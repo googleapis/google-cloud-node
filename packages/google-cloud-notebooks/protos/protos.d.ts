@@ -15195,6 +15195,3687 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
+
+            /** Namespace v2. */
+            namespace v2 {
+
+                /** Properties of a DiagnosticConfig. */
+                interface IDiagnosticConfig {
+
+                    /** DiagnosticConfig gcsBucket */
+                    gcsBucket?: (string|null);
+
+                    /** DiagnosticConfig relativePath */
+                    relativePath?: (string|null);
+
+                    /** DiagnosticConfig enableRepairFlag */
+                    enableRepairFlag?: (boolean|null);
+
+                    /** DiagnosticConfig enablePacketCaptureFlag */
+                    enablePacketCaptureFlag?: (boolean|null);
+
+                    /** DiagnosticConfig enableCopyHomeFilesFlag */
+                    enableCopyHomeFilesFlag?: (boolean|null);
+                }
+
+                /** Represents a DiagnosticConfig. */
+                class DiagnosticConfig implements IDiagnosticConfig {
+
+                    /**
+                     * Constructs a new DiagnosticConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v2.IDiagnosticConfig);
+
+                    /** DiagnosticConfig gcsBucket. */
+                    public gcsBucket: string;
+
+                    /** DiagnosticConfig relativePath. */
+                    public relativePath: string;
+
+                    /** DiagnosticConfig enableRepairFlag. */
+                    public enableRepairFlag: boolean;
+
+                    /** DiagnosticConfig enablePacketCaptureFlag. */
+                    public enablePacketCaptureFlag: boolean;
+
+                    /** DiagnosticConfig enableCopyHomeFilesFlag. */
+                    public enableCopyHomeFilesFlag: boolean;
+
+                    /**
+                     * Creates a new DiagnosticConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DiagnosticConfig instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v2.IDiagnosticConfig): google.cloud.notebooks.v2.DiagnosticConfig;
+
+                    /**
+                     * Encodes the specified DiagnosticConfig message. Does not implicitly {@link google.cloud.notebooks.v2.DiagnosticConfig.verify|verify} messages.
+                     * @param message DiagnosticConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v2.IDiagnosticConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DiagnosticConfig message, length delimited. Does not implicitly {@link google.cloud.notebooks.v2.DiagnosticConfig.verify|verify} messages.
+                     * @param message DiagnosticConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v2.IDiagnosticConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DiagnosticConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DiagnosticConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v2.DiagnosticConfig;
+
+                    /**
+                     * Decodes a DiagnosticConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DiagnosticConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v2.DiagnosticConfig;
+
+                    /**
+                     * Verifies a DiagnosticConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DiagnosticConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DiagnosticConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v2.DiagnosticConfig;
+
+                    /**
+                     * Creates a plain object from a DiagnosticConfig message. Also converts values to other types if specified.
+                     * @param message DiagnosticConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v2.DiagnosticConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DiagnosticConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DiagnosticConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an Event. */
+                interface IEvent {
+
+                    /** Event reportTime */
+                    reportTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Event type */
+                    type?: (google.cloud.notebooks.v2.Event.EventType|keyof typeof google.cloud.notebooks.v2.Event.EventType|null);
+
+                    /** Event details */
+                    details?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents an Event. */
+                class Event implements IEvent {
+
+                    /**
+                     * Constructs a new Event.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v2.IEvent);
+
+                    /** Event reportTime. */
+                    public reportTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Event type. */
+                    public type: (google.cloud.notebooks.v2.Event.EventType|keyof typeof google.cloud.notebooks.v2.Event.EventType);
+
+                    /** Event details. */
+                    public details: { [k: string]: string };
+
+                    /**
+                     * Creates a new Event instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Event instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v2.IEvent): google.cloud.notebooks.v2.Event;
+
+                    /**
+                     * Encodes the specified Event message. Does not implicitly {@link google.cloud.notebooks.v2.Event.verify|verify} messages.
+                     * @param message Event message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v2.IEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Event message, length delimited. Does not implicitly {@link google.cloud.notebooks.v2.Event.verify|verify} messages.
+                     * @param message Event message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v2.IEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Event message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Event
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v2.Event;
+
+                    /**
+                     * Decodes an Event message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Event
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v2.Event;
+
+                    /**
+                     * Verifies an Event message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Event message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Event
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v2.Event;
+
+                    /**
+                     * Creates a plain object from an Event message. Also converts values to other types if specified.
+                     * @param message Event
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v2.Event, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Event to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Event
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Event {
+
+                    /** EventType enum. */
+                    enum EventType {
+                        EVENT_TYPE_UNSPECIFIED = 0,
+                        IDLE = 1,
+                        HEARTBEAT = 2,
+                        HEALTH = 3,
+                        MAINTENANCE = 4,
+                        METADATA_CHANGE = 5
+                    }
+                }
+
+                /** Properties of a NetworkInterface. */
+                interface INetworkInterface {
+
+                    /** NetworkInterface network */
+                    network?: (string|null);
+
+                    /** NetworkInterface subnet */
+                    subnet?: (string|null);
+
+                    /** NetworkInterface nicType */
+                    nicType?: (google.cloud.notebooks.v2.NetworkInterface.NicType|keyof typeof google.cloud.notebooks.v2.NetworkInterface.NicType|null);
+                }
+
+                /** Represents a NetworkInterface. */
+                class NetworkInterface implements INetworkInterface {
+
+                    /**
+                     * Constructs a new NetworkInterface.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v2.INetworkInterface);
+
+                    /** NetworkInterface network. */
+                    public network: string;
+
+                    /** NetworkInterface subnet. */
+                    public subnet: string;
+
+                    /** NetworkInterface nicType. */
+                    public nicType: (google.cloud.notebooks.v2.NetworkInterface.NicType|keyof typeof google.cloud.notebooks.v2.NetworkInterface.NicType);
+
+                    /**
+                     * Creates a new NetworkInterface instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NetworkInterface instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v2.INetworkInterface): google.cloud.notebooks.v2.NetworkInterface;
+
+                    /**
+                     * Encodes the specified NetworkInterface message. Does not implicitly {@link google.cloud.notebooks.v2.NetworkInterface.verify|verify} messages.
+                     * @param message NetworkInterface message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v2.INetworkInterface, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NetworkInterface message, length delimited. Does not implicitly {@link google.cloud.notebooks.v2.NetworkInterface.verify|verify} messages.
+                     * @param message NetworkInterface message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v2.INetworkInterface, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NetworkInterface message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NetworkInterface
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v2.NetworkInterface;
+
+                    /**
+                     * Decodes a NetworkInterface message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NetworkInterface
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v2.NetworkInterface;
+
+                    /**
+                     * Verifies a NetworkInterface message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NetworkInterface message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NetworkInterface
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v2.NetworkInterface;
+
+                    /**
+                     * Creates a plain object from a NetworkInterface message. Also converts values to other types if specified.
+                     * @param message NetworkInterface
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v2.NetworkInterface, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NetworkInterface to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NetworkInterface
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace NetworkInterface {
+
+                    /** NicType enum. */
+                    enum NicType {
+                        NIC_TYPE_UNSPECIFIED = 0,
+                        VIRTIO_NET = 1,
+                        GVNIC = 2
+                    }
+                }
+
+                /** Properties of a VmImage. */
+                interface IVmImage {
+
+                    /** VmImage project */
+                    project?: (string|null);
+
+                    /** VmImage name */
+                    name?: (string|null);
+
+                    /** VmImage family */
+                    family?: (string|null);
+                }
+
+                /** Represents a VmImage. */
+                class VmImage implements IVmImage {
+
+                    /**
+                     * Constructs a new VmImage.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v2.IVmImage);
+
+                    /** VmImage project. */
+                    public project: string;
+
+                    /** VmImage name. */
+                    public name?: (string|null);
+
+                    /** VmImage family. */
+                    public family?: (string|null);
+
+                    /** VmImage image. */
+                    public image?: ("name"|"family");
+
+                    /**
+                     * Creates a new VmImage instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VmImage instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v2.IVmImage): google.cloud.notebooks.v2.VmImage;
+
+                    /**
+                     * Encodes the specified VmImage message. Does not implicitly {@link google.cloud.notebooks.v2.VmImage.verify|verify} messages.
+                     * @param message VmImage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v2.IVmImage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VmImage message, length delimited. Does not implicitly {@link google.cloud.notebooks.v2.VmImage.verify|verify} messages.
+                     * @param message VmImage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v2.IVmImage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VmImage message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VmImage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v2.VmImage;
+
+                    /**
+                     * Decodes a VmImage message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VmImage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v2.VmImage;
+
+                    /**
+                     * Verifies a VmImage message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VmImage message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VmImage
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v2.VmImage;
+
+                    /**
+                     * Creates a plain object from a VmImage message. Also converts values to other types if specified.
+                     * @param message VmImage
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v2.VmImage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VmImage to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VmImage
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ContainerImage. */
+                interface IContainerImage {
+
+                    /** ContainerImage repository */
+                    repository?: (string|null);
+
+                    /** ContainerImage tag */
+                    tag?: (string|null);
+                }
+
+                /** Represents a ContainerImage. */
+                class ContainerImage implements IContainerImage {
+
+                    /**
+                     * Constructs a new ContainerImage.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v2.IContainerImage);
+
+                    /** ContainerImage repository. */
+                    public repository: string;
+
+                    /** ContainerImage tag. */
+                    public tag: string;
+
+                    /**
+                     * Creates a new ContainerImage instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ContainerImage instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v2.IContainerImage): google.cloud.notebooks.v2.ContainerImage;
+
+                    /**
+                     * Encodes the specified ContainerImage message. Does not implicitly {@link google.cloud.notebooks.v2.ContainerImage.verify|verify} messages.
+                     * @param message ContainerImage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v2.IContainerImage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ContainerImage message, length delimited. Does not implicitly {@link google.cloud.notebooks.v2.ContainerImage.verify|verify} messages.
+                     * @param message ContainerImage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v2.IContainerImage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ContainerImage message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ContainerImage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v2.ContainerImage;
+
+                    /**
+                     * Decodes a ContainerImage message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ContainerImage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v2.ContainerImage;
+
+                    /**
+                     * Verifies a ContainerImage message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ContainerImage message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ContainerImage
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v2.ContainerImage;
+
+                    /**
+                     * Creates a plain object from a ContainerImage message. Also converts values to other types if specified.
+                     * @param message ContainerImage
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v2.ContainerImage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ContainerImage to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ContainerImage
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AcceleratorConfig. */
+                interface IAcceleratorConfig {
+
+                    /** AcceleratorConfig type */
+                    type?: (google.cloud.notebooks.v2.AcceleratorConfig.AcceleratorType|keyof typeof google.cloud.notebooks.v2.AcceleratorConfig.AcceleratorType|null);
+
+                    /** AcceleratorConfig coreCount */
+                    coreCount?: (number|Long|string|null);
+                }
+
+                /** Represents an AcceleratorConfig. */
+                class AcceleratorConfig implements IAcceleratorConfig {
+
+                    /**
+                     * Constructs a new AcceleratorConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v2.IAcceleratorConfig);
+
+                    /** AcceleratorConfig type. */
+                    public type: (google.cloud.notebooks.v2.AcceleratorConfig.AcceleratorType|keyof typeof google.cloud.notebooks.v2.AcceleratorConfig.AcceleratorType);
+
+                    /** AcceleratorConfig coreCount. */
+                    public coreCount: (number|Long|string);
+
+                    /**
+                     * Creates a new AcceleratorConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AcceleratorConfig instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v2.IAcceleratorConfig): google.cloud.notebooks.v2.AcceleratorConfig;
+
+                    /**
+                     * Encodes the specified AcceleratorConfig message. Does not implicitly {@link google.cloud.notebooks.v2.AcceleratorConfig.verify|verify} messages.
+                     * @param message AcceleratorConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v2.IAcceleratorConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AcceleratorConfig message, length delimited. Does not implicitly {@link google.cloud.notebooks.v2.AcceleratorConfig.verify|verify} messages.
+                     * @param message AcceleratorConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v2.IAcceleratorConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AcceleratorConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AcceleratorConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v2.AcceleratorConfig;
+
+                    /**
+                     * Decodes an AcceleratorConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AcceleratorConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v2.AcceleratorConfig;
+
+                    /**
+                     * Verifies an AcceleratorConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AcceleratorConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AcceleratorConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v2.AcceleratorConfig;
+
+                    /**
+                     * Creates a plain object from an AcceleratorConfig message. Also converts values to other types if specified.
+                     * @param message AcceleratorConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v2.AcceleratorConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AcceleratorConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AcceleratorConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AcceleratorConfig {
+
+                    /** AcceleratorType enum. */
+                    enum AcceleratorType {
+                        ACCELERATOR_TYPE_UNSPECIFIED = 0,
+                        NVIDIA_TESLA_P100 = 2,
+                        NVIDIA_TESLA_V100 = 3,
+                        NVIDIA_TESLA_P4 = 4,
+                        NVIDIA_TESLA_T4 = 5,
+                        NVIDIA_TESLA_A100 = 11,
+                        NVIDIA_A100_80GB = 12,
+                        NVIDIA_L4 = 13,
+                        NVIDIA_TESLA_T4_VWS = 8,
+                        NVIDIA_TESLA_P100_VWS = 9,
+                        NVIDIA_TESLA_P4_VWS = 10
+                    }
+                }
+
+                /** Properties of a ShieldedInstanceConfig. */
+                interface IShieldedInstanceConfig {
+
+                    /** ShieldedInstanceConfig enableSecureBoot */
+                    enableSecureBoot?: (boolean|null);
+
+                    /** ShieldedInstanceConfig enableVtpm */
+                    enableVtpm?: (boolean|null);
+
+                    /** ShieldedInstanceConfig enableIntegrityMonitoring */
+                    enableIntegrityMonitoring?: (boolean|null);
+                }
+
+                /** Represents a ShieldedInstanceConfig. */
+                class ShieldedInstanceConfig implements IShieldedInstanceConfig {
+
+                    /**
+                     * Constructs a new ShieldedInstanceConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v2.IShieldedInstanceConfig);
+
+                    /** ShieldedInstanceConfig enableSecureBoot. */
+                    public enableSecureBoot: boolean;
+
+                    /** ShieldedInstanceConfig enableVtpm. */
+                    public enableVtpm: boolean;
+
+                    /** ShieldedInstanceConfig enableIntegrityMonitoring. */
+                    public enableIntegrityMonitoring: boolean;
+
+                    /**
+                     * Creates a new ShieldedInstanceConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ShieldedInstanceConfig instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v2.IShieldedInstanceConfig): google.cloud.notebooks.v2.ShieldedInstanceConfig;
+
+                    /**
+                     * Encodes the specified ShieldedInstanceConfig message. Does not implicitly {@link google.cloud.notebooks.v2.ShieldedInstanceConfig.verify|verify} messages.
+                     * @param message ShieldedInstanceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v2.IShieldedInstanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ShieldedInstanceConfig message, length delimited. Does not implicitly {@link google.cloud.notebooks.v2.ShieldedInstanceConfig.verify|verify} messages.
+                     * @param message ShieldedInstanceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v2.IShieldedInstanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ShieldedInstanceConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ShieldedInstanceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v2.ShieldedInstanceConfig;
+
+                    /**
+                     * Decodes a ShieldedInstanceConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ShieldedInstanceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v2.ShieldedInstanceConfig;
+
+                    /**
+                     * Verifies a ShieldedInstanceConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ShieldedInstanceConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ShieldedInstanceConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v2.ShieldedInstanceConfig;
+
+                    /**
+                     * Creates a plain object from a ShieldedInstanceConfig message. Also converts values to other types if specified.
+                     * @param message ShieldedInstanceConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v2.ShieldedInstanceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ShieldedInstanceConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ShieldedInstanceConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GPUDriverConfig. */
+                interface IGPUDriverConfig {
+
+                    /** GPUDriverConfig enableGpuDriver */
+                    enableGpuDriver?: (boolean|null);
+
+                    /** GPUDriverConfig customGpuDriverPath */
+                    customGpuDriverPath?: (string|null);
+                }
+
+                /** Represents a GPUDriverConfig. */
+                class GPUDriverConfig implements IGPUDriverConfig {
+
+                    /**
+                     * Constructs a new GPUDriverConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v2.IGPUDriverConfig);
+
+                    /** GPUDriverConfig enableGpuDriver. */
+                    public enableGpuDriver: boolean;
+
+                    /** GPUDriverConfig customGpuDriverPath. */
+                    public customGpuDriverPath: string;
+
+                    /**
+                     * Creates a new GPUDriverConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GPUDriverConfig instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v2.IGPUDriverConfig): google.cloud.notebooks.v2.GPUDriverConfig;
+
+                    /**
+                     * Encodes the specified GPUDriverConfig message. Does not implicitly {@link google.cloud.notebooks.v2.GPUDriverConfig.verify|verify} messages.
+                     * @param message GPUDriverConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v2.IGPUDriverConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GPUDriverConfig message, length delimited. Does not implicitly {@link google.cloud.notebooks.v2.GPUDriverConfig.verify|verify} messages.
+                     * @param message GPUDriverConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v2.IGPUDriverConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GPUDriverConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GPUDriverConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v2.GPUDriverConfig;
+
+                    /**
+                     * Decodes a GPUDriverConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GPUDriverConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v2.GPUDriverConfig;
+
+                    /**
+                     * Verifies a GPUDriverConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GPUDriverConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GPUDriverConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v2.GPUDriverConfig;
+
+                    /**
+                     * Creates a plain object from a GPUDriverConfig message. Also converts values to other types if specified.
+                     * @param message GPUDriverConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v2.GPUDriverConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GPUDriverConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GPUDriverConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DataDisk. */
+                interface IDataDisk {
+
+                    /** DataDisk diskSizeGb */
+                    diskSizeGb?: (number|Long|string|null);
+
+                    /** DataDisk diskType */
+                    diskType?: (google.cloud.notebooks.v2.DiskType|keyof typeof google.cloud.notebooks.v2.DiskType|null);
+
+                    /** DataDisk diskEncryption */
+                    diskEncryption?: (google.cloud.notebooks.v2.DiskEncryption|keyof typeof google.cloud.notebooks.v2.DiskEncryption|null);
+
+                    /** DataDisk kmsKey */
+                    kmsKey?: (string|null);
+                }
+
+                /** Represents a DataDisk. */
+                class DataDisk implements IDataDisk {
+
+                    /**
+                     * Constructs a new DataDisk.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v2.IDataDisk);
+
+                    /** DataDisk diskSizeGb. */
+                    public diskSizeGb: (number|Long|string);
+
+                    /** DataDisk diskType. */
+                    public diskType: (google.cloud.notebooks.v2.DiskType|keyof typeof google.cloud.notebooks.v2.DiskType);
+
+                    /** DataDisk diskEncryption. */
+                    public diskEncryption: (google.cloud.notebooks.v2.DiskEncryption|keyof typeof google.cloud.notebooks.v2.DiskEncryption);
+
+                    /** DataDisk kmsKey. */
+                    public kmsKey: string;
+
+                    /**
+                     * Creates a new DataDisk instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataDisk instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v2.IDataDisk): google.cloud.notebooks.v2.DataDisk;
+
+                    /**
+                     * Encodes the specified DataDisk message. Does not implicitly {@link google.cloud.notebooks.v2.DataDisk.verify|verify} messages.
+                     * @param message DataDisk message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v2.IDataDisk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataDisk message, length delimited. Does not implicitly {@link google.cloud.notebooks.v2.DataDisk.verify|verify} messages.
+                     * @param message DataDisk message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v2.IDataDisk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataDisk message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataDisk
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v2.DataDisk;
+
+                    /**
+                     * Decodes a DataDisk message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataDisk
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v2.DataDisk;
+
+                    /**
+                     * Verifies a DataDisk message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataDisk message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataDisk
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v2.DataDisk;
+
+                    /**
+                     * Creates a plain object from a DataDisk message. Also converts values to other types if specified.
+                     * @param message DataDisk
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v2.DataDisk, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataDisk to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataDisk
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BootDisk. */
+                interface IBootDisk {
+
+                    /** BootDisk diskSizeGb */
+                    diskSizeGb?: (number|Long|string|null);
+
+                    /** BootDisk diskType */
+                    diskType?: (google.cloud.notebooks.v2.DiskType|keyof typeof google.cloud.notebooks.v2.DiskType|null);
+
+                    /** BootDisk diskEncryption */
+                    diskEncryption?: (google.cloud.notebooks.v2.DiskEncryption|keyof typeof google.cloud.notebooks.v2.DiskEncryption|null);
+
+                    /** BootDisk kmsKey */
+                    kmsKey?: (string|null);
+                }
+
+                /** Represents a BootDisk. */
+                class BootDisk implements IBootDisk {
+
+                    /**
+                     * Constructs a new BootDisk.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v2.IBootDisk);
+
+                    /** BootDisk diskSizeGb. */
+                    public diskSizeGb: (number|Long|string);
+
+                    /** BootDisk diskType. */
+                    public diskType: (google.cloud.notebooks.v2.DiskType|keyof typeof google.cloud.notebooks.v2.DiskType);
+
+                    /** BootDisk diskEncryption. */
+                    public diskEncryption: (google.cloud.notebooks.v2.DiskEncryption|keyof typeof google.cloud.notebooks.v2.DiskEncryption);
+
+                    /** BootDisk kmsKey. */
+                    public kmsKey: string;
+
+                    /**
+                     * Creates a new BootDisk instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BootDisk instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v2.IBootDisk): google.cloud.notebooks.v2.BootDisk;
+
+                    /**
+                     * Encodes the specified BootDisk message. Does not implicitly {@link google.cloud.notebooks.v2.BootDisk.verify|verify} messages.
+                     * @param message BootDisk message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v2.IBootDisk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BootDisk message, length delimited. Does not implicitly {@link google.cloud.notebooks.v2.BootDisk.verify|verify} messages.
+                     * @param message BootDisk message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v2.IBootDisk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BootDisk message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BootDisk
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v2.BootDisk;
+
+                    /**
+                     * Decodes a BootDisk message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BootDisk
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v2.BootDisk;
+
+                    /**
+                     * Verifies a BootDisk message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BootDisk message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BootDisk
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v2.BootDisk;
+
+                    /**
+                     * Creates a plain object from a BootDisk message. Also converts values to other types if specified.
+                     * @param message BootDisk
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v2.BootDisk, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BootDisk to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BootDisk
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ServiceAccount. */
+                interface IServiceAccount {
+
+                    /** ServiceAccount email */
+                    email?: (string|null);
+
+                    /** ServiceAccount scopes */
+                    scopes?: (string[]|null);
+                }
+
+                /** Represents a ServiceAccount. */
+                class ServiceAccount implements IServiceAccount {
+
+                    /**
+                     * Constructs a new ServiceAccount.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v2.IServiceAccount);
+
+                    /** ServiceAccount email. */
+                    public email: string;
+
+                    /** ServiceAccount scopes. */
+                    public scopes: string[];
+
+                    /**
+                     * Creates a new ServiceAccount instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ServiceAccount instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v2.IServiceAccount): google.cloud.notebooks.v2.ServiceAccount;
+
+                    /**
+                     * Encodes the specified ServiceAccount message. Does not implicitly {@link google.cloud.notebooks.v2.ServiceAccount.verify|verify} messages.
+                     * @param message ServiceAccount message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v2.IServiceAccount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ServiceAccount message, length delimited. Does not implicitly {@link google.cloud.notebooks.v2.ServiceAccount.verify|verify} messages.
+                     * @param message ServiceAccount message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v2.IServiceAccount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ServiceAccount message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ServiceAccount
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v2.ServiceAccount;
+
+                    /**
+                     * Decodes a ServiceAccount message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ServiceAccount
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v2.ServiceAccount;
+
+                    /**
+                     * Verifies a ServiceAccount message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ServiceAccount message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ServiceAccount
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v2.ServiceAccount;
+
+                    /**
+                     * Creates a plain object from a ServiceAccount message. Also converts values to other types if specified.
+                     * @param message ServiceAccount
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v2.ServiceAccount, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ServiceAccount to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ServiceAccount
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GceSetup. */
+                interface IGceSetup {
+
+                    /** GceSetup machineType */
+                    machineType?: (string|null);
+
+                    /** GceSetup acceleratorConfigs */
+                    acceleratorConfigs?: (google.cloud.notebooks.v2.IAcceleratorConfig[]|null);
+
+                    /** GceSetup serviceAccounts */
+                    serviceAccounts?: (google.cloud.notebooks.v2.IServiceAccount[]|null);
+
+                    /** GceSetup vmImage */
+                    vmImage?: (google.cloud.notebooks.v2.IVmImage|null);
+
+                    /** GceSetup containerImage */
+                    containerImage?: (google.cloud.notebooks.v2.IContainerImage|null);
+
+                    /** GceSetup bootDisk */
+                    bootDisk?: (google.cloud.notebooks.v2.IBootDisk|null);
+
+                    /** GceSetup dataDisks */
+                    dataDisks?: (google.cloud.notebooks.v2.IDataDisk[]|null);
+
+                    /** GceSetup shieldedInstanceConfig */
+                    shieldedInstanceConfig?: (google.cloud.notebooks.v2.IShieldedInstanceConfig|null);
+
+                    /** GceSetup networkInterfaces */
+                    networkInterfaces?: (google.cloud.notebooks.v2.INetworkInterface[]|null);
+
+                    /** GceSetup disablePublicIp */
+                    disablePublicIp?: (boolean|null);
+
+                    /** GceSetup tags */
+                    tags?: (string[]|null);
+
+                    /** GceSetup metadata */
+                    metadata?: ({ [k: string]: string }|null);
+
+                    /** GceSetup enableIpForwarding */
+                    enableIpForwarding?: (boolean|null);
+
+                    /** GceSetup gpuDriverConfig */
+                    gpuDriverConfig?: (google.cloud.notebooks.v2.IGPUDriverConfig|null);
+                }
+
+                /** Represents a GceSetup. */
+                class GceSetup implements IGceSetup {
+
+                    /**
+                     * Constructs a new GceSetup.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v2.IGceSetup);
+
+                    /** GceSetup machineType. */
+                    public machineType: string;
+
+                    /** GceSetup acceleratorConfigs. */
+                    public acceleratorConfigs: google.cloud.notebooks.v2.IAcceleratorConfig[];
+
+                    /** GceSetup serviceAccounts. */
+                    public serviceAccounts: google.cloud.notebooks.v2.IServiceAccount[];
+
+                    /** GceSetup vmImage. */
+                    public vmImage?: (google.cloud.notebooks.v2.IVmImage|null);
+
+                    /** GceSetup containerImage. */
+                    public containerImage?: (google.cloud.notebooks.v2.IContainerImage|null);
+
+                    /** GceSetup bootDisk. */
+                    public bootDisk?: (google.cloud.notebooks.v2.IBootDisk|null);
+
+                    /** GceSetup dataDisks. */
+                    public dataDisks: google.cloud.notebooks.v2.IDataDisk[];
+
+                    /** GceSetup shieldedInstanceConfig. */
+                    public shieldedInstanceConfig?: (google.cloud.notebooks.v2.IShieldedInstanceConfig|null);
+
+                    /** GceSetup networkInterfaces. */
+                    public networkInterfaces: google.cloud.notebooks.v2.INetworkInterface[];
+
+                    /** GceSetup disablePublicIp. */
+                    public disablePublicIp: boolean;
+
+                    /** GceSetup tags. */
+                    public tags: string[];
+
+                    /** GceSetup metadata. */
+                    public metadata: { [k: string]: string };
+
+                    /** GceSetup enableIpForwarding. */
+                    public enableIpForwarding: boolean;
+
+                    /** GceSetup gpuDriverConfig. */
+                    public gpuDriverConfig?: (google.cloud.notebooks.v2.IGPUDriverConfig|null);
+
+                    /** GceSetup image. */
+                    public image?: ("vmImage"|"containerImage");
+
+                    /**
+                     * Creates a new GceSetup instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GceSetup instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v2.IGceSetup): google.cloud.notebooks.v2.GceSetup;
+
+                    /**
+                     * Encodes the specified GceSetup message. Does not implicitly {@link google.cloud.notebooks.v2.GceSetup.verify|verify} messages.
+                     * @param message GceSetup message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v2.IGceSetup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GceSetup message, length delimited. Does not implicitly {@link google.cloud.notebooks.v2.GceSetup.verify|verify} messages.
+                     * @param message GceSetup message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v2.IGceSetup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GceSetup message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GceSetup
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v2.GceSetup;
+
+                    /**
+                     * Decodes a GceSetup message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GceSetup
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v2.GceSetup;
+
+                    /**
+                     * Verifies a GceSetup message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GceSetup message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GceSetup
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v2.GceSetup;
+
+                    /**
+                     * Creates a plain object from a GceSetup message. Also converts values to other types if specified.
+                     * @param message GceSetup
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v2.GceSetup, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GceSetup to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GceSetup
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** DiskEncryption enum. */
+                enum DiskEncryption {
+                    DISK_ENCRYPTION_UNSPECIFIED = 0,
+                    GMEK = 1,
+                    CMEK = 2
+                }
+
+                /** DiskType enum. */
+                enum DiskType {
+                    DISK_TYPE_UNSPECIFIED = 0,
+                    PD_STANDARD = 1,
+                    PD_SSD = 2,
+                    PD_BALANCED = 3,
+                    PD_EXTREME = 4
+                }
+
+                /** Properties of an UpgradeHistoryEntry. */
+                interface IUpgradeHistoryEntry {
+
+                    /** UpgradeHistoryEntry snapshot */
+                    snapshot?: (string|null);
+
+                    /** UpgradeHistoryEntry vmImage */
+                    vmImage?: (string|null);
+
+                    /** UpgradeHistoryEntry containerImage */
+                    containerImage?: (string|null);
+
+                    /** UpgradeHistoryEntry framework */
+                    framework?: (string|null);
+
+                    /** UpgradeHistoryEntry version */
+                    version?: (string|null);
+
+                    /** UpgradeHistoryEntry state */
+                    state?: (google.cloud.notebooks.v2.UpgradeHistoryEntry.State|keyof typeof google.cloud.notebooks.v2.UpgradeHistoryEntry.State|null);
+
+                    /** UpgradeHistoryEntry createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** UpgradeHistoryEntry action */
+                    action?: (google.cloud.notebooks.v2.UpgradeHistoryEntry.Action|keyof typeof google.cloud.notebooks.v2.UpgradeHistoryEntry.Action|null);
+
+                    /** UpgradeHistoryEntry targetVersion */
+                    targetVersion?: (string|null);
+                }
+
+                /** Represents an UpgradeHistoryEntry. */
+                class UpgradeHistoryEntry implements IUpgradeHistoryEntry {
+
+                    /**
+                     * Constructs a new UpgradeHistoryEntry.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v2.IUpgradeHistoryEntry);
+
+                    /** UpgradeHistoryEntry snapshot. */
+                    public snapshot: string;
+
+                    /** UpgradeHistoryEntry vmImage. */
+                    public vmImage: string;
+
+                    /** UpgradeHistoryEntry containerImage. */
+                    public containerImage: string;
+
+                    /** UpgradeHistoryEntry framework. */
+                    public framework: string;
+
+                    /** UpgradeHistoryEntry version. */
+                    public version: string;
+
+                    /** UpgradeHistoryEntry state. */
+                    public state: (google.cloud.notebooks.v2.UpgradeHistoryEntry.State|keyof typeof google.cloud.notebooks.v2.UpgradeHistoryEntry.State);
+
+                    /** UpgradeHistoryEntry createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** UpgradeHistoryEntry action. */
+                    public action: (google.cloud.notebooks.v2.UpgradeHistoryEntry.Action|keyof typeof google.cloud.notebooks.v2.UpgradeHistoryEntry.Action);
+
+                    /** UpgradeHistoryEntry targetVersion. */
+                    public targetVersion: string;
+
+                    /**
+                     * Creates a new UpgradeHistoryEntry instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpgradeHistoryEntry instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v2.IUpgradeHistoryEntry): google.cloud.notebooks.v2.UpgradeHistoryEntry;
+
+                    /**
+                     * Encodes the specified UpgradeHistoryEntry message. Does not implicitly {@link google.cloud.notebooks.v2.UpgradeHistoryEntry.verify|verify} messages.
+                     * @param message UpgradeHistoryEntry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v2.IUpgradeHistoryEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpgradeHistoryEntry message, length delimited. Does not implicitly {@link google.cloud.notebooks.v2.UpgradeHistoryEntry.verify|verify} messages.
+                     * @param message UpgradeHistoryEntry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v2.IUpgradeHistoryEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpgradeHistoryEntry message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpgradeHistoryEntry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v2.UpgradeHistoryEntry;
+
+                    /**
+                     * Decodes an UpgradeHistoryEntry message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpgradeHistoryEntry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v2.UpgradeHistoryEntry;
+
+                    /**
+                     * Verifies an UpgradeHistoryEntry message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpgradeHistoryEntry message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpgradeHistoryEntry
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v2.UpgradeHistoryEntry;
+
+                    /**
+                     * Creates a plain object from an UpgradeHistoryEntry message. Also converts values to other types if specified.
+                     * @param message UpgradeHistoryEntry
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v2.UpgradeHistoryEntry, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpgradeHistoryEntry to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpgradeHistoryEntry
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace UpgradeHistoryEntry {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        STARTED = 1,
+                        SUCCEEDED = 2,
+                        FAILED = 3
+                    }
+
+                    /** Action enum. */
+                    enum Action {
+                        ACTION_UNSPECIFIED = 0,
+                        UPGRADE = 1,
+                        ROLLBACK = 2
+                    }
+                }
+
+                /** Properties of an Instance. */
+                interface IInstance {
+
+                    /** Instance name */
+                    name?: (string|null);
+
+                    /** Instance gceSetup */
+                    gceSetup?: (google.cloud.notebooks.v2.IGceSetup|null);
+
+                    /** Instance proxyUri */
+                    proxyUri?: (string|null);
+
+                    /** Instance instanceOwners */
+                    instanceOwners?: (string[]|null);
+
+                    /** Instance creator */
+                    creator?: (string|null);
+
+                    /** Instance state */
+                    state?: (google.cloud.notebooks.v2.State|keyof typeof google.cloud.notebooks.v2.State|null);
+
+                    /** Instance upgradeHistory */
+                    upgradeHistory?: (google.cloud.notebooks.v2.IUpgradeHistoryEntry[]|null);
+
+                    /** Instance id */
+                    id?: (string|null);
+
+                    /** Instance healthState */
+                    healthState?: (google.cloud.notebooks.v2.HealthState|keyof typeof google.cloud.notebooks.v2.HealthState|null);
+
+                    /** Instance healthInfo */
+                    healthInfo?: ({ [k: string]: string }|null);
+
+                    /** Instance createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Instance updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Instance disableProxyAccess */
+                    disableProxyAccess?: (boolean|null);
+
+                    /** Instance labels */
+                    labels?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents an Instance. */
+                class Instance implements IInstance {
+
+                    /**
+                     * Constructs a new Instance.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v2.IInstance);
+
+                    /** Instance name. */
+                    public name: string;
+
+                    /** Instance gceSetup. */
+                    public gceSetup?: (google.cloud.notebooks.v2.IGceSetup|null);
+
+                    /** Instance proxyUri. */
+                    public proxyUri: string;
+
+                    /** Instance instanceOwners. */
+                    public instanceOwners: string[];
+
+                    /** Instance creator. */
+                    public creator: string;
+
+                    /** Instance state. */
+                    public state: (google.cloud.notebooks.v2.State|keyof typeof google.cloud.notebooks.v2.State);
+
+                    /** Instance upgradeHistory. */
+                    public upgradeHistory: google.cloud.notebooks.v2.IUpgradeHistoryEntry[];
+
+                    /** Instance id. */
+                    public id: string;
+
+                    /** Instance healthState. */
+                    public healthState: (google.cloud.notebooks.v2.HealthState|keyof typeof google.cloud.notebooks.v2.HealthState);
+
+                    /** Instance healthInfo. */
+                    public healthInfo: { [k: string]: string };
+
+                    /** Instance createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Instance updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Instance disableProxyAccess. */
+                    public disableProxyAccess: boolean;
+
+                    /** Instance labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Instance infrastructure. */
+                    public infrastructure?: "gceSetup";
+
+                    /**
+                     * Creates a new Instance instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Instance instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v2.IInstance): google.cloud.notebooks.v2.Instance;
+
+                    /**
+                     * Encodes the specified Instance message. Does not implicitly {@link google.cloud.notebooks.v2.Instance.verify|verify} messages.
+                     * @param message Instance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v2.IInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Instance message, length delimited. Does not implicitly {@link google.cloud.notebooks.v2.Instance.verify|verify} messages.
+                     * @param message Instance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v2.IInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Instance message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Instance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v2.Instance;
+
+                    /**
+                     * Decodes an Instance message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Instance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v2.Instance;
+
+                    /**
+                     * Verifies an Instance message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Instance message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Instance
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v2.Instance;
+
+                    /**
+                     * Creates a plain object from an Instance message. Also converts values to other types if specified.
+                     * @param message Instance
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v2.Instance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Instance to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Instance
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** State enum. */
+                enum State {
+                    STATE_UNSPECIFIED = 0,
+                    STARTING = 1,
+                    PROVISIONING = 2,
+                    ACTIVE = 3,
+                    STOPPING = 4,
+                    STOPPED = 5,
+                    DELETED = 6,
+                    UPGRADING = 7,
+                    INITIALIZING = 8,
+                    SUSPENDING = 9,
+                    SUSPENDED = 10
+                }
+
+                /** HealthState enum. */
+                enum HealthState {
+                    HEALTH_STATE_UNSPECIFIED = 0,
+                    HEALTHY = 1,
+                    UNHEALTHY = 2,
+                    AGENT_NOT_INSTALLED = 3,
+                    AGENT_NOT_RUNNING = 4
+                }
+
+                /** Represents a NotebookService */
+                class NotebookService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new NotebookService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new NotebookService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): NotebookService;
+
+                    /**
+                     * Calls ListInstances.
+                     * @param request ListInstancesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListInstancesResponse
+                     */
+                    public listInstances(request: google.cloud.notebooks.v2.IListInstancesRequest, callback: google.cloud.notebooks.v2.NotebookService.ListInstancesCallback): void;
+
+                    /**
+                     * Calls ListInstances.
+                     * @param request ListInstancesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listInstances(request: google.cloud.notebooks.v2.IListInstancesRequest): Promise<google.cloud.notebooks.v2.ListInstancesResponse>;
+
+                    /**
+                     * Calls GetInstance.
+                     * @param request GetInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Instance
+                     */
+                    public getInstance(request: google.cloud.notebooks.v2.IGetInstanceRequest, callback: google.cloud.notebooks.v2.NotebookService.GetInstanceCallback): void;
+
+                    /**
+                     * Calls GetInstance.
+                     * @param request GetInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getInstance(request: google.cloud.notebooks.v2.IGetInstanceRequest): Promise<google.cloud.notebooks.v2.Instance>;
+
+                    /**
+                     * Calls CreateInstance.
+                     * @param request CreateInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createInstance(request: google.cloud.notebooks.v2.ICreateInstanceRequest, callback: google.cloud.notebooks.v2.NotebookService.CreateInstanceCallback): void;
+
+                    /**
+                     * Calls CreateInstance.
+                     * @param request CreateInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createInstance(request: google.cloud.notebooks.v2.ICreateInstanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateInstance.
+                     * @param request UpdateInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateInstance(request: google.cloud.notebooks.v2.IUpdateInstanceRequest, callback: google.cloud.notebooks.v2.NotebookService.UpdateInstanceCallback): void;
+
+                    /**
+                     * Calls UpdateInstance.
+                     * @param request UpdateInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateInstance(request: google.cloud.notebooks.v2.IUpdateInstanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteInstance.
+                     * @param request DeleteInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteInstance(request: google.cloud.notebooks.v2.IDeleteInstanceRequest, callback: google.cloud.notebooks.v2.NotebookService.DeleteInstanceCallback): void;
+
+                    /**
+                     * Calls DeleteInstance.
+                     * @param request DeleteInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteInstance(request: google.cloud.notebooks.v2.IDeleteInstanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls StartInstance.
+                     * @param request StartInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public startInstance(request: google.cloud.notebooks.v2.IStartInstanceRequest, callback: google.cloud.notebooks.v2.NotebookService.StartInstanceCallback): void;
+
+                    /**
+                     * Calls StartInstance.
+                     * @param request StartInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public startInstance(request: google.cloud.notebooks.v2.IStartInstanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls StopInstance.
+                     * @param request StopInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public stopInstance(request: google.cloud.notebooks.v2.IStopInstanceRequest, callback: google.cloud.notebooks.v2.NotebookService.StopInstanceCallback): void;
+
+                    /**
+                     * Calls StopInstance.
+                     * @param request StopInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public stopInstance(request: google.cloud.notebooks.v2.IStopInstanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ResetInstance.
+                     * @param request ResetInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public resetInstance(request: google.cloud.notebooks.v2.IResetInstanceRequest, callback: google.cloud.notebooks.v2.NotebookService.ResetInstanceCallback): void;
+
+                    /**
+                     * Calls ResetInstance.
+                     * @param request ResetInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public resetInstance(request: google.cloud.notebooks.v2.IResetInstanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CheckInstanceUpgradability.
+                     * @param request CheckInstanceUpgradabilityRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and CheckInstanceUpgradabilityResponse
+                     */
+                    public checkInstanceUpgradability(request: google.cloud.notebooks.v2.ICheckInstanceUpgradabilityRequest, callback: google.cloud.notebooks.v2.NotebookService.CheckInstanceUpgradabilityCallback): void;
+
+                    /**
+                     * Calls CheckInstanceUpgradability.
+                     * @param request CheckInstanceUpgradabilityRequest message or plain object
+                     * @returns Promise
+                     */
+                    public checkInstanceUpgradability(request: google.cloud.notebooks.v2.ICheckInstanceUpgradabilityRequest): Promise<google.cloud.notebooks.v2.CheckInstanceUpgradabilityResponse>;
+
+                    /**
+                     * Calls UpgradeInstance.
+                     * @param request UpgradeInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public upgradeInstance(request: google.cloud.notebooks.v2.IUpgradeInstanceRequest, callback: google.cloud.notebooks.v2.NotebookService.UpgradeInstanceCallback): void;
+
+                    /**
+                     * Calls UpgradeInstance.
+                     * @param request UpgradeInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public upgradeInstance(request: google.cloud.notebooks.v2.IUpgradeInstanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls RollbackInstance.
+                     * @param request RollbackInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public rollbackInstance(request: google.cloud.notebooks.v2.IRollbackInstanceRequest, callback: google.cloud.notebooks.v2.NotebookService.RollbackInstanceCallback): void;
+
+                    /**
+                     * Calls RollbackInstance.
+                     * @param request RollbackInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public rollbackInstance(request: google.cloud.notebooks.v2.IRollbackInstanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DiagnoseInstance.
+                     * @param request DiagnoseInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public diagnoseInstance(request: google.cloud.notebooks.v2.IDiagnoseInstanceRequest, callback: google.cloud.notebooks.v2.NotebookService.DiagnoseInstanceCallback): void;
+
+                    /**
+                     * Calls DiagnoseInstance.
+                     * @param request DiagnoseInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public diagnoseInstance(request: google.cloud.notebooks.v2.IDiagnoseInstanceRequest): Promise<google.longrunning.Operation>;
+                }
+
+                namespace NotebookService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.notebooks.v2.NotebookService|listInstances}.
+                     * @param error Error, if any
+                     * @param [response] ListInstancesResponse
+                     */
+                    type ListInstancesCallback = (error: (Error|null), response?: google.cloud.notebooks.v2.ListInstancesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.notebooks.v2.NotebookService|getInstance}.
+                     * @param error Error, if any
+                     * @param [response] Instance
+                     */
+                    type GetInstanceCallback = (error: (Error|null), response?: google.cloud.notebooks.v2.Instance) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.notebooks.v2.NotebookService|createInstance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.notebooks.v2.NotebookService|updateInstance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.notebooks.v2.NotebookService|deleteInstance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.notebooks.v2.NotebookService|startInstance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type StartInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.notebooks.v2.NotebookService|stopInstance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type StopInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.notebooks.v2.NotebookService|resetInstance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ResetInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.notebooks.v2.NotebookService|checkInstanceUpgradability}.
+                     * @param error Error, if any
+                     * @param [response] CheckInstanceUpgradabilityResponse
+                     */
+                    type CheckInstanceUpgradabilityCallback = (error: (Error|null), response?: google.cloud.notebooks.v2.CheckInstanceUpgradabilityResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.notebooks.v2.NotebookService|upgradeInstance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpgradeInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.notebooks.v2.NotebookService|rollbackInstance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type RollbackInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.notebooks.v2.NotebookService|diagnoseInstance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DiagnoseInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                }
+
+                /** Properties of an OperationMetadata. */
+                interface IOperationMetadata {
+
+                    /** OperationMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target */
+                    target?: (string|null);
+
+                    /** OperationMetadata verb */
+                    verb?: (string|null);
+
+                    /** OperationMetadata statusMessage */
+                    statusMessage?: (string|null);
+
+                    /** OperationMetadata requestedCancellation */
+                    requestedCancellation?: (boolean|null);
+
+                    /** OperationMetadata apiVersion */
+                    apiVersion?: (string|null);
+
+                    /** OperationMetadata endpoint */
+                    endpoint?: (string|null);
+                }
+
+                /** Represents an OperationMetadata. */
+                class OperationMetadata implements IOperationMetadata {
+
+                    /**
+                     * Constructs a new OperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v2.IOperationMetadata);
+
+                    /** OperationMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target. */
+                    public target: string;
+
+                    /** OperationMetadata verb. */
+                    public verb: string;
+
+                    /** OperationMetadata statusMessage. */
+                    public statusMessage: string;
+
+                    /** OperationMetadata requestedCancellation. */
+                    public requestedCancellation: boolean;
+
+                    /** OperationMetadata apiVersion. */
+                    public apiVersion: string;
+
+                    /** OperationMetadata endpoint. */
+                    public endpoint: string;
+
+                    /**
+                     * Creates a new OperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v2.IOperationMetadata): google.cloud.notebooks.v2.OperationMetadata;
+
+                    /**
+                     * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.notebooks.v2.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v2.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.notebooks.v2.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v2.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v2.OperationMetadata;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v2.OperationMetadata;
+
+                    /**
+                     * Verifies an OperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v2.OperationMetadata;
+
+                    /**
+                     * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                     * @param message OperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v2.OperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OperationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListInstancesRequest. */
+                interface IListInstancesRequest {
+
+                    /** ListInstancesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListInstancesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListInstancesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListInstancesRequest. */
+                class ListInstancesRequest implements IListInstancesRequest {
+
+                    /**
+                     * Constructs a new ListInstancesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v2.IListInstancesRequest);
+
+                    /** ListInstancesRequest parent. */
+                    public parent: string;
+
+                    /** ListInstancesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListInstancesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListInstancesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListInstancesRequest instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v2.IListInstancesRequest): google.cloud.notebooks.v2.ListInstancesRequest;
+
+                    /**
+                     * Encodes the specified ListInstancesRequest message. Does not implicitly {@link google.cloud.notebooks.v2.ListInstancesRequest.verify|verify} messages.
+                     * @param message ListInstancesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v2.IListInstancesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListInstancesRequest message, length delimited. Does not implicitly {@link google.cloud.notebooks.v2.ListInstancesRequest.verify|verify} messages.
+                     * @param message ListInstancesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v2.IListInstancesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListInstancesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListInstancesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v2.ListInstancesRequest;
+
+                    /**
+                     * Decodes a ListInstancesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListInstancesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v2.ListInstancesRequest;
+
+                    /**
+                     * Verifies a ListInstancesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListInstancesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListInstancesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v2.ListInstancesRequest;
+
+                    /**
+                     * Creates a plain object from a ListInstancesRequest message. Also converts values to other types if specified.
+                     * @param message ListInstancesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v2.ListInstancesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListInstancesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListInstancesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListInstancesResponse. */
+                interface IListInstancesResponse {
+
+                    /** ListInstancesResponse instances */
+                    instances?: (google.cloud.notebooks.v2.IInstance[]|null);
+
+                    /** ListInstancesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListInstancesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListInstancesResponse. */
+                class ListInstancesResponse implements IListInstancesResponse {
+
+                    /**
+                     * Constructs a new ListInstancesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v2.IListInstancesResponse);
+
+                    /** ListInstancesResponse instances. */
+                    public instances: google.cloud.notebooks.v2.IInstance[];
+
+                    /** ListInstancesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListInstancesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListInstancesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListInstancesResponse instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v2.IListInstancesResponse): google.cloud.notebooks.v2.ListInstancesResponse;
+
+                    /**
+                     * Encodes the specified ListInstancesResponse message. Does not implicitly {@link google.cloud.notebooks.v2.ListInstancesResponse.verify|verify} messages.
+                     * @param message ListInstancesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v2.IListInstancesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListInstancesResponse message, length delimited. Does not implicitly {@link google.cloud.notebooks.v2.ListInstancesResponse.verify|verify} messages.
+                     * @param message ListInstancesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v2.IListInstancesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListInstancesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListInstancesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v2.ListInstancesResponse;
+
+                    /**
+                     * Decodes a ListInstancesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListInstancesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v2.ListInstancesResponse;
+
+                    /**
+                     * Verifies a ListInstancesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListInstancesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListInstancesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v2.ListInstancesResponse;
+
+                    /**
+                     * Creates a plain object from a ListInstancesResponse message. Also converts values to other types if specified.
+                     * @param message ListInstancesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v2.ListInstancesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListInstancesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListInstancesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetInstanceRequest. */
+                interface IGetInstanceRequest {
+
+                    /** GetInstanceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetInstanceRequest. */
+                class GetInstanceRequest implements IGetInstanceRequest {
+
+                    /**
+                     * Constructs a new GetInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v2.IGetInstanceRequest);
+
+                    /** GetInstanceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v2.IGetInstanceRequest): google.cloud.notebooks.v2.GetInstanceRequest;
+
+                    /**
+                     * Encodes the specified GetInstanceRequest message. Does not implicitly {@link google.cloud.notebooks.v2.GetInstanceRequest.verify|verify} messages.
+                     * @param message GetInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v2.IGetInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.notebooks.v2.GetInstanceRequest.verify|verify} messages.
+                     * @param message GetInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v2.IGetInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v2.GetInstanceRequest;
+
+                    /**
+                     * Decodes a GetInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v2.GetInstanceRequest;
+
+                    /**
+                     * Verifies a GetInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v2.GetInstanceRequest;
+
+                    /**
+                     * Creates a plain object from a GetInstanceRequest message. Also converts values to other types if specified.
+                     * @param message GetInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v2.GetInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateInstanceRequest. */
+                interface ICreateInstanceRequest {
+
+                    /** CreateInstanceRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateInstanceRequest instanceId */
+                    instanceId?: (string|null);
+
+                    /** CreateInstanceRequest instance */
+                    instance?: (google.cloud.notebooks.v2.IInstance|null);
+
+                    /** CreateInstanceRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateInstanceRequest. */
+                class CreateInstanceRequest implements ICreateInstanceRequest {
+
+                    /**
+                     * Constructs a new CreateInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v2.ICreateInstanceRequest);
+
+                    /** CreateInstanceRequest parent. */
+                    public parent: string;
+
+                    /** CreateInstanceRequest instanceId. */
+                    public instanceId: string;
+
+                    /** CreateInstanceRequest instance. */
+                    public instance?: (google.cloud.notebooks.v2.IInstance|null);
+
+                    /** CreateInstanceRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v2.ICreateInstanceRequest): google.cloud.notebooks.v2.CreateInstanceRequest;
+
+                    /**
+                     * Encodes the specified CreateInstanceRequest message. Does not implicitly {@link google.cloud.notebooks.v2.CreateInstanceRequest.verify|verify} messages.
+                     * @param message CreateInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v2.ICreateInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.notebooks.v2.CreateInstanceRequest.verify|verify} messages.
+                     * @param message CreateInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v2.ICreateInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v2.CreateInstanceRequest;
+
+                    /**
+                     * Decodes a CreateInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v2.CreateInstanceRequest;
+
+                    /**
+                     * Verifies a CreateInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v2.CreateInstanceRequest;
+
+                    /**
+                     * Creates a plain object from a CreateInstanceRequest message. Also converts values to other types if specified.
+                     * @param message CreateInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v2.CreateInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateInstanceRequest. */
+                interface IUpdateInstanceRequest {
+
+                    /** UpdateInstanceRequest instance */
+                    instance?: (google.cloud.notebooks.v2.IInstance|null);
+
+                    /** UpdateInstanceRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateInstanceRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateInstanceRequest. */
+                class UpdateInstanceRequest implements IUpdateInstanceRequest {
+
+                    /**
+                     * Constructs a new UpdateInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v2.IUpdateInstanceRequest);
+
+                    /** UpdateInstanceRequest instance. */
+                    public instance?: (google.cloud.notebooks.v2.IInstance|null);
+
+                    /** UpdateInstanceRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateInstanceRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v2.IUpdateInstanceRequest): google.cloud.notebooks.v2.UpdateInstanceRequest;
+
+                    /**
+                     * Encodes the specified UpdateInstanceRequest message. Does not implicitly {@link google.cloud.notebooks.v2.UpdateInstanceRequest.verify|verify} messages.
+                     * @param message UpdateInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v2.IUpdateInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.notebooks.v2.UpdateInstanceRequest.verify|verify} messages.
+                     * @param message UpdateInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v2.IUpdateInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v2.UpdateInstanceRequest;
+
+                    /**
+                     * Decodes an UpdateInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v2.UpdateInstanceRequest;
+
+                    /**
+                     * Verifies an UpdateInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v2.UpdateInstanceRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateInstanceRequest message. Also converts values to other types if specified.
+                     * @param message UpdateInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v2.UpdateInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteInstanceRequest. */
+                interface IDeleteInstanceRequest {
+
+                    /** DeleteInstanceRequest name */
+                    name?: (string|null);
+
+                    /** DeleteInstanceRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteInstanceRequest. */
+                class DeleteInstanceRequest implements IDeleteInstanceRequest {
+
+                    /**
+                     * Constructs a new DeleteInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v2.IDeleteInstanceRequest);
+
+                    /** DeleteInstanceRequest name. */
+                    public name: string;
+
+                    /** DeleteInstanceRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v2.IDeleteInstanceRequest): google.cloud.notebooks.v2.DeleteInstanceRequest;
+
+                    /**
+                     * Encodes the specified DeleteInstanceRequest message. Does not implicitly {@link google.cloud.notebooks.v2.DeleteInstanceRequest.verify|verify} messages.
+                     * @param message DeleteInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v2.IDeleteInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.notebooks.v2.DeleteInstanceRequest.verify|verify} messages.
+                     * @param message DeleteInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v2.IDeleteInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v2.DeleteInstanceRequest;
+
+                    /**
+                     * Decodes a DeleteInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v2.DeleteInstanceRequest;
+
+                    /**
+                     * Verifies a DeleteInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v2.DeleteInstanceRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteInstanceRequest message. Also converts values to other types if specified.
+                     * @param message DeleteInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v2.DeleteInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a StartInstanceRequest. */
+                interface IStartInstanceRequest {
+
+                    /** StartInstanceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a StartInstanceRequest. */
+                class StartInstanceRequest implements IStartInstanceRequest {
+
+                    /**
+                     * Constructs a new StartInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v2.IStartInstanceRequest);
+
+                    /** StartInstanceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new StartInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StartInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v2.IStartInstanceRequest): google.cloud.notebooks.v2.StartInstanceRequest;
+
+                    /**
+                     * Encodes the specified StartInstanceRequest message. Does not implicitly {@link google.cloud.notebooks.v2.StartInstanceRequest.verify|verify} messages.
+                     * @param message StartInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v2.IStartInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StartInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.notebooks.v2.StartInstanceRequest.verify|verify} messages.
+                     * @param message StartInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v2.IStartInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StartInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StartInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v2.StartInstanceRequest;
+
+                    /**
+                     * Decodes a StartInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StartInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v2.StartInstanceRequest;
+
+                    /**
+                     * Verifies a StartInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StartInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StartInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v2.StartInstanceRequest;
+
+                    /**
+                     * Creates a plain object from a StartInstanceRequest message. Also converts values to other types if specified.
+                     * @param message StartInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v2.StartInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StartInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StartInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a StopInstanceRequest. */
+                interface IStopInstanceRequest {
+
+                    /** StopInstanceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a StopInstanceRequest. */
+                class StopInstanceRequest implements IStopInstanceRequest {
+
+                    /**
+                     * Constructs a new StopInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v2.IStopInstanceRequest);
+
+                    /** StopInstanceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new StopInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StopInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v2.IStopInstanceRequest): google.cloud.notebooks.v2.StopInstanceRequest;
+
+                    /**
+                     * Encodes the specified StopInstanceRequest message. Does not implicitly {@link google.cloud.notebooks.v2.StopInstanceRequest.verify|verify} messages.
+                     * @param message StopInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v2.IStopInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StopInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.notebooks.v2.StopInstanceRequest.verify|verify} messages.
+                     * @param message StopInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v2.IStopInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StopInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StopInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v2.StopInstanceRequest;
+
+                    /**
+                     * Decodes a StopInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StopInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v2.StopInstanceRequest;
+
+                    /**
+                     * Verifies a StopInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StopInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StopInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v2.StopInstanceRequest;
+
+                    /**
+                     * Creates a plain object from a StopInstanceRequest message. Also converts values to other types if specified.
+                     * @param message StopInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v2.StopInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StopInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StopInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ResetInstanceRequest. */
+                interface IResetInstanceRequest {
+
+                    /** ResetInstanceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a ResetInstanceRequest. */
+                class ResetInstanceRequest implements IResetInstanceRequest {
+
+                    /**
+                     * Constructs a new ResetInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v2.IResetInstanceRequest);
+
+                    /** ResetInstanceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new ResetInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResetInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v2.IResetInstanceRequest): google.cloud.notebooks.v2.ResetInstanceRequest;
+
+                    /**
+                     * Encodes the specified ResetInstanceRequest message. Does not implicitly {@link google.cloud.notebooks.v2.ResetInstanceRequest.verify|verify} messages.
+                     * @param message ResetInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v2.IResetInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResetInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.notebooks.v2.ResetInstanceRequest.verify|verify} messages.
+                     * @param message ResetInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v2.IResetInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResetInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResetInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v2.ResetInstanceRequest;
+
+                    /**
+                     * Decodes a ResetInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResetInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v2.ResetInstanceRequest;
+
+                    /**
+                     * Verifies a ResetInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResetInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResetInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v2.ResetInstanceRequest;
+
+                    /**
+                     * Creates a plain object from a ResetInstanceRequest message. Also converts values to other types if specified.
+                     * @param message ResetInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v2.ResetInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResetInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ResetInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CheckInstanceUpgradabilityRequest. */
+                interface ICheckInstanceUpgradabilityRequest {
+
+                    /** CheckInstanceUpgradabilityRequest notebookInstance */
+                    notebookInstance?: (string|null);
+                }
+
+                /** Represents a CheckInstanceUpgradabilityRequest. */
+                class CheckInstanceUpgradabilityRequest implements ICheckInstanceUpgradabilityRequest {
+
+                    /**
+                     * Constructs a new CheckInstanceUpgradabilityRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v2.ICheckInstanceUpgradabilityRequest);
+
+                    /** CheckInstanceUpgradabilityRequest notebookInstance. */
+                    public notebookInstance: string;
+
+                    /**
+                     * Creates a new CheckInstanceUpgradabilityRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CheckInstanceUpgradabilityRequest instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v2.ICheckInstanceUpgradabilityRequest): google.cloud.notebooks.v2.CheckInstanceUpgradabilityRequest;
+
+                    /**
+                     * Encodes the specified CheckInstanceUpgradabilityRequest message. Does not implicitly {@link google.cloud.notebooks.v2.CheckInstanceUpgradabilityRequest.verify|verify} messages.
+                     * @param message CheckInstanceUpgradabilityRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v2.ICheckInstanceUpgradabilityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CheckInstanceUpgradabilityRequest message, length delimited. Does not implicitly {@link google.cloud.notebooks.v2.CheckInstanceUpgradabilityRequest.verify|verify} messages.
+                     * @param message CheckInstanceUpgradabilityRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v2.ICheckInstanceUpgradabilityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CheckInstanceUpgradabilityRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CheckInstanceUpgradabilityRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v2.CheckInstanceUpgradabilityRequest;
+
+                    /**
+                     * Decodes a CheckInstanceUpgradabilityRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CheckInstanceUpgradabilityRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v2.CheckInstanceUpgradabilityRequest;
+
+                    /**
+                     * Verifies a CheckInstanceUpgradabilityRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CheckInstanceUpgradabilityRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CheckInstanceUpgradabilityRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v2.CheckInstanceUpgradabilityRequest;
+
+                    /**
+                     * Creates a plain object from a CheckInstanceUpgradabilityRequest message. Also converts values to other types if specified.
+                     * @param message CheckInstanceUpgradabilityRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v2.CheckInstanceUpgradabilityRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CheckInstanceUpgradabilityRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CheckInstanceUpgradabilityRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CheckInstanceUpgradabilityResponse. */
+                interface ICheckInstanceUpgradabilityResponse {
+
+                    /** CheckInstanceUpgradabilityResponse upgradeable */
+                    upgradeable?: (boolean|null);
+
+                    /** CheckInstanceUpgradabilityResponse upgradeVersion */
+                    upgradeVersion?: (string|null);
+
+                    /** CheckInstanceUpgradabilityResponse upgradeInfo */
+                    upgradeInfo?: (string|null);
+
+                    /** CheckInstanceUpgradabilityResponse upgradeImage */
+                    upgradeImage?: (string|null);
+                }
+
+                /** Represents a CheckInstanceUpgradabilityResponse. */
+                class CheckInstanceUpgradabilityResponse implements ICheckInstanceUpgradabilityResponse {
+
+                    /**
+                     * Constructs a new CheckInstanceUpgradabilityResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v2.ICheckInstanceUpgradabilityResponse);
+
+                    /** CheckInstanceUpgradabilityResponse upgradeable. */
+                    public upgradeable: boolean;
+
+                    /** CheckInstanceUpgradabilityResponse upgradeVersion. */
+                    public upgradeVersion: string;
+
+                    /** CheckInstanceUpgradabilityResponse upgradeInfo. */
+                    public upgradeInfo: string;
+
+                    /** CheckInstanceUpgradabilityResponse upgradeImage. */
+                    public upgradeImage: string;
+
+                    /**
+                     * Creates a new CheckInstanceUpgradabilityResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CheckInstanceUpgradabilityResponse instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v2.ICheckInstanceUpgradabilityResponse): google.cloud.notebooks.v2.CheckInstanceUpgradabilityResponse;
+
+                    /**
+                     * Encodes the specified CheckInstanceUpgradabilityResponse message. Does not implicitly {@link google.cloud.notebooks.v2.CheckInstanceUpgradabilityResponse.verify|verify} messages.
+                     * @param message CheckInstanceUpgradabilityResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v2.ICheckInstanceUpgradabilityResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CheckInstanceUpgradabilityResponse message, length delimited. Does not implicitly {@link google.cloud.notebooks.v2.CheckInstanceUpgradabilityResponse.verify|verify} messages.
+                     * @param message CheckInstanceUpgradabilityResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v2.ICheckInstanceUpgradabilityResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CheckInstanceUpgradabilityResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CheckInstanceUpgradabilityResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v2.CheckInstanceUpgradabilityResponse;
+
+                    /**
+                     * Decodes a CheckInstanceUpgradabilityResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CheckInstanceUpgradabilityResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v2.CheckInstanceUpgradabilityResponse;
+
+                    /**
+                     * Verifies a CheckInstanceUpgradabilityResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CheckInstanceUpgradabilityResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CheckInstanceUpgradabilityResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v2.CheckInstanceUpgradabilityResponse;
+
+                    /**
+                     * Creates a plain object from a CheckInstanceUpgradabilityResponse message. Also converts values to other types if specified.
+                     * @param message CheckInstanceUpgradabilityResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v2.CheckInstanceUpgradabilityResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CheckInstanceUpgradabilityResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CheckInstanceUpgradabilityResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpgradeInstanceRequest. */
+                interface IUpgradeInstanceRequest {
+
+                    /** UpgradeInstanceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an UpgradeInstanceRequest. */
+                class UpgradeInstanceRequest implements IUpgradeInstanceRequest {
+
+                    /**
+                     * Constructs a new UpgradeInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v2.IUpgradeInstanceRequest);
+
+                    /** UpgradeInstanceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new UpgradeInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpgradeInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v2.IUpgradeInstanceRequest): google.cloud.notebooks.v2.UpgradeInstanceRequest;
+
+                    /**
+                     * Encodes the specified UpgradeInstanceRequest message. Does not implicitly {@link google.cloud.notebooks.v2.UpgradeInstanceRequest.verify|verify} messages.
+                     * @param message UpgradeInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v2.IUpgradeInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpgradeInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.notebooks.v2.UpgradeInstanceRequest.verify|verify} messages.
+                     * @param message UpgradeInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v2.IUpgradeInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpgradeInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpgradeInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v2.UpgradeInstanceRequest;
+
+                    /**
+                     * Decodes an UpgradeInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpgradeInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v2.UpgradeInstanceRequest;
+
+                    /**
+                     * Verifies an UpgradeInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpgradeInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpgradeInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v2.UpgradeInstanceRequest;
+
+                    /**
+                     * Creates a plain object from an UpgradeInstanceRequest message. Also converts values to other types if specified.
+                     * @param message UpgradeInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v2.UpgradeInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpgradeInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpgradeInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RollbackInstanceRequest. */
+                interface IRollbackInstanceRequest {
+
+                    /** RollbackInstanceRequest name */
+                    name?: (string|null);
+
+                    /** RollbackInstanceRequest targetSnapshot */
+                    targetSnapshot?: (string|null);
+
+                    /** RollbackInstanceRequest revisionId */
+                    revisionId?: (string|null);
+                }
+
+                /** Represents a RollbackInstanceRequest. */
+                class RollbackInstanceRequest implements IRollbackInstanceRequest {
+
+                    /**
+                     * Constructs a new RollbackInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v2.IRollbackInstanceRequest);
+
+                    /** RollbackInstanceRequest name. */
+                    public name: string;
+
+                    /** RollbackInstanceRequest targetSnapshot. */
+                    public targetSnapshot: string;
+
+                    /** RollbackInstanceRequest revisionId. */
+                    public revisionId: string;
+
+                    /**
+                     * Creates a new RollbackInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RollbackInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v2.IRollbackInstanceRequest): google.cloud.notebooks.v2.RollbackInstanceRequest;
+
+                    /**
+                     * Encodes the specified RollbackInstanceRequest message. Does not implicitly {@link google.cloud.notebooks.v2.RollbackInstanceRequest.verify|verify} messages.
+                     * @param message RollbackInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v2.IRollbackInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RollbackInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.notebooks.v2.RollbackInstanceRequest.verify|verify} messages.
+                     * @param message RollbackInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v2.IRollbackInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RollbackInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RollbackInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v2.RollbackInstanceRequest;
+
+                    /**
+                     * Decodes a RollbackInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RollbackInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v2.RollbackInstanceRequest;
+
+                    /**
+                     * Verifies a RollbackInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RollbackInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RollbackInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v2.RollbackInstanceRequest;
+
+                    /**
+                     * Creates a plain object from a RollbackInstanceRequest message. Also converts values to other types if specified.
+                     * @param message RollbackInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v2.RollbackInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RollbackInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RollbackInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DiagnoseInstanceRequest. */
+                interface IDiagnoseInstanceRequest {
+
+                    /** DiagnoseInstanceRequest name */
+                    name?: (string|null);
+
+                    /** DiagnoseInstanceRequest diagnosticConfig */
+                    diagnosticConfig?: (google.cloud.notebooks.v2.IDiagnosticConfig|null);
+
+                    /** DiagnoseInstanceRequest timeoutMinutes */
+                    timeoutMinutes?: (number|null);
+                }
+
+                /** Represents a DiagnoseInstanceRequest. */
+                class DiagnoseInstanceRequest implements IDiagnoseInstanceRequest {
+
+                    /**
+                     * Constructs a new DiagnoseInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.notebooks.v2.IDiagnoseInstanceRequest);
+
+                    /** DiagnoseInstanceRequest name. */
+                    public name: string;
+
+                    /** DiagnoseInstanceRequest diagnosticConfig. */
+                    public diagnosticConfig?: (google.cloud.notebooks.v2.IDiagnosticConfig|null);
+
+                    /** DiagnoseInstanceRequest timeoutMinutes. */
+                    public timeoutMinutes: number;
+
+                    /**
+                     * Creates a new DiagnoseInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DiagnoseInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.notebooks.v2.IDiagnoseInstanceRequest): google.cloud.notebooks.v2.DiagnoseInstanceRequest;
+
+                    /**
+                     * Encodes the specified DiagnoseInstanceRequest message. Does not implicitly {@link google.cloud.notebooks.v2.DiagnoseInstanceRequest.verify|verify} messages.
+                     * @param message DiagnoseInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.notebooks.v2.IDiagnoseInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DiagnoseInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.notebooks.v2.DiagnoseInstanceRequest.verify|verify} messages.
+                     * @param message DiagnoseInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.notebooks.v2.IDiagnoseInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DiagnoseInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DiagnoseInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.notebooks.v2.DiagnoseInstanceRequest;
+
+                    /**
+                     * Decodes a DiagnoseInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DiagnoseInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.notebooks.v2.DiagnoseInstanceRequest;
+
+                    /**
+                     * Verifies a DiagnoseInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DiagnoseInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DiagnoseInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.notebooks.v2.DiagnoseInstanceRequest;
+
+                    /**
+                     * Creates a plain object from a DiagnoseInstanceRequest message. Also converts values to other types if specified.
+                     * @param message DiagnoseInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.notebooks.v2.DiagnoseInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DiagnoseInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DiagnoseInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+            }
         }
     }
 
