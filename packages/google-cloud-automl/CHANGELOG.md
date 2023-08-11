@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+## [4.0.0](https://github.com/googleapis/nodejs-automl/compare/v3.1.3...v4.0.0) (2023-08-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 14
+
+### Miscellaneous Chores
+
+* Upgrade to Node 14 ([a6ab913](https://github.com/googleapis/nodejs-automl/commit/a6ab913ae49222b75dccdaaf4f0cea64c0eef5d2))
+
 ## [3.1.3](https://github.com/googleapis/nodejs-automl/compare/v3.1.2...v3.1.3) (2023-04-02)
 
 
