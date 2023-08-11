@@ -340,7 +340,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
       protos.google.cloud.language.v1.IAnalyzeSentimentRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   analyzeSentiment(
@@ -386,7 +386,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v1.IAnalyzeSentimentResponse,
       protos.google.cloud.language.v1.IAnalyzeSentimentRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -430,7 +430,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
       protos.google.cloud.language.v1.IAnalyzeEntitiesRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   analyzeEntities(
@@ -476,7 +476,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v1.IAnalyzeEntitiesResponse,
       protos.google.cloud.language.v1.IAnalyzeEntitiesRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -524,7 +524,7 @@ export class LanguageServiceClient {
         | protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   >;
   analyzeEntitySentiment(
@@ -573,7 +573,7 @@ export class LanguageServiceClient {
         | protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest
         | undefined
       ),
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -621,7 +621,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
       protos.google.cloud.language.v1.IAnalyzeSyntaxRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   analyzeSyntax(
@@ -661,7 +661,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v1.IAnalyzeSyntaxResponse,
       protos.google.cloud.language.v1.IAnalyzeSyntaxRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -704,7 +704,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v1.IClassifyTextResponse,
       protos.google.cloud.language.v1.IClassifyTextRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   classifyText(
@@ -744,7 +744,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v1.IClassifyTextResponse,
       protos.google.cloud.language.v1.IClassifyTextRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -784,7 +784,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v1.IModerateTextResponse,
       protos.google.cloud.language.v1.IModerateTextRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   moderateText(
@@ -824,7 +824,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v1.IModerateTextResponse,
       protos.google.cloud.language.v1.IModerateTextRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -869,7 +869,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v1.IAnnotateTextResponse,
       protos.google.cloud.language.v1.IAnnotateTextRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   >;
   annotateText(
@@ -909,7 +909,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v1.IAnnotateTextResponse,
       protos.google.cloud.language.v1.IAnnotateTextRequest | undefined,
-      {} | undefined,
+      {} | undefined
     ]
   > | void {
     request = request || {};
