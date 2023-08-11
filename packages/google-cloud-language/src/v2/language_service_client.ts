@@ -338,7 +338,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v2.IAnalyzeSentimentResponse,
       protos.google.cloud.language.v2.IAnalyzeSentimentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   analyzeSentiment(
@@ -384,7 +384,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v2.IAnalyzeSentimentResponse,
       protos.google.cloud.language.v2.IAnalyzeSentimentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -428,7 +428,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v2.IAnalyzeEntitiesResponse,
       protos.google.cloud.language.v2.IAnalyzeEntitiesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   analyzeEntities(
@@ -474,7 +474,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v2.IAnalyzeEntitiesResponse,
       protos.google.cloud.language.v2.IAnalyzeEntitiesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -514,7 +514,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v2.IClassifyTextResponse,
       protos.google.cloud.language.v2.IClassifyTextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   classifyText(
@@ -554,7 +554,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v2.IClassifyTextResponse,
       protos.google.cloud.language.v2.IClassifyTextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -594,7 +594,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v2.IModerateTextResponse,
       protos.google.cloud.language.v2.IModerateTextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   moderateText(
@@ -634,7 +634,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v2.IModerateTextResponse,
       protos.google.cloud.language.v2.IModerateTextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -678,7 +678,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v2.IAnnotateTextResponse,
       protos.google.cloud.language.v2.IAnnotateTextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   annotateText(
@@ -718,7 +718,7 @@ export class LanguageServiceClient {
     [
       protos.google.cloud.language.v2.IAnnotateTextResponse,
       protos.google.cloud.language.v2.IAnnotateTextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
