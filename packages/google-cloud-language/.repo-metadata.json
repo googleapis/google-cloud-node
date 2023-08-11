@@ -1,17 +1,17 @@
 {
-  "default_version": "v1",
-  "release_level": "stable",
-  "requires_billing": true,
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/language/latest",
-  "codeowner_team": "@googleapis/ml-apis",
-  "language": "nodejs",
-  "issue_tracker": "https://issuetracker.google.com/savedsearches/559753",
-  "product_documentation": "https://cloud.google.com/natural-language/docs/",
   "name": "language",
-  "distribution_name": "@google-cloud/language",
-  "name_pretty": "Natural Language",
-  "api_id": "language.googleapis.com",
+  "name_pretty": "Cloud Natural Language API",
+  "product_documentation": "https://cloud.google.com/natural-language/docs",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/language/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "preview",
+  "language": "nodejs",
   "repo": "googleapis/google-cloud-node",
-  "api_shortname": "language",
-  "library_type": "GAPIC_AUTO"
+  "distribution_name": "@google-cloud/language",
+  "api_id": "language.googleapis.com",
+  "default_version": "v2",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO",
+  "api_shortname": "language"
 }
+
