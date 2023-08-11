@@ -4275,6 +4275,197 @@ describe('File', () => {
         await file.save(DATA, options, assert.ifError);
       });
 
+      it('should save a Readable with no errors', done => {
+        const options = {resumable: false};
+        file.createWriteStream = () => {
+          const writeStream = new PassThrough();
+          writeStream.on('data', data => {
+            assert.strictEqual(data.toString(), DATA);
+          });
+          writeStream.once('finish', done);
+          return writeStream;
+        };
+
+        const readable = new Readable({
+          read() {
+            this.push(DATA);
+            this.push(null);
+          },
+        });
+
+        void file.save(readable, options);
+      });
+
+      it('should propagate Readable errors', done => {
+        const options = {resumable: false};
+        file.createWriteStream = () => {
+          const writeStream = new PassThrough();
+          let errorCalled = false;
+          writeStream.on('data', data => {
+            assert.strictEqual(data.toString(), DATA);
+          });
+          writeStream.on('error', err => {
+            errorCalled = true;
+            assert.strictEqual(err.message, 'Error!');
+          });
+          writeStream.on('finish', () => {
+            assert.ok(errorCalled);
+          });
+          return writeStream;
+        };
+
+        const readable = new Readable({
+          read() {
+            setTimeout(() => {
+              this.push(DATA);
+              this.destroy(new Error('Error!'));
+            }, 50);
+          },
+        });
+
+        file.save(readable, options, (err: Error) => {
+          assert.strictEqual(err.message, 'Error!');
+          done();
+        });
+      });
+
+      it('Readable upload should not retry', async () => {
+        const options = {resumable: false};
+
+        let retryCount = 0;
+
+        file.createWriteStream = () => {
+          retryCount++;
+          return new Transform({
+            transform(
+              chunk: string | Buffer,
+              _encoding: string,
+              done: Function
+            ) {
+              this.push(chunk);
+              setTimeout(() => {
+                done(new HTTPError('retryable error', 408));
+              }, 5);
+            },
+          });
+        };
+        try {
+          const readable = new Readable({
+            read() {
+              this.push(DATA);
+              this.push(null);
+            },
+          });
+
+          await file.save(readable, options);
+          throw Error('unreachable');
+        } catch (e) {
+          assert.strictEqual((e as Error).message, 'retryable error');
+          assert.ok(retryCount === 1);
+        }
+      });
+
+      it('Destroyed Readable upload should throw', async () => {
+        const options = {resumable: false};
+
+        file.createWriteStream = () => {
+          throw new Error('unreachable');
+        };
+        try {
+          const readable = new Readable({
+            read() {
+              this.push(DATA);
+              this.push(null);
+            },
+          });
+
+          readable.destroy();
+
+          await file.save(readable, options);
+        } catch (e) {
+          assert.strictEqual(
+            (e as Error).message,
+            FileExceptionMessages.STREAM_NOT_READABLE
+          );
+        }
+      });
+
+      it('should save a generator with no error', done => {
+        const options = {resumable: false};
+        file.createWriteStream = () => {
+          const writeStream = new PassThrough();
+          writeStream.on('data', data => {
+            assert.strictEqual(data.toString(), DATA);
+            done();
+          });
+          return writeStream;
+        };
+
+        const generator = async function* (arg?: {signal?: AbortSignal}) {
+          await new Promise(resolve => setTimeout(resolve, 5));
+          if (arg?.signal?.aborted) return;
+          yield DATA;
+        };
+
+        void file.save(generator, options);
+      });
+
+      it('should propagate async iterable errors', done => {
+        const options = {resumable: false};
+        file.createWriteStream = () => {
+          const writeStream = new PassThrough();
+          let errorCalled = false;
+          writeStream.on('data', data => {
+            assert.strictEqual(data.toString(), DATA);
+          });
+          writeStream.on('error', err => {
+            errorCalled = true;
+            assert.strictEqual(err.message, 'Error!');
+          });
+          writeStream.on('finish', () => {
+            assert.ok(errorCalled);
+          });
+          return writeStream;
+        };
+
+        const generator = async function* () {
+          yield DATA;
+          throw new Error('Error!');
+        };
+
+        file.save(generator(), options, (err: Error) => {
+          assert.strictEqual(err.message, 'Error!');
+          done();
+        });
+      });
+
+      it('should error on invalid async iterator data', done => {
+        const options = {resumable: false};
+        file.createWriteStream = () => {
+          const writeStream = new PassThrough();
+          let errorCalled = false;
+          writeStream.on('error', () => {
+            errorCalled = true;
+          });
+          writeStream.on('finish', () => {
+            assert.ok(errorCalled);
+          });
+          return writeStream;
+        };
+
+        const generator = async function* () {
+          yield {thisIsNot: 'a buffer or a string'};
+        };
+
+        file.save(generator(), options, (err: Error) => {
+          assert.strictEqual(
+            err.message,
+            'The "chunk" argument must be of type string or an instance of Buffer or Uint8Array. Received an instance of Object'
+          );
+          done();
+        });
+      });
+
       it('buffer upload should retry on first failure', async () => {
         const options = {
           resumable: false,
