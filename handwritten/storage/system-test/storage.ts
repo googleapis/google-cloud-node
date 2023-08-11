@@ -41,7 +41,7 @@ import {gzipSync} from 'zlib';
 interface ErrorCallbackFunction {
   (err: Error | null): void;
 }
-import {PubSub} from '@google-cloud/pubsub';
+import {PubSub, Subscription, Topic} from '@google-cloud/pubsub';
 import {LifecycleRule} from '../src/bucket';
 import {IdempotencyStrategy} from '../src/storage';
 
@@ -82,8 +82,7 @@ describe('storage', () => {
   const pubsub = new PubSub({
     projectId: process.env.PROJECT_ID,
   });
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let topic: any;
+  let topic: Topic;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const FILES: {[index: string]: any} = {
     logo: {
@@ -1712,7 +1711,7 @@ describe('storage', () => {
             .then(() => file.save('abc', USER_PROJECT_OPTIONS))
             .then(() => topic.getMetadata())
             .then(data => {
-              topicName = data[0].name;
+              topicName = data[0].name!;
             });
         });
 
@@ -3549,39 +3548,27 @@ describe('storage', () => {
 
   describe('notifications', () => {
     let notification: Notification;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let subscription: any;
+    let subscription: Subscription;
 
-    before(() => {
-      return bucket
-        .createNotification(topic, {
+    before(async () => {
+      const createNotificationData = await bucket.createNotification(
+        topic.name,
+        {
           eventTypes: ['OBJECT_FINALIZE'],
-        })
-        .then(data => {
-          notification = data[0];
-          subscription = topic.subscription(generateName());
-
-          return subscription.create();
-        });
+        }
+      );
+      notification = createNotificationData[0];
+      subscription = topic.subscription(generateName());
+      await subscription.create();
     });
 
-    after(() => {
-      return (
-        subscription
-          .delete()
-          .then(() => {
-            return bucket.getNotifications();
-          })
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          .then((data: any) => {
-            return Promise.all(
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              data[0].map((notification: any) => {
-                return notification.delete();
-              })
-            );
-          })
-      );
+    after(async () => {
+      await subscription.delete();
+      const notifications = await bucket.getNotifications();
+      const notificationsToDelete = notifications[0].map(notification => {
+        return notification.delete();
+      });
+      await Promise.all(notificationsToDelete);
     });
 
     it('should get an existing notification', async () => {
@@ -3611,12 +3598,15 @@ describe('storage', () => {
     });
 
     it('should emit events to a subscription', done => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      subscription.on('error', done).on('message', (message: any) => {
-        const attrs = message.attributes;
-        assert.strictEqual(attrs.eventType, 'OBJECT_FINALIZE');
-        done();
-      });
+      subscription
+        .on('error', err => {
+          done(err);
+        })
+        .on('message', message => {
+          const attrs = message.attributes;
+          assert.strictEqual(attrs.eventType, 'OBJECT_FINALIZE');
+          done();
+        });
 
       bucket.upload(FILES.logo.path, (err: Error | null) => {
         if (err) {
@@ -3630,7 +3620,7 @@ describe('storage', () => {
       let notification: Notification;
 
       return bucket
-        .createNotification(topic, {
+        .createNotification(topic.name, {
           eventTypes: ['OBJECT_DELETE'],
         })
         .then(data => {
