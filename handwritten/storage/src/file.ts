@@ -29,14 +29,7 @@ import * as crypto from 'crypto';
 import * as fs from 'fs';
 import * as mime from 'mime';
 import * as resumableUpload from './resumable-upload';
-import {
-  Writable,
-  Readable,
-  pipeline,
-  Transform,
-  PassThrough,
-  PipelineSource,
-} from 'stream';
+import {Writable, Readable, pipeline, Transform, PassThrough} from 'stream';
 import * as zlib from 'zlib';
 import * as http from 'http';
 
@@ -99,8 +92,6 @@ export interface PolicyDocument {
   base64: string;
   signature: string;
 }
-
-export type SaveData = string | Buffer | PipelineSource<string | Buffer>;
 
 export type GenerateSignedPostPolicyV2Response = [PolicyDocument];
 
@@ -463,7 +454,6 @@ export enum FileExceptionMessages {
   UPLOAD_MISMATCH = `The uploaded data did not match the data from the server.
     As a precaution, the file has been deleted.
     To be sure the content is the same, you should try uploading the file again.`,
-  STREAM_NOT_READABLE = 'Stream must be readable.',
 }
 
 /**
@@ -3567,9 +3557,13 @@ class File extends ServiceObject<File, FileMetadata> {
     this.copy(newFile, copyOptions, callback!);
   }
 
-  save(data: SaveData, options?: SaveOptions): Promise<void>;
-  save(data: SaveData, callback: SaveCallback): void;
-  save(data: SaveData, options: SaveOptions, callback: SaveCallback): void;
+  save(data: string | Buffer, options?: SaveOptions): Promise<void>;
+  save(data: string | Buffer, callback: SaveCallback): void;
+  save(
+    data: string | Buffer,
+    options: SaveOptions,
+    callback: SaveCallback
+  ): void;
   /**
    * @typedef {object} SaveOptions
    * @extends CreateWriteStreamOptions
@@ -3596,7 +3590,7 @@ class File extends ServiceObject<File, FileMetadata> {
    * resumable feature is disabled.
    * </p>
    *
-   * @param {SaveData} data The data to write to a file.
+   * @param {string | Buffer} data The data to write to a file.
    * @param {SaveOptions} [options] See {@link File#createWriteStream}'s `options`
    *     parameter.
    * @param {SaveCallback} [callback] Callback function.
@@ -3624,7 +3618,7 @@ class File extends ServiceObject<File, FileMetadata> {
    * ```
    */
   save(
-    data: SaveData,
+    data: string | Buffer,
     optionsOrCallback?: SaveOptions | SaveCallback,
     callback?: SaveCallback
   ): Promise<void> | void {
@@ -3644,68 +3638,28 @@ class File extends ServiceObject<File, FileMetadata> {
     }
     const returnValue = retry(
       async (bail: (err: Error) => void) => {
-        if (data instanceof Readable) {
-          // Make sure any pending async readable operations are finished before
-          // attempting to check if the stream is readable.
-          await new Promise(resolve => setImmediate(resolve));
-
-          if (!data.readable || data.destroyed) {
-            // Calling pipeline() with a non-readable stream will result in the
-            // callback being called without an error, and no piping taking
-            // place. In that case, file.save() would appear to succeed, but
-            // nothing would be uploaded.
-            return bail(new Error(FileExceptionMessages.STREAM_NOT_READABLE));
-          }
-        }
-
-        return new Promise<void>((resolve, reject) => {
+        await new Promise<void>((resolve, reject) => {
           if (maxRetries === 0) {
             this.storage.retryOptions.autoRetry = false;
           }
-          const writable = this.createWriteStream(options);
-
+          const writable = this.createWriteStream(options)
+            .on('error', err => {
+              if (
+                this.storage.retryOptions.autoRetry &&
+                this.storage.retryOptions.retryableErrorFn!(err)
+              ) {
+                return reject(err);
+              } else {
+                return bail(err);
+              }
+            })
+            .on('finish', () => {
+              return resolve();
+            });
           if (options.onUploadProgress) {
             writable.on('progress', options.onUploadProgress);
           }
-
-          const handleError = (err: Error) => {
-            if (
-              !this.storage.retryOptions.autoRetry ||
-              !this.storage.retryOptions.retryableErrorFn!(err)
-            ) {
-              bail(err);
-            }
-
-            reject(err);
-          };
-
-          if (typeof data === 'string' || Buffer.isBuffer(data)) {
-            writable
-              .on('error', handleError)
-              .on('finish', () => resolve())
-              .end(data);
-          } else {
-            pipeline(data, writable, err => {
-              if (err) {
-                // If data is not a valid PipelineSource, then pipeline will
-                // fail without destroying the writable stream. If data is a
-                // PipelineSource that yields invalid chunks (e.g. a stream in
-                // object mode or an iterable that does not yield Buffers or
-                // strings), then pipeline will destroy the writable stream.
-                if (!writable.destroyed) writable.destroy();
-
-                if (typeof data !== 'function') {
-                  // Only PipelineSourceFunction can be retried. Async-iterables
-                  // and Readable streams can only be consumed once.
-                  bail(err);
-                }
-
-                handleError(err);
-              } else {
-                resolve();
-              }
-            });
-          }
+          writable.end(data);
         });
       },
       {
