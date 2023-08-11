@@ -2732,6 +2732,13 @@
                         "suspendedData": {
                           "type": "SuspendedData",
                           "id": 9
+                        },
+                        "stateInitiator": {
+                          "type": "StateInitiator",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -2776,6 +2783,13 @@
                         },
                         "SuspendedData": {
                           "fields": {}
+                        },
+                        "StateInitiator": {
+                          "values": {
+                            "STATE_INITIATOR_UNSPECIFIED": 0,
+                            "USER": 1,
+                            "SERVICE": 2
+                          }
                         }
                       }
                     },
