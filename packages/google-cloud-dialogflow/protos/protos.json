@@ -2307,6 +2307,10 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 14
+                        },
+                        "platform": {
+                          "type": "string",
+                          "id": 18
                         }
                       }
                     },
@@ -5955,6 +5959,10 @@
                               "options": {
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/AnswerRecord"
                               }
+                            },
+                            "baselineModelVersion": {
+                              "type": "string",
+                              "id": 5
                             }
                           }
                         }
@@ -6040,6 +6048,10 @@
                               "keyType": "string",
                               "type": "string",
                               "id": 2
+                            },
+                            "baselineModelVersion": {
+                              "type": "string",
+                              "id": 4
                             }
                           }
                         }
