@@ -465,7 +465,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IApi,
       protos.google.cloud.apigeeregistry.v1.IGetApiRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getApi(
@@ -505,7 +505,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IApi,
       protos.google.cloud.apigeeregistry.v1.IGetApiRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -561,7 +561,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IApi,
       protos.google.cloud.apigeeregistry.v1.ICreateApiRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createApi(
@@ -607,7 +607,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IApi,
       protos.google.cloud.apigeeregistry.v1.ICreateApiRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -663,7 +663,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IApi,
       protos.google.cloud.apigeeregistry.v1.IUpdateApiRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateApi(
@@ -709,7 +709,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IApi,
       protos.google.cloud.apigeeregistry.v1.IUpdateApiRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -759,7 +759,7 @@ export class RegistryClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.apigeeregistry.v1.IDeleteApiRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteApi(
@@ -805,7 +805,7 @@ export class RegistryClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.apigeeregistry.v1.IDeleteApiRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -851,7 +851,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IApiVersion,
       protos.google.cloud.apigeeregistry.v1.IGetApiVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getApiVersion(
@@ -897,7 +897,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IApiVersion,
       protos.google.cloud.apigeeregistry.v1.IGetApiVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -956,7 +956,7 @@ export class RegistryClient {
         | protos.google.cloud.apigeeregistry.v1.ICreateApiVersionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createApiVersion(
@@ -1005,7 +1005,7 @@ export class RegistryClient {
         | protos.google.cloud.apigeeregistry.v1.ICreateApiVersionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1064,7 +1064,7 @@ export class RegistryClient {
         | protos.google.cloud.apigeeregistry.v1.IUpdateApiVersionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateApiVersion(
@@ -1113,7 +1113,7 @@ export class RegistryClient {
         | protos.google.cloud.apigeeregistry.v1.IUpdateApiVersionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1166,7 +1166,7 @@ export class RegistryClient {
         | protos.google.cloud.apigeeregistry.v1.IDeleteApiVersionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteApiVersion(
@@ -1215,7 +1215,7 @@ export class RegistryClient {
         | protos.google.cloud.apigeeregistry.v1.IDeleteApiVersionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1261,7 +1261,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IApiSpec,
       protos.google.cloud.apigeeregistry.v1.IGetApiSpecRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getApiSpec(
@@ -1307,7 +1307,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IApiSpec,
       protos.google.cloud.apigeeregistry.v1.IGetApiSpecRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1359,7 +1359,7 @@ export class RegistryClient {
         | protos.google.cloud.apigeeregistry.v1.IGetApiSpecContentsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getApiSpecContents(
@@ -1408,7 +1408,7 @@ export class RegistryClient {
         | protos.google.cloud.apigeeregistry.v1.IGetApiSpecContentsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1464,7 +1464,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IApiSpec,
       protos.google.cloud.apigeeregistry.v1.ICreateApiSpecRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createApiSpec(
@@ -1510,7 +1510,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IApiSpec,
       protos.google.cloud.apigeeregistry.v1.ICreateApiSpecRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1566,7 +1566,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IApiSpec,
       protos.google.cloud.apigeeregistry.v1.IUpdateApiSpecRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateApiSpec(
@@ -1612,7 +1612,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IApiSpec,
       protos.google.cloud.apigeeregistry.v1.IUpdateApiSpecRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1662,7 +1662,7 @@ export class RegistryClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.apigeeregistry.v1.IDeleteApiSpecRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteApiSpec(
@@ -1708,7 +1708,7 @@ export class RegistryClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.apigeeregistry.v1.IDeleteApiSpecRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1759,7 +1759,7 @@ export class RegistryClient {
         | protos.google.cloud.apigeeregistry.v1.ITagApiSpecRevisionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   tagApiSpecRevision(
@@ -1808,7 +1808,7 @@ export class RegistryClient {
         | protos.google.cloud.apigeeregistry.v1.ITagApiSpecRevisionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1859,7 +1859,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IApiSpec,
       protos.google.cloud.apigeeregistry.v1.IRollbackApiSpecRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   rollbackApiSpec(
@@ -1905,7 +1905,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IApiSpec,
       protos.google.cloud.apigeeregistry.v1.IRollbackApiSpecRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1957,7 +1957,7 @@ export class RegistryClient {
         | protos.google.cloud.apigeeregistry.v1.IDeleteApiSpecRevisionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteApiSpecRevision(
@@ -2006,7 +2006,7 @@ export class RegistryClient {
         | protos.google.cloud.apigeeregistry.v1.IDeleteApiSpecRevisionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2055,7 +2055,7 @@ export class RegistryClient {
         | protos.google.cloud.apigeeregistry.v1.IGetApiDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getApiDeployment(
@@ -2104,7 +2104,7 @@ export class RegistryClient {
         | protos.google.cloud.apigeeregistry.v1.IGetApiDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2163,7 +2163,7 @@ export class RegistryClient {
         | protos.google.cloud.apigeeregistry.v1.ICreateApiDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createApiDeployment(
@@ -2212,7 +2212,7 @@ export class RegistryClient {
         | protos.google.cloud.apigeeregistry.v1.ICreateApiDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2271,7 +2271,7 @@ export class RegistryClient {
         | protos.google.cloud.apigeeregistry.v1.IUpdateApiDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateApiDeployment(
@@ -2320,7 +2320,7 @@ export class RegistryClient {
         | protos.google.cloud.apigeeregistry.v1.IUpdateApiDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2373,7 +2373,7 @@ export class RegistryClient {
         | protos.google.cloud.apigeeregistry.v1.IDeleteApiDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteApiDeployment(
@@ -2422,7 +2422,7 @@ export class RegistryClient {
         | protos.google.cloud.apigeeregistry.v1.IDeleteApiDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2474,7 +2474,7 @@ export class RegistryClient {
         | protos.google.cloud.apigeeregistry.v1.ITagApiDeploymentRevisionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   tagApiDeploymentRevision(
@@ -2523,7 +2523,7 @@ export class RegistryClient {
         | protos.google.cloud.apigeeregistry.v1.ITagApiDeploymentRevisionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2581,7 +2581,7 @@ export class RegistryClient {
         | protos.google.cloud.apigeeregistry.v1.IRollbackApiDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   rollbackApiDeployment(
@@ -2630,7 +2630,7 @@ export class RegistryClient {
         | protos.google.cloud.apigeeregistry.v1.IRollbackApiDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2682,7 +2682,7 @@ export class RegistryClient {
         | protos.google.cloud.apigeeregistry.v1.IDeleteApiDeploymentRevisionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteApiDeploymentRevision(
@@ -2731,7 +2731,7 @@ export class RegistryClient {
         | protos.google.cloud.apigeeregistry.v1.IDeleteApiDeploymentRevisionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2781,7 +2781,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IArtifact,
       protos.google.cloud.apigeeregistry.v1.IGetArtifactRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getArtifact(
@@ -2827,7 +2827,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IArtifact,
       protos.google.cloud.apigeeregistry.v1.IGetArtifactRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2879,7 +2879,7 @@ export class RegistryClient {
         | protos.google.cloud.apigeeregistry.v1.IGetArtifactContentsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getArtifactContents(
@@ -2928,7 +2928,7 @@ export class RegistryClient {
         | protos.google.cloud.apigeeregistry.v1.IGetArtifactContentsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2984,7 +2984,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IArtifact,
       protos.google.cloud.apigeeregistry.v1.ICreateArtifactRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createArtifact(
@@ -3030,7 +3030,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IArtifact,
       protos.google.cloud.apigeeregistry.v1.ICreateArtifactRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3078,7 +3078,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IArtifact,
       protos.google.cloud.apigeeregistry.v1.IReplaceArtifactRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   replaceArtifact(
@@ -3124,7 +3124,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IArtifact,
       protos.google.cloud.apigeeregistry.v1.IReplaceArtifactRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3170,7 +3170,7 @@ export class RegistryClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.apigeeregistry.v1.IDeleteArtifactRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteArtifact(
@@ -3216,7 +3216,7 @@ export class RegistryClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.apigeeregistry.v1.IDeleteArtifactRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3280,7 +3280,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IApi[],
       protos.google.cloud.apigeeregistry.v1.IListApisRequest | null,
-      protos.google.cloud.apigeeregistry.v1.IListApisResponse
+      protos.google.cloud.apigeeregistry.v1.IListApisResponse,
     ]
   >;
   listApis(
@@ -3326,7 +3326,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IApi[],
       protos.google.cloud.apigeeregistry.v1.IListApisRequest | null,
-      protos.google.cloud.apigeeregistry.v1.IListApisResponse
+      protos.google.cloud.apigeeregistry.v1.IListApisResponse,
     ]
   > | void {
     request = request || {};
@@ -3502,7 +3502,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IApiVersion[],
       protos.google.cloud.apigeeregistry.v1.IListApiVersionsRequest | null,
-      protos.google.cloud.apigeeregistry.v1.IListApiVersionsResponse
+      protos.google.cloud.apigeeregistry.v1.IListApiVersionsResponse,
     ]
   >;
   listApiVersions(
@@ -3548,7 +3548,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IApiVersion[],
       protos.google.cloud.apigeeregistry.v1.IListApiVersionsRequest | null,
-      protos.google.cloud.apigeeregistry.v1.IListApiVersionsResponse
+      protos.google.cloud.apigeeregistry.v1.IListApiVersionsResponse,
     ]
   > | void {
     request = request || {};
@@ -3724,7 +3724,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IApiSpec[],
       protos.google.cloud.apigeeregistry.v1.IListApiSpecsRequest | null,
-      protos.google.cloud.apigeeregistry.v1.IListApiSpecsResponse
+      protos.google.cloud.apigeeregistry.v1.IListApiSpecsResponse,
     ]
   >;
   listApiSpecs(
@@ -3770,7 +3770,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IApiSpec[],
       protos.google.cloud.apigeeregistry.v1.IListApiSpecsRequest | null,
-      protos.google.cloud.apigeeregistry.v1.IListApiSpecsResponse
+      protos.google.cloud.apigeeregistry.v1.IListApiSpecsResponse,
     ]
   > | void {
     request = request || {};
@@ -3937,7 +3937,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IApiSpec[],
       protos.google.cloud.apigeeregistry.v1.IListApiSpecRevisionsRequest | null,
-      protos.google.cloud.apigeeregistry.v1.IListApiSpecRevisionsResponse
+      protos.google.cloud.apigeeregistry.v1.IListApiSpecRevisionsResponse,
     ]
   >;
   listApiSpecRevisions(
@@ -3983,7 +3983,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IApiSpec[],
       protos.google.cloud.apigeeregistry.v1.IListApiSpecRevisionsRequest | null,
-      protos.google.cloud.apigeeregistry.v1.IListApiSpecRevisionsResponse
+      protos.google.cloud.apigeeregistry.v1.IListApiSpecRevisionsResponse,
     ]
   > | void {
     request = request || {};
@@ -4139,7 +4139,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IApiDeployment[],
       protos.google.cloud.apigeeregistry.v1.IListApiDeploymentsRequest | null,
-      protos.google.cloud.apigeeregistry.v1.IListApiDeploymentsResponse
+      protos.google.cloud.apigeeregistry.v1.IListApiDeploymentsResponse,
     ]
   >;
   listApiDeployments(
@@ -4185,7 +4185,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IApiDeployment[],
       protos.google.cloud.apigeeregistry.v1.IListApiDeploymentsRequest | null,
-      protos.google.cloud.apigeeregistry.v1.IListApiDeploymentsResponse
+      protos.google.cloud.apigeeregistry.v1.IListApiDeploymentsResponse,
     ]
   > | void {
     request = request || {};
@@ -4352,7 +4352,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IApiDeployment[],
       protos.google.cloud.apigeeregistry.v1.IListApiDeploymentRevisionsRequest | null,
-      protos.google.cloud.apigeeregistry.v1.IListApiDeploymentRevisionsResponse
+      protos.google.cloud.apigeeregistry.v1.IListApiDeploymentRevisionsResponse,
     ]
   >;
   listApiDeploymentRevisions(
@@ -4398,7 +4398,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IApiDeployment[],
       protos.google.cloud.apigeeregistry.v1.IListApiDeploymentRevisionsRequest | null,
-      protos.google.cloud.apigeeregistry.v1.IListApiDeploymentRevisionsResponse
+      protos.google.cloud.apigeeregistry.v1.IListApiDeploymentRevisionsResponse,
     ]
   > | void {
     request = request || {};
@@ -4558,7 +4558,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IArtifact[],
       protos.google.cloud.apigeeregistry.v1.IListArtifactsRequest | null,
-      protos.google.cloud.apigeeregistry.v1.IListArtifactsResponse
+      protos.google.cloud.apigeeregistry.v1.IListArtifactsResponse,
     ]
   >;
   listArtifacts(
@@ -4604,7 +4604,7 @@ export class RegistryClient {
     [
       protos.google.cloud.apigeeregistry.v1.IArtifact[],
       protos.google.cloud.apigeeregistry.v1.IListArtifactsRequest | null,
-      protos.google.cloud.apigeeregistry.v1.IListArtifactsResponse
+      protos.google.cloud.apigeeregistry.v1.IListArtifactsResponse,
     ]
   > | void {
     request = request || {};
