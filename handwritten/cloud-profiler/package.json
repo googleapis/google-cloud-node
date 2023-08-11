@@ -27,33 +27,33 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "@google-cloud/common": "^4.0.0",
+    "@google-cloud/common": "^5.0.0",
     "@google-cloud/logging-min": "^10.0.0",
     "@types/console-log-level": "^1.4.0",
     "@types/semver": "^7.0.0",
     "console-log-level": "^1.4.0",
     "delay": "^5.0.0",
     "extend": "^3.0.2",
-    "gcp-metadata": "^4.0.0",
+    "gcp-metadata": "^6.0.0",
     "parse-duration": "^1.0.0",
     "pprof": "3.2.1",
     "pretty-ms": "^7.0.0",
     "protobufjs": "~7.2.4",
     "semver": "^7.0.0",
-    "teeny-request": "^8.0.0"
+    "teeny-request": "^9.0.0"
   },
   "devDependencies": {
     "@types/extend": "^3.0.0",
     "@types/long": "^4.0.0",
     "@types/mocha": "^9.0.0",
     "@types/nock": "^10.0.0",
-    "@types/node": "^18.0.0",
+    "@types/node": "^20.4.9",
     "@types/pretty-ms": "^4.0.0",
     "@types/sinon": "^10.0.0",
     "@types/tmp": "0.2.3",
-    "c8": "^8.0.0",
+    "c8": "^8.0.1",
     "codecov": "^3.0.0",
-    "gts": "^3.1.0",
+    "gts": "^5.0.0",
     "js-green-licenses": "^4.0.0",
     "jsdoc": "^4.0.0",
     "jsdoc-fresh": "^2.0.0",
@@ -64,7 +64,7 @@
     "sinon": "^15.0.0",
     "source-map": "^0.7.0",
     "tmp": "0.2.1",
-    "typescript": "^4.7.2"
+    "typescript": "^5.1.6"
   },
   "files": [
     "build/src",
@@ -77,6 +77,6 @@
     ]
   },
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=14.0.0"
   }
 }

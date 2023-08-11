@@ -197,7 +197,10 @@ async function profileBytes(p: perftools.profiles.IProfile): Promise<string> {
  * Error constructed from HTTP server response which indicates backoff.
  */
 export class BackoffResponseError extends Error {
-  constructor(message: string | undefined, readonly backoffMillis: number) {
+  constructor(
+    message: string | undefined,
+    readonly backoffMillis: number
+  ) {
     super(message);
   }
 }
