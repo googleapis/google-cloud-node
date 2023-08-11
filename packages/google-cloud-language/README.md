@@ -2,22 +2,22 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Natural Language: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-language)
+# [Cloud Natural Language API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-language)
 
-[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+[![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/language.svg)](https://www.npmjs.org/package/@google-cloud/language)
 
 
 
 
-Google Cloud Natural Language API client for Node.js
+Cloud Natural Language API client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
 [the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-language/CHANGELOG.md).
 
-* [Natural Language Node.js Client API Reference][client-docs]
-* [Natural Language Documentation][product-docs]
+* [Cloud Natural Language API Node.js Client API Reference][client-docs]
+* [Cloud Natural Language API Documentation][product-docs]
 * [github.com/googleapis/google-cloud-node/packages/google-cloud-language](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-language)
 
 Read more about the client libraries for Cloud APIs, including the older
@@ -43,7 +43,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 1.  [Select or create a Cloud Platform project][projects].
 1.  [Enable billing for your project][billing].
-1.  [Enable the Natural Language API][enable_api].
+1.  [Enable the Cloud Natural Language API API][enable_api].
 1.  [Set up authentication with a service account][auth] so you can access the
     API from your local workstation.
 
@@ -105,11 +105,16 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 | Language_service.annotate_text | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v1beta2/language_service.annotate_text.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v1beta2/language_service.annotate_text.js,packages/google-cloud-language/samples/README.md) |
 | Language_service.classify_text | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v1beta2/language_service.classify_text.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v1beta2/language_service.classify_text.js,packages/google-cloud-language/samples/README.md) |
 | Language_service.moderate_text | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v1beta2/language_service.moderate_text.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v1beta2/language_service.moderate_text.js,packages/google-cloud-language/samples/README.md) |
+| Language_service.analyze_entities | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v2/language_service.analyze_entities.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v2/language_service.analyze_entities.js,packages/google-cloud-language/samples/README.md) |
+| Language_service.analyze_sentiment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v2/language_service.analyze_sentiment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v2/language_service.analyze_sentiment.js,packages/google-cloud-language/samples/README.md) |
+| Language_service.annotate_text | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v2/language_service.annotate_text.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v2/language_service.annotate_text.js,packages/google-cloud-language/samples/README.md) |
+| Language_service.classify_text | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v2/language_service.classify_text.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v2/language_service.classify_text.js,packages/google-cloud-language/samples/README.md) |
+| Language_service.moderate_text | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/generated/v2/language_service.moderate_text.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/generated/v2/language_service.moderate_text.js,packages/google-cloud-language/samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-language/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-language/samples/quickstart.js,packages/google-cloud-language/samples/README.md) |
 
 
 
-The [Natural Language Node.js Client API Reference][client-docs] documentation
+The [Cloud Natural Language API Node.js Client API Reference][client-docs] documentation
 also contains samples.
 
 ## Supported Node.js Versions
@@ -139,14 +144,13 @@ This library follows [Semantic Versioning](http://semver.org/).
 
 
 
-This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
-unless absolutely necessary (e.g. because of critical security issues) or with
-an extensive deprecation period. Issues and requests against **stable** libraries
-are addressed with the highest priority.
 
 
 
 
+This library is considered to be in **preview**. This means it is still a
+work-in-progress and under active development. Any release is subject to
+backwards-incompatible changes at any time.
 
 
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
@@ -170,7 +174,7 @@ Apache Version 2.0
 See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/language/latest
-[product-docs]: https://cloud.google.com/natural-language/docs/
+[product-docs]: https://cloud.google.com/natural-language/docs
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
