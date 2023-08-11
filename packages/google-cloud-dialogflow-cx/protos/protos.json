@@ -1328,6 +1328,13 @@
                             "importOption": {
                               "type": "ImportOption",
                               "id": 4
+                            },
+                            "flowImportStrategy": {
+                              "type": "FlowImportStrategy",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -1336,6 +1343,17 @@
                                 "IMPORT_OPTION_UNSPECIFIED": 0,
                                 "KEEP": 1,
                                 "FALLBACK": 2
+                              }
+                            }
+                          }
+                        },
+                        "FlowImportStrategy": {
+                          "fields": {
+                            "globalImportStrategy": {
+                              "type": "ImportStrategy",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -1395,6 +1413,16 @@
                               "type": "bytes",
                               "id": 2
                             }
+                          }
+                        },
+                        "ImportStrategy": {
+                          "values": {
+                            "IMPORT_STRATEGY_UNSPECIFIED": 0,
+                            "IMPORT_STRATEGY_CREATE_NEW": 1,
+                            "IMPORT_STRATEGY_REPLACE": 2,
+                            "IMPORT_STRATEGY_KEEP": 3,
+                            "IMPORT_STRATEGY_MERGE": 4,
+                            "IMPORT_STRATEGY_THROW_ERROR": 5
                           }
                         },
                         "Pages": {
@@ -1971,6 +1999,10 @@
                               "type": "TelephonyTransferCall",
                               "id": 18
                             },
+                            "responseType": {
+                              "type": "ResponseType",
+                              "id": 4
+                            },
                             "channel": {
                               "type": "string",
                               "id": 19
@@ -2111,6 +2143,14 @@
                                   "type": "string",
                                   "id": 1
                                 }
+                              }
+                            },
+                            "ResponseType": {
+                              "values": {
+                                "RESPONSE_TYPE_UNSPECIFIED": 0,
+                                "ENTRY_PROMPT": 1,
+                                "PARAMETER_PROMPT": 2,
+                                "HANDLER_PROMPT": 3
                               }
                             }
                           }
@@ -5716,12 +5756,16 @@
                               "responseType": "ListTransitionRouteGroupsResponse",
                               "options": {
                                 "(google.api.http).get": "/v3/{parent=projects/*/locations/*/agents/*/flows/*}/transitionRouteGroups",
+                                "(google.api.http).additional_bindings.get": "/v3/{parent=projects/*/locations/*/agents/*}/transitionRouteGroups",
                                 "(google.api.method_signature)": "parent"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "get": "/v3/{parent=projects/*/locations/*/agents/*/flows/*}/transitionRouteGroups"
+                                    "get": "/v3/{parent=projects/*/locations/*/agents/*/flows/*}/transitionRouteGroups",
+                                    "additional_bindings": {
+                                      "get": "/v3/{parent=projects/*/locations/*/agents/*}/transitionRouteGroups"
+                                    }
                                   }
                                 },
                                 {
@@ -5734,12 +5778,16 @@
                               "responseType": "TransitionRouteGroup",
                               "options": {
                                 "(google.api.http).get": "/v3/{name=projects/*/locations/*/agents/*/flows/*/transitionRouteGroups/*}",
+                                "(google.api.http).additional_bindings.get": "/v3/{name=projects/*/locations/*/agents/*/transitionRouteGroups/*}",
                                 "(google.api.method_signature)": "name"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "get": "/v3/{name=projects/*/locations/*/agents/*/flows/*/transitionRouteGroups/*}"
+                                    "get": "/v3/{name=projects/*/locations/*/agents/*/flows/*/transitionRouteGroups/*}",
+                                    "additional_bindings": {
+                                      "get": "/v3/{name=projects/*/locations/*/agents/*/transitionRouteGroups/*}"
+                                    }
                                   }
                                 },
                                 {
@@ -5753,13 +5801,19 @@
                               "options": {
                                 "(google.api.http).post": "/v3/{parent=projects/*/locations/*/agents/*/flows/*}/transitionRouteGroups",
                                 "(google.api.http).body": "transition_route_group",
+                                "(google.api.http).additional_bindings.post": "/v3/{parent=projects/*/locations/*/agents/*}/transitionRouteGroups",
+                                "(google.api.http).additional_bindings.body": "transition_route_group",
                                 "(google.api.method_signature)": "parent,transition_route_group"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
                                     "post": "/v3/{parent=projects/*/locations/*/agents/*/flows/*}/transitionRouteGroups",
-                                    "body": "transition_route_group"
+                                    "body": "transition_route_group",
+                                    "additional_bindings": {
+                                      "post": "/v3/{parent=projects/*/locations/*/agents/*}/transitionRouteGroups",
+                                      "body": "transition_route_group"
+                                    }
                                   }
                                 },
                                 {
@@ -5773,13 +5827,19 @@
                               "options": {
                                 "(google.api.http).patch": "/v3/{transition_route_group.name=projects/*/locations/*/agents/*/flows/*/transitionRouteGroups/*}",
                                 "(google.api.http).body": "transition_route_group",
+                                "(google.api.http).additional_bindings.patch": "/v3/{transition_route_group.name=projects/*/locations/*/agents/*/transitionRouteGroups/*}",
+                                "(google.api.http).additional_bindings.body": "transition_route_group",
                                 "(google.api.method_signature)": "transition_route_group,update_mask"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
                                     "patch": "/v3/{transition_route_group.name=projects/*/locations/*/agents/*/flows/*/transitionRouteGroups/*}",
-                                    "body": "transition_route_group"
+                                    "body": "transition_route_group",
+                                    "additional_bindings": {
+                                      "patch": "/v3/{transition_route_group.name=projects/*/locations/*/agents/*/transitionRouteGroups/*}",
+                                      "body": "transition_route_group"
+                                    }
                                   }
                                 },
                                 {
@@ -5792,12 +5852,16 @@
                               "responseType": "google.protobuf.Empty",
                               "options": {
                                 "(google.api.http).delete": "/v3/{name=projects/*/locations/*/agents/*/flows/*/transitionRouteGroups/*}",
+                                "(google.api.http).additional_bindings.delete": "/v3/{name=projects/*/locations/*/agents/*/transitionRouteGroups/*}",
                                 "(google.api.method_signature)": "name"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "delete": "/v3/{name=projects/*/locations/*/agents/*/flows/*/transitionRouteGroups/*}"
+                                    "delete": "/v3/{name=projects/*/locations/*/agents/*/flows/*/transitionRouteGroups/*}",
+                                    "additional_bindings": {
+                                      "delete": "/v3/{name=projects/*/locations/*/agents/*/transitionRouteGroups/*}"
+                                    }
                                   }
                                 },
                                 {
@@ -5810,7 +5874,9 @@
                         "TransitionRouteGroup": {
                           "options": {
                             "(google.api.resource).type": "dialogflow.googleapis.com/TransitionRouteGroup",
-                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/transitionRouteGroups/{transition_route_group}"
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/agents/{agent}/transitionRouteGroups/{transition_route_group}",
+                            "(google.api.resource).plural": "transitionRouteGroups",
+                            "(google.api.resource).singular": "transitionRouteGroup"
                           },
                           "fields": {
                             "name": {
@@ -9149,6 +9215,13 @@
                             "importOption": {
                               "type": "ImportOption",
                               "id": 4
+                            },
+                            "flowImportStrategy": {
+                              "type": "FlowImportStrategy",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -9157,6 +9230,17 @@
                                 "IMPORT_OPTION_UNSPECIFIED": 0,
                                 "KEEP": 1,
                                 "FALLBACK": 2
+                              }
+                            }
+                          }
+                        },
+                        "FlowImportStrategy": {
+                          "fields": {
+                            "globalImportStrategy": {
+                              "type": "ImportStrategy",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -9216,6 +9300,16 @@
                               "type": "bytes",
                               "id": 2
                             }
+                          }
+                        },
+                        "ImportStrategy": {
+                          "values": {
+                            "IMPORT_STRATEGY_UNSPECIFIED": 0,
+                            "IMPORT_STRATEGY_CREATE_NEW": 1,
+                            "IMPORT_STRATEGY_REPLACE": 2,
+                            "IMPORT_STRATEGY_KEEP": 3,
+                            "IMPORT_STRATEGY_MERGE": 4,
+                            "IMPORT_STRATEGY_THROW_ERROR": 5
                           }
                         },
                         "Pages": {
@@ -13537,12 +13631,16 @@
                               "responseType": "ListTransitionRouteGroupsResponse",
                               "options": {
                                 "(google.api.http).get": "/v3beta1/{parent=projects/*/locations/*/agents/*/flows/*}/transitionRouteGroups",
+                                "(google.api.http).additional_bindings.get": "/v3beta1/{parent=projects/*/locations/*/agents/*}/transitionRouteGroups",
                                 "(google.api.method_signature)": "parent"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "get": "/v3beta1/{parent=projects/*/locations/*/agents/*/flows/*}/transitionRouteGroups"
+                                    "get": "/v3beta1/{parent=projects/*/locations/*/agents/*/flows/*}/transitionRouteGroups",
+                                    "additional_bindings": {
+                                      "get": "/v3beta1/{parent=projects/*/locations/*/agents/*}/transitionRouteGroups"
+                                    }
                                   }
                                 },
                                 {
@@ -13555,12 +13653,16 @@
                               "responseType": "TransitionRouteGroup",
                               "options": {
                                 "(google.api.http).get": "/v3beta1/{name=projects/*/locations/*/agents/*/flows/*/transitionRouteGroups/*}",
+                                "(google.api.http).additional_bindings.get": "/v3beta1/{name=projects/*/locations/*/agents/*/transitionRouteGroups/*}",
                                 "(google.api.method_signature)": "name"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "get": "/v3beta1/{name=projects/*/locations/*/agents/*/flows/*/transitionRouteGroups/*}"
+                                    "get": "/v3beta1/{name=projects/*/locations/*/agents/*/flows/*/transitionRouteGroups/*}",
+                                    "additional_bindings": {
+                                      "get": "/v3beta1/{name=projects/*/locations/*/agents/*/transitionRouteGroups/*}"
+                                    }
                                   }
                                 },
                                 {
@@ -13574,13 +13676,19 @@
                               "options": {
                                 "(google.api.http).post": "/v3beta1/{parent=projects/*/locations/*/agents/*/flows/*}/transitionRouteGroups",
                                 "(google.api.http).body": "transition_route_group",
+                                "(google.api.http).additional_bindings.post": "/v3beta1/{parent=projects/*/locations/*/agents/*}/transitionRouteGroups",
+                                "(google.api.http).additional_bindings.body": "transition_route_group",
                                 "(google.api.method_signature)": "parent,transition_route_group"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
                                     "post": "/v3beta1/{parent=projects/*/locations/*/agents/*/flows/*}/transitionRouteGroups",
-                                    "body": "transition_route_group"
+                                    "body": "transition_route_group",
+                                    "additional_bindings": {
+                                      "post": "/v3beta1/{parent=projects/*/locations/*/agents/*}/transitionRouteGroups",
+                                      "body": "transition_route_group"
+                                    }
                                   }
                                 },
                                 {
@@ -13594,13 +13702,19 @@
                               "options": {
                                 "(google.api.http).patch": "/v3beta1/{transition_route_group.name=projects/*/locations/*/agents/*/flows/*/transitionRouteGroups/*}",
                                 "(google.api.http).body": "transition_route_group",
+                                "(google.api.http).additional_bindings.patch": "/v3beta1/{transition_route_group.name=projects/*/locations/*/agents/*/transitionRouteGroups/*}",
+                                "(google.api.http).additional_bindings.body": "transition_route_group",
                                 "(google.api.method_signature)": "transition_route_group,update_mask"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
                                     "patch": "/v3beta1/{transition_route_group.name=projects/*/locations/*/agents/*/flows/*/transitionRouteGroups/*}",
-                                    "body": "transition_route_group"
+                                    "body": "transition_route_group",
+                                    "additional_bindings": {
+                                      "patch": "/v3beta1/{transition_route_group.name=projects/*/locations/*/agents/*/transitionRouteGroups/*}",
+                                      "body": "transition_route_group"
+                                    }
                                   }
                                 },
                                 {
@@ -13613,12 +13727,16 @@
                               "responseType": "google.protobuf.Empty",
                               "options": {
                                 "(google.api.http).delete": "/v3beta1/{name=projects/*/locations/*/agents/*/flows/*/transitionRouteGroups/*}",
+                                "(google.api.http).additional_bindings.delete": "/v3beta1/{name=projects/*/locations/*/agents/*/transitionRouteGroups/*}",
                                 "(google.api.method_signature)": "name"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "delete": "/v3beta1/{name=projects/*/locations/*/agents/*/flows/*/transitionRouteGroups/*}"
+                                    "delete": "/v3beta1/{name=projects/*/locations/*/agents/*/flows/*/transitionRouteGroups/*}",
+                                    "additional_bindings": {
+                                      "delete": "/v3beta1/{name=projects/*/locations/*/agents/*/transitionRouteGroups/*}"
+                                    }
                                   }
                                 },
                                 {
@@ -13631,7 +13749,9 @@
                         "TransitionRouteGroup": {
                           "options": {
                             "(google.api.resource).type": "dialogflow.googleapis.com/TransitionRouteGroup",
-                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/transitionRouteGroups/{transition_route_group}"
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/agents/{agent}/transitionRouteGroups/{transition_route_group}",
+                            "(google.api.resource).plural": "transitionRouteGroups",
+                            "(google.api.resource).singular": "transitionRouteGroup"
                           },
                           "fields": {
                             "name": {

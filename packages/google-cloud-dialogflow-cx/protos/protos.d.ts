@@ -4840,6 +4840,9 @@ export namespace google {
 
                         /** ImportFlowRequest importOption */
                         importOption?: (google.cloud.dialogflow.cx.v3.ImportFlowRequest.ImportOption|keyof typeof google.cloud.dialogflow.cx.v3.ImportFlowRequest.ImportOption|null);
+
+                        /** ImportFlowRequest flowImportStrategy */
+                        flowImportStrategy?: (google.cloud.dialogflow.cx.v3.IFlowImportStrategy|null);
                     }
 
                     /** Represents an ImportFlowRequest. */
@@ -4862,6 +4865,9 @@ export namespace google {
 
                         /** ImportFlowRequest importOption. */
                         public importOption: (google.cloud.dialogflow.cx.v3.ImportFlowRequest.ImportOption|keyof typeof google.cloud.dialogflow.cx.v3.ImportFlowRequest.ImportOption);
+
+                        /** ImportFlowRequest flowImportStrategy. */
+                        public flowImportStrategy?: (google.cloud.dialogflow.cx.v3.IFlowImportStrategy|null);
 
                         /** ImportFlowRequest flow. */
                         public flow?: ("flowUri"|"flowContent");
@@ -4952,6 +4958,103 @@ export namespace google {
                             KEEP = 1,
                             FALLBACK = 2
                         }
+                    }
+
+                    /** Properties of a FlowImportStrategy. */
+                    interface IFlowImportStrategy {
+
+                        /** FlowImportStrategy globalImportStrategy */
+                        globalImportStrategy?: (google.cloud.dialogflow.cx.v3.ImportStrategy|keyof typeof google.cloud.dialogflow.cx.v3.ImportStrategy|null);
+                    }
+
+                    /** Represents a FlowImportStrategy. */
+                    class FlowImportStrategy implements IFlowImportStrategy {
+
+                        /**
+                         * Constructs a new FlowImportStrategy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IFlowImportStrategy);
+
+                        /** FlowImportStrategy globalImportStrategy. */
+                        public globalImportStrategy: (google.cloud.dialogflow.cx.v3.ImportStrategy|keyof typeof google.cloud.dialogflow.cx.v3.ImportStrategy);
+
+                        /**
+                         * Creates a new FlowImportStrategy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FlowImportStrategy instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IFlowImportStrategy): google.cloud.dialogflow.cx.v3.FlowImportStrategy;
+
+                        /**
+                         * Encodes the specified FlowImportStrategy message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.FlowImportStrategy.verify|verify} messages.
+                         * @param message FlowImportStrategy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IFlowImportStrategy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FlowImportStrategy message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.FlowImportStrategy.verify|verify} messages.
+                         * @param message FlowImportStrategy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IFlowImportStrategy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FlowImportStrategy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FlowImportStrategy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.FlowImportStrategy;
+
+                        /**
+                         * Decodes a FlowImportStrategy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FlowImportStrategy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.FlowImportStrategy;
+
+                        /**
+                         * Verifies a FlowImportStrategy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FlowImportStrategy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FlowImportStrategy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.FlowImportStrategy;
+
+                        /**
+                         * Creates a plain object from a FlowImportStrategy message. Also converts values to other types if specified.
+                         * @param message FlowImportStrategy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.FlowImportStrategy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FlowImportStrategy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FlowImportStrategy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an ImportFlowResponse. */
@@ -5264,6 +5367,16 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** ImportStrategy enum. */
+                    enum ImportStrategy {
+                        IMPORT_STRATEGY_UNSPECIFIED = 0,
+                        IMPORT_STRATEGY_CREATE_NEW = 1,
+                        IMPORT_STRATEGY_REPLACE = 2,
+                        IMPORT_STRATEGY_KEEP = 3,
+                        IMPORT_STRATEGY_MERGE = 4,
+                        IMPORT_STRATEGY_THROW_ERROR = 5
                     }
 
                     /** Represents a Pages */
@@ -7338,6 +7451,9 @@ export namespace google {
                         /** ResponseMessage telephonyTransferCall */
                         telephonyTransferCall?: (google.cloud.dialogflow.cx.v3.ResponseMessage.ITelephonyTransferCall|null);
 
+                        /** ResponseMessage responseType */
+                        responseType?: (google.cloud.dialogflow.cx.v3.ResponseMessage.ResponseType|keyof typeof google.cloud.dialogflow.cx.v3.ResponseMessage.ResponseType|null);
+
                         /** ResponseMessage channel */
                         channel?: (string|null);
                     }
@@ -7377,6 +7493,9 @@ export namespace google {
 
                         /** ResponseMessage telephonyTransferCall. */
                         public telephonyTransferCall?: (google.cloud.dialogflow.cx.v3.ResponseMessage.ITelephonyTransferCall|null);
+
+                        /** ResponseMessage responseType. */
+                        public responseType: (google.cloud.dialogflow.cx.v3.ResponseMessage.ResponseType|keyof typeof google.cloud.dialogflow.cx.v3.ResponseMessage.ResponseType);
 
                         /** ResponseMessage channel. */
                         public channel: string;
@@ -8377,6 +8496,14 @@ export namespace google {
                              * @returns The default type url
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** ResponseType enum. */
+                        enum ResponseType {
+                            RESPONSE_TYPE_UNSPECIFIED = 0,
+                            ENTRY_PROMPT = 1,
+                            PARAMETER_PROMPT = 2,
+                            HANDLER_PROMPT = 3
                         }
                     }
 
@@ -35664,6 +35791,9 @@ export namespace google {
 
                         /** ImportFlowRequest importOption */
                         importOption?: (google.cloud.dialogflow.cx.v3beta1.ImportFlowRequest.ImportOption|keyof typeof google.cloud.dialogflow.cx.v3beta1.ImportFlowRequest.ImportOption|null);
+
+                        /** ImportFlowRequest flowImportStrategy */
+                        flowImportStrategy?: (google.cloud.dialogflow.cx.v3beta1.IFlowImportStrategy|null);
                     }
 
                     /** Represents an ImportFlowRequest. */
@@ -35686,6 +35816,9 @@ export namespace google {
 
                         /** ImportFlowRequest importOption. */
                         public importOption: (google.cloud.dialogflow.cx.v3beta1.ImportFlowRequest.ImportOption|keyof typeof google.cloud.dialogflow.cx.v3beta1.ImportFlowRequest.ImportOption);
+
+                        /** ImportFlowRequest flowImportStrategy. */
+                        public flowImportStrategy?: (google.cloud.dialogflow.cx.v3beta1.IFlowImportStrategy|null);
 
                         /** ImportFlowRequest flow. */
                         public flow?: ("flowUri"|"flowContent");
@@ -35776,6 +35909,103 @@ export namespace google {
                             KEEP = 1,
                             FALLBACK = 2
                         }
+                    }
+
+                    /** Properties of a FlowImportStrategy. */
+                    interface IFlowImportStrategy {
+
+                        /** FlowImportStrategy globalImportStrategy */
+                        globalImportStrategy?: (google.cloud.dialogflow.cx.v3beta1.ImportStrategy|keyof typeof google.cloud.dialogflow.cx.v3beta1.ImportStrategy|null);
+                    }
+
+                    /** Represents a FlowImportStrategy. */
+                    class FlowImportStrategy implements IFlowImportStrategy {
+
+                        /**
+                         * Constructs a new FlowImportStrategy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IFlowImportStrategy);
+
+                        /** FlowImportStrategy globalImportStrategy. */
+                        public globalImportStrategy: (google.cloud.dialogflow.cx.v3beta1.ImportStrategy|keyof typeof google.cloud.dialogflow.cx.v3beta1.ImportStrategy);
+
+                        /**
+                         * Creates a new FlowImportStrategy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FlowImportStrategy instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IFlowImportStrategy): google.cloud.dialogflow.cx.v3beta1.FlowImportStrategy;
+
+                        /**
+                         * Encodes the specified FlowImportStrategy message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.FlowImportStrategy.verify|verify} messages.
+                         * @param message FlowImportStrategy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IFlowImportStrategy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FlowImportStrategy message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.FlowImportStrategy.verify|verify} messages.
+                         * @param message FlowImportStrategy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IFlowImportStrategy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FlowImportStrategy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FlowImportStrategy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.FlowImportStrategy;
+
+                        /**
+                         * Decodes a FlowImportStrategy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FlowImportStrategy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.FlowImportStrategy;
+
+                        /**
+                         * Verifies a FlowImportStrategy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FlowImportStrategy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FlowImportStrategy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.FlowImportStrategy;
+
+                        /**
+                         * Creates a plain object from a FlowImportStrategy message. Also converts values to other types if specified.
+                         * @param message FlowImportStrategy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.FlowImportStrategy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FlowImportStrategy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FlowImportStrategy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an ImportFlowResponse. */
@@ -36088,6 +36318,16 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** ImportStrategy enum. */
+                    enum ImportStrategy {
+                        IMPORT_STRATEGY_UNSPECIFIED = 0,
+                        IMPORT_STRATEGY_CREATE_NEW = 1,
+                        IMPORT_STRATEGY_REPLACE = 2,
+                        IMPORT_STRATEGY_KEEP = 3,
+                        IMPORT_STRATEGY_MERGE = 4,
+                        IMPORT_STRATEGY_THROW_ERROR = 5
                     }
 
                     /** Represents a Pages */

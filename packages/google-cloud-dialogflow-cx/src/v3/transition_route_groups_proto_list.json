@@ -10,6 +10,7 @@
   "../../protos/google/cloud/dialogflow/cx/v3/flow.proto",
   "../../protos/google/cloud/dialogflow/cx/v3/fulfillment.proto",
   "../../protos/google/cloud/dialogflow/cx/v3/gcs.proto",
+  "../../protos/google/cloud/dialogflow/cx/v3/import_strategy.proto",
   "../../protos/google/cloud/dialogflow/cx/v3/intent.proto",
   "../../protos/google/cloud/dialogflow/cx/v3/page.proto",
   "../../protos/google/cloud/dialogflow/cx/v3/response_message.proto",

@@ -32,7 +32,9 @@ function main(name) {
    *  Required. The name of the
    *  TransitionRouteGroup google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup.
    *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/flows/<Flow ID>/transitionRouteGroups/<Transition Route Group ID>`.
+   *  ID>/flows/<Flow ID>/transitionRouteGroups/<Transition Route Group ID>`
+   *  or `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+   *  ID>/transitionRouteGroups/<Transition Route Group ID>`.
    */
   // const name = 'abc123'
   /**
