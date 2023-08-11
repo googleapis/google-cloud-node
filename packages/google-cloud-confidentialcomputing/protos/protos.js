@@ -1046,6 +1046,7 @@
                          * @memberof google.cloud.confidentialcomputing.v1
                          * @interface IVerifyAttestationResponse
                          * @property {string|null} [oidcClaimsToken] VerifyAttestationResponse oidcClaimsToken
+                         * @property {Array.<google.rpc.IStatus>|null} [partialErrors] VerifyAttestationResponse partialErrors
                          */
     
                         /**
@@ -1057,6 +1058,7 @@
                          * @param {google.cloud.confidentialcomputing.v1.IVerifyAttestationResponse=} [properties] Properties to set
                          */
                         function VerifyAttestationResponse(properties) {
+                            this.partialErrors = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -1070,6 +1072,14 @@
                          * @instance
                          */
                         VerifyAttestationResponse.prototype.oidcClaimsToken = "";
+    
+                        /**
+                         * VerifyAttestationResponse partialErrors.
+                         * @member {Array.<google.rpc.IStatus>} partialErrors
+                         * @memberof google.cloud.confidentialcomputing.v1.VerifyAttestationResponse
+                         * @instance
+                         */
+                        VerifyAttestationResponse.prototype.partialErrors = $util.emptyArray;
     
                         /**
                          * Creates a new VerifyAttestationResponse instance using the specified properties.
@@ -1097,6 +1107,9 @@
                                 writer = $Writer.create();
                             if (message.oidcClaimsToken != null && Object.hasOwnProperty.call(message, "oidcClaimsToken"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.oidcClaimsToken);
+                            if (message.partialErrors != null && message.partialErrors.length)
+                                for (var i = 0; i < message.partialErrors.length; ++i)
+                                    $root.google.rpc.Status.encode(message.partialErrors[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -1133,6 +1146,12 @@
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.oidcClaimsToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.partialErrors && message.partialErrors.length))
+                                            message.partialErrors = [];
+                                        message.partialErrors.push($root.google.rpc.Status.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -1173,6 +1192,15 @@
                             if (message.oidcClaimsToken != null && message.hasOwnProperty("oidcClaimsToken"))
                                 if (!$util.isString(message.oidcClaimsToken))
                                     return "oidcClaimsToken: string expected";
+                            if (message.partialErrors != null && message.hasOwnProperty("partialErrors")) {
+                                if (!Array.isArray(message.partialErrors))
+                                    return "partialErrors: array expected";
+                                for (var i = 0; i < message.partialErrors.length; ++i) {
+                                    var error = $root.google.rpc.Status.verify(message.partialErrors[i]);
+                                    if (error)
+                                        return "partialErrors." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -1190,6 +1218,16 @@
                             var message = new $root.google.cloud.confidentialcomputing.v1.VerifyAttestationResponse();
                             if (object.oidcClaimsToken != null)
                                 message.oidcClaimsToken = String(object.oidcClaimsToken);
+                            if (object.partialErrors) {
+                                if (!Array.isArray(object.partialErrors))
+                                    throw TypeError(".google.cloud.confidentialcomputing.v1.VerifyAttestationResponse.partialErrors: array expected");
+                                message.partialErrors = [];
+                                for (var i = 0; i < object.partialErrors.length; ++i) {
+                                    if (typeof object.partialErrors[i] !== "object")
+                                        throw TypeError(".google.cloud.confidentialcomputing.v1.VerifyAttestationResponse.partialErrors: object expected");
+                                    message.partialErrors[i] = $root.google.rpc.Status.fromObject(object.partialErrors[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -1206,10 +1244,17 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.partialErrors = [];
                             if (options.defaults)
                                 object.oidcClaimsToken = "";
                             if (message.oidcClaimsToken != null && message.hasOwnProperty("oidcClaimsToken"))
                                 object.oidcClaimsToken = message.oidcClaimsToken;
+                            if (message.partialErrors && message.partialErrors.length) {
+                                object.partialErrors = [];
+                                for (var j = 0; j < message.partialErrors.length; ++j)
+                                    object.partialErrors[j] = $root.google.rpc.Status.toObject(message.partialErrors[j], options);
+                            }
                             return object;
                         };
     
@@ -20641,7 +20686,527 @@
                 return Timestamp;
             })();
     
+            protobuf.Any = (function() {
+    
+                /**
+                 * Properties of an Any.
+                 * @memberof google.protobuf
+                 * @interface IAny
+                 * @property {string|null} [type_url] Any type_url
+                 * @property {Uint8Array|null} [value] Any value
+                 */
+    
+                /**
+                 * Constructs a new Any.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Any.
+                 * @implements IAny
+                 * @constructor
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 */
+                function Any(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Any type_url.
+                 * @member {string} type_url
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.type_url = "";
+    
+                /**
+                 * Any value.
+                 * @member {Uint8Array} value
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.value = $util.newBuffer([]);
+    
+                /**
+                 * Creates a new Any instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 * @returns {google.protobuf.Any} Any instance
+                 */
+                Any.create = function create(properties) {
+                    return new Any(properties);
+                };
+    
+                /**
+                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type_url = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.value = reader.bytes();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Any message.
+                 * @function verify
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Any.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        if (!$util.isString(message.type_url))
+                            return "type_url: string expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
+                            return "value: buffer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Any} Any
+                 */
+                Any.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Any)
+                        return object;
+                    var message = new $root.google.protobuf.Any();
+                    if (object.type_url != null)
+                        message.type_url = String(object.type_url);
+                    if (object.value != null)
+                        if (typeof object.value === "string")
+                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
+                        else if (object.value.length >= 0)
+                            message.value = object.value;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Any message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.Any} message Any
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Any.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type_url = "";
+                        if (options.bytes === String)
+                            object.value = "";
+                        else {
+                            object.value = [];
+                            if (options.bytes !== Array)
+                                object.value = $util.newBuffer(object.value);
+                        }
+                    }
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        object.type_url = message.type_url;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Any to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Any.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Any
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Any.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Any";
+                };
+    
+                return Any;
+            })();
+    
             return protobuf;
+        })();
+    
+        google.rpc = (function() {
+    
+            /**
+             * Namespace rpc.
+             * @memberof google
+             * @namespace
+             */
+            var rpc = {};
+    
+            rpc.Status = (function() {
+    
+                /**
+                 * Properties of a Status.
+                 * @memberof google.rpc
+                 * @interface IStatus
+                 * @property {number|null} [code] Status code
+                 * @property {string|null} [message] Status message
+                 * @property {Array.<google.protobuf.IAny>|null} [details] Status details
+                 */
+    
+                /**
+                 * Constructs a new Status.
+                 * @memberof google.rpc
+                 * @classdesc Represents a Status.
+                 * @implements IStatus
+                 * @constructor
+                 * @param {google.rpc.IStatus=} [properties] Properties to set
+                 */
+                function Status(properties) {
+                    this.details = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Status code.
+                 * @member {number} code
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.code = 0;
+    
+                /**
+                 * Status message.
+                 * @member {string} message
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.message = "";
+    
+                /**
+                 * Status details.
+                 * @member {Array.<google.protobuf.IAny>} details
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.details = $util.emptyArray;
+    
+                /**
+                 * Creates a new Status instance using the specified properties.
+                 * @function create
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus=} [properties] Properties to set
+                 * @returns {google.rpc.Status} Status instance
+                 */
+                Status.create = function create(properties) {
+                    return new Status(properties);
+                };
+    
+                /**
+                 * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus} message Status message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Status.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
+                    if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
+                    if (message.details != null && message.details.length)
+                        for (var i = 0; i < message.details.length; ++i)
+                            $root.google.protobuf.Any.encode(message.details[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus} message Status message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Status.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Status message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.rpc.Status} Status
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Status.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.code = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.message = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.details && message.details.length))
+                                    message.details = [];
+                                message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Status message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.rpc.Status} Status
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Status.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Status message.
+                 * @function verify
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Status.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.code != null && message.hasOwnProperty("code"))
+                        if (!$util.isInteger(message.code))
+                            return "code: integer expected";
+                    if (message.message != null && message.hasOwnProperty("message"))
+                        if (!$util.isString(message.message))
+                            return "message: string expected";
+                    if (message.details != null && message.hasOwnProperty("details")) {
+                        if (!Array.isArray(message.details))
+                            return "details: array expected";
+                        for (var i = 0; i < message.details.length; ++i) {
+                            var error = $root.google.protobuf.Any.verify(message.details[i]);
+                            if (error)
+                                return "details." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a Status message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.rpc.Status} Status
+                 */
+                Status.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.rpc.Status)
+                        return object;
+                    var message = new $root.google.rpc.Status();
+                    if (object.code != null)
+                        message.code = object.code | 0;
+                    if (object.message != null)
+                        message.message = String(object.message);
+                    if (object.details) {
+                        if (!Array.isArray(object.details))
+                            throw TypeError(".google.rpc.Status.details: array expected");
+                        message.details = [];
+                        for (var i = 0; i < object.details.length; ++i) {
+                            if (typeof object.details[i] !== "object")
+                                throw TypeError(".google.rpc.Status.details: object expected");
+                            message.details[i] = $root.google.protobuf.Any.fromObject(object.details[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Status message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.Status} message Status
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Status.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.details = [];
+                    if (options.defaults) {
+                        object.code = 0;
+                        object.message = "";
+                    }
+                    if (message.code != null && message.hasOwnProperty("code"))
+                        object.code = message.code;
+                    if (message.message != null && message.hasOwnProperty("message"))
+                        object.message = message.message;
+                    if (message.details && message.details.length) {
+                        object.details = [];
+                        for (var j = 0; j < message.details.length; ++j)
+                            object.details[j] = $root.google.protobuf.Any.toObject(message.details[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Status to JSON.
+                 * @function toJSON
+                 * @memberof google.rpc.Status
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Status.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Status
+                 * @function getTypeUrl
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Status.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.rpc.Status";
+                };
+    
+                return Status;
+            })();
+    
+            return rpc;
         })();
     
         return google;
