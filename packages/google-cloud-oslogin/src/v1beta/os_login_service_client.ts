@@ -245,6 +245,7 @@ export class OsLoginServiceClient {
       'getSshPublicKey',
       'importSshPublicKey',
       'updateSshPublicKey',
+      'signSshPublicKey',
     ];
     for (const methodName of osLoginServiceStubMethods) {
       const callPromise = this.osLoginServiceStub.then(
@@ -992,6 +993,101 @@ export class OsLoginServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.updateSshPublicKey(request, options, callback);
+  }
+  /**
+   * Signs an SSH public key for a user to authenticate to an instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.sshPublicKey
+   *   The SSH public key to sign.
+   * @param {string} request.parent
+   *   The parent project and zone for the signing request. This is needed to
+   *   properly ensure per-organization ISS processing and potentially to provide
+   *   for the possibility of zone-specific certificates used in the signing
+   *   process.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.oslogin.v1beta.SignSshPublicKeyResponse|SignSshPublicKeyResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/os_login_service.sign_ssh_public_key.js</caption>
+   * region_tag:oslogin_v1beta_generated_OsLoginService_SignSshPublicKey_async
+   */
+  signSshPublicKey(
+    request?: protos.google.cloud.oslogin.v1beta.ISignSshPublicKeyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.oslogin.v1beta.ISignSshPublicKeyResponse,
+      protos.google.cloud.oslogin.v1beta.ISignSshPublicKeyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  signSshPublicKey(
+    request: protos.google.cloud.oslogin.v1beta.ISignSshPublicKeyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.oslogin.v1beta.ISignSshPublicKeyResponse,
+      | protos.google.cloud.oslogin.v1beta.ISignSshPublicKeyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  signSshPublicKey(
+    request: protos.google.cloud.oslogin.v1beta.ISignSshPublicKeyRequest,
+    callback: Callback<
+      protos.google.cloud.oslogin.v1beta.ISignSshPublicKeyResponse,
+      | protos.google.cloud.oslogin.v1beta.ISignSshPublicKeyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  signSshPublicKey(
+    request?: protos.google.cloud.oslogin.v1beta.ISignSshPublicKeyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.oslogin.v1beta.ISignSshPublicKeyResponse,
+          | protos.google.cloud.oslogin.v1beta.ISignSshPublicKeyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.oslogin.v1beta.ISignSshPublicKeyResponse,
+      | protos.google.cloud.oslogin.v1beta.ISignSshPublicKeyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.oslogin.v1beta.ISignSshPublicKeyResponse,
+      protos.google.cloud.oslogin.v1beta.ISignSshPublicKeyRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.signSshPublicKey(request, options, callback);
   }
 
   // --------------------

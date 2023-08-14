@@ -25,6 +25,7 @@
   * [Os_login_service.get_login_profile](#os_login_service.get_login_profile)
   * [Os_login_service.get_ssh_public_key](#os_login_service.get_ssh_public_key)
   * [Os_login_service.import_ssh_public_key](#os_login_service.import_ssh_public_key)
+  * [Os_login_service.sign_ssh_public_key](#os_login_service.sign_ssh_public_key)
   * [Os_login_service.update_ssh_public_key](#os_login_service.update_ssh_public_key)
   * [Quickstart](#quickstart)
 
@@ -257,6 +258,23 @@ __Usage:__
 
 
 `node packages/google-cloud-oslogin/samples/generated/v1beta/os_login_service.import_ssh_public_key.js`
+
+
+-----
+
+
+
+
+### Os_login_service.sign_ssh_public_key
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oslogin/samples/generated/v1beta/os_login_service.sign_ssh_public_key.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oslogin/samples/generated/v1beta/os_login_service.sign_ssh_public_key.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-oslogin/samples/generated/v1beta/os_login_service.sign_ssh_public_key.js`
 
 
 -----

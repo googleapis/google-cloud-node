@@ -326,6 +326,50 @@
                     }
                 }
             }
+        },
+        {
+            "regionTag": "oslogin_v1beta_generated_OsLoginService_SignSshPublicKey_async",
+            "title": "OsLoginService signSshPublicKey Sample",
+            "origin": "API_DEFINITION",
+            "description": " Signs an SSH public key for a user to authenticate to an instance.",
+            "canonical": true,
+            "file": "os_login_service.sign_ssh_public_key.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SignSshPublicKey",
+                "fullName": "google.cloud.oslogin.v1beta.OsLoginService.SignSshPublicKey",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "ssh_public_key",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.oslogin.v1beta.SignSshPublicKeyResponse",
+                "client": {
+                    "shortName": "OsLoginServiceClient",
+                    "fullName": "google.cloud.oslogin.v1beta.OsLoginServiceClient"
+                },
+                "method": {
+                    "shortName": "SignSshPublicKey",
+                    "fullName": "google.cloud.oslogin.v1beta.OsLoginService.SignSshPublicKey",
+                    "service": {
+                        "shortName": "OsLoginService",
+                        "fullName": "google.cloud.oslogin.v1beta.OsLoginService"
+                    }
+                }
+            }
         }
     ]
 }

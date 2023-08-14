@@ -3560,6 +3560,39 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.oslogin.v1beta.OsLoginService|signSshPublicKey}.
+                         * @memberof google.cloud.oslogin.v1beta.OsLoginService
+                         * @typedef SignSshPublicKeyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.oslogin.v1beta.SignSshPublicKeyResponse} [response] SignSshPublicKeyResponse
+                         */
+    
+                        /**
+                         * Calls SignSshPublicKey.
+                         * @function signSshPublicKey
+                         * @memberof google.cloud.oslogin.v1beta.OsLoginService
+                         * @instance
+                         * @param {google.cloud.oslogin.v1beta.ISignSshPublicKeyRequest} request SignSshPublicKeyRequest message or plain object
+                         * @param {google.cloud.oslogin.v1beta.OsLoginService.SignSshPublicKeyCallback} callback Node-style callback called with the error, if any, and SignSshPublicKeyResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(OsLoginService.prototype.signSshPublicKey = function signSshPublicKey(request, callback) {
+                            return this.rpcCall(signSshPublicKey, $root.google.cloud.oslogin.v1beta.SignSshPublicKeyRequest, $root.google.cloud.oslogin.v1beta.SignSshPublicKeyResponse, request, callback);
+                        }, "name", { value: "SignSshPublicKey" });
+    
+                        /**
+                         * Calls SignSshPublicKey.
+                         * @function signSshPublicKey
+                         * @memberof google.cloud.oslogin.v1beta.OsLoginService
+                         * @instance
+                         * @param {google.cloud.oslogin.v1beta.ISignSshPublicKeyRequest} request SignSshPublicKeyRequest message or plain object
+                         * @returns {Promise<google.cloud.oslogin.v1beta.SignSshPublicKeyResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return OsLoginService;
                     })();
     
@@ -6568,6 +6601,436 @@
                         };
     
                         return WebAuthn;
+                    })();
+    
+                    v1beta.SignSshPublicKeyRequest = (function() {
+    
+                        /**
+                         * Properties of a SignSshPublicKeyRequest.
+                         * @memberof google.cloud.oslogin.v1beta
+                         * @interface ISignSshPublicKeyRequest
+                         * @property {string|null} [sshPublicKey] SignSshPublicKeyRequest sshPublicKey
+                         * @property {string|null} [parent] SignSshPublicKeyRequest parent
+                         */
+    
+                        /**
+                         * Constructs a new SignSshPublicKeyRequest.
+                         * @memberof google.cloud.oslogin.v1beta
+                         * @classdesc Represents a SignSshPublicKeyRequest.
+                         * @implements ISignSshPublicKeyRequest
+                         * @constructor
+                         * @param {google.cloud.oslogin.v1beta.ISignSshPublicKeyRequest=} [properties] Properties to set
+                         */
+                        function SignSshPublicKeyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SignSshPublicKeyRequest sshPublicKey.
+                         * @member {string} sshPublicKey
+                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyRequest
+                         * @instance
+                         */
+                        SignSshPublicKeyRequest.prototype.sshPublicKey = "";
+    
+                        /**
+                         * SignSshPublicKeyRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyRequest
+                         * @instance
+                         */
+                        SignSshPublicKeyRequest.prototype.parent = "";
+    
+                        /**
+                         * Creates a new SignSshPublicKeyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1beta.ISignSshPublicKeyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.oslogin.v1beta.SignSshPublicKeyRequest} SignSshPublicKeyRequest instance
+                         */
+                        SignSshPublicKeyRequest.create = function create(properties) {
+                            return new SignSshPublicKeyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SignSshPublicKeyRequest message. Does not implicitly {@link google.cloud.oslogin.v1beta.SignSshPublicKeyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1beta.ISignSshPublicKeyRequest} message SignSshPublicKeyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SignSshPublicKeyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.sshPublicKey != null && Object.hasOwnProperty.call(message, "sshPublicKey"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.sshPublicKey);
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.parent);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SignSshPublicKeyRequest message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1beta.SignSshPublicKeyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1beta.ISignSshPublicKeyRequest} message SignSshPublicKeyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SignSshPublicKeyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SignSshPublicKeyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.oslogin.v1beta.SignSshPublicKeyRequest} SignSshPublicKeyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SignSshPublicKeyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1beta.SignSshPublicKeyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.sshPublicKey = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SignSshPublicKeyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.oslogin.v1beta.SignSshPublicKeyRequest} SignSshPublicKeyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SignSshPublicKeyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SignSshPublicKeyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SignSshPublicKeyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.sshPublicKey != null && message.hasOwnProperty("sshPublicKey"))
+                                if (!$util.isString(message.sshPublicKey))
+                                    return "sshPublicKey: string expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SignSshPublicKeyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.oslogin.v1beta.SignSshPublicKeyRequest} SignSshPublicKeyRequest
+                         */
+                        SignSshPublicKeyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.oslogin.v1beta.SignSshPublicKeyRequest)
+                                return object;
+                            var message = new $root.google.cloud.oslogin.v1beta.SignSshPublicKeyRequest();
+                            if (object.sshPublicKey != null)
+                                message.sshPublicKey = String(object.sshPublicKey);
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SignSshPublicKeyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyRequest
+                         * @static
+                         * @param {google.cloud.oslogin.v1beta.SignSshPublicKeyRequest} message SignSshPublicKeyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SignSshPublicKeyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.sshPublicKey = "";
+                                object.parent = "";
+                            }
+                            if (message.sshPublicKey != null && message.hasOwnProperty("sshPublicKey"))
+                                object.sshPublicKey = message.sshPublicKey;
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SignSshPublicKeyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SignSshPublicKeyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SignSshPublicKeyRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SignSshPublicKeyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.oslogin.v1beta.SignSshPublicKeyRequest";
+                        };
+    
+                        return SignSshPublicKeyRequest;
+                    })();
+    
+                    v1beta.SignSshPublicKeyResponse = (function() {
+    
+                        /**
+                         * Properties of a SignSshPublicKeyResponse.
+                         * @memberof google.cloud.oslogin.v1beta
+                         * @interface ISignSshPublicKeyResponse
+                         * @property {string|null} [signedSshPublicKey] SignSshPublicKeyResponse signedSshPublicKey
+                         */
+    
+                        /**
+                         * Constructs a new SignSshPublicKeyResponse.
+                         * @memberof google.cloud.oslogin.v1beta
+                         * @classdesc Represents a SignSshPublicKeyResponse.
+                         * @implements ISignSshPublicKeyResponse
+                         * @constructor
+                         * @param {google.cloud.oslogin.v1beta.ISignSshPublicKeyResponse=} [properties] Properties to set
+                         */
+                        function SignSshPublicKeyResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SignSshPublicKeyResponse signedSshPublicKey.
+                         * @member {string} signedSshPublicKey
+                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyResponse
+                         * @instance
+                         */
+                        SignSshPublicKeyResponse.prototype.signedSshPublicKey = "";
+    
+                        /**
+                         * Creates a new SignSshPublicKeyResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyResponse
+                         * @static
+                         * @param {google.cloud.oslogin.v1beta.ISignSshPublicKeyResponse=} [properties] Properties to set
+                         * @returns {google.cloud.oslogin.v1beta.SignSshPublicKeyResponse} SignSshPublicKeyResponse instance
+                         */
+                        SignSshPublicKeyResponse.create = function create(properties) {
+                            return new SignSshPublicKeyResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SignSshPublicKeyResponse message. Does not implicitly {@link google.cloud.oslogin.v1beta.SignSshPublicKeyResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyResponse
+                         * @static
+                         * @param {google.cloud.oslogin.v1beta.ISignSshPublicKeyResponse} message SignSshPublicKeyResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SignSshPublicKeyResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.signedSshPublicKey != null && Object.hasOwnProperty.call(message, "signedSshPublicKey"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.signedSshPublicKey);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SignSshPublicKeyResponse message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1beta.SignSshPublicKeyResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyResponse
+                         * @static
+                         * @param {google.cloud.oslogin.v1beta.ISignSshPublicKeyResponse} message SignSshPublicKeyResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SignSshPublicKeyResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SignSshPublicKeyResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.oslogin.v1beta.SignSshPublicKeyResponse} SignSshPublicKeyResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SignSshPublicKeyResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.v1beta.SignSshPublicKeyResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.signedSshPublicKey = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SignSshPublicKeyResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.oslogin.v1beta.SignSshPublicKeyResponse} SignSshPublicKeyResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SignSshPublicKeyResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SignSshPublicKeyResponse message.
+                         * @function verify
+                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SignSshPublicKeyResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.signedSshPublicKey != null && message.hasOwnProperty("signedSshPublicKey"))
+                                if (!$util.isString(message.signedSshPublicKey))
+                                    return "signedSshPublicKey: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SignSshPublicKeyResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.oslogin.v1beta.SignSshPublicKeyResponse} SignSshPublicKeyResponse
+                         */
+                        SignSshPublicKeyResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.oslogin.v1beta.SignSshPublicKeyResponse)
+                                return object;
+                            var message = new $root.google.cloud.oslogin.v1beta.SignSshPublicKeyResponse();
+                            if (object.signedSshPublicKey != null)
+                                message.signedSshPublicKey = String(object.signedSshPublicKey);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SignSshPublicKeyResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyResponse
+                         * @static
+                         * @param {google.cloud.oslogin.v1beta.SignSshPublicKeyResponse} message SignSshPublicKeyResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SignSshPublicKeyResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.signedSshPublicKey = "";
+                            if (message.signedSshPublicKey != null && message.hasOwnProperty("signedSshPublicKey"))
+                                object.signedSshPublicKey = message.signedSshPublicKey;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SignSshPublicKeyResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SignSshPublicKeyResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SignSshPublicKeyResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.oslogin.v1beta.SignSshPublicKeyResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SignSshPublicKeyResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.oslogin.v1beta.SignSshPublicKeyResponse";
+                        };
+    
+                        return SignSshPublicKeyResponse;
                     })();
     
                     /**
