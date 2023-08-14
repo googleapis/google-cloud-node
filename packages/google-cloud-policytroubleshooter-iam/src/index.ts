@@ -16,12 +16,13 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
+import * as v3 from './v3';
 import * as v3beta from './v3beta';
 
 const PolicyTroubleshooterClient = v3beta.PolicyTroubleshooterClient;
 type PolicyTroubleshooterClient = v3beta.PolicyTroubleshooterClient;
 
-export {v3beta, PolicyTroubleshooterClient};
-export default {v3beta, PolicyTroubleshooterClient};
+export {v3, v3beta, PolicyTroubleshooterClient};
+export default {v3, v3beta, PolicyTroubleshooterClient};
 import * as protos from '../protos/protos';
 export {protos};

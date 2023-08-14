@@ -13,6 +13,7 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Policy_troubleshooter.troubleshoot_iam_policy](#policy_troubleshooter.troubleshoot_iam_policy)
+  * [Policy_troubleshooter.troubleshoot_iam_policy](#policy_troubleshooter.troubleshoot_iam_policy)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -27,6 +28,23 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Policy_troubleshooter.troubleshoot_iam_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-policytroubleshooter-iam/samples/generated/v3/policy_troubleshooter.troubleshoot_iam_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-policytroubleshooter-iam/samples/generated/v3/policy_troubleshooter.troubleshoot_iam_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-policytroubleshooter-iam/samples/generated/v3/policy_troubleshooter.troubleshoot_iam_policy.js`
+
+
+-----
+
 
 
 
