@@ -9,6 +9,8 @@
   "../../protos/google/cloud/contentwarehouse/v1/document_service_request.proto",
   "../../protos/google/cloud/contentwarehouse/v1/filters.proto",
   "../../protos/google/cloud/contentwarehouse/v1/histogram.proto",
+  "../../protos/google/cloud/contentwarehouse/v1/pipeline_service.proto",
+  "../../protos/google/cloud/contentwarehouse/v1/pipelines.proto",
   "../../protos/google/cloud/contentwarehouse/v1/rule_engine.proto",
   "../../protos/google/cloud/contentwarehouse/v1/ruleset_service.proto",
   "../../protos/google/cloud/contentwarehouse/v1/ruleset_service_request.proto",

@@ -5450,7 +5450,7 @@
                          * @memberof google.cloud.binaryauthorization.v1beta1
                          * @interface IContinuousValidationEvent
                          * @property {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IContinuousValidationPodEvent|null} [podEvent] ContinuousValidationEvent podEvent
-                         * @property {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IUnsupportedPolicyEvent|null} [unsupportedPolicyEvent] ContinuousValidationEvent unsupportedPolicyEvent
+                         * @property {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IConfigErrorEvent|null} [configErrorEvent] ContinuousValidationEvent configErrorEvent
                          */
     
                         /**
@@ -5477,24 +5477,24 @@
                         ContinuousValidationEvent.prototype.podEvent = null;
     
                         /**
-                         * ContinuousValidationEvent unsupportedPolicyEvent.
-                         * @member {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IUnsupportedPolicyEvent|null|undefined} unsupportedPolicyEvent
+                         * ContinuousValidationEvent configErrorEvent.
+                         * @member {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IConfigErrorEvent|null|undefined} configErrorEvent
                          * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent
                          * @instance
                          */
-                        ContinuousValidationEvent.prototype.unsupportedPolicyEvent = null;
+                        ContinuousValidationEvent.prototype.configErrorEvent = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * ContinuousValidationEvent eventType.
-                         * @member {"podEvent"|"unsupportedPolicyEvent"|undefined} eventType
+                         * @member {"podEvent"|"configErrorEvent"|undefined} eventType
                          * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent
                          * @instance
                          */
                         Object.defineProperty(ContinuousValidationEvent.prototype, "eventType", {
-                            get: $util.oneOfGetter($oneOfFields = ["podEvent", "unsupportedPolicyEvent"]),
+                            get: $util.oneOfGetter($oneOfFields = ["podEvent", "configErrorEvent"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -5524,8 +5524,8 @@
                                 writer = $Writer.create();
                             if (message.podEvent != null && Object.hasOwnProperty.call(message, "podEvent"))
                                 $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.encode(message.podEvent, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            if (message.unsupportedPolicyEvent != null && Object.hasOwnProperty.call(message, "unsupportedPolicyEvent"))
-                                $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent.encode(message.unsupportedPolicyEvent, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.configErrorEvent != null && Object.hasOwnProperty.call(message, "configErrorEvent"))
+                                $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent.encode(message.configErrorEvent, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -5564,8 +5564,8 @@
                                         message.podEvent = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.decode(reader, reader.uint32());
                                         break;
                                     }
-                                case 2: {
-                                        message.unsupportedPolicyEvent = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent.decode(reader, reader.uint32());
+                                case 4: {
+                                        message.configErrorEvent = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -5612,14 +5612,14 @@
                                         return "podEvent." + error;
                                 }
                             }
-                            if (message.unsupportedPolicyEvent != null && message.hasOwnProperty("unsupportedPolicyEvent")) {
+                            if (message.configErrorEvent != null && message.hasOwnProperty("configErrorEvent")) {
                                 if (properties.eventType === 1)
                                     return "eventType: multiple values";
                                 properties.eventType = 1;
                                 {
-                                    var error = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent.verify(message.unsupportedPolicyEvent);
+                                    var error = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent.verify(message.configErrorEvent);
                                     if (error)
-                                        return "unsupportedPolicyEvent." + error;
+                                        return "configErrorEvent." + error;
                                 }
                             }
                             return null;
@@ -5642,10 +5642,10 @@
                                     throw TypeError(".google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.podEvent: object expected");
                                 message.podEvent = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.fromObject(object.podEvent);
                             }
-                            if (object.unsupportedPolicyEvent != null) {
-                                if (typeof object.unsupportedPolicyEvent !== "object")
-                                    throw TypeError(".google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.unsupportedPolicyEvent: object expected");
-                                message.unsupportedPolicyEvent = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent.fromObject(object.unsupportedPolicyEvent);
+                            if (object.configErrorEvent != null) {
+                                if (typeof object.configErrorEvent !== "object")
+                                    throw TypeError(".google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.configErrorEvent: object expected");
+                                message.configErrorEvent = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent.fromObject(object.configErrorEvent);
                             }
                             return message;
                         };
@@ -5668,10 +5668,10 @@
                                 if (options.oneofs)
                                     object.eventType = "podEvent";
                             }
-                            if (message.unsupportedPolicyEvent != null && message.hasOwnProperty("unsupportedPolicyEvent")) {
-                                object.unsupportedPolicyEvent = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent.toObject(message.unsupportedPolicyEvent, options);
+                            if (message.configErrorEvent != null && message.hasOwnProperty("configErrorEvent")) {
+                                object.configErrorEvent = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent.toObject(message.configErrorEvent, options);
                                 if (options.oneofs)
-                                    object.eventType = "unsupportedPolicyEvent";
+                                    object.eventType = "configErrorEvent";
                             }
                             return object;
                         };
@@ -5710,6 +5710,7 @@
                              * @interface IContinuousValidationPodEvent
                              * @property {string|null} [podNamespace] ContinuousValidationPodEvent podNamespace
                              * @property {string|null} [pod] ContinuousValidationPodEvent pod
+                             * @property {string|null} [policyName] ContinuousValidationPodEvent policyName
                              * @property {google.protobuf.ITimestamp|null} [deployTime] ContinuousValidationPodEvent deployTime
                              * @property {google.protobuf.ITimestamp|null} [endTime] ContinuousValidationPodEvent endTime
                              * @property {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.PolicyConformanceVerdict|null} [verdict] ContinuousValidationPodEvent verdict
@@ -5747,6 +5748,14 @@
                              * @instance
                              */
                             ContinuousValidationPodEvent.prototype.pod = "";
+    
+                            /**
+                             * ContinuousValidationPodEvent policyName.
+                             * @member {string} policyName
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent
+                             * @instance
+                             */
+                            ContinuousValidationPodEvent.prototype.policyName = "";
     
                             /**
                              * ContinuousValidationPodEvent deployTime.
@@ -5817,6 +5826,8 @@
                                         $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.encode(message.images[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                                 if (message.podNamespace != null && Object.hasOwnProperty.call(message, "podNamespace"))
                                     writer.uint32(/* id 7, wireType 2 =*/58).string(message.podNamespace);
+                                if (message.policyName != null && Object.hasOwnProperty.call(message, "policyName"))
+                                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.policyName);
                                 return writer;
                             };
     
@@ -5857,6 +5868,10 @@
                                         }
                                     case 1: {
                                             message.pod = reader.string();
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.policyName = reader.string();
                                             break;
                                         }
                                     case 2: {
@@ -5918,6 +5933,9 @@
                                 if (message.pod != null && message.hasOwnProperty("pod"))
                                     if (!$util.isString(message.pod))
                                         return "pod: string expected";
+                                if (message.policyName != null && message.hasOwnProperty("policyName"))
+                                    if (!$util.isString(message.policyName))
+                                        return "policyName: string expected";
                                 if (message.deployTime != null && message.hasOwnProperty("deployTime")) {
                                     var error = $root.google.protobuf.Timestamp.verify(message.deployTime);
                                     if (error)
@@ -5964,6 +5982,8 @@
                                     message.podNamespace = String(object.podNamespace);
                                 if (object.pod != null)
                                     message.pod = String(object.pod);
+                                if (object.policyName != null)
+                                    message.policyName = String(object.policyName);
                                 if (object.deployTime != null) {
                                     if (typeof object.deployTime !== "object")
                                         throw TypeError(".google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.deployTime: object expected");
@@ -6024,6 +6044,7 @@
                                     object.endTime = null;
                                     object.verdict = options.enums === String ? "POLICY_CONFORMANCE_VERDICT_UNSPECIFIED" : 0;
                                     object.podNamespace = "";
+                                    object.policyName = "";
                                 }
                                 if (message.pod != null && message.hasOwnProperty("pod"))
                                     object.pod = message.pod;
@@ -6040,6 +6061,8 @@
                                 }
                                 if (message.podNamespace != null && message.hasOwnProperty("podNamespace"))
                                     object.podNamespace = message.podNamespace;
+                                if (message.policyName != null && message.hasOwnProperty("policyName"))
+                                    object.policyName = message.policyName;
                                 return object;
                             };
     
@@ -6092,6 +6115,7 @@
                                  * @property {string|null} [image] ImageDetails image
                                  * @property {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.AuditResult|null} [result] ImageDetails result
                                  * @property {string|null} [description] ImageDetails description
+                                 * @property {Array.<google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ICheckResult>|null} [checkResults] ImageDetails checkResults
                                  */
     
                                 /**
@@ -6103,6 +6127,7 @@
                                  * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.IImageDetails=} [properties] Properties to set
                                  */
                                 function ImageDetails(properties) {
+                                    this.checkResults = [];
                                     if (properties)
                                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                             if (properties[keys[i]] != null)
@@ -6134,6 +6159,14 @@
                                 ImageDetails.prototype.description = "";
     
                                 /**
+                                 * ImageDetails checkResults.
+                                 * @member {Array.<google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ICheckResult>} checkResults
+                                 * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails
+                                 * @instance
+                                 */
+                                ImageDetails.prototype.checkResults = $util.emptyArray;
+    
+                                /**
                                  * Creates a new ImageDetails instance using the specified properties.
                                  * @function create
                                  * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails
@@ -6163,6 +6196,9 @@
                                         writer.uint32(/* id 2, wireType 0 =*/16).int32(message.result);
                                     if (message.description != null && Object.hasOwnProperty.call(message, "description"))
                                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                                    if (message.checkResults != null && message.checkResults.length)
+                                        for (var i = 0; i < message.checkResults.length; ++i)
+                                            $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.encode(message.checkResults[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                                     return writer;
                                 };
     
@@ -6207,6 +6243,12 @@
                                             }
                                         case 3: {
                                                 message.description = reader.string();
+                                                break;
+                                            }
+                                        case 4: {
+                                                if (!(message.checkResults && message.checkResults.length))
+                                                    message.checkResults = [];
+                                                message.checkResults.push($root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.decode(reader, reader.uint32()));
                                                 break;
                                             }
                                         default:
@@ -6259,6 +6301,15 @@
                                     if (message.description != null && message.hasOwnProperty("description"))
                                         if (!$util.isString(message.description))
                                             return "description: string expected";
+                                    if (message.checkResults != null && message.hasOwnProperty("checkResults")) {
+                                        if (!Array.isArray(message.checkResults))
+                                            return "checkResults: array expected";
+                                        for (var i = 0; i < message.checkResults.length; ++i) {
+                                            var error = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.verify(message.checkResults[i]);
+                                            if (error)
+                                                return "checkResults." + error;
+                                        }
+                                    }
                                     return null;
                                 };
     
@@ -6298,6 +6349,16 @@
                                     }
                                     if (object.description != null)
                                         message.description = String(object.description);
+                                    if (object.checkResults) {
+                                        if (!Array.isArray(object.checkResults))
+                                            throw TypeError(".google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.checkResults: array expected");
+                                        message.checkResults = [];
+                                        for (var i = 0; i < object.checkResults.length; ++i) {
+                                            if (typeof object.checkResults[i] !== "object")
+                                                throw TypeError(".google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.checkResults: object expected");
+                                            message.checkResults[i] = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.fromObject(object.checkResults[i]);
+                                        }
+                                    }
                                     return message;
                                 };
     
@@ -6314,6 +6375,8 @@
                                     if (!options)
                                         options = {};
                                     var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.checkResults = [];
                                     if (options.defaults) {
                                         object.image = "";
                                         object.result = options.enums === String ? "AUDIT_RESULT_UNSPECIFIED" : 0;
@@ -6325,6 +6388,11 @@
                                         object.result = options.enums === String ? $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.AuditResult[message.result] === undefined ? message.result : $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.AuditResult[message.result] : message.result;
                                     if (message.description != null && message.hasOwnProperty("description"))
                                         object.description = message.description;
+                                    if (message.checkResults && message.checkResults.length) {
+                                        object.checkResults = [];
+                                        for (var j = 0; j < message.checkResults.length; ++j)
+                                            object.checkResults[j] = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.toObject(message.checkResults[j], options);
+                                    }
                                     return object;
                                 };
     
@@ -6370,30 +6438,683 @@
                                     return values;
                                 })();
     
+                                ImageDetails.CheckResult = (function() {
+    
+                                    /**
+                                     * Properties of a CheckResult.
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails
+                                     * @interface ICheckResult
+                                     * @property {string|null} [checkSetIndex] CheckResult checkSetIndex
+                                     * @property {string|null} [checkSetName] CheckResult checkSetName
+                                     * @property {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.ICheckSetScope|null} [checkSetScope] CheckResult checkSetScope
+                                     * @property {string|null} [checkIndex] CheckResult checkIndex
+                                     * @property {string|null} [checkName] CheckResult checkName
+                                     * @property {string|null} [checkType] CheckResult checkType
+                                     * @property {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckVerdict|null} [verdict] CheckResult verdict
+                                     * @property {string|null} [explanation] CheckResult explanation
+                                     */
+    
+                                    /**
+                                     * Constructs a new CheckResult.
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails
+                                     * @classdesc Represents a CheckResult.
+                                     * @implements ICheckResult
+                                     * @constructor
+                                     * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ICheckResult=} [properties] Properties to set
+                                     */
+                                    function CheckResult(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * CheckResult checkSetIndex.
+                                     * @member {string} checkSetIndex
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @instance
+                                     */
+                                    CheckResult.prototype.checkSetIndex = "";
+    
+                                    /**
+                                     * CheckResult checkSetName.
+                                     * @member {string} checkSetName
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @instance
+                                     */
+                                    CheckResult.prototype.checkSetName = "";
+    
+                                    /**
+                                     * CheckResult checkSetScope.
+                                     * @member {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.ICheckSetScope|null|undefined} checkSetScope
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @instance
+                                     */
+                                    CheckResult.prototype.checkSetScope = null;
+    
+                                    /**
+                                     * CheckResult checkIndex.
+                                     * @member {string} checkIndex
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @instance
+                                     */
+                                    CheckResult.prototype.checkIndex = "";
+    
+                                    /**
+                                     * CheckResult checkName.
+                                     * @member {string} checkName
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @instance
+                                     */
+                                    CheckResult.prototype.checkName = "";
+    
+                                    /**
+                                     * CheckResult checkType.
+                                     * @member {string} checkType
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @instance
+                                     */
+                                    CheckResult.prototype.checkType = "";
+    
+                                    /**
+                                     * CheckResult verdict.
+                                     * @member {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckVerdict} verdict
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @instance
+                                     */
+                                    CheckResult.prototype.verdict = 0;
+    
+                                    /**
+                                     * CheckResult explanation.
+                                     * @member {string} explanation
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @instance
+                                     */
+                                    CheckResult.prototype.explanation = "";
+    
+                                    /**
+                                     * Creates a new CheckResult instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @static
+                                     * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ICheckResult=} [properties] Properties to set
+                                     * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult} CheckResult instance
+                                     */
+                                    CheckResult.create = function create(properties) {
+                                        return new CheckResult(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified CheckResult message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @static
+                                     * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ICheckResult} message CheckResult message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    CheckResult.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.checkSetIndex != null && Object.hasOwnProperty.call(message, "checkSetIndex"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.checkSetIndex);
+                                        if (message.checkSetName != null && Object.hasOwnProperty.call(message, "checkSetName"))
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.checkSetName);
+                                        if (message.checkSetScope != null && Object.hasOwnProperty.call(message, "checkSetScope"))
+                                            $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope.encode(message.checkSetScope, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                        if (message.checkIndex != null && Object.hasOwnProperty.call(message, "checkIndex"))
+                                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.checkIndex);
+                                        if (message.checkName != null && Object.hasOwnProperty.call(message, "checkName"))
+                                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.checkName);
+                                        if (message.checkType != null && Object.hasOwnProperty.call(message, "checkType"))
+                                            writer.uint32(/* id 6, wireType 2 =*/50).string(message.checkType);
+                                        if (message.verdict != null && Object.hasOwnProperty.call(message, "verdict"))
+                                            writer.uint32(/* id 7, wireType 0 =*/56).int32(message.verdict);
+                                        if (message.explanation != null && Object.hasOwnProperty.call(message, "explanation"))
+                                            writer.uint32(/* id 8, wireType 2 =*/66).string(message.explanation);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified CheckResult message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @static
+                                     * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ICheckResult} message CheckResult message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    CheckResult.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a CheckResult message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult} CheckResult
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    CheckResult.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.checkSetIndex = reader.string();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.checkSetName = reader.string();
+                                                    break;
+                                                }
+                                            case 3: {
+                                                    message.checkSetScope = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope.decode(reader, reader.uint32());
+                                                    break;
+                                                }
+                                            case 4: {
+                                                    message.checkIndex = reader.string();
+                                                    break;
+                                                }
+                                            case 5: {
+                                                    message.checkName = reader.string();
+                                                    break;
+                                                }
+                                            case 6: {
+                                                    message.checkType = reader.string();
+                                                    break;
+                                                }
+                                            case 7: {
+                                                    message.verdict = reader.int32();
+                                                    break;
+                                                }
+                                            case 8: {
+                                                    message.explanation = reader.string();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a CheckResult message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult} CheckResult
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    CheckResult.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a CheckResult message.
+                                     * @function verify
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    CheckResult.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.checkSetIndex != null && message.hasOwnProperty("checkSetIndex"))
+                                            if (!$util.isString(message.checkSetIndex))
+                                                return "checkSetIndex: string expected";
+                                        if (message.checkSetName != null && message.hasOwnProperty("checkSetName"))
+                                            if (!$util.isString(message.checkSetName))
+                                                return "checkSetName: string expected";
+                                        if (message.checkSetScope != null && message.hasOwnProperty("checkSetScope")) {
+                                            var error = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope.verify(message.checkSetScope);
+                                            if (error)
+                                                return "checkSetScope." + error;
+                                        }
+                                        if (message.checkIndex != null && message.hasOwnProperty("checkIndex"))
+                                            if (!$util.isString(message.checkIndex))
+                                                return "checkIndex: string expected";
+                                        if (message.checkName != null && message.hasOwnProperty("checkName"))
+                                            if (!$util.isString(message.checkName))
+                                                return "checkName: string expected";
+                                        if (message.checkType != null && message.hasOwnProperty("checkType"))
+                                            if (!$util.isString(message.checkType))
+                                                return "checkType: string expected";
+                                        if (message.verdict != null && message.hasOwnProperty("verdict"))
+                                            switch (message.verdict) {
+                                            default:
+                                                return "verdict: enum value expected";
+                                            case 0:
+                                            case 1:
+                                                break;
+                                            }
+                                        if (message.explanation != null && message.hasOwnProperty("explanation"))
+                                            if (!$util.isString(message.explanation))
+                                                return "explanation: string expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a CheckResult message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult} CheckResult
+                                     */
+                                    CheckResult.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult)
+                                            return object;
+                                        var message = new $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult();
+                                        if (object.checkSetIndex != null)
+                                            message.checkSetIndex = String(object.checkSetIndex);
+                                        if (object.checkSetName != null)
+                                            message.checkSetName = String(object.checkSetName);
+                                        if (object.checkSetScope != null) {
+                                            if (typeof object.checkSetScope !== "object")
+                                                throw TypeError(".google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.checkSetScope: object expected");
+                                            message.checkSetScope = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope.fromObject(object.checkSetScope);
+                                        }
+                                        if (object.checkIndex != null)
+                                            message.checkIndex = String(object.checkIndex);
+                                        if (object.checkName != null)
+                                            message.checkName = String(object.checkName);
+                                        if (object.checkType != null)
+                                            message.checkType = String(object.checkType);
+                                        switch (object.verdict) {
+                                        default:
+                                            if (typeof object.verdict === "number") {
+                                                message.verdict = object.verdict;
+                                                break;
+                                            }
+                                            break;
+                                        case "CHECK_VERDICT_UNSPECIFIED":
+                                        case 0:
+                                            message.verdict = 0;
+                                            break;
+                                        case "NON_CONFORMANT":
+                                        case 1:
+                                            message.verdict = 1;
+                                            break;
+                                        }
+                                        if (object.explanation != null)
+                                            message.explanation = String(object.explanation);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a CheckResult message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @static
+                                     * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult} message CheckResult
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    CheckResult.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.checkSetIndex = "";
+                                            object.checkSetName = "";
+                                            object.checkSetScope = null;
+                                            object.checkIndex = "";
+                                            object.checkName = "";
+                                            object.checkType = "";
+                                            object.verdict = options.enums === String ? "CHECK_VERDICT_UNSPECIFIED" : 0;
+                                            object.explanation = "";
+                                        }
+                                        if (message.checkSetIndex != null && message.hasOwnProperty("checkSetIndex"))
+                                            object.checkSetIndex = message.checkSetIndex;
+                                        if (message.checkSetName != null && message.hasOwnProperty("checkSetName"))
+                                            object.checkSetName = message.checkSetName;
+                                        if (message.checkSetScope != null && message.hasOwnProperty("checkSetScope"))
+                                            object.checkSetScope = $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope.toObject(message.checkSetScope, options);
+                                        if (message.checkIndex != null && message.hasOwnProperty("checkIndex"))
+                                            object.checkIndex = message.checkIndex;
+                                        if (message.checkName != null && message.hasOwnProperty("checkName"))
+                                            object.checkName = message.checkName;
+                                        if (message.checkType != null && message.hasOwnProperty("checkType"))
+                                            object.checkType = message.checkType;
+                                        if (message.verdict != null && message.hasOwnProperty("verdict"))
+                                            object.verdict = options.enums === String ? $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckVerdict[message.verdict] === undefined ? message.verdict : $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckVerdict[message.verdict] : message.verdict;
+                                        if (message.explanation != null && message.hasOwnProperty("explanation"))
+                                            object.explanation = message.explanation;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this CheckResult to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    CheckResult.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for CheckResult
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    CheckResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult";
+                                    };
+    
+                                    CheckResult.CheckSetScope = (function() {
+    
+                                        /**
+                                         * Properties of a CheckSetScope.
+                                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                         * @interface ICheckSetScope
+                                         * @property {string|null} [kubernetesServiceAccount] CheckSetScope kubernetesServiceAccount
+                                         * @property {string|null} [kubernetesNamespace] CheckSetScope kubernetesNamespace
+                                         */
+    
+                                        /**
+                                         * Constructs a new CheckSetScope.
+                                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult
+                                         * @classdesc Represents a CheckSetScope.
+                                         * @implements ICheckSetScope
+                                         * @constructor
+                                         * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.ICheckSetScope=} [properties] Properties to set
+                                         */
+                                        function CheckSetScope(properties) {
+                                            if (properties)
+                                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                    if (properties[keys[i]] != null)
+                                                        this[keys[i]] = properties[keys[i]];
+                                        }
+    
+                                        /**
+                                         * CheckSetScope kubernetesServiceAccount.
+                                         * @member {string|null|undefined} kubernetesServiceAccount
+                                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope
+                                         * @instance
+                                         */
+                                        CheckSetScope.prototype.kubernetesServiceAccount = null;
+    
+                                        /**
+                                         * CheckSetScope kubernetesNamespace.
+                                         * @member {string|null|undefined} kubernetesNamespace
+                                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope
+                                         * @instance
+                                         */
+                                        CheckSetScope.prototype.kubernetesNamespace = null;
+    
+                                        // OneOf field names bound to virtual getters and setters
+                                        var $oneOfFields;
+    
+                                        /**
+                                         * CheckSetScope scope.
+                                         * @member {"kubernetesServiceAccount"|"kubernetesNamespace"|undefined} scope
+                                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope
+                                         * @instance
+                                         */
+                                        Object.defineProperty(CheckSetScope.prototype, "scope", {
+                                            get: $util.oneOfGetter($oneOfFields = ["kubernetesServiceAccount", "kubernetesNamespace"]),
+                                            set: $util.oneOfSetter($oneOfFields)
+                                        });
+    
+                                        /**
+                                         * Creates a new CheckSetScope instance using the specified properties.
+                                         * @function create
+                                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope
+                                         * @static
+                                         * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.ICheckSetScope=} [properties] Properties to set
+                                         * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope} CheckSetScope instance
+                                         */
+                                        CheckSetScope.create = function create(properties) {
+                                            return new CheckSetScope(properties);
+                                        };
+    
+                                        /**
+                                         * Encodes the specified CheckSetScope message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope.verify|verify} messages.
+                                         * @function encode
+                                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope
+                                         * @static
+                                         * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.ICheckSetScope} message CheckSetScope message or plain object to encode
+                                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                                         * @returns {$protobuf.Writer} Writer
+                                         */
+                                        CheckSetScope.encode = function encode(message, writer) {
+                                            if (!writer)
+                                                writer = $Writer.create();
+                                            if (message.kubernetesServiceAccount != null && Object.hasOwnProperty.call(message, "kubernetesServiceAccount"))
+                                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.kubernetesServiceAccount);
+                                            if (message.kubernetesNamespace != null && Object.hasOwnProperty.call(message, "kubernetesNamespace"))
+                                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.kubernetesNamespace);
+                                            return writer;
+                                        };
+    
+                                        /**
+                                         * Encodes the specified CheckSetScope message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope.verify|verify} messages.
+                                         * @function encodeDelimited
+                                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope
+                                         * @static
+                                         * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.ICheckSetScope} message CheckSetScope message or plain object to encode
+                                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                                         * @returns {$protobuf.Writer} Writer
+                                         */
+                                        CheckSetScope.encodeDelimited = function encodeDelimited(message, writer) {
+                                            return this.encode(message, writer).ldelim();
+                                        };
+    
+                                        /**
+                                         * Decodes a CheckSetScope message from the specified reader or buffer.
+                                         * @function decode
+                                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope
+                                         * @static
+                                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                         * @param {number} [length] Message length if known beforehand
+                                         * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope} CheckSetScope
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        CheckSetScope.decode = function decode(reader, length) {
+                                            if (!(reader instanceof $Reader))
+                                                reader = $Reader.create(reader);
+                                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope();
+                                            while (reader.pos < end) {
+                                                var tag = reader.uint32();
+                                                switch (tag >>> 3) {
+                                                case 1: {
+                                                        message.kubernetesServiceAccount = reader.string();
+                                                        break;
+                                                    }
+                                                case 2: {
+                                                        message.kubernetesNamespace = reader.string();
+                                                        break;
+                                                    }
+                                                default:
+                                                    reader.skipType(tag & 7);
+                                                    break;
+                                                }
+                                            }
+                                            return message;
+                                        };
+    
+                                        /**
+                                         * Decodes a CheckSetScope message from the specified reader or buffer, length delimited.
+                                         * @function decodeDelimited
+                                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope
+                                         * @static
+                                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                         * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope} CheckSetScope
+                                         * @throws {Error} If the payload is not a reader or valid buffer
+                                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                         */
+                                        CheckSetScope.decodeDelimited = function decodeDelimited(reader) {
+                                            if (!(reader instanceof $Reader))
+                                                reader = new $Reader(reader);
+                                            return this.decode(reader, reader.uint32());
+                                        };
+    
+                                        /**
+                                         * Verifies a CheckSetScope message.
+                                         * @function verify
+                                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope
+                                         * @static
+                                         * @param {Object.<string,*>} message Plain object to verify
+                                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                         */
+                                        CheckSetScope.verify = function verify(message) {
+                                            if (typeof message !== "object" || message === null)
+                                                return "object expected";
+                                            var properties = {};
+                                            if (message.kubernetesServiceAccount != null && message.hasOwnProperty("kubernetesServiceAccount")) {
+                                                properties.scope = 1;
+                                                if (!$util.isString(message.kubernetesServiceAccount))
+                                                    return "kubernetesServiceAccount: string expected";
+                                            }
+                                            if (message.kubernetesNamespace != null && message.hasOwnProperty("kubernetesNamespace")) {
+                                                if (properties.scope === 1)
+                                                    return "scope: multiple values";
+                                                properties.scope = 1;
+                                                if (!$util.isString(message.kubernetesNamespace))
+                                                    return "kubernetesNamespace: string expected";
+                                            }
+                                            return null;
+                                        };
+    
+                                        /**
+                                         * Creates a CheckSetScope message from a plain object. Also converts values to their respective internal types.
+                                         * @function fromObject
+                                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope
+                                         * @static
+                                         * @param {Object.<string,*>} object Plain object
+                                         * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope} CheckSetScope
+                                         */
+                                        CheckSetScope.fromObject = function fromObject(object) {
+                                            if (object instanceof $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope)
+                                                return object;
+                                            var message = new $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope();
+                                            if (object.kubernetesServiceAccount != null)
+                                                message.kubernetesServiceAccount = String(object.kubernetesServiceAccount);
+                                            if (object.kubernetesNamespace != null)
+                                                message.kubernetesNamespace = String(object.kubernetesNamespace);
+                                            return message;
+                                        };
+    
+                                        /**
+                                         * Creates a plain object from a CheckSetScope message. Also converts values to other types if specified.
+                                         * @function toObject
+                                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope
+                                         * @static
+                                         * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope} message CheckSetScope
+                                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                         * @returns {Object.<string,*>} Plain object
+                                         */
+                                        CheckSetScope.toObject = function toObject(message, options) {
+                                            if (!options)
+                                                options = {};
+                                            var object = {};
+                                            if (message.kubernetesServiceAccount != null && message.hasOwnProperty("kubernetesServiceAccount")) {
+                                                object.kubernetesServiceAccount = message.kubernetesServiceAccount;
+                                                if (options.oneofs)
+                                                    object.scope = "kubernetesServiceAccount";
+                                            }
+                                            if (message.kubernetesNamespace != null && message.hasOwnProperty("kubernetesNamespace")) {
+                                                object.kubernetesNamespace = message.kubernetesNamespace;
+                                                if (options.oneofs)
+                                                    object.scope = "kubernetesNamespace";
+                                            }
+                                            return object;
+                                        };
+    
+                                        /**
+                                         * Converts this CheckSetScope to JSON.
+                                         * @function toJSON
+                                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope
+                                         * @instance
+                                         * @returns {Object.<string,*>} JSON object
+                                         */
+                                        CheckSetScope.prototype.toJSON = function toJSON() {
+                                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                        };
+    
+                                        /**
+                                         * Gets the default type url for CheckSetScope
+                                         * @function getTypeUrl
+                                         * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope
+                                         * @static
+                                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                         * @returns {string} The default type url
+                                         */
+                                        CheckSetScope.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                            if (typeUrlPrefix === undefined) {
+                                                typeUrlPrefix = "type.googleapis.com";
+                                            }
+                                            return typeUrlPrefix + "/google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope";
+                                        };
+    
+                                        return CheckSetScope;
+                                    })();
+    
+                                    /**
+                                     * CheckVerdict enum.
+                                     * @name google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckVerdict
+                                     * @enum {number}
+                                     * @property {number} CHECK_VERDICT_UNSPECIFIED=0 CHECK_VERDICT_UNSPECIFIED value
+                                     * @property {number} NON_CONFORMANT=1 NON_CONFORMANT value
+                                     */
+                                    CheckResult.CheckVerdict = (function() {
+                                        var valuesById = {}, values = Object.create(valuesById);
+                                        values[valuesById[0] = "CHECK_VERDICT_UNSPECIFIED"] = 0;
+                                        values[valuesById[1] = "NON_CONFORMANT"] = 1;
+                                        return values;
+                                    })();
+    
+                                    return CheckResult;
+                                })();
+    
                                 return ImageDetails;
                             })();
     
                             return ContinuousValidationPodEvent;
                         })();
     
-                        ContinuousValidationEvent.UnsupportedPolicyEvent = (function() {
+                        ContinuousValidationEvent.ConfigErrorEvent = (function() {
     
                             /**
-                             * Properties of an UnsupportedPolicyEvent.
+                             * Properties of a ConfigErrorEvent.
                              * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent
-                             * @interface IUnsupportedPolicyEvent
-                             * @property {string|null} [description] UnsupportedPolicyEvent description
+                             * @interface IConfigErrorEvent
+                             * @property {string|null} [description] ConfigErrorEvent description
                              */
     
                             /**
-                             * Constructs a new UnsupportedPolicyEvent.
+                             * Constructs a new ConfigErrorEvent.
                              * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent
-                             * @classdesc Represents an UnsupportedPolicyEvent.
-                             * @implements IUnsupportedPolicyEvent
+                             * @classdesc Represents a ConfigErrorEvent.
+                             * @implements IConfigErrorEvent
                              * @constructor
-                             * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IUnsupportedPolicyEvent=} [properties] Properties to set
+                             * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IConfigErrorEvent=} [properties] Properties to set
                              */
-                            function UnsupportedPolicyEvent(properties) {
+                            function ConfigErrorEvent(properties) {
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -6401,35 +7122,35 @@
                             }
     
                             /**
-                             * UnsupportedPolicyEvent description.
+                             * ConfigErrorEvent description.
                              * @member {string} description
-                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent
                              * @instance
                              */
-                            UnsupportedPolicyEvent.prototype.description = "";
+                            ConfigErrorEvent.prototype.description = "";
     
                             /**
-                             * Creates a new UnsupportedPolicyEvent instance using the specified properties.
+                             * Creates a new ConfigErrorEvent instance using the specified properties.
                              * @function create
-                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent
                              * @static
-                             * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IUnsupportedPolicyEvent=} [properties] Properties to set
-                             * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent} UnsupportedPolicyEvent instance
+                             * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IConfigErrorEvent=} [properties] Properties to set
+                             * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent} ConfigErrorEvent instance
                              */
-                            UnsupportedPolicyEvent.create = function create(properties) {
-                                return new UnsupportedPolicyEvent(properties);
+                            ConfigErrorEvent.create = function create(properties) {
+                                return new ConfigErrorEvent(properties);
                             };
     
                             /**
-                             * Encodes the specified UnsupportedPolicyEvent message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent.verify|verify} messages.
+                             * Encodes the specified ConfigErrorEvent message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent.verify|verify} messages.
                              * @function encode
-                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent
                              * @static
-                             * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IUnsupportedPolicyEvent} message UnsupportedPolicyEvent message or plain object to encode
+                             * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IConfigErrorEvent} message ConfigErrorEvent message or plain object to encode
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            UnsupportedPolicyEvent.encode = function encode(message, writer) {
+                            ConfigErrorEvent.encode = function encode(message, writer) {
                                 if (!writer)
                                     writer = $Writer.create();
                                 if (message.description != null && Object.hasOwnProperty.call(message, "description"))
@@ -6438,33 +7159,33 @@
                             };
     
                             /**
-                             * Encodes the specified UnsupportedPolicyEvent message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent.verify|verify} messages.
+                             * Encodes the specified ConfigErrorEvent message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent.verify|verify} messages.
                              * @function encodeDelimited
-                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent
                              * @static
-                             * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IUnsupportedPolicyEvent} message UnsupportedPolicyEvent message or plain object to encode
+                             * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IConfigErrorEvent} message ConfigErrorEvent message or plain object to encode
                              * @param {$protobuf.Writer} [writer] Writer to encode to
                              * @returns {$protobuf.Writer} Writer
                              */
-                            UnsupportedPolicyEvent.encodeDelimited = function encodeDelimited(message, writer) {
+                            ConfigErrorEvent.encodeDelimited = function encodeDelimited(message, writer) {
                                 return this.encode(message, writer).ldelim();
                             };
     
                             /**
-                             * Decodes an UnsupportedPolicyEvent message from the specified reader or buffer.
+                             * Decodes a ConfigErrorEvent message from the specified reader or buffer.
                              * @function decode
-                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent
                              * @static
                              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                              * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent} UnsupportedPolicyEvent
+                             * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent} ConfigErrorEvent
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            UnsupportedPolicyEvent.decode = function decode(reader, length) {
+                            ConfigErrorEvent.decode = function decode(reader, length) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent();
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent();
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
@@ -6481,30 +7202,30 @@
                             };
     
                             /**
-                             * Decodes an UnsupportedPolicyEvent message from the specified reader or buffer, length delimited.
+                             * Decodes a ConfigErrorEvent message from the specified reader or buffer, length delimited.
                              * @function decodeDelimited
-                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent
                              * @static
                              * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent} UnsupportedPolicyEvent
+                             * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent} ConfigErrorEvent
                              * @throws {Error} If the payload is not a reader or valid buffer
                              * @throws {$protobuf.util.ProtocolError} If required fields are missing
                              */
-                            UnsupportedPolicyEvent.decodeDelimited = function decodeDelimited(reader) {
+                            ConfigErrorEvent.decodeDelimited = function decodeDelimited(reader) {
                                 if (!(reader instanceof $Reader))
                                     reader = new $Reader(reader);
                                 return this.decode(reader, reader.uint32());
                             };
     
                             /**
-                             * Verifies an UnsupportedPolicyEvent message.
+                             * Verifies a ConfigErrorEvent message.
                              * @function verify
-                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent
                              * @static
                              * @param {Object.<string,*>} message Plain object to verify
                              * @returns {string|null} `null` if valid, otherwise the reason why it is not
                              */
-                            UnsupportedPolicyEvent.verify = function verify(message) {
+                            ConfigErrorEvent.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
                                 if (message.description != null && message.hasOwnProperty("description"))
@@ -6514,32 +7235,32 @@
                             };
     
                             /**
-                             * Creates an UnsupportedPolicyEvent message from a plain object. Also converts values to their respective internal types.
+                             * Creates a ConfigErrorEvent message from a plain object. Also converts values to their respective internal types.
                              * @function fromObject
-                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent
                              * @static
                              * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent} UnsupportedPolicyEvent
+                             * @returns {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent} ConfigErrorEvent
                              */
-                            UnsupportedPolicyEvent.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent)
+                            ConfigErrorEvent.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent)
                                     return object;
-                                var message = new $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent();
+                                var message = new $root.google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent();
                                 if (object.description != null)
                                     message.description = String(object.description);
                                 return message;
                             };
     
                             /**
-                             * Creates a plain object from an UnsupportedPolicyEvent message. Also converts values to other types if specified.
+                             * Creates a plain object from a ConfigErrorEvent message. Also converts values to other types if specified.
                              * @function toObject
-                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent
                              * @static
-                             * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent} message UnsupportedPolicyEvent
+                             * @param {google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent} message ConfigErrorEvent
                              * @param {$protobuf.IConversionOptions} [options] Conversion options
                              * @returns {Object.<string,*>} Plain object
                              */
-                            UnsupportedPolicyEvent.toObject = function toObject(message, options) {
+                            ConfigErrorEvent.toObject = function toObject(message, options) {
                                 if (!options)
                                     options = {};
                                 var object = {};
@@ -6551,32 +7272,32 @@
                             };
     
                             /**
-                             * Converts this UnsupportedPolicyEvent to JSON.
+                             * Converts this ConfigErrorEvent to JSON.
                              * @function toJSON
-                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent
                              * @instance
                              * @returns {Object.<string,*>} JSON object
                              */
-                            UnsupportedPolicyEvent.prototype.toJSON = function toJSON() {
+                            ConfigErrorEvent.prototype.toJSON = function toJSON() {
                                 return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                             };
     
                             /**
-                             * Gets the default type url for UnsupportedPolicyEvent
+                             * Gets the default type url for ConfigErrorEvent
                              * @function getTypeUrl
-                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent
+                             * @memberof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent
                              * @static
                              * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                              * @returns {string} The default type url
                              */
-                            UnsupportedPolicyEvent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            ConfigErrorEvent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
                                 if (typeUrlPrefix === undefined) {
                                     typeUrlPrefix = "type.googleapis.com";
                                 }
-                                return typeUrlPrefix + "/google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent";
+                                return typeUrlPrefix + "/google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent";
                             };
     
-                            return UnsupportedPolicyEvent;
+                            return ConfigErrorEvent;
                         })();
     
                         return ContinuousValidationEvent;

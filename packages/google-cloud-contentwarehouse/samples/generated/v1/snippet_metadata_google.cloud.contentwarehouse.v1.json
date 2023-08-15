@@ -848,6 +848,66 @@
             }
         },
         {
+            "regionTag": "contentwarehouse_v1_generated_PipelineService_RunPipeline_async",
+            "title": "DocumentLinkService runPipeline Sample",
+            "origin": "API_DEFINITION",
+            "description": " Run a predefined pipeline.",
+            "canonical": true,
+            "file": "pipeline_service.run_pipeline.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 78,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RunPipeline",
+                "fullName": "google.cloud.contentwarehouse.v1.PipelineService.RunPipeline",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "gcs_ingest_pipeline",
+                        "type": ".google.cloud.contentwarehouse.v1.GcsIngestPipeline"
+                    },
+                    {
+                        "name": "gcs_ingest_with_doc_ai_processors_pipeline",
+                        "type": ".google.cloud.contentwarehouse.v1.GcsIngestWithDocAiProcessorsPipeline"
+                    },
+                    {
+                        "name": "export_cdw_pipeline",
+                        "type": ".google.cloud.contentwarehouse.v1.ExportToCdwPipeline"
+                    },
+                    {
+                        "name": "process_with_doc_ai_pipeline",
+                        "type": ".google.cloud.contentwarehouse.v1.ProcessWithDocAiPipeline"
+                    },
+                    {
+                        "name": "request_metadata",
+                        "type": ".google.cloud.contentwarehouse.v1.RequestMetadata"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "PipelineServiceClient",
+                    "fullName": "google.cloud.contentwarehouse.v1.PipelineServiceClient"
+                },
+                "method": {
+                    "shortName": "RunPipeline",
+                    "fullName": "google.cloud.contentwarehouse.v1.PipelineService.RunPipeline",
+                    "service": {
+                        "shortName": "PipelineService",
+                        "fullName": "google.cloud.contentwarehouse.v1.PipelineService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "contentwarehouse_v1_generated_RuleSetService_CreateRuleSet_async",
             "title": "DocumentLinkService createRuleSet Sample",
             "origin": "API_DEFINITION",

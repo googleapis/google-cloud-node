@@ -2271,6 +2271,320 @@
                         }
                       }
                     },
+                    "PipelineService": {
+                      "options": {
+                        "(google.api.default_host)": "contentwarehouse.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "RunPipeline": {
+                          "requestType": "RunPipelineRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*}:runPipeline",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "RunPipelineResponse",
+                            "(google.longrunning.operation_info).metadata_type": "RunPipelineMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*}:runPipeline",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "RunPipelineResponse",
+                                "metadata_type": "RunPipelineMetadata"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "RunPipelineRequest": {
+                      "oneofs": {
+                        "pipeline": {
+                          "oneof": [
+                            "gcsIngestPipeline",
+                            "gcsIngestWithDocAiProcessorsPipeline",
+                            "exportCdwPipeline",
+                            "processWithDocAiPipeline"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "contentwarehouse.googleapis.com/Location"
+                          }
+                        },
+                        "gcsIngestPipeline": {
+                          "type": "GcsIngestPipeline",
+                          "id": 2
+                        },
+                        "gcsIngestWithDocAiProcessorsPipeline": {
+                          "type": "GcsIngestWithDocAiProcessorsPipeline",
+                          "id": 3
+                        },
+                        "exportCdwPipeline": {
+                          "type": "ExportToCdwPipeline",
+                          "id": 4
+                        },
+                        "processWithDocAiPipeline": {
+                          "type": "ProcessWithDocAiPipeline",
+                          "id": 5
+                        },
+                        "requestMetadata": {
+                          "type": "RequestMetadata",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "RunPipelineResponse": {
+                      "fields": {}
+                    },
+                    "RunPipelineMetadata": {
+                      "oneofs": {
+                        "pipelineMetadata": {
+                          "oneof": [
+                            "gcsIngestPipelineMetadata",
+                            "exportToCdwPipelineMetadata",
+                            "processWithDocAiPipelineMetadata"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "totalFileCount": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "failedFileCount": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "userInfo": {
+                          "type": "UserInfo",
+                          "id": 3
+                        },
+                        "gcsIngestPipelineMetadata": {
+                          "type": "GcsIngestPipelineMetadata",
+                          "id": 4
+                        },
+                        "exportToCdwPipelineMetadata": {
+                          "type": "ExportToCdwPipelineMetadata",
+                          "id": 6
+                        },
+                        "processWithDocAiPipelineMetadata": {
+                          "type": "ProcessWithDocAiPipelineMetadata",
+                          "id": 7
+                        },
+                        "individualDocumentStatuses": {
+                          "rule": "repeated",
+                          "type": "IndividualDocumentStatus",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "GcsIngestPipelineMetadata": {
+                          "fields": {
+                            "inputPath": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "ExportToCdwPipelineMetadata": {
+                          "fields": {
+                            "documents": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            },
+                            "docAiDataset": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "outputPath": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "ProcessWithDocAiPipelineMetadata": {
+                          "fields": {
+                            "documents": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            },
+                            "processorInfo": {
+                              "type": "ProcessorInfo",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "IndividualDocumentStatus": {
+                          "fields": {
+                            "documentId": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "status": {
+                              "type": "google.rpc.Status",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ProcessorInfo": {
+                      "fields": {
+                        "processorName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "documentType": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "schemaName": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "IngestPipelineConfig": {
+                      "fields": {
+                        "documentAclPolicy": {
+                          "type": "google.iam.v1.Policy",
+                          "id": 1
+                        },
+                        "enableDocumentTextExtraction": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "folder": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GcsIngestPipeline": {
+                      "fields": {
+                        "inputPath": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "schemaName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "processorType": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "skipIngestedDocuments": {
+                          "type": "bool",
+                          "id": 4
+                        },
+                        "pipelineConfig": {
+                          "type": "IngestPipelineConfig",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GcsIngestWithDocAiProcessorsPipeline": {
+                      "fields": {
+                        "inputPath": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "splitClassifyProcessorInfo": {
+                          "type": "ProcessorInfo",
+                          "id": 2
+                        },
+                        "extractProcessorInfos": {
+                          "rule": "repeated",
+                          "type": "ProcessorInfo",
+                          "id": 3
+                        },
+                        "processorResultsFolderPath": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "skipIngestedDocuments": {
+                          "type": "bool",
+                          "id": 5
+                        },
+                        "pipelineConfig": {
+                          "type": "IngestPipelineConfig",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ExportToCdwPipeline": {
+                      "fields": {
+                        "documents": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "exportFolderPath": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "docAiDataset": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "trainingSplitRatio": {
+                          "type": "float",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ProcessWithDocAiPipeline": {
+                      "fields": {
+                        "documents": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "exportFolderPath": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "processorInfo": {
+                          "type": "ProcessorInfo",
+                          "id": 3
+                        },
+                        "processorResultsFolderPath": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
                     "RuleSetService": {
                       "options": {
                         "(google.api.default_host)": "contentwarehouse.googleapis.com",
