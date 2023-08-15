@@ -551,7 +551,7 @@ export class PersistentResourceServiceClient {
   }
 
 /**
- * Uploads a Model artifact into Vertex AI.
+ * Creates a PersistentResource.
  *
  * @param {Object} request
  *   The request object that will be sent.

@@ -789,7 +789,9 @@ export class ScheduleServiceClient {
  * @param {google.cloud.aiplatform.v1beta1.Schedule} request.schedule
  *   Required. The Schedule which replaces the resource on the server.
  *   The following restrictions will be applied:
+ *
  *     * The scheduled request type cannot be changed.
+ *     * The non-empty fields cannot be unset.
  *     * The output_only fields will be ignored if specified.
  * @param {google.protobuf.FieldMask} request.updateMask
  *   Required. The update mask applies to the resource. See
@@ -1011,6 +1013,7 @@ export class ScheduleServiceClient {
  *   descending order.
  *
  *   Supported fields:
+ *
  *     * `create_time`
  *     * `start_time`
  *     * `end_time`
@@ -1145,6 +1148,7 @@ export class ScheduleServiceClient {
  *   descending order.
  *
  *   Supported fields:
+ *
  *     * `create_time`
  *     * `start_time`
  *     * `end_time`
@@ -1246,6 +1250,7 @@ export class ScheduleServiceClient {
  *   descending order.
  *
  *   Supported fields:
+ *
  *     * `create_time`
  *     * `start_time`
  *     * `end_time`

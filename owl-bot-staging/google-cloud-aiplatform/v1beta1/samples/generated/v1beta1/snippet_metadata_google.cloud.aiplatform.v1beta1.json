@@ -7287,7 +7287,7 @@
       "regionTag": "aiplatform_v1beta1_generated_PersistentResourceService_CreatePersistentResource_async",
       "title": "DatasetService createPersistentResource Sample",
       "origin": "API_DEFINITION",
-      "description": " Uploads a Model artifact into Vertex AI.",
+      "description": " Creates a PersistentResource.",
       "canonical": true,
       "file": "persistent_resource_service.create_persistent_resource.js",
       "language": "JAVASCRIPT",
@@ -8104,6 +8104,50 @@
       }
     },
     {
+      "regionTag": "aiplatform_v1beta1_generated_PredictionService_CountTokens_async",
+      "title": "DatasetService countTokens Sample",
+      "origin": "API_DEFINITION",
+      "description": " Perform a token counting.",
+      "canonical": true,
+      "file": "prediction_service.count_tokens.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CountTokens",
+        "fullName": "google.cloud.aiplatform.v1beta1.PredictionService.CountTokens",
+        "async": true,
+        "parameters": [
+          {
+            "name": "endpoint",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "instances",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.cloud.aiplatform.v1beta1.CountTokensResponse",
+        "client": {
+          "shortName": "PredictionServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.PredictionServiceClient"
+        },
+        "method": {
+          "shortName": "CountTokens",
+          "fullName": "google.cloud.aiplatform.v1beta1.PredictionService.CountTokens",
+          "service": {
+            "shortName": "PredictionService",
+            "fullName": "google.cloud.aiplatform.v1beta1.PredictionService"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "aiplatform_v1beta1_generated_ScheduleService_CreateSchedule_async",
       "title": "DatasetService createSchedule Sample",
       "origin": "API_DEFINITION",
@@ -8378,7 +8422,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 62,
+          "end": 63,
           "type": "FULL"
         }
       ],
