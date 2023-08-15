@@ -1,0 +1,145 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.binaryauthorization.v1",
+  "libraryPackage": "@google-cloud/binary-authorization",
+  "services": {
+    "BinauthzManagementServiceV1": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "BinauthzManagementServiceV1Client",
+          "rpcs": {
+            "GetPolicy": {
+              "methods": [
+                "getPolicy"
+              ]
+            },
+            "UpdatePolicy": {
+              "methods": [
+                "updatePolicy"
+              ]
+            },
+            "CreateAttestor": {
+              "methods": [
+                "createAttestor"
+              ]
+            },
+            "GetAttestor": {
+              "methods": [
+                "getAttestor"
+              ]
+            },
+            "UpdateAttestor": {
+              "methods": [
+                "updateAttestor"
+              ]
+            },
+            "DeleteAttestor": {
+              "methods": [
+                "deleteAttestor"
+              ]
+            },
+            "ListAttestors": {
+              "methods": [
+                "listAttestors",
+                "listAttestorsStream",
+                "listAttestorsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "BinauthzManagementServiceV1Client",
+          "rpcs": {
+            "GetPolicy": {
+              "methods": [
+                "getPolicy"
+              ]
+            },
+            "UpdatePolicy": {
+              "methods": [
+                "updatePolicy"
+              ]
+            },
+            "CreateAttestor": {
+              "methods": [
+                "createAttestor"
+              ]
+            },
+            "GetAttestor": {
+              "methods": [
+                "getAttestor"
+              ]
+            },
+            "UpdateAttestor": {
+              "methods": [
+                "updateAttestor"
+              ]
+            },
+            "DeleteAttestor": {
+              "methods": [
+                "deleteAttestor"
+              ]
+            },
+            "ListAttestors": {
+              "methods": [
+                "listAttestors",
+                "listAttestorsStream",
+                "listAttestorsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SystemPolicyV1": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SystemPolicyV1Client",
+          "rpcs": {
+            "GetSystemPolicy": {
+              "methods": [
+                "getSystemPolicy"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SystemPolicyV1Client",
+          "rpcs": {
+            "GetSystemPolicy": {
+              "methods": [
+                "getSystemPolicy"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ValidationHelperV1": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ValidationHelperV1Client",
+          "rpcs": {
+            "ValidateAttestationOccurrence": {
+              "methods": [
+                "validateAttestationOccurrence"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ValidationHelperV1Client",
+          "rpcs": {
+            "ValidateAttestationOccurrence": {
+              "methods": [
+                "validateAttestationOccurrence"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
