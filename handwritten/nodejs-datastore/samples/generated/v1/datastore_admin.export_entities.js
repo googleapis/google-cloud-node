@@ -35,7 +35,7 @@ function main(projectId, outputUrlPrefix) {
   /**
    *  Client-assigned labels.
    */
-  // const labels = 1234
+  // const labels = [1,2,3,4]
   /**
    *  Description of what data from the project is included in the export.
    */
@@ -52,8 +52,8 @@ function main(projectId, outputUrlPrefix) {
    *  considerations (https://cloud.google.com/storage/docs/naming#object-considerations).
    *  The resulting files will be nested deeper than the specified URL prefix.
    *  The final output URL will be provided in the
-   *  google.datastore.admin.v1.ExportEntitiesResponse.output_url google.datastore.admin.v1.ExportEntitiesResponse.output_url  field. That
-   *  value should be used for subsequent ImportEntities operations.
+   *  google.datastore.admin.v1.ExportEntitiesResponse.output_url google.datastore.admin.v1.ExportEntitiesResponse.output_url 
+   *  field. That value should be used for subsequent ImportEntities operations.
    *  By nesting the data files deeper, the same Cloud Storage bucket can be used
    *  in multiple ExportEntities operations without conflict.
    */

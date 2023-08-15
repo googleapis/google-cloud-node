@@ -9916,6 +9916,8 @@
                          * @memberof google.datastore.v1.AggregationQuery
                          * @interface IAggregation
                          * @property {google.datastore.v1.AggregationQuery.Aggregation.ICount|null} [count] Aggregation count
+                         * @property {google.datastore.v1.AggregationQuery.Aggregation.ISum|null} [sum] Aggregation sum
+                         * @property {google.datastore.v1.AggregationQuery.Aggregation.IAvg|null} [avg] Aggregation avg
                          * @property {string|null} [alias] Aggregation alias
                          */
     
@@ -9943,6 +9945,22 @@
                         Aggregation.prototype.count = null;
     
                         /**
+                         * Aggregation sum.
+                         * @member {google.datastore.v1.AggregationQuery.Aggregation.ISum|null|undefined} sum
+                         * @memberof google.datastore.v1.AggregationQuery.Aggregation
+                         * @instance
+                         */
+                        Aggregation.prototype.sum = null;
+    
+                        /**
+                         * Aggregation avg.
+                         * @member {google.datastore.v1.AggregationQuery.Aggregation.IAvg|null|undefined} avg
+                         * @memberof google.datastore.v1.AggregationQuery.Aggregation
+                         * @instance
+                         */
+                        Aggregation.prototype.avg = null;
+    
+                        /**
                          * Aggregation alias.
                          * @member {string} alias
                          * @memberof google.datastore.v1.AggregationQuery.Aggregation
@@ -9955,12 +9973,12 @@
     
                         /**
                          * Aggregation operator.
-                         * @member {"count"|undefined} operator
+                         * @member {"count"|"sum"|"avg"|undefined} operator
                          * @memberof google.datastore.v1.AggregationQuery.Aggregation
                          * @instance
                          */
                         Object.defineProperty(Aggregation.prototype, "operator", {
-                            get: $util.oneOfGetter($oneOfFields = ["count"]),
+                            get: $util.oneOfGetter($oneOfFields = ["count", "sum", "avg"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -9990,6 +10008,10 @@
                                 writer = $Writer.create();
                             if (message.count != null && Object.hasOwnProperty.call(message, "count"))
                                 $root.google.datastore.v1.AggregationQuery.Aggregation.Count.encode(message.count, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.sum != null && Object.hasOwnProperty.call(message, "sum"))
+                                $root.google.datastore.v1.AggregationQuery.Aggregation.Sum.encode(message.sum, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.avg != null && Object.hasOwnProperty.call(message, "avg"))
+                                $root.google.datastore.v1.AggregationQuery.Aggregation.Avg.encode(message.avg, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.alias != null && Object.hasOwnProperty.call(message, "alias"))
                                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.alias);
                             return writer;
@@ -10028,6 +10050,14 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.count = $root.google.datastore.v1.AggregationQuery.Aggregation.Count.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.sum = $root.google.datastore.v1.AggregationQuery.Aggregation.Sum.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.avg = $root.google.datastore.v1.AggregationQuery.Aggregation.Avg.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 7: {
@@ -10078,6 +10108,26 @@
                                         return "count." + error;
                                 }
                             }
+                            if (message.sum != null && message.hasOwnProperty("sum")) {
+                                if (properties.operator === 1)
+                                    return "operator: multiple values";
+                                properties.operator = 1;
+                                {
+                                    var error = $root.google.datastore.v1.AggregationQuery.Aggregation.Sum.verify(message.sum);
+                                    if (error)
+                                        return "sum." + error;
+                                }
+                            }
+                            if (message.avg != null && message.hasOwnProperty("avg")) {
+                                if (properties.operator === 1)
+                                    return "operator: multiple values";
+                                properties.operator = 1;
+                                {
+                                    var error = $root.google.datastore.v1.AggregationQuery.Aggregation.Avg.verify(message.avg);
+                                    if (error)
+                                        return "avg." + error;
+                                }
+                            }
                             if (message.alias != null && message.hasOwnProperty("alias"))
                                 if (!$util.isString(message.alias))
                                     return "alias: string expected";
@@ -10100,6 +10150,16 @@
                                 if (typeof object.count !== "object")
                                     throw TypeError(".google.datastore.v1.AggregationQuery.Aggregation.count: object expected");
                                 message.count = $root.google.datastore.v1.AggregationQuery.Aggregation.Count.fromObject(object.count);
+                            }
+                            if (object.sum != null) {
+                                if (typeof object.sum !== "object")
+                                    throw TypeError(".google.datastore.v1.AggregationQuery.Aggregation.sum: object expected");
+                                message.sum = $root.google.datastore.v1.AggregationQuery.Aggregation.Sum.fromObject(object.sum);
+                            }
+                            if (object.avg != null) {
+                                if (typeof object.avg !== "object")
+                                    throw TypeError(".google.datastore.v1.AggregationQuery.Aggregation.avg: object expected");
+                                message.avg = $root.google.datastore.v1.AggregationQuery.Aggregation.Avg.fromObject(object.avg);
                             }
                             if (object.alias != null)
                                 message.alias = String(object.alias);
@@ -10125,6 +10185,16 @@
                                 object.count = $root.google.datastore.v1.AggregationQuery.Aggregation.Count.toObject(message.count, options);
                                 if (options.oneofs)
                                     object.operator = "count";
+                            }
+                            if (message.sum != null && message.hasOwnProperty("sum")) {
+                                object.sum = $root.google.datastore.v1.AggregationQuery.Aggregation.Sum.toObject(message.sum, options);
+                                if (options.oneofs)
+                                    object.operator = "sum";
+                            }
+                            if (message.avg != null && message.hasOwnProperty("avg")) {
+                                object.avg = $root.google.datastore.v1.AggregationQuery.Aggregation.Avg.toObject(message.avg, options);
+                                if (options.oneofs)
+                                    object.operator = "avg";
                             }
                             if (message.alias != null && message.hasOwnProperty("alias"))
                                 object.alias = message.alias;
@@ -10363,6 +10433,422 @@
                             };
     
                             return Count;
+                        })();
+    
+                        Aggregation.Sum = (function() {
+    
+                            /**
+                             * Properties of a Sum.
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation
+                             * @interface ISum
+                             * @property {google.datastore.v1.IPropertyReference|null} [property] Sum property
+                             */
+    
+                            /**
+                             * Constructs a new Sum.
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation
+                             * @classdesc Represents a Sum.
+                             * @implements ISum
+                             * @constructor
+                             * @param {google.datastore.v1.AggregationQuery.Aggregation.ISum=} [properties] Properties to set
+                             */
+                            function Sum(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Sum property.
+                             * @member {google.datastore.v1.IPropertyReference|null|undefined} property
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Sum
+                             * @instance
+                             */
+                            Sum.prototype.property = null;
+    
+                            /**
+                             * Creates a new Sum instance using the specified properties.
+                             * @function create
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Sum
+                             * @static
+                             * @param {google.datastore.v1.AggregationQuery.Aggregation.ISum=} [properties] Properties to set
+                             * @returns {google.datastore.v1.AggregationQuery.Aggregation.Sum} Sum instance
+                             */
+                            Sum.create = function create(properties) {
+                                return new Sum(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Sum message. Does not implicitly {@link google.datastore.v1.AggregationQuery.Aggregation.Sum.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Sum
+                             * @static
+                             * @param {google.datastore.v1.AggregationQuery.Aggregation.ISum} message Sum message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Sum.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.property != null && Object.hasOwnProperty.call(message, "property"))
+                                    $root.google.datastore.v1.PropertyReference.encode(message.property, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Sum message, length delimited. Does not implicitly {@link google.datastore.v1.AggregationQuery.Aggregation.Sum.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Sum
+                             * @static
+                             * @param {google.datastore.v1.AggregationQuery.Aggregation.ISum} message Sum message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Sum.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Sum message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Sum
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.datastore.v1.AggregationQuery.Aggregation.Sum} Sum
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Sum.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.AggregationQuery.Aggregation.Sum();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.property = $root.google.datastore.v1.PropertyReference.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Sum message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Sum
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.datastore.v1.AggregationQuery.Aggregation.Sum} Sum
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Sum.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Sum message.
+                             * @function verify
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Sum
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Sum.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.property != null && message.hasOwnProperty("property")) {
+                                    var error = $root.google.datastore.v1.PropertyReference.verify(message.property);
+                                    if (error)
+                                        return "property." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Sum message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Sum
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.datastore.v1.AggregationQuery.Aggregation.Sum} Sum
+                             */
+                            Sum.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.datastore.v1.AggregationQuery.Aggregation.Sum)
+                                    return object;
+                                var message = new $root.google.datastore.v1.AggregationQuery.Aggregation.Sum();
+                                if (object.property != null) {
+                                    if (typeof object.property !== "object")
+                                        throw TypeError(".google.datastore.v1.AggregationQuery.Aggregation.Sum.property: object expected");
+                                    message.property = $root.google.datastore.v1.PropertyReference.fromObject(object.property);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Sum message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Sum
+                             * @static
+                             * @param {google.datastore.v1.AggregationQuery.Aggregation.Sum} message Sum
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Sum.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.property = null;
+                                if (message.property != null && message.hasOwnProperty("property"))
+                                    object.property = $root.google.datastore.v1.PropertyReference.toObject(message.property, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Sum to JSON.
+                             * @function toJSON
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Sum
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Sum.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Sum
+                             * @function getTypeUrl
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Sum
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Sum.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.datastore.v1.AggregationQuery.Aggregation.Sum";
+                            };
+    
+                            return Sum;
+                        })();
+    
+                        Aggregation.Avg = (function() {
+    
+                            /**
+                             * Properties of an Avg.
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation
+                             * @interface IAvg
+                             * @property {google.datastore.v1.IPropertyReference|null} [property] Avg property
+                             */
+    
+                            /**
+                             * Constructs a new Avg.
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation
+                             * @classdesc Represents an Avg.
+                             * @implements IAvg
+                             * @constructor
+                             * @param {google.datastore.v1.AggregationQuery.Aggregation.IAvg=} [properties] Properties to set
+                             */
+                            function Avg(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Avg property.
+                             * @member {google.datastore.v1.IPropertyReference|null|undefined} property
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Avg
+                             * @instance
+                             */
+                            Avg.prototype.property = null;
+    
+                            /**
+                             * Creates a new Avg instance using the specified properties.
+                             * @function create
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Avg
+                             * @static
+                             * @param {google.datastore.v1.AggregationQuery.Aggregation.IAvg=} [properties] Properties to set
+                             * @returns {google.datastore.v1.AggregationQuery.Aggregation.Avg} Avg instance
+                             */
+                            Avg.create = function create(properties) {
+                                return new Avg(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Avg message. Does not implicitly {@link google.datastore.v1.AggregationQuery.Aggregation.Avg.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Avg
+                             * @static
+                             * @param {google.datastore.v1.AggregationQuery.Aggregation.IAvg} message Avg message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Avg.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.property != null && Object.hasOwnProperty.call(message, "property"))
+                                    $root.google.datastore.v1.PropertyReference.encode(message.property, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Avg message, length delimited. Does not implicitly {@link google.datastore.v1.AggregationQuery.Aggregation.Avg.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Avg
+                             * @static
+                             * @param {google.datastore.v1.AggregationQuery.Aggregation.IAvg} message Avg message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Avg.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an Avg message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Avg
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.datastore.v1.AggregationQuery.Aggregation.Avg} Avg
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Avg.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.datastore.v1.AggregationQuery.Aggregation.Avg();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.property = $root.google.datastore.v1.PropertyReference.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an Avg message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Avg
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.datastore.v1.AggregationQuery.Aggregation.Avg} Avg
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Avg.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an Avg message.
+                             * @function verify
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Avg
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Avg.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.property != null && message.hasOwnProperty("property")) {
+                                    var error = $root.google.datastore.v1.PropertyReference.verify(message.property);
+                                    if (error)
+                                        return "property." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an Avg message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Avg
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.datastore.v1.AggregationQuery.Aggregation.Avg} Avg
+                             */
+                            Avg.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.datastore.v1.AggregationQuery.Aggregation.Avg)
+                                    return object;
+                                var message = new $root.google.datastore.v1.AggregationQuery.Aggregation.Avg();
+                                if (object.property != null) {
+                                    if (typeof object.property !== "object")
+                                        throw TypeError(".google.datastore.v1.AggregationQuery.Aggregation.Avg.property: object expected");
+                                    message.property = $root.google.datastore.v1.PropertyReference.fromObject(object.property);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an Avg message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Avg
+                             * @static
+                             * @param {google.datastore.v1.AggregationQuery.Aggregation.Avg} message Avg
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Avg.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.property = null;
+                                if (message.property != null && message.hasOwnProperty("property"))
+                                    object.property = $root.google.datastore.v1.PropertyReference.toObject(message.property, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Avg to JSON.
+                             * @function toJSON
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Avg
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Avg.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Avg
+                             * @function getTypeUrl
+                             * @memberof google.datastore.v1.AggregationQuery.Aggregation.Avg
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Avg.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.datastore.v1.AggregationQuery.Aggregation.Avg";
+                            };
+    
+                            return Avg;
                         })();
     
                         return Aggregation;

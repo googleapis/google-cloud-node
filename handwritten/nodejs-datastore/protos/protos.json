@@ -900,7 +900,9 @@
                       "oneofs": {
                         "operator": {
                           "oneof": [
-                            "count"
+                            "count",
+                            "sum",
+                            "avg"
                           ]
                         }
                       },
@@ -908,6 +910,14 @@
                         "count": {
                           "type": "Count",
                           "id": 1
+                        },
+                        "sum": {
+                          "type": "Sum",
+                          "id": 2
+                        },
+                        "avg": {
+                          "type": "Avg",
+                          "id": 3
                         },
                         "alias": {
                           "type": "string",
@@ -926,6 +936,22 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            }
+                          }
+                        },
+                        "Sum": {
+                          "fields": {
+                            "property": {
+                              "type": "PropertyReference",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "Avg": {
+                          "fields": {
+                            "property": {
+                              "type": "PropertyReference",
+                              "id": 1
                             }
                           }
                         }

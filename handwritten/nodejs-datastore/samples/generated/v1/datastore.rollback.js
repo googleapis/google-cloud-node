@@ -42,7 +42,7 @@ function main(projectId, transaction) {
    *  Required. The transaction identifier, returned by a call to
    *  Datastore.BeginTransaction google.datastore.v1.Datastore.BeginTransaction.
    */
-  // const transaction = 'Buffer.from('string')'
+  // const transaction = Buffer.from('string')
 
   // Imports the Datastore library
   const {DatastoreClient} = require('@google-cloud/datastore').v1;

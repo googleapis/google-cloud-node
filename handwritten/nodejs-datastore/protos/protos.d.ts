@@ -3826,6 +3826,12 @@ export namespace google {
                     /** Aggregation count */
                     count?: (google.datastore.v1.AggregationQuery.Aggregation.ICount|null);
 
+                    /** Aggregation sum */
+                    sum?: (google.datastore.v1.AggregationQuery.Aggregation.ISum|null);
+
+                    /** Aggregation avg */
+                    avg?: (google.datastore.v1.AggregationQuery.Aggregation.IAvg|null);
+
                     /** Aggregation alias */
                     alias?: (string|null);
                 }
@@ -3842,11 +3848,17 @@ export namespace google {
                     /** Aggregation count. */
                     public count?: (google.datastore.v1.AggregationQuery.Aggregation.ICount|null);
 
+                    /** Aggregation sum. */
+                    public sum?: (google.datastore.v1.AggregationQuery.Aggregation.ISum|null);
+
+                    /** Aggregation avg. */
+                    public avg?: (google.datastore.v1.AggregationQuery.Aggregation.IAvg|null);
+
                     /** Aggregation alias. */
                     public alias: string;
 
                     /** Aggregation operator. */
-                    public operator?: "count";
+                    public operator?: ("count"|"sum"|"avg");
 
                     /**
                      * Creates a new Aggregation instance using the specified properties.
@@ -4019,6 +4031,200 @@ export namespace google {
 
                         /**
                          * Gets the default type url for Count
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Sum. */
+                    interface ISum {
+
+                        /** Sum property */
+                        property?: (google.datastore.v1.IPropertyReference|null);
+                    }
+
+                    /** Represents a Sum. */
+                    class Sum implements ISum {
+
+                        /**
+                         * Constructs a new Sum.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.datastore.v1.AggregationQuery.Aggregation.ISum);
+
+                        /** Sum property. */
+                        public property?: (google.datastore.v1.IPropertyReference|null);
+
+                        /**
+                         * Creates a new Sum instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Sum instance
+                         */
+                        public static create(properties?: google.datastore.v1.AggregationQuery.Aggregation.ISum): google.datastore.v1.AggregationQuery.Aggregation.Sum;
+
+                        /**
+                         * Encodes the specified Sum message. Does not implicitly {@link google.datastore.v1.AggregationQuery.Aggregation.Sum.verify|verify} messages.
+                         * @param message Sum message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.datastore.v1.AggregationQuery.Aggregation.ISum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Sum message, length delimited. Does not implicitly {@link google.datastore.v1.AggregationQuery.Aggregation.Sum.verify|verify} messages.
+                         * @param message Sum message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.datastore.v1.AggregationQuery.Aggregation.ISum, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Sum message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Sum
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.datastore.v1.AggregationQuery.Aggregation.Sum;
+
+                        /**
+                         * Decodes a Sum message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Sum
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.datastore.v1.AggregationQuery.Aggregation.Sum;
+
+                        /**
+                         * Verifies a Sum message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Sum message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Sum
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.datastore.v1.AggregationQuery.Aggregation.Sum;
+
+                        /**
+                         * Creates a plain object from a Sum message. Also converts values to other types if specified.
+                         * @param message Sum
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.datastore.v1.AggregationQuery.Aggregation.Sum, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Sum to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Sum
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an Avg. */
+                    interface IAvg {
+
+                        /** Avg property */
+                        property?: (google.datastore.v1.IPropertyReference|null);
+                    }
+
+                    /** Represents an Avg. */
+                    class Avg implements IAvg {
+
+                        /**
+                         * Constructs a new Avg.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.datastore.v1.AggregationQuery.Aggregation.IAvg);
+
+                        /** Avg property. */
+                        public property?: (google.datastore.v1.IPropertyReference|null);
+
+                        /**
+                         * Creates a new Avg instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Avg instance
+                         */
+                        public static create(properties?: google.datastore.v1.AggregationQuery.Aggregation.IAvg): google.datastore.v1.AggregationQuery.Aggregation.Avg;
+
+                        /**
+                         * Encodes the specified Avg message. Does not implicitly {@link google.datastore.v1.AggregationQuery.Aggregation.Avg.verify|verify} messages.
+                         * @param message Avg message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.datastore.v1.AggregationQuery.Aggregation.IAvg, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Avg message, length delimited. Does not implicitly {@link google.datastore.v1.AggregationQuery.Aggregation.Avg.verify|verify} messages.
+                         * @param message Avg message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.datastore.v1.AggregationQuery.Aggregation.IAvg, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Avg message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Avg
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.datastore.v1.AggregationQuery.Aggregation.Avg;
+
+                        /**
+                         * Decodes an Avg message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Avg
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.datastore.v1.AggregationQuery.Aggregation.Avg;
+
+                        /**
+                         * Verifies an Avg message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Avg message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Avg
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.datastore.v1.AggregationQuery.Aggregation.Avg;
+
+                        /**
+                         * Creates a plain object from an Avg message. Also converts values to other types if specified.
+                         * @param message Avg
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.datastore.v1.AggregationQuery.Aggregation.Avg, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Avg to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Avg
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
