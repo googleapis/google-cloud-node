@@ -1531,6 +1531,7 @@ export class TensorboardServiceClient {
       'listTensorboards',
       'deleteTensorboard',
       'readTensorboardUsage',
+      'readTensorboardSize',
       'createTensorboardExperiment',
       'getTensorboardExperiment',
       'updateTensorboardExperiment',
@@ -1845,6 +1846,98 @@ export class TensorboardServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.readTensorboardUsage(request, options, callback);
+  }
+  /**
+   * Returns the storage size for a given TensorBoard instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.tensorboard
+   *   Required. The name of the Tensorboard resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.ReadTensorboardSizeResponse|ReadTensorboardSizeResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/tensorboard_service.read_tensorboard_size.js</caption>
+   * region_tag:aiplatform_v1_generated_TensorboardService_ReadTensorboardSize_async
+   */
+  readTensorboardSize(
+    request?: protos.google.cloud.aiplatform.v1.IReadTensorboardSizeRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IReadTensorboardSizeResponse,
+      protos.google.cloud.aiplatform.v1.IReadTensorboardSizeRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  readTensorboardSize(
+    request: protos.google.cloud.aiplatform.v1.IReadTensorboardSizeRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IReadTensorboardSizeResponse,
+      | protos.google.cloud.aiplatform.v1.IReadTensorboardSizeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  readTensorboardSize(
+    request: protos.google.cloud.aiplatform.v1.IReadTensorboardSizeRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IReadTensorboardSizeResponse,
+      | protos.google.cloud.aiplatform.v1.IReadTensorboardSizeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  readTensorboardSize(
+    request?: protos.google.cloud.aiplatform.v1.IReadTensorboardSizeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IReadTensorboardSizeResponse,
+          | protos.google.cloud.aiplatform.v1.IReadTensorboardSizeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.IReadTensorboardSizeResponse,
+      | protos.google.cloud.aiplatform.v1.IReadTensorboardSizeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IReadTensorboardSizeResponse,
+      protos.google.cloud.aiplatform.v1.IReadTensorboardSizeRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        tensorboard: request.tensorboard ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.readTensorboardSize(request, options, callback);
   }
   /**
    * Creates a TensorboardExperiment.

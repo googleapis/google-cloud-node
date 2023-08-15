@@ -7986,7 +7986,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 62,
+                    "end": 63,
                     "type": "FULL"
                 }
             ],
@@ -8504,6 +8504,46 @@
                 "method": {
                     "shortName": "ReadTensorboardUsage",
                     "fullName": "google.cloud.aiplatform.v1.TensorboardService.ReadTensorboardUsage",
+                    "service": {
+                        "shortName": "TensorboardService",
+                        "fullName": "google.cloud.aiplatform.v1.TensorboardService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1_generated_TensorboardService_ReadTensorboardSize_async",
+            "title": "DatasetService readTensorboardSize Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns the storage size for a given TensorBoard instance.",
+            "canonical": true,
+            "file": "tensorboard_service.read_tensorboard_size.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ReadTensorboardSize",
+                "fullName": "google.cloud.aiplatform.v1.TensorboardService.ReadTensorboardSize",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "tensorboard",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1.ReadTensorboardSizeResponse",
+                "client": {
+                    "shortName": "TensorboardServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.TensorboardServiceClient"
+                },
+                "method": {
+                    "shortName": "ReadTensorboardSize",
+                    "fullName": "google.cloud.aiplatform.v1.TensorboardService.ReadTensorboardSize",
                     "service": {
                         "shortName": "TensorboardService",
                         "fullName": "google.cloud.aiplatform.v1.TensorboardService"
