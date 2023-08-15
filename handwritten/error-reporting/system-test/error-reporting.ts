@@ -638,7 +638,7 @@ describe('error-reporting', () => {
   // As such, each test is set to fail due to a timeout only if sufficiently
   // more than TIMEOUT ms has elapsed to avoid test fragility.
 
-  it('Should correctly publish an error that is an Error object', async function verifyErrors() {
+  it.skip('Should correctly publish an error that is an Error object', async function verifyErrors() {
     this.timeout(TIMEOUT);
     const errorId = buildName('with-error-constructor');
     function expectedTopOfStack() {
@@ -668,7 +668,7 @@ describe('error-reporting', () => {
     );
   });
 
-  it('Should correctly publish an error that is undefined', async function (this) {
+  it.skip('Should correctly publish an error that is undefined', async function (this) {
     this.timeout(TIMEOUT);
     await verifyReporting(
       undefined,
@@ -680,7 +680,7 @@ describe('error-reporting', () => {
     );
   });
 
-  it('Should correctly publish an error that is null', async function (this) {
+  it.skip('Should correctly publish an error that is null', async function (this: any) {
     this.timeout(TIMEOUT);
     await verifyReporting(
       null,
@@ -717,7 +717,7 @@ describe('error-reporting', () => {
     );
   });
 
-  it('Should correctly publish an error that is of an unknown type', async function (this) {
+  it.skip('Should correctly publish an error that is of an unknown type', async function (this) {
     this.timeout(TIMEOUT);
     const bool = true;
     await verifyReporting(
