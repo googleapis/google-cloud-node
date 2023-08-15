@@ -3764,6 +3764,7 @@
                          * @property {google.cloud.networkmanagement.v1.IFirewallInfo|null} [firewall] Step firewall
                          * @property {google.cloud.networkmanagement.v1.IRouteInfo|null} [route] Step route
                          * @property {google.cloud.networkmanagement.v1.IEndpointInfo|null} [endpoint] Step endpoint
+                         * @property {google.cloud.networkmanagement.v1.IGoogleServiceInfo|null} [googleService] Step googleService
                          * @property {google.cloud.networkmanagement.v1.IForwardingRuleInfo|null} [forwardingRule] Step forwardingRule
                          * @property {google.cloud.networkmanagement.v1.IVpnGatewayInfo|null} [vpnGateway] Step vpnGateway
                          * @property {google.cloud.networkmanagement.v1.IVpnTunnelInfo|null} [vpnTunnel] Step vpnTunnel
@@ -3859,6 +3860,14 @@
                          * @instance
                          */
                         Step.prototype.endpoint = null;
+    
+                        /**
+                         * Step googleService.
+                         * @member {google.cloud.networkmanagement.v1.IGoogleServiceInfo|null|undefined} googleService
+                         * @memberof google.cloud.networkmanagement.v1.Step
+                         * @instance
+                         */
+                        Step.prototype.googleService = null;
     
                         /**
                          * Step forwardingRule.
@@ -3985,12 +3994,12 @@
     
                         /**
                          * Step stepInfo.
-                         * @member {"instance"|"firewall"|"route"|"endpoint"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|undefined} stepInfo
+                         * @member {"instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|undefined} stepInfo
                          * @memberof google.cloud.networkmanagement.v1.Step
                          * @instance
                          */
                         Object.defineProperty(Step.prototype, "stepInfo", {
-                            get: $util.oneOfGetter($oneOfFields = ["instance", "firewall", "route", "endpoint", "forwardingRule", "vpnGateway", "vpnTunnel", "vpcConnector", "deliver", "forward", "abort", "drop", "loadBalancer", "network", "gkeMaster", "cloudSqlInstance", "cloudFunction", "appEngineVersion", "cloudRunRevision"]),
+                            get: $util.oneOfGetter($oneOfFields = ["instance", "firewall", "route", "endpoint", "googleService", "forwardingRule", "vpnGateway", "vpnTunnel", "vpcConnector", "deliver", "forward", "abort", "drop", "loadBalancer", "network", "gkeMaster", "cloudSqlInstance", "cloudFunction", "appEngineVersion", "cloudRunRevision"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -4064,6 +4073,8 @@
                                 $root.google.cloud.networkmanagement.v1.AppEngineVersionInfo.encode(message.appEngineVersion, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                             if (message.cloudRunRevision != null && Object.hasOwnProperty.call(message, "cloudRunRevision"))
                                 $root.google.cloud.networkmanagement.v1.CloudRunRevisionInfo.encode(message.cloudRunRevision, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
+                            if (message.googleService != null && Object.hasOwnProperty.call(message, "googleService"))
+                                $root.google.cloud.networkmanagement.v1.GoogleServiceInfo.encode(message.googleService, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
                             return writer;
                         };
     
@@ -4128,6 +4139,10 @@
                                     }
                                 case 8: {
                                         message.endpoint = $root.google.cloud.networkmanagement.v1.EndpointInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 24: {
+                                        message.googleService = $root.google.cloud.networkmanagement.v1.GoogleServiceInfo.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 9: {
@@ -4236,6 +4251,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 27:
                                 case 3:
                                 case 21:
                                 case 22:
@@ -4304,6 +4320,16 @@
                                     var error = $root.google.cloud.networkmanagement.v1.EndpointInfo.verify(message.endpoint);
                                     if (error)
                                         return "endpoint." + error;
+                                }
+                            }
+                            if (message.googleService != null && message.hasOwnProperty("googleService")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1.GoogleServiceInfo.verify(message.googleService);
+                                    if (error)
+                                        return "googleService." + error;
                                 }
                             }
                             if (message.forwardingRule != null && message.hasOwnProperty("forwardingRule")) {
@@ -4492,6 +4518,10 @@
                             case 2:
                                 message.state = 2;
                                 break;
+                            case "START_FROM_GOOGLE_SERVICE":
+                            case 27:
+                                message.state = 27;
+                                break;
                             case "START_FROM_PRIVATE_NETWORK":
                             case 3:
                                 message.state = 3;
@@ -4612,6 +4642,11 @@
                                 if (typeof object.endpoint !== "object")
                                     throw TypeError(".google.cloud.networkmanagement.v1.Step.endpoint: object expected");
                                 message.endpoint = $root.google.cloud.networkmanagement.v1.EndpointInfo.fromObject(object.endpoint);
+                            }
+                            if (object.googleService != null) {
+                                if (typeof object.googleService !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1.Step.googleService: object expected");
+                                message.googleService = $root.google.cloud.networkmanagement.v1.GoogleServiceInfo.fromObject(object.googleService);
                             }
                             if (object.forwardingRule != null) {
                                 if (typeof object.forwardingRule !== "object")
@@ -4813,6 +4848,11 @@
                                 if (options.oneofs)
                                     object.stepInfo = "cloudRunRevision";
                             }
+                            if (message.googleService != null && message.hasOwnProperty("googleService")) {
+                                object.googleService = $root.google.cloud.networkmanagement.v1.GoogleServiceInfo.toObject(message.googleService, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "googleService";
+                            }
                             return object;
                         };
     
@@ -4849,6 +4889,7 @@
                          * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
                          * @property {number} START_FROM_INSTANCE=1 START_FROM_INSTANCE value
                          * @property {number} START_FROM_INTERNET=2 START_FROM_INTERNET value
+                         * @property {number} START_FROM_GOOGLE_SERVICE=27 START_FROM_GOOGLE_SERVICE value
                          * @property {number} START_FROM_PRIVATE_NETWORK=3 START_FROM_PRIVATE_NETWORK value
                          * @property {number} START_FROM_GKE_MASTER=21 START_FROM_GKE_MASTER value
                          * @property {number} START_FROM_CLOUD_SQL_INSTANCE=22 START_FROM_CLOUD_SQL_INSTANCE value
@@ -4879,6 +4920,7 @@
                             values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "START_FROM_INSTANCE"] = 1;
                             values[valuesById[2] = "START_FROM_INTERNET"] = 2;
+                            values[valuesById[27] = "START_FROM_GOOGLE_SERVICE"] = 27;
                             values[valuesById[3] = "START_FROM_PRIVATE_NETWORK"] = 3;
                             values[valuesById[21] = "START_FROM_GKE_MASTER"] = 21;
                             values[valuesById[22] = "START_FROM_CLOUD_SQL_INSTANCE"] = 22;
@@ -5859,6 +5901,8 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
+                                case 6:
                                     break;
                                 }
                             return null;
@@ -5930,6 +5974,14 @@
                             case "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE":
                             case 4:
                                 message.firewallRuleType = 4;
+                                break;
+                            case "NETWORK_FIREWALL_POLICY_RULE":
+                            case 5:
+                                message.firewallRuleType = 5;
+                                break;
+                            case "NETWORK_REGIONAL_FIREWALL_POLICY_RULE":
+                            case 6:
+                                message.firewallRuleType = 6;
                                 break;
                             }
                             return message;
@@ -6026,6 +6078,8 @@
                          * @property {number} VPC_FIREWALL_RULE=2 VPC_FIREWALL_RULE value
                          * @property {number} IMPLIED_VPC_FIREWALL_RULE=3 IMPLIED_VPC_FIREWALL_RULE value
                          * @property {number} SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE=4 SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE value
+                         * @property {number} NETWORK_FIREWALL_POLICY_RULE=5 NETWORK_FIREWALL_POLICY_RULE value
+                         * @property {number} NETWORK_REGIONAL_FIREWALL_POLICY_RULE=6 NETWORK_REGIONAL_FIREWALL_POLICY_RULE value
                          */
                         FirewallInfo.FirewallRuleType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -6034,6 +6088,8 @@
                             values[valuesById[2] = "VPC_FIREWALL_RULE"] = 2;
                             values[valuesById[3] = "IMPLIED_VPC_FIREWALL_RULE"] = 3;
                             values[valuesById[4] = "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE"] = 4;
+                            values[valuesById[5] = "NETWORK_FIREWALL_POLICY_RULE"] = 5;
+                            values[valuesById[6] = "NETWORK_REGIONAL_FIREWALL_POLICY_RULE"] = 6;
                             return values;
                         })();
     
@@ -6912,6 +6968,280 @@
                         })();
     
                         return RouteInfo;
+                    })();
+    
+                    v1.GoogleServiceInfo = (function() {
+    
+                        /**
+                         * Properties of a GoogleServiceInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @interface IGoogleServiceInfo
+                         * @property {string|null} [sourceIp] GoogleServiceInfo sourceIp
+                         * @property {google.cloud.networkmanagement.v1.GoogleServiceInfo.GoogleServiceType|null} [googleServiceType] GoogleServiceInfo googleServiceType
+                         */
+    
+                        /**
+                         * Constructs a new GoogleServiceInfo.
+                         * @memberof google.cloud.networkmanagement.v1
+                         * @classdesc Represents a GoogleServiceInfo.
+                         * @implements IGoogleServiceInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1.IGoogleServiceInfo=} [properties] Properties to set
+                         */
+                        function GoogleServiceInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GoogleServiceInfo sourceIp.
+                         * @member {string} sourceIp
+                         * @memberof google.cloud.networkmanagement.v1.GoogleServiceInfo
+                         * @instance
+                         */
+                        GoogleServiceInfo.prototype.sourceIp = "";
+    
+                        /**
+                         * GoogleServiceInfo googleServiceType.
+                         * @member {google.cloud.networkmanagement.v1.GoogleServiceInfo.GoogleServiceType} googleServiceType
+                         * @memberof google.cloud.networkmanagement.v1.GoogleServiceInfo
+                         * @instance
+                         */
+                        GoogleServiceInfo.prototype.googleServiceType = 0;
+    
+                        /**
+                         * Creates a new GoogleServiceInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1.GoogleServiceInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IGoogleServiceInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1.GoogleServiceInfo} GoogleServiceInfo instance
+                         */
+                        GoogleServiceInfo.create = function create(properties) {
+                            return new GoogleServiceInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GoogleServiceInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1.GoogleServiceInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1.GoogleServiceInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IGoogleServiceInfo} message GoogleServiceInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GoogleServiceInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.sourceIp != null && Object.hasOwnProperty.call(message, "sourceIp"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.sourceIp);
+                            if (message.googleServiceType != null && Object.hasOwnProperty.call(message, "googleServiceType"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.googleServiceType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GoogleServiceInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1.GoogleServiceInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.GoogleServiceInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.IGoogleServiceInfo} message GoogleServiceInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GoogleServiceInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GoogleServiceInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1.GoogleServiceInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1.GoogleServiceInfo} GoogleServiceInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GoogleServiceInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1.GoogleServiceInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.sourceIp = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.googleServiceType = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GoogleServiceInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1.GoogleServiceInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1.GoogleServiceInfo} GoogleServiceInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GoogleServiceInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GoogleServiceInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1.GoogleServiceInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GoogleServiceInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.sourceIp != null && message.hasOwnProperty("sourceIp"))
+                                if (!$util.isString(message.sourceIp))
+                                    return "sourceIp: string expected";
+                            if (message.googleServiceType != null && message.hasOwnProperty("googleServiceType"))
+                                switch (message.googleServiceType) {
+                                default:
+                                    return "googleServiceType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GoogleServiceInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1.GoogleServiceInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1.GoogleServiceInfo} GoogleServiceInfo
+                         */
+                        GoogleServiceInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1.GoogleServiceInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1.GoogleServiceInfo();
+                            if (object.sourceIp != null)
+                                message.sourceIp = String(object.sourceIp);
+                            switch (object.googleServiceType) {
+                            default:
+                                if (typeof object.googleServiceType === "number") {
+                                    message.googleServiceType = object.googleServiceType;
+                                    break;
+                                }
+                                break;
+                            case "GOOGLE_SERVICE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.googleServiceType = 0;
+                                break;
+                            case "IAP":
+                            case 1:
+                                message.googleServiceType = 1;
+                                break;
+                            case "GFE_PROXY_OR_HEALTH_CHECK_PROBER":
+                            case 2:
+                                message.googleServiceType = 2;
+                                break;
+                            case "CLOUD_DNS":
+                            case 3:
+                                message.googleServiceType = 3;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GoogleServiceInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1.GoogleServiceInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1.GoogleServiceInfo} message GoogleServiceInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GoogleServiceInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.sourceIp = "";
+                                object.googleServiceType = options.enums === String ? "GOOGLE_SERVICE_TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.sourceIp != null && message.hasOwnProperty("sourceIp"))
+                                object.sourceIp = message.sourceIp;
+                            if (message.googleServiceType != null && message.hasOwnProperty("googleServiceType"))
+                                object.googleServiceType = options.enums === String ? $root.google.cloud.networkmanagement.v1.GoogleServiceInfo.GoogleServiceType[message.googleServiceType] === undefined ? message.googleServiceType : $root.google.cloud.networkmanagement.v1.GoogleServiceInfo.GoogleServiceType[message.googleServiceType] : message.googleServiceType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GoogleServiceInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1.GoogleServiceInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GoogleServiceInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GoogleServiceInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1.GoogleServiceInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GoogleServiceInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1.GoogleServiceInfo";
+                        };
+    
+                        /**
+                         * GoogleServiceType enum.
+                         * @name google.cloud.networkmanagement.v1.GoogleServiceInfo.GoogleServiceType
+                         * @enum {number}
+                         * @property {number} GOOGLE_SERVICE_TYPE_UNSPECIFIED=0 GOOGLE_SERVICE_TYPE_UNSPECIFIED value
+                         * @property {number} IAP=1 IAP value
+                         * @property {number} GFE_PROXY_OR_HEALTH_CHECK_PROBER=2 GFE_PROXY_OR_HEALTH_CHECK_PROBER value
+                         * @property {number} CLOUD_DNS=3 CLOUD_DNS value
+                         */
+                        GoogleServiceInfo.GoogleServiceType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "GOOGLE_SERVICE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "IAP"] = 1;
+                            values[valuesById[2] = "GFE_PROXY_OR_HEALTH_CHECK_PROBER"] = 2;
+                            values[valuesById[3] = "CLOUD_DNS"] = 3;
+                            return values;
+                        })();
+    
+                        return GoogleServiceInfo;
                     })();
     
                     v1.ForwardingRuleInfo = (function() {
@@ -18449,6 +18779,7 @@
                          * @property {google.cloud.networkmanagement.v1beta1.IFirewallInfo|null} [firewall] Step firewall
                          * @property {google.cloud.networkmanagement.v1beta1.IRouteInfo|null} [route] Step route
                          * @property {google.cloud.networkmanagement.v1beta1.IEndpointInfo|null} [endpoint] Step endpoint
+                         * @property {google.cloud.networkmanagement.v1beta1.IGoogleServiceInfo|null} [googleService] Step googleService
                          * @property {google.cloud.networkmanagement.v1beta1.IForwardingRuleInfo|null} [forwardingRule] Step forwardingRule
                          * @property {google.cloud.networkmanagement.v1beta1.IVpnGatewayInfo|null} [vpnGateway] Step vpnGateway
                          * @property {google.cloud.networkmanagement.v1beta1.IVpnTunnelInfo|null} [vpnTunnel] Step vpnTunnel
@@ -18544,6 +18875,14 @@
                          * @instance
                          */
                         Step.prototype.endpoint = null;
+    
+                        /**
+                         * Step googleService.
+                         * @member {google.cloud.networkmanagement.v1beta1.IGoogleServiceInfo|null|undefined} googleService
+                         * @memberof google.cloud.networkmanagement.v1beta1.Step
+                         * @instance
+                         */
+                        Step.prototype.googleService = null;
     
                         /**
                          * Step forwardingRule.
@@ -18670,12 +19009,12 @@
     
                         /**
                          * Step stepInfo.
-                         * @member {"instance"|"firewall"|"route"|"endpoint"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|undefined} stepInfo
+                         * @member {"instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"vpnGateway"|"vpnTunnel"|"vpcConnector"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"cloudSqlInstance"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|undefined} stepInfo
                          * @memberof google.cloud.networkmanagement.v1beta1.Step
                          * @instance
                          */
                         Object.defineProperty(Step.prototype, "stepInfo", {
-                            get: $util.oneOfGetter($oneOfFields = ["instance", "firewall", "route", "endpoint", "forwardingRule", "vpnGateway", "vpnTunnel", "vpcConnector", "deliver", "forward", "abort", "drop", "loadBalancer", "network", "gkeMaster", "cloudSqlInstance", "cloudFunction", "appEngineVersion", "cloudRunRevision"]),
+                            get: $util.oneOfGetter($oneOfFields = ["instance", "firewall", "route", "endpoint", "googleService", "forwardingRule", "vpnGateway", "vpnTunnel", "vpcConnector", "deliver", "forward", "abort", "drop", "loadBalancer", "network", "gkeMaster", "cloudSqlInstance", "cloudFunction", "appEngineVersion", "cloudRunRevision"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -18749,6 +19088,8 @@
                                 $root.google.cloud.networkmanagement.v1beta1.AppEngineVersionInfo.encode(message.appEngineVersion, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                             if (message.cloudRunRevision != null && Object.hasOwnProperty.call(message, "cloudRunRevision"))
                                 $root.google.cloud.networkmanagement.v1beta1.CloudRunRevisionInfo.encode(message.cloudRunRevision, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
+                            if (message.googleService != null && Object.hasOwnProperty.call(message, "googleService"))
+                                $root.google.cloud.networkmanagement.v1beta1.GoogleServiceInfo.encode(message.googleService, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
                             return writer;
                         };
     
@@ -18813,6 +19154,10 @@
                                     }
                                 case 8: {
                                         message.endpoint = $root.google.cloud.networkmanagement.v1beta1.EndpointInfo.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 24: {
+                                        message.googleService = $root.google.cloud.networkmanagement.v1beta1.GoogleServiceInfo.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 9: {
@@ -18921,6 +19266,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 27:
                                 case 3:
                                 case 21:
                                 case 22:
@@ -18989,6 +19335,16 @@
                                     var error = $root.google.cloud.networkmanagement.v1beta1.EndpointInfo.verify(message.endpoint);
                                     if (error)
                                         return "endpoint." + error;
+                                }
+                            }
+                            if (message.googleService != null && message.hasOwnProperty("googleService")) {
+                                if (properties.stepInfo === 1)
+                                    return "stepInfo: multiple values";
+                                properties.stepInfo = 1;
+                                {
+                                    var error = $root.google.cloud.networkmanagement.v1beta1.GoogleServiceInfo.verify(message.googleService);
+                                    if (error)
+                                        return "googleService." + error;
                                 }
                             }
                             if (message.forwardingRule != null && message.hasOwnProperty("forwardingRule")) {
@@ -19177,6 +19533,10 @@
                             case 2:
                                 message.state = 2;
                                 break;
+                            case "START_FROM_GOOGLE_SERVICE":
+                            case 27:
+                                message.state = 27;
+                                break;
                             case "START_FROM_PRIVATE_NETWORK":
                             case 3:
                                 message.state = 3;
@@ -19297,6 +19657,11 @@
                                 if (typeof object.endpoint !== "object")
                                     throw TypeError(".google.cloud.networkmanagement.v1beta1.Step.endpoint: object expected");
                                 message.endpoint = $root.google.cloud.networkmanagement.v1beta1.EndpointInfo.fromObject(object.endpoint);
+                            }
+                            if (object.googleService != null) {
+                                if (typeof object.googleService !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.Step.googleService: object expected");
+                                message.googleService = $root.google.cloud.networkmanagement.v1beta1.GoogleServiceInfo.fromObject(object.googleService);
                             }
                             if (object.forwardingRule != null) {
                                 if (typeof object.forwardingRule !== "object")
@@ -19498,6 +19863,11 @@
                                 if (options.oneofs)
                                     object.stepInfo = "cloudRunRevision";
                             }
+                            if (message.googleService != null && message.hasOwnProperty("googleService")) {
+                                object.googleService = $root.google.cloud.networkmanagement.v1beta1.GoogleServiceInfo.toObject(message.googleService, options);
+                                if (options.oneofs)
+                                    object.stepInfo = "googleService";
+                            }
                             return object;
                         };
     
@@ -19534,6 +19904,7 @@
                          * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
                          * @property {number} START_FROM_INSTANCE=1 START_FROM_INSTANCE value
                          * @property {number} START_FROM_INTERNET=2 START_FROM_INTERNET value
+                         * @property {number} START_FROM_GOOGLE_SERVICE=27 START_FROM_GOOGLE_SERVICE value
                          * @property {number} START_FROM_PRIVATE_NETWORK=3 START_FROM_PRIVATE_NETWORK value
                          * @property {number} START_FROM_GKE_MASTER=21 START_FROM_GKE_MASTER value
                          * @property {number} START_FROM_CLOUD_SQL_INSTANCE=22 START_FROM_CLOUD_SQL_INSTANCE value
@@ -19564,6 +19935,7 @@
                             values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "START_FROM_INSTANCE"] = 1;
                             values[valuesById[2] = "START_FROM_INTERNET"] = 2;
+                            values[valuesById[27] = "START_FROM_GOOGLE_SERVICE"] = 27;
                             values[valuesById[3] = "START_FROM_PRIVATE_NETWORK"] = 3;
                             values[valuesById[21] = "START_FROM_GKE_MASTER"] = 21;
                             values[valuesById[22] = "START_FROM_CLOUD_SQL_INSTANCE"] = 22;
@@ -20544,6 +20916,8 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
+                                case 6:
                                     break;
                                 }
                             return null;
@@ -20615,6 +20989,14 @@
                             case "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE":
                             case 4:
                                 message.firewallRuleType = 4;
+                                break;
+                            case "NETWORK_FIREWALL_POLICY_RULE":
+                            case 5:
+                                message.firewallRuleType = 5;
+                                break;
+                            case "NETWORK_REGIONAL_FIREWALL_POLICY_RULE":
+                            case 6:
+                                message.firewallRuleType = 6;
                                 break;
                             }
                             return message;
@@ -20711,6 +21093,8 @@
                          * @property {number} VPC_FIREWALL_RULE=2 VPC_FIREWALL_RULE value
                          * @property {number} IMPLIED_VPC_FIREWALL_RULE=3 IMPLIED_VPC_FIREWALL_RULE value
                          * @property {number} SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE=4 SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE value
+                         * @property {number} NETWORK_FIREWALL_POLICY_RULE=5 NETWORK_FIREWALL_POLICY_RULE value
+                         * @property {number} NETWORK_REGIONAL_FIREWALL_POLICY_RULE=6 NETWORK_REGIONAL_FIREWALL_POLICY_RULE value
                          */
                         FirewallInfo.FirewallRuleType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -20719,6 +21103,8 @@
                             values[valuesById[2] = "VPC_FIREWALL_RULE"] = 2;
                             values[valuesById[3] = "IMPLIED_VPC_FIREWALL_RULE"] = 3;
                             values[valuesById[4] = "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE"] = 4;
+                            values[valuesById[5] = "NETWORK_FIREWALL_POLICY_RULE"] = 5;
+                            values[valuesById[6] = "NETWORK_REGIONAL_FIREWALL_POLICY_RULE"] = 6;
                             return values;
                         })();
     
@@ -21597,6 +21983,280 @@
                         })();
     
                         return RouteInfo;
+                    })();
+    
+                    v1beta1.GoogleServiceInfo = (function() {
+    
+                        /**
+                         * Properties of a GoogleServiceInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @interface IGoogleServiceInfo
+                         * @property {string|null} [sourceIp] GoogleServiceInfo sourceIp
+                         * @property {google.cloud.networkmanagement.v1beta1.GoogleServiceInfo.GoogleServiceType|null} [googleServiceType] GoogleServiceInfo googleServiceType
+                         */
+    
+                        /**
+                         * Constructs a new GoogleServiceInfo.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @classdesc Represents a GoogleServiceInfo.
+                         * @implements IGoogleServiceInfo
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1beta1.IGoogleServiceInfo=} [properties] Properties to set
+                         */
+                        function GoogleServiceInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GoogleServiceInfo sourceIp.
+                         * @member {string} sourceIp
+                         * @memberof google.cloud.networkmanagement.v1beta1.GoogleServiceInfo
+                         * @instance
+                         */
+                        GoogleServiceInfo.prototype.sourceIp = "";
+    
+                        /**
+                         * GoogleServiceInfo googleServiceType.
+                         * @member {google.cloud.networkmanagement.v1beta1.GoogleServiceInfo.GoogleServiceType} googleServiceType
+                         * @memberof google.cloud.networkmanagement.v1beta1.GoogleServiceInfo
+                         * @instance
+                         */
+                        GoogleServiceInfo.prototype.googleServiceType = 0;
+    
+                        /**
+                         * Creates a new GoogleServiceInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1beta1.GoogleServiceInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IGoogleServiceInfo=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1beta1.GoogleServiceInfo} GoogleServiceInfo instance
+                         */
+                        GoogleServiceInfo.create = function create(properties) {
+                            return new GoogleServiceInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GoogleServiceInfo message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.GoogleServiceInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1beta1.GoogleServiceInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IGoogleServiceInfo} message GoogleServiceInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GoogleServiceInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.sourceIp != null && Object.hasOwnProperty.call(message, "sourceIp"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.sourceIp);
+                            if (message.googleServiceType != null && Object.hasOwnProperty.call(message, "googleServiceType"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.googleServiceType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GoogleServiceInfo message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.GoogleServiceInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.GoogleServiceInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IGoogleServiceInfo} message GoogleServiceInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GoogleServiceInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GoogleServiceInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1beta1.GoogleServiceInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1beta1.GoogleServiceInfo} GoogleServiceInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GoogleServiceInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1beta1.GoogleServiceInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.sourceIp = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.googleServiceType = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GoogleServiceInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.GoogleServiceInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1beta1.GoogleServiceInfo} GoogleServiceInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GoogleServiceInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GoogleServiceInfo message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1beta1.GoogleServiceInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GoogleServiceInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.sourceIp != null && message.hasOwnProperty("sourceIp"))
+                                if (!$util.isString(message.sourceIp))
+                                    return "sourceIp: string expected";
+                            if (message.googleServiceType != null && message.hasOwnProperty("googleServiceType"))
+                                switch (message.googleServiceType) {
+                                default:
+                                    return "googleServiceType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GoogleServiceInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.GoogleServiceInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1beta1.GoogleServiceInfo} GoogleServiceInfo
+                         */
+                        GoogleServiceInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1beta1.GoogleServiceInfo)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1beta1.GoogleServiceInfo();
+                            if (object.sourceIp != null)
+                                message.sourceIp = String(object.sourceIp);
+                            switch (object.googleServiceType) {
+                            default:
+                                if (typeof object.googleServiceType === "number") {
+                                    message.googleServiceType = object.googleServiceType;
+                                    break;
+                                }
+                                break;
+                            case "GOOGLE_SERVICE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.googleServiceType = 0;
+                                break;
+                            case "IAP":
+                            case 1:
+                                message.googleServiceType = 1;
+                                break;
+                            case "GFE_PROXY_OR_HEALTH_CHECK_PROBER":
+                            case 2:
+                                message.googleServiceType = 2;
+                                break;
+                            case "CLOUD_DNS":
+                            case 3:
+                                message.googleServiceType = 3;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GoogleServiceInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.GoogleServiceInfo
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.GoogleServiceInfo} message GoogleServiceInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GoogleServiceInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.sourceIp = "";
+                                object.googleServiceType = options.enums === String ? "GOOGLE_SERVICE_TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.sourceIp != null && message.hasOwnProperty("sourceIp"))
+                                object.sourceIp = message.sourceIp;
+                            if (message.googleServiceType != null && message.hasOwnProperty("googleServiceType"))
+                                object.googleServiceType = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.GoogleServiceInfo.GoogleServiceType[message.googleServiceType] === undefined ? message.googleServiceType : $root.google.cloud.networkmanagement.v1beta1.GoogleServiceInfo.GoogleServiceType[message.googleServiceType] : message.googleServiceType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GoogleServiceInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1beta1.GoogleServiceInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GoogleServiceInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GoogleServiceInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1beta1.GoogleServiceInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GoogleServiceInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.GoogleServiceInfo";
+                        };
+    
+                        /**
+                         * GoogleServiceType enum.
+                         * @name google.cloud.networkmanagement.v1beta1.GoogleServiceInfo.GoogleServiceType
+                         * @enum {number}
+                         * @property {number} GOOGLE_SERVICE_TYPE_UNSPECIFIED=0 GOOGLE_SERVICE_TYPE_UNSPECIFIED value
+                         * @property {number} IAP=1 IAP value
+                         * @property {number} GFE_PROXY_OR_HEALTH_CHECK_PROBER=2 GFE_PROXY_OR_HEALTH_CHECK_PROBER value
+                         * @property {number} CLOUD_DNS=3 CLOUD_DNS value
+                         */
+                        GoogleServiceInfo.GoogleServiceType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "GOOGLE_SERVICE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "IAP"] = 1;
+                            values[valuesById[2] = "GFE_PROXY_OR_HEALTH_CHECK_PROBER"] = 2;
+                            values[valuesById[3] = "CLOUD_DNS"] = 3;
+                            return values;
+                        })();
+    
+                        return GoogleServiceInfo;
                     })();
     
                     v1beta1.ForwardingRuleInfo = (function() {

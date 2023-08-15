@@ -374,6 +374,7 @@
                             "firewall",
                             "route",
                             "endpoint",
+                            "googleService",
                             "forwardingRule",
                             "vpnGateway",
                             "vpnTunnel",
@@ -424,6 +425,10 @@
                         "endpoint": {
                           "type": "EndpointInfo",
                           "id": 8
+                        },
+                        "googleService": {
+                          "type": "GoogleServiceInfo",
+                          "id": 24
                         },
                         "forwardingRule": {
                           "type": "ForwardingRuleInfo",
@@ -492,6 +497,7 @@
                             "STATE_UNSPECIFIED": 0,
                             "START_FROM_INSTANCE": 1,
                             "START_FROM_INTERNET": 2,
+                            "START_FROM_GOOGLE_SERVICE": 27,
                             "START_FROM_PRIVATE_NETWORK": 3,
                             "START_FROM_GKE_MASTER": 21,
                             "START_FROM_CLOUD_SQL_INSTANCE": 22,
@@ -628,7 +634,9 @@
                             "HIERARCHICAL_FIREWALL_POLICY_RULE": 1,
                             "VPC_FIREWALL_RULE": 2,
                             "IMPLIED_VPC_FIREWALL_RULE": 3,
-                            "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE": 4
+                            "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE": 4,
+                            "NETWORK_FIREWALL_POLICY_RULE": 5,
+                            "NETWORK_REGIONAL_FIREWALL_POLICY_RULE": 6
                           }
                         }
                       }
@@ -757,6 +765,28 @@
                             "ROUTE_SCOPE_UNSPECIFIED": 0,
                             "NETWORK": 1,
                             "NCC_HUB": 2
+                          }
+                        }
+                      }
+                    },
+                    "GoogleServiceInfo": {
+                      "fields": {
+                        "sourceIp": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "googleServiceType": {
+                          "type": "GoogleServiceType",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "GoogleServiceType": {
+                          "values": {
+                            "GOOGLE_SERVICE_TYPE_UNSPECIFIED": 0,
+                            "IAP": 1,
+                            "GFE_PROXY_OR_HEALTH_CHECK_PROBER": 2,
+                            "CLOUD_DNS": 3
                           }
                         }
                       }
@@ -1957,6 +1987,7 @@
                             "firewall",
                             "route",
                             "endpoint",
+                            "googleService",
                             "forwardingRule",
                             "vpnGateway",
                             "vpnTunnel",
@@ -2007,6 +2038,10 @@
                         "endpoint": {
                           "type": "EndpointInfo",
                           "id": 8
+                        },
+                        "googleService": {
+                          "type": "GoogleServiceInfo",
+                          "id": 24
                         },
                         "forwardingRule": {
                           "type": "ForwardingRuleInfo",
@@ -2075,6 +2110,7 @@
                             "STATE_UNSPECIFIED": 0,
                             "START_FROM_INSTANCE": 1,
                             "START_FROM_INTERNET": 2,
+                            "START_FROM_GOOGLE_SERVICE": 27,
                             "START_FROM_PRIVATE_NETWORK": 3,
                             "START_FROM_GKE_MASTER": 21,
                             "START_FROM_CLOUD_SQL_INSTANCE": 22,
@@ -2211,7 +2247,9 @@
                             "HIERARCHICAL_FIREWALL_POLICY_RULE": 1,
                             "VPC_FIREWALL_RULE": 2,
                             "IMPLIED_VPC_FIREWALL_RULE": 3,
-                            "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE": 4
+                            "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE": 4,
+                            "NETWORK_FIREWALL_POLICY_RULE": 5,
+                            "NETWORK_REGIONAL_FIREWALL_POLICY_RULE": 6
                           }
                         }
                       }
@@ -2340,6 +2378,28 @@
                             "ROUTE_SCOPE_UNSPECIFIED": 0,
                             "NETWORK": 1,
                             "NCC_HUB": 2
+                          }
+                        }
+                      }
+                    },
+                    "GoogleServiceInfo": {
+                      "fields": {
+                        "sourceIp": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "googleServiceType": {
+                          "type": "GoogleServiceType",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "GoogleServiceType": {
+                          "values": {
+                            "GOOGLE_SERVICE_TYPE_UNSPECIFIED": 0,
+                            "IAP": 1,
+                            "GFE_PROXY_OR_HEALTH_CHECK_PROBER": 2,
+                            "CLOUD_DNS": 3
                           }
                         }
                       }
