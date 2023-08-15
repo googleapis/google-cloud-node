@@ -10124,6 +10124,1519 @@ export namespace google {
                     }
                 }
 
+                /** Represents a PipelineService */
+                class PipelineService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new PipelineService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new PipelineService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): PipelineService;
+
+                    /**
+                     * Calls RunPipeline.
+                     * @param request RunPipelineRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public runPipeline(request: google.cloud.contentwarehouse.v1.IRunPipelineRequest, callback: google.cloud.contentwarehouse.v1.PipelineService.RunPipelineCallback): void;
+
+                    /**
+                     * Calls RunPipeline.
+                     * @param request RunPipelineRequest message or plain object
+                     * @returns Promise
+                     */
+                    public runPipeline(request: google.cloud.contentwarehouse.v1.IRunPipelineRequest): Promise<google.longrunning.Operation>;
+                }
+
+                namespace PipelineService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.contentwarehouse.v1.PipelineService|runPipeline}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type RunPipelineCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                }
+
+                /** Properties of a RunPipelineRequest. */
+                interface IRunPipelineRequest {
+
+                    /** RunPipelineRequest name */
+                    name?: (string|null);
+
+                    /** RunPipelineRequest gcsIngestPipeline */
+                    gcsIngestPipeline?: (google.cloud.contentwarehouse.v1.IGcsIngestPipeline|null);
+
+                    /** RunPipelineRequest gcsIngestWithDocAiProcessorsPipeline */
+                    gcsIngestWithDocAiProcessorsPipeline?: (google.cloud.contentwarehouse.v1.IGcsIngestWithDocAiProcessorsPipeline|null);
+
+                    /** RunPipelineRequest exportCdwPipeline */
+                    exportCdwPipeline?: (google.cloud.contentwarehouse.v1.IExportToCdwPipeline|null);
+
+                    /** RunPipelineRequest processWithDocAiPipeline */
+                    processWithDocAiPipeline?: (google.cloud.contentwarehouse.v1.IProcessWithDocAiPipeline|null);
+
+                    /** RunPipelineRequest requestMetadata */
+                    requestMetadata?: (google.cloud.contentwarehouse.v1.IRequestMetadata|null);
+                }
+
+                /** Represents a RunPipelineRequest. */
+                class RunPipelineRequest implements IRunPipelineRequest {
+
+                    /**
+                     * Constructs a new RunPipelineRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contentwarehouse.v1.IRunPipelineRequest);
+
+                    /** RunPipelineRequest name. */
+                    public name: string;
+
+                    /** RunPipelineRequest gcsIngestPipeline. */
+                    public gcsIngestPipeline?: (google.cloud.contentwarehouse.v1.IGcsIngestPipeline|null);
+
+                    /** RunPipelineRequest gcsIngestWithDocAiProcessorsPipeline. */
+                    public gcsIngestWithDocAiProcessorsPipeline?: (google.cloud.contentwarehouse.v1.IGcsIngestWithDocAiProcessorsPipeline|null);
+
+                    /** RunPipelineRequest exportCdwPipeline. */
+                    public exportCdwPipeline?: (google.cloud.contentwarehouse.v1.IExportToCdwPipeline|null);
+
+                    /** RunPipelineRequest processWithDocAiPipeline. */
+                    public processWithDocAiPipeline?: (google.cloud.contentwarehouse.v1.IProcessWithDocAiPipeline|null);
+
+                    /** RunPipelineRequest requestMetadata. */
+                    public requestMetadata?: (google.cloud.contentwarehouse.v1.IRequestMetadata|null);
+
+                    /** RunPipelineRequest pipeline. */
+                    public pipeline?: ("gcsIngestPipeline"|"gcsIngestWithDocAiProcessorsPipeline"|"exportCdwPipeline"|"processWithDocAiPipeline");
+
+                    /**
+                     * Creates a new RunPipelineRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RunPipelineRequest instance
+                     */
+                    public static create(properties?: google.cloud.contentwarehouse.v1.IRunPipelineRequest): google.cloud.contentwarehouse.v1.RunPipelineRequest;
+
+                    /**
+                     * Encodes the specified RunPipelineRequest message. Does not implicitly {@link google.cloud.contentwarehouse.v1.RunPipelineRequest.verify|verify} messages.
+                     * @param message RunPipelineRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contentwarehouse.v1.IRunPipelineRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RunPipelineRequest message, length delimited. Does not implicitly {@link google.cloud.contentwarehouse.v1.RunPipelineRequest.verify|verify} messages.
+                     * @param message RunPipelineRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contentwarehouse.v1.IRunPipelineRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RunPipelineRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RunPipelineRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contentwarehouse.v1.RunPipelineRequest;
+
+                    /**
+                     * Decodes a RunPipelineRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RunPipelineRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contentwarehouse.v1.RunPipelineRequest;
+
+                    /**
+                     * Verifies a RunPipelineRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RunPipelineRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RunPipelineRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contentwarehouse.v1.RunPipelineRequest;
+
+                    /**
+                     * Creates a plain object from a RunPipelineRequest message. Also converts values to other types if specified.
+                     * @param message RunPipelineRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contentwarehouse.v1.RunPipelineRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RunPipelineRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RunPipelineRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RunPipelineResponse. */
+                interface IRunPipelineResponse {
+                }
+
+                /** Represents a RunPipelineResponse. */
+                class RunPipelineResponse implements IRunPipelineResponse {
+
+                    /**
+                     * Constructs a new RunPipelineResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contentwarehouse.v1.IRunPipelineResponse);
+
+                    /**
+                     * Creates a new RunPipelineResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RunPipelineResponse instance
+                     */
+                    public static create(properties?: google.cloud.contentwarehouse.v1.IRunPipelineResponse): google.cloud.contentwarehouse.v1.RunPipelineResponse;
+
+                    /**
+                     * Encodes the specified RunPipelineResponse message. Does not implicitly {@link google.cloud.contentwarehouse.v1.RunPipelineResponse.verify|verify} messages.
+                     * @param message RunPipelineResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contentwarehouse.v1.IRunPipelineResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RunPipelineResponse message, length delimited. Does not implicitly {@link google.cloud.contentwarehouse.v1.RunPipelineResponse.verify|verify} messages.
+                     * @param message RunPipelineResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contentwarehouse.v1.IRunPipelineResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RunPipelineResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RunPipelineResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contentwarehouse.v1.RunPipelineResponse;
+
+                    /**
+                     * Decodes a RunPipelineResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RunPipelineResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contentwarehouse.v1.RunPipelineResponse;
+
+                    /**
+                     * Verifies a RunPipelineResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RunPipelineResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RunPipelineResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contentwarehouse.v1.RunPipelineResponse;
+
+                    /**
+                     * Creates a plain object from a RunPipelineResponse message. Also converts values to other types if specified.
+                     * @param message RunPipelineResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contentwarehouse.v1.RunPipelineResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RunPipelineResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RunPipelineResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RunPipelineMetadata. */
+                interface IRunPipelineMetadata {
+
+                    /** RunPipelineMetadata totalFileCount */
+                    totalFileCount?: (number|null);
+
+                    /** RunPipelineMetadata failedFileCount */
+                    failedFileCount?: (number|null);
+
+                    /** RunPipelineMetadata userInfo */
+                    userInfo?: (google.cloud.contentwarehouse.v1.IUserInfo|null);
+
+                    /** RunPipelineMetadata gcsIngestPipelineMetadata */
+                    gcsIngestPipelineMetadata?: (google.cloud.contentwarehouse.v1.RunPipelineMetadata.IGcsIngestPipelineMetadata|null);
+
+                    /** RunPipelineMetadata exportToCdwPipelineMetadata */
+                    exportToCdwPipelineMetadata?: (google.cloud.contentwarehouse.v1.RunPipelineMetadata.IExportToCdwPipelineMetadata|null);
+
+                    /** RunPipelineMetadata processWithDocAiPipelineMetadata */
+                    processWithDocAiPipelineMetadata?: (google.cloud.contentwarehouse.v1.RunPipelineMetadata.IProcessWithDocAiPipelineMetadata|null);
+
+                    /** RunPipelineMetadata individualDocumentStatuses */
+                    individualDocumentStatuses?: (google.cloud.contentwarehouse.v1.RunPipelineMetadata.IIndividualDocumentStatus[]|null);
+                }
+
+                /** Represents a RunPipelineMetadata. */
+                class RunPipelineMetadata implements IRunPipelineMetadata {
+
+                    /**
+                     * Constructs a new RunPipelineMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contentwarehouse.v1.IRunPipelineMetadata);
+
+                    /** RunPipelineMetadata totalFileCount. */
+                    public totalFileCount: number;
+
+                    /** RunPipelineMetadata failedFileCount. */
+                    public failedFileCount: number;
+
+                    /** RunPipelineMetadata userInfo. */
+                    public userInfo?: (google.cloud.contentwarehouse.v1.IUserInfo|null);
+
+                    /** RunPipelineMetadata gcsIngestPipelineMetadata. */
+                    public gcsIngestPipelineMetadata?: (google.cloud.contentwarehouse.v1.RunPipelineMetadata.IGcsIngestPipelineMetadata|null);
+
+                    /** RunPipelineMetadata exportToCdwPipelineMetadata. */
+                    public exportToCdwPipelineMetadata?: (google.cloud.contentwarehouse.v1.RunPipelineMetadata.IExportToCdwPipelineMetadata|null);
+
+                    /** RunPipelineMetadata processWithDocAiPipelineMetadata. */
+                    public processWithDocAiPipelineMetadata?: (google.cloud.contentwarehouse.v1.RunPipelineMetadata.IProcessWithDocAiPipelineMetadata|null);
+
+                    /** RunPipelineMetadata individualDocumentStatuses. */
+                    public individualDocumentStatuses: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IIndividualDocumentStatus[];
+
+                    /** RunPipelineMetadata pipelineMetadata. */
+                    public pipelineMetadata?: ("gcsIngestPipelineMetadata"|"exportToCdwPipelineMetadata"|"processWithDocAiPipelineMetadata");
+
+                    /**
+                     * Creates a new RunPipelineMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RunPipelineMetadata instance
+                     */
+                    public static create(properties?: google.cloud.contentwarehouse.v1.IRunPipelineMetadata): google.cloud.contentwarehouse.v1.RunPipelineMetadata;
+
+                    /**
+                     * Encodes the specified RunPipelineMetadata message. Does not implicitly {@link google.cloud.contentwarehouse.v1.RunPipelineMetadata.verify|verify} messages.
+                     * @param message RunPipelineMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contentwarehouse.v1.IRunPipelineMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RunPipelineMetadata message, length delimited. Does not implicitly {@link google.cloud.contentwarehouse.v1.RunPipelineMetadata.verify|verify} messages.
+                     * @param message RunPipelineMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contentwarehouse.v1.IRunPipelineMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RunPipelineMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RunPipelineMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contentwarehouse.v1.RunPipelineMetadata;
+
+                    /**
+                     * Decodes a RunPipelineMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RunPipelineMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contentwarehouse.v1.RunPipelineMetadata;
+
+                    /**
+                     * Verifies a RunPipelineMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RunPipelineMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RunPipelineMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contentwarehouse.v1.RunPipelineMetadata;
+
+                    /**
+                     * Creates a plain object from a RunPipelineMetadata message. Also converts values to other types if specified.
+                     * @param message RunPipelineMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contentwarehouse.v1.RunPipelineMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RunPipelineMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RunPipelineMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RunPipelineMetadata {
+
+                    /** Properties of a GcsIngestPipelineMetadata. */
+                    interface IGcsIngestPipelineMetadata {
+
+                        /** GcsIngestPipelineMetadata inputPath */
+                        inputPath?: (string|null);
+                    }
+
+                    /** Represents a GcsIngestPipelineMetadata. */
+                    class GcsIngestPipelineMetadata implements IGcsIngestPipelineMetadata {
+
+                        /**
+                         * Constructs a new GcsIngestPipelineMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IGcsIngestPipelineMetadata);
+
+                        /** GcsIngestPipelineMetadata inputPath. */
+                        public inputPath: string;
+
+                        /**
+                         * Creates a new GcsIngestPipelineMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GcsIngestPipelineMetadata instance
+                         */
+                        public static create(properties?: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IGcsIngestPipelineMetadata): google.cloud.contentwarehouse.v1.RunPipelineMetadata.GcsIngestPipelineMetadata;
+
+                        /**
+                         * Encodes the specified GcsIngestPipelineMetadata message. Does not implicitly {@link google.cloud.contentwarehouse.v1.RunPipelineMetadata.GcsIngestPipelineMetadata.verify|verify} messages.
+                         * @param message GcsIngestPipelineMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IGcsIngestPipelineMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GcsIngestPipelineMetadata message, length delimited. Does not implicitly {@link google.cloud.contentwarehouse.v1.RunPipelineMetadata.GcsIngestPipelineMetadata.verify|verify} messages.
+                         * @param message GcsIngestPipelineMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IGcsIngestPipelineMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GcsIngestPipelineMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GcsIngestPipelineMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contentwarehouse.v1.RunPipelineMetadata.GcsIngestPipelineMetadata;
+
+                        /**
+                         * Decodes a GcsIngestPipelineMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GcsIngestPipelineMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contentwarehouse.v1.RunPipelineMetadata.GcsIngestPipelineMetadata;
+
+                        /**
+                         * Verifies a GcsIngestPipelineMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GcsIngestPipelineMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GcsIngestPipelineMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contentwarehouse.v1.RunPipelineMetadata.GcsIngestPipelineMetadata;
+
+                        /**
+                         * Creates a plain object from a GcsIngestPipelineMetadata message. Also converts values to other types if specified.
+                         * @param message GcsIngestPipelineMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contentwarehouse.v1.RunPipelineMetadata.GcsIngestPipelineMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GcsIngestPipelineMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GcsIngestPipelineMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an ExportToCdwPipelineMetadata. */
+                    interface IExportToCdwPipelineMetadata {
+
+                        /** ExportToCdwPipelineMetadata documents */
+                        documents?: (string[]|null);
+
+                        /** ExportToCdwPipelineMetadata docAiDataset */
+                        docAiDataset?: (string|null);
+
+                        /** ExportToCdwPipelineMetadata outputPath */
+                        outputPath?: (string|null);
+                    }
+
+                    /** Represents an ExportToCdwPipelineMetadata. */
+                    class ExportToCdwPipelineMetadata implements IExportToCdwPipelineMetadata {
+
+                        /**
+                         * Constructs a new ExportToCdwPipelineMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IExportToCdwPipelineMetadata);
+
+                        /** ExportToCdwPipelineMetadata documents. */
+                        public documents: string[];
+
+                        /** ExportToCdwPipelineMetadata docAiDataset. */
+                        public docAiDataset: string;
+
+                        /** ExportToCdwPipelineMetadata outputPath. */
+                        public outputPath: string;
+
+                        /**
+                         * Creates a new ExportToCdwPipelineMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ExportToCdwPipelineMetadata instance
+                         */
+                        public static create(properties?: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IExportToCdwPipelineMetadata): google.cloud.contentwarehouse.v1.RunPipelineMetadata.ExportToCdwPipelineMetadata;
+
+                        /**
+                         * Encodes the specified ExportToCdwPipelineMetadata message. Does not implicitly {@link google.cloud.contentwarehouse.v1.RunPipelineMetadata.ExportToCdwPipelineMetadata.verify|verify} messages.
+                         * @param message ExportToCdwPipelineMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IExportToCdwPipelineMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ExportToCdwPipelineMetadata message, length delimited. Does not implicitly {@link google.cloud.contentwarehouse.v1.RunPipelineMetadata.ExportToCdwPipelineMetadata.verify|verify} messages.
+                         * @param message ExportToCdwPipelineMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IExportToCdwPipelineMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ExportToCdwPipelineMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ExportToCdwPipelineMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contentwarehouse.v1.RunPipelineMetadata.ExportToCdwPipelineMetadata;
+
+                        /**
+                         * Decodes an ExportToCdwPipelineMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ExportToCdwPipelineMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contentwarehouse.v1.RunPipelineMetadata.ExportToCdwPipelineMetadata;
+
+                        /**
+                         * Verifies an ExportToCdwPipelineMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ExportToCdwPipelineMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ExportToCdwPipelineMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contentwarehouse.v1.RunPipelineMetadata.ExportToCdwPipelineMetadata;
+
+                        /**
+                         * Creates a plain object from an ExportToCdwPipelineMetadata message. Also converts values to other types if specified.
+                         * @param message ExportToCdwPipelineMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contentwarehouse.v1.RunPipelineMetadata.ExportToCdwPipelineMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ExportToCdwPipelineMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ExportToCdwPipelineMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ProcessWithDocAiPipelineMetadata. */
+                    interface IProcessWithDocAiPipelineMetadata {
+
+                        /** ProcessWithDocAiPipelineMetadata documents */
+                        documents?: (string[]|null);
+
+                        /** ProcessWithDocAiPipelineMetadata processorInfo */
+                        processorInfo?: (google.cloud.contentwarehouse.v1.IProcessorInfo|null);
+                    }
+
+                    /** Represents a ProcessWithDocAiPipelineMetadata. */
+                    class ProcessWithDocAiPipelineMetadata implements IProcessWithDocAiPipelineMetadata {
+
+                        /**
+                         * Constructs a new ProcessWithDocAiPipelineMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IProcessWithDocAiPipelineMetadata);
+
+                        /** ProcessWithDocAiPipelineMetadata documents. */
+                        public documents: string[];
+
+                        /** ProcessWithDocAiPipelineMetadata processorInfo. */
+                        public processorInfo?: (google.cloud.contentwarehouse.v1.IProcessorInfo|null);
+
+                        /**
+                         * Creates a new ProcessWithDocAiPipelineMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ProcessWithDocAiPipelineMetadata instance
+                         */
+                        public static create(properties?: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IProcessWithDocAiPipelineMetadata): google.cloud.contentwarehouse.v1.RunPipelineMetadata.ProcessWithDocAiPipelineMetadata;
+
+                        /**
+                         * Encodes the specified ProcessWithDocAiPipelineMetadata message. Does not implicitly {@link google.cloud.contentwarehouse.v1.RunPipelineMetadata.ProcessWithDocAiPipelineMetadata.verify|verify} messages.
+                         * @param message ProcessWithDocAiPipelineMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IProcessWithDocAiPipelineMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ProcessWithDocAiPipelineMetadata message, length delimited. Does not implicitly {@link google.cloud.contentwarehouse.v1.RunPipelineMetadata.ProcessWithDocAiPipelineMetadata.verify|verify} messages.
+                         * @param message ProcessWithDocAiPipelineMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IProcessWithDocAiPipelineMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ProcessWithDocAiPipelineMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ProcessWithDocAiPipelineMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contentwarehouse.v1.RunPipelineMetadata.ProcessWithDocAiPipelineMetadata;
+
+                        /**
+                         * Decodes a ProcessWithDocAiPipelineMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ProcessWithDocAiPipelineMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contentwarehouse.v1.RunPipelineMetadata.ProcessWithDocAiPipelineMetadata;
+
+                        /**
+                         * Verifies a ProcessWithDocAiPipelineMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ProcessWithDocAiPipelineMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ProcessWithDocAiPipelineMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contentwarehouse.v1.RunPipelineMetadata.ProcessWithDocAiPipelineMetadata;
+
+                        /**
+                         * Creates a plain object from a ProcessWithDocAiPipelineMetadata message. Also converts values to other types if specified.
+                         * @param message ProcessWithDocAiPipelineMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contentwarehouse.v1.RunPipelineMetadata.ProcessWithDocAiPipelineMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ProcessWithDocAiPipelineMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ProcessWithDocAiPipelineMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an IndividualDocumentStatus. */
+                    interface IIndividualDocumentStatus {
+
+                        /** IndividualDocumentStatus documentId */
+                        documentId?: (string|null);
+
+                        /** IndividualDocumentStatus status */
+                        status?: (google.rpc.IStatus|null);
+                    }
+
+                    /** Represents an IndividualDocumentStatus. */
+                    class IndividualDocumentStatus implements IIndividualDocumentStatus {
+
+                        /**
+                         * Constructs a new IndividualDocumentStatus.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IIndividualDocumentStatus);
+
+                        /** IndividualDocumentStatus documentId. */
+                        public documentId: string;
+
+                        /** IndividualDocumentStatus status. */
+                        public status?: (google.rpc.IStatus|null);
+
+                        /**
+                         * Creates a new IndividualDocumentStatus instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns IndividualDocumentStatus instance
+                         */
+                        public static create(properties?: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IIndividualDocumentStatus): google.cloud.contentwarehouse.v1.RunPipelineMetadata.IndividualDocumentStatus;
+
+                        /**
+                         * Encodes the specified IndividualDocumentStatus message. Does not implicitly {@link google.cloud.contentwarehouse.v1.RunPipelineMetadata.IndividualDocumentStatus.verify|verify} messages.
+                         * @param message IndividualDocumentStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IIndividualDocumentStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified IndividualDocumentStatus message, length delimited. Does not implicitly {@link google.cloud.contentwarehouse.v1.RunPipelineMetadata.IndividualDocumentStatus.verify|verify} messages.
+                         * @param message IndividualDocumentStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IIndividualDocumentStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an IndividualDocumentStatus message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns IndividualDocumentStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contentwarehouse.v1.RunPipelineMetadata.IndividualDocumentStatus;
+
+                        /**
+                         * Decodes an IndividualDocumentStatus message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns IndividualDocumentStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contentwarehouse.v1.RunPipelineMetadata.IndividualDocumentStatus;
+
+                        /**
+                         * Verifies an IndividualDocumentStatus message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an IndividualDocumentStatus message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns IndividualDocumentStatus
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contentwarehouse.v1.RunPipelineMetadata.IndividualDocumentStatus;
+
+                        /**
+                         * Creates a plain object from an IndividualDocumentStatus message. Also converts values to other types if specified.
+                         * @param message IndividualDocumentStatus
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IndividualDocumentStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this IndividualDocumentStatus to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for IndividualDocumentStatus
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a ProcessorInfo. */
+                interface IProcessorInfo {
+
+                    /** ProcessorInfo processorName */
+                    processorName?: (string|null);
+
+                    /** ProcessorInfo documentType */
+                    documentType?: (string|null);
+
+                    /** ProcessorInfo schemaName */
+                    schemaName?: (string|null);
+                }
+
+                /** Represents a ProcessorInfo. */
+                class ProcessorInfo implements IProcessorInfo {
+
+                    /**
+                     * Constructs a new ProcessorInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contentwarehouse.v1.IProcessorInfo);
+
+                    /** ProcessorInfo processorName. */
+                    public processorName: string;
+
+                    /** ProcessorInfo documentType. */
+                    public documentType: string;
+
+                    /** ProcessorInfo schemaName. */
+                    public schemaName: string;
+
+                    /**
+                     * Creates a new ProcessorInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ProcessorInfo instance
+                     */
+                    public static create(properties?: google.cloud.contentwarehouse.v1.IProcessorInfo): google.cloud.contentwarehouse.v1.ProcessorInfo;
+
+                    /**
+                     * Encodes the specified ProcessorInfo message. Does not implicitly {@link google.cloud.contentwarehouse.v1.ProcessorInfo.verify|verify} messages.
+                     * @param message ProcessorInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contentwarehouse.v1.IProcessorInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ProcessorInfo message, length delimited. Does not implicitly {@link google.cloud.contentwarehouse.v1.ProcessorInfo.verify|verify} messages.
+                     * @param message ProcessorInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contentwarehouse.v1.IProcessorInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ProcessorInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ProcessorInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contentwarehouse.v1.ProcessorInfo;
+
+                    /**
+                     * Decodes a ProcessorInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ProcessorInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contentwarehouse.v1.ProcessorInfo;
+
+                    /**
+                     * Verifies a ProcessorInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ProcessorInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ProcessorInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contentwarehouse.v1.ProcessorInfo;
+
+                    /**
+                     * Creates a plain object from a ProcessorInfo message. Also converts values to other types if specified.
+                     * @param message ProcessorInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contentwarehouse.v1.ProcessorInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ProcessorInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ProcessorInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an IngestPipelineConfig. */
+                interface IIngestPipelineConfig {
+
+                    /** IngestPipelineConfig documentAclPolicy */
+                    documentAclPolicy?: (google.iam.v1.IPolicy|null);
+
+                    /** IngestPipelineConfig enableDocumentTextExtraction */
+                    enableDocumentTextExtraction?: (boolean|null);
+
+                    /** IngestPipelineConfig folder */
+                    folder?: (string|null);
+                }
+
+                /** Represents an IngestPipelineConfig. */
+                class IngestPipelineConfig implements IIngestPipelineConfig {
+
+                    /**
+                     * Constructs a new IngestPipelineConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contentwarehouse.v1.IIngestPipelineConfig);
+
+                    /** IngestPipelineConfig documentAclPolicy. */
+                    public documentAclPolicy?: (google.iam.v1.IPolicy|null);
+
+                    /** IngestPipelineConfig enableDocumentTextExtraction. */
+                    public enableDocumentTextExtraction: boolean;
+
+                    /** IngestPipelineConfig folder. */
+                    public folder: string;
+
+                    /**
+                     * Creates a new IngestPipelineConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns IngestPipelineConfig instance
+                     */
+                    public static create(properties?: google.cloud.contentwarehouse.v1.IIngestPipelineConfig): google.cloud.contentwarehouse.v1.IngestPipelineConfig;
+
+                    /**
+                     * Encodes the specified IngestPipelineConfig message. Does not implicitly {@link google.cloud.contentwarehouse.v1.IngestPipelineConfig.verify|verify} messages.
+                     * @param message IngestPipelineConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contentwarehouse.v1.IIngestPipelineConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified IngestPipelineConfig message, length delimited. Does not implicitly {@link google.cloud.contentwarehouse.v1.IngestPipelineConfig.verify|verify} messages.
+                     * @param message IngestPipelineConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contentwarehouse.v1.IIngestPipelineConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an IngestPipelineConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns IngestPipelineConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contentwarehouse.v1.IngestPipelineConfig;
+
+                    /**
+                     * Decodes an IngestPipelineConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns IngestPipelineConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contentwarehouse.v1.IngestPipelineConfig;
+
+                    /**
+                     * Verifies an IngestPipelineConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an IngestPipelineConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns IngestPipelineConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contentwarehouse.v1.IngestPipelineConfig;
+
+                    /**
+                     * Creates a plain object from an IngestPipelineConfig message. Also converts values to other types if specified.
+                     * @param message IngestPipelineConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contentwarehouse.v1.IngestPipelineConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this IngestPipelineConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IngestPipelineConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GcsIngestPipeline. */
+                interface IGcsIngestPipeline {
+
+                    /** GcsIngestPipeline inputPath */
+                    inputPath?: (string|null);
+
+                    /** GcsIngestPipeline schemaName */
+                    schemaName?: (string|null);
+
+                    /** GcsIngestPipeline processorType */
+                    processorType?: (string|null);
+
+                    /** GcsIngestPipeline skipIngestedDocuments */
+                    skipIngestedDocuments?: (boolean|null);
+
+                    /** GcsIngestPipeline pipelineConfig */
+                    pipelineConfig?: (google.cloud.contentwarehouse.v1.IIngestPipelineConfig|null);
+                }
+
+                /** Represents a GcsIngestPipeline. */
+                class GcsIngestPipeline implements IGcsIngestPipeline {
+
+                    /**
+                     * Constructs a new GcsIngestPipeline.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contentwarehouse.v1.IGcsIngestPipeline);
+
+                    /** GcsIngestPipeline inputPath. */
+                    public inputPath: string;
+
+                    /** GcsIngestPipeline schemaName. */
+                    public schemaName: string;
+
+                    /** GcsIngestPipeline processorType. */
+                    public processorType: string;
+
+                    /** GcsIngestPipeline skipIngestedDocuments. */
+                    public skipIngestedDocuments: boolean;
+
+                    /** GcsIngestPipeline pipelineConfig. */
+                    public pipelineConfig?: (google.cloud.contentwarehouse.v1.IIngestPipelineConfig|null);
+
+                    /**
+                     * Creates a new GcsIngestPipeline instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GcsIngestPipeline instance
+                     */
+                    public static create(properties?: google.cloud.contentwarehouse.v1.IGcsIngestPipeline): google.cloud.contentwarehouse.v1.GcsIngestPipeline;
+
+                    /**
+                     * Encodes the specified GcsIngestPipeline message. Does not implicitly {@link google.cloud.contentwarehouse.v1.GcsIngestPipeline.verify|verify} messages.
+                     * @param message GcsIngestPipeline message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contentwarehouse.v1.IGcsIngestPipeline, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GcsIngestPipeline message, length delimited. Does not implicitly {@link google.cloud.contentwarehouse.v1.GcsIngestPipeline.verify|verify} messages.
+                     * @param message GcsIngestPipeline message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contentwarehouse.v1.IGcsIngestPipeline, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GcsIngestPipeline message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GcsIngestPipeline
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contentwarehouse.v1.GcsIngestPipeline;
+
+                    /**
+                     * Decodes a GcsIngestPipeline message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GcsIngestPipeline
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contentwarehouse.v1.GcsIngestPipeline;
+
+                    /**
+                     * Verifies a GcsIngestPipeline message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GcsIngestPipeline message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GcsIngestPipeline
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contentwarehouse.v1.GcsIngestPipeline;
+
+                    /**
+                     * Creates a plain object from a GcsIngestPipeline message. Also converts values to other types if specified.
+                     * @param message GcsIngestPipeline
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contentwarehouse.v1.GcsIngestPipeline, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GcsIngestPipeline to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GcsIngestPipeline
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GcsIngestWithDocAiProcessorsPipeline. */
+                interface IGcsIngestWithDocAiProcessorsPipeline {
+
+                    /** GcsIngestWithDocAiProcessorsPipeline inputPath */
+                    inputPath?: (string|null);
+
+                    /** GcsIngestWithDocAiProcessorsPipeline splitClassifyProcessorInfo */
+                    splitClassifyProcessorInfo?: (google.cloud.contentwarehouse.v1.IProcessorInfo|null);
+
+                    /** GcsIngestWithDocAiProcessorsPipeline extractProcessorInfos */
+                    extractProcessorInfos?: (google.cloud.contentwarehouse.v1.IProcessorInfo[]|null);
+
+                    /** GcsIngestWithDocAiProcessorsPipeline processorResultsFolderPath */
+                    processorResultsFolderPath?: (string|null);
+
+                    /** GcsIngestWithDocAiProcessorsPipeline skipIngestedDocuments */
+                    skipIngestedDocuments?: (boolean|null);
+
+                    /** GcsIngestWithDocAiProcessorsPipeline pipelineConfig */
+                    pipelineConfig?: (google.cloud.contentwarehouse.v1.IIngestPipelineConfig|null);
+                }
+
+                /** Represents a GcsIngestWithDocAiProcessorsPipeline. */
+                class GcsIngestWithDocAiProcessorsPipeline implements IGcsIngestWithDocAiProcessorsPipeline {
+
+                    /**
+                     * Constructs a new GcsIngestWithDocAiProcessorsPipeline.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contentwarehouse.v1.IGcsIngestWithDocAiProcessorsPipeline);
+
+                    /** GcsIngestWithDocAiProcessorsPipeline inputPath. */
+                    public inputPath: string;
+
+                    /** GcsIngestWithDocAiProcessorsPipeline splitClassifyProcessorInfo. */
+                    public splitClassifyProcessorInfo?: (google.cloud.contentwarehouse.v1.IProcessorInfo|null);
+
+                    /** GcsIngestWithDocAiProcessorsPipeline extractProcessorInfos. */
+                    public extractProcessorInfos: google.cloud.contentwarehouse.v1.IProcessorInfo[];
+
+                    /** GcsIngestWithDocAiProcessorsPipeline processorResultsFolderPath. */
+                    public processorResultsFolderPath: string;
+
+                    /** GcsIngestWithDocAiProcessorsPipeline skipIngestedDocuments. */
+                    public skipIngestedDocuments: boolean;
+
+                    /** GcsIngestWithDocAiProcessorsPipeline pipelineConfig. */
+                    public pipelineConfig?: (google.cloud.contentwarehouse.v1.IIngestPipelineConfig|null);
+
+                    /**
+                     * Creates a new GcsIngestWithDocAiProcessorsPipeline instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GcsIngestWithDocAiProcessorsPipeline instance
+                     */
+                    public static create(properties?: google.cloud.contentwarehouse.v1.IGcsIngestWithDocAiProcessorsPipeline): google.cloud.contentwarehouse.v1.GcsIngestWithDocAiProcessorsPipeline;
+
+                    /**
+                     * Encodes the specified GcsIngestWithDocAiProcessorsPipeline message. Does not implicitly {@link google.cloud.contentwarehouse.v1.GcsIngestWithDocAiProcessorsPipeline.verify|verify} messages.
+                     * @param message GcsIngestWithDocAiProcessorsPipeline message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contentwarehouse.v1.IGcsIngestWithDocAiProcessorsPipeline, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GcsIngestWithDocAiProcessorsPipeline message, length delimited. Does not implicitly {@link google.cloud.contentwarehouse.v1.GcsIngestWithDocAiProcessorsPipeline.verify|verify} messages.
+                     * @param message GcsIngestWithDocAiProcessorsPipeline message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contentwarehouse.v1.IGcsIngestWithDocAiProcessorsPipeline, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GcsIngestWithDocAiProcessorsPipeline message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GcsIngestWithDocAiProcessorsPipeline
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contentwarehouse.v1.GcsIngestWithDocAiProcessorsPipeline;
+
+                    /**
+                     * Decodes a GcsIngestWithDocAiProcessorsPipeline message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GcsIngestWithDocAiProcessorsPipeline
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contentwarehouse.v1.GcsIngestWithDocAiProcessorsPipeline;
+
+                    /**
+                     * Verifies a GcsIngestWithDocAiProcessorsPipeline message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GcsIngestWithDocAiProcessorsPipeline message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GcsIngestWithDocAiProcessorsPipeline
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contentwarehouse.v1.GcsIngestWithDocAiProcessorsPipeline;
+
+                    /**
+                     * Creates a plain object from a GcsIngestWithDocAiProcessorsPipeline message. Also converts values to other types if specified.
+                     * @param message GcsIngestWithDocAiProcessorsPipeline
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contentwarehouse.v1.GcsIngestWithDocAiProcessorsPipeline, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GcsIngestWithDocAiProcessorsPipeline to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GcsIngestWithDocAiProcessorsPipeline
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExportToCdwPipeline. */
+                interface IExportToCdwPipeline {
+
+                    /** ExportToCdwPipeline documents */
+                    documents?: (string[]|null);
+
+                    /** ExportToCdwPipeline exportFolderPath */
+                    exportFolderPath?: (string|null);
+
+                    /** ExportToCdwPipeline docAiDataset */
+                    docAiDataset?: (string|null);
+
+                    /** ExportToCdwPipeline trainingSplitRatio */
+                    trainingSplitRatio?: (number|null);
+                }
+
+                /** Represents an ExportToCdwPipeline. */
+                class ExportToCdwPipeline implements IExportToCdwPipeline {
+
+                    /**
+                     * Constructs a new ExportToCdwPipeline.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contentwarehouse.v1.IExportToCdwPipeline);
+
+                    /** ExportToCdwPipeline documents. */
+                    public documents: string[];
+
+                    /** ExportToCdwPipeline exportFolderPath. */
+                    public exportFolderPath: string;
+
+                    /** ExportToCdwPipeline docAiDataset. */
+                    public docAiDataset: string;
+
+                    /** ExportToCdwPipeline trainingSplitRatio. */
+                    public trainingSplitRatio: number;
+
+                    /**
+                     * Creates a new ExportToCdwPipeline instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportToCdwPipeline instance
+                     */
+                    public static create(properties?: google.cloud.contentwarehouse.v1.IExportToCdwPipeline): google.cloud.contentwarehouse.v1.ExportToCdwPipeline;
+
+                    /**
+                     * Encodes the specified ExportToCdwPipeline message. Does not implicitly {@link google.cloud.contentwarehouse.v1.ExportToCdwPipeline.verify|verify} messages.
+                     * @param message ExportToCdwPipeline message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contentwarehouse.v1.IExportToCdwPipeline, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportToCdwPipeline message, length delimited. Does not implicitly {@link google.cloud.contentwarehouse.v1.ExportToCdwPipeline.verify|verify} messages.
+                     * @param message ExportToCdwPipeline message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contentwarehouse.v1.IExportToCdwPipeline, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportToCdwPipeline message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportToCdwPipeline
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contentwarehouse.v1.ExportToCdwPipeline;
+
+                    /**
+                     * Decodes an ExportToCdwPipeline message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportToCdwPipeline
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contentwarehouse.v1.ExportToCdwPipeline;
+
+                    /**
+                     * Verifies an ExportToCdwPipeline message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportToCdwPipeline message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportToCdwPipeline
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contentwarehouse.v1.ExportToCdwPipeline;
+
+                    /**
+                     * Creates a plain object from an ExportToCdwPipeline message. Also converts values to other types if specified.
+                     * @param message ExportToCdwPipeline
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contentwarehouse.v1.ExportToCdwPipeline, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportToCdwPipeline to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportToCdwPipeline
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ProcessWithDocAiPipeline. */
+                interface IProcessWithDocAiPipeline {
+
+                    /** ProcessWithDocAiPipeline documents */
+                    documents?: (string[]|null);
+
+                    /** ProcessWithDocAiPipeline exportFolderPath */
+                    exportFolderPath?: (string|null);
+
+                    /** ProcessWithDocAiPipeline processorInfo */
+                    processorInfo?: (google.cloud.contentwarehouse.v1.IProcessorInfo|null);
+
+                    /** ProcessWithDocAiPipeline processorResultsFolderPath */
+                    processorResultsFolderPath?: (string|null);
+                }
+
+                /** Represents a ProcessWithDocAiPipeline. */
+                class ProcessWithDocAiPipeline implements IProcessWithDocAiPipeline {
+
+                    /**
+                     * Constructs a new ProcessWithDocAiPipeline.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contentwarehouse.v1.IProcessWithDocAiPipeline);
+
+                    /** ProcessWithDocAiPipeline documents. */
+                    public documents: string[];
+
+                    /** ProcessWithDocAiPipeline exportFolderPath. */
+                    public exportFolderPath: string;
+
+                    /** ProcessWithDocAiPipeline processorInfo. */
+                    public processorInfo?: (google.cloud.contentwarehouse.v1.IProcessorInfo|null);
+
+                    /** ProcessWithDocAiPipeline processorResultsFolderPath. */
+                    public processorResultsFolderPath: string;
+
+                    /**
+                     * Creates a new ProcessWithDocAiPipeline instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ProcessWithDocAiPipeline instance
+                     */
+                    public static create(properties?: google.cloud.contentwarehouse.v1.IProcessWithDocAiPipeline): google.cloud.contentwarehouse.v1.ProcessWithDocAiPipeline;
+
+                    /**
+                     * Encodes the specified ProcessWithDocAiPipeline message. Does not implicitly {@link google.cloud.contentwarehouse.v1.ProcessWithDocAiPipeline.verify|verify} messages.
+                     * @param message ProcessWithDocAiPipeline message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contentwarehouse.v1.IProcessWithDocAiPipeline, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ProcessWithDocAiPipeline message, length delimited. Does not implicitly {@link google.cloud.contentwarehouse.v1.ProcessWithDocAiPipeline.verify|verify} messages.
+                     * @param message ProcessWithDocAiPipeline message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contentwarehouse.v1.IProcessWithDocAiPipeline, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ProcessWithDocAiPipeline message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ProcessWithDocAiPipeline
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contentwarehouse.v1.ProcessWithDocAiPipeline;
+
+                    /**
+                     * Decodes a ProcessWithDocAiPipeline message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ProcessWithDocAiPipeline
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contentwarehouse.v1.ProcessWithDocAiPipeline;
+
+                    /**
+                     * Verifies a ProcessWithDocAiPipeline message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ProcessWithDocAiPipeline message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ProcessWithDocAiPipeline
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contentwarehouse.v1.ProcessWithDocAiPipeline;
+
+                    /**
+                     * Creates a plain object from a ProcessWithDocAiPipeline message. Also converts values to other types if specified.
+                     * @param message ProcessWithDocAiPipeline
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contentwarehouse.v1.ProcessWithDocAiPipeline, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ProcessWithDocAiPipeline to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ProcessWithDocAiPipeline
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents a RuleSetService */
                 class RuleSetService extends $protobuf.rpc.Service {
 
