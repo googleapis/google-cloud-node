@@ -2561,6 +2561,10 @@
                                     case 3:
                                     case 5:
                                     case 7:
+                                    case 9:
+                                    case 10:
+                                    case 12:
+                                    case 13:
                                         break;
                                     }
                                 }
@@ -2601,6 +2605,22 @@
                                 case "DEFAULT_MASKING_VALUE":
                                 case 7:
                                     message.predefinedExpression = 7;
+                                    break;
+                                case "LAST_FOUR_CHARACTERS":
+                                case 9:
+                                    message.predefinedExpression = 9;
+                                    break;
+                                case "FIRST_FOUR_CHARACTERS":
+                                case 10:
+                                    message.predefinedExpression = 10;
+                                    break;
+                                case "EMAIL_MASK":
+                                case 12:
+                                    message.predefinedExpression = 12;
+                                    break;
+                                case "DATE_YEAR_MASK":
+                                case 13:
+                                    message.predefinedExpression = 13;
                                     break;
                                 }
                                 return message;
@@ -2661,6 +2681,10 @@
                              * @property {number} SHA256=3 SHA256 value
                              * @property {number} ALWAYS_NULL=5 ALWAYS_NULL value
                              * @property {number} DEFAULT_MASKING_VALUE=7 DEFAULT_MASKING_VALUE value
+                             * @property {number} LAST_FOUR_CHARACTERS=9 LAST_FOUR_CHARACTERS value
+                             * @property {number} FIRST_FOUR_CHARACTERS=10 FIRST_FOUR_CHARACTERS value
+                             * @property {number} EMAIL_MASK=12 EMAIL_MASK value
+                             * @property {number} DATE_YEAR_MASK=13 DATE_YEAR_MASK value
                              */
                             DataMaskingPolicy.PredefinedExpression = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
@@ -2668,6 +2692,10 @@
                                 values[valuesById[3] = "SHA256"] = 3;
                                 values[valuesById[5] = "ALWAYS_NULL"] = 5;
                                 values[valuesById[7] = "DEFAULT_MASKING_VALUE"] = 7;
+                                values[valuesById[9] = "LAST_FOUR_CHARACTERS"] = 9;
+                                values[valuesById[10] = "FIRST_FOUR_CHARACTERS"] = 10;
+                                values[valuesById[12] = "EMAIL_MASK"] = 12;
+                                values[valuesById[13] = "DATE_YEAR_MASK"] = 13;
                                 return values;
                             })();
     

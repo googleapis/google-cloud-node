@@ -374,7 +374,11 @@
                                 "PREDEFINED_EXPRESSION_UNSPECIFIED": 0,
                                 "SHA256": 3,
                                 "ALWAYS_NULL": 5,
-                                "DEFAULT_MASKING_VALUE": 7
+                                "DEFAULT_MASKING_VALUE": 7,
+                                "LAST_FOUR_CHARACTERS": 9,
+                                "FIRST_FOUR_CHARACTERS": 10,
+                                "EMAIL_MASK": 12,
+                                "DATE_YEAR_MASK": 13
                               }
                             }
                           }
