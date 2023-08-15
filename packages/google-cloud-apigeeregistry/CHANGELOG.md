@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.0](https://github.com/googleapis/nodejs-apigee-registry/compare/v0.3.0...v1.0.0) (2023-08-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* update to Node 14 ([#50](https://github.com/googleapis/nodejs-apigee-registry/issues/50))
+
+### Miscellaneous Chores
+
+* Update to Node 14 ([#50](https://github.com/googleapis/nodejs-apigee-registry/issues/50)) ([ae2c7ea](https://github.com/googleapis/nodejs-apigee-registry/commit/ae2c7ea278d037c3ba020192ab8913b0659191e8))
+
 ## [0.3.0](https://github.com/googleapis/nodejs-apigee-registry/compare/v0.2.1...v0.3.0) (2023-02-09)
 
 
