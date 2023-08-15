@@ -436,7 +436,7 @@ export class PredictionServiceClient {
    * * Tables - Row, with column values matching the columns of the model,
    *            up to 5MB. Not available for FORECASTING
    *
-   * {@link google.cloud.automl.v1beta1.TablesModelMetadata.prediction_type|prediction_type}.
+   * {@link protos.google.cloud.automl.v1beta1.TablesModelMetadata.prediction_type|prediction_type}.
    * * Text Sentiment - TextSnippet, content up 500 characters, UTF-8
    *                     encoded.
    *
@@ -471,9 +471,8 @@ export class PredictionServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.automl.v1beta1.PredictResponse | PredictResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.automl.v1beta1.PredictResponse|PredictResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/prediction_service.predict.js</caption>
    * region_tag:automl_v1beta1_generated_PredictionService_Predict_async
@@ -546,12 +545,12 @@ export class PredictionServiceClient {
   }
 
   /**
-   * Perform a batch prediction. Unlike the online {@link google.cloud.automl.v1beta1.PredictionService.Predict|Predict}, batch
+   * Perform a batch prediction. Unlike the online {@link protos.google.cloud.automl.v1beta1.PredictionService.Predict|Predict}, batch
    * prediction result won't be immediately available in the response. Instead,
    * a long running operation object is returned. User can poll the operation
-   * result via {@link google.longrunning.Operations.GetOperation|GetOperation}
-   * method. Once the operation is done, {@link google.cloud.automl.v1beta1.BatchPredictResult|BatchPredictResult} is returned in
-   * the {@link google.longrunning.Operation.response|response} field.
+   * result via {@link protos.google.longrunning.Operations.GetOperation|GetOperation}
+   * method. Once the operation is done, {@link protos.google.cloud.automl.v1beta1.BatchPredictResult|BatchPredictResult} is returned in
+   * the {@link protos.google.longrunning.Operation.response|response} field.
    * Available for following ML problems:
    * * Image Classification
    * * Image Object Detection
@@ -645,8 +644,7 @@ export class PredictionServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/prediction_service.batch_predict.js</caption>
    * region_tag:automl_v1beta1_generated_PredictionService_BatchPredict_async
@@ -741,8 +739,7 @@ export class PredictionServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/prediction_service.batch_predict.js</caption>
    * region_tag:automl_v1beta1_generated_PredictionService_BatchPredict_async

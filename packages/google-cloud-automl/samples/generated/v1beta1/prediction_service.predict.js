@@ -56,7 +56,7 @@ function main(name, payload) {
    *         should be populated in the returned TablesAnnotation.
    *         The default is false.
    */
-  // const params = 1234
+  // const params = [1,2,3,4]
 
   // Imports the Automl library
   const {PredictionServiceClient} = require('@google-cloud/automl').v1beta1;

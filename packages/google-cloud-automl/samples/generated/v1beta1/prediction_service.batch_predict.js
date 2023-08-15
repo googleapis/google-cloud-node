@@ -101,7 +101,7 @@ function main(name, inputConfig, outputConfig, params) {
    *       at least that long as a relative value of video frame size will be
    *       returned. Value in 0 to 1 range. Default is 0.
    */
-  // const params = 1234
+  // const params = [1,2,3,4]
 
   // Imports the Automl library
   const {PredictionServiceClient} = require('@google-cloud/automl').v1beta1;
