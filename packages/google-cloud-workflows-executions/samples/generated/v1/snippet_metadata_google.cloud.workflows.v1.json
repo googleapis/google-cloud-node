@@ -15,7 +15,7 @@
             "regionTag": "workflows_v1_generated_Workflows_ListWorkflows_async",
             "title": "Workflows listWorkflows Sample",
             "origin": "API_DEFINITION",
-            "description": " Lists Workflows in a given project and location. The default order is not specified.",
+            "description": " Lists workflows in a given project and location. The default order is not specified.",
             "canonical": true,
             "file": "workflows.list_workflows.js",
             "language": "JAVASCRIPT",
@@ -71,14 +71,14 @@
             "regionTag": "workflows_v1_generated_Workflows_GetWorkflow_async",
             "title": "Workflows getWorkflow Sample",
             "origin": "API_DEFINITION",
-            "description": " Gets details of a single Workflow.",
+            "description": " Gets details of a single workflow.",
             "canonical": true,
             "file": "workflows.get_workflow.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 54,
+                    "end": 62,
                     "type": "FULL"
                 }
             ],
@@ -89,6 +89,10 @@
                 "parameters": [
                     {
                         "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "revision_id",
                         "type": "TYPE_STRING"
                     }
                 ],
@@ -111,7 +115,7 @@
             "regionTag": "workflows_v1_generated_Workflows_CreateWorkflow_async",
             "title": "Workflows createWorkflow Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a new workflow. If a workflow with the specified name already exists in the specified project and location, the long running operation will return [ALREADY_EXISTS][google.rpc.Code.ALREADY_EXISTS] error.",
+            "description": " Creates a new workflow. If a workflow with the specified name already exists in the specified project and location, the long running operation returns a [ALREADY_EXISTS][google.rpc.Code.ALREADY_EXISTS] error.",
             "canonical": true,
             "file": "workflows.create_workflow.js",
             "language": "JAVASCRIPT",
@@ -199,7 +203,7 @@
             "regionTag": "workflows_v1_generated_Workflows_UpdateWorkflow_async",
             "title": "Workflows updateWorkflow Sample",
             "origin": "API_DEFINITION",
-            "description": " Updates an existing workflow. Running this method has no impact on already running executions of the workflow. A new revision of the workflow may be created as a result of a successful update operation. In that case, such revision will be used in new workflow executions.",
+            "description": " Updates an existing workflow. Running this method has no impact on already running executions of the workflow. A new revision of the workflow might be created as a result of a successful update operation. In that case, the new revision is used in new workflow executions.",
             "canonical": true,
             "file": "workflows.update_workflow.js",
             "language": "JAVASCRIPT",

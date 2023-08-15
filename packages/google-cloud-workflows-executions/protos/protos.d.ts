@@ -2316,6 +2316,18 @@ export namespace google {
 
                     /** Workflow sourceContents */
                     sourceContents?: (string|null);
+
+                    /** Workflow cryptoKeyName */
+                    cryptoKeyName?: (string|null);
+
+                    /** Workflow stateError */
+                    stateError?: (google.cloud.workflows.v1.Workflow.IStateError|null);
+
+                    /** Workflow callLogLevel */
+                    callLogLevel?: (google.cloud.workflows.v1.Workflow.CallLogLevel|keyof typeof google.cloud.workflows.v1.Workflow.CallLogLevel|null);
+
+                    /** Workflow userEnvVars */
+                    userEnvVars?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a Workflow. */
@@ -2356,6 +2368,18 @@ export namespace google {
 
                     /** Workflow sourceContents. */
                     public sourceContents?: (string|null);
+
+                    /** Workflow cryptoKeyName. */
+                    public cryptoKeyName: string;
+
+                    /** Workflow stateError. */
+                    public stateError?: (google.cloud.workflows.v1.Workflow.IStateError|null);
+
+                    /** Workflow callLogLevel. */
+                    public callLogLevel: (google.cloud.workflows.v1.Workflow.CallLogLevel|keyof typeof google.cloud.workflows.v1.Workflow.CallLogLevel);
+
+                    /** Workflow userEnvVars. */
+                    public userEnvVars: { [k: string]: string };
 
                     /** Workflow sourceCode. */
                     public sourceCode?: "sourceContents";
@@ -2443,7 +2467,128 @@ export namespace google {
                     /** State enum. */
                     enum State {
                         STATE_UNSPECIFIED = 0,
-                        ACTIVE = 1
+                        ACTIVE = 1,
+                        UNAVAILABLE = 2
+                    }
+
+                    /** Properties of a StateError. */
+                    interface IStateError {
+
+                        /** StateError details */
+                        details?: (string|null);
+
+                        /** StateError type */
+                        type?: (google.cloud.workflows.v1.Workflow.StateError.Type|keyof typeof google.cloud.workflows.v1.Workflow.StateError.Type|null);
+                    }
+
+                    /** Represents a StateError. */
+                    class StateError implements IStateError {
+
+                        /**
+                         * Constructs a new StateError.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.workflows.v1.Workflow.IStateError);
+
+                        /** StateError details. */
+                        public details: string;
+
+                        /** StateError type. */
+                        public type: (google.cloud.workflows.v1.Workflow.StateError.Type|keyof typeof google.cloud.workflows.v1.Workflow.StateError.Type);
+
+                        /**
+                         * Creates a new StateError instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns StateError instance
+                         */
+                        public static create(properties?: google.cloud.workflows.v1.Workflow.IStateError): google.cloud.workflows.v1.Workflow.StateError;
+
+                        /**
+                         * Encodes the specified StateError message. Does not implicitly {@link google.cloud.workflows.v1.Workflow.StateError.verify|verify} messages.
+                         * @param message StateError message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.workflows.v1.Workflow.IStateError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified StateError message, length delimited. Does not implicitly {@link google.cloud.workflows.v1.Workflow.StateError.verify|verify} messages.
+                         * @param message StateError message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.workflows.v1.Workflow.IStateError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a StateError message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns StateError
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workflows.v1.Workflow.StateError;
+
+                        /**
+                         * Decodes a StateError message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns StateError
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workflows.v1.Workflow.StateError;
+
+                        /**
+                         * Verifies a StateError message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a StateError message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns StateError
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.workflows.v1.Workflow.StateError;
+
+                        /**
+                         * Creates a plain object from a StateError message. Also converts values to other types if specified.
+                         * @param message StateError
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.workflows.v1.Workflow.StateError, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this StateError to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for StateError
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace StateError {
+
+                        /** Type enum. */
+                        enum Type {
+                            TYPE_UNSPECIFIED = 0,
+                            KMS_ERROR = 1
+                        }
+                    }
+
+                    /** CallLogLevel enum. */
+                    enum CallLogLevel {
+                        CALL_LOG_LEVEL_UNSPECIFIED = 0,
+                        LOG_ALL_CALLS = 1,
+                        LOG_ERRORS_ONLY = 2,
+                        LOG_NONE = 3
                     }
                 }
 
@@ -2682,6 +2827,9 @@ export namespace google {
 
                     /** GetWorkflowRequest name */
                     name?: (string|null);
+
+                    /** GetWorkflowRequest revisionId */
+                    revisionId?: (string|null);
                 }
 
                 /** Represents a GetWorkflowRequest. */
@@ -2695,6 +2843,9 @@ export namespace google {
 
                     /** GetWorkflowRequest name. */
                     public name: string;
+
+                    /** GetWorkflowRequest revisionId. */
+                    public revisionId: string;
 
                     /**
                      * Creates a new GetWorkflowRequest instance using the specified properties.

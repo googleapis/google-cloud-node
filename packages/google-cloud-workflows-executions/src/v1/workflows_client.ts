@@ -27,6 +27,8 @@ import type {
   LROperation,
   PaginationCallback,
   GaxCall,
+  LocationsClient,
+  LocationProtos,
 } from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
@@ -63,6 +65,7 @@ export class WorkflowsClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
   workflowsStub?: Promise<{[name: string]: Function}>;
@@ -160,6 +163,10 @@ export class WorkflowsClient {
     if (servicePath === staticMembers.servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
+    this.locationsClient = new this._gaxModule.LocationsClient(
+      this._gaxGrpc,
+      opts
+    );
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -183,6 +190,9 @@ export class WorkflowsClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      cryptoKeyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/keyRings/{keyRing}/cryptoKeys/{cryptoKey}'
+      ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
@@ -417,13 +427,19 @@ export class WorkflowsClient {
   // -- Service calls --
   // -------------------
   /**
-   * Gets details of a single Workflow.
+   * Gets details of a single workflow.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Name of the workflow which information should be retrieved.
+   *   Required. Name of the workflow for which information should be retrieved.
    *   Format: projects/{project}/locations/{location}/workflows/{workflow}
+   * @param {string} [request.revisionId]
+   *   Optional. The revision of the workflow to retrieve. If the revision_id is
+   *   empty, the latest revision is retrieved.
+   *   The format is "000001-a4d", where the first six characters define
+   *   the zero-padded decimal revision number. They are followed by a hyphen and
+   *   three hexadecimal characters.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -505,7 +521,7 @@ export class WorkflowsClient {
   /**
    * Creates a new workflow. If a workflow with the specified name already
    * exists in the specified project and location, the long running operation
-   * will return {@link protos.google.rpc.Code.ALREADY_EXISTS|ALREADY_EXISTS} error.
+   * returns a {@link protos.google.rpc.Code.ALREADY_EXISTS|ALREADY_EXISTS} error.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -794,8 +810,8 @@ export class WorkflowsClient {
   /**
    * Updates an existing workflow.
    * Running this method has no impact on already running executions of the
-   * workflow. A new revision of the workflow may be created as a result of a
-   * successful update operation. In that case, such revision will be used
+   * workflow. A new revision of the workflow might be created as a result of a
+   * successful update operation. In that case, the new revision is used
    * in new workflow executions.
    *
    * @param {Object} request
@@ -935,7 +951,7 @@ export class WorkflowsClient {
     >;
   }
   /**
-   * Lists Workflows in a given project and location.
+   * Lists workflows in a given project and location.
    * The default order is not specified.
    *
    * @param {Object} request
@@ -944,10 +960,10 @@ export class WorkflowsClient {
    *   Required. Project and location from which the workflows should be listed.
    *   Format: projects/{project}/locations/{location}
    * @param {number} request.pageSize
-   *   Maximum number of workflows to return per call. The service may return
-   *   fewer than this value. If the value is not specified, a default value of
-   *   500 will be used. The maximum permitted value is 1000 and values greater
-   *   than 1000 will be coerced down to 1000.
+   *   Maximum number of workflows to return per call. The service might return
+   *   fewer than this value even if not at the end of the collection. If a value
+   *   is not specified, a default value of 500 is used. The maximum permitted
+   *   value is 1000 and values greater than 1000 are coerced down to 1000.
    * @param {string} request.pageToken
    *   A page token, received from a previous `ListWorkflows` call.
    *   Provide this to retrieve the subsequent page.
@@ -957,10 +973,10 @@ export class WorkflowsClient {
    * @param {string} request.filter
    *   Filter to restrict results to specific workflows.
    * @param {string} request.orderBy
-   *   Comma-separated list of fields that that specify the order of the results.
+   *   Comma-separated list of fields that specify the order of the results.
    *   Default sorting order for a field is ascending. To specify descending order
-   *   for a field, append a " desc" suffix.
-   *   If not specified, the results will be returned in an unspecified order.
+   *   for a field, append a "desc" suffix.
+   *   If not specified, the results are returned in an unspecified order.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1056,10 +1072,10 @@ export class WorkflowsClient {
    *   Required. Project and location from which the workflows should be listed.
    *   Format: projects/{project}/locations/{location}
    * @param {number} request.pageSize
-   *   Maximum number of workflows to return per call. The service may return
-   *   fewer than this value. If the value is not specified, a default value of
-   *   500 will be used. The maximum permitted value is 1000 and values greater
-   *   than 1000 will be coerced down to 1000.
+   *   Maximum number of workflows to return per call. The service might return
+   *   fewer than this value even if not at the end of the collection. If a value
+   *   is not specified, a default value of 500 is used. The maximum permitted
+   *   value is 1000 and values greater than 1000 are coerced down to 1000.
    * @param {string} request.pageToken
    *   A page token, received from a previous `ListWorkflows` call.
    *   Provide this to retrieve the subsequent page.
@@ -1069,10 +1085,10 @@ export class WorkflowsClient {
    * @param {string} request.filter
    *   Filter to restrict results to specific workflows.
    * @param {string} request.orderBy
-   *   Comma-separated list of fields that that specify the order of the results.
+   *   Comma-separated list of fields that specify the order of the results.
    *   Default sorting order for a field is ascending. To specify descending order
-   *   for a field, append a " desc" suffix.
-   *   If not specified, the results will be returned in an unspecified order.
+   *   for a field, append a "desc" suffix.
+   *   If not specified, the results are returned in an unspecified order.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1116,10 +1132,10 @@ export class WorkflowsClient {
    *   Required. Project and location from which the workflows should be listed.
    *   Format: projects/{project}/locations/{location}
    * @param {number} request.pageSize
-   *   Maximum number of workflows to return per call. The service may return
-   *   fewer than this value. If the value is not specified, a default value of
-   *   500 will be used. The maximum permitted value is 1000 and values greater
-   *   than 1000 will be coerced down to 1000.
+   *   Maximum number of workflows to return per call. The service might return
+   *   fewer than this value even if not at the end of the collection. If a value
+   *   is not specified, a default value of 500 is used. The maximum permitted
+   *   value is 1000 and values greater than 1000 are coerced down to 1000.
    * @param {string} request.pageToken
    *   A page token, received from a previous `ListWorkflows` call.
    *   Provide this to retrieve the subsequent page.
@@ -1129,10 +1145,10 @@ export class WorkflowsClient {
    * @param {string} request.filter
    *   Filter to restrict results to specific workflows.
    * @param {string} request.orderBy
-   *   Comma-separated list of fields that that specify the order of the results.
+   *   Comma-separated list of fields that specify the order of the results.
    *   Default sorting order for a field is ascending. To specify descending order
-   *   for a field, append a " desc" suffix.
-   *   If not specified, the results will be returned in an unspecified order.
+   *   for a field, append a "desc" suffix.
+   *   If not specified, the results are returned in an unspecified order.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1166,9 +1182,333 @@ export class WorkflowsClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.workflows.v1.IWorkflow>;
   }
+  /**
+   * Gets information about a location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Resource name for the location.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example
+   * ```
+   * const [response] = await client.getLocation(request);
+   * ```
+   */
+  getLocation(
+    request: LocationProtos.google.cloud.location.IGetLocationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          LocationProtos.google.cloud.location.ILocation,
+          | LocationProtos.google.cloud.location.IGetLocationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LocationProtos.google.cloud.location.ILocation,
+      | LocationProtos.google.cloud.location.IGetLocationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.getLocation(request, options, callback);
+  }
+
+  /**
+   * Lists information about the supported locations for this service. Returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The resource that owns the locations collection, if applicable.
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example
+   * ```
+   * const iterable = client.listLocationsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   * ```
+   */
+  listLocationsAsync(
+    request: LocationProtos.google.cloud.location.IListLocationsRequest,
+    options?: CallOptions
+  ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.listLocationsAsync(request, options);
+  }
+
+  /**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   *   for the details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   *   {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<[protos.google.longrunning.Operation]> {
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | iteration protocols}.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+  cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.CancelOperationRequest,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   * for the details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.deleteOperation(request, options, callback);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified cryptoKey resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} keyRing
+   * @param {string} cryptoKey
+   * @returns {string} Resource name string.
+   */
+  cryptoKeyPath(
+    project: string,
+    location: string,
+    keyRing: string,
+    cryptoKey: string
+  ) {
+    return this.pathTemplates.cryptoKeyPathTemplate.render({
+      project: project,
+      location: location,
+      keyRing: keyRing,
+      cryptoKey: cryptoKey,
+    });
+  }
+
+  /**
+   * Parse the project from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .project;
+  }
+
+  /**
+   * Parse the location from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .location;
+  }
+
+  /**
+   * Parse the keyRing from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the keyRing.
+   */
+  matchKeyRingFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .keyRing;
+  }
+
+  /**
+   * Parse the cryptoKey from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the cryptoKey.
+   */
+  matchCryptoKeyFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .cryptoKey;
+  }
 
   /**
    * Return a fully-qualified location resource name string.
@@ -1266,6 +1606,7 @@ export class WorkflowsClient {
       return this.workflowsStub.then((stub) => {
         this._terminated = true;
         stub.close();
+        this.locationsClient.close();
         this.operationsClient.close();
       });
     }

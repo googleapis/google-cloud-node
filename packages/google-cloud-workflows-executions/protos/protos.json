@@ -627,7 +627,9 @@
                     "go_package": "cloud.google.com/go/workflows/apiv1/workflowspb;workflowspb",
                     "java_multiple_files": true,
                     "java_outer_classname": "WorkflowsProto",
-                    "java_package": "com.google.cloud.workflows.v1"
+                    "java_package": "com.google.cloud.workflows.v1",
+                    "(google.api.resource_definition).type": "cloudkms.googleapis.com/CryptoKey",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/keyRings/{keyRing}/cryptoKeys/{cryptoKey}"
                   },
                   "nested": {
                     "Workflows": {
@@ -824,13 +826,72 @@
                         "sourceContents": {
                           "type": "string",
                           "id": 10
+                        },
+                        "cryptoKeyName": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
+                        },
+                        "stateError": {
+                          "type": "StateError",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "callLogLevel": {
+                          "type": "CallLogLevel",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "userEnvVars": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
                         "State": {
                           "values": {
                             "STATE_UNSPECIFIED": 0,
-                            "ACTIVE": 1
+                            "ACTIVE": 1,
+                            "UNAVAILABLE": 2
+                          }
+                        },
+                        "StateError": {
+                          "fields": {
+                            "details": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "type": {
+                              "type": "Type",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "Type": {
+                              "values": {
+                                "TYPE_UNSPECIFIED": 0,
+                                "KMS_ERROR": 1
+                              }
+                            }
+                          }
+                        },
+                        "CallLogLevel": {
+                          "values": {
+                            "CALL_LOG_LEVEL_UNSPECIFIED": 0,
+                            "LOG_ALL_CALLS": 1,
+                            "LOG_ERRORS_ONLY": 2,
+                            "LOG_NONE": 3
                           }
                         }
                       }
@@ -889,6 +950,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "workflows.googleapis.com/Workflow"
+                          }
+                        },
+                        "revisionId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
