@@ -44,6 +44,11 @@
               "methods": [
                 "updateSshPublicKey"
               ]
+            },
+            "SignSshPublicKey": {
+              "methods": [
+                "signSshPublicKey"
+              ]
             }
           }
         },
@@ -83,6 +88,11 @@
             "UpdateSshPublicKey": {
               "methods": [
                 "updateSshPublicKey"
+              ]
+            },
+            "SignSshPublicKey": {
+              "methods": [
+                "signSshPublicKey"
               ]
             }
           }

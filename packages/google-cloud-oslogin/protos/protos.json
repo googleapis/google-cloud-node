@@ -582,6 +582,26 @@
                               "(google.api.method_signature)": "name,ssh_public_key,update_mask"
                             }
                           ]
+                        },
+                        "SignSshPublicKey": {
+                          "requestType": "SignSshPublicKeyRequest",
+                          "responseType": "SignSshPublicKeyResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{parent=users/*/projects/*/zones/*}:signSshPublicKey",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,ssh_public_key"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{parent=users/*/projects/*/zones/*}:signSshPublicKey",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,ssh_public_key"
+                            }
+                          ]
                         }
                       }
                     },
@@ -790,6 +810,26 @@
                     "WebAuthn": {
                       "fields": {
                         "rpId": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "SignSshPublicKeyRequest": {
+                      "fields": {
+                        "sshPublicKey": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "parent": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SignSshPublicKeyResponse": {
+                      "fields": {
+                        "signedSshPublicKey": {
                           "type": "string",
                           "id": 1
                         }

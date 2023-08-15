@@ -1534,6 +1534,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public updateSshPublicKey(request: google.cloud.oslogin.v1beta.IUpdateSshPublicKeyRequest): Promise<google.cloud.oslogin.common.SshPublicKey>;
+
+                    /**
+                     * Calls SignSshPublicKey.
+                     * @param request SignSshPublicKeyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SignSshPublicKeyResponse
+                     */
+                    public signSshPublicKey(request: google.cloud.oslogin.v1beta.ISignSshPublicKeyRequest, callback: google.cloud.oslogin.v1beta.OsLoginService.SignSshPublicKeyCallback): void;
+
+                    /**
+                     * Calls SignSshPublicKey.
+                     * @param request SignSshPublicKeyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public signSshPublicKey(request: google.cloud.oslogin.v1beta.ISignSshPublicKeyRequest): Promise<google.cloud.oslogin.v1beta.SignSshPublicKeyResponse>;
                 }
 
                 namespace OsLoginService {
@@ -1586,6 +1600,13 @@ export namespace google {
                      * @param [response] SshPublicKey
                      */
                     type UpdateSshPublicKeyCallback = (error: (Error|null), response?: google.cloud.oslogin.common.SshPublicKey) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oslogin.v1beta.OsLoginService|signSshPublicKey}.
+                     * @param error Error, if any
+                     * @param [response] SignSshPublicKeyResponse
+                     */
+                    type SignSshPublicKeyCallback = (error: (Error|null), response?: google.cloud.oslogin.v1beta.SignSshPublicKeyResponse) => void;
                 }
 
                 /** Properties of a LoginProfile. */
@@ -2845,6 +2866,206 @@ export namespace google {
 
                     /**
                      * Gets the default type url for WebAuthn
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SignSshPublicKeyRequest. */
+                interface ISignSshPublicKeyRequest {
+
+                    /** SignSshPublicKeyRequest sshPublicKey */
+                    sshPublicKey?: (string|null);
+
+                    /** SignSshPublicKeyRequest parent */
+                    parent?: (string|null);
+                }
+
+                /** Represents a SignSshPublicKeyRequest. */
+                class SignSshPublicKeyRequest implements ISignSshPublicKeyRequest {
+
+                    /**
+                     * Constructs a new SignSshPublicKeyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oslogin.v1beta.ISignSshPublicKeyRequest);
+
+                    /** SignSshPublicKeyRequest sshPublicKey. */
+                    public sshPublicKey: string;
+
+                    /** SignSshPublicKeyRequest parent. */
+                    public parent: string;
+
+                    /**
+                     * Creates a new SignSshPublicKeyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SignSshPublicKeyRequest instance
+                     */
+                    public static create(properties?: google.cloud.oslogin.v1beta.ISignSshPublicKeyRequest): google.cloud.oslogin.v1beta.SignSshPublicKeyRequest;
+
+                    /**
+                     * Encodes the specified SignSshPublicKeyRequest message. Does not implicitly {@link google.cloud.oslogin.v1beta.SignSshPublicKeyRequest.verify|verify} messages.
+                     * @param message SignSshPublicKeyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oslogin.v1beta.ISignSshPublicKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SignSshPublicKeyRequest message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1beta.SignSshPublicKeyRequest.verify|verify} messages.
+                     * @param message SignSshPublicKeyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oslogin.v1beta.ISignSshPublicKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SignSshPublicKeyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SignSshPublicKeyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oslogin.v1beta.SignSshPublicKeyRequest;
+
+                    /**
+                     * Decodes a SignSshPublicKeyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SignSshPublicKeyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oslogin.v1beta.SignSshPublicKeyRequest;
+
+                    /**
+                     * Verifies a SignSshPublicKeyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SignSshPublicKeyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SignSshPublicKeyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oslogin.v1beta.SignSshPublicKeyRequest;
+
+                    /**
+                     * Creates a plain object from a SignSshPublicKeyRequest message. Also converts values to other types if specified.
+                     * @param message SignSshPublicKeyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oslogin.v1beta.SignSshPublicKeyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SignSshPublicKeyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SignSshPublicKeyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SignSshPublicKeyResponse. */
+                interface ISignSshPublicKeyResponse {
+
+                    /** SignSshPublicKeyResponse signedSshPublicKey */
+                    signedSshPublicKey?: (string|null);
+                }
+
+                /** Represents a SignSshPublicKeyResponse. */
+                class SignSshPublicKeyResponse implements ISignSshPublicKeyResponse {
+
+                    /**
+                     * Constructs a new SignSshPublicKeyResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oslogin.v1beta.ISignSshPublicKeyResponse);
+
+                    /** SignSshPublicKeyResponse signedSshPublicKey. */
+                    public signedSshPublicKey: string;
+
+                    /**
+                     * Creates a new SignSshPublicKeyResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SignSshPublicKeyResponse instance
+                     */
+                    public static create(properties?: google.cloud.oslogin.v1beta.ISignSshPublicKeyResponse): google.cloud.oslogin.v1beta.SignSshPublicKeyResponse;
+
+                    /**
+                     * Encodes the specified SignSshPublicKeyResponse message. Does not implicitly {@link google.cloud.oslogin.v1beta.SignSshPublicKeyResponse.verify|verify} messages.
+                     * @param message SignSshPublicKeyResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oslogin.v1beta.ISignSshPublicKeyResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SignSshPublicKeyResponse message, length delimited. Does not implicitly {@link google.cloud.oslogin.v1beta.SignSshPublicKeyResponse.verify|verify} messages.
+                     * @param message SignSshPublicKeyResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oslogin.v1beta.ISignSshPublicKeyResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SignSshPublicKeyResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SignSshPublicKeyResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oslogin.v1beta.SignSshPublicKeyResponse;
+
+                    /**
+                     * Decodes a SignSshPublicKeyResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SignSshPublicKeyResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oslogin.v1beta.SignSshPublicKeyResponse;
+
+                    /**
+                     * Verifies a SignSshPublicKeyResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SignSshPublicKeyResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SignSshPublicKeyResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oslogin.v1beta.SignSshPublicKeyResponse;
+
+                    /**
+                     * Creates a plain object from a SignSshPublicKeyResponse message. Also converts values to other types if specified.
+                     * @param message SignSshPublicKeyResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oslogin.v1beta.SignSshPublicKeyResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SignSshPublicKeyResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SignSshPublicKeyResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
