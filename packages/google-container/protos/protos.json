@@ -7561,6 +7561,14 @@
                     "evaluationMode": {
                       "type": "EvaluationMode",
                       "id": 2
+                    },
+                    "policyBindings": {
+                      "rule": "repeated",
+                      "type": "PolicyBinding",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   },
                   "nested": {
@@ -7568,7 +7576,27 @@
                       "values": {
                         "EVALUATION_MODE_UNSPECIFIED": 0,
                         "DISABLED": 1,
-                        "PROJECT_SINGLETON_POLICY_ENFORCE": 2
+                        "PROJECT_SINGLETON_POLICY_ENFORCE": 2,
+                        "POLICY_BINDINGS": 5,
+                        "POLICY_BINDINGS_AND_PROJECT_SINGLETON_POLICY_ENFORCE": 6
+                      }
+                    },
+                    "PolicyBinding": {
+                      "oneofs": {
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
                       }
                     }
                   }

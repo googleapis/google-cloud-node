@@ -27335,6 +27335,9 @@ export namespace google {
 
                 /** BinaryAuthorization evaluationMode */
                 evaluationMode?: (google.container.v1beta1.BinaryAuthorization.EvaluationMode|keyof typeof google.container.v1beta1.BinaryAuthorization.EvaluationMode|null);
+
+                /** BinaryAuthorization policyBindings */
+                policyBindings?: (google.container.v1beta1.BinaryAuthorization.IPolicyBinding[]|null);
             }
 
             /** Represents a BinaryAuthorization. */
@@ -27351,6 +27354,9 @@ export namespace google {
 
                 /** BinaryAuthorization evaluationMode. */
                 public evaluationMode: (google.container.v1beta1.BinaryAuthorization.EvaluationMode|keyof typeof google.container.v1beta1.BinaryAuthorization.EvaluationMode);
+
+                /** BinaryAuthorization policyBindings. */
+                public policyBindings: google.container.v1beta1.BinaryAuthorization.IPolicyBinding[];
 
                 /**
                  * Creates a new BinaryAuthorization instance using the specified properties.
@@ -27436,7 +27442,109 @@ export namespace google {
                 enum EvaluationMode {
                     EVALUATION_MODE_UNSPECIFIED = 0,
                     DISABLED = 1,
-                    PROJECT_SINGLETON_POLICY_ENFORCE = 2
+                    PROJECT_SINGLETON_POLICY_ENFORCE = 2,
+                    POLICY_BINDINGS = 5,
+                    POLICY_BINDINGS_AND_PROJECT_SINGLETON_POLICY_ENFORCE = 6
+                }
+
+                /** Properties of a PolicyBinding. */
+                interface IPolicyBinding {
+
+                    /** PolicyBinding name */
+                    name?: (string|null);
+                }
+
+                /** Represents a PolicyBinding. */
+                class PolicyBinding implements IPolicyBinding {
+
+                    /**
+                     * Constructs a new PolicyBinding.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.container.v1beta1.BinaryAuthorization.IPolicyBinding);
+
+                    /** PolicyBinding name. */
+                    public name?: (string|null);
+
+                    /** PolicyBinding _name. */
+                    public _name?: "name";
+
+                    /**
+                     * Creates a new PolicyBinding instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PolicyBinding instance
+                     */
+                    public static create(properties?: google.container.v1beta1.BinaryAuthorization.IPolicyBinding): google.container.v1beta1.BinaryAuthorization.PolicyBinding;
+
+                    /**
+                     * Encodes the specified PolicyBinding message. Does not implicitly {@link google.container.v1beta1.BinaryAuthorization.PolicyBinding.verify|verify} messages.
+                     * @param message PolicyBinding message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.container.v1beta1.BinaryAuthorization.IPolicyBinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PolicyBinding message, length delimited. Does not implicitly {@link google.container.v1beta1.BinaryAuthorization.PolicyBinding.verify|verify} messages.
+                     * @param message PolicyBinding message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.container.v1beta1.BinaryAuthorization.IPolicyBinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PolicyBinding message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PolicyBinding
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1beta1.BinaryAuthorization.PolicyBinding;
+
+                    /**
+                     * Decodes a PolicyBinding message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PolicyBinding
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1beta1.BinaryAuthorization.PolicyBinding;
+
+                    /**
+                     * Verifies a PolicyBinding message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PolicyBinding message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PolicyBinding
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.container.v1beta1.BinaryAuthorization.PolicyBinding;
+
+                    /**
+                     * Creates a plain object from a PolicyBinding message. Also converts values to other types if specified.
+                     * @param message PolicyBinding
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.container.v1beta1.BinaryAuthorization.PolicyBinding, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PolicyBinding to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PolicyBinding
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
 
