@@ -229,6 +229,30 @@
         }
       }
     },
+    "PipelineService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "PipelineServiceClient",
+          "rpcs": {
+            "RunPipeline": {
+              "methods": [
+                "runPipeline"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "PipelineServiceClient",
+          "rpcs": {
+            "RunPipeline": {
+              "methods": [
+                "runPipeline"
+              ]
+            }
+          }
+        }
+      }
+    },
     "RuleSetService": {
       "clients": {
         "grpc": {
