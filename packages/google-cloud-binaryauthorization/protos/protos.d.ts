@@ -2283,8 +2283,8 @@ export namespace google {
                     /** ContinuousValidationEvent podEvent */
                     podEvent?: (google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IContinuousValidationPodEvent|null);
 
-                    /** ContinuousValidationEvent unsupportedPolicyEvent */
-                    unsupportedPolicyEvent?: (google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IUnsupportedPolicyEvent|null);
+                    /** ContinuousValidationEvent configErrorEvent */
+                    configErrorEvent?: (google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IConfigErrorEvent|null);
                 }
 
                 /** Represents a ContinuousValidationEvent. */
@@ -2299,11 +2299,11 @@ export namespace google {
                     /** ContinuousValidationEvent podEvent. */
                     public podEvent?: (google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IContinuousValidationPodEvent|null);
 
-                    /** ContinuousValidationEvent unsupportedPolicyEvent. */
-                    public unsupportedPolicyEvent?: (google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IUnsupportedPolicyEvent|null);
+                    /** ContinuousValidationEvent configErrorEvent. */
+                    public configErrorEvent?: (google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IConfigErrorEvent|null);
 
                     /** ContinuousValidationEvent eventType. */
-                    public eventType?: ("podEvent"|"unsupportedPolicyEvent");
+                    public eventType?: ("podEvent"|"configErrorEvent");
 
                     /**
                      * Creates a new ContinuousValidationEvent instance using the specified properties.
@@ -2394,6 +2394,9 @@ export namespace google {
                         /** ContinuousValidationPodEvent pod */
                         pod?: (string|null);
 
+                        /** ContinuousValidationPodEvent policyName */
+                        policyName?: (string|null);
+
                         /** ContinuousValidationPodEvent deployTime */
                         deployTime?: (google.protobuf.ITimestamp|null);
 
@@ -2421,6 +2424,9 @@ export namespace google {
 
                         /** ContinuousValidationPodEvent pod. */
                         public pod: string;
+
+                        /** ContinuousValidationPodEvent policyName. */
+                        public policyName: string;
 
                         /** ContinuousValidationPodEvent deployTime. */
                         public deployTime?: (google.protobuf.ITimestamp|null);
@@ -2531,6 +2537,9 @@ export namespace google {
 
                             /** ImageDetails description */
                             description?: (string|null);
+
+                            /** ImageDetails checkResults */
+                            checkResults?: (google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ICheckResult[]|null);
                         }
 
                         /** Represents an ImageDetails. */
@@ -2550,6 +2559,9 @@ export namespace google {
 
                             /** ImageDetails description. */
                             public description: string;
+
+                            /** ImageDetails checkResults. */
+                            public checkResults: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ICheckResult[];
 
                             /**
                              * Creates a new ImageDetails instance using the specified properties.
@@ -2637,100 +2649,354 @@ export namespace google {
                                 ALLOW = 1,
                                 DENY = 2
                             }
+
+                            /** Properties of a CheckResult. */
+                            interface ICheckResult {
+
+                                /** CheckResult checkSetIndex */
+                                checkSetIndex?: (string|null);
+
+                                /** CheckResult checkSetName */
+                                checkSetName?: (string|null);
+
+                                /** CheckResult checkSetScope */
+                                checkSetScope?: (google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.ICheckSetScope|null);
+
+                                /** CheckResult checkIndex */
+                                checkIndex?: (string|null);
+
+                                /** CheckResult checkName */
+                                checkName?: (string|null);
+
+                                /** CheckResult checkType */
+                                checkType?: (string|null);
+
+                                /** CheckResult verdict */
+                                verdict?: (google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckVerdict|keyof typeof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckVerdict|null);
+
+                                /** CheckResult explanation */
+                                explanation?: (string|null);
+                            }
+
+                            /** Represents a CheckResult. */
+                            class CheckResult implements ICheckResult {
+
+                                /**
+                                 * Constructs a new CheckResult.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ICheckResult);
+
+                                /** CheckResult checkSetIndex. */
+                                public checkSetIndex: string;
+
+                                /** CheckResult checkSetName. */
+                                public checkSetName: string;
+
+                                /** CheckResult checkSetScope. */
+                                public checkSetScope?: (google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.ICheckSetScope|null);
+
+                                /** CheckResult checkIndex. */
+                                public checkIndex: string;
+
+                                /** CheckResult checkName. */
+                                public checkName: string;
+
+                                /** CheckResult checkType. */
+                                public checkType: string;
+
+                                /** CheckResult verdict. */
+                                public verdict: (google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckVerdict|keyof typeof google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckVerdict);
+
+                                /** CheckResult explanation. */
+                                public explanation: string;
+
+                                /**
+                                 * Creates a new CheckResult instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns CheckResult instance
+                                 */
+                                public static create(properties?: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ICheckResult): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult;
+
+                                /**
+                                 * Encodes the specified CheckResult message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.verify|verify} messages.
+                                 * @param message CheckResult message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ICheckResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified CheckResult message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.verify|verify} messages.
+                                 * @param message CheckResult message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.ICheckResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a CheckResult message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns CheckResult
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult;
+
+                                /**
+                                 * Decodes a CheckResult message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns CheckResult
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult;
+
+                                /**
+                                 * Verifies a CheckResult message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a CheckResult message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns CheckResult
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult;
+
+                                /**
+                                 * Creates a plain object from a CheckResult message. Also converts values to other types if specified.
+                                 * @param message CheckResult
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this CheckResult to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for CheckResult
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            namespace CheckResult {
+
+                                /** Properties of a CheckSetScope. */
+                                interface ICheckSetScope {
+
+                                    /** CheckSetScope kubernetesServiceAccount */
+                                    kubernetesServiceAccount?: (string|null);
+
+                                    /** CheckSetScope kubernetesNamespace */
+                                    kubernetesNamespace?: (string|null);
+                                }
+
+                                /** Represents a CheckSetScope. */
+                                class CheckSetScope implements ICheckSetScope {
+
+                                    /**
+                                     * Constructs a new CheckSetScope.
+                                     * @param [properties] Properties to set
+                                     */
+                                    constructor(properties?: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.ICheckSetScope);
+
+                                    /** CheckSetScope kubernetesServiceAccount. */
+                                    public kubernetesServiceAccount?: (string|null);
+
+                                    /** CheckSetScope kubernetesNamespace. */
+                                    public kubernetesNamespace?: (string|null);
+
+                                    /** CheckSetScope scope. */
+                                    public scope?: ("kubernetesServiceAccount"|"kubernetesNamespace");
+
+                                    /**
+                                     * Creates a new CheckSetScope instance using the specified properties.
+                                     * @param [properties] Properties to set
+                                     * @returns CheckSetScope instance
+                                     */
+                                    public static create(properties?: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.ICheckSetScope): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope;
+
+                                    /**
+                                     * Encodes the specified CheckSetScope message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope.verify|verify} messages.
+                                     * @param message CheckSetScope message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encode(message: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.ICheckSetScope, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Encodes the specified CheckSetScope message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope.verify|verify} messages.
+                                     * @param message CheckSetScope message or plain object to encode
+                                     * @param [writer] Writer to encode to
+                                     * @returns Writer
+                                     */
+                                    public static encodeDelimited(message: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.ICheckSetScope, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                    /**
+                                     * Decodes a CheckSetScope message from the specified reader or buffer.
+                                     * @param reader Reader or buffer to decode from
+                                     * @param [length] Message length if known beforehand
+                                     * @returns CheckSetScope
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope;
+
+                                    /**
+                                     * Decodes a CheckSetScope message from the specified reader or buffer, length delimited.
+                                     * @param reader Reader or buffer to decode from
+                                     * @returns CheckSetScope
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope;
+
+                                    /**
+                                     * Verifies a CheckSetScope message.
+                                     * @param message Plain object to verify
+                                     * @returns `null` if valid, otherwise the reason why it is not
+                                     */
+                                    public static verify(message: { [k: string]: any }): (string|null);
+
+                                    /**
+                                     * Creates a CheckSetScope message from a plain object. Also converts values to their respective internal types.
+                                     * @param object Plain object
+                                     * @returns CheckSetScope
+                                     */
+                                    public static fromObject(object: { [k: string]: any }): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope;
+
+                                    /**
+                                     * Creates a plain object from a CheckSetScope message. Also converts values to other types if specified.
+                                     * @param message CheckSetScope
+                                     * @param [options] Conversion options
+                                     * @returns Plain object
+                                     */
+                                    public static toObject(message: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent.ImageDetails.CheckResult.CheckSetScope, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                    /**
+                                     * Converts this CheckSetScope to JSON.
+                                     * @returns JSON object
+                                     */
+                                    public toJSON(): { [k: string]: any };
+
+                                    /**
+                                     * Gets the default type url for CheckSetScope
+                                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns The default type url
+                                     */
+                                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                                }
+
+                                /** CheckVerdict enum. */
+                                enum CheckVerdict {
+                                    CHECK_VERDICT_UNSPECIFIED = 0,
+                                    NON_CONFORMANT = 1
+                                }
+                            }
                         }
                     }
 
-                    /** Properties of an UnsupportedPolicyEvent. */
-                    interface IUnsupportedPolicyEvent {
+                    /** Properties of a ConfigErrorEvent. */
+                    interface IConfigErrorEvent {
 
-                        /** UnsupportedPolicyEvent description */
+                        /** ConfigErrorEvent description */
                         description?: (string|null);
                     }
 
-                    /** Represents an UnsupportedPolicyEvent. */
-                    class UnsupportedPolicyEvent implements IUnsupportedPolicyEvent {
+                    /** Represents a ConfigErrorEvent. */
+                    class ConfigErrorEvent implements IConfigErrorEvent {
 
                         /**
-                         * Constructs a new UnsupportedPolicyEvent.
+                         * Constructs a new ConfigErrorEvent.
                          * @param [properties] Properties to set
                          */
-                        constructor(properties?: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IUnsupportedPolicyEvent);
+                        constructor(properties?: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IConfigErrorEvent);
 
-                        /** UnsupportedPolicyEvent description. */
+                        /** ConfigErrorEvent description. */
                         public description: string;
 
                         /**
-                         * Creates a new UnsupportedPolicyEvent instance using the specified properties.
+                         * Creates a new ConfigErrorEvent instance using the specified properties.
                          * @param [properties] Properties to set
-                         * @returns UnsupportedPolicyEvent instance
+                         * @returns ConfigErrorEvent instance
                          */
-                        public static create(properties?: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IUnsupportedPolicyEvent): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent;
+                        public static create(properties?: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IConfigErrorEvent): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent;
 
                         /**
-                         * Encodes the specified UnsupportedPolicyEvent message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent.verify|verify} messages.
-                         * @param message UnsupportedPolicyEvent message or plain object to encode
+                         * Encodes the specified ConfigErrorEvent message. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent.verify|verify} messages.
+                         * @param message ConfigErrorEvent message or plain object to encode
                          * @param [writer] Writer to encode to
                          * @returns Writer
                          */
-                        public static encode(message: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IUnsupportedPolicyEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+                        public static encode(message: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IConfigErrorEvent, writer?: $protobuf.Writer): $protobuf.Writer;
 
                         /**
-                         * Encodes the specified UnsupportedPolicyEvent message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent.verify|verify} messages.
-                         * @param message UnsupportedPolicyEvent message or plain object to encode
+                         * Encodes the specified ConfigErrorEvent message, length delimited. Does not implicitly {@link google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent.verify|verify} messages.
+                         * @param message ConfigErrorEvent message or plain object to encode
                          * @param [writer] Writer to encode to
                          * @returns Writer
                          */
-                        public static encodeDelimited(message: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IUnsupportedPolicyEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+                        public static encodeDelimited(message: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.IConfigErrorEvent, writer?: $protobuf.Writer): $protobuf.Writer;
 
                         /**
-                         * Decodes an UnsupportedPolicyEvent message from the specified reader or buffer.
+                         * Decodes a ConfigErrorEvent message from the specified reader or buffer.
                          * @param reader Reader or buffer to decode from
                          * @param [length] Message length if known beforehand
-                         * @returns UnsupportedPolicyEvent
+                         * @returns ConfigErrorEvent
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent;
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent;
 
                         /**
-                         * Decodes an UnsupportedPolicyEvent message from the specified reader or buffer, length delimited.
+                         * Decodes a ConfigErrorEvent message from the specified reader or buffer, length delimited.
                          * @param reader Reader or buffer to decode from
-                         * @returns UnsupportedPolicyEvent
+                         * @returns ConfigErrorEvent
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent;
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent;
 
                         /**
-                         * Verifies an UnsupportedPolicyEvent message.
+                         * Verifies a ConfigErrorEvent message.
                          * @param message Plain object to verify
                          * @returns `null` if valid, otherwise the reason why it is not
                          */
                         public static verify(message: { [k: string]: any }): (string|null);
 
                         /**
-                         * Creates an UnsupportedPolicyEvent message from a plain object. Also converts values to their respective internal types.
+                         * Creates a ConfigErrorEvent message from a plain object. Also converts values to their respective internal types.
                          * @param object Plain object
-                         * @returns UnsupportedPolicyEvent
+                         * @returns ConfigErrorEvent
                          */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent;
+                        public static fromObject(object: { [k: string]: any }): google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent;
 
                         /**
-                         * Creates a plain object from an UnsupportedPolicyEvent message. Also converts values to other types if specified.
-                         * @param message UnsupportedPolicyEvent
+                         * Creates a plain object from a ConfigErrorEvent message. Also converts values to other types if specified.
+                         * @param message ConfigErrorEvent
                          * @param [options] Conversion options
                          * @returns Plain object
                          */
-                        public static toObject(message: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.UnsupportedPolicyEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                        public static toObject(message: google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ConfigErrorEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                         /**
-                         * Converts this UnsupportedPolicyEvent to JSON.
+                         * Converts this ConfigErrorEvent to JSON.
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
 
                         /**
-                         * Gets the default type url for UnsupportedPolicyEvent
+                         * Gets the default type url for ConfigErrorEvent
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */

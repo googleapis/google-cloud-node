@@ -684,7 +684,7 @@
                         "eventType": {
                           "oneof": [
                             "podEvent",
-                            "unsupportedPolicyEvent"
+                            "configErrorEvent"
                           ]
                         }
                       },
@@ -693,9 +693,9 @@
                           "type": "ContinuousValidationPodEvent",
                           "id": 1
                         },
-                        "unsupportedPolicyEvent": {
-                          "type": "UnsupportedPolicyEvent",
-                          "id": 2
+                        "configErrorEvent": {
+                          "type": "ConfigErrorEvent",
+                          "id": 4
                         }
                       },
                       "nested": {
@@ -708,6 +708,10 @@
                             "pod": {
                               "type": "string",
                               "id": 1
+                            },
+                            "policyName": {
+                              "type": "string",
+                              "id": 8
                             },
                             "deployTime": {
                               "type": "google.protobuf.Timestamp",
@@ -747,6 +751,11 @@
                                 "description": {
                                   "type": "string",
                                   "id": 3
+                                },
+                                "checkResults": {
+                                  "rule": "repeated",
+                                  "type": "CheckResult",
+                                  "id": 4
                                 }
                               },
                               "nested": {
@@ -756,12 +765,76 @@
                                     "ALLOW": 1,
                                     "DENY": 2
                                   }
+                                },
+                                "CheckResult": {
+                                  "fields": {
+                                    "checkSetIndex": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "checkSetName": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "checkSetScope": {
+                                      "type": "CheckSetScope",
+                                      "id": 3
+                                    },
+                                    "checkIndex": {
+                                      "type": "string",
+                                      "id": 4
+                                    },
+                                    "checkName": {
+                                      "type": "string",
+                                      "id": 5
+                                    },
+                                    "checkType": {
+                                      "type": "string",
+                                      "id": 6
+                                    },
+                                    "verdict": {
+                                      "type": "CheckVerdict",
+                                      "id": 7
+                                    },
+                                    "explanation": {
+                                      "type": "string",
+                                      "id": 8
+                                    }
+                                  },
+                                  "nested": {
+                                    "CheckSetScope": {
+                                      "oneofs": {
+                                        "scope": {
+                                          "oneof": [
+                                            "kubernetesServiceAccount",
+                                            "kubernetesNamespace"
+                                          ]
+                                        }
+                                      },
+                                      "fields": {
+                                        "kubernetesServiceAccount": {
+                                          "type": "string",
+                                          "id": 1
+                                        },
+                                        "kubernetesNamespace": {
+                                          "type": "string",
+                                          "id": 2
+                                        }
+                                      }
+                                    },
+                                    "CheckVerdict": {
+                                      "values": {
+                                        "CHECK_VERDICT_UNSPECIFIED": 0,
+                                        "NON_CONFORMANT": 1
+                                      }
+                                    }
+                                  }
                                 }
                               }
                             }
                           }
                         },
-                        "UnsupportedPolicyEvent": {
+                        "ConfigErrorEvent": {
                           "fields": {
                             "description": {
                               "type": "string",
