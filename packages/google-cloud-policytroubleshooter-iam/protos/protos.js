@@ -66,6 +66,6862 @@
                      */
                     var iam = {};
     
+                    iam.v3 = (function() {
+    
+                        /**
+                         * Namespace v3.
+                         * @memberof google.cloud.policytroubleshooter.iam
+                         * @namespace
+                         */
+                        var v3 = {};
+    
+                        v3.PolicyTroubleshooter = (function() {
+    
+                            /**
+                             * Constructs a new PolicyTroubleshooter service.
+                             * @memberof google.cloud.policytroubleshooter.iam.v3
+                             * @classdesc Represents a PolicyTroubleshooter
+                             * @extends $protobuf.rpc.Service
+                             * @constructor
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             */
+                            function PolicyTroubleshooter(rpcImpl, requestDelimited, responseDelimited) {
+                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                            }
+    
+                            (PolicyTroubleshooter.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = PolicyTroubleshooter;
+    
+                            /**
+                             * Creates new PolicyTroubleshooter service using the specified rpc implementation.
+                             * @function create
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.PolicyTroubleshooter
+                             * @static
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             * @returns {PolicyTroubleshooter} RPC service. Useful where requests and/or responses are streamed.
+                             */
+                            PolicyTroubleshooter.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                                return new this(rpcImpl, requestDelimited, responseDelimited);
+                            };
+    
+                            /**
+                             * Callback as used by {@link google.cloud.policytroubleshooter.iam.v3.PolicyTroubleshooter|troubleshootIamPolicy}.
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.PolicyTroubleshooter
+                             * @typedef TroubleshootIamPolicyCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse} [response] TroubleshootIamPolicyResponse
+                             */
+    
+                            /**
+                             * Calls TroubleshootIamPolicy.
+                             * @function troubleshootIamPolicy
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.PolicyTroubleshooter
+                             * @instance
+                             * @param {google.cloud.policytroubleshooter.iam.v3.ITroubleshootIamPolicyRequest} request TroubleshootIamPolicyRequest message or plain object
+                             * @param {google.cloud.policytroubleshooter.iam.v3.PolicyTroubleshooter.TroubleshootIamPolicyCallback} callback Node-style callback called with the error, if any, and TroubleshootIamPolicyResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(PolicyTroubleshooter.prototype.troubleshootIamPolicy = function troubleshootIamPolicy(request, callback) {
+                                return this.rpcCall(troubleshootIamPolicy, $root.google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest, $root.google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse, request, callback);
+                            }, "name", { value: "TroubleshootIamPolicy" });
+    
+                            /**
+                             * Calls TroubleshootIamPolicy.
+                             * @function troubleshootIamPolicy
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.PolicyTroubleshooter
+                             * @instance
+                             * @param {google.cloud.policytroubleshooter.iam.v3.ITroubleshootIamPolicyRequest} request TroubleshootIamPolicyRequest message or plain object
+                             * @returns {Promise<google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            return PolicyTroubleshooter;
+                        })();
+    
+                        /**
+                         * AllowAccessState enum.
+                         * @name google.cloud.policytroubleshooter.iam.v3.AllowAccessState
+                         * @enum {number}
+                         * @property {number} ALLOW_ACCESS_STATE_UNSPECIFIED=0 ALLOW_ACCESS_STATE_UNSPECIFIED value
+                         * @property {number} ALLOW_ACCESS_STATE_GRANTED=1 ALLOW_ACCESS_STATE_GRANTED value
+                         * @property {number} ALLOW_ACCESS_STATE_NOT_GRANTED=2 ALLOW_ACCESS_STATE_NOT_GRANTED value
+                         * @property {number} ALLOW_ACCESS_STATE_UNKNOWN_CONDITIONAL=3 ALLOW_ACCESS_STATE_UNKNOWN_CONDITIONAL value
+                         * @property {number} ALLOW_ACCESS_STATE_UNKNOWN_INFO=4 ALLOW_ACCESS_STATE_UNKNOWN_INFO value
+                         */
+                        v3.AllowAccessState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ALLOW_ACCESS_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ALLOW_ACCESS_STATE_GRANTED"] = 1;
+                            values[valuesById[2] = "ALLOW_ACCESS_STATE_NOT_GRANTED"] = 2;
+                            values[valuesById[3] = "ALLOW_ACCESS_STATE_UNKNOWN_CONDITIONAL"] = 3;
+                            values[valuesById[4] = "ALLOW_ACCESS_STATE_UNKNOWN_INFO"] = 4;
+                            return values;
+                        })();
+    
+                        /**
+                         * DenyAccessState enum.
+                         * @name google.cloud.policytroubleshooter.iam.v3.DenyAccessState
+                         * @enum {number}
+                         * @property {number} DENY_ACCESS_STATE_UNSPECIFIED=0 DENY_ACCESS_STATE_UNSPECIFIED value
+                         * @property {number} DENY_ACCESS_STATE_DENIED=1 DENY_ACCESS_STATE_DENIED value
+                         * @property {number} DENY_ACCESS_STATE_NOT_DENIED=2 DENY_ACCESS_STATE_NOT_DENIED value
+                         * @property {number} DENY_ACCESS_STATE_UNKNOWN_CONDITIONAL=3 DENY_ACCESS_STATE_UNKNOWN_CONDITIONAL value
+                         * @property {number} DENY_ACCESS_STATE_UNKNOWN_INFO=4 DENY_ACCESS_STATE_UNKNOWN_INFO value
+                         */
+                        v3.DenyAccessState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "DENY_ACCESS_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DENY_ACCESS_STATE_DENIED"] = 1;
+                            values[valuesById[2] = "DENY_ACCESS_STATE_NOT_DENIED"] = 2;
+                            values[valuesById[3] = "DENY_ACCESS_STATE_UNKNOWN_CONDITIONAL"] = 3;
+                            values[valuesById[4] = "DENY_ACCESS_STATE_UNKNOWN_INFO"] = 4;
+                            return values;
+                        })();
+    
+                        /**
+                         * RolePermissionInclusionState enum.
+                         * @name google.cloud.policytroubleshooter.iam.v3.RolePermissionInclusionState
+                         * @enum {number}
+                         * @property {number} ROLE_PERMISSION_INCLUSION_STATE_UNSPECIFIED=0 ROLE_PERMISSION_INCLUSION_STATE_UNSPECIFIED value
+                         * @property {number} ROLE_PERMISSION_INCLUDED=1 ROLE_PERMISSION_INCLUDED value
+                         * @property {number} ROLE_PERMISSION_NOT_INCLUDED=2 ROLE_PERMISSION_NOT_INCLUDED value
+                         * @property {number} ROLE_PERMISSION_UNKNOWN_INFO=3 ROLE_PERMISSION_UNKNOWN_INFO value
+                         */
+                        v3.RolePermissionInclusionState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ROLE_PERMISSION_INCLUSION_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ROLE_PERMISSION_INCLUDED"] = 1;
+                            values[valuesById[2] = "ROLE_PERMISSION_NOT_INCLUDED"] = 2;
+                            values[valuesById[3] = "ROLE_PERMISSION_UNKNOWN_INFO"] = 3;
+                            return values;
+                        })();
+    
+                        /**
+                         * PermissionPatternMatchingState enum.
+                         * @name google.cloud.policytroubleshooter.iam.v3.PermissionPatternMatchingState
+                         * @enum {number}
+                         * @property {number} PERMISSION_PATTERN_MATCHING_STATE_UNSPECIFIED=0 PERMISSION_PATTERN_MATCHING_STATE_UNSPECIFIED value
+                         * @property {number} PERMISSION_PATTERN_MATCHED=1 PERMISSION_PATTERN_MATCHED value
+                         * @property {number} PERMISSION_PATTERN_NOT_MATCHED=2 PERMISSION_PATTERN_NOT_MATCHED value
+                         */
+                        v3.PermissionPatternMatchingState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PERMISSION_PATTERN_MATCHING_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PERMISSION_PATTERN_MATCHED"] = 1;
+                            values[valuesById[2] = "PERMISSION_PATTERN_NOT_MATCHED"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * MembershipMatchingState enum.
+                         * @name google.cloud.policytroubleshooter.iam.v3.MembershipMatchingState
+                         * @enum {number}
+                         * @property {number} MEMBERSHIP_MATCHING_STATE_UNSPECIFIED=0 MEMBERSHIP_MATCHING_STATE_UNSPECIFIED value
+                         * @property {number} MEMBERSHIP_MATCHED=1 MEMBERSHIP_MATCHED value
+                         * @property {number} MEMBERSHIP_NOT_MATCHED=2 MEMBERSHIP_NOT_MATCHED value
+                         * @property {number} MEMBERSHIP_UNKNOWN_INFO=3 MEMBERSHIP_UNKNOWN_INFO value
+                         * @property {number} MEMBERSHIP_UNKNOWN_UNSUPPORTED=4 MEMBERSHIP_UNKNOWN_UNSUPPORTED value
+                         */
+                        v3.MembershipMatchingState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "MEMBERSHIP_MATCHING_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "MEMBERSHIP_MATCHED"] = 1;
+                            values[valuesById[2] = "MEMBERSHIP_NOT_MATCHED"] = 2;
+                            values[valuesById[3] = "MEMBERSHIP_UNKNOWN_INFO"] = 3;
+                            values[valuesById[4] = "MEMBERSHIP_UNKNOWN_UNSUPPORTED"] = 4;
+                            return values;
+                        })();
+    
+                        /**
+                         * HeuristicRelevance enum.
+                         * @name google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance
+                         * @enum {number}
+                         * @property {number} HEURISTIC_RELEVANCE_UNSPECIFIED=0 HEURISTIC_RELEVANCE_UNSPECIFIED value
+                         * @property {number} HEURISTIC_RELEVANCE_NORMAL=1 HEURISTIC_RELEVANCE_NORMAL value
+                         * @property {number} HEURISTIC_RELEVANCE_HIGH=2 HEURISTIC_RELEVANCE_HIGH value
+                         */
+                        v3.HeuristicRelevance = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "HEURISTIC_RELEVANCE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "HEURISTIC_RELEVANCE_NORMAL"] = 1;
+                            values[valuesById[2] = "HEURISTIC_RELEVANCE_HIGH"] = 2;
+                            return values;
+                        })();
+    
+                        v3.TroubleshootIamPolicyRequest = (function() {
+    
+                            /**
+                             * Properties of a TroubleshootIamPolicyRequest.
+                             * @memberof google.cloud.policytroubleshooter.iam.v3
+                             * @interface ITroubleshootIamPolicyRequest
+                             * @property {google.cloud.policytroubleshooter.iam.v3.IAccessTuple|null} [accessTuple] TroubleshootIamPolicyRequest accessTuple
+                             */
+    
+                            /**
+                             * Constructs a new TroubleshootIamPolicyRequest.
+                             * @memberof google.cloud.policytroubleshooter.iam.v3
+                             * @classdesc Represents a TroubleshootIamPolicyRequest.
+                             * @implements ITroubleshootIamPolicyRequest
+                             * @constructor
+                             * @param {google.cloud.policytroubleshooter.iam.v3.ITroubleshootIamPolicyRequest=} [properties] Properties to set
+                             */
+                            function TroubleshootIamPolicyRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * TroubleshootIamPolicyRequest accessTuple.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.IAccessTuple|null|undefined} accessTuple
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest
+                             * @instance
+                             */
+                            TroubleshootIamPolicyRequest.prototype.accessTuple = null;
+    
+                            /**
+                             * Creates a new TroubleshootIamPolicyRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.ITroubleshootIamPolicyRequest=} [properties] Properties to set
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest} TroubleshootIamPolicyRequest instance
+                             */
+                            TroubleshootIamPolicyRequest.create = function create(properties) {
+                                return new TroubleshootIamPolicyRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified TroubleshootIamPolicyRequest message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.ITroubleshootIamPolicyRequest} message TroubleshootIamPolicyRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TroubleshootIamPolicyRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.accessTuple != null && Object.hasOwnProperty.call(message, "accessTuple"))
+                                    $root.google.cloud.policytroubleshooter.iam.v3.AccessTuple.encode(message.accessTuple, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified TroubleshootIamPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.ITroubleshootIamPolicyRequest} message TroubleshootIamPolicyRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TroubleshootIamPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a TroubleshootIamPolicyRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest} TroubleshootIamPolicyRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TroubleshootIamPolicyRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.accessTuple = $root.google.cloud.policytroubleshooter.iam.v3.AccessTuple.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a TroubleshootIamPolicyRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest} TroubleshootIamPolicyRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TroubleshootIamPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a TroubleshootIamPolicyRequest message.
+                             * @function verify
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            TroubleshootIamPolicyRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.accessTuple != null && message.hasOwnProperty("accessTuple")) {
+                                    var error = $root.google.cloud.policytroubleshooter.iam.v3.AccessTuple.verify(message.accessTuple);
+                                    if (error)
+                                        return "accessTuple." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a TroubleshootIamPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest} TroubleshootIamPolicyRequest
+                             */
+                            TroubleshootIamPolicyRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest)
+                                    return object;
+                                var message = new $root.google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest();
+                                if (object.accessTuple != null) {
+                                    if (typeof object.accessTuple !== "object")
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest.accessTuple: object expected");
+                                    message.accessTuple = $root.google.cloud.policytroubleshooter.iam.v3.AccessTuple.fromObject(object.accessTuple);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a TroubleshootIamPolicyRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest} message TroubleshootIamPolicyRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            TroubleshootIamPolicyRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.accessTuple = null;
+                                if (message.accessTuple != null && message.hasOwnProperty("accessTuple"))
+                                    object.accessTuple = $root.google.cloud.policytroubleshooter.iam.v3.AccessTuple.toObject(message.accessTuple, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this TroubleshootIamPolicyRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            TroubleshootIamPolicyRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for TroubleshootIamPolicyRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            TroubleshootIamPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest";
+                            };
+    
+                            return TroubleshootIamPolicyRequest;
+                        })();
+    
+                        v3.TroubleshootIamPolicyResponse = (function() {
+    
+                            /**
+                             * Properties of a TroubleshootIamPolicyResponse.
+                             * @memberof google.cloud.policytroubleshooter.iam.v3
+                             * @interface ITroubleshootIamPolicyResponse
+                             * @property {google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse.OverallAccessState|null} [overallAccessState] TroubleshootIamPolicyResponse overallAccessState
+                             * @property {google.cloud.policytroubleshooter.iam.v3.IAccessTuple|null} [accessTuple] TroubleshootIamPolicyResponse accessTuple
+                             * @property {google.cloud.policytroubleshooter.iam.v3.IAllowPolicyExplanation|null} [allowPolicyExplanation] TroubleshootIamPolicyResponse allowPolicyExplanation
+                             * @property {google.cloud.policytroubleshooter.iam.v3.IDenyPolicyExplanation|null} [denyPolicyExplanation] TroubleshootIamPolicyResponse denyPolicyExplanation
+                             */
+    
+                            /**
+                             * Constructs a new TroubleshootIamPolicyResponse.
+                             * @memberof google.cloud.policytroubleshooter.iam.v3
+                             * @classdesc Represents a TroubleshootIamPolicyResponse.
+                             * @implements ITroubleshootIamPolicyResponse
+                             * @constructor
+                             * @param {google.cloud.policytroubleshooter.iam.v3.ITroubleshootIamPolicyResponse=} [properties] Properties to set
+                             */
+                            function TroubleshootIamPolicyResponse(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * TroubleshootIamPolicyResponse overallAccessState.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse.OverallAccessState} overallAccessState
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse
+                             * @instance
+                             */
+                            TroubleshootIamPolicyResponse.prototype.overallAccessState = 0;
+    
+                            /**
+                             * TroubleshootIamPolicyResponse accessTuple.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.IAccessTuple|null|undefined} accessTuple
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse
+                             * @instance
+                             */
+                            TroubleshootIamPolicyResponse.prototype.accessTuple = null;
+    
+                            /**
+                             * TroubleshootIamPolicyResponse allowPolicyExplanation.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.IAllowPolicyExplanation|null|undefined} allowPolicyExplanation
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse
+                             * @instance
+                             */
+                            TroubleshootIamPolicyResponse.prototype.allowPolicyExplanation = null;
+    
+                            /**
+                             * TroubleshootIamPolicyResponse denyPolicyExplanation.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.IDenyPolicyExplanation|null|undefined} denyPolicyExplanation
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse
+                             * @instance
+                             */
+                            TroubleshootIamPolicyResponse.prototype.denyPolicyExplanation = null;
+    
+                            /**
+                             * Creates a new TroubleshootIamPolicyResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.ITroubleshootIamPolicyResponse=} [properties] Properties to set
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse} TroubleshootIamPolicyResponse instance
+                             */
+                            TroubleshootIamPolicyResponse.create = function create(properties) {
+                                return new TroubleshootIamPolicyResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified TroubleshootIamPolicyResponse message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.ITroubleshootIamPolicyResponse} message TroubleshootIamPolicyResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TroubleshootIamPolicyResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.overallAccessState != null && Object.hasOwnProperty.call(message, "overallAccessState"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.overallAccessState);
+                                if (message.accessTuple != null && Object.hasOwnProperty.call(message, "accessTuple"))
+                                    $root.google.cloud.policytroubleshooter.iam.v3.AccessTuple.encode(message.accessTuple, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.allowPolicyExplanation != null && Object.hasOwnProperty.call(message, "allowPolicyExplanation"))
+                                    $root.google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation.encode(message.allowPolicyExplanation, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.denyPolicyExplanation != null && Object.hasOwnProperty.call(message, "denyPolicyExplanation"))
+                                    $root.google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation.encode(message.denyPolicyExplanation, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified TroubleshootIamPolicyResponse message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.ITroubleshootIamPolicyResponse} message TroubleshootIamPolicyResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TroubleshootIamPolicyResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a TroubleshootIamPolicyResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse} TroubleshootIamPolicyResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TroubleshootIamPolicyResponse.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.overallAccessState = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.accessTuple = $root.google.cloud.policytroubleshooter.iam.v3.AccessTuple.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.allowPolicyExplanation = $root.google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.denyPolicyExplanation = $root.google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a TroubleshootIamPolicyResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse} TroubleshootIamPolicyResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TroubleshootIamPolicyResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a TroubleshootIamPolicyResponse message.
+                             * @function verify
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            TroubleshootIamPolicyResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.overallAccessState != null && message.hasOwnProperty("overallAccessState"))
+                                    switch (message.overallAccessState) {
+                                    default:
+                                        return "overallAccessState: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                if (message.accessTuple != null && message.hasOwnProperty("accessTuple")) {
+                                    var error = $root.google.cloud.policytroubleshooter.iam.v3.AccessTuple.verify(message.accessTuple);
+                                    if (error)
+                                        return "accessTuple." + error;
+                                }
+                                if (message.allowPolicyExplanation != null && message.hasOwnProperty("allowPolicyExplanation")) {
+                                    var error = $root.google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation.verify(message.allowPolicyExplanation);
+                                    if (error)
+                                        return "allowPolicyExplanation." + error;
+                                }
+                                if (message.denyPolicyExplanation != null && message.hasOwnProperty("denyPolicyExplanation")) {
+                                    var error = $root.google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation.verify(message.denyPolicyExplanation);
+                                    if (error)
+                                        return "denyPolicyExplanation." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a TroubleshootIamPolicyResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse} TroubleshootIamPolicyResponse
+                             */
+                            TroubleshootIamPolicyResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse)
+                                    return object;
+                                var message = new $root.google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse();
+                                switch (object.overallAccessState) {
+                                default:
+                                    if (typeof object.overallAccessState === "number") {
+                                        message.overallAccessState = object.overallAccessState;
+                                        break;
+                                    }
+                                    break;
+                                case "OVERALL_ACCESS_STATE_UNSPECIFIED":
+                                case 0:
+                                    message.overallAccessState = 0;
+                                    break;
+                                case "CAN_ACCESS":
+                                case 1:
+                                    message.overallAccessState = 1;
+                                    break;
+                                case "CANNOT_ACCESS":
+                                case 2:
+                                    message.overallAccessState = 2;
+                                    break;
+                                case "UNKNOWN_INFO":
+                                case 3:
+                                    message.overallAccessState = 3;
+                                    break;
+                                case "UNKNOWN_CONDITIONAL":
+                                case 4:
+                                    message.overallAccessState = 4;
+                                    break;
+                                }
+                                if (object.accessTuple != null) {
+                                    if (typeof object.accessTuple !== "object")
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse.accessTuple: object expected");
+                                    message.accessTuple = $root.google.cloud.policytroubleshooter.iam.v3.AccessTuple.fromObject(object.accessTuple);
+                                }
+                                if (object.allowPolicyExplanation != null) {
+                                    if (typeof object.allowPolicyExplanation !== "object")
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse.allowPolicyExplanation: object expected");
+                                    message.allowPolicyExplanation = $root.google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation.fromObject(object.allowPolicyExplanation);
+                                }
+                                if (object.denyPolicyExplanation != null) {
+                                    if (typeof object.denyPolicyExplanation !== "object")
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse.denyPolicyExplanation: object expected");
+                                    message.denyPolicyExplanation = $root.google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation.fromObject(object.denyPolicyExplanation);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a TroubleshootIamPolicyResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse} message TroubleshootIamPolicyResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            TroubleshootIamPolicyResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.overallAccessState = options.enums === String ? "OVERALL_ACCESS_STATE_UNSPECIFIED" : 0;
+                                    object.accessTuple = null;
+                                    object.allowPolicyExplanation = null;
+                                    object.denyPolicyExplanation = null;
+                                }
+                                if (message.overallAccessState != null && message.hasOwnProperty("overallAccessState"))
+                                    object.overallAccessState = options.enums === String ? $root.google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse.OverallAccessState[message.overallAccessState] === undefined ? message.overallAccessState : $root.google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse.OverallAccessState[message.overallAccessState] : message.overallAccessState;
+                                if (message.accessTuple != null && message.hasOwnProperty("accessTuple"))
+                                    object.accessTuple = $root.google.cloud.policytroubleshooter.iam.v3.AccessTuple.toObject(message.accessTuple, options);
+                                if (message.allowPolicyExplanation != null && message.hasOwnProperty("allowPolicyExplanation"))
+                                    object.allowPolicyExplanation = $root.google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation.toObject(message.allowPolicyExplanation, options);
+                                if (message.denyPolicyExplanation != null && message.hasOwnProperty("denyPolicyExplanation"))
+                                    object.denyPolicyExplanation = $root.google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation.toObject(message.denyPolicyExplanation, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this TroubleshootIamPolicyResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            TroubleshootIamPolicyResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for TroubleshootIamPolicyResponse
+                             * @function getTypeUrl
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            TroubleshootIamPolicyResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse";
+                            };
+    
+                            /**
+                             * OverallAccessState enum.
+                             * @name google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse.OverallAccessState
+                             * @enum {number}
+                             * @property {number} OVERALL_ACCESS_STATE_UNSPECIFIED=0 OVERALL_ACCESS_STATE_UNSPECIFIED value
+                             * @property {number} CAN_ACCESS=1 CAN_ACCESS value
+                             * @property {number} CANNOT_ACCESS=2 CANNOT_ACCESS value
+                             * @property {number} UNKNOWN_INFO=3 UNKNOWN_INFO value
+                             * @property {number} UNKNOWN_CONDITIONAL=4 UNKNOWN_CONDITIONAL value
+                             */
+                            TroubleshootIamPolicyResponse.OverallAccessState = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "OVERALL_ACCESS_STATE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "CAN_ACCESS"] = 1;
+                                values[valuesById[2] = "CANNOT_ACCESS"] = 2;
+                                values[valuesById[3] = "UNKNOWN_INFO"] = 3;
+                                values[valuesById[4] = "UNKNOWN_CONDITIONAL"] = 4;
+                                return values;
+                            })();
+    
+                            return TroubleshootIamPolicyResponse;
+                        })();
+    
+                        v3.AccessTuple = (function() {
+    
+                            /**
+                             * Properties of an AccessTuple.
+                             * @memberof google.cloud.policytroubleshooter.iam.v3
+                             * @interface IAccessTuple
+                             * @property {string|null} [principal] AccessTuple principal
+                             * @property {string|null} [fullResourceName] AccessTuple fullResourceName
+                             * @property {string|null} [permission] AccessTuple permission
+                             * @property {string|null} [permissionFqdn] AccessTuple permissionFqdn
+                             * @property {google.cloud.policytroubleshooter.iam.v3.IConditionContext|null} [conditionContext] AccessTuple conditionContext
+                             */
+    
+                            /**
+                             * Constructs a new AccessTuple.
+                             * @memberof google.cloud.policytroubleshooter.iam.v3
+                             * @classdesc Represents an AccessTuple.
+                             * @implements IAccessTuple
+                             * @constructor
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IAccessTuple=} [properties] Properties to set
+                             */
+                            function AccessTuple(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AccessTuple principal.
+                             * @member {string} principal
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AccessTuple
+                             * @instance
+                             */
+                            AccessTuple.prototype.principal = "";
+    
+                            /**
+                             * AccessTuple fullResourceName.
+                             * @member {string} fullResourceName
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AccessTuple
+                             * @instance
+                             */
+                            AccessTuple.prototype.fullResourceName = "";
+    
+                            /**
+                             * AccessTuple permission.
+                             * @member {string} permission
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AccessTuple
+                             * @instance
+                             */
+                            AccessTuple.prototype.permission = "";
+    
+                            /**
+                             * AccessTuple permissionFqdn.
+                             * @member {string} permissionFqdn
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AccessTuple
+                             * @instance
+                             */
+                            AccessTuple.prototype.permissionFqdn = "";
+    
+                            /**
+                             * AccessTuple conditionContext.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.IConditionContext|null|undefined} conditionContext
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AccessTuple
+                             * @instance
+                             */
+                            AccessTuple.prototype.conditionContext = null;
+    
+                            /**
+                             * Creates a new AccessTuple instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AccessTuple
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IAccessTuple=} [properties] Properties to set
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.AccessTuple} AccessTuple instance
+                             */
+                            AccessTuple.create = function create(properties) {
+                                return new AccessTuple(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AccessTuple message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.AccessTuple.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AccessTuple
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IAccessTuple} message AccessTuple message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AccessTuple.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.principal != null && Object.hasOwnProperty.call(message, "principal"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.principal);
+                                if (message.fullResourceName != null && Object.hasOwnProperty.call(message, "fullResourceName"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.fullResourceName);
+                                if (message.permission != null && Object.hasOwnProperty.call(message, "permission"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.permission);
+                                if (message.permissionFqdn != null && Object.hasOwnProperty.call(message, "permissionFqdn"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.permissionFqdn);
+                                if (message.conditionContext != null && Object.hasOwnProperty.call(message, "conditionContext"))
+                                    $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.encode(message.conditionContext, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AccessTuple message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.AccessTuple.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AccessTuple
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IAccessTuple} message AccessTuple message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AccessTuple.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AccessTuple message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AccessTuple
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.AccessTuple} AccessTuple
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AccessTuple.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.policytroubleshooter.iam.v3.AccessTuple();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.principal = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.fullResourceName = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.permission = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.permissionFqdn = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.conditionContext = $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AccessTuple message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AccessTuple
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.AccessTuple} AccessTuple
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AccessTuple.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AccessTuple message.
+                             * @function verify
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AccessTuple
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AccessTuple.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.principal != null && message.hasOwnProperty("principal"))
+                                    if (!$util.isString(message.principal))
+                                        return "principal: string expected";
+                                if (message.fullResourceName != null && message.hasOwnProperty("fullResourceName"))
+                                    if (!$util.isString(message.fullResourceName))
+                                        return "fullResourceName: string expected";
+                                if (message.permission != null && message.hasOwnProperty("permission"))
+                                    if (!$util.isString(message.permission))
+                                        return "permission: string expected";
+                                if (message.permissionFqdn != null && message.hasOwnProperty("permissionFqdn"))
+                                    if (!$util.isString(message.permissionFqdn))
+                                        return "permissionFqdn: string expected";
+                                if (message.conditionContext != null && message.hasOwnProperty("conditionContext")) {
+                                    var error = $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.verify(message.conditionContext);
+                                    if (error)
+                                        return "conditionContext." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AccessTuple message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AccessTuple
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.AccessTuple} AccessTuple
+                             */
+                            AccessTuple.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.policytroubleshooter.iam.v3.AccessTuple)
+                                    return object;
+                                var message = new $root.google.cloud.policytroubleshooter.iam.v3.AccessTuple();
+                                if (object.principal != null)
+                                    message.principal = String(object.principal);
+                                if (object.fullResourceName != null)
+                                    message.fullResourceName = String(object.fullResourceName);
+                                if (object.permission != null)
+                                    message.permission = String(object.permission);
+                                if (object.permissionFqdn != null)
+                                    message.permissionFqdn = String(object.permissionFqdn);
+                                if (object.conditionContext != null) {
+                                    if (typeof object.conditionContext !== "object")
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.AccessTuple.conditionContext: object expected");
+                                    message.conditionContext = $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.fromObject(object.conditionContext);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AccessTuple message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AccessTuple
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.AccessTuple} message AccessTuple
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AccessTuple.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.principal = "";
+                                    object.fullResourceName = "";
+                                    object.permission = "";
+                                    object.permissionFqdn = "";
+                                    object.conditionContext = null;
+                                }
+                                if (message.principal != null && message.hasOwnProperty("principal"))
+                                    object.principal = message.principal;
+                                if (message.fullResourceName != null && message.hasOwnProperty("fullResourceName"))
+                                    object.fullResourceName = message.fullResourceName;
+                                if (message.permission != null && message.hasOwnProperty("permission"))
+                                    object.permission = message.permission;
+                                if (message.permissionFqdn != null && message.hasOwnProperty("permissionFqdn"))
+                                    object.permissionFqdn = message.permissionFqdn;
+                                if (message.conditionContext != null && message.hasOwnProperty("conditionContext"))
+                                    object.conditionContext = $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.toObject(message.conditionContext, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AccessTuple to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AccessTuple
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AccessTuple.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AccessTuple
+                             * @function getTypeUrl
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AccessTuple
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AccessTuple.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.policytroubleshooter.iam.v3.AccessTuple";
+                            };
+    
+                            return AccessTuple;
+                        })();
+    
+                        v3.ConditionContext = (function() {
+    
+                            /**
+                             * Properties of a ConditionContext.
+                             * @memberof google.cloud.policytroubleshooter.iam.v3
+                             * @interface IConditionContext
+                             * @property {google.cloud.policytroubleshooter.iam.v3.ConditionContext.IResource|null} [resource] ConditionContext resource
+                             * @property {google.cloud.policytroubleshooter.iam.v3.ConditionContext.IPeer|null} [destination] ConditionContext destination
+                             * @property {google.cloud.policytroubleshooter.iam.v3.ConditionContext.IRequest|null} [request] ConditionContext request
+                             * @property {Array.<google.cloud.policytroubleshooter.iam.v3.ConditionContext.IEffectiveTag>|null} [effectiveTags] ConditionContext effectiveTags
+                             */
+    
+                            /**
+                             * Constructs a new ConditionContext.
+                             * @memberof google.cloud.policytroubleshooter.iam.v3
+                             * @classdesc Represents a ConditionContext.
+                             * @implements IConditionContext
+                             * @constructor
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IConditionContext=} [properties] Properties to set
+                             */
+                            function ConditionContext(properties) {
+                                this.effectiveTags = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ConditionContext resource.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.ConditionContext.IResource|null|undefined} resource
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext
+                             * @instance
+                             */
+                            ConditionContext.prototype.resource = null;
+    
+                            /**
+                             * ConditionContext destination.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.ConditionContext.IPeer|null|undefined} destination
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext
+                             * @instance
+                             */
+                            ConditionContext.prototype.destination = null;
+    
+                            /**
+                             * ConditionContext request.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.ConditionContext.IRequest|null|undefined} request
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext
+                             * @instance
+                             */
+                            ConditionContext.prototype.request = null;
+    
+                            /**
+                             * ConditionContext effectiveTags.
+                             * @member {Array.<google.cloud.policytroubleshooter.iam.v3.ConditionContext.IEffectiveTag>} effectiveTags
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext
+                             * @instance
+                             */
+                            ConditionContext.prototype.effectiveTags = $util.emptyArray;
+    
+                            /**
+                             * Creates a new ConditionContext instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IConditionContext=} [properties] Properties to set
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.ConditionContext} ConditionContext instance
+                             */
+                            ConditionContext.create = function create(properties) {
+                                return new ConditionContext(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ConditionContext message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ConditionContext.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IConditionContext} message ConditionContext message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ConditionContext.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
+                                    $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource.encode(message.resource, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.destination != null && Object.hasOwnProperty.call(message, "destination"))
+                                    $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer.encode(message.destination, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.request != null && Object.hasOwnProperty.call(message, "request"))
+                                    $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request.encode(message.request, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.effectiveTags != null && message.effectiveTags.length)
+                                    for (var i = 0; i < message.effectiveTags.length; ++i)
+                                        $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag.encode(message.effectiveTags[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ConditionContext message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ConditionContext.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IConditionContext} message ConditionContext message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ConditionContext.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ConditionContext message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.ConditionContext} ConditionContext
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ConditionContext.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.resource = $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.destination = $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.request = $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            if (!(message.effectiveTags && message.effectiveTags.length))
+                                                message.effectiveTags = [];
+                                            message.effectiveTags.push($root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ConditionContext message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.ConditionContext} ConditionContext
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ConditionContext.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ConditionContext message.
+                             * @function verify
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ConditionContext.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.resource != null && message.hasOwnProperty("resource")) {
+                                    var error = $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource.verify(message.resource);
+                                    if (error)
+                                        return "resource." + error;
+                                }
+                                if (message.destination != null && message.hasOwnProperty("destination")) {
+                                    var error = $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer.verify(message.destination);
+                                    if (error)
+                                        return "destination." + error;
+                                }
+                                if (message.request != null && message.hasOwnProperty("request")) {
+                                    var error = $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request.verify(message.request);
+                                    if (error)
+                                        return "request." + error;
+                                }
+                                if (message.effectiveTags != null && message.hasOwnProperty("effectiveTags")) {
+                                    if (!Array.isArray(message.effectiveTags))
+                                        return "effectiveTags: array expected";
+                                    for (var i = 0; i < message.effectiveTags.length; ++i) {
+                                        var error = $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag.verify(message.effectiveTags[i]);
+                                        if (error)
+                                            return "effectiveTags." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ConditionContext message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.ConditionContext} ConditionContext
+                             */
+                            ConditionContext.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext)
+                                    return object;
+                                var message = new $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext();
+                                if (object.resource != null) {
+                                    if (typeof object.resource !== "object")
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.ConditionContext.resource: object expected");
+                                    message.resource = $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource.fromObject(object.resource);
+                                }
+                                if (object.destination != null) {
+                                    if (typeof object.destination !== "object")
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.ConditionContext.destination: object expected");
+                                    message.destination = $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer.fromObject(object.destination);
+                                }
+                                if (object.request != null) {
+                                    if (typeof object.request !== "object")
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.ConditionContext.request: object expected");
+                                    message.request = $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request.fromObject(object.request);
+                                }
+                                if (object.effectiveTags) {
+                                    if (!Array.isArray(object.effectiveTags))
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.ConditionContext.effectiveTags: array expected");
+                                    message.effectiveTags = [];
+                                    for (var i = 0; i < object.effectiveTags.length; ++i) {
+                                        if (typeof object.effectiveTags[i] !== "object")
+                                            throw TypeError(".google.cloud.policytroubleshooter.iam.v3.ConditionContext.effectiveTags: object expected");
+                                        message.effectiveTags[i] = $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag.fromObject(object.effectiveTags[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ConditionContext message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.ConditionContext} message ConditionContext
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ConditionContext.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.effectiveTags = [];
+                                if (options.defaults) {
+                                    object.resource = null;
+                                    object.destination = null;
+                                    object.request = null;
+                                }
+                                if (message.resource != null && message.hasOwnProperty("resource"))
+                                    object.resource = $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource.toObject(message.resource, options);
+                                if (message.destination != null && message.hasOwnProperty("destination"))
+                                    object.destination = $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer.toObject(message.destination, options);
+                                if (message.request != null && message.hasOwnProperty("request"))
+                                    object.request = $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request.toObject(message.request, options);
+                                if (message.effectiveTags && message.effectiveTags.length) {
+                                    object.effectiveTags = [];
+                                    for (var j = 0; j < message.effectiveTags.length; ++j)
+                                        object.effectiveTags[j] = $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag.toObject(message.effectiveTags[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ConditionContext to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ConditionContext.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ConditionContext
+                             * @function getTypeUrl
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ConditionContext.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.policytroubleshooter.iam.v3.ConditionContext";
+                            };
+    
+                            ConditionContext.Resource = (function() {
+    
+                                /**
+                                 * Properties of a Resource.
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext
+                                 * @interface IResource
+                                 * @property {string|null} [service] Resource service
+                                 * @property {string|null} [name] Resource name
+                                 * @property {string|null} [type] Resource type
+                                 */
+    
+                                /**
+                                 * Constructs a new Resource.
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext
+                                 * @classdesc Represents a Resource.
+                                 * @implements IResource
+                                 * @constructor
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.ConditionContext.IResource=} [properties] Properties to set
+                                 */
+                                function Resource(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Resource service.
+                                 * @member {string} service
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource
+                                 * @instance
+                                 */
+                                Resource.prototype.service = "";
+    
+                                /**
+                                 * Resource name.
+                                 * @member {string} name
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource
+                                 * @instance
+                                 */
+                                Resource.prototype.name = "";
+    
+                                /**
+                                 * Resource type.
+                                 * @member {string} type
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource
+                                 * @instance
+                                 */
+                                Resource.prototype.type = "";
+    
+                                /**
+                                 * Creates a new Resource instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.ConditionContext.IResource=} [properties] Properties to set
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource} Resource instance
+                                 */
+                                Resource.create = function create(properties) {
+                                    return new Resource(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Resource message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.ConditionContext.IResource} message Resource message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Resource.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.service != null && Object.hasOwnProperty.call(message, "service"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.service);
+                                    if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+                                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.type);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Resource message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.ConditionContext.IResource} message Resource message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Resource.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Resource message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource} Resource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Resource.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.service = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.name = reader.string();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.type = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Resource message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource} Resource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Resource.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Resource message.
+                                 * @function verify
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Resource.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.service != null && message.hasOwnProperty("service"))
+                                        if (!$util.isString(message.service))
+                                            return "service: string expected";
+                                    if (message.name != null && message.hasOwnProperty("name"))
+                                        if (!$util.isString(message.name))
+                                            return "name: string expected";
+                                    if (message.type != null && message.hasOwnProperty("type"))
+                                        if (!$util.isString(message.type))
+                                            return "type: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Resource message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource} Resource
+                                 */
+                                Resource.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource)
+                                        return object;
+                                    var message = new $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource();
+                                    if (object.service != null)
+                                        message.service = String(object.service);
+                                    if (object.name != null)
+                                        message.name = String(object.name);
+                                    if (object.type != null)
+                                        message.type = String(object.type);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Resource message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource} message Resource
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Resource.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.service = "";
+                                        object.name = "";
+                                        object.type = "";
+                                    }
+                                    if (message.service != null && message.hasOwnProperty("service"))
+                                        object.service = message.service;
+                                    if (message.name != null && message.hasOwnProperty("name"))
+                                        object.name = message.name;
+                                    if (message.type != null && message.hasOwnProperty("type"))
+                                        object.type = message.type;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Resource to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Resource.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Resource
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Resource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource";
+                                };
+    
+                                return Resource;
+                            })();
+    
+                            ConditionContext.Peer = (function() {
+    
+                                /**
+                                 * Properties of a Peer.
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext
+                                 * @interface IPeer
+                                 * @property {string|null} [ip] Peer ip
+                                 * @property {number|Long|null} [port] Peer port
+                                 */
+    
+                                /**
+                                 * Constructs a new Peer.
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext
+                                 * @classdesc Represents a Peer.
+                                 * @implements IPeer
+                                 * @constructor
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.ConditionContext.IPeer=} [properties] Properties to set
+                                 */
+                                function Peer(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Peer ip.
+                                 * @member {string} ip
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer
+                                 * @instance
+                                 */
+                                Peer.prototype.ip = "";
+    
+                                /**
+                                 * Peer port.
+                                 * @member {number|Long} port
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer
+                                 * @instance
+                                 */
+                                Peer.prototype.port = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                                /**
+                                 * Creates a new Peer instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.ConditionContext.IPeer=} [properties] Properties to set
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer} Peer instance
+                                 */
+                                Peer.create = function create(properties) {
+                                    return new Peer(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Peer message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.ConditionContext.IPeer} message Peer message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Peer.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.ip != null && Object.hasOwnProperty.call(message, "ip"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.ip);
+                                    if (message.port != null && Object.hasOwnProperty.call(message, "port"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int64(message.port);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Peer message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.ConditionContext.IPeer} message Peer message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Peer.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Peer message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer} Peer
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Peer.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.ip = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.port = reader.int64();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Peer message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer} Peer
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Peer.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Peer message.
+                                 * @function verify
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Peer.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.ip != null && message.hasOwnProperty("ip"))
+                                        if (!$util.isString(message.ip))
+                                            return "ip: string expected";
+                                    if (message.port != null && message.hasOwnProperty("port"))
+                                        if (!$util.isInteger(message.port) && !(message.port && $util.isInteger(message.port.low) && $util.isInteger(message.port.high)))
+                                            return "port: integer|Long expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Peer message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer} Peer
+                                 */
+                                Peer.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer)
+                                        return object;
+                                    var message = new $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer();
+                                    if (object.ip != null)
+                                        message.ip = String(object.ip);
+                                    if (object.port != null)
+                                        if ($util.Long)
+                                            (message.port = $util.Long.fromValue(object.port)).unsigned = false;
+                                        else if (typeof object.port === "string")
+                                            message.port = parseInt(object.port, 10);
+                                        else if (typeof object.port === "number")
+                                            message.port = object.port;
+                                        else if (typeof object.port === "object")
+                                            message.port = new $util.LongBits(object.port.low >>> 0, object.port.high >>> 0).toNumber();
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Peer message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer} message Peer
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Peer.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.ip = "";
+                                        if ($util.Long) {
+                                            var long = new $util.Long(0, 0, false);
+                                            object.port = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                        } else
+                                            object.port = options.longs === String ? "0" : 0;
+                                    }
+                                    if (message.ip != null && message.hasOwnProperty("ip"))
+                                        object.ip = message.ip;
+                                    if (message.port != null && message.hasOwnProperty("port"))
+                                        if (typeof message.port === "number")
+                                            object.port = options.longs === String ? String(message.port) : message.port;
+                                        else
+                                            object.port = options.longs === String ? $util.Long.prototype.toString.call(message.port) : options.longs === Number ? new $util.LongBits(message.port.low >>> 0, message.port.high >>> 0).toNumber() : message.port;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Peer to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Peer.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Peer
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Peer.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer";
+                                };
+    
+                                return Peer;
+                            })();
+    
+                            ConditionContext.Request = (function() {
+    
+                                /**
+                                 * Properties of a Request.
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext
+                                 * @interface IRequest
+                                 * @property {google.protobuf.ITimestamp|null} [receiveTime] Request receiveTime
+                                 */
+    
+                                /**
+                                 * Constructs a new Request.
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext
+                                 * @classdesc Represents a Request.
+                                 * @implements IRequest
+                                 * @constructor
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.ConditionContext.IRequest=} [properties] Properties to set
+                                 */
+                                function Request(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Request receiveTime.
+                                 * @member {google.protobuf.ITimestamp|null|undefined} receiveTime
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request
+                                 * @instance
+                                 */
+                                Request.prototype.receiveTime = null;
+    
+                                /**
+                                 * Creates a new Request instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.ConditionContext.IRequest=} [properties] Properties to set
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request} Request instance
+                                 */
+                                Request.create = function create(properties) {
+                                    return new Request(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Request message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.ConditionContext.IRequest} message Request message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Request.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.receiveTime != null && Object.hasOwnProperty.call(message, "receiveTime"))
+                                        $root.google.protobuf.Timestamp.encode(message.receiveTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Request message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.ConditionContext.IRequest} message Request message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Request.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Request message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request} Request
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Request.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.receiveTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Request message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request} Request
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Request.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Request message.
+                                 * @function verify
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Request.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.receiveTime != null && message.hasOwnProperty("receiveTime")) {
+                                        var error = $root.google.protobuf.Timestamp.verify(message.receiveTime);
+                                        if (error)
+                                            return "receiveTime." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Request message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request} Request
+                                 */
+                                Request.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request)
+                                        return object;
+                                    var message = new $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request();
+                                    if (object.receiveTime != null) {
+                                        if (typeof object.receiveTime !== "object")
+                                            throw TypeError(".google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request.receiveTime: object expected");
+                                        message.receiveTime = $root.google.protobuf.Timestamp.fromObject(object.receiveTime);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Request message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request} message Request
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Request.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.receiveTime = null;
+                                    if (message.receiveTime != null && message.hasOwnProperty("receiveTime"))
+                                        object.receiveTime = $root.google.protobuf.Timestamp.toObject(message.receiveTime, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Request to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Request.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Request
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Request.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request";
+                                };
+    
+                                return Request;
+                            })();
+    
+                            ConditionContext.EffectiveTag = (function() {
+    
+                                /**
+                                 * Properties of an EffectiveTag.
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext
+                                 * @interface IEffectiveTag
+                                 * @property {string|null} [tagValue] EffectiveTag tagValue
+                                 * @property {string|null} [namespacedTagValue] EffectiveTag namespacedTagValue
+                                 * @property {string|null} [tagKey] EffectiveTag tagKey
+                                 * @property {string|null} [namespacedTagKey] EffectiveTag namespacedTagKey
+                                 * @property {string|null} [tagKeyParentName] EffectiveTag tagKeyParentName
+                                 * @property {boolean|null} [inherited] EffectiveTag inherited
+                                 */
+    
+                                /**
+                                 * Constructs a new EffectiveTag.
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext
+                                 * @classdesc Represents an EffectiveTag.
+                                 * @implements IEffectiveTag
+                                 * @constructor
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.ConditionContext.IEffectiveTag=} [properties] Properties to set
+                                 */
+                                function EffectiveTag(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * EffectiveTag tagValue.
+                                 * @member {string} tagValue
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag
+                                 * @instance
+                                 */
+                                EffectiveTag.prototype.tagValue = "";
+    
+                                /**
+                                 * EffectiveTag namespacedTagValue.
+                                 * @member {string} namespacedTagValue
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag
+                                 * @instance
+                                 */
+                                EffectiveTag.prototype.namespacedTagValue = "";
+    
+                                /**
+                                 * EffectiveTag tagKey.
+                                 * @member {string} tagKey
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag
+                                 * @instance
+                                 */
+                                EffectiveTag.prototype.tagKey = "";
+    
+                                /**
+                                 * EffectiveTag namespacedTagKey.
+                                 * @member {string} namespacedTagKey
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag
+                                 * @instance
+                                 */
+                                EffectiveTag.prototype.namespacedTagKey = "";
+    
+                                /**
+                                 * EffectiveTag tagKeyParentName.
+                                 * @member {string} tagKeyParentName
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag
+                                 * @instance
+                                 */
+                                EffectiveTag.prototype.tagKeyParentName = "";
+    
+                                /**
+                                 * EffectiveTag inherited.
+                                 * @member {boolean} inherited
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag
+                                 * @instance
+                                 */
+                                EffectiveTag.prototype.inherited = false;
+    
+                                /**
+                                 * Creates a new EffectiveTag instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.ConditionContext.IEffectiveTag=} [properties] Properties to set
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag} EffectiveTag instance
+                                 */
+                                EffectiveTag.create = function create(properties) {
+                                    return new EffectiveTag(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified EffectiveTag message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.ConditionContext.IEffectiveTag} message EffectiveTag message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                EffectiveTag.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.tagValue != null && Object.hasOwnProperty.call(message, "tagValue"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.tagValue);
+                                    if (message.namespacedTagValue != null && Object.hasOwnProperty.call(message, "namespacedTagValue"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.namespacedTagValue);
+                                    if (message.tagKey != null && Object.hasOwnProperty.call(message, "tagKey"))
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.tagKey);
+                                    if (message.namespacedTagKey != null && Object.hasOwnProperty.call(message, "namespacedTagKey"))
+                                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.namespacedTagKey);
+                                    if (message.inherited != null && Object.hasOwnProperty.call(message, "inherited"))
+                                        writer.uint32(/* id 5, wireType 0 =*/40).bool(message.inherited);
+                                    if (message.tagKeyParentName != null && Object.hasOwnProperty.call(message, "tagKeyParentName"))
+                                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.tagKeyParentName);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified EffectiveTag message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.ConditionContext.IEffectiveTag} message EffectiveTag message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                EffectiveTag.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an EffectiveTag message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag} EffectiveTag
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                EffectiveTag.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.tagValue = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.namespacedTagValue = reader.string();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.tagKey = reader.string();
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.namespacedTagKey = reader.string();
+                                                break;
+                                            }
+                                        case 6: {
+                                                message.tagKeyParentName = reader.string();
+                                                break;
+                                            }
+                                        case 5: {
+                                                message.inherited = reader.bool();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an EffectiveTag message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag} EffectiveTag
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                EffectiveTag.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an EffectiveTag message.
+                                 * @function verify
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                EffectiveTag.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.tagValue != null && message.hasOwnProperty("tagValue"))
+                                        if (!$util.isString(message.tagValue))
+                                            return "tagValue: string expected";
+                                    if (message.namespacedTagValue != null && message.hasOwnProperty("namespacedTagValue"))
+                                        if (!$util.isString(message.namespacedTagValue))
+                                            return "namespacedTagValue: string expected";
+                                    if (message.tagKey != null && message.hasOwnProperty("tagKey"))
+                                        if (!$util.isString(message.tagKey))
+                                            return "tagKey: string expected";
+                                    if (message.namespacedTagKey != null && message.hasOwnProperty("namespacedTagKey"))
+                                        if (!$util.isString(message.namespacedTagKey))
+                                            return "namespacedTagKey: string expected";
+                                    if (message.tagKeyParentName != null && message.hasOwnProperty("tagKeyParentName"))
+                                        if (!$util.isString(message.tagKeyParentName))
+                                            return "tagKeyParentName: string expected";
+                                    if (message.inherited != null && message.hasOwnProperty("inherited"))
+                                        if (typeof message.inherited !== "boolean")
+                                            return "inherited: boolean expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an EffectiveTag message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag} EffectiveTag
+                                 */
+                                EffectiveTag.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag)
+                                        return object;
+                                    var message = new $root.google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag();
+                                    if (object.tagValue != null)
+                                        message.tagValue = String(object.tagValue);
+                                    if (object.namespacedTagValue != null)
+                                        message.namespacedTagValue = String(object.namespacedTagValue);
+                                    if (object.tagKey != null)
+                                        message.tagKey = String(object.tagKey);
+                                    if (object.namespacedTagKey != null)
+                                        message.namespacedTagKey = String(object.namespacedTagKey);
+                                    if (object.tagKeyParentName != null)
+                                        message.tagKeyParentName = String(object.tagKeyParentName);
+                                    if (object.inherited != null)
+                                        message.inherited = Boolean(object.inherited);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an EffectiveTag message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag} message EffectiveTag
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                EffectiveTag.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.tagValue = "";
+                                        object.namespacedTagValue = "";
+                                        object.tagKey = "";
+                                        object.namespacedTagKey = "";
+                                        object.inherited = false;
+                                        object.tagKeyParentName = "";
+                                    }
+                                    if (message.tagValue != null && message.hasOwnProperty("tagValue"))
+                                        object.tagValue = message.tagValue;
+                                    if (message.namespacedTagValue != null && message.hasOwnProperty("namespacedTagValue"))
+                                        object.namespacedTagValue = message.namespacedTagValue;
+                                    if (message.tagKey != null && message.hasOwnProperty("tagKey"))
+                                        object.tagKey = message.tagKey;
+                                    if (message.namespacedTagKey != null && message.hasOwnProperty("namespacedTagKey"))
+                                        object.namespacedTagKey = message.namespacedTagKey;
+                                    if (message.inherited != null && message.hasOwnProperty("inherited"))
+                                        object.inherited = message.inherited;
+                                    if (message.tagKeyParentName != null && message.hasOwnProperty("tagKeyParentName"))
+                                        object.tagKeyParentName = message.tagKeyParentName;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this EffectiveTag to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                EffectiveTag.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for EffectiveTag
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                EffectiveTag.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag";
+                                };
+    
+                                return EffectiveTag;
+                            })();
+    
+                            return ConditionContext;
+                        })();
+    
+                        v3.AllowPolicyExplanation = (function() {
+    
+                            /**
+                             * Properties of an AllowPolicyExplanation.
+                             * @memberof google.cloud.policytroubleshooter.iam.v3
+                             * @interface IAllowPolicyExplanation
+                             * @property {google.cloud.policytroubleshooter.iam.v3.AllowAccessState|null} [allowAccessState] AllowPolicyExplanation allowAccessState
+                             * @property {Array.<google.cloud.policytroubleshooter.iam.v3.IExplainedAllowPolicy>|null} [explainedPolicies] AllowPolicyExplanation explainedPolicies
+                             * @property {google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|null} [relevance] AllowPolicyExplanation relevance
+                             */
+    
+                            /**
+                             * Constructs a new AllowPolicyExplanation.
+                             * @memberof google.cloud.policytroubleshooter.iam.v3
+                             * @classdesc Represents an AllowPolicyExplanation.
+                             * @implements IAllowPolicyExplanation
+                             * @constructor
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IAllowPolicyExplanation=} [properties] Properties to set
+                             */
+                            function AllowPolicyExplanation(properties) {
+                                this.explainedPolicies = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AllowPolicyExplanation allowAccessState.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.AllowAccessState} allowAccessState
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation
+                             * @instance
+                             */
+                            AllowPolicyExplanation.prototype.allowAccessState = 0;
+    
+                            /**
+                             * AllowPolicyExplanation explainedPolicies.
+                             * @member {Array.<google.cloud.policytroubleshooter.iam.v3.IExplainedAllowPolicy>} explainedPolicies
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation
+                             * @instance
+                             */
+                            AllowPolicyExplanation.prototype.explainedPolicies = $util.emptyArray;
+    
+                            /**
+                             * AllowPolicyExplanation relevance.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance} relevance
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation
+                             * @instance
+                             */
+                            AllowPolicyExplanation.prototype.relevance = 0;
+    
+                            /**
+                             * Creates a new AllowPolicyExplanation instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IAllowPolicyExplanation=} [properties] Properties to set
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation} AllowPolicyExplanation instance
+                             */
+                            AllowPolicyExplanation.create = function create(properties) {
+                                return new AllowPolicyExplanation(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AllowPolicyExplanation message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IAllowPolicyExplanation} message AllowPolicyExplanation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AllowPolicyExplanation.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.allowAccessState != null && Object.hasOwnProperty.call(message, "allowAccessState"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.allowAccessState);
+                                if (message.explainedPolicies != null && message.explainedPolicies.length)
+                                    for (var i = 0; i < message.explainedPolicies.length; ++i)
+                                        $root.google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy.encode(message.explainedPolicies[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.relevance != null && Object.hasOwnProperty.call(message, "relevance"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.relevance);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AllowPolicyExplanation message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IAllowPolicyExplanation} message AllowPolicyExplanation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AllowPolicyExplanation.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AllowPolicyExplanation message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation} AllowPolicyExplanation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AllowPolicyExplanation.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.allowAccessState = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.explainedPolicies && message.explainedPolicies.length))
+                                                message.explainedPolicies = [];
+                                            message.explainedPolicies.push($root.google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.relevance = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AllowPolicyExplanation message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation} AllowPolicyExplanation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AllowPolicyExplanation.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AllowPolicyExplanation message.
+                             * @function verify
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AllowPolicyExplanation.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.allowAccessState != null && message.hasOwnProperty("allowAccessState"))
+                                    switch (message.allowAccessState) {
+                                    default:
+                                        return "allowAccessState: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                if (message.explainedPolicies != null && message.hasOwnProperty("explainedPolicies")) {
+                                    if (!Array.isArray(message.explainedPolicies))
+                                        return "explainedPolicies: array expected";
+                                    for (var i = 0; i < message.explainedPolicies.length; ++i) {
+                                        var error = $root.google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy.verify(message.explainedPolicies[i]);
+                                        if (error)
+                                            return "explainedPolicies." + error;
+                                    }
+                                }
+                                if (message.relevance != null && message.hasOwnProperty("relevance"))
+                                    switch (message.relevance) {
+                                    default:
+                                        return "relevance: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AllowPolicyExplanation message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation} AllowPolicyExplanation
+                             */
+                            AllowPolicyExplanation.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation)
+                                    return object;
+                                var message = new $root.google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation();
+                                switch (object.allowAccessState) {
+                                default:
+                                    if (typeof object.allowAccessState === "number") {
+                                        message.allowAccessState = object.allowAccessState;
+                                        break;
+                                    }
+                                    break;
+                                case "ALLOW_ACCESS_STATE_UNSPECIFIED":
+                                case 0:
+                                    message.allowAccessState = 0;
+                                    break;
+                                case "ALLOW_ACCESS_STATE_GRANTED":
+                                case 1:
+                                    message.allowAccessState = 1;
+                                    break;
+                                case "ALLOW_ACCESS_STATE_NOT_GRANTED":
+                                case 2:
+                                    message.allowAccessState = 2;
+                                    break;
+                                case "ALLOW_ACCESS_STATE_UNKNOWN_CONDITIONAL":
+                                case 3:
+                                    message.allowAccessState = 3;
+                                    break;
+                                case "ALLOW_ACCESS_STATE_UNKNOWN_INFO":
+                                case 4:
+                                    message.allowAccessState = 4;
+                                    break;
+                                }
+                                if (object.explainedPolicies) {
+                                    if (!Array.isArray(object.explainedPolicies))
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation.explainedPolicies: array expected");
+                                    message.explainedPolicies = [];
+                                    for (var i = 0; i < object.explainedPolicies.length; ++i) {
+                                        if (typeof object.explainedPolicies[i] !== "object")
+                                            throw TypeError(".google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation.explainedPolicies: object expected");
+                                        message.explainedPolicies[i] = $root.google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy.fromObject(object.explainedPolicies[i]);
+                                    }
+                                }
+                                switch (object.relevance) {
+                                default:
+                                    if (typeof object.relevance === "number") {
+                                        message.relevance = object.relevance;
+                                        break;
+                                    }
+                                    break;
+                                case "HEURISTIC_RELEVANCE_UNSPECIFIED":
+                                case 0:
+                                    message.relevance = 0;
+                                    break;
+                                case "HEURISTIC_RELEVANCE_NORMAL":
+                                case 1:
+                                    message.relevance = 1;
+                                    break;
+                                case "HEURISTIC_RELEVANCE_HIGH":
+                                case 2:
+                                    message.relevance = 2;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AllowPolicyExplanation message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation} message AllowPolicyExplanation
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AllowPolicyExplanation.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.explainedPolicies = [];
+                                if (options.defaults) {
+                                    object.allowAccessState = options.enums === String ? "ALLOW_ACCESS_STATE_UNSPECIFIED" : 0;
+                                    object.relevance = options.enums === String ? "HEURISTIC_RELEVANCE_UNSPECIFIED" : 0;
+                                }
+                                if (message.allowAccessState != null && message.hasOwnProperty("allowAccessState"))
+                                    object.allowAccessState = options.enums === String ? $root.google.cloud.policytroubleshooter.iam.v3.AllowAccessState[message.allowAccessState] === undefined ? message.allowAccessState : $root.google.cloud.policytroubleshooter.iam.v3.AllowAccessState[message.allowAccessState] : message.allowAccessState;
+                                if (message.explainedPolicies && message.explainedPolicies.length) {
+                                    object.explainedPolicies = [];
+                                    for (var j = 0; j < message.explainedPolicies.length; ++j)
+                                        object.explainedPolicies[j] = $root.google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy.toObject(message.explainedPolicies[j], options);
+                                }
+                                if (message.relevance != null && message.hasOwnProperty("relevance"))
+                                    object.relevance = options.enums === String ? $root.google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance[message.relevance] === undefined ? message.relevance : $root.google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance[message.relevance] : message.relevance;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AllowPolicyExplanation to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AllowPolicyExplanation.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AllowPolicyExplanation
+                             * @function getTypeUrl
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AllowPolicyExplanation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation";
+                            };
+    
+                            return AllowPolicyExplanation;
+                        })();
+    
+                        v3.ExplainedAllowPolicy = (function() {
+    
+                            /**
+                             * Properties of an ExplainedAllowPolicy.
+                             * @memberof google.cloud.policytroubleshooter.iam.v3
+                             * @interface IExplainedAllowPolicy
+                             * @property {google.cloud.policytroubleshooter.iam.v3.AllowAccessState|null} [allowAccessState] ExplainedAllowPolicy allowAccessState
+                             * @property {string|null} [fullResourceName] ExplainedAllowPolicy fullResourceName
+                             * @property {Array.<google.cloud.policytroubleshooter.iam.v3.IAllowBindingExplanation>|null} [bindingExplanations] ExplainedAllowPolicy bindingExplanations
+                             * @property {google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|null} [relevance] ExplainedAllowPolicy relevance
+                             * @property {google.iam.v1.IPolicy|null} [policy] ExplainedAllowPolicy policy
+                             */
+    
+                            /**
+                             * Constructs a new ExplainedAllowPolicy.
+                             * @memberof google.cloud.policytroubleshooter.iam.v3
+                             * @classdesc Represents an ExplainedAllowPolicy.
+                             * @implements IExplainedAllowPolicy
+                             * @constructor
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IExplainedAllowPolicy=} [properties] Properties to set
+                             */
+                            function ExplainedAllowPolicy(properties) {
+                                this.bindingExplanations = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ExplainedAllowPolicy allowAccessState.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.AllowAccessState} allowAccessState
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy
+                             * @instance
+                             */
+                            ExplainedAllowPolicy.prototype.allowAccessState = 0;
+    
+                            /**
+                             * ExplainedAllowPolicy fullResourceName.
+                             * @member {string} fullResourceName
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy
+                             * @instance
+                             */
+                            ExplainedAllowPolicy.prototype.fullResourceName = "";
+    
+                            /**
+                             * ExplainedAllowPolicy bindingExplanations.
+                             * @member {Array.<google.cloud.policytroubleshooter.iam.v3.IAllowBindingExplanation>} bindingExplanations
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy
+                             * @instance
+                             */
+                            ExplainedAllowPolicy.prototype.bindingExplanations = $util.emptyArray;
+    
+                            /**
+                             * ExplainedAllowPolicy relevance.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance} relevance
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy
+                             * @instance
+                             */
+                            ExplainedAllowPolicy.prototype.relevance = 0;
+    
+                            /**
+                             * ExplainedAllowPolicy policy.
+                             * @member {google.iam.v1.IPolicy|null|undefined} policy
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy
+                             * @instance
+                             */
+                            ExplainedAllowPolicy.prototype.policy = null;
+    
+                            /**
+                             * Creates a new ExplainedAllowPolicy instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IExplainedAllowPolicy=} [properties] Properties to set
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy} ExplainedAllowPolicy instance
+                             */
+                            ExplainedAllowPolicy.create = function create(properties) {
+                                return new ExplainedAllowPolicy(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ExplainedAllowPolicy message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IExplainedAllowPolicy} message ExplainedAllowPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ExplainedAllowPolicy.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.allowAccessState != null && Object.hasOwnProperty.call(message, "allowAccessState"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.allowAccessState);
+                                if (message.fullResourceName != null && Object.hasOwnProperty.call(message, "fullResourceName"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.fullResourceName);
+                                if (message.bindingExplanations != null && message.bindingExplanations.length)
+                                    for (var i = 0; i < message.bindingExplanations.length; ++i)
+                                        $root.google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.encode(message.bindingExplanations[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.relevance != null && Object.hasOwnProperty.call(message, "relevance"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.relevance);
+                                if (message.policy != null && Object.hasOwnProperty.call(message, "policy"))
+                                    $root.google.iam.v1.Policy.encode(message.policy, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ExplainedAllowPolicy message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IExplainedAllowPolicy} message ExplainedAllowPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ExplainedAllowPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an ExplainedAllowPolicy message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy} ExplainedAllowPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ExplainedAllowPolicy.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.allowAccessState = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.fullResourceName = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.bindingExplanations && message.bindingExplanations.length))
+                                                message.bindingExplanations = [];
+                                            message.bindingExplanations.push($root.google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.relevance = reader.int32();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.policy = $root.google.iam.v1.Policy.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an ExplainedAllowPolicy message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy} ExplainedAllowPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ExplainedAllowPolicy.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an ExplainedAllowPolicy message.
+                             * @function verify
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ExplainedAllowPolicy.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.allowAccessState != null && message.hasOwnProperty("allowAccessState"))
+                                    switch (message.allowAccessState) {
+                                    default:
+                                        return "allowAccessState: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                if (message.fullResourceName != null && message.hasOwnProperty("fullResourceName"))
+                                    if (!$util.isString(message.fullResourceName))
+                                        return "fullResourceName: string expected";
+                                if (message.bindingExplanations != null && message.hasOwnProperty("bindingExplanations")) {
+                                    if (!Array.isArray(message.bindingExplanations))
+                                        return "bindingExplanations: array expected";
+                                    for (var i = 0; i < message.bindingExplanations.length; ++i) {
+                                        var error = $root.google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.verify(message.bindingExplanations[i]);
+                                        if (error)
+                                            return "bindingExplanations." + error;
+                                    }
+                                }
+                                if (message.relevance != null && message.hasOwnProperty("relevance"))
+                                    switch (message.relevance) {
+                                    default:
+                                        return "relevance: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.policy != null && message.hasOwnProperty("policy")) {
+                                    var error = $root.google.iam.v1.Policy.verify(message.policy);
+                                    if (error)
+                                        return "policy." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an ExplainedAllowPolicy message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy} ExplainedAllowPolicy
+                             */
+                            ExplainedAllowPolicy.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy)
+                                    return object;
+                                var message = new $root.google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy();
+                                switch (object.allowAccessState) {
+                                default:
+                                    if (typeof object.allowAccessState === "number") {
+                                        message.allowAccessState = object.allowAccessState;
+                                        break;
+                                    }
+                                    break;
+                                case "ALLOW_ACCESS_STATE_UNSPECIFIED":
+                                case 0:
+                                    message.allowAccessState = 0;
+                                    break;
+                                case "ALLOW_ACCESS_STATE_GRANTED":
+                                case 1:
+                                    message.allowAccessState = 1;
+                                    break;
+                                case "ALLOW_ACCESS_STATE_NOT_GRANTED":
+                                case 2:
+                                    message.allowAccessState = 2;
+                                    break;
+                                case "ALLOW_ACCESS_STATE_UNKNOWN_CONDITIONAL":
+                                case 3:
+                                    message.allowAccessState = 3;
+                                    break;
+                                case "ALLOW_ACCESS_STATE_UNKNOWN_INFO":
+                                case 4:
+                                    message.allowAccessState = 4;
+                                    break;
+                                }
+                                if (object.fullResourceName != null)
+                                    message.fullResourceName = String(object.fullResourceName);
+                                if (object.bindingExplanations) {
+                                    if (!Array.isArray(object.bindingExplanations))
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy.bindingExplanations: array expected");
+                                    message.bindingExplanations = [];
+                                    for (var i = 0; i < object.bindingExplanations.length; ++i) {
+                                        if (typeof object.bindingExplanations[i] !== "object")
+                                            throw TypeError(".google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy.bindingExplanations: object expected");
+                                        message.bindingExplanations[i] = $root.google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.fromObject(object.bindingExplanations[i]);
+                                    }
+                                }
+                                switch (object.relevance) {
+                                default:
+                                    if (typeof object.relevance === "number") {
+                                        message.relevance = object.relevance;
+                                        break;
+                                    }
+                                    break;
+                                case "HEURISTIC_RELEVANCE_UNSPECIFIED":
+                                case 0:
+                                    message.relevance = 0;
+                                    break;
+                                case "HEURISTIC_RELEVANCE_NORMAL":
+                                case 1:
+                                    message.relevance = 1;
+                                    break;
+                                case "HEURISTIC_RELEVANCE_HIGH":
+                                case 2:
+                                    message.relevance = 2;
+                                    break;
+                                }
+                                if (object.policy != null) {
+                                    if (typeof object.policy !== "object")
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy.policy: object expected");
+                                    message.policy = $root.google.iam.v1.Policy.fromObject(object.policy);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an ExplainedAllowPolicy message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy} message ExplainedAllowPolicy
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ExplainedAllowPolicy.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.bindingExplanations = [];
+                                if (options.defaults) {
+                                    object.allowAccessState = options.enums === String ? "ALLOW_ACCESS_STATE_UNSPECIFIED" : 0;
+                                    object.fullResourceName = "";
+                                    object.relevance = options.enums === String ? "HEURISTIC_RELEVANCE_UNSPECIFIED" : 0;
+                                    object.policy = null;
+                                }
+                                if (message.allowAccessState != null && message.hasOwnProperty("allowAccessState"))
+                                    object.allowAccessState = options.enums === String ? $root.google.cloud.policytroubleshooter.iam.v3.AllowAccessState[message.allowAccessState] === undefined ? message.allowAccessState : $root.google.cloud.policytroubleshooter.iam.v3.AllowAccessState[message.allowAccessState] : message.allowAccessState;
+                                if (message.fullResourceName != null && message.hasOwnProperty("fullResourceName"))
+                                    object.fullResourceName = message.fullResourceName;
+                                if (message.bindingExplanations && message.bindingExplanations.length) {
+                                    object.bindingExplanations = [];
+                                    for (var j = 0; j < message.bindingExplanations.length; ++j)
+                                        object.bindingExplanations[j] = $root.google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.toObject(message.bindingExplanations[j], options);
+                                }
+                                if (message.relevance != null && message.hasOwnProperty("relevance"))
+                                    object.relevance = options.enums === String ? $root.google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance[message.relevance] === undefined ? message.relevance : $root.google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance[message.relevance] : message.relevance;
+                                if (message.policy != null && message.hasOwnProperty("policy"))
+                                    object.policy = $root.google.iam.v1.Policy.toObject(message.policy, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ExplainedAllowPolicy to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ExplainedAllowPolicy.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ExplainedAllowPolicy
+                             * @function getTypeUrl
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ExplainedAllowPolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy";
+                            };
+    
+                            return ExplainedAllowPolicy;
+                        })();
+    
+                        v3.AllowBindingExplanation = (function() {
+    
+                            /**
+                             * Properties of an AllowBindingExplanation.
+                             * @memberof google.cloud.policytroubleshooter.iam.v3
+                             * @interface IAllowBindingExplanation
+                             * @property {google.cloud.policytroubleshooter.iam.v3.AllowAccessState|null} [allowAccessState] AllowBindingExplanation allowAccessState
+                             * @property {string|null} [role] AllowBindingExplanation role
+                             * @property {google.cloud.policytroubleshooter.iam.v3.RolePermissionInclusionState|null} [rolePermission] AllowBindingExplanation rolePermission
+                             * @property {google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|null} [rolePermissionRelevance] AllowBindingExplanation rolePermissionRelevance
+                             * @property {google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.IAnnotatedAllowMembership|null} [combinedMembership] AllowBindingExplanation combinedMembership
+                             * @property {Object.<string,google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.IAnnotatedAllowMembership>|null} [memberships] AllowBindingExplanation memberships
+                             * @property {google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|null} [relevance] AllowBindingExplanation relevance
+                             * @property {google.type.IExpr|null} [condition] AllowBindingExplanation condition
+                             * @property {google.cloud.policytroubleshooter.iam.v3.IConditionExplanation|null} [conditionExplanation] AllowBindingExplanation conditionExplanation
+                             */
+    
+                            /**
+                             * Constructs a new AllowBindingExplanation.
+                             * @memberof google.cloud.policytroubleshooter.iam.v3
+                             * @classdesc Represents an AllowBindingExplanation.
+                             * @implements IAllowBindingExplanation
+                             * @constructor
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IAllowBindingExplanation=} [properties] Properties to set
+                             */
+                            function AllowBindingExplanation(properties) {
+                                this.memberships = {};
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AllowBindingExplanation allowAccessState.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.AllowAccessState} allowAccessState
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation
+                             * @instance
+                             */
+                            AllowBindingExplanation.prototype.allowAccessState = 0;
+    
+                            /**
+                             * AllowBindingExplanation role.
+                             * @member {string} role
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation
+                             * @instance
+                             */
+                            AllowBindingExplanation.prototype.role = "";
+    
+                            /**
+                             * AllowBindingExplanation rolePermission.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.RolePermissionInclusionState} rolePermission
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation
+                             * @instance
+                             */
+                            AllowBindingExplanation.prototype.rolePermission = 0;
+    
+                            /**
+                             * AllowBindingExplanation rolePermissionRelevance.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance} rolePermissionRelevance
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation
+                             * @instance
+                             */
+                            AllowBindingExplanation.prototype.rolePermissionRelevance = 0;
+    
+                            /**
+                             * AllowBindingExplanation combinedMembership.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.IAnnotatedAllowMembership|null|undefined} combinedMembership
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation
+                             * @instance
+                             */
+                            AllowBindingExplanation.prototype.combinedMembership = null;
+    
+                            /**
+                             * AllowBindingExplanation memberships.
+                             * @member {Object.<string,google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.IAnnotatedAllowMembership>} memberships
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation
+                             * @instance
+                             */
+                            AllowBindingExplanation.prototype.memberships = $util.emptyObject;
+    
+                            /**
+                             * AllowBindingExplanation relevance.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance} relevance
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation
+                             * @instance
+                             */
+                            AllowBindingExplanation.prototype.relevance = 0;
+    
+                            /**
+                             * AllowBindingExplanation condition.
+                             * @member {google.type.IExpr|null|undefined} condition
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation
+                             * @instance
+                             */
+                            AllowBindingExplanation.prototype.condition = null;
+    
+                            /**
+                             * AllowBindingExplanation conditionExplanation.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.IConditionExplanation|null|undefined} conditionExplanation
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation
+                             * @instance
+                             */
+                            AllowBindingExplanation.prototype.conditionExplanation = null;
+    
+                            /**
+                             * Creates a new AllowBindingExplanation instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IAllowBindingExplanation=} [properties] Properties to set
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation} AllowBindingExplanation instance
+                             */
+                            AllowBindingExplanation.create = function create(properties) {
+                                return new AllowBindingExplanation(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AllowBindingExplanation message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IAllowBindingExplanation} message AllowBindingExplanation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AllowBindingExplanation.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.allowAccessState != null && Object.hasOwnProperty.call(message, "allowAccessState"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.allowAccessState);
+                                if (message.role != null && Object.hasOwnProperty.call(message, "role"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.role);
+                                if (message.rolePermission != null && Object.hasOwnProperty.call(message, "rolePermission"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.rolePermission);
+                                if (message.rolePermissionRelevance != null && Object.hasOwnProperty.call(message, "rolePermissionRelevance"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.rolePermissionRelevance);
+                                if (message.combinedMembership != null && Object.hasOwnProperty.call(message, "combinedMembership"))
+                                    $root.google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership.encode(message.combinedMembership, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.memberships != null && Object.hasOwnProperty.call(message, "memberships"))
+                                    for (var keys = Object.keys(message.memberships), i = 0; i < keys.length; ++i) {
+                                        writer.uint32(/* id 6, wireType 2 =*/50).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                        $root.google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership.encode(message.memberships[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                    }
+                                if (message.relevance != null && Object.hasOwnProperty.call(message, "relevance"))
+                                    writer.uint32(/* id 7, wireType 0 =*/56).int32(message.relevance);
+                                if (message.condition != null && Object.hasOwnProperty.call(message, "condition"))
+                                    $root.google.type.Expr.encode(message.condition, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.conditionExplanation != null && Object.hasOwnProperty.call(message, "conditionExplanation"))
+                                    $root.google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.encode(message.conditionExplanation, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AllowBindingExplanation message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IAllowBindingExplanation} message AllowBindingExplanation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AllowBindingExplanation.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AllowBindingExplanation message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation} AllowBindingExplanation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AllowBindingExplanation.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation(), key, value;
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.allowAccessState = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.role = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.rolePermission = reader.int32();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.rolePermissionRelevance = reader.int32();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.combinedMembership = $root.google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            if (message.memberships === $util.emptyObject)
+                                                message.memberships = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = null;
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = $root.google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership.decode(reader, reader.uint32());
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.memberships[key] = value;
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.relevance = reader.int32();
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.condition = $root.google.type.Expr.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 9: {
+                                            message.conditionExplanation = $root.google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AllowBindingExplanation message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation} AllowBindingExplanation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AllowBindingExplanation.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AllowBindingExplanation message.
+                             * @function verify
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AllowBindingExplanation.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.allowAccessState != null && message.hasOwnProperty("allowAccessState"))
+                                    switch (message.allowAccessState) {
+                                    default:
+                                        return "allowAccessState: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                if (message.role != null && message.hasOwnProperty("role"))
+                                    if (!$util.isString(message.role))
+                                        return "role: string expected";
+                                if (message.rolePermission != null && message.hasOwnProperty("rolePermission"))
+                                    switch (message.rolePermission) {
+                                    default:
+                                        return "rolePermission: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                if (message.rolePermissionRelevance != null && message.hasOwnProperty("rolePermissionRelevance"))
+                                    switch (message.rolePermissionRelevance) {
+                                    default:
+                                        return "rolePermissionRelevance: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.combinedMembership != null && message.hasOwnProperty("combinedMembership")) {
+                                    var error = $root.google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership.verify(message.combinedMembership);
+                                    if (error)
+                                        return "combinedMembership." + error;
+                                }
+                                if (message.memberships != null && message.hasOwnProperty("memberships")) {
+                                    if (!$util.isObject(message.memberships))
+                                        return "memberships: object expected";
+                                    var key = Object.keys(message.memberships);
+                                    for (var i = 0; i < key.length; ++i) {
+                                        var error = $root.google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership.verify(message.memberships[key[i]]);
+                                        if (error)
+                                            return "memberships." + error;
+                                    }
+                                }
+                                if (message.relevance != null && message.hasOwnProperty("relevance"))
+                                    switch (message.relevance) {
+                                    default:
+                                        return "relevance: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.condition != null && message.hasOwnProperty("condition")) {
+                                    var error = $root.google.type.Expr.verify(message.condition);
+                                    if (error)
+                                        return "condition." + error;
+                                }
+                                if (message.conditionExplanation != null && message.hasOwnProperty("conditionExplanation")) {
+                                    var error = $root.google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.verify(message.conditionExplanation);
+                                    if (error)
+                                        return "conditionExplanation." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AllowBindingExplanation message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation} AllowBindingExplanation
+                             */
+                            AllowBindingExplanation.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation)
+                                    return object;
+                                var message = new $root.google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation();
+                                switch (object.allowAccessState) {
+                                default:
+                                    if (typeof object.allowAccessState === "number") {
+                                        message.allowAccessState = object.allowAccessState;
+                                        break;
+                                    }
+                                    break;
+                                case "ALLOW_ACCESS_STATE_UNSPECIFIED":
+                                case 0:
+                                    message.allowAccessState = 0;
+                                    break;
+                                case "ALLOW_ACCESS_STATE_GRANTED":
+                                case 1:
+                                    message.allowAccessState = 1;
+                                    break;
+                                case "ALLOW_ACCESS_STATE_NOT_GRANTED":
+                                case 2:
+                                    message.allowAccessState = 2;
+                                    break;
+                                case "ALLOW_ACCESS_STATE_UNKNOWN_CONDITIONAL":
+                                case 3:
+                                    message.allowAccessState = 3;
+                                    break;
+                                case "ALLOW_ACCESS_STATE_UNKNOWN_INFO":
+                                case 4:
+                                    message.allowAccessState = 4;
+                                    break;
+                                }
+                                if (object.role != null)
+                                    message.role = String(object.role);
+                                switch (object.rolePermission) {
+                                default:
+                                    if (typeof object.rolePermission === "number") {
+                                        message.rolePermission = object.rolePermission;
+                                        break;
+                                    }
+                                    break;
+                                case "ROLE_PERMISSION_INCLUSION_STATE_UNSPECIFIED":
+                                case 0:
+                                    message.rolePermission = 0;
+                                    break;
+                                case "ROLE_PERMISSION_INCLUDED":
+                                case 1:
+                                    message.rolePermission = 1;
+                                    break;
+                                case "ROLE_PERMISSION_NOT_INCLUDED":
+                                case 2:
+                                    message.rolePermission = 2;
+                                    break;
+                                case "ROLE_PERMISSION_UNKNOWN_INFO":
+                                case 3:
+                                    message.rolePermission = 3;
+                                    break;
+                                }
+                                switch (object.rolePermissionRelevance) {
+                                default:
+                                    if (typeof object.rolePermissionRelevance === "number") {
+                                        message.rolePermissionRelevance = object.rolePermissionRelevance;
+                                        break;
+                                    }
+                                    break;
+                                case "HEURISTIC_RELEVANCE_UNSPECIFIED":
+                                case 0:
+                                    message.rolePermissionRelevance = 0;
+                                    break;
+                                case "HEURISTIC_RELEVANCE_NORMAL":
+                                case 1:
+                                    message.rolePermissionRelevance = 1;
+                                    break;
+                                case "HEURISTIC_RELEVANCE_HIGH":
+                                case 2:
+                                    message.rolePermissionRelevance = 2;
+                                    break;
+                                }
+                                if (object.combinedMembership != null) {
+                                    if (typeof object.combinedMembership !== "object")
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.combinedMembership: object expected");
+                                    message.combinedMembership = $root.google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership.fromObject(object.combinedMembership);
+                                }
+                                if (object.memberships) {
+                                    if (typeof object.memberships !== "object")
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.memberships: object expected");
+                                    message.memberships = {};
+                                    for (var keys = Object.keys(object.memberships), i = 0; i < keys.length; ++i) {
+                                        if (typeof object.memberships[keys[i]] !== "object")
+                                            throw TypeError(".google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.memberships: object expected");
+                                        message.memberships[keys[i]] = $root.google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership.fromObject(object.memberships[keys[i]]);
+                                    }
+                                }
+                                switch (object.relevance) {
+                                default:
+                                    if (typeof object.relevance === "number") {
+                                        message.relevance = object.relevance;
+                                        break;
+                                    }
+                                    break;
+                                case "HEURISTIC_RELEVANCE_UNSPECIFIED":
+                                case 0:
+                                    message.relevance = 0;
+                                    break;
+                                case "HEURISTIC_RELEVANCE_NORMAL":
+                                case 1:
+                                    message.relevance = 1;
+                                    break;
+                                case "HEURISTIC_RELEVANCE_HIGH":
+                                case 2:
+                                    message.relevance = 2;
+                                    break;
+                                }
+                                if (object.condition != null) {
+                                    if (typeof object.condition !== "object")
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.condition: object expected");
+                                    message.condition = $root.google.type.Expr.fromObject(object.condition);
+                                }
+                                if (object.conditionExplanation != null) {
+                                    if (typeof object.conditionExplanation !== "object")
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.conditionExplanation: object expected");
+                                    message.conditionExplanation = $root.google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.fromObject(object.conditionExplanation);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AllowBindingExplanation message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation} message AllowBindingExplanation
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AllowBindingExplanation.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.objects || options.defaults)
+                                    object.memberships = {};
+                                if (options.defaults) {
+                                    object.allowAccessState = options.enums === String ? "ALLOW_ACCESS_STATE_UNSPECIFIED" : 0;
+                                    object.role = "";
+                                    object.rolePermission = options.enums === String ? "ROLE_PERMISSION_INCLUSION_STATE_UNSPECIFIED" : 0;
+                                    object.rolePermissionRelevance = options.enums === String ? "HEURISTIC_RELEVANCE_UNSPECIFIED" : 0;
+                                    object.combinedMembership = null;
+                                    object.relevance = options.enums === String ? "HEURISTIC_RELEVANCE_UNSPECIFIED" : 0;
+                                    object.condition = null;
+                                    object.conditionExplanation = null;
+                                }
+                                if (message.allowAccessState != null && message.hasOwnProperty("allowAccessState"))
+                                    object.allowAccessState = options.enums === String ? $root.google.cloud.policytroubleshooter.iam.v3.AllowAccessState[message.allowAccessState] === undefined ? message.allowAccessState : $root.google.cloud.policytroubleshooter.iam.v3.AllowAccessState[message.allowAccessState] : message.allowAccessState;
+                                if (message.role != null && message.hasOwnProperty("role"))
+                                    object.role = message.role;
+                                if (message.rolePermission != null && message.hasOwnProperty("rolePermission"))
+                                    object.rolePermission = options.enums === String ? $root.google.cloud.policytroubleshooter.iam.v3.RolePermissionInclusionState[message.rolePermission] === undefined ? message.rolePermission : $root.google.cloud.policytroubleshooter.iam.v3.RolePermissionInclusionState[message.rolePermission] : message.rolePermission;
+                                if (message.rolePermissionRelevance != null && message.hasOwnProperty("rolePermissionRelevance"))
+                                    object.rolePermissionRelevance = options.enums === String ? $root.google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance[message.rolePermissionRelevance] === undefined ? message.rolePermissionRelevance : $root.google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance[message.rolePermissionRelevance] : message.rolePermissionRelevance;
+                                if (message.combinedMembership != null && message.hasOwnProperty("combinedMembership"))
+                                    object.combinedMembership = $root.google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership.toObject(message.combinedMembership, options);
+                                var keys2;
+                                if (message.memberships && (keys2 = Object.keys(message.memberships)).length) {
+                                    object.memberships = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.memberships[keys2[j]] = $root.google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership.toObject(message.memberships[keys2[j]], options);
+                                }
+                                if (message.relevance != null && message.hasOwnProperty("relevance"))
+                                    object.relevance = options.enums === String ? $root.google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance[message.relevance] === undefined ? message.relevance : $root.google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance[message.relevance] : message.relevance;
+                                if (message.condition != null && message.hasOwnProperty("condition"))
+                                    object.condition = $root.google.type.Expr.toObject(message.condition, options);
+                                if (message.conditionExplanation != null && message.hasOwnProperty("conditionExplanation"))
+                                    object.conditionExplanation = $root.google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.toObject(message.conditionExplanation, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AllowBindingExplanation to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AllowBindingExplanation.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for AllowBindingExplanation
+                             * @function getTypeUrl
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            AllowBindingExplanation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation";
+                            };
+    
+                            AllowBindingExplanation.AnnotatedAllowMembership = (function() {
+    
+                                /**
+                                 * Properties of an AnnotatedAllowMembership.
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation
+                                 * @interface IAnnotatedAllowMembership
+                                 * @property {google.cloud.policytroubleshooter.iam.v3.MembershipMatchingState|null} [membership] AnnotatedAllowMembership membership
+                                 * @property {google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|null} [relevance] AnnotatedAllowMembership relevance
+                                 */
+    
+                                /**
+                                 * Constructs a new AnnotatedAllowMembership.
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation
+                                 * @classdesc Represents an AnnotatedAllowMembership.
+                                 * @implements IAnnotatedAllowMembership
+                                 * @constructor
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.IAnnotatedAllowMembership=} [properties] Properties to set
+                                 */
+                                function AnnotatedAllowMembership(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * AnnotatedAllowMembership membership.
+                                 * @member {google.cloud.policytroubleshooter.iam.v3.MembershipMatchingState} membership
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership
+                                 * @instance
+                                 */
+                                AnnotatedAllowMembership.prototype.membership = 0;
+    
+                                /**
+                                 * AnnotatedAllowMembership relevance.
+                                 * @member {google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance} relevance
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership
+                                 * @instance
+                                 */
+                                AnnotatedAllowMembership.prototype.relevance = 0;
+    
+                                /**
+                                 * Creates a new AnnotatedAllowMembership instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.IAnnotatedAllowMembership=} [properties] Properties to set
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership} AnnotatedAllowMembership instance
+                                 */
+                                AnnotatedAllowMembership.create = function create(properties) {
+                                    return new AnnotatedAllowMembership(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified AnnotatedAllowMembership message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.IAnnotatedAllowMembership} message AnnotatedAllowMembership message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                AnnotatedAllowMembership.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.membership != null && Object.hasOwnProperty.call(message, "membership"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.membership);
+                                    if (message.relevance != null && Object.hasOwnProperty.call(message, "relevance"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.relevance);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified AnnotatedAllowMembership message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.IAnnotatedAllowMembership} message AnnotatedAllowMembership message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                AnnotatedAllowMembership.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an AnnotatedAllowMembership message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership} AnnotatedAllowMembership
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                AnnotatedAllowMembership.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.membership = reader.int32();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.relevance = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an AnnotatedAllowMembership message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership} AnnotatedAllowMembership
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                AnnotatedAllowMembership.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an AnnotatedAllowMembership message.
+                                 * @function verify
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                AnnotatedAllowMembership.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.membership != null && message.hasOwnProperty("membership"))
+                                        switch (message.membership) {
+                                        default:
+                                            return "membership: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                        case 4:
+                                            break;
+                                        }
+                                    if (message.relevance != null && message.hasOwnProperty("relevance"))
+                                        switch (message.relevance) {
+                                        default:
+                                            return "relevance: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                            break;
+                                        }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an AnnotatedAllowMembership message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership} AnnotatedAllowMembership
+                                 */
+                                AnnotatedAllowMembership.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership)
+                                        return object;
+                                    var message = new $root.google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership();
+                                    switch (object.membership) {
+                                    default:
+                                        if (typeof object.membership === "number") {
+                                            message.membership = object.membership;
+                                            break;
+                                        }
+                                        break;
+                                    case "MEMBERSHIP_MATCHING_STATE_UNSPECIFIED":
+                                    case 0:
+                                        message.membership = 0;
+                                        break;
+                                    case "MEMBERSHIP_MATCHED":
+                                    case 1:
+                                        message.membership = 1;
+                                        break;
+                                    case "MEMBERSHIP_NOT_MATCHED":
+                                    case 2:
+                                        message.membership = 2;
+                                        break;
+                                    case "MEMBERSHIP_UNKNOWN_INFO":
+                                    case 3:
+                                        message.membership = 3;
+                                        break;
+                                    case "MEMBERSHIP_UNKNOWN_UNSUPPORTED":
+                                    case 4:
+                                        message.membership = 4;
+                                        break;
+                                    }
+                                    switch (object.relevance) {
+                                    default:
+                                        if (typeof object.relevance === "number") {
+                                            message.relevance = object.relevance;
+                                            break;
+                                        }
+                                        break;
+                                    case "HEURISTIC_RELEVANCE_UNSPECIFIED":
+                                    case 0:
+                                        message.relevance = 0;
+                                        break;
+                                    case "HEURISTIC_RELEVANCE_NORMAL":
+                                    case 1:
+                                        message.relevance = 1;
+                                        break;
+                                    case "HEURISTIC_RELEVANCE_HIGH":
+                                    case 2:
+                                        message.relevance = 2;
+                                        break;
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an AnnotatedAllowMembership message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership} message AnnotatedAllowMembership
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                AnnotatedAllowMembership.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.membership = options.enums === String ? "MEMBERSHIP_MATCHING_STATE_UNSPECIFIED" : 0;
+                                        object.relevance = options.enums === String ? "HEURISTIC_RELEVANCE_UNSPECIFIED" : 0;
+                                    }
+                                    if (message.membership != null && message.hasOwnProperty("membership"))
+                                        object.membership = options.enums === String ? $root.google.cloud.policytroubleshooter.iam.v3.MembershipMatchingState[message.membership] === undefined ? message.membership : $root.google.cloud.policytroubleshooter.iam.v3.MembershipMatchingState[message.membership] : message.membership;
+                                    if (message.relevance != null && message.hasOwnProperty("relevance"))
+                                        object.relevance = options.enums === String ? $root.google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance[message.relevance] === undefined ? message.relevance : $root.google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance[message.relevance] : message.relevance;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this AnnotatedAllowMembership to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                AnnotatedAllowMembership.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for AnnotatedAllowMembership
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                AnnotatedAllowMembership.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership";
+                                };
+    
+                                return AnnotatedAllowMembership;
+                            })();
+    
+                            return AllowBindingExplanation;
+                        })();
+    
+                        v3.DenyPolicyExplanation = (function() {
+    
+                            /**
+                             * Properties of a DenyPolicyExplanation.
+                             * @memberof google.cloud.policytroubleshooter.iam.v3
+                             * @interface IDenyPolicyExplanation
+                             * @property {google.cloud.policytroubleshooter.iam.v3.DenyAccessState|null} [denyAccessState] DenyPolicyExplanation denyAccessState
+                             * @property {Array.<google.cloud.policytroubleshooter.iam.v3.IExplainedDenyResource>|null} [explainedResources] DenyPolicyExplanation explainedResources
+                             * @property {google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|null} [relevance] DenyPolicyExplanation relevance
+                             * @property {boolean|null} [permissionDeniable] DenyPolicyExplanation permissionDeniable
+                             */
+    
+                            /**
+                             * Constructs a new DenyPolicyExplanation.
+                             * @memberof google.cloud.policytroubleshooter.iam.v3
+                             * @classdesc Represents a DenyPolicyExplanation.
+                             * @implements IDenyPolicyExplanation
+                             * @constructor
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IDenyPolicyExplanation=} [properties] Properties to set
+                             */
+                            function DenyPolicyExplanation(properties) {
+                                this.explainedResources = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DenyPolicyExplanation denyAccessState.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.DenyAccessState} denyAccessState
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation
+                             * @instance
+                             */
+                            DenyPolicyExplanation.prototype.denyAccessState = 0;
+    
+                            /**
+                             * DenyPolicyExplanation explainedResources.
+                             * @member {Array.<google.cloud.policytroubleshooter.iam.v3.IExplainedDenyResource>} explainedResources
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation
+                             * @instance
+                             */
+                            DenyPolicyExplanation.prototype.explainedResources = $util.emptyArray;
+    
+                            /**
+                             * DenyPolicyExplanation relevance.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance} relevance
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation
+                             * @instance
+                             */
+                            DenyPolicyExplanation.prototype.relevance = 0;
+    
+                            /**
+                             * DenyPolicyExplanation permissionDeniable.
+                             * @member {boolean} permissionDeniable
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation
+                             * @instance
+                             */
+                            DenyPolicyExplanation.prototype.permissionDeniable = false;
+    
+                            /**
+                             * Creates a new DenyPolicyExplanation instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IDenyPolicyExplanation=} [properties] Properties to set
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation} DenyPolicyExplanation instance
+                             */
+                            DenyPolicyExplanation.create = function create(properties) {
+                                return new DenyPolicyExplanation(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DenyPolicyExplanation message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IDenyPolicyExplanation} message DenyPolicyExplanation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DenyPolicyExplanation.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.denyAccessState != null && Object.hasOwnProperty.call(message, "denyAccessState"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.denyAccessState);
+                                if (message.explainedResources != null && message.explainedResources.length)
+                                    for (var i = 0; i < message.explainedResources.length; ++i)
+                                        $root.google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource.encode(message.explainedResources[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.relevance != null && Object.hasOwnProperty.call(message, "relevance"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.relevance);
+                                if (message.permissionDeniable != null && Object.hasOwnProperty.call(message, "permissionDeniable"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.permissionDeniable);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DenyPolicyExplanation message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IDenyPolicyExplanation} message DenyPolicyExplanation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DenyPolicyExplanation.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DenyPolicyExplanation message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation} DenyPolicyExplanation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DenyPolicyExplanation.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.denyAccessState = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.explainedResources && message.explainedResources.length))
+                                                message.explainedResources = [];
+                                            message.explainedResources.push($root.google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.relevance = reader.int32();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.permissionDeniable = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DenyPolicyExplanation message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation} DenyPolicyExplanation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DenyPolicyExplanation.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DenyPolicyExplanation message.
+                             * @function verify
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DenyPolicyExplanation.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.denyAccessState != null && message.hasOwnProperty("denyAccessState"))
+                                    switch (message.denyAccessState) {
+                                    default:
+                                        return "denyAccessState: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                if (message.explainedResources != null && message.hasOwnProperty("explainedResources")) {
+                                    if (!Array.isArray(message.explainedResources))
+                                        return "explainedResources: array expected";
+                                    for (var i = 0; i < message.explainedResources.length; ++i) {
+                                        var error = $root.google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource.verify(message.explainedResources[i]);
+                                        if (error)
+                                            return "explainedResources." + error;
+                                    }
+                                }
+                                if (message.relevance != null && message.hasOwnProperty("relevance"))
+                                    switch (message.relevance) {
+                                    default:
+                                        return "relevance: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.permissionDeniable != null && message.hasOwnProperty("permissionDeniable"))
+                                    if (typeof message.permissionDeniable !== "boolean")
+                                        return "permissionDeniable: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DenyPolicyExplanation message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation} DenyPolicyExplanation
+                             */
+                            DenyPolicyExplanation.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation)
+                                    return object;
+                                var message = new $root.google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation();
+                                switch (object.denyAccessState) {
+                                default:
+                                    if (typeof object.denyAccessState === "number") {
+                                        message.denyAccessState = object.denyAccessState;
+                                        break;
+                                    }
+                                    break;
+                                case "DENY_ACCESS_STATE_UNSPECIFIED":
+                                case 0:
+                                    message.denyAccessState = 0;
+                                    break;
+                                case "DENY_ACCESS_STATE_DENIED":
+                                case 1:
+                                    message.denyAccessState = 1;
+                                    break;
+                                case "DENY_ACCESS_STATE_NOT_DENIED":
+                                case 2:
+                                    message.denyAccessState = 2;
+                                    break;
+                                case "DENY_ACCESS_STATE_UNKNOWN_CONDITIONAL":
+                                case 3:
+                                    message.denyAccessState = 3;
+                                    break;
+                                case "DENY_ACCESS_STATE_UNKNOWN_INFO":
+                                case 4:
+                                    message.denyAccessState = 4;
+                                    break;
+                                }
+                                if (object.explainedResources) {
+                                    if (!Array.isArray(object.explainedResources))
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation.explainedResources: array expected");
+                                    message.explainedResources = [];
+                                    for (var i = 0; i < object.explainedResources.length; ++i) {
+                                        if (typeof object.explainedResources[i] !== "object")
+                                            throw TypeError(".google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation.explainedResources: object expected");
+                                        message.explainedResources[i] = $root.google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource.fromObject(object.explainedResources[i]);
+                                    }
+                                }
+                                switch (object.relevance) {
+                                default:
+                                    if (typeof object.relevance === "number") {
+                                        message.relevance = object.relevance;
+                                        break;
+                                    }
+                                    break;
+                                case "HEURISTIC_RELEVANCE_UNSPECIFIED":
+                                case 0:
+                                    message.relevance = 0;
+                                    break;
+                                case "HEURISTIC_RELEVANCE_NORMAL":
+                                case 1:
+                                    message.relevance = 1;
+                                    break;
+                                case "HEURISTIC_RELEVANCE_HIGH":
+                                case 2:
+                                    message.relevance = 2;
+                                    break;
+                                }
+                                if (object.permissionDeniable != null)
+                                    message.permissionDeniable = Boolean(object.permissionDeniable);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DenyPolicyExplanation message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation} message DenyPolicyExplanation
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DenyPolicyExplanation.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.explainedResources = [];
+                                if (options.defaults) {
+                                    object.denyAccessState = options.enums === String ? "DENY_ACCESS_STATE_UNSPECIFIED" : 0;
+                                    object.relevance = options.enums === String ? "HEURISTIC_RELEVANCE_UNSPECIFIED" : 0;
+                                    object.permissionDeniable = false;
+                                }
+                                if (message.denyAccessState != null && message.hasOwnProperty("denyAccessState"))
+                                    object.denyAccessState = options.enums === String ? $root.google.cloud.policytroubleshooter.iam.v3.DenyAccessState[message.denyAccessState] === undefined ? message.denyAccessState : $root.google.cloud.policytroubleshooter.iam.v3.DenyAccessState[message.denyAccessState] : message.denyAccessState;
+                                if (message.explainedResources && message.explainedResources.length) {
+                                    object.explainedResources = [];
+                                    for (var j = 0; j < message.explainedResources.length; ++j)
+                                        object.explainedResources[j] = $root.google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource.toObject(message.explainedResources[j], options);
+                                }
+                                if (message.relevance != null && message.hasOwnProperty("relevance"))
+                                    object.relevance = options.enums === String ? $root.google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance[message.relevance] === undefined ? message.relevance : $root.google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance[message.relevance] : message.relevance;
+                                if (message.permissionDeniable != null && message.hasOwnProperty("permissionDeniable"))
+                                    object.permissionDeniable = message.permissionDeniable;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DenyPolicyExplanation to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DenyPolicyExplanation.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DenyPolicyExplanation
+                             * @function getTypeUrl
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DenyPolicyExplanation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation";
+                            };
+    
+                            return DenyPolicyExplanation;
+                        })();
+    
+                        v3.ExplainedDenyResource = (function() {
+    
+                            /**
+                             * Properties of an ExplainedDenyResource.
+                             * @memberof google.cloud.policytroubleshooter.iam.v3
+                             * @interface IExplainedDenyResource
+                             * @property {google.cloud.policytroubleshooter.iam.v3.DenyAccessState|null} [denyAccessState] ExplainedDenyResource denyAccessState
+                             * @property {string|null} [fullResourceName] ExplainedDenyResource fullResourceName
+                             * @property {Array.<google.cloud.policytroubleshooter.iam.v3.IExplainedDenyPolicy>|null} [explainedPolicies] ExplainedDenyResource explainedPolicies
+                             * @property {google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|null} [relevance] ExplainedDenyResource relevance
+                             */
+    
+                            /**
+                             * Constructs a new ExplainedDenyResource.
+                             * @memberof google.cloud.policytroubleshooter.iam.v3
+                             * @classdesc Represents an ExplainedDenyResource.
+                             * @implements IExplainedDenyResource
+                             * @constructor
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IExplainedDenyResource=} [properties] Properties to set
+                             */
+                            function ExplainedDenyResource(properties) {
+                                this.explainedPolicies = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ExplainedDenyResource denyAccessState.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.DenyAccessState} denyAccessState
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource
+                             * @instance
+                             */
+                            ExplainedDenyResource.prototype.denyAccessState = 0;
+    
+                            /**
+                             * ExplainedDenyResource fullResourceName.
+                             * @member {string} fullResourceName
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource
+                             * @instance
+                             */
+                            ExplainedDenyResource.prototype.fullResourceName = "";
+    
+                            /**
+                             * ExplainedDenyResource explainedPolicies.
+                             * @member {Array.<google.cloud.policytroubleshooter.iam.v3.IExplainedDenyPolicy>} explainedPolicies
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource
+                             * @instance
+                             */
+                            ExplainedDenyResource.prototype.explainedPolicies = $util.emptyArray;
+    
+                            /**
+                             * ExplainedDenyResource relevance.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance} relevance
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource
+                             * @instance
+                             */
+                            ExplainedDenyResource.prototype.relevance = 0;
+    
+                            /**
+                             * Creates a new ExplainedDenyResource instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IExplainedDenyResource=} [properties] Properties to set
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource} ExplainedDenyResource instance
+                             */
+                            ExplainedDenyResource.create = function create(properties) {
+                                return new ExplainedDenyResource(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ExplainedDenyResource message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IExplainedDenyResource} message ExplainedDenyResource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ExplainedDenyResource.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.denyAccessState != null && Object.hasOwnProperty.call(message, "denyAccessState"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.denyAccessState);
+                                if (message.fullResourceName != null && Object.hasOwnProperty.call(message, "fullResourceName"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.fullResourceName);
+                                if (message.explainedPolicies != null && message.explainedPolicies.length)
+                                    for (var i = 0; i < message.explainedPolicies.length; ++i)
+                                        $root.google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy.encode(message.explainedPolicies[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.relevance != null && Object.hasOwnProperty.call(message, "relevance"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.relevance);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ExplainedDenyResource message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IExplainedDenyResource} message ExplainedDenyResource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ExplainedDenyResource.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an ExplainedDenyResource message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource} ExplainedDenyResource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ExplainedDenyResource.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.denyAccessState = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.fullResourceName = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.explainedPolicies && message.explainedPolicies.length))
+                                                message.explainedPolicies = [];
+                                            message.explainedPolicies.push($root.google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.relevance = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an ExplainedDenyResource message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource} ExplainedDenyResource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ExplainedDenyResource.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an ExplainedDenyResource message.
+                             * @function verify
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ExplainedDenyResource.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.denyAccessState != null && message.hasOwnProperty("denyAccessState"))
+                                    switch (message.denyAccessState) {
+                                    default:
+                                        return "denyAccessState: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                if (message.fullResourceName != null && message.hasOwnProperty("fullResourceName"))
+                                    if (!$util.isString(message.fullResourceName))
+                                        return "fullResourceName: string expected";
+                                if (message.explainedPolicies != null && message.hasOwnProperty("explainedPolicies")) {
+                                    if (!Array.isArray(message.explainedPolicies))
+                                        return "explainedPolicies: array expected";
+                                    for (var i = 0; i < message.explainedPolicies.length; ++i) {
+                                        var error = $root.google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy.verify(message.explainedPolicies[i]);
+                                        if (error)
+                                            return "explainedPolicies." + error;
+                                    }
+                                }
+                                if (message.relevance != null && message.hasOwnProperty("relevance"))
+                                    switch (message.relevance) {
+                                    default:
+                                        return "relevance: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an ExplainedDenyResource message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource} ExplainedDenyResource
+                             */
+                            ExplainedDenyResource.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource)
+                                    return object;
+                                var message = new $root.google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource();
+                                switch (object.denyAccessState) {
+                                default:
+                                    if (typeof object.denyAccessState === "number") {
+                                        message.denyAccessState = object.denyAccessState;
+                                        break;
+                                    }
+                                    break;
+                                case "DENY_ACCESS_STATE_UNSPECIFIED":
+                                case 0:
+                                    message.denyAccessState = 0;
+                                    break;
+                                case "DENY_ACCESS_STATE_DENIED":
+                                case 1:
+                                    message.denyAccessState = 1;
+                                    break;
+                                case "DENY_ACCESS_STATE_NOT_DENIED":
+                                case 2:
+                                    message.denyAccessState = 2;
+                                    break;
+                                case "DENY_ACCESS_STATE_UNKNOWN_CONDITIONAL":
+                                case 3:
+                                    message.denyAccessState = 3;
+                                    break;
+                                case "DENY_ACCESS_STATE_UNKNOWN_INFO":
+                                case 4:
+                                    message.denyAccessState = 4;
+                                    break;
+                                }
+                                if (object.fullResourceName != null)
+                                    message.fullResourceName = String(object.fullResourceName);
+                                if (object.explainedPolicies) {
+                                    if (!Array.isArray(object.explainedPolicies))
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource.explainedPolicies: array expected");
+                                    message.explainedPolicies = [];
+                                    for (var i = 0; i < object.explainedPolicies.length; ++i) {
+                                        if (typeof object.explainedPolicies[i] !== "object")
+                                            throw TypeError(".google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource.explainedPolicies: object expected");
+                                        message.explainedPolicies[i] = $root.google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy.fromObject(object.explainedPolicies[i]);
+                                    }
+                                }
+                                switch (object.relevance) {
+                                default:
+                                    if (typeof object.relevance === "number") {
+                                        message.relevance = object.relevance;
+                                        break;
+                                    }
+                                    break;
+                                case "HEURISTIC_RELEVANCE_UNSPECIFIED":
+                                case 0:
+                                    message.relevance = 0;
+                                    break;
+                                case "HEURISTIC_RELEVANCE_NORMAL":
+                                case 1:
+                                    message.relevance = 1;
+                                    break;
+                                case "HEURISTIC_RELEVANCE_HIGH":
+                                case 2:
+                                    message.relevance = 2;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an ExplainedDenyResource message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource} message ExplainedDenyResource
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ExplainedDenyResource.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.explainedPolicies = [];
+                                if (options.defaults) {
+                                    object.denyAccessState = options.enums === String ? "DENY_ACCESS_STATE_UNSPECIFIED" : 0;
+                                    object.fullResourceName = "";
+                                    object.relevance = options.enums === String ? "HEURISTIC_RELEVANCE_UNSPECIFIED" : 0;
+                                }
+                                if (message.denyAccessState != null && message.hasOwnProperty("denyAccessState"))
+                                    object.denyAccessState = options.enums === String ? $root.google.cloud.policytroubleshooter.iam.v3.DenyAccessState[message.denyAccessState] === undefined ? message.denyAccessState : $root.google.cloud.policytroubleshooter.iam.v3.DenyAccessState[message.denyAccessState] : message.denyAccessState;
+                                if (message.fullResourceName != null && message.hasOwnProperty("fullResourceName"))
+                                    object.fullResourceName = message.fullResourceName;
+                                if (message.explainedPolicies && message.explainedPolicies.length) {
+                                    object.explainedPolicies = [];
+                                    for (var j = 0; j < message.explainedPolicies.length; ++j)
+                                        object.explainedPolicies[j] = $root.google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy.toObject(message.explainedPolicies[j], options);
+                                }
+                                if (message.relevance != null && message.hasOwnProperty("relevance"))
+                                    object.relevance = options.enums === String ? $root.google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance[message.relevance] === undefined ? message.relevance : $root.google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance[message.relevance] : message.relevance;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ExplainedDenyResource to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ExplainedDenyResource.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ExplainedDenyResource
+                             * @function getTypeUrl
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ExplainedDenyResource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource";
+                            };
+    
+                            return ExplainedDenyResource;
+                        })();
+    
+                        v3.ExplainedDenyPolicy = (function() {
+    
+                            /**
+                             * Properties of an ExplainedDenyPolicy.
+                             * @memberof google.cloud.policytroubleshooter.iam.v3
+                             * @interface IExplainedDenyPolicy
+                             * @property {google.cloud.policytroubleshooter.iam.v3.DenyAccessState|null} [denyAccessState] ExplainedDenyPolicy denyAccessState
+                             * @property {google.iam.v2.IPolicy|null} [policy] ExplainedDenyPolicy policy
+                             * @property {Array.<google.cloud.policytroubleshooter.iam.v3.IDenyRuleExplanation>|null} [ruleExplanations] ExplainedDenyPolicy ruleExplanations
+                             * @property {google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|null} [relevance] ExplainedDenyPolicy relevance
+                             */
+    
+                            /**
+                             * Constructs a new ExplainedDenyPolicy.
+                             * @memberof google.cloud.policytroubleshooter.iam.v3
+                             * @classdesc Represents an ExplainedDenyPolicy.
+                             * @implements IExplainedDenyPolicy
+                             * @constructor
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IExplainedDenyPolicy=} [properties] Properties to set
+                             */
+                            function ExplainedDenyPolicy(properties) {
+                                this.ruleExplanations = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ExplainedDenyPolicy denyAccessState.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.DenyAccessState} denyAccessState
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy
+                             * @instance
+                             */
+                            ExplainedDenyPolicy.prototype.denyAccessState = 0;
+    
+                            /**
+                             * ExplainedDenyPolicy policy.
+                             * @member {google.iam.v2.IPolicy|null|undefined} policy
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy
+                             * @instance
+                             */
+                            ExplainedDenyPolicy.prototype.policy = null;
+    
+                            /**
+                             * ExplainedDenyPolicy ruleExplanations.
+                             * @member {Array.<google.cloud.policytroubleshooter.iam.v3.IDenyRuleExplanation>} ruleExplanations
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy
+                             * @instance
+                             */
+                            ExplainedDenyPolicy.prototype.ruleExplanations = $util.emptyArray;
+    
+                            /**
+                             * ExplainedDenyPolicy relevance.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance} relevance
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy
+                             * @instance
+                             */
+                            ExplainedDenyPolicy.prototype.relevance = 0;
+    
+                            /**
+                             * Creates a new ExplainedDenyPolicy instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IExplainedDenyPolicy=} [properties] Properties to set
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy} ExplainedDenyPolicy instance
+                             */
+                            ExplainedDenyPolicy.create = function create(properties) {
+                                return new ExplainedDenyPolicy(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ExplainedDenyPolicy message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IExplainedDenyPolicy} message ExplainedDenyPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ExplainedDenyPolicy.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.denyAccessState != null && Object.hasOwnProperty.call(message, "denyAccessState"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.denyAccessState);
+                                if (message.policy != null && Object.hasOwnProperty.call(message, "policy"))
+                                    $root.google.iam.v2.Policy.encode(message.policy, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.ruleExplanations != null && message.ruleExplanations.length)
+                                    for (var i = 0; i < message.ruleExplanations.length; ++i)
+                                        $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.encode(message.ruleExplanations[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.relevance != null && Object.hasOwnProperty.call(message, "relevance"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.relevance);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ExplainedDenyPolicy message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IExplainedDenyPolicy} message ExplainedDenyPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ExplainedDenyPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an ExplainedDenyPolicy message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy} ExplainedDenyPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ExplainedDenyPolicy.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.denyAccessState = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.policy = $root.google.iam.v2.Policy.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.ruleExplanations && message.ruleExplanations.length))
+                                                message.ruleExplanations = [];
+                                            message.ruleExplanations.push($root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.relevance = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an ExplainedDenyPolicy message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy} ExplainedDenyPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ExplainedDenyPolicy.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an ExplainedDenyPolicy message.
+                             * @function verify
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ExplainedDenyPolicy.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.denyAccessState != null && message.hasOwnProperty("denyAccessState"))
+                                    switch (message.denyAccessState) {
+                                    default:
+                                        return "denyAccessState: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                if (message.policy != null && message.hasOwnProperty("policy")) {
+                                    var error = $root.google.iam.v2.Policy.verify(message.policy);
+                                    if (error)
+                                        return "policy." + error;
+                                }
+                                if (message.ruleExplanations != null && message.hasOwnProperty("ruleExplanations")) {
+                                    if (!Array.isArray(message.ruleExplanations))
+                                        return "ruleExplanations: array expected";
+                                    for (var i = 0; i < message.ruleExplanations.length; ++i) {
+                                        var error = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.verify(message.ruleExplanations[i]);
+                                        if (error)
+                                            return "ruleExplanations." + error;
+                                    }
+                                }
+                                if (message.relevance != null && message.hasOwnProperty("relevance"))
+                                    switch (message.relevance) {
+                                    default:
+                                        return "relevance: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an ExplainedDenyPolicy message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy} ExplainedDenyPolicy
+                             */
+                            ExplainedDenyPolicy.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy)
+                                    return object;
+                                var message = new $root.google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy();
+                                switch (object.denyAccessState) {
+                                default:
+                                    if (typeof object.denyAccessState === "number") {
+                                        message.denyAccessState = object.denyAccessState;
+                                        break;
+                                    }
+                                    break;
+                                case "DENY_ACCESS_STATE_UNSPECIFIED":
+                                case 0:
+                                    message.denyAccessState = 0;
+                                    break;
+                                case "DENY_ACCESS_STATE_DENIED":
+                                case 1:
+                                    message.denyAccessState = 1;
+                                    break;
+                                case "DENY_ACCESS_STATE_NOT_DENIED":
+                                case 2:
+                                    message.denyAccessState = 2;
+                                    break;
+                                case "DENY_ACCESS_STATE_UNKNOWN_CONDITIONAL":
+                                case 3:
+                                    message.denyAccessState = 3;
+                                    break;
+                                case "DENY_ACCESS_STATE_UNKNOWN_INFO":
+                                case 4:
+                                    message.denyAccessState = 4;
+                                    break;
+                                }
+                                if (object.policy != null) {
+                                    if (typeof object.policy !== "object")
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy.policy: object expected");
+                                    message.policy = $root.google.iam.v2.Policy.fromObject(object.policy);
+                                }
+                                if (object.ruleExplanations) {
+                                    if (!Array.isArray(object.ruleExplanations))
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy.ruleExplanations: array expected");
+                                    message.ruleExplanations = [];
+                                    for (var i = 0; i < object.ruleExplanations.length; ++i) {
+                                        if (typeof object.ruleExplanations[i] !== "object")
+                                            throw TypeError(".google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy.ruleExplanations: object expected");
+                                        message.ruleExplanations[i] = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.fromObject(object.ruleExplanations[i]);
+                                    }
+                                }
+                                switch (object.relevance) {
+                                default:
+                                    if (typeof object.relevance === "number") {
+                                        message.relevance = object.relevance;
+                                        break;
+                                    }
+                                    break;
+                                case "HEURISTIC_RELEVANCE_UNSPECIFIED":
+                                case 0:
+                                    message.relevance = 0;
+                                    break;
+                                case "HEURISTIC_RELEVANCE_NORMAL":
+                                case 1:
+                                    message.relevance = 1;
+                                    break;
+                                case "HEURISTIC_RELEVANCE_HIGH":
+                                case 2:
+                                    message.relevance = 2;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an ExplainedDenyPolicy message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy} message ExplainedDenyPolicy
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ExplainedDenyPolicy.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.ruleExplanations = [];
+                                if (options.defaults) {
+                                    object.denyAccessState = options.enums === String ? "DENY_ACCESS_STATE_UNSPECIFIED" : 0;
+                                    object.policy = null;
+                                    object.relevance = options.enums === String ? "HEURISTIC_RELEVANCE_UNSPECIFIED" : 0;
+                                }
+                                if (message.denyAccessState != null && message.hasOwnProperty("denyAccessState"))
+                                    object.denyAccessState = options.enums === String ? $root.google.cloud.policytroubleshooter.iam.v3.DenyAccessState[message.denyAccessState] === undefined ? message.denyAccessState : $root.google.cloud.policytroubleshooter.iam.v3.DenyAccessState[message.denyAccessState] : message.denyAccessState;
+                                if (message.policy != null && message.hasOwnProperty("policy"))
+                                    object.policy = $root.google.iam.v2.Policy.toObject(message.policy, options);
+                                if (message.ruleExplanations && message.ruleExplanations.length) {
+                                    object.ruleExplanations = [];
+                                    for (var j = 0; j < message.ruleExplanations.length; ++j)
+                                        object.ruleExplanations[j] = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.toObject(message.ruleExplanations[j], options);
+                                }
+                                if (message.relevance != null && message.hasOwnProperty("relevance"))
+                                    object.relevance = options.enums === String ? $root.google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance[message.relevance] === undefined ? message.relevance : $root.google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance[message.relevance] : message.relevance;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ExplainedDenyPolicy to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ExplainedDenyPolicy.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ExplainedDenyPolicy
+                             * @function getTypeUrl
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ExplainedDenyPolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy";
+                            };
+    
+                            return ExplainedDenyPolicy;
+                        })();
+    
+                        v3.DenyRuleExplanation = (function() {
+    
+                            /**
+                             * Properties of a DenyRuleExplanation.
+                             * @memberof google.cloud.policytroubleshooter.iam.v3
+                             * @interface IDenyRuleExplanation
+                             * @property {google.cloud.policytroubleshooter.iam.v3.DenyAccessState|null} [denyAccessState] DenyRuleExplanation denyAccessState
+                             * @property {google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedPermissionMatching|null} [combinedDeniedPermission] DenyRuleExplanation combinedDeniedPermission
+                             * @property {Object.<string,google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedPermissionMatching>|null} [deniedPermissions] DenyRuleExplanation deniedPermissions
+                             * @property {google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedPermissionMatching|null} [combinedExceptionPermission] DenyRuleExplanation combinedExceptionPermission
+                             * @property {Object.<string,google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedPermissionMatching>|null} [exceptionPermissions] DenyRuleExplanation exceptionPermissions
+                             * @property {google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedDenyPrincipalMatching|null} [combinedDeniedPrincipal] DenyRuleExplanation combinedDeniedPrincipal
+                             * @property {Object.<string,google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedDenyPrincipalMatching>|null} [deniedPrincipals] DenyRuleExplanation deniedPrincipals
+                             * @property {google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedDenyPrincipalMatching|null} [combinedExceptionPrincipal] DenyRuleExplanation combinedExceptionPrincipal
+                             * @property {Object.<string,google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedDenyPrincipalMatching>|null} [exceptionPrincipals] DenyRuleExplanation exceptionPrincipals
+                             * @property {google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|null} [relevance] DenyRuleExplanation relevance
+                             * @property {google.type.IExpr|null} [condition] DenyRuleExplanation condition
+                             * @property {google.cloud.policytroubleshooter.iam.v3.IConditionExplanation|null} [conditionExplanation] DenyRuleExplanation conditionExplanation
+                             */
+    
+                            /**
+                             * Constructs a new DenyRuleExplanation.
+                             * @memberof google.cloud.policytroubleshooter.iam.v3
+                             * @classdesc Represents a DenyRuleExplanation.
+                             * @implements IDenyRuleExplanation
+                             * @constructor
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IDenyRuleExplanation=} [properties] Properties to set
+                             */
+                            function DenyRuleExplanation(properties) {
+                                this.deniedPermissions = {};
+                                this.exceptionPermissions = {};
+                                this.deniedPrincipals = {};
+                                this.exceptionPrincipals = {};
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DenyRuleExplanation denyAccessState.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.DenyAccessState} denyAccessState
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation
+                             * @instance
+                             */
+                            DenyRuleExplanation.prototype.denyAccessState = 0;
+    
+                            /**
+                             * DenyRuleExplanation combinedDeniedPermission.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedPermissionMatching|null|undefined} combinedDeniedPermission
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation
+                             * @instance
+                             */
+                            DenyRuleExplanation.prototype.combinedDeniedPermission = null;
+    
+                            /**
+                             * DenyRuleExplanation deniedPermissions.
+                             * @member {Object.<string,google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedPermissionMatching>} deniedPermissions
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation
+                             * @instance
+                             */
+                            DenyRuleExplanation.prototype.deniedPermissions = $util.emptyObject;
+    
+                            /**
+                             * DenyRuleExplanation combinedExceptionPermission.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedPermissionMatching|null|undefined} combinedExceptionPermission
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation
+                             * @instance
+                             */
+                            DenyRuleExplanation.prototype.combinedExceptionPermission = null;
+    
+                            /**
+                             * DenyRuleExplanation exceptionPermissions.
+                             * @member {Object.<string,google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedPermissionMatching>} exceptionPermissions
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation
+                             * @instance
+                             */
+                            DenyRuleExplanation.prototype.exceptionPermissions = $util.emptyObject;
+    
+                            /**
+                             * DenyRuleExplanation combinedDeniedPrincipal.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedDenyPrincipalMatching|null|undefined} combinedDeniedPrincipal
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation
+                             * @instance
+                             */
+                            DenyRuleExplanation.prototype.combinedDeniedPrincipal = null;
+    
+                            /**
+                             * DenyRuleExplanation deniedPrincipals.
+                             * @member {Object.<string,google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedDenyPrincipalMatching>} deniedPrincipals
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation
+                             * @instance
+                             */
+                            DenyRuleExplanation.prototype.deniedPrincipals = $util.emptyObject;
+    
+                            /**
+                             * DenyRuleExplanation combinedExceptionPrincipal.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedDenyPrincipalMatching|null|undefined} combinedExceptionPrincipal
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation
+                             * @instance
+                             */
+                            DenyRuleExplanation.prototype.combinedExceptionPrincipal = null;
+    
+                            /**
+                             * DenyRuleExplanation exceptionPrincipals.
+                             * @member {Object.<string,google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedDenyPrincipalMatching>} exceptionPrincipals
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation
+                             * @instance
+                             */
+                            DenyRuleExplanation.prototype.exceptionPrincipals = $util.emptyObject;
+    
+                            /**
+                             * DenyRuleExplanation relevance.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance} relevance
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation
+                             * @instance
+                             */
+                            DenyRuleExplanation.prototype.relevance = 0;
+    
+                            /**
+                             * DenyRuleExplanation condition.
+                             * @member {google.type.IExpr|null|undefined} condition
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation
+                             * @instance
+                             */
+                            DenyRuleExplanation.prototype.condition = null;
+    
+                            /**
+                             * DenyRuleExplanation conditionExplanation.
+                             * @member {google.cloud.policytroubleshooter.iam.v3.IConditionExplanation|null|undefined} conditionExplanation
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation
+                             * @instance
+                             */
+                            DenyRuleExplanation.prototype.conditionExplanation = null;
+    
+                            /**
+                             * Creates a new DenyRuleExplanation instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IDenyRuleExplanation=} [properties] Properties to set
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation} DenyRuleExplanation instance
+                             */
+                            DenyRuleExplanation.create = function create(properties) {
+                                return new DenyRuleExplanation(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DenyRuleExplanation message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IDenyRuleExplanation} message DenyRuleExplanation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DenyRuleExplanation.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.denyAccessState != null && Object.hasOwnProperty.call(message, "denyAccessState"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.denyAccessState);
+                                if (message.combinedDeniedPermission != null && Object.hasOwnProperty.call(message, "combinedDeniedPermission"))
+                                    $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching.encode(message.combinedDeniedPermission, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.deniedPermissions != null && Object.hasOwnProperty.call(message, "deniedPermissions"))
+                                    for (var keys = Object.keys(message.deniedPermissions), i = 0; i < keys.length; ++i) {
+                                        writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                        $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching.encode(message.deniedPermissions[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                    }
+                                if (message.combinedExceptionPermission != null && Object.hasOwnProperty.call(message, "combinedExceptionPermission"))
+                                    $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching.encode(message.combinedExceptionPermission, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.exceptionPermissions != null && Object.hasOwnProperty.call(message, "exceptionPermissions"))
+                                    for (var keys = Object.keys(message.exceptionPermissions), i = 0; i < keys.length; ++i) {
+                                        writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                        $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching.encode(message.exceptionPermissions[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                    }
+                                if (message.combinedDeniedPrincipal != null && Object.hasOwnProperty.call(message, "combinedDeniedPrincipal"))
+                                    $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching.encode(message.combinedDeniedPrincipal, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.deniedPrincipals != null && Object.hasOwnProperty.call(message, "deniedPrincipals"))
+                                    for (var keys = Object.keys(message.deniedPrincipals), i = 0; i < keys.length; ++i) {
+                                        writer.uint32(/* id 7, wireType 2 =*/58).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                        $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching.encode(message.deniedPrincipals[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                    }
+                                if (message.combinedExceptionPrincipal != null && Object.hasOwnProperty.call(message, "combinedExceptionPrincipal"))
+                                    $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching.encode(message.combinedExceptionPrincipal, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.exceptionPrincipals != null && Object.hasOwnProperty.call(message, "exceptionPrincipals"))
+                                    for (var keys = Object.keys(message.exceptionPrincipals), i = 0; i < keys.length; ++i) {
+                                        writer.uint32(/* id 9, wireType 2 =*/74).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                        $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching.encode(message.exceptionPrincipals[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                    }
+                                if (message.relevance != null && Object.hasOwnProperty.call(message, "relevance"))
+                                    writer.uint32(/* id 10, wireType 0 =*/80).int32(message.relevance);
+                                if (message.condition != null && Object.hasOwnProperty.call(message, "condition"))
+                                    $root.google.type.Expr.encode(message.condition, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                                if (message.conditionExplanation != null && Object.hasOwnProperty.call(message, "conditionExplanation"))
+                                    $root.google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.encode(message.conditionExplanation, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DenyRuleExplanation message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IDenyRuleExplanation} message DenyRuleExplanation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DenyRuleExplanation.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DenyRuleExplanation message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation} DenyRuleExplanation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DenyRuleExplanation.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation(), key, value;
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.denyAccessState = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.combinedDeniedPermission = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (message.deniedPermissions === $util.emptyObject)
+                                                message.deniedPermissions = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = null;
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching.decode(reader, reader.uint32());
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.deniedPermissions[key] = value;
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.combinedExceptionPermission = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            if (message.exceptionPermissions === $util.emptyObject)
+                                                message.exceptionPermissions = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = null;
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching.decode(reader, reader.uint32());
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.exceptionPermissions[key] = value;
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.combinedDeniedPrincipal = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            if (message.deniedPrincipals === $util.emptyObject)
+                                                message.deniedPrincipals = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = null;
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching.decode(reader, reader.uint32());
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.deniedPrincipals[key] = value;
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.combinedExceptionPrincipal = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 9: {
+                                            if (message.exceptionPrincipals === $util.emptyObject)
+                                                message.exceptionPrincipals = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = null;
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching.decode(reader, reader.uint32());
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.exceptionPrincipals[key] = value;
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.relevance = reader.int32();
+                                            break;
+                                        }
+                                    case 11: {
+                                            message.condition = $root.google.type.Expr.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 12: {
+                                            message.conditionExplanation = $root.google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DenyRuleExplanation message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation} DenyRuleExplanation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DenyRuleExplanation.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DenyRuleExplanation message.
+                             * @function verify
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DenyRuleExplanation.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.denyAccessState != null && message.hasOwnProperty("denyAccessState"))
+                                    switch (message.denyAccessState) {
+                                    default:
+                                        return "denyAccessState: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                if (message.combinedDeniedPermission != null && message.hasOwnProperty("combinedDeniedPermission")) {
+                                    var error = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching.verify(message.combinedDeniedPermission);
+                                    if (error)
+                                        return "combinedDeniedPermission." + error;
+                                }
+                                if (message.deniedPermissions != null && message.hasOwnProperty("deniedPermissions")) {
+                                    if (!$util.isObject(message.deniedPermissions))
+                                        return "deniedPermissions: object expected";
+                                    var key = Object.keys(message.deniedPermissions);
+                                    for (var i = 0; i < key.length; ++i) {
+                                        var error = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching.verify(message.deniedPermissions[key[i]]);
+                                        if (error)
+                                            return "deniedPermissions." + error;
+                                    }
+                                }
+                                if (message.combinedExceptionPermission != null && message.hasOwnProperty("combinedExceptionPermission")) {
+                                    var error = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching.verify(message.combinedExceptionPermission);
+                                    if (error)
+                                        return "combinedExceptionPermission." + error;
+                                }
+                                if (message.exceptionPermissions != null && message.hasOwnProperty("exceptionPermissions")) {
+                                    if (!$util.isObject(message.exceptionPermissions))
+                                        return "exceptionPermissions: object expected";
+                                    var key = Object.keys(message.exceptionPermissions);
+                                    for (var i = 0; i < key.length; ++i) {
+                                        var error = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching.verify(message.exceptionPermissions[key[i]]);
+                                        if (error)
+                                            return "exceptionPermissions." + error;
+                                    }
+                                }
+                                if (message.combinedDeniedPrincipal != null && message.hasOwnProperty("combinedDeniedPrincipal")) {
+                                    var error = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching.verify(message.combinedDeniedPrincipal);
+                                    if (error)
+                                        return "combinedDeniedPrincipal." + error;
+                                }
+                                if (message.deniedPrincipals != null && message.hasOwnProperty("deniedPrincipals")) {
+                                    if (!$util.isObject(message.deniedPrincipals))
+                                        return "deniedPrincipals: object expected";
+                                    var key = Object.keys(message.deniedPrincipals);
+                                    for (var i = 0; i < key.length; ++i) {
+                                        var error = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching.verify(message.deniedPrincipals[key[i]]);
+                                        if (error)
+                                            return "deniedPrincipals." + error;
+                                    }
+                                }
+                                if (message.combinedExceptionPrincipal != null && message.hasOwnProperty("combinedExceptionPrincipal")) {
+                                    var error = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching.verify(message.combinedExceptionPrincipal);
+                                    if (error)
+                                        return "combinedExceptionPrincipal." + error;
+                                }
+                                if (message.exceptionPrincipals != null && message.hasOwnProperty("exceptionPrincipals")) {
+                                    if (!$util.isObject(message.exceptionPrincipals))
+                                        return "exceptionPrincipals: object expected";
+                                    var key = Object.keys(message.exceptionPrincipals);
+                                    for (var i = 0; i < key.length; ++i) {
+                                        var error = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching.verify(message.exceptionPrincipals[key[i]]);
+                                        if (error)
+                                            return "exceptionPrincipals." + error;
+                                    }
+                                }
+                                if (message.relevance != null && message.hasOwnProperty("relevance"))
+                                    switch (message.relevance) {
+                                    default:
+                                        return "relevance: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.condition != null && message.hasOwnProperty("condition")) {
+                                    var error = $root.google.type.Expr.verify(message.condition);
+                                    if (error)
+                                        return "condition." + error;
+                                }
+                                if (message.conditionExplanation != null && message.hasOwnProperty("conditionExplanation")) {
+                                    var error = $root.google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.verify(message.conditionExplanation);
+                                    if (error)
+                                        return "conditionExplanation." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DenyRuleExplanation message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation} DenyRuleExplanation
+                             */
+                            DenyRuleExplanation.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation)
+                                    return object;
+                                var message = new $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation();
+                                switch (object.denyAccessState) {
+                                default:
+                                    if (typeof object.denyAccessState === "number") {
+                                        message.denyAccessState = object.denyAccessState;
+                                        break;
+                                    }
+                                    break;
+                                case "DENY_ACCESS_STATE_UNSPECIFIED":
+                                case 0:
+                                    message.denyAccessState = 0;
+                                    break;
+                                case "DENY_ACCESS_STATE_DENIED":
+                                case 1:
+                                    message.denyAccessState = 1;
+                                    break;
+                                case "DENY_ACCESS_STATE_NOT_DENIED":
+                                case 2:
+                                    message.denyAccessState = 2;
+                                    break;
+                                case "DENY_ACCESS_STATE_UNKNOWN_CONDITIONAL":
+                                case 3:
+                                    message.denyAccessState = 3;
+                                    break;
+                                case "DENY_ACCESS_STATE_UNKNOWN_INFO":
+                                case 4:
+                                    message.denyAccessState = 4;
+                                    break;
+                                }
+                                if (object.combinedDeniedPermission != null) {
+                                    if (typeof object.combinedDeniedPermission !== "object")
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.combinedDeniedPermission: object expected");
+                                    message.combinedDeniedPermission = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching.fromObject(object.combinedDeniedPermission);
+                                }
+                                if (object.deniedPermissions) {
+                                    if (typeof object.deniedPermissions !== "object")
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.deniedPermissions: object expected");
+                                    message.deniedPermissions = {};
+                                    for (var keys = Object.keys(object.deniedPermissions), i = 0; i < keys.length; ++i) {
+                                        if (typeof object.deniedPermissions[keys[i]] !== "object")
+                                            throw TypeError(".google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.deniedPermissions: object expected");
+                                        message.deniedPermissions[keys[i]] = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching.fromObject(object.deniedPermissions[keys[i]]);
+                                    }
+                                }
+                                if (object.combinedExceptionPermission != null) {
+                                    if (typeof object.combinedExceptionPermission !== "object")
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.combinedExceptionPermission: object expected");
+                                    message.combinedExceptionPermission = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching.fromObject(object.combinedExceptionPermission);
+                                }
+                                if (object.exceptionPermissions) {
+                                    if (typeof object.exceptionPermissions !== "object")
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.exceptionPermissions: object expected");
+                                    message.exceptionPermissions = {};
+                                    for (var keys = Object.keys(object.exceptionPermissions), i = 0; i < keys.length; ++i) {
+                                        if (typeof object.exceptionPermissions[keys[i]] !== "object")
+                                            throw TypeError(".google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.exceptionPermissions: object expected");
+                                        message.exceptionPermissions[keys[i]] = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching.fromObject(object.exceptionPermissions[keys[i]]);
+                                    }
+                                }
+                                if (object.combinedDeniedPrincipal != null) {
+                                    if (typeof object.combinedDeniedPrincipal !== "object")
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.combinedDeniedPrincipal: object expected");
+                                    message.combinedDeniedPrincipal = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching.fromObject(object.combinedDeniedPrincipal);
+                                }
+                                if (object.deniedPrincipals) {
+                                    if (typeof object.deniedPrincipals !== "object")
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.deniedPrincipals: object expected");
+                                    message.deniedPrincipals = {};
+                                    for (var keys = Object.keys(object.deniedPrincipals), i = 0; i < keys.length; ++i) {
+                                        if (typeof object.deniedPrincipals[keys[i]] !== "object")
+                                            throw TypeError(".google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.deniedPrincipals: object expected");
+                                        message.deniedPrincipals[keys[i]] = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching.fromObject(object.deniedPrincipals[keys[i]]);
+                                    }
+                                }
+                                if (object.combinedExceptionPrincipal != null) {
+                                    if (typeof object.combinedExceptionPrincipal !== "object")
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.combinedExceptionPrincipal: object expected");
+                                    message.combinedExceptionPrincipal = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching.fromObject(object.combinedExceptionPrincipal);
+                                }
+                                if (object.exceptionPrincipals) {
+                                    if (typeof object.exceptionPrincipals !== "object")
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.exceptionPrincipals: object expected");
+                                    message.exceptionPrincipals = {};
+                                    for (var keys = Object.keys(object.exceptionPrincipals), i = 0; i < keys.length; ++i) {
+                                        if (typeof object.exceptionPrincipals[keys[i]] !== "object")
+                                            throw TypeError(".google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.exceptionPrincipals: object expected");
+                                        message.exceptionPrincipals[keys[i]] = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching.fromObject(object.exceptionPrincipals[keys[i]]);
+                                    }
+                                }
+                                switch (object.relevance) {
+                                default:
+                                    if (typeof object.relevance === "number") {
+                                        message.relevance = object.relevance;
+                                        break;
+                                    }
+                                    break;
+                                case "HEURISTIC_RELEVANCE_UNSPECIFIED":
+                                case 0:
+                                    message.relevance = 0;
+                                    break;
+                                case "HEURISTIC_RELEVANCE_NORMAL":
+                                case 1:
+                                    message.relevance = 1;
+                                    break;
+                                case "HEURISTIC_RELEVANCE_HIGH":
+                                case 2:
+                                    message.relevance = 2;
+                                    break;
+                                }
+                                if (object.condition != null) {
+                                    if (typeof object.condition !== "object")
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.condition: object expected");
+                                    message.condition = $root.google.type.Expr.fromObject(object.condition);
+                                }
+                                if (object.conditionExplanation != null) {
+                                    if (typeof object.conditionExplanation !== "object")
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.conditionExplanation: object expected");
+                                    message.conditionExplanation = $root.google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.fromObject(object.conditionExplanation);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DenyRuleExplanation message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation} message DenyRuleExplanation
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DenyRuleExplanation.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.objects || options.defaults) {
+                                    object.deniedPermissions = {};
+                                    object.exceptionPermissions = {};
+                                    object.deniedPrincipals = {};
+                                    object.exceptionPrincipals = {};
+                                }
+                                if (options.defaults) {
+                                    object.denyAccessState = options.enums === String ? "DENY_ACCESS_STATE_UNSPECIFIED" : 0;
+                                    object.combinedDeniedPermission = null;
+                                    object.combinedExceptionPermission = null;
+                                    object.combinedDeniedPrincipal = null;
+                                    object.combinedExceptionPrincipal = null;
+                                    object.relevance = options.enums === String ? "HEURISTIC_RELEVANCE_UNSPECIFIED" : 0;
+                                    object.condition = null;
+                                    object.conditionExplanation = null;
+                                }
+                                if (message.denyAccessState != null && message.hasOwnProperty("denyAccessState"))
+                                    object.denyAccessState = options.enums === String ? $root.google.cloud.policytroubleshooter.iam.v3.DenyAccessState[message.denyAccessState] === undefined ? message.denyAccessState : $root.google.cloud.policytroubleshooter.iam.v3.DenyAccessState[message.denyAccessState] : message.denyAccessState;
+                                if (message.combinedDeniedPermission != null && message.hasOwnProperty("combinedDeniedPermission"))
+                                    object.combinedDeniedPermission = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching.toObject(message.combinedDeniedPermission, options);
+                                var keys2;
+                                if (message.deniedPermissions && (keys2 = Object.keys(message.deniedPermissions)).length) {
+                                    object.deniedPermissions = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.deniedPermissions[keys2[j]] = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching.toObject(message.deniedPermissions[keys2[j]], options);
+                                }
+                                if (message.combinedExceptionPermission != null && message.hasOwnProperty("combinedExceptionPermission"))
+                                    object.combinedExceptionPermission = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching.toObject(message.combinedExceptionPermission, options);
+                                if (message.exceptionPermissions && (keys2 = Object.keys(message.exceptionPermissions)).length) {
+                                    object.exceptionPermissions = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.exceptionPermissions[keys2[j]] = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching.toObject(message.exceptionPermissions[keys2[j]], options);
+                                }
+                                if (message.combinedDeniedPrincipal != null && message.hasOwnProperty("combinedDeniedPrincipal"))
+                                    object.combinedDeniedPrincipal = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching.toObject(message.combinedDeniedPrincipal, options);
+                                if (message.deniedPrincipals && (keys2 = Object.keys(message.deniedPrincipals)).length) {
+                                    object.deniedPrincipals = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.deniedPrincipals[keys2[j]] = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching.toObject(message.deniedPrincipals[keys2[j]], options);
+                                }
+                                if (message.combinedExceptionPrincipal != null && message.hasOwnProperty("combinedExceptionPrincipal"))
+                                    object.combinedExceptionPrincipal = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching.toObject(message.combinedExceptionPrincipal, options);
+                                if (message.exceptionPrincipals && (keys2 = Object.keys(message.exceptionPrincipals)).length) {
+                                    object.exceptionPrincipals = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.exceptionPrincipals[keys2[j]] = $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching.toObject(message.exceptionPrincipals[keys2[j]], options);
+                                }
+                                if (message.relevance != null && message.hasOwnProperty("relevance"))
+                                    object.relevance = options.enums === String ? $root.google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance[message.relevance] === undefined ? message.relevance : $root.google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance[message.relevance] : message.relevance;
+                                if (message.condition != null && message.hasOwnProperty("condition"))
+                                    object.condition = $root.google.type.Expr.toObject(message.condition, options);
+                                if (message.conditionExplanation != null && message.hasOwnProperty("conditionExplanation"))
+                                    object.conditionExplanation = $root.google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.toObject(message.conditionExplanation, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DenyRuleExplanation to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DenyRuleExplanation.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DenyRuleExplanation
+                             * @function getTypeUrl
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DenyRuleExplanation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation";
+                            };
+    
+                            DenyRuleExplanation.AnnotatedPermissionMatching = (function() {
+    
+                                /**
+                                 * Properties of an AnnotatedPermissionMatching.
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation
+                                 * @interface IAnnotatedPermissionMatching
+                                 * @property {google.cloud.policytroubleshooter.iam.v3.PermissionPatternMatchingState|null} [permissionMatchingState] AnnotatedPermissionMatching permissionMatchingState
+                                 * @property {google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|null} [relevance] AnnotatedPermissionMatching relevance
+                                 */
+    
+                                /**
+                                 * Constructs a new AnnotatedPermissionMatching.
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation
+                                 * @classdesc Represents an AnnotatedPermissionMatching.
+                                 * @implements IAnnotatedPermissionMatching
+                                 * @constructor
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedPermissionMatching=} [properties] Properties to set
+                                 */
+                                function AnnotatedPermissionMatching(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * AnnotatedPermissionMatching permissionMatchingState.
+                                 * @member {google.cloud.policytroubleshooter.iam.v3.PermissionPatternMatchingState} permissionMatchingState
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching
+                                 * @instance
+                                 */
+                                AnnotatedPermissionMatching.prototype.permissionMatchingState = 0;
+    
+                                /**
+                                 * AnnotatedPermissionMatching relevance.
+                                 * @member {google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance} relevance
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching
+                                 * @instance
+                                 */
+                                AnnotatedPermissionMatching.prototype.relevance = 0;
+    
+                                /**
+                                 * Creates a new AnnotatedPermissionMatching instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedPermissionMatching=} [properties] Properties to set
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching} AnnotatedPermissionMatching instance
+                                 */
+                                AnnotatedPermissionMatching.create = function create(properties) {
+                                    return new AnnotatedPermissionMatching(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified AnnotatedPermissionMatching message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedPermissionMatching} message AnnotatedPermissionMatching message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                AnnotatedPermissionMatching.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.permissionMatchingState != null && Object.hasOwnProperty.call(message, "permissionMatchingState"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.permissionMatchingState);
+                                    if (message.relevance != null && Object.hasOwnProperty.call(message, "relevance"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.relevance);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified AnnotatedPermissionMatching message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedPermissionMatching} message AnnotatedPermissionMatching message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                AnnotatedPermissionMatching.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an AnnotatedPermissionMatching message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching} AnnotatedPermissionMatching
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                AnnotatedPermissionMatching.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.permissionMatchingState = reader.int32();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.relevance = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an AnnotatedPermissionMatching message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching} AnnotatedPermissionMatching
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                AnnotatedPermissionMatching.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an AnnotatedPermissionMatching message.
+                                 * @function verify
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                AnnotatedPermissionMatching.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.permissionMatchingState != null && message.hasOwnProperty("permissionMatchingState"))
+                                        switch (message.permissionMatchingState) {
+                                        default:
+                                            return "permissionMatchingState: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                            break;
+                                        }
+                                    if (message.relevance != null && message.hasOwnProperty("relevance"))
+                                        switch (message.relevance) {
+                                        default:
+                                            return "relevance: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                            break;
+                                        }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an AnnotatedPermissionMatching message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching} AnnotatedPermissionMatching
+                                 */
+                                AnnotatedPermissionMatching.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching)
+                                        return object;
+                                    var message = new $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching();
+                                    switch (object.permissionMatchingState) {
+                                    default:
+                                        if (typeof object.permissionMatchingState === "number") {
+                                            message.permissionMatchingState = object.permissionMatchingState;
+                                            break;
+                                        }
+                                        break;
+                                    case "PERMISSION_PATTERN_MATCHING_STATE_UNSPECIFIED":
+                                    case 0:
+                                        message.permissionMatchingState = 0;
+                                        break;
+                                    case "PERMISSION_PATTERN_MATCHED":
+                                    case 1:
+                                        message.permissionMatchingState = 1;
+                                        break;
+                                    case "PERMISSION_PATTERN_NOT_MATCHED":
+                                    case 2:
+                                        message.permissionMatchingState = 2;
+                                        break;
+                                    }
+                                    switch (object.relevance) {
+                                    default:
+                                        if (typeof object.relevance === "number") {
+                                            message.relevance = object.relevance;
+                                            break;
+                                        }
+                                        break;
+                                    case "HEURISTIC_RELEVANCE_UNSPECIFIED":
+                                    case 0:
+                                        message.relevance = 0;
+                                        break;
+                                    case "HEURISTIC_RELEVANCE_NORMAL":
+                                    case 1:
+                                        message.relevance = 1;
+                                        break;
+                                    case "HEURISTIC_RELEVANCE_HIGH":
+                                    case 2:
+                                        message.relevance = 2;
+                                        break;
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an AnnotatedPermissionMatching message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching} message AnnotatedPermissionMatching
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                AnnotatedPermissionMatching.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.permissionMatchingState = options.enums === String ? "PERMISSION_PATTERN_MATCHING_STATE_UNSPECIFIED" : 0;
+                                        object.relevance = options.enums === String ? "HEURISTIC_RELEVANCE_UNSPECIFIED" : 0;
+                                    }
+                                    if (message.permissionMatchingState != null && message.hasOwnProperty("permissionMatchingState"))
+                                        object.permissionMatchingState = options.enums === String ? $root.google.cloud.policytroubleshooter.iam.v3.PermissionPatternMatchingState[message.permissionMatchingState] === undefined ? message.permissionMatchingState : $root.google.cloud.policytroubleshooter.iam.v3.PermissionPatternMatchingState[message.permissionMatchingState] : message.permissionMatchingState;
+                                    if (message.relevance != null && message.hasOwnProperty("relevance"))
+                                        object.relevance = options.enums === String ? $root.google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance[message.relevance] === undefined ? message.relevance : $root.google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance[message.relevance] : message.relevance;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this AnnotatedPermissionMatching to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                AnnotatedPermissionMatching.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for AnnotatedPermissionMatching
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                AnnotatedPermissionMatching.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching";
+                                };
+    
+                                return AnnotatedPermissionMatching;
+                            })();
+    
+                            DenyRuleExplanation.AnnotatedDenyPrincipalMatching = (function() {
+    
+                                /**
+                                 * Properties of an AnnotatedDenyPrincipalMatching.
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation
+                                 * @interface IAnnotatedDenyPrincipalMatching
+                                 * @property {google.cloud.policytroubleshooter.iam.v3.MembershipMatchingState|null} [membership] AnnotatedDenyPrincipalMatching membership
+                                 * @property {google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|null} [relevance] AnnotatedDenyPrincipalMatching relevance
+                                 */
+    
+                                /**
+                                 * Constructs a new AnnotatedDenyPrincipalMatching.
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation
+                                 * @classdesc Represents an AnnotatedDenyPrincipalMatching.
+                                 * @implements IAnnotatedDenyPrincipalMatching
+                                 * @constructor
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedDenyPrincipalMatching=} [properties] Properties to set
+                                 */
+                                function AnnotatedDenyPrincipalMatching(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * AnnotatedDenyPrincipalMatching membership.
+                                 * @member {google.cloud.policytroubleshooter.iam.v3.MembershipMatchingState} membership
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching
+                                 * @instance
+                                 */
+                                AnnotatedDenyPrincipalMatching.prototype.membership = 0;
+    
+                                /**
+                                 * AnnotatedDenyPrincipalMatching relevance.
+                                 * @member {google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance} relevance
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching
+                                 * @instance
+                                 */
+                                AnnotatedDenyPrincipalMatching.prototype.relevance = 0;
+    
+                                /**
+                                 * Creates a new AnnotatedDenyPrincipalMatching instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedDenyPrincipalMatching=} [properties] Properties to set
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching} AnnotatedDenyPrincipalMatching instance
+                                 */
+                                AnnotatedDenyPrincipalMatching.create = function create(properties) {
+                                    return new AnnotatedDenyPrincipalMatching(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified AnnotatedDenyPrincipalMatching message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedDenyPrincipalMatching} message AnnotatedDenyPrincipalMatching message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                AnnotatedDenyPrincipalMatching.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.membership != null && Object.hasOwnProperty.call(message, "membership"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.membership);
+                                    if (message.relevance != null && Object.hasOwnProperty.call(message, "relevance"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.relevance);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified AnnotatedDenyPrincipalMatching message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedDenyPrincipalMatching} message AnnotatedDenyPrincipalMatching message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                AnnotatedDenyPrincipalMatching.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an AnnotatedDenyPrincipalMatching message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching} AnnotatedDenyPrincipalMatching
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                AnnotatedDenyPrincipalMatching.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.membership = reader.int32();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.relevance = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an AnnotatedDenyPrincipalMatching message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching} AnnotatedDenyPrincipalMatching
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                AnnotatedDenyPrincipalMatching.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an AnnotatedDenyPrincipalMatching message.
+                                 * @function verify
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                AnnotatedDenyPrincipalMatching.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.membership != null && message.hasOwnProperty("membership"))
+                                        switch (message.membership) {
+                                        default:
+                                            return "membership: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                        case 4:
+                                            break;
+                                        }
+                                    if (message.relevance != null && message.hasOwnProperty("relevance"))
+                                        switch (message.relevance) {
+                                        default:
+                                            return "relevance: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                            break;
+                                        }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an AnnotatedDenyPrincipalMatching message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching} AnnotatedDenyPrincipalMatching
+                                 */
+                                AnnotatedDenyPrincipalMatching.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching)
+                                        return object;
+                                    var message = new $root.google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching();
+                                    switch (object.membership) {
+                                    default:
+                                        if (typeof object.membership === "number") {
+                                            message.membership = object.membership;
+                                            break;
+                                        }
+                                        break;
+                                    case "MEMBERSHIP_MATCHING_STATE_UNSPECIFIED":
+                                    case 0:
+                                        message.membership = 0;
+                                        break;
+                                    case "MEMBERSHIP_MATCHED":
+                                    case 1:
+                                        message.membership = 1;
+                                        break;
+                                    case "MEMBERSHIP_NOT_MATCHED":
+                                    case 2:
+                                        message.membership = 2;
+                                        break;
+                                    case "MEMBERSHIP_UNKNOWN_INFO":
+                                    case 3:
+                                        message.membership = 3;
+                                        break;
+                                    case "MEMBERSHIP_UNKNOWN_UNSUPPORTED":
+                                    case 4:
+                                        message.membership = 4;
+                                        break;
+                                    }
+                                    switch (object.relevance) {
+                                    default:
+                                        if (typeof object.relevance === "number") {
+                                            message.relevance = object.relevance;
+                                            break;
+                                        }
+                                        break;
+                                    case "HEURISTIC_RELEVANCE_UNSPECIFIED":
+                                    case 0:
+                                        message.relevance = 0;
+                                        break;
+                                    case "HEURISTIC_RELEVANCE_NORMAL":
+                                    case 1:
+                                        message.relevance = 1;
+                                        break;
+                                    case "HEURISTIC_RELEVANCE_HIGH":
+                                    case 2:
+                                        message.relevance = 2;
+                                        break;
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an AnnotatedDenyPrincipalMatching message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching} message AnnotatedDenyPrincipalMatching
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                AnnotatedDenyPrincipalMatching.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.membership = options.enums === String ? "MEMBERSHIP_MATCHING_STATE_UNSPECIFIED" : 0;
+                                        object.relevance = options.enums === String ? "HEURISTIC_RELEVANCE_UNSPECIFIED" : 0;
+                                    }
+                                    if (message.membership != null && message.hasOwnProperty("membership"))
+                                        object.membership = options.enums === String ? $root.google.cloud.policytroubleshooter.iam.v3.MembershipMatchingState[message.membership] === undefined ? message.membership : $root.google.cloud.policytroubleshooter.iam.v3.MembershipMatchingState[message.membership] : message.membership;
+                                    if (message.relevance != null && message.hasOwnProperty("relevance"))
+                                        object.relevance = options.enums === String ? $root.google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance[message.relevance] === undefined ? message.relevance : $root.google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance[message.relevance] : message.relevance;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this AnnotatedDenyPrincipalMatching to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                AnnotatedDenyPrincipalMatching.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for AnnotatedDenyPrincipalMatching
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                AnnotatedDenyPrincipalMatching.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching";
+                                };
+    
+                                return AnnotatedDenyPrincipalMatching;
+                            })();
+    
+                            return DenyRuleExplanation;
+                        })();
+    
+                        v3.ConditionExplanation = (function() {
+    
+                            /**
+                             * Properties of a ConditionExplanation.
+                             * @memberof google.cloud.policytroubleshooter.iam.v3
+                             * @interface IConditionExplanation
+                             * @property {google.protobuf.IValue|null} [value] ConditionExplanation value
+                             * @property {Array.<google.rpc.IStatus>|null} [errors] ConditionExplanation errors
+                             * @property {Array.<google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.IEvaluationState>|null} [evaluationStates] ConditionExplanation evaluationStates
+                             */
+    
+                            /**
+                             * Constructs a new ConditionExplanation.
+                             * @memberof google.cloud.policytroubleshooter.iam.v3
+                             * @classdesc Represents a ConditionExplanation.
+                             * @implements IConditionExplanation
+                             * @constructor
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IConditionExplanation=} [properties] Properties to set
+                             */
+                            function ConditionExplanation(properties) {
+                                this.errors = [];
+                                this.evaluationStates = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ConditionExplanation value.
+                             * @member {google.protobuf.IValue|null|undefined} value
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionExplanation
+                             * @instance
+                             */
+                            ConditionExplanation.prototype.value = null;
+    
+                            /**
+                             * ConditionExplanation errors.
+                             * @member {Array.<google.rpc.IStatus>} errors
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionExplanation
+                             * @instance
+                             */
+                            ConditionExplanation.prototype.errors = $util.emptyArray;
+    
+                            /**
+                             * ConditionExplanation evaluationStates.
+                             * @member {Array.<google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.IEvaluationState>} evaluationStates
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionExplanation
+                             * @instance
+                             */
+                            ConditionExplanation.prototype.evaluationStates = $util.emptyArray;
+    
+                            /**
+                             * Creates a new ConditionExplanation instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionExplanation
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IConditionExplanation=} [properties] Properties to set
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.ConditionExplanation} ConditionExplanation instance
+                             */
+                            ConditionExplanation.create = function create(properties) {
+                                return new ConditionExplanation(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ConditionExplanation message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionExplanation
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IConditionExplanation} message ConditionExplanation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ConditionExplanation.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                    $root.google.protobuf.Value.encode(message.value, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.evaluationStates != null && message.evaluationStates.length)
+                                    for (var i = 0; i < message.evaluationStates.length; ++i)
+                                        $root.google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState.encode(message.evaluationStates[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.errors != null && message.errors.length)
+                                    for (var i = 0; i < message.errors.length; ++i)
+                                        $root.google.rpc.Status.encode(message.errors[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ConditionExplanation message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionExplanation
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.IConditionExplanation} message ConditionExplanation message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ConditionExplanation.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ConditionExplanation message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionExplanation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.ConditionExplanation} ConditionExplanation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ConditionExplanation.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.policytroubleshooter.iam.v3.ConditionExplanation();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.value = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.errors && message.errors.length))
+                                                message.errors = [];
+                                            message.errors.push($root.google.rpc.Status.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.evaluationStates && message.evaluationStates.length))
+                                                message.evaluationStates = [];
+                                            message.evaluationStates.push($root.google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ConditionExplanation message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionExplanation
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.ConditionExplanation} ConditionExplanation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ConditionExplanation.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ConditionExplanation message.
+                             * @function verify
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionExplanation
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ConditionExplanation.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.value != null && message.hasOwnProperty("value")) {
+                                    var error = $root.google.protobuf.Value.verify(message.value);
+                                    if (error)
+                                        return "value." + error;
+                                }
+                                if (message.errors != null && message.hasOwnProperty("errors")) {
+                                    if (!Array.isArray(message.errors))
+                                        return "errors: array expected";
+                                    for (var i = 0; i < message.errors.length; ++i) {
+                                        var error = $root.google.rpc.Status.verify(message.errors[i]);
+                                        if (error)
+                                            return "errors." + error;
+                                    }
+                                }
+                                if (message.evaluationStates != null && message.hasOwnProperty("evaluationStates")) {
+                                    if (!Array.isArray(message.evaluationStates))
+                                        return "evaluationStates: array expected";
+                                    for (var i = 0; i < message.evaluationStates.length; ++i) {
+                                        var error = $root.google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState.verify(message.evaluationStates[i]);
+                                        if (error)
+                                            return "evaluationStates." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ConditionExplanation message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionExplanation
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.policytroubleshooter.iam.v3.ConditionExplanation} ConditionExplanation
+                             */
+                            ConditionExplanation.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.policytroubleshooter.iam.v3.ConditionExplanation)
+                                    return object;
+                                var message = new $root.google.cloud.policytroubleshooter.iam.v3.ConditionExplanation();
+                                if (object.value != null) {
+                                    if (typeof object.value !== "object")
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.value: object expected");
+                                    message.value = $root.google.protobuf.Value.fromObject(object.value);
+                                }
+                                if (object.errors) {
+                                    if (!Array.isArray(object.errors))
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.errors: array expected");
+                                    message.errors = [];
+                                    for (var i = 0; i < object.errors.length; ++i) {
+                                        if (typeof object.errors[i] !== "object")
+                                            throw TypeError(".google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.errors: object expected");
+                                        message.errors[i] = $root.google.rpc.Status.fromObject(object.errors[i]);
+                                    }
+                                }
+                                if (object.evaluationStates) {
+                                    if (!Array.isArray(object.evaluationStates))
+                                        throw TypeError(".google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.evaluationStates: array expected");
+                                    message.evaluationStates = [];
+                                    for (var i = 0; i < object.evaluationStates.length; ++i) {
+                                        if (typeof object.evaluationStates[i] !== "object")
+                                            throw TypeError(".google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.evaluationStates: object expected");
+                                        message.evaluationStates[i] = $root.google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState.fromObject(object.evaluationStates[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ConditionExplanation message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionExplanation
+                             * @static
+                             * @param {google.cloud.policytroubleshooter.iam.v3.ConditionExplanation} message ConditionExplanation
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ConditionExplanation.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.evaluationStates = [];
+                                    object.errors = [];
+                                }
+                                if (options.defaults)
+                                    object.value = null;
+                                if (message.value != null && message.hasOwnProperty("value"))
+                                    object.value = $root.google.protobuf.Value.toObject(message.value, options);
+                                if (message.evaluationStates && message.evaluationStates.length) {
+                                    object.evaluationStates = [];
+                                    for (var j = 0; j < message.evaluationStates.length; ++j)
+                                        object.evaluationStates[j] = $root.google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState.toObject(message.evaluationStates[j], options);
+                                }
+                                if (message.errors && message.errors.length) {
+                                    object.errors = [];
+                                    for (var j = 0; j < message.errors.length; ++j)
+                                        object.errors[j] = $root.google.rpc.Status.toObject(message.errors[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ConditionExplanation to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionExplanation
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ConditionExplanation.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ConditionExplanation
+                             * @function getTypeUrl
+                             * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionExplanation
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ConditionExplanation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.policytroubleshooter.iam.v3.ConditionExplanation";
+                            };
+    
+                            ConditionExplanation.EvaluationState = (function() {
+    
+                                /**
+                                 * Properties of an EvaluationState.
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionExplanation
+                                 * @interface IEvaluationState
+                                 * @property {number|null} [start] EvaluationState start
+                                 * @property {number|null} [end] EvaluationState end
+                                 * @property {google.protobuf.IValue|null} [value] EvaluationState value
+                                 * @property {Array.<google.rpc.IStatus>|null} [errors] EvaluationState errors
+                                 */
+    
+                                /**
+                                 * Constructs a new EvaluationState.
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionExplanation
+                                 * @classdesc Represents an EvaluationState.
+                                 * @implements IEvaluationState
+                                 * @constructor
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.IEvaluationState=} [properties] Properties to set
+                                 */
+                                function EvaluationState(properties) {
+                                    this.errors = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * EvaluationState start.
+                                 * @member {number} start
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState
+                                 * @instance
+                                 */
+                                EvaluationState.prototype.start = 0;
+    
+                                /**
+                                 * EvaluationState end.
+                                 * @member {number} end
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState
+                                 * @instance
+                                 */
+                                EvaluationState.prototype.end = 0;
+    
+                                /**
+                                 * EvaluationState value.
+                                 * @member {google.protobuf.IValue|null|undefined} value
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState
+                                 * @instance
+                                 */
+                                EvaluationState.prototype.value = null;
+    
+                                /**
+                                 * EvaluationState errors.
+                                 * @member {Array.<google.rpc.IStatus>} errors
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState
+                                 * @instance
+                                 */
+                                EvaluationState.prototype.errors = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new EvaluationState instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.IEvaluationState=} [properties] Properties to set
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState} EvaluationState instance
+                                 */
+                                EvaluationState.create = function create(properties) {
+                                    return new EvaluationState(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified EvaluationState message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.IEvaluationState} message EvaluationState message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                EvaluationState.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.start != null && Object.hasOwnProperty.call(message, "start"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.start);
+                                    if (message.end != null && Object.hasOwnProperty.call(message, "end"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.end);
+                                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                        $root.google.protobuf.Value.encode(message.value, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                    if (message.errors != null && message.errors.length)
+                                        for (var i = 0; i < message.errors.length; ++i)
+                                            $root.google.rpc.Status.encode(message.errors[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified EvaluationState message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.IEvaluationState} message EvaluationState message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                EvaluationState.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an EvaluationState message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState} EvaluationState
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                EvaluationState.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.start = reader.int32();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.end = reader.int32();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.value = $root.google.protobuf.Value.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 4: {
+                                                if (!(message.errors && message.errors.length))
+                                                    message.errors = [];
+                                                message.errors.push($root.google.rpc.Status.decode(reader, reader.uint32()));
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an EvaluationState message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState} EvaluationState
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                EvaluationState.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an EvaluationState message.
+                                 * @function verify
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                EvaluationState.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.start != null && message.hasOwnProperty("start"))
+                                        if (!$util.isInteger(message.start))
+                                            return "start: integer expected";
+                                    if (message.end != null && message.hasOwnProperty("end"))
+                                        if (!$util.isInteger(message.end))
+                                            return "end: integer expected";
+                                    if (message.value != null && message.hasOwnProperty("value")) {
+                                        var error = $root.google.protobuf.Value.verify(message.value);
+                                        if (error)
+                                            return "value." + error;
+                                    }
+                                    if (message.errors != null && message.hasOwnProperty("errors")) {
+                                        if (!Array.isArray(message.errors))
+                                            return "errors: array expected";
+                                        for (var i = 0; i < message.errors.length; ++i) {
+                                            var error = $root.google.rpc.Status.verify(message.errors[i]);
+                                            if (error)
+                                                return "errors." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an EvaluationState message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState} EvaluationState
+                                 */
+                                EvaluationState.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState)
+                                        return object;
+                                    var message = new $root.google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState();
+                                    if (object.start != null)
+                                        message.start = object.start | 0;
+                                    if (object.end != null)
+                                        message.end = object.end | 0;
+                                    if (object.value != null) {
+                                        if (typeof object.value !== "object")
+                                            throw TypeError(".google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState.value: object expected");
+                                        message.value = $root.google.protobuf.Value.fromObject(object.value);
+                                    }
+                                    if (object.errors) {
+                                        if (!Array.isArray(object.errors))
+                                            throw TypeError(".google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState.errors: array expected");
+                                        message.errors = [];
+                                        for (var i = 0; i < object.errors.length; ++i) {
+                                            if (typeof object.errors[i] !== "object")
+                                                throw TypeError(".google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState.errors: object expected");
+                                            message.errors[i] = $root.google.rpc.Status.fromObject(object.errors[i]);
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an EvaluationState message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState
+                                 * @static
+                                 * @param {google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState} message EvaluationState
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                EvaluationState.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.errors = [];
+                                    if (options.defaults) {
+                                        object.start = 0;
+                                        object.end = 0;
+                                        object.value = null;
+                                    }
+                                    if (message.start != null && message.hasOwnProperty("start"))
+                                        object.start = message.start;
+                                    if (message.end != null && message.hasOwnProperty("end"))
+                                        object.end = message.end;
+                                    if (message.value != null && message.hasOwnProperty("value"))
+                                        object.value = $root.google.protobuf.Value.toObject(message.value, options);
+                                    if (message.errors && message.errors.length) {
+                                        object.errors = [];
+                                        for (var j = 0; j < message.errors.length; ++j)
+                                            object.errors[j] = $root.google.rpc.Status.toObject(message.errors[j], options);
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this EvaluationState to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                EvaluationState.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for EvaluationState
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                EvaluationState.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState";
+                                };
+    
+                                return EvaluationState;
+                            })();
+    
+                            return ConditionExplanation;
+                        })();
+    
+                        return v3;
+                    })();
+    
                     iam.v3beta = (function() {
     
                         /**

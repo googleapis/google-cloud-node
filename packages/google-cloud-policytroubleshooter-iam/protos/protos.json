@@ -8,6 +8,577 @@
               "nested": {
                 "iam": {
                   "nested": {
+                    "v3": {
+                      "options": {
+                        "cc_enable_arenas": true,
+                        "csharp_namespace": "Google.Cloud.PolicyTroubleshooter.Iam.V3",
+                        "go_package": "cloud.google.com/go/policytroubleshooter/iam/apiv3/iampb;iampb",
+                        "java_multiple_files": true,
+                        "java_outer_classname": "TroubleshooterProto",
+                        "java_package": "com.google.cloud.policytroubleshooter.iam.v3",
+                        "php_namespace": "Google\\Cloud\\PolicyTroubleshooter\\Iam\\V3",
+                        "ruby_package": "Google::Cloud::PolicyTroubleshooter::Iam::V3"
+                      },
+                      "nested": {
+                        "PolicyTroubleshooter": {
+                          "options": {
+                            "(google.api.default_host)": "policytroubleshooter.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                          },
+                          "methods": {
+                            "TroubleshootIamPolicy": {
+                              "requestType": "TroubleshootIamPolicyRequest",
+                              "responseType": "TroubleshootIamPolicyResponse",
+                              "options": {
+                                "(google.api.http).post": "/v3/iam:troubleshoot",
+                                "(google.api.http).body": "*"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v3/iam:troubleshoot",
+                                    "body": "*"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "AllowAccessState": {
+                          "values": {
+                            "ALLOW_ACCESS_STATE_UNSPECIFIED": 0,
+                            "ALLOW_ACCESS_STATE_GRANTED": 1,
+                            "ALLOW_ACCESS_STATE_NOT_GRANTED": 2,
+                            "ALLOW_ACCESS_STATE_UNKNOWN_CONDITIONAL": 3,
+                            "ALLOW_ACCESS_STATE_UNKNOWN_INFO": 4
+                          }
+                        },
+                        "DenyAccessState": {
+                          "values": {
+                            "DENY_ACCESS_STATE_UNSPECIFIED": 0,
+                            "DENY_ACCESS_STATE_DENIED": 1,
+                            "DENY_ACCESS_STATE_NOT_DENIED": 2,
+                            "DENY_ACCESS_STATE_UNKNOWN_CONDITIONAL": 3,
+                            "DENY_ACCESS_STATE_UNKNOWN_INFO": 4
+                          }
+                        },
+                        "RolePermissionInclusionState": {
+                          "values": {
+                            "ROLE_PERMISSION_INCLUSION_STATE_UNSPECIFIED": 0,
+                            "ROLE_PERMISSION_INCLUDED": 1,
+                            "ROLE_PERMISSION_NOT_INCLUDED": 2,
+                            "ROLE_PERMISSION_UNKNOWN_INFO": 3
+                          }
+                        },
+                        "PermissionPatternMatchingState": {
+                          "values": {
+                            "PERMISSION_PATTERN_MATCHING_STATE_UNSPECIFIED": 0,
+                            "PERMISSION_PATTERN_MATCHED": 1,
+                            "PERMISSION_PATTERN_NOT_MATCHED": 2
+                          }
+                        },
+                        "MembershipMatchingState": {
+                          "values": {
+                            "MEMBERSHIP_MATCHING_STATE_UNSPECIFIED": 0,
+                            "MEMBERSHIP_MATCHED": 1,
+                            "MEMBERSHIP_NOT_MATCHED": 2,
+                            "MEMBERSHIP_UNKNOWN_INFO": 3,
+                            "MEMBERSHIP_UNKNOWN_UNSUPPORTED": 4
+                          }
+                        },
+                        "HeuristicRelevance": {
+                          "values": {
+                            "HEURISTIC_RELEVANCE_UNSPECIFIED": 0,
+                            "HEURISTIC_RELEVANCE_NORMAL": 1,
+                            "HEURISTIC_RELEVANCE_HIGH": 2
+                          }
+                        },
+                        "TroubleshootIamPolicyRequest": {
+                          "fields": {
+                            "accessTuple": {
+                              "type": "AccessTuple",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "TroubleshootIamPolicyResponse": {
+                          "fields": {
+                            "overallAccessState": {
+                              "type": "OverallAccessState",
+                              "id": 1
+                            },
+                            "accessTuple": {
+                              "type": "AccessTuple",
+                              "id": 2
+                            },
+                            "allowPolicyExplanation": {
+                              "type": "AllowPolicyExplanation",
+                              "id": 3
+                            },
+                            "denyPolicyExplanation": {
+                              "type": "DenyPolicyExplanation",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "OverallAccessState": {
+                              "values": {
+                                "OVERALL_ACCESS_STATE_UNSPECIFIED": 0,
+                                "CAN_ACCESS": 1,
+                                "CANNOT_ACCESS": 2,
+                                "UNKNOWN_INFO": 3,
+                                "UNKNOWN_CONDITIONAL": 4
+                              }
+                            }
+                          }
+                        },
+                        "AccessTuple": {
+                          "fields": {
+                            "principal": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "fullResourceName": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "permission": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "permissionFqdn": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "conditionContext": {
+                              "type": "ConditionContext",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "ConditionContext": {
+                          "fields": {
+                            "resource": {
+                              "type": "Resource",
+                              "id": 1
+                            },
+                            "destination": {
+                              "type": "Peer",
+                              "id": 2
+                            },
+                            "request": {
+                              "type": "Request",
+                              "id": 3
+                            },
+                            "effectiveTags": {
+                              "rule": "repeated",
+                              "type": "EffectiveTag",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Resource": {
+                              "fields": {
+                                "service": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "id": 3
+                                }
+                              }
+                            },
+                            "Peer": {
+                              "fields": {
+                                "ip": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "port": {
+                                  "type": "int64",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "Request": {
+                              "fields": {
+                                "receiveTime": {
+                                  "type": "google.protobuf.Timestamp",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "EffectiveTag": {
+                              "fields": {
+                                "tagValue": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "namespacedTagValue": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "tagKey": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "namespacedTagKey": {
+                                  "type": "string",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "tagKeyParentName": {
+                                  "type": "string",
+                                  "id": 6
+                                },
+                                "inherited": {
+                                  "type": "bool",
+                                  "id": 5,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "AllowPolicyExplanation": {
+                          "fields": {
+                            "allowAccessState": {
+                              "type": "AllowAccessState",
+                              "id": 1
+                            },
+                            "explainedPolicies": {
+                              "rule": "repeated",
+                              "type": "ExplainedAllowPolicy",
+                              "id": 2
+                            },
+                            "relevance": {
+                              "type": "HeuristicRelevance",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "ExplainedAllowPolicy": {
+                          "fields": {
+                            "allowAccessState": {
+                              "type": "AllowAccessState",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "fullResourceName": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "bindingExplanations": {
+                              "rule": "repeated",
+                              "type": "AllowBindingExplanation",
+                              "id": 3
+                            },
+                            "relevance": {
+                              "type": "HeuristicRelevance",
+                              "id": 4
+                            },
+                            "policy": {
+                              "type": "google.iam.v1.Policy",
+                              "id": 5
+                            }
+                          }
+                        },
+                        "AllowBindingExplanation": {
+                          "fields": {
+                            "allowAccessState": {
+                              "type": "AllowAccessState",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "role": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "rolePermission": {
+                              "type": "RolePermissionInclusionState",
+                              "id": 3
+                            },
+                            "rolePermissionRelevance": {
+                              "type": "HeuristicRelevance",
+                              "id": 4
+                            },
+                            "combinedMembership": {
+                              "type": "AnnotatedAllowMembership",
+                              "id": 5
+                            },
+                            "memberships": {
+                              "keyType": "string",
+                              "type": "AnnotatedAllowMembership",
+                              "id": 6
+                            },
+                            "relevance": {
+                              "type": "HeuristicRelevance",
+                              "id": 7
+                            },
+                            "condition": {
+                              "type": "google.type.Expr",
+                              "id": 8
+                            },
+                            "conditionExplanation": {
+                              "type": "ConditionExplanation",
+                              "id": 9
+                            }
+                          },
+                          "nested": {
+                            "AnnotatedAllowMembership": {
+                              "fields": {
+                                "membership": {
+                                  "type": "MembershipMatchingState",
+                                  "id": 1
+                                },
+                                "relevance": {
+                                  "type": "HeuristicRelevance",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "DenyPolicyExplanation": {
+                          "fields": {
+                            "denyAccessState": {
+                              "type": "DenyAccessState",
+                              "id": 1
+                            },
+                            "explainedResources": {
+                              "rule": "repeated",
+                              "type": "ExplainedDenyResource",
+                              "id": 2
+                            },
+                            "relevance": {
+                              "type": "HeuristicRelevance",
+                              "id": 3
+                            },
+                            "permissionDeniable": {
+                              "type": "bool",
+                              "id": 4
+                            }
+                          }
+                        },
+                        "ExplainedDenyResource": {
+                          "fields": {
+                            "denyAccessState": {
+                              "type": "DenyAccessState",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "fullResourceName": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "explainedPolicies": {
+                              "rule": "repeated",
+                              "type": "ExplainedDenyPolicy",
+                              "id": 3
+                            },
+                            "relevance": {
+                              "type": "HeuristicRelevance",
+                              "id": 4
+                            }
+                          }
+                        },
+                        "ExplainedDenyPolicy": {
+                          "fields": {
+                            "denyAccessState": {
+                              "type": "DenyAccessState",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "policy": {
+                              "type": "google.iam.v2.Policy",
+                              "id": 2
+                            },
+                            "ruleExplanations": {
+                              "rule": "repeated",
+                              "type": "DenyRuleExplanation",
+                              "id": 3
+                            },
+                            "relevance": {
+                              "type": "HeuristicRelevance",
+                              "id": 4
+                            }
+                          }
+                        },
+                        "DenyRuleExplanation": {
+                          "fields": {
+                            "denyAccessState": {
+                              "type": "DenyAccessState",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "combinedDeniedPermission": {
+                              "type": "AnnotatedPermissionMatching",
+                              "id": 2
+                            },
+                            "deniedPermissions": {
+                              "keyType": "string",
+                              "type": "AnnotatedPermissionMatching",
+                              "id": 3
+                            },
+                            "combinedExceptionPermission": {
+                              "type": "AnnotatedPermissionMatching",
+                              "id": 4
+                            },
+                            "exceptionPermissions": {
+                              "keyType": "string",
+                              "type": "AnnotatedPermissionMatching",
+                              "id": 5
+                            },
+                            "combinedDeniedPrincipal": {
+                              "type": "AnnotatedDenyPrincipalMatching",
+                              "id": 6
+                            },
+                            "deniedPrincipals": {
+                              "keyType": "string",
+                              "type": "AnnotatedDenyPrincipalMatching",
+                              "id": 7
+                            },
+                            "combinedExceptionPrincipal": {
+                              "type": "AnnotatedDenyPrincipalMatching",
+                              "id": 8
+                            },
+                            "exceptionPrincipals": {
+                              "keyType": "string",
+                              "type": "AnnotatedDenyPrincipalMatching",
+                              "id": 9
+                            },
+                            "relevance": {
+                              "type": "HeuristicRelevance",
+                              "id": 10
+                            },
+                            "condition": {
+                              "type": "google.type.Expr",
+                              "id": 11
+                            },
+                            "conditionExplanation": {
+                              "type": "ConditionExplanation",
+                              "id": 12
+                            }
+                          },
+                          "nested": {
+                            "AnnotatedPermissionMatching": {
+                              "fields": {
+                                "permissionMatchingState": {
+                                  "type": "PermissionPatternMatchingState",
+                                  "id": 1
+                                },
+                                "relevance": {
+                                  "type": "HeuristicRelevance",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "AnnotatedDenyPrincipalMatching": {
+                              "fields": {
+                                "membership": {
+                                  "type": "MembershipMatchingState",
+                                  "id": 1
+                                },
+                                "relevance": {
+                                  "type": "HeuristicRelevance",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "ConditionExplanation": {
+                          "fields": {
+                            "value": {
+                              "type": "google.protobuf.Value",
+                              "id": 1
+                            },
+                            "errors": {
+                              "rule": "repeated",
+                              "type": "google.rpc.Status",
+                              "id": 3
+                            },
+                            "evaluationStates": {
+                              "rule": "repeated",
+                              "type": "EvaluationState",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "EvaluationState": {
+                              "fields": {
+                                "start": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "end": {
+                                  "type": "int32",
+                                  "id": 2
+                                },
+                                "value": {
+                                  "type": "google.protobuf.Value",
+                                  "id": 3
+                                },
+                                "errors": {
+                                  "rule": "repeated",
+                                  "type": "google.rpc.Status",
+                                  "id": 4
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
                     "v3beta": {
                       "options": {
                         "cc_enable_arenas": true,

@@ -26,6 +26,2428 @@ export namespace google {
             /** Namespace iam. */
             namespace iam {
 
+                /** Namespace v3. */
+                namespace v3 {
+
+                    /** Represents a PolicyTroubleshooter */
+                    class PolicyTroubleshooter extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new PolicyTroubleshooter service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new PolicyTroubleshooter service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): PolicyTroubleshooter;
+
+                        /**
+                         * Calls TroubleshootIamPolicy.
+                         * @param request TroubleshootIamPolicyRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and TroubleshootIamPolicyResponse
+                         */
+                        public troubleshootIamPolicy(request: google.cloud.policytroubleshooter.iam.v3.ITroubleshootIamPolicyRequest, callback: google.cloud.policytroubleshooter.iam.v3.PolicyTroubleshooter.TroubleshootIamPolicyCallback): void;
+
+                        /**
+                         * Calls TroubleshootIamPolicy.
+                         * @param request TroubleshootIamPolicyRequest message or plain object
+                         * @returns Promise
+                         */
+                        public troubleshootIamPolicy(request: google.cloud.policytroubleshooter.iam.v3.ITroubleshootIamPolicyRequest): Promise<google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse>;
+                    }
+
+                    namespace PolicyTroubleshooter {
+
+                        /**
+                         * Callback as used by {@link google.cloud.policytroubleshooter.iam.v3.PolicyTroubleshooter|troubleshootIamPolicy}.
+                         * @param error Error, if any
+                         * @param [response] TroubleshootIamPolicyResponse
+                         */
+                        type TroubleshootIamPolicyCallback = (error: (Error|null), response?: google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse) => void;
+                    }
+
+                    /** AllowAccessState enum. */
+                    enum AllowAccessState {
+                        ALLOW_ACCESS_STATE_UNSPECIFIED = 0,
+                        ALLOW_ACCESS_STATE_GRANTED = 1,
+                        ALLOW_ACCESS_STATE_NOT_GRANTED = 2,
+                        ALLOW_ACCESS_STATE_UNKNOWN_CONDITIONAL = 3,
+                        ALLOW_ACCESS_STATE_UNKNOWN_INFO = 4
+                    }
+
+                    /** DenyAccessState enum. */
+                    enum DenyAccessState {
+                        DENY_ACCESS_STATE_UNSPECIFIED = 0,
+                        DENY_ACCESS_STATE_DENIED = 1,
+                        DENY_ACCESS_STATE_NOT_DENIED = 2,
+                        DENY_ACCESS_STATE_UNKNOWN_CONDITIONAL = 3,
+                        DENY_ACCESS_STATE_UNKNOWN_INFO = 4
+                    }
+
+                    /** RolePermissionInclusionState enum. */
+                    enum RolePermissionInclusionState {
+                        ROLE_PERMISSION_INCLUSION_STATE_UNSPECIFIED = 0,
+                        ROLE_PERMISSION_INCLUDED = 1,
+                        ROLE_PERMISSION_NOT_INCLUDED = 2,
+                        ROLE_PERMISSION_UNKNOWN_INFO = 3
+                    }
+
+                    /** PermissionPatternMatchingState enum. */
+                    enum PermissionPatternMatchingState {
+                        PERMISSION_PATTERN_MATCHING_STATE_UNSPECIFIED = 0,
+                        PERMISSION_PATTERN_MATCHED = 1,
+                        PERMISSION_PATTERN_NOT_MATCHED = 2
+                    }
+
+                    /** MembershipMatchingState enum. */
+                    enum MembershipMatchingState {
+                        MEMBERSHIP_MATCHING_STATE_UNSPECIFIED = 0,
+                        MEMBERSHIP_MATCHED = 1,
+                        MEMBERSHIP_NOT_MATCHED = 2,
+                        MEMBERSHIP_UNKNOWN_INFO = 3,
+                        MEMBERSHIP_UNKNOWN_UNSUPPORTED = 4
+                    }
+
+                    /** HeuristicRelevance enum. */
+                    enum HeuristicRelevance {
+                        HEURISTIC_RELEVANCE_UNSPECIFIED = 0,
+                        HEURISTIC_RELEVANCE_NORMAL = 1,
+                        HEURISTIC_RELEVANCE_HIGH = 2
+                    }
+
+                    /** Properties of a TroubleshootIamPolicyRequest. */
+                    interface ITroubleshootIamPolicyRequest {
+
+                        /** TroubleshootIamPolicyRequest accessTuple */
+                        accessTuple?: (google.cloud.policytroubleshooter.iam.v3.IAccessTuple|null);
+                    }
+
+                    /** Represents a TroubleshootIamPolicyRequest. */
+                    class TroubleshootIamPolicyRequest implements ITroubleshootIamPolicyRequest {
+
+                        /**
+                         * Constructs a new TroubleshootIamPolicyRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.policytroubleshooter.iam.v3.ITroubleshootIamPolicyRequest);
+
+                        /** TroubleshootIamPolicyRequest accessTuple. */
+                        public accessTuple?: (google.cloud.policytroubleshooter.iam.v3.IAccessTuple|null);
+
+                        /**
+                         * Creates a new TroubleshootIamPolicyRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TroubleshootIamPolicyRequest instance
+                         */
+                        public static create(properties?: google.cloud.policytroubleshooter.iam.v3.ITroubleshootIamPolicyRequest): google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest;
+
+                        /**
+                         * Encodes the specified TroubleshootIamPolicyRequest message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest.verify|verify} messages.
+                         * @param message TroubleshootIamPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.policytroubleshooter.iam.v3.ITroubleshootIamPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TroubleshootIamPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest.verify|verify} messages.
+                         * @param message TroubleshootIamPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.policytroubleshooter.iam.v3.ITroubleshootIamPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TroubleshootIamPolicyRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TroubleshootIamPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest;
+
+                        /**
+                         * Decodes a TroubleshootIamPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TroubleshootIamPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest;
+
+                        /**
+                         * Verifies a TroubleshootIamPolicyRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TroubleshootIamPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TroubleshootIamPolicyRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest;
+
+                        /**
+                         * Creates a plain object from a TroubleshootIamPolicyRequest message. Also converts values to other types if specified.
+                         * @param message TroubleshootIamPolicyRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TroubleshootIamPolicyRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TroubleshootIamPolicyRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a TroubleshootIamPolicyResponse. */
+                    interface ITroubleshootIamPolicyResponse {
+
+                        /** TroubleshootIamPolicyResponse overallAccessState */
+                        overallAccessState?: (google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse.OverallAccessState|keyof typeof google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse.OverallAccessState|null);
+
+                        /** TroubleshootIamPolicyResponse accessTuple */
+                        accessTuple?: (google.cloud.policytroubleshooter.iam.v3.IAccessTuple|null);
+
+                        /** TroubleshootIamPolicyResponse allowPolicyExplanation */
+                        allowPolicyExplanation?: (google.cloud.policytroubleshooter.iam.v3.IAllowPolicyExplanation|null);
+
+                        /** TroubleshootIamPolicyResponse denyPolicyExplanation */
+                        denyPolicyExplanation?: (google.cloud.policytroubleshooter.iam.v3.IDenyPolicyExplanation|null);
+                    }
+
+                    /** Represents a TroubleshootIamPolicyResponse. */
+                    class TroubleshootIamPolicyResponse implements ITroubleshootIamPolicyResponse {
+
+                        /**
+                         * Constructs a new TroubleshootIamPolicyResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.policytroubleshooter.iam.v3.ITroubleshootIamPolicyResponse);
+
+                        /** TroubleshootIamPolicyResponse overallAccessState. */
+                        public overallAccessState: (google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse.OverallAccessState|keyof typeof google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse.OverallAccessState);
+
+                        /** TroubleshootIamPolicyResponse accessTuple. */
+                        public accessTuple?: (google.cloud.policytroubleshooter.iam.v3.IAccessTuple|null);
+
+                        /** TroubleshootIamPolicyResponse allowPolicyExplanation. */
+                        public allowPolicyExplanation?: (google.cloud.policytroubleshooter.iam.v3.IAllowPolicyExplanation|null);
+
+                        /** TroubleshootIamPolicyResponse denyPolicyExplanation. */
+                        public denyPolicyExplanation?: (google.cloud.policytroubleshooter.iam.v3.IDenyPolicyExplanation|null);
+
+                        /**
+                         * Creates a new TroubleshootIamPolicyResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TroubleshootIamPolicyResponse instance
+                         */
+                        public static create(properties?: google.cloud.policytroubleshooter.iam.v3.ITroubleshootIamPolicyResponse): google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse;
+
+                        /**
+                         * Encodes the specified TroubleshootIamPolicyResponse message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse.verify|verify} messages.
+                         * @param message TroubleshootIamPolicyResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.policytroubleshooter.iam.v3.ITroubleshootIamPolicyResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TroubleshootIamPolicyResponse message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse.verify|verify} messages.
+                         * @param message TroubleshootIamPolicyResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.policytroubleshooter.iam.v3.ITroubleshootIamPolicyResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TroubleshootIamPolicyResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TroubleshootIamPolicyResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse;
+
+                        /**
+                         * Decodes a TroubleshootIamPolicyResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TroubleshootIamPolicyResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse;
+
+                        /**
+                         * Verifies a TroubleshootIamPolicyResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TroubleshootIamPolicyResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TroubleshootIamPolicyResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse;
+
+                        /**
+                         * Creates a plain object from a TroubleshootIamPolicyResponse message. Also converts values to other types if specified.
+                         * @param message TroubleshootIamPolicyResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TroubleshootIamPolicyResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TroubleshootIamPolicyResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace TroubleshootIamPolicyResponse {
+
+                        /** OverallAccessState enum. */
+                        enum OverallAccessState {
+                            OVERALL_ACCESS_STATE_UNSPECIFIED = 0,
+                            CAN_ACCESS = 1,
+                            CANNOT_ACCESS = 2,
+                            UNKNOWN_INFO = 3,
+                            UNKNOWN_CONDITIONAL = 4
+                        }
+                    }
+
+                    /** Properties of an AccessTuple. */
+                    interface IAccessTuple {
+
+                        /** AccessTuple principal */
+                        principal?: (string|null);
+
+                        /** AccessTuple fullResourceName */
+                        fullResourceName?: (string|null);
+
+                        /** AccessTuple permission */
+                        permission?: (string|null);
+
+                        /** AccessTuple permissionFqdn */
+                        permissionFqdn?: (string|null);
+
+                        /** AccessTuple conditionContext */
+                        conditionContext?: (google.cloud.policytroubleshooter.iam.v3.IConditionContext|null);
+                    }
+
+                    /** Represents an AccessTuple. */
+                    class AccessTuple implements IAccessTuple {
+
+                        /**
+                         * Constructs a new AccessTuple.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.policytroubleshooter.iam.v3.IAccessTuple);
+
+                        /** AccessTuple principal. */
+                        public principal: string;
+
+                        /** AccessTuple fullResourceName. */
+                        public fullResourceName: string;
+
+                        /** AccessTuple permission. */
+                        public permission: string;
+
+                        /** AccessTuple permissionFqdn. */
+                        public permissionFqdn: string;
+
+                        /** AccessTuple conditionContext. */
+                        public conditionContext?: (google.cloud.policytroubleshooter.iam.v3.IConditionContext|null);
+
+                        /**
+                         * Creates a new AccessTuple instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AccessTuple instance
+                         */
+                        public static create(properties?: google.cloud.policytroubleshooter.iam.v3.IAccessTuple): google.cloud.policytroubleshooter.iam.v3.AccessTuple;
+
+                        /**
+                         * Encodes the specified AccessTuple message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.AccessTuple.verify|verify} messages.
+                         * @param message AccessTuple message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.policytroubleshooter.iam.v3.IAccessTuple, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AccessTuple message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.AccessTuple.verify|verify} messages.
+                         * @param message AccessTuple message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.policytroubleshooter.iam.v3.IAccessTuple, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AccessTuple message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AccessTuple
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policytroubleshooter.iam.v3.AccessTuple;
+
+                        /**
+                         * Decodes an AccessTuple message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AccessTuple
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policytroubleshooter.iam.v3.AccessTuple;
+
+                        /**
+                         * Verifies an AccessTuple message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AccessTuple message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AccessTuple
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.policytroubleshooter.iam.v3.AccessTuple;
+
+                        /**
+                         * Creates a plain object from an AccessTuple message. Also converts values to other types if specified.
+                         * @param message AccessTuple
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.policytroubleshooter.iam.v3.AccessTuple, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AccessTuple to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AccessTuple
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ConditionContext. */
+                    interface IConditionContext {
+
+                        /** ConditionContext resource */
+                        resource?: (google.cloud.policytroubleshooter.iam.v3.ConditionContext.IResource|null);
+
+                        /** ConditionContext destination */
+                        destination?: (google.cloud.policytroubleshooter.iam.v3.ConditionContext.IPeer|null);
+
+                        /** ConditionContext request */
+                        request?: (google.cloud.policytroubleshooter.iam.v3.ConditionContext.IRequest|null);
+
+                        /** ConditionContext effectiveTags */
+                        effectiveTags?: (google.cloud.policytroubleshooter.iam.v3.ConditionContext.IEffectiveTag[]|null);
+                    }
+
+                    /** Represents a ConditionContext. */
+                    class ConditionContext implements IConditionContext {
+
+                        /**
+                         * Constructs a new ConditionContext.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.policytroubleshooter.iam.v3.IConditionContext);
+
+                        /** ConditionContext resource. */
+                        public resource?: (google.cloud.policytroubleshooter.iam.v3.ConditionContext.IResource|null);
+
+                        /** ConditionContext destination. */
+                        public destination?: (google.cloud.policytroubleshooter.iam.v3.ConditionContext.IPeer|null);
+
+                        /** ConditionContext request. */
+                        public request?: (google.cloud.policytroubleshooter.iam.v3.ConditionContext.IRequest|null);
+
+                        /** ConditionContext effectiveTags. */
+                        public effectiveTags: google.cloud.policytroubleshooter.iam.v3.ConditionContext.IEffectiveTag[];
+
+                        /**
+                         * Creates a new ConditionContext instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConditionContext instance
+                         */
+                        public static create(properties?: google.cloud.policytroubleshooter.iam.v3.IConditionContext): google.cloud.policytroubleshooter.iam.v3.ConditionContext;
+
+                        /**
+                         * Encodes the specified ConditionContext message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ConditionContext.verify|verify} messages.
+                         * @param message ConditionContext message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.policytroubleshooter.iam.v3.IConditionContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConditionContext message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ConditionContext.verify|verify} messages.
+                         * @param message ConditionContext message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.policytroubleshooter.iam.v3.IConditionContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConditionContext message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConditionContext
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policytroubleshooter.iam.v3.ConditionContext;
+
+                        /**
+                         * Decodes a ConditionContext message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConditionContext
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policytroubleshooter.iam.v3.ConditionContext;
+
+                        /**
+                         * Verifies a ConditionContext message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConditionContext message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConditionContext
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.policytroubleshooter.iam.v3.ConditionContext;
+
+                        /**
+                         * Creates a plain object from a ConditionContext message. Also converts values to other types if specified.
+                         * @param message ConditionContext
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.policytroubleshooter.iam.v3.ConditionContext, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConditionContext to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ConditionContext
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ConditionContext {
+
+                        /** Properties of a Resource. */
+                        interface IResource {
+
+                            /** Resource service */
+                            service?: (string|null);
+
+                            /** Resource name */
+                            name?: (string|null);
+
+                            /** Resource type */
+                            type?: (string|null);
+                        }
+
+                        /** Represents a Resource. */
+                        class Resource implements IResource {
+
+                            /**
+                             * Constructs a new Resource.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.policytroubleshooter.iam.v3.ConditionContext.IResource);
+
+                            /** Resource service. */
+                            public service: string;
+
+                            /** Resource name. */
+                            public name: string;
+
+                            /** Resource type. */
+                            public type: string;
+
+                            /**
+                             * Creates a new Resource instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Resource instance
+                             */
+                            public static create(properties?: google.cloud.policytroubleshooter.iam.v3.ConditionContext.IResource): google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource;
+
+                            /**
+                             * Encodes the specified Resource message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource.verify|verify} messages.
+                             * @param message Resource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.policytroubleshooter.iam.v3.ConditionContext.IResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Resource message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource.verify|verify} messages.
+                             * @param message Resource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.policytroubleshooter.iam.v3.ConditionContext.IResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Resource message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Resource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource;
+
+                            /**
+                             * Decodes a Resource message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Resource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource;
+
+                            /**
+                             * Verifies a Resource message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Resource message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Resource
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource;
+
+                            /**
+                             * Creates a plain object from a Resource message. Also converts values to other types if specified.
+                             * @param message Resource
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.policytroubleshooter.iam.v3.ConditionContext.Resource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Resource to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Resource
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a Peer. */
+                        interface IPeer {
+
+                            /** Peer ip */
+                            ip?: (string|null);
+
+                            /** Peer port */
+                            port?: (number|Long|string|null);
+                        }
+
+                        /** Represents a Peer. */
+                        class Peer implements IPeer {
+
+                            /**
+                             * Constructs a new Peer.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.policytroubleshooter.iam.v3.ConditionContext.IPeer);
+
+                            /** Peer ip. */
+                            public ip: string;
+
+                            /** Peer port. */
+                            public port: (number|Long|string);
+
+                            /**
+                             * Creates a new Peer instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Peer instance
+                             */
+                            public static create(properties?: google.cloud.policytroubleshooter.iam.v3.ConditionContext.IPeer): google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer;
+
+                            /**
+                             * Encodes the specified Peer message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer.verify|verify} messages.
+                             * @param message Peer message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.policytroubleshooter.iam.v3.ConditionContext.IPeer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Peer message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer.verify|verify} messages.
+                             * @param message Peer message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.policytroubleshooter.iam.v3.ConditionContext.IPeer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Peer message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Peer
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer;
+
+                            /**
+                             * Decodes a Peer message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Peer
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer;
+
+                            /**
+                             * Verifies a Peer message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Peer message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Peer
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer;
+
+                            /**
+                             * Creates a plain object from a Peer message. Also converts values to other types if specified.
+                             * @param message Peer
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.policytroubleshooter.iam.v3.ConditionContext.Peer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Peer to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Peer
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a Request. */
+                        interface IRequest {
+
+                            /** Request receiveTime */
+                            receiveTime?: (google.protobuf.ITimestamp|null);
+                        }
+
+                        /** Represents a Request. */
+                        class Request implements IRequest {
+
+                            /**
+                             * Constructs a new Request.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.policytroubleshooter.iam.v3.ConditionContext.IRequest);
+
+                            /** Request receiveTime. */
+                            public receiveTime?: (google.protobuf.ITimestamp|null);
+
+                            /**
+                             * Creates a new Request instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Request instance
+                             */
+                            public static create(properties?: google.cloud.policytroubleshooter.iam.v3.ConditionContext.IRequest): google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request;
+
+                            /**
+                             * Encodes the specified Request message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request.verify|verify} messages.
+                             * @param message Request message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.policytroubleshooter.iam.v3.ConditionContext.IRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Request message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request.verify|verify} messages.
+                             * @param message Request message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.policytroubleshooter.iam.v3.ConditionContext.IRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Request message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Request
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request;
+
+                            /**
+                             * Decodes a Request message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Request
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request;
+
+                            /**
+                             * Verifies a Request message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Request message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Request
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request;
+
+                            /**
+                             * Creates a plain object from a Request message. Also converts values to other types if specified.
+                             * @param message Request
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.policytroubleshooter.iam.v3.ConditionContext.Request, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Request to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Request
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of an EffectiveTag. */
+                        interface IEffectiveTag {
+
+                            /** EffectiveTag tagValue */
+                            tagValue?: (string|null);
+
+                            /** EffectiveTag namespacedTagValue */
+                            namespacedTagValue?: (string|null);
+
+                            /** EffectiveTag tagKey */
+                            tagKey?: (string|null);
+
+                            /** EffectiveTag namespacedTagKey */
+                            namespacedTagKey?: (string|null);
+
+                            /** EffectiveTag tagKeyParentName */
+                            tagKeyParentName?: (string|null);
+
+                            /** EffectiveTag inherited */
+                            inherited?: (boolean|null);
+                        }
+
+                        /** Represents an EffectiveTag. */
+                        class EffectiveTag implements IEffectiveTag {
+
+                            /**
+                             * Constructs a new EffectiveTag.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.policytroubleshooter.iam.v3.ConditionContext.IEffectiveTag);
+
+                            /** EffectiveTag tagValue. */
+                            public tagValue: string;
+
+                            /** EffectiveTag namespacedTagValue. */
+                            public namespacedTagValue: string;
+
+                            /** EffectiveTag tagKey. */
+                            public tagKey: string;
+
+                            /** EffectiveTag namespacedTagKey. */
+                            public namespacedTagKey: string;
+
+                            /** EffectiveTag tagKeyParentName. */
+                            public tagKeyParentName: string;
+
+                            /** EffectiveTag inherited. */
+                            public inherited: boolean;
+
+                            /**
+                             * Creates a new EffectiveTag instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns EffectiveTag instance
+                             */
+                            public static create(properties?: google.cloud.policytroubleshooter.iam.v3.ConditionContext.IEffectiveTag): google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag;
+
+                            /**
+                             * Encodes the specified EffectiveTag message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag.verify|verify} messages.
+                             * @param message EffectiveTag message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.policytroubleshooter.iam.v3.ConditionContext.IEffectiveTag, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified EffectiveTag message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag.verify|verify} messages.
+                             * @param message EffectiveTag message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.policytroubleshooter.iam.v3.ConditionContext.IEffectiveTag, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an EffectiveTag message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns EffectiveTag
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag;
+
+                            /**
+                             * Decodes an EffectiveTag message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns EffectiveTag
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag;
+
+                            /**
+                             * Verifies an EffectiveTag message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an EffectiveTag message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns EffectiveTag
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag;
+
+                            /**
+                             * Creates a plain object from an EffectiveTag message. Also converts values to other types if specified.
+                             * @param message EffectiveTag
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.policytroubleshooter.iam.v3.ConditionContext.EffectiveTag, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this EffectiveTag to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for EffectiveTag
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of an AllowPolicyExplanation. */
+                    interface IAllowPolicyExplanation {
+
+                        /** AllowPolicyExplanation allowAccessState */
+                        allowAccessState?: (google.cloud.policytroubleshooter.iam.v3.AllowAccessState|keyof typeof google.cloud.policytroubleshooter.iam.v3.AllowAccessState|null);
+
+                        /** AllowPolicyExplanation explainedPolicies */
+                        explainedPolicies?: (google.cloud.policytroubleshooter.iam.v3.IExplainedAllowPolicy[]|null);
+
+                        /** AllowPolicyExplanation relevance */
+                        relevance?: (google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|keyof typeof google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|null);
+                    }
+
+                    /** Represents an AllowPolicyExplanation. */
+                    class AllowPolicyExplanation implements IAllowPolicyExplanation {
+
+                        /**
+                         * Constructs a new AllowPolicyExplanation.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.policytroubleshooter.iam.v3.IAllowPolicyExplanation);
+
+                        /** AllowPolicyExplanation allowAccessState. */
+                        public allowAccessState: (google.cloud.policytroubleshooter.iam.v3.AllowAccessState|keyof typeof google.cloud.policytroubleshooter.iam.v3.AllowAccessState);
+
+                        /** AllowPolicyExplanation explainedPolicies. */
+                        public explainedPolicies: google.cloud.policytroubleshooter.iam.v3.IExplainedAllowPolicy[];
+
+                        /** AllowPolicyExplanation relevance. */
+                        public relevance: (google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|keyof typeof google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance);
+
+                        /**
+                         * Creates a new AllowPolicyExplanation instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AllowPolicyExplanation instance
+                         */
+                        public static create(properties?: google.cloud.policytroubleshooter.iam.v3.IAllowPolicyExplanation): google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation;
+
+                        /**
+                         * Encodes the specified AllowPolicyExplanation message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation.verify|verify} messages.
+                         * @param message AllowPolicyExplanation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.policytroubleshooter.iam.v3.IAllowPolicyExplanation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AllowPolicyExplanation message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation.verify|verify} messages.
+                         * @param message AllowPolicyExplanation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.policytroubleshooter.iam.v3.IAllowPolicyExplanation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AllowPolicyExplanation message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AllowPolicyExplanation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation;
+
+                        /**
+                         * Decodes an AllowPolicyExplanation message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AllowPolicyExplanation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation;
+
+                        /**
+                         * Verifies an AllowPolicyExplanation message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AllowPolicyExplanation message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AllowPolicyExplanation
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation;
+
+                        /**
+                         * Creates a plain object from an AllowPolicyExplanation message. Also converts values to other types if specified.
+                         * @param message AllowPolicyExplanation
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.policytroubleshooter.iam.v3.AllowPolicyExplanation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AllowPolicyExplanation to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AllowPolicyExplanation
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an ExplainedAllowPolicy. */
+                    interface IExplainedAllowPolicy {
+
+                        /** ExplainedAllowPolicy allowAccessState */
+                        allowAccessState?: (google.cloud.policytroubleshooter.iam.v3.AllowAccessState|keyof typeof google.cloud.policytroubleshooter.iam.v3.AllowAccessState|null);
+
+                        /** ExplainedAllowPolicy fullResourceName */
+                        fullResourceName?: (string|null);
+
+                        /** ExplainedAllowPolicy bindingExplanations */
+                        bindingExplanations?: (google.cloud.policytroubleshooter.iam.v3.IAllowBindingExplanation[]|null);
+
+                        /** ExplainedAllowPolicy relevance */
+                        relevance?: (google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|keyof typeof google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|null);
+
+                        /** ExplainedAllowPolicy policy */
+                        policy?: (google.iam.v1.IPolicy|null);
+                    }
+
+                    /** Represents an ExplainedAllowPolicy. */
+                    class ExplainedAllowPolicy implements IExplainedAllowPolicy {
+
+                        /**
+                         * Constructs a new ExplainedAllowPolicy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.policytroubleshooter.iam.v3.IExplainedAllowPolicy);
+
+                        /** ExplainedAllowPolicy allowAccessState. */
+                        public allowAccessState: (google.cloud.policytroubleshooter.iam.v3.AllowAccessState|keyof typeof google.cloud.policytroubleshooter.iam.v3.AllowAccessState);
+
+                        /** ExplainedAllowPolicy fullResourceName. */
+                        public fullResourceName: string;
+
+                        /** ExplainedAllowPolicy bindingExplanations. */
+                        public bindingExplanations: google.cloud.policytroubleshooter.iam.v3.IAllowBindingExplanation[];
+
+                        /** ExplainedAllowPolicy relevance. */
+                        public relevance: (google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|keyof typeof google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance);
+
+                        /** ExplainedAllowPolicy policy. */
+                        public policy?: (google.iam.v1.IPolicy|null);
+
+                        /**
+                         * Creates a new ExplainedAllowPolicy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ExplainedAllowPolicy instance
+                         */
+                        public static create(properties?: google.cloud.policytroubleshooter.iam.v3.IExplainedAllowPolicy): google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy;
+
+                        /**
+                         * Encodes the specified ExplainedAllowPolicy message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy.verify|verify} messages.
+                         * @param message ExplainedAllowPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.policytroubleshooter.iam.v3.IExplainedAllowPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ExplainedAllowPolicy message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy.verify|verify} messages.
+                         * @param message ExplainedAllowPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.policytroubleshooter.iam.v3.IExplainedAllowPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ExplainedAllowPolicy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ExplainedAllowPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy;
+
+                        /**
+                         * Decodes an ExplainedAllowPolicy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ExplainedAllowPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy;
+
+                        /**
+                         * Verifies an ExplainedAllowPolicy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ExplainedAllowPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ExplainedAllowPolicy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy;
+
+                        /**
+                         * Creates a plain object from an ExplainedAllowPolicy message. Also converts values to other types if specified.
+                         * @param message ExplainedAllowPolicy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.policytroubleshooter.iam.v3.ExplainedAllowPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ExplainedAllowPolicy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ExplainedAllowPolicy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an AllowBindingExplanation. */
+                    interface IAllowBindingExplanation {
+
+                        /** AllowBindingExplanation allowAccessState */
+                        allowAccessState?: (google.cloud.policytroubleshooter.iam.v3.AllowAccessState|keyof typeof google.cloud.policytroubleshooter.iam.v3.AllowAccessState|null);
+
+                        /** AllowBindingExplanation role */
+                        role?: (string|null);
+
+                        /** AllowBindingExplanation rolePermission */
+                        rolePermission?: (google.cloud.policytroubleshooter.iam.v3.RolePermissionInclusionState|keyof typeof google.cloud.policytroubleshooter.iam.v3.RolePermissionInclusionState|null);
+
+                        /** AllowBindingExplanation rolePermissionRelevance */
+                        rolePermissionRelevance?: (google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|keyof typeof google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|null);
+
+                        /** AllowBindingExplanation combinedMembership */
+                        combinedMembership?: (google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.IAnnotatedAllowMembership|null);
+
+                        /** AllowBindingExplanation memberships */
+                        memberships?: ({ [k: string]: google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.IAnnotatedAllowMembership }|null);
+
+                        /** AllowBindingExplanation relevance */
+                        relevance?: (google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|keyof typeof google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|null);
+
+                        /** AllowBindingExplanation condition */
+                        condition?: (google.type.IExpr|null);
+
+                        /** AllowBindingExplanation conditionExplanation */
+                        conditionExplanation?: (google.cloud.policytroubleshooter.iam.v3.IConditionExplanation|null);
+                    }
+
+                    /** Represents an AllowBindingExplanation. */
+                    class AllowBindingExplanation implements IAllowBindingExplanation {
+
+                        /**
+                         * Constructs a new AllowBindingExplanation.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.policytroubleshooter.iam.v3.IAllowBindingExplanation);
+
+                        /** AllowBindingExplanation allowAccessState. */
+                        public allowAccessState: (google.cloud.policytroubleshooter.iam.v3.AllowAccessState|keyof typeof google.cloud.policytroubleshooter.iam.v3.AllowAccessState);
+
+                        /** AllowBindingExplanation role. */
+                        public role: string;
+
+                        /** AllowBindingExplanation rolePermission. */
+                        public rolePermission: (google.cloud.policytroubleshooter.iam.v3.RolePermissionInclusionState|keyof typeof google.cloud.policytroubleshooter.iam.v3.RolePermissionInclusionState);
+
+                        /** AllowBindingExplanation rolePermissionRelevance. */
+                        public rolePermissionRelevance: (google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|keyof typeof google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance);
+
+                        /** AllowBindingExplanation combinedMembership. */
+                        public combinedMembership?: (google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.IAnnotatedAllowMembership|null);
+
+                        /** AllowBindingExplanation memberships. */
+                        public memberships: { [k: string]: google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.IAnnotatedAllowMembership };
+
+                        /** AllowBindingExplanation relevance. */
+                        public relevance: (google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|keyof typeof google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance);
+
+                        /** AllowBindingExplanation condition. */
+                        public condition?: (google.type.IExpr|null);
+
+                        /** AllowBindingExplanation conditionExplanation. */
+                        public conditionExplanation?: (google.cloud.policytroubleshooter.iam.v3.IConditionExplanation|null);
+
+                        /**
+                         * Creates a new AllowBindingExplanation instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AllowBindingExplanation instance
+                         */
+                        public static create(properties?: google.cloud.policytroubleshooter.iam.v3.IAllowBindingExplanation): google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation;
+
+                        /**
+                         * Encodes the specified AllowBindingExplanation message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.verify|verify} messages.
+                         * @param message AllowBindingExplanation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.policytroubleshooter.iam.v3.IAllowBindingExplanation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AllowBindingExplanation message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.verify|verify} messages.
+                         * @param message AllowBindingExplanation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.policytroubleshooter.iam.v3.IAllowBindingExplanation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AllowBindingExplanation message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AllowBindingExplanation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation;
+
+                        /**
+                         * Decodes an AllowBindingExplanation message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AllowBindingExplanation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation;
+
+                        /**
+                         * Verifies an AllowBindingExplanation message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AllowBindingExplanation message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AllowBindingExplanation
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation;
+
+                        /**
+                         * Creates a plain object from an AllowBindingExplanation message. Also converts values to other types if specified.
+                         * @param message AllowBindingExplanation
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AllowBindingExplanation to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AllowBindingExplanation
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace AllowBindingExplanation {
+
+                        /** Properties of an AnnotatedAllowMembership. */
+                        interface IAnnotatedAllowMembership {
+
+                            /** AnnotatedAllowMembership membership */
+                            membership?: (google.cloud.policytroubleshooter.iam.v3.MembershipMatchingState|keyof typeof google.cloud.policytroubleshooter.iam.v3.MembershipMatchingState|null);
+
+                            /** AnnotatedAllowMembership relevance */
+                            relevance?: (google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|keyof typeof google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|null);
+                        }
+
+                        /** Represents an AnnotatedAllowMembership. */
+                        class AnnotatedAllowMembership implements IAnnotatedAllowMembership {
+
+                            /**
+                             * Constructs a new AnnotatedAllowMembership.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.IAnnotatedAllowMembership);
+
+                            /** AnnotatedAllowMembership membership. */
+                            public membership: (google.cloud.policytroubleshooter.iam.v3.MembershipMatchingState|keyof typeof google.cloud.policytroubleshooter.iam.v3.MembershipMatchingState);
+
+                            /** AnnotatedAllowMembership relevance. */
+                            public relevance: (google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|keyof typeof google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance);
+
+                            /**
+                             * Creates a new AnnotatedAllowMembership instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns AnnotatedAllowMembership instance
+                             */
+                            public static create(properties?: google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.IAnnotatedAllowMembership): google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership;
+
+                            /**
+                             * Encodes the specified AnnotatedAllowMembership message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership.verify|verify} messages.
+                             * @param message AnnotatedAllowMembership message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.IAnnotatedAllowMembership, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified AnnotatedAllowMembership message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership.verify|verify} messages.
+                             * @param message AnnotatedAllowMembership message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.IAnnotatedAllowMembership, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an AnnotatedAllowMembership message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns AnnotatedAllowMembership
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership;
+
+                            /**
+                             * Decodes an AnnotatedAllowMembership message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns AnnotatedAllowMembership
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership;
+
+                            /**
+                             * Verifies an AnnotatedAllowMembership message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an AnnotatedAllowMembership message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns AnnotatedAllowMembership
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership;
+
+                            /**
+                             * Creates a plain object from an AnnotatedAllowMembership message. Also converts values to other types if specified.
+                             * @param message AnnotatedAllowMembership
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.policytroubleshooter.iam.v3.AllowBindingExplanation.AnnotatedAllowMembership, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this AnnotatedAllowMembership to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for AnnotatedAllowMembership
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a DenyPolicyExplanation. */
+                    interface IDenyPolicyExplanation {
+
+                        /** DenyPolicyExplanation denyAccessState */
+                        denyAccessState?: (google.cloud.policytroubleshooter.iam.v3.DenyAccessState|keyof typeof google.cloud.policytroubleshooter.iam.v3.DenyAccessState|null);
+
+                        /** DenyPolicyExplanation explainedResources */
+                        explainedResources?: (google.cloud.policytroubleshooter.iam.v3.IExplainedDenyResource[]|null);
+
+                        /** DenyPolicyExplanation relevance */
+                        relevance?: (google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|keyof typeof google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|null);
+
+                        /** DenyPolicyExplanation permissionDeniable */
+                        permissionDeniable?: (boolean|null);
+                    }
+
+                    /** Represents a DenyPolicyExplanation. */
+                    class DenyPolicyExplanation implements IDenyPolicyExplanation {
+
+                        /**
+                         * Constructs a new DenyPolicyExplanation.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.policytroubleshooter.iam.v3.IDenyPolicyExplanation);
+
+                        /** DenyPolicyExplanation denyAccessState. */
+                        public denyAccessState: (google.cloud.policytroubleshooter.iam.v3.DenyAccessState|keyof typeof google.cloud.policytroubleshooter.iam.v3.DenyAccessState);
+
+                        /** DenyPolicyExplanation explainedResources. */
+                        public explainedResources: google.cloud.policytroubleshooter.iam.v3.IExplainedDenyResource[];
+
+                        /** DenyPolicyExplanation relevance. */
+                        public relevance: (google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|keyof typeof google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance);
+
+                        /** DenyPolicyExplanation permissionDeniable. */
+                        public permissionDeniable: boolean;
+
+                        /**
+                         * Creates a new DenyPolicyExplanation instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DenyPolicyExplanation instance
+                         */
+                        public static create(properties?: google.cloud.policytroubleshooter.iam.v3.IDenyPolicyExplanation): google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation;
+
+                        /**
+                         * Encodes the specified DenyPolicyExplanation message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation.verify|verify} messages.
+                         * @param message DenyPolicyExplanation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.policytroubleshooter.iam.v3.IDenyPolicyExplanation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DenyPolicyExplanation message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation.verify|verify} messages.
+                         * @param message DenyPolicyExplanation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.policytroubleshooter.iam.v3.IDenyPolicyExplanation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DenyPolicyExplanation message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DenyPolicyExplanation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation;
+
+                        /**
+                         * Decodes a DenyPolicyExplanation message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DenyPolicyExplanation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation;
+
+                        /**
+                         * Verifies a DenyPolicyExplanation message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DenyPolicyExplanation message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DenyPolicyExplanation
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation;
+
+                        /**
+                         * Creates a plain object from a DenyPolicyExplanation message. Also converts values to other types if specified.
+                         * @param message DenyPolicyExplanation
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.policytroubleshooter.iam.v3.DenyPolicyExplanation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DenyPolicyExplanation to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DenyPolicyExplanation
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an ExplainedDenyResource. */
+                    interface IExplainedDenyResource {
+
+                        /** ExplainedDenyResource denyAccessState */
+                        denyAccessState?: (google.cloud.policytroubleshooter.iam.v3.DenyAccessState|keyof typeof google.cloud.policytroubleshooter.iam.v3.DenyAccessState|null);
+
+                        /** ExplainedDenyResource fullResourceName */
+                        fullResourceName?: (string|null);
+
+                        /** ExplainedDenyResource explainedPolicies */
+                        explainedPolicies?: (google.cloud.policytroubleshooter.iam.v3.IExplainedDenyPolicy[]|null);
+
+                        /** ExplainedDenyResource relevance */
+                        relevance?: (google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|keyof typeof google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|null);
+                    }
+
+                    /** Represents an ExplainedDenyResource. */
+                    class ExplainedDenyResource implements IExplainedDenyResource {
+
+                        /**
+                         * Constructs a new ExplainedDenyResource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.policytroubleshooter.iam.v3.IExplainedDenyResource);
+
+                        /** ExplainedDenyResource denyAccessState. */
+                        public denyAccessState: (google.cloud.policytroubleshooter.iam.v3.DenyAccessState|keyof typeof google.cloud.policytroubleshooter.iam.v3.DenyAccessState);
+
+                        /** ExplainedDenyResource fullResourceName. */
+                        public fullResourceName: string;
+
+                        /** ExplainedDenyResource explainedPolicies. */
+                        public explainedPolicies: google.cloud.policytroubleshooter.iam.v3.IExplainedDenyPolicy[];
+
+                        /** ExplainedDenyResource relevance. */
+                        public relevance: (google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|keyof typeof google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance);
+
+                        /**
+                         * Creates a new ExplainedDenyResource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ExplainedDenyResource instance
+                         */
+                        public static create(properties?: google.cloud.policytroubleshooter.iam.v3.IExplainedDenyResource): google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource;
+
+                        /**
+                         * Encodes the specified ExplainedDenyResource message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource.verify|verify} messages.
+                         * @param message ExplainedDenyResource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.policytroubleshooter.iam.v3.IExplainedDenyResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ExplainedDenyResource message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource.verify|verify} messages.
+                         * @param message ExplainedDenyResource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.policytroubleshooter.iam.v3.IExplainedDenyResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ExplainedDenyResource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ExplainedDenyResource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource;
+
+                        /**
+                         * Decodes an ExplainedDenyResource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ExplainedDenyResource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource;
+
+                        /**
+                         * Verifies an ExplainedDenyResource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ExplainedDenyResource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ExplainedDenyResource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource;
+
+                        /**
+                         * Creates a plain object from an ExplainedDenyResource message. Also converts values to other types if specified.
+                         * @param message ExplainedDenyResource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.policytroubleshooter.iam.v3.ExplainedDenyResource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ExplainedDenyResource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ExplainedDenyResource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an ExplainedDenyPolicy. */
+                    interface IExplainedDenyPolicy {
+
+                        /** ExplainedDenyPolicy denyAccessState */
+                        denyAccessState?: (google.cloud.policytroubleshooter.iam.v3.DenyAccessState|keyof typeof google.cloud.policytroubleshooter.iam.v3.DenyAccessState|null);
+
+                        /** ExplainedDenyPolicy policy */
+                        policy?: (google.iam.v2.IPolicy|null);
+
+                        /** ExplainedDenyPolicy ruleExplanations */
+                        ruleExplanations?: (google.cloud.policytroubleshooter.iam.v3.IDenyRuleExplanation[]|null);
+
+                        /** ExplainedDenyPolicy relevance */
+                        relevance?: (google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|keyof typeof google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|null);
+                    }
+
+                    /** Represents an ExplainedDenyPolicy. */
+                    class ExplainedDenyPolicy implements IExplainedDenyPolicy {
+
+                        /**
+                         * Constructs a new ExplainedDenyPolicy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.policytroubleshooter.iam.v3.IExplainedDenyPolicy);
+
+                        /** ExplainedDenyPolicy denyAccessState. */
+                        public denyAccessState: (google.cloud.policytroubleshooter.iam.v3.DenyAccessState|keyof typeof google.cloud.policytroubleshooter.iam.v3.DenyAccessState);
+
+                        /** ExplainedDenyPolicy policy. */
+                        public policy?: (google.iam.v2.IPolicy|null);
+
+                        /** ExplainedDenyPolicy ruleExplanations. */
+                        public ruleExplanations: google.cloud.policytroubleshooter.iam.v3.IDenyRuleExplanation[];
+
+                        /** ExplainedDenyPolicy relevance. */
+                        public relevance: (google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|keyof typeof google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance);
+
+                        /**
+                         * Creates a new ExplainedDenyPolicy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ExplainedDenyPolicy instance
+                         */
+                        public static create(properties?: google.cloud.policytroubleshooter.iam.v3.IExplainedDenyPolicy): google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy;
+
+                        /**
+                         * Encodes the specified ExplainedDenyPolicy message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy.verify|verify} messages.
+                         * @param message ExplainedDenyPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.policytroubleshooter.iam.v3.IExplainedDenyPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ExplainedDenyPolicy message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy.verify|verify} messages.
+                         * @param message ExplainedDenyPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.policytroubleshooter.iam.v3.IExplainedDenyPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ExplainedDenyPolicy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ExplainedDenyPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy;
+
+                        /**
+                         * Decodes an ExplainedDenyPolicy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ExplainedDenyPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy;
+
+                        /**
+                         * Verifies an ExplainedDenyPolicy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ExplainedDenyPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ExplainedDenyPolicy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy;
+
+                        /**
+                         * Creates a plain object from an ExplainedDenyPolicy message. Also converts values to other types if specified.
+                         * @param message ExplainedDenyPolicy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.policytroubleshooter.iam.v3.ExplainedDenyPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ExplainedDenyPolicy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ExplainedDenyPolicy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DenyRuleExplanation. */
+                    interface IDenyRuleExplanation {
+
+                        /** DenyRuleExplanation denyAccessState */
+                        denyAccessState?: (google.cloud.policytroubleshooter.iam.v3.DenyAccessState|keyof typeof google.cloud.policytroubleshooter.iam.v3.DenyAccessState|null);
+
+                        /** DenyRuleExplanation combinedDeniedPermission */
+                        combinedDeniedPermission?: (google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedPermissionMatching|null);
+
+                        /** DenyRuleExplanation deniedPermissions */
+                        deniedPermissions?: ({ [k: string]: google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedPermissionMatching }|null);
+
+                        /** DenyRuleExplanation combinedExceptionPermission */
+                        combinedExceptionPermission?: (google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedPermissionMatching|null);
+
+                        /** DenyRuleExplanation exceptionPermissions */
+                        exceptionPermissions?: ({ [k: string]: google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedPermissionMatching }|null);
+
+                        /** DenyRuleExplanation combinedDeniedPrincipal */
+                        combinedDeniedPrincipal?: (google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedDenyPrincipalMatching|null);
+
+                        /** DenyRuleExplanation deniedPrincipals */
+                        deniedPrincipals?: ({ [k: string]: google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedDenyPrincipalMatching }|null);
+
+                        /** DenyRuleExplanation combinedExceptionPrincipal */
+                        combinedExceptionPrincipal?: (google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedDenyPrincipalMatching|null);
+
+                        /** DenyRuleExplanation exceptionPrincipals */
+                        exceptionPrincipals?: ({ [k: string]: google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedDenyPrincipalMatching }|null);
+
+                        /** DenyRuleExplanation relevance */
+                        relevance?: (google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|keyof typeof google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|null);
+
+                        /** DenyRuleExplanation condition */
+                        condition?: (google.type.IExpr|null);
+
+                        /** DenyRuleExplanation conditionExplanation */
+                        conditionExplanation?: (google.cloud.policytroubleshooter.iam.v3.IConditionExplanation|null);
+                    }
+
+                    /** Represents a DenyRuleExplanation. */
+                    class DenyRuleExplanation implements IDenyRuleExplanation {
+
+                        /**
+                         * Constructs a new DenyRuleExplanation.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.policytroubleshooter.iam.v3.IDenyRuleExplanation);
+
+                        /** DenyRuleExplanation denyAccessState. */
+                        public denyAccessState: (google.cloud.policytroubleshooter.iam.v3.DenyAccessState|keyof typeof google.cloud.policytroubleshooter.iam.v3.DenyAccessState);
+
+                        /** DenyRuleExplanation combinedDeniedPermission. */
+                        public combinedDeniedPermission?: (google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedPermissionMatching|null);
+
+                        /** DenyRuleExplanation deniedPermissions. */
+                        public deniedPermissions: { [k: string]: google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedPermissionMatching };
+
+                        /** DenyRuleExplanation combinedExceptionPermission. */
+                        public combinedExceptionPermission?: (google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedPermissionMatching|null);
+
+                        /** DenyRuleExplanation exceptionPermissions. */
+                        public exceptionPermissions: { [k: string]: google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedPermissionMatching };
+
+                        /** DenyRuleExplanation combinedDeniedPrincipal. */
+                        public combinedDeniedPrincipal?: (google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedDenyPrincipalMatching|null);
+
+                        /** DenyRuleExplanation deniedPrincipals. */
+                        public deniedPrincipals: { [k: string]: google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedDenyPrincipalMatching };
+
+                        /** DenyRuleExplanation combinedExceptionPrincipal. */
+                        public combinedExceptionPrincipal?: (google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedDenyPrincipalMatching|null);
+
+                        /** DenyRuleExplanation exceptionPrincipals. */
+                        public exceptionPrincipals: { [k: string]: google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedDenyPrincipalMatching };
+
+                        /** DenyRuleExplanation relevance. */
+                        public relevance: (google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|keyof typeof google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance);
+
+                        /** DenyRuleExplanation condition. */
+                        public condition?: (google.type.IExpr|null);
+
+                        /** DenyRuleExplanation conditionExplanation. */
+                        public conditionExplanation?: (google.cloud.policytroubleshooter.iam.v3.IConditionExplanation|null);
+
+                        /**
+                         * Creates a new DenyRuleExplanation instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DenyRuleExplanation instance
+                         */
+                        public static create(properties?: google.cloud.policytroubleshooter.iam.v3.IDenyRuleExplanation): google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation;
+
+                        /**
+                         * Encodes the specified DenyRuleExplanation message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.verify|verify} messages.
+                         * @param message DenyRuleExplanation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.policytroubleshooter.iam.v3.IDenyRuleExplanation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DenyRuleExplanation message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.verify|verify} messages.
+                         * @param message DenyRuleExplanation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.policytroubleshooter.iam.v3.IDenyRuleExplanation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DenyRuleExplanation message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DenyRuleExplanation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation;
+
+                        /**
+                         * Decodes a DenyRuleExplanation message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DenyRuleExplanation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation;
+
+                        /**
+                         * Verifies a DenyRuleExplanation message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DenyRuleExplanation message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DenyRuleExplanation
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation;
+
+                        /**
+                         * Creates a plain object from a DenyRuleExplanation message. Also converts values to other types if specified.
+                         * @param message DenyRuleExplanation
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DenyRuleExplanation to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DenyRuleExplanation
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace DenyRuleExplanation {
+
+                        /** Properties of an AnnotatedPermissionMatching. */
+                        interface IAnnotatedPermissionMatching {
+
+                            /** AnnotatedPermissionMatching permissionMatchingState */
+                            permissionMatchingState?: (google.cloud.policytroubleshooter.iam.v3.PermissionPatternMatchingState|keyof typeof google.cloud.policytroubleshooter.iam.v3.PermissionPatternMatchingState|null);
+
+                            /** AnnotatedPermissionMatching relevance */
+                            relevance?: (google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|keyof typeof google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|null);
+                        }
+
+                        /** Represents an AnnotatedPermissionMatching. */
+                        class AnnotatedPermissionMatching implements IAnnotatedPermissionMatching {
+
+                            /**
+                             * Constructs a new AnnotatedPermissionMatching.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedPermissionMatching);
+
+                            /** AnnotatedPermissionMatching permissionMatchingState. */
+                            public permissionMatchingState: (google.cloud.policytroubleshooter.iam.v3.PermissionPatternMatchingState|keyof typeof google.cloud.policytroubleshooter.iam.v3.PermissionPatternMatchingState);
+
+                            /** AnnotatedPermissionMatching relevance. */
+                            public relevance: (google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|keyof typeof google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance);
+
+                            /**
+                             * Creates a new AnnotatedPermissionMatching instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns AnnotatedPermissionMatching instance
+                             */
+                            public static create(properties?: google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedPermissionMatching): google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching;
+
+                            /**
+                             * Encodes the specified AnnotatedPermissionMatching message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching.verify|verify} messages.
+                             * @param message AnnotatedPermissionMatching message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedPermissionMatching, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified AnnotatedPermissionMatching message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching.verify|verify} messages.
+                             * @param message AnnotatedPermissionMatching message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedPermissionMatching, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an AnnotatedPermissionMatching message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns AnnotatedPermissionMatching
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching;
+
+                            /**
+                             * Decodes an AnnotatedPermissionMatching message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns AnnotatedPermissionMatching
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching;
+
+                            /**
+                             * Verifies an AnnotatedPermissionMatching message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an AnnotatedPermissionMatching message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns AnnotatedPermissionMatching
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching;
+
+                            /**
+                             * Creates a plain object from an AnnotatedPermissionMatching message. Also converts values to other types if specified.
+                             * @param message AnnotatedPermissionMatching
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this AnnotatedPermissionMatching to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for AnnotatedPermissionMatching
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of an AnnotatedDenyPrincipalMatching. */
+                        interface IAnnotatedDenyPrincipalMatching {
+
+                            /** AnnotatedDenyPrincipalMatching membership */
+                            membership?: (google.cloud.policytroubleshooter.iam.v3.MembershipMatchingState|keyof typeof google.cloud.policytroubleshooter.iam.v3.MembershipMatchingState|null);
+
+                            /** AnnotatedDenyPrincipalMatching relevance */
+                            relevance?: (google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|keyof typeof google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|null);
+                        }
+
+                        /** Represents an AnnotatedDenyPrincipalMatching. */
+                        class AnnotatedDenyPrincipalMatching implements IAnnotatedDenyPrincipalMatching {
+
+                            /**
+                             * Constructs a new AnnotatedDenyPrincipalMatching.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedDenyPrincipalMatching);
+
+                            /** AnnotatedDenyPrincipalMatching membership. */
+                            public membership: (google.cloud.policytroubleshooter.iam.v3.MembershipMatchingState|keyof typeof google.cloud.policytroubleshooter.iam.v3.MembershipMatchingState);
+
+                            /** AnnotatedDenyPrincipalMatching relevance. */
+                            public relevance: (google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance|keyof typeof google.cloud.policytroubleshooter.iam.v3.HeuristicRelevance);
+
+                            /**
+                             * Creates a new AnnotatedDenyPrincipalMatching instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns AnnotatedDenyPrincipalMatching instance
+                             */
+                            public static create(properties?: google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedDenyPrincipalMatching): google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching;
+
+                            /**
+                             * Encodes the specified AnnotatedDenyPrincipalMatching message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching.verify|verify} messages.
+                             * @param message AnnotatedDenyPrincipalMatching message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedDenyPrincipalMatching, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified AnnotatedDenyPrincipalMatching message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching.verify|verify} messages.
+                             * @param message AnnotatedDenyPrincipalMatching message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.IAnnotatedDenyPrincipalMatching, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an AnnotatedDenyPrincipalMatching message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns AnnotatedDenyPrincipalMatching
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching;
+
+                            /**
+                             * Decodes an AnnotatedDenyPrincipalMatching message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns AnnotatedDenyPrincipalMatching
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching;
+
+                            /**
+                             * Verifies an AnnotatedDenyPrincipalMatching message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an AnnotatedDenyPrincipalMatching message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns AnnotatedDenyPrincipalMatching
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching;
+
+                            /**
+                             * Creates a plain object from an AnnotatedDenyPrincipalMatching message. Also converts values to other types if specified.
+                             * @param message AnnotatedDenyPrincipalMatching
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this AnnotatedDenyPrincipalMatching to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for AnnotatedDenyPrincipalMatching
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a ConditionExplanation. */
+                    interface IConditionExplanation {
+
+                        /** ConditionExplanation value */
+                        value?: (google.protobuf.IValue|null);
+
+                        /** ConditionExplanation errors */
+                        errors?: (google.rpc.IStatus[]|null);
+
+                        /** ConditionExplanation evaluationStates */
+                        evaluationStates?: (google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.IEvaluationState[]|null);
+                    }
+
+                    /** Represents a ConditionExplanation. */
+                    class ConditionExplanation implements IConditionExplanation {
+
+                        /**
+                         * Constructs a new ConditionExplanation.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.policytroubleshooter.iam.v3.IConditionExplanation);
+
+                        /** ConditionExplanation value. */
+                        public value?: (google.protobuf.IValue|null);
+
+                        /** ConditionExplanation errors. */
+                        public errors: google.rpc.IStatus[];
+
+                        /** ConditionExplanation evaluationStates. */
+                        public evaluationStates: google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.IEvaluationState[];
+
+                        /**
+                         * Creates a new ConditionExplanation instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConditionExplanation instance
+                         */
+                        public static create(properties?: google.cloud.policytroubleshooter.iam.v3.IConditionExplanation): google.cloud.policytroubleshooter.iam.v3.ConditionExplanation;
+
+                        /**
+                         * Encodes the specified ConditionExplanation message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.verify|verify} messages.
+                         * @param message ConditionExplanation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.policytroubleshooter.iam.v3.IConditionExplanation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConditionExplanation message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.verify|verify} messages.
+                         * @param message ConditionExplanation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.policytroubleshooter.iam.v3.IConditionExplanation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConditionExplanation message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConditionExplanation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policytroubleshooter.iam.v3.ConditionExplanation;
+
+                        /**
+                         * Decodes a ConditionExplanation message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConditionExplanation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policytroubleshooter.iam.v3.ConditionExplanation;
+
+                        /**
+                         * Verifies a ConditionExplanation message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConditionExplanation message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConditionExplanation
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.policytroubleshooter.iam.v3.ConditionExplanation;
+
+                        /**
+                         * Creates a plain object from a ConditionExplanation message. Also converts values to other types if specified.
+                         * @param message ConditionExplanation
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.policytroubleshooter.iam.v3.ConditionExplanation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConditionExplanation to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ConditionExplanation
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ConditionExplanation {
+
+                        /** Properties of an EvaluationState. */
+                        interface IEvaluationState {
+
+                            /** EvaluationState start */
+                            start?: (number|null);
+
+                            /** EvaluationState end */
+                            end?: (number|null);
+
+                            /** EvaluationState value */
+                            value?: (google.protobuf.IValue|null);
+
+                            /** EvaluationState errors */
+                            errors?: (google.rpc.IStatus[]|null);
+                        }
+
+                        /** Represents an EvaluationState. */
+                        class EvaluationState implements IEvaluationState {
+
+                            /**
+                             * Constructs a new EvaluationState.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.IEvaluationState);
+
+                            /** EvaluationState start. */
+                            public start: number;
+
+                            /** EvaluationState end. */
+                            public end: number;
+
+                            /** EvaluationState value. */
+                            public value?: (google.protobuf.IValue|null);
+
+                            /** EvaluationState errors. */
+                            public errors: google.rpc.IStatus[];
+
+                            /**
+                             * Creates a new EvaluationState instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns EvaluationState instance
+                             */
+                            public static create(properties?: google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.IEvaluationState): google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState;
+
+                            /**
+                             * Encodes the specified EvaluationState message. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState.verify|verify} messages.
+                             * @param message EvaluationState message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.IEvaluationState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified EvaluationState message, length delimited. Does not implicitly {@link google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState.verify|verify} messages.
+                             * @param message EvaluationState message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.IEvaluationState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an EvaluationState message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns EvaluationState
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState;
+
+                            /**
+                             * Decodes an EvaluationState message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns EvaluationState
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState;
+
+                            /**
+                             * Verifies an EvaluationState message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an EvaluationState message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns EvaluationState
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState;
+
+                            /**
+                             * Creates a plain object from an EvaluationState message. Also converts values to other types if specified.
+                             * @param message EvaluationState
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this EvaluationState to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for EvaluationState
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+                }
+
                 /** Namespace v3beta. */
                 namespace v3beta {
 
