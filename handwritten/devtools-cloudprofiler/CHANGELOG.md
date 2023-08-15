@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/profiler?activeTab=versions
 
+## [6.0.0](https://github.com/googleapis/cloud-profiler-nodejs/compare/v5.0.5...v6.0.0) (2023-08-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to Node 14 ([#891](https://github.com/googleapis/cloud-profiler-nodejs/issues/891))
+
+### Miscellaneous Chores
+
+* Upgrade to Node 14 ([#891](https://github.com/googleapis/cloud-profiler-nodejs/issues/891)) ([66b7f4e](https://github.com/googleapis/cloud-profiler-nodejs/commit/66b7f4e4beeaf09e7bb1107368997bfafd2a4679))
+
 ## [5.0.5](https://github.com/googleapis/cloud-profiler-nodejs/compare/v5.0.4...v5.0.5) (2023-07-24)
 
 
