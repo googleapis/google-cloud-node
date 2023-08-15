@@ -47,7 +47,7 @@ function main(projectId) {
    *  transaction identifier is returned by a call to
    *  Datastore.BeginTransaction google.datastore.v1.Datastore.BeginTransaction.
    */
-  // const transaction = 'Buffer.from('string')'
+  // const transaction = Buffer.from('string')
   /**
    *  Options for beginning a new transaction for this request.
    *  The transaction is committed when the request completes. If specified,
@@ -67,7 +67,7 @@ function main(projectId) {
    *  When mode is `NON_TRANSACTIONAL`, no two mutations may affect a single
    *  entity.
    */
-  // const mutations = 1234
+  // const mutations = [1,2,3,4]
 
   // Imports the Datastore library
   const {DatastoreClient} = require('@google-cloud/datastore').v1;

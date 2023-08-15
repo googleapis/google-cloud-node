@@ -45,7 +45,7 @@ function main(projectId, keys) {
   /**
    *  Required. Keys of entities to look up.
    */
-  // const keys = 1234
+  // const keys = [1,2,3,4]
 
   // Imports the Datastore library
   const {DatastoreClient} = require('@google-cloud/datastore').v1;

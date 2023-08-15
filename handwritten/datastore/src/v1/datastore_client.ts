@@ -377,9 +377,8 @@ export class DatastoreClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.datastore.v1.LookupResponse | LookupResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.datastore.v1.LookupResponse|LookupResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/datastore.lookup.js</caption>
    * region_tag:datastore_v1_generated_Datastore_Lookup_async
@@ -495,9 +494,8 @@ export class DatastoreClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.datastore.v1.RunQueryResponse | RunQueryResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.datastore.v1.RunQueryResponse|RunQueryResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/datastore.run_query.js</caption>
    * region_tag:datastore_v1_generated_Datastore_RunQuery_async
@@ -613,9 +611,8 @@ export class DatastoreClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.datastore.v1.RunAggregationQueryResponse | RunAggregationQueryResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.datastore.v1.RunAggregationQueryResponse|RunAggregationQueryResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/datastore.run_aggregation_query.js</caption>
    * region_tag:datastore_v1_generated_Datastore_RunAggregationQuery_async
@@ -724,9 +721,8 @@ export class DatastoreClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.datastore.v1.BeginTransactionResponse | BeginTransactionResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.datastore.v1.BeginTransactionResponse|BeginTransactionResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/datastore.begin_transaction.js</caption>
    * region_tag:datastore_v1_generated_Datastore_BeginTransaction_async
@@ -836,12 +832,12 @@ export class DatastoreClient {
    * @param {Buffer} request.transaction
    *   The identifier of the transaction associated with the commit. A
    *   transaction identifier is returned by a call to
-   *   {@link google.datastore.v1.Datastore.BeginTransaction|Datastore.BeginTransaction}.
+   *   {@link protos.google.datastore.v1.Datastore.BeginTransaction|Datastore.BeginTransaction}.
    * @param {google.datastore.v1.TransactionOptions} request.singleUseTransaction
    *   Options for beginning a new transaction for this request.
    *   The transaction is committed when the request completes. If specified,
-   *   {@link google.datastore.v1.TransactionOptions|TransactionOptions.mode} must be
-   *   {@link google.datastore.v1.TransactionOptions.ReadWrite|TransactionOptions.ReadWrite}.
+   *   {@link protos.google.datastore.v1.TransactionOptions|TransactionOptions.mode} must be
+   *   {@link protos.google.datastore.v1.TransactionOptions.ReadWrite|TransactionOptions.ReadWrite}.
    * @param {number[]} request.mutations
    *   The mutations to perform.
    *
@@ -859,9 +855,8 @@ export class DatastoreClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.datastore.v1.CommitResponse | CommitResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.datastore.v1.CommitResponse|CommitResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/datastore.commit.js</caption>
    * region_tag:datastore_v1_generated_Datastore_Commit_async
@@ -965,13 +960,12 @@ export class DatastoreClient {
    *   database.
    * @param {Buffer} request.transaction
    *   Required. The transaction identifier, returned by a call to
-   *   {@link google.datastore.v1.Datastore.BeginTransaction|Datastore.BeginTransaction}.
+   *   {@link protos.google.datastore.v1.Datastore.BeginTransaction|Datastore.BeginTransaction}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.datastore.v1.RollbackResponse | RollbackResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.datastore.v1.RollbackResponse|RollbackResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/datastore.rollback.js</caption>
    * region_tag:datastore_v1_generated_Datastore_Rollback_async
@@ -1080,9 +1074,8 @@ export class DatastoreClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.datastore.v1.AllocateIdsResponse | AllocateIdsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.datastore.v1.AllocateIdsResponse|AllocateIdsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/datastore.allocate_ids.js</caption>
    * region_tag:datastore_v1_generated_Datastore_AllocateIds_async
@@ -1191,9 +1184,8 @@ export class DatastoreClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.datastore.v1.ReserveIdsResponse | ReserveIdsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.datastore.v1.ReserveIdsResponse|ReserveIdsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/datastore.reserve_ids.js</caption>
    * region_tag:datastore_v1_generated_Datastore_ReserveIds_async

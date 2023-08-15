@@ -35,10 +35,11 @@ function main(projectId, inputUrl) {
   /**
    *  Client-assigned labels.
    */
-  // const labels = 1234
+  // const labels = [1,2,3,4]
   /**
-   *  Required. The full resource URL of the external storage location. Currently, only
-   *  Google Cloud Storage is supported. So input_url should be of the form:
+   *  Required. The full resource URL of the external storage location.
+   *  Currently, only Google Cloud Storage is supported. So input_url should be
+   *  of the form:
    *  `gs://BUCKET_NAME[/NAMESPACE_PATH]/OVERALL_EXPORT_METADATA_FILE`, where
    *  `BUCKET_NAME` is the name of the Cloud Storage bucket, `NAMESPACE_PATH` is
    *  an optional Cloud Storage namespace path (this is not a Cloud Datastore

@@ -42,7 +42,7 @@ function main(projectId, keys) {
    *  Required. A list of keys with incomplete key paths for which to allocate
    *  IDs. No key may be reserved/read-only.
    */
-  // const keys = 1234
+  // const keys = [1,2,3,4]
 
   // Imports the Datastore library
   const {DatastoreClient} = require('@google-cloud/datastore').v1;
