@@ -483,6 +483,7 @@ export class AnalyticsAdminServiceClient {
       'getGoogleSignalsSettings',
       'updateGoogleSignalsSettings',
       'createConversionEvent',
+      'updateConversionEvent',
       'getConversionEvent',
       'deleteConversionEvent',
       'listConversionEvents',
@@ -3731,6 +3732,108 @@ export class AnalyticsAdminServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.createConversionEvent(request, options, callback);
+  }
+  /**
+   * Updates a conversion event with the specified attributes.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.analytics.admin.v1alpha.ConversionEvent} request.conversionEvent
+   *   Required. The conversion event to update.
+   *   The `name` field is used to identify the settings to be updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to be updated. Field names must be in snake
+   *   case (e.g., "field_to_update"). Omitted fields will not be updated. To
+   *   replace the entire entity, use one path with the string "*" to match all
+   *   fields.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.ConversionEvent|ConversionEvent}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_conversion_event.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateConversionEvent_async
+   */
+  updateConversionEvent(
+    request?: protos.google.analytics.admin.v1alpha.IUpdateConversionEventRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IConversionEvent,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateConversionEventRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateConversionEvent(
+    request: protos.google.analytics.admin.v1alpha.IUpdateConversionEventRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IConversionEvent,
+      | protos.google.analytics.admin.v1alpha.IUpdateConversionEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateConversionEvent(
+    request: protos.google.analytics.admin.v1alpha.IUpdateConversionEventRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IConversionEvent,
+      | protos.google.analytics.admin.v1alpha.IUpdateConversionEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateConversionEvent(
+    request?: protos.google.analytics.admin.v1alpha.IUpdateConversionEventRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IConversionEvent,
+          | protos.google.analytics.admin.v1alpha.IUpdateConversionEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IConversionEvent,
+      | protos.google.analytics.admin.v1alpha.IUpdateConversionEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IConversionEvent,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateConversionEventRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'conversion_event.name': request.conversionEvent!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateConversionEvent(request, options, callback);
   }
   /**
    * Retrieve a single conversion event.
