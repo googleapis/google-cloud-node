@@ -50,7 +50,7 @@
     "test": "c8 mocha build/test"
   },
   "dependencies": {
-    "@google-cloud/common": "^4.0.0",
+    "@google-cloud/common": "^5.0.0",
     "@types/pumpify": "^1.4.1",
     "google-gax": "^4.0.3",
     "pumpify": "^2.0.0",
