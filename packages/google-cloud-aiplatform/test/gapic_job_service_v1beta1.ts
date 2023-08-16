@@ -2418,8 +2418,9 @@ describe('v1beta1.JobServiceClient', () => {
       );
       client.innerApiCalls.createModelDeploymentMonitoringJob =
         stubSimpleCall(expectedResponse);
-      const [response] =
-        await client.createModelDeploymentMonitoringJob(request);
+      const [response] = await client.createModelDeploymentMonitoringJob(
+        request
+      );
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.createModelDeploymentMonitoringJob as SinonStub
@@ -2693,8 +2694,9 @@ describe('v1beta1.JobServiceClient', () => {
       );
       client.innerApiCalls.pauseModelDeploymentMonitoringJob =
         stubSimpleCall(expectedResponse);
-      const [response] =
-        await client.pauseModelDeploymentMonitoringJob(request);
+      const [response] = await client.pauseModelDeploymentMonitoringJob(
+        request
+      );
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.pauseModelDeploymentMonitoringJob as SinonStub
@@ -2831,8 +2833,9 @@ describe('v1beta1.JobServiceClient', () => {
       );
       client.innerApiCalls.resumeModelDeploymentMonitoringJob =
         stubSimpleCall(expectedResponse);
-      const [response] =
-        await client.resumeModelDeploymentMonitoringJob(request);
+      const [response] = await client.resumeModelDeploymentMonitoringJob(
+        request
+      );
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.resumeModelDeploymentMonitoringJob as SinonStub
@@ -3947,8 +3950,9 @@ describe('v1beta1.JobServiceClient', () => {
       );
       client.innerApiCalls.updateModelDeploymentMonitoringJob =
         stubLongRunningCall(expectedResponse);
-      const [operation] =
-        await client.updateModelDeploymentMonitoringJob(request);
+      const [operation] = await client.updateModelDeploymentMonitoringJob(
+        request
+      );
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
@@ -4068,8 +4072,9 @@ describe('v1beta1.JobServiceClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.updateModelDeploymentMonitoringJob =
         stubLongRunningCall(undefined, undefined, expectedError);
-      const [operation] =
-        await client.updateModelDeploymentMonitoringJob(request);
+      const [operation] = await client.updateModelDeploymentMonitoringJob(
+        request
+      );
       await assert.rejects(operation.promise(), expectedError);
       const actualRequest = (
         client.innerApiCalls.updateModelDeploymentMonitoringJob as SinonStub
@@ -4145,8 +4150,9 @@ describe('v1beta1.JobServiceClient', () => {
       );
       client.innerApiCalls.deleteModelDeploymentMonitoringJob =
         stubLongRunningCall(expectedResponse);
-      const [operation] =
-        await client.deleteModelDeploymentMonitoringJob(request);
+      const [operation] = await client.deleteModelDeploymentMonitoringJob(
+        request
+      );
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
@@ -4263,8 +4269,9 @@ describe('v1beta1.JobServiceClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteModelDeploymentMonitoringJob =
         stubLongRunningCall(undefined, undefined, expectedError);
-      const [operation] =
-        await client.deleteModelDeploymentMonitoringJob(request);
+      const [operation] = await client.deleteModelDeploymentMonitoringJob(
+        request
+      );
       await assert.rejects(operation.promise(), expectedError);
       const actualRequest = (
         client.innerApiCalls.deleteModelDeploymentMonitoringJob as SinonStub
@@ -6771,8 +6778,9 @@ describe('v1beta1.JobServiceClient', () => {
       ];
       client.innerApiCalls.listModelDeploymentMonitoringJobs =
         stubSimpleCall(expectedResponse);
-      const [response] =
-        await client.listModelDeploymentMonitoringJobs(request);
+      const [response] = await client.listModelDeploymentMonitoringJobs(
+        request
+      );
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.listModelDeploymentMonitoringJobs as SinonStub
