@@ -2068,9 +2068,8 @@ describe('v1.TensorboardServiceClient', () => {
       );
       client.innerApiCalls.batchReadTensorboardTimeSeriesData =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.batchReadTensorboardTimeSeriesData(
-        request
-      );
+      const [response] =
+        await client.batchReadTensorboardTimeSeriesData(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.batchReadTensorboardTimeSeriesData as SinonStub

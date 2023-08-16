@@ -2547,9 +2547,8 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
       );
       client.innerApiCalls.scheduleDeleteCertificateAuthority =
         stubLongRunningCall(expectedResponse);
-      const [operation] = await client.scheduleDeleteCertificateAuthority(
-        request
-      );
+      const [operation] =
+        await client.scheduleDeleteCertificateAuthority(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
@@ -2675,9 +2674,8 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.scheduleDeleteCertificateAuthority =
         stubLongRunningCall(undefined, undefined, expectedError);
-      const [operation] = await client.scheduleDeleteCertificateAuthority(
-        request
-      );
+      const [operation] =
+        await client.scheduleDeleteCertificateAuthority(request);
       await assert.rejects(operation.promise(), expectedError);
       const actualRequest = (
         client.innerApiCalls.scheduleDeleteCertificateAuthority as SinonStub

@@ -8221,9 +8221,8 @@ describe('v1.VmwareEngineClient', () => {
       ];
       client.innerApiCalls.listPrivateConnectionPeeringRoutes =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.listPrivateConnectionPeeringRoutes(
-        request
-      );
+      const [response] =
+        await client.listPrivateConnectionPeeringRoutes(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.listPrivateConnectionPeeringRoutes as SinonStub

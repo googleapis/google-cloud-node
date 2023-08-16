@@ -77,9 +77,8 @@ function main(channelConnection, id, providerId, eventType, date, textData) {
     };
 
     // Run request
-    const response = await publishingClient.publishChannelConnectionEvents(
-      request
-    );
+    const response =
+      await publishingClient.publishChannelConnectionEvents(request);
     console.log(response);
   }
 
