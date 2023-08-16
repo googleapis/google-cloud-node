@@ -1109,9 +1109,8 @@ describe('v1.DataMigrationServiceClient', () => {
       );
       client.innerApiCalls.describeConversionWorkspaceRevisions =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.describeConversionWorkspaceRevisions(
-        request
-      );
+      const [response] =
+        await client.describeConversionWorkspaceRevisions(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.describeConversionWorkspaceRevisions as SinonStub

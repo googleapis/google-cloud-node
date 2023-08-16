@@ -548,9 +548,8 @@ describe('v1.AttachedClustersClient', () => {
       );
       client.innerApiCalls.generateAttachedClusterInstallManifest =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.generateAttachedClusterInstallManifest(
-        request
-      );
+      const [response] =
+        await client.generateAttachedClusterInstallManifest(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.generateAttachedClusterInstallManifest as SinonStub
