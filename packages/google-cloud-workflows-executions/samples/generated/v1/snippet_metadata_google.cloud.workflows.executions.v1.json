@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 76,
+                    "end": 92,
                     "type": "FULL"
                 }
             ],
@@ -46,6 +46,14 @@
                     {
                         "name": "view",
                         "type": ".google.cloud.workflows.executions.v1.ExecutionView"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
                     }
                 ],
                 "resultType": ".google.cloud.workflows.executions.v1.ListExecutionsResponse",
