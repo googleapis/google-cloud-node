@@ -1905,38 +1905,179 @@
                         return OperationMetadata;
                     })();
     
-                    /**
-                     * VolumePerformanceTier enum.
-                     * @name google.cloud.baremetalsolution.v2.VolumePerformanceTier
-                     * @enum {number}
-                     * @property {number} VOLUME_PERFORMANCE_TIER_UNSPECIFIED=0 VOLUME_PERFORMANCE_TIER_UNSPECIFIED value
-                     * @property {number} VOLUME_PERFORMANCE_TIER_SHARED=1 VOLUME_PERFORMANCE_TIER_SHARED value
-                     * @property {number} VOLUME_PERFORMANCE_TIER_ASSIGNED=2 VOLUME_PERFORMANCE_TIER_ASSIGNED value
-                     * @property {number} VOLUME_PERFORMANCE_TIER_HT=3 VOLUME_PERFORMANCE_TIER_HT value
-                     */
-                    v2.VolumePerformanceTier = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "VOLUME_PERFORMANCE_TIER_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "VOLUME_PERFORMANCE_TIER_SHARED"] = 1;
-                        values[valuesById[2] = "VOLUME_PERFORMANCE_TIER_ASSIGNED"] = 2;
-                        values[valuesById[3] = "VOLUME_PERFORMANCE_TIER_HT"] = 3;
-                        return values;
-                    })();
+                    v2.ResetInstanceResponse = (function() {
     
-                    /**
-                     * WorkloadProfile enum.
-                     * @name google.cloud.baremetalsolution.v2.WorkloadProfile
-                     * @enum {number}
-                     * @property {number} WORKLOAD_PROFILE_UNSPECIFIED=0 WORKLOAD_PROFILE_UNSPECIFIED value
-                     * @property {number} WORKLOAD_PROFILE_GENERIC=1 WORKLOAD_PROFILE_GENERIC value
-                     * @property {number} WORKLOAD_PROFILE_HANA=2 WORKLOAD_PROFILE_HANA value
-                     */
-                    v2.WorkloadProfile = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "WORKLOAD_PROFILE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "WORKLOAD_PROFILE_GENERIC"] = 1;
-                        values[valuesById[2] = "WORKLOAD_PROFILE_HANA"] = 2;
-                        return values;
+                        /**
+                         * Properties of a ResetInstanceResponse.
+                         * @memberof google.cloud.baremetalsolution.v2
+                         * @interface IResetInstanceResponse
+                         */
+    
+                        /**
+                         * Constructs a new ResetInstanceResponse.
+                         * @memberof google.cloud.baremetalsolution.v2
+                         * @classdesc Represents a ResetInstanceResponse.
+                         * @implements IResetInstanceResponse
+                         * @constructor
+                         * @param {google.cloud.baremetalsolution.v2.IResetInstanceResponse=} [properties] Properties to set
+                         */
+                        function ResetInstanceResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new ResetInstanceResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.baremetalsolution.v2.ResetInstanceResponse
+                         * @static
+                         * @param {google.cloud.baremetalsolution.v2.IResetInstanceResponse=} [properties] Properties to set
+                         * @returns {google.cloud.baremetalsolution.v2.ResetInstanceResponse} ResetInstanceResponse instance
+                         */
+                        ResetInstanceResponse.create = function create(properties) {
+                            return new ResetInstanceResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ResetInstanceResponse message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ResetInstanceResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.baremetalsolution.v2.ResetInstanceResponse
+                         * @static
+                         * @param {google.cloud.baremetalsolution.v2.IResetInstanceResponse} message ResetInstanceResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResetInstanceResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ResetInstanceResponse message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ResetInstanceResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.baremetalsolution.v2.ResetInstanceResponse
+                         * @static
+                         * @param {google.cloud.baremetalsolution.v2.IResetInstanceResponse} message ResetInstanceResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResetInstanceResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ResetInstanceResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.baremetalsolution.v2.ResetInstanceResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.baremetalsolution.v2.ResetInstanceResponse} ResetInstanceResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResetInstanceResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.baremetalsolution.v2.ResetInstanceResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ResetInstanceResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.baremetalsolution.v2.ResetInstanceResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.baremetalsolution.v2.ResetInstanceResponse} ResetInstanceResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResetInstanceResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ResetInstanceResponse message.
+                         * @function verify
+                         * @memberof google.cloud.baremetalsolution.v2.ResetInstanceResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ResetInstanceResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ResetInstanceResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.baremetalsolution.v2.ResetInstanceResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.baremetalsolution.v2.ResetInstanceResponse} ResetInstanceResponse
+                         */
+                        ResetInstanceResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.baremetalsolution.v2.ResetInstanceResponse)
+                                return object;
+                            return new $root.google.cloud.baremetalsolution.v2.ResetInstanceResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from a ResetInstanceResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.baremetalsolution.v2.ResetInstanceResponse
+                         * @static
+                         * @param {google.cloud.baremetalsolution.v2.ResetInstanceResponse} message ResetInstanceResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ResetInstanceResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this ResetInstanceResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.baremetalsolution.v2.ResetInstanceResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ResetInstanceResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ResetInstanceResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.baremetalsolution.v2.ResetInstanceResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ResetInstanceResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.baremetalsolution.v2.ResetInstanceResponse";
+                        };
+    
+                        return ResetInstanceResponse;
                     })();
     
                     v2.Instance = (function() {
@@ -4219,181 +4360,6 @@
                         return ResetInstanceRequest;
                     })();
     
-                    v2.ResetInstanceResponse = (function() {
-    
-                        /**
-                         * Properties of a ResetInstanceResponse.
-                         * @memberof google.cloud.baremetalsolution.v2
-                         * @interface IResetInstanceResponse
-                         */
-    
-                        /**
-                         * Constructs a new ResetInstanceResponse.
-                         * @memberof google.cloud.baremetalsolution.v2
-                         * @classdesc Represents a ResetInstanceResponse.
-                         * @implements IResetInstanceResponse
-                         * @constructor
-                         * @param {google.cloud.baremetalsolution.v2.IResetInstanceResponse=} [properties] Properties to set
-                         */
-                        function ResetInstanceResponse(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * Creates a new ResetInstanceResponse instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.baremetalsolution.v2.ResetInstanceResponse
-                         * @static
-                         * @param {google.cloud.baremetalsolution.v2.IResetInstanceResponse=} [properties] Properties to set
-                         * @returns {google.cloud.baremetalsolution.v2.ResetInstanceResponse} ResetInstanceResponse instance
-                         */
-                        ResetInstanceResponse.create = function create(properties) {
-                            return new ResetInstanceResponse(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified ResetInstanceResponse message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ResetInstanceResponse.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.baremetalsolution.v2.ResetInstanceResponse
-                         * @static
-                         * @param {google.cloud.baremetalsolution.v2.IResetInstanceResponse} message ResetInstanceResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ResetInstanceResponse.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified ResetInstanceResponse message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ResetInstanceResponse.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.baremetalsolution.v2.ResetInstanceResponse
-                         * @static
-                         * @param {google.cloud.baremetalsolution.v2.IResetInstanceResponse} message ResetInstanceResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ResetInstanceResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a ResetInstanceResponse message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.baremetalsolution.v2.ResetInstanceResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.baremetalsolution.v2.ResetInstanceResponse} ResetInstanceResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ResetInstanceResponse.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.baremetalsolution.v2.ResetInstanceResponse();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a ResetInstanceResponse message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.baremetalsolution.v2.ResetInstanceResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.baremetalsolution.v2.ResetInstanceResponse} ResetInstanceResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ResetInstanceResponse.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a ResetInstanceResponse message.
-                         * @function verify
-                         * @memberof google.cloud.baremetalsolution.v2.ResetInstanceResponse
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        ResetInstanceResponse.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a ResetInstanceResponse message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.baremetalsolution.v2.ResetInstanceResponse
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.baremetalsolution.v2.ResetInstanceResponse} ResetInstanceResponse
-                         */
-                        ResetInstanceResponse.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.baremetalsolution.v2.ResetInstanceResponse)
-                                return object;
-                            return new $root.google.cloud.baremetalsolution.v2.ResetInstanceResponse();
-                        };
-    
-                        /**
-                         * Creates a plain object from a ResetInstanceResponse message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.baremetalsolution.v2.ResetInstanceResponse
-                         * @static
-                         * @param {google.cloud.baremetalsolution.v2.ResetInstanceResponse} message ResetInstanceResponse
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        ResetInstanceResponse.toObject = function toObject() {
-                            return {};
-                        };
-    
-                        /**
-                         * Converts this ResetInstanceResponse to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.baremetalsolution.v2.ResetInstanceResponse
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        ResetInstanceResponse.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for ResetInstanceResponse
-                         * @function getTypeUrl
-                         * @memberof google.cloud.baremetalsolution.v2.ResetInstanceResponse
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        ResetInstanceResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.baremetalsolution.v2.ResetInstanceResponse";
-                        };
-    
-                        return ResetInstanceResponse;
-                    })();
-    
                     v2.StartInstanceRequest = (function() {
     
                         /**
@@ -6154,6 +6120,618 @@
                         };
     
                         return DetachLunRequest;
+                    })();
+    
+                    v2.ServerNetworkTemplate = (function() {
+    
+                        /**
+                         * Properties of a ServerNetworkTemplate.
+                         * @memberof google.cloud.baremetalsolution.v2
+                         * @interface IServerNetworkTemplate
+                         * @property {string|null} [name] ServerNetworkTemplate name
+                         * @property {Array.<string>|null} [applicableInstanceTypes] ServerNetworkTemplate applicableInstanceTypes
+                         * @property {Array.<google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface>|null} [logicalInterfaces] ServerNetworkTemplate logicalInterfaces
+                         */
+    
+                        /**
+                         * Constructs a new ServerNetworkTemplate.
+                         * @memberof google.cloud.baremetalsolution.v2
+                         * @classdesc Represents a ServerNetworkTemplate.
+                         * @implements IServerNetworkTemplate
+                         * @constructor
+                         * @param {google.cloud.baremetalsolution.v2.IServerNetworkTemplate=} [properties] Properties to set
+                         */
+                        function ServerNetworkTemplate(properties) {
+                            this.applicableInstanceTypes = [];
+                            this.logicalInterfaces = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ServerNetworkTemplate name.
+                         * @member {string} name
+                         * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate
+                         * @instance
+                         */
+                        ServerNetworkTemplate.prototype.name = "";
+    
+                        /**
+                         * ServerNetworkTemplate applicableInstanceTypes.
+                         * @member {Array.<string>} applicableInstanceTypes
+                         * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate
+                         * @instance
+                         */
+                        ServerNetworkTemplate.prototype.applicableInstanceTypes = $util.emptyArray;
+    
+                        /**
+                         * ServerNetworkTemplate logicalInterfaces.
+                         * @member {Array.<google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface>} logicalInterfaces
+                         * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate
+                         * @instance
+                         */
+                        ServerNetworkTemplate.prototype.logicalInterfaces = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ServerNetworkTemplate instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate
+                         * @static
+                         * @param {google.cloud.baremetalsolution.v2.IServerNetworkTemplate=} [properties] Properties to set
+                         * @returns {google.cloud.baremetalsolution.v2.ServerNetworkTemplate} ServerNetworkTemplate instance
+                         */
+                        ServerNetworkTemplate.create = function create(properties) {
+                            return new ServerNetworkTemplate(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ServerNetworkTemplate message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ServerNetworkTemplate.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate
+                         * @static
+                         * @param {google.cloud.baremetalsolution.v2.IServerNetworkTemplate} message ServerNetworkTemplate message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ServerNetworkTemplate.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.applicableInstanceTypes != null && message.applicableInstanceTypes.length)
+                                for (var i = 0; i < message.applicableInstanceTypes.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.applicableInstanceTypes[i]);
+                            if (message.logicalInterfaces != null && message.logicalInterfaces.length)
+                                for (var i = 0; i < message.logicalInterfaces.length; ++i)
+                                    $root.google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.encode(message.logicalInterfaces[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ServerNetworkTemplate message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ServerNetworkTemplate.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate
+                         * @static
+                         * @param {google.cloud.baremetalsolution.v2.IServerNetworkTemplate} message ServerNetworkTemplate message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ServerNetworkTemplate.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ServerNetworkTemplate message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.baremetalsolution.v2.ServerNetworkTemplate} ServerNetworkTemplate
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ServerNetworkTemplate.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.baremetalsolution.v2.ServerNetworkTemplate();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.applicableInstanceTypes && message.applicableInstanceTypes.length))
+                                            message.applicableInstanceTypes = [];
+                                        message.applicableInstanceTypes.push(reader.string());
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.logicalInterfaces && message.logicalInterfaces.length))
+                                            message.logicalInterfaces = [];
+                                        message.logicalInterfaces.push($root.google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ServerNetworkTemplate message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.baremetalsolution.v2.ServerNetworkTemplate} ServerNetworkTemplate
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ServerNetworkTemplate.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ServerNetworkTemplate message.
+                         * @function verify
+                         * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ServerNetworkTemplate.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.applicableInstanceTypes != null && message.hasOwnProperty("applicableInstanceTypes")) {
+                                if (!Array.isArray(message.applicableInstanceTypes))
+                                    return "applicableInstanceTypes: array expected";
+                                for (var i = 0; i < message.applicableInstanceTypes.length; ++i)
+                                    if (!$util.isString(message.applicableInstanceTypes[i]))
+                                        return "applicableInstanceTypes: string[] expected";
+                            }
+                            if (message.logicalInterfaces != null && message.hasOwnProperty("logicalInterfaces")) {
+                                if (!Array.isArray(message.logicalInterfaces))
+                                    return "logicalInterfaces: array expected";
+                                for (var i = 0; i < message.logicalInterfaces.length; ++i) {
+                                    var error = $root.google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.verify(message.logicalInterfaces[i]);
+                                    if (error)
+                                        return "logicalInterfaces." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ServerNetworkTemplate message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.baremetalsolution.v2.ServerNetworkTemplate} ServerNetworkTemplate
+                         */
+                        ServerNetworkTemplate.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.baremetalsolution.v2.ServerNetworkTemplate)
+                                return object;
+                            var message = new $root.google.cloud.baremetalsolution.v2.ServerNetworkTemplate();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.applicableInstanceTypes) {
+                                if (!Array.isArray(object.applicableInstanceTypes))
+                                    throw TypeError(".google.cloud.baremetalsolution.v2.ServerNetworkTemplate.applicableInstanceTypes: array expected");
+                                message.applicableInstanceTypes = [];
+                                for (var i = 0; i < object.applicableInstanceTypes.length; ++i)
+                                    message.applicableInstanceTypes[i] = String(object.applicableInstanceTypes[i]);
+                            }
+                            if (object.logicalInterfaces) {
+                                if (!Array.isArray(object.logicalInterfaces))
+                                    throw TypeError(".google.cloud.baremetalsolution.v2.ServerNetworkTemplate.logicalInterfaces: array expected");
+                                message.logicalInterfaces = [];
+                                for (var i = 0; i < object.logicalInterfaces.length; ++i) {
+                                    if (typeof object.logicalInterfaces[i] !== "object")
+                                        throw TypeError(".google.cloud.baremetalsolution.v2.ServerNetworkTemplate.logicalInterfaces: object expected");
+                                    message.logicalInterfaces[i] = $root.google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.fromObject(object.logicalInterfaces[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ServerNetworkTemplate message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate
+                         * @static
+                         * @param {google.cloud.baremetalsolution.v2.ServerNetworkTemplate} message ServerNetworkTemplate
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ServerNetworkTemplate.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.applicableInstanceTypes = [];
+                                object.logicalInterfaces = [];
+                            }
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.applicableInstanceTypes && message.applicableInstanceTypes.length) {
+                                object.applicableInstanceTypes = [];
+                                for (var j = 0; j < message.applicableInstanceTypes.length; ++j)
+                                    object.applicableInstanceTypes[j] = message.applicableInstanceTypes[j];
+                            }
+                            if (message.logicalInterfaces && message.logicalInterfaces.length) {
+                                object.logicalInterfaces = [];
+                                for (var j = 0; j < message.logicalInterfaces.length; ++j)
+                                    object.logicalInterfaces[j] = $root.google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.toObject(message.logicalInterfaces[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ServerNetworkTemplate to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ServerNetworkTemplate.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ServerNetworkTemplate
+                         * @function getTypeUrl
+                         * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ServerNetworkTemplate.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.baremetalsolution.v2.ServerNetworkTemplate";
+                        };
+    
+                        ServerNetworkTemplate.LogicalInterface = (function() {
+    
+                            /**
+                             * Properties of a LogicalInterface.
+                             * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate
+                             * @interface ILogicalInterface
+                             * @property {string|null} [name] LogicalInterface name
+                             * @property {google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.InterfaceType|null} [type] LogicalInterface type
+                             * @property {boolean|null} [required] LogicalInterface required
+                             */
+    
+                            /**
+                             * Constructs a new LogicalInterface.
+                             * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate
+                             * @classdesc Represents a LogicalInterface.
+                             * @implements ILogicalInterface
+                             * @constructor
+                             * @param {google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface=} [properties] Properties to set
+                             */
+                            function LogicalInterface(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * LogicalInterface name.
+                             * @member {string} name
+                             * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface
+                             * @instance
+                             */
+                            LogicalInterface.prototype.name = "";
+    
+                            /**
+                             * LogicalInterface type.
+                             * @member {google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.InterfaceType} type
+                             * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface
+                             * @instance
+                             */
+                            LogicalInterface.prototype.type = 0;
+    
+                            /**
+                             * LogicalInterface required.
+                             * @member {boolean} required
+                             * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface
+                             * @instance
+                             */
+                            LogicalInterface.prototype.required = false;
+    
+                            /**
+                             * Creates a new LogicalInterface instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface
+                             * @static
+                             * @param {google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface=} [properties] Properties to set
+                             * @returns {google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface} LogicalInterface instance
+                             */
+                            LogicalInterface.create = function create(properties) {
+                                return new LogicalInterface(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified LogicalInterface message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface
+                             * @static
+                             * @param {google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface} message LogicalInterface message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LogicalInterface.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.type);
+                                if (message.required != null && Object.hasOwnProperty.call(message, "required"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.required);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified LogicalInterface message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface
+                             * @static
+                             * @param {google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface} message LogicalInterface message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LogicalInterface.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a LogicalInterface message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface} LogicalInterface
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LogicalInterface.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.type = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.required = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a LogicalInterface message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface} LogicalInterface
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LogicalInterface.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a LogicalInterface message.
+                             * @function verify
+                             * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            LogicalInterface.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    switch (message.type) {
+                                    default:
+                                        return "type: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.required != null && message.hasOwnProperty("required"))
+                                    if (typeof message.required !== "boolean")
+                                        return "required: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a LogicalInterface message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface} LogicalInterface
+                             */
+                            LogicalInterface.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface)
+                                    return object;
+                                var message = new $root.google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
+                                case "INTERFACE_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.type = 0;
+                                    break;
+                                case "BOND":
+                                case 1:
+                                    message.type = 1;
+                                    break;
+                                case "NIC":
+                                case 2:
+                                    message.type = 2;
+                                    break;
+                                }
+                                if (object.required != null)
+                                    message.required = Boolean(object.required);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a LogicalInterface message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface
+                             * @static
+                             * @param {google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface} message LogicalInterface
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            LogicalInterface.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.type = options.enums === String ? "INTERFACE_TYPE_UNSPECIFIED" : 0;
+                                    object.required = false;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    object.type = options.enums === String ? $root.google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.InterfaceType[message.type] === undefined ? message.type : $root.google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.InterfaceType[message.type] : message.type;
+                                if (message.required != null && message.hasOwnProperty("required"))
+                                    object.required = message.required;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this LogicalInterface to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            LogicalInterface.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for LogicalInterface
+                             * @function getTypeUrl
+                             * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            LogicalInterface.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface";
+                            };
+    
+                            /**
+                             * InterfaceType enum.
+                             * @name google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.InterfaceType
+                             * @enum {number}
+                             * @property {number} INTERFACE_TYPE_UNSPECIFIED=0 INTERFACE_TYPE_UNSPECIFIED value
+                             * @property {number} BOND=1 BOND value
+                             * @property {number} NIC=2 NIC value
+                             */
+                            LogicalInterface.InterfaceType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "INTERFACE_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "BOND"] = 1;
+                                values[valuesById[2] = "NIC"] = 2;
+                                return values;
+                            })();
+    
+                            return LogicalInterface;
+                        })();
+    
+                        return ServerNetworkTemplate;
+                    })();
+    
+                    /**
+                     * VolumePerformanceTier enum.
+                     * @name google.cloud.baremetalsolution.v2.VolumePerformanceTier
+                     * @enum {number}
+                     * @property {number} VOLUME_PERFORMANCE_TIER_UNSPECIFIED=0 VOLUME_PERFORMANCE_TIER_UNSPECIFIED value
+                     * @property {number} VOLUME_PERFORMANCE_TIER_SHARED=1 VOLUME_PERFORMANCE_TIER_SHARED value
+                     * @property {number} VOLUME_PERFORMANCE_TIER_ASSIGNED=2 VOLUME_PERFORMANCE_TIER_ASSIGNED value
+                     * @property {number} VOLUME_PERFORMANCE_TIER_HT=3 VOLUME_PERFORMANCE_TIER_HT value
+                     */
+                    v2.VolumePerformanceTier = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "VOLUME_PERFORMANCE_TIER_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "VOLUME_PERFORMANCE_TIER_SHARED"] = 1;
+                        values[valuesById[2] = "VOLUME_PERFORMANCE_TIER_ASSIGNED"] = 2;
+                        values[valuesById[3] = "VOLUME_PERFORMANCE_TIER_HT"] = 3;
+                        return values;
+                    })();
+    
+                    /**
+                     * WorkloadProfile enum.
+                     * @name google.cloud.baremetalsolution.v2.WorkloadProfile
+                     * @enum {number}
+                     * @property {number} WORKLOAD_PROFILE_UNSPECIFIED=0 WORKLOAD_PROFILE_UNSPECIFIED value
+                     * @property {number} WORKLOAD_PROFILE_GENERIC=1 WORKLOAD_PROFILE_GENERIC value
+                     * @property {number} WORKLOAD_PROFILE_HANA=2 WORKLOAD_PROFILE_HANA value
+                     */
+                    v2.WorkloadProfile = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "WORKLOAD_PROFILE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "WORKLOAD_PROFILE_GENERIC"] = 1;
+                        values[valuesById[2] = "WORKLOAD_PROFILE_HANA"] = 2;
+                        return values;
                     })();
     
                     v2.Lun = (function() {
@@ -25015,584 +25593,6 @@
                         };
     
                         return UpdateProvisioningConfigRequest;
-                    })();
-    
-                    v2.ServerNetworkTemplate = (function() {
-    
-                        /**
-                         * Properties of a ServerNetworkTemplate.
-                         * @memberof google.cloud.baremetalsolution.v2
-                         * @interface IServerNetworkTemplate
-                         * @property {string|null} [name] ServerNetworkTemplate name
-                         * @property {Array.<string>|null} [applicableInstanceTypes] ServerNetworkTemplate applicableInstanceTypes
-                         * @property {Array.<google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface>|null} [logicalInterfaces] ServerNetworkTemplate logicalInterfaces
-                         */
-    
-                        /**
-                         * Constructs a new ServerNetworkTemplate.
-                         * @memberof google.cloud.baremetalsolution.v2
-                         * @classdesc Represents a ServerNetworkTemplate.
-                         * @implements IServerNetworkTemplate
-                         * @constructor
-                         * @param {google.cloud.baremetalsolution.v2.IServerNetworkTemplate=} [properties] Properties to set
-                         */
-                        function ServerNetworkTemplate(properties) {
-                            this.applicableInstanceTypes = [];
-                            this.logicalInterfaces = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * ServerNetworkTemplate name.
-                         * @member {string} name
-                         * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate
-                         * @instance
-                         */
-                        ServerNetworkTemplate.prototype.name = "";
-    
-                        /**
-                         * ServerNetworkTemplate applicableInstanceTypes.
-                         * @member {Array.<string>} applicableInstanceTypes
-                         * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate
-                         * @instance
-                         */
-                        ServerNetworkTemplate.prototype.applicableInstanceTypes = $util.emptyArray;
-    
-                        /**
-                         * ServerNetworkTemplate logicalInterfaces.
-                         * @member {Array.<google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface>} logicalInterfaces
-                         * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate
-                         * @instance
-                         */
-                        ServerNetworkTemplate.prototype.logicalInterfaces = $util.emptyArray;
-    
-                        /**
-                         * Creates a new ServerNetworkTemplate instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate
-                         * @static
-                         * @param {google.cloud.baremetalsolution.v2.IServerNetworkTemplate=} [properties] Properties to set
-                         * @returns {google.cloud.baremetalsolution.v2.ServerNetworkTemplate} ServerNetworkTemplate instance
-                         */
-                        ServerNetworkTemplate.create = function create(properties) {
-                            return new ServerNetworkTemplate(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified ServerNetworkTemplate message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ServerNetworkTemplate.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate
-                         * @static
-                         * @param {google.cloud.baremetalsolution.v2.IServerNetworkTemplate} message ServerNetworkTemplate message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ServerNetworkTemplate.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                            if (message.applicableInstanceTypes != null && message.applicableInstanceTypes.length)
-                                for (var i = 0; i < message.applicableInstanceTypes.length; ++i)
-                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.applicableInstanceTypes[i]);
-                            if (message.logicalInterfaces != null && message.logicalInterfaces.length)
-                                for (var i = 0; i < message.logicalInterfaces.length; ++i)
-                                    $root.google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.encode(message.logicalInterfaces[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified ServerNetworkTemplate message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ServerNetworkTemplate.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate
-                         * @static
-                         * @param {google.cloud.baremetalsolution.v2.IServerNetworkTemplate} message ServerNetworkTemplate message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ServerNetworkTemplate.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a ServerNetworkTemplate message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.baremetalsolution.v2.ServerNetworkTemplate} ServerNetworkTemplate
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ServerNetworkTemplate.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.baremetalsolution.v2.ServerNetworkTemplate();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.name = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        if (!(message.applicableInstanceTypes && message.applicableInstanceTypes.length))
-                                            message.applicableInstanceTypes = [];
-                                        message.applicableInstanceTypes.push(reader.string());
-                                        break;
-                                    }
-                                case 3: {
-                                        if (!(message.logicalInterfaces && message.logicalInterfaces.length))
-                                            message.logicalInterfaces = [];
-                                        message.logicalInterfaces.push($root.google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.decode(reader, reader.uint32()));
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a ServerNetworkTemplate message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.baremetalsolution.v2.ServerNetworkTemplate} ServerNetworkTemplate
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ServerNetworkTemplate.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a ServerNetworkTemplate message.
-                         * @function verify
-                         * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        ServerNetworkTemplate.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                if (!$util.isString(message.name))
-                                    return "name: string expected";
-                            if (message.applicableInstanceTypes != null && message.hasOwnProperty("applicableInstanceTypes")) {
-                                if (!Array.isArray(message.applicableInstanceTypes))
-                                    return "applicableInstanceTypes: array expected";
-                                for (var i = 0; i < message.applicableInstanceTypes.length; ++i)
-                                    if (!$util.isString(message.applicableInstanceTypes[i]))
-                                        return "applicableInstanceTypes: string[] expected";
-                            }
-                            if (message.logicalInterfaces != null && message.hasOwnProperty("logicalInterfaces")) {
-                                if (!Array.isArray(message.logicalInterfaces))
-                                    return "logicalInterfaces: array expected";
-                                for (var i = 0; i < message.logicalInterfaces.length; ++i) {
-                                    var error = $root.google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.verify(message.logicalInterfaces[i]);
-                                    if (error)
-                                        return "logicalInterfaces." + error;
-                                }
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a ServerNetworkTemplate message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.baremetalsolution.v2.ServerNetworkTemplate} ServerNetworkTemplate
-                         */
-                        ServerNetworkTemplate.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.baremetalsolution.v2.ServerNetworkTemplate)
-                                return object;
-                            var message = new $root.google.cloud.baremetalsolution.v2.ServerNetworkTemplate();
-                            if (object.name != null)
-                                message.name = String(object.name);
-                            if (object.applicableInstanceTypes) {
-                                if (!Array.isArray(object.applicableInstanceTypes))
-                                    throw TypeError(".google.cloud.baremetalsolution.v2.ServerNetworkTemplate.applicableInstanceTypes: array expected");
-                                message.applicableInstanceTypes = [];
-                                for (var i = 0; i < object.applicableInstanceTypes.length; ++i)
-                                    message.applicableInstanceTypes[i] = String(object.applicableInstanceTypes[i]);
-                            }
-                            if (object.logicalInterfaces) {
-                                if (!Array.isArray(object.logicalInterfaces))
-                                    throw TypeError(".google.cloud.baremetalsolution.v2.ServerNetworkTemplate.logicalInterfaces: array expected");
-                                message.logicalInterfaces = [];
-                                for (var i = 0; i < object.logicalInterfaces.length; ++i) {
-                                    if (typeof object.logicalInterfaces[i] !== "object")
-                                        throw TypeError(".google.cloud.baremetalsolution.v2.ServerNetworkTemplate.logicalInterfaces: object expected");
-                                    message.logicalInterfaces[i] = $root.google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.fromObject(object.logicalInterfaces[i]);
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a ServerNetworkTemplate message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate
-                         * @static
-                         * @param {google.cloud.baremetalsolution.v2.ServerNetworkTemplate} message ServerNetworkTemplate
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        ServerNetworkTemplate.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults) {
-                                object.applicableInstanceTypes = [];
-                                object.logicalInterfaces = [];
-                            }
-                            if (options.defaults)
-                                object.name = "";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = message.name;
-                            if (message.applicableInstanceTypes && message.applicableInstanceTypes.length) {
-                                object.applicableInstanceTypes = [];
-                                for (var j = 0; j < message.applicableInstanceTypes.length; ++j)
-                                    object.applicableInstanceTypes[j] = message.applicableInstanceTypes[j];
-                            }
-                            if (message.logicalInterfaces && message.logicalInterfaces.length) {
-                                object.logicalInterfaces = [];
-                                for (var j = 0; j < message.logicalInterfaces.length; ++j)
-                                    object.logicalInterfaces[j] = $root.google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.toObject(message.logicalInterfaces[j], options);
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this ServerNetworkTemplate to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        ServerNetworkTemplate.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for ServerNetworkTemplate
-                         * @function getTypeUrl
-                         * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        ServerNetworkTemplate.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.baremetalsolution.v2.ServerNetworkTemplate";
-                        };
-    
-                        ServerNetworkTemplate.LogicalInterface = (function() {
-    
-                            /**
-                             * Properties of a LogicalInterface.
-                             * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate
-                             * @interface ILogicalInterface
-                             * @property {string|null} [name] LogicalInterface name
-                             * @property {google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.InterfaceType|null} [type] LogicalInterface type
-                             * @property {boolean|null} [required] LogicalInterface required
-                             */
-    
-                            /**
-                             * Constructs a new LogicalInterface.
-                             * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate
-                             * @classdesc Represents a LogicalInterface.
-                             * @implements ILogicalInterface
-                             * @constructor
-                             * @param {google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface=} [properties] Properties to set
-                             */
-                            function LogicalInterface(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * LogicalInterface name.
-                             * @member {string} name
-                             * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface
-                             * @instance
-                             */
-                            LogicalInterface.prototype.name = "";
-    
-                            /**
-                             * LogicalInterface type.
-                             * @member {google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.InterfaceType} type
-                             * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface
-                             * @instance
-                             */
-                            LogicalInterface.prototype.type = 0;
-    
-                            /**
-                             * LogicalInterface required.
-                             * @member {boolean} required
-                             * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface
-                             * @instance
-                             */
-                            LogicalInterface.prototype.required = false;
-    
-                            /**
-                             * Creates a new LogicalInterface instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface
-                             * @static
-                             * @param {google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface=} [properties] Properties to set
-                             * @returns {google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface} LogicalInterface instance
-                             */
-                            LogicalInterface.create = function create(properties) {
-                                return new LogicalInterface(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified LogicalInterface message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface
-                             * @static
-                             * @param {google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface} message LogicalInterface message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            LogicalInterface.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                                if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.type);
-                                if (message.required != null && Object.hasOwnProperty.call(message, "required"))
-                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.required);
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified LogicalInterface message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface
-                             * @static
-                             * @param {google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface} message LogicalInterface message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            LogicalInterface.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a LogicalInterface message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface} LogicalInterface
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            LogicalInterface.decode = function decode(reader, length) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.name = reader.string();
-                                            break;
-                                        }
-                                    case 2: {
-                                            message.type = reader.int32();
-                                            break;
-                                        }
-                                    case 3: {
-                                            message.required = reader.bool();
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a LogicalInterface message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface} LogicalInterface
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            LogicalInterface.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a LogicalInterface message.
-                             * @function verify
-                             * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            LogicalInterface.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                if (message.name != null && message.hasOwnProperty("name"))
-                                    if (!$util.isString(message.name))
-                                        return "name: string expected";
-                                if (message.type != null && message.hasOwnProperty("type"))
-                                    switch (message.type) {
-                                    default:
-                                        return "type: enum value expected";
-                                    case 0:
-                                    case 1:
-                                    case 2:
-                                        break;
-                                    }
-                                if (message.required != null && message.hasOwnProperty("required"))
-                                    if (typeof message.required !== "boolean")
-                                        return "required: boolean expected";
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a LogicalInterface message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface} LogicalInterface
-                             */
-                            LogicalInterface.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface)
-                                    return object;
-                                var message = new $root.google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface();
-                                if (object.name != null)
-                                    message.name = String(object.name);
-                                switch (object.type) {
-                                default:
-                                    if (typeof object.type === "number") {
-                                        message.type = object.type;
-                                        break;
-                                    }
-                                    break;
-                                case "INTERFACE_TYPE_UNSPECIFIED":
-                                case 0:
-                                    message.type = 0;
-                                    break;
-                                case "BOND":
-                                case 1:
-                                    message.type = 1;
-                                    break;
-                                case "NIC":
-                                case 2:
-                                    message.type = 2;
-                                    break;
-                                }
-                                if (object.required != null)
-                                    message.required = Boolean(object.required);
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a LogicalInterface message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface
-                             * @static
-                             * @param {google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface} message LogicalInterface
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            LogicalInterface.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (options.defaults) {
-                                    object.name = "";
-                                    object.type = options.enums === String ? "INTERFACE_TYPE_UNSPECIFIED" : 0;
-                                    object.required = false;
-                                }
-                                if (message.name != null && message.hasOwnProperty("name"))
-                                    object.name = message.name;
-                                if (message.type != null && message.hasOwnProperty("type"))
-                                    object.type = options.enums === String ? $root.google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.InterfaceType[message.type] === undefined ? message.type : $root.google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.InterfaceType[message.type] : message.type;
-                                if (message.required != null && message.hasOwnProperty("required"))
-                                    object.required = message.required;
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this LogicalInterface to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            LogicalInterface.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for LogicalInterface
-                             * @function getTypeUrl
-                             * @memberof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            LogicalInterface.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface";
-                            };
-    
-                            /**
-                             * InterfaceType enum.
-                             * @name google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.InterfaceType
-                             * @enum {number}
-                             * @property {number} INTERFACE_TYPE_UNSPECIFIED=0 INTERFACE_TYPE_UNSPECIFIED value
-                             * @property {number} BOND=1 BOND value
-                             * @property {number} NIC=2 NIC value
-                             */
-                            LogicalInterface.InterfaceType = (function() {
-                                var valuesById = {}, values = Object.create(valuesById);
-                                values[valuesById[0] = "INTERFACE_TYPE_UNSPECIFIED"] = 0;
-                                values[valuesById[1] = "BOND"] = 1;
-                                values[valuesById[2] = "NIC"] = 2;
-                                return values;
-                            })();
-    
-                            return LogicalInterface;
-                        })();
-    
-                        return ServerNetworkTemplate;
                     })();
     
                     v2.SSHKey = (function() {
