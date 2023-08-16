@@ -4983,9 +4983,8 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       client.innerApiCalls.createDisplayVideo360AdvertiserLink =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.createDisplayVideo360AdvertiserLink(
-        request
-      );
+      const [response] =
+        await client.createDisplayVideo360AdvertiserLink(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.createDisplayVideo360AdvertiserLink as SinonStub
@@ -5126,9 +5125,8 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       client.innerApiCalls.deleteDisplayVideo360AdvertiserLink =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteDisplayVideo360AdvertiserLink(
-        request
-      );
+      const [response] =
+        await client.deleteDisplayVideo360AdvertiserLink(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.deleteDisplayVideo360AdvertiserLink as SinonStub
@@ -5270,9 +5268,8 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       client.innerApiCalls.updateDisplayVideo360AdvertiserLink =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.updateDisplayVideo360AdvertiserLink(
-        request
-      );
+      const [response] =
+        await client.updateDisplayVideo360AdvertiserLink(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.updateDisplayVideo360AdvertiserLink as SinonStub
@@ -5416,9 +5413,8 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       client.innerApiCalls.getDisplayVideo360AdvertiserLinkProposal =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.getDisplayVideo360AdvertiserLinkProposal(
-        request
-      );
+      const [response] =
+        await client.getDisplayVideo360AdvertiserLinkProposal(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls
@@ -11806,9 +11802,8 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       client.innerApiCalls.setAutomatedGa4ConfigurationOptOut =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.setAutomatedGa4ConfigurationOptOut(
-        request
-      );
+      const [response] =
+        await client.setAutomatedGa4ConfigurationOptOut(request);
       assert.deepStrictEqual(response, expectedResponse);
     });
 
@@ -11902,9 +11897,8 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       client.innerApiCalls.fetchAutomatedGa4ConfigurationOptOut =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.fetchAutomatedGa4ConfigurationOptOut(
-        request
-      );
+      const [response] =
+        await client.fetchAutomatedGa4ConfigurationOptOut(request);
       assert.deepStrictEqual(response, expectedResponse);
     });
 
@@ -12278,9 +12272,8 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       );
       client.innerApiCalls.updateEnhancedMeasurementSettings =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.updateEnhancedMeasurementSettings(
-        request
-      );
+      const [response] =
+        await client.updateEnhancedMeasurementSettings(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.updateEnhancedMeasurementSettings as SinonStub
@@ -16919,9 +16912,8 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       ];
       client.innerApiCalls.listDisplayVideo360AdvertiserLinks =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.listDisplayVideo360AdvertiserLinks(
-        request
-      );
+      const [response] =
+        await client.listDisplayVideo360AdvertiserLinks(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.listDisplayVideo360AdvertiserLinks as SinonStub
