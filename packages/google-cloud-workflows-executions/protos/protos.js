@@ -251,12 +251,16 @@
                              * @property {string|null} [name] Execution name
                              * @property {google.protobuf.ITimestamp|null} [startTime] Execution startTime
                              * @property {google.protobuf.ITimestamp|null} [endTime] Execution endTime
+                             * @property {google.protobuf.IDuration|null} [duration] Execution duration
                              * @property {google.cloud.workflows.executions.v1.Execution.State|null} [state] Execution state
                              * @property {string|null} [argument] Execution argument
                              * @property {string|null} [result] Execution result
                              * @property {google.cloud.workflows.executions.v1.Execution.IError|null} [error] Execution error
                              * @property {string|null} [workflowRevisionId] Execution workflowRevisionId
                              * @property {google.cloud.workflows.executions.v1.Execution.CallLogLevel|null} [callLogLevel] Execution callLogLevel
+                             * @property {google.cloud.workflows.executions.v1.Execution.IStatus|null} [status] Execution status
+                             * @property {Object.<string,string>|null} [labels] Execution labels
+                             * @property {google.cloud.workflows.executions.v1.Execution.IStateError|null} [stateError] Execution stateError
                              */
     
                             /**
@@ -268,6 +272,7 @@
                              * @param {google.cloud.workflows.executions.v1.IExecution=} [properties] Properties to set
                              */
                             function Execution(properties) {
+                                this.labels = {};
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -297,6 +302,14 @@
                              * @instance
                              */
                             Execution.prototype.endTime = null;
+    
+                            /**
+                             * Execution duration.
+                             * @member {google.protobuf.IDuration|null|undefined} duration
+                             * @memberof google.cloud.workflows.executions.v1.Execution
+                             * @instance
+                             */
+                            Execution.prototype.duration = null;
     
                             /**
                              * Execution state.
@@ -347,6 +360,30 @@
                             Execution.prototype.callLogLevel = 0;
     
                             /**
+                             * Execution status.
+                             * @member {google.cloud.workflows.executions.v1.Execution.IStatus|null|undefined} status
+                             * @memberof google.cloud.workflows.executions.v1.Execution
+                             * @instance
+                             */
+                            Execution.prototype.status = null;
+    
+                            /**
+                             * Execution labels.
+                             * @member {Object.<string,string>} labels
+                             * @memberof google.cloud.workflows.executions.v1.Execution
+                             * @instance
+                             */
+                            Execution.prototype.labels = $util.emptyObject;
+    
+                            /**
+                             * Execution stateError.
+                             * @member {google.cloud.workflows.executions.v1.Execution.IStateError|null|undefined} stateError
+                             * @memberof google.cloud.workflows.executions.v1.Execution
+                             * @instance
+                             */
+                            Execution.prototype.stateError = null;
+    
+                            /**
                              * Creates a new Execution instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.workflows.executions.v1.Execution
@@ -388,6 +425,15 @@
                                     writer.uint32(/* id 8, wireType 2 =*/66).string(message.workflowRevisionId);
                                 if (message.callLogLevel != null && Object.hasOwnProperty.call(message, "callLogLevel"))
                                     writer.uint32(/* id 9, wireType 0 =*/72).int32(message.callLogLevel);
+                                if (message.status != null && Object.hasOwnProperty.call(message, "status"))
+                                    $root.google.cloud.workflows.executions.v1.Execution.Status.encode(message.status, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                                if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                    for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                        writer.uint32(/* id 11, wireType 2 =*/90).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                                if (message.duration != null && Object.hasOwnProperty.call(message, "duration"))
+                                    $root.google.protobuf.Duration.encode(message.duration, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                                if (message.stateError != null && Object.hasOwnProperty.call(message, "stateError"))
+                                    $root.google.cloud.workflows.executions.v1.Execution.StateError.encode(message.stateError, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                                 return writer;
                             };
     
@@ -418,7 +464,7 @@
                             Execution.decode = function decode(reader, length) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workflows.executions.v1.Execution();
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workflows.executions.v1.Execution(), key, value;
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
@@ -432,6 +478,10 @@
                                         }
                                     case 3: {
                                             message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 12: {
+                                            message.duration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
                                             break;
                                         }
                                     case 4: {
@@ -456,6 +506,37 @@
                                         }
                                     case 9: {
                                             message.callLogLevel = reader.int32();
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.status = $root.google.cloud.workflows.executions.v1.Execution.Status.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 11: {
+                                            if (message.labels === $util.emptyObject)
+                                                message.labels = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = "";
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = reader.string();
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.labels[key] = value;
+                                            break;
+                                        }
+                                    case 13: {
+                                            message.stateError = $root.google.cloud.workflows.executions.v1.Execution.StateError.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -506,6 +587,11 @@
                                     if (error)
                                         return "endTime." + error;
                                 }
+                                if (message.duration != null && message.hasOwnProperty("duration")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.duration);
+                                    if (error)
+                                        return "duration." + error;
+                                }
                                 if (message.state != null && message.hasOwnProperty("state"))
                                     switch (message.state) {
                                     default:
@@ -515,6 +601,8 @@
                                     case 2:
                                     case 3:
                                     case 4:
+                                    case 5:
+                                    case 6:
                                         break;
                                     }
                                 if (message.argument != null && message.hasOwnProperty("argument"))
@@ -538,8 +626,27 @@
                                     case 0:
                                     case 1:
                                     case 2:
+                                    case 3:
                                         break;
                                     }
+                                if (message.status != null && message.hasOwnProperty("status")) {
+                                    var error = $root.google.cloud.workflows.executions.v1.Execution.Status.verify(message.status);
+                                    if (error)
+                                        return "status." + error;
+                                }
+                                if (message.labels != null && message.hasOwnProperty("labels")) {
+                                    if (!$util.isObject(message.labels))
+                                        return "labels: object expected";
+                                    var key = Object.keys(message.labels);
+                                    for (var i = 0; i < key.length; ++i)
+                                        if (!$util.isString(message.labels[key[i]]))
+                                            return "labels: string{k:string} expected";
+                                }
+                                if (message.stateError != null && message.hasOwnProperty("stateError")) {
+                                    var error = $root.google.cloud.workflows.executions.v1.Execution.StateError.verify(message.stateError);
+                                    if (error)
+                                        return "stateError." + error;
+                                }
                                 return null;
                             };
     
@@ -567,6 +674,11 @@
                                         throw TypeError(".google.cloud.workflows.executions.v1.Execution.endTime: object expected");
                                     message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
                                 }
+                                if (object.duration != null) {
+                                    if (typeof object.duration !== "object")
+                                        throw TypeError(".google.cloud.workflows.executions.v1.Execution.duration: object expected");
+                                    message.duration = $root.google.protobuf.Duration.fromObject(object.duration);
+                                }
                                 switch (object.state) {
                                 default:
                                     if (typeof object.state === "number") {
@@ -593,6 +705,14 @@
                                 case "CANCELLED":
                                 case 4:
                                     message.state = 4;
+                                    break;
+                                case "UNAVAILABLE":
+                                case 5:
+                                    message.state = 5;
+                                    break;
+                                case "QUEUED":
+                                case 6:
+                                    message.state = 6;
                                     break;
                                 }
                                 if (object.argument != null)
@@ -625,6 +745,27 @@
                                 case 2:
                                     message.callLogLevel = 2;
                                     break;
+                                case "LOG_NONE":
+                                case 3:
+                                    message.callLogLevel = 3;
+                                    break;
+                                }
+                                if (object.status != null) {
+                                    if (typeof object.status !== "object")
+                                        throw TypeError(".google.cloud.workflows.executions.v1.Execution.status: object expected");
+                                    message.status = $root.google.cloud.workflows.executions.v1.Execution.Status.fromObject(object.status);
+                                }
+                                if (object.labels) {
+                                    if (typeof object.labels !== "object")
+                                        throw TypeError(".google.cloud.workflows.executions.v1.Execution.labels: object expected");
+                                    message.labels = {};
+                                    for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                        message.labels[keys[i]] = String(object.labels[keys[i]]);
+                                }
+                                if (object.stateError != null) {
+                                    if (typeof object.stateError !== "object")
+                                        throw TypeError(".google.cloud.workflows.executions.v1.Execution.stateError: object expected");
+                                    message.stateError = $root.google.cloud.workflows.executions.v1.Execution.StateError.fromObject(object.stateError);
                                 }
                                 return message;
                             };
@@ -642,6 +783,8 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
+                                if (options.objects || options.defaults)
+                                    object.labels = {};
                                 if (options.defaults) {
                                     object.name = "";
                                     object.startTime = null;
@@ -652,6 +795,9 @@
                                     object.error = null;
                                     object.workflowRevisionId = "";
                                     object.callLogLevel = options.enums === String ? "CALL_LOG_LEVEL_UNSPECIFIED" : 0;
+                                    object.status = null;
+                                    object.duration = null;
+                                    object.stateError = null;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -671,6 +817,18 @@
                                     object.workflowRevisionId = message.workflowRevisionId;
                                 if (message.callLogLevel != null && message.hasOwnProperty("callLogLevel"))
                                     object.callLogLevel = options.enums === String ? $root.google.cloud.workflows.executions.v1.Execution.CallLogLevel[message.callLogLevel] === undefined ? message.callLogLevel : $root.google.cloud.workflows.executions.v1.Execution.CallLogLevel[message.callLogLevel] : message.callLogLevel;
+                                if (message.status != null && message.hasOwnProperty("status"))
+                                    object.status = $root.google.cloud.workflows.executions.v1.Execution.Status.toObject(message.status, options);
+                                var keys2;
+                                if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                    object.labels = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.labels[keys2[j]] = message.labels[keys2[j]];
+                                }
+                                if (message.duration != null && message.hasOwnProperty("duration"))
+                                    object.duration = $root.google.protobuf.Duration.toObject(message.duration, options);
+                                if (message.stateError != null && message.hasOwnProperty("stateError"))
+                                    object.stateError = $root.google.cloud.workflows.executions.v1.Execution.StateError.toObject(message.stateError, options);
                                 return object;
                             };
     
@@ -699,6 +857,30 @@
                                 }
                                 return typeUrlPrefix + "/google.cloud.workflows.executions.v1.Execution";
                             };
+    
+                            /**
+                             * State enum.
+                             * @name google.cloud.workflows.executions.v1.Execution.State
+                             * @enum {number}
+                             * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                             * @property {number} ACTIVE=1 ACTIVE value
+                             * @property {number} SUCCEEDED=2 SUCCEEDED value
+                             * @property {number} FAILED=3 FAILED value
+                             * @property {number} CANCELLED=4 CANCELLED value
+                             * @property {number} UNAVAILABLE=5 UNAVAILABLE value
+                             * @property {number} QUEUED=6 QUEUED value
+                             */
+                            Execution.State = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "ACTIVE"] = 1;
+                                values[valuesById[2] = "SUCCEEDED"] = 2;
+                                values[valuesById[3] = "FAILED"] = 3;
+                                values[valuesById[4] = "CANCELLED"] = 4;
+                                values[valuesById[5] = "UNAVAILABLE"] = 5;
+                                values[valuesById[6] = "QUEUED"] = 6;
+                                return values;
+                            })();
     
                             Execution.StackTraceElement = (function() {
     
@@ -1727,39 +1909,732 @@
                             })();
     
                             /**
-                             * State enum.
-                             * @name google.cloud.workflows.executions.v1.Execution.State
-                             * @enum {number}
-                             * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
-                             * @property {number} ACTIVE=1 ACTIVE value
-                             * @property {number} SUCCEEDED=2 SUCCEEDED value
-                             * @property {number} FAILED=3 FAILED value
-                             * @property {number} CANCELLED=4 CANCELLED value
-                             */
-                            Execution.State = (function() {
-                                var valuesById = {}, values = Object.create(valuesById);
-                                values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
-                                values[valuesById[1] = "ACTIVE"] = 1;
-                                values[valuesById[2] = "SUCCEEDED"] = 2;
-                                values[valuesById[3] = "FAILED"] = 3;
-                                values[valuesById[4] = "CANCELLED"] = 4;
-                                return values;
-                            })();
-    
-                            /**
                              * CallLogLevel enum.
                              * @name google.cloud.workflows.executions.v1.Execution.CallLogLevel
                              * @enum {number}
                              * @property {number} CALL_LOG_LEVEL_UNSPECIFIED=0 CALL_LOG_LEVEL_UNSPECIFIED value
                              * @property {number} LOG_ALL_CALLS=1 LOG_ALL_CALLS value
                              * @property {number} LOG_ERRORS_ONLY=2 LOG_ERRORS_ONLY value
+                             * @property {number} LOG_NONE=3 LOG_NONE value
                              */
                             Execution.CallLogLevel = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
                                 values[valuesById[0] = "CALL_LOG_LEVEL_UNSPECIFIED"] = 0;
                                 values[valuesById[1] = "LOG_ALL_CALLS"] = 1;
                                 values[valuesById[2] = "LOG_ERRORS_ONLY"] = 2;
+                                values[valuesById[3] = "LOG_NONE"] = 3;
                                 return values;
+                            })();
+    
+                            Execution.Status = (function() {
+    
+                                /**
+                                 * Properties of a Status.
+                                 * @memberof google.cloud.workflows.executions.v1.Execution
+                                 * @interface IStatus
+                                 * @property {Array.<google.cloud.workflows.executions.v1.Execution.Status.IStep>|null} [currentSteps] Status currentSteps
+                                 */
+    
+                                /**
+                                 * Constructs a new Status.
+                                 * @memberof google.cloud.workflows.executions.v1.Execution
+                                 * @classdesc Represents a Status.
+                                 * @implements IStatus
+                                 * @constructor
+                                 * @param {google.cloud.workflows.executions.v1.Execution.IStatus=} [properties] Properties to set
+                                 */
+                                function Status(properties) {
+                                    this.currentSteps = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Status currentSteps.
+                                 * @member {Array.<google.cloud.workflows.executions.v1.Execution.Status.IStep>} currentSteps
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.Status
+                                 * @instance
+                                 */
+                                Status.prototype.currentSteps = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new Status instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.Status
+                                 * @static
+                                 * @param {google.cloud.workflows.executions.v1.Execution.IStatus=} [properties] Properties to set
+                                 * @returns {google.cloud.workflows.executions.v1.Execution.Status} Status instance
+                                 */
+                                Status.create = function create(properties) {
+                                    return new Status(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Status message. Does not implicitly {@link google.cloud.workflows.executions.v1.Execution.Status.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.Status
+                                 * @static
+                                 * @param {google.cloud.workflows.executions.v1.Execution.IStatus} message Status message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Status.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.currentSteps != null && message.currentSteps.length)
+                                        for (var i = 0; i < message.currentSteps.length; ++i)
+                                            $root.google.cloud.workflows.executions.v1.Execution.Status.Step.encode(message.currentSteps[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Status message, length delimited. Does not implicitly {@link google.cloud.workflows.executions.v1.Execution.Status.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.Status
+                                 * @static
+                                 * @param {google.cloud.workflows.executions.v1.Execution.IStatus} message Status message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Status.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Status message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.Status
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.workflows.executions.v1.Execution.Status} Status
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Status.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workflows.executions.v1.Execution.Status();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                if (!(message.currentSteps && message.currentSteps.length))
+                                                    message.currentSteps = [];
+                                                message.currentSteps.push($root.google.cloud.workflows.executions.v1.Execution.Status.Step.decode(reader, reader.uint32()));
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Status message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.Status
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.workflows.executions.v1.Execution.Status} Status
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Status.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Status message.
+                                 * @function verify
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.Status
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Status.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.currentSteps != null && message.hasOwnProperty("currentSteps")) {
+                                        if (!Array.isArray(message.currentSteps))
+                                            return "currentSteps: array expected";
+                                        for (var i = 0; i < message.currentSteps.length; ++i) {
+                                            var error = $root.google.cloud.workflows.executions.v1.Execution.Status.Step.verify(message.currentSteps[i]);
+                                            if (error)
+                                                return "currentSteps." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Status message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.Status
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.workflows.executions.v1.Execution.Status} Status
+                                 */
+                                Status.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.workflows.executions.v1.Execution.Status)
+                                        return object;
+                                    var message = new $root.google.cloud.workflows.executions.v1.Execution.Status();
+                                    if (object.currentSteps) {
+                                        if (!Array.isArray(object.currentSteps))
+                                            throw TypeError(".google.cloud.workflows.executions.v1.Execution.Status.currentSteps: array expected");
+                                        message.currentSteps = [];
+                                        for (var i = 0; i < object.currentSteps.length; ++i) {
+                                            if (typeof object.currentSteps[i] !== "object")
+                                                throw TypeError(".google.cloud.workflows.executions.v1.Execution.Status.currentSteps: object expected");
+                                            message.currentSteps[i] = $root.google.cloud.workflows.executions.v1.Execution.Status.Step.fromObject(object.currentSteps[i]);
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Status message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.Status
+                                 * @static
+                                 * @param {google.cloud.workflows.executions.v1.Execution.Status} message Status
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Status.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.currentSteps = [];
+                                    if (message.currentSteps && message.currentSteps.length) {
+                                        object.currentSteps = [];
+                                        for (var j = 0; j < message.currentSteps.length; ++j)
+                                            object.currentSteps[j] = $root.google.cloud.workflows.executions.v1.Execution.Status.Step.toObject(message.currentSteps[j], options);
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Status to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.Status
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Status.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Status
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.Status
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Status.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.workflows.executions.v1.Execution.Status";
+                                };
+    
+                                Status.Step = (function() {
+    
+                                    /**
+                                     * Properties of a Step.
+                                     * @memberof google.cloud.workflows.executions.v1.Execution.Status
+                                     * @interface IStep
+                                     * @property {string|null} [routine] Step routine
+                                     * @property {string|null} [step] Step step
+                                     */
+    
+                                    /**
+                                     * Constructs a new Step.
+                                     * @memberof google.cloud.workflows.executions.v1.Execution.Status
+                                     * @classdesc Represents a Step.
+                                     * @implements IStep
+                                     * @constructor
+                                     * @param {google.cloud.workflows.executions.v1.Execution.Status.IStep=} [properties] Properties to set
+                                     */
+                                    function Step(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * Step routine.
+                                     * @member {string} routine
+                                     * @memberof google.cloud.workflows.executions.v1.Execution.Status.Step
+                                     * @instance
+                                     */
+                                    Step.prototype.routine = "";
+    
+                                    /**
+                                     * Step step.
+                                     * @member {string} step
+                                     * @memberof google.cloud.workflows.executions.v1.Execution.Status.Step
+                                     * @instance
+                                     */
+                                    Step.prototype.step = "";
+    
+                                    /**
+                                     * Creates a new Step instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.workflows.executions.v1.Execution.Status.Step
+                                     * @static
+                                     * @param {google.cloud.workflows.executions.v1.Execution.Status.IStep=} [properties] Properties to set
+                                     * @returns {google.cloud.workflows.executions.v1.Execution.Status.Step} Step instance
+                                     */
+                                    Step.create = function create(properties) {
+                                        return new Step(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Step message. Does not implicitly {@link google.cloud.workflows.executions.v1.Execution.Status.Step.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.workflows.executions.v1.Execution.Status.Step
+                                     * @static
+                                     * @param {google.cloud.workflows.executions.v1.Execution.Status.IStep} message Step message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Step.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.routine != null && Object.hasOwnProperty.call(message, "routine"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.routine);
+                                        if (message.step != null && Object.hasOwnProperty.call(message, "step"))
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.step);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Step message, length delimited. Does not implicitly {@link google.cloud.workflows.executions.v1.Execution.Status.Step.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.workflows.executions.v1.Execution.Status.Step
+                                     * @static
+                                     * @param {google.cloud.workflows.executions.v1.Execution.Status.IStep} message Step message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Step.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a Step message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.workflows.executions.v1.Execution.Status.Step
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.workflows.executions.v1.Execution.Status.Step} Step
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Step.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workflows.executions.v1.Execution.Status.Step();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.routine = reader.string();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.step = reader.string();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a Step message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.workflows.executions.v1.Execution.Status.Step
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.workflows.executions.v1.Execution.Status.Step} Step
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Step.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a Step message.
+                                     * @function verify
+                                     * @memberof google.cloud.workflows.executions.v1.Execution.Status.Step
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    Step.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.routine != null && message.hasOwnProperty("routine"))
+                                            if (!$util.isString(message.routine))
+                                                return "routine: string expected";
+                                        if (message.step != null && message.hasOwnProperty("step"))
+                                            if (!$util.isString(message.step))
+                                                return "step: string expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a Step message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.workflows.executions.v1.Execution.Status.Step
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.workflows.executions.v1.Execution.Status.Step} Step
+                                     */
+                                    Step.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.workflows.executions.v1.Execution.Status.Step)
+                                            return object;
+                                        var message = new $root.google.cloud.workflows.executions.v1.Execution.Status.Step();
+                                        if (object.routine != null)
+                                            message.routine = String(object.routine);
+                                        if (object.step != null)
+                                            message.step = String(object.step);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a Step message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.workflows.executions.v1.Execution.Status.Step
+                                     * @static
+                                     * @param {google.cloud.workflows.executions.v1.Execution.Status.Step} message Step
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    Step.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.routine = "";
+                                            object.step = "";
+                                        }
+                                        if (message.routine != null && message.hasOwnProperty("routine"))
+                                            object.routine = message.routine;
+                                        if (message.step != null && message.hasOwnProperty("step"))
+                                            object.step = message.step;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this Step to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.workflows.executions.v1.Execution.Status.Step
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    Step.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for Step
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.workflows.executions.v1.Execution.Status.Step
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    Step.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.workflows.executions.v1.Execution.Status.Step";
+                                    };
+    
+                                    return Step;
+                                })();
+    
+                                return Status;
+                            })();
+    
+                            Execution.StateError = (function() {
+    
+                                /**
+                                 * Properties of a StateError.
+                                 * @memberof google.cloud.workflows.executions.v1.Execution
+                                 * @interface IStateError
+                                 * @property {string|null} [details] StateError details
+                                 * @property {google.cloud.workflows.executions.v1.Execution.StateError.Type|null} [type] StateError type
+                                 */
+    
+                                /**
+                                 * Constructs a new StateError.
+                                 * @memberof google.cloud.workflows.executions.v1.Execution
+                                 * @classdesc Represents a StateError.
+                                 * @implements IStateError
+                                 * @constructor
+                                 * @param {google.cloud.workflows.executions.v1.Execution.IStateError=} [properties] Properties to set
+                                 */
+                                function StateError(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * StateError details.
+                                 * @member {string} details
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StateError
+                                 * @instance
+                                 */
+                                StateError.prototype.details = "";
+    
+                                /**
+                                 * StateError type.
+                                 * @member {google.cloud.workflows.executions.v1.Execution.StateError.Type} type
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StateError
+                                 * @instance
+                                 */
+                                StateError.prototype.type = 0;
+    
+                                /**
+                                 * Creates a new StateError instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StateError
+                                 * @static
+                                 * @param {google.cloud.workflows.executions.v1.Execution.IStateError=} [properties] Properties to set
+                                 * @returns {google.cloud.workflows.executions.v1.Execution.StateError} StateError instance
+                                 */
+                                StateError.create = function create(properties) {
+                                    return new StateError(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified StateError message. Does not implicitly {@link google.cloud.workflows.executions.v1.Execution.StateError.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StateError
+                                 * @static
+                                 * @param {google.cloud.workflows.executions.v1.Execution.IStateError} message StateError message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                StateError.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.details != null && Object.hasOwnProperty.call(message, "details"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.details);
+                                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.type);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified StateError message, length delimited. Does not implicitly {@link google.cloud.workflows.executions.v1.Execution.StateError.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StateError
+                                 * @static
+                                 * @param {google.cloud.workflows.executions.v1.Execution.IStateError} message StateError message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                StateError.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a StateError message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StateError
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.workflows.executions.v1.Execution.StateError} StateError
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                StateError.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workflows.executions.v1.Execution.StateError();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.details = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.type = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a StateError message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StateError
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.workflows.executions.v1.Execution.StateError} StateError
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                StateError.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a StateError message.
+                                 * @function verify
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StateError
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                StateError.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.details != null && message.hasOwnProperty("details"))
+                                        if (!$util.isString(message.details))
+                                            return "details: string expected";
+                                    if (message.type != null && message.hasOwnProperty("type"))
+                                        switch (message.type) {
+                                        default:
+                                            return "type: enum value expected";
+                                        case 0:
+                                        case 1:
+                                            break;
+                                        }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a StateError message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StateError
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.workflows.executions.v1.Execution.StateError} StateError
+                                 */
+                                StateError.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.workflows.executions.v1.Execution.StateError)
+                                        return object;
+                                    var message = new $root.google.cloud.workflows.executions.v1.Execution.StateError();
+                                    if (object.details != null)
+                                        message.details = String(object.details);
+                                    switch (object.type) {
+                                    default:
+                                        if (typeof object.type === "number") {
+                                            message.type = object.type;
+                                            break;
+                                        }
+                                        break;
+                                    case "TYPE_UNSPECIFIED":
+                                    case 0:
+                                        message.type = 0;
+                                        break;
+                                    case "KMS_ERROR":
+                                    case 1:
+                                        message.type = 1;
+                                        break;
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a StateError message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StateError
+                                 * @static
+                                 * @param {google.cloud.workflows.executions.v1.Execution.StateError} message StateError
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                StateError.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.details = "";
+                                        object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
+                                    }
+                                    if (message.details != null && message.hasOwnProperty("details"))
+                                        object.details = message.details;
+                                    if (message.type != null && message.hasOwnProperty("type"))
+                                        object.type = options.enums === String ? $root.google.cloud.workflows.executions.v1.Execution.StateError.Type[message.type] === undefined ? message.type : $root.google.cloud.workflows.executions.v1.Execution.StateError.Type[message.type] : message.type;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this StateError to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StateError
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                StateError.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for StateError
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.workflows.executions.v1.Execution.StateError
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                StateError.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.workflows.executions.v1.Execution.StateError";
+                                };
+    
+                                /**
+                                 * Type enum.
+                                 * @name google.cloud.workflows.executions.v1.Execution.StateError.Type
+                                 * @enum {number}
+                                 * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                                 * @property {number} KMS_ERROR=1 KMS_ERROR value
+                                 */
+                                StateError.Type = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "KMS_ERROR"] = 1;
+                                    return values;
+                                })();
+    
+                                return StateError;
                             })();
     
                             return Execution;
@@ -1775,6 +2650,8 @@
                              * @property {number|null} [pageSize] ListExecutionsRequest pageSize
                              * @property {string|null} [pageToken] ListExecutionsRequest pageToken
                              * @property {google.cloud.workflows.executions.v1.ExecutionView|null} [view] ListExecutionsRequest view
+                             * @property {string|null} [filter] ListExecutionsRequest filter
+                             * @property {string|null} [orderBy] ListExecutionsRequest orderBy
                              */
     
                             /**
@@ -1825,6 +2702,22 @@
                             ListExecutionsRequest.prototype.view = 0;
     
                             /**
+                             * ListExecutionsRequest filter.
+                             * @member {string} filter
+                             * @memberof google.cloud.workflows.executions.v1.ListExecutionsRequest
+                             * @instance
+                             */
+                            ListExecutionsRequest.prototype.filter = "";
+    
+                            /**
+                             * ListExecutionsRequest orderBy.
+                             * @member {string} orderBy
+                             * @memberof google.cloud.workflows.executions.v1.ListExecutionsRequest
+                             * @instance
+                             */
+                            ListExecutionsRequest.prototype.orderBy = "";
+    
+                            /**
                              * Creates a new ListExecutionsRequest instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.workflows.executions.v1.ListExecutionsRequest
@@ -1856,6 +2749,10 @@
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
                                 if (message.view != null && Object.hasOwnProperty.call(message, "view"))
                                     writer.uint32(/* id 4, wireType 0 =*/32).int32(message.view);
+                                if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.filter);
+                                if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.orderBy);
                                 return writer;
                             };
     
@@ -1904,6 +2801,14 @@
                                         }
                                     case 4: {
                                             message.view = reader.int32();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.filter = reader.string();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.orderBy = reader.string();
                                             break;
                                         }
                                     default:
@@ -1959,6 +2864,12 @@
                                     case 2:
                                         break;
                                     }
+                                if (message.filter != null && message.hasOwnProperty("filter"))
+                                    if (!$util.isString(message.filter))
+                                        return "filter: string expected";
+                                if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                    if (!$util.isString(message.orderBy))
+                                        return "orderBy: string expected";
                                 return null;
                             };
     
@@ -2000,6 +2911,10 @@
                                     message.view = 2;
                                     break;
                                 }
+                                if (object.filter != null)
+                                    message.filter = String(object.filter);
+                                if (object.orderBy != null)
+                                    message.orderBy = String(object.orderBy);
                                 return message;
                             };
     
@@ -2021,6 +2936,8 @@
                                     object.pageSize = 0;
                                     object.pageToken = "";
                                     object.view = options.enums === String ? "EXECUTION_VIEW_UNSPECIFIED" : 0;
+                                    object.filter = "";
+                                    object.orderBy = "";
                                 }
                                 if (message.parent != null && message.hasOwnProperty("parent"))
                                     object.parent = message.parent;
@@ -2030,6 +2947,10 @@
                                     object.pageToken = message.pageToken;
                                 if (message.view != null && message.hasOwnProperty("view"))
                                     object.view = options.enums === String ? $root.google.cloud.workflows.executions.v1.ExecutionView[message.view] === undefined ? message.view : $root.google.cloud.workflows.executions.v1.ExecutionView[message.view] : message.view;
+                                if (message.filter != null && message.hasOwnProperty("filter"))
+                                    object.filter = message.filter;
+                                if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                    object.orderBy = message.orderBy;
                                 return object;
                             };
     

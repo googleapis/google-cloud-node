@@ -35,7 +35,7 @@ function main(parent) {
   // const parent = 'abc123'
   /**
    *  Maximum number of executions to return per call.
-   *  Max supported value depends on the selected Execution view: it's 10000 for
+   *  Max supported value depends on the selected Execution view: it's 1000 for
    *  BASIC and 100 for FULL. The default value used if the field is not
    *  specified is 100, regardless of the selected view. Values greater than
    *  the max value will be coerced down to it.
@@ -46,13 +46,29 @@ function main(parent) {
    *  Provide this to retrieve the subsequent page.
    *  When paginating, all other parameters provided to `ListExecutions` must
    *  match the call that provided the page token.
+   *  Note that pagination is applied to dynamic data. The list of executions
+   *  returned can change between page requests.
    */
   // const pageToken = 'abc123'
   /**
-   *  Optional. A view defining which fields should be filled in the returned executions.
-   *  The API will default to the BASIC view.
+   *  Optional. A view defining which fields should be filled in the returned
+   *  executions. The API will default to the BASIC view.
    */
   // const view = {}
+  /**
+   *  Optional. Filters applied to the Executions.ListExecutions  results.
+   *  The following fields are supported for filtering:
+   *  executionID, state, startTime, endTime, duration, workflowRevisionID,
+   *  stepName, and label.
+   */
+  // const filter = 'abc123'
+  /**
+   *  Optional. The ordering applied to the Executions.ListExecutions  results.
+   *  By default the ordering is based on descending start time.
+   *  The following fields are supported for order by:
+   *  executionID, startTime, endTime, duration, state, and workflowRevisionID.
+   */
+  // const orderBy = 'abc123'
 
   // Imports the Executions library
   const {ExecutionsClient} = require('@google-cloud/workflow-executions').v1;
