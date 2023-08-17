@@ -1107,19 +1107,95 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** VolumePerformanceTier enum. */
-                enum VolumePerformanceTier {
-                    VOLUME_PERFORMANCE_TIER_UNSPECIFIED = 0,
-                    VOLUME_PERFORMANCE_TIER_SHARED = 1,
-                    VOLUME_PERFORMANCE_TIER_ASSIGNED = 2,
-                    VOLUME_PERFORMANCE_TIER_HT = 3
+                /** Properties of a ResetInstanceResponse. */
+                interface IResetInstanceResponse {
                 }
 
-                /** WorkloadProfile enum. */
-                enum WorkloadProfile {
-                    WORKLOAD_PROFILE_UNSPECIFIED = 0,
-                    WORKLOAD_PROFILE_GENERIC = 1,
-                    WORKLOAD_PROFILE_HANA = 2
+                /** Represents a ResetInstanceResponse. */
+                class ResetInstanceResponse implements IResetInstanceResponse {
+
+                    /**
+                     * Constructs a new ResetInstanceResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IResetInstanceResponse);
+
+                    /**
+                     * Creates a new ResetInstanceResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResetInstanceResponse instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IResetInstanceResponse): google.cloud.baremetalsolution.v2.ResetInstanceResponse;
+
+                    /**
+                     * Encodes the specified ResetInstanceResponse message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ResetInstanceResponse.verify|verify} messages.
+                     * @param message ResetInstanceResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IResetInstanceResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResetInstanceResponse message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ResetInstanceResponse.verify|verify} messages.
+                     * @param message ResetInstanceResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IResetInstanceResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResetInstanceResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResetInstanceResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.ResetInstanceResponse;
+
+                    /**
+                     * Decodes a ResetInstanceResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResetInstanceResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.ResetInstanceResponse;
+
+                    /**
+                     * Verifies a ResetInstanceResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResetInstanceResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResetInstanceResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.ResetInstanceResponse;
+
+                    /**
+                     * Creates a plain object from a ResetInstanceResponse message. Also converts values to other types if specified.
+                     * @param message ResetInstanceResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.ResetInstanceResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResetInstanceResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ResetInstanceResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an Instance. */
@@ -1960,97 +2036,6 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ResetInstanceRequest
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a ResetInstanceResponse. */
-                interface IResetInstanceResponse {
-                }
-
-                /** Represents a ResetInstanceResponse. */
-                class ResetInstanceResponse implements IResetInstanceResponse {
-
-                    /**
-                     * Constructs a new ResetInstanceResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.baremetalsolution.v2.IResetInstanceResponse);
-
-                    /**
-                     * Creates a new ResetInstanceResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ResetInstanceResponse instance
-                     */
-                    public static create(properties?: google.cloud.baremetalsolution.v2.IResetInstanceResponse): google.cloud.baremetalsolution.v2.ResetInstanceResponse;
-
-                    /**
-                     * Encodes the specified ResetInstanceResponse message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ResetInstanceResponse.verify|verify} messages.
-                     * @param message ResetInstanceResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.baremetalsolution.v2.IResetInstanceResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ResetInstanceResponse message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ResetInstanceResponse.verify|verify} messages.
-                     * @param message ResetInstanceResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IResetInstanceResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ResetInstanceResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ResetInstanceResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.ResetInstanceResponse;
-
-                    /**
-                     * Decodes a ResetInstanceResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ResetInstanceResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.ResetInstanceResponse;
-
-                    /**
-                     * Verifies a ResetInstanceResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ResetInstanceResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ResetInstanceResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.ResetInstanceResponse;
-
-                    /**
-                     * Creates a plain object from a ResetInstanceResponse message. Also converts values to other types if specified.
-                     * @param message ResetInstanceResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.baremetalsolution.v2.ResetInstanceResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ResetInstanceResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ResetInstanceResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -2916,6 +2901,252 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ServerNetworkTemplate. */
+                interface IServerNetworkTemplate {
+
+                    /** ServerNetworkTemplate name */
+                    name?: (string|null);
+
+                    /** ServerNetworkTemplate applicableInstanceTypes */
+                    applicableInstanceTypes?: (string[]|null);
+
+                    /** ServerNetworkTemplate logicalInterfaces */
+                    logicalInterfaces?: (google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface[]|null);
+                }
+
+                /** Represents a ServerNetworkTemplate. */
+                class ServerNetworkTemplate implements IServerNetworkTemplate {
+
+                    /**
+                     * Constructs a new ServerNetworkTemplate.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.baremetalsolution.v2.IServerNetworkTemplate);
+
+                    /** ServerNetworkTemplate name. */
+                    public name: string;
+
+                    /** ServerNetworkTemplate applicableInstanceTypes. */
+                    public applicableInstanceTypes: string[];
+
+                    /** ServerNetworkTemplate logicalInterfaces. */
+                    public logicalInterfaces: google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface[];
+
+                    /**
+                     * Creates a new ServerNetworkTemplate instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ServerNetworkTemplate instance
+                     */
+                    public static create(properties?: google.cloud.baremetalsolution.v2.IServerNetworkTemplate): google.cloud.baremetalsolution.v2.ServerNetworkTemplate;
+
+                    /**
+                     * Encodes the specified ServerNetworkTemplate message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ServerNetworkTemplate.verify|verify} messages.
+                     * @param message ServerNetworkTemplate message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.baremetalsolution.v2.IServerNetworkTemplate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ServerNetworkTemplate message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ServerNetworkTemplate.verify|verify} messages.
+                     * @param message ServerNetworkTemplate message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IServerNetworkTemplate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ServerNetworkTemplate message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ServerNetworkTemplate
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.ServerNetworkTemplate;
+
+                    /**
+                     * Decodes a ServerNetworkTemplate message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ServerNetworkTemplate
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.ServerNetworkTemplate;
+
+                    /**
+                     * Verifies a ServerNetworkTemplate message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ServerNetworkTemplate message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ServerNetworkTemplate
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.ServerNetworkTemplate;
+
+                    /**
+                     * Creates a plain object from a ServerNetworkTemplate message. Also converts values to other types if specified.
+                     * @param message ServerNetworkTemplate
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.baremetalsolution.v2.ServerNetworkTemplate, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ServerNetworkTemplate to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ServerNetworkTemplate
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ServerNetworkTemplate {
+
+                    /** Properties of a LogicalInterface. */
+                    interface ILogicalInterface {
+
+                        /** LogicalInterface name */
+                        name?: (string|null);
+
+                        /** LogicalInterface type */
+                        type?: (google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.InterfaceType|keyof typeof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.InterfaceType|null);
+
+                        /** LogicalInterface required */
+                        required?: (boolean|null);
+                    }
+
+                    /** Represents a LogicalInterface. */
+                    class LogicalInterface implements ILogicalInterface {
+
+                        /**
+                         * Constructs a new LogicalInterface.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface);
+
+                        /** LogicalInterface name. */
+                        public name: string;
+
+                        /** LogicalInterface type. */
+                        public type: (google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.InterfaceType|keyof typeof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.InterfaceType);
+
+                        /** LogicalInterface required. */
+                        public required: boolean;
+
+                        /**
+                         * Creates a new LogicalInterface instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LogicalInterface instance
+                         */
+                        public static create(properties?: google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface): google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface;
+
+                        /**
+                         * Encodes the specified LogicalInterface message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.verify|verify} messages.
+                         * @param message LogicalInterface message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LogicalInterface message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.verify|verify} messages.
+                         * @param message LogicalInterface message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LogicalInterface message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LogicalInterface
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface;
+
+                        /**
+                         * Decodes a LogicalInterface message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LogicalInterface
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface;
+
+                        /**
+                         * Verifies a LogicalInterface message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LogicalInterface message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LogicalInterface
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface;
+
+                        /**
+                         * Creates a plain object from a LogicalInterface message. Also converts values to other types if specified.
+                         * @param message LogicalInterface
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LogicalInterface to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for LogicalInterface
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace LogicalInterface {
+
+                        /** InterfaceType enum. */
+                        enum InterfaceType {
+                            INTERFACE_TYPE_UNSPECIFIED = 0,
+                            BOND = 1,
+                            NIC = 2
+                        }
+                    }
+                }
+
+                /** VolumePerformanceTier enum. */
+                enum VolumePerformanceTier {
+                    VOLUME_PERFORMANCE_TIER_UNSPECIFIED = 0,
+                    VOLUME_PERFORMANCE_TIER_SHARED = 1,
+                    VOLUME_PERFORMANCE_TIER_ASSIGNED = 2,
+                    VOLUME_PERFORMANCE_TIER_HT = 3
+                }
+
+                /** WorkloadProfile enum. */
+                enum WorkloadProfile {
+                    WORKLOAD_PROFILE_UNSPECIFIED = 0,
+                    WORKLOAD_PROFILE_GENERIC = 1,
+                    WORKLOAD_PROFILE_HANA = 2
                 }
 
                 /** Properties of a Lun. */
@@ -10059,237 +10290,6 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a ServerNetworkTemplate. */
-                interface IServerNetworkTemplate {
-
-                    /** ServerNetworkTemplate name */
-                    name?: (string|null);
-
-                    /** ServerNetworkTemplate applicableInstanceTypes */
-                    applicableInstanceTypes?: (string[]|null);
-
-                    /** ServerNetworkTemplate logicalInterfaces */
-                    logicalInterfaces?: (google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface[]|null);
-                }
-
-                /** Represents a ServerNetworkTemplate. */
-                class ServerNetworkTemplate implements IServerNetworkTemplate {
-
-                    /**
-                     * Constructs a new ServerNetworkTemplate.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.baremetalsolution.v2.IServerNetworkTemplate);
-
-                    /** ServerNetworkTemplate name. */
-                    public name: string;
-
-                    /** ServerNetworkTemplate applicableInstanceTypes. */
-                    public applicableInstanceTypes: string[];
-
-                    /** ServerNetworkTemplate logicalInterfaces. */
-                    public logicalInterfaces: google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface[];
-
-                    /**
-                     * Creates a new ServerNetworkTemplate instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ServerNetworkTemplate instance
-                     */
-                    public static create(properties?: google.cloud.baremetalsolution.v2.IServerNetworkTemplate): google.cloud.baremetalsolution.v2.ServerNetworkTemplate;
-
-                    /**
-                     * Encodes the specified ServerNetworkTemplate message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ServerNetworkTemplate.verify|verify} messages.
-                     * @param message ServerNetworkTemplate message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.baremetalsolution.v2.IServerNetworkTemplate, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ServerNetworkTemplate message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ServerNetworkTemplate.verify|verify} messages.
-                     * @param message ServerNetworkTemplate message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.baremetalsolution.v2.IServerNetworkTemplate, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ServerNetworkTemplate message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ServerNetworkTemplate
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.ServerNetworkTemplate;
-
-                    /**
-                     * Decodes a ServerNetworkTemplate message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ServerNetworkTemplate
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.ServerNetworkTemplate;
-
-                    /**
-                     * Verifies a ServerNetworkTemplate message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ServerNetworkTemplate message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ServerNetworkTemplate
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.ServerNetworkTemplate;
-
-                    /**
-                     * Creates a plain object from a ServerNetworkTemplate message. Also converts values to other types if specified.
-                     * @param message ServerNetworkTemplate
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.baremetalsolution.v2.ServerNetworkTemplate, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ServerNetworkTemplate to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ServerNetworkTemplate
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace ServerNetworkTemplate {
-
-                    /** Properties of a LogicalInterface. */
-                    interface ILogicalInterface {
-
-                        /** LogicalInterface name */
-                        name?: (string|null);
-
-                        /** LogicalInterface type */
-                        type?: (google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.InterfaceType|keyof typeof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.InterfaceType|null);
-
-                        /** LogicalInterface required */
-                        required?: (boolean|null);
-                    }
-
-                    /** Represents a LogicalInterface. */
-                    class LogicalInterface implements ILogicalInterface {
-
-                        /**
-                         * Constructs a new LogicalInterface.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface);
-
-                        /** LogicalInterface name. */
-                        public name: string;
-
-                        /** LogicalInterface type. */
-                        public type: (google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.InterfaceType|keyof typeof google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.InterfaceType);
-
-                        /** LogicalInterface required. */
-                        public required: boolean;
-
-                        /**
-                         * Creates a new LogicalInterface instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns LogicalInterface instance
-                         */
-                        public static create(properties?: google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface): google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface;
-
-                        /**
-                         * Encodes the specified LogicalInterface message. Does not implicitly {@link google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.verify|verify} messages.
-                         * @param message LogicalInterface message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified LogicalInterface message, length delimited. Does not implicitly {@link google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface.verify|verify} messages.
-                         * @param message LogicalInterface message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.baremetalsolution.v2.ServerNetworkTemplate.ILogicalInterface, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a LogicalInterface message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns LogicalInterface
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface;
-
-                        /**
-                         * Decodes a LogicalInterface message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns LogicalInterface
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface;
-
-                        /**
-                         * Verifies a LogicalInterface message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a LogicalInterface message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns LogicalInterface
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface;
-
-                        /**
-                         * Creates a plain object from a LogicalInterface message. Also converts values to other types if specified.
-                         * @param message LogicalInterface
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.baremetalsolution.v2.ServerNetworkTemplate.LogicalInterface, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this LogicalInterface to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for LogicalInterface
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    namespace LogicalInterface {
-
-                        /** InterfaceType enum. */
-                        enum InterfaceType {
-                            INTERFACE_TYPE_UNSPECIFIED = 0,
-                            BOND = 1,
-                            NIC = 2
-                        }
-                    }
                 }
 
                 /** Properties of a SSHKey. */

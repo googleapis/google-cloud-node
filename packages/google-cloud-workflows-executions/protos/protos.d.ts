@@ -149,6 +149,9 @@ export namespace google {
                         /** Execution endTime */
                         endTime?: (google.protobuf.ITimestamp|null);
 
+                        /** Execution duration */
+                        duration?: (google.protobuf.IDuration|null);
+
                         /** Execution state */
                         state?: (google.cloud.workflows.executions.v1.Execution.State|keyof typeof google.cloud.workflows.executions.v1.Execution.State|null);
 
@@ -166,6 +169,15 @@ export namespace google {
 
                         /** Execution callLogLevel */
                         callLogLevel?: (google.cloud.workflows.executions.v1.Execution.CallLogLevel|keyof typeof google.cloud.workflows.executions.v1.Execution.CallLogLevel|null);
+
+                        /** Execution status */
+                        status?: (google.cloud.workflows.executions.v1.Execution.IStatus|null);
+
+                        /** Execution labels */
+                        labels?: ({ [k: string]: string }|null);
+
+                        /** Execution stateError */
+                        stateError?: (google.cloud.workflows.executions.v1.Execution.IStateError|null);
                     }
 
                     /** Represents an Execution. */
@@ -186,6 +198,9 @@ export namespace google {
                         /** Execution endTime. */
                         public endTime?: (google.protobuf.ITimestamp|null);
 
+                        /** Execution duration. */
+                        public duration?: (google.protobuf.IDuration|null);
+
                         /** Execution state. */
                         public state: (google.cloud.workflows.executions.v1.Execution.State|keyof typeof google.cloud.workflows.executions.v1.Execution.State);
 
@@ -203,6 +218,15 @@ export namespace google {
 
                         /** Execution callLogLevel. */
                         public callLogLevel: (google.cloud.workflows.executions.v1.Execution.CallLogLevel|keyof typeof google.cloud.workflows.executions.v1.Execution.CallLogLevel);
+
+                        /** Execution status. */
+                        public status?: (google.cloud.workflows.executions.v1.Execution.IStatus|null);
+
+                        /** Execution labels. */
+                        public labels: { [k: string]: string };
+
+                        /** Execution stateError. */
+                        public stateError?: (google.cloud.workflows.executions.v1.Execution.IStateError|null);
 
                         /**
                          * Creates a new Execution instance using the specified properties.
@@ -283,6 +307,17 @@ export namespace google {
                     }
 
                     namespace Execution {
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            ACTIVE = 1,
+                            SUCCEEDED = 2,
+                            FAILED = 3,
+                            CANCELLED = 4,
+                            UNAVAILABLE = 5,
+                            QUEUED = 6
+                        }
 
                         /** Properties of a StackTraceElement. */
                         interface IStackTraceElement {
@@ -711,20 +746,327 @@ export namespace google {
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
-                        /** State enum. */
-                        enum State {
-                            STATE_UNSPECIFIED = 0,
-                            ACTIVE = 1,
-                            SUCCEEDED = 2,
-                            FAILED = 3,
-                            CANCELLED = 4
-                        }
-
                         /** CallLogLevel enum. */
                         enum CallLogLevel {
                             CALL_LOG_LEVEL_UNSPECIFIED = 0,
                             LOG_ALL_CALLS = 1,
-                            LOG_ERRORS_ONLY = 2
+                            LOG_ERRORS_ONLY = 2,
+                            LOG_NONE = 3
+                        }
+
+                        /** Properties of a Status. */
+                        interface IStatus {
+
+                            /** Status currentSteps */
+                            currentSteps?: (google.cloud.workflows.executions.v1.Execution.Status.IStep[]|null);
+                        }
+
+                        /** Represents a Status. */
+                        class Status implements IStatus {
+
+                            /**
+                             * Constructs a new Status.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.workflows.executions.v1.Execution.IStatus);
+
+                            /** Status currentSteps. */
+                            public currentSteps: google.cloud.workflows.executions.v1.Execution.Status.IStep[];
+
+                            /**
+                             * Creates a new Status instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Status instance
+                             */
+                            public static create(properties?: google.cloud.workflows.executions.v1.Execution.IStatus): google.cloud.workflows.executions.v1.Execution.Status;
+
+                            /**
+                             * Encodes the specified Status message. Does not implicitly {@link google.cloud.workflows.executions.v1.Execution.Status.verify|verify} messages.
+                             * @param message Status message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.workflows.executions.v1.Execution.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Status message, length delimited. Does not implicitly {@link google.cloud.workflows.executions.v1.Execution.Status.verify|verify} messages.
+                             * @param message Status message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.workflows.executions.v1.Execution.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Status message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Status
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workflows.executions.v1.Execution.Status;
+
+                            /**
+                             * Decodes a Status message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Status
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workflows.executions.v1.Execution.Status;
+
+                            /**
+                             * Verifies a Status message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Status message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Status
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.workflows.executions.v1.Execution.Status;
+
+                            /**
+                             * Creates a plain object from a Status message. Also converts values to other types if specified.
+                             * @param message Status
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.workflows.executions.v1.Execution.Status, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Status to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Status
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace Status {
+
+                            /** Properties of a Step. */
+                            interface IStep {
+
+                                /** Step routine */
+                                routine?: (string|null);
+
+                                /** Step step */
+                                step?: (string|null);
+                            }
+
+                            /** Represents a Step. */
+                            class Step implements IStep {
+
+                                /**
+                                 * Constructs a new Step.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.workflows.executions.v1.Execution.Status.IStep);
+
+                                /** Step routine. */
+                                public routine: string;
+
+                                /** Step step. */
+                                public step: string;
+
+                                /**
+                                 * Creates a new Step instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns Step instance
+                                 */
+                                public static create(properties?: google.cloud.workflows.executions.v1.Execution.Status.IStep): google.cloud.workflows.executions.v1.Execution.Status.Step;
+
+                                /**
+                                 * Encodes the specified Step message. Does not implicitly {@link google.cloud.workflows.executions.v1.Execution.Status.Step.verify|verify} messages.
+                                 * @param message Step message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.workflows.executions.v1.Execution.Status.IStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified Step message, length delimited. Does not implicitly {@link google.cloud.workflows.executions.v1.Execution.Status.Step.verify|verify} messages.
+                                 * @param message Step message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.workflows.executions.v1.Execution.Status.IStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a Step message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns Step
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workflows.executions.v1.Execution.Status.Step;
+
+                                /**
+                                 * Decodes a Step message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns Step
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workflows.executions.v1.Execution.Status.Step;
+
+                                /**
+                                 * Verifies a Step message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a Step message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns Step
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.workflows.executions.v1.Execution.Status.Step;
+
+                                /**
+                                 * Creates a plain object from a Step message. Also converts values to other types if specified.
+                                 * @param message Step
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.workflows.executions.v1.Execution.Status.Step, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this Step to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for Step
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+
+                        /** Properties of a StateError. */
+                        interface IStateError {
+
+                            /** StateError details */
+                            details?: (string|null);
+
+                            /** StateError type */
+                            type?: (google.cloud.workflows.executions.v1.Execution.StateError.Type|keyof typeof google.cloud.workflows.executions.v1.Execution.StateError.Type|null);
+                        }
+
+                        /** Represents a StateError. */
+                        class StateError implements IStateError {
+
+                            /**
+                             * Constructs a new StateError.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.workflows.executions.v1.Execution.IStateError);
+
+                            /** StateError details. */
+                            public details: string;
+
+                            /** StateError type. */
+                            public type: (google.cloud.workflows.executions.v1.Execution.StateError.Type|keyof typeof google.cloud.workflows.executions.v1.Execution.StateError.Type);
+
+                            /**
+                             * Creates a new StateError instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns StateError instance
+                             */
+                            public static create(properties?: google.cloud.workflows.executions.v1.Execution.IStateError): google.cloud.workflows.executions.v1.Execution.StateError;
+
+                            /**
+                             * Encodes the specified StateError message. Does not implicitly {@link google.cloud.workflows.executions.v1.Execution.StateError.verify|verify} messages.
+                             * @param message StateError message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.workflows.executions.v1.Execution.IStateError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified StateError message, length delimited. Does not implicitly {@link google.cloud.workflows.executions.v1.Execution.StateError.verify|verify} messages.
+                             * @param message StateError message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.workflows.executions.v1.Execution.IStateError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a StateError message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns StateError
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workflows.executions.v1.Execution.StateError;
+
+                            /**
+                             * Decodes a StateError message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns StateError
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workflows.executions.v1.Execution.StateError;
+
+                            /**
+                             * Verifies a StateError message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a StateError message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns StateError
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.workflows.executions.v1.Execution.StateError;
+
+                            /**
+                             * Creates a plain object from a StateError message. Also converts values to other types if specified.
+                             * @param message StateError
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.workflows.executions.v1.Execution.StateError, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this StateError to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for StateError
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace StateError {
+
+                            /** Type enum. */
+                            enum Type {
+                                TYPE_UNSPECIFIED = 0,
+                                KMS_ERROR = 1
+                            }
                         }
                     }
 
@@ -742,6 +1084,12 @@ export namespace google {
 
                         /** ListExecutionsRequest view */
                         view?: (google.cloud.workflows.executions.v1.ExecutionView|keyof typeof google.cloud.workflows.executions.v1.ExecutionView|null);
+
+                        /** ListExecutionsRequest filter */
+                        filter?: (string|null);
+
+                        /** ListExecutionsRequest orderBy */
+                        orderBy?: (string|null);
                     }
 
                     /** Represents a ListExecutionsRequest. */
@@ -764,6 +1112,12 @@ export namespace google {
 
                         /** ListExecutionsRequest view. */
                         public view: (google.cloud.workflows.executions.v1.ExecutionView|keyof typeof google.cloud.workflows.executions.v1.ExecutionView);
+
+                        /** ListExecutionsRequest filter. */
+                        public filter: string;
+
+                        /** ListExecutionsRequest orderBy. */
+                        public orderBy: string;
 
                         /**
                          * Creates a new ListExecutionsRequest instance using the specified properties.

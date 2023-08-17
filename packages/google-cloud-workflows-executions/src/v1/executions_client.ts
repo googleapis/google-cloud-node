@@ -442,8 +442,8 @@ export class ExecutionsClient {
    *   Format:
    *   projects/{project}/locations/{location}/workflows/{workflow}/executions/{execution}
    * @param {google.cloud.workflows.executions.v1.ExecutionView} [request.view]
-   *   Optional. A view defining which fields should be filled in the returned execution.
-   *   The API will default to the FULL view.
+   *   Optional. A view defining which fields should be filled in the returned
+   *   execution. The API will default to the FULL view.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -645,7 +645,7 @@ export class ExecutionsClient {
    *   Format: projects/{project}/locations/{location}/workflows/{workflow}
    * @param {number} request.pageSize
    *   Maximum number of executions to return per call.
-   *   Max supported value depends on the selected Execution view: it's 10000 for
+   *   Max supported value depends on the selected Execution view: it's 1000 for
    *   BASIC and 100 for FULL. The default value used if the field is not
    *   specified is 100, regardless of the selected view. Values greater than
    *   the max value will be coerced down to it.
@@ -655,9 +655,22 @@ export class ExecutionsClient {
    *
    *   When paginating, all other parameters provided to `ListExecutions` must
    *   match the call that provided the page token.
+   *
+   *   Note that pagination is applied to dynamic data. The list of executions
+   *   returned can change between page requests.
    * @param {google.cloud.workflows.executions.v1.ExecutionView} [request.view]
-   *   Optional. A view defining which fields should be filled in the returned executions.
-   *   The API will default to the BASIC view.
+   *   Optional. A view defining which fields should be filled in the returned
+   *   executions. The API will default to the BASIC view.
+   * @param {string} [request.filter]
+   *   Optional. Filters applied to the [Executions.ListExecutions] results.
+   *   The following fields are supported for filtering:
+   *   executionID, state, startTime, endTime, duration, workflowRevisionID,
+   *   stepName, and label.
+   * @param {string} [request.orderBy]
+   *   Optional. The ordering applied to the [Executions.ListExecutions] results.
+   *   By default the ordering is based on descending start time.
+   *   The following fields are supported for order by:
+   *   executionID, startTime, endTime, duration, state, and workflowRevisionID.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -754,7 +767,7 @@ export class ExecutionsClient {
    *   Format: projects/{project}/locations/{location}/workflows/{workflow}
    * @param {number} request.pageSize
    *   Maximum number of executions to return per call.
-   *   Max supported value depends on the selected Execution view: it's 10000 for
+   *   Max supported value depends on the selected Execution view: it's 1000 for
    *   BASIC and 100 for FULL. The default value used if the field is not
    *   specified is 100, regardless of the selected view. Values greater than
    *   the max value will be coerced down to it.
@@ -764,9 +777,22 @@ export class ExecutionsClient {
    *
    *   When paginating, all other parameters provided to `ListExecutions` must
    *   match the call that provided the page token.
+   *
+   *   Note that pagination is applied to dynamic data. The list of executions
+   *   returned can change between page requests.
    * @param {google.cloud.workflows.executions.v1.ExecutionView} [request.view]
-   *   Optional. A view defining which fields should be filled in the returned executions.
-   *   The API will default to the BASIC view.
+   *   Optional. A view defining which fields should be filled in the returned
+   *   executions. The API will default to the BASIC view.
+   * @param {string} [request.filter]
+   *   Optional. Filters applied to the [Executions.ListExecutions] results.
+   *   The following fields are supported for filtering:
+   *   executionID, state, startTime, endTime, duration, workflowRevisionID,
+   *   stepName, and label.
+   * @param {string} [request.orderBy]
+   *   Optional. The ordering applied to the [Executions.ListExecutions] results.
+   *   By default the ordering is based on descending start time.
+   *   The following fields are supported for order by:
+   *   executionID, startTime, endTime, duration, state, and workflowRevisionID.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -811,7 +837,7 @@ export class ExecutionsClient {
    *   Format: projects/{project}/locations/{location}/workflows/{workflow}
    * @param {number} request.pageSize
    *   Maximum number of executions to return per call.
-   *   Max supported value depends on the selected Execution view: it's 10000 for
+   *   Max supported value depends on the selected Execution view: it's 1000 for
    *   BASIC and 100 for FULL. The default value used if the field is not
    *   specified is 100, regardless of the selected view. Values greater than
    *   the max value will be coerced down to it.
@@ -821,9 +847,22 @@ export class ExecutionsClient {
    *
    *   When paginating, all other parameters provided to `ListExecutions` must
    *   match the call that provided the page token.
+   *
+   *   Note that pagination is applied to dynamic data. The list of executions
+   *   returned can change between page requests.
    * @param {google.cloud.workflows.executions.v1.ExecutionView} [request.view]
-   *   Optional. A view defining which fields should be filled in the returned executions.
-   *   The API will default to the BASIC view.
+   *   Optional. A view defining which fields should be filled in the returned
+   *   executions. The API will default to the BASIC view.
+   * @param {string} [request.filter]
+   *   Optional. Filters applied to the [Executions.ListExecutions] results.
+   *   The following fields are supported for filtering:
+   *   executionID, state, startTime, endTime, duration, workflowRevisionID,
+   *   stepName, and label.
+   * @param {string} [request.orderBy]
+   *   Optional. The ordering applied to the [Executions.ListExecutions] results.
+   *   By default the ordering is based on descending start time.
+   *   The following fields are supported for order by:
+   *   executionID, startTime, endTime, duration, state, and workflowRevisionID.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

@@ -35,8 +35,8 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  Optional. A view defining which fields should be filled in the returned execution.
-   *  The API will default to the FULL view.
+   *  Optional. A view defining which fields should be filled in the returned
+   *  execution. The API will default to the FULL view.
    */
   // const view = {}
 
