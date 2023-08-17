@@ -1048,20 +1048,8 @@
                         }
                       }
                     },
-                    "VolumePerformanceTier": {
-                      "values": {
-                        "VOLUME_PERFORMANCE_TIER_UNSPECIFIED": 0,
-                        "VOLUME_PERFORMANCE_TIER_SHARED": 1,
-                        "VOLUME_PERFORMANCE_TIER_ASSIGNED": 2,
-                        "VOLUME_PERFORMANCE_TIER_HT": 3
-                      }
-                    },
-                    "WorkloadProfile": {
-                      "values": {
-                        "WORKLOAD_PROFILE_UNSPECIFIED": 0,
-                        "WORKLOAD_PROFILE_GENERIC": 1,
-                        "WORKLOAD_PROFILE_HANA": 2
-                      }
+                    "ResetInstanceResponse": {
+                      "fields": {}
                     },
                     "Instance": {
                       "options": {
@@ -1308,9 +1296,6 @@
                         }
                       }
                     },
-                    "ResetInstanceResponse": {
-                      "fields": {}
-                    },
                     "StartInstanceRequest": {
                       "fields": {
                         "name": {
@@ -1393,6 +1378,73 @@
                           "type": "bool",
                           "id": 3
                         }
+                      }
+                    },
+                    "ServerNetworkTemplate": {
+                      "options": {
+                        "(google.api.resource).type": "baremetalsolution.googleapis.com/ServerNetworkTemplate",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/serverNetworkTemplate/{server_network_template}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "applicableInstanceTypes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "logicalInterfaces": {
+                          "rule": "repeated",
+                          "type": "LogicalInterface",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "LogicalInterface": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "type": {
+                              "type": "InterfaceType",
+                              "id": 2
+                            },
+                            "required": {
+                              "type": "bool",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "InterfaceType": {
+                              "values": {
+                                "INTERFACE_TYPE_UNSPECIFIED": 0,
+                                "BOND": 1,
+                                "NIC": 2
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "VolumePerformanceTier": {
+                      "values": {
+                        "VOLUME_PERFORMANCE_TIER_UNSPECIFIED": 0,
+                        "VOLUME_PERFORMANCE_TIER_SHARED": 1,
+                        "VOLUME_PERFORMANCE_TIER_ASSIGNED": 2,
+                        "VOLUME_PERFORMANCE_TIER_HT": 3
+                      }
+                    },
+                    "WorkloadProfile": {
+                      "values": {
+                        "WORKLOAD_PROFILE_UNSPECIFIED": 0,
+                        "WORKLOAD_PROFILE_GENERIC": 1,
+                        "WORKLOAD_PROFILE_HANA": 2
                       }
                     },
                     "Lun": {
@@ -3241,58 +3293,6 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "ServerNetworkTemplate": {
-                      "options": {
-                        "(google.api.resource).type": "baremetalsolution.googleapis.com/ServerNetworkTemplate",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/serverNetworkTemplate/{server_network_template}"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "applicableInstanceTypes": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 2
-                        },
-                        "logicalInterfaces": {
-                          "rule": "repeated",
-                          "type": "LogicalInterface",
-                          "id": 3
-                        }
-                      },
-                      "nested": {
-                        "LogicalInterface": {
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "type": {
-                              "type": "InterfaceType",
-                              "id": 2
-                            },
-                            "required": {
-                              "type": "bool",
-                              "id": 3
-                            }
-                          },
-                          "nested": {
-                            "InterfaceType": {
-                              "values": {
-                                "INTERFACE_TYPE_UNSPECIFIED": 0,
-                                "BOND": 1,
-                                "NIC": 2
-                              }
-                            }
                           }
                         }
                       }
