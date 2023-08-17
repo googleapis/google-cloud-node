@@ -54,7 +54,7 @@
     "c8": "^7.3.5",
     "gts": "^3.1.0",
     "jsdoc": "^4.0.0",
-    "jsdoc-fresh": "^2.0.0",
+    "jsdoc-fresh": "^3.0.0",
     "jsdoc-region-tag": "^3.0.0",
     "long": "^5.2.3",
     "linkinator": "4.1.2",
