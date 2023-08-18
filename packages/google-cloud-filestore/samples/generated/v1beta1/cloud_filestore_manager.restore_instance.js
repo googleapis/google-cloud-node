@@ -34,7 +34,7 @@ function main(name, fileShare) {
    */
   // const name = 'abc123'
   /**
-   *  Required. Name of the file share in the Filestore instance that the snapshot
+   *  Required. Name of the file share in the Filestore instance that the backup
    *  is being restored to.
    */
   // const fileShare = 'abc123'

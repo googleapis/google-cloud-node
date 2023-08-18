@@ -57,10 +57,8 @@ const version = require('../../../package.json').version;
  *    backups are resources of the form:
  *    `/projects/{project_id}/locations/{location_id}/backup/{backup_id}`
  *
- *  Note that location_id can represent a GCP `zone` or `region` depending on the
- *  resource.
- *  for example:
- *  A zonal Filestore instance:
+ *  Note that location_id can represent a Google Cloud `zone` or `region`
+ *  depending on the resource. for example: A zonal Filestore instance:
  *  * `projects/my-project/locations/us-central1-c/instances/my-basic-tier-filer`
  *  A regional Filestore instance:
  *  * `projects/my-project/locations/us-central1/instances/my-enterprise-filer`
@@ -981,7 +979,7 @@ export class CloudFilestoreManagerClient {
    * @param {string} request.parent
    *   Required. The instance's project and location, in the format
    *   `projects/{project_id}/locations/{location}`. In Filestore,
-   *   locations map to GCP zones, for example **us-west1-b**.
+   *   locations map to Google Cloud zones, for example **us-west1-b**.
    * @param {string} request.instanceId
    *   Required. The ID of the instance to create.
    *   The ID must be unique within the specified project and location.
@@ -1125,9 +1123,9 @@ export class CloudFilestoreManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Mask of fields to update.  At least one path must be supplied in this
-   *   field.  The elements of the repeated paths field may only include these
-   *   fields:
+   *   Required. Mask of fields to update.  At least one path must be supplied in
+   *   this field.  The elements of the repeated paths field may only include
+   *   these fields:
    *
    *   * "description"
    *   * "file_shares"
@@ -1276,7 +1274,7 @@ export class CloudFilestoreManagerClient {
    *   Required. The resource name of the instance, in the format
    *   `projects/{project_id}/locations/{location_id}/instances/{instance_id}`.
    * @param {string} request.fileShare
-   *   Required. Name of the file share in the Filestore instance that the snapshot
+   *   Required. Name of the file share in the Filestore instance that the backup
    *   is being restored to.
    * @param {string} request.sourceSnapshot
    *   The resource name of the snapshot, in the format
@@ -1419,11 +1417,12 @@ export class CloudFilestoreManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. projects/{project_id}/locations/{location_id}/instances/{instance_id}.
-   *   The resource name of the instance, in the format
+   *   Required.
+   *   projects/{project_id}/locations/{location_id}/instances/{instance_id}. The
+   *   resource name of the instance, in the format
    * @param {string} request.targetSnapshotId
-   *   Required. The snapshot resource ID, in the format 'my-snapshot', where the specified
-   *   ID is the {snapshot_id} of the fully qualified name like
+   *   Required. The snapshot resource ID, in the format 'my-snapshot', where the
+   *   specified ID is the {snapshot_id} of the fully qualified name like
    *   projects/{project_id}/locations/{location_id}/instances/{instance_id}/snapshots/{snapshot_id}
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1982,8 +1981,8 @@ export class CloudFilestoreManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Mask of fields to update.  At least one path must be supplied in this
-   *   field.
+   *   Required. Mask of fields to update.  At least one path must be supplied in
+   *   this field.
    * @param {google.cloud.filestore.v1beta1.Snapshot} request.snapshot
    *   Required. A snapshot resource
    * @param {object} [options]
@@ -2123,7 +2122,7 @@ export class CloudFilestoreManagerClient {
    * @param {string} request.parent
    *   Required. The backup's project and location, in the format
    *   `projects/{project_id}/locations/{location}`. In Filestore,
-   *   backup locations map to GCP regions, for example **us-west1**.
+   *   backup locations map to Google Cloud regions, for example **us-west1**.
    * @param {google.cloud.filestore.v1beta1.Backup} request.backup
    *   Required. A {@link protos.google.cloud.filestore.v1beta1.Backup|backup resource}
    * @param {string} request.backupId
@@ -2406,8 +2405,8 @@ export class CloudFilestoreManagerClient {
    * @param {google.cloud.filestore.v1beta1.Backup} request.backup
    *   Required. A {@link protos.google.cloud.filestore.v1beta1.Backup|backup resource}
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Mask of fields to update.  At least one path must be supplied in this
-   *   field.
+   *   Required. Mask of fields to update.  At least one path must be supplied in
+   *   this field.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2828,9 +2827,9 @@ export class CloudFilestoreManagerClient {
    *   Required. A share resource.
    *   Only fields specified in update_mask are updated.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Mask of fields to update. At least one path must be supplied in this
-   *   field.
-   *   The elements of the repeated paths field may only include these fields:
+   *   Required. Mask of fields to update. At least one path must be supplied in
+   *   this field. The elements of the repeated paths field may only include these
+   *   fields:
    *
    *   * "description"
    *   * "capacity_gb"
@@ -2972,10 +2971,11 @@ export class CloudFilestoreManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location for which to retrieve instance information,
-   *   in the format `projects/{project_id}/locations/{location}`. In Cloud
-   *   Filestore, locations map to GCP zones, for example **us-west1-b**. To
-   *   retrieve instance information for all locations, use "-" for the
+   *   Required. The project and location for which to retrieve instance
+   *   information, in the format `projects/{project_id}/locations/{location}`. In
+   *   Cloud Filestore, locations map to Google Cloud zones, for example
+   *   **us-west1-b**. To retrieve instance information for all locations, use "-"
+   *   for the
    *   `{location}` value.
    * @param {number} request.pageSize
    *   The maximum number of items to return.
@@ -3078,10 +3078,11 @@ export class CloudFilestoreManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location for which to retrieve instance information,
-   *   in the format `projects/{project_id}/locations/{location}`. In Cloud
-   *   Filestore, locations map to GCP zones, for example **us-west1-b**. To
-   *   retrieve instance information for all locations, use "-" for the
+   *   Required. The project and location for which to retrieve instance
+   *   information, in the format `projects/{project_id}/locations/{location}`. In
+   *   Cloud Filestore, locations map to Google Cloud zones, for example
+   *   **us-west1-b**. To retrieve instance information for all locations, use "-"
+   *   for the
    *   `{location}` value.
    * @param {number} request.pageSize
    *   The maximum number of items to return.
@@ -3132,10 +3133,11 @@ export class CloudFilestoreManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location for which to retrieve instance information,
-   *   in the format `projects/{project_id}/locations/{location}`. In Cloud
-   *   Filestore, locations map to GCP zones, for example **us-west1-b**. To
-   *   retrieve instance information for all locations, use "-" for the
+   *   Required. The project and location for which to retrieve instance
+   *   information, in the format `projects/{project_id}/locations/{location}`. In
+   *   Cloud Filestore, locations map to Google Cloud zones, for example
+   *   **us-west1-b**. To retrieve instance information for all locations, use "-"
+   *   for the
    *   `{location}` value.
    * @param {number} request.pageSize
    *   The maximum number of items to return.
@@ -3394,11 +3396,11 @@ export class CloudFilestoreManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location for which to retrieve backup information,
-   *   in the format `projects/{project_id}/locations/{location}`.
-   *   In Filestore, backup locations map to GCP regions,
-   *   for example **us-west1**.
-   *   To retrieve backup information for all locations, use "-" for the
+   *   Required. The project and location for which to retrieve backup
+   *   information, in the format `projects/{project_id}/locations/{location}`. In
+   *   Filestore, backup locations map to Google Cloud regions, for example
+   *   **us-west1**. To retrieve backup information for all locations, use "-" for
+   *   the
    *   `{location}` value.
    * @param {number} request.pageSize
    *   The maximum number of items to return.
@@ -3501,11 +3503,11 @@ export class CloudFilestoreManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location for which to retrieve backup information,
-   *   in the format `projects/{project_id}/locations/{location}`.
-   *   In Filestore, backup locations map to GCP regions,
-   *   for example **us-west1**.
-   *   To retrieve backup information for all locations, use "-" for the
+   *   Required. The project and location for which to retrieve backup
+   *   information, in the format `projects/{project_id}/locations/{location}`. In
+   *   Filestore, backup locations map to Google Cloud regions, for example
+   *   **us-west1**. To retrieve backup information for all locations, use "-" for
+   *   the
    *   `{location}` value.
    * @param {number} request.pageSize
    *   The maximum number of items to return.
@@ -3556,11 +3558,11 @@ export class CloudFilestoreManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location for which to retrieve backup information,
-   *   in the format `projects/{project_id}/locations/{location}`.
-   *   In Filestore, backup locations map to GCP regions,
-   *   for example **us-west1**.
-   *   To retrieve backup information for all locations, use "-" for the
+   *   Required. The project and location for which to retrieve backup
+   *   information, in the format `projects/{project_id}/locations/{location}`. In
+   *   Filestore, backup locations map to Google Cloud regions, for example
+   *   **us-west1**. To retrieve backup information for all locations, use "-" for
+   *   the
    *   `{location}` value.
    * @param {number} request.pageSize
    *   The maximum number of items to return.

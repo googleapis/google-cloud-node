@@ -29,8 +29,8 @@ function main(updateMask, snapshot) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Mask of fields to update.  At least one path must be supplied in this
-   *  field.
+   *  Required. Mask of fields to update.  At least one path must be supplied in
+   *  this field.
    */
   // const updateMask = {}
   /**
