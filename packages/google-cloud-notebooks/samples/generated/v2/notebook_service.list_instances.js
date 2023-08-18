@@ -42,6 +42,15 @@ function main(parent) {
    *  listing from the last result.
    */
   // const pageToken = 'abc123'
+  /**
+   *  Optional. Sort results. Supported values are "name", "name desc" or ""
+   *  (unsorted).
+   */
+  // const orderBy = 'abc123'
+  /**
+   *  Optional. List filter.
+   */
+  // const filter = 'abc123'
 
   // Imports the Notebooks library
   const {NotebookServiceClient} = require('@google-cloud/notebooks').v2;

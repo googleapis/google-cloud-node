@@ -1974,6 +1974,11 @@ export class NotebookServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A previous returned page token that can be used to continue
    *   listing from the last result.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort results. Supported values are "name", "name desc" or ""
+   *   (unsorted).
+   * @param {string} [request.filter]
+   *   Optional. List filter.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2073,6 +2078,11 @@ export class NotebookServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A previous returned page token that can be used to continue
    *   listing from the last result.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort results. Supported values are "name", "name desc" or ""
+   *   (unsorted).
+   * @param {string} [request.filter]
+   *   Optional. List filter.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2120,6 +2130,11 @@ export class NotebookServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. A previous returned page token that can be used to continue
    *   listing from the last result.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort results. Supported values are "name", "name desc" or ""
+   *   (unsorted).
+   * @param {string} [request.filter]
+   *   Optional. List filter.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
