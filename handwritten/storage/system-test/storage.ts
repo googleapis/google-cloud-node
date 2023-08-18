@@ -1530,21 +1530,9 @@ describe('storage', () => {
 
       async function createFile(): Promise<File> {
         const file = BUCKET.file(generateName());
-        FILES.push(file);
         await file.save('data');
+        FILES.push(file);
         return file;
-      }
-
-      async function deleteFilesAsync() {
-        await new Promise(resolve =>
-          setTimeout(resolve, RETENTION_PERIOD_SECONDS * 1000)
-        );
-        return Promise.all(
-          FILES.map(async file => {
-            await file.setMetadata({temporaryHold: null});
-            return file.delete();
-          })
-        );
       }
 
       before(async () => {
@@ -1555,8 +1543,15 @@ describe('storage', () => {
         });
       });
 
-      after(() => {
-        return deleteFilesAsync();
+      after(async () => {
+        await new Promise(resolve =>
+          setTimeout(resolve, RETENTION_PERIOD_SECONDS * 1000)
+        );
+        await Promise.all(
+          FILES.map(async file => {
+            return file.delete();
+          })
+        );
       });
 
       it('should block an overwrite request', async () => {
