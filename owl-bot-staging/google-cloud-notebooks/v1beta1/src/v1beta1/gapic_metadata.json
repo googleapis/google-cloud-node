@@ -1,0 +1,221 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.notebooks.v1beta1",
+  "libraryPackage": "@google-cloud/notebooks",
+  "services": {
+    "NotebookService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "NotebookServiceClient",
+          "rpcs": {
+            "GetInstance": {
+              "methods": [
+                "getInstance"
+              ]
+            },
+            "IsInstanceUpgradeable": {
+              "methods": [
+                "isInstanceUpgradeable"
+              ]
+            },
+            "GetEnvironment": {
+              "methods": [
+                "getEnvironment"
+              ]
+            },
+            "CreateInstance": {
+              "methods": [
+                "createInstance"
+              ]
+            },
+            "RegisterInstance": {
+              "methods": [
+                "registerInstance"
+              ]
+            },
+            "SetInstanceAccelerator": {
+              "methods": [
+                "setInstanceAccelerator"
+              ]
+            },
+            "SetInstanceMachineType": {
+              "methods": [
+                "setInstanceMachineType"
+              ]
+            },
+            "SetInstanceLabels": {
+              "methods": [
+                "setInstanceLabels"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "deleteInstance"
+              ]
+            },
+            "StartInstance": {
+              "methods": [
+                "startInstance"
+              ]
+            },
+            "StopInstance": {
+              "methods": [
+                "stopInstance"
+              ]
+            },
+            "ResetInstance": {
+              "methods": [
+                "resetInstance"
+              ]
+            },
+            "ReportInstanceInfo": {
+              "methods": [
+                "reportInstanceInfo"
+              ]
+            },
+            "UpgradeInstance": {
+              "methods": [
+                "upgradeInstance"
+              ]
+            },
+            "UpgradeInstanceInternal": {
+              "methods": [
+                "upgradeInstanceInternal"
+              ]
+            },
+            "CreateEnvironment": {
+              "methods": [
+                "createEnvironment"
+              ]
+            },
+            "DeleteEnvironment": {
+              "methods": [
+                "deleteEnvironment"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances",
+                "listInstancesStream",
+                "listInstancesAsync"
+              ]
+            },
+            "ListEnvironments": {
+              "methods": [
+                "listEnvironments",
+                "listEnvironmentsStream",
+                "listEnvironmentsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "NotebookServiceClient",
+          "rpcs": {
+            "GetInstance": {
+              "methods": [
+                "getInstance"
+              ]
+            },
+            "IsInstanceUpgradeable": {
+              "methods": [
+                "isInstanceUpgradeable"
+              ]
+            },
+            "GetEnvironment": {
+              "methods": [
+                "getEnvironment"
+              ]
+            },
+            "CreateInstance": {
+              "methods": [
+                "createInstance"
+              ]
+            },
+            "RegisterInstance": {
+              "methods": [
+                "registerInstance"
+              ]
+            },
+            "SetInstanceAccelerator": {
+              "methods": [
+                "setInstanceAccelerator"
+              ]
+            },
+            "SetInstanceMachineType": {
+              "methods": [
+                "setInstanceMachineType"
+              ]
+            },
+            "SetInstanceLabels": {
+              "methods": [
+                "setInstanceLabels"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "deleteInstance"
+              ]
+            },
+            "StartInstance": {
+              "methods": [
+                "startInstance"
+              ]
+            },
+            "StopInstance": {
+              "methods": [
+                "stopInstance"
+              ]
+            },
+            "ResetInstance": {
+              "methods": [
+                "resetInstance"
+              ]
+            },
+            "ReportInstanceInfo": {
+              "methods": [
+                "reportInstanceInfo"
+              ]
+            },
+            "UpgradeInstance": {
+              "methods": [
+                "upgradeInstance"
+              ]
+            },
+            "UpgradeInstanceInternal": {
+              "methods": [
+                "upgradeInstanceInternal"
+              ]
+            },
+            "CreateEnvironment": {
+              "methods": [
+                "createEnvironment"
+              ]
+            },
+            "DeleteEnvironment": {
+              "methods": [
+                "deleteEnvironment"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances",
+                "listInstancesStream",
+                "listInstancesAsync"
+              ]
+            },
+            "ListEnvironments": {
+              "methods": [
+                "listEnvironments",
+                "listEnvironmentsStream",
+                "listEnvironmentsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
