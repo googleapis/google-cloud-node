@@ -10246,6 +10246,7 @@
                          * @property {google.cloud.filestore.v1beta1.NfsExportOptions.SquashMode|null} [squashMode] NfsExportOptions squashMode
                          * @property {number|Long|null} [anonUid] NfsExportOptions anonUid
                          * @property {number|Long|null} [anonGid] NfsExportOptions anonGid
+                         * @property {Array.<google.cloud.filestore.v1beta1.NfsExportOptions.SecurityFlavor>|null} [securityFlavors] NfsExportOptions securityFlavors
                          */
     
                         /**
@@ -10258,6 +10259,7 @@
                          */
                         function NfsExportOptions(properties) {
                             this.ipRanges = [];
+                            this.securityFlavors = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -10305,6 +10307,14 @@
                         NfsExportOptions.prototype.anonGid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
     
                         /**
+                         * NfsExportOptions securityFlavors.
+                         * @member {Array.<google.cloud.filestore.v1beta1.NfsExportOptions.SecurityFlavor>} securityFlavors
+                         * @memberof google.cloud.filestore.v1beta1.NfsExportOptions
+                         * @instance
+                         */
+                        NfsExportOptions.prototype.securityFlavors = $util.emptyArray;
+    
+                        /**
                          * Creates a new NfsExportOptions instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.filestore.v1beta1.NfsExportOptions
@@ -10339,6 +10349,12 @@
                                 writer.uint32(/* id 4, wireType 0 =*/32).int64(message.anonUid);
                             if (message.anonGid != null && Object.hasOwnProperty.call(message, "anonGid"))
                                 writer.uint32(/* id 5, wireType 0 =*/40).int64(message.anonGid);
+                            if (message.securityFlavors != null && message.securityFlavors.length) {
+                                writer.uint32(/* id 6, wireType 2 =*/50).fork();
+                                for (var i = 0; i < message.securityFlavors.length; ++i)
+                                    writer.int32(message.securityFlavors[i]);
+                                writer.ldelim();
+                            }
                             return writer;
                         };
     
@@ -10393,6 +10409,17 @@
                                     }
                                 case 5: {
                                         message.anonGid = reader.int64();
+                                        break;
+                                    }
+                                case 6: {
+                                        if (!(message.securityFlavors && message.securityFlavors.length))
+                                            message.securityFlavors = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.securityFlavors.push(reader.int32());
+                                        } else
+                                            message.securityFlavors.push(reader.int32());
                                         break;
                                     }
                                 default:
@@ -10461,6 +10488,21 @@
                             if (message.anonGid != null && message.hasOwnProperty("anonGid"))
                                 if (!$util.isInteger(message.anonGid) && !(message.anonGid && $util.isInteger(message.anonGid.low) && $util.isInteger(message.anonGid.high)))
                                     return "anonGid: integer|Long expected";
+                            if (message.securityFlavors != null && message.hasOwnProperty("securityFlavors")) {
+                                if (!Array.isArray(message.securityFlavors))
+                                    return "securityFlavors: array expected";
+                                for (var i = 0; i < message.securityFlavors.length; ++i)
+                                    switch (message.securityFlavors[i]) {
+                                    default:
+                                        return "securityFlavors: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                            }
                             return null;
                         };
     
@@ -10541,6 +10583,39 @@
                                     message.anonGid = object.anonGid;
                                 else if (typeof object.anonGid === "object")
                                     message.anonGid = new $util.LongBits(object.anonGid.low >>> 0, object.anonGid.high >>> 0).toNumber();
+                            if (object.securityFlavors) {
+                                if (!Array.isArray(object.securityFlavors))
+                                    throw TypeError(".google.cloud.filestore.v1beta1.NfsExportOptions.securityFlavors: array expected");
+                                message.securityFlavors = [];
+                                for (var i = 0; i < object.securityFlavors.length; ++i)
+                                    switch (object.securityFlavors[i]) {
+                                    default:
+                                        if (typeof object.securityFlavors[i] === "number") {
+                                            message.securityFlavors[i] = object.securityFlavors[i];
+                                            break;
+                                        }
+                                    case "SECURITY_FLAVOR_UNSPECIFIED":
+                                    case 0:
+                                        message.securityFlavors[i] = 0;
+                                        break;
+                                    case "AUTH_SYS":
+                                    case 1:
+                                        message.securityFlavors[i] = 1;
+                                        break;
+                                    case "KRB5":
+                                    case 2:
+                                        message.securityFlavors[i] = 2;
+                                        break;
+                                    case "KRB5I":
+                                    case 3:
+                                        message.securityFlavors[i] = 3;
+                                        break;
+                                    case "KRB5P":
+                                    case 4:
+                                        message.securityFlavors[i] = 4;
+                                        break;
+                                    }
+                            }
                             return message;
                         };
     
@@ -10557,8 +10632,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.ipRanges = [];
+                                object.securityFlavors = [];
+                            }
                             if (options.defaults) {
                                 object.accessMode = options.enums === String ? "ACCESS_MODE_UNSPECIFIED" : 0;
                                 object.squashMode = options.enums === String ? "SQUASH_MODE_UNSPECIFIED" : 0;
@@ -10592,6 +10669,11 @@
                                     object.anonGid = options.longs === String ? String(message.anonGid) : message.anonGid;
                                 else
                                     object.anonGid = options.longs === String ? $util.Long.prototype.toString.call(message.anonGid) : options.longs === Number ? new $util.LongBits(message.anonGid.low >>> 0, message.anonGid.high >>> 0).toNumber() : message.anonGid;
+                            if (message.securityFlavors && message.securityFlavors.length) {
+                                object.securityFlavors = [];
+                                for (var j = 0; j < message.securityFlavors.length; ++j)
+                                    object.securityFlavors[j] = options.enums === String ? $root.google.cloud.filestore.v1beta1.NfsExportOptions.SecurityFlavor[message.securityFlavors[j]] === undefined ? message.securityFlavors[j] : $root.google.cloud.filestore.v1beta1.NfsExportOptions.SecurityFlavor[message.securityFlavors[j]] : message.securityFlavors[j];
+                            }
                             return object;
                         };
     
@@ -10653,7 +10735,481 @@
                             return values;
                         })();
     
+                        /**
+                         * SecurityFlavor enum.
+                         * @name google.cloud.filestore.v1beta1.NfsExportOptions.SecurityFlavor
+                         * @enum {number}
+                         * @property {number} SECURITY_FLAVOR_UNSPECIFIED=0 SECURITY_FLAVOR_UNSPECIFIED value
+                         * @property {number} AUTH_SYS=1 AUTH_SYS value
+                         * @property {number} KRB5=2 KRB5 value
+                         * @property {number} KRB5I=3 KRB5I value
+                         * @property {number} KRB5P=4 KRB5P value
+                         */
+                        NfsExportOptions.SecurityFlavor = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SECURITY_FLAVOR_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "AUTH_SYS"] = 1;
+                            values[valuesById[2] = "KRB5"] = 2;
+                            values[valuesById[3] = "KRB5I"] = 3;
+                            values[valuesById[4] = "KRB5P"] = 4;
+                            return values;
+                        })();
+    
                         return NfsExportOptions;
+                    })();
+    
+                    v1beta1.ManagedActiveDirectoryConfig = (function() {
+    
+                        /**
+                         * Properties of a ManagedActiveDirectoryConfig.
+                         * @memberof google.cloud.filestore.v1beta1
+                         * @interface IManagedActiveDirectoryConfig
+                         * @property {string|null} [domain] ManagedActiveDirectoryConfig domain
+                         * @property {string|null} [computer] ManagedActiveDirectoryConfig computer
+                         */
+    
+                        /**
+                         * Constructs a new ManagedActiveDirectoryConfig.
+                         * @memberof google.cloud.filestore.v1beta1
+                         * @classdesc Represents a ManagedActiveDirectoryConfig.
+                         * @implements IManagedActiveDirectoryConfig
+                         * @constructor
+                         * @param {google.cloud.filestore.v1beta1.IManagedActiveDirectoryConfig=} [properties] Properties to set
+                         */
+                        function ManagedActiveDirectoryConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ManagedActiveDirectoryConfig domain.
+                         * @member {string} domain
+                         * @memberof google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig
+                         * @instance
+                         */
+                        ManagedActiveDirectoryConfig.prototype.domain = "";
+    
+                        /**
+                         * ManagedActiveDirectoryConfig computer.
+                         * @member {string} computer
+                         * @memberof google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig
+                         * @instance
+                         */
+                        ManagedActiveDirectoryConfig.prototype.computer = "";
+    
+                        /**
+                         * Creates a new ManagedActiveDirectoryConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig
+                         * @static
+                         * @param {google.cloud.filestore.v1beta1.IManagedActiveDirectoryConfig=} [properties] Properties to set
+                         * @returns {google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig} ManagedActiveDirectoryConfig instance
+                         */
+                        ManagedActiveDirectoryConfig.create = function create(properties) {
+                            return new ManagedActiveDirectoryConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ManagedActiveDirectoryConfig message. Does not implicitly {@link google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig
+                         * @static
+                         * @param {google.cloud.filestore.v1beta1.IManagedActiveDirectoryConfig} message ManagedActiveDirectoryConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ManagedActiveDirectoryConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.domain != null && Object.hasOwnProperty.call(message, "domain"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.domain);
+                            if (message.computer != null && Object.hasOwnProperty.call(message, "computer"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.computer);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ManagedActiveDirectoryConfig message, length delimited. Does not implicitly {@link google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig
+                         * @static
+                         * @param {google.cloud.filestore.v1beta1.IManagedActiveDirectoryConfig} message ManagedActiveDirectoryConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ManagedActiveDirectoryConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ManagedActiveDirectoryConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig} ManagedActiveDirectoryConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ManagedActiveDirectoryConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.domain = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.computer = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ManagedActiveDirectoryConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig} ManagedActiveDirectoryConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ManagedActiveDirectoryConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ManagedActiveDirectoryConfig message.
+                         * @function verify
+                         * @memberof google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ManagedActiveDirectoryConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.domain != null && message.hasOwnProperty("domain"))
+                                if (!$util.isString(message.domain))
+                                    return "domain: string expected";
+                            if (message.computer != null && message.hasOwnProperty("computer"))
+                                if (!$util.isString(message.computer))
+                                    return "computer: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ManagedActiveDirectoryConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig} ManagedActiveDirectoryConfig
+                         */
+                        ManagedActiveDirectoryConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig)
+                                return object;
+                            var message = new $root.google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig();
+                            if (object.domain != null)
+                                message.domain = String(object.domain);
+                            if (object.computer != null)
+                                message.computer = String(object.computer);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ManagedActiveDirectoryConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig
+                         * @static
+                         * @param {google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig} message ManagedActiveDirectoryConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ManagedActiveDirectoryConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.domain = "";
+                                object.computer = "";
+                            }
+                            if (message.domain != null && message.hasOwnProperty("domain"))
+                                object.domain = message.domain;
+                            if (message.computer != null && message.hasOwnProperty("computer"))
+                                object.computer = message.computer;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ManagedActiveDirectoryConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ManagedActiveDirectoryConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ManagedActiveDirectoryConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ManagedActiveDirectoryConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig";
+                        };
+    
+                        return ManagedActiveDirectoryConfig;
+                    })();
+    
+                    v1beta1.DirectoryServicesConfig = (function() {
+    
+                        /**
+                         * Properties of a DirectoryServicesConfig.
+                         * @memberof google.cloud.filestore.v1beta1
+                         * @interface IDirectoryServicesConfig
+                         * @property {google.cloud.filestore.v1beta1.IManagedActiveDirectoryConfig|null} [managedActiveDirectory] DirectoryServicesConfig managedActiveDirectory
+                         */
+    
+                        /**
+                         * Constructs a new DirectoryServicesConfig.
+                         * @memberof google.cloud.filestore.v1beta1
+                         * @classdesc Represents a DirectoryServicesConfig.
+                         * @implements IDirectoryServicesConfig
+                         * @constructor
+                         * @param {google.cloud.filestore.v1beta1.IDirectoryServicesConfig=} [properties] Properties to set
+                         */
+                        function DirectoryServicesConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DirectoryServicesConfig managedActiveDirectory.
+                         * @member {google.cloud.filestore.v1beta1.IManagedActiveDirectoryConfig|null|undefined} managedActiveDirectory
+                         * @memberof google.cloud.filestore.v1beta1.DirectoryServicesConfig
+                         * @instance
+                         */
+                        DirectoryServicesConfig.prototype.managedActiveDirectory = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * DirectoryServicesConfig config.
+                         * @member {"managedActiveDirectory"|undefined} config
+                         * @memberof google.cloud.filestore.v1beta1.DirectoryServicesConfig
+                         * @instance
+                         */
+                        Object.defineProperty(DirectoryServicesConfig.prototype, "config", {
+                            get: $util.oneOfGetter($oneOfFields = ["managedActiveDirectory"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new DirectoryServicesConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.filestore.v1beta1.DirectoryServicesConfig
+                         * @static
+                         * @param {google.cloud.filestore.v1beta1.IDirectoryServicesConfig=} [properties] Properties to set
+                         * @returns {google.cloud.filestore.v1beta1.DirectoryServicesConfig} DirectoryServicesConfig instance
+                         */
+                        DirectoryServicesConfig.create = function create(properties) {
+                            return new DirectoryServicesConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DirectoryServicesConfig message. Does not implicitly {@link google.cloud.filestore.v1beta1.DirectoryServicesConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.filestore.v1beta1.DirectoryServicesConfig
+                         * @static
+                         * @param {google.cloud.filestore.v1beta1.IDirectoryServicesConfig} message DirectoryServicesConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DirectoryServicesConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.managedActiveDirectory != null && Object.hasOwnProperty.call(message, "managedActiveDirectory"))
+                                $root.google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig.encode(message.managedActiveDirectory, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DirectoryServicesConfig message, length delimited. Does not implicitly {@link google.cloud.filestore.v1beta1.DirectoryServicesConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.filestore.v1beta1.DirectoryServicesConfig
+                         * @static
+                         * @param {google.cloud.filestore.v1beta1.IDirectoryServicesConfig} message DirectoryServicesConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DirectoryServicesConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DirectoryServicesConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.filestore.v1beta1.DirectoryServicesConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.filestore.v1beta1.DirectoryServicesConfig} DirectoryServicesConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DirectoryServicesConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.filestore.v1beta1.DirectoryServicesConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.managedActiveDirectory = $root.google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DirectoryServicesConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.filestore.v1beta1.DirectoryServicesConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.filestore.v1beta1.DirectoryServicesConfig} DirectoryServicesConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DirectoryServicesConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DirectoryServicesConfig message.
+                         * @function verify
+                         * @memberof google.cloud.filestore.v1beta1.DirectoryServicesConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DirectoryServicesConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.managedActiveDirectory != null && message.hasOwnProperty("managedActiveDirectory")) {
+                                properties.config = 1;
+                                {
+                                    var error = $root.google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig.verify(message.managedActiveDirectory);
+                                    if (error)
+                                        return "managedActiveDirectory." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DirectoryServicesConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.filestore.v1beta1.DirectoryServicesConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.filestore.v1beta1.DirectoryServicesConfig} DirectoryServicesConfig
+                         */
+                        DirectoryServicesConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.filestore.v1beta1.DirectoryServicesConfig)
+                                return object;
+                            var message = new $root.google.cloud.filestore.v1beta1.DirectoryServicesConfig();
+                            if (object.managedActiveDirectory != null) {
+                                if (typeof object.managedActiveDirectory !== "object")
+                                    throw TypeError(".google.cloud.filestore.v1beta1.DirectoryServicesConfig.managedActiveDirectory: object expected");
+                                message.managedActiveDirectory = $root.google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig.fromObject(object.managedActiveDirectory);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DirectoryServicesConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.filestore.v1beta1.DirectoryServicesConfig
+                         * @static
+                         * @param {google.cloud.filestore.v1beta1.DirectoryServicesConfig} message DirectoryServicesConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DirectoryServicesConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.managedActiveDirectory != null && message.hasOwnProperty("managedActiveDirectory")) {
+                                object.managedActiveDirectory = $root.google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig.toObject(message.managedActiveDirectory, options);
+                                if (options.oneofs)
+                                    object.config = "managedActiveDirectory";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DirectoryServicesConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.filestore.v1beta1.DirectoryServicesConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DirectoryServicesConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DirectoryServicesConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.filestore.v1beta1.DirectoryServicesConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DirectoryServicesConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.filestore.v1beta1.DirectoryServicesConfig";
+                        };
+    
+                        return DirectoryServicesConfig;
                     })();
     
                     v1beta1.Instance = (function() {
@@ -10680,6 +11236,8 @@
                          * @property {number|Long|null} [maxShareCount] Instance maxShareCount
                          * @property {number|Long|null} [capacityGb] Instance capacityGb
                          * @property {boolean|null} [multiShareEnabled] Instance multiShareEnabled
+                         * @property {google.cloud.filestore.v1beta1.Instance.FileProtocol|null} [protocol] Instance protocol
+                         * @property {google.cloud.filestore.v1beta1.IDirectoryServicesConfig|null} [directoryServices] Instance directoryServices
                          */
     
                         /**
@@ -10846,6 +11404,22 @@
                         Instance.prototype.multiShareEnabled = false;
     
                         /**
+                         * Instance protocol.
+                         * @member {google.cloud.filestore.v1beta1.Instance.FileProtocol} protocol
+                         * @memberof google.cloud.filestore.v1beta1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.protocol = 0;
+    
+                        /**
+                         * Instance directoryServices.
+                         * @member {google.cloud.filestore.v1beta1.IDirectoryServicesConfig|null|undefined} directoryServices
+                         * @memberof google.cloud.filestore.v1beta1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.directoryServices = null;
+    
+                        /**
                          * Creates a new Instance instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.filestore.v1beta1.Instance
@@ -10912,6 +11486,10 @@
                                 writer.uint32(/* id 19, wireType 0 =*/152).int64(message.capacityGb);
                             if (message.multiShareEnabled != null && Object.hasOwnProperty.call(message, "multiShareEnabled"))
                                 writer.uint32(/* id 20, wireType 0 =*/160).bool(message.multiShareEnabled);
+                            if (message.protocol != null && Object.hasOwnProperty.call(message, "protocol"))
+                                writer.uint32(/* id 21, wireType 0 =*/168).int32(message.protocol);
+                            if (message.directoryServices != null && Object.hasOwnProperty.call(message, "directoryServices"))
+                                $root.google.cloud.filestore.v1beta1.DirectoryServicesConfig.encode(message.directoryServices, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
                             return writer;
                         };
     
@@ -11048,6 +11626,14 @@
                                         message.multiShareEnabled = reader.bool();
                                         break;
                                     }
+                                case 21: {
+                                        message.protocol = reader.int32();
+                                        break;
+                                    }
+                                case 24: {
+                                        message.directoryServices = $root.google.cloud.filestore.v1beta1.DirectoryServicesConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -11125,6 +11711,7 @@
                                 case 4:
                                 case 6:
                                 case 7:
+                                case 8:
                                     break;
                                 }
                             if (message.labels != null && message.hasOwnProperty("labels")) {
@@ -11191,6 +11778,20 @@
                             if (message.multiShareEnabled != null && message.hasOwnProperty("multiShareEnabled"))
                                 if (typeof message.multiShareEnabled !== "boolean")
                                     return "multiShareEnabled: boolean expected";
+                            if (message.protocol != null && message.hasOwnProperty("protocol"))
+                                switch (message.protocol) {
+                                default:
+                                    return "protocol: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.directoryServices != null && message.hasOwnProperty("directoryServices")) {
+                                var error = $root.google.cloud.filestore.v1beta1.DirectoryServicesConfig.verify(message.directoryServices);
+                                if (error)
+                                    return "directoryServices." + error;
+                            }
                             return null;
                         };
     
@@ -11304,6 +11905,10 @@
                             case 7:
                                 message.tier = 7;
                                 break;
+                            case "ZONAL":
+                            case 8:
+                                message.tier = 8;
+                                break;
                             }
                             if (object.labels) {
                                 if (typeof object.labels !== "object")
@@ -11400,6 +12005,31 @@
                                     message.capacityGb = new $util.LongBits(object.capacityGb.low >>> 0, object.capacityGb.high >>> 0).toNumber();
                             if (object.multiShareEnabled != null)
                                 message.multiShareEnabled = Boolean(object.multiShareEnabled);
+                            switch (object.protocol) {
+                            default:
+                                if (typeof object.protocol === "number") {
+                                    message.protocol = object.protocol;
+                                    break;
+                                }
+                                break;
+                            case "FILE_PROTOCOL_UNSPECIFIED":
+                            case 0:
+                                message.protocol = 0;
+                                break;
+                            case "NFS_V3":
+                            case 1:
+                                message.protocol = 1;
+                                break;
+                            case "NFS_V4_1":
+                            case 2:
+                                message.protocol = 2;
+                                break;
+                            }
+                            if (object.directoryServices != null) {
+                                if (typeof object.directoryServices !== "object")
+                                    throw TypeError(".google.cloud.filestore.v1beta1.Instance.directoryServices: object expected");
+                                message.directoryServices = $root.google.cloud.filestore.v1beta1.DirectoryServicesConfig.fromObject(object.directoryServices);
+                            }
                             return message;
                         };
     
@@ -11454,6 +12084,8 @@
                                 } else
                                     object.capacityGb = options.longs === String ? "0" : 0;
                                 object.multiShareEnabled = false;
+                                object.protocol = options.enums === String ? "FILE_PROTOCOL_UNSPECIFIED" : 0;
+                                object.directoryServices = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -11516,6 +12148,10 @@
                                     object.capacityGb = options.longs === String ? $util.Long.prototype.toString.call(message.capacityGb) : options.longs === Number ? new $util.LongBits(message.capacityGb.low >>> 0, message.capacityGb.high >>> 0).toNumber() : message.capacityGb;
                             if (message.multiShareEnabled != null && message.hasOwnProperty("multiShareEnabled"))
                                 object.multiShareEnabled = message.multiShareEnabled;
+                            if (message.protocol != null && message.hasOwnProperty("protocol"))
+                                object.protocol = options.enums === String ? $root.google.cloud.filestore.v1beta1.Instance.FileProtocol[message.protocol] === undefined ? message.protocol : $root.google.cloud.filestore.v1beta1.Instance.FileProtocol[message.protocol] : message.protocol;
+                            if (message.directoryServices != null && message.hasOwnProperty("directoryServices"))
+                                object.directoryServices = $root.google.cloud.filestore.v1beta1.DirectoryServicesConfig.toObject(message.directoryServices, options);
                             return object;
                         };
     
@@ -11588,6 +12224,7 @@
                          * @property {number} BASIC_SSD=4 BASIC_SSD value
                          * @property {number} HIGH_SCALE_SSD=6 HIGH_SCALE_SSD value
                          * @property {number} ENTERPRISE=7 ENTERPRISE value
+                         * @property {number} ZONAL=8 ZONAL value
                          */
                         Instance.Tier = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -11598,6 +12235,7 @@
                             values[valuesById[4] = "BASIC_SSD"] = 4;
                             values[valuesById[6] = "HIGH_SCALE_SSD"] = 6;
                             values[valuesById[7] = "ENTERPRISE"] = 7;
+                            values[valuesById[8] = "ZONAL"] = 8;
                             return values;
                         })();
     
@@ -11612,6 +12250,22 @@
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "SUSPENSION_REASON_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "KMS_KEY_ISSUE"] = 1;
+                            return values;
+                        })();
+    
+                        /**
+                         * FileProtocol enum.
+                         * @name google.cloud.filestore.v1beta1.Instance.FileProtocol
+                         * @enum {number}
+                         * @property {number} FILE_PROTOCOL_UNSPECIFIED=0 FILE_PROTOCOL_UNSPECIFIED value
+                         * @property {number} NFS_V3=1 NFS_V3 value
+                         * @property {number} NFS_V4_1=2 NFS_V4_1 value
+                         */
+                        Instance.FileProtocol = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "FILE_PROTOCOL_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "NFS_V3"] = 1;
+                            values[valuesById[2] = "NFS_V4_1"] = 2;
                             return values;
                         })();
     
@@ -15859,6 +16513,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.createTime != null && message.hasOwnProperty("createTime")) {
@@ -15897,6 +16552,7 @@
                                 case 4:
                                 case 6:
                                 case 7:
+                                case 8:
                                     break;
                                 }
                             if (message.downloadBytes != null && message.hasOwnProperty("downloadBytes"))
@@ -15955,6 +16611,10 @@
                             case "DELETING":
                             case 4:
                                 message.state = 4;
+                                break;
+                            case "INVALID":
+                            case 5:
+                                message.state = 5;
                                 break;
                             }
                             if (object.createTime != null) {
@@ -16025,6 +16685,10 @@
                             case "ENTERPRISE":
                             case 7:
                                 message.sourceInstanceTier = 7;
+                                break;
+                            case "ZONAL":
+                            case 8:
+                                message.sourceInstanceTier = 8;
                                 break;
                             }
                             if (object.downloadBytes != null)
@@ -16164,6 +16828,7 @@
                          * @property {number} FINALIZING=2 FINALIZING value
                          * @property {number} READY=3 READY value
                          * @property {number} DELETING=4 DELETING value
+                         * @property {number} INVALID=5 INVALID value
                          */
                         Backup.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -16172,6 +16837,7 @@
                             values[valuesById[2] = "FINALIZING"] = 2;
                             values[valuesById[3] = "READY"] = 3;
                             values[valuesById[4] = "DELETING"] = 4;
+                            values[valuesById[5] = "INVALID"] = 5;
                             return values;
                         })();
     
@@ -17674,6 +18340,7 @@
                          * @property {google.cloud.filestore.v1beta1.Share.State|null} [state] Share state
                          * @property {google.protobuf.ITimestamp|null} [createTime] Share createTime
                          * @property {Object.<string,string>|null} [labels] Share labels
+                         * @property {string|null} [backup] Share backup
                          */
     
                         /**
@@ -17758,6 +18425,28 @@
                         Share.prototype.labels = $util.emptyObject;
     
                         /**
+                         * Share backup.
+                         * @member {string|null|undefined} backup
+                         * @memberof google.cloud.filestore.v1beta1.Share
+                         * @instance
+                         */
+                        Share.prototype.backup = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Share source.
+                         * @member {"backup"|undefined} source
+                         * @memberof google.cloud.filestore.v1beta1.Share
+                         * @instance
+                         */
+                        Object.defineProperty(Share.prototype, "source", {
+                            get: $util.oneOfGetter($oneOfFields = ["backup"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new Share instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.filestore.v1beta1.Share
@@ -17799,6 +18488,8 @@
                             if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                                 for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 8, wireType 2 =*/66).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.backup != null && Object.hasOwnProperty.call(message, "backup"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.backup);
                             return writer;
                         };
     
@@ -17886,6 +18577,10 @@
                                         message.labels[key] = value;
                                         break;
                                     }
+                                case 9: {
+                                        message.backup = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -17921,6 +18616,7 @@
                         Share.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -17964,6 +18660,11 @@
                                 for (var i = 0; i < key.length; ++i)
                                     if (!$util.isString(message.labels[key[i]]))
                                         return "labels: string{k:string} expected";
+                            }
+                            if (message.backup != null && message.hasOwnProperty("backup")) {
+                                properties.source = 1;
+                                if (!$util.isString(message.backup))
+                                    return "backup: string expected";
                             }
                             return null;
                         };
@@ -18041,6 +18742,8 @@
                                 for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
                                     message.labels[keys[i]] = String(object.labels[keys[i]]);
                             }
+                            if (object.backup != null)
+                                message.backup = String(object.backup);
                             return message;
                         };
     
@@ -18098,6 +18801,11 @@
                                 object.labels = {};
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.backup != null && message.hasOwnProperty("backup")) {
+                                object.backup = message.backup;
+                                if (options.oneofs)
+                                    object.source = "backup";
                             }
                             return object;
                         };
