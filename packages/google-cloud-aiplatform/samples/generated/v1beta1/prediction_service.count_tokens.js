@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(schedule, updateMask) {
-  // [START aiplatform_v1beta1_generated_ScheduleService_UpdateSchedule_async]
+function main(endpoint, instances) {
+  // [START aiplatform_v1beta1_generated_PredictionService_CountTokens_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,39 +29,37 @@ function main(schedule, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The Schedule which replaces the resource on the server.
-   *  The following restrictions will be applied:
-   *    * The scheduled request type cannot be changed.
-   *    * The non-empty fields cannot be unset.
-   *    * The output_only fields will be ignored if specified.
+   *  Required. The name of the Endpoint requested to perform token counting.
+   *  Format:
+   *  `projects/{project}/locations/{location}/endpoints/{endpoint}`
    */
-  // const schedule = {}
+  // const endpoint = 'abc123'
   /**
-   *  Required. The update mask applies to the resource. See
-   *  google.protobuf.FieldMask google.protobuf.FieldMask.
+   *  Required. The instances that are the input to token counting call.
+   *  Schema is identical to the prediction schema of the underlying model.
    */
-  // const updateMask = {}
+  // const instances = [1,2,3,4]
 
   // Imports the Aiplatform library
-  const {ScheduleServiceClient} = require('@google-cloud/aiplatform').v1beta1;
+  const {PredictionServiceClient} = require('@google-cloud/aiplatform').v1beta1;
 
   // Instantiates a client
-  const aiplatformClient = new ScheduleServiceClient();
+  const aiplatformClient = new PredictionServiceClient();
 
-  async function callUpdateSchedule() {
+  async function callCountTokens() {
     // Construct request
     const request = {
-      schedule,
-      updateMask,
+      endpoint,
+      instances,
     };
 
     // Run request
-    const response = await aiplatformClient.updateSchedule(request);
+    const response = await aiplatformClient.countTokens(request);
     console.log(response);
   }
 
-  callUpdateSchedule();
-  // [END aiplatform_v1beta1_generated_ScheduleService_UpdateSchedule_async]
+  callCountTokens();
+  // [END aiplatform_v1beta1_generated_PredictionService_CountTokens_async]
 }
 
 process.on('unhandledRejection', err => {

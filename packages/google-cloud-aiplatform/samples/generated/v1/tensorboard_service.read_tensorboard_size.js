@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(schedule, updateMask) {
-  // [START aiplatform_v1beta1_generated_ScheduleService_UpdateSchedule_async]
+function main(tensorboard) {
+  // [START aiplatform_v1_generated_TensorboardService_ReadTensorboardSize_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,39 +29,31 @@ function main(schedule, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The Schedule which replaces the resource on the server.
-   *  The following restrictions will be applied:
-   *    * The scheduled request type cannot be changed.
-   *    * The non-empty fields cannot be unset.
-   *    * The output_only fields will be ignored if specified.
+   *  Required. The name of the Tensorboard resource.
+   *  Format:
+   *  `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
    */
-  // const schedule = {}
-  /**
-   *  Required. The update mask applies to the resource. See
-   *  google.protobuf.FieldMask google.protobuf.FieldMask.
-   */
-  // const updateMask = {}
+  // const tensorboard = 'abc123'
 
   // Imports the Aiplatform library
-  const {ScheduleServiceClient} = require('@google-cloud/aiplatform').v1beta1;
+  const {TensorboardServiceClient} = require('@google-cloud/aiplatform').v1;
 
   // Instantiates a client
-  const aiplatformClient = new ScheduleServiceClient();
+  const aiplatformClient = new TensorboardServiceClient();
 
-  async function callUpdateSchedule() {
+  async function callReadTensorboardSize() {
     // Construct request
     const request = {
-      schedule,
-      updateMask,
+      tensorboard,
     };
 
     // Run request
-    const response = await aiplatformClient.updateSchedule(request);
+    const response = await aiplatformClient.readTensorboardSize(request);
     console.log(response);
   }
 
-  callUpdateSchedule();
-  // [END aiplatform_v1beta1_generated_ScheduleService_UpdateSchedule_async]
+  callReadTensorboardSize();
+  // [END aiplatform_v1_generated_TensorboardService_ReadTensorboardSize_async]
 }
 
 process.on('unhandledRejection', err => {

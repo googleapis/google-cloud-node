@@ -209,6 +209,7 @@
   * [Tensorboard_service.list_tensorboard_time_series](#tensorboard_service.list_tensorboard_time_series)
   * [Tensorboard_service.list_tensorboards](#tensorboard_service.list_tensorboards)
   * [Tensorboard_service.read_tensorboard_blob_data](#tensorboard_service.read_tensorboard_blob_data)
+  * [Tensorboard_service.read_tensorboard_size](#tensorboard_service.read_tensorboard_size)
   * [Tensorboard_service.read_tensorboard_time_series_data](#tensorboard_service.read_tensorboard_time_series_data)
   * [Tensorboard_service.read_tensorboard_usage](#tensorboard_service.read_tensorboard_usage)
   * [Tensorboard_service.update_tensorboard](#tensorboard_service.update_tensorboard)
@@ -401,6 +402,7 @@
   * [Pipeline_service.get_training_pipeline](#pipeline_service.get_training_pipeline)
   * [Pipeline_service.list_pipeline_jobs](#pipeline_service.list_pipeline_jobs)
   * [Pipeline_service.list_training_pipelines](#pipeline_service.list_training_pipelines)
+  * [Prediction_service.count_tokens](#prediction_service.count_tokens)
   * [Prediction_service.explain](#prediction_service.explain)
   * [Prediction_service.predict](#prediction_service.predict)
   * [Prediction_service.raw_predict](#prediction_service.raw_predict)
@@ -3828,6 +3830,23 @@ __Usage:__
 
 
 
+### Tensorboard_service.read_tensorboard_size
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.read_tensorboard_size.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.read_tensorboard_size.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.read_tensorboard_size.js`
+
+
+-----
+
+
+
+
 ### Tensorboard_service.read_tensorboard_time_series_data
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.read_tensorboard_time_series_data.js).
@@ -7085,6 +7104,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/pipeline_service.list_training_pipelines.js`
+
+
+-----
+
+
+
+
+### Prediction_service.count_tokens
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.count_tokens.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.count_tokens.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.count_tokens.js`
 
 
 -----

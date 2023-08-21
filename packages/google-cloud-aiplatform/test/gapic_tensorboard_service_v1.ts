@@ -547,6 +547,137 @@ describe('v1.TensorboardServiceClient', () => {
     });
   });
 
+  describe('readTensorboardSize', () => {
+    it('invokes readTensorboardSize without error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ReadTensorboardSizeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ReadTensorboardSizeRequest',
+        ['tensorboard']
+      );
+      request.tensorboard = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ReadTensorboardSizeResponse()
+      );
+      client.innerApiCalls.readTensorboardSize =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.readTensorboardSize(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.readTensorboardSize as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.readTensorboardSize as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes readTensorboardSize without error using callback', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ReadTensorboardSizeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ReadTensorboardSizeRequest',
+        ['tensorboard']
+      );
+      request.tensorboard = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ReadTensorboardSizeResponse()
+      );
+      client.innerApiCalls.readTensorboardSize =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.readTensorboardSize(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.IReadTensorboardSizeResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.readTensorboardSize as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.readTensorboardSize as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes readTensorboardSize with error', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ReadTensorboardSizeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ReadTensorboardSizeRequest',
+        ['tensorboard']
+      );
+      request.tensorboard = defaultValue1;
+      const expectedHeaderRequestParams = `tensorboard=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.readTensorboardSize = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.readTensorboardSize(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.readTensorboardSize as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.readTensorboardSize as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes readTensorboardSize with closed client', async () => {
+      const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ReadTensorboardSizeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ReadTensorboardSizeRequest',
+        ['tensorboard']
+      );
+      request.tensorboard = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.readTensorboardSize(request), expectedError);
+    });
+  });
+
   describe('createTensorboardExperiment', () => {
     it('invokes createTensorboardExperiment without error', async () => {
       const client = new tensorboardserviceModule.v1.TensorboardServiceClient({
@@ -2068,8 +2199,9 @@ describe('v1.TensorboardServiceClient', () => {
       );
       client.innerApiCalls.batchReadTensorboardTimeSeriesData =
         stubSimpleCall(expectedResponse);
-      const [response] =
-        await client.batchReadTensorboardTimeSeriesData(request);
+      const [response] = await client.batchReadTensorboardTimeSeriesData(
+        request
+      );
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.batchReadTensorboardTimeSeriesData as SinonStub

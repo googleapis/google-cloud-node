@@ -2130,6 +2130,11 @@
                 "readTensorboardUsage"
               ]
             },
+            "ReadTensorboardSize": {
+              "methods": [
+                "readTensorboardSize"
+              ]
+            },
             "CreateTensorboardExperiment": {
               "methods": [
                 "createTensorboardExperiment"
@@ -2288,6 +2293,11 @@
             "ReadTensorboardUsage": {
               "methods": [
                 "readTensorboardUsage"
+              ]
+            },
+            "ReadTensorboardSize": {
+              "methods": [
+                "readTensorboardSize"
               ]
             },
             "CreateTensorboardExperiment": {
