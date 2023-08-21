@@ -4220,6 +4220,9 @@ export namespace google {
 
                     /** NfsExportOptions anonGid */
                     anonGid?: (number|Long|string|null);
+
+                    /** NfsExportOptions securityFlavors */
+                    securityFlavors?: (google.cloud.filestore.v1beta1.NfsExportOptions.SecurityFlavor[]|null);
                 }
 
                 /** Represents a NfsExportOptions. */
@@ -4245,6 +4248,9 @@ export namespace google {
 
                     /** NfsExportOptions anonGid. */
                     public anonGid: (number|Long|string);
+
+                    /** NfsExportOptions securityFlavors. */
+                    public securityFlavors: google.cloud.filestore.v1beta1.NfsExportOptions.SecurityFlavor[];
 
                     /**
                      * Creates a new NfsExportOptions instance using the specified properties.
@@ -4339,6 +4345,218 @@ export namespace google {
                         NO_ROOT_SQUASH = 1,
                         ROOT_SQUASH = 2
                     }
+
+                    /** SecurityFlavor enum. */
+                    enum SecurityFlavor {
+                        SECURITY_FLAVOR_UNSPECIFIED = 0,
+                        AUTH_SYS = 1,
+                        KRB5 = 2,
+                        KRB5I = 3,
+                        KRB5P = 4
+                    }
+                }
+
+                /** Properties of a ManagedActiveDirectoryConfig. */
+                interface IManagedActiveDirectoryConfig {
+
+                    /** ManagedActiveDirectoryConfig domain */
+                    domain?: (string|null);
+
+                    /** ManagedActiveDirectoryConfig computer */
+                    computer?: (string|null);
+                }
+
+                /** Represents a ManagedActiveDirectoryConfig. */
+                class ManagedActiveDirectoryConfig implements IManagedActiveDirectoryConfig {
+
+                    /**
+                     * Constructs a new ManagedActiveDirectoryConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.filestore.v1beta1.IManagedActiveDirectoryConfig);
+
+                    /** ManagedActiveDirectoryConfig domain. */
+                    public domain: string;
+
+                    /** ManagedActiveDirectoryConfig computer. */
+                    public computer: string;
+
+                    /**
+                     * Creates a new ManagedActiveDirectoryConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ManagedActiveDirectoryConfig instance
+                     */
+                    public static create(properties?: google.cloud.filestore.v1beta1.IManagedActiveDirectoryConfig): google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig;
+
+                    /**
+                     * Encodes the specified ManagedActiveDirectoryConfig message. Does not implicitly {@link google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig.verify|verify} messages.
+                     * @param message ManagedActiveDirectoryConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.filestore.v1beta1.IManagedActiveDirectoryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ManagedActiveDirectoryConfig message, length delimited. Does not implicitly {@link google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig.verify|verify} messages.
+                     * @param message ManagedActiveDirectoryConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.filestore.v1beta1.IManagedActiveDirectoryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ManagedActiveDirectoryConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ManagedActiveDirectoryConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig;
+
+                    /**
+                     * Decodes a ManagedActiveDirectoryConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ManagedActiveDirectoryConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig;
+
+                    /**
+                     * Verifies a ManagedActiveDirectoryConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ManagedActiveDirectoryConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ManagedActiveDirectoryConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig;
+
+                    /**
+                     * Creates a plain object from a ManagedActiveDirectoryConfig message. Also converts values to other types if specified.
+                     * @param message ManagedActiveDirectoryConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.filestore.v1beta1.ManagedActiveDirectoryConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ManagedActiveDirectoryConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ManagedActiveDirectoryConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DirectoryServicesConfig. */
+                interface IDirectoryServicesConfig {
+
+                    /** DirectoryServicesConfig managedActiveDirectory */
+                    managedActiveDirectory?: (google.cloud.filestore.v1beta1.IManagedActiveDirectoryConfig|null);
+                }
+
+                /** Represents a DirectoryServicesConfig. */
+                class DirectoryServicesConfig implements IDirectoryServicesConfig {
+
+                    /**
+                     * Constructs a new DirectoryServicesConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.filestore.v1beta1.IDirectoryServicesConfig);
+
+                    /** DirectoryServicesConfig managedActiveDirectory. */
+                    public managedActiveDirectory?: (google.cloud.filestore.v1beta1.IManagedActiveDirectoryConfig|null);
+
+                    /** DirectoryServicesConfig config. */
+                    public config?: "managedActiveDirectory";
+
+                    /**
+                     * Creates a new DirectoryServicesConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DirectoryServicesConfig instance
+                     */
+                    public static create(properties?: google.cloud.filestore.v1beta1.IDirectoryServicesConfig): google.cloud.filestore.v1beta1.DirectoryServicesConfig;
+
+                    /**
+                     * Encodes the specified DirectoryServicesConfig message. Does not implicitly {@link google.cloud.filestore.v1beta1.DirectoryServicesConfig.verify|verify} messages.
+                     * @param message DirectoryServicesConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.filestore.v1beta1.IDirectoryServicesConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DirectoryServicesConfig message, length delimited. Does not implicitly {@link google.cloud.filestore.v1beta1.DirectoryServicesConfig.verify|verify} messages.
+                     * @param message DirectoryServicesConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.filestore.v1beta1.IDirectoryServicesConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DirectoryServicesConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DirectoryServicesConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.filestore.v1beta1.DirectoryServicesConfig;
+
+                    /**
+                     * Decodes a DirectoryServicesConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DirectoryServicesConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.filestore.v1beta1.DirectoryServicesConfig;
+
+                    /**
+                     * Verifies a DirectoryServicesConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DirectoryServicesConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DirectoryServicesConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.filestore.v1beta1.DirectoryServicesConfig;
+
+                    /**
+                     * Creates a plain object from a DirectoryServicesConfig message. Also converts values to other types if specified.
+                     * @param message DirectoryServicesConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.filestore.v1beta1.DirectoryServicesConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DirectoryServicesConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DirectoryServicesConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an Instance. */
@@ -4397,6 +4615,12 @@ export namespace google {
 
                     /** Instance multiShareEnabled */
                     multiShareEnabled?: (boolean|null);
+
+                    /** Instance protocol */
+                    protocol?: (google.cloud.filestore.v1beta1.Instance.FileProtocol|keyof typeof google.cloud.filestore.v1beta1.Instance.FileProtocol|null);
+
+                    /** Instance directoryServices */
+                    directoryServices?: (google.cloud.filestore.v1beta1.IDirectoryServicesConfig|null);
                 }
 
                 /** Represents an Instance. */
@@ -4461,6 +4685,12 @@ export namespace google {
 
                     /** Instance multiShareEnabled. */
                     public multiShareEnabled: boolean;
+
+                    /** Instance protocol. */
+                    public protocol: (google.cloud.filestore.v1beta1.Instance.FileProtocol|keyof typeof google.cloud.filestore.v1beta1.Instance.FileProtocol);
+
+                    /** Instance directoryServices. */
+                    public directoryServices?: (google.cloud.filestore.v1beta1.IDirectoryServicesConfig|null);
 
                     /**
                      * Creates a new Instance instance using the specified properties.
@@ -4565,13 +4795,21 @@ export namespace google {
                         BASIC_HDD = 3,
                         BASIC_SSD = 4,
                         HIGH_SCALE_SSD = 6,
-                        ENTERPRISE = 7
+                        ENTERPRISE = 7,
+                        ZONAL = 8
                     }
 
                     /** SuspensionReason enum. */
                     enum SuspensionReason {
                         SUSPENSION_REASON_UNSPECIFIED = 0,
                         KMS_KEY_ISSUE = 1
+                    }
+
+                    /** FileProtocol enum. */
+                    enum FileProtocol {
+                        FILE_PROTOCOL_UNSPECIFIED = 0,
+                        NFS_V3 = 1,
+                        NFS_V4_1 = 2
                     }
                 }
 
@@ -6383,7 +6621,8 @@ export namespace google {
                         CREATING = 1,
                         FINALIZING = 2,
                         READY = 3,
-                        DELETING = 4
+                        DELETING = 4,
+                        INVALID = 5
                     }
                 }
 
@@ -7049,6 +7288,9 @@ export namespace google {
 
                     /** Share labels */
                     labels?: ({ [k: string]: string }|null);
+
+                    /** Share backup */
+                    backup?: (string|null);
                 }
 
                 /** Represents a Share. */
@@ -7083,6 +7325,12 @@ export namespace google {
 
                     /** Share labels. */
                     public labels: { [k: string]: string };
+
+                    /** Share backup. */
+                    public backup?: (string|null);
+
+                    /** Share source. */
+                    public source?: "backup";
 
                     /**
                      * Creates a new Share instance using the specified properties.

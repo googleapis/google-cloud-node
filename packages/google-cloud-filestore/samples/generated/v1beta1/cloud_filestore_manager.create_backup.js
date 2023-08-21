@@ -31,7 +31,7 @@ function main(parent, backup, backupId) {
   /**
    *  Required. The backup's project and location, in the format
    *  `projects/{project_id}/locations/{location}`. In Filestore,
-   *  backup locations map to GCP regions, for example **us-west1**.
+   *  backup locations map to Google Cloud regions, for example **us-west1**.
    */
   // const parent = 'abc123'
   /**

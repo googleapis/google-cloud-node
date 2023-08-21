@@ -1857,6 +1857,11 @@
                         "anonGid": {
                           "type": "int64",
                           "id": 5
+                        },
+                        "securityFlavors": {
+                          "rule": "repeated",
+                          "type": "SecurityFlavor",
+                          "id": 6
                         }
                       },
                       "nested": {
@@ -1873,6 +1878,42 @@
                             "NO_ROOT_SQUASH": 1,
                             "ROOT_SQUASH": 2
                           }
+                        },
+                        "SecurityFlavor": {
+                          "values": {
+                            "SECURITY_FLAVOR_UNSPECIFIED": 0,
+                            "AUTH_SYS": 1,
+                            "KRB5": 2,
+                            "KRB5I": 3,
+                            "KRB5P": 4
+                          }
+                        }
+                      }
+                    },
+                    "ManagedActiveDirectoryConfig": {
+                      "fields": {
+                        "domain": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "computer": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DirectoryServicesConfig": {
+                      "oneofs": {
+                        "config": {
+                          "oneof": [
+                            "managedActiveDirectory"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "managedActiveDirectory": {
+                          "type": "ManagedActiveDirectoryConfig",
+                          "id": 1
                         }
                       }
                     },
@@ -1972,10 +2013,7 @@
                         },
                         "maxShareCount": {
                           "type": "int64",
-                          "id": 18,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
+                          "id": 18
                         },
                         "capacityGb": {
                           "type": "int64",
@@ -1984,6 +2022,17 @@
                         "multiShareEnabled": {
                           "type": "bool",
                           "id": 20
+                        },
+                        "protocol": {
+                          "type": "FileProtocol",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "directoryServices": {
+                          "type": "DirectoryServicesConfig",
+                          "id": 24
                         }
                       },
                       "nested": {
@@ -2010,13 +2059,21 @@
                             "BASIC_HDD": 3,
                             "BASIC_SSD": 4,
                             "HIGH_SCALE_SSD": 6,
-                            "ENTERPRISE": 7
+                            "ENTERPRISE": 7,
+                            "ZONAL": 8
                           }
                         },
                         "SuspensionReason": {
                           "values": {
                             "SUSPENSION_REASON_UNSPECIFIED": 0,
                             "KMS_KEY_ISSUE": 1
+                          }
+                        },
+                        "FileProtocol": {
+                          "values": {
+                            "FILE_PROTOCOL_UNSPECIFIED": 0,
+                            "NFS_V3": 1,
+                            "NFS_V4_1": 2
                           }
                         }
                       }
@@ -2106,6 +2163,7 @@
                           "type": "string",
                           "id": 3,
                           "options": {
+                            "deprecated": true,
                             "(google.api.resource_reference).type": "file.googleapis.com/Snapshot"
                           }
                         },
@@ -2460,7 +2518,8 @@
                             "CREATING": 1,
                             "FINALIZING": 2,
                             "READY": 3,
-                            "DELETING": 4
+                            "DELETING": 4,
+                            "INVALID": 5
                           }
                         }
                       }
@@ -2584,6 +2643,13 @@
                         "(google.api.resource).type": "file.googleapis.com/Share",
                         "(google.api.resource).pattern": "projects/{project}/locations/{location}/instances/{instance}/shares/{share}"
                       },
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "backup"
+                          ]
+                        }
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -2627,6 +2693,14 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 8
+                        },
+                        "backup": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "(google.api.resource_reference).type": "file.googleapis.com/Backup"
+                          }
                         }
                       },
                       "nested": {

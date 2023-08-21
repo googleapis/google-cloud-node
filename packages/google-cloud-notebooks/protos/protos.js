@@ -43671,6 +43671,8 @@
                          * @property {string|null} [parent] ListInstancesRequest parent
                          * @property {number|null} [pageSize] ListInstancesRequest pageSize
                          * @property {string|null} [pageToken] ListInstancesRequest pageToken
+                         * @property {string|null} [orderBy] ListInstancesRequest orderBy
+                         * @property {string|null} [filter] ListInstancesRequest filter
                          */
     
                         /**
@@ -43713,6 +43715,22 @@
                         ListInstancesRequest.prototype.pageToken = "";
     
                         /**
+                         * ListInstancesRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.notebooks.v2.ListInstancesRequest
+                         * @instance
+                         */
+                        ListInstancesRequest.prototype.orderBy = "";
+    
+                        /**
+                         * ListInstancesRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.notebooks.v2.ListInstancesRequest
+                         * @instance
+                         */
+                        ListInstancesRequest.prototype.filter = "";
+    
+                        /**
                          * Creates a new ListInstancesRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.notebooks.v2.ListInstancesRequest
@@ -43742,6 +43760,10 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
                             if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.orderBy);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.filter);
                             return writer;
                         };
     
@@ -43788,6 +43810,14 @@
                                         message.pageToken = reader.string();
                                         break;
                                     }
+                                case 4: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -43832,6 +43862,12 @@
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 if (!$util.isString(message.pageToken))
                                     return "pageToken: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
                             return null;
                         };
     
@@ -43853,6 +43889,10 @@
                                 message.pageSize = object.pageSize | 0;
                             if (object.pageToken != null)
                                 message.pageToken = String(object.pageToken);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
                             return message;
                         };
     
@@ -43873,6 +43913,8 @@
                                 object.parent = "";
                                 object.pageSize = 0;
                                 object.pageToken = "";
+                                object.orderBy = "";
+                                object.filter = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -43880,6 +43922,10 @@
                                 object.pageSize = message.pageSize;
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 object.pageToken = message.pageToken;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
                             return object;
                         };
     

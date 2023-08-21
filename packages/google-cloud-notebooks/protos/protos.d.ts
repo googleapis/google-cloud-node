@@ -17427,6 +17427,12 @@ export namespace google {
 
                     /** ListInstancesRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** ListInstancesRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** ListInstancesRequest filter */
+                    filter?: (string|null);
                 }
 
                 /** Represents a ListInstancesRequest. */
@@ -17446,6 +17452,12 @@ export namespace google {
 
                     /** ListInstancesRequest pageToken. */
                     public pageToken: string;
+
+                    /** ListInstancesRequest orderBy. */
+                    public orderBy: string;
+
+                    /** ListInstancesRequest filter. */
+                    public filter: string;
 
                     /**
                      * Creates a new ListInstancesRequest instance using the specified properties.
