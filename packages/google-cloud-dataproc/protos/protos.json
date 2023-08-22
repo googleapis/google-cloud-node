@@ -1942,7 +1942,10 @@
                         "metadata": {
                           "keyType": "string",
                           "type": "string",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "reservationAffinity": {
                           "type": "ReservationAffinity",
@@ -2068,6 +2071,14 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "instanceReferences": {
+                          "rule": "repeated",
+                          "type": "InstanceReference",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "imageUri": {
                           "type": "string",
                           "id": 3,
@@ -2124,6 +2135,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "minNumInstances": {
+                          "type": "int32",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "instanceFlexibilityPolicy": {
+                          "type": "InstanceFlexibilityPolicy",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -2134,6 +2159,26 @@
                             "PREEMPTIBLE": 2,
                             "SPOT": 3
                           }
+                        }
+                      }
+                    },
+                    "InstanceReference": {
+                      "fields": {
+                        "instanceName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "instanceId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "publicKey": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "publicEciesKey": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
@@ -2151,6 +2196,86 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "instanceGroupManagerUri": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "InstanceFlexibilityPolicy": {
+                      "fields": {
+                        "instanceSelectionList": {
+                          "rule": "repeated",
+                          "type": "InstanceSelection",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "instanceSelectionResults": {
+                          "rule": "repeated",
+                          "type": "InstanceSelectionResult",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "InstanceSelection": {
+                          "fields": {
+                            "machineTypes": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "rank": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "InstanceSelectionResult": {
+                          "oneofs": {
+                            "_machineType": {
+                              "oneof": [
+                                "machineType"
+                              ]
+                            },
+                            "_vmCount": {
+                              "oneof": [
+                                "vmCount"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "machineType": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "vmCount": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            }
                           }
                         }
                       }
@@ -2321,7 +2446,8 @@
                             "UPDATING": 5,
                             "STOPPING": 6,
                             "STOPPED": 7,
-                            "STARTING": 8
+                            "STARTING": 8,
+                            "REPAIRING": 10
                           }
                         },
                         "Substate": {

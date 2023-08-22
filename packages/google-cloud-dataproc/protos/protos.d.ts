@@ -6011,6 +6011,9 @@ export namespace google {
                     /** InstanceGroupConfig instanceNames */
                     instanceNames?: (string[]|null);
 
+                    /** InstanceGroupConfig instanceReferences */
+                    instanceReferences?: (google.cloud.dataproc.v1.IInstanceReference[]|null);
+
                     /** InstanceGroupConfig imageUri */
                     imageUri?: (string|null);
 
@@ -6034,6 +6037,12 @@ export namespace google {
 
                     /** InstanceGroupConfig minCpuPlatform */
                     minCpuPlatform?: (string|null);
+
+                    /** InstanceGroupConfig minNumInstances */
+                    minNumInstances?: (number|null);
+
+                    /** InstanceGroupConfig instanceFlexibilityPolicy */
+                    instanceFlexibilityPolicy?: (google.cloud.dataproc.v1.IInstanceFlexibilityPolicy|null);
                 }
 
                 /** Represents an InstanceGroupConfig. */
@@ -6050,6 +6059,9 @@ export namespace google {
 
                     /** InstanceGroupConfig instanceNames. */
                     public instanceNames: string[];
+
+                    /** InstanceGroupConfig instanceReferences. */
+                    public instanceReferences: google.cloud.dataproc.v1.IInstanceReference[];
 
                     /** InstanceGroupConfig imageUri. */
                     public imageUri: string;
@@ -6074,6 +6086,12 @@ export namespace google {
 
                     /** InstanceGroupConfig minCpuPlatform. */
                     public minCpuPlatform: string;
+
+                    /** InstanceGroupConfig minNumInstances. */
+                    public minNumInstances: number;
+
+                    /** InstanceGroupConfig instanceFlexibilityPolicy. */
+                    public instanceFlexibilityPolicy?: (google.cloud.dataproc.v1.IInstanceFlexibilityPolicy|null);
 
                     /**
                      * Creates a new InstanceGroupConfig instance using the specified properties.
@@ -6164,6 +6182,121 @@ export namespace google {
                     }
                 }
 
+                /** Properties of an InstanceReference. */
+                interface IInstanceReference {
+
+                    /** InstanceReference instanceName */
+                    instanceName?: (string|null);
+
+                    /** InstanceReference instanceId */
+                    instanceId?: (string|null);
+
+                    /** InstanceReference publicKey */
+                    publicKey?: (string|null);
+
+                    /** InstanceReference publicEciesKey */
+                    publicEciesKey?: (string|null);
+                }
+
+                /** Represents an InstanceReference. */
+                class InstanceReference implements IInstanceReference {
+
+                    /**
+                     * Constructs a new InstanceReference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IInstanceReference);
+
+                    /** InstanceReference instanceName. */
+                    public instanceName: string;
+
+                    /** InstanceReference instanceId. */
+                    public instanceId: string;
+
+                    /** InstanceReference publicKey. */
+                    public publicKey: string;
+
+                    /** InstanceReference publicEciesKey. */
+                    public publicEciesKey: string;
+
+                    /**
+                     * Creates a new InstanceReference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InstanceReference instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IInstanceReference): google.cloud.dataproc.v1.InstanceReference;
+
+                    /**
+                     * Encodes the specified InstanceReference message. Does not implicitly {@link google.cloud.dataproc.v1.InstanceReference.verify|verify} messages.
+                     * @param message InstanceReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IInstanceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InstanceReference message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.InstanceReference.verify|verify} messages.
+                     * @param message InstanceReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IInstanceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InstanceReference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InstanceReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.InstanceReference;
+
+                    /**
+                     * Decodes an InstanceReference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InstanceReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.InstanceReference;
+
+                    /**
+                     * Verifies an InstanceReference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InstanceReference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InstanceReference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.InstanceReference;
+
+                    /**
+                     * Creates a plain object from an InstanceReference message. Also converts values to other types if specified.
+                     * @param message InstanceReference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.InstanceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InstanceReference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InstanceReference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a ManagedGroupConfig. */
                 interface IManagedGroupConfig {
 
@@ -6172,6 +6305,9 @@ export namespace google {
 
                     /** ManagedGroupConfig instanceGroupManagerName */
                     instanceGroupManagerName?: (string|null);
+
+                    /** ManagedGroupConfig instanceGroupManagerUri */
+                    instanceGroupManagerUri?: (string|null);
                 }
 
                 /** Represents a ManagedGroupConfig. */
@@ -6188,6 +6324,9 @@ export namespace google {
 
                     /** ManagedGroupConfig instanceGroupManagerName. */
                     public instanceGroupManagerName: string;
+
+                    /** ManagedGroupConfig instanceGroupManagerUri. */
+                    public instanceGroupManagerUri: string;
 
                     /**
                      * Creates a new ManagedGroupConfig instance using the specified properties.
@@ -6265,6 +6404,324 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an InstanceFlexibilityPolicy. */
+                interface IInstanceFlexibilityPolicy {
+
+                    /** InstanceFlexibilityPolicy instanceSelectionList */
+                    instanceSelectionList?: (google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IInstanceSelection[]|null);
+
+                    /** InstanceFlexibilityPolicy instanceSelectionResults */
+                    instanceSelectionResults?: (google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IInstanceSelectionResult[]|null);
+                }
+
+                /** Represents an InstanceFlexibilityPolicy. */
+                class InstanceFlexibilityPolicy implements IInstanceFlexibilityPolicy {
+
+                    /**
+                     * Constructs a new InstanceFlexibilityPolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IInstanceFlexibilityPolicy);
+
+                    /** InstanceFlexibilityPolicy instanceSelectionList. */
+                    public instanceSelectionList: google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IInstanceSelection[];
+
+                    /** InstanceFlexibilityPolicy instanceSelectionResults. */
+                    public instanceSelectionResults: google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IInstanceSelectionResult[];
+
+                    /**
+                     * Creates a new InstanceFlexibilityPolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InstanceFlexibilityPolicy instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IInstanceFlexibilityPolicy): google.cloud.dataproc.v1.InstanceFlexibilityPolicy;
+
+                    /**
+                     * Encodes the specified InstanceFlexibilityPolicy message. Does not implicitly {@link google.cloud.dataproc.v1.InstanceFlexibilityPolicy.verify|verify} messages.
+                     * @param message InstanceFlexibilityPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IInstanceFlexibilityPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InstanceFlexibilityPolicy message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.InstanceFlexibilityPolicy.verify|verify} messages.
+                     * @param message InstanceFlexibilityPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IInstanceFlexibilityPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InstanceFlexibilityPolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InstanceFlexibilityPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.InstanceFlexibilityPolicy;
+
+                    /**
+                     * Decodes an InstanceFlexibilityPolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InstanceFlexibilityPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.InstanceFlexibilityPolicy;
+
+                    /**
+                     * Verifies an InstanceFlexibilityPolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InstanceFlexibilityPolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InstanceFlexibilityPolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.InstanceFlexibilityPolicy;
+
+                    /**
+                     * Creates a plain object from an InstanceFlexibilityPolicy message. Also converts values to other types if specified.
+                     * @param message InstanceFlexibilityPolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.InstanceFlexibilityPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InstanceFlexibilityPolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InstanceFlexibilityPolicy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace InstanceFlexibilityPolicy {
+
+                    /** Properties of an InstanceSelection. */
+                    interface IInstanceSelection {
+
+                        /** InstanceSelection machineTypes */
+                        machineTypes?: (string[]|null);
+
+                        /** InstanceSelection rank */
+                        rank?: (number|null);
+                    }
+
+                    /** Represents an InstanceSelection. */
+                    class InstanceSelection implements IInstanceSelection {
+
+                        /**
+                         * Constructs a new InstanceSelection.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IInstanceSelection);
+
+                        /** InstanceSelection machineTypes. */
+                        public machineTypes: string[];
+
+                        /** InstanceSelection rank. */
+                        public rank: number;
+
+                        /**
+                         * Creates a new InstanceSelection instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns InstanceSelection instance
+                         */
+                        public static create(properties?: google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IInstanceSelection): google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection;
+
+                        /**
+                         * Encodes the specified InstanceSelection message. Does not implicitly {@link google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection.verify|verify} messages.
+                         * @param message InstanceSelection message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IInstanceSelection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified InstanceSelection message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection.verify|verify} messages.
+                         * @param message InstanceSelection message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IInstanceSelection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an InstanceSelection message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns InstanceSelection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection;
+
+                        /**
+                         * Decodes an InstanceSelection message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns InstanceSelection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection;
+
+                        /**
+                         * Verifies an InstanceSelection message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an InstanceSelection message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns InstanceSelection
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection;
+
+                        /**
+                         * Creates a plain object from an InstanceSelection message. Also converts values to other types if specified.
+                         * @param message InstanceSelection
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this InstanceSelection to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for InstanceSelection
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an InstanceSelectionResult. */
+                    interface IInstanceSelectionResult {
+
+                        /** InstanceSelectionResult machineType */
+                        machineType?: (string|null);
+
+                        /** InstanceSelectionResult vmCount */
+                        vmCount?: (number|null);
+                    }
+
+                    /** Represents an InstanceSelectionResult. */
+                    class InstanceSelectionResult implements IInstanceSelectionResult {
+
+                        /**
+                         * Constructs a new InstanceSelectionResult.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IInstanceSelectionResult);
+
+                        /** InstanceSelectionResult machineType. */
+                        public machineType?: (string|null);
+
+                        /** InstanceSelectionResult vmCount. */
+                        public vmCount?: (number|null);
+
+                        /** InstanceSelectionResult _machineType. */
+                        public _machineType?: "machineType";
+
+                        /** InstanceSelectionResult _vmCount. */
+                        public _vmCount?: "vmCount";
+
+                        /**
+                         * Creates a new InstanceSelectionResult instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns InstanceSelectionResult instance
+                         */
+                        public static create(properties?: google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IInstanceSelectionResult): google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult;
+
+                        /**
+                         * Encodes the specified InstanceSelectionResult message. Does not implicitly {@link google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult.verify|verify} messages.
+                         * @param message InstanceSelectionResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IInstanceSelectionResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified InstanceSelectionResult message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult.verify|verify} messages.
+                         * @param message InstanceSelectionResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IInstanceSelectionResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an InstanceSelectionResult message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns InstanceSelectionResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult;
+
+                        /**
+                         * Decodes an InstanceSelectionResult message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns InstanceSelectionResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult;
+
+                        /**
+                         * Verifies an InstanceSelectionResult message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an InstanceSelectionResult message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns InstanceSelectionResult
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult;
+
+                        /**
+                         * Creates a plain object from an InstanceSelectionResult message. Also converts values to other types if specified.
+                         * @param message InstanceSelectionResult
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this InstanceSelectionResult to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for InstanceSelectionResult
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of an AcceleratorConfig. */
@@ -6943,7 +7400,8 @@ export namespace google {
                         UPDATING = 5,
                         STOPPING = 6,
                         STOPPED = 7,
-                        STARTING = 8
+                        STARTING = 8,
+                        REPAIRING = 10
                     }
 
                     /** Substate enum. */

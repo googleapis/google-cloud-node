@@ -1057,8 +1057,9 @@ describe('v1.WorkflowTemplateServiceClient', () => {
       );
       client.innerApiCalls.instantiateInlineWorkflowTemplate =
         stubLongRunningCall(expectedResponse);
-      const [operation] =
-        await client.instantiateInlineWorkflowTemplate(request);
+      const [operation] = await client.instantiateInlineWorkflowTemplate(
+        request
+      );
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
@@ -1178,8 +1179,9 @@ describe('v1.WorkflowTemplateServiceClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.instantiateInlineWorkflowTemplate =
         stubLongRunningCall(undefined, undefined, expectedError);
-      const [operation] =
-        await client.instantiateInlineWorkflowTemplate(request);
+      const [operation] = await client.instantiateInlineWorkflowTemplate(
+        request
+      );
       await assert.rejects(operation.promise(), expectedError);
       const actualRequest = (
         client.innerApiCalls.instantiateInlineWorkflowTemplate as SinonStub
