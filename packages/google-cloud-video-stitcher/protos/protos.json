@@ -1743,7 +1743,7 @@
                               "id": 1,
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "videostitcher.googleapis.com/LiveSession"
+                                "(google.api.resource_reference).child_type": "videostitcher.googleapis.com/LiveSession"
                               }
                             },
                             "liveSession": {
