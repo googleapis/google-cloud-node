@@ -2059,6 +2059,9 @@ export namespace google {
 
                         /** AllUpdatesRule disableDefaultIamRecipients */
                         disableDefaultIamRecipients?: (boolean|null);
+
+                        /** AllUpdatesRule enableProjectLevelRecipients */
+                        enableProjectLevelRecipients?: (boolean|null);
                     }
 
                     /** Represents an AllUpdatesRule. */
@@ -2081,6 +2084,9 @@ export namespace google {
 
                         /** AllUpdatesRule disableDefaultIamRecipients. */
                         public disableDefaultIamRecipients: boolean;
+
+                        /** AllUpdatesRule enableProjectLevelRecipients. */
+                        public enableProjectLevelRecipients: boolean;
 
                         /**
                          * Creates a new AllUpdatesRule instance using the specified properties.
@@ -2868,6 +2874,9 @@ export namespace google {
                         /** ListBudgetsRequest parent */
                         parent?: (string|null);
 
+                        /** ListBudgetsRequest scope */
+                        scope?: (string|null);
+
                         /** ListBudgetsRequest pageSize */
                         pageSize?: (number|null);
 
@@ -2886,6 +2895,9 @@ export namespace google {
 
                         /** ListBudgetsRequest parent. */
                         public parent: string;
+
+                        /** ListBudgetsRequest scope. */
+                        public scope: string;
 
                         /** ListBudgetsRequest pageSize. */
                         public pageSize: number;
