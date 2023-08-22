@@ -737,6 +737,13 @@ export class BudgetServiceClient {
    * @param {string} request.parent
    *   Required. Name of billing account to list budgets under. Values
    *   are of the form `billingAccounts/{billingAccountId}`.
+   * @param {string} [request.scope]
+   *   Optional. Set the scope of the budgets to be returned, in the format of the
+   *   resource name. The scope of a budget is the cost that it tracks, such as
+   *   costs for a single project, or the costs for all projects in a folder. Only
+   *   project scope (in the format of "projects/project-id" or "projects/123") is
+   *   supported in this field. When this field is set to a project's resource
+   *   name, the budgets returned are tracking the costs for that project.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of budgets to return per page.
    *   The default and maximum value are 100.
@@ -838,6 +845,13 @@ export class BudgetServiceClient {
    * @param {string} request.parent
    *   Required. Name of billing account to list budgets under. Values
    *   are of the form `billingAccounts/{billingAccountId}`.
+   * @param {string} [request.scope]
+   *   Optional. Set the scope of the budgets to be returned, in the format of the
+   *   resource name. The scope of a budget is the cost that it tracks, such as
+   *   costs for a single project, or the costs for all projects in a folder. Only
+   *   project scope (in the format of "projects/project-id" or "projects/123") is
+   *   supported in this field. When this field is set to a project's resource
+   *   name, the budgets returned are tracking the costs for that project.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of budgets to return per page.
    *   The default and maximum value are 100.
@@ -887,6 +901,13 @@ export class BudgetServiceClient {
    * @param {string} request.parent
    *   Required. Name of billing account to list budgets under. Values
    *   are of the form `billingAccounts/{billingAccountId}`.
+   * @param {string} [request.scope]
+   *   Optional. Set the scope of the budgets to be returned, in the format of the
+   *   resource name. The scope of a budget is the cost that it tracks, such as
+   *   costs for a single project, or the costs for all projects in a folder. Only
+   *   project scope (in the format of "projects/project-id" or "projects/123") is
+   *   supported in this field. When this field is set to a project's resource
+   *   name, the budgets returned are tracking the costs for that project.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of budgets to return per page.
    *   The default and maximum value are 100.

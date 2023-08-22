@@ -486,6 +486,9 @@ export namespace google {
 
                         /** NotificationsRule disableDefaultIamRecipients */
                         disableDefaultIamRecipients?: (boolean|null);
+
+                        /** NotificationsRule enableProjectLevelRecipients */
+                        enableProjectLevelRecipients?: (boolean|null);
                     }
 
                     /** Represents a NotificationsRule. */
@@ -508,6 +511,9 @@ export namespace google {
 
                         /** NotificationsRule disableDefaultIamRecipients. */
                         public disableDefaultIamRecipients: boolean;
+
+                        /** NotificationsRule enableProjectLevelRecipients. */
+                        public enableProjectLevelRecipients: boolean;
 
                         /**
                          * Creates a new NotificationsRule instance using the specified properties.
@@ -1295,6 +1301,9 @@ export namespace google {
                         /** ListBudgetsRequest parent */
                         parent?: (string|null);
 
+                        /** ListBudgetsRequest scope */
+                        scope?: (string|null);
+
                         /** ListBudgetsRequest pageSize */
                         pageSize?: (number|null);
 
@@ -1313,6 +1322,9 @@ export namespace google {
 
                         /** ListBudgetsRequest parent. */
                         public parent: string;
+
+                        /** ListBudgetsRequest scope. */
+                        public scope: string;
 
                         /** ListBudgetsRequest pageSize. */
                         public pageSize: number;

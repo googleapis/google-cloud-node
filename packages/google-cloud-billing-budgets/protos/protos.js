@@ -1168,6 +1168,7 @@
                              * @property {string|null} [schemaVersion] NotificationsRule schemaVersion
                              * @property {Array.<string>|null} [monitoringNotificationChannels] NotificationsRule monitoringNotificationChannels
                              * @property {boolean|null} [disableDefaultIamRecipients] NotificationsRule disableDefaultIamRecipients
+                             * @property {boolean|null} [enableProjectLevelRecipients] NotificationsRule enableProjectLevelRecipients
                              */
     
                             /**
@@ -1219,6 +1220,14 @@
                             NotificationsRule.prototype.disableDefaultIamRecipients = false;
     
                             /**
+                             * NotificationsRule enableProjectLevelRecipients.
+                             * @member {boolean} enableProjectLevelRecipients
+                             * @memberof google.cloud.billing.budgets.v1.NotificationsRule
+                             * @instance
+                             */
+                            NotificationsRule.prototype.enableProjectLevelRecipients = false;
+    
+                            /**
                              * Creates a new NotificationsRule instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.billing.budgets.v1.NotificationsRule
@@ -1251,6 +1260,8 @@
                                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.monitoringNotificationChannels[i]);
                                 if (message.disableDefaultIamRecipients != null && Object.hasOwnProperty.call(message, "disableDefaultIamRecipients"))
                                     writer.uint32(/* id 4, wireType 0 =*/32).bool(message.disableDefaultIamRecipients);
+                                if (message.enableProjectLevelRecipients != null && Object.hasOwnProperty.call(message, "enableProjectLevelRecipients"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).bool(message.enableProjectLevelRecipients);
                                 return writer;
                             };
     
@@ -1301,6 +1312,10 @@
                                         }
                                     case 4: {
                                             message.disableDefaultIamRecipients = reader.bool();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.enableProjectLevelRecipients = reader.bool();
                                             break;
                                         }
                                     default:
@@ -1354,6 +1369,9 @@
                                 if (message.disableDefaultIamRecipients != null && message.hasOwnProperty("disableDefaultIamRecipients"))
                                     if (typeof message.disableDefaultIamRecipients !== "boolean")
                                         return "disableDefaultIamRecipients: boolean expected";
+                                if (message.enableProjectLevelRecipients != null && message.hasOwnProperty("enableProjectLevelRecipients"))
+                                    if (typeof message.enableProjectLevelRecipients !== "boolean")
+                                        return "enableProjectLevelRecipients: boolean expected";
                                 return null;
                             };
     
@@ -1382,6 +1400,8 @@
                                 }
                                 if (object.disableDefaultIamRecipients != null)
                                     message.disableDefaultIamRecipients = Boolean(object.disableDefaultIamRecipients);
+                                if (object.enableProjectLevelRecipients != null)
+                                    message.enableProjectLevelRecipients = Boolean(object.enableProjectLevelRecipients);
                                 return message;
                             };
     
@@ -1404,6 +1424,7 @@
                                     object.pubsubTopic = "";
                                     object.schemaVersion = "";
                                     object.disableDefaultIamRecipients = false;
+                                    object.enableProjectLevelRecipients = false;
                                 }
                                 if (message.pubsubTopic != null && message.hasOwnProperty("pubsubTopic"))
                                     object.pubsubTopic = message.pubsubTopic;
@@ -1416,6 +1437,8 @@
                                 }
                                 if (message.disableDefaultIamRecipients != null && message.hasOwnProperty("disableDefaultIamRecipients"))
                                     object.disableDefaultIamRecipients = message.disableDefaultIamRecipients;
+                                if (message.enableProjectLevelRecipients != null && message.hasOwnProperty("enableProjectLevelRecipients"))
+                                    object.enableProjectLevelRecipients = message.enableProjectLevelRecipients;
                                 return object;
                             };
     
@@ -3201,6 +3224,7 @@
                              * @memberof google.cloud.billing.budgets.v1
                              * @interface IListBudgetsRequest
                              * @property {string|null} [parent] ListBudgetsRequest parent
+                             * @property {string|null} [scope] ListBudgetsRequest scope
                              * @property {number|null} [pageSize] ListBudgetsRequest pageSize
                              * @property {string|null} [pageToken] ListBudgetsRequest pageToken
                              */
@@ -3227,6 +3251,14 @@
                              * @instance
                              */
                             ListBudgetsRequest.prototype.parent = "";
+    
+                            /**
+                             * ListBudgetsRequest scope.
+                             * @member {string} scope
+                             * @memberof google.cloud.billing.budgets.v1.ListBudgetsRequest
+                             * @instance
+                             */
+                            ListBudgetsRequest.prototype.scope = "";
     
                             /**
                              * ListBudgetsRequest pageSize.
@@ -3274,6 +3306,8 @@
                                     writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
                                 if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                                if (message.scope != null && Object.hasOwnProperty.call(message, "scope"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.scope);
                                 return writer;
                             };
     
@@ -3310,6 +3344,10 @@
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.scope = reader.string();
                                             break;
                                         }
                                     case 2: {
@@ -3358,6 +3396,9 @@
                                 if (message.parent != null && message.hasOwnProperty("parent"))
                                     if (!$util.isString(message.parent))
                                         return "parent: string expected";
+                                if (message.scope != null && message.hasOwnProperty("scope"))
+                                    if (!$util.isString(message.scope))
+                                        return "scope: string expected";
                                 if (message.pageSize != null && message.hasOwnProperty("pageSize"))
                                     if (!$util.isInteger(message.pageSize))
                                         return "pageSize: integer expected";
@@ -3381,6 +3422,8 @@
                                 var message = new $root.google.cloud.billing.budgets.v1.ListBudgetsRequest();
                                 if (object.parent != null)
                                     message.parent = String(object.parent);
+                                if (object.scope != null)
+                                    message.scope = String(object.scope);
                                 if (object.pageSize != null)
                                     message.pageSize = object.pageSize | 0;
                                 if (object.pageToken != null)
@@ -3405,6 +3448,7 @@
                                     object.parent = "";
                                     object.pageSize = 0;
                                     object.pageToken = "";
+                                    object.scope = "";
                                 }
                                 if (message.parent != null && message.hasOwnProperty("parent"))
                                     object.parent = message.parent;
@@ -3412,6 +3456,8 @@
                                     object.pageSize = message.pageSize;
                                 if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                     object.pageToken = message.pageToken;
+                                if (message.scope != null && message.hasOwnProperty("scope"))
+                                    object.scope = message.scope;
                                 return object;
                             };
     
