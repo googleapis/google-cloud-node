@@ -16830,6 +16830,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.tpu.v2alpha1.Tpu|resetQueuedResource}.
+                         * @memberof google.cloud.tpu.v2alpha1.Tpu
+                         * @typedef ResetQueuedResourceCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls ResetQueuedResource.
+                         * @function resetQueuedResource
+                         * @memberof google.cloud.tpu.v2alpha1.Tpu
+                         * @instance
+                         * @param {google.cloud.tpu.v2alpha1.IResetQueuedResourceRequest} request ResetQueuedResourceRequest message or plain object
+                         * @param {google.cloud.tpu.v2alpha1.Tpu.ResetQueuedResourceCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Tpu.prototype.resetQueuedResource = function resetQueuedResource(request, callback) {
+                            return this.rpcCall(resetQueuedResource, $root.google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "ResetQueuedResource" });
+    
+                        /**
+                         * Calls ResetQueuedResource.
+                         * @function resetQueuedResource
+                         * @memberof google.cloud.tpu.v2alpha1.Tpu
+                         * @instance
+                         * @param {google.cloud.tpu.v2alpha1.IResetQueuedResourceRequest} request ResetQueuedResourceRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.tpu.v2alpha1.Tpu|generateServiceIdentity}.
                          * @memberof google.cloud.tpu.v2alpha1.Tpu
                          * @typedef GenerateServiceIdentityCallback
@@ -21062,6 +21095,7 @@
                                  * @interface INodeSpec
                                  * @property {string|null} [parent] NodeSpec parent
                                  * @property {string|null} [nodeId] NodeSpec nodeId
+                                 * @property {google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.IMultiNodeParams|null} [multiNodeParams] NodeSpec multiNodeParams
                                  * @property {google.cloud.tpu.v2alpha1.INode|null} [node] NodeSpec node
                                  */
     
@@ -21095,6 +21129,14 @@
                                  * @instance
                                  */
                                 NodeSpec.prototype.nodeId = "";
+    
+                                /**
+                                 * NodeSpec multiNodeParams.
+                                 * @member {google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.IMultiNodeParams|null|undefined} multiNodeParams
+                                 * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec
+                                 * @instance
+                                 */
+                                NodeSpec.prototype.multiNodeParams = null;
     
                                 /**
                                  * NodeSpec node.
@@ -21134,6 +21176,8 @@
                                         writer.uint32(/* id 2, wireType 2 =*/18).string(message.nodeId);
                                     if (message.node != null && Object.hasOwnProperty.call(message, "node"))
                                         $root.google.cloud.tpu.v2alpha1.Node.encode(message.node, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                    if (message.multiNodeParams != null && Object.hasOwnProperty.call(message, "multiNodeParams"))
+                                        $root.google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams.encode(message.multiNodeParams, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                                     return writer;
                                 };
     
@@ -21174,6 +21218,10 @@
                                             }
                                         case 2: {
                                                 message.nodeId = reader.string();
+                                                break;
+                                            }
+                                        case 6: {
+                                                message.multiNodeParams = $root.google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams.decode(reader, reader.uint32());
                                                 break;
                                             }
                                         case 3: {
@@ -21221,6 +21269,11 @@
                                     if (message.nodeId != null && message.hasOwnProperty("nodeId"))
                                         if (!$util.isString(message.nodeId))
                                             return "nodeId: string expected";
+                                    if (message.multiNodeParams != null && message.hasOwnProperty("multiNodeParams")) {
+                                        var error = $root.google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams.verify(message.multiNodeParams);
+                                        if (error)
+                                            return "multiNodeParams." + error;
+                                    }
                                     if (message.node != null && message.hasOwnProperty("node")) {
                                         var error = $root.google.cloud.tpu.v2alpha1.Node.verify(message.node);
                                         if (error)
@@ -21245,6 +21298,11 @@
                                         message.parent = String(object.parent);
                                     if (object.nodeId != null)
                                         message.nodeId = String(object.nodeId);
+                                    if (object.multiNodeParams != null) {
+                                        if (typeof object.multiNodeParams !== "object")
+                                            throw TypeError(".google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.multiNodeParams: object expected");
+                                        message.multiNodeParams = $root.google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams.fromObject(object.multiNodeParams);
+                                    }
                                     if (object.node != null) {
                                         if (typeof object.node !== "object")
                                             throw TypeError(".google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.node: object expected");
@@ -21270,6 +21328,7 @@
                                         object.parent = "";
                                         object.nodeId = "";
                                         object.node = null;
+                                        object.multiNodeParams = null;
                                     }
                                     if (message.parent != null && message.hasOwnProperty("parent"))
                                         object.parent = message.parent;
@@ -21277,6 +21336,8 @@
                                         object.nodeId = message.nodeId;
                                     if (message.node != null && message.hasOwnProperty("node"))
                                         object.node = $root.google.cloud.tpu.v2alpha1.Node.toObject(message.node, options);
+                                    if (message.multiNodeParams != null && message.hasOwnProperty("multiNodeParams"))
+                                        object.multiNodeParams = $root.google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams.toObject(message.multiNodeParams, options);
                                     return object;
                                 };
     
@@ -21305,6 +21366,233 @@
                                     }
                                     return typeUrlPrefix + "/google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec";
                                 };
+    
+                                NodeSpec.MultiNodeParams = (function() {
+    
+                                    /**
+                                     * Properties of a MultiNodeParams.
+                                     * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec
+                                     * @interface IMultiNodeParams
+                                     * @property {number|null} [nodeCount] MultiNodeParams nodeCount
+                                     * @property {string|null} [nodeIdPrefix] MultiNodeParams nodeIdPrefix
+                                     */
+    
+                                    /**
+                                     * Constructs a new MultiNodeParams.
+                                     * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec
+                                     * @classdesc Represents a MultiNodeParams.
+                                     * @implements IMultiNodeParams
+                                     * @constructor
+                                     * @param {google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.IMultiNodeParams=} [properties] Properties to set
+                                     */
+                                    function MultiNodeParams(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * MultiNodeParams nodeCount.
+                                     * @member {number} nodeCount
+                                     * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams
+                                     * @instance
+                                     */
+                                    MultiNodeParams.prototype.nodeCount = 0;
+    
+                                    /**
+                                     * MultiNodeParams nodeIdPrefix.
+                                     * @member {string} nodeIdPrefix
+                                     * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams
+                                     * @instance
+                                     */
+                                    MultiNodeParams.prototype.nodeIdPrefix = "";
+    
+                                    /**
+                                     * Creates a new MultiNodeParams instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams
+                                     * @static
+                                     * @param {google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.IMultiNodeParams=} [properties] Properties to set
+                                     * @returns {google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams} MultiNodeParams instance
+                                     */
+                                    MultiNodeParams.create = function create(properties) {
+                                        return new MultiNodeParams(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified MultiNodeParams message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams
+                                     * @static
+                                     * @param {google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.IMultiNodeParams} message MultiNodeParams message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    MultiNodeParams.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.nodeCount != null && Object.hasOwnProperty.call(message, "nodeCount"))
+                                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.nodeCount);
+                                        if (message.nodeIdPrefix != null && Object.hasOwnProperty.call(message, "nodeIdPrefix"))
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.nodeIdPrefix);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified MultiNodeParams message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams
+                                     * @static
+                                     * @param {google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.IMultiNodeParams} message MultiNodeParams message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    MultiNodeParams.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a MultiNodeParams message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams} MultiNodeParams
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    MultiNodeParams.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.nodeCount = reader.int32();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.nodeIdPrefix = reader.string();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a MultiNodeParams message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams} MultiNodeParams
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    MultiNodeParams.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a MultiNodeParams message.
+                                     * @function verify
+                                     * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    MultiNodeParams.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.nodeCount != null && message.hasOwnProperty("nodeCount"))
+                                            if (!$util.isInteger(message.nodeCount))
+                                                return "nodeCount: integer expected";
+                                        if (message.nodeIdPrefix != null && message.hasOwnProperty("nodeIdPrefix"))
+                                            if (!$util.isString(message.nodeIdPrefix))
+                                                return "nodeIdPrefix: string expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a MultiNodeParams message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams} MultiNodeParams
+                                     */
+                                    MultiNodeParams.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams)
+                                            return object;
+                                        var message = new $root.google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams();
+                                        if (object.nodeCount != null)
+                                            message.nodeCount = object.nodeCount | 0;
+                                        if (object.nodeIdPrefix != null)
+                                            message.nodeIdPrefix = String(object.nodeIdPrefix);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a MultiNodeParams message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams
+                                     * @static
+                                     * @param {google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams} message MultiNodeParams
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    MultiNodeParams.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.nodeCount = 0;
+                                            object.nodeIdPrefix = "";
+                                        }
+                                        if (message.nodeCount != null && message.hasOwnProperty("nodeCount"))
+                                            object.nodeCount = message.nodeCount;
+                                        if (message.nodeIdPrefix != null && message.hasOwnProperty("nodeIdPrefix"))
+                                            object.nodeIdPrefix = message.nodeIdPrefix;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this MultiNodeParams to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    MultiNodeParams.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for MultiNodeParams
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    MultiNodeParams.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams";
+                                    };
+    
+                                    return MultiNodeParams;
+                                })();
     
                                 return NodeSpec;
                             })();
@@ -27495,6 +27783,209 @@
                         };
     
                         return DeleteQueuedResourceRequest;
+                    })();
+    
+                    v2alpha1.ResetQueuedResourceRequest = (function() {
+    
+                        /**
+                         * Properties of a ResetQueuedResourceRequest.
+                         * @memberof google.cloud.tpu.v2alpha1
+                         * @interface IResetQueuedResourceRequest
+                         * @property {string|null} [name] ResetQueuedResourceRequest name
+                         */
+    
+                        /**
+                         * Constructs a new ResetQueuedResourceRequest.
+                         * @memberof google.cloud.tpu.v2alpha1
+                         * @classdesc Represents a ResetQueuedResourceRequest.
+                         * @implements IResetQueuedResourceRequest
+                         * @constructor
+                         * @param {google.cloud.tpu.v2alpha1.IResetQueuedResourceRequest=} [properties] Properties to set
+                         */
+                        function ResetQueuedResourceRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ResetQueuedResourceRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest
+                         * @instance
+                         */
+                        ResetQueuedResourceRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new ResetQueuedResourceRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.IResetQueuedResourceRequest=} [properties] Properties to set
+                         * @returns {google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest} ResetQueuedResourceRequest instance
+                         */
+                        ResetQueuedResourceRequest.create = function create(properties) {
+                            return new ResetQueuedResourceRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ResetQueuedResourceRequest message. Does not implicitly {@link google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.IResetQueuedResourceRequest} message ResetQueuedResourceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResetQueuedResourceRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ResetQueuedResourceRequest message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.IResetQueuedResourceRequest} message ResetQueuedResourceRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResetQueuedResourceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ResetQueuedResourceRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest} ResetQueuedResourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResetQueuedResourceRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ResetQueuedResourceRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest} ResetQueuedResourceRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResetQueuedResourceRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ResetQueuedResourceRequest message.
+                         * @function verify
+                         * @memberof google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ResetQueuedResourceRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ResetQueuedResourceRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest} ResetQueuedResourceRequest
+                         */
+                        ResetQueuedResourceRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest)
+                                return object;
+                            var message = new $root.google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ResetQueuedResourceRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest} message ResetQueuedResourceRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ResetQueuedResourceRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ResetQueuedResourceRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ResetQueuedResourceRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ResetQueuedResourceRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ResetQueuedResourceRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest";
+                        };
+    
+                        return ResetQueuedResourceRequest;
                     })();
     
                     v2alpha1.ServiceIdentity = (function() {
