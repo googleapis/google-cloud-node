@@ -35,8 +35,9 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  The new billing information for the project. Read-only fields are ignored;
-   *  thus, you can leave empty all fields except `billing_account_name`.
+   *  The new billing information for the project. Output-only fields are
+   *  ignored; thus, you can leave empty all fields except
+   *  `billing_account_name`.
    */
   // const projectBillingInfo = {}
 
