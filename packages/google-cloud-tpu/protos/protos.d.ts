@@ -7030,6 +7030,20 @@ export namespace google {
                     public deleteQueuedResource(request: google.cloud.tpu.v2alpha1.IDeleteQueuedResourceRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls ResetQueuedResource.
+                     * @param request ResetQueuedResourceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public resetQueuedResource(request: google.cloud.tpu.v2alpha1.IResetQueuedResourceRequest, callback: google.cloud.tpu.v2alpha1.Tpu.ResetQueuedResourceCallback): void;
+
+                    /**
+                     * Calls ResetQueuedResource.
+                     * @param request ResetQueuedResourceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public resetQueuedResource(request: google.cloud.tpu.v2alpha1.IResetQueuedResourceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls GenerateServiceIdentity.
                      * @param request GenerateServiceIdentityRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and GenerateServiceIdentityResponse
@@ -7206,6 +7220,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteQueuedResourceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.tpu.v2alpha1.Tpu|resetQueuedResource}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ResetQueuedResourceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.tpu.v2alpha1.Tpu|generateServiceIdentity}.
@@ -8735,6 +8756,9 @@ export namespace google {
                             /** NodeSpec nodeId */
                             nodeId?: (string|null);
 
+                            /** NodeSpec multiNodeParams */
+                            multiNodeParams?: (google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.IMultiNodeParams|null);
+
                             /** NodeSpec node */
                             node?: (google.cloud.tpu.v2alpha1.INode|null);
                         }
@@ -8753,6 +8777,9 @@ export namespace google {
 
                             /** NodeSpec nodeId. */
                             public nodeId: string;
+
+                            /** NodeSpec multiNodeParams. */
+                            public multiNodeParams?: (google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.IMultiNodeParams|null);
 
                             /** NodeSpec node. */
                             public node?: (google.cloud.tpu.v2alpha1.INode|null);
@@ -8833,6 +8860,112 @@ export namespace google {
                              * @returns The default type url
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace NodeSpec {
+
+                            /** Properties of a MultiNodeParams. */
+                            interface IMultiNodeParams {
+
+                                /** MultiNodeParams nodeCount */
+                                nodeCount?: (number|null);
+
+                                /** MultiNodeParams nodeIdPrefix */
+                                nodeIdPrefix?: (string|null);
+                            }
+
+                            /** Represents a MultiNodeParams. */
+                            class MultiNodeParams implements IMultiNodeParams {
+
+                                /**
+                                 * Constructs a new MultiNodeParams.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.IMultiNodeParams);
+
+                                /** MultiNodeParams nodeCount. */
+                                public nodeCount: number;
+
+                                /** MultiNodeParams nodeIdPrefix. */
+                                public nodeIdPrefix: string;
+
+                                /**
+                                 * Creates a new MultiNodeParams instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns MultiNodeParams instance
+                                 */
+                                public static create(properties?: google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.IMultiNodeParams): google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams;
+
+                                /**
+                                 * Encodes the specified MultiNodeParams message. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams.verify|verify} messages.
+                                 * @param message MultiNodeParams message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.IMultiNodeParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified MultiNodeParams message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams.verify|verify} messages.
+                                 * @param message MultiNodeParams message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.IMultiNodeParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a MultiNodeParams message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns MultiNodeParams
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams;
+
+                                /**
+                                 * Decodes a MultiNodeParams message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns MultiNodeParams
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams;
+
+                                /**
+                                 * Verifies a MultiNodeParams message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a MultiNodeParams message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns MultiNodeParams
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams;
+
+                                /**
+                                 * Creates a plain object from a MultiNodeParams message. Also converts values to other types if specified.
+                                 * @param message MultiNodeParams
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.tpu.v2alpha1.QueuedResource.Tpu.NodeSpec.MultiNodeParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this MultiNodeParams to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for MultiNodeParams
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
                         }
                     }
 
@@ -11520,6 +11653,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DeleteQueuedResourceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ResetQueuedResourceRequest. */
+                interface IResetQueuedResourceRequest {
+
+                    /** ResetQueuedResourceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a ResetQueuedResourceRequest. */
+                class ResetQueuedResourceRequest implements IResetQueuedResourceRequest {
+
+                    /**
+                     * Constructs a new ResetQueuedResourceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tpu.v2alpha1.IResetQueuedResourceRequest);
+
+                    /** ResetQueuedResourceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new ResetQueuedResourceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResetQueuedResourceRequest instance
+                     */
+                    public static create(properties?: google.cloud.tpu.v2alpha1.IResetQueuedResourceRequest): google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest;
+
+                    /**
+                     * Encodes the specified ResetQueuedResourceRequest message. Does not implicitly {@link google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest.verify|verify} messages.
+                     * @param message ResetQueuedResourceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tpu.v2alpha1.IResetQueuedResourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResetQueuedResourceRequest message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest.verify|verify} messages.
+                     * @param message ResetQueuedResourceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tpu.v2alpha1.IResetQueuedResourceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResetQueuedResourceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResetQueuedResourceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest;
+
+                    /**
+                     * Decodes a ResetQueuedResourceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResetQueuedResourceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest;
+
+                    /**
+                     * Verifies a ResetQueuedResourceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResetQueuedResourceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResetQueuedResourceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest;
+
+                    /**
+                     * Creates a plain object from a ResetQueuedResourceRequest message. Also converts values to other types if specified.
+                     * @param message ResetQueuedResourceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tpu.v2alpha1.ResetQueuedResourceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResetQueuedResourceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ResetQueuedResourceRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
