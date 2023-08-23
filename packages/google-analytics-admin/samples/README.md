@@ -189,6 +189,7 @@
   * [Analytics_admin_service.run_access_report](#analytics_admin_service.run_access_report)
   * [Analytics_admin_service.search_change_history_events](#analytics_admin_service.search_change_history_events)
   * [Analytics_admin_service.update_account](#analytics_admin_service.update_account)
+  * [Analytics_admin_service.update_conversion_event](#analytics_admin_service.update_conversion_event)
   * [Analytics_admin_service.update_custom_dimension](#analytics_admin_service.update_custom_dimension)
   * [Analytics_admin_service.update_custom_metric](#analytics_admin_service.update_custom_metric)
   * [Analytics_admin_service.update_data_retention_settings](#analytics_admin_service.update_data_retention_settings)
@@ -3215,6 +3216,23 @@ __Usage:__
 
 
 `node packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.update_account.js`
+
+
+-----
+
+
+
+
+### Analytics_admin_service.update_conversion_event
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.update_conversion_event.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.update_conversion_event.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.update_conversion_event.js`
 
 
 -----

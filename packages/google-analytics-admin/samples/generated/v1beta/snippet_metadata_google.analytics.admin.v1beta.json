@@ -1018,7 +1018,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 57,
+                    "end": 59,
                     "type": "FULL"
                 }
             ],
@@ -1204,6 +1204,50 @@
                 "method": {
                     "shortName": "CreateConversionEvent",
                     "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateConversionEvent",
+                    "service": {
+                        "shortName": "AnalyticsAdminService",
+                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_UpdateConversionEvent_async",
+            "title": "AnalyticsAdminService updateConversionEvent Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates a conversion event with the specified attributes.",
+            "canonical": true,
+            "file": "analytics_admin_service.update_conversion_event.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateConversionEvent",
+                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateConversionEvent",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "conversion_event",
+                        "type": ".google.analytics.admin.v1beta.ConversionEvent"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.analytics.admin.v1beta.ConversionEvent",
+                "client": {
+                    "shortName": "AnalyticsAdminServiceClient",
+                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateConversionEvent",
+                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateConversionEvent",
                     "service": {
                         "shortName": "AnalyticsAdminService",
                         "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
