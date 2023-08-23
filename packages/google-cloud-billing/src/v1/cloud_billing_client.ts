@@ -788,8 +788,9 @@ export class CloudBillingClient {
    *   information that you want to update. For example,
    *   `projects/tokyo-rain-123`.
    * @param {google.cloud.billing.v1.ProjectBillingInfo} request.projectBillingInfo
-   *   The new billing information for the project. Read-only fields are ignored;
-   *   thus, you can leave empty all fields except `billing_account_name`.
+   *   The new billing information for the project. Output-only fields are
+   *   ignored; thus, you can leave empty all fields except
+   *   `billing_account_name`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
