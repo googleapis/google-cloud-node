@@ -2900,6 +2900,151 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
     });
   });
 
+  describe('updateConversionEvent', () => {
+    it('invokes updateConversionEvent without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.UpdateConversionEventRequest()
+      );
+      request.conversionEvent ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.UpdateConversionEventRequest',
+        ['conversionEvent', 'name']
+      );
+      request.conversionEvent.name = defaultValue1;
+      const expectedHeaderRequestParams = `conversion_event.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.ConversionEvent()
+      );
+      client.innerApiCalls.updateConversionEvent =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateConversionEvent(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateConversionEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateConversionEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateConversionEvent without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.UpdateConversionEventRequest()
+      );
+      request.conversionEvent ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.UpdateConversionEventRequest',
+        ['conversionEvent', 'name']
+      );
+      request.conversionEvent.name = defaultValue1;
+      const expectedHeaderRequestParams = `conversion_event.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.ConversionEvent()
+      );
+      client.innerApiCalls.updateConversionEvent =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateConversionEvent(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1beta.IConversionEvent | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateConversionEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateConversionEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateConversionEvent with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.UpdateConversionEventRequest()
+      );
+      request.conversionEvent ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.UpdateConversionEventRequest',
+        ['conversionEvent', 'name']
+      );
+      request.conversionEvent.name = defaultValue1;
+      const expectedHeaderRequestParams = `conversion_event.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateConversionEvent = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateConversionEvent(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateConversionEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateConversionEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateConversionEvent with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.UpdateConversionEventRequest()
+      );
+      request.conversionEvent ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.UpdateConversionEventRequest',
+        ['conversionEvent', 'name']
+      );
+      request.conversionEvent.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateConversionEvent(request),
+        expectedError
+      );
+    });
+  });
+
   describe('getConversionEvent', () => {
     it('invokes getConversionEvent without error', async () => {
       const client =

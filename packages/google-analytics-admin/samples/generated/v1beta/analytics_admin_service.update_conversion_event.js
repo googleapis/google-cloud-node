@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(measurementProtocolSecret, updateMask) {
-  // [START analyticsadmin_v1beta_generated_AnalyticsAdminService_UpdateMeasurementProtocolSecret_async]
+function main(conversionEvent, updateMask) {
+  // [START analyticsadmin_v1beta_generated_AnalyticsAdminService_UpdateConversionEvent_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,12 +29,15 @@ function main(measurementProtocolSecret, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The measurement protocol secret to update.
+   *  Required. The conversion event to update.
+   *  The `name` field is used to identify the settings to be updated.
    */
-  // const measurementProtocolSecret = {}
+  // const conversionEvent = {}
   /**
-   *  Required. The list of fields to be updated. Omitted fields will not be
-   *  updated.
+   *  Required. The list of fields to be updated. Field names must be in snake
+   *  case (e.g., "field_to_update"). Omitted fields will not be updated. To
+   *  replace the entire entity, use one path with the string "*" to match all
+   *  fields.
    */
   // const updateMask = {}
 
@@ -44,20 +47,20 @@ function main(measurementProtocolSecret, updateMask) {
   // Instantiates a client
   const adminClient = new AnalyticsAdminServiceClient();
 
-  async function callUpdateMeasurementProtocolSecret() {
+  async function callUpdateConversionEvent() {
     // Construct request
     const request = {
-      measurementProtocolSecret,
+      conversionEvent,
       updateMask,
     };
 
     // Run request
-    const response = await adminClient.updateMeasurementProtocolSecret(request);
+    const response = await adminClient.updateConversionEvent(request);
     console.log(response);
   }
 
-  callUpdateMeasurementProtocolSecret();
-  // [END analyticsadmin_v1beta_generated_AnalyticsAdminService_UpdateMeasurementProtocolSecret_async]
+  callUpdateConversionEvent();
+  // [END analyticsadmin_v1beta_generated_AnalyticsAdminService_UpdateConversionEvent_async]
 }
 
 process.on('unhandledRejection', err => {
