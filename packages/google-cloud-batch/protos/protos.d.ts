@@ -9269,6 +9269,9 @@ export namespace google {
 
                     /** TaskExecution exitCode */
                     exitCode?: (number|null);
+
+                    /** TaskExecution stderrSnippet */
+                    stderrSnippet?: (string|null);
                 }
 
                 /** Represents a TaskExecution. */
@@ -9282,6 +9285,9 @@ export namespace google {
 
                     /** TaskExecution exitCode. */
                     public exitCode: number;
+
+                    /** TaskExecution stderrSnippet. */
+                    public stderrSnippet: string;
 
                     /**
                      * Creates a new TaskExecution instance using the specified properties.
@@ -9593,6 +9599,9 @@ export namespace google {
                     /** Runnable barrier */
                     barrier?: (google.cloud.batch.v1alpha.Runnable.IBarrier|null);
 
+                    /** Runnable displayName */
+                    displayName?: (string|null);
+
                     /** Runnable ignoreExitStatus */
                     ignoreExitStatus?: (boolean|null);
 
@@ -9629,6 +9638,9 @@ export namespace google {
 
                     /** Runnable barrier. */
                     public barrier?: (google.cloud.batch.v1alpha.Runnable.IBarrier|null);
+
+                    /** Runnable displayName. */
+                    public displayName: string;
 
                     /** Runnable ignoreExitStatus. */
                     public ignoreExitStatus: boolean;

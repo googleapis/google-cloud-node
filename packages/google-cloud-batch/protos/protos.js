@@ -24407,6 +24407,7 @@
                          * @memberof google.cloud.batch.v1alpha
                          * @interface ITaskExecution
                          * @property {number|null} [exitCode] TaskExecution exitCode
+                         * @property {string|null} [stderrSnippet] TaskExecution stderrSnippet
                          */
     
                         /**
@@ -24431,6 +24432,14 @@
                          * @instance
                          */
                         TaskExecution.prototype.exitCode = 0;
+    
+                        /**
+                         * TaskExecution stderrSnippet.
+                         * @member {string} stderrSnippet
+                         * @memberof google.cloud.batch.v1alpha.TaskExecution
+                         * @instance
+                         */
+                        TaskExecution.prototype.stderrSnippet = "";
     
                         /**
                          * Creates a new TaskExecution instance using the specified properties.
@@ -24458,6 +24467,8 @@
                                 writer = $Writer.create();
                             if (message.exitCode != null && Object.hasOwnProperty.call(message, "exitCode"))
                                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.exitCode);
+                            if (message.stderrSnippet != null && Object.hasOwnProperty.call(message, "stderrSnippet"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.stderrSnippet);
                             return writer;
                         };
     
@@ -24494,6 +24505,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.exitCode = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.stderrSnippet = reader.string();
                                         break;
                                     }
                                 default:
@@ -24534,6 +24549,9 @@
                             if (message.exitCode != null && message.hasOwnProperty("exitCode"))
                                 if (!$util.isInteger(message.exitCode))
                                     return "exitCode: integer expected";
+                            if (message.stderrSnippet != null && message.hasOwnProperty("stderrSnippet"))
+                                if (!$util.isString(message.stderrSnippet))
+                                    return "stderrSnippet: string expected";
                             return null;
                         };
     
@@ -24551,6 +24569,8 @@
                             var message = new $root.google.cloud.batch.v1alpha.TaskExecution();
                             if (object.exitCode != null)
                                 message.exitCode = object.exitCode | 0;
+                            if (object.stderrSnippet != null)
+                                message.stderrSnippet = String(object.stderrSnippet);
                             return message;
                         };
     
@@ -24567,10 +24587,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.exitCode = 0;
+                                object.stderrSnippet = "";
+                            }
                             if (message.exitCode != null && message.hasOwnProperty("exitCode"))
                                 object.exitCode = message.exitCode;
+                            if (message.stderrSnippet != null && message.hasOwnProperty("stderrSnippet"))
+                                object.stderrSnippet = message.stderrSnippet;
                             return object;
                         };
     
@@ -25160,6 +25184,7 @@
                          * @property {google.cloud.batch.v1alpha.Runnable.IContainer|null} [container] Runnable container
                          * @property {google.cloud.batch.v1alpha.Runnable.IScript|null} [script] Runnable script
                          * @property {google.cloud.batch.v1alpha.Runnable.IBarrier|null} [barrier] Runnable barrier
+                         * @property {string|null} [displayName] Runnable displayName
                          * @property {boolean|null} [ignoreExitStatus] Runnable ignoreExitStatus
                          * @property {boolean|null} [background] Runnable background
                          * @property {boolean|null} [alwaysRun] Runnable alwaysRun
@@ -25207,6 +25232,14 @@
                          * @instance
                          */
                         Runnable.prototype.barrier = null;
+    
+                        /**
+                         * Runnable displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.batch.v1alpha.Runnable
+                         * @instance
+                         */
+                        Runnable.prototype.displayName = "";
     
                         /**
                          * Runnable ignoreExitStatus.
@@ -25313,6 +25346,8 @@
                             if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                                 for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 9, wireType 2 =*/74).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.displayName);
                             return writer;
                         };
     
@@ -25357,6 +25392,10 @@
                                     }
                                 case 6: {
                                         message.barrier = $root.google.cloud.batch.v1alpha.Runnable.Barrier.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.displayName = reader.string();
                                         break;
                                     }
                                 case 3: {
@@ -25466,6 +25505,9 @@
                                         return "barrier." + error;
                                 }
                             }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
                             if (message.ignoreExitStatus != null && message.hasOwnProperty("ignoreExitStatus"))
                                 if (typeof message.ignoreExitStatus !== "boolean")
                                     return "ignoreExitStatus: boolean expected";
@@ -25523,6 +25565,8 @@
                                     throw TypeError(".google.cloud.batch.v1alpha.Runnable.barrier: object expected");
                                 message.barrier = $root.google.cloud.batch.v1alpha.Runnable.Barrier.fromObject(object.barrier);
                             }
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
                             if (object.ignoreExitStatus != null)
                                 message.ignoreExitStatus = Boolean(object.ignoreExitStatus);
                             if (object.background != null)
@@ -25570,6 +25614,7 @@
                                 object.alwaysRun = false;
                                 object.environment = null;
                                 object.timeout = null;
+                                object.displayName = "";
                             }
                             if (message.container != null && message.hasOwnProperty("container")) {
                                 object.container = $root.google.cloud.batch.v1alpha.Runnable.Container.toObject(message.container, options);
@@ -25602,6 +25647,8 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.labels[keys2[j]] = message.labels[keys2[j]];
                             }
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
                             return object;
                         };
     
