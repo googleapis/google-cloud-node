@@ -150,7 +150,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 67,
+                    "end": 76,
                     "type": "FULL"
                 }
             ],
@@ -161,6 +161,10 @@
                 "parameters": [
                     {
                         "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "scope",
                         "type": "TYPE_STRING"
                     },
                     {
