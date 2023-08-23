@@ -15240,6 +15240,7 @@
                          * @interface IInstanceGroupConfig
                          * @property {number|null} [numInstances] InstanceGroupConfig numInstances
                          * @property {Array.<string>|null} [instanceNames] InstanceGroupConfig instanceNames
+                         * @property {Array.<google.cloud.dataproc.v1.IInstanceReference>|null} [instanceReferences] InstanceGroupConfig instanceReferences
                          * @property {string|null} [imageUri] InstanceGroupConfig imageUri
                          * @property {string|null} [machineTypeUri] InstanceGroupConfig machineTypeUri
                          * @property {google.cloud.dataproc.v1.IDiskConfig|null} [diskConfig] InstanceGroupConfig diskConfig
@@ -15248,6 +15249,8 @@
                          * @property {google.cloud.dataproc.v1.IManagedGroupConfig|null} [managedGroupConfig] InstanceGroupConfig managedGroupConfig
                          * @property {Array.<google.cloud.dataproc.v1.IAcceleratorConfig>|null} [accelerators] InstanceGroupConfig accelerators
                          * @property {string|null} [minCpuPlatform] InstanceGroupConfig minCpuPlatform
+                         * @property {number|null} [minNumInstances] InstanceGroupConfig minNumInstances
+                         * @property {google.cloud.dataproc.v1.IInstanceFlexibilityPolicy|null} [instanceFlexibilityPolicy] InstanceGroupConfig instanceFlexibilityPolicy
                          */
     
                         /**
@@ -15260,6 +15263,7 @@
                          */
                         function InstanceGroupConfig(properties) {
                             this.instanceNames = [];
+                            this.instanceReferences = [];
                             this.accelerators = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -15282,6 +15286,14 @@
                          * @instance
                          */
                         InstanceGroupConfig.prototype.instanceNames = $util.emptyArray;
+    
+                        /**
+                         * InstanceGroupConfig instanceReferences.
+                         * @member {Array.<google.cloud.dataproc.v1.IInstanceReference>} instanceReferences
+                         * @memberof google.cloud.dataproc.v1.InstanceGroupConfig
+                         * @instance
+                         */
+                        InstanceGroupConfig.prototype.instanceReferences = $util.emptyArray;
     
                         /**
                          * InstanceGroupConfig imageUri.
@@ -15348,6 +15360,22 @@
                         InstanceGroupConfig.prototype.minCpuPlatform = "";
     
                         /**
+                         * InstanceGroupConfig minNumInstances.
+                         * @member {number} minNumInstances
+                         * @memberof google.cloud.dataproc.v1.InstanceGroupConfig
+                         * @instance
+                         */
+                        InstanceGroupConfig.prototype.minNumInstances = 0;
+    
+                        /**
+                         * InstanceGroupConfig instanceFlexibilityPolicy.
+                         * @member {google.cloud.dataproc.v1.IInstanceFlexibilityPolicy|null|undefined} instanceFlexibilityPolicy
+                         * @memberof google.cloud.dataproc.v1.InstanceGroupConfig
+                         * @instance
+                         */
+                        InstanceGroupConfig.prototype.instanceFlexibilityPolicy = null;
+    
+                        /**
                          * Creates a new InstanceGroupConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dataproc.v1.InstanceGroupConfig
@@ -15393,6 +15421,13 @@
                                 writer.uint32(/* id 9, wireType 2 =*/74).string(message.minCpuPlatform);
                             if (message.preemptibility != null && Object.hasOwnProperty.call(message, "preemptibility"))
                                 writer.uint32(/* id 10, wireType 0 =*/80).int32(message.preemptibility);
+                            if (message.instanceReferences != null && message.instanceReferences.length)
+                                for (var i = 0; i < message.instanceReferences.length; ++i)
+                                    $root.google.cloud.dataproc.v1.InstanceReference.encode(message.instanceReferences[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.minNumInstances != null && Object.hasOwnProperty.call(message, "minNumInstances"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).int32(message.minNumInstances);
+                            if (message.instanceFlexibilityPolicy != null && Object.hasOwnProperty.call(message, "instanceFlexibilityPolicy"))
+                                $root.google.cloud.dataproc.v1.InstanceFlexibilityPolicy.encode(message.instanceFlexibilityPolicy, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                             return writer;
                         };
     
@@ -15437,6 +15472,12 @@
                                         message.instanceNames.push(reader.string());
                                         break;
                                     }
+                                case 11: {
+                                        if (!(message.instanceReferences && message.instanceReferences.length))
+                                            message.instanceReferences = [];
+                                        message.instanceReferences.push($root.google.cloud.dataproc.v1.InstanceReference.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 case 3: {
                                         message.imageUri = reader.string();
                                         break;
@@ -15469,6 +15510,14 @@
                                     }
                                 case 9: {
                                         message.minCpuPlatform = reader.string();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.minNumInstances = reader.int32();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.instanceFlexibilityPolicy = $root.google.cloud.dataproc.v1.InstanceFlexibilityPolicy.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -15516,6 +15565,15 @@
                                     if (!$util.isString(message.instanceNames[i]))
                                         return "instanceNames: string[] expected";
                             }
+                            if (message.instanceReferences != null && message.hasOwnProperty("instanceReferences")) {
+                                if (!Array.isArray(message.instanceReferences))
+                                    return "instanceReferences: array expected";
+                                for (var i = 0; i < message.instanceReferences.length; ++i) {
+                                    var error = $root.google.cloud.dataproc.v1.InstanceReference.verify(message.instanceReferences[i]);
+                                    if (error)
+                                        return "instanceReferences." + error;
+                                }
+                            }
                             if (message.imageUri != null && message.hasOwnProperty("imageUri"))
                                 if (!$util.isString(message.imageUri))
                                     return "imageUri: string expected";
@@ -15557,6 +15615,14 @@
                             if (message.minCpuPlatform != null && message.hasOwnProperty("minCpuPlatform"))
                                 if (!$util.isString(message.minCpuPlatform))
                                     return "minCpuPlatform: string expected";
+                            if (message.minNumInstances != null && message.hasOwnProperty("minNumInstances"))
+                                if (!$util.isInteger(message.minNumInstances))
+                                    return "minNumInstances: integer expected";
+                            if (message.instanceFlexibilityPolicy != null && message.hasOwnProperty("instanceFlexibilityPolicy")) {
+                                var error = $root.google.cloud.dataproc.v1.InstanceFlexibilityPolicy.verify(message.instanceFlexibilityPolicy);
+                                if (error)
+                                    return "instanceFlexibilityPolicy." + error;
+                            }
                             return null;
                         };
     
@@ -15580,6 +15646,16 @@
                                 message.instanceNames = [];
                                 for (var i = 0; i < object.instanceNames.length; ++i)
                                     message.instanceNames[i] = String(object.instanceNames[i]);
+                            }
+                            if (object.instanceReferences) {
+                                if (!Array.isArray(object.instanceReferences))
+                                    throw TypeError(".google.cloud.dataproc.v1.InstanceGroupConfig.instanceReferences: array expected");
+                                message.instanceReferences = [];
+                                for (var i = 0; i < object.instanceReferences.length; ++i) {
+                                    if (typeof object.instanceReferences[i] !== "object")
+                                        throw TypeError(".google.cloud.dataproc.v1.InstanceGroupConfig.instanceReferences: object expected");
+                                    message.instanceReferences[i] = $root.google.cloud.dataproc.v1.InstanceReference.fromObject(object.instanceReferences[i]);
+                                }
                             }
                             if (object.imageUri != null)
                                 message.imageUri = String(object.imageUri);
@@ -15633,6 +15709,13 @@
                             }
                             if (object.minCpuPlatform != null)
                                 message.minCpuPlatform = String(object.minCpuPlatform);
+                            if (object.minNumInstances != null)
+                                message.minNumInstances = object.minNumInstances | 0;
+                            if (object.instanceFlexibilityPolicy != null) {
+                                if (typeof object.instanceFlexibilityPolicy !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.InstanceGroupConfig.instanceFlexibilityPolicy: object expected");
+                                message.instanceFlexibilityPolicy = $root.google.cloud.dataproc.v1.InstanceFlexibilityPolicy.fromObject(object.instanceFlexibilityPolicy);
+                            }
                             return message;
                         };
     
@@ -15652,6 +15735,7 @@
                             if (options.arrays || options.defaults) {
                                 object.instanceNames = [];
                                 object.accelerators = [];
+                                object.instanceReferences = [];
                             }
                             if (options.defaults) {
                                 object.numInstances = 0;
@@ -15662,6 +15746,8 @@
                                 object.managedGroupConfig = null;
                                 object.minCpuPlatform = "";
                                 object.preemptibility = options.enums === String ? "PREEMPTIBILITY_UNSPECIFIED" : 0;
+                                object.minNumInstances = 0;
+                                object.instanceFlexibilityPolicy = null;
                             }
                             if (message.numInstances != null && message.hasOwnProperty("numInstances"))
                                 object.numInstances = message.numInstances;
@@ -15689,6 +15775,15 @@
                                 object.minCpuPlatform = message.minCpuPlatform;
                             if (message.preemptibility != null && message.hasOwnProperty("preemptibility"))
                                 object.preemptibility = options.enums === String ? $root.google.cloud.dataproc.v1.InstanceGroupConfig.Preemptibility[message.preemptibility] === undefined ? message.preemptibility : $root.google.cloud.dataproc.v1.InstanceGroupConfig.Preemptibility[message.preemptibility] : message.preemptibility;
+                            if (message.instanceReferences && message.instanceReferences.length) {
+                                object.instanceReferences = [];
+                                for (var j = 0; j < message.instanceReferences.length; ++j)
+                                    object.instanceReferences[j] = $root.google.cloud.dataproc.v1.InstanceReference.toObject(message.instanceReferences[j], options);
+                            }
+                            if (message.minNumInstances != null && message.hasOwnProperty("minNumInstances"))
+                                object.minNumInstances = message.minNumInstances;
+                            if (message.instanceFlexibilityPolicy != null && message.hasOwnProperty("instanceFlexibilityPolicy"))
+                                object.instanceFlexibilityPolicy = $root.google.cloud.dataproc.v1.InstanceFlexibilityPolicy.toObject(message.instanceFlexibilityPolicy, options);
                             return object;
                         };
     
@@ -15739,6 +15834,279 @@
                         return InstanceGroupConfig;
                     })();
     
+                    v1.InstanceReference = (function() {
+    
+                        /**
+                         * Properties of an InstanceReference.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface IInstanceReference
+                         * @property {string|null} [instanceName] InstanceReference instanceName
+                         * @property {string|null} [instanceId] InstanceReference instanceId
+                         * @property {string|null} [publicKey] InstanceReference publicKey
+                         * @property {string|null} [publicEciesKey] InstanceReference publicEciesKey
+                         */
+    
+                        /**
+                         * Constructs a new InstanceReference.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents an InstanceReference.
+                         * @implements IInstanceReference
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.IInstanceReference=} [properties] Properties to set
+                         */
+                        function InstanceReference(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * InstanceReference instanceName.
+                         * @member {string} instanceName
+                         * @memberof google.cloud.dataproc.v1.InstanceReference
+                         * @instance
+                         */
+                        InstanceReference.prototype.instanceName = "";
+    
+                        /**
+                         * InstanceReference instanceId.
+                         * @member {string} instanceId
+                         * @memberof google.cloud.dataproc.v1.InstanceReference
+                         * @instance
+                         */
+                        InstanceReference.prototype.instanceId = "";
+    
+                        /**
+                         * InstanceReference publicKey.
+                         * @member {string} publicKey
+                         * @memberof google.cloud.dataproc.v1.InstanceReference
+                         * @instance
+                         */
+                        InstanceReference.prototype.publicKey = "";
+    
+                        /**
+                         * InstanceReference publicEciesKey.
+                         * @member {string} publicEciesKey
+                         * @memberof google.cloud.dataproc.v1.InstanceReference
+                         * @instance
+                         */
+                        InstanceReference.prototype.publicEciesKey = "";
+    
+                        /**
+                         * Creates a new InstanceReference instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.InstanceReference
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IInstanceReference=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.InstanceReference} InstanceReference instance
+                         */
+                        InstanceReference.create = function create(properties) {
+                            return new InstanceReference(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified InstanceReference message. Does not implicitly {@link google.cloud.dataproc.v1.InstanceReference.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.InstanceReference
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IInstanceReference} message InstanceReference message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InstanceReference.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.instanceName != null && Object.hasOwnProperty.call(message, "instanceName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.instanceName);
+                            if (message.instanceId != null && Object.hasOwnProperty.call(message, "instanceId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.instanceId);
+                            if (message.publicKey != null && Object.hasOwnProperty.call(message, "publicKey"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.publicKey);
+                            if (message.publicEciesKey != null && Object.hasOwnProperty.call(message, "publicEciesKey"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.publicEciesKey);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified InstanceReference message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.InstanceReference.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.InstanceReference
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IInstanceReference} message InstanceReference message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InstanceReference.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an InstanceReference message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.InstanceReference
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.InstanceReference} InstanceReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InstanceReference.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.InstanceReference();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.instanceName = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.instanceId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.publicKey = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.publicEciesKey = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an InstanceReference message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.InstanceReference
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.InstanceReference} InstanceReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InstanceReference.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an InstanceReference message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.InstanceReference
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        InstanceReference.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.instanceName != null && message.hasOwnProperty("instanceName"))
+                                if (!$util.isString(message.instanceName))
+                                    return "instanceName: string expected";
+                            if (message.instanceId != null && message.hasOwnProperty("instanceId"))
+                                if (!$util.isString(message.instanceId))
+                                    return "instanceId: string expected";
+                            if (message.publicKey != null && message.hasOwnProperty("publicKey"))
+                                if (!$util.isString(message.publicKey))
+                                    return "publicKey: string expected";
+                            if (message.publicEciesKey != null && message.hasOwnProperty("publicEciesKey"))
+                                if (!$util.isString(message.publicEciesKey))
+                                    return "publicEciesKey: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an InstanceReference message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.InstanceReference
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.InstanceReference} InstanceReference
+                         */
+                        InstanceReference.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.InstanceReference)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.InstanceReference();
+                            if (object.instanceName != null)
+                                message.instanceName = String(object.instanceName);
+                            if (object.instanceId != null)
+                                message.instanceId = String(object.instanceId);
+                            if (object.publicKey != null)
+                                message.publicKey = String(object.publicKey);
+                            if (object.publicEciesKey != null)
+                                message.publicEciesKey = String(object.publicEciesKey);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an InstanceReference message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.InstanceReference
+                         * @static
+                         * @param {google.cloud.dataproc.v1.InstanceReference} message InstanceReference
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        InstanceReference.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.instanceName = "";
+                                object.instanceId = "";
+                                object.publicKey = "";
+                                object.publicEciesKey = "";
+                            }
+                            if (message.instanceName != null && message.hasOwnProperty("instanceName"))
+                                object.instanceName = message.instanceName;
+                            if (message.instanceId != null && message.hasOwnProperty("instanceId"))
+                                object.instanceId = message.instanceId;
+                            if (message.publicKey != null && message.hasOwnProperty("publicKey"))
+                                object.publicKey = message.publicKey;
+                            if (message.publicEciesKey != null && message.hasOwnProperty("publicEciesKey"))
+                                object.publicEciesKey = message.publicEciesKey;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this InstanceReference to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.InstanceReference
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        InstanceReference.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for InstanceReference
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataproc.v1.InstanceReference
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        InstanceReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataproc.v1.InstanceReference";
+                        };
+    
+                        return InstanceReference;
+                    })();
+    
                     v1.ManagedGroupConfig = (function() {
     
                         /**
@@ -15747,6 +16115,7 @@
                          * @interface IManagedGroupConfig
                          * @property {string|null} [instanceTemplateName] ManagedGroupConfig instanceTemplateName
                          * @property {string|null} [instanceGroupManagerName] ManagedGroupConfig instanceGroupManagerName
+                         * @property {string|null} [instanceGroupManagerUri] ManagedGroupConfig instanceGroupManagerUri
                          */
     
                         /**
@@ -15781,6 +16150,14 @@
                         ManagedGroupConfig.prototype.instanceGroupManagerName = "";
     
                         /**
+                         * ManagedGroupConfig instanceGroupManagerUri.
+                         * @member {string} instanceGroupManagerUri
+                         * @memberof google.cloud.dataproc.v1.ManagedGroupConfig
+                         * @instance
+                         */
+                        ManagedGroupConfig.prototype.instanceGroupManagerUri = "";
+    
+                        /**
                          * Creates a new ManagedGroupConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dataproc.v1.ManagedGroupConfig
@@ -15808,6 +16185,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.instanceTemplateName);
                             if (message.instanceGroupManagerName != null && Object.hasOwnProperty.call(message, "instanceGroupManagerName"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.instanceGroupManagerName);
+                            if (message.instanceGroupManagerUri != null && Object.hasOwnProperty.call(message, "instanceGroupManagerUri"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.instanceGroupManagerUri);
                             return writer;
                         };
     
@@ -15848,6 +16227,10 @@
                                     }
                                 case 2: {
                                         message.instanceGroupManagerName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.instanceGroupManagerUri = reader.string();
                                         break;
                                     }
                                 default:
@@ -15891,6 +16274,9 @@
                             if (message.instanceGroupManagerName != null && message.hasOwnProperty("instanceGroupManagerName"))
                                 if (!$util.isString(message.instanceGroupManagerName))
                                     return "instanceGroupManagerName: string expected";
+                            if (message.instanceGroupManagerUri != null && message.hasOwnProperty("instanceGroupManagerUri"))
+                                if (!$util.isString(message.instanceGroupManagerUri))
+                                    return "instanceGroupManagerUri: string expected";
                             return null;
                         };
     
@@ -15910,6 +16296,8 @@
                                 message.instanceTemplateName = String(object.instanceTemplateName);
                             if (object.instanceGroupManagerName != null)
                                 message.instanceGroupManagerName = String(object.instanceGroupManagerName);
+                            if (object.instanceGroupManagerUri != null)
+                                message.instanceGroupManagerUri = String(object.instanceGroupManagerUri);
                             return message;
                         };
     
@@ -15929,11 +16317,14 @@
                             if (options.defaults) {
                                 object.instanceTemplateName = "";
                                 object.instanceGroupManagerName = "";
+                                object.instanceGroupManagerUri = "";
                             }
                             if (message.instanceTemplateName != null && message.hasOwnProperty("instanceTemplateName"))
                                 object.instanceTemplateName = message.instanceTemplateName;
                             if (message.instanceGroupManagerName != null && message.hasOwnProperty("instanceGroupManagerName"))
                                 object.instanceGroupManagerName = message.instanceGroupManagerName;
+                            if (message.instanceGroupManagerUri != null && message.hasOwnProperty("instanceGroupManagerUri"))
+                                object.instanceGroupManagerUri = message.instanceGroupManagerUri;
                             return object;
                         };
     
@@ -15964,6 +16355,777 @@
                         };
     
                         return ManagedGroupConfig;
+                    })();
+    
+                    v1.InstanceFlexibilityPolicy = (function() {
+    
+                        /**
+                         * Properties of an InstanceFlexibilityPolicy.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface IInstanceFlexibilityPolicy
+                         * @property {Array.<google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IInstanceSelection>|null} [instanceSelectionList] InstanceFlexibilityPolicy instanceSelectionList
+                         * @property {Array.<google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IInstanceSelectionResult>|null} [instanceSelectionResults] InstanceFlexibilityPolicy instanceSelectionResults
+                         */
+    
+                        /**
+                         * Constructs a new InstanceFlexibilityPolicy.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents an InstanceFlexibilityPolicy.
+                         * @implements IInstanceFlexibilityPolicy
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.IInstanceFlexibilityPolicy=} [properties] Properties to set
+                         */
+                        function InstanceFlexibilityPolicy(properties) {
+                            this.instanceSelectionList = [];
+                            this.instanceSelectionResults = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * InstanceFlexibilityPolicy instanceSelectionList.
+                         * @member {Array.<google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IInstanceSelection>} instanceSelectionList
+                         * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy
+                         * @instance
+                         */
+                        InstanceFlexibilityPolicy.prototype.instanceSelectionList = $util.emptyArray;
+    
+                        /**
+                         * InstanceFlexibilityPolicy instanceSelectionResults.
+                         * @member {Array.<google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IInstanceSelectionResult>} instanceSelectionResults
+                         * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy
+                         * @instance
+                         */
+                        InstanceFlexibilityPolicy.prototype.instanceSelectionResults = $util.emptyArray;
+    
+                        /**
+                         * Creates a new InstanceFlexibilityPolicy instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IInstanceFlexibilityPolicy=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.InstanceFlexibilityPolicy} InstanceFlexibilityPolicy instance
+                         */
+                        InstanceFlexibilityPolicy.create = function create(properties) {
+                            return new InstanceFlexibilityPolicy(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified InstanceFlexibilityPolicy message. Does not implicitly {@link google.cloud.dataproc.v1.InstanceFlexibilityPolicy.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IInstanceFlexibilityPolicy} message InstanceFlexibilityPolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InstanceFlexibilityPolicy.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.instanceSelectionList != null && message.instanceSelectionList.length)
+                                for (var i = 0; i < message.instanceSelectionList.length; ++i)
+                                    $root.google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection.encode(message.instanceSelectionList[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.instanceSelectionResults != null && message.instanceSelectionResults.length)
+                                for (var i = 0; i < message.instanceSelectionResults.length; ++i)
+                                    $root.google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult.encode(message.instanceSelectionResults[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified InstanceFlexibilityPolicy message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.InstanceFlexibilityPolicy.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IInstanceFlexibilityPolicy} message InstanceFlexibilityPolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InstanceFlexibilityPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an InstanceFlexibilityPolicy message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.InstanceFlexibilityPolicy} InstanceFlexibilityPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InstanceFlexibilityPolicy.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.InstanceFlexibilityPolicy();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        if (!(message.instanceSelectionList && message.instanceSelectionList.length))
+                                            message.instanceSelectionList = [];
+                                        message.instanceSelectionList.push($root.google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.instanceSelectionResults && message.instanceSelectionResults.length))
+                                            message.instanceSelectionResults = [];
+                                        message.instanceSelectionResults.push($root.google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an InstanceFlexibilityPolicy message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.InstanceFlexibilityPolicy} InstanceFlexibilityPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InstanceFlexibilityPolicy.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an InstanceFlexibilityPolicy message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        InstanceFlexibilityPolicy.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.instanceSelectionList != null && message.hasOwnProperty("instanceSelectionList")) {
+                                if (!Array.isArray(message.instanceSelectionList))
+                                    return "instanceSelectionList: array expected";
+                                for (var i = 0; i < message.instanceSelectionList.length; ++i) {
+                                    var error = $root.google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection.verify(message.instanceSelectionList[i]);
+                                    if (error)
+                                        return "instanceSelectionList." + error;
+                                }
+                            }
+                            if (message.instanceSelectionResults != null && message.hasOwnProperty("instanceSelectionResults")) {
+                                if (!Array.isArray(message.instanceSelectionResults))
+                                    return "instanceSelectionResults: array expected";
+                                for (var i = 0; i < message.instanceSelectionResults.length; ++i) {
+                                    var error = $root.google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult.verify(message.instanceSelectionResults[i]);
+                                    if (error)
+                                        return "instanceSelectionResults." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an InstanceFlexibilityPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.InstanceFlexibilityPolicy} InstanceFlexibilityPolicy
+                         */
+                        InstanceFlexibilityPolicy.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.InstanceFlexibilityPolicy)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.InstanceFlexibilityPolicy();
+                            if (object.instanceSelectionList) {
+                                if (!Array.isArray(object.instanceSelectionList))
+                                    throw TypeError(".google.cloud.dataproc.v1.InstanceFlexibilityPolicy.instanceSelectionList: array expected");
+                                message.instanceSelectionList = [];
+                                for (var i = 0; i < object.instanceSelectionList.length; ++i) {
+                                    if (typeof object.instanceSelectionList[i] !== "object")
+                                        throw TypeError(".google.cloud.dataproc.v1.InstanceFlexibilityPolicy.instanceSelectionList: object expected");
+                                    message.instanceSelectionList[i] = $root.google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection.fromObject(object.instanceSelectionList[i]);
+                                }
+                            }
+                            if (object.instanceSelectionResults) {
+                                if (!Array.isArray(object.instanceSelectionResults))
+                                    throw TypeError(".google.cloud.dataproc.v1.InstanceFlexibilityPolicy.instanceSelectionResults: array expected");
+                                message.instanceSelectionResults = [];
+                                for (var i = 0; i < object.instanceSelectionResults.length; ++i) {
+                                    if (typeof object.instanceSelectionResults[i] !== "object")
+                                        throw TypeError(".google.cloud.dataproc.v1.InstanceFlexibilityPolicy.instanceSelectionResults: object expected");
+                                    message.instanceSelectionResults[i] = $root.google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult.fromObject(object.instanceSelectionResults[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an InstanceFlexibilityPolicy message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy
+                         * @static
+                         * @param {google.cloud.dataproc.v1.InstanceFlexibilityPolicy} message InstanceFlexibilityPolicy
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        InstanceFlexibilityPolicy.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.instanceSelectionList = [];
+                                object.instanceSelectionResults = [];
+                            }
+                            if (message.instanceSelectionList && message.instanceSelectionList.length) {
+                                object.instanceSelectionList = [];
+                                for (var j = 0; j < message.instanceSelectionList.length; ++j)
+                                    object.instanceSelectionList[j] = $root.google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection.toObject(message.instanceSelectionList[j], options);
+                            }
+                            if (message.instanceSelectionResults && message.instanceSelectionResults.length) {
+                                object.instanceSelectionResults = [];
+                                for (var j = 0; j < message.instanceSelectionResults.length; ++j)
+                                    object.instanceSelectionResults[j] = $root.google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult.toObject(message.instanceSelectionResults[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this InstanceFlexibilityPolicy to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        InstanceFlexibilityPolicy.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for InstanceFlexibilityPolicy
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        InstanceFlexibilityPolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataproc.v1.InstanceFlexibilityPolicy";
+                        };
+    
+                        InstanceFlexibilityPolicy.InstanceSelection = (function() {
+    
+                            /**
+                             * Properties of an InstanceSelection.
+                             * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy
+                             * @interface IInstanceSelection
+                             * @property {Array.<string>|null} [machineTypes] InstanceSelection machineTypes
+                             * @property {number|null} [rank] InstanceSelection rank
+                             */
+    
+                            /**
+                             * Constructs a new InstanceSelection.
+                             * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy
+                             * @classdesc Represents an InstanceSelection.
+                             * @implements IInstanceSelection
+                             * @constructor
+                             * @param {google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IInstanceSelection=} [properties] Properties to set
+                             */
+                            function InstanceSelection(properties) {
+                                this.machineTypes = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * InstanceSelection machineTypes.
+                             * @member {Array.<string>} machineTypes
+                             * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection
+                             * @instance
+                             */
+                            InstanceSelection.prototype.machineTypes = $util.emptyArray;
+    
+                            /**
+                             * InstanceSelection rank.
+                             * @member {number} rank
+                             * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection
+                             * @instance
+                             */
+                            InstanceSelection.prototype.rank = 0;
+    
+                            /**
+                             * Creates a new InstanceSelection instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection
+                             * @static
+                             * @param {google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IInstanceSelection=} [properties] Properties to set
+                             * @returns {google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection} InstanceSelection instance
+                             */
+                            InstanceSelection.create = function create(properties) {
+                                return new InstanceSelection(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified InstanceSelection message. Does not implicitly {@link google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection
+                             * @static
+                             * @param {google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IInstanceSelection} message InstanceSelection message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InstanceSelection.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.machineTypes != null && message.machineTypes.length)
+                                    for (var i = 0; i < message.machineTypes.length; ++i)
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.machineTypes[i]);
+                                if (message.rank != null && Object.hasOwnProperty.call(message, "rank"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.rank);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified InstanceSelection message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection
+                             * @static
+                             * @param {google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IInstanceSelection} message InstanceSelection message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InstanceSelection.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an InstanceSelection message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection} InstanceSelection
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InstanceSelection.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.machineTypes && message.machineTypes.length))
+                                                message.machineTypes = [];
+                                            message.machineTypes.push(reader.string());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.rank = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an InstanceSelection message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection} InstanceSelection
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InstanceSelection.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an InstanceSelection message.
+                             * @function verify
+                             * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            InstanceSelection.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.machineTypes != null && message.hasOwnProperty("machineTypes")) {
+                                    if (!Array.isArray(message.machineTypes))
+                                        return "machineTypes: array expected";
+                                    for (var i = 0; i < message.machineTypes.length; ++i)
+                                        if (!$util.isString(message.machineTypes[i]))
+                                            return "machineTypes: string[] expected";
+                                }
+                                if (message.rank != null && message.hasOwnProperty("rank"))
+                                    if (!$util.isInteger(message.rank))
+                                        return "rank: integer expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an InstanceSelection message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection} InstanceSelection
+                             */
+                            InstanceSelection.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection)
+                                    return object;
+                                var message = new $root.google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection();
+                                if (object.machineTypes) {
+                                    if (!Array.isArray(object.machineTypes))
+                                        throw TypeError(".google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection.machineTypes: array expected");
+                                    message.machineTypes = [];
+                                    for (var i = 0; i < object.machineTypes.length; ++i)
+                                        message.machineTypes[i] = String(object.machineTypes[i]);
+                                }
+                                if (object.rank != null)
+                                    message.rank = object.rank | 0;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an InstanceSelection message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection
+                             * @static
+                             * @param {google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection} message InstanceSelection
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            InstanceSelection.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.machineTypes = [];
+                                if (options.defaults)
+                                    object.rank = 0;
+                                if (message.machineTypes && message.machineTypes.length) {
+                                    object.machineTypes = [];
+                                    for (var j = 0; j < message.machineTypes.length; ++j)
+                                        object.machineTypes[j] = message.machineTypes[j];
+                                }
+                                if (message.rank != null && message.hasOwnProperty("rank"))
+                                    object.rank = message.rank;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this InstanceSelection to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            InstanceSelection.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for InstanceSelection
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            InstanceSelection.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelection";
+                            };
+    
+                            return InstanceSelection;
+                        })();
+    
+                        InstanceFlexibilityPolicy.InstanceSelectionResult = (function() {
+    
+                            /**
+                             * Properties of an InstanceSelectionResult.
+                             * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy
+                             * @interface IInstanceSelectionResult
+                             * @property {string|null} [machineType] InstanceSelectionResult machineType
+                             * @property {number|null} [vmCount] InstanceSelectionResult vmCount
+                             */
+    
+                            /**
+                             * Constructs a new InstanceSelectionResult.
+                             * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy
+                             * @classdesc Represents an InstanceSelectionResult.
+                             * @implements IInstanceSelectionResult
+                             * @constructor
+                             * @param {google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IInstanceSelectionResult=} [properties] Properties to set
+                             */
+                            function InstanceSelectionResult(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * InstanceSelectionResult machineType.
+                             * @member {string|null|undefined} machineType
+                             * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult
+                             * @instance
+                             */
+                            InstanceSelectionResult.prototype.machineType = null;
+    
+                            /**
+                             * InstanceSelectionResult vmCount.
+                             * @member {number|null|undefined} vmCount
+                             * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult
+                             * @instance
+                             */
+                            InstanceSelectionResult.prototype.vmCount = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * InstanceSelectionResult _machineType.
+                             * @member {"machineType"|undefined} _machineType
+                             * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult
+                             * @instance
+                             */
+                            Object.defineProperty(InstanceSelectionResult.prototype, "_machineType", {
+                                get: $util.oneOfGetter($oneOfFields = ["machineType"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * InstanceSelectionResult _vmCount.
+                             * @member {"vmCount"|undefined} _vmCount
+                             * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult
+                             * @instance
+                             */
+                            Object.defineProperty(InstanceSelectionResult.prototype, "_vmCount", {
+                                get: $util.oneOfGetter($oneOfFields = ["vmCount"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new InstanceSelectionResult instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult
+                             * @static
+                             * @param {google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IInstanceSelectionResult=} [properties] Properties to set
+                             * @returns {google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult} InstanceSelectionResult instance
+                             */
+                            InstanceSelectionResult.create = function create(properties) {
+                                return new InstanceSelectionResult(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified InstanceSelectionResult message. Does not implicitly {@link google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult
+                             * @static
+                             * @param {google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IInstanceSelectionResult} message InstanceSelectionResult message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InstanceSelectionResult.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.machineType != null && Object.hasOwnProperty.call(message, "machineType"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.machineType);
+                                if (message.vmCount != null && Object.hasOwnProperty.call(message, "vmCount"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.vmCount);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified InstanceSelectionResult message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult
+                             * @static
+                             * @param {google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IInstanceSelectionResult} message InstanceSelectionResult message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InstanceSelectionResult.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an InstanceSelectionResult message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult} InstanceSelectionResult
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InstanceSelectionResult.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.machineType = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.vmCount = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an InstanceSelectionResult message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult} InstanceSelectionResult
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InstanceSelectionResult.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an InstanceSelectionResult message.
+                             * @function verify
+                             * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            InstanceSelectionResult.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.machineType != null && message.hasOwnProperty("machineType")) {
+                                    properties._machineType = 1;
+                                    if (!$util.isString(message.machineType))
+                                        return "machineType: string expected";
+                                }
+                                if (message.vmCount != null && message.hasOwnProperty("vmCount")) {
+                                    properties._vmCount = 1;
+                                    if (!$util.isInteger(message.vmCount))
+                                        return "vmCount: integer expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an InstanceSelectionResult message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult} InstanceSelectionResult
+                             */
+                            InstanceSelectionResult.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult)
+                                    return object;
+                                var message = new $root.google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult();
+                                if (object.machineType != null)
+                                    message.machineType = String(object.machineType);
+                                if (object.vmCount != null)
+                                    message.vmCount = object.vmCount | 0;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an InstanceSelectionResult message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult
+                             * @static
+                             * @param {google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult} message InstanceSelectionResult
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            InstanceSelectionResult.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.machineType != null && message.hasOwnProperty("machineType")) {
+                                    object.machineType = message.machineType;
+                                    if (options.oneofs)
+                                        object._machineType = "machineType";
+                                }
+                                if (message.vmCount != null && message.hasOwnProperty("vmCount")) {
+                                    object.vmCount = message.vmCount;
+                                    if (options.oneofs)
+                                        object._vmCount = "vmCount";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this InstanceSelectionResult to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            InstanceSelectionResult.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for InstanceSelectionResult
+                             * @function getTypeUrl
+                             * @memberof google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            InstanceSelectionResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.dataproc.v1.InstanceFlexibilityPolicy.InstanceSelectionResult";
+                            };
+    
+                            return InstanceSelectionResult;
+                        })();
+    
+                        return InstanceFlexibilityPolicy;
                     })();
     
                     v1.AcceleratorConfig = (function() {
@@ -17492,6 +18654,7 @@
                                 case 6:
                                 case 7:
                                 case 8:
+                                case 10:
                                     break;
                                 }
                             if (message.detail != null && message.hasOwnProperty("detail"))
@@ -17572,6 +18735,10 @@
                             case "STARTING":
                             case 8:
                                 message.state = 8;
+                                break;
+                            case "REPAIRING":
+                            case 10:
+                                message.state = 10;
                                 break;
                             }
                             if (object.detail != null)
@@ -17674,6 +18841,7 @@
                          * @property {number} STOPPING=6 STOPPING value
                          * @property {number} STOPPED=7 STOPPED value
                          * @property {number} STARTING=8 STARTING value
+                         * @property {number} REPAIRING=10 REPAIRING value
                          */
                         ClusterStatus.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -17687,6 +18855,7 @@
                             values[valuesById[6] = "STOPPING"] = 6;
                             values[valuesById[7] = "STOPPED"] = 7;
                             values[valuesById[8] = "STARTING"] = 8;
+                            values[valuesById[10] = "REPAIRING"] = 10;
                             return values;
                         })();
     
