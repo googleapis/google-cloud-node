@@ -1105,6 +1105,9 @@ export namespace google {
 
                         /** DataMaskingPolicy predefinedExpression */
                         predefinedExpression?: (google.cloud.bigquery.datapolicies.v1.DataMaskingPolicy.PredefinedExpression|keyof typeof google.cloud.bigquery.datapolicies.v1.DataMaskingPolicy.PredefinedExpression|null);
+
+                        /** DataMaskingPolicy routine */
+                        routine?: (string|null);
                     }
 
                     /** Represents a DataMaskingPolicy. */
@@ -1119,8 +1122,11 @@ export namespace google {
                         /** DataMaskingPolicy predefinedExpression. */
                         public predefinedExpression?: (google.cloud.bigquery.datapolicies.v1.DataMaskingPolicy.PredefinedExpression|keyof typeof google.cloud.bigquery.datapolicies.v1.DataMaskingPolicy.PredefinedExpression|null);
 
+                        /** DataMaskingPolicy routine. */
+                        public routine?: (string|null);
+
                         /** DataMaskingPolicy maskingExpression. */
-                        public maskingExpression?: "predefinedExpression";
+                        public maskingExpression?: ("predefinedExpression"|"routine");
 
                         /**
                          * Creates a new DataMaskingPolicy instance using the specified properties.
