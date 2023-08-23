@@ -2237,6 +2237,13 @@
                         "exitCode": {
                           "type": "int32",
                           "id": 1
+                        },
+                        "stderrSnippet": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2300,6 +2307,13 @@
                         "barrier": {
                           "type": "Barrier",
                           "id": 6
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "ignoreExitStatus": {
                           "type": "bool",
