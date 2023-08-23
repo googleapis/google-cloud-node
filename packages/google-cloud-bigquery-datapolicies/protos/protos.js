@@ -2413,6 +2413,7 @@
                              * @memberof google.cloud.bigquery.datapolicies.v1
                              * @interface IDataMaskingPolicy
                              * @property {google.cloud.bigquery.datapolicies.v1.DataMaskingPolicy.PredefinedExpression|null} [predefinedExpression] DataMaskingPolicy predefinedExpression
+                             * @property {string|null} [routine] DataMaskingPolicy routine
                              */
     
                             /**
@@ -2438,17 +2439,25 @@
                              */
                             DataMaskingPolicy.prototype.predefinedExpression = null;
     
+                            /**
+                             * DataMaskingPolicy routine.
+                             * @member {string|null|undefined} routine
+                             * @memberof google.cloud.bigquery.datapolicies.v1.DataMaskingPolicy
+                             * @instance
+                             */
+                            DataMaskingPolicy.prototype.routine = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
                             /**
                              * DataMaskingPolicy maskingExpression.
-                             * @member {"predefinedExpression"|undefined} maskingExpression
+                             * @member {"predefinedExpression"|"routine"|undefined} maskingExpression
                              * @memberof google.cloud.bigquery.datapolicies.v1.DataMaskingPolicy
                              * @instance
                              */
                             Object.defineProperty(DataMaskingPolicy.prototype, "maskingExpression", {
-                                get: $util.oneOfGetter($oneOfFields = ["predefinedExpression"]),
+                                get: $util.oneOfGetter($oneOfFields = ["predefinedExpression", "routine"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -2478,6 +2487,8 @@
                                     writer = $Writer.create();
                                 if (message.predefinedExpression != null && Object.hasOwnProperty.call(message, "predefinedExpression"))
                                     writer.uint32(/* id 1, wireType 0 =*/8).int32(message.predefinedExpression);
+                                if (message.routine != null && Object.hasOwnProperty.call(message, "routine"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.routine);
                                 return writer;
                             };
     
@@ -2514,6 +2525,10 @@
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.predefinedExpression = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.routine = reader.string();
                                             break;
                                         }
                                     default:
@@ -2567,6 +2582,13 @@
                                     case 13:
                                         break;
                                     }
+                                }
+                                if (message.routine != null && message.hasOwnProperty("routine")) {
+                                    if (properties.maskingExpression === 1)
+                                        return "maskingExpression: multiple values";
+                                    properties.maskingExpression = 1;
+                                    if (!$util.isString(message.routine))
+                                        return "routine: string expected";
                                 }
                                 return null;
                             };
@@ -2623,6 +2645,8 @@
                                     message.predefinedExpression = 13;
                                     break;
                                 }
+                                if (object.routine != null)
+                                    message.routine = String(object.routine);
                                 return message;
                             };
     
@@ -2643,6 +2667,11 @@
                                     object.predefinedExpression = options.enums === String ? $root.google.cloud.bigquery.datapolicies.v1.DataMaskingPolicy.PredefinedExpression[message.predefinedExpression] === undefined ? message.predefinedExpression : $root.google.cloud.bigquery.datapolicies.v1.DataMaskingPolicy.PredefinedExpression[message.predefinedExpression] : message.predefinedExpression;
                                     if (options.oneofs)
                                         object.maskingExpression = "predefinedExpression";
+                                }
+                                if (message.routine != null && message.hasOwnProperty("routine")) {
+                                    object.routine = message.routine;
+                                    if (options.oneofs)
+                                        object.maskingExpression = "routine";
                                 }
                                 return object;
                             };

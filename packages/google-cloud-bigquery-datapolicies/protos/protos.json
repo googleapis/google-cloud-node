@@ -358,7 +358,8 @@
                           "oneofs": {
                             "maskingExpression": {
                               "oneof": [
-                                "predefinedExpression"
+                                "predefinedExpression",
+                                "routine"
                               ]
                             }
                           },
@@ -366,6 +367,10 @@
                             "predefinedExpression": {
                               "type": "PredefinedExpression",
                               "id": 1
+                            },
+                            "routine": {
+                              "type": "string",
+                              "id": 3
                             }
                           },
                           "nested": {
