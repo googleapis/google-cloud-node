@@ -995,8 +995,9 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
       );
       client.innerApiCalls.resetIdentityAwareProxyClientSecret =
         stubSimpleCall(expectedResponse);
-      const [response] =
-        await client.resetIdentityAwareProxyClientSecret(request);
+      const [response] = await client.resetIdentityAwareProxyClientSecret(
+        request
+      );
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.resetIdentityAwareProxyClientSecret as SinonStub
