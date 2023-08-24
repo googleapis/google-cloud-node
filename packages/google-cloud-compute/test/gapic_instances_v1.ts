@@ -5340,8 +5340,9 @@ describe('v1.InstancesClient', () => {
       );
       client.innerApiCalls.setShieldedInstanceIntegrityPolicy =
         stubSimpleCall(expectedResponse);
-      const [response] =
-        await client.setShieldedInstanceIntegrityPolicy(request);
+      const [response] = await client.setShieldedInstanceIntegrityPolicy(
+        request
+      );
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.setShieldedInstanceIntegrityPolicy as SinonStub
