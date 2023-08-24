@@ -95,9 +95,8 @@ async function callListSupportedDatabaseFlags() {
   };
 
   // Run request
-  const iterable = await alloydbClient.listSupportedDatabaseFlagsAsync(
-    request
-  );
+  const iterable =
+    await alloydbClient.listSupportedDatabaseFlagsAsync(request);
   for await (const response of iterable) {
     console.log(response);
   }
