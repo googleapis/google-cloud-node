@@ -87,8 +87,9 @@ async function quickstart() {
     };
 
     // Run request
-    const iterable =
-      await rapidMigrationAssessmentClient.listCollectorsAsync(request);
+    const iterable = await rapidMigrationAssessmentClient.listCollectorsAsync(
+      request
+    );
     console.log(`Listing collectors for location ${location}:`);
     let count = 0;
     for await (const response of iterable) {
