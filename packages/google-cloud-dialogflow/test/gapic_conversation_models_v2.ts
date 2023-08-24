@@ -1345,8 +1345,9 @@ describe('v2.ConversationModelsClient', () => {
       );
       client.innerApiCalls.createConversationModelEvaluation =
         stubLongRunningCall(expectedResponse);
-      const [operation] =
-        await client.createConversationModelEvaluation(request);
+      const [operation] = await client.createConversationModelEvaluation(
+        request
+      );
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
@@ -1463,8 +1464,9 @@ describe('v2.ConversationModelsClient', () => {
       const expectedError = new Error('expected');
       client.innerApiCalls.createConversationModelEvaluation =
         stubLongRunningCall(undefined, undefined, expectedError);
-      const [operation] =
-        await client.createConversationModelEvaluation(request);
+      const [operation] = await client.createConversationModelEvaluation(
+        request
+      );
       await assert.rejects(operation.promise(), expectedError);
       const actualRequest = (
         client.innerApiCalls.createConversationModelEvaluation as SinonStub
