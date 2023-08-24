@@ -1,0 +1,107 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-places",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.maps.places.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "places_v1_generated_Places_SearchText_async",
+      "title": "Places searchText Sample",
+      "origin": "API_DEFINITION",
+      "description": " Text query based place search.",
+      "canonical": true,
+      "file": "places.search_text.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 125,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SearchText",
+        "fullName": "google.maps.places.v1.Places.SearchText",
+        "async": true,
+        "parameters": [
+          {
+            "name": "text_query",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "language_code",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region_code",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "rank_preference",
+            "type": ".google.maps.places.v1.SearchTextRequest.RankPreference"
+          },
+          {
+            "name": "location",
+            "type": ".google.maps.places.v1.SearchTextRequest.Location"
+          },
+          {
+            "name": "included_type",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "open_now",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "price_range",
+            "type": ".google.maps.places.v1.Int32Range"
+          },
+          {
+            "name": "min_rating",
+            "type": "TYPE_DOUBLE"
+          },
+          {
+            "name": "max_result_count",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "price_levels",
+            "type": "TYPE_ENUM[]"
+          },
+          {
+            "name": "strict_type_filtering",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "location_bias",
+            "type": ".google.maps.places.v1.SearchTextRequest.LocationBias"
+          },
+          {
+            "name": "location_restriction",
+            "type": ".google.maps.places.v1.SearchTextRequest.LocationRestriction"
+          }
+        ],
+        "resultType": ".google.maps.places.v1.SearchTextResponse",
+        "client": {
+          "shortName": "PlacesClient",
+          "fullName": "google.maps.places.v1.PlacesClient"
+        },
+        "method": {
+          "shortName": "SearchText",
+          "fullName": "google.maps.places.v1.Places.SearchText",
+          "service": {
+            "shortName": "Places",
+            "fullName": "google.maps.places.v1.Places"
+          }
+        }
+      }
+    }
+  ]
+}
