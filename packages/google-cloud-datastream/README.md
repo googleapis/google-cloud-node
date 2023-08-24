@@ -99,8 +99,9 @@ async function listConnectionProfiles() {
   };
 
   // Run request
-  const iterable =
-    await datastreamClient.listConnectionProfilesAsync(request);
+  const iterable = await datastreamClient.listConnectionProfilesAsync(
+    request
+  );
   for await (const response of iterable) {
     console.log(response);
   }
