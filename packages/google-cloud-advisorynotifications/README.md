@@ -109,9 +109,8 @@ async function callListNotifications() {
   };
 
   // Run request
-  const iterable = await advisorynotificationsClient.listNotificationsAsync(
-    request
-  );
+  const iterable =
+    await advisorynotificationsClient.listNotificationsAsync(request);
   for await (const response of iterable) {
     console.log(response);
   }
