@@ -2285,8 +2285,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       ];
       client.innerApiCalls.listRelatedAccountGroupMemberships =
         stubSimpleCall(expectedResponse);
-      const [response] =
-        await client.listRelatedAccountGroupMemberships(request);
+      const [response] = await client.listRelatedAccountGroupMemberships(
+        request
+      );
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.listRelatedAccountGroupMemberships as SinonStub
@@ -2672,8 +2673,9 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       ];
       client.innerApiCalls.searchRelatedAccountGroupMemberships =
         stubSimpleCall(expectedResponse);
-      const [response] =
-        await client.searchRelatedAccountGroupMemberships(request);
+      const [response] = await client.searchRelatedAccountGroupMemberships(
+        request
+      );
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.searchRelatedAccountGroupMemberships as SinonStub
