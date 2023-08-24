@@ -96,8 +96,9 @@ async function callListClientGateways() {
   };
 
   // Run request
-  const iterable =
-    await clientgatewaysClient.listClientGatewaysAsync(request);
+  const iterable = await clientgatewaysClient.listClientGatewaysAsync(
+    request
+  );
   for await (const response of iterable) {
     console.log(response);
   }
