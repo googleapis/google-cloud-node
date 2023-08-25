@@ -849,6 +849,18 @@ export class ClusterManagerClient {
    *   Google Compute Engine resources.
    * @param {google.container.v1beta1.WindowsNodeConfig} request.windowsNodeConfig
    *   Parameters that can be configured on Windows nodes.
+   * @param {string} [request.machineType]
+   *   Optional. The desired machine type for nodes in the node pool.
+   *   Initiates an upgrade operation that migrates the nodes in the
+   *   node pool to the specified machine type.
+   * @param {string} [request.diskType]
+   *   Optional. The desired disk type for nodes in the node pool.
+   *   Initiates an upgrade operation that migrates the nodes in the
+   *   node pool to the specified disk type.
+   * @param {number} [request.diskSizeGb]
+   *   Optional. The desired disk size for nodes in the node pool.
+   *   Initiates an upgrade operation that migrates the nodes in the
+   *   node pool to the specified disk size.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
