@@ -30722,6 +30722,15 @@ export namespace google {
 
                 /** UpdateNodePoolRequest windowsNodeConfig */
                 windowsNodeConfig?: (google.container.v1beta1.IWindowsNodeConfig|null);
+
+                /** UpdateNodePoolRequest machineType */
+                machineType?: (string|null);
+
+                /** UpdateNodePoolRequest diskType */
+                diskType?: (string|null);
+
+                /** UpdateNodePoolRequest diskSizeGb */
+                diskSizeGb?: (number|Long|string|null);
             }
 
             /** Represents an UpdateNodePoolRequest. */
@@ -30804,6 +30813,15 @@ export namespace google {
 
                 /** UpdateNodePoolRequest windowsNodeConfig. */
                 public windowsNodeConfig?: (google.container.v1beta1.IWindowsNodeConfig|null);
+
+                /** UpdateNodePoolRequest machineType. */
+                public machineType: string;
+
+                /** UpdateNodePoolRequest diskType. */
+                public diskType: string;
+
+                /** UpdateNodePoolRequest diskSizeGb. */
+                public diskSizeGb: (number|Long|string);
 
                 /**
                  * Creates a new UpdateNodePoolRequest instance using the specified properties.
