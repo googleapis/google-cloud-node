@@ -2436,8 +2436,9 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       client.innerApiCalls.createChannelPartnerRepricingConfig =
         stubSimpleCall(expectedResponse);
-      const [response] =
-        await client.createChannelPartnerRepricingConfig(request);
+      const [response] = await client.createChannelPartnerRepricingConfig(
+        request
+      );
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.createChannelPartnerRepricingConfig as SinonStub
@@ -2583,8 +2584,9 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       client.innerApiCalls.updateChannelPartnerRepricingConfig =
         stubSimpleCall(expectedResponse);
-      const [response] =
-        await client.updateChannelPartnerRepricingConfig(request);
+      const [response] = await client.updateChannelPartnerRepricingConfig(
+        request
+      );
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.updateChannelPartnerRepricingConfig as SinonStub
@@ -2732,8 +2734,9 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       client.innerApiCalls.deleteChannelPartnerRepricingConfig =
         stubSimpleCall(expectedResponse);
-      const [response] =
-        await client.deleteChannelPartnerRepricingConfig(request);
+      const [response] = await client.deleteChannelPartnerRepricingConfig(
+        request
+      );
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.deleteChannelPartnerRepricingConfig as SinonStub
@@ -7656,8 +7659,9 @@ describe('v1.CloudChannelServiceClient', () => {
       ];
       client.innerApiCalls.listChannelPartnerRepricingConfigs =
         stubSimpleCall(expectedResponse);
-      const [response] =
-        await client.listChannelPartnerRepricingConfigs(request);
+      const [response] = await client.listChannelPartnerRepricingConfigs(
+        request
+      );
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.listChannelPartnerRepricingConfigs as SinonStub
