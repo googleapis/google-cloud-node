@@ -61,8 +61,9 @@ function main(parent) {
     };
 
     // Run request
-    const iterable =
-      await storageinsightsClient.listReportConfigsAsync(request);
+    const iterable = await storageinsightsClient.listReportConfigsAsync(
+      request
+    );
     for await (const response of iterable) {
       console.log(response);
     }
