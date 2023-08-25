@@ -1682,8 +1682,9 @@ describe('v1beta1.GrafeasV1Beta1Client', () => {
       );
       client.innerApiCalls.getVulnerabilityOccurrencesSummary =
         stubSimpleCall(expectedResponse);
-      const [response] =
-        await client.getVulnerabilityOccurrencesSummary(request);
+      const [response] = await client.getVulnerabilityOccurrencesSummary(
+        request
+      );
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.getVulnerabilityOccurrencesSummary as SinonStub
