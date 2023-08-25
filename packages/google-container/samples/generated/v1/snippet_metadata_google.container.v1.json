@@ -230,7 +230,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 156,
+                    "end": 177,
                     "type": "FULL"
                 }
             ],
@@ -334,6 +334,18 @@
                     {
                         "name": "windows_node_config",
                         "type": ".google.container.v1.WindowsNodeConfig"
+                    },
+                    {
+                        "name": "machine_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "disk_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "disk_size_gb",
+                        "type": "TYPE_INT64"
                     }
                 ],
                 "resultType": ".google.container.v1.Operation",

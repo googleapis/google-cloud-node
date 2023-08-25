@@ -2929,6 +2929,27 @@
                     "windowsNodeConfig": {
                       "type": "WindowsNodeConfig",
                       "id": 34
+                    },
+                    "machineType": {
+                      "type": "string",
+                      "id": 36,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "diskType": {
+                      "type": "string",
+                      "id": 37,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "diskSizeGb": {
+                      "type": "int64",
+                      "id": 38,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -3836,6 +3857,13 @@
                         "type": {
                           "type": "Type",
                           "id": 1
+                        },
+                        "tpuTopology": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "policyName": {
                           "type": "string",
