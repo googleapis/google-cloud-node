@@ -2360,8 +2360,9 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       ];
       client.innerApiCalls.listInstanceOsPoliciesCompliances =
         stubSimpleCall(expectedResponse);
-      const [response] =
-        await client.listInstanceOSPoliciesCompliances(request);
+      const [response] = await client.listInstanceOSPoliciesCompliances(
+        request
+      );
       assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
