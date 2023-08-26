@@ -2008,6 +2008,66 @@
             }
         },
         {
+            "regionTag": "dialogflow_v2_generated_Conversations_SearchKnowledge_async",
+            "title": "dialogflow searchKnowledge Sample",
+            "origin": "API_DEFINITION",
+            "description": " Get answers for the given query based on knowledge documents.",
+            "canonical": true,
+            "file": "conversations.search_knowledge.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 89,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SearchKnowledge",
+                "fullName": "google.cloud.dialogflow.v2.Conversations.SearchKnowledge",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "query",
+                        "type": ".google.cloud.dialogflow.v2.TextInput"
+                    },
+                    {
+                        "name": "conversation_profile",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "session_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "conversation",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "latest_message",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.dialogflow.v2.SearchKnowledgeResponse",
+                "client": {
+                    "shortName": "ConversationsClient",
+                    "fullName": "google.cloud.dialogflow.v2.ConversationsClient"
+                },
+                "method": {
+                    "shortName": "SearchKnowledge",
+                    "fullName": "google.cloud.dialogflow.v2.Conversations.SearchKnowledge",
+                    "service": {
+                        "shortName": "Conversations",
+                        "fullName": "google.cloud.dialogflow.v2.Conversations"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "dialogflow_v2_generated_Documents_ListDocuments_async",
             "title": "dialogflow listDocuments Sample",
             "origin": "API_DEFINITION",
@@ -3982,7 +4042,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 93,
+                    "end": 97,
                     "type": "FULL"
                 }
             ],
@@ -4002,6 +4062,10 @@
                     {
                         "name": "event_input",
                         "type": ".google.cloud.dialogflow.v2.EventInput"
+                    },
+                    {
+                        "name": "suggestion_input",
+                        "type": ".google.cloud.dialogflow.v2.SuggestionInput"
                     },
                     {
                         "name": "reply_audio_config",
