@@ -527,6 +527,11 @@
                 "generateStatelessSummary"
               ]
             },
+            "SearchKnowledge": {
+              "methods": [
+                "searchKnowledge"
+              ]
+            },
             "ListConversations": {
               "methods": [
                 "listConversations",
@@ -569,6 +574,11 @@
             "GenerateStatelessSummary": {
               "methods": [
                 "generateStatelessSummary"
+              ]
+            },
+            "SearchKnowledge": {
+              "methods": [
+                "searchKnowledge"
               ]
             },
             "ListConversations": {
