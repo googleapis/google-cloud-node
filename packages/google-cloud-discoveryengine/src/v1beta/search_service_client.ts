@@ -25,6 +25,8 @@ import type {
   ClientOptions,
   PaginationCallback,
   GaxCall,
+  LocationsClient,
+  LocationProtos,
 } from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
@@ -59,6 +61,7 @@ export class SearchServiceClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   searchServiceStub?: Promise<{[name: string]: Function}>;
 
@@ -154,6 +157,10 @@ export class SearchServiceClient {
     if (servicePath === staticMembers.servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
+    this.locationsClient = new this._gaxModule.LocationsClient(
+      this._gaxGrpc,
+      opts
+    );
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -466,6 +473,35 @@ export class SearchServiceClient {
    *   characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec} request.contentSearchSpec
    *   A specification for configuring the behavior of content search.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.EmbeddingSpec} request.embeddingSpec
+   *   Uses the provided embedding to do additional semantic document retrieval.
+   *   The retrieval is based on the dot product of
+   *   {@link protos.|SearchRequest.embedding_spec.embedding_vectors.vector} and the document
+   *   embedding that is provided in
+   *   {@link protos.|SearchRequest.embedding_spec.embedding_vectors.field_path}.
+   *
+   *   If {@link protos.|SearchRequest.embedding_spec.embedding_vectors.field_path} is not
+   *   provided, it will use {@link protos.|ServingConfig.embedding_config.field_paths}.
+   * @param {string} request.rankingExpression
+   *   The ranking expression controls the customized ranking on retrieval
+   *   documents. This overrides {@link protos.|ServingConfig.ranking_expression}.
+   *   The ranking expression is a single function or multiple functions that are
+   *   joint by "+".
+   *     * ranking_expression = function, { " + ", function };
+   *   Supported functions:
+   *     * double * relevance_score
+   *     * double * dotProduct(embedding_field_path)
+   *   Function variables:
+   *     `relevance_score`: pre-defined keywords, used for measure relevance
+   *     between query and document.
+   *     `embedding_field_path`: the document embedding field
+   *     used with query embedding vector.
+   *     `dotProduct`: embedding function between embedding_field_path and query
+   *     embedding vector.
+   *
+   *    Example ranking expression:
+   *      If document has an embedding field doc_embedding, the ranking expression
+   *      could be `0.5 * relevance_score + 0.3 * dotProduct(doc_embedding)`.
    * @param {boolean} request.safeSearch
    *   Whether to turn on safe search. This is only supported for
    *   website search.
@@ -675,6 +711,35 @@ export class SearchServiceClient {
    *   characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec} request.contentSearchSpec
    *   A specification for configuring the behavior of content search.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.EmbeddingSpec} request.embeddingSpec
+   *   Uses the provided embedding to do additional semantic document retrieval.
+   *   The retrieval is based on the dot product of
+   *   {@link protos.|SearchRequest.embedding_spec.embedding_vectors.vector} and the document
+   *   embedding that is provided in
+   *   {@link protos.|SearchRequest.embedding_spec.embedding_vectors.field_path}.
+   *
+   *   If {@link protos.|SearchRequest.embedding_spec.embedding_vectors.field_path} is not
+   *   provided, it will use {@link protos.|ServingConfig.embedding_config.field_paths}.
+   * @param {string} request.rankingExpression
+   *   The ranking expression controls the customized ranking on retrieval
+   *   documents. This overrides {@link protos.|ServingConfig.ranking_expression}.
+   *   The ranking expression is a single function or multiple functions that are
+   *   joint by "+".
+   *     * ranking_expression = function, { " + ", function };
+   *   Supported functions:
+   *     * double * relevance_score
+   *     * double * dotProduct(embedding_field_path)
+   *   Function variables:
+   *     `relevance_score`: pre-defined keywords, used for measure relevance
+   *     between query and document.
+   *     `embedding_field_path`: the document embedding field
+   *     used with query embedding vector.
+   *     `dotProduct`: embedding function between embedding_field_path and query
+   *     embedding vector.
+   *
+   *    Example ranking expression:
+   *      If document has an embedding field doc_embedding, the ranking expression
+   *      could be `0.5 * relevance_score + 0.3 * dotProduct(doc_embedding)`.
    * @param {boolean} request.safeSearch
    *   Whether to turn on safe search. This is only supported for
    *   website search.
@@ -832,6 +897,35 @@ export class SearchServiceClient {
    *   characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec} request.contentSearchSpec
    *   A specification for configuring the behavior of content search.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.EmbeddingSpec} request.embeddingSpec
+   *   Uses the provided embedding to do additional semantic document retrieval.
+   *   The retrieval is based on the dot product of
+   *   {@link protos.|SearchRequest.embedding_spec.embedding_vectors.vector} and the document
+   *   embedding that is provided in
+   *   {@link protos.|SearchRequest.embedding_spec.embedding_vectors.field_path}.
+   *
+   *   If {@link protos.|SearchRequest.embedding_spec.embedding_vectors.field_path} is not
+   *   provided, it will use {@link protos.|ServingConfig.embedding_config.field_paths}.
+   * @param {string} request.rankingExpression
+   *   The ranking expression controls the customized ranking on retrieval
+   *   documents. This overrides {@link protos.|ServingConfig.ranking_expression}.
+   *   The ranking expression is a single function or multiple functions that are
+   *   joint by "+".
+   *     * ranking_expression = function, { " + ", function };
+   *   Supported functions:
+   *     * double * relevance_score
+   *     * double * dotProduct(embedding_field_path)
+   *   Function variables:
+   *     `relevance_score`: pre-defined keywords, used for measure relevance
+   *     between query and document.
+   *     `embedding_field_path`: the document embedding field
+   *     used with query embedding vector.
+   *     `dotProduct`: embedding function between embedding_field_path and query
+   *     embedding vector.
+   *
+   *    Example ranking expression:
+   *      If document has an embedding field doc_embedding, the ranking expression
+   *      could be `0.5 * relevance_score + 0.3 * dotProduct(doc_embedding)`.
    * @param {boolean} request.safeSearch
    *   Whether to turn on safe search. This is only supported for
    *   website search.
@@ -886,6 +980,84 @@ export class SearchServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.discoveryengine.v1beta.SearchResponse.ISearchResult>;
   }
+  /**
+   * Gets information about a location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Resource name for the location.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example
+   * ```
+   * const [response] = await client.getLocation(request);
+   * ```
+   */
+  getLocation(
+    request: LocationProtos.google.cloud.location.IGetLocationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          LocationProtos.google.cloud.location.ILocation,
+          | LocationProtos.google.cloud.location.IGetLocationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LocationProtos.google.cloud.location.ILocation,
+      | LocationProtos.google.cloud.location.IGetLocationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.getLocation(request, options, callback);
+  }
+
+  /**
+   * Lists information about the supported locations for this service. Returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The resource that owns the locations collection, if applicable.
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example
+   * ```
+   * const iterable = client.listLocationsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   * ```
+   */
+  listLocationsAsync(
+    request: LocationProtos.google.cloud.location.IListLocationsRequest,
+    options?: CallOptions
+  ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.listLocationsAsync(request, options);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
@@ -1877,6 +2049,7 @@ export class SearchServiceClient {
       return this.searchServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
+        this.locationsClient.close();
       });
     }
     return Promise.resolve();
