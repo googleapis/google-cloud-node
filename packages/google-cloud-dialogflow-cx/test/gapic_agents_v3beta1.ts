@@ -1050,6 +1050,284 @@ describe('v3beta1.AgentsClient', () => {
     });
   });
 
+  describe('getGenerativeSettings', () => {
+    it('invokes getGenerativeSettings without error', async () => {
+      const client = new agentsModule.v3beta1.AgentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.GetGenerativeSettingsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.GetGenerativeSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.GenerativeSettings()
+      );
+      client.innerApiCalls.getGenerativeSettings =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getGenerativeSettings(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getGenerativeSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGenerativeSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getGenerativeSettings without error using callback', async () => {
+      const client = new agentsModule.v3beta1.AgentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.GetGenerativeSettingsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.GetGenerativeSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.GenerativeSettings()
+      );
+      client.innerApiCalls.getGenerativeSettings =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getGenerativeSettings(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.dialogflow.cx.v3beta1.IGenerativeSettings | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getGenerativeSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGenerativeSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getGenerativeSettings with error', async () => {
+      const client = new agentsModule.v3beta1.AgentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.GetGenerativeSettingsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.GetGenerativeSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getGenerativeSettings = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getGenerativeSettings(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.getGenerativeSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGenerativeSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getGenerativeSettings with closed client', async () => {
+      const client = new agentsModule.v3beta1.AgentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.GetGenerativeSettingsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.GetGenerativeSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getGenerativeSettings(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('updateGenerativeSettings', () => {
+    it('invokes updateGenerativeSettings without error', async () => {
+      const client = new agentsModule.v3beta1.AgentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.UpdateGenerativeSettingsRequest()
+      );
+      request.generativeSettings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.UpdateGenerativeSettingsRequest',
+        ['generativeSettings', 'name']
+      );
+      request.generativeSettings.name = defaultValue1;
+      const expectedHeaderRequestParams = `generative_settings.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.GenerativeSettings()
+      );
+      client.innerApiCalls.updateGenerativeSettings =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateGenerativeSettings(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateGenerativeSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGenerativeSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateGenerativeSettings without error using callback', async () => {
+      const client = new agentsModule.v3beta1.AgentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.UpdateGenerativeSettingsRequest()
+      );
+      request.generativeSettings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.UpdateGenerativeSettingsRequest',
+        ['generativeSettings', 'name']
+      );
+      request.generativeSettings.name = defaultValue1;
+      const expectedHeaderRequestParams = `generative_settings.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.GenerativeSettings()
+      );
+      client.innerApiCalls.updateGenerativeSettings =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateGenerativeSettings(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.dialogflow.cx.v3beta1.IGenerativeSettings | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateGenerativeSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGenerativeSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateGenerativeSettings with error', async () => {
+      const client = new agentsModule.v3beta1.AgentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.UpdateGenerativeSettingsRequest()
+      );
+      request.generativeSettings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.UpdateGenerativeSettingsRequest',
+        ['generativeSettings', 'name']
+      );
+      request.generativeSettings.name = defaultValue1;
+      const expectedHeaderRequestParams = `generative_settings.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateGenerativeSettings = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateGenerativeSettings(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateGenerativeSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGenerativeSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateGenerativeSettings with closed client', async () => {
+      const client = new agentsModule.v3beta1.AgentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.UpdateGenerativeSettingsRequest()
+      );
+      request.generativeSettings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.cx.v3beta1.UpdateGenerativeSettingsRequest',
+        ['generativeSettings', 'name']
+      );
+      request.generativeSettings.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateGenerativeSettings(request),
+        expectedError
+      );
+    });
+  });
+
   describe('exportAgent', () => {
     it('invokes exportAgent without error', async () => {
       const client = new agentsModule.v3beta1.AgentsClient({
@@ -2322,6 +2600,85 @@ describe('v3beta1.AgentsClient', () => {
         assert.strictEqual(result, 'agentValue');
         assert(
           (client.pathTemplates.agentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('agentGenerativeSettings', () => {
+      const fakePath = '/rendered/path/agentGenerativeSettings';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        agent: 'agentValue',
+      };
+      const client = new agentsModule.v3beta1.AgentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.agentGenerativeSettingsPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.agentGenerativeSettingsPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('agentGenerativeSettingsPath', () => {
+        const result = client.agentGenerativeSettingsPath(
+          'projectValue',
+          'locationValue',
+          'agentValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.agentGenerativeSettingsPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromAgentGenerativeSettingsName', () => {
+        const result =
+          client.matchProjectFromAgentGenerativeSettingsName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.agentGenerativeSettingsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromAgentGenerativeSettingsName', () => {
+        const result =
+          client.matchLocationFromAgentGenerativeSettingsName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.agentGenerativeSettingsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAgentFromAgentGenerativeSettingsName', () => {
+        const result =
+          client.matchAgentFromAgentGenerativeSettingsName(fakePath);
+        assert.strictEqual(result, 'agentValue');
+        assert(
+          (
+            client.pathTemplates.agentGenerativeSettingsPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

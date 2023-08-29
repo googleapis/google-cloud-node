@@ -40,6 +40,16 @@
                 "getAgentValidationResult"
               ]
             },
+            "GetGenerativeSettings": {
+              "methods": [
+                "getGenerativeSettings"
+              ]
+            },
+            "UpdateGenerativeSettings": {
+              "methods": [
+                "updateGenerativeSettings"
+              ]
+            },
             "ExportAgent": {
               "methods": [
                 "exportAgent"
@@ -90,6 +100,16 @@
             "GetAgentValidationResult": {
               "methods": [
                 "getAgentValidationResult"
+              ]
+            },
+            "GetGenerativeSettings": {
+              "methods": [
+                "getGenerativeSettings"
+              ]
+            },
+            "UpdateGenerativeSettings": {
+              "methods": [
+                "updateGenerativeSettings"
               ]
             },
             "ExportAgent": {

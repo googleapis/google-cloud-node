@@ -190,6 +190,9 @@ export class AgentsClient {
       agentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}'
       ),
+      agentGenerativeSettingsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/generativeSettings'
+      ),
       agentValidationResultPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/validationResult'
       ),
@@ -405,6 +408,8 @@ export class AgentsClient {
       'restoreAgent',
       'validateAgent',
       'getAgentValidationResult',
+      'getGenerativeSettings',
+      'updateGenerativeSettings',
     ];
     for (const methodName of agentsStubMethods) {
       const callPromise = this.agentsStub.then(
@@ -1071,6 +1076,208 @@ export class AgentsClient {
       });
     this.initialize();
     return this.innerApiCalls.getAgentValidationResult(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Gets the generative settings for the agent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Format: `projects/<Project ID>/locations/<Location
+   *   ID>/agents/<Agent ID>/generativeSettings`.
+   * @param {string} request.languageCode
+   *   Required. Language code of the generative settings.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3beta1.GenerativeSettings|GenerativeSettings}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3beta1/agents.get_generative_settings.js</caption>
+   * region_tag:dialogflow_v3beta1_generated_Agents_GetGenerativeSettings_async
+   */
+  getGenerativeSettings(
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetGenerativeSettingsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.cx.v3beta1.IGenerativeSettings,
+      (
+        | protos.google.cloud.dialogflow.cx.v3beta1.IGetGenerativeSettingsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getGenerativeSettings(
+    request: protos.google.cloud.dialogflow.cx.v3beta1.IGetGenerativeSettingsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dialogflow.cx.v3beta1.IGenerativeSettings,
+      | protos.google.cloud.dialogflow.cx.v3beta1.IGetGenerativeSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getGenerativeSettings(
+    request: protos.google.cloud.dialogflow.cx.v3beta1.IGetGenerativeSettingsRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.cx.v3beta1.IGenerativeSettings,
+      | protos.google.cloud.dialogflow.cx.v3beta1.IGetGenerativeSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getGenerativeSettings(
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetGenerativeSettingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IGenerativeSettings,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IGetGenerativeSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dialogflow.cx.v3beta1.IGenerativeSettings,
+      | protos.google.cloud.dialogflow.cx.v3beta1.IGetGenerativeSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.cx.v3beta1.IGenerativeSettings,
+      (
+        | protos.google.cloud.dialogflow.cx.v3beta1.IGetGenerativeSettingsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getGenerativeSettings(request, options, callback);
+  }
+  /**
+   * Updates the generative settings for the agent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.dialogflow.cx.v3beta1.GenerativeSettings} request.generativeSettings
+   *   Required. Generative settings to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The mask to control which fields get updated. If the mask is not
+   *   present, all fields will be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3beta1.GenerativeSettings|GenerativeSettings}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3beta1/agents.update_generative_settings.js</caption>
+   * region_tag:dialogflow_v3beta1_generated_Agents_UpdateGenerativeSettings_async
+   */
+  updateGenerativeSettings(
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IUpdateGenerativeSettingsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.cx.v3beta1.IGenerativeSettings,
+      (
+        | protos.google.cloud.dialogflow.cx.v3beta1.IUpdateGenerativeSettingsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateGenerativeSettings(
+    request: protos.google.cloud.dialogflow.cx.v3beta1.IUpdateGenerativeSettingsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dialogflow.cx.v3beta1.IGenerativeSettings,
+      | protos.google.cloud.dialogflow.cx.v3beta1.IUpdateGenerativeSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateGenerativeSettings(
+    request: protos.google.cloud.dialogflow.cx.v3beta1.IUpdateGenerativeSettingsRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.cx.v3beta1.IGenerativeSettings,
+      | protos.google.cloud.dialogflow.cx.v3beta1.IUpdateGenerativeSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateGenerativeSettings(
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IUpdateGenerativeSettingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IGenerativeSettings,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IUpdateGenerativeSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dialogflow.cx.v3beta1.IGenerativeSettings,
+      | protos.google.cloud.dialogflow.cx.v3beta1.IUpdateGenerativeSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.cx.v3beta1.IGenerativeSettings,
+      (
+        | protos.google.cloud.dialogflow.cx.v3beta1.IUpdateGenerativeSettingsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'generative_settings.name': request.generativeSettings!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateGenerativeSettings(
       request,
       options,
       callback
@@ -1907,6 +2114,71 @@ export class AgentsClient {
    */
   matchAgentFromAgentName(agentName: string) {
     return this.pathTemplates.agentPathTemplate.match(agentName).agent;
+  }
+
+  /**
+   * Return a fully-qualified agentGenerativeSettings resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @returns {string} Resource name string.
+   */
+  agentGenerativeSettingsPath(
+    project: string,
+    location: string,
+    agent: string
+  ) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+    });
+  }
+
+  /**
+   * Parse the project from AgentGenerativeSettings resource.
+   *
+   * @param {string} agentGenerativeSettingsName
+   *   A fully-qualified path representing AgentGenerativeSettings resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAgentGenerativeSettingsName(
+    agentGenerativeSettingsName: string
+  ) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(
+      agentGenerativeSettingsName
+    ).project;
+  }
+
+  /**
+   * Parse the location from AgentGenerativeSettings resource.
+   *
+   * @param {string} agentGenerativeSettingsName
+   *   A fully-qualified path representing AgentGenerativeSettings resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAgentGenerativeSettingsName(
+    agentGenerativeSettingsName: string
+  ) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(
+      agentGenerativeSettingsName
+    ).location;
+  }
+
+  /**
+   * Parse the agent from AgentGenerativeSettings resource.
+   *
+   * @param {string} agentGenerativeSettingsName
+   *   A fully-qualified path representing AgentGenerativeSettings resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromAgentGenerativeSettingsName(
+    agentGenerativeSettingsName: string
+  ) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(
+      agentGenerativeSettingsName
+    ).agent;
   }
 
   /**
