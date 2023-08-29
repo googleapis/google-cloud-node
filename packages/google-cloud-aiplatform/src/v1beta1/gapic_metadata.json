@@ -1880,6 +1880,11 @@
                 "deletePersistentResource"
               ]
             },
+            "UpdatePersistentResource": {
+              "methods": [
+                "updatePersistentResource"
+              ]
+            },
             "ListPersistentResources": {
               "methods": [
                 "listPersistentResources",
@@ -1905,6 +1910,11 @@
             "DeletePersistentResource": {
               "methods": [
                 "deletePersistentResource"
+              ]
+            },
+            "UpdatePersistentResource": {
+              "methods": [
+                "updatePersistentResource"
               ]
             },
             "ListPersistentResources": {

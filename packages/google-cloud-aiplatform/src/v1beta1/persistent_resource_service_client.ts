@@ -1530,6 +1530,12 @@ export class PersistentResourceServiceClient {
     const deletePersistentResourceMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata'
     ) as gax.protobuf.Type;
+    const updatePersistentResourceResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.PersistentResource'
+    ) as gax.protobuf.Type;
+    const updatePersistentResourceMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.UpdatePersistentResourceOperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createPersistentResource: new this._gaxModule.LongrunningDescriptor(
@@ -1548,6 +1554,15 @@ export class PersistentResourceServiceClient {
         ),
         deletePersistentResourceMetadata.decode.bind(
           deletePersistentResourceMetadata
+        )
+      ),
+      updatePersistentResource: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updatePersistentResourceResponse.decode.bind(
+          updatePersistentResourceResponse
+        ),
+        updatePersistentResourceMetadata.decode.bind(
+          updatePersistentResourceMetadata
         )
       ),
     };
@@ -1607,6 +1622,7 @@ export class PersistentResourceServiceClient {
       'getPersistentResource',
       'listPersistentResources',
       'deletePersistentResource',
+      'updatePersistentResource',
     ];
     for (const methodName of persistentResourceServiceStubMethods) {
       const callPromise = this.persistentResourceServiceStub.then(
@@ -2081,6 +2097,153 @@ export class PersistentResourceServiceClient {
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
       protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
+    >;
+  }
+  /**
+   * Updates a PersistentResource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.aiplatform.v1beta1.PersistentResource} request.persistentResource
+   *   Required. The PersistentResource to update.
+   *
+   *   The PersistentResource's `name` field is used to identify the
+   *   PersistentResource to update. Format:
+   *   `projects/{project}/locations/{location}/persistentResources/{persistent_resource}`
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Specify the fields to be overwritten in the PersistentResource by
+   *   the update method.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/persistent_resource_service.update_persistent_resource.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_PersistentResourceService_UpdatePersistentResource_async
+   */
+  updatePersistentResource(
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdatePersistentResourceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IPersistentResource,
+        protos.google.cloud.aiplatform.v1beta1.IUpdatePersistentResourceOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updatePersistentResource(
+    request: protos.google.cloud.aiplatform.v1beta1.IUpdatePersistentResourceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IPersistentResource,
+        protos.google.cloud.aiplatform.v1beta1.IUpdatePersistentResourceOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updatePersistentResource(
+    request: protos.google.cloud.aiplatform.v1beta1.IUpdatePersistentResourceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IPersistentResource,
+        protos.google.cloud.aiplatform.v1beta1.IUpdatePersistentResourceOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updatePersistentResource(
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdatePersistentResourceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1beta1.IPersistentResource,
+            protos.google.cloud.aiplatform.v1beta1.IUpdatePersistentResourceOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IPersistentResource,
+        protos.google.cloud.aiplatform.v1beta1.IUpdatePersistentResourceOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IPersistentResource,
+        protos.google.cloud.aiplatform.v1beta1.IUpdatePersistentResourceOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'persistent_resource.name': request.persistentResource!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updatePersistentResource(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `updatePersistentResource()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/persistent_resource_service.update_persistent_resource.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_PersistentResourceService_UpdatePersistentResource_async
+   */
+  async checkUpdatePersistentResourceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1beta1.PersistentResource,
+      protos.google.cloud.aiplatform.v1beta1.UpdatePersistentResourceOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updatePersistentResource,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1beta1.PersistentResource,
+      protos.google.cloud.aiplatform.v1beta1.UpdatePersistentResourceOperationMetadata
     >;
   }
   /**

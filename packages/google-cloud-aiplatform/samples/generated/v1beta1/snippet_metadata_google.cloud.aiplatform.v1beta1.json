@@ -7460,6 +7460,50 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1beta1_generated_PersistentResourceService_UpdatePersistentResource_async",
+            "title": "DatasetService updatePersistentResource Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates a PersistentResource.",
+            "canonical": true,
+            "file": "persistent_resource_service.update_persistent_resource.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdatePersistentResource",
+                "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceService.UpdatePersistentResource",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "persistent_resource",
+                        "type": ".google.cloud.aiplatform.v1beta1.PersistentResource"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "PersistentResourceServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdatePersistentResource",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceService.UpdatePersistentResource",
+                    "service": {
+                        "shortName": "PersistentResourceService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1beta1_generated_PipelineService_CreateTrainingPipeline_async",
             "title": "DatasetService createTrainingPipeline Sample",
             "origin": "API_DEFINITION",
