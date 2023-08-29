@@ -383,6 +383,7 @@ export class ConversationsClient {
       'listMessages',
       'suggestConversationSummary',
       'generateStatelessSummary',
+      'searchKnowledge',
     ];
     for (const methodName of conversationsStubMethods) {
       const callPromise = this.conversationsStub.then(
@@ -1132,6 +1133,128 @@ export class ConversationsClient {
       options,
       callback
     );
+  }
+  /**
+   * Get answers for the given query based on knowledge documents.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The parent resource contains the conversation profile
+   *   Format: 'projects/<Project ID>' or `projects/<Project
+   *   ID>/locations/<Location ID>`.
+   * @param {google.cloud.dialogflow.v2beta1.TextInput} request.query
+   *   Required. The natural language text query for knowledge search.
+   * @param {string} request.conversationProfile
+   *   Required. The conversation profile used to configure the search.
+   *   Format: `projects/<Project ID>/locations/<Location
+   *   ID>/conversationProfiles/<Conversation Profile ID>`.
+   * @param {string} request.sessionId
+   *   The ID of the search session.
+   *   The session_id can be combined with Dialogflow V3 Agent ID retrieved from
+   *   conversation profile or on its own to identify a search session. The search
+   *   history of the same session will impact the search result. It's up to the
+   *   API caller to choose an appropriate `Session ID`. It can be a random number
+   *   or some type of session identifiers (preferably hashed). The length must
+   *   not exceed 36 characters.
+   * @param {string} request.conversation
+   *   The conversation (between human agent and end user) where the search
+   *   request is triggered. Format: `projects/<Project ID>/locations/<Location
+   *   ID>/conversations/<Conversation ID>`.
+   * @param {string} request.latestMessage
+   *   The name of the latest conversation message when the request is
+   *   triggered.
+   *   Format: `projects/<Project ID>/locations/<Location
+   *   ID>/conversations/<Conversation ID>/messages/<Message ID>`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2beta1.SearchKnowledgeResponse|SearchKnowledgeResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta1/conversations.search_knowledge.js</caption>
+   * region_tag:dialogflow_v2beta1_generated_Conversations_SearchKnowledge_async
+   */
+  searchKnowledge(
+    request?: protos.google.cloud.dialogflow.v2beta1.ISearchKnowledgeRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2beta1.ISearchKnowledgeResponse,
+      (
+        | protos.google.cloud.dialogflow.v2beta1.ISearchKnowledgeRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  searchKnowledge(
+    request: protos.google.cloud.dialogflow.v2beta1.ISearchKnowledgeRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2beta1.ISearchKnowledgeResponse,
+      | protos.google.cloud.dialogflow.v2beta1.ISearchKnowledgeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  searchKnowledge(
+    request: protos.google.cloud.dialogflow.v2beta1.ISearchKnowledgeRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2beta1.ISearchKnowledgeResponse,
+      | protos.google.cloud.dialogflow.v2beta1.ISearchKnowledgeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  searchKnowledge(
+    request?: protos.google.cloud.dialogflow.v2beta1.ISearchKnowledgeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.dialogflow.v2beta1.ISearchKnowledgeResponse,
+          | protos.google.cloud.dialogflow.v2beta1.ISearchKnowledgeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dialogflow.v2beta1.ISearchKnowledgeResponse,
+      | protos.google.cloud.dialogflow.v2beta1.ISearchKnowledgeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2beta1.ISearchKnowledgeResponse,
+      (
+        | protos.google.cloud.dialogflow.v2beta1.ISearchKnowledgeRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+        conversation: request.conversation ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.searchKnowledge(request, options, callback);
   }
 
   /**
