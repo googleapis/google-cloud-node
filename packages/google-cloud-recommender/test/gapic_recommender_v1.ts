@@ -616,6 +616,143 @@ describe('v1.RecommenderClient', () => {
     });
   });
 
+  describe('markRecommendationDismissed', () => {
+    it('invokes markRecommendationDismissed without error', async () => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.MarkRecommendationDismissedRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.MarkRecommendationDismissedRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.Recommendation()
+      );
+      client.innerApiCalls.markRecommendationDismissed =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.markRecommendationDismissed(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.markRecommendationDismissed as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.markRecommendationDismissed as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes markRecommendationDismissed without error using callback', async () => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.MarkRecommendationDismissedRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.MarkRecommendationDismissedRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.Recommendation()
+      );
+      client.innerApiCalls.markRecommendationDismissed =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.markRecommendationDismissed(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.recommender.v1.IRecommendation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.markRecommendationDismissed as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.markRecommendationDismissed as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes markRecommendationDismissed with error', async () => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.MarkRecommendationDismissedRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.MarkRecommendationDismissedRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.markRecommendationDismissed = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.markRecommendationDismissed(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.markRecommendationDismissed as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.markRecommendationDismissed as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes markRecommendationDismissed with closed client', async () => {
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1.MarkRecommendationDismissedRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recommender.v1.MarkRecommendationDismissedRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.markRecommendationDismissed(request),
+        expectedError
+      );
+    });
+  });
+
   describe('markRecommendationClaimed', () => {
     it('invokes markRecommendationClaimed without error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
@@ -2288,6 +2425,93 @@ describe('v1.RecommenderClient', () => {
       });
     });
 
+    describe('billingAccountLocationInsightTypeConfig', () => {
+      const fakePath = '/rendered/path/billingAccountLocationInsightTypeConfig';
+      const expectedParameters = {
+        billing_account: 'billingAccountValue',
+        location: 'locationValue',
+        insight_type: 'insightTypeValue',
+      };
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.billingAccountLocationInsightTypeConfigPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.billingAccountLocationInsightTypeConfigPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('billingAccountLocationInsightTypeConfigPath', () => {
+        const result = client.billingAccountLocationInsightTypeConfigPath(
+          'billingAccountValue',
+          'locationValue',
+          'insightTypeValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .billingAccountLocationInsightTypeConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchBillingAccountFromBillingAccountLocationInsightTypeConfigName', () => {
+        const result =
+          client.matchBillingAccountFromBillingAccountLocationInsightTypeConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'billingAccountValue');
+        assert(
+          (
+            client.pathTemplates
+              .billingAccountLocationInsightTypeConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromBillingAccountLocationInsightTypeConfigName', () => {
+        const result =
+          client.matchLocationFromBillingAccountLocationInsightTypeConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .billingAccountLocationInsightTypeConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchInsightTypeFromBillingAccountLocationInsightTypeConfigName', () => {
+        const result =
+          client.matchInsightTypeFromBillingAccountLocationInsightTypeConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'insightTypeValue');
+        assert(
+          (
+            client.pathTemplates
+              .billingAccountLocationInsightTypeConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('billingAccountLocationInsightTypeInsight', () => {
       const fakePath =
         '/rendered/path/billingAccountLocationInsightTypeInsight';
@@ -2470,6 +2694,93 @@ describe('v1.RecommenderClient', () => {
         assert(
           (
             client.pathTemplates.billingAccountLocationRecommenderPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('billingAccountLocationRecommenderConfig', () => {
+      const fakePath = '/rendered/path/billingAccountLocationRecommenderConfig';
+      const expectedParameters = {
+        billing_account: 'billingAccountValue',
+        location: 'locationValue',
+        recommender: 'recommenderValue',
+      };
+      const client = new recommenderModule.v1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.billingAccountLocationRecommenderConfigPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.billingAccountLocationRecommenderConfigPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('billingAccountLocationRecommenderConfigPath', () => {
+        const result = client.billingAccountLocationRecommenderConfigPath(
+          'billingAccountValue',
+          'locationValue',
+          'recommenderValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .billingAccountLocationRecommenderConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchBillingAccountFromBillingAccountLocationRecommenderConfigName', () => {
+        const result =
+          client.matchBillingAccountFromBillingAccountLocationRecommenderConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'billingAccountValue');
+        assert(
+          (
+            client.pathTemplates
+              .billingAccountLocationRecommenderConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromBillingAccountLocationRecommenderConfigName', () => {
+        const result =
+          client.matchLocationFromBillingAccountLocationRecommenderConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .billingAccountLocationRecommenderConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRecommenderFromBillingAccountLocationRecommenderConfigName', () => {
+        const result =
+          client.matchRecommenderFromBillingAccountLocationRecommenderConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'recommenderValue');
+        assert(
+          (
+            client.pathTemplates
+              .billingAccountLocationRecommenderConfigPathTemplate
               .match as SinonStub
           )
             .getCall(-1)
