@@ -21,16 +21,11 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as documentserviceModule from '../src';
+import * as conversationalsearchserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {
-  protobuf,
-  LROperation,
-  operationsProtos,
-  LocationProtos,
-} from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -69,38 +64,6 @@ function stubSimpleCallWithCallback<ResponseType>(
   return error
     ? sinon.stub().callsArgWith(2, error)
     : sinon.stub().callsArgWith(2, null, response);
-}
-
-function stubLongRunningCall<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
-}
-
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
-) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
 function stubPageStreamingCall<ResponseType>(
@@ -164,66 +127,83 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1.DocumentServiceClient', () => {
+describe('v1.ConversationalSearchServiceClient', () => {
   describe('Common methods', () => {
     it('has servicePath', () => {
       const servicePath =
-        documentserviceModule.v1.DocumentServiceClient.servicePath;
+        conversationalsearchserviceModule.v1.ConversationalSearchServiceClient
+          .servicePath;
       assert(servicePath);
     });
 
     it('has apiEndpoint', () => {
       const apiEndpoint =
-        documentserviceModule.v1.DocumentServiceClient.apiEndpoint;
+        conversationalsearchserviceModule.v1.ConversationalSearchServiceClient
+          .apiEndpoint;
       assert(apiEndpoint);
     });
 
     it('has port', () => {
-      const port = documentserviceModule.v1.DocumentServiceClient.port;
+      const port =
+        conversationalsearchserviceModule.v1.ConversationalSearchServiceClient
+          .port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient();
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        fallback: true,
-      });
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            fallback: true,
+          }
+        );
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.documentServiceStub, undefined);
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      assert.strictEqual(client.conversationalSearchServiceStub, undefined);
       await client.initialize();
-      assert(client.documentServiceStub);
+      assert(client.conversationalSearchServiceStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
-      assert(client.documentServiceStub);
+      assert(client.conversationalSearchServiceStub);
       client.close().then(() => {
         done();
       });
     });
 
     it('has close method for the non-initialized client', done => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.documentServiceStub, undefined);
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      assert.strictEqual(client.conversationalSearchServiceStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -231,10 +211,13 @@ describe('v1.DocumentServiceClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
       const result = await client.getProjectId();
       assert.strictEqual(result, fakeProjectId);
@@ -243,10 +226,13 @@ describe('v1.DocumentServiceClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.auth.getProjectId = sinon
         .stub()
         .callsArgWith(0, null, fakeProjectId);
@@ -264,64 +250,71 @@ describe('v1.DocumentServiceClient', () => {
     });
   });
 
-  describe('getDocument', () => {
-    it('invokes getDocument without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+  describe('converseConversation', () => {
+    it('invokes converseConversation without error', async () => {
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.GetDocumentRequest()
+        new protos.google.cloud.discoveryengine.v1.ConverseConversationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.GetDocumentRequest',
+        '.google.cloud.discoveryengine.v1.ConverseConversationRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.Document()
+        new protos.google.cloud.discoveryengine.v1.ConverseConversationResponse()
       );
-      client.innerApiCalls.getDocument = stubSimpleCall(expectedResponse);
-      const [response] = await client.getDocument(request);
+      client.innerApiCalls.converseConversation =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.converseConversation(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getDocument as SinonStub
+        client.innerApiCalls.converseConversation as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getDocument as SinonStub
+        client.innerApiCalls.converseConversation as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getDocument without error using callback', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes converseConversation without error using callback', async () => {
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.GetDocumentRequest()
+        new protos.google.cloud.discoveryengine.v1.ConverseConversationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.GetDocumentRequest',
+        '.google.cloud.discoveryengine.v1.ConverseConversationRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.Document()
+        new protos.google.cloud.discoveryengine.v1.ConverseConversationResponse()
       );
-      client.innerApiCalls.getDocument =
+      client.innerApiCalls.converseConversation =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getDocument(
+        client.converseConversation(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1.IDocument | null
+            result?: protos.google.cloud.discoveryengine.v1.IConverseConversationResponse | null
           ) => {
             if (err) {
               reject(err);
@@ -334,124 +327,137 @@ describe('v1.DocumentServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getDocument as SinonStub
+        client.innerApiCalls.converseConversation as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getDocument as SinonStub
+        client.innerApiCalls.converseConversation as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getDocument with error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes converseConversation with error', async () => {
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.GetDocumentRequest()
+        new protos.google.cloud.discoveryengine.v1.ConverseConversationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.GetDocumentRequest',
+        '.google.cloud.discoveryengine.v1.ConverseConversationRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.getDocument = stubSimpleCall(
+      client.innerApiCalls.converseConversation = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.getDocument(request), expectedError);
+      await assert.rejects(client.converseConversation(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.getDocument as SinonStub
+        client.innerApiCalls.converseConversation as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getDocument as SinonStub
+        client.innerApiCalls.converseConversation as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getDocument with closed client', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes converseConversation with closed client', async () => {
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.GetDocumentRequest()
+        new protos.google.cloud.discoveryengine.v1.ConverseConversationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.GetDocumentRequest',
+        '.google.cloud.discoveryengine.v1.ConverseConversationRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.getDocument(request), expectedError);
+      await assert.rejects(client.converseConversation(request), expectedError);
     });
   });
 
-  describe('createDocument', () => {
-    it('invokes createDocument without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+  describe('createConversation', () => {
+    it('invokes createConversation without error', async () => {
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.CreateDocumentRequest()
+        new protos.google.cloud.discoveryengine.v1.CreateConversationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.CreateDocumentRequest',
+        '.google.cloud.discoveryengine.v1.CreateConversationRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.Document()
+        new protos.google.cloud.discoveryengine.v1.Conversation()
       );
-      client.innerApiCalls.createDocument = stubSimpleCall(expectedResponse);
-      const [response] = await client.createDocument(request);
+      client.innerApiCalls.createConversation =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createConversation(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.createDocument as SinonStub
+        client.innerApiCalls.createConversation as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.createDocument as SinonStub
+        client.innerApiCalls.createConversation as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes createDocument without error using callback', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes createConversation without error using callback', async () => {
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.CreateDocumentRequest()
+        new protos.google.cloud.discoveryengine.v1.CreateConversationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.CreateDocumentRequest',
+        '.google.cloud.discoveryengine.v1.CreateConversationRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.Document()
+        new protos.google.cloud.discoveryengine.v1.Conversation()
       );
-      client.innerApiCalls.createDocument =
+      client.innerApiCalls.createConversation =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.createDocument(
+        client.createConversation(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1.IDocument | null
+            result?: protos.google.cloud.discoveryengine.v1.IConversation | null
           ) => {
             if (err) {
               reject(err);
@@ -464,212 +470,87 @@ describe('v1.DocumentServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.createDocument as SinonStub
+        client.innerApiCalls.createConversation as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.createDocument as SinonStub
+        client.innerApiCalls.createConversation as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes createDocument with error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes createConversation with error', async () => {
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.CreateDocumentRequest()
+        new protos.google.cloud.discoveryengine.v1.CreateConversationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.CreateDocumentRequest',
+        '.google.cloud.discoveryengine.v1.CreateConversationRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.createDocument = stubSimpleCall(
+      client.innerApiCalls.createConversation = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.createDocument(request), expectedError);
+      await assert.rejects(client.createConversation(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.createDocument as SinonStub
+        client.innerApiCalls.createConversation as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.createDocument as SinonStub
+        client.innerApiCalls.createConversation as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes createDocument with closed client', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes createConversation with closed client', async () => {
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.CreateDocumentRequest()
+        new protos.google.cloud.discoveryengine.v1.CreateConversationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.CreateDocumentRequest',
+        '.google.cloud.discoveryengine.v1.CreateConversationRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.createDocument(request), expectedError);
+      await assert.rejects(client.createConversation(request), expectedError);
     });
   });
 
-  describe('updateDocument', () => {
-    it('invokes updateDocument without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.UpdateDocumentRequest()
-      );
-      request.document ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.UpdateDocumentRequest',
-        ['document', 'name']
-      );
-      request.document.name = defaultValue1;
-      const expectedHeaderRequestParams = `document.name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.Document()
-      );
-      client.innerApiCalls.updateDocument = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateDocument(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateDocument as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateDocument as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateDocument without error using callback', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.UpdateDocumentRequest()
-      );
-      request.document ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.UpdateDocumentRequest',
-        ['document', 'name']
-      );
-      request.document.name = defaultValue1;
-      const expectedHeaderRequestParams = `document.name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.Document()
-      );
-      client.innerApiCalls.updateDocument =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateDocument(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1.IDocument | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
+  describe('deleteConversation', () => {
+    it('invokes deleteConversation without error', async () => {
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
           }
         );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateDocument as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateDocument as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateDocument with error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.UpdateDocumentRequest()
-      );
-      request.document ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.UpdateDocumentRequest',
-        ['document', 'name']
-      );
-      request.document.name = defaultValue1;
-      const expectedHeaderRequestParams = `document.name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateDocument = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateDocument(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateDocument as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateDocument as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateDocument with closed client', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.UpdateDocumentRequest()
-      );
-      request.document ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.UpdateDocumentRequest',
-        ['document', 'name']
-      );
-      request.document.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.updateDocument(request), expectedError);
-    });
-  });
-
-  describe('deleteDocument', () => {
-    it('invokes deleteDocument without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.DeleteDocumentRequest()
+        new protos.google.cloud.discoveryengine.v1.DeleteConversationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.DeleteDocumentRequest',
+        '.google.cloud.discoveryengine.v1.DeleteConversationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -677,30 +558,34 @@ describe('v1.DocumentServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteDocument = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteDocument(request);
+      client.innerApiCalls.deleteConversation =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteConversation(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.deleteDocument as SinonStub
+        client.innerApiCalls.deleteConversation as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDocument as SinonStub
+        client.innerApiCalls.deleteConversation as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes deleteDocument without error using callback', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes deleteConversation without error using callback', async () => {
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.DeleteDocumentRequest()
+        new protos.google.cloud.discoveryengine.v1.DeleteConversationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.DeleteDocumentRequest',
+        '.google.cloud.discoveryengine.v1.DeleteConversationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -708,10 +593,10 @@ describe('v1.DocumentServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteDocument =
+      client.innerApiCalls.deleteConversation =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.deleteDocument(
+        client.deleteConversation(
           request,
           (
             err?: Error | null,
@@ -728,528 +613,139 @@ describe('v1.DocumentServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.deleteDocument as SinonStub
+        client.innerApiCalls.deleteConversation as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDocument as SinonStub
+        client.innerApiCalls.deleteConversation as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes deleteDocument with error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes deleteConversation with error', async () => {
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.DeleteDocumentRequest()
+        new protos.google.cloud.discoveryengine.v1.DeleteConversationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.DeleteDocumentRequest',
+        '.google.cloud.discoveryengine.v1.DeleteConversationRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.deleteDocument = stubSimpleCall(
+      client.innerApiCalls.deleteConversation = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.deleteDocument(request), expectedError);
+      await assert.rejects(client.deleteConversation(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.deleteDocument as SinonStub
+        client.innerApiCalls.deleteConversation as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDocument as SinonStub
+        client.innerApiCalls.deleteConversation as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes deleteDocument with closed client', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes deleteConversation with closed client', async () => {
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.DeleteDocumentRequest()
+        new protos.google.cloud.discoveryengine.v1.DeleteConversationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.DeleteDocumentRequest',
+        '.google.cloud.discoveryengine.v1.DeleteConversationRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.deleteDocument(request), expectedError);
+      await assert.rejects(client.deleteConversation(request), expectedError);
     });
   });
 
-  describe('importDocuments', () => {
-    it('invokes importDocuments without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ImportDocumentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ImportDocumentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.importDocuments =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.importDocuments(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.importDocuments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.importDocuments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes importDocuments without error using callback', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ImportDocumentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ImportDocumentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.importDocuments =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.importDocuments(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.discoveryengine.v1.IImportDocumentsResponse,
-              protos.google.cloud.discoveryengine.v1.IImportDocumentsMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
+  describe('updateConversation', () => {
+    it('invokes updateConversation without error', async () => {
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
           }
         );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.discoveryengine.v1.IImportDocumentsResponse,
-        protos.google.cloud.discoveryengine.v1.IImportDocumentsMetadata
-      >;
-      const [response] = await operation.promise();
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.UpdateConversationRequest()
+      );
+      request.conversation ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.UpdateConversationRequest',
+        ['conversation', 'name']
+      );
+      request.conversation.name = defaultValue1;
+      const expectedHeaderRequestParams = `conversation.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.Conversation()
+      );
+      client.innerApiCalls.updateConversation =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateConversation(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.importDocuments as SinonStub
+        client.innerApiCalls.updateConversation as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.importDocuments as SinonStub
+        client.innerApiCalls.updateConversation as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes importDocuments with call error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ImportDocumentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ImportDocumentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.importDocuments = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.importDocuments(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.importDocuments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.importDocuments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes importDocuments with LRO error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ImportDocumentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ImportDocumentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.importDocuments = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.importDocuments(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.importDocuments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.importDocuments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkImportDocumentsProgress without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkImportDocumentsProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkImportDocumentsProgress with error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkImportDocumentsProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('purgeDocuments', () => {
-    it('invokes purgeDocuments without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.PurgeDocumentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.PurgeDocumentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.purgeDocuments =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.purgeDocuments(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.purgeDocuments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.purgeDocuments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes purgeDocuments without error using callback', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.PurgeDocumentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.PurgeDocumentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.purgeDocuments =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.purgeDocuments(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.discoveryengine.v1.IPurgeDocumentsResponse,
-              protos.google.cloud.discoveryengine.v1.IPurgeDocumentsMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
+    it('invokes updateConversation without error using callback', async () => {
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
           }
         );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.discoveryengine.v1.IPurgeDocumentsResponse,
-        protos.google.cloud.discoveryengine.v1.IPurgeDocumentsMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.purgeDocuments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.purgeDocuments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes purgeDocuments with call error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.PurgeDocumentsRequest()
+        new protos.google.cloud.discoveryengine.v1.UpdateConversationRequest()
       );
+      request.conversation ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.PurgeDocumentsRequest',
-        ['parent']
+        '.google.cloud.discoveryengine.v1.UpdateConversationRequest',
+        ['conversation', 'name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.purgeDocuments = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.purgeDocuments(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.purgeDocuments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.purgeDocuments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes purgeDocuments with LRO error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.PurgeDocumentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.PurgeDocumentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.purgeDocuments = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.purgeDocuments(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.purgeDocuments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.purgeDocuments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkPurgeDocumentsProgress without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
+      request.conversation.name = defaultValue1;
+      const expectedHeaderRequestParams = `conversation.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
+        new protos.google.cloud.discoveryengine.v1.Conversation()
       );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkPurgeDocumentsProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkPurgeDocumentsProgress with error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkPurgeDocumentsProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listDocuments', () => {
-    it('invokes listDocuments without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ListDocumentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ListDocumentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.Document()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.Document()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.Document()
-        ),
-      ];
-      client.innerApiCalls.listDocuments = stubSimpleCall(expectedResponse);
-      const [response] = await client.listDocuments(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listDocuments as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDocuments as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listDocuments without error using callback', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ListDocumentsRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ListDocumentsRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.Document()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.Document()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.Document()
-        ),
-      ];
-      client.innerApiCalls.listDocuments =
+      client.innerApiCalls.updateConversation =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.listDocuments(
+        client.updateConversation(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1.IDocument[] | null
+            result?: protos.google.cloud.discoveryengine.v1.IConversation | null
           ) => {
             if (err) {
               reject(err);
@@ -1262,80 +758,391 @@ describe('v1.DocumentServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.listDocuments as SinonStub
+        client.innerApiCalls.updateConversation as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listDocuments as SinonStub
+        client.innerApiCalls.updateConversation as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listDocuments with error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes updateConversation with error', async () => {
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ListDocumentsRequest()
+        new protos.google.cloud.discoveryengine.v1.UpdateConversationRequest()
       );
+      request.conversation ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ListDocumentsRequest',
-        ['parent']
+        '.google.cloud.discoveryengine.v1.UpdateConversationRequest',
+        ['conversation', 'name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      request.conversation.name = defaultValue1;
+      const expectedHeaderRequestParams = `conversation.name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.listDocuments = stubSimpleCall(
+      client.innerApiCalls.updateConversation = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.listDocuments(request), expectedError);
+      await assert.rejects(client.updateConversation(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.listDocuments as SinonStub
+        client.innerApiCalls.updateConversation as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listDocuments as SinonStub
+        client.innerApiCalls.updateConversation as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listDocumentsStream without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes updateConversation with closed client', async () => {
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ListDocumentsRequest()
+        new protos.google.cloud.discoveryengine.v1.UpdateConversationRequest()
+      );
+      request.conversation ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.UpdateConversationRequest',
+        ['conversation', 'name']
+      );
+      request.conversation.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateConversation(request), expectedError);
+    });
+  });
+
+  describe('getConversation', () => {
+    it('invokes getConversation without error', async () => {
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.GetConversationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ListDocumentsRequest',
+        '.google.cloud.discoveryengine.v1.GetConversationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.Conversation()
+      );
+      client.innerApiCalls.getConversation = stubSimpleCall(expectedResponse);
+      const [response] = await client.getConversation(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getConversation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConversation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getConversation without error using callback', async () => {
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.GetConversationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.GetConversationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.Conversation()
+      );
+      client.innerApiCalls.getConversation =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getConversation(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.discoveryengine.v1.IConversation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getConversation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConversation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getConversation with error', async () => {
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.GetConversationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.GetConversationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getConversation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getConversation(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getConversation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConversation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getConversation with closed client', async () => {
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.GetConversationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.GetConversationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getConversation(request), expectedError);
+    });
+  });
+
+  describe('listConversations', () => {
+    it('invokes listConversations without error', async () => {
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.ListConversationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.ListConversationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.Document()
+          new protos.google.cloud.discoveryengine.v1.Conversation()
         ),
         generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.Document()
+          new protos.google.cloud.discoveryengine.v1.Conversation()
         ),
         generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.Document()
+          new protos.google.cloud.discoveryengine.v1.Conversation()
         ),
       ];
-      client.descriptors.page.listDocuments.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listDocumentsStream(request);
+      client.innerApiCalls.listConversations = stubSimpleCall(expectedResponse);
+      const [response] = await client.listConversations(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listConversations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listConversations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listConversations without error using callback', async () => {
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.ListConversationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.ListConversationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1.Conversation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1.Conversation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1.Conversation()
+        ),
+      ];
+      client.innerApiCalls.listConversations =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.discoveryengine.v1.Document[] = [];
+        client.listConversations(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.discoveryengine.v1.IConversation[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listConversations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listConversations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listConversations with error', async () => {
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.ListConversationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.ListConversationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listConversations = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listConversations(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listConversations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listConversations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listConversationsStream without error', async () => {
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.ListConversationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.ListConversationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1.Conversation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1.Conversation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1.Conversation()
+        ),
+      ];
+      client.descriptors.page.listConversations.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listConversationsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.discoveryengine.v1.Conversation[] =
+          [];
         stream.on(
           'data',
-          (response: protos.google.cloud.discoveryengine.v1.Document) => {
+          (response: protos.google.cloud.discoveryengine.v1.Conversation) => {
             responses.push(response);
           }
         );
@@ -1349,12 +1156,12 @@ describe('v1.DocumentServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listDocuments.createStream as SinonStub)
+        (client.descriptors.page.listConversations.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listDocuments, request)
+          .calledWith(client.innerApiCalls.listConversations, request)
       );
       assert(
-        (client.descriptors.page.listDocuments.createStream as SinonStub)
+        (client.descriptors.page.listConversations.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
@@ -1362,30 +1169,34 @@ describe('v1.DocumentServiceClient', () => {
       );
     });
 
-    it('invokes listDocumentsStream with error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('invokes listConversationsStream with error', async () => {
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ListDocumentsRequest()
+        new protos.google.cloud.discoveryengine.v1.ListConversationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ListDocumentsRequest',
+        '.google.cloud.discoveryengine.v1.ListConversationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listDocuments.createStream =
+      client.descriptors.page.listConversations.createStream =
         stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listDocumentsStream(request);
+      const stream = client.listConversationsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.discoveryengine.v1.Document[] = [];
+        const responses: protos.google.cloud.discoveryengine.v1.Conversation[] =
+          [];
         stream.on(
           'data',
-          (response: protos.google.cloud.discoveryengine.v1.Document) => {
+          (response: protos.google.cloud.discoveryengine.v1.Conversation) => {
             responses.push(response);
           }
         );
@@ -1398,12 +1209,12 @@ describe('v1.DocumentServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listDocuments.createStream as SinonStub)
+        (client.descriptors.page.listConversations.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listDocuments, request)
+          .calledWith(client.innerApiCalls.listConversations, request)
       );
       assert(
-        (client.descriptors.page.listDocuments.createStream as SinonStub)
+        (client.descriptors.page.listConversations.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
@@ -1411,48 +1222,52 @@ describe('v1.DocumentServiceClient', () => {
       );
     });
 
-    it('uses async iteration with listDocuments without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('uses async iteration with listConversations without error', async () => {
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ListDocumentsRequest()
+        new protos.google.cloud.discoveryengine.v1.ListConversationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ListDocumentsRequest',
+        '.google.cloud.discoveryengine.v1.ListConversationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.Document()
+          new protos.google.cloud.discoveryengine.v1.Conversation()
         ),
         generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.Document()
+          new protos.google.cloud.discoveryengine.v1.Conversation()
         ),
         generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.Document()
+          new protos.google.cloud.discoveryengine.v1.Conversation()
         ),
       ];
-      client.descriptors.page.listDocuments.asyncIterate =
+      client.descriptors.page.listConversations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.discoveryengine.v1.IDocument[] = [];
-      const iterable = client.listDocumentsAsync(request);
+      const responses: protos.google.cloud.discoveryengine.v1.IConversation[] =
+        [];
+      const iterable = client.listConversationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (
-          client.descriptors.page.listDocuments.asyncIterate as SinonStub
+          client.descriptors.page.listConversations.asyncIterate as SinonStub
         ).getCall(0).args[1],
         request
       );
       assert(
-        (client.descriptors.page.listDocuments.asyncIterate as SinonStub)
+        (client.descriptors.page.listConversations.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
@@ -1460,27 +1275,30 @@ describe('v1.DocumentServiceClient', () => {
       );
     });
 
-    it('uses async iteration with listDocuments with error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+    it('uses async iteration with listConversations with error', async () => {
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ListDocumentsRequest()
+        new protos.google.cloud.discoveryengine.v1.ListConversationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ListDocumentsRequest',
+        '.google.cloud.discoveryengine.v1.ListConversationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listDocuments.asyncIterate =
+      client.descriptors.page.listConversations.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listDocumentsAsync(request);
+      const iterable = client.listConversationsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.discoveryengine.v1.IDocument[] =
+        const responses: protos.google.cloud.discoveryengine.v1.IConversation[] =
           [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -1488,12 +1306,12 @@ describe('v1.DocumentServiceClient', () => {
       });
       assert.deepStrictEqual(
         (
-          client.descriptors.page.listDocuments.asyncIterate as SinonStub
+          client.descriptors.page.listConversations.asyncIterate as SinonStub
         ).getCall(0).args[1],
         request
       );
       assert(
-        (client.descriptors.page.listDocuments.asyncIterate as SinonStub)
+        (client.descriptors.page.listConversations.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers['x-goog-request-params'].includes(
             expectedHeaderRequestParams
@@ -1503,10 +1321,13 @@ describe('v1.DocumentServiceClient', () => {
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -1533,10 +1354,13 @@ describe('v1.DocumentServiceClient', () => {
       );
     });
     it('invokes getLocation without error using callback', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -1577,10 +1401,13 @@ describe('v1.DocumentServiceClient', () => {
       assert((client.locationsClient.getLocation as SinonStub).getCall(0));
     });
     it('invokes getLocation with error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -1612,10 +1439,13 @@ describe('v1.DocumentServiceClient', () => {
   });
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
@@ -1660,10 +1490,13 @@ describe('v1.DocumentServiceClient', () => {
       );
     });
     it('uses async iteration with listLocations with error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
@@ -1699,346 +1532,40 @@ describe('v1.DocumentServiceClient', () => {
       );
     });
   });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes getOperation without error using callback', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.getOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: operationsProtos.google.longrunning.Operation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-    it('invokes getOperation with error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.cancelOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
-    });
-    it('invokes cancelOperation with error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.deleteOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-    it('uses async iteration with listOperations with error', async () => {
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
 
   describe('Path templates', () => {
-    describe('projectLocationCollectionDataStoreBranch', () => {
-      const fakePath =
-        '/rendered/path/projectLocationCollectionDataStoreBranch';
+    describe('projectLocationCollectionDataStore', () => {
+      const fakePath = '/rendered/path/projectLocationCollectionDataStore';
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
         collection: 'collectionValue',
         data_store: 'dataStoreValue',
-        branch: 'branchValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
-      client.pathTemplates.projectLocationCollectionDataStoreBranchPathTemplate.render =
+      client.pathTemplates.projectLocationCollectionDataStorePathTemplate.render =
         sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationCollectionDataStoreBranchPathTemplate.match =
+      client.pathTemplates.projectLocationCollectionDataStorePathTemplate.match =
         sinon.stub().returns(expectedParameters);
 
-      it('projectLocationCollectionDataStoreBranchPath', () => {
-        const result = client.projectLocationCollectionDataStoreBranchPath(
+      it('projectLocationCollectionDataStorePath', () => {
+        const result = client.projectLocationCollectionDataStorePath(
           'projectValue',
           'locationValue',
           'collectionValue',
-          'dataStoreValue',
-          'branchValue'
+          'dataStoreValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
           (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchPathTemplate
+            client.pathTemplates.projectLocationCollectionDataStorePathTemplate
               .render as SinonStub
           )
             .getCall(-1)
@@ -2046,16 +1573,15 @@ describe('v1.DocumentServiceClient', () => {
         );
       });
 
-      it('matchProjectFromProjectLocationCollectionDataStoreBranchName', () => {
+      it('matchProjectFromProjectLocationCollectionDataStoreName', () => {
         const result =
-          client.matchProjectFromProjectLocationCollectionDataStoreBranchName(
+          client.matchProjectFromProjectLocationCollectionDataStoreName(
             fakePath
           );
         assert.strictEqual(result, 'projectValue');
         assert(
           (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchPathTemplate
+            client.pathTemplates.projectLocationCollectionDataStorePathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -2063,16 +1589,15 @@ describe('v1.DocumentServiceClient', () => {
         );
       });
 
-      it('matchLocationFromProjectLocationCollectionDataStoreBranchName', () => {
+      it('matchLocationFromProjectLocationCollectionDataStoreName', () => {
         const result =
-          client.matchLocationFromProjectLocationCollectionDataStoreBranchName(
+          client.matchLocationFromProjectLocationCollectionDataStoreName(
             fakePath
           );
         assert.strictEqual(result, 'locationValue');
         assert(
           (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchPathTemplate
+            client.pathTemplates.projectLocationCollectionDataStorePathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -2080,16 +1605,15 @@ describe('v1.DocumentServiceClient', () => {
         );
       });
 
-      it('matchCollectionFromProjectLocationCollectionDataStoreBranchName', () => {
+      it('matchCollectionFromProjectLocationCollectionDataStoreName', () => {
         const result =
-          client.matchCollectionFromProjectLocationCollectionDataStoreBranchName(
+          client.matchCollectionFromProjectLocationCollectionDataStoreName(
             fakePath
           );
         assert.strictEqual(result, 'collectionValue');
         assert(
           (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchPathTemplate
+            client.pathTemplates.projectLocationCollectionDataStorePathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -2097,33 +1621,15 @@ describe('v1.DocumentServiceClient', () => {
         );
       });
 
-      it('matchDataStoreFromProjectLocationCollectionDataStoreBranchName', () => {
+      it('matchDataStoreFromProjectLocationCollectionDataStoreName', () => {
         const result =
-          client.matchDataStoreFromProjectLocationCollectionDataStoreBranchName(
+          client.matchDataStoreFromProjectLocationCollectionDataStoreName(
             fakePath
           );
         assert.strictEqual(result, 'dataStoreValue');
         assert(
           (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchBranchFromProjectLocationCollectionDataStoreBranchName', () => {
-        const result =
-          client.matchBranchFromProjectLocationCollectionDataStoreBranchName(
-            fakePath
-          );
-        assert.strictEqual(result, 'branchValue');
-        assert(
-          (
-            client.pathTemplates
-              .projectLocationCollectionDataStoreBranchPathTemplate
+            client.pathTemplates.projectLocationCollectionDataStorePathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -2143,10 +1649,13 @@ describe('v1.DocumentServiceClient', () => {
         branch: 'branchValue',
         document: 'documentValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2288,10 +1797,13 @@ describe('v1.DocumentServiceClient', () => {
         data_store: 'dataStoreValue',
         conversation: 'conversationValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2415,10 +1927,13 @@ describe('v1.DocumentServiceClient', () => {
         data_store: 'dataStoreValue',
         schema: 'schemaValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2531,35 +2046,43 @@ describe('v1.DocumentServiceClient', () => {
       });
     });
 
-    describe('projectLocationDataStoreBranch', () => {
-      const fakePath = '/rendered/path/projectLocationDataStoreBranch';
+    describe('projectLocationCollectionDataStoreServingConfig', () => {
+      const fakePath =
+        '/rendered/path/projectLocationCollectionDataStoreServingConfig';
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
+        collection: 'collectionValue',
         data_store: 'dataStoreValue',
-        branch: 'branchValue',
+        serving_config: 'servingConfigValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
-      client.pathTemplates.projectLocationDataStoreBranchPathTemplate.render =
+      client.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
-      client.pathTemplates.projectLocationDataStoreBranchPathTemplate.match =
+      client.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.match =
         sinon.stub().returns(expectedParameters);
 
-      it('projectLocationDataStoreBranchPath', () => {
-        const result = client.projectLocationDataStoreBranchPath(
-          'projectValue',
-          'locationValue',
-          'dataStoreValue',
-          'branchValue'
-        );
+      it('projectLocationCollectionDataStoreServingConfigPath', () => {
+        const result =
+          client.projectLocationCollectionDataStoreServingConfigPath(
+            'projectValue',
+            'locationValue',
+            'collectionValue',
+            'dataStoreValue',
+            'servingConfigValue'
+          );
         assert.strictEqual(result, fakePath);
         assert(
           (
-            client.pathTemplates.projectLocationDataStoreBranchPathTemplate
+            client.pathTemplates
+              .projectLocationCollectionDataStoreServingConfigPathTemplate
               .render as SinonStub
           )
             .getCall(-1)
@@ -2567,13 +2090,16 @@ describe('v1.DocumentServiceClient', () => {
         );
       });
 
-      it('matchProjectFromProjectLocationDataStoreBranchName', () => {
+      it('matchProjectFromProjectLocationCollectionDataStoreServingConfigName', () => {
         const result =
-          client.matchProjectFromProjectLocationDataStoreBranchName(fakePath);
+          client.matchProjectFromProjectLocationCollectionDataStoreServingConfigName(
+            fakePath
+          );
         assert.strictEqual(result, 'projectValue');
         assert(
           (
-            client.pathTemplates.projectLocationDataStoreBranchPathTemplate
+            client.pathTemplates
+              .projectLocationCollectionDataStoreServingConfigPathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -2581,13 +2107,16 @@ describe('v1.DocumentServiceClient', () => {
         );
       });
 
-      it('matchLocationFromProjectLocationDataStoreBranchName', () => {
+      it('matchLocationFromProjectLocationCollectionDataStoreServingConfigName', () => {
         const result =
-          client.matchLocationFromProjectLocationDataStoreBranchName(fakePath);
+          client.matchLocationFromProjectLocationCollectionDataStoreServingConfigName(
+            fakePath
+          );
         assert.strictEqual(result, 'locationValue');
         assert(
           (
-            client.pathTemplates.projectLocationDataStoreBranchPathTemplate
+            client.pathTemplates
+              .projectLocationCollectionDataStoreServingConfigPathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -2595,13 +2124,33 @@ describe('v1.DocumentServiceClient', () => {
         );
       });
 
-      it('matchDataStoreFromProjectLocationDataStoreBranchName', () => {
+      it('matchCollectionFromProjectLocationCollectionDataStoreServingConfigName', () => {
         const result =
-          client.matchDataStoreFromProjectLocationDataStoreBranchName(fakePath);
+          client.matchCollectionFromProjectLocationCollectionDataStoreServingConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionDataStoreServingConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationCollectionDataStoreServingConfigName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationCollectionDataStoreServingConfigName(
+            fakePath
+          );
         assert.strictEqual(result, 'dataStoreValue');
         assert(
           (
-            client.pathTemplates.projectLocationDataStoreBranchPathTemplate
+            client.pathTemplates
+              .projectLocationCollectionDataStoreServingConfigPathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -2609,13 +2158,98 @@ describe('v1.DocumentServiceClient', () => {
         );
       });
 
-      it('matchBranchFromProjectLocationDataStoreBranchName', () => {
+      it('matchServingConfigFromProjectLocationCollectionDataStoreServingConfigName', () => {
         const result =
-          client.matchBranchFromProjectLocationDataStoreBranchName(fakePath);
-        assert.strictEqual(result, 'branchValue');
+          client.matchServingConfigFromProjectLocationCollectionDataStoreServingConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'servingConfigValue');
         assert(
           (
-            client.pathTemplates.projectLocationDataStoreBranchPathTemplate
+            client.pathTemplates
+              .projectLocationCollectionDataStoreServingConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationDataStore', () => {
+      const fakePath = '/rendered/path/projectLocationDataStore';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        data_store: 'dataStoreValue',
+      };
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.projectLocationDataStorePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectLocationDataStorePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectLocationDataStorePath', () => {
+        const result = client.projectLocationDataStorePath(
+          'projectValue',
+          'locationValue',
+          'dataStoreValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationDataStorePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationDataStoreName', () => {
+        const result =
+          client.matchProjectFromProjectLocationDataStoreName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationDataStorePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationDataStoreName', () => {
+        const result =
+          client.matchLocationFromProjectLocationDataStoreName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationDataStorePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationDataStoreName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationDataStoreName(fakePath);
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationDataStorePathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -2633,10 +2267,13 @@ describe('v1.DocumentServiceClient', () => {
         branch: 'branchValue',
         document: 'documentValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2757,10 +2394,13 @@ describe('v1.DocumentServiceClient', () => {
         data_store: 'dataStoreValue',
         conversation: 'conversationValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreConversationPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2863,10 +2503,13 @@ describe('v1.DocumentServiceClient', () => {
         data_store: 'dataStoreValue',
         schema: 'schemaValue',
       };
-      const client = new documentserviceModule.v1.DocumentServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreSchemaPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2940,6 +2583,115 @@ describe('v1.DocumentServiceClient', () => {
         assert(
           (
             client.pathTemplates.projectLocationDataStoreSchemaPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationDataStoreServingConfig', () => {
+      const fakePath = '/rendered/path/projectLocationDataStoreServingConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        data_store: 'dataStoreValue',
+        serving_config: 'servingConfigValue',
+      };
+      const client =
+        new conversationalsearchserviceModule.v1.ConversationalSearchServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationDataStoreServingConfigPath', () => {
+        const result = client.projectLocationDataStoreServingConfigPath(
+          'projectValue',
+          'locationValue',
+          'dataStoreValue',
+          'servingConfigValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreServingConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationDataStoreServingConfigName', () => {
+        const result =
+          client.matchProjectFromProjectLocationDataStoreServingConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreServingConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationDataStoreServingConfigName', () => {
+        const result =
+          client.matchLocationFromProjectLocationDataStoreServingConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreServingConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStoreFromProjectLocationDataStoreServingConfigName', () => {
+        const result =
+          client.matchDataStoreFromProjectLocationDataStoreServingConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'dataStoreValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreServingConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchServingConfigFromProjectLocationDataStoreServingConfigName', () => {
+        const result =
+          client.matchServingConfigFromProjectLocationDataStoreServingConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'servingConfigValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationDataStoreServingConfigPathTemplate
               .match as SinonStub
           )
             .getCall(-1)

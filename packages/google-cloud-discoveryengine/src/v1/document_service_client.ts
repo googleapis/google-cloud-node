@@ -27,6 +27,8 @@ import type {
   LROperation,
   PaginationCallback,
   GaxCall,
+  LocationsClient,
+  LocationProtos,
 } from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
@@ -62,6 +64,7 @@ export class DocumentServiceClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
   documentServiceStub?: Promise<{[name: string]: Function}>;
@@ -158,6 +161,10 @@ export class DocumentServiceClient {
     if (servicePath === staticMembers.servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
+    this.locationsClient = new this._gaxModule.LocationsClient(
+      this._gaxGrpc,
+      opts
+    );
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -189,6 +196,10 @@ export class DocumentServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}'
         ),
+      projectLocationCollectionDataStoreConversationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/conversations/{conversation}'
+        ),
       projectLocationCollectionDataStoreSchemaPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/schemas/{schema}'
@@ -200,6 +211,10 @@ export class DocumentServiceClient {
       projectLocationDataStoreBranchDocumentPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}'
+        ),
+      projectLocationDataStoreConversationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/conversations/{conversation}'
         ),
       projectLocationDataStoreSchemaPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -246,6 +261,15 @@ export class DocumentServiceClient {
               get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/schemas/*/operations/*}',
             },
             {
+              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/targetSites/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/collections/*/engines/*/operations/*}',
+            },
+            {
               get: '/v1/{name=projects/*/locations/*/collections/*/operations/*}',
             },
             {
@@ -275,7 +299,16 @@ export class DocumentServiceClient {
               get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/schemas/*}/operations',
             },
             {
+              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/targetSites}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine}/operations',
+            },
+            {
               get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/collections/*/engines/*}/operations',
             },
             {get: '/v1/{name=projects/*/locations/*/collections/*}/operations'},
             {
@@ -916,7 +949,7 @@ export class DocumentServiceClient {
    *   `false`, {@link protos.google.cloud.discoveryengine.v1.Document.id|Document.id}s have
    *   to be specified using
    *   {@link protos.google.cloud.discoveryengine.v1.ImportDocumentsRequest.id_field|id_field},
-   *   otherwises, documents without IDs will fail to be imported.
+   *   otherwise, documents without IDs fail to be imported.
    *
    *   Only set this field when using
    *   {@link protos.google.cloud.discoveryengine.v1.GcsSource|GcsSource} or
@@ -924,7 +957,7 @@ export class DocumentServiceClient {
    *   {@link protos.google.cloud.discoveryengine.v1.GcsSource.data_schema|GcsSource.data_schema}
    *   or
    *   {@link protos.google.cloud.discoveryengine.v1.BigQuerySource.data_schema|BigQuerySource.data_schema}
-   *   is `custom`. Otherwise, an INVALID_ARGUMENT error is thrown.
+   *   is `custom` or `csv`. Otherwise, an INVALID_ARGUMENT error is thrown.
    * @param {string} request.idField
    *   The field in the Cloud Storage and BigQuery sources that indicates the
    *   unique IDs of the documents.
@@ -934,12 +967,12 @@ export class DocumentServiceClient {
    *   For {@link protos.google.cloud.discoveryengine.v1.BigQuerySource|BigQuerySource} it is
    *   the column name of the BigQuery table where the unique ids are stored.
    *
-   *   The values of the JSON field or the BigQuery column will be used as the
+   *   The values of the JSON field or the BigQuery column are used as the
    *   {@link protos.google.cloud.discoveryengine.v1.Document.id|Document.id}s. The JSON field
    *   or the BigQuery column must be of string type, and the values must be set
    *   as valid strings conform to [RFC-1034](https://tools.ietf.org/html/rfc1034)
-   *   with 1-63 characters. Otherwise, documents without valid IDs will fail to
-   *   be imported.
+   *   with 1-63 characters. Otherwise, documents without valid IDs fail to be
+   *   imported.
    *
    *   Only set this field when using
    *   {@link protos.google.cloud.discoveryengine.v1.GcsSource|GcsSource} or
@@ -1252,9 +1285,10 @@ export class DocumentServiceClient {
    *   Use `default_branch` as the branch ID, to list documents under the default
    *   branch.
    *
-   *   If the caller does not have permission to list {@link protos.|Documents}s under this
-   *   branch, regardless of whether or not this branch exists, a
-   *   `PERMISSION_DENIED` error is returned.
+   *   If the caller does not have permission to list
+   *   {@link protos.google.cloud.discoveryengine.v1.Document|Document}s under this branch,
+   *   regardless of whether or not this branch exists, a `PERMISSION_DENIED`
+   *   error is returned.
    * @param {number} request.pageSize
    *   Maximum number of {@link protos.google.cloud.discoveryengine.v1.Document|Document}s to
    *   return. If unspecified, defaults to 100. The maximum allowed value is 1000.
@@ -1369,9 +1403,10 @@ export class DocumentServiceClient {
    *   Use `default_branch` as the branch ID, to list documents under the default
    *   branch.
    *
-   *   If the caller does not have permission to list {@link protos.|Documents}s under this
-   *   branch, regardless of whether or not this branch exists, a
-   *   `PERMISSION_DENIED` error is returned.
+   *   If the caller does not have permission to list
+   *   {@link protos.google.cloud.discoveryengine.v1.Document|Document}s under this branch,
+   *   regardless of whether or not this branch exists, a `PERMISSION_DENIED`
+   *   error is returned.
    * @param {number} request.pageSize
    *   Maximum number of {@link protos.google.cloud.discoveryengine.v1.Document|Document}s to
    *   return. If unspecified, defaults to 100. The maximum allowed value is 1000.
@@ -1434,9 +1469,10 @@ export class DocumentServiceClient {
    *   Use `default_branch` as the branch ID, to list documents under the default
    *   branch.
    *
-   *   If the caller does not have permission to list {@link protos.|Documents}s under this
-   *   branch, regardless of whether or not this branch exists, a
-   *   `PERMISSION_DENIED` error is returned.
+   *   If the caller does not have permission to list
+   *   {@link protos.google.cloud.discoveryengine.v1.Document|Document}s under this branch,
+   *   regardless of whether or not this branch exists, a `PERMISSION_DENIED`
+   *   error is returned.
    * @param {number} request.pageSize
    *   Maximum number of {@link protos.google.cloud.discoveryengine.v1.Document|Document}s to
    *   return. If unspecified, defaults to 100. The maximum allowed value is 1000.
@@ -1487,6 +1523,84 @@ export class DocumentServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.discoveryengine.v1.IDocument>;
   }
+  /**
+   * Gets information about a location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Resource name for the location.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example
+   * ```
+   * const [response] = await client.getLocation(request);
+   * ```
+   */
+  getLocation(
+    request: LocationProtos.google.cloud.location.IGetLocationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          LocationProtos.google.cloud.location.ILocation,
+          | LocationProtos.google.cloud.location.IGetLocationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LocationProtos.google.cloud.location.ILocation,
+      | LocationProtos.google.cloud.location.IGetLocationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.getLocation(request, options, callback);
+  }
+
+  /**
+   * Lists information about the supported locations for this service. Returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The resource that owns the locations collection, if applicable.
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example
+   * ```
+   * const iterable = client.listLocationsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   * ```
+   */
+  listLocationsAsync(
+    request: LocationProtos.google.cloud.location.IListLocationsRequest,
+    options?: CallOptions
+  ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.listLocationsAsync(request, options);
+  }
+
   /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
@@ -1891,6 +2005,109 @@ export class DocumentServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationCollectionDataStoreConversation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @param {string} conversation
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreConversationPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string,
+    conversation: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+        conversation: conversation,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreConversation resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreConversationName
+   *   A fully-qualified path representing project_location_collection_data_store_conversation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreConversationName(
+    projectLocationCollectionDataStoreConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(
+      projectLocationCollectionDataStoreConversationName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreConversation resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreConversationName
+   *   A fully-qualified path representing project_location_collection_data_store_conversation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreConversationName(
+    projectLocationCollectionDataStoreConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(
+      projectLocationCollectionDataStoreConversationName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreConversation resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreConversationName
+   *   A fully-qualified path representing project_location_collection_data_store_conversation resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreConversationName(
+    projectLocationCollectionDataStoreConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(
+      projectLocationCollectionDataStoreConversationName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreConversation resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreConversationName
+   *   A fully-qualified path representing project_location_collection_data_store_conversation resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreConversationName(
+    projectLocationCollectionDataStoreConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(
+      projectLocationCollectionDataStoreConversationName
+    ).data_store;
+  }
+
+  /**
+   * Parse the conversation from ProjectLocationCollectionDataStoreConversation resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreConversationName
+   *   A fully-qualified path representing project_location_collection_data_store_conversation resource.
+   * @returns {string} A string representing the conversation.
+   */
+  matchConversationFromProjectLocationCollectionDataStoreConversationName(
+    projectLocationCollectionDataStoreConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(
+      projectLocationCollectionDataStoreConversationName
+    ).conversation;
+  }
+
+  /**
    * Return a fully-qualified projectLocationCollectionDataStoreSchema resource name string.
    *
    * @param {string} project
@@ -2182,6 +2399,91 @@ export class DocumentServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationDataStoreConversation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @param {string} conversation
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreConversationPath(
+    project: string,
+    location: string,
+    dataStore: string,
+    conversation: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+        conversation: conversation,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreConversation resource.
+   *
+   * @param {string} projectLocationDataStoreConversationName
+   *   A fully-qualified path representing project_location_data_store_conversation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreConversationName(
+    projectLocationDataStoreConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(
+      projectLocationDataStoreConversationName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreConversation resource.
+   *
+   * @param {string} projectLocationDataStoreConversationName
+   *   A fully-qualified path representing project_location_data_store_conversation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreConversationName(
+    projectLocationDataStoreConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(
+      projectLocationDataStoreConversationName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreConversation resource.
+   *
+   * @param {string} projectLocationDataStoreConversationName
+   *   A fully-qualified path representing project_location_data_store_conversation resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreConversationName(
+    projectLocationDataStoreConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(
+      projectLocationDataStoreConversationName
+    ).data_store;
+  }
+
+  /**
+   * Parse the conversation from ProjectLocationDataStoreConversation resource.
+   *
+   * @param {string} projectLocationDataStoreConversationName
+   *   A fully-qualified path representing project_location_data_store_conversation resource.
+   * @returns {string} A string representing the conversation.
+   */
+  matchConversationFromProjectLocationDataStoreConversationName(
+    projectLocationDataStoreConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(
+      projectLocationDataStoreConversationName
+    ).conversation;
+  }
+
+  /**
    * Return a fully-qualified projectLocationDataStoreSchema resource name string.
    *
    * @param {string} project
@@ -2277,6 +2579,7 @@ export class DocumentServiceClient {
       return this.documentServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
+        this.locationsClient.close();
         this.operationsClient.close();
       });
     }

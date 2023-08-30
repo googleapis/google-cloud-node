@@ -33,9 +33,10 @@ function main(parent) {
    *  `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`.
    *  Use `default_branch` as the branch ID, to list documents under the default
    *  branch.
-   *  If the caller does not have permission to list Documents  s under this
-   *  branch, regardless of whether or not this branch exists, a
-   *  `PERMISSION_DENIED` error is returned.
+   *  If the caller does not have permission to list
+   *  Document google.cloud.discoveryengine.v1.Document s under this branch,
+   *  regardless of whether or not this branch exists, a `PERMISSION_DENIED`
+   *  error is returned.
    */
   // const parent = 'abc123'
   /**
