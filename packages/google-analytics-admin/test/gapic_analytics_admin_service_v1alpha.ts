@@ -3972,6 +3972,576 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
     });
   });
 
+  describe('getSKAdNetworkConversionValueSchema', () => {
+    it('invokes getSKAdNetworkConversionValueSchema without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetSKAdNetworkConversionValueSchemaRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetSKAdNetworkConversionValueSchemaRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema()
+      );
+      client.innerApiCalls.getSkAdNetworkConversionValueSchema =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getSKAdNetworkConversionValueSchema(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getSkAdNetworkConversionValueSchema as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSkAdNetworkConversionValueSchema as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSKAdNetworkConversionValueSchema without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetSKAdNetworkConversionValueSchemaRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetSKAdNetworkConversionValueSchemaRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema()
+      );
+      client.innerApiCalls.getSkAdNetworkConversionValueSchema =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getSKAdNetworkConversionValueSchema(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getSkAdNetworkConversionValueSchema as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSkAdNetworkConversionValueSchema as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSKAdNetworkConversionValueSchema with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetSKAdNetworkConversionValueSchemaRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetSKAdNetworkConversionValueSchemaRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getSkAdNetworkConversionValueSchema = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getSKAdNetworkConversionValueSchema(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.getSkAdNetworkConversionValueSchema as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSkAdNetworkConversionValueSchema as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSKAdNetworkConversionValueSchema with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.GetSKAdNetworkConversionValueSchemaRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.GetSKAdNetworkConversionValueSchemaRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getSKAdNetworkConversionValueSchema(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('createSKAdNetworkConversionValueSchema', () => {
+    it('invokes createSKAdNetworkConversionValueSchema without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateSKAdNetworkConversionValueSchemaRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.CreateSKAdNetworkConversionValueSchemaRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema()
+      );
+      client.innerApiCalls.createSkAdNetworkConversionValueSchema =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createSKAdNetworkConversionValueSchema(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createSkAdNetworkConversionValueSchema as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSkAdNetworkConversionValueSchema as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createSKAdNetworkConversionValueSchema without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateSKAdNetworkConversionValueSchemaRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.CreateSKAdNetworkConversionValueSchemaRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema()
+      );
+      client.innerApiCalls.createSkAdNetworkConversionValueSchema =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createSKAdNetworkConversionValueSchema(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createSkAdNetworkConversionValueSchema as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSkAdNetworkConversionValueSchema as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createSKAdNetworkConversionValueSchema with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateSKAdNetworkConversionValueSchemaRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.CreateSKAdNetworkConversionValueSchemaRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createSkAdNetworkConversionValueSchema =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.createSKAdNetworkConversionValueSchema(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.createSkAdNetworkConversionValueSchema as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSkAdNetworkConversionValueSchema as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createSKAdNetworkConversionValueSchema with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.CreateSKAdNetworkConversionValueSchemaRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.CreateSKAdNetworkConversionValueSchemaRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.createSKAdNetworkConversionValueSchema(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('deleteSKAdNetworkConversionValueSchema', () => {
+    it('invokes deleteSKAdNetworkConversionValueSchema without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteSKAdNetworkConversionValueSchemaRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.DeleteSKAdNetworkConversionValueSchemaRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteSkAdNetworkConversionValueSchema =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteSKAdNetworkConversionValueSchema(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteSkAdNetworkConversionValueSchema as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSkAdNetworkConversionValueSchema as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteSKAdNetworkConversionValueSchema without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteSKAdNetworkConversionValueSchemaRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.DeleteSKAdNetworkConversionValueSchemaRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteSkAdNetworkConversionValueSchema =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteSKAdNetworkConversionValueSchema(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteSkAdNetworkConversionValueSchema as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSkAdNetworkConversionValueSchema as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteSKAdNetworkConversionValueSchema with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteSKAdNetworkConversionValueSchemaRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.DeleteSKAdNetworkConversionValueSchemaRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteSkAdNetworkConversionValueSchema =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.deleteSKAdNetworkConversionValueSchema(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteSkAdNetworkConversionValueSchema as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSkAdNetworkConversionValueSchema as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteSKAdNetworkConversionValueSchema with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.DeleteSKAdNetworkConversionValueSchemaRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.DeleteSKAdNetworkConversionValueSchemaRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deleteSKAdNetworkConversionValueSchema(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('updateSKAdNetworkConversionValueSchema', () => {
+    it('invokes updateSKAdNetworkConversionValueSchema without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateSKAdNetworkConversionValueSchemaRequest()
+      );
+      request.skadnetworkConversionValueSchema ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateSKAdNetworkConversionValueSchemaRequest',
+        ['skadnetworkConversionValueSchema', 'name']
+      );
+      request.skadnetworkConversionValueSchema.name = defaultValue1;
+      const expectedHeaderRequestParams = `skadnetwork_conversion_value_schema.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema()
+      );
+      client.innerApiCalls.updateSkAdNetworkConversionValueSchema =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateSKAdNetworkConversionValueSchema(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateSkAdNetworkConversionValueSchema as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSkAdNetworkConversionValueSchema as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSKAdNetworkConversionValueSchema without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateSKAdNetworkConversionValueSchemaRequest()
+      );
+      request.skadnetworkConversionValueSchema ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateSKAdNetworkConversionValueSchemaRequest',
+        ['skadnetworkConversionValueSchema', 'name']
+      );
+      request.skadnetworkConversionValueSchema.name = defaultValue1;
+      const expectedHeaderRequestParams = `skadnetwork_conversion_value_schema.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema()
+      );
+      client.innerApiCalls.updateSkAdNetworkConversionValueSchema =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateSKAdNetworkConversionValueSchema(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateSkAdNetworkConversionValueSchema as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSkAdNetworkConversionValueSchema as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSKAdNetworkConversionValueSchema with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateSKAdNetworkConversionValueSchemaRequest()
+      );
+      request.skadnetworkConversionValueSchema ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateSKAdNetworkConversionValueSchemaRequest',
+        ['skadnetworkConversionValueSchema', 'name']
+      );
+      request.skadnetworkConversionValueSchema.name = defaultValue1;
+      const expectedHeaderRequestParams = `skadnetwork_conversion_value_schema.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateSkAdNetworkConversionValueSchema =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.updateSKAdNetworkConversionValueSchema(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateSkAdNetworkConversionValueSchema as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSkAdNetworkConversionValueSchema as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSKAdNetworkConversionValueSchema with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.UpdateSKAdNetworkConversionValueSchemaRequest()
+      );
+      request.skadnetworkConversionValueSchema ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.UpdateSKAdNetworkConversionValueSchemaRequest',
+        ['skadnetworkConversionValueSchema', 'name']
+      );
+      request.skadnetworkConversionValueSchema.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateSKAdNetworkConversionValueSchema(request),
+        expectedError
+      );
+    });
+  });
+
   describe('getGoogleSignalsSettings', () => {
     it('invokes getGoogleSignalsSettings without error', async () => {
       const client =
@@ -16184,6 +16754,382 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
     });
   });
 
+  describe('listSKAdNetworkConversionValueSchemas', () => {
+    it('invokes listSKAdNetworkConversionValueSchemas without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema()
+        ),
+      ];
+      client.innerApiCalls.listSkAdNetworkConversionValueSchemas =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listSKAdNetworkConversionValueSchemas(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listSkAdNetworkConversionValueSchemas as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSkAdNetworkConversionValueSchemas as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSKAdNetworkConversionValueSchemas without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema()
+        ),
+      ];
+      client.innerApiCalls.listSkAdNetworkConversionValueSchemas =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listSKAdNetworkConversionValueSchemas(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listSkAdNetworkConversionValueSchemas as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSkAdNetworkConversionValueSchemas as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSKAdNetworkConversionValueSchemas with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listSkAdNetworkConversionValueSchemas =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.listSKAdNetworkConversionValueSchemas(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.listSkAdNetworkConversionValueSchemas as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSkAdNetworkConversionValueSchemas as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSKAdNetworkConversionValueSchemasStream without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema()
+        ),
+      ];
+      client.descriptors.page.listSKAdNetworkConversionValueSchemas.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream =
+        client.listSKAdNetworkConversionValueSchemasStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listSKAdNetworkConversionValueSchemas
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listSkAdNetworkConversionValueSchemas,
+            request
+          )
+      );
+      assert(
+        (
+          client.descriptors.page.listSKAdNetworkConversionValueSchemas
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listSKAdNetworkConversionValueSchemasStream with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listSKAdNetworkConversionValueSchemas.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream =
+        client.listSKAdNetworkConversionValueSchemasStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listSKAdNetworkConversionValueSchemas
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listSkAdNetworkConversionValueSchemas,
+            request
+          )
+      );
+      assert(
+        (
+          client.descriptors.page.listSKAdNetworkConversionValueSchemas
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listSKAdNetworkConversionValueSchemas without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema()
+        ),
+      ];
+      client.descriptors.page.listSKAdNetworkConversionValueSchemas.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema[] =
+        [];
+      const iterable =
+        client.listSKAdNetworkConversionValueSchemasAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listSKAdNetworkConversionValueSchemas
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listSKAdNetworkConversionValueSchemas
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listSKAdNetworkConversionValueSchemas with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listSKAdNetworkConversionValueSchemas.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable =
+        client.listSKAdNetworkConversionValueSchemasAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listSKAdNetworkConversionValueSchemas
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listSKAdNetworkConversionValueSchemas
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
   describe('searchChangeHistoryEvents', () => {
     it('invokes searchChangeHistoryEvents without error', async () => {
       const client =
@@ -22857,6 +23803,91 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         assert.strictEqual(result, 'userLinkValue');
         assert(
           (client.pathTemplates.propertyUserLinkPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('sKAdNetworkConversionValueSchema', () => {
+      const fakePath = '/rendered/path/sKAdNetworkConversionValueSchema';
+      const expectedParameters = {
+        property: 'propertyValue',
+        data_stream: 'dataStreamValue',
+        skadnetwork_conversion_value_schema:
+          'skadnetworkConversionValueSchemaValue',
+      };
+      const client =
+        new analyticsadminserviceModule.v1alpha.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.sKAdNetworkConversionValueSchemaPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.sKAdNetworkConversionValueSchemaPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('sKAdNetworkConversionValueSchemaPath', () => {
+        const result = client.sKAdNetworkConversionValueSchemaPath(
+          'propertyValue',
+          'dataStreamValue',
+          'skadnetworkConversionValueSchemaValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.sKAdNetworkConversionValueSchemaPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchPropertyFromSKAdNetworkConversionValueSchemaName', () => {
+        const result =
+          client.matchPropertyFromSKAdNetworkConversionValueSchemaName(
+            fakePath
+          );
+        assert.strictEqual(result, 'propertyValue');
+        assert(
+          (
+            client.pathTemplates.sKAdNetworkConversionValueSchemaPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDataStreamFromSKAdNetworkConversionValueSchemaName', () => {
+        const result =
+          client.matchDataStreamFromSKAdNetworkConversionValueSchemaName(
+            fakePath
+          );
+        assert.strictEqual(result, 'dataStreamValue');
+        assert(
+          (
+            client.pathTemplates.sKAdNetworkConversionValueSchemaPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSkadnetworkConversionValueSchemaFromSKAdNetworkConversionValueSchemaName', () => {
+        const result =
+          client.matchSkadnetworkConversionValueSchemaFromSKAdNetworkConversionValueSchemaName(
+            fakePath
+          );
+        assert.strictEqual(result, 'skadnetworkConversionValueSchemaValue');
+        assert(
+          (
+            client.pathTemplates.sKAdNetworkConversionValueSchemaPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
