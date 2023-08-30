@@ -33,11 +33,12 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  Maximum number of items to return.
+   *  Optional. Maximum number of items to return.
    */
   // const pageSize = 1234
   /**
-   *  next_page_token value returned from a previous List request, if any.
+   *  Optional. next_page_token value returned from a previous List request, if
+   *  any.
    */
   // const pageToken = 'abc123'
 

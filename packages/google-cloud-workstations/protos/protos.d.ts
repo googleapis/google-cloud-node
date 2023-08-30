@@ -5986,6 +5986,9 @@ export namespace google {
                     /** WorkstationConfig persistentDirectories */
                     persistentDirectories?: (google.cloud.workstations.v1beta.WorkstationConfig.IPersistentDirectory[]|null);
 
+                    /** WorkstationConfig ephemeralDirectories */
+                    ephemeralDirectories?: (google.cloud.workstations.v1beta.WorkstationConfig.IEphemeralDirectory[]|null);
+
                     /** WorkstationConfig container */
                     container?: (google.cloud.workstations.v1beta.WorkstationConfig.IContainer|null);
 
@@ -5994,6 +5997,9 @@ export namespace google {
 
                     /** WorkstationConfig readinessChecks */
                     readinessChecks?: (google.cloud.workstations.v1beta.WorkstationConfig.IReadinessCheck[]|null);
+
+                    /** WorkstationConfig replicaZones */
+                    replicaZones?: (string[]|null);
 
                     /** WorkstationConfig degraded */
                     degraded?: (boolean|null);
@@ -6056,6 +6062,9 @@ export namespace google {
                     /** WorkstationConfig persistentDirectories. */
                     public persistentDirectories: google.cloud.workstations.v1beta.WorkstationConfig.IPersistentDirectory[];
 
+                    /** WorkstationConfig ephemeralDirectories. */
+                    public ephemeralDirectories: google.cloud.workstations.v1beta.WorkstationConfig.IEphemeralDirectory[];
+
                     /** WorkstationConfig container. */
                     public container?: (google.cloud.workstations.v1beta.WorkstationConfig.IContainer|null);
 
@@ -6064,6 +6073,9 @@ export namespace google {
 
                     /** WorkstationConfig readinessChecks. */
                     public readinessChecks: google.cloud.workstations.v1beta.WorkstationConfig.IReadinessCheck[];
+
+                    /** WorkstationConfig replicaZones. */
+                    public replicaZones: string[];
 
                     /** WorkstationConfig degraded. */
                     public degraded: boolean;
@@ -6265,6 +6277,9 @@ export namespace google {
                             /** GceInstance serviceAccount */
                             serviceAccount?: (string|null);
 
+                            /** GceInstance serviceAccountScopes */
+                            serviceAccountScopes?: (string[]|null);
+
                             /** GceInstance tags */
                             tags?: (string[]|null);
 
@@ -6276,6 +6291,9 @@ export namespace google {
 
                             /** GceInstance disablePublicIpAddresses */
                             disablePublicIpAddresses?: (boolean|null);
+
+                            /** GceInstance enableNestedVirtualization */
+                            enableNestedVirtualization?: (boolean|null);
 
                             /** GceInstance shieldedInstanceConfig */
                             shieldedInstanceConfig?: (google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.IGceShieldedInstanceConfig|null);
@@ -6305,6 +6323,9 @@ export namespace google {
                             /** GceInstance serviceAccount. */
                             public serviceAccount: string;
 
+                            /** GceInstance serviceAccountScopes. */
+                            public serviceAccountScopes: string[];
+
                             /** GceInstance tags. */
                             public tags: string[];
 
@@ -6316,6 +6337,9 @@ export namespace google {
 
                             /** GceInstance disablePublicIpAddresses. */
                             public disablePublicIpAddresses: boolean;
+
+                            /** GceInstance enableNestedVirtualization. */
+                            public enableNestedVirtualization: boolean;
 
                             /** GceInstance shieldedInstanceConfig. */
                             public shieldedInstanceConfig?: (google.cloud.workstations.v1beta.WorkstationConfig.Host.GceInstance.IGceShieldedInstanceConfig|null);
@@ -6723,11 +6747,11 @@ export namespace google {
                     /** Properties of a PersistentDirectory. */
                     interface IPersistentDirectory {
 
-                        /** PersistentDirectory mountPath */
-                        mountPath?: (string|null);
-
                         /** PersistentDirectory gcePd */
                         gcePd?: (google.cloud.workstations.v1beta.WorkstationConfig.PersistentDirectory.IGceRegionalPersistentDisk|null);
+
+                        /** PersistentDirectory mountPath */
+                        mountPath?: (string|null);
                     }
 
                     /** Represents a PersistentDirectory. */
@@ -6739,11 +6763,11 @@ export namespace google {
                          */
                         constructor(properties?: google.cloud.workstations.v1beta.WorkstationConfig.IPersistentDirectory);
 
-                        /** PersistentDirectory mountPath. */
-                        public mountPath: string;
-
                         /** PersistentDirectory gcePd. */
                         public gcePd?: (google.cloud.workstations.v1beta.WorkstationConfig.PersistentDirectory.IGceRegionalPersistentDisk|null);
+
+                        /** PersistentDirectory mountPath. */
+                        public mountPath: string;
 
                         /** PersistentDirectory directoryType. */
                         public directoryType?: "gcePd";
@@ -6957,6 +6981,230 @@ export namespace google {
                                 DELETE = 1,
                                 RETAIN = 2
                             }
+                        }
+                    }
+
+                    /** Properties of an EphemeralDirectory. */
+                    interface IEphemeralDirectory {
+
+                        /** EphemeralDirectory gcePd */
+                        gcePd?: (google.cloud.workstations.v1beta.WorkstationConfig.EphemeralDirectory.IGcePersistentDisk|null);
+
+                        /** EphemeralDirectory mountPath */
+                        mountPath?: (string|null);
+                    }
+
+                    /** Represents an EphemeralDirectory. */
+                    class EphemeralDirectory implements IEphemeralDirectory {
+
+                        /**
+                         * Constructs a new EphemeralDirectory.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.workstations.v1beta.WorkstationConfig.IEphemeralDirectory);
+
+                        /** EphemeralDirectory gcePd. */
+                        public gcePd?: (google.cloud.workstations.v1beta.WorkstationConfig.EphemeralDirectory.IGcePersistentDisk|null);
+
+                        /** EphemeralDirectory mountPath. */
+                        public mountPath: string;
+
+                        /** EphemeralDirectory directoryType. */
+                        public directoryType?: "gcePd";
+
+                        /**
+                         * Creates a new EphemeralDirectory instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EphemeralDirectory instance
+                         */
+                        public static create(properties?: google.cloud.workstations.v1beta.WorkstationConfig.IEphemeralDirectory): google.cloud.workstations.v1beta.WorkstationConfig.EphemeralDirectory;
+
+                        /**
+                         * Encodes the specified EphemeralDirectory message. Does not implicitly {@link google.cloud.workstations.v1beta.WorkstationConfig.EphemeralDirectory.verify|verify} messages.
+                         * @param message EphemeralDirectory message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.workstations.v1beta.WorkstationConfig.IEphemeralDirectory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EphemeralDirectory message, length delimited. Does not implicitly {@link google.cloud.workstations.v1beta.WorkstationConfig.EphemeralDirectory.verify|verify} messages.
+                         * @param message EphemeralDirectory message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.workstations.v1beta.WorkstationConfig.IEphemeralDirectory, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an EphemeralDirectory message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EphemeralDirectory
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1beta.WorkstationConfig.EphemeralDirectory;
+
+                        /**
+                         * Decodes an EphemeralDirectory message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EphemeralDirectory
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1beta.WorkstationConfig.EphemeralDirectory;
+
+                        /**
+                         * Verifies an EphemeralDirectory message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an EphemeralDirectory message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EphemeralDirectory
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1beta.WorkstationConfig.EphemeralDirectory;
+
+                        /**
+                         * Creates a plain object from an EphemeralDirectory message. Also converts values to other types if specified.
+                         * @param message EphemeralDirectory
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.workstations.v1beta.WorkstationConfig.EphemeralDirectory, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EphemeralDirectory to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for EphemeralDirectory
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace EphemeralDirectory {
+
+                        /** Properties of a GcePersistentDisk. */
+                        interface IGcePersistentDisk {
+
+                            /** GcePersistentDisk diskType */
+                            diskType?: (string|null);
+
+                            /** GcePersistentDisk sourceSnapshot */
+                            sourceSnapshot?: (string|null);
+
+                            /** GcePersistentDisk sourceImage */
+                            sourceImage?: (string|null);
+
+                            /** GcePersistentDisk readOnly */
+                            readOnly?: (boolean|null);
+                        }
+
+                        /** Represents a GcePersistentDisk. */
+                        class GcePersistentDisk implements IGcePersistentDisk {
+
+                            /**
+                             * Constructs a new GcePersistentDisk.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.workstations.v1beta.WorkstationConfig.EphemeralDirectory.IGcePersistentDisk);
+
+                            /** GcePersistentDisk diskType. */
+                            public diskType: string;
+
+                            /** GcePersistentDisk sourceSnapshot. */
+                            public sourceSnapshot: string;
+
+                            /** GcePersistentDisk sourceImage. */
+                            public sourceImage: string;
+
+                            /** GcePersistentDisk readOnly. */
+                            public readOnly: boolean;
+
+                            /**
+                             * Creates a new GcePersistentDisk instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns GcePersistentDisk instance
+                             */
+                            public static create(properties?: google.cloud.workstations.v1beta.WorkstationConfig.EphemeralDirectory.IGcePersistentDisk): google.cloud.workstations.v1beta.WorkstationConfig.EphemeralDirectory.GcePersistentDisk;
+
+                            /**
+                             * Encodes the specified GcePersistentDisk message. Does not implicitly {@link google.cloud.workstations.v1beta.WorkstationConfig.EphemeralDirectory.GcePersistentDisk.verify|verify} messages.
+                             * @param message GcePersistentDisk message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.workstations.v1beta.WorkstationConfig.EphemeralDirectory.IGcePersistentDisk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified GcePersistentDisk message, length delimited. Does not implicitly {@link google.cloud.workstations.v1beta.WorkstationConfig.EphemeralDirectory.GcePersistentDisk.verify|verify} messages.
+                             * @param message GcePersistentDisk message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.workstations.v1beta.WorkstationConfig.EphemeralDirectory.IGcePersistentDisk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a GcePersistentDisk message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns GcePersistentDisk
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1beta.WorkstationConfig.EphemeralDirectory.GcePersistentDisk;
+
+                            /**
+                             * Decodes a GcePersistentDisk message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns GcePersistentDisk
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1beta.WorkstationConfig.EphemeralDirectory.GcePersistentDisk;
+
+                            /**
+                             * Verifies a GcePersistentDisk message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a GcePersistentDisk message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns GcePersistentDisk
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1beta.WorkstationConfig.EphemeralDirectory.GcePersistentDisk;
+
+                            /**
+                             * Creates a plain object from a GcePersistentDisk message. Also converts values to other types if specified.
+                             * @param message GcePersistentDisk
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.workstations.v1beta.WorkstationConfig.EphemeralDirectory.GcePersistentDisk, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this GcePersistentDisk to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for GcePersistentDisk
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
 
@@ -7321,6 +7569,9 @@ export namespace google {
                     /** Workstation updateTime */
                     updateTime?: (google.protobuf.ITimestamp|null);
 
+                    /** Workstation startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
                     /** Workstation deleteTime */
                     deleteTime?: (google.protobuf.ITimestamp|null);
 
@@ -7369,6 +7620,9 @@ export namespace google {
 
                     /** Workstation updateTime. */
                     public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Workstation startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
 
                     /** Workstation deleteTime. */
                     public deleteTime?: (google.protobuf.ITimestamp|null);
@@ -10106,14 +10360,14 @@ export namespace google {
                 /** Properties of a GenerateAccessTokenRequest. */
                 interface IGenerateAccessTokenRequest {
 
-                    /** GenerateAccessTokenRequest workstation */
-                    workstation?: (string|null);
-
                     /** GenerateAccessTokenRequest expireTime */
                     expireTime?: (google.protobuf.ITimestamp|null);
 
                     /** GenerateAccessTokenRequest ttl */
                     ttl?: (google.protobuf.IDuration|null);
+
+                    /** GenerateAccessTokenRequest workstation */
+                    workstation?: (string|null);
                 }
 
                 /** Represents a GenerateAccessTokenRequest. */
@@ -10125,14 +10379,14 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.workstations.v1beta.IGenerateAccessTokenRequest);
 
-                    /** GenerateAccessTokenRequest workstation. */
-                    public workstation: string;
-
                     /** GenerateAccessTokenRequest expireTime. */
                     public expireTime?: (google.protobuf.ITimestamp|null);
 
                     /** GenerateAccessTokenRequest ttl. */
                     public ttl?: (google.protobuf.IDuration|null);
+
+                    /** GenerateAccessTokenRequest workstation. */
+                    public workstation: string;
 
                     /** GenerateAccessTokenRequest expiration. */
                     public expiration?: ("expireTime"|"ttl");
