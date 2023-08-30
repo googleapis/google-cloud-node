@@ -826,6 +826,12 @@ export namespace google {
                     /** WorkstationConfig encryptionKey */
                     encryptionKey?: (google.cloud.workstations.v1.WorkstationConfig.ICustomerEncryptionKey|null);
 
+                    /** WorkstationConfig readinessChecks */
+                    readinessChecks?: (google.cloud.workstations.v1.WorkstationConfig.IReadinessCheck[]|null);
+
+                    /** WorkstationConfig replicaZones */
+                    replicaZones?: (string[]|null);
+
                     /** WorkstationConfig degraded */
                     degraded?: (boolean|null);
 
@@ -889,6 +895,12 @@ export namespace google {
 
                     /** WorkstationConfig encryptionKey. */
                     public encryptionKey?: (google.cloud.workstations.v1.WorkstationConfig.ICustomerEncryptionKey|null);
+
+                    /** WorkstationConfig readinessChecks. */
+                    public readinessChecks: google.cloud.workstations.v1.WorkstationConfig.IReadinessCheck[];
+
+                    /** WorkstationConfig replicaZones. */
+                    public replicaZones: string[];
 
                     /** WorkstationConfig degraded. */
                     public degraded: boolean;
@@ -1087,6 +1099,9 @@ export namespace google {
                             /** GceInstance serviceAccount */
                             serviceAccount?: (string|null);
 
+                            /** GceInstance serviceAccountScopes */
+                            serviceAccountScopes?: (string[]|null);
+
                             /** GceInstance tags */
                             tags?: (string[]|null);
 
@@ -1126,6 +1141,9 @@ export namespace google {
 
                             /** GceInstance serviceAccount. */
                             public serviceAccount: string;
+
+                            /** GceInstance serviceAccountScopes. */
+                            public serviceAccountScopes: string[];
 
                             /** GceInstance tags. */
                             public tags: string[];
@@ -1908,6 +1926,109 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+
+                    /** Properties of a ReadinessCheck. */
+                    interface IReadinessCheck {
+
+                        /** ReadinessCheck path */
+                        path?: (string|null);
+
+                        /** ReadinessCheck port */
+                        port?: (number|null);
+                    }
+
+                    /** Represents a ReadinessCheck. */
+                    class ReadinessCheck implements IReadinessCheck {
+
+                        /**
+                         * Constructs a new ReadinessCheck.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.workstations.v1.WorkstationConfig.IReadinessCheck);
+
+                        /** ReadinessCheck path. */
+                        public path: string;
+
+                        /** ReadinessCheck port. */
+                        public port: number;
+
+                        /**
+                         * Creates a new ReadinessCheck instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ReadinessCheck instance
+                         */
+                        public static create(properties?: google.cloud.workstations.v1.WorkstationConfig.IReadinessCheck): google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck;
+
+                        /**
+                         * Encodes the specified ReadinessCheck message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck.verify|verify} messages.
+                         * @param message ReadinessCheck message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.workstations.v1.WorkstationConfig.IReadinessCheck, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ReadinessCheck message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck.verify|verify} messages.
+                         * @param message ReadinessCheck message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.workstations.v1.WorkstationConfig.IReadinessCheck, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ReadinessCheck message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ReadinessCheck
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck;
+
+                        /**
+                         * Decodes a ReadinessCheck message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ReadinessCheck
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck;
+
+                        /**
+                         * Verifies a ReadinessCheck message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ReadinessCheck message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ReadinessCheck
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck;
+
+                        /**
+                         * Creates a plain object from a ReadinessCheck message. Also converts values to other types if specified.
+                         * @param message ReadinessCheck
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ReadinessCheck to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ReadinessCheck
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a Workstation. */
@@ -1936,6 +2057,9 @@ export namespace google {
 
                     /** Workstation updateTime */
                     updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Workstation startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
 
                     /** Workstation deleteTime */
                     deleteTime?: (google.protobuf.ITimestamp|null);
@@ -1982,6 +2106,9 @@ export namespace google {
 
                     /** Workstation updateTime. */
                     public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Workstation startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
 
                     /** Workstation deleteTime. */
                     public deleteTime?: (google.protobuf.ITimestamp|null);

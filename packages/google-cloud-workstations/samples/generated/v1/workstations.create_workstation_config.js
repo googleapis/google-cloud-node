@@ -41,8 +41,8 @@ function main(parent, workstationConfigId, workstationConfig) {
    */
   // const workstationConfig = {}
   /**
-   *  If set, validate the request and preview the review, but do not actually
-   *  apply it.
+   *  Optional. If set, validate the request and preview the review, but do not
+   *  actually apply it.
    */
   // const validateOnly = true
 

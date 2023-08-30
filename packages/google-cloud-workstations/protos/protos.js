@@ -1735,6 +1735,8 @@
                          * @property {Array.<google.cloud.workstations.v1.WorkstationConfig.IPersistentDirectory>|null} [persistentDirectories] WorkstationConfig persistentDirectories
                          * @property {google.cloud.workstations.v1.WorkstationConfig.IContainer|null} [container] WorkstationConfig container
                          * @property {google.cloud.workstations.v1.WorkstationConfig.ICustomerEncryptionKey|null} [encryptionKey] WorkstationConfig encryptionKey
+                         * @property {Array.<google.cloud.workstations.v1.WorkstationConfig.IReadinessCheck>|null} [readinessChecks] WorkstationConfig readinessChecks
+                         * @property {Array.<string>|null} [replicaZones] WorkstationConfig replicaZones
                          * @property {boolean|null} [degraded] WorkstationConfig degraded
                          * @property {Array.<google.rpc.IStatus>|null} [conditions] WorkstationConfig conditions
                          */
@@ -1751,6 +1753,8 @@
                             this.annotations = {};
                             this.labels = {};
                             this.persistentDirectories = [];
+                            this.readinessChecks = [];
+                            this.replicaZones = [];
                             this.conditions = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -1887,6 +1891,22 @@
                         WorkstationConfig.prototype.encryptionKey = null;
     
                         /**
+                         * WorkstationConfig readinessChecks.
+                         * @member {Array.<google.cloud.workstations.v1.WorkstationConfig.IReadinessCheck>} readinessChecks
+                         * @memberof google.cloud.workstations.v1.WorkstationConfig
+                         * @instance
+                         */
+                        WorkstationConfig.prototype.readinessChecks = $util.emptyArray;
+    
+                        /**
+                         * WorkstationConfig replicaZones.
+                         * @member {Array.<string>} replicaZones
+                         * @memberof google.cloud.workstations.v1.WorkstationConfig
+                         * @instance
+                         */
+                        WorkstationConfig.prototype.replicaZones = $util.emptyArray;
+    
+                        /**
                          * WorkstationConfig degraded.
                          * @member {boolean} degraded
                          * @memberof google.cloud.workstations.v1.WorkstationConfig
@@ -1966,6 +1986,12 @@
                             if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                                 for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 18, wireType 2 =*/146).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.readinessChecks != null && message.readinessChecks.length)
+                                for (var i = 0; i < message.readinessChecks.length; ++i)
+                                    $root.google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck.encode(message.readinessChecks[i], writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
+                            if (message.replicaZones != null && message.replicaZones.length)
+                                for (var i = 0; i < message.replicaZones.length; ++i)
+                                    writer.uint32(/* id 23, wireType 2 =*/186).string(message.replicaZones[i]);
                             return writer;
                         };
     
@@ -2104,6 +2130,18 @@
                                         message.encryptionKey = $root.google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 19: {
+                                        if (!(message.readinessChecks && message.readinessChecks.length))
+                                            message.readinessChecks = [];
+                                        message.readinessChecks.push($root.google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 23: {
+                                        if (!(message.replicaZones && message.replicaZones.length))
+                                            message.replicaZones = [];
+                                        message.replicaZones.push(reader.string());
+                                        break;
+                                    }
                                 case 15: {
                                         message.degraded = reader.bool();
                                         break;
@@ -2229,6 +2267,22 @@
                                 if (error)
                                     return "encryptionKey." + error;
                             }
+                            if (message.readinessChecks != null && message.hasOwnProperty("readinessChecks")) {
+                                if (!Array.isArray(message.readinessChecks))
+                                    return "readinessChecks: array expected";
+                                for (var i = 0; i < message.readinessChecks.length; ++i) {
+                                    var error = $root.google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck.verify(message.readinessChecks[i]);
+                                    if (error)
+                                        return "readinessChecks." + error;
+                                }
+                            }
+                            if (message.replicaZones != null && message.hasOwnProperty("replicaZones")) {
+                                if (!Array.isArray(message.replicaZones))
+                                    return "replicaZones: array expected";
+                                for (var i = 0; i < message.replicaZones.length; ++i)
+                                    if (!$util.isString(message.replicaZones[i]))
+                                        return "replicaZones: string[] expected";
+                            }
                             if (message.degraded != null && message.hasOwnProperty("degraded"))
                                 if (typeof message.degraded !== "boolean")
                                     return "degraded: boolean expected";
@@ -2330,6 +2384,23 @@
                                     throw TypeError(".google.cloud.workstations.v1.WorkstationConfig.encryptionKey: object expected");
                                 message.encryptionKey = $root.google.cloud.workstations.v1.WorkstationConfig.CustomerEncryptionKey.fromObject(object.encryptionKey);
                             }
+                            if (object.readinessChecks) {
+                                if (!Array.isArray(object.readinessChecks))
+                                    throw TypeError(".google.cloud.workstations.v1.WorkstationConfig.readinessChecks: array expected");
+                                message.readinessChecks = [];
+                                for (var i = 0; i < object.readinessChecks.length; ++i) {
+                                    if (typeof object.readinessChecks[i] !== "object")
+                                        throw TypeError(".google.cloud.workstations.v1.WorkstationConfig.readinessChecks: object expected");
+                                    message.readinessChecks[i] = $root.google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck.fromObject(object.readinessChecks[i]);
+                                }
+                            }
+                            if (object.replicaZones) {
+                                if (!Array.isArray(object.replicaZones))
+                                    throw TypeError(".google.cloud.workstations.v1.WorkstationConfig.replicaZones: array expected");
+                                message.replicaZones = [];
+                                for (var i = 0; i < object.replicaZones.length; ++i)
+                                    message.replicaZones[i] = String(object.replicaZones[i]);
+                            }
                             if (object.degraded != null)
                                 message.degraded = Boolean(object.degraded);
                             if (object.conditions) {
@@ -2361,6 +2432,8 @@
                             if (options.arrays || options.defaults) {
                                 object.persistentDirectories = [];
                                 object.conditions = [];
+                                object.readinessChecks = [];
+                                object.replicaZones = [];
                             }
                             if (options.objects || options.defaults) {
                                 object.annotations = {};
@@ -2430,6 +2503,16 @@
                                 object.labels = {};
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.readinessChecks && message.readinessChecks.length) {
+                                object.readinessChecks = [];
+                                for (var j = 0; j < message.readinessChecks.length; ++j)
+                                    object.readinessChecks[j] = $root.google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck.toObject(message.readinessChecks[j], options);
+                            }
+                            if (message.replicaZones && message.replicaZones.length) {
+                                object.replicaZones = [];
+                                for (var j = 0; j < message.replicaZones.length; ++j)
+                                    object.replicaZones[j] = message.replicaZones[j];
                             }
                             return object;
                         };
@@ -2692,6 +2775,7 @@
                                  * @interface IGceInstance
                                  * @property {string|null} [machineType] GceInstance machineType
                                  * @property {string|null} [serviceAccount] GceInstance serviceAccount
+                                 * @property {Array.<string>|null} [serviceAccountScopes] GceInstance serviceAccountScopes
                                  * @property {Array.<string>|null} [tags] GceInstance tags
                                  * @property {number|null} [poolSize] GceInstance poolSize
                                  * @property {number|null} [pooledInstances] GceInstance pooledInstances
@@ -2711,6 +2795,7 @@
                                  * @param {google.cloud.workstations.v1.WorkstationConfig.Host.IGceInstance=} [properties] Properties to set
                                  */
                                 function GceInstance(properties) {
+                                    this.serviceAccountScopes = [];
                                     this.tags = [];
                                     if (properties)
                                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -2733,6 +2818,14 @@
                                  * @instance
                                  */
                                 GceInstance.prototype.serviceAccount = "";
+    
+                                /**
+                                 * GceInstance serviceAccountScopes.
+                                 * @member {Array.<string>} serviceAccountScopes
+                                 * @memberof google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance
+                                 * @instance
+                                 */
+                                GceInstance.prototype.serviceAccountScopes = $util.emptyArray;
     
                                 /**
                                  * GceInstance tags.
@@ -2826,6 +2919,9 @@
                                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.machineType);
                                     if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
                                         writer.uint32(/* id 2, wireType 2 =*/18).string(message.serviceAccount);
+                                    if (message.serviceAccountScopes != null && message.serviceAccountScopes.length)
+                                        for (var i = 0; i < message.serviceAccountScopes.length; ++i)
+                                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.serviceAccountScopes[i]);
                                     if (message.tags != null && message.tags.length)
                                         for (var i = 0; i < message.tags.length; ++i)
                                             writer.uint32(/* id 4, wireType 2 =*/34).string(message.tags[i]);
@@ -2883,6 +2979,12 @@
                                             }
                                         case 2: {
                                                 message.serviceAccount = reader.string();
+                                                break;
+                                            }
+                                        case 3: {
+                                                if (!(message.serviceAccountScopes && message.serviceAccountScopes.length))
+                                                    message.serviceAccountScopes = [];
+                                                message.serviceAccountScopes.push(reader.string());
                                                 break;
                                             }
                                         case 4: {
@@ -2960,6 +3062,13 @@
                                     if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                                         if (!$util.isString(message.serviceAccount))
                                             return "serviceAccount: string expected";
+                                    if (message.serviceAccountScopes != null && message.hasOwnProperty("serviceAccountScopes")) {
+                                        if (!Array.isArray(message.serviceAccountScopes))
+                                            return "serviceAccountScopes: array expected";
+                                        for (var i = 0; i < message.serviceAccountScopes.length; ++i)
+                                            if (!$util.isString(message.serviceAccountScopes[i]))
+                                                return "serviceAccountScopes: string[] expected";
+                                    }
                                     if (message.tags != null && message.hasOwnProperty("tags")) {
                                         if (!Array.isArray(message.tags))
                                             return "tags: array expected";
@@ -3011,6 +3120,13 @@
                                         message.machineType = String(object.machineType);
                                     if (object.serviceAccount != null)
                                         message.serviceAccount = String(object.serviceAccount);
+                                    if (object.serviceAccountScopes) {
+                                        if (!Array.isArray(object.serviceAccountScopes))
+                                            throw TypeError(".google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.serviceAccountScopes: array expected");
+                                        message.serviceAccountScopes = [];
+                                        for (var i = 0; i < object.serviceAccountScopes.length; ++i)
+                                            message.serviceAccountScopes[i] = String(object.serviceAccountScopes[i]);
+                                    }
                                     if (object.tags) {
                                         if (!Array.isArray(object.tags))
                                             throw TypeError(".google.cloud.workstations.v1.WorkstationConfig.Host.GceInstance.tags: array expected");
@@ -3054,8 +3170,10 @@
                                     if (!options)
                                         options = {};
                                     var object = {};
-                                    if (options.arrays || options.defaults)
+                                    if (options.arrays || options.defaults) {
+                                        object.serviceAccountScopes = [];
                                         object.tags = [];
+                                    }
                                     if (options.defaults) {
                                         object.machineType = "";
                                         object.serviceAccount = "";
@@ -3071,6 +3189,11 @@
                                         object.machineType = message.machineType;
                                     if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                                         object.serviceAccount = message.serviceAccount;
+                                    if (message.serviceAccountScopes && message.serviceAccountScopes.length) {
+                                        object.serviceAccountScopes = [];
+                                        for (var j = 0; j < message.serviceAccountScopes.length; ++j)
+                                            object.serviceAccountScopes[j] = message.serviceAccountScopes[j];
+                                    }
                                     if (message.tags && message.tags.length) {
                                         object.tags = [];
                                         for (var j = 0; j < message.tags.length; ++j)
@@ -4781,6 +4904,233 @@
                             return CustomerEncryptionKey;
                         })();
     
+                        WorkstationConfig.ReadinessCheck = (function() {
+    
+                            /**
+                             * Properties of a ReadinessCheck.
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig
+                             * @interface IReadinessCheck
+                             * @property {string|null} [path] ReadinessCheck path
+                             * @property {number|null} [port] ReadinessCheck port
+                             */
+    
+                            /**
+                             * Constructs a new ReadinessCheck.
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig
+                             * @classdesc Represents a ReadinessCheck.
+                             * @implements IReadinessCheck
+                             * @constructor
+                             * @param {google.cloud.workstations.v1.WorkstationConfig.IReadinessCheck=} [properties] Properties to set
+                             */
+                            function ReadinessCheck(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ReadinessCheck path.
+                             * @member {string} path
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck
+                             * @instance
+                             */
+                            ReadinessCheck.prototype.path = "";
+    
+                            /**
+                             * ReadinessCheck port.
+                             * @member {number} port
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck
+                             * @instance
+                             */
+                            ReadinessCheck.prototype.port = 0;
+    
+                            /**
+                             * Creates a new ReadinessCheck instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck
+                             * @static
+                             * @param {google.cloud.workstations.v1.WorkstationConfig.IReadinessCheck=} [properties] Properties to set
+                             * @returns {google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck} ReadinessCheck instance
+                             */
+                            ReadinessCheck.create = function create(properties) {
+                                return new ReadinessCheck(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ReadinessCheck message. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck
+                             * @static
+                             * @param {google.cloud.workstations.v1.WorkstationConfig.IReadinessCheck} message ReadinessCheck message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ReadinessCheck.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.path != null && Object.hasOwnProperty.call(message, "path"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.path);
+                                if (message.port != null && Object.hasOwnProperty.call(message, "port"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.port);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ReadinessCheck message, length delimited. Does not implicitly {@link google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck
+                             * @static
+                             * @param {google.cloud.workstations.v1.WorkstationConfig.IReadinessCheck} message ReadinessCheck message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ReadinessCheck.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ReadinessCheck message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck} ReadinessCheck
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ReadinessCheck.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.path = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.port = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ReadinessCheck message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck} ReadinessCheck
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ReadinessCheck.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ReadinessCheck message.
+                             * @function verify
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ReadinessCheck.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.path != null && message.hasOwnProperty("path"))
+                                    if (!$util.isString(message.path))
+                                        return "path: string expected";
+                                if (message.port != null && message.hasOwnProperty("port"))
+                                    if (!$util.isInteger(message.port))
+                                        return "port: integer expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ReadinessCheck message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck} ReadinessCheck
+                             */
+                            ReadinessCheck.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck)
+                                    return object;
+                                var message = new $root.google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck();
+                                if (object.path != null)
+                                    message.path = String(object.path);
+                                if (object.port != null)
+                                    message.port = object.port | 0;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ReadinessCheck message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck
+                             * @static
+                             * @param {google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck} message ReadinessCheck
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ReadinessCheck.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.path = "";
+                                    object.port = 0;
+                                }
+                                if (message.path != null && message.hasOwnProperty("path"))
+                                    object.path = message.path;
+                                if (message.port != null && message.hasOwnProperty("port"))
+                                    object.port = message.port;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ReadinessCheck to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ReadinessCheck.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ReadinessCheck
+                             * @function getTypeUrl
+                             * @memberof google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ReadinessCheck.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.workstations.v1.WorkstationConfig.ReadinessCheck";
+                            };
+    
+                            return ReadinessCheck;
+                        })();
+    
                         return WorkstationConfig;
                     })();
     
@@ -4798,6 +5148,7 @@
                          * @property {Object.<string,string>|null} [labels] Workstation labels
                          * @property {google.protobuf.ITimestamp|null} [createTime] Workstation createTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] Workstation updateTime
+                         * @property {google.protobuf.ITimestamp|null} [startTime] Workstation startTime
                          * @property {google.protobuf.ITimestamp|null} [deleteTime] Workstation deleteTime
                          * @property {string|null} [etag] Workstation etag
                          * @property {google.cloud.workstations.v1.Workstation.State|null} [state] Workstation state
@@ -4886,6 +5237,14 @@
                         Workstation.prototype.updateTime = null;
     
                         /**
+                         * Workstation startTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                         * @memberof google.cloud.workstations.v1.Workstation
+                         * @instance
+                         */
+                        Workstation.prototype.startTime = null;
+    
+                        /**
                          * Workstation deleteTime.
                          * @member {google.protobuf.ITimestamp|null|undefined} deleteTime
                          * @memberof google.cloud.workstations.v1.Workstation
@@ -4967,6 +5326,8 @@
                             if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                                 for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 13, wireType 2 =*/106).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                             return writer;
                         };
     
@@ -5071,6 +5432,10 @@
                                         message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 14: {
+                                        message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 8: {
                                         message.deleteTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                         break;
@@ -5160,6 +5525,11 @@
                                 if (error)
                                     return "updateTime." + error;
                             }
+                            if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                if (error)
+                                    return "startTime." + error;
+                            }
                             if (message.deleteTime != null && message.hasOwnProperty("deleteTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.deleteTime);
                                 if (error)
@@ -5229,6 +5599,11 @@
                                     throw TypeError(".google.cloud.workstations.v1.Workstation.updateTime: object expected");
                                 message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
                             }
+                            if (object.startTime != null) {
+                                if (typeof object.startTime !== "object")
+                                    throw TypeError(".google.cloud.workstations.v1.Workstation.startTime: object expected");
+                                message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                            }
                             if (object.deleteTime != null) {
                                 if (typeof object.deleteTime !== "object")
                                     throw TypeError(".google.cloud.workstations.v1.Workstation.deleteTime: object expected");
@@ -5297,6 +5672,7 @@
                                 object.etag = "";
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                                 object.host = "";
+                                object.startTime = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -5329,6 +5705,8 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.labels[keys2[j]] = message.labels[keys2[j]];
                             }
+                            if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
                             return object;
                         };
     
