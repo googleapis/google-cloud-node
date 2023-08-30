@@ -17,6 +17,15 @@
 ### ⚠ BREAKING CHANGES
 
 * Make node 14 the minimum supported version ([#2244](https://github.com/googleapis/nodejs-storage/issues/2244))
+* Add stronger typings to metadata ([#2234](https://github.com/googleapis/nodejs-storage/issues/2234))
+* Remove extend and Treat Provided Options as Mutable ([#2204](https://github.com/googleapis/nodejs-storage/issues/2204))
+* Stronger typing for lifecycle rules ([#2215](https://github.com/googleapis/nodejs-storage/issues/2215))
+* Do not return responsebody in delete, only raw response ([#2236](https://github.com/googleapis/nodejs-storage/issues/2236))
+* Remove extraneous validation in favor of server errors ([#2237](https://github.com/googleapis/nodejs-storage/issues/2237))
+* Mark bucket.setLabels and associated interfaces as deprecated ([#2214](https://github.com/googleapis/nodejs-storage/issues/2214))
+* Disable source maps for smaller bundle size ([#2240](https://github.com/googleapis/nodejs-storage/issues/2240))
+
+
 
 ### Features
 

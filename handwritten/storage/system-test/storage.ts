@@ -3364,7 +3364,7 @@ describe('storage', () => {
           assert(err instanceof Error);
           assert.strictEqual(
             err.message,
-            `Max allowed expiration is seven days (${SEVEN_DAYS_IN_SECONDS} seconds).`
+            `Max allowed expiration is seven days (${SEVEN_DAYS_IN_SECONDS.toString()} seconds).`
           );
           return true;
         }
