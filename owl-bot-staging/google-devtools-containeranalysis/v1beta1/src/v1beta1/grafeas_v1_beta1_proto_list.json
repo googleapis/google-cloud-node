@@ -1,0 +1,15 @@
+[
+  "../../protos/google/devtools/containeranalysis/v1beta1/attestation/attestation.proto",
+  "../../protos/google/devtools/containeranalysis/v1beta1/build/build.proto",
+  "../../protos/google/devtools/containeranalysis/v1beta1/common/common.proto",
+  "../../protos/google/devtools/containeranalysis/v1beta1/containeranalysis.proto",
+  "../../protos/google/devtools/containeranalysis/v1beta1/cvss/cvss.proto",
+  "../../protos/google/devtools/containeranalysis/v1beta1/deployment/deployment.proto",
+  "../../protos/google/devtools/containeranalysis/v1beta1/discovery/discovery.proto",
+  "../../protos/google/devtools/containeranalysis/v1beta1/grafeas/grafeas.proto",
+  "../../protos/google/devtools/containeranalysis/v1beta1/image/image.proto",
+  "../../protos/google/devtools/containeranalysis/v1beta1/package/package.proto",
+  "../../protos/google/devtools/containeranalysis/v1beta1/provenance/provenance.proto",
+  "../../protos/google/devtools/containeranalysis/v1beta1/source/source.proto",
+  "../../protos/google/devtools/containeranalysis/v1beta1/vulnerability/vulnerability.proto"
+]
