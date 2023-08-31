@@ -1244,8 +1244,6 @@
                     "java_multiple_files": true,
                     "java_package": "com.google.cloud.recommender.v1beta1",
                     "objc_class_prefix": "CREC",
-                    "(google.api.resource_definition).type": "recommender.googleapis.com/Recommender",
-                    "(google.api.resource_definition).pattern": "organizations/{organization}/locations/{location}/recommenders/{recommender}",
                     "java_outer_classname": "RecommenderProto"
                   },
                   "nested": {
@@ -1355,6 +1353,18 @@
                             "ACCEPTED": 2,
                             "DISMISSED": 3
                           }
+                        }
+                      }
+                    },
+                    "InsightType": {
+                      "options": {
+                        "(google.api.resource).type": "recommender.googleapis.com/InsightType",
+                        "(google.api.resource).pattern": "insightTypes/{insight_type}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     },
@@ -1669,6 +1679,18 @@
                             "FAILED": 4,
                             "DISMISSED": 5
                           }
+                        }
+                      }
+                    },
+                    "RecommenderType": {
+                      "options": {
+                        "(google.api.resource).type": "recommender.googleapis.com/Recommender",
+                        "(google.api.resource).pattern": "recommenders/{recommender}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     },
@@ -2085,6 +2107,34 @@
                               "(google.api.method_signature)": "insight_type_config,update_mask"
                             }
                           ]
+                        },
+                        "ListRecommenders": {
+                          "requestType": "ListRecommendersRequest",
+                          "responseType": "ListRecommendersResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/recommenders"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/recommenders"
+                              }
+                            }
+                          ]
+                        },
+                        "ListInsightTypes": {
+                          "requestType": "ListInsightTypesRequest",
+                          "responseType": "ListInsightTypesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/insightTypes"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/insightTypes"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -2359,6 +2409,68 @@
                         "validateOnly": {
                           "type": "bool",
                           "id": 3
+                        }
+                      }
+                    },
+                    "ListRecommendersRequest": {
+                      "fields": {
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListRecommendersResponse": {
+                      "fields": {
+                        "recommenders": {
+                          "rule": "repeated",
+                          "type": "RecommenderType",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListInsightTypesRequest": {
+                      "fields": {
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListInsightTypesResponse": {
+                      "fields": {
+                        "insightTypes": {
+                          "rule": "repeated",
+                          "type": "InsightType",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     }

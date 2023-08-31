@@ -75,6 +75,14 @@
         "UpdateInsightTypeConfig": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "ListRecommenders": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListInsightTypes": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }
