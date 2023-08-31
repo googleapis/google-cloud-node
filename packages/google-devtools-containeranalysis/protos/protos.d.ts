@@ -22566,6 +22566,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public generatePackagesSummary(request: google.devtools.containeranalysis.v1beta1.IGeneratePackagesSummaryRequest): Promise<google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse>;
+
+                    /**
+                     * Calls ExportSBOM.
+                     * @param request ExportSBOMRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ExportSBOMResponse
+                     */
+                    public exportSBOM(request: google.devtools.containeranalysis.v1beta1.IExportSBOMRequest, callback: google.devtools.containeranalysis.v1beta1.ContainerAnalysisV1Beta1.ExportSBOMCallback): void;
+
+                    /**
+                     * Calls ExportSBOM.
+                     * @param request ExportSBOMRequest message or plain object
+                     * @returns Promise
+                     */
+                    public exportSBOM(request: google.devtools.containeranalysis.v1beta1.IExportSBOMRequest): Promise<google.devtools.containeranalysis.v1beta1.ExportSBOMResponse>;
                 }
 
                 namespace ContainerAnalysisV1Beta1 {
@@ -22597,6 +22611,13 @@ export namespace google {
                      * @param [response] PackagesSummaryResponse
                      */
                     type GeneratePackagesSummaryCallback = (error: (Error|null), response?: google.devtools.containeranalysis.v1beta1.PackagesSummaryResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.devtools.containeranalysis.v1beta1.ContainerAnalysisV1Beta1|exportSBOM}.
+                     * @param error Error, if any
+                     * @param [response] ExportSBOMResponse
+                     */
+                    type ExportSBOMCallback = (error: (Error|null), response?: google.devtools.containeranalysis.v1beta1.ExportSBOMResponse) => void;
                 }
 
                 /** Properties of a GeneratePackagesSummaryRequest. */
@@ -22903,6 +22924,200 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+                }
+
+                /** Properties of an ExportSBOMRequest. */
+                interface IExportSBOMRequest {
+
+                    /** ExportSBOMRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an ExportSBOMRequest. */
+                class ExportSBOMRequest implements IExportSBOMRequest {
+
+                    /**
+                     * Constructs a new ExportSBOMRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.containeranalysis.v1beta1.IExportSBOMRequest);
+
+                    /** ExportSBOMRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new ExportSBOMRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportSBOMRequest instance
+                     */
+                    public static create(properties?: google.devtools.containeranalysis.v1beta1.IExportSBOMRequest): google.devtools.containeranalysis.v1beta1.ExportSBOMRequest;
+
+                    /**
+                     * Encodes the specified ExportSBOMRequest message. Does not implicitly {@link google.devtools.containeranalysis.v1beta1.ExportSBOMRequest.verify|verify} messages.
+                     * @param message ExportSBOMRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.containeranalysis.v1beta1.IExportSBOMRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportSBOMRequest message, length delimited. Does not implicitly {@link google.devtools.containeranalysis.v1beta1.ExportSBOMRequest.verify|verify} messages.
+                     * @param message ExportSBOMRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.containeranalysis.v1beta1.IExportSBOMRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportSBOMRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportSBOMRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.containeranalysis.v1beta1.ExportSBOMRequest;
+
+                    /**
+                     * Decodes an ExportSBOMRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportSBOMRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.containeranalysis.v1beta1.ExportSBOMRequest;
+
+                    /**
+                     * Verifies an ExportSBOMRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportSBOMRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportSBOMRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.containeranalysis.v1beta1.ExportSBOMRequest;
+
+                    /**
+                     * Creates a plain object from an ExportSBOMRequest message. Also converts values to other types if specified.
+                     * @param message ExportSBOMRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.containeranalysis.v1beta1.ExportSBOMRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportSBOMRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportSBOMRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExportSBOMResponse. */
+                interface IExportSBOMResponse {
+
+                    /** ExportSBOMResponse discoveryOccurrenceId */
+                    discoveryOccurrenceId?: (string|null);
+                }
+
+                /** Represents an ExportSBOMResponse. */
+                class ExportSBOMResponse implements IExportSBOMResponse {
+
+                    /**
+                     * Constructs a new ExportSBOMResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.containeranalysis.v1beta1.IExportSBOMResponse);
+
+                    /** ExportSBOMResponse discoveryOccurrenceId. */
+                    public discoveryOccurrenceId: string;
+
+                    /**
+                     * Creates a new ExportSBOMResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportSBOMResponse instance
+                     */
+                    public static create(properties?: google.devtools.containeranalysis.v1beta1.IExportSBOMResponse): google.devtools.containeranalysis.v1beta1.ExportSBOMResponse;
+
+                    /**
+                     * Encodes the specified ExportSBOMResponse message. Does not implicitly {@link google.devtools.containeranalysis.v1beta1.ExportSBOMResponse.verify|verify} messages.
+                     * @param message ExportSBOMResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.containeranalysis.v1beta1.IExportSBOMResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportSBOMResponse message, length delimited. Does not implicitly {@link google.devtools.containeranalysis.v1beta1.ExportSBOMResponse.verify|verify} messages.
+                     * @param message ExportSBOMResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.containeranalysis.v1beta1.IExportSBOMResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportSBOMResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportSBOMResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.containeranalysis.v1beta1.ExportSBOMResponse;
+
+                    /**
+                     * Decodes an ExportSBOMResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportSBOMResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.containeranalysis.v1beta1.ExportSBOMResponse;
+
+                    /**
+                     * Verifies an ExportSBOMResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportSBOMResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportSBOMResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.containeranalysis.v1beta1.ExportSBOMResponse;
+
+                    /**
+                     * Creates a plain object from an ExportSBOMResponse message. Also converts values to other types if specified.
+                     * @param message ExportSBOMResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.containeranalysis.v1beta1.ExportSBOMResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportSBOMResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportSBOMResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
         }

@@ -188,6 +188,46 @@
             }
         },
         {
+            "regionTag": "containeranalysis_v1beta1_generated_ContainerAnalysisV1Beta1_ExportSBOM_async",
+            "title": "containeranalysis exportSBOM Sample",
+            "origin": "API_DEFINITION",
+            "description": " Generates an SBOM and other dependency information for the given resource.",
+            "canonical": true,
+            "file": "container_analysis_v1_beta1.export_s_b_o_m.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ExportSBOM",
+                "fullName": "google.devtools.containeranalysis.v1beta1.ContainerAnalysisV1Beta1.ExportSBOM",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.devtools.containeranalysis.v1beta1.ExportSBOMResponse",
+                "client": {
+                    "shortName": "ContainerAnalysisV1Beta1Client",
+                    "fullName": "google.devtools.containeranalysis.v1beta1.ContainerAnalysisV1Beta1Client"
+                },
+                "method": {
+                    "shortName": "ExportSBOM",
+                    "fullName": "google.devtools.containeranalysis.v1beta1.ContainerAnalysisV1Beta1.ExportSBOM",
+                    "service": {
+                        "shortName": "ContainerAnalysisV1Beta1",
+                        "fullName": "google.devtools.containeranalysis.v1beta1.ContainerAnalysisV1Beta1"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "containeranalysis_v1beta1_generated_GrafeasV1Beta1_GetOccurrence_async",
             "title": "containeranalysis getOccurrence Sample",
             "origin": "API_DEFINITION",
