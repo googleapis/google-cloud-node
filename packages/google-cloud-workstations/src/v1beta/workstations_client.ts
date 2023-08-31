@@ -903,9 +903,6 @@ export class WorkstationsClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.workstation
-   *   Required. Name of the workstation for which the access token should be
-   *   generated.
    * @param {google.protobuf.Timestamp} request.expireTime
    *   Desired expiration time of the access token. This value must
    *   be at most 24 hours in the future. If a value is not specified, the
@@ -915,6 +912,9 @@ export class WorkstationsClient {
    *   Desired lifetime duration of the access token. This value must
    *   be at most 24 hours. If a value is not specified, the token's lifetime
    *   will be set to a default value of 1 hour.
+   * @param {string} request.workstation
+   *   Required. Name of the workstation for which the access token should be
+   *   generated.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1016,9 +1016,9 @@ export class WorkstationsClient {
    *   Required. ID to use for the workstation cluster.
    * @param {google.cloud.workstations.v1beta.WorkstationCluster} request.workstationCluster
    *   Required. Workstation cluster to create.
-   * @param {boolean} request.validateOnly
-   *   If set, validate the request and preview the review, but do not actually
-   *   apply it.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the review, but do not
+   *   actually apply it.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1162,12 +1162,13 @@ export class WorkstationsClient {
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. Mask that specifies which fields in the workstation cluster
    *   should be updated.
-   * @param {boolean} request.validateOnly
-   *   If set, validate the request and preview the review, but do not actually
-   *   apply it.
-   * @param {boolean} request.allowMissing
-   *   If set, and the workstation cluster is not found, a new workstation
-   *   cluster will be created. In this situation, update_mask is ignored.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the review, but do not
+   *   actually apply it.
+   * @param {boolean} [request.allowMissing]
+   *   Optional. If set, and the workstation cluster is not found, a new
+   *   workstation cluster will be created. In this situation, update_mask is
+   *   ignored.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1308,13 +1309,14 @@ export class WorkstationsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Name of the workstation cluster to delete.
-   * @param {boolean} request.validateOnly
-   *   If set, validate the request and preview the review, but do not apply it.
-   * @param {string} request.etag
-   *   If set, the request will be rejected if the latest version of the
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the review, but do not
+   *   apply it.
+   * @param {string} [request.etag]
+   *   Optional. If set, the request will be rejected if the latest version of the
    *   workstation cluster on the server does not have this ETag.
-   * @param {boolean} request.force
-   *   If set, any workstation configurations and workstations in the
+   * @param {boolean} [request.force]
+   *   Optional. If set, any workstation configurations and workstations in the
    *   workstation cluster are also deleted. Otherwise, the request only
    *   works if the workstation cluster has no configurations or workstations.
    * @param {object} [options]
@@ -1461,9 +1463,9 @@ export class WorkstationsClient {
    *   Required. ID to use for the workstation configuration.
    * @param {google.cloud.workstations.v1beta.WorkstationConfig} request.workstationConfig
    *   Required. Config to create.
-   * @param {boolean} request.validateOnly
-   *   If set, validate the request and preview the review, but do not actually
-   *   apply it.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the review, but do not
+   *   actually apply it.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1607,11 +1609,11 @@ export class WorkstationsClient {
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. Mask specifying which fields in the workstation configuration
    *   should be updated.
-   * @param {boolean} request.validateOnly
-   *   If set, validate the request and preview the review, but do not actually
-   *   apply it.
-   * @param {boolean} request.allowMissing
-   *   If set and the workstation configuration is not found, a new
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the review, but do not
+   *   actually apply it.
+   * @param {boolean} [request.allowMissing]
+   *   Optional. If set and the workstation configuration is not found, a new
    *   workstation configuration will be created. In this situation,
    *   update_mask is ignored.
    * @param {object} [options]
@@ -1754,16 +1756,16 @@ export class WorkstationsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Name of the workstation configuration to delete.
-   * @param {boolean} request.validateOnly
-   *   If set, validate the request and preview the review, but do not actually
-   *   apply it.
-   * @param {string} request.etag
-   *   If set, the request is rejected if the latest version of the
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the review, but do not
+   *   actually apply it.
+   * @param {string} [request.etag]
+   *   Optional. If set, the request is rejected if the latest version of the
    *   workstation configuration on the server does not have this ETag.
-   * @param {boolean} request.force
-   *   If set, any workstations in the workstation configuration are also deleted.
-   *   Otherwise, the request works only if the workstation configuration has
-   *   no workstations.
+   * @param {boolean} [request.force]
+   *   Optional. If set, any workstations in the workstation configuration are
+   *   also deleted. Otherwise, the request works only if the workstation
+   *   configuration has no workstations.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1908,9 +1910,9 @@ export class WorkstationsClient {
    *   Required. ID to use for the workstation.
    * @param {google.cloud.workstations.v1beta.Workstation} request.workstation
    *   Required. Workstation to create.
-   * @param {boolean} request.validateOnly
-   *   If set, validate the request and preview the review, but do not actually
-   *   apply it.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the review, but do not
+   *   actually apply it.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2050,11 +2052,11 @@ export class WorkstationsClient {
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. Mask specifying which fields in the workstation configuration
    *   should be updated.
-   * @param {boolean} request.validateOnly
-   *   If set, validate the request and preview the review, but do not actually
-   *   apply it.
-   * @param {boolean} request.allowMissing
-   *   If set and the workstation configuration is not found, a new
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the review, but do not
+   *   actually apply it.
+   * @param {boolean} [request.allowMissing]
+   *   Optional. If set and the workstation configuration is not found, a new
    *   workstation configuration is created. In this situation, update_mask
    *   is ignored.
    * @param {object} [options]
@@ -2193,11 +2195,11 @@ export class WorkstationsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Name of the workstation to delete.
-   * @param {boolean} request.validateOnly
-   *   If set, validate the request and preview the review, but do not actually
-   *   apply it.
-   * @param {string} request.etag
-   *   If set, the request will be rejected if the latest version of the
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the review, but do not
+   *   actually apply it.
+   * @param {string} [request.etag]
+   *   Optional. If set, the request will be rejected if the latest version of the
    *   workstation on the server does not have this ETag.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2335,11 +2337,11 @@ export class WorkstationsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Name of the workstation to start.
-   * @param {boolean} request.validateOnly
-   *   If set, validate the request and preview the review, but do not actually
-   *   apply it.
-   * @param {string} request.etag
-   *   If set, the request will be rejected if the latest version of the
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the review, but do not
+   *   actually apply it.
+   * @param {string} [request.etag]
+   *   Optional. If set, the request will be rejected if the latest version of the
    *   workstation on the server does not have this ETag.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2477,11 +2479,11 @@ export class WorkstationsClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Name of the workstation to stop.
-   * @param {boolean} request.validateOnly
-   *   If set, validate the request and preview the review, but do not actually
-   *   apply it.
-   * @param {string} request.etag
-   *   If set, the request will be rejected if the latest version of the
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the review, but do not
+   *   actually apply it.
+   * @param {string} [request.etag]
+   *   Optional. If set, the request will be rejected if the latest version of the
    *   workstation on the server does not have this ETag.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2619,10 +2621,11 @@ export class WorkstationsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   * @param {number} request.pageSize
-   *   Maximum number of items to return.
-   * @param {string} request.pageToken
-   *   next_page_token value returned from a previous List request, if any.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of items to return.
+   * @param {string} [request.pageToken]
+   *   Optional. next_page_token value returned from a previous List request, if
+   *   any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2720,10 +2723,11 @@ export class WorkstationsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   * @param {number} request.pageSize
-   *   Maximum number of items to return.
-   * @param {string} request.pageToken
-   *   next_page_token value returned from a previous List request, if any.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of items to return.
+   * @param {string} [request.pageToken]
+   *   Optional. next_page_token value returned from a previous List request, if
+   *   any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2765,10 +2769,11 @@ export class WorkstationsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   * @param {number} request.pageSize
-   *   Maximum number of items to return.
-   * @param {string} request.pageToken
-   *   next_page_token value returned from a previous List request, if any.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of items to return.
+   * @param {string} [request.pageToken]
+   *   Optional. next_page_token value returned from a previous List request, if
+   *   any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -2809,10 +2814,11 @@ export class WorkstationsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   * @param {number} request.pageSize
-   *   Maximum number of items to return.
-   * @param {string} request.pageToken
-   *   next_page_token value returned from a previous List request, if any.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of items to return.
+   * @param {string} [request.pageToken]
+   *   Optional. next_page_token value returned from a previous List request, if
+   *   any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2910,10 +2916,11 @@ export class WorkstationsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   * @param {number} request.pageSize
-   *   Maximum number of items to return.
-   * @param {string} request.pageToken
-   *   next_page_token value returned from a previous List request, if any.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of items to return.
+   * @param {string} [request.pageToken]
+   *   Optional. next_page_token value returned from a previous List request, if
+   *   any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2955,10 +2962,11 @@ export class WorkstationsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   * @param {number} request.pageSize
-   *   Maximum number of items to return.
-   * @param {string} request.pageToken
-   *   next_page_token value returned from a previous List request, if any.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of items to return.
+   * @param {string} [request.pageToken]
+   *   Optional. next_page_token value returned from a previous List request, if
+   *   any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -3000,10 +3008,11 @@ export class WorkstationsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   * @param {number} request.pageSize
-   *   Maximum number of items to return.
-   * @param {string} request.pageToken
-   *   next_page_token value returned from a previous List request, if any.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of items to return.
+   * @param {string} [request.pageToken]
+   *   Optional. next_page_token value returned from a previous List request, if
+   *   any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3101,10 +3110,11 @@ export class WorkstationsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   * @param {number} request.pageSize
-   *   Maximum number of items to return.
-   * @param {string} request.pageToken
-   *   next_page_token value returned from a previous List request, if any.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of items to return.
+   * @param {string} [request.pageToken]
+   *   Optional. next_page_token value returned from a previous List request, if
+   *   any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3146,10 +3156,11 @@ export class WorkstationsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   * @param {number} request.pageSize
-   *   Maximum number of items to return.
-   * @param {string} request.pageToken
-   *   next_page_token value returned from a previous List request, if any.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of items to return.
+   * @param {string} [request.pageToken]
+   *   Optional. next_page_token value returned from a previous List request, if
+   *   any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -3190,10 +3201,11 @@ export class WorkstationsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   * @param {number} request.pageSize
-   *   Maximum number of items to return.
-   * @param {string} request.pageToken
-   *   next_page_token value returned from a previous List request, if any.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of items to return.
+   * @param {string} [request.pageToken]
+   *   Optional. next_page_token value returned from a previous List request, if
+   *   any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3287,10 +3299,11 @@ export class WorkstationsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   * @param {number} request.pageSize
-   *   Maximum number of items to return.
-   * @param {string} request.pageToken
-   *   next_page_token value returned from a previous List request, if any.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of items to return.
+   * @param {string} [request.pageToken]
+   *   Optional. next_page_token value returned from a previous List request, if
+   *   any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3332,10 +3345,11 @@ export class WorkstationsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   * @param {number} request.pageSize
-   *   Maximum number of items to return.
-   * @param {string} request.pageToken
-   *   next_page_token value returned from a previous List request, if any.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of items to return.
+   * @param {string} [request.pageToken]
+   *   Optional. next_page_token value returned from a previous List request, if
+   *   any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -3377,10 +3391,11 @@ export class WorkstationsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   * @param {number} request.pageSize
-   *   Maximum number of items to return.
-   * @param {string} request.pageToken
-   *   next_page_token value returned from a previous List request, if any.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of items to return.
+   * @param {string} [request.pageToken]
+   *   Optional. next_page_token value returned from a previous List request, if
+   *   any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3478,10 +3493,11 @@ export class WorkstationsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   * @param {number} request.pageSize
-   *   Maximum number of items to return.
-   * @param {string} request.pageToken
-   *   next_page_token value returned from a previous List request, if any.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of items to return.
+   * @param {string} [request.pageToken]
+   *   Optional. next_page_token value returned from a previous List request, if
+   *   any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3523,10 +3539,11 @@ export class WorkstationsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Parent resource name.
-   * @param {number} request.pageSize
-   *   Maximum number of items to return.
-   * @param {string} request.pageToken
-   *   next_page_token value returned from a previous List request, if any.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of items to return.
+   * @param {string} [request.pageToken]
+   *   Optional. next_page_token value returned from a previous List request, if
+   *   any.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
