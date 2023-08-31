@@ -19300,6 +19300,7 @@
                          * @property {google.cloud.tpu.v2alpha1.IAcceleratorConfig|null} [acceleratorConfig] Node acceleratorConfig
                          * @property {google.cloud.tpu.v2alpha1.IShieldedInstanceConfig|null} [shieldedInstanceConfig] Node shieldedInstanceConfig
                          * @property {boolean|null} [multisliceNode] Node multisliceNode
+                         * @property {google.cloud.tpu.v2alpha1.IBootDiskConfig|null} [bootDiskConfig] Node bootDiskConfig
                          */
     
                         /**
@@ -19516,6 +19517,14 @@
                         Node.prototype.multisliceNode = false;
     
                         /**
+                         * Node bootDiskConfig.
+                         * @member {google.cloud.tpu.v2alpha1.IBootDiskConfig|null|undefined} bootDiskConfig
+                         * @memberof google.cloud.tpu.v2alpha1.Node
+                         * @instance
+                         */
+                        Node.prototype.bootDiskConfig = null;
+    
+                        /**
                          * Creates a new Node instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.tpu.v2alpha1.Node
@@ -19593,6 +19602,8 @@
                                 $root.google.cloud.tpu.v2alpha1.ShieldedInstanceConfig.encode(message.shieldedInstanceConfig, writer.uint32(/* id 45, wireType 2 =*/362).fork()).ldelim();
                             if (message.multisliceNode != null && Object.hasOwnProperty.call(message, "multisliceNode"))
                                 writer.uint32(/* id 47, wireType 0 =*/376).bool(message.multisliceNode);
+                            if (message.bootDiskConfig != null && Object.hasOwnProperty.call(message, "bootDiskConfig"))
+                                $root.google.cloud.tpu.v2alpha1.BootDiskConfig.encode(message.bootDiskConfig, writer.uint32(/* id 49, wireType 2 =*/394).fork()).ldelim();
                             return writer;
                         };
     
@@ -19767,6 +19778,10 @@
                                     }
                                 case 47: {
                                         message.multisliceNode = reader.bool();
+                                        break;
+                                    }
+                                case 49: {
+                                        message.bootDiskConfig = $root.google.cloud.tpu.v2alpha1.BootDiskConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -19953,6 +19968,11 @@
                             if (message.multisliceNode != null && message.hasOwnProperty("multisliceNode"))
                                 if (typeof message.multisliceNode !== "boolean")
                                     return "multisliceNode: boolean expected";
+                            if (message.bootDiskConfig != null && message.hasOwnProperty("bootDiskConfig")) {
+                                var error = $root.google.cloud.tpu.v2alpha1.BootDiskConfig.verify(message.bootDiskConfig);
+                                if (error)
+                                    return "bootDiskConfig." + error;
+                            }
                             return null;
                         };
     
@@ -20194,6 +20214,11 @@
                             }
                             if (object.multisliceNode != null)
                                 message.multisliceNode = Boolean(object.multisliceNode);
+                            if (object.bootDiskConfig != null) {
+                                if (typeof object.bootDiskConfig !== "object")
+                                    throw TypeError(".google.cloud.tpu.v2alpha1.Node.bootDiskConfig: object expected");
+                                message.bootDiskConfig = $root.google.cloud.tpu.v2alpha1.BootDiskConfig.fromObject(object.bootDiskConfig);
+                            }
                             return message;
                         };
     
@@ -20243,6 +20268,7 @@
                                 object.acceleratorConfig = null;
                                 object.shieldedInstanceConfig = null;
                                 object.multisliceNode = false;
+                                object.bootDiskConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -20314,6 +20340,8 @@
                                 object.shieldedInstanceConfig = $root.google.cloud.tpu.v2alpha1.ShieldedInstanceConfig.toObject(message.shieldedInstanceConfig, options);
                             if (message.multisliceNode != null && message.hasOwnProperty("multisliceNode"))
                                 object.multisliceNode = message.multisliceNode;
+                            if (message.bootDiskConfig != null && message.hasOwnProperty("bootDiskConfig"))
+                                object.bootDiskConfig = $root.google.cloud.tpu.v2alpha1.BootDiskConfig.toObject(message.bootDiskConfig, options);
                             return object;
                         };
     
@@ -32582,6 +32610,459 @@
                         };
     
                         return ShieldedInstanceConfig;
+                    })();
+    
+                    v2alpha1.BootDiskConfig = (function() {
+    
+                        /**
+                         * Properties of a BootDiskConfig.
+                         * @memberof google.cloud.tpu.v2alpha1
+                         * @interface IBootDiskConfig
+                         * @property {google.cloud.tpu.v2alpha1.ICustomerEncryptionKey|null} [customerEncryptionKey] BootDiskConfig customerEncryptionKey
+                         * @property {boolean|null} [enableConfidentialCompute] BootDiskConfig enableConfidentialCompute
+                         */
+    
+                        /**
+                         * Constructs a new BootDiskConfig.
+                         * @memberof google.cloud.tpu.v2alpha1
+                         * @classdesc Represents a BootDiskConfig.
+                         * @implements IBootDiskConfig
+                         * @constructor
+                         * @param {google.cloud.tpu.v2alpha1.IBootDiskConfig=} [properties] Properties to set
+                         */
+                        function BootDiskConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BootDiskConfig customerEncryptionKey.
+                         * @member {google.cloud.tpu.v2alpha1.ICustomerEncryptionKey|null|undefined} customerEncryptionKey
+                         * @memberof google.cloud.tpu.v2alpha1.BootDiskConfig
+                         * @instance
+                         */
+                        BootDiskConfig.prototype.customerEncryptionKey = null;
+    
+                        /**
+                         * BootDiskConfig enableConfidentialCompute.
+                         * @member {boolean} enableConfidentialCompute
+                         * @memberof google.cloud.tpu.v2alpha1.BootDiskConfig
+                         * @instance
+                         */
+                        BootDiskConfig.prototype.enableConfidentialCompute = false;
+    
+                        /**
+                         * Creates a new BootDiskConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tpu.v2alpha1.BootDiskConfig
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.IBootDiskConfig=} [properties] Properties to set
+                         * @returns {google.cloud.tpu.v2alpha1.BootDiskConfig} BootDiskConfig instance
+                         */
+                        BootDiskConfig.create = function create(properties) {
+                            return new BootDiskConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BootDiskConfig message. Does not implicitly {@link google.cloud.tpu.v2alpha1.BootDiskConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tpu.v2alpha1.BootDiskConfig
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.IBootDiskConfig} message BootDiskConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BootDiskConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.customerEncryptionKey != null && Object.hasOwnProperty.call(message, "customerEncryptionKey"))
+                                $root.google.cloud.tpu.v2alpha1.CustomerEncryptionKey.encode(message.customerEncryptionKey, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.enableConfidentialCompute != null && Object.hasOwnProperty.call(message, "enableConfidentialCompute"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.enableConfidentialCompute);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BootDiskConfig message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.BootDiskConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tpu.v2alpha1.BootDiskConfig
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.IBootDiskConfig} message BootDiskConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BootDiskConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BootDiskConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tpu.v2alpha1.BootDiskConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tpu.v2alpha1.BootDiskConfig} BootDiskConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BootDiskConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tpu.v2alpha1.BootDiskConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.customerEncryptionKey = $root.google.cloud.tpu.v2alpha1.CustomerEncryptionKey.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.enableConfidentialCompute = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BootDiskConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tpu.v2alpha1.BootDiskConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tpu.v2alpha1.BootDiskConfig} BootDiskConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BootDiskConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BootDiskConfig message.
+                         * @function verify
+                         * @memberof google.cloud.tpu.v2alpha1.BootDiskConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BootDiskConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.customerEncryptionKey != null && message.hasOwnProperty("customerEncryptionKey")) {
+                                var error = $root.google.cloud.tpu.v2alpha1.CustomerEncryptionKey.verify(message.customerEncryptionKey);
+                                if (error)
+                                    return "customerEncryptionKey." + error;
+                            }
+                            if (message.enableConfidentialCompute != null && message.hasOwnProperty("enableConfidentialCompute"))
+                                if (typeof message.enableConfidentialCompute !== "boolean")
+                                    return "enableConfidentialCompute: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BootDiskConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tpu.v2alpha1.BootDiskConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tpu.v2alpha1.BootDiskConfig} BootDiskConfig
+                         */
+                        BootDiskConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tpu.v2alpha1.BootDiskConfig)
+                                return object;
+                            var message = new $root.google.cloud.tpu.v2alpha1.BootDiskConfig();
+                            if (object.customerEncryptionKey != null) {
+                                if (typeof object.customerEncryptionKey !== "object")
+                                    throw TypeError(".google.cloud.tpu.v2alpha1.BootDiskConfig.customerEncryptionKey: object expected");
+                                message.customerEncryptionKey = $root.google.cloud.tpu.v2alpha1.CustomerEncryptionKey.fromObject(object.customerEncryptionKey);
+                            }
+                            if (object.enableConfidentialCompute != null)
+                                message.enableConfidentialCompute = Boolean(object.enableConfidentialCompute);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BootDiskConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tpu.v2alpha1.BootDiskConfig
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.BootDiskConfig} message BootDiskConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BootDiskConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.customerEncryptionKey = null;
+                                object.enableConfidentialCompute = false;
+                            }
+                            if (message.customerEncryptionKey != null && message.hasOwnProperty("customerEncryptionKey"))
+                                object.customerEncryptionKey = $root.google.cloud.tpu.v2alpha1.CustomerEncryptionKey.toObject(message.customerEncryptionKey, options);
+                            if (message.enableConfidentialCompute != null && message.hasOwnProperty("enableConfidentialCompute"))
+                                object.enableConfidentialCompute = message.enableConfidentialCompute;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BootDiskConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tpu.v2alpha1.BootDiskConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BootDiskConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BootDiskConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.tpu.v2alpha1.BootDiskConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BootDiskConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.tpu.v2alpha1.BootDiskConfig";
+                        };
+    
+                        return BootDiskConfig;
+                    })();
+    
+                    v2alpha1.CustomerEncryptionKey = (function() {
+    
+                        /**
+                         * Properties of a CustomerEncryptionKey.
+                         * @memberof google.cloud.tpu.v2alpha1
+                         * @interface ICustomerEncryptionKey
+                         * @property {string|null} [kmsKeyName] CustomerEncryptionKey kmsKeyName
+                         */
+    
+                        /**
+                         * Constructs a new CustomerEncryptionKey.
+                         * @memberof google.cloud.tpu.v2alpha1
+                         * @classdesc Represents a CustomerEncryptionKey.
+                         * @implements ICustomerEncryptionKey
+                         * @constructor
+                         * @param {google.cloud.tpu.v2alpha1.ICustomerEncryptionKey=} [properties] Properties to set
+                         */
+                        function CustomerEncryptionKey(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CustomerEncryptionKey kmsKeyName.
+                         * @member {string|null|undefined} kmsKeyName
+                         * @memberof google.cloud.tpu.v2alpha1.CustomerEncryptionKey
+                         * @instance
+                         */
+                        CustomerEncryptionKey.prototype.kmsKeyName = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * CustomerEncryptionKey key.
+                         * @member {"kmsKeyName"|undefined} key
+                         * @memberof google.cloud.tpu.v2alpha1.CustomerEncryptionKey
+                         * @instance
+                         */
+                        Object.defineProperty(CustomerEncryptionKey.prototype, "key", {
+                            get: $util.oneOfGetter($oneOfFields = ["kmsKeyName"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new CustomerEncryptionKey instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tpu.v2alpha1.CustomerEncryptionKey
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.ICustomerEncryptionKey=} [properties] Properties to set
+                         * @returns {google.cloud.tpu.v2alpha1.CustomerEncryptionKey} CustomerEncryptionKey instance
+                         */
+                        CustomerEncryptionKey.create = function create(properties) {
+                            return new CustomerEncryptionKey(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CustomerEncryptionKey message. Does not implicitly {@link google.cloud.tpu.v2alpha1.CustomerEncryptionKey.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tpu.v2alpha1.CustomerEncryptionKey
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.ICustomerEncryptionKey} message CustomerEncryptionKey message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomerEncryptionKey.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.kmsKeyName != null && Object.hasOwnProperty.call(message, "kmsKeyName"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.kmsKeyName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CustomerEncryptionKey message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.CustomerEncryptionKey.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tpu.v2alpha1.CustomerEncryptionKey
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.ICustomerEncryptionKey} message CustomerEncryptionKey message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomerEncryptionKey.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CustomerEncryptionKey message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tpu.v2alpha1.CustomerEncryptionKey
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tpu.v2alpha1.CustomerEncryptionKey} CustomerEncryptionKey
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomerEncryptionKey.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tpu.v2alpha1.CustomerEncryptionKey();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 7: {
+                                        message.kmsKeyName = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CustomerEncryptionKey message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tpu.v2alpha1.CustomerEncryptionKey
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tpu.v2alpha1.CustomerEncryptionKey} CustomerEncryptionKey
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomerEncryptionKey.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CustomerEncryptionKey message.
+                         * @function verify
+                         * @memberof google.cloud.tpu.v2alpha1.CustomerEncryptionKey
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CustomerEncryptionKey.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName")) {
+                                properties.key = 1;
+                                if (!$util.isString(message.kmsKeyName))
+                                    return "kmsKeyName: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CustomerEncryptionKey message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tpu.v2alpha1.CustomerEncryptionKey
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tpu.v2alpha1.CustomerEncryptionKey} CustomerEncryptionKey
+                         */
+                        CustomerEncryptionKey.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tpu.v2alpha1.CustomerEncryptionKey)
+                                return object;
+                            var message = new $root.google.cloud.tpu.v2alpha1.CustomerEncryptionKey();
+                            if (object.kmsKeyName != null)
+                                message.kmsKeyName = String(object.kmsKeyName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CustomerEncryptionKey message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tpu.v2alpha1.CustomerEncryptionKey
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.CustomerEncryptionKey} message CustomerEncryptionKey
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CustomerEncryptionKey.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.kmsKeyName != null && message.hasOwnProperty("kmsKeyName")) {
+                                object.kmsKeyName = message.kmsKeyName;
+                                if (options.oneofs)
+                                    object.key = "kmsKeyName";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CustomerEncryptionKey to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tpu.v2alpha1.CustomerEncryptionKey
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CustomerEncryptionKey.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CustomerEncryptionKey
+                         * @function getTypeUrl
+                         * @memberof google.cloud.tpu.v2alpha1.CustomerEncryptionKey
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CustomerEncryptionKey.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.tpu.v2alpha1.CustomerEncryptionKey";
+                        };
+    
+                        return CustomerEncryptionKey;
                     })();
     
                     return v2alpha1;

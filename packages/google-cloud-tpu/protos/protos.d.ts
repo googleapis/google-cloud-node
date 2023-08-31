@@ -8301,6 +8301,9 @@ export namespace google {
 
                     /** Node multisliceNode */
                     multisliceNode?: (boolean|null);
+
+                    /** Node bootDiskConfig */
+                    bootDiskConfig?: (google.cloud.tpu.v2alpha1.IBootDiskConfig|null);
                 }
 
                 /** Represents a Node. */
@@ -8383,6 +8386,9 @@ export namespace google {
 
                     /** Node multisliceNode. */
                     public multisliceNode: boolean;
+
+                    /** Node bootDiskConfig. */
+                    public bootDiskConfig?: (google.cloud.tpu.v2alpha1.IBootDiskConfig|null);
 
                     /**
                      * Creates a new Node instance using the specified properties.
@@ -13689,6 +13695,209 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ShieldedInstanceConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BootDiskConfig. */
+                interface IBootDiskConfig {
+
+                    /** BootDiskConfig customerEncryptionKey */
+                    customerEncryptionKey?: (google.cloud.tpu.v2alpha1.ICustomerEncryptionKey|null);
+
+                    /** BootDiskConfig enableConfidentialCompute */
+                    enableConfidentialCompute?: (boolean|null);
+                }
+
+                /** Represents a BootDiskConfig. */
+                class BootDiskConfig implements IBootDiskConfig {
+
+                    /**
+                     * Constructs a new BootDiskConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tpu.v2alpha1.IBootDiskConfig);
+
+                    /** BootDiskConfig customerEncryptionKey. */
+                    public customerEncryptionKey?: (google.cloud.tpu.v2alpha1.ICustomerEncryptionKey|null);
+
+                    /** BootDiskConfig enableConfidentialCompute. */
+                    public enableConfidentialCompute: boolean;
+
+                    /**
+                     * Creates a new BootDiskConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BootDiskConfig instance
+                     */
+                    public static create(properties?: google.cloud.tpu.v2alpha1.IBootDiskConfig): google.cloud.tpu.v2alpha1.BootDiskConfig;
+
+                    /**
+                     * Encodes the specified BootDiskConfig message. Does not implicitly {@link google.cloud.tpu.v2alpha1.BootDiskConfig.verify|verify} messages.
+                     * @param message BootDiskConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tpu.v2alpha1.IBootDiskConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BootDiskConfig message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.BootDiskConfig.verify|verify} messages.
+                     * @param message BootDiskConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tpu.v2alpha1.IBootDiskConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BootDiskConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BootDiskConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tpu.v2alpha1.BootDiskConfig;
+
+                    /**
+                     * Decodes a BootDiskConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BootDiskConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tpu.v2alpha1.BootDiskConfig;
+
+                    /**
+                     * Verifies a BootDiskConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BootDiskConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BootDiskConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tpu.v2alpha1.BootDiskConfig;
+
+                    /**
+                     * Creates a plain object from a BootDiskConfig message. Also converts values to other types if specified.
+                     * @param message BootDiskConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tpu.v2alpha1.BootDiskConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BootDiskConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BootDiskConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CustomerEncryptionKey. */
+                interface ICustomerEncryptionKey {
+
+                    /** CustomerEncryptionKey kmsKeyName */
+                    kmsKeyName?: (string|null);
+                }
+
+                /** Represents a CustomerEncryptionKey. */
+                class CustomerEncryptionKey implements ICustomerEncryptionKey {
+
+                    /**
+                     * Constructs a new CustomerEncryptionKey.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tpu.v2alpha1.ICustomerEncryptionKey);
+
+                    /** CustomerEncryptionKey kmsKeyName. */
+                    public kmsKeyName?: (string|null);
+
+                    /** CustomerEncryptionKey key. */
+                    public key?: "kmsKeyName";
+
+                    /**
+                     * Creates a new CustomerEncryptionKey instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CustomerEncryptionKey instance
+                     */
+                    public static create(properties?: google.cloud.tpu.v2alpha1.ICustomerEncryptionKey): google.cloud.tpu.v2alpha1.CustomerEncryptionKey;
+
+                    /**
+                     * Encodes the specified CustomerEncryptionKey message. Does not implicitly {@link google.cloud.tpu.v2alpha1.CustomerEncryptionKey.verify|verify} messages.
+                     * @param message CustomerEncryptionKey message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tpu.v2alpha1.ICustomerEncryptionKey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CustomerEncryptionKey message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.CustomerEncryptionKey.verify|verify} messages.
+                     * @param message CustomerEncryptionKey message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tpu.v2alpha1.ICustomerEncryptionKey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CustomerEncryptionKey message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CustomerEncryptionKey
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tpu.v2alpha1.CustomerEncryptionKey;
+
+                    /**
+                     * Decodes a CustomerEncryptionKey message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CustomerEncryptionKey
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tpu.v2alpha1.CustomerEncryptionKey;
+
+                    /**
+                     * Verifies a CustomerEncryptionKey message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CustomerEncryptionKey message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CustomerEncryptionKey
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tpu.v2alpha1.CustomerEncryptionKey;
+
+                    /**
+                     * Creates a plain object from a CustomerEncryptionKey message. Also converts values to other types if specified.
+                     * @param message CustomerEncryptionKey
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tpu.v2alpha1.CustomerEncryptionKey, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CustomerEncryptionKey to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CustomerEncryptionKey
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
