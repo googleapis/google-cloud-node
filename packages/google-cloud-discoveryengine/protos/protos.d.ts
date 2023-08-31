@@ -26,6 +26,127 @@ export namespace google {
             /** Namespace v1. */
             namespace v1 {
 
+                /** Properties of an Interval. */
+                interface IInterval {
+
+                    /** Interval minimum */
+                    minimum?: (number|null);
+
+                    /** Interval exclusiveMinimum */
+                    exclusiveMinimum?: (number|null);
+
+                    /** Interval maximum */
+                    maximum?: (number|null);
+
+                    /** Interval exclusiveMaximum */
+                    exclusiveMaximum?: (number|null);
+                }
+
+                /** Represents an Interval. */
+                class Interval implements IInterval {
+
+                    /**
+                     * Constructs a new Interval.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1.IInterval);
+
+                    /** Interval minimum. */
+                    public minimum?: (number|null);
+
+                    /** Interval exclusiveMinimum. */
+                    public exclusiveMinimum?: (number|null);
+
+                    /** Interval maximum. */
+                    public maximum?: (number|null);
+
+                    /** Interval exclusiveMaximum. */
+                    public exclusiveMaximum?: (number|null);
+
+                    /** Interval min. */
+                    public min?: ("minimum"|"exclusiveMinimum");
+
+                    /** Interval max. */
+                    public max?: ("maximum"|"exclusiveMaximum");
+
+                    /**
+                     * Creates a new Interval instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Interval instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1.IInterval): google.cloud.discoveryengine.v1.Interval;
+
+                    /**
+                     * Encodes the specified Interval message. Does not implicitly {@link google.cloud.discoveryengine.v1.Interval.verify|verify} messages.
+                     * @param message Interval message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1.IInterval, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Interval message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.Interval.verify|verify} messages.
+                     * @param message Interval message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1.IInterval, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Interval message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Interval
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.Interval;
+
+                    /**
+                     * Decodes an Interval message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Interval
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.Interval;
+
+                    /**
+                     * Verifies an Interval message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Interval message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Interval
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.Interval;
+
+                    /**
+                     * Creates a plain object from an Interval message. Also converts values to other types if specified.
+                     * @param message Interval
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1.Interval, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Interval to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Interval
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a CustomAttribute. */
                 interface ICustomAttribute {
 
@@ -291,6 +412,9 @@ export namespace google {
 
                     /** CompleteQueryRequest userPseudoId */
                     userPseudoId?: (string|null);
+
+                    /** CompleteQueryRequest includeTailSuggestions */
+                    includeTailSuggestions?: (boolean|null);
                 }
 
                 /** Represents a CompleteQueryRequest. */
@@ -313,6 +437,9 @@ export namespace google {
 
                     /** CompleteQueryRequest userPseudoId. */
                     public userPseudoId: string;
+
+                    /** CompleteQueryRequest includeTailSuggestions. */
+                    public includeTailSuggestions: boolean;
 
                     /**
                      * Creates a new CompleteQueryRequest instance using the specified properties.
@@ -397,6 +524,9 @@ export namespace google {
 
                     /** CompleteQueryResponse querySuggestions */
                     querySuggestions?: (google.cloud.discoveryengine.v1.CompleteQueryResponse.IQuerySuggestion[]|null);
+
+                    /** CompleteQueryResponse tailMatchTriggered */
+                    tailMatchTriggered?: (boolean|null);
                 }
 
                 /** Represents a CompleteQueryResponse. */
@@ -410,6 +540,9 @@ export namespace google {
 
                     /** CompleteQueryResponse querySuggestions. */
                     public querySuggestions: google.cloud.discoveryengine.v1.CompleteQueryResponse.IQuerySuggestion[];
+
+                    /** CompleteQueryResponse tailMatchTriggered. */
+                    public tailMatchTriggered: boolean;
 
                     /**
                      * Creates a new CompleteQueryResponse instance using the specified properties.
@@ -582,6 +715,2724 @@ export namespace google {
 
                         /**
                          * Gets the default type url for QuerySuggestion
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a Conversation. */
+                interface IConversation {
+
+                    /** Conversation name */
+                    name?: (string|null);
+
+                    /** Conversation state */
+                    state?: (google.cloud.discoveryengine.v1.Conversation.State|keyof typeof google.cloud.discoveryengine.v1.Conversation.State|null);
+
+                    /** Conversation userPseudoId */
+                    userPseudoId?: (string|null);
+
+                    /** Conversation messages */
+                    messages?: (google.cloud.discoveryengine.v1.IConversationMessage[]|null);
+
+                    /** Conversation startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Conversation endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a Conversation. */
+                class Conversation implements IConversation {
+
+                    /**
+                     * Constructs a new Conversation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1.IConversation);
+
+                    /** Conversation name. */
+                    public name: string;
+
+                    /** Conversation state. */
+                    public state: (google.cloud.discoveryengine.v1.Conversation.State|keyof typeof google.cloud.discoveryengine.v1.Conversation.State);
+
+                    /** Conversation userPseudoId. */
+                    public userPseudoId: string;
+
+                    /** Conversation messages. */
+                    public messages: google.cloud.discoveryengine.v1.IConversationMessage[];
+
+                    /** Conversation startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Conversation endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new Conversation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Conversation instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1.IConversation): google.cloud.discoveryengine.v1.Conversation;
+
+                    /**
+                     * Encodes the specified Conversation message. Does not implicitly {@link google.cloud.discoveryengine.v1.Conversation.verify|verify} messages.
+                     * @param message Conversation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1.IConversation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Conversation message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.Conversation.verify|verify} messages.
+                     * @param message Conversation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1.IConversation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Conversation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Conversation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.Conversation;
+
+                    /**
+                     * Decodes a Conversation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Conversation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.Conversation;
+
+                    /**
+                     * Verifies a Conversation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Conversation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Conversation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.Conversation;
+
+                    /**
+                     * Creates a plain object from a Conversation message. Also converts values to other types if specified.
+                     * @param message Conversation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1.Conversation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Conversation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Conversation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Conversation {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        IN_PROGRESS = 1,
+                        COMPLETED = 2
+                    }
+                }
+
+                /** Properties of a Reply. */
+                interface IReply {
+
+                    /** Reply summary */
+                    summary?: (google.cloud.discoveryengine.v1.SearchResponse.ISummary|null);
+                }
+
+                /** Represents a Reply. */
+                class Reply implements IReply {
+
+                    /**
+                     * Constructs a new Reply.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1.IReply);
+
+                    /** Reply summary. */
+                    public summary?: (google.cloud.discoveryengine.v1.SearchResponse.ISummary|null);
+
+                    /**
+                     * Creates a new Reply instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Reply instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1.IReply): google.cloud.discoveryengine.v1.Reply;
+
+                    /**
+                     * Encodes the specified Reply message. Does not implicitly {@link google.cloud.discoveryengine.v1.Reply.verify|verify} messages.
+                     * @param message Reply message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1.IReply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Reply message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.Reply.verify|verify} messages.
+                     * @param message Reply message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1.IReply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Reply message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Reply
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.Reply;
+
+                    /**
+                     * Decodes a Reply message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Reply
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.Reply;
+
+                    /**
+                     * Verifies a Reply message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Reply message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Reply
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.Reply;
+
+                    /**
+                     * Creates a plain object from a Reply message. Also converts values to other types if specified.
+                     * @param message Reply
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1.Reply, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Reply to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Reply
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ConversationContext. */
+                interface IConversationContext {
+
+                    /** ConversationContext contextDocuments */
+                    contextDocuments?: (string[]|null);
+
+                    /** ConversationContext activeDocument */
+                    activeDocument?: (string|null);
+                }
+
+                /** Represents a ConversationContext. */
+                class ConversationContext implements IConversationContext {
+
+                    /**
+                     * Constructs a new ConversationContext.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1.IConversationContext);
+
+                    /** ConversationContext contextDocuments. */
+                    public contextDocuments: string[];
+
+                    /** ConversationContext activeDocument. */
+                    public activeDocument: string;
+
+                    /**
+                     * Creates a new ConversationContext instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConversationContext instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1.IConversationContext): google.cloud.discoveryengine.v1.ConversationContext;
+
+                    /**
+                     * Encodes the specified ConversationContext message. Does not implicitly {@link google.cloud.discoveryengine.v1.ConversationContext.verify|verify} messages.
+                     * @param message ConversationContext message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1.IConversationContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConversationContext message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.ConversationContext.verify|verify} messages.
+                     * @param message ConversationContext message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1.IConversationContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConversationContext message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConversationContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.ConversationContext;
+
+                    /**
+                     * Decodes a ConversationContext message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConversationContext
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.ConversationContext;
+
+                    /**
+                     * Verifies a ConversationContext message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConversationContext message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConversationContext
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.ConversationContext;
+
+                    /**
+                     * Creates a plain object from a ConversationContext message. Also converts values to other types if specified.
+                     * @param message ConversationContext
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1.ConversationContext, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConversationContext to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConversationContext
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TextInput. */
+                interface ITextInput {
+
+                    /** TextInput input */
+                    input?: (string|null);
+
+                    /** TextInput context */
+                    context?: (google.cloud.discoveryengine.v1.IConversationContext|null);
+                }
+
+                /** Represents a TextInput. */
+                class TextInput implements ITextInput {
+
+                    /**
+                     * Constructs a new TextInput.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1.ITextInput);
+
+                    /** TextInput input. */
+                    public input: string;
+
+                    /** TextInput context. */
+                    public context?: (google.cloud.discoveryengine.v1.IConversationContext|null);
+
+                    /**
+                     * Creates a new TextInput instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TextInput instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1.ITextInput): google.cloud.discoveryengine.v1.TextInput;
+
+                    /**
+                     * Encodes the specified TextInput message. Does not implicitly {@link google.cloud.discoveryengine.v1.TextInput.verify|verify} messages.
+                     * @param message TextInput message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1.ITextInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TextInput message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.TextInput.verify|verify} messages.
+                     * @param message TextInput message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1.ITextInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TextInput message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TextInput
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.TextInput;
+
+                    /**
+                     * Decodes a TextInput message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TextInput
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.TextInput;
+
+                    /**
+                     * Verifies a TextInput message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TextInput message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TextInput
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.TextInput;
+
+                    /**
+                     * Creates a plain object from a TextInput message. Also converts values to other types if specified.
+                     * @param message TextInput
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1.TextInput, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TextInput to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TextInput
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ConversationMessage. */
+                interface IConversationMessage {
+
+                    /** ConversationMessage userInput */
+                    userInput?: (google.cloud.discoveryengine.v1.ITextInput|null);
+
+                    /** ConversationMessage reply */
+                    reply?: (google.cloud.discoveryengine.v1.IReply|null);
+
+                    /** ConversationMessage createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a ConversationMessage. */
+                class ConversationMessage implements IConversationMessage {
+
+                    /**
+                     * Constructs a new ConversationMessage.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1.IConversationMessage);
+
+                    /** ConversationMessage userInput. */
+                    public userInput?: (google.cloud.discoveryengine.v1.ITextInput|null);
+
+                    /** ConversationMessage reply. */
+                    public reply?: (google.cloud.discoveryengine.v1.IReply|null);
+
+                    /** ConversationMessage createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ConversationMessage message. */
+                    public message?: ("userInput"|"reply");
+
+                    /**
+                     * Creates a new ConversationMessage instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConversationMessage instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1.IConversationMessage): google.cloud.discoveryengine.v1.ConversationMessage;
+
+                    /**
+                     * Encodes the specified ConversationMessage message. Does not implicitly {@link google.cloud.discoveryengine.v1.ConversationMessage.verify|verify} messages.
+                     * @param message ConversationMessage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1.IConversationMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConversationMessage message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.ConversationMessage.verify|verify} messages.
+                     * @param message ConversationMessage message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1.IConversationMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConversationMessage message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConversationMessage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.ConversationMessage;
+
+                    /**
+                     * Decodes a ConversationMessage message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConversationMessage
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.ConversationMessage;
+
+                    /**
+                     * Verifies a ConversationMessage message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConversationMessage message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConversationMessage
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.ConversationMessage;
+
+                    /**
+                     * Creates a plain object from a ConversationMessage message. Also converts values to other types if specified.
+                     * @param message ConversationMessage
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1.ConversationMessage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConversationMessage to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConversationMessage
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a SearchService */
+                class SearchService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new SearchService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new SearchService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): SearchService;
+
+                    /**
+                     * Calls Search.
+                     * @param request SearchRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SearchResponse
+                     */
+                    public search(request: google.cloud.discoveryengine.v1.ISearchRequest, callback: google.cloud.discoveryengine.v1.SearchService.SearchCallback): void;
+
+                    /**
+                     * Calls Search.
+                     * @param request SearchRequest message or plain object
+                     * @returns Promise
+                     */
+                    public search(request: google.cloud.discoveryengine.v1.ISearchRequest): Promise<google.cloud.discoveryengine.v1.SearchResponse>;
+                }
+
+                namespace SearchService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1.SearchService|search}.
+                     * @param error Error, if any
+                     * @param [response] SearchResponse
+                     */
+                    type SearchCallback = (error: (Error|null), response?: google.cloud.discoveryengine.v1.SearchResponse) => void;
+                }
+
+                /** Properties of a SearchRequest. */
+                interface ISearchRequest {
+
+                    /** SearchRequest servingConfig */
+                    servingConfig?: (string|null);
+
+                    /** SearchRequest branch */
+                    branch?: (string|null);
+
+                    /** SearchRequest query */
+                    query?: (string|null);
+
+                    /** SearchRequest imageQuery */
+                    imageQuery?: (google.cloud.discoveryengine.v1.SearchRequest.IImageQuery|null);
+
+                    /** SearchRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** SearchRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** SearchRequest offset */
+                    offset?: (number|null);
+
+                    /** SearchRequest filter */
+                    filter?: (string|null);
+
+                    /** SearchRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** SearchRequest userInfo */
+                    userInfo?: (google.cloud.discoveryengine.v1.IUserInfo|null);
+
+                    /** SearchRequest facetSpecs */
+                    facetSpecs?: (google.cloud.discoveryengine.v1.SearchRequest.IFacetSpec[]|null);
+
+                    /** SearchRequest boostSpec */
+                    boostSpec?: (google.cloud.discoveryengine.v1.SearchRequest.IBoostSpec|null);
+
+                    /** SearchRequest params */
+                    params?: ({ [k: string]: google.protobuf.IValue }|null);
+
+                    /** SearchRequest queryExpansionSpec */
+                    queryExpansionSpec?: (google.cloud.discoveryengine.v1.SearchRequest.IQueryExpansionSpec|null);
+
+                    /** SearchRequest spellCorrectionSpec */
+                    spellCorrectionSpec?: (google.cloud.discoveryengine.v1.SearchRequest.ISpellCorrectionSpec|null);
+
+                    /** SearchRequest userPseudoId */
+                    userPseudoId?: (string|null);
+
+                    /** SearchRequest contentSearchSpec */
+                    contentSearchSpec?: (google.cloud.discoveryengine.v1.SearchRequest.IContentSearchSpec|null);
+
+                    /** SearchRequest safeSearch */
+                    safeSearch?: (boolean|null);
+
+                    /** SearchRequest userLabels */
+                    userLabels?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents a SearchRequest. */
+                class SearchRequest implements ISearchRequest {
+
+                    /**
+                     * Constructs a new SearchRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1.ISearchRequest);
+
+                    /** SearchRequest servingConfig. */
+                    public servingConfig: string;
+
+                    /** SearchRequest branch. */
+                    public branch: string;
+
+                    /** SearchRequest query. */
+                    public query: string;
+
+                    /** SearchRequest imageQuery. */
+                    public imageQuery?: (google.cloud.discoveryengine.v1.SearchRequest.IImageQuery|null);
+
+                    /** SearchRequest pageSize. */
+                    public pageSize: number;
+
+                    /** SearchRequest pageToken. */
+                    public pageToken: string;
+
+                    /** SearchRequest offset. */
+                    public offset: number;
+
+                    /** SearchRequest filter. */
+                    public filter: string;
+
+                    /** SearchRequest orderBy. */
+                    public orderBy: string;
+
+                    /** SearchRequest userInfo. */
+                    public userInfo?: (google.cloud.discoveryengine.v1.IUserInfo|null);
+
+                    /** SearchRequest facetSpecs. */
+                    public facetSpecs: google.cloud.discoveryengine.v1.SearchRequest.IFacetSpec[];
+
+                    /** SearchRequest boostSpec. */
+                    public boostSpec?: (google.cloud.discoveryengine.v1.SearchRequest.IBoostSpec|null);
+
+                    /** SearchRequest params. */
+                    public params: { [k: string]: google.protobuf.IValue };
+
+                    /** SearchRequest queryExpansionSpec. */
+                    public queryExpansionSpec?: (google.cloud.discoveryengine.v1.SearchRequest.IQueryExpansionSpec|null);
+
+                    /** SearchRequest spellCorrectionSpec. */
+                    public spellCorrectionSpec?: (google.cloud.discoveryengine.v1.SearchRequest.ISpellCorrectionSpec|null);
+
+                    /** SearchRequest userPseudoId. */
+                    public userPseudoId: string;
+
+                    /** SearchRequest contentSearchSpec. */
+                    public contentSearchSpec?: (google.cloud.discoveryengine.v1.SearchRequest.IContentSearchSpec|null);
+
+                    /** SearchRequest safeSearch. */
+                    public safeSearch: boolean;
+
+                    /** SearchRequest userLabels. */
+                    public userLabels: { [k: string]: string };
+
+                    /**
+                     * Creates a new SearchRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchRequest instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1.ISearchRequest): google.cloud.discoveryengine.v1.SearchRequest;
+
+                    /**
+                     * Encodes the specified SearchRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.verify|verify} messages.
+                     * @param message SearchRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1.ISearchRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.verify|verify} messages.
+                     * @param message SearchRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1.ISearchRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchRequest;
+
+                    /**
+                     * Decodes a SearchRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchRequest;
+
+                    /**
+                     * Verifies a SearchRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchRequest;
+
+                    /**
+                     * Creates a plain object from a SearchRequest message. Also converts values to other types if specified.
+                     * @param message SearchRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1.SearchRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SearchRequest {
+
+                    /** Properties of an ImageQuery. */
+                    interface IImageQuery {
+
+                        /** ImageQuery imageBytes */
+                        imageBytes?: (string|null);
+                    }
+
+                    /** Represents an ImageQuery. */
+                    class ImageQuery implements IImageQuery {
+
+                        /**
+                         * Constructs a new ImageQuery.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.discoveryengine.v1.SearchRequest.IImageQuery);
+
+                        /** ImageQuery imageBytes. */
+                        public imageBytes?: (string|null);
+
+                        /** ImageQuery image. */
+                        public image?: "imageBytes";
+
+                        /**
+                         * Creates a new ImageQuery instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ImageQuery instance
+                         */
+                        public static create(properties?: google.cloud.discoveryengine.v1.SearchRequest.IImageQuery): google.cloud.discoveryengine.v1.SearchRequest.ImageQuery;
+
+                        /**
+                         * Encodes the specified ImageQuery message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.ImageQuery.verify|verify} messages.
+                         * @param message ImageQuery message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.discoveryengine.v1.SearchRequest.IImageQuery, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ImageQuery message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.ImageQuery.verify|verify} messages.
+                         * @param message ImageQuery message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchRequest.IImageQuery, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ImageQuery message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ImageQuery
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchRequest.ImageQuery;
+
+                        /**
+                         * Decodes an ImageQuery message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ImageQuery
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchRequest.ImageQuery;
+
+                        /**
+                         * Verifies an ImageQuery message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ImageQuery message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ImageQuery
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchRequest.ImageQuery;
+
+                        /**
+                         * Creates a plain object from an ImageQuery message. Also converts values to other types if specified.
+                         * @param message ImageQuery
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.discoveryengine.v1.SearchRequest.ImageQuery, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ImageQuery to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ImageQuery
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a FacetSpec. */
+                    interface IFacetSpec {
+
+                        /** FacetSpec facetKey */
+                        facetKey?: (google.cloud.discoveryengine.v1.SearchRequest.FacetSpec.IFacetKey|null);
+
+                        /** FacetSpec limit */
+                        limit?: (number|null);
+
+                        /** FacetSpec excludedFilterKeys */
+                        excludedFilterKeys?: (string[]|null);
+
+                        /** FacetSpec enableDynamicPosition */
+                        enableDynamicPosition?: (boolean|null);
+                    }
+
+                    /** Represents a FacetSpec. */
+                    class FacetSpec implements IFacetSpec {
+
+                        /**
+                         * Constructs a new FacetSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.discoveryengine.v1.SearchRequest.IFacetSpec);
+
+                        /** FacetSpec facetKey. */
+                        public facetKey?: (google.cloud.discoveryengine.v1.SearchRequest.FacetSpec.IFacetKey|null);
+
+                        /** FacetSpec limit. */
+                        public limit: number;
+
+                        /** FacetSpec excludedFilterKeys. */
+                        public excludedFilterKeys: string[];
+
+                        /** FacetSpec enableDynamicPosition. */
+                        public enableDynamicPosition: boolean;
+
+                        /**
+                         * Creates a new FacetSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FacetSpec instance
+                         */
+                        public static create(properties?: google.cloud.discoveryengine.v1.SearchRequest.IFacetSpec): google.cloud.discoveryengine.v1.SearchRequest.FacetSpec;
+
+                        /**
+                         * Encodes the specified FacetSpec message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.FacetSpec.verify|verify} messages.
+                         * @param message FacetSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.discoveryengine.v1.SearchRequest.IFacetSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FacetSpec message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.FacetSpec.verify|verify} messages.
+                         * @param message FacetSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchRequest.IFacetSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FacetSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FacetSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchRequest.FacetSpec;
+
+                        /**
+                         * Decodes a FacetSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FacetSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchRequest.FacetSpec;
+
+                        /**
+                         * Verifies a FacetSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FacetSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FacetSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchRequest.FacetSpec;
+
+                        /**
+                         * Creates a plain object from a FacetSpec message. Also converts values to other types if specified.
+                         * @param message FacetSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.discoveryengine.v1.SearchRequest.FacetSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FacetSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FacetSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace FacetSpec {
+
+                        /** Properties of a FacetKey. */
+                        interface IFacetKey {
+
+                            /** FacetKey key */
+                            key?: (string|null);
+
+                            /** FacetKey intervals */
+                            intervals?: (google.cloud.discoveryengine.v1.IInterval[]|null);
+
+                            /** FacetKey restrictedValues */
+                            restrictedValues?: (string[]|null);
+
+                            /** FacetKey prefixes */
+                            prefixes?: (string[]|null);
+
+                            /** FacetKey contains */
+                            contains?: (string[]|null);
+
+                            /** FacetKey caseInsensitive */
+                            caseInsensitive?: (boolean|null);
+
+                            /** FacetKey orderBy */
+                            orderBy?: (string|null);
+                        }
+
+                        /** Represents a FacetKey. */
+                        class FacetKey implements IFacetKey {
+
+                            /**
+                             * Constructs a new FacetKey.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.discoveryengine.v1.SearchRequest.FacetSpec.IFacetKey);
+
+                            /** FacetKey key. */
+                            public key: string;
+
+                            /** FacetKey intervals. */
+                            public intervals: google.cloud.discoveryengine.v1.IInterval[];
+
+                            /** FacetKey restrictedValues. */
+                            public restrictedValues: string[];
+
+                            /** FacetKey prefixes. */
+                            public prefixes: string[];
+
+                            /** FacetKey contains. */
+                            public contains: string[];
+
+                            /** FacetKey caseInsensitive. */
+                            public caseInsensitive: boolean;
+
+                            /** FacetKey orderBy. */
+                            public orderBy: string;
+
+                            /**
+                             * Creates a new FacetKey instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns FacetKey instance
+                             */
+                            public static create(properties?: google.cloud.discoveryengine.v1.SearchRequest.FacetSpec.IFacetKey): google.cloud.discoveryengine.v1.SearchRequest.FacetSpec.FacetKey;
+
+                            /**
+                             * Encodes the specified FacetKey message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.FacetSpec.FacetKey.verify|verify} messages.
+                             * @param message FacetKey message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.discoveryengine.v1.SearchRequest.FacetSpec.IFacetKey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified FacetKey message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.FacetSpec.FacetKey.verify|verify} messages.
+                             * @param message FacetKey message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchRequest.FacetSpec.IFacetKey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a FacetKey message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns FacetKey
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchRequest.FacetSpec.FacetKey;
+
+                            /**
+                             * Decodes a FacetKey message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns FacetKey
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchRequest.FacetSpec.FacetKey;
+
+                            /**
+                             * Verifies a FacetKey message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a FacetKey message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns FacetKey
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchRequest.FacetSpec.FacetKey;
+
+                            /**
+                             * Creates a plain object from a FacetKey message. Also converts values to other types if specified.
+                             * @param message FacetKey
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.discoveryengine.v1.SearchRequest.FacetSpec.FacetKey, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this FacetKey to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for FacetKey
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a BoostSpec. */
+                    interface IBoostSpec {
+
+                        /** BoostSpec conditionBoostSpecs */
+                        conditionBoostSpecs?: (google.cloud.discoveryengine.v1.SearchRequest.BoostSpec.IConditionBoostSpec[]|null);
+                    }
+
+                    /** Represents a BoostSpec. */
+                    class BoostSpec implements IBoostSpec {
+
+                        /**
+                         * Constructs a new BoostSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.discoveryengine.v1.SearchRequest.IBoostSpec);
+
+                        /** BoostSpec conditionBoostSpecs. */
+                        public conditionBoostSpecs: google.cloud.discoveryengine.v1.SearchRequest.BoostSpec.IConditionBoostSpec[];
+
+                        /**
+                         * Creates a new BoostSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BoostSpec instance
+                         */
+                        public static create(properties?: google.cloud.discoveryengine.v1.SearchRequest.IBoostSpec): google.cloud.discoveryengine.v1.SearchRequest.BoostSpec;
+
+                        /**
+                         * Encodes the specified BoostSpec message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.BoostSpec.verify|verify} messages.
+                         * @param message BoostSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.discoveryengine.v1.SearchRequest.IBoostSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BoostSpec message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.BoostSpec.verify|verify} messages.
+                         * @param message BoostSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchRequest.IBoostSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BoostSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BoostSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchRequest.BoostSpec;
+
+                        /**
+                         * Decodes a BoostSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BoostSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchRequest.BoostSpec;
+
+                        /**
+                         * Verifies a BoostSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BoostSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BoostSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchRequest.BoostSpec;
+
+                        /**
+                         * Creates a plain object from a BoostSpec message. Also converts values to other types if specified.
+                         * @param message BoostSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.discoveryengine.v1.SearchRequest.BoostSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BoostSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BoostSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace BoostSpec {
+
+                        /** Properties of a ConditionBoostSpec. */
+                        interface IConditionBoostSpec {
+
+                            /** ConditionBoostSpec condition */
+                            condition?: (string|null);
+
+                            /** ConditionBoostSpec boost */
+                            boost?: (number|null);
+                        }
+
+                        /** Represents a ConditionBoostSpec. */
+                        class ConditionBoostSpec implements IConditionBoostSpec {
+
+                            /**
+                             * Constructs a new ConditionBoostSpec.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.discoveryengine.v1.SearchRequest.BoostSpec.IConditionBoostSpec);
+
+                            /** ConditionBoostSpec condition. */
+                            public condition: string;
+
+                            /** ConditionBoostSpec boost. */
+                            public boost: number;
+
+                            /**
+                             * Creates a new ConditionBoostSpec instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ConditionBoostSpec instance
+                             */
+                            public static create(properties?: google.cloud.discoveryengine.v1.SearchRequest.BoostSpec.IConditionBoostSpec): google.cloud.discoveryengine.v1.SearchRequest.BoostSpec.ConditionBoostSpec;
+
+                            /**
+                             * Encodes the specified ConditionBoostSpec message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.BoostSpec.ConditionBoostSpec.verify|verify} messages.
+                             * @param message ConditionBoostSpec message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.discoveryengine.v1.SearchRequest.BoostSpec.IConditionBoostSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ConditionBoostSpec message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.BoostSpec.ConditionBoostSpec.verify|verify} messages.
+                             * @param message ConditionBoostSpec message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchRequest.BoostSpec.IConditionBoostSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ConditionBoostSpec message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ConditionBoostSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchRequest.BoostSpec.ConditionBoostSpec;
+
+                            /**
+                             * Decodes a ConditionBoostSpec message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ConditionBoostSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchRequest.BoostSpec.ConditionBoostSpec;
+
+                            /**
+                             * Verifies a ConditionBoostSpec message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ConditionBoostSpec message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ConditionBoostSpec
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchRequest.BoostSpec.ConditionBoostSpec;
+
+                            /**
+                             * Creates a plain object from a ConditionBoostSpec message. Also converts values to other types if specified.
+                             * @param message ConditionBoostSpec
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.discoveryengine.v1.SearchRequest.BoostSpec.ConditionBoostSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ConditionBoostSpec to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ConditionBoostSpec
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a QueryExpansionSpec. */
+                    interface IQueryExpansionSpec {
+
+                        /** QueryExpansionSpec condition */
+                        condition?: (google.cloud.discoveryengine.v1.SearchRequest.QueryExpansionSpec.Condition|keyof typeof google.cloud.discoveryengine.v1.SearchRequest.QueryExpansionSpec.Condition|null);
+
+                        /** QueryExpansionSpec pinUnexpandedResults */
+                        pinUnexpandedResults?: (boolean|null);
+                    }
+
+                    /** Represents a QueryExpansionSpec. */
+                    class QueryExpansionSpec implements IQueryExpansionSpec {
+
+                        /**
+                         * Constructs a new QueryExpansionSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.discoveryengine.v1.SearchRequest.IQueryExpansionSpec);
+
+                        /** QueryExpansionSpec condition. */
+                        public condition: (google.cloud.discoveryengine.v1.SearchRequest.QueryExpansionSpec.Condition|keyof typeof google.cloud.discoveryengine.v1.SearchRequest.QueryExpansionSpec.Condition);
+
+                        /** QueryExpansionSpec pinUnexpandedResults. */
+                        public pinUnexpandedResults: boolean;
+
+                        /**
+                         * Creates a new QueryExpansionSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns QueryExpansionSpec instance
+                         */
+                        public static create(properties?: google.cloud.discoveryengine.v1.SearchRequest.IQueryExpansionSpec): google.cloud.discoveryengine.v1.SearchRequest.QueryExpansionSpec;
+
+                        /**
+                         * Encodes the specified QueryExpansionSpec message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.QueryExpansionSpec.verify|verify} messages.
+                         * @param message QueryExpansionSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.discoveryengine.v1.SearchRequest.IQueryExpansionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified QueryExpansionSpec message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.QueryExpansionSpec.verify|verify} messages.
+                         * @param message QueryExpansionSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchRequest.IQueryExpansionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a QueryExpansionSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns QueryExpansionSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchRequest.QueryExpansionSpec;
+
+                        /**
+                         * Decodes a QueryExpansionSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns QueryExpansionSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchRequest.QueryExpansionSpec;
+
+                        /**
+                         * Verifies a QueryExpansionSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a QueryExpansionSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns QueryExpansionSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchRequest.QueryExpansionSpec;
+
+                        /**
+                         * Creates a plain object from a QueryExpansionSpec message. Also converts values to other types if specified.
+                         * @param message QueryExpansionSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.discoveryengine.v1.SearchRequest.QueryExpansionSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this QueryExpansionSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for QueryExpansionSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace QueryExpansionSpec {
+
+                        /** Condition enum. */
+                        enum Condition {
+                            CONDITION_UNSPECIFIED = 0,
+                            DISABLED = 1,
+                            AUTO = 2
+                        }
+                    }
+
+                    /** Properties of a SpellCorrectionSpec. */
+                    interface ISpellCorrectionSpec {
+
+                        /** SpellCorrectionSpec mode */
+                        mode?: (google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec.Mode|keyof typeof google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec.Mode|null);
+                    }
+
+                    /** Represents a SpellCorrectionSpec. */
+                    class SpellCorrectionSpec implements ISpellCorrectionSpec {
+
+                        /**
+                         * Constructs a new SpellCorrectionSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.discoveryengine.v1.SearchRequest.ISpellCorrectionSpec);
+
+                        /** SpellCorrectionSpec mode. */
+                        public mode: (google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec.Mode|keyof typeof google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec.Mode);
+
+                        /**
+                         * Creates a new SpellCorrectionSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SpellCorrectionSpec instance
+                         */
+                        public static create(properties?: google.cloud.discoveryengine.v1.SearchRequest.ISpellCorrectionSpec): google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec;
+
+                        /**
+                         * Encodes the specified SpellCorrectionSpec message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec.verify|verify} messages.
+                         * @param message SpellCorrectionSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.discoveryengine.v1.SearchRequest.ISpellCorrectionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SpellCorrectionSpec message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec.verify|verify} messages.
+                         * @param message SpellCorrectionSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchRequest.ISpellCorrectionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SpellCorrectionSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SpellCorrectionSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec;
+
+                        /**
+                         * Decodes a SpellCorrectionSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SpellCorrectionSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec;
+
+                        /**
+                         * Verifies a SpellCorrectionSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SpellCorrectionSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SpellCorrectionSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec;
+
+                        /**
+                         * Creates a plain object from a SpellCorrectionSpec message. Also converts values to other types if specified.
+                         * @param message SpellCorrectionSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SpellCorrectionSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SpellCorrectionSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace SpellCorrectionSpec {
+
+                        /** Mode enum. */
+                        enum Mode {
+                            MODE_UNSPECIFIED = 0,
+                            SUGGESTION_ONLY = 1,
+                            AUTO = 2
+                        }
+                    }
+
+                    /** Properties of a ContentSearchSpec. */
+                    interface IContentSearchSpec {
+
+                        /** ContentSearchSpec snippetSpec */
+                        snippetSpec?: (google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.ISnippetSpec|null);
+
+                        /** ContentSearchSpec summarySpec */
+                        summarySpec?: (google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.ISummarySpec|null);
+                    }
+
+                    /** Represents a ContentSearchSpec. */
+                    class ContentSearchSpec implements IContentSearchSpec {
+
+                        /**
+                         * Constructs a new ContentSearchSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.discoveryengine.v1.SearchRequest.IContentSearchSpec);
+
+                        /** ContentSearchSpec snippetSpec. */
+                        public snippetSpec?: (google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.ISnippetSpec|null);
+
+                        /** ContentSearchSpec summarySpec. */
+                        public summarySpec?: (google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.ISummarySpec|null);
+
+                        /**
+                         * Creates a new ContentSearchSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ContentSearchSpec instance
+                         */
+                        public static create(properties?: google.cloud.discoveryengine.v1.SearchRequest.IContentSearchSpec): google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec;
+
+                        /**
+                         * Encodes the specified ContentSearchSpec message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.verify|verify} messages.
+                         * @param message ContentSearchSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.discoveryengine.v1.SearchRequest.IContentSearchSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ContentSearchSpec message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.verify|verify} messages.
+                         * @param message ContentSearchSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchRequest.IContentSearchSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ContentSearchSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ContentSearchSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec;
+
+                        /**
+                         * Decodes a ContentSearchSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ContentSearchSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec;
+
+                        /**
+                         * Verifies a ContentSearchSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ContentSearchSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ContentSearchSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec;
+
+                        /**
+                         * Creates a plain object from a ContentSearchSpec message. Also converts values to other types if specified.
+                         * @param message ContentSearchSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ContentSearchSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ContentSearchSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ContentSearchSpec {
+
+                        /** Properties of a SnippetSpec. */
+                        interface ISnippetSpec {
+
+                            /** SnippetSpec maxSnippetCount */
+                            maxSnippetCount?: (number|null);
+
+                            /** SnippetSpec referenceOnly */
+                            referenceOnly?: (boolean|null);
+
+                            /** SnippetSpec returnSnippet */
+                            returnSnippet?: (boolean|null);
+                        }
+
+                        /** Represents a SnippetSpec. */
+                        class SnippetSpec implements ISnippetSpec {
+
+                            /**
+                             * Constructs a new SnippetSpec.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.ISnippetSpec);
+
+                            /** SnippetSpec maxSnippetCount. */
+                            public maxSnippetCount: number;
+
+                            /** SnippetSpec referenceOnly. */
+                            public referenceOnly: boolean;
+
+                            /** SnippetSpec returnSnippet. */
+                            public returnSnippet: boolean;
+
+                            /**
+                             * Creates a new SnippetSpec instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns SnippetSpec instance
+                             */
+                            public static create(properties?: google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.ISnippetSpec): google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.SnippetSpec;
+
+                            /**
+                             * Encodes the specified SnippetSpec message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.SnippetSpec.verify|verify} messages.
+                             * @param message SnippetSpec message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.ISnippetSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified SnippetSpec message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.SnippetSpec.verify|verify} messages.
+                             * @param message SnippetSpec message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.ISnippetSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a SnippetSpec message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns SnippetSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.SnippetSpec;
+
+                            /**
+                             * Decodes a SnippetSpec message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns SnippetSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.SnippetSpec;
+
+                            /**
+                             * Verifies a SnippetSpec message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a SnippetSpec message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns SnippetSpec
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.SnippetSpec;
+
+                            /**
+                             * Creates a plain object from a SnippetSpec message. Also converts values to other types if specified.
+                             * @param message SnippetSpec
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.SnippetSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this SnippetSpec to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for SnippetSpec
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a SummarySpec. */
+                        interface ISummarySpec {
+
+                            /** SummarySpec summaryResultCount */
+                            summaryResultCount?: (number|null);
+
+                            /** SummarySpec includeCitations */
+                            includeCitations?: (boolean|null);
+
+                            /** SummarySpec ignoreAdversarialQuery */
+                            ignoreAdversarialQuery?: (boolean|null);
+
+                            /** SummarySpec ignoreNonSummarySeekingQuery */
+                            ignoreNonSummarySeekingQuery?: (boolean|null);
+
+                            /** SummarySpec languageCode */
+                            languageCode?: (string|null);
+                        }
+
+                        /** Represents a SummarySpec. */
+                        class SummarySpec implements ISummarySpec {
+
+                            /**
+                             * Constructs a new SummarySpec.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.ISummarySpec);
+
+                            /** SummarySpec summaryResultCount. */
+                            public summaryResultCount: number;
+
+                            /** SummarySpec includeCitations. */
+                            public includeCitations: boolean;
+
+                            /** SummarySpec ignoreAdversarialQuery. */
+                            public ignoreAdversarialQuery: boolean;
+
+                            /** SummarySpec ignoreNonSummarySeekingQuery. */
+                            public ignoreNonSummarySeekingQuery: boolean;
+
+                            /** SummarySpec languageCode. */
+                            public languageCode: string;
+
+                            /**
+                             * Creates a new SummarySpec instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns SummarySpec instance
+                             */
+                            public static create(properties?: google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.ISummarySpec): google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.SummarySpec;
+
+                            /**
+                             * Encodes the specified SummarySpec message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.SummarySpec.verify|verify} messages.
+                             * @param message SummarySpec message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.ISummarySpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified SummarySpec message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.SummarySpec.verify|verify} messages.
+                             * @param message SummarySpec message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.ISummarySpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a SummarySpec message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns SummarySpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.SummarySpec;
+
+                            /**
+                             * Decodes a SummarySpec message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns SummarySpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.SummarySpec;
+
+                            /**
+                             * Verifies a SummarySpec message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a SummarySpec message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns SummarySpec
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.SummarySpec;
+
+                            /**
+                             * Creates a plain object from a SummarySpec message. Also converts values to other types if specified.
+                             * @param message SummarySpec
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.SummarySpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this SummarySpec to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for SummarySpec
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+                }
+
+                /** Properties of a SearchResponse. */
+                interface ISearchResponse {
+
+                    /** SearchResponse results */
+                    results?: (google.cloud.discoveryengine.v1.SearchResponse.ISearchResult[]|null);
+
+                    /** SearchResponse facets */
+                    facets?: (google.cloud.discoveryengine.v1.SearchResponse.IFacet[]|null);
+
+                    /** SearchResponse totalSize */
+                    totalSize?: (number|null);
+
+                    /** SearchResponse attributionToken */
+                    attributionToken?: (string|null);
+
+                    /** SearchResponse redirectUri */
+                    redirectUri?: (string|null);
+
+                    /** SearchResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** SearchResponse correctedQuery */
+                    correctedQuery?: (string|null);
+
+                    /** SearchResponse summary */
+                    summary?: (google.cloud.discoveryengine.v1.SearchResponse.ISummary|null);
+
+                    /** SearchResponse queryExpansionInfo */
+                    queryExpansionInfo?: (google.cloud.discoveryengine.v1.SearchResponse.IQueryExpansionInfo|null);
+                }
+
+                /** Represents a SearchResponse. */
+                class SearchResponse implements ISearchResponse {
+
+                    /**
+                     * Constructs a new SearchResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1.ISearchResponse);
+
+                    /** SearchResponse results. */
+                    public results: google.cloud.discoveryengine.v1.SearchResponse.ISearchResult[];
+
+                    /** SearchResponse facets. */
+                    public facets: google.cloud.discoveryengine.v1.SearchResponse.IFacet[];
+
+                    /** SearchResponse totalSize. */
+                    public totalSize: number;
+
+                    /** SearchResponse attributionToken. */
+                    public attributionToken: string;
+
+                    /** SearchResponse redirectUri. */
+                    public redirectUri: string;
+
+                    /** SearchResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** SearchResponse correctedQuery. */
+                    public correctedQuery: string;
+
+                    /** SearchResponse summary. */
+                    public summary?: (google.cloud.discoveryengine.v1.SearchResponse.ISummary|null);
+
+                    /** SearchResponse queryExpansionInfo. */
+                    public queryExpansionInfo?: (google.cloud.discoveryengine.v1.SearchResponse.IQueryExpansionInfo|null);
+
+                    /**
+                     * Creates a new SearchResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchResponse instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1.ISearchResponse): google.cloud.discoveryengine.v1.SearchResponse;
+
+                    /**
+                     * Encodes the specified SearchResponse message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.verify|verify} messages.
+                     * @param message SearchResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1.ISearchResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchResponse message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.verify|verify} messages.
+                     * @param message SearchResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1.ISearchResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchResponse;
+
+                    /**
+                     * Decodes a SearchResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchResponse;
+
+                    /**
+                     * Verifies a SearchResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchResponse;
+
+                    /**
+                     * Creates a plain object from a SearchResponse message. Also converts values to other types if specified.
+                     * @param message SearchResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1.SearchResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SearchResponse {
+
+                    /** Properties of a SearchResult. */
+                    interface ISearchResult {
+
+                        /** SearchResult id */
+                        id?: (string|null);
+
+                        /** SearchResult document */
+                        document?: (google.cloud.discoveryengine.v1.IDocument|null);
+                    }
+
+                    /** Represents a SearchResult. */
+                    class SearchResult implements ISearchResult {
+
+                        /**
+                         * Constructs a new SearchResult.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.discoveryengine.v1.SearchResponse.ISearchResult);
+
+                        /** SearchResult id. */
+                        public id: string;
+
+                        /** SearchResult document. */
+                        public document?: (google.cloud.discoveryengine.v1.IDocument|null);
+
+                        /**
+                         * Creates a new SearchResult instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SearchResult instance
+                         */
+                        public static create(properties?: google.cloud.discoveryengine.v1.SearchResponse.ISearchResult): google.cloud.discoveryengine.v1.SearchResponse.SearchResult;
+
+                        /**
+                         * Encodes the specified SearchResult message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.SearchResult.verify|verify} messages.
+                         * @param message SearchResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.discoveryengine.v1.SearchResponse.ISearchResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SearchResult message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.SearchResult.verify|verify} messages.
+                         * @param message SearchResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchResponse.ISearchResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SearchResult message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SearchResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchResponse.SearchResult;
+
+                        /**
+                         * Decodes a SearchResult message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SearchResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchResponse.SearchResult;
+
+                        /**
+                         * Verifies a SearchResult message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SearchResult message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SearchResult
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchResponse.SearchResult;
+
+                        /**
+                         * Creates a plain object from a SearchResult message. Also converts values to other types if specified.
+                         * @param message SearchResult
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.discoveryengine.v1.SearchResponse.SearchResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SearchResult to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SearchResult
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Facet. */
+                    interface IFacet {
+
+                        /** Facet key */
+                        key?: (string|null);
+
+                        /** Facet values */
+                        values?: (google.cloud.discoveryengine.v1.SearchResponse.Facet.IFacetValue[]|null);
+
+                        /** Facet dynamicFacet */
+                        dynamicFacet?: (boolean|null);
+                    }
+
+                    /** Represents a Facet. */
+                    class Facet implements IFacet {
+
+                        /**
+                         * Constructs a new Facet.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.discoveryengine.v1.SearchResponse.IFacet);
+
+                        /** Facet key. */
+                        public key: string;
+
+                        /** Facet values. */
+                        public values: google.cloud.discoveryengine.v1.SearchResponse.Facet.IFacetValue[];
+
+                        /** Facet dynamicFacet. */
+                        public dynamicFacet: boolean;
+
+                        /**
+                         * Creates a new Facet instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Facet instance
+                         */
+                        public static create(properties?: google.cloud.discoveryengine.v1.SearchResponse.IFacet): google.cloud.discoveryengine.v1.SearchResponse.Facet;
+
+                        /**
+                         * Encodes the specified Facet message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.Facet.verify|verify} messages.
+                         * @param message Facet message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.discoveryengine.v1.SearchResponse.IFacet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Facet message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.Facet.verify|verify} messages.
+                         * @param message Facet message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchResponse.IFacet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Facet message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Facet
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchResponse.Facet;
+
+                        /**
+                         * Decodes a Facet message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Facet
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchResponse.Facet;
+
+                        /**
+                         * Verifies a Facet message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Facet message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Facet
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchResponse.Facet;
+
+                        /**
+                         * Creates a plain object from a Facet message. Also converts values to other types if specified.
+                         * @param message Facet
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.discoveryengine.v1.SearchResponse.Facet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Facet to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Facet
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Facet {
+
+                        /** Properties of a FacetValue. */
+                        interface IFacetValue {
+
+                            /** FacetValue value */
+                            value?: (string|null);
+
+                            /** FacetValue interval */
+                            interval?: (google.cloud.discoveryengine.v1.IInterval|null);
+
+                            /** FacetValue count */
+                            count?: (number|Long|string|null);
+                        }
+
+                        /** Represents a FacetValue. */
+                        class FacetValue implements IFacetValue {
+
+                            /**
+                             * Constructs a new FacetValue.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.discoveryengine.v1.SearchResponse.Facet.IFacetValue);
+
+                            /** FacetValue value. */
+                            public value?: (string|null);
+
+                            /** FacetValue interval. */
+                            public interval?: (google.cloud.discoveryengine.v1.IInterval|null);
+
+                            /** FacetValue count. */
+                            public count: (number|Long|string);
+
+                            /** FacetValue facetValue. */
+                            public facetValue?: ("value"|"interval");
+
+                            /**
+                             * Creates a new FacetValue instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns FacetValue instance
+                             */
+                            public static create(properties?: google.cloud.discoveryengine.v1.SearchResponse.Facet.IFacetValue): google.cloud.discoveryengine.v1.SearchResponse.Facet.FacetValue;
+
+                            /**
+                             * Encodes the specified FacetValue message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.Facet.FacetValue.verify|verify} messages.
+                             * @param message FacetValue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.discoveryengine.v1.SearchResponse.Facet.IFacetValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified FacetValue message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.Facet.FacetValue.verify|verify} messages.
+                             * @param message FacetValue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchResponse.Facet.IFacetValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a FacetValue message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns FacetValue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchResponse.Facet.FacetValue;
+
+                            /**
+                             * Decodes a FacetValue message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns FacetValue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchResponse.Facet.FacetValue;
+
+                            /**
+                             * Verifies a FacetValue message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a FacetValue message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns FacetValue
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchResponse.Facet.FacetValue;
+
+                            /**
+                             * Creates a plain object from a FacetValue message. Also converts values to other types if specified.
+                             * @param message FacetValue
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.discoveryengine.v1.SearchResponse.Facet.FacetValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this FacetValue to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for FacetValue
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a Summary. */
+                    interface ISummary {
+
+                        /** Summary summaryText */
+                        summaryText?: (string|null);
+
+                        /** Summary summarySkippedReasons */
+                        summarySkippedReasons?: (google.cloud.discoveryengine.v1.SearchResponse.Summary.SummarySkippedReason[]|null);
+
+                        /** Summary safetyAttributes */
+                        safetyAttributes?: (google.cloud.discoveryengine.v1.SearchResponse.Summary.ISafetyAttributes|null);
+                    }
+
+                    /** Represents a Summary. */
+                    class Summary implements ISummary {
+
+                        /**
+                         * Constructs a new Summary.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.discoveryengine.v1.SearchResponse.ISummary);
+
+                        /** Summary summaryText. */
+                        public summaryText: string;
+
+                        /** Summary summarySkippedReasons. */
+                        public summarySkippedReasons: google.cloud.discoveryengine.v1.SearchResponse.Summary.SummarySkippedReason[];
+
+                        /** Summary safetyAttributes. */
+                        public safetyAttributes?: (google.cloud.discoveryengine.v1.SearchResponse.Summary.ISafetyAttributes|null);
+
+                        /**
+                         * Creates a new Summary instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Summary instance
+                         */
+                        public static create(properties?: google.cloud.discoveryengine.v1.SearchResponse.ISummary): google.cloud.discoveryengine.v1.SearchResponse.Summary;
+
+                        /**
+                         * Encodes the specified Summary message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.Summary.verify|verify} messages.
+                         * @param message Summary message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.discoveryengine.v1.SearchResponse.ISummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Summary message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.Summary.verify|verify} messages.
+                         * @param message Summary message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchResponse.ISummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Summary message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Summary
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchResponse.Summary;
+
+                        /**
+                         * Decodes a Summary message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Summary
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchResponse.Summary;
+
+                        /**
+                         * Verifies a Summary message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Summary message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Summary
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchResponse.Summary;
+
+                        /**
+                         * Creates a plain object from a Summary message. Also converts values to other types if specified.
+                         * @param message Summary
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.discoveryengine.v1.SearchResponse.Summary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Summary to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Summary
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Summary {
+
+                        /** Properties of a SafetyAttributes. */
+                        interface ISafetyAttributes {
+
+                            /** SafetyAttributes categories */
+                            categories?: (string[]|null);
+
+                            /** SafetyAttributes scores */
+                            scores?: (number[]|null);
+                        }
+
+                        /** Represents a SafetyAttributes. */
+                        class SafetyAttributes implements ISafetyAttributes {
+
+                            /**
+                             * Constructs a new SafetyAttributes.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.discoveryengine.v1.SearchResponse.Summary.ISafetyAttributes);
+
+                            /** SafetyAttributes categories. */
+                            public categories: string[];
+
+                            /** SafetyAttributes scores. */
+                            public scores: number[];
+
+                            /**
+                             * Creates a new SafetyAttributes instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns SafetyAttributes instance
+                             */
+                            public static create(properties?: google.cloud.discoveryengine.v1.SearchResponse.Summary.ISafetyAttributes): google.cloud.discoveryengine.v1.SearchResponse.Summary.SafetyAttributes;
+
+                            /**
+                             * Encodes the specified SafetyAttributes message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.Summary.SafetyAttributes.verify|verify} messages.
+                             * @param message SafetyAttributes message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.discoveryengine.v1.SearchResponse.Summary.ISafetyAttributes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified SafetyAttributes message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.Summary.SafetyAttributes.verify|verify} messages.
+                             * @param message SafetyAttributes message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchResponse.Summary.ISafetyAttributes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a SafetyAttributes message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns SafetyAttributes
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchResponse.Summary.SafetyAttributes;
+
+                            /**
+                             * Decodes a SafetyAttributes message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns SafetyAttributes
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchResponse.Summary.SafetyAttributes;
+
+                            /**
+                             * Verifies a SafetyAttributes message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a SafetyAttributes message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns SafetyAttributes
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchResponse.Summary.SafetyAttributes;
+
+                            /**
+                             * Creates a plain object from a SafetyAttributes message. Also converts values to other types if specified.
+                             * @param message SafetyAttributes
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.discoveryengine.v1.SearchResponse.Summary.SafetyAttributes, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this SafetyAttributes to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for SafetyAttributes
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** SummarySkippedReason enum. */
+                        enum SummarySkippedReason {
+                            SUMMARY_SKIPPED_REASON_UNSPECIFIED = 0,
+                            ADVERSARIAL_QUERY_IGNORED = 1,
+                            NON_SUMMARY_SEEKING_QUERY_IGNORED = 2,
+                            OUT_OF_DOMAIN_QUERY_IGNORED = 3,
+                            POTENTIAL_POLICY_VIOLATION = 4,
+                            LLM_ADDON_NOT_ENABLED = 5
+                        }
+                    }
+
+                    /** Properties of a QueryExpansionInfo. */
+                    interface IQueryExpansionInfo {
+
+                        /** QueryExpansionInfo expandedQuery */
+                        expandedQuery?: (boolean|null);
+
+                        /** QueryExpansionInfo pinnedResultCount */
+                        pinnedResultCount?: (number|Long|string|null);
+                    }
+
+                    /** Represents a QueryExpansionInfo. */
+                    class QueryExpansionInfo implements IQueryExpansionInfo {
+
+                        /**
+                         * Constructs a new QueryExpansionInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.discoveryengine.v1.SearchResponse.IQueryExpansionInfo);
+
+                        /** QueryExpansionInfo expandedQuery. */
+                        public expandedQuery: boolean;
+
+                        /** QueryExpansionInfo pinnedResultCount. */
+                        public pinnedResultCount: (number|Long|string);
+
+                        /**
+                         * Creates a new QueryExpansionInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns QueryExpansionInfo instance
+                         */
+                        public static create(properties?: google.cloud.discoveryengine.v1.SearchResponse.IQueryExpansionInfo): google.cloud.discoveryengine.v1.SearchResponse.QueryExpansionInfo;
+
+                        /**
+                         * Encodes the specified QueryExpansionInfo message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.QueryExpansionInfo.verify|verify} messages.
+                         * @param message QueryExpansionInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.discoveryengine.v1.SearchResponse.IQueryExpansionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified QueryExpansionInfo message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.QueryExpansionInfo.verify|verify} messages.
+                         * @param message QueryExpansionInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchResponse.IQueryExpansionInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a QueryExpansionInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns QueryExpansionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchResponse.QueryExpansionInfo;
+
+                        /**
+                         * Decodes a QueryExpansionInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns QueryExpansionInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchResponse.QueryExpansionInfo;
+
+                        /**
+                         * Verifies a QueryExpansionInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a QueryExpansionInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns QueryExpansionInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchResponse.QueryExpansionInfo;
+
+                        /**
+                         * Creates a plain object from a QueryExpansionInfo message. Also converts values to other types if specified.
+                         * @param message QueryExpansionInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.discoveryengine.v1.SearchResponse.QueryExpansionInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this QueryExpansionInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for QueryExpansionInfo
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -844,6 +3695,1022 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+                }
+
+                /** Represents a ConversationalSearchService */
+                class ConversationalSearchService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new ConversationalSearchService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new ConversationalSearchService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): ConversationalSearchService;
+
+                    /**
+                     * Calls ConverseConversation.
+                     * @param request ConverseConversationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ConverseConversationResponse
+                     */
+                    public converseConversation(request: google.cloud.discoveryengine.v1.IConverseConversationRequest, callback: google.cloud.discoveryengine.v1.ConversationalSearchService.ConverseConversationCallback): void;
+
+                    /**
+                     * Calls ConverseConversation.
+                     * @param request ConverseConversationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public converseConversation(request: google.cloud.discoveryengine.v1.IConverseConversationRequest): Promise<google.cloud.discoveryengine.v1.ConverseConversationResponse>;
+
+                    /**
+                     * Calls CreateConversation.
+                     * @param request CreateConversationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Conversation
+                     */
+                    public createConversation(request: google.cloud.discoveryengine.v1.ICreateConversationRequest, callback: google.cloud.discoveryengine.v1.ConversationalSearchService.CreateConversationCallback): void;
+
+                    /**
+                     * Calls CreateConversation.
+                     * @param request CreateConversationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createConversation(request: google.cloud.discoveryengine.v1.ICreateConversationRequest): Promise<google.cloud.discoveryengine.v1.Conversation>;
+
+                    /**
+                     * Calls DeleteConversation.
+                     * @param request DeleteConversationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteConversation(request: google.cloud.discoveryengine.v1.IDeleteConversationRequest, callback: google.cloud.discoveryengine.v1.ConversationalSearchService.DeleteConversationCallback): void;
+
+                    /**
+                     * Calls DeleteConversation.
+                     * @param request DeleteConversationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteConversation(request: google.cloud.discoveryengine.v1.IDeleteConversationRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls UpdateConversation.
+                     * @param request UpdateConversationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Conversation
+                     */
+                    public updateConversation(request: google.cloud.discoveryengine.v1.IUpdateConversationRequest, callback: google.cloud.discoveryengine.v1.ConversationalSearchService.UpdateConversationCallback): void;
+
+                    /**
+                     * Calls UpdateConversation.
+                     * @param request UpdateConversationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateConversation(request: google.cloud.discoveryengine.v1.IUpdateConversationRequest): Promise<google.cloud.discoveryengine.v1.Conversation>;
+
+                    /**
+                     * Calls GetConversation.
+                     * @param request GetConversationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Conversation
+                     */
+                    public getConversation(request: google.cloud.discoveryengine.v1.IGetConversationRequest, callback: google.cloud.discoveryengine.v1.ConversationalSearchService.GetConversationCallback): void;
+
+                    /**
+                     * Calls GetConversation.
+                     * @param request GetConversationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getConversation(request: google.cloud.discoveryengine.v1.IGetConversationRequest): Promise<google.cloud.discoveryengine.v1.Conversation>;
+
+                    /**
+                     * Calls ListConversations.
+                     * @param request ListConversationsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListConversationsResponse
+                     */
+                    public listConversations(request: google.cloud.discoveryengine.v1.IListConversationsRequest, callback: google.cloud.discoveryengine.v1.ConversationalSearchService.ListConversationsCallback): void;
+
+                    /**
+                     * Calls ListConversations.
+                     * @param request ListConversationsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listConversations(request: google.cloud.discoveryengine.v1.IListConversationsRequest): Promise<google.cloud.discoveryengine.v1.ListConversationsResponse>;
+                }
+
+                namespace ConversationalSearchService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1.ConversationalSearchService|converseConversation}.
+                     * @param error Error, if any
+                     * @param [response] ConverseConversationResponse
+                     */
+                    type ConverseConversationCallback = (error: (Error|null), response?: google.cloud.discoveryengine.v1.ConverseConversationResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1.ConversationalSearchService|createConversation}.
+                     * @param error Error, if any
+                     * @param [response] Conversation
+                     */
+                    type CreateConversationCallback = (error: (Error|null), response?: google.cloud.discoveryengine.v1.Conversation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1.ConversationalSearchService|deleteConversation}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteConversationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1.ConversationalSearchService|updateConversation}.
+                     * @param error Error, if any
+                     * @param [response] Conversation
+                     */
+                    type UpdateConversationCallback = (error: (Error|null), response?: google.cloud.discoveryengine.v1.Conversation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1.ConversationalSearchService|getConversation}.
+                     * @param error Error, if any
+                     * @param [response] Conversation
+                     */
+                    type GetConversationCallback = (error: (Error|null), response?: google.cloud.discoveryengine.v1.Conversation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.discoveryengine.v1.ConversationalSearchService|listConversations}.
+                     * @param error Error, if any
+                     * @param [response] ListConversationsResponse
+                     */
+                    type ListConversationsCallback = (error: (Error|null), response?: google.cloud.discoveryengine.v1.ListConversationsResponse) => void;
+                }
+
+                /** Properties of a ConverseConversationRequest. */
+                interface IConverseConversationRequest {
+
+                    /** ConverseConversationRequest name */
+                    name?: (string|null);
+
+                    /** ConverseConversationRequest query */
+                    query?: (google.cloud.discoveryengine.v1.ITextInput|null);
+
+                    /** ConverseConversationRequest servingConfig */
+                    servingConfig?: (string|null);
+
+                    /** ConverseConversationRequest conversation */
+                    conversation?: (google.cloud.discoveryengine.v1.IConversation|null);
+
+                    /** ConverseConversationRequest safeSearch */
+                    safeSearch?: (boolean|null);
+
+                    /** ConverseConversationRequest userLabels */
+                    userLabels?: ({ [k: string]: string }|null);
+
+                    /** ConverseConversationRequest summarySpec */
+                    summarySpec?: (google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.ISummarySpec|null);
+                }
+
+                /** Represents a ConverseConversationRequest. */
+                class ConverseConversationRequest implements IConverseConversationRequest {
+
+                    /**
+                     * Constructs a new ConverseConversationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1.IConverseConversationRequest);
+
+                    /** ConverseConversationRequest name. */
+                    public name: string;
+
+                    /** ConverseConversationRequest query. */
+                    public query?: (google.cloud.discoveryengine.v1.ITextInput|null);
+
+                    /** ConverseConversationRequest servingConfig. */
+                    public servingConfig: string;
+
+                    /** ConverseConversationRequest conversation. */
+                    public conversation?: (google.cloud.discoveryengine.v1.IConversation|null);
+
+                    /** ConverseConversationRequest safeSearch. */
+                    public safeSearch: boolean;
+
+                    /** ConverseConversationRequest userLabels. */
+                    public userLabels: { [k: string]: string };
+
+                    /** ConverseConversationRequest summarySpec. */
+                    public summarySpec?: (google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.ISummarySpec|null);
+
+                    /**
+                     * Creates a new ConverseConversationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConverseConversationRequest instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1.IConverseConversationRequest): google.cloud.discoveryengine.v1.ConverseConversationRequest;
+
+                    /**
+                     * Encodes the specified ConverseConversationRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1.ConverseConversationRequest.verify|verify} messages.
+                     * @param message ConverseConversationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1.IConverseConversationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConverseConversationRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.ConverseConversationRequest.verify|verify} messages.
+                     * @param message ConverseConversationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1.IConverseConversationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConverseConversationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConverseConversationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.ConverseConversationRequest;
+
+                    /**
+                     * Decodes a ConverseConversationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConverseConversationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.ConverseConversationRequest;
+
+                    /**
+                     * Verifies a ConverseConversationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConverseConversationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConverseConversationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.ConverseConversationRequest;
+
+                    /**
+                     * Creates a plain object from a ConverseConversationRequest message. Also converts values to other types if specified.
+                     * @param message ConverseConversationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1.ConverseConversationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConverseConversationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConverseConversationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ConverseConversationResponse. */
+                interface IConverseConversationResponse {
+
+                    /** ConverseConversationResponse reply */
+                    reply?: (google.cloud.discoveryengine.v1.IReply|null);
+
+                    /** ConverseConversationResponse conversation */
+                    conversation?: (google.cloud.discoveryengine.v1.IConversation|null);
+
+                    /** ConverseConversationResponse searchResults */
+                    searchResults?: (google.cloud.discoveryengine.v1.SearchResponse.ISearchResult[]|null);
+                }
+
+                /** Represents a ConverseConversationResponse. */
+                class ConverseConversationResponse implements IConverseConversationResponse {
+
+                    /**
+                     * Constructs a new ConverseConversationResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1.IConverseConversationResponse);
+
+                    /** ConverseConversationResponse reply. */
+                    public reply?: (google.cloud.discoveryengine.v1.IReply|null);
+
+                    /** ConverseConversationResponse conversation. */
+                    public conversation?: (google.cloud.discoveryengine.v1.IConversation|null);
+
+                    /** ConverseConversationResponse searchResults. */
+                    public searchResults: google.cloud.discoveryengine.v1.SearchResponse.ISearchResult[];
+
+                    /**
+                     * Creates a new ConverseConversationResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConverseConversationResponse instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1.IConverseConversationResponse): google.cloud.discoveryengine.v1.ConverseConversationResponse;
+
+                    /**
+                     * Encodes the specified ConverseConversationResponse message. Does not implicitly {@link google.cloud.discoveryengine.v1.ConverseConversationResponse.verify|verify} messages.
+                     * @param message ConverseConversationResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1.IConverseConversationResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConverseConversationResponse message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.ConverseConversationResponse.verify|verify} messages.
+                     * @param message ConverseConversationResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1.IConverseConversationResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConverseConversationResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConverseConversationResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.ConverseConversationResponse;
+
+                    /**
+                     * Decodes a ConverseConversationResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConverseConversationResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.ConverseConversationResponse;
+
+                    /**
+                     * Verifies a ConverseConversationResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConverseConversationResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConverseConversationResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.ConverseConversationResponse;
+
+                    /**
+                     * Creates a plain object from a ConverseConversationResponse message. Also converts values to other types if specified.
+                     * @param message ConverseConversationResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1.ConverseConversationResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConverseConversationResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConverseConversationResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateConversationRequest. */
+                interface ICreateConversationRequest {
+
+                    /** CreateConversationRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateConversationRequest conversation */
+                    conversation?: (google.cloud.discoveryengine.v1.IConversation|null);
+                }
+
+                /** Represents a CreateConversationRequest. */
+                class CreateConversationRequest implements ICreateConversationRequest {
+
+                    /**
+                     * Constructs a new CreateConversationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1.ICreateConversationRequest);
+
+                    /** CreateConversationRequest parent. */
+                    public parent: string;
+
+                    /** CreateConversationRequest conversation. */
+                    public conversation?: (google.cloud.discoveryengine.v1.IConversation|null);
+
+                    /**
+                     * Creates a new CreateConversationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateConversationRequest instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1.ICreateConversationRequest): google.cloud.discoveryengine.v1.CreateConversationRequest;
+
+                    /**
+                     * Encodes the specified CreateConversationRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1.CreateConversationRequest.verify|verify} messages.
+                     * @param message CreateConversationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1.ICreateConversationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateConversationRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.CreateConversationRequest.verify|verify} messages.
+                     * @param message CreateConversationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1.ICreateConversationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateConversationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateConversationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.CreateConversationRequest;
+
+                    /**
+                     * Decodes a CreateConversationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateConversationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.CreateConversationRequest;
+
+                    /**
+                     * Verifies a CreateConversationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateConversationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateConversationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.CreateConversationRequest;
+
+                    /**
+                     * Creates a plain object from a CreateConversationRequest message. Also converts values to other types if specified.
+                     * @param message CreateConversationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1.CreateConversationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateConversationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateConversationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateConversationRequest. */
+                interface IUpdateConversationRequest {
+
+                    /** UpdateConversationRequest conversation */
+                    conversation?: (google.cloud.discoveryengine.v1.IConversation|null);
+
+                    /** UpdateConversationRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateConversationRequest. */
+                class UpdateConversationRequest implements IUpdateConversationRequest {
+
+                    /**
+                     * Constructs a new UpdateConversationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1.IUpdateConversationRequest);
+
+                    /** UpdateConversationRequest conversation. */
+                    public conversation?: (google.cloud.discoveryengine.v1.IConversation|null);
+
+                    /** UpdateConversationRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateConversationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateConversationRequest instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1.IUpdateConversationRequest): google.cloud.discoveryengine.v1.UpdateConversationRequest;
+
+                    /**
+                     * Encodes the specified UpdateConversationRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1.UpdateConversationRequest.verify|verify} messages.
+                     * @param message UpdateConversationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1.IUpdateConversationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateConversationRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.UpdateConversationRequest.verify|verify} messages.
+                     * @param message UpdateConversationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1.IUpdateConversationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateConversationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateConversationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.UpdateConversationRequest;
+
+                    /**
+                     * Decodes an UpdateConversationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateConversationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.UpdateConversationRequest;
+
+                    /**
+                     * Verifies an UpdateConversationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateConversationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateConversationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.UpdateConversationRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateConversationRequest message. Also converts values to other types if specified.
+                     * @param message UpdateConversationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1.UpdateConversationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateConversationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateConversationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteConversationRequest. */
+                interface IDeleteConversationRequest {
+
+                    /** DeleteConversationRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteConversationRequest. */
+                class DeleteConversationRequest implements IDeleteConversationRequest {
+
+                    /**
+                     * Constructs a new DeleteConversationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1.IDeleteConversationRequest);
+
+                    /** DeleteConversationRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteConversationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteConversationRequest instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1.IDeleteConversationRequest): google.cloud.discoveryengine.v1.DeleteConversationRequest;
+
+                    /**
+                     * Encodes the specified DeleteConversationRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1.DeleteConversationRequest.verify|verify} messages.
+                     * @param message DeleteConversationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1.IDeleteConversationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteConversationRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.DeleteConversationRequest.verify|verify} messages.
+                     * @param message DeleteConversationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1.IDeleteConversationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteConversationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteConversationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.DeleteConversationRequest;
+
+                    /**
+                     * Decodes a DeleteConversationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteConversationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.DeleteConversationRequest;
+
+                    /**
+                     * Verifies a DeleteConversationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteConversationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteConversationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.DeleteConversationRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteConversationRequest message. Also converts values to other types if specified.
+                     * @param message DeleteConversationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1.DeleteConversationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteConversationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteConversationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetConversationRequest. */
+                interface IGetConversationRequest {
+
+                    /** GetConversationRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetConversationRequest. */
+                class GetConversationRequest implements IGetConversationRequest {
+
+                    /**
+                     * Constructs a new GetConversationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1.IGetConversationRequest);
+
+                    /** GetConversationRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetConversationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetConversationRequest instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1.IGetConversationRequest): google.cloud.discoveryengine.v1.GetConversationRequest;
+
+                    /**
+                     * Encodes the specified GetConversationRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1.GetConversationRequest.verify|verify} messages.
+                     * @param message GetConversationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1.IGetConversationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetConversationRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.GetConversationRequest.verify|verify} messages.
+                     * @param message GetConversationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1.IGetConversationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetConversationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetConversationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.GetConversationRequest;
+
+                    /**
+                     * Decodes a GetConversationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetConversationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.GetConversationRequest;
+
+                    /**
+                     * Verifies a GetConversationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetConversationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetConversationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.GetConversationRequest;
+
+                    /**
+                     * Creates a plain object from a GetConversationRequest message. Also converts values to other types if specified.
+                     * @param message GetConversationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1.GetConversationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetConversationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetConversationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListConversationsRequest. */
+                interface IListConversationsRequest {
+
+                    /** ListConversationsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListConversationsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListConversationsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListConversationsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListConversationsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListConversationsRequest. */
+                class ListConversationsRequest implements IListConversationsRequest {
+
+                    /**
+                     * Constructs a new ListConversationsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1.IListConversationsRequest);
+
+                    /** ListConversationsRequest parent. */
+                    public parent: string;
+
+                    /** ListConversationsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListConversationsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListConversationsRequest filter. */
+                    public filter: string;
+
+                    /** ListConversationsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListConversationsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListConversationsRequest instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1.IListConversationsRequest): google.cloud.discoveryengine.v1.ListConversationsRequest;
+
+                    /**
+                     * Encodes the specified ListConversationsRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1.ListConversationsRequest.verify|verify} messages.
+                     * @param message ListConversationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1.IListConversationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListConversationsRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.ListConversationsRequest.verify|verify} messages.
+                     * @param message ListConversationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1.IListConversationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListConversationsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListConversationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.ListConversationsRequest;
+
+                    /**
+                     * Decodes a ListConversationsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListConversationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.ListConversationsRequest;
+
+                    /**
+                     * Verifies a ListConversationsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListConversationsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListConversationsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.ListConversationsRequest;
+
+                    /**
+                     * Creates a plain object from a ListConversationsRequest message. Also converts values to other types if specified.
+                     * @param message ListConversationsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1.ListConversationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListConversationsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListConversationsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListConversationsResponse. */
+                interface IListConversationsResponse {
+
+                    /** ListConversationsResponse conversations */
+                    conversations?: (google.cloud.discoveryengine.v1.IConversation[]|null);
+
+                    /** ListConversationsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListConversationsResponse. */
+                class ListConversationsResponse implements IListConversationsResponse {
+
+                    /**
+                     * Constructs a new ListConversationsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.discoveryengine.v1.IListConversationsResponse);
+
+                    /** ListConversationsResponse conversations. */
+                    public conversations: google.cloud.discoveryengine.v1.IConversation[];
+
+                    /** ListConversationsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListConversationsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListConversationsResponse instance
+                     */
+                    public static create(properties?: google.cloud.discoveryengine.v1.IListConversationsResponse): google.cloud.discoveryengine.v1.ListConversationsResponse;
+
+                    /**
+                     * Encodes the specified ListConversationsResponse message. Does not implicitly {@link google.cloud.discoveryengine.v1.ListConversationsResponse.verify|verify} messages.
+                     * @param message ListConversationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.discoveryengine.v1.IListConversationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListConversationsResponse message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.ListConversationsResponse.verify|verify} messages.
+                     * @param message ListConversationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.discoveryengine.v1.IListConversationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListConversationsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListConversationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.ListConversationsResponse;
+
+                    /**
+                     * Decodes a ListConversationsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListConversationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.ListConversationsResponse;
+
+                    /**
+                     * Verifies a ListConversationsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListConversationsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListConversationsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.ListConversationsResponse;
+
+                    /**
+                     * Creates a plain object from a ListConversationsResponse message. Also converts values to other types if specified.
+                     * @param message ListConversationsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.discoveryengine.v1.ListConversationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListConversationsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListConversationsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Represents a DocumentService */
@@ -3566,6 +7433,9 @@ export namespace google {
                     /** DocumentInfo name */
                     name?: (string|null);
 
+                    /** DocumentInfo uri */
+                    uri?: (string|null);
+
                     /** DocumentInfo quantity */
                     quantity?: (number|null);
 
@@ -3588,6 +7458,9 @@ export namespace google {
                     /** DocumentInfo name. */
                     public name?: (string|null);
 
+                    /** DocumentInfo uri. */
+                    public uri?: (string|null);
+
                     /** DocumentInfo quantity. */
                     public quantity?: (number|null);
 
@@ -3595,7 +7468,7 @@ export namespace google {
                     public promotionIds: string[];
 
                     /** DocumentInfo documentDescriptor. */
-                    public documentDescriptor?: ("id"|"name");
+                    public documentDescriptor?: ("id"|"name"|"uri");
 
                     /** DocumentInfo _quantity. */
                     public _quantity?: "quantity";
@@ -5398,873 +9271,6 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Represents a SearchService */
-                class SearchService extends $protobuf.rpc.Service {
-
-                    /**
-                     * Constructs a new SearchService service.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     */
-                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
-
-                    /**
-                     * Creates new SearchService service using the specified rpc implementation.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     * @returns RPC service. Useful where requests and/or responses are streamed.
-                     */
-                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): SearchService;
-
-                    /**
-                     * Calls Search.
-                     * @param request SearchRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and SearchResponse
-                     */
-                    public search(request: google.cloud.discoveryengine.v1.ISearchRequest, callback: google.cloud.discoveryengine.v1.SearchService.SearchCallback): void;
-
-                    /**
-                     * Calls Search.
-                     * @param request SearchRequest message or plain object
-                     * @returns Promise
-                     */
-                    public search(request: google.cloud.discoveryengine.v1.ISearchRequest): Promise<google.cloud.discoveryengine.v1.SearchResponse>;
-                }
-
-                namespace SearchService {
-
-                    /**
-                     * Callback as used by {@link google.cloud.discoveryengine.v1.SearchService|search}.
-                     * @param error Error, if any
-                     * @param [response] SearchResponse
-                     */
-                    type SearchCallback = (error: (Error|null), response?: google.cloud.discoveryengine.v1.SearchResponse) => void;
-                }
-
-                /** Properties of a SearchRequest. */
-                interface ISearchRequest {
-
-                    /** SearchRequest servingConfig */
-                    servingConfig?: (string|null);
-
-                    /** SearchRequest branch */
-                    branch?: (string|null);
-
-                    /** SearchRequest query */
-                    query?: (string|null);
-
-                    /** SearchRequest pageSize */
-                    pageSize?: (number|null);
-
-                    /** SearchRequest pageToken */
-                    pageToken?: (string|null);
-
-                    /** SearchRequest offset */
-                    offset?: (number|null);
-
-                    /** SearchRequest userInfo */
-                    userInfo?: (google.cloud.discoveryengine.v1.IUserInfo|null);
-
-                    /** SearchRequest params */
-                    params?: ({ [k: string]: google.protobuf.IValue }|null);
-
-                    /** SearchRequest queryExpansionSpec */
-                    queryExpansionSpec?: (google.cloud.discoveryengine.v1.SearchRequest.IQueryExpansionSpec|null);
-
-                    /** SearchRequest spellCorrectionSpec */
-                    spellCorrectionSpec?: (google.cloud.discoveryengine.v1.SearchRequest.ISpellCorrectionSpec|null);
-
-                    /** SearchRequest userPseudoId */
-                    userPseudoId?: (string|null);
-
-                    /** SearchRequest contentSearchSpec */
-                    contentSearchSpec?: (google.cloud.discoveryengine.v1.SearchRequest.IContentSearchSpec|null);
-
-                    /** SearchRequest safeSearch */
-                    safeSearch?: (boolean|null);
-
-                    /** SearchRequest userLabels */
-                    userLabels?: ({ [k: string]: string }|null);
-                }
-
-                /** Represents a SearchRequest. */
-                class SearchRequest implements ISearchRequest {
-
-                    /**
-                     * Constructs a new SearchRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.discoveryengine.v1.ISearchRequest);
-
-                    /** SearchRequest servingConfig. */
-                    public servingConfig: string;
-
-                    /** SearchRequest branch. */
-                    public branch: string;
-
-                    /** SearchRequest query. */
-                    public query: string;
-
-                    /** SearchRequest pageSize. */
-                    public pageSize: number;
-
-                    /** SearchRequest pageToken. */
-                    public pageToken: string;
-
-                    /** SearchRequest offset. */
-                    public offset: number;
-
-                    /** SearchRequest userInfo. */
-                    public userInfo?: (google.cloud.discoveryengine.v1.IUserInfo|null);
-
-                    /** SearchRequest params. */
-                    public params: { [k: string]: google.protobuf.IValue };
-
-                    /** SearchRequest queryExpansionSpec. */
-                    public queryExpansionSpec?: (google.cloud.discoveryengine.v1.SearchRequest.IQueryExpansionSpec|null);
-
-                    /** SearchRequest spellCorrectionSpec. */
-                    public spellCorrectionSpec?: (google.cloud.discoveryengine.v1.SearchRequest.ISpellCorrectionSpec|null);
-
-                    /** SearchRequest userPseudoId. */
-                    public userPseudoId: string;
-
-                    /** SearchRequest contentSearchSpec. */
-                    public contentSearchSpec?: (google.cloud.discoveryengine.v1.SearchRequest.IContentSearchSpec|null);
-
-                    /** SearchRequest safeSearch. */
-                    public safeSearch: boolean;
-
-                    /** SearchRequest userLabels. */
-                    public userLabels: { [k: string]: string };
-
-                    /**
-                     * Creates a new SearchRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns SearchRequest instance
-                     */
-                    public static create(properties?: google.cloud.discoveryengine.v1.ISearchRequest): google.cloud.discoveryengine.v1.SearchRequest;
-
-                    /**
-                     * Encodes the specified SearchRequest message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.verify|verify} messages.
-                     * @param message SearchRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.discoveryengine.v1.ISearchRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified SearchRequest message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.verify|verify} messages.
-                     * @param message SearchRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.discoveryengine.v1.ISearchRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a SearchRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns SearchRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchRequest;
-
-                    /**
-                     * Decodes a SearchRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns SearchRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchRequest;
-
-                    /**
-                     * Verifies a SearchRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a SearchRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns SearchRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchRequest;
-
-                    /**
-                     * Creates a plain object from a SearchRequest message. Also converts values to other types if specified.
-                     * @param message SearchRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.discoveryengine.v1.SearchRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this SearchRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for SearchRequest
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace SearchRequest {
-
-                    /** Properties of a QueryExpansionSpec. */
-                    interface IQueryExpansionSpec {
-
-                        /** QueryExpansionSpec condition */
-                        condition?: (google.cloud.discoveryengine.v1.SearchRequest.QueryExpansionSpec.Condition|keyof typeof google.cloud.discoveryengine.v1.SearchRequest.QueryExpansionSpec.Condition|null);
-                    }
-
-                    /** Represents a QueryExpansionSpec. */
-                    class QueryExpansionSpec implements IQueryExpansionSpec {
-
-                        /**
-                         * Constructs a new QueryExpansionSpec.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.discoveryengine.v1.SearchRequest.IQueryExpansionSpec);
-
-                        /** QueryExpansionSpec condition. */
-                        public condition: (google.cloud.discoveryengine.v1.SearchRequest.QueryExpansionSpec.Condition|keyof typeof google.cloud.discoveryengine.v1.SearchRequest.QueryExpansionSpec.Condition);
-
-                        /**
-                         * Creates a new QueryExpansionSpec instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns QueryExpansionSpec instance
-                         */
-                        public static create(properties?: google.cloud.discoveryengine.v1.SearchRequest.IQueryExpansionSpec): google.cloud.discoveryengine.v1.SearchRequest.QueryExpansionSpec;
-
-                        /**
-                         * Encodes the specified QueryExpansionSpec message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.QueryExpansionSpec.verify|verify} messages.
-                         * @param message QueryExpansionSpec message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.discoveryengine.v1.SearchRequest.IQueryExpansionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified QueryExpansionSpec message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.QueryExpansionSpec.verify|verify} messages.
-                         * @param message QueryExpansionSpec message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchRequest.IQueryExpansionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a QueryExpansionSpec message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns QueryExpansionSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchRequest.QueryExpansionSpec;
-
-                        /**
-                         * Decodes a QueryExpansionSpec message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns QueryExpansionSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchRequest.QueryExpansionSpec;
-
-                        /**
-                         * Verifies a QueryExpansionSpec message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a QueryExpansionSpec message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns QueryExpansionSpec
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchRequest.QueryExpansionSpec;
-
-                        /**
-                         * Creates a plain object from a QueryExpansionSpec message. Also converts values to other types if specified.
-                         * @param message QueryExpansionSpec
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.discoveryengine.v1.SearchRequest.QueryExpansionSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this QueryExpansionSpec to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for QueryExpansionSpec
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    namespace QueryExpansionSpec {
-
-                        /** Condition enum. */
-                        enum Condition {
-                            CONDITION_UNSPECIFIED = 0,
-                            DISABLED = 1,
-                            AUTO = 2
-                        }
-                    }
-
-                    /** Properties of a SpellCorrectionSpec. */
-                    interface ISpellCorrectionSpec {
-
-                        /** SpellCorrectionSpec mode */
-                        mode?: (google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec.Mode|keyof typeof google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec.Mode|null);
-                    }
-
-                    /** Represents a SpellCorrectionSpec. */
-                    class SpellCorrectionSpec implements ISpellCorrectionSpec {
-
-                        /**
-                         * Constructs a new SpellCorrectionSpec.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.discoveryengine.v1.SearchRequest.ISpellCorrectionSpec);
-
-                        /** SpellCorrectionSpec mode. */
-                        public mode: (google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec.Mode|keyof typeof google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec.Mode);
-
-                        /**
-                         * Creates a new SpellCorrectionSpec instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns SpellCorrectionSpec instance
-                         */
-                        public static create(properties?: google.cloud.discoveryengine.v1.SearchRequest.ISpellCorrectionSpec): google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec;
-
-                        /**
-                         * Encodes the specified SpellCorrectionSpec message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec.verify|verify} messages.
-                         * @param message SpellCorrectionSpec message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.discoveryengine.v1.SearchRequest.ISpellCorrectionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified SpellCorrectionSpec message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec.verify|verify} messages.
-                         * @param message SpellCorrectionSpec message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchRequest.ISpellCorrectionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a SpellCorrectionSpec message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns SpellCorrectionSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec;
-
-                        /**
-                         * Decodes a SpellCorrectionSpec message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns SpellCorrectionSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec;
-
-                        /**
-                         * Verifies a SpellCorrectionSpec message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a SpellCorrectionSpec message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns SpellCorrectionSpec
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec;
-
-                        /**
-                         * Creates a plain object from a SpellCorrectionSpec message. Also converts values to other types if specified.
-                         * @param message SpellCorrectionSpec
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this SpellCorrectionSpec to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for SpellCorrectionSpec
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    namespace SpellCorrectionSpec {
-
-                        /** Mode enum. */
-                        enum Mode {
-                            MODE_UNSPECIFIED = 0,
-                            SUGGESTION_ONLY = 1,
-                            AUTO = 2
-                        }
-                    }
-
-                    /** Properties of a ContentSearchSpec. */
-                    interface IContentSearchSpec {
-
-                        /** ContentSearchSpec snippetSpec */
-                        snippetSpec?: (google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.ISnippetSpec|null);
-                    }
-
-                    /** Represents a ContentSearchSpec. */
-                    class ContentSearchSpec implements IContentSearchSpec {
-
-                        /**
-                         * Constructs a new ContentSearchSpec.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.discoveryengine.v1.SearchRequest.IContentSearchSpec);
-
-                        /** ContentSearchSpec snippetSpec. */
-                        public snippetSpec?: (google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.ISnippetSpec|null);
-
-                        /**
-                         * Creates a new ContentSearchSpec instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns ContentSearchSpec instance
-                         */
-                        public static create(properties?: google.cloud.discoveryengine.v1.SearchRequest.IContentSearchSpec): google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec;
-
-                        /**
-                         * Encodes the specified ContentSearchSpec message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.verify|verify} messages.
-                         * @param message ContentSearchSpec message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.discoveryengine.v1.SearchRequest.IContentSearchSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified ContentSearchSpec message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.verify|verify} messages.
-                         * @param message ContentSearchSpec message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchRequest.IContentSearchSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a ContentSearchSpec message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns ContentSearchSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec;
-
-                        /**
-                         * Decodes a ContentSearchSpec message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns ContentSearchSpec
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec;
-
-                        /**
-                         * Verifies a ContentSearchSpec message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a ContentSearchSpec message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns ContentSearchSpec
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec;
-
-                        /**
-                         * Creates a plain object from a ContentSearchSpec message. Also converts values to other types if specified.
-                         * @param message ContentSearchSpec
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this ContentSearchSpec to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for ContentSearchSpec
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    namespace ContentSearchSpec {
-
-                        /** Properties of a SnippetSpec. */
-                        interface ISnippetSpec {
-
-                            /** SnippetSpec maxSnippetCount */
-                            maxSnippetCount?: (number|null);
-
-                            /** SnippetSpec referenceOnly */
-                            referenceOnly?: (boolean|null);
-                        }
-
-                        /** Represents a SnippetSpec. */
-                        class SnippetSpec implements ISnippetSpec {
-
-                            /**
-                             * Constructs a new SnippetSpec.
-                             * @param [properties] Properties to set
-                             */
-                            constructor(properties?: google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.ISnippetSpec);
-
-                            /** SnippetSpec maxSnippetCount. */
-                            public maxSnippetCount: number;
-
-                            /** SnippetSpec referenceOnly. */
-                            public referenceOnly: boolean;
-
-                            /**
-                             * Creates a new SnippetSpec instance using the specified properties.
-                             * @param [properties] Properties to set
-                             * @returns SnippetSpec instance
-                             */
-                            public static create(properties?: google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.ISnippetSpec): google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.SnippetSpec;
-
-                            /**
-                             * Encodes the specified SnippetSpec message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.SnippetSpec.verify|verify} messages.
-                             * @param message SnippetSpec message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encode(message: google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.ISnippetSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Encodes the specified SnippetSpec message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.SnippetSpec.verify|verify} messages.
-                             * @param message SnippetSpec message or plain object to encode
-                             * @param [writer] Writer to encode to
-                             * @returns Writer
-                             */
-                            public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.ISnippetSpec, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                            /**
-                             * Decodes a SnippetSpec message from the specified reader or buffer.
-                             * @param reader Reader or buffer to decode from
-                             * @param [length] Message length if known beforehand
-                             * @returns SnippetSpec
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.SnippetSpec;
-
-                            /**
-                             * Decodes a SnippetSpec message from the specified reader or buffer, length delimited.
-                             * @param reader Reader or buffer to decode from
-                             * @returns SnippetSpec
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.SnippetSpec;
-
-                            /**
-                             * Verifies a SnippetSpec message.
-                             * @param message Plain object to verify
-                             * @returns `null` if valid, otherwise the reason why it is not
-                             */
-                            public static verify(message: { [k: string]: any }): (string|null);
-
-                            /**
-                             * Creates a SnippetSpec message from a plain object. Also converts values to their respective internal types.
-                             * @param object Plain object
-                             * @returns SnippetSpec
-                             */
-                            public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.SnippetSpec;
-
-                            /**
-                             * Creates a plain object from a SnippetSpec message. Also converts values to other types if specified.
-                             * @param message SnippetSpec
-                             * @param [options] Conversion options
-                             * @returns Plain object
-                             */
-                            public static toObject(message: google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec.SnippetSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                            /**
-                             * Converts this SnippetSpec to JSON.
-                             * @returns JSON object
-                             */
-                            public toJSON(): { [k: string]: any };
-
-                            /**
-                             * Gets the default type url for SnippetSpec
-                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns The default type url
-                             */
-                            public static getTypeUrl(typeUrlPrefix?: string): string;
-                        }
-                    }
-                }
-
-                /** Properties of a SearchResponse. */
-                interface ISearchResponse {
-
-                    /** SearchResponse results */
-                    results?: (google.cloud.discoveryengine.v1.SearchResponse.ISearchResult[]|null);
-
-                    /** SearchResponse totalSize */
-                    totalSize?: (number|null);
-
-                    /** SearchResponse attributionToken */
-                    attributionToken?: (string|null);
-
-                    /** SearchResponse nextPageToken */
-                    nextPageToken?: (string|null);
-
-                    /** SearchResponse correctedQuery */
-                    correctedQuery?: (string|null);
-                }
-
-                /** Represents a SearchResponse. */
-                class SearchResponse implements ISearchResponse {
-
-                    /**
-                     * Constructs a new SearchResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.discoveryengine.v1.ISearchResponse);
-
-                    /** SearchResponse results. */
-                    public results: google.cloud.discoveryengine.v1.SearchResponse.ISearchResult[];
-
-                    /** SearchResponse totalSize. */
-                    public totalSize: number;
-
-                    /** SearchResponse attributionToken. */
-                    public attributionToken: string;
-
-                    /** SearchResponse nextPageToken. */
-                    public nextPageToken: string;
-
-                    /** SearchResponse correctedQuery. */
-                    public correctedQuery: string;
-
-                    /**
-                     * Creates a new SearchResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns SearchResponse instance
-                     */
-                    public static create(properties?: google.cloud.discoveryengine.v1.ISearchResponse): google.cloud.discoveryengine.v1.SearchResponse;
-
-                    /**
-                     * Encodes the specified SearchResponse message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.verify|verify} messages.
-                     * @param message SearchResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.discoveryengine.v1.ISearchResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified SearchResponse message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.verify|verify} messages.
-                     * @param message SearchResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.discoveryengine.v1.ISearchResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a SearchResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns SearchResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchResponse;
-
-                    /**
-                     * Decodes a SearchResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns SearchResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchResponse;
-
-                    /**
-                     * Verifies a SearchResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a SearchResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns SearchResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchResponse;
-
-                    /**
-                     * Creates a plain object from a SearchResponse message. Also converts values to other types if specified.
-                     * @param message SearchResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.discoveryengine.v1.SearchResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this SearchResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for SearchResponse
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace SearchResponse {
-
-                    /** Properties of a SearchResult. */
-                    interface ISearchResult {
-
-                        /** SearchResult id */
-                        id?: (string|null);
-
-                        /** SearchResult document */
-                        document?: (google.cloud.discoveryengine.v1.IDocument|null);
-                    }
-
-                    /** Represents a SearchResult. */
-                    class SearchResult implements ISearchResult {
-
-                        /**
-                         * Constructs a new SearchResult.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.discoveryengine.v1.SearchResponse.ISearchResult);
-
-                        /** SearchResult id. */
-                        public id: string;
-
-                        /** SearchResult document. */
-                        public document?: (google.cloud.discoveryengine.v1.IDocument|null);
-
-                        /**
-                         * Creates a new SearchResult instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns SearchResult instance
-                         */
-                        public static create(properties?: google.cloud.discoveryengine.v1.SearchResponse.ISearchResult): google.cloud.discoveryengine.v1.SearchResponse.SearchResult;
-
-                        /**
-                         * Encodes the specified SearchResult message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.SearchResult.verify|verify} messages.
-                         * @param message SearchResult message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.discoveryengine.v1.SearchResponse.ISearchResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified SearchResult message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchResponse.SearchResult.verify|verify} messages.
-                         * @param message SearchResult message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchResponse.ISearchResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a SearchResult message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns SearchResult
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchResponse.SearchResult;
-
-                        /**
-                         * Decodes a SearchResult message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns SearchResult
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchResponse.SearchResult;
-
-                        /**
-                         * Verifies a SearchResult message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a SearchResult message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns SearchResult
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchResponse.SearchResult;
-
-                        /**
-                         * Creates a plain object from a SearchResult message. Also converts values to other types if specified.
-                         * @param message SearchResult
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.discoveryengine.v1.SearchResponse.SearchResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this SearchResult to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for SearchResult
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
                 }
 
                 /** Represents a UserEventService */
@@ -23470,109 +26476,6 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
-        /** Properties of an Any. */
-        interface IAny {
-
-            /** Any type_url */
-            type_url?: (string|null);
-
-            /** Any value */
-            value?: (Uint8Array|string|null);
-        }
-
-        /** Represents an Any. */
-        class Any implements IAny {
-
-            /**
-             * Constructs a new Any.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IAny);
-
-            /** Any type_url. */
-            public type_url: string;
-
-            /** Any value. */
-            public value: (Uint8Array|string);
-
-            /**
-             * Creates a new Any instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Any instance
-             */
-            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
-
-            /**
-             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-             * @param message Any message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-             * @param message Any message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an Any message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Any
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
-
-            /**
-             * Decodes an Any message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Any
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
-
-            /**
-             * Verifies an Any message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an Any message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Any
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
-
-            /**
-             * Creates a plain object from an Any message. Also converts values to other types if specified.
-             * @param message Any
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Any to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Any
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
         /** Properties of an Empty. */
         interface IEmpty {
         }
@@ -23755,6 +26658,109 @@ export namespace google {
 
             /**
              * Gets the default type url for FieldMask
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an Any. */
+        interface IAny {
+
+            /** Any type_url */
+            type_url?: (string|null);
+
+            /** Any value */
+            value?: (Uint8Array|string|null);
+        }
+
+        /** Represents an Any. */
+        class Any implements IAny {
+
+            /**
+             * Constructs a new Any.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IAny);
+
+            /** Any type_url. */
+            public type_url: string;
+
+            /** Any value. */
+            public value: (Uint8Array|string);
+
+            /**
+             * Creates a new Any instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Any instance
+             */
+            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
+
+            /**
+             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
+
+            /**
+             * Verifies an Any message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Any message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Any
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
+
+            /**
+             * Creates a plain object from an Any message. Also converts values to other types if specified.
+             * @param message Any
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Any to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Any
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

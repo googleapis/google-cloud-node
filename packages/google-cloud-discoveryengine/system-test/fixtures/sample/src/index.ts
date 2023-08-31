@@ -18,6 +18,7 @@
 
 import {
   CompletionServiceClient,
+  ConversationalSearchServiceClient,
   DocumentServiceClient,
   SchemaServiceClient,
   SearchServiceClient,
@@ -26,6 +27,11 @@ import {
 
 // check that the client class type name can be used
 function doStuffWithCompletionServiceClient(client: CompletionServiceClient) {
+  client.close();
+}
+function doStuffWithConversationalSearchServiceClient(
+  client: ConversationalSearchServiceClient
+) {
   client.close();
 }
 function doStuffWithDocumentServiceClient(client: DocumentServiceClient) {
@@ -45,6 +51,12 @@ function main() {
   // check that the client instance can be created
   const completionServiceClient = new CompletionServiceClient();
   doStuffWithCompletionServiceClient(completionServiceClient);
+  // check that the client instance can be created
+  const conversationalSearchServiceClient =
+    new ConversationalSearchServiceClient();
+  doStuffWithConversationalSearchServiceClient(
+    conversationalSearchServiceClient
+  );
   // check that the client instance can be created
   const documentServiceClient = new DocumentServiceClient();
   doStuffWithDocumentServiceClient(documentServiceClient);

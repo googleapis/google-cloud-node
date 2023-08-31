@@ -47,9 +47,13 @@ function main(servingConfig) {
    */
   // const query = 'abc123'
   /**
+   *  Raw image query.
+   */
+  // const imageQuery = {}
+  /**
    *  Maximum number of Document google.cloud.discoveryengine.v1.Document s to
    *  return. If unspecified, defaults to a reasonable value. The maximum allowed
-   *  value is 100. Values above 100 will be coerced to 100.
+   *  value is 100. Values above 100 are coerced to 100.
    *  If this field is negative, an  `INVALID_ARGUMENT`  is returned.
    */
   // const pageSize = 1234
@@ -74,11 +78,37 @@ function main(servingConfig) {
    */
   // const offset = 1234
   /**
+   *  The filter syntax consists of an expression language for constructing a
+   *  predicate from one or more fields of the documents being filtered. Filter
+   *  expression is case-sensitive.
+   *  If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
+   */
+  // const filter = 'abc123'
+  /**
+   *  The order in which documents are returned. Documents can be ordered by
+   *  a field in an Document google.cloud.discoveryengine.v1.Document  object.
+   *  Leave it unset if ordered by relevance. `order_by` expression is
+   *  case-sensitive.
+   *  If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
+   */
+  // const orderBy = 'abc123'
+  /**
    *  Information about the end user.
-   *  Highly recommended for analytics. The user_agent string in UserInfo will
-   *  be used to deduce device_type for analytics.
+   *  Highly recommended for analytics.
+   *  UserInfo.user_agent google.cloud.discoveryengine.v1.UserInfo.user_agent 
+   *  is used to deduce `device_type` for analytics.
    */
   // const userInfo = {}
+  /**
+   *  Facet specifications for faceted search. If empty, no facets are returned.
+   *  A maximum of 100 values are allowed. Otherwise, an  `INVALID_ARGUMENT`
+   *  error is returned.
+   */
+  // const facetSpecs = [1,2,3,4]
+  /**
+   *  Boost specification to boost certain documents.
+   */
+  // const boostSpec = {}
   /**
    *  Additional search parameters.
    *  For public website search only, supported values are:
@@ -91,12 +121,12 @@ function main(servingConfig) {
   // const params = [1,2,3,4]
   /**
    *  The query expansion specification that specifies the conditions under which
-   *  query expansion will occur.
+   *  query expansion occurs.
    */
   // const queryExpansionSpec = {}
   /**
    *  The spell correction specification that specifies the mode under
-   *  which spell correction will take effect.
+   *  which spell correction takes effect.
    */
   // const spellCorrectionSpec = {}
   /**
@@ -114,13 +144,12 @@ function main(servingConfig) {
    */
   // const userPseudoId = 'abc123'
   /**
-   *  The content search spec that configs the desired behavior of content
-   *  search.
+   *  A specification for configuring the behavior of content search.
    */
   // const contentSearchSpec = {}
   /**
    *  Whether to turn on safe search. This is only supported for
-   *  ContentConfig.PUBLIC_WEBSITE .
+   *  website search.
    */
   // const safeSearch = true
   /**
