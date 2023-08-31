@@ -240,6 +240,44 @@
                                   "(google.api.method_signature)": "name"
                                 }
                               ]
+                            },
+                            "GetGenerativeSettings": {
+                              "requestType": "GetGenerativeSettingsRequest",
+                              "responseType": "GenerativeSettings",
+                              "options": {
+                                "(google.api.http).get": "/v3/{name=projects/*/locations/*/agents/*/generativeSettings}",
+                                "(google.api.method_signature)": "name,language_code"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v3/{name=projects/*/locations/*/agents/*/generativeSettings}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name,language_code"
+                                }
+                              ]
+                            },
+                            "UpdateGenerativeSettings": {
+                              "requestType": "UpdateGenerativeSettingsRequest",
+                              "responseType": "GenerativeSettings",
+                              "options": {
+                                "(google.api.http).patch": "/v3/{generative_settings.name=projects/*/locations/*/agents/*/generativeSettings}",
+                                "(google.api.http).body": "generative_settings",
+                                "(google.api.method_signature)": "generative_settings,update_mask"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v3/{generative_settings.name=projects/*/locations/*/agents/*/generativeSettings}",
+                                    "body": "generative_settings"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "generative_settings,update_mask"
+                                }
+                              ]
                             }
                           }
                         },
@@ -255,6 +293,13 @@
                           "options": {
                             "(google.api.resource).type": "dialogflow.googleapis.com/Agent",
                             "(google.api.resource).pattern": "projects/{project}/locations/{location}/agents/{agent}"
+                          },
+                          "oneofs": {
+                            "_genAppBuilderSettings": {
+                              "oneof": [
+                                "genAppBuilderSettings"
+                              ]
+                            }
                           },
                           "fields": {
                             "name": {
@@ -340,6 +385,13 @@
                             "textToSpeechSettings": {
                               "type": "TextToSpeechSettings",
                               "id": 31
+                            },
+                            "genAppBuilderSettings": {
+                              "type": "GenAppBuilderSettings",
+                              "id": 33,
+                              "options": {
+                                "proto3_optional": true
+                              }
                             }
                           },
                           "nested": {
@@ -381,6 +433,17 @@
                                       "type": "string",
                                       "id": 5
                                     }
+                                  }
+                                }
+                              }
+                            },
+                            "GenAppBuilderSettings": {
+                              "fields": {
+                                "engine": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
                                   }
                                 }
                               }
@@ -672,6 +735,43 @@
                               "rule": "repeated",
                               "type": "FlowValidationResult",
                               "id": 2
+                            }
+                          }
+                        },
+                        "GetGenerativeSettingsRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/AgentGenerativeSettings"
+                              }
+                            },
+                            "languageCode": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "UpdateGenerativeSettingsRequest": {
+                          "fields": {
+                            "generativeSettings": {
+                              "type": "GenerativeSettings",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -1120,6 +1220,13 @@
                             "nluSettings": {
                               "type": "NluSettings",
                               "id": 11
+                            },
+                            "knowledgeConnectorSettings": {
+                              "type": "KnowledgeConnectorSettings",
+                              "id": 18,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -1569,6 +1676,13 @@
                               "rule": "repeated",
                               "type": "EventHandler",
                               "id": 10
+                            },
+                            "knowledgeConnectorSettings": {
+                              "type": "KnowledgeConnectorSettings",
+                              "id": 18,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -1702,6 +1816,13 @@
                               "id": 6,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "description": {
+                              "type": "string",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
                             "intent": {
@@ -1846,6 +1967,68 @@
                             }
                           }
                         },
+                        "KnowledgeConnectorSettings": {
+                          "oneofs": {
+                            "target": {
+                              "oneof": [
+                                "targetPage",
+                                "targetFlow"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "enabled": {
+                              "type": "bool",
+                              "id": 1
+                            },
+                            "triggerFulfillment": {
+                              "type": "Fulfillment",
+                              "id": 3
+                            },
+                            "targetPage": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Page"
+                              }
+                            },
+                            "targetFlow": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Flow"
+                              }
+                            },
+                            "dataStoreConnections": {
+                              "rule": "repeated",
+                              "type": "DataStoreConnection",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "DataStoreConnection": {
+                          "fields": {
+                            "dataStoreType": {
+                              "type": "DataStoreType",
+                              "id": 1
+                            },
+                            "dataStore": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "DataStoreType": {
+                          "values": {
+                            "DATA_STORE_TYPE_UNSPECIFIED": 0,
+                            "PUBLIC_WEB": 1,
+                            "UNSTRUCTURED": 2,
+                            "STRUCTURED": 3
+                          }
+                        },
                         "Fulfillment": {
                           "fields": {
                             "messages": {
@@ -1952,7 +2135,8 @@
                                 "endInteraction",
                                 "playAudio",
                                 "mixedAudio",
-                                "telephonyTransferCall"
+                                "telephonyTransferCall",
+                                "knowledgeInfoCard"
                               ]
                             }
                           },
@@ -1998,6 +2182,10 @@
                             "telephonyTransferCall": {
                               "type": "TelephonyTransferCall",
                               "id": 18
+                            },
+                            "knowledgeInfoCard": {
+                              "type": "KnowledgeInfoCard",
+                              "id": 20
                             },
                             "responseType": {
                               "type": "ResponseType",
@@ -2145,6 +2333,9 @@
                                 }
                               }
                             },
+                            "KnowledgeInfoCard": {
+                              "fields": {}
+                            },
                             "ResponseType": {
                               "values": {
                                 "RESPONSE_TYPE_UNSPECIFIED": 0,
@@ -2199,7 +2390,8 @@
                                 "FLOW": 5,
                                 "PAGE": 6,
                                 "PAGES": 13,
-                                "TRANSITION_ROUTE_GROUP": 7
+                                "TRANSITION_ROUTE_GROUP": 7,
+                                "AGENT_TRANSITION_ROUTE_GROUP": 14
                               }
                             },
                             "Severity": {
@@ -2221,6 +2413,120 @@
                             "displayName": {
                               "type": "string",
                               "id": 2
+                            }
+                          }
+                        },
+                        "GenerativeSettings": {
+                          "options": {
+                            "(google.api.resource).type": "dialogflow.googleapis.com/AgentGenerativeSettings",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/agents/{agent}/generativeSettings"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 5
+                            },
+                            "fallbackSettings": {
+                              "type": "FallbackSettings",
+                              "id": 1
+                            },
+                            "generativeSafetySettings": {
+                              "type": "SafetySettings",
+                              "id": 3
+                            },
+                            "knowledgeConnectorSettings": {
+                              "type": "KnowledgeConnectorSettings",
+                              "id": 7
+                            },
+                            "languageCode": {
+                              "type": "string",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "FallbackSettings": {
+                              "fields": {
+                                "selectedPrompt": {
+                                  "type": "string",
+                                  "id": 3
+                                },
+                                "promptTemplates": {
+                                  "rule": "repeated",
+                                  "type": "PromptTemplate",
+                                  "id": 4
+                                }
+                              },
+                              "nested": {
+                                "PromptTemplate": {
+                                  "fields": {
+                                    "displayName": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "promptText": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "frozen": {
+                                      "type": "bool",
+                                      "id": 3
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "KnowledgeConnectorSettings": {
+                              "fields": {
+                                "business": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "agent": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "agentIdentity": {
+                                  "type": "string",
+                                  "id": 3
+                                },
+                                "businessDescription": {
+                                  "type": "string",
+                                  "id": 4
+                                },
+                                "agentScope": {
+                                  "type": "string",
+                                  "id": 5
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "SafetySettings": {
+                          "fields": {
+                            "bannedPhrases": {
+                              "rule": "repeated",
+                              "type": "Phrase",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "Phrase": {
+                              "fields": {
+                                "text": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "languageCode": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
                             }
                           }
                         },
@@ -4992,6 +5298,10 @@
                               "type": "google.protobuf.Duration",
                               "id": 15
                             },
+                            "endpointingTimeout": {
+                              "type": "google.protobuf.Duration",
+                              "id": 19
+                            },
                             "isInputText": {
                               "type": "bool",
                               "id": 16
@@ -7405,7 +7715,8 @@
                           "oneofs": {
                             "dataRetention": {
                               "oneof": [
-                                "retentionWindowDays"
+                                "retentionWindowDays",
+                                "retentionStrategy"
                               ]
                             }
                           },
@@ -7447,6 +7758,10 @@
                               "type": "int32",
                               "id": 6
                             },
+                            "retentionStrategy": {
+                              "type": "RetentionStrategy",
+                              "id": 7
+                            },
                             "purgeDataTypes": {
                               "rule": "repeated",
                               "type": "PurgeDataType",
@@ -7472,6 +7787,12 @@
                               "values": {
                                 "REDACTION_SCOPE_UNSPECIFIED": 0,
                                 "REDACT_DISK_STORAGE": 2
+                              }
+                            },
+                            "RetentionStrategy": {
+                              "values": {
+                                "RETENTION_STRATEGY_UNSPECIFIED": 0,
+                                "REMOVE_AFTER_CONVERSATION": 1
                               }
                             },
                             "PurgeDataType": {
@@ -8127,6 +8448,44 @@
                                   "(google.api.method_signature)": "name"
                                 }
                               ]
+                            },
+                            "GetGenerativeSettings": {
+                              "requestType": "GetGenerativeSettingsRequest",
+                              "responseType": "GenerativeSettings",
+                              "options": {
+                                "(google.api.http).get": "/v3beta1/{name=projects/*/locations/*/agents/*/generativeSettings}",
+                                "(google.api.method_signature)": "name,language_code"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v3beta1/{name=projects/*/locations/*/agents/*/generativeSettings}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name,language_code"
+                                }
+                              ]
+                            },
+                            "UpdateGenerativeSettings": {
+                              "requestType": "UpdateGenerativeSettingsRequest",
+                              "responseType": "GenerativeSettings",
+                              "options": {
+                                "(google.api.http).patch": "/v3beta1/{generative_settings.name=projects/*/locations/*/agents/*/generativeSettings}",
+                                "(google.api.http).body": "generative_settings",
+                                "(google.api.method_signature)": "generative_settings,update_mask"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v3beta1/{generative_settings.name=projects/*/locations/*/agents/*/generativeSettings}",
+                                    "body": "generative_settings"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "generative_settings,update_mask"
+                                }
+                              ]
                             }
                           }
                         },
@@ -8142,6 +8501,13 @@
                           "options": {
                             "(google.api.resource).type": "dialogflow.googleapis.com/Agent",
                             "(google.api.resource).pattern": "projects/{project}/locations/{location}/agents/{agent}"
+                          },
+                          "oneofs": {
+                            "_genAppBuilderSettings": {
+                              "oneof": [
+                                "genAppBuilderSettings"
+                              ]
+                            }
                           },
                           "fields": {
                             "name": {
@@ -8227,6 +8593,13 @@
                             "textToSpeechSettings": {
                               "type": "TextToSpeechSettings",
                               "id": 31
+                            },
+                            "genAppBuilderSettings": {
+                              "type": "GenAppBuilderSettings",
+                              "id": 33,
+                              "options": {
+                                "proto3_optional": true
+                              }
                             }
                           },
                           "nested": {
@@ -8268,6 +8641,17 @@
                                       "type": "string",
                                       "id": 5
                                     }
+                                  }
+                                }
+                              }
+                            },
+                            "GenAppBuilderSettings": {
+                              "fields": {
+                                "engine": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
                                   }
                                 }
                               }
@@ -8559,6 +8943,43 @@
                               "rule": "repeated",
                               "type": "FlowValidationResult",
                               "id": 2
+                            }
+                          }
+                        },
+                        "GetGenerativeSettingsRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/AgentGenerativeSettings"
+                              }
+                            },
+                            "languageCode": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "UpdateGenerativeSettingsRequest": {
+                          "fields": {
+                            "generativeSettings": {
+                              "type": "GenerativeSettings",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -9007,6 +9428,13 @@
                             "nluSettings": {
                               "type": "NluSettings",
                               "id": 11
+                            },
+                            "knowledgeConnectorSettings": {
+                              "type": "KnowledgeConnectorSettings",
+                              "id": 18,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -9456,6 +9884,13 @@
                               "rule": "repeated",
                               "type": "EventHandler",
                               "id": 10
+                            },
+                            "knowledgeConnectorSettings": {
+                              "type": "KnowledgeConnectorSettings",
+                              "id": 18,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -9589,6 +10024,13 @@
                               "id": 6,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "description": {
+                              "type": "string",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
                             "intent": {
@@ -9733,6 +10175,68 @@
                             }
                           }
                         },
+                        "KnowledgeConnectorSettings": {
+                          "oneofs": {
+                            "target": {
+                              "oneof": [
+                                "targetPage",
+                                "targetFlow"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "enabled": {
+                              "type": "bool",
+                              "id": 1
+                            },
+                            "triggerFulfillment": {
+                              "type": "Fulfillment",
+                              "id": 3
+                            },
+                            "targetPage": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Page"
+                              }
+                            },
+                            "targetFlow": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Flow"
+                              }
+                            },
+                            "dataStoreConnections": {
+                              "rule": "repeated",
+                              "type": "DataStoreConnection",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "DataStoreConnection": {
+                          "fields": {
+                            "dataStoreType": {
+                              "type": "DataStoreType",
+                              "id": 1
+                            },
+                            "dataStore": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "DataStoreType": {
+                          "values": {
+                            "DATA_STORE_TYPE_UNSPECIFIED": 0,
+                            "PUBLIC_WEB": 1,
+                            "UNSTRUCTURED": 2,
+                            "STRUCTURED": 3
+                          }
+                        },
                         "Fulfillment": {
                           "fields": {
                             "messages": {
@@ -9839,7 +10343,8 @@
                                 "endInteraction",
                                 "playAudio",
                                 "mixedAudio",
-                                "telephonyTransferCall"
+                                "telephonyTransferCall",
+                                "knowledgeInfoCard"
                               ]
                             }
                           },
@@ -9885,6 +10390,10 @@
                             "telephonyTransferCall": {
                               "type": "TelephonyTransferCall",
                               "id": 18
+                            },
+                            "knowledgeInfoCard": {
+                              "type": "KnowledgeInfoCard",
+                              "id": 20
                             },
                             "channel": {
                               "type": "string",
@@ -10027,6 +10536,9 @@
                                   "id": 1
                                 }
                               }
+                            },
+                            "KnowledgeInfoCard": {
+                              "fields": {}
                             }
                           }
                         },
@@ -10074,7 +10586,8 @@
                                 "FLOW": 5,
                                 "PAGE": 6,
                                 "PAGES": 13,
-                                "TRANSITION_ROUTE_GROUP": 7
+                                "TRANSITION_ROUTE_GROUP": 7,
+                                "AGENT_TRANSITION_ROUTE_GROUP": 14
                               }
                             },
                             "Severity": {
@@ -10096,6 +10609,120 @@
                             "displayName": {
                               "type": "string",
                               "id": 2
+                            }
+                          }
+                        },
+                        "GenerativeSettings": {
+                          "options": {
+                            "(google.api.resource).type": "dialogflow.googleapis.com/AgentGenerativeSettings",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/agents/{agent}/generativeSettings"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 5
+                            },
+                            "fallbackSettings": {
+                              "type": "FallbackSettings",
+                              "id": 1
+                            },
+                            "generativeSafetySettings": {
+                              "type": "SafetySettings",
+                              "id": 3
+                            },
+                            "knowledgeConnectorSettings": {
+                              "type": "KnowledgeConnectorSettings",
+                              "id": 7
+                            },
+                            "languageCode": {
+                              "type": "string",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "FallbackSettings": {
+                              "fields": {
+                                "selectedPrompt": {
+                                  "type": "string",
+                                  "id": 3
+                                },
+                                "promptTemplates": {
+                                  "rule": "repeated",
+                                  "type": "PromptTemplate",
+                                  "id": 4
+                                }
+                              },
+                              "nested": {
+                                "PromptTemplate": {
+                                  "fields": {
+                                    "displayName": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "promptText": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "frozen": {
+                                      "type": "bool",
+                                      "id": 3
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "KnowledgeConnectorSettings": {
+                              "fields": {
+                                "business": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "agent": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "agentIdentity": {
+                                  "type": "string",
+                                  "id": 3
+                                },
+                                "businessDescription": {
+                                  "type": "string",
+                                  "id": 4
+                                },
+                                "agentScope": {
+                                  "type": "string",
+                                  "id": 5
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "SafetySettings": {
+                          "fields": {
+                            "bannedPhrases": {
+                              "rule": "repeated",
+                              "type": "Phrase",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "Phrase": {
+                              "fields": {
+                                "text": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "languageCode": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
                             }
                           }
                         },
@@ -12867,6 +13494,10 @@
                               "type": "google.protobuf.Duration",
                               "id": 15
                             },
+                            "endpointingTimeout": {
+                              "type": "google.protobuf.Duration",
+                              "id": 19
+                            },
                             "isInputText": {
                               "type": "bool",
                               "id": 16
@@ -15280,7 +15911,8 @@
                           "oneofs": {
                             "dataRetention": {
                               "oneof": [
-                                "retentionWindowDays"
+                                "retentionWindowDays",
+                                "retentionStrategy"
                               ]
                             }
                           },
@@ -15322,6 +15954,10 @@
                               "type": "int32",
                               "id": 6
                             },
+                            "retentionStrategy": {
+                              "type": "RetentionStrategy",
+                              "id": 7
+                            },
                             "purgeDataTypes": {
                               "rule": "repeated",
                               "type": "PurgeDataType",
@@ -15347,6 +15983,12 @@
                               "values": {
                                 "REDACTION_SCOPE_UNSPECIFIED": 0,
                                 "REDACT_DISK_STORAGE": 2
+                              }
+                            },
+                            "RetentionStrategy": {
+                              "values": {
+                                "RETENTION_STRATEGY_UNSPECIFIED": 0,
+                                "REMOVE_AFTER_CONVERSATION": 1
                               }
                             },
                             "PurgeDataType": {
