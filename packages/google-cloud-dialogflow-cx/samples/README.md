@@ -17,9 +17,11 @@
   * [Agents.export_agent](#agents.export_agent)
   * [Agents.get_agent](#agents.get_agent)
   * [Agents.get_agent_validation_result](#agents.get_agent_validation_result)
+  * [Agents.get_generative_settings](#agents.get_generative_settings)
   * [Agents.list_agents](#agents.list_agents)
   * [Agents.restore_agent](#agents.restore_agent)
   * [Agents.update_agent](#agents.update_agent)
+  * [Agents.update_generative_settings](#agents.update_generative_settings)
   * [Agents.validate_agent](#agents.validate_agent)
   * [Changelogs.get_changelog](#changelogs.get_changelog)
   * [Changelogs.list_changelogs](#changelogs.list_changelogs)
@@ -310,6 +312,23 @@ __Usage:__
 
 
 
+### Agents.get_generative_settings
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3/agents.get_generative_settings.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3/agents.get_generative_settings.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3/agents.get_generative_settings.js`
+
+
+-----
+
+
+
+
 ### Agents.list_agents
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3/agents.list_agents.js).
@@ -354,6 +373,23 @@ __Usage:__
 
 
 `node packages/google-cloud-dialogflow-cx/samples/generated/v3/agents.update_agent.js`
+
+
+-----
+
+
+
+
+### Agents.update_generative_settings
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3/agents.update_generative_settings.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3/agents.update_generative_settings.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3/agents.update_generative_settings.js`
 
 
 -----
