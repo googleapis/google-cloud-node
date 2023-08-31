@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name, etag) {
-  // [START recommender_v1beta1_generated_Recommender_MarkInsightAccepted_async]
+function main() {
+  // [START recommender_v1beta1_generated_Recommender_ListRecommenders_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,18 +29,15 @@ function main(name, etag) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the insight.
+   *  The number of RecommenderTypes to return per page. The service may return
+   *  fewer than this value.
    */
-  // const name = 'abc123'
+  // const pageSize = 1234
   /**
-   *  Optional. State properties user wish to include with this state.  Full
-   *  replace of the current state_metadata.
+   *  A page token, received from a previous `ListRecommenders` call.
+   *  Provide this to retrieve the subsequent page.
    */
-  // const stateMetadata = [1,2,3,4]
-  /**
-   *  Required. Fingerprint of the Insight. Provides optimistic locking.
-   */
-  // const etag = 'abc123'
+  // const pageToken = 'abc123'
 
   // Imports the Recommender library
   const {RecommenderClient} = require('@google-cloud/recommender').v1beta1;
@@ -48,20 +45,20 @@ function main(name, etag) {
   // Instantiates a client
   const recommenderClient = new RecommenderClient();
 
-  async function callMarkInsightAccepted() {
+  async function callListRecommenders() {
     // Construct request
     const request = {
-      name,
-      etag,
     };
 
     // Run request
-    const response = await recommenderClient.markInsightAccepted(request);
-    console.log(response);
+    const iterable = await recommenderClient.listRecommendersAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callMarkInsightAccepted();
-  // [END recommender_v1beta1_generated_Recommender_MarkInsightAccepted_async]
+  callListRecommenders();
+  // [END recommender_v1beta1_generated_Recommender_ListRecommenders_async]
 }
 
 process.on('unhandledRejection', err => {

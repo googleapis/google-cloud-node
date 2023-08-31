@@ -244,6 +244,50 @@
             }
         },
         {
+            "regionTag": "recommender_v1_generated_Recommender_MarkRecommendationDismissed_async",
+            "title": "Recommender markRecommendationDismissed Sample",
+            "origin": "API_DEFINITION",
+            "description": " Mark the Recommendation State as Dismissed. Users can use this method to indicate to the Recommender API that an ACTIVE recommendation has to be marked back as DISMISSED. MarkRecommendationDismissed can be applied to recommendations in ACTIVE state. Requires the recommender.*.update IAM permission for the specified recommender.",
+            "canonical": true,
+            "file": "recommender.mark_recommendation_dismissed.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 57,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "MarkRecommendationDismissed",
+                "fullName": "google.cloud.recommender.v1.Recommender.MarkRecommendationDismissed",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "etag",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.recommender.v1.Recommendation",
+                "client": {
+                    "shortName": "RecommenderClient",
+                    "fullName": "google.cloud.recommender.v1.RecommenderClient"
+                },
+                "method": {
+                    "shortName": "MarkRecommendationDismissed",
+                    "fullName": "google.cloud.recommender.v1.Recommender.MarkRecommendationDismissed",
+                    "service": {
+                        "shortName": "Recommender",
+                        "fullName": "google.cloud.recommender.v1.Recommender"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "recommender_v1_generated_Recommender_MarkRecommendationClaimed_async",
             "title": "Recommender markRecommendationClaimed Sample",
             "origin": "API_DEFINITION",
@@ -398,7 +442,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 57,
+                    "end": 58,
                     "type": "FULL"
                 }
             ],
@@ -486,7 +530,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 57,
+                    "end": 58,
                     "type": "FULL"
                 }
             ],

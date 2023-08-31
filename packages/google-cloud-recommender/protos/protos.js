@@ -415,6 +415,8 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.severity != null && message.hasOwnProperty("severity"))
@@ -514,6 +516,14 @@
                             case "MANAGEABILITY":
                             case 4:
                                 message.category = 4;
+                                break;
+                            case "SUSTAINABILITY":
+                            case 5:
+                                message.category = 5;
+                                break;
+                            case "RELIABILITY":
+                            case 6:
+                                message.category = 6;
                                 break;
                             }
                             switch (object.severity) {
@@ -656,6 +666,8 @@
                          * @property {number} SECURITY=2 SECURITY value
                          * @property {number} PERFORMANCE=3 PERFORMANCE value
                          * @property {number} MANAGEABILITY=4 MANAGEABILITY value
+                         * @property {number} SUSTAINABILITY=5 SUSTAINABILITY value
+                         * @property {number} RELIABILITY=6 RELIABILITY value
                          */
                         Insight.Category = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -664,6 +676,8 @@
                             values[valuesById[2] = "SECURITY"] = 2;
                             values[valuesById[3] = "PERFORMANCE"] = 3;
                             values[valuesById[4] = "MANAGEABILITY"] = 4;
+                            values[valuesById[5] = "SUSTAINABILITY"] = 5;
+                            values[valuesById[6] = "RELIABILITY"] = 6;
                             return values;
                         })();
     
@@ -4252,6 +4266,541 @@
                         return SecurityProjection;
                     })();
     
+                    v1.SustainabilityProjection = (function() {
+    
+                        /**
+                         * Properties of a SustainabilityProjection.
+                         * @memberof google.cloud.recommender.v1
+                         * @interface ISustainabilityProjection
+                         * @property {number|null} [kgCO2e] SustainabilityProjection kgCO2e
+                         * @property {google.protobuf.IDuration|null} [duration] SustainabilityProjection duration
+                         */
+    
+                        /**
+                         * Constructs a new SustainabilityProjection.
+                         * @memberof google.cloud.recommender.v1
+                         * @classdesc Represents a SustainabilityProjection.
+                         * @implements ISustainabilityProjection
+                         * @constructor
+                         * @param {google.cloud.recommender.v1.ISustainabilityProjection=} [properties] Properties to set
+                         */
+                        function SustainabilityProjection(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SustainabilityProjection kgCO2e.
+                         * @member {number} kgCO2e
+                         * @memberof google.cloud.recommender.v1.SustainabilityProjection
+                         * @instance
+                         */
+                        SustainabilityProjection.prototype.kgCO2e = 0;
+    
+                        /**
+                         * SustainabilityProjection duration.
+                         * @member {google.protobuf.IDuration|null|undefined} duration
+                         * @memberof google.cloud.recommender.v1.SustainabilityProjection
+                         * @instance
+                         */
+                        SustainabilityProjection.prototype.duration = null;
+    
+                        /**
+                         * Creates a new SustainabilityProjection instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recommender.v1.SustainabilityProjection
+                         * @static
+                         * @param {google.cloud.recommender.v1.ISustainabilityProjection=} [properties] Properties to set
+                         * @returns {google.cloud.recommender.v1.SustainabilityProjection} SustainabilityProjection instance
+                         */
+                        SustainabilityProjection.create = function create(properties) {
+                            return new SustainabilityProjection(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SustainabilityProjection message. Does not implicitly {@link google.cloud.recommender.v1.SustainabilityProjection.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recommender.v1.SustainabilityProjection
+                         * @static
+                         * @param {google.cloud.recommender.v1.ISustainabilityProjection} message SustainabilityProjection message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SustainabilityProjection.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.kgCO2e != null && Object.hasOwnProperty.call(message, "kgCO2e"))
+                                writer.uint32(/* id 1, wireType 1 =*/9).double(message.kgCO2e);
+                            if (message.duration != null && Object.hasOwnProperty.call(message, "duration"))
+                                $root.google.protobuf.Duration.encode(message.duration, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SustainabilityProjection message, length delimited. Does not implicitly {@link google.cloud.recommender.v1.SustainabilityProjection.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recommender.v1.SustainabilityProjection
+                         * @static
+                         * @param {google.cloud.recommender.v1.ISustainabilityProjection} message SustainabilityProjection message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SustainabilityProjection.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SustainabilityProjection message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recommender.v1.SustainabilityProjection
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recommender.v1.SustainabilityProjection} SustainabilityProjection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SustainabilityProjection.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recommender.v1.SustainabilityProjection();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.kgCO2e = reader.double();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.duration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SustainabilityProjection message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recommender.v1.SustainabilityProjection
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recommender.v1.SustainabilityProjection} SustainabilityProjection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SustainabilityProjection.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SustainabilityProjection message.
+                         * @function verify
+                         * @memberof google.cloud.recommender.v1.SustainabilityProjection
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SustainabilityProjection.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.kgCO2e != null && message.hasOwnProperty("kgCO2e"))
+                                if (typeof message.kgCO2e !== "number")
+                                    return "kgCO2e: number expected";
+                            if (message.duration != null && message.hasOwnProperty("duration")) {
+                                var error = $root.google.protobuf.Duration.verify(message.duration);
+                                if (error)
+                                    return "duration." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SustainabilityProjection message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recommender.v1.SustainabilityProjection
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recommender.v1.SustainabilityProjection} SustainabilityProjection
+                         */
+                        SustainabilityProjection.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recommender.v1.SustainabilityProjection)
+                                return object;
+                            var message = new $root.google.cloud.recommender.v1.SustainabilityProjection();
+                            if (object.kgCO2e != null)
+                                message.kgCO2e = Number(object.kgCO2e);
+                            if (object.duration != null) {
+                                if (typeof object.duration !== "object")
+                                    throw TypeError(".google.cloud.recommender.v1.SustainabilityProjection.duration: object expected");
+                                message.duration = $root.google.protobuf.Duration.fromObject(object.duration);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SustainabilityProjection message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recommender.v1.SustainabilityProjection
+                         * @static
+                         * @param {google.cloud.recommender.v1.SustainabilityProjection} message SustainabilityProjection
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SustainabilityProjection.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.kgCO2e = 0;
+                                object.duration = null;
+                            }
+                            if (message.kgCO2e != null && message.hasOwnProperty("kgCO2e"))
+                                object.kgCO2e = options.json && !isFinite(message.kgCO2e) ? String(message.kgCO2e) : message.kgCO2e;
+                            if (message.duration != null && message.hasOwnProperty("duration"))
+                                object.duration = $root.google.protobuf.Duration.toObject(message.duration, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SustainabilityProjection to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recommender.v1.SustainabilityProjection
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SustainabilityProjection.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SustainabilityProjection
+                         * @function getTypeUrl
+                         * @memberof google.cloud.recommender.v1.SustainabilityProjection
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SustainabilityProjection.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.recommender.v1.SustainabilityProjection";
+                        };
+    
+                        return SustainabilityProjection;
+                    })();
+    
+                    v1.ReliabilityProjection = (function() {
+    
+                        /**
+                         * Properties of a ReliabilityProjection.
+                         * @memberof google.cloud.recommender.v1
+                         * @interface IReliabilityProjection
+                         * @property {Array.<google.cloud.recommender.v1.ReliabilityProjection.RiskType>|null} [risks] ReliabilityProjection risks
+                         * @property {google.protobuf.IStruct|null} [details] ReliabilityProjection details
+                         */
+    
+                        /**
+                         * Constructs a new ReliabilityProjection.
+                         * @memberof google.cloud.recommender.v1
+                         * @classdesc Represents a ReliabilityProjection.
+                         * @implements IReliabilityProjection
+                         * @constructor
+                         * @param {google.cloud.recommender.v1.IReliabilityProjection=} [properties] Properties to set
+                         */
+                        function ReliabilityProjection(properties) {
+                            this.risks = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ReliabilityProjection risks.
+                         * @member {Array.<google.cloud.recommender.v1.ReliabilityProjection.RiskType>} risks
+                         * @memberof google.cloud.recommender.v1.ReliabilityProjection
+                         * @instance
+                         */
+                        ReliabilityProjection.prototype.risks = $util.emptyArray;
+    
+                        /**
+                         * ReliabilityProjection details.
+                         * @member {google.protobuf.IStruct|null|undefined} details
+                         * @memberof google.cloud.recommender.v1.ReliabilityProjection
+                         * @instance
+                         */
+                        ReliabilityProjection.prototype.details = null;
+    
+                        /**
+                         * Creates a new ReliabilityProjection instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recommender.v1.ReliabilityProjection
+                         * @static
+                         * @param {google.cloud.recommender.v1.IReliabilityProjection=} [properties] Properties to set
+                         * @returns {google.cloud.recommender.v1.ReliabilityProjection} ReliabilityProjection instance
+                         */
+                        ReliabilityProjection.create = function create(properties) {
+                            return new ReliabilityProjection(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ReliabilityProjection message. Does not implicitly {@link google.cloud.recommender.v1.ReliabilityProjection.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recommender.v1.ReliabilityProjection
+                         * @static
+                         * @param {google.cloud.recommender.v1.IReliabilityProjection} message ReliabilityProjection message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReliabilityProjection.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.risks != null && message.risks.length) {
+                                writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                                for (var i = 0; i < message.risks.length; ++i)
+                                    writer.int32(message.risks[i]);
+                                writer.ldelim();
+                            }
+                            if (message.details != null && Object.hasOwnProperty.call(message, "details"))
+                                $root.google.protobuf.Struct.encode(message.details, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ReliabilityProjection message, length delimited. Does not implicitly {@link google.cloud.recommender.v1.ReliabilityProjection.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recommender.v1.ReliabilityProjection
+                         * @static
+                         * @param {google.cloud.recommender.v1.IReliabilityProjection} message ReliabilityProjection message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReliabilityProjection.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ReliabilityProjection message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recommender.v1.ReliabilityProjection
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recommender.v1.ReliabilityProjection} ReliabilityProjection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReliabilityProjection.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recommender.v1.ReliabilityProjection();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.risks && message.risks.length))
+                                            message.risks = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.risks.push(reader.int32());
+                                        } else
+                                            message.risks.push(reader.int32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.details = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ReliabilityProjection message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recommender.v1.ReliabilityProjection
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recommender.v1.ReliabilityProjection} ReliabilityProjection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReliabilityProjection.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ReliabilityProjection message.
+                         * @function verify
+                         * @memberof google.cloud.recommender.v1.ReliabilityProjection
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ReliabilityProjection.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.risks != null && message.hasOwnProperty("risks")) {
+                                if (!Array.isArray(message.risks))
+                                    return "risks: array expected";
+                                for (var i = 0; i < message.risks.length; ++i)
+                                    switch (message.risks[i]) {
+                                    default:
+                                        return "risks: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                            }
+                            if (message.details != null && message.hasOwnProperty("details")) {
+                                var error = $root.google.protobuf.Struct.verify(message.details);
+                                if (error)
+                                    return "details." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ReliabilityProjection message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recommender.v1.ReliabilityProjection
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recommender.v1.ReliabilityProjection} ReliabilityProjection
+                         */
+                        ReliabilityProjection.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recommender.v1.ReliabilityProjection)
+                                return object;
+                            var message = new $root.google.cloud.recommender.v1.ReliabilityProjection();
+                            if (object.risks) {
+                                if (!Array.isArray(object.risks))
+                                    throw TypeError(".google.cloud.recommender.v1.ReliabilityProjection.risks: array expected");
+                                message.risks = [];
+                                for (var i = 0; i < object.risks.length; ++i)
+                                    switch (object.risks[i]) {
+                                    default:
+                                        if (typeof object.risks[i] === "number") {
+                                            message.risks[i] = object.risks[i];
+                                            break;
+                                        }
+                                    case "RISK_TYPE_UNSPECIFIED":
+                                    case 0:
+                                        message.risks[i] = 0;
+                                        break;
+                                    case "SERVICE_DISRUPTION":
+                                    case 1:
+                                        message.risks[i] = 1;
+                                        break;
+                                    case "DATA_LOSS":
+                                    case 2:
+                                        message.risks[i] = 2;
+                                        break;
+                                    case "ACCESS_DENY":
+                                    case 3:
+                                        message.risks[i] = 3;
+                                        break;
+                                    }
+                            }
+                            if (object.details != null) {
+                                if (typeof object.details !== "object")
+                                    throw TypeError(".google.cloud.recommender.v1.ReliabilityProjection.details: object expected");
+                                message.details = $root.google.protobuf.Struct.fromObject(object.details);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ReliabilityProjection message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recommender.v1.ReliabilityProjection
+                         * @static
+                         * @param {google.cloud.recommender.v1.ReliabilityProjection} message ReliabilityProjection
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ReliabilityProjection.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.risks = [];
+                            if (options.defaults)
+                                object.details = null;
+                            if (message.risks && message.risks.length) {
+                                object.risks = [];
+                                for (var j = 0; j < message.risks.length; ++j)
+                                    object.risks[j] = options.enums === String ? $root.google.cloud.recommender.v1.ReliabilityProjection.RiskType[message.risks[j]] === undefined ? message.risks[j] : $root.google.cloud.recommender.v1.ReliabilityProjection.RiskType[message.risks[j]] : message.risks[j];
+                            }
+                            if (message.details != null && message.hasOwnProperty("details"))
+                                object.details = $root.google.protobuf.Struct.toObject(message.details, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ReliabilityProjection to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recommender.v1.ReliabilityProjection
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ReliabilityProjection.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ReliabilityProjection
+                         * @function getTypeUrl
+                         * @memberof google.cloud.recommender.v1.ReliabilityProjection
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ReliabilityProjection.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.recommender.v1.ReliabilityProjection";
+                        };
+    
+                        /**
+                         * RiskType enum.
+                         * @name google.cloud.recommender.v1.ReliabilityProjection.RiskType
+                         * @enum {number}
+                         * @property {number} RISK_TYPE_UNSPECIFIED=0 RISK_TYPE_UNSPECIFIED value
+                         * @property {number} SERVICE_DISRUPTION=1 SERVICE_DISRUPTION value
+                         * @property {number} DATA_LOSS=2 DATA_LOSS value
+                         * @property {number} ACCESS_DENY=3 ACCESS_DENY value
+                         */
+                        ReliabilityProjection.RiskType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "RISK_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SERVICE_DISRUPTION"] = 1;
+                            values[valuesById[2] = "DATA_LOSS"] = 2;
+                            values[valuesById[3] = "ACCESS_DENY"] = 3;
+                            return values;
+                        })();
+    
+                        return ReliabilityProjection;
+                    })();
+    
                     v1.Impact = (function() {
     
                         /**
@@ -4261,6 +4810,8 @@
                          * @property {google.cloud.recommender.v1.Impact.Category|null} [category] Impact category
                          * @property {google.cloud.recommender.v1.ICostProjection|null} [costProjection] Impact costProjection
                          * @property {google.cloud.recommender.v1.ISecurityProjection|null} [securityProjection] Impact securityProjection
+                         * @property {google.cloud.recommender.v1.ISustainabilityProjection|null} [sustainabilityProjection] Impact sustainabilityProjection
+                         * @property {google.cloud.recommender.v1.IReliabilityProjection|null} [reliabilityProjection] Impact reliabilityProjection
                          */
     
                         /**
@@ -4302,17 +4853,33 @@
                          */
                         Impact.prototype.securityProjection = null;
     
+                        /**
+                         * Impact sustainabilityProjection.
+                         * @member {google.cloud.recommender.v1.ISustainabilityProjection|null|undefined} sustainabilityProjection
+                         * @memberof google.cloud.recommender.v1.Impact
+                         * @instance
+                         */
+                        Impact.prototype.sustainabilityProjection = null;
+    
+                        /**
+                         * Impact reliabilityProjection.
+                         * @member {google.cloud.recommender.v1.IReliabilityProjection|null|undefined} reliabilityProjection
+                         * @memberof google.cloud.recommender.v1.Impact
+                         * @instance
+                         */
+                        Impact.prototype.reliabilityProjection = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * Impact projection.
-                         * @member {"costProjection"|"securityProjection"|undefined} projection
+                         * @member {"costProjection"|"securityProjection"|"sustainabilityProjection"|"reliabilityProjection"|undefined} projection
                          * @memberof google.cloud.recommender.v1.Impact
                          * @instance
                          */
                         Object.defineProperty(Impact.prototype, "projection", {
-                            get: $util.oneOfGetter($oneOfFields = ["costProjection", "securityProjection"]),
+                            get: $util.oneOfGetter($oneOfFields = ["costProjection", "securityProjection", "sustainabilityProjection", "reliabilityProjection"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -4346,6 +4913,10 @@
                                 $root.google.cloud.recommender.v1.CostProjection.encode(message.costProjection, writer.uint32(/* id 100, wireType 2 =*/802).fork()).ldelim();
                             if (message.securityProjection != null && Object.hasOwnProperty.call(message, "securityProjection"))
                                 $root.google.cloud.recommender.v1.SecurityProjection.encode(message.securityProjection, writer.uint32(/* id 101, wireType 2 =*/810).fork()).ldelim();
+                            if (message.sustainabilityProjection != null && Object.hasOwnProperty.call(message, "sustainabilityProjection"))
+                                $root.google.cloud.recommender.v1.SustainabilityProjection.encode(message.sustainabilityProjection, writer.uint32(/* id 102, wireType 2 =*/818).fork()).ldelim();
+                            if (message.reliabilityProjection != null && Object.hasOwnProperty.call(message, "reliabilityProjection"))
+                                $root.google.cloud.recommender.v1.ReliabilityProjection.encode(message.reliabilityProjection, writer.uint32(/* id 103, wireType 2 =*/826).fork()).ldelim();
                             return writer;
                         };
     
@@ -4390,6 +4961,14 @@
                                     }
                                 case 101: {
                                         message.securityProjection = $root.google.cloud.recommender.v1.SecurityProjection.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 102: {
+                                        message.sustainabilityProjection = $root.google.cloud.recommender.v1.SustainabilityProjection.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 103: {
+                                        message.reliabilityProjection = $root.google.cloud.recommender.v1.ReliabilityProjection.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -4437,6 +5016,8 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.costProjection != null && message.hasOwnProperty("costProjection")) {
@@ -4455,6 +5036,26 @@
                                     var error = $root.google.cloud.recommender.v1.SecurityProjection.verify(message.securityProjection);
                                     if (error)
                                         return "securityProjection." + error;
+                                }
+                            }
+                            if (message.sustainabilityProjection != null && message.hasOwnProperty("sustainabilityProjection")) {
+                                if (properties.projection === 1)
+                                    return "projection: multiple values";
+                                properties.projection = 1;
+                                {
+                                    var error = $root.google.cloud.recommender.v1.SustainabilityProjection.verify(message.sustainabilityProjection);
+                                    if (error)
+                                        return "sustainabilityProjection." + error;
+                                }
+                            }
+                            if (message.reliabilityProjection != null && message.hasOwnProperty("reliabilityProjection")) {
+                                if (properties.projection === 1)
+                                    return "projection: multiple values";
+                                properties.projection = 1;
+                                {
+                                    var error = $root.google.cloud.recommender.v1.ReliabilityProjection.verify(message.reliabilityProjection);
+                                    if (error)
+                                        return "reliabilityProjection." + error;
                                 }
                             }
                             return null;
@@ -4499,6 +5100,14 @@
                             case 4:
                                 message.category = 4;
                                 break;
+                            case "SUSTAINABILITY":
+                            case 5:
+                                message.category = 5;
+                                break;
+                            case "RELIABILITY":
+                            case 6:
+                                message.category = 6;
+                                break;
                             }
                             if (object.costProjection != null) {
                                 if (typeof object.costProjection !== "object")
@@ -4509,6 +5118,16 @@
                                 if (typeof object.securityProjection !== "object")
                                     throw TypeError(".google.cloud.recommender.v1.Impact.securityProjection: object expected");
                                 message.securityProjection = $root.google.cloud.recommender.v1.SecurityProjection.fromObject(object.securityProjection);
+                            }
+                            if (object.sustainabilityProjection != null) {
+                                if (typeof object.sustainabilityProjection !== "object")
+                                    throw TypeError(".google.cloud.recommender.v1.Impact.sustainabilityProjection: object expected");
+                                message.sustainabilityProjection = $root.google.cloud.recommender.v1.SustainabilityProjection.fromObject(object.sustainabilityProjection);
+                            }
+                            if (object.reliabilityProjection != null) {
+                                if (typeof object.reliabilityProjection !== "object")
+                                    throw TypeError(".google.cloud.recommender.v1.Impact.reliabilityProjection: object expected");
+                                message.reliabilityProjection = $root.google.cloud.recommender.v1.ReliabilityProjection.fromObject(object.reliabilityProjection);
                             }
                             return message;
                         };
@@ -4539,6 +5158,16 @@
                                 object.securityProjection = $root.google.cloud.recommender.v1.SecurityProjection.toObject(message.securityProjection, options);
                                 if (options.oneofs)
                                     object.projection = "securityProjection";
+                            }
+                            if (message.sustainabilityProjection != null && message.hasOwnProperty("sustainabilityProjection")) {
+                                object.sustainabilityProjection = $root.google.cloud.recommender.v1.SustainabilityProjection.toObject(message.sustainabilityProjection, options);
+                                if (options.oneofs)
+                                    object.projection = "sustainabilityProjection";
+                            }
+                            if (message.reliabilityProjection != null && message.hasOwnProperty("reliabilityProjection")) {
+                                object.reliabilityProjection = $root.google.cloud.recommender.v1.ReliabilityProjection.toObject(message.reliabilityProjection, options);
+                                if (options.oneofs)
+                                    object.projection = "reliabilityProjection";
                             }
                             return object;
                         };
@@ -4578,6 +5207,8 @@
                          * @property {number} SECURITY=2 SECURITY value
                          * @property {number} PERFORMANCE=3 PERFORMANCE value
                          * @property {number} MANAGEABILITY=4 MANAGEABILITY value
+                         * @property {number} SUSTAINABILITY=5 SUSTAINABILITY value
+                         * @property {number} RELIABILITY=6 RELIABILITY value
                          */
                         Impact.Category = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -4586,6 +5217,8 @@
                             values[valuesById[2] = "SECURITY"] = 2;
                             values[valuesById[3] = "PERFORMANCE"] = 3;
                             values[valuesById[4] = "MANAGEABILITY"] = 4;
+                            values[valuesById[5] = "SUSTAINABILITY"] = 5;
+                            values[valuesById[6] = "RELIABILITY"] = 6;
                             return values;
                         })();
     
@@ -5704,6 +6337,39 @@
                          * @memberof google.cloud.recommender.v1.Recommender
                          * @instance
                          * @param {google.cloud.recommender.v1.IGetRecommendationRequest} request GetRecommendationRequest message or plain object
+                         * @returns {Promise<google.cloud.recommender.v1.Recommendation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.recommender.v1.Recommender|markRecommendationDismissed}.
+                         * @memberof google.cloud.recommender.v1.Recommender
+                         * @typedef MarkRecommendationDismissedCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.recommender.v1.Recommendation} [response] Recommendation
+                         */
+    
+                        /**
+                         * Calls MarkRecommendationDismissed.
+                         * @function markRecommendationDismissed
+                         * @memberof google.cloud.recommender.v1.Recommender
+                         * @instance
+                         * @param {google.cloud.recommender.v1.IMarkRecommendationDismissedRequest} request MarkRecommendationDismissedRequest message or plain object
+                         * @param {google.cloud.recommender.v1.Recommender.MarkRecommendationDismissedCallback} callback Node-style callback called with the error, if any, and Recommendation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Recommender.prototype.markRecommendationDismissed = function markRecommendationDismissed(request, callback) {
+                            return this.rpcCall(markRecommendationDismissed, $root.google.cloud.recommender.v1.MarkRecommendationDismissedRequest, $root.google.cloud.recommender.v1.Recommendation, request, callback);
+                        }, "name", { value: "MarkRecommendationDismissed" });
+    
+                        /**
+                         * Calls MarkRecommendationDismissed.
+                         * @function markRecommendationDismissed
+                         * @memberof google.cloud.recommender.v1.Recommender
+                         * @instance
+                         * @param {google.cloud.recommender.v1.IMarkRecommendationDismissedRequest} request MarkRecommendationDismissedRequest message or plain object
                          * @returns {Promise<google.cloud.recommender.v1.Recommendation>} Promise
                          * @variation 2
                          */
@@ -7674,6 +8340,233 @@
                         };
     
                         return GetRecommendationRequest;
+                    })();
+    
+                    v1.MarkRecommendationDismissedRequest = (function() {
+    
+                        /**
+                         * Properties of a MarkRecommendationDismissedRequest.
+                         * @memberof google.cloud.recommender.v1
+                         * @interface IMarkRecommendationDismissedRequest
+                         * @property {string|null} [name] MarkRecommendationDismissedRequest name
+                         * @property {string|null} [etag] MarkRecommendationDismissedRequest etag
+                         */
+    
+                        /**
+                         * Constructs a new MarkRecommendationDismissedRequest.
+                         * @memberof google.cloud.recommender.v1
+                         * @classdesc Represents a MarkRecommendationDismissedRequest.
+                         * @implements IMarkRecommendationDismissedRequest
+                         * @constructor
+                         * @param {google.cloud.recommender.v1.IMarkRecommendationDismissedRequest=} [properties] Properties to set
+                         */
+                        function MarkRecommendationDismissedRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MarkRecommendationDismissedRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.recommender.v1.MarkRecommendationDismissedRequest
+                         * @instance
+                         */
+                        MarkRecommendationDismissedRequest.prototype.name = "";
+    
+                        /**
+                         * MarkRecommendationDismissedRequest etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.recommender.v1.MarkRecommendationDismissedRequest
+                         * @instance
+                         */
+                        MarkRecommendationDismissedRequest.prototype.etag = "";
+    
+                        /**
+                         * Creates a new MarkRecommendationDismissedRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recommender.v1.MarkRecommendationDismissedRequest
+                         * @static
+                         * @param {google.cloud.recommender.v1.IMarkRecommendationDismissedRequest=} [properties] Properties to set
+                         * @returns {google.cloud.recommender.v1.MarkRecommendationDismissedRequest} MarkRecommendationDismissedRequest instance
+                         */
+                        MarkRecommendationDismissedRequest.create = function create(properties) {
+                            return new MarkRecommendationDismissedRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MarkRecommendationDismissedRequest message. Does not implicitly {@link google.cloud.recommender.v1.MarkRecommendationDismissedRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recommender.v1.MarkRecommendationDismissedRequest
+                         * @static
+                         * @param {google.cloud.recommender.v1.IMarkRecommendationDismissedRequest} message MarkRecommendationDismissedRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MarkRecommendationDismissedRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.etag);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MarkRecommendationDismissedRequest message, length delimited. Does not implicitly {@link google.cloud.recommender.v1.MarkRecommendationDismissedRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recommender.v1.MarkRecommendationDismissedRequest
+                         * @static
+                         * @param {google.cloud.recommender.v1.IMarkRecommendationDismissedRequest} message MarkRecommendationDismissedRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MarkRecommendationDismissedRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MarkRecommendationDismissedRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recommender.v1.MarkRecommendationDismissedRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recommender.v1.MarkRecommendationDismissedRequest} MarkRecommendationDismissedRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MarkRecommendationDismissedRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recommender.v1.MarkRecommendationDismissedRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MarkRecommendationDismissedRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recommender.v1.MarkRecommendationDismissedRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recommender.v1.MarkRecommendationDismissedRequest} MarkRecommendationDismissedRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MarkRecommendationDismissedRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MarkRecommendationDismissedRequest message.
+                         * @function verify
+                         * @memberof google.cloud.recommender.v1.MarkRecommendationDismissedRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MarkRecommendationDismissedRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MarkRecommendationDismissedRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recommender.v1.MarkRecommendationDismissedRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recommender.v1.MarkRecommendationDismissedRequest} MarkRecommendationDismissedRequest
+                         */
+                        MarkRecommendationDismissedRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recommender.v1.MarkRecommendationDismissedRequest)
+                                return object;
+                            var message = new $root.google.cloud.recommender.v1.MarkRecommendationDismissedRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MarkRecommendationDismissedRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recommender.v1.MarkRecommendationDismissedRequest
+                         * @static
+                         * @param {google.cloud.recommender.v1.MarkRecommendationDismissedRequest} message MarkRecommendationDismissedRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MarkRecommendationDismissedRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.etag = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MarkRecommendationDismissedRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recommender.v1.MarkRecommendationDismissedRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MarkRecommendationDismissedRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MarkRecommendationDismissedRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.recommender.v1.MarkRecommendationDismissedRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MarkRecommendationDismissedRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.recommender.v1.MarkRecommendationDismissedRequest";
+                        };
+    
+                        return MarkRecommendationDismissedRequest;
                     })();
     
                     v1.MarkRecommendationClaimedRequest = (function() {
@@ -10606,6 +11499,209 @@
                         })();
     
                         return InsightStateInfo;
+                    })();
+    
+                    v1beta1.InsightType = (function() {
+    
+                        /**
+                         * Properties of an InsightType.
+                         * @memberof google.cloud.recommender.v1beta1
+                         * @interface IInsightType
+                         * @property {string|null} [name] InsightType name
+                         */
+    
+                        /**
+                         * Constructs a new InsightType.
+                         * @memberof google.cloud.recommender.v1beta1
+                         * @classdesc Represents an InsightType.
+                         * @implements IInsightType
+                         * @constructor
+                         * @param {google.cloud.recommender.v1beta1.IInsightType=} [properties] Properties to set
+                         */
+                        function InsightType(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * InsightType name.
+                         * @member {string} name
+                         * @memberof google.cloud.recommender.v1beta1.InsightType
+                         * @instance
+                         */
+                        InsightType.prototype.name = "";
+    
+                        /**
+                         * Creates a new InsightType instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recommender.v1beta1.InsightType
+                         * @static
+                         * @param {google.cloud.recommender.v1beta1.IInsightType=} [properties] Properties to set
+                         * @returns {google.cloud.recommender.v1beta1.InsightType} InsightType instance
+                         */
+                        InsightType.create = function create(properties) {
+                            return new InsightType(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified InsightType message. Does not implicitly {@link google.cloud.recommender.v1beta1.InsightType.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recommender.v1beta1.InsightType
+                         * @static
+                         * @param {google.cloud.recommender.v1beta1.IInsightType} message InsightType message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InsightType.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified InsightType message, length delimited. Does not implicitly {@link google.cloud.recommender.v1beta1.InsightType.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recommender.v1beta1.InsightType
+                         * @static
+                         * @param {google.cloud.recommender.v1beta1.IInsightType} message InsightType message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InsightType.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an InsightType message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recommender.v1beta1.InsightType
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recommender.v1beta1.InsightType} InsightType
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InsightType.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recommender.v1beta1.InsightType();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an InsightType message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recommender.v1beta1.InsightType
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recommender.v1beta1.InsightType} InsightType
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InsightType.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an InsightType message.
+                         * @function verify
+                         * @memberof google.cloud.recommender.v1beta1.InsightType
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        InsightType.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an InsightType message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recommender.v1beta1.InsightType
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recommender.v1beta1.InsightType} InsightType
+                         */
+                        InsightType.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recommender.v1beta1.InsightType)
+                                return object;
+                            var message = new $root.google.cloud.recommender.v1beta1.InsightType();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an InsightType message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recommender.v1beta1.InsightType
+                         * @static
+                         * @param {google.cloud.recommender.v1beta1.InsightType} message InsightType
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        InsightType.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this InsightType to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recommender.v1beta1.InsightType
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        InsightType.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for InsightType
+                         * @function getTypeUrl
+                         * @memberof google.cloud.recommender.v1beta1.InsightType
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        InsightType.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.recommender.v1beta1.InsightType";
+                        };
+    
+                        return InsightType;
                     })();
     
                     v1beta1.InsightTypeConfig = (function() {
@@ -14595,6 +15691,209 @@
                         return RecommendationStateInfo;
                     })();
     
+                    v1beta1.RecommenderType = (function() {
+    
+                        /**
+                         * Properties of a RecommenderType.
+                         * @memberof google.cloud.recommender.v1beta1
+                         * @interface IRecommenderType
+                         * @property {string|null} [name] RecommenderType name
+                         */
+    
+                        /**
+                         * Constructs a new RecommenderType.
+                         * @memberof google.cloud.recommender.v1beta1
+                         * @classdesc Represents a RecommenderType.
+                         * @implements IRecommenderType
+                         * @constructor
+                         * @param {google.cloud.recommender.v1beta1.IRecommenderType=} [properties] Properties to set
+                         */
+                        function RecommenderType(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RecommenderType name.
+                         * @member {string} name
+                         * @memberof google.cloud.recommender.v1beta1.RecommenderType
+                         * @instance
+                         */
+                        RecommenderType.prototype.name = "";
+    
+                        /**
+                         * Creates a new RecommenderType instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recommender.v1beta1.RecommenderType
+                         * @static
+                         * @param {google.cloud.recommender.v1beta1.IRecommenderType=} [properties] Properties to set
+                         * @returns {google.cloud.recommender.v1beta1.RecommenderType} RecommenderType instance
+                         */
+                        RecommenderType.create = function create(properties) {
+                            return new RecommenderType(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RecommenderType message. Does not implicitly {@link google.cloud.recommender.v1beta1.RecommenderType.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recommender.v1beta1.RecommenderType
+                         * @static
+                         * @param {google.cloud.recommender.v1beta1.IRecommenderType} message RecommenderType message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RecommenderType.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RecommenderType message, length delimited. Does not implicitly {@link google.cloud.recommender.v1beta1.RecommenderType.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recommender.v1beta1.RecommenderType
+                         * @static
+                         * @param {google.cloud.recommender.v1beta1.IRecommenderType} message RecommenderType message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RecommenderType.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RecommenderType message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recommender.v1beta1.RecommenderType
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recommender.v1beta1.RecommenderType} RecommenderType
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RecommenderType.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recommender.v1beta1.RecommenderType();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RecommenderType message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recommender.v1beta1.RecommenderType
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recommender.v1beta1.RecommenderType} RecommenderType
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RecommenderType.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RecommenderType message.
+                         * @function verify
+                         * @memberof google.cloud.recommender.v1beta1.RecommenderType
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RecommenderType.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RecommenderType message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recommender.v1beta1.RecommenderType
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recommender.v1beta1.RecommenderType} RecommenderType
+                         */
+                        RecommenderType.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recommender.v1beta1.RecommenderType)
+                                return object;
+                            var message = new $root.google.cloud.recommender.v1beta1.RecommenderType();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RecommenderType message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recommender.v1beta1.RecommenderType
+                         * @static
+                         * @param {google.cloud.recommender.v1beta1.RecommenderType} message RecommenderType
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RecommenderType.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RecommenderType to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recommender.v1beta1.RecommenderType
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RecommenderType.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RecommenderType
+                         * @function getTypeUrl
+                         * @memberof google.cloud.recommender.v1beta1.RecommenderType
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RecommenderType.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.recommender.v1beta1.RecommenderType";
+                        };
+    
+                        return RecommenderType;
+                    })();
+    
                     v1beta1.RecommenderConfig = (function() {
     
                         /**
@@ -15616,6 +16915,72 @@
                          * @instance
                          * @param {google.cloud.recommender.v1beta1.IUpdateInsightTypeConfigRequest} request UpdateInsightTypeConfigRequest message or plain object
                          * @returns {Promise<google.cloud.recommender.v1beta1.InsightTypeConfig>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.recommender.v1beta1.Recommender|listRecommenders}.
+                         * @memberof google.cloud.recommender.v1beta1.Recommender
+                         * @typedef ListRecommendersCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.recommender.v1beta1.ListRecommendersResponse} [response] ListRecommendersResponse
+                         */
+    
+                        /**
+                         * Calls ListRecommenders.
+                         * @function listRecommenders
+                         * @memberof google.cloud.recommender.v1beta1.Recommender
+                         * @instance
+                         * @param {google.cloud.recommender.v1beta1.IListRecommendersRequest} request ListRecommendersRequest message or plain object
+                         * @param {google.cloud.recommender.v1beta1.Recommender.ListRecommendersCallback} callback Node-style callback called with the error, if any, and ListRecommendersResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Recommender.prototype.listRecommenders = function listRecommenders(request, callback) {
+                            return this.rpcCall(listRecommenders, $root.google.cloud.recommender.v1beta1.ListRecommendersRequest, $root.google.cloud.recommender.v1beta1.ListRecommendersResponse, request, callback);
+                        }, "name", { value: "ListRecommenders" });
+    
+                        /**
+                         * Calls ListRecommenders.
+                         * @function listRecommenders
+                         * @memberof google.cloud.recommender.v1beta1.Recommender
+                         * @instance
+                         * @param {google.cloud.recommender.v1beta1.IListRecommendersRequest} request ListRecommendersRequest message or plain object
+                         * @returns {Promise<google.cloud.recommender.v1beta1.ListRecommendersResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.recommender.v1beta1.Recommender|listInsightTypes}.
+                         * @memberof google.cloud.recommender.v1beta1.Recommender
+                         * @typedef ListInsightTypesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.recommender.v1beta1.ListInsightTypesResponse} [response] ListInsightTypesResponse
+                         */
+    
+                        /**
+                         * Calls ListInsightTypes.
+                         * @function listInsightTypes
+                         * @memberof google.cloud.recommender.v1beta1.Recommender
+                         * @instance
+                         * @param {google.cloud.recommender.v1beta1.IListInsightTypesRequest} request ListInsightTypesRequest message or plain object
+                         * @param {google.cloud.recommender.v1beta1.Recommender.ListInsightTypesCallback} callback Node-style callback called with the error, if any, and ListInsightTypesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Recommender.prototype.listInsightTypes = function listInsightTypes(request, callback) {
+                            return this.rpcCall(listInsightTypes, $root.google.cloud.recommender.v1beta1.ListInsightTypesRequest, $root.google.cloud.recommender.v1beta1.ListInsightTypesResponse, request, callback);
+                        }, "name", { value: "ListInsightTypes" });
+    
+                        /**
+                         * Calls ListInsightTypes.
+                         * @function listInsightTypes
+                         * @memberof google.cloud.recommender.v1beta1.Recommender
+                         * @instance
+                         * @param {google.cloud.recommender.v1beta1.IListInsightTypesRequest} request ListInsightTypesRequest message or plain object
+                         * @returns {Promise<google.cloud.recommender.v1beta1.ListInsightTypesResponse>} Promise
                          * @variation 2
                          */
     
@@ -19138,6 +20503,956 @@
                         };
     
                         return UpdateInsightTypeConfigRequest;
+                    })();
+    
+                    v1beta1.ListRecommendersRequest = (function() {
+    
+                        /**
+                         * Properties of a ListRecommendersRequest.
+                         * @memberof google.cloud.recommender.v1beta1
+                         * @interface IListRecommendersRequest
+                         * @property {number|null} [pageSize] ListRecommendersRequest pageSize
+                         * @property {string|null} [pageToken] ListRecommendersRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListRecommendersRequest.
+                         * @memberof google.cloud.recommender.v1beta1
+                         * @classdesc Represents a ListRecommendersRequest.
+                         * @implements IListRecommendersRequest
+                         * @constructor
+                         * @param {google.cloud.recommender.v1beta1.IListRecommendersRequest=} [properties] Properties to set
+                         */
+                        function ListRecommendersRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListRecommendersRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.recommender.v1beta1.ListRecommendersRequest
+                         * @instance
+                         */
+                        ListRecommendersRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListRecommendersRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.recommender.v1beta1.ListRecommendersRequest
+                         * @instance
+                         */
+                        ListRecommendersRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListRecommendersRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recommender.v1beta1.ListRecommendersRequest
+                         * @static
+                         * @param {google.cloud.recommender.v1beta1.IListRecommendersRequest=} [properties] Properties to set
+                         * @returns {google.cloud.recommender.v1beta1.ListRecommendersRequest} ListRecommendersRequest instance
+                         */
+                        ListRecommendersRequest.create = function create(properties) {
+                            return new ListRecommendersRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListRecommendersRequest message. Does not implicitly {@link google.cloud.recommender.v1beta1.ListRecommendersRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recommender.v1beta1.ListRecommendersRequest
+                         * @static
+                         * @param {google.cloud.recommender.v1beta1.IListRecommendersRequest} message ListRecommendersRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRecommendersRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListRecommendersRequest message, length delimited. Does not implicitly {@link google.cloud.recommender.v1beta1.ListRecommendersRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recommender.v1beta1.ListRecommendersRequest
+                         * @static
+                         * @param {google.cloud.recommender.v1beta1.IListRecommendersRequest} message ListRecommendersRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRecommendersRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListRecommendersRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recommender.v1beta1.ListRecommendersRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recommender.v1beta1.ListRecommendersRequest} ListRecommendersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRecommendersRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recommender.v1beta1.ListRecommendersRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListRecommendersRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recommender.v1beta1.ListRecommendersRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recommender.v1beta1.ListRecommendersRequest} ListRecommendersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRecommendersRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListRecommendersRequest message.
+                         * @function verify
+                         * @memberof google.cloud.recommender.v1beta1.ListRecommendersRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListRecommendersRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListRecommendersRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recommender.v1beta1.ListRecommendersRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recommender.v1beta1.ListRecommendersRequest} ListRecommendersRequest
+                         */
+                        ListRecommendersRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recommender.v1beta1.ListRecommendersRequest)
+                                return object;
+                            var message = new $root.google.cloud.recommender.v1beta1.ListRecommendersRequest();
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListRecommendersRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recommender.v1beta1.ListRecommendersRequest
+                         * @static
+                         * @param {google.cloud.recommender.v1beta1.ListRecommendersRequest} message ListRecommendersRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListRecommendersRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListRecommendersRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recommender.v1beta1.ListRecommendersRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListRecommendersRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListRecommendersRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.recommender.v1beta1.ListRecommendersRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListRecommendersRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.recommender.v1beta1.ListRecommendersRequest";
+                        };
+    
+                        return ListRecommendersRequest;
+                    })();
+    
+                    v1beta1.ListRecommendersResponse = (function() {
+    
+                        /**
+                         * Properties of a ListRecommendersResponse.
+                         * @memberof google.cloud.recommender.v1beta1
+                         * @interface IListRecommendersResponse
+                         * @property {Array.<google.cloud.recommender.v1beta1.IRecommenderType>|null} [recommenders] ListRecommendersResponse recommenders
+                         * @property {string|null} [nextPageToken] ListRecommendersResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListRecommendersResponse.
+                         * @memberof google.cloud.recommender.v1beta1
+                         * @classdesc Represents a ListRecommendersResponse.
+                         * @implements IListRecommendersResponse
+                         * @constructor
+                         * @param {google.cloud.recommender.v1beta1.IListRecommendersResponse=} [properties] Properties to set
+                         */
+                        function ListRecommendersResponse(properties) {
+                            this.recommenders = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListRecommendersResponse recommenders.
+                         * @member {Array.<google.cloud.recommender.v1beta1.IRecommenderType>} recommenders
+                         * @memberof google.cloud.recommender.v1beta1.ListRecommendersResponse
+                         * @instance
+                         */
+                        ListRecommendersResponse.prototype.recommenders = $util.emptyArray;
+    
+                        /**
+                         * ListRecommendersResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.recommender.v1beta1.ListRecommendersResponse
+                         * @instance
+                         */
+                        ListRecommendersResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListRecommendersResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recommender.v1beta1.ListRecommendersResponse
+                         * @static
+                         * @param {google.cloud.recommender.v1beta1.IListRecommendersResponse=} [properties] Properties to set
+                         * @returns {google.cloud.recommender.v1beta1.ListRecommendersResponse} ListRecommendersResponse instance
+                         */
+                        ListRecommendersResponse.create = function create(properties) {
+                            return new ListRecommendersResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListRecommendersResponse message. Does not implicitly {@link google.cloud.recommender.v1beta1.ListRecommendersResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recommender.v1beta1.ListRecommendersResponse
+                         * @static
+                         * @param {google.cloud.recommender.v1beta1.IListRecommendersResponse} message ListRecommendersResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRecommendersResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.recommenders != null && message.recommenders.length)
+                                for (var i = 0; i < message.recommenders.length; ++i)
+                                    $root.google.cloud.recommender.v1beta1.RecommenderType.encode(message.recommenders[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListRecommendersResponse message, length delimited. Does not implicitly {@link google.cloud.recommender.v1beta1.ListRecommendersResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recommender.v1beta1.ListRecommendersResponse
+                         * @static
+                         * @param {google.cloud.recommender.v1beta1.IListRecommendersResponse} message ListRecommendersResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRecommendersResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListRecommendersResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recommender.v1beta1.ListRecommendersResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recommender.v1beta1.ListRecommendersResponse} ListRecommendersResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRecommendersResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recommender.v1beta1.ListRecommendersResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.recommenders && message.recommenders.length))
+                                            message.recommenders = [];
+                                        message.recommenders.push($root.google.cloud.recommender.v1beta1.RecommenderType.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListRecommendersResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recommender.v1beta1.ListRecommendersResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recommender.v1beta1.ListRecommendersResponse} ListRecommendersResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRecommendersResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListRecommendersResponse message.
+                         * @function verify
+                         * @memberof google.cloud.recommender.v1beta1.ListRecommendersResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListRecommendersResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.recommenders != null && message.hasOwnProperty("recommenders")) {
+                                if (!Array.isArray(message.recommenders))
+                                    return "recommenders: array expected";
+                                for (var i = 0; i < message.recommenders.length; ++i) {
+                                    var error = $root.google.cloud.recommender.v1beta1.RecommenderType.verify(message.recommenders[i]);
+                                    if (error)
+                                        return "recommenders." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListRecommendersResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recommender.v1beta1.ListRecommendersResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recommender.v1beta1.ListRecommendersResponse} ListRecommendersResponse
+                         */
+                        ListRecommendersResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recommender.v1beta1.ListRecommendersResponse)
+                                return object;
+                            var message = new $root.google.cloud.recommender.v1beta1.ListRecommendersResponse();
+                            if (object.recommenders) {
+                                if (!Array.isArray(object.recommenders))
+                                    throw TypeError(".google.cloud.recommender.v1beta1.ListRecommendersResponse.recommenders: array expected");
+                                message.recommenders = [];
+                                for (var i = 0; i < object.recommenders.length; ++i) {
+                                    if (typeof object.recommenders[i] !== "object")
+                                        throw TypeError(".google.cloud.recommender.v1beta1.ListRecommendersResponse.recommenders: object expected");
+                                    message.recommenders[i] = $root.google.cloud.recommender.v1beta1.RecommenderType.fromObject(object.recommenders[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListRecommendersResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recommender.v1beta1.ListRecommendersResponse
+                         * @static
+                         * @param {google.cloud.recommender.v1beta1.ListRecommendersResponse} message ListRecommendersResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListRecommendersResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.recommenders = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.recommenders && message.recommenders.length) {
+                                object.recommenders = [];
+                                for (var j = 0; j < message.recommenders.length; ++j)
+                                    object.recommenders[j] = $root.google.cloud.recommender.v1beta1.RecommenderType.toObject(message.recommenders[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListRecommendersResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recommender.v1beta1.ListRecommendersResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListRecommendersResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListRecommendersResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.recommender.v1beta1.ListRecommendersResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListRecommendersResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.recommender.v1beta1.ListRecommendersResponse";
+                        };
+    
+                        return ListRecommendersResponse;
+                    })();
+    
+                    v1beta1.ListInsightTypesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListInsightTypesRequest.
+                         * @memberof google.cloud.recommender.v1beta1
+                         * @interface IListInsightTypesRequest
+                         * @property {number|null} [pageSize] ListInsightTypesRequest pageSize
+                         * @property {string|null} [pageToken] ListInsightTypesRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListInsightTypesRequest.
+                         * @memberof google.cloud.recommender.v1beta1
+                         * @classdesc Represents a ListInsightTypesRequest.
+                         * @implements IListInsightTypesRequest
+                         * @constructor
+                         * @param {google.cloud.recommender.v1beta1.IListInsightTypesRequest=} [properties] Properties to set
+                         */
+                        function ListInsightTypesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListInsightTypesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.recommender.v1beta1.ListInsightTypesRequest
+                         * @instance
+                         */
+                        ListInsightTypesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListInsightTypesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.recommender.v1beta1.ListInsightTypesRequest
+                         * @instance
+                         */
+                        ListInsightTypesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListInsightTypesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recommender.v1beta1.ListInsightTypesRequest
+                         * @static
+                         * @param {google.cloud.recommender.v1beta1.IListInsightTypesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.recommender.v1beta1.ListInsightTypesRequest} ListInsightTypesRequest instance
+                         */
+                        ListInsightTypesRequest.create = function create(properties) {
+                            return new ListInsightTypesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListInsightTypesRequest message. Does not implicitly {@link google.cloud.recommender.v1beta1.ListInsightTypesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recommender.v1beta1.ListInsightTypesRequest
+                         * @static
+                         * @param {google.cloud.recommender.v1beta1.IListInsightTypesRequest} message ListInsightTypesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListInsightTypesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListInsightTypesRequest message, length delimited. Does not implicitly {@link google.cloud.recommender.v1beta1.ListInsightTypesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recommender.v1beta1.ListInsightTypesRequest
+                         * @static
+                         * @param {google.cloud.recommender.v1beta1.IListInsightTypesRequest} message ListInsightTypesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListInsightTypesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListInsightTypesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recommender.v1beta1.ListInsightTypesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recommender.v1beta1.ListInsightTypesRequest} ListInsightTypesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListInsightTypesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recommender.v1beta1.ListInsightTypesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListInsightTypesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recommender.v1beta1.ListInsightTypesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recommender.v1beta1.ListInsightTypesRequest} ListInsightTypesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListInsightTypesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListInsightTypesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.recommender.v1beta1.ListInsightTypesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListInsightTypesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListInsightTypesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recommender.v1beta1.ListInsightTypesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recommender.v1beta1.ListInsightTypesRequest} ListInsightTypesRequest
+                         */
+                        ListInsightTypesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recommender.v1beta1.ListInsightTypesRequest)
+                                return object;
+                            var message = new $root.google.cloud.recommender.v1beta1.ListInsightTypesRequest();
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListInsightTypesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recommender.v1beta1.ListInsightTypesRequest
+                         * @static
+                         * @param {google.cloud.recommender.v1beta1.ListInsightTypesRequest} message ListInsightTypesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListInsightTypesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListInsightTypesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recommender.v1beta1.ListInsightTypesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListInsightTypesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListInsightTypesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.recommender.v1beta1.ListInsightTypesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListInsightTypesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.recommender.v1beta1.ListInsightTypesRequest";
+                        };
+    
+                        return ListInsightTypesRequest;
+                    })();
+    
+                    v1beta1.ListInsightTypesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListInsightTypesResponse.
+                         * @memberof google.cloud.recommender.v1beta1
+                         * @interface IListInsightTypesResponse
+                         * @property {Array.<google.cloud.recommender.v1beta1.IInsightType>|null} [insightTypes] ListInsightTypesResponse insightTypes
+                         * @property {string|null} [nextPageToken] ListInsightTypesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListInsightTypesResponse.
+                         * @memberof google.cloud.recommender.v1beta1
+                         * @classdesc Represents a ListInsightTypesResponse.
+                         * @implements IListInsightTypesResponse
+                         * @constructor
+                         * @param {google.cloud.recommender.v1beta1.IListInsightTypesResponse=} [properties] Properties to set
+                         */
+                        function ListInsightTypesResponse(properties) {
+                            this.insightTypes = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListInsightTypesResponse insightTypes.
+                         * @member {Array.<google.cloud.recommender.v1beta1.IInsightType>} insightTypes
+                         * @memberof google.cloud.recommender.v1beta1.ListInsightTypesResponse
+                         * @instance
+                         */
+                        ListInsightTypesResponse.prototype.insightTypes = $util.emptyArray;
+    
+                        /**
+                         * ListInsightTypesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.recommender.v1beta1.ListInsightTypesResponse
+                         * @instance
+                         */
+                        ListInsightTypesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListInsightTypesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recommender.v1beta1.ListInsightTypesResponse
+                         * @static
+                         * @param {google.cloud.recommender.v1beta1.IListInsightTypesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.recommender.v1beta1.ListInsightTypesResponse} ListInsightTypesResponse instance
+                         */
+                        ListInsightTypesResponse.create = function create(properties) {
+                            return new ListInsightTypesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListInsightTypesResponse message. Does not implicitly {@link google.cloud.recommender.v1beta1.ListInsightTypesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recommender.v1beta1.ListInsightTypesResponse
+                         * @static
+                         * @param {google.cloud.recommender.v1beta1.IListInsightTypesResponse} message ListInsightTypesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListInsightTypesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.insightTypes != null && message.insightTypes.length)
+                                for (var i = 0; i < message.insightTypes.length; ++i)
+                                    $root.google.cloud.recommender.v1beta1.InsightType.encode(message.insightTypes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListInsightTypesResponse message, length delimited. Does not implicitly {@link google.cloud.recommender.v1beta1.ListInsightTypesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recommender.v1beta1.ListInsightTypesResponse
+                         * @static
+                         * @param {google.cloud.recommender.v1beta1.IListInsightTypesResponse} message ListInsightTypesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListInsightTypesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListInsightTypesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recommender.v1beta1.ListInsightTypesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recommender.v1beta1.ListInsightTypesResponse} ListInsightTypesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListInsightTypesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recommender.v1beta1.ListInsightTypesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.insightTypes && message.insightTypes.length))
+                                            message.insightTypes = [];
+                                        message.insightTypes.push($root.google.cloud.recommender.v1beta1.InsightType.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListInsightTypesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recommender.v1beta1.ListInsightTypesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recommender.v1beta1.ListInsightTypesResponse} ListInsightTypesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListInsightTypesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListInsightTypesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.recommender.v1beta1.ListInsightTypesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListInsightTypesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.insightTypes != null && message.hasOwnProperty("insightTypes")) {
+                                if (!Array.isArray(message.insightTypes))
+                                    return "insightTypes: array expected";
+                                for (var i = 0; i < message.insightTypes.length; ++i) {
+                                    var error = $root.google.cloud.recommender.v1beta1.InsightType.verify(message.insightTypes[i]);
+                                    if (error)
+                                        return "insightTypes." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListInsightTypesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recommender.v1beta1.ListInsightTypesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recommender.v1beta1.ListInsightTypesResponse} ListInsightTypesResponse
+                         */
+                        ListInsightTypesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recommender.v1beta1.ListInsightTypesResponse)
+                                return object;
+                            var message = new $root.google.cloud.recommender.v1beta1.ListInsightTypesResponse();
+                            if (object.insightTypes) {
+                                if (!Array.isArray(object.insightTypes))
+                                    throw TypeError(".google.cloud.recommender.v1beta1.ListInsightTypesResponse.insightTypes: array expected");
+                                message.insightTypes = [];
+                                for (var i = 0; i < object.insightTypes.length; ++i) {
+                                    if (typeof object.insightTypes[i] !== "object")
+                                        throw TypeError(".google.cloud.recommender.v1beta1.ListInsightTypesResponse.insightTypes: object expected");
+                                    message.insightTypes[i] = $root.google.cloud.recommender.v1beta1.InsightType.fromObject(object.insightTypes[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListInsightTypesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recommender.v1beta1.ListInsightTypesResponse
+                         * @static
+                         * @param {google.cloud.recommender.v1beta1.ListInsightTypesResponse} message ListInsightTypesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListInsightTypesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.insightTypes = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.insightTypes && message.insightTypes.length) {
+                                object.insightTypes = [];
+                                for (var j = 0; j < message.insightTypes.length; ++j)
+                                    object.insightTypes[j] = $root.google.cloud.recommender.v1beta1.InsightType.toObject(message.insightTypes[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListInsightTypesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recommender.v1beta1.ListInsightTypesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListInsightTypesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListInsightTypesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.recommender.v1beta1.ListInsightTypesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListInsightTypesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.recommender.v1beta1.ListInsightTypesResponse";
+                        };
+    
+                        return ListInsightTypesResponse;
                     })();
     
                     return v1beta1;

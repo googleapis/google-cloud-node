@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name, etag) {
-  // [START recommender_v1beta1_generated_Recommender_MarkInsightAccepted_async]
+function main(name) {
+  // [START recommender_v1_generated_Recommender_MarkRecommendationDismissed_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,39 +29,33 @@ function main(name, etag) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the insight.
+   *  Name of the recommendation.
    */
   // const name = 'abc123'
   /**
-   *  Optional. State properties user wish to include with this state.  Full
-   *  replace of the current state_metadata.
-   */
-  // const stateMetadata = [1,2,3,4]
-  /**
-   *  Required. Fingerprint of the Insight. Provides optimistic locking.
+   *  Fingerprint of the Recommendation. Provides optimistic locking.
    */
   // const etag = 'abc123'
 
   // Imports the Recommender library
-  const {RecommenderClient} = require('@google-cloud/recommender').v1beta1;
+  const {RecommenderClient} = require('@google-cloud/recommender').v1;
 
   // Instantiates a client
   const recommenderClient = new RecommenderClient();
 
-  async function callMarkInsightAccepted() {
+  async function callMarkRecommendationDismissed() {
     // Construct request
     const request = {
       name,
-      etag,
     };
 
     // Run request
-    const response = await recommenderClient.markInsightAccepted(request);
+    const response = await recommenderClient.markRecommendationDismissed(request);
     console.log(response);
   }
 
-  callMarkInsightAccepted();
-  // [END recommender_v1beta1_generated_Recommender_MarkInsightAccepted_async]
+  callMarkRecommendationDismissed();
+  // [END recommender_v1_generated_Recommender_MarkRecommendationDismissed_async]
 }
 
 process.on('unhandledRejection', err => {

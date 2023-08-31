@@ -73,6 +73,20 @@
                 "listRecommendationsStream",
                 "listRecommendationsAsync"
               ]
+            },
+            "ListRecommenders": {
+              "methods": [
+                "listRecommenders",
+                "listRecommendersStream",
+                "listRecommendersAsync"
+              ]
+            },
+            "ListInsightTypes": {
+              "methods": [
+                "listInsightTypes",
+                "listInsightTypesStream",
+                "listInsightTypesAsync"
+              ]
             }
           }
         },
@@ -141,6 +155,20 @@
                 "listRecommendations",
                 "listRecommendationsStream",
                 "listRecommendationsAsync"
+              ]
+            },
+            "ListRecommenders": {
+              "methods": [
+                "listRecommenders",
+                "listRecommendersStream",
+                "listRecommendersAsync"
+              ]
+            },
+            "ListInsightTypes": {
+              "methods": [
+                "listInsightTypes",
+                "listInsightTypesStream",
+                "listInsightTypesAsync"
               ]
             }
           }

@@ -82,7 +82,9 @@
                             "COST": 1,
                             "SECURITY": 2,
                             "PERFORMANCE": 3,
-                            "MANAGEABILITY": 4
+                            "MANAGEABILITY": 4,
+                            "SUSTAINABILITY": 5,
+                            "RELIABILITY": 6
                           }
                         },
                         "Severity": {
@@ -130,7 +132,7 @@
                     "InsightTypeConfig": {
                       "options": {
                         "(google.api.resource).type": "recommender.googleapis.com/InsightTypeConfig",
-                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/insightTypes/{insight_type}/config"
+                        "(google.api.resource).pattern": "billingAccounts/{billing_account}/locations/{location}/insightTypes/{insight_type}/config"
                       },
                       "fields": {
                         "name": {
@@ -363,12 +365,49 @@
                         }
                       }
                     },
+                    "SustainabilityProjection": {
+                      "fields": {
+                        "kgCO2e": {
+                          "type": "double",
+                          "id": 1
+                        },
+                        "duration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ReliabilityProjection": {
+                      "fields": {
+                        "risks": {
+                          "rule": "repeated",
+                          "type": "RiskType",
+                          "id": 1
+                        },
+                        "details": {
+                          "type": "google.protobuf.Struct",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "RiskType": {
+                          "values": {
+                            "RISK_TYPE_UNSPECIFIED": 0,
+                            "SERVICE_DISRUPTION": 1,
+                            "DATA_LOSS": 2,
+                            "ACCESS_DENY": 3
+                          }
+                        }
+                      }
+                    },
                     "Impact": {
                       "oneofs": {
                         "projection": {
                           "oneof": [
                             "costProjection",
-                            "securityProjection"
+                            "securityProjection",
+                            "sustainabilityProjection",
+                            "reliabilityProjection"
                           ]
                         }
                       },
@@ -384,6 +423,14 @@
                         "securityProjection": {
                           "type": "SecurityProjection",
                           "id": 101
+                        },
+                        "sustainabilityProjection": {
+                          "type": "SustainabilityProjection",
+                          "id": 102
+                        },
+                        "reliabilityProjection": {
+                          "type": "ReliabilityProjection",
+                          "id": 103
                         }
                       },
                       "nested": {
@@ -393,7 +440,9 @@
                             "COST": 1,
                             "SECURITY": 2,
                             "PERFORMANCE": 3,
-                            "MANAGEABILITY": 4
+                            "MANAGEABILITY": 4,
+                            "SUSTAINABILITY": 5,
+                            "RELIABILITY": 6
                           }
                         }
                       }
@@ -426,7 +475,7 @@
                     "RecommenderConfig": {
                       "options": {
                         "(google.api.resource).type": "recommender.googleapis.com/RecommenderConfig",
-                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/recommenders/{recommender}/config"
+                        "(google.api.resource).pattern": "billingAccounts/{billing_account}/locations/{location}/recommenders/{recommender}/config"
                       },
                       "fields": {
                         "name": {
@@ -636,6 +685,38 @@
                             }
                           ]
                         },
+                        "MarkRecommendationDismissed": {
+                          "requestType": "MarkRecommendationDismissedRequest",
+                          "responseType": "Recommendation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markDismissed",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{name=organizations/*/locations/*/recommenders/*/recommendations/*}:markDismissed",
+                            "(google.api.http).additional_bindings.body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/recommenders/*/recommendations/*}:markDismissed",
+                                "body": "*",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1/{name=billingAccounts/*/locations/*/recommenders/*/recommendations/*}:markDismissed",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1/{name=folders/*/locations/*/recommenders/*/recommendations/*}:markDismissed",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1/{name=organizations/*/locations/*/recommenders/*/recommendations/*}:markDismissed",
+                                    "body": "*"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        },
                         "MarkRecommendationClaimed": {
                           "requestType": "MarkRecommendationClaimedRequest",
                           "responseType": "Recommendation",
@@ -749,16 +830,21 @@
                           "responseType": "RecommenderConfig",
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/recommenders/*/config}",
-                            "(google.api.http).additional_bindings.get": "/v1/{name=organizations/*/locations/*/recommenders/*/config}",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=billingAccounts/*/locations/*/recommenders/*/config}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "get": "/v1/{name=projects/*/locations/*/recommenders/*/config}",
-                                "additional_bindings": {
-                                  "get": "/v1/{name=organizations/*/locations/*/recommenders/*/config}"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{name=organizations/*/locations/*/recommenders/*/config}"
+                                  },
+                                  {
+                                    "get": "/v1/{name=billingAccounts/*/locations/*/recommenders/*/config}"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -772,7 +858,7 @@
                           "options": {
                             "(google.api.http).patch": "/v1/{recommender_config.name=projects/*/locations/*/recommenders/*/config}",
                             "(google.api.http).body": "recommender_config",
-                            "(google.api.http).additional_bindings.patch": "/v1/{recommender_config.name=organizations/*/locations/*/recommenders/*/config}",
+                            "(google.api.http).additional_bindings.patch": "/v1/{recommender_config.name=billingAccounts/*/locations/*/recommenders/*/config}",
                             "(google.api.http).additional_bindings.body": "recommender_config",
                             "(google.api.method_signature)": "recommender_config,update_mask"
                           },
@@ -781,10 +867,16 @@
                               "(google.api.http)": {
                                 "patch": "/v1/{recommender_config.name=projects/*/locations/*/recommenders/*/config}",
                                 "body": "recommender_config",
-                                "additional_bindings": {
-                                  "patch": "/v1/{recommender_config.name=organizations/*/locations/*/recommenders/*/config}",
-                                  "body": "recommender_config"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "patch": "/v1/{recommender_config.name=organizations/*/locations/*/recommenders/*/config}",
+                                    "body": "recommender_config"
+                                  },
+                                  {
+                                    "patch": "/v1/{recommender_config.name=billingAccounts/*/locations/*/recommenders/*/config}",
+                                    "body": "recommender_config"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -797,16 +889,21 @@
                           "responseType": "InsightTypeConfig",
                           "options": {
                             "(google.api.http).get": "/v1/{name=projects/*/locations/*/insightTypes/*/config}",
-                            "(google.api.http).additional_bindings.get": "/v1/{name=organizations/*/locations/*/insightTypes/*/config}",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=billingAccounts/*/locations/*/insightTypes/*/config}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "get": "/v1/{name=projects/*/locations/*/insightTypes/*/config}",
-                                "additional_bindings": {
-                                  "get": "/v1/{name=organizations/*/locations/*/insightTypes/*/config}"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{name=organizations/*/locations/*/insightTypes/*/config}"
+                                  },
+                                  {
+                                    "get": "/v1/{name=billingAccounts/*/locations/*/insightTypes/*/config}"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -820,7 +917,7 @@
                           "options": {
                             "(google.api.http).patch": "/v1/{insight_type_config.name=projects/*/locations/*/insightTypes/*/config}",
                             "(google.api.http).body": "insight_type_config",
-                            "(google.api.http).additional_bindings.patch": "/v1/{insight_type_config.name=organizations/*/locations/*/insightTypes/*/config}",
+                            "(google.api.http).additional_bindings.patch": "/v1/{insight_type_config.name=billingAccounts/*/locations/*/insightTypes/*/config}",
                             "(google.api.http).additional_bindings.body": "insight_type_config",
                             "(google.api.method_signature)": "insight_type_config,update_mask"
                           },
@@ -829,10 +926,16 @@
                               "(google.api.http)": {
                                 "patch": "/v1/{insight_type_config.name=projects/*/locations/*/insightTypes/*/config}",
                                 "body": "insight_type_config",
-                                "additional_bindings": {
-                                  "patch": "/v1/{insight_type_config.name=organizations/*/locations/*/insightTypes/*/config}",
-                                  "body": "insight_type_config"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "patch": "/v1/{insight_type_config.name=organizations/*/locations/*/insightTypes/*/config}",
+                                    "body": "insight_type_config"
+                                  },
+                                  {
+                                    "patch": "/v1/{insight_type_config.name=billingAccounts/*/locations/*/insightTypes/*/config}",
+                                    "body": "insight_type_config"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -982,6 +1085,22 @@
                         }
                       }
                     },
+                    "MarkRecommendationDismissedRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recommender.googleapis.com/Recommendation"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "MarkRecommendationClaimedRequest": {
                       "fields": {
                         "name": {
@@ -1125,8 +1244,6 @@
                     "java_multiple_files": true,
                     "java_package": "com.google.cloud.recommender.v1beta1",
                     "objc_class_prefix": "CREC",
-                    "(google.api.resource_definition).type": "recommender.googleapis.com/Recommender",
-                    "(google.api.resource_definition).pattern": "organizations/{organization}/locations/{location}/recommenders/{recommender}",
                     "java_outer_classname": "RecommenderProto"
                   },
                   "nested": {
@@ -1236,6 +1353,18 @@
                             "ACCEPTED": 2,
                             "DISMISSED": 3
                           }
+                        }
+                      }
+                    },
+                    "InsightType": {
+                      "options": {
+                        "(google.api.resource).type": "recommender.googleapis.com/InsightType",
+                        "(google.api.resource).pattern": "insightTypes/{insight_type}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     },
@@ -1550,6 +1679,18 @@
                             "FAILED": 4,
                             "DISMISSED": 5
                           }
+                        }
+                      }
+                    },
+                    "RecommenderType": {
+                      "options": {
+                        "(google.api.resource).type": "recommender.googleapis.com/Recommender",
+                        "(google.api.resource).pattern": "recommenders/{recommender}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     },
@@ -1966,6 +2107,34 @@
                               "(google.api.method_signature)": "insight_type_config,update_mask"
                             }
                           ]
+                        },
+                        "ListRecommenders": {
+                          "requestType": "ListRecommendersRequest",
+                          "responseType": "ListRecommendersResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/recommenders"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/recommenders"
+                              }
+                            }
+                          ]
+                        },
+                        "ListInsightTypes": {
+                          "requestType": "ListInsightTypesRequest",
+                          "responseType": "ListInsightTypesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/insightTypes"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/insightTypes"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -2240,6 +2409,68 @@
                         "validateOnly": {
                           "type": "bool",
                           "id": 3
+                        }
+                      }
+                    },
+                    "ListRecommendersRequest": {
+                      "fields": {
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListRecommendersResponse": {
+                      "fields": {
+                        "recommenders": {
+                          "rule": "repeated",
+                          "type": "RecommenderType",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListInsightTypesRequest": {
+                      "fields": {
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListInsightTypesResponse": {
+                      "fields": {
+                        "insightTypes": {
+                          "rule": "repeated",
+                          "type": "InsightType",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     }
