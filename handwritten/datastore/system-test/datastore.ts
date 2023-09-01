@@ -21,11 +21,12 @@ import {Datastore, Index} from '../src';
 import {google} from '../protos/protos';
 import {Storage} from '@google-cloud/storage';
 import {AggregateField} from '../src/aggregate';
-import {PropertyFilter, EntityFilter, and, or} from '../src/filter';
+import {PropertyFilter, and, or} from '../src/filter';
 import {entity} from '../src/entity';
 import KEY_SYMBOL = entity.KEY_SYMBOL;
 
 describe('Datastore', () => {
+  let timeBeforeDataCreation: number;
   const testKinds: string[] = [];
   const datastore = new Datastore({
     namespace: `${Date.now()}`,
@@ -46,6 +47,26 @@ describe('Datastore', () => {
 
   // TODO/DX ensure indexes before testing, and maybe? cleanup indexes after
   //  possible implications with kokoro project
+
+  // Gets the read time of the latest save so that the test isn't flakey due to race condition.
+  async function getReadTime(path: [{kind: string; name: string}]) {
+    const projectId = await datastore.getProjectId();
+    const request = {
+      keys: [
+        {
+          path,
+          partitionId: {namespaceId: datastore.namespace},
+        },
+      ],
+      projectId,
+    };
+    const dataClient = datastore.clients_.get('DatastoreClient');
+    let results: any;
+    if (dataClient) {
+      results = await dataClient['lookup'](request);
+    }
+    return parseInt(results[0].readTime.seconds) * 1000;
+  }
 
   after(async () => {
     async function deleteEntities(kind: string) {
@@ -676,12 +697,28 @@ describe('Datastore', () => {
     ];
 
     before(async () => {
+      // This 'sleep' function is used to ensure that when data is saved to datastore,
+      // the time on the server is far enough ahead to be sure to be later than timeBeforeDataCreation
+      // so that when we read at timeBeforeDataCreation we get a snapshot of data before the save.
+      function sleep(ms: number) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
       const keysToSave = keys.map((key, index) => {
         return {
           key,
           data: characters[index],
         };
       });
+      // Save for a key so that a read time can be accessed for snapshot reads.
+      const emptyData = Object.assign(Object.assign({}, keysToSave[0]), {
+        data: {},
+      });
+      await datastore.save(emptyData);
+      timeBeforeDataCreation = await getReadTime([
+        {kind: 'Character', name: 'Rickard'},
+      ]);
+      // Sleep for 3 seconds so that any future reads will be later than timeBeforeDataCreation.
+      await sleep(3000);
       await datastore.save(keysToSave);
     });
 
@@ -950,6 +987,251 @@ describe('Datastore', () => {
         });
       });
     });
+    describe('with a sum filter', () => {
+      it('should run a sum aggregation', async () => {
+        const q = datastore.createQuery('Character');
+        const aggregate = datastore
+          .createAggregationQuery(q)
+          .addAggregation(AggregateField.sum('appearances'));
+        const [results] = await datastore.runAggregationQuery(aggregate);
+        assert.deepStrictEqual(results, [{property_1: 187}]);
+      });
+      it('should run a sum aggregation with a list of aggregates', async () => {
+        const q = datastore.createQuery('Character');
+        const aggregate = datastore
+          .createAggregationQuery(q)
+          .addAggregations([
+            AggregateField.sum('appearances'),
+            AggregateField.sum('appearances'),
+          ]);
+        const [results] = await datastore.runAggregationQuery(aggregate);
+        assert.deepStrictEqual(results, [{property_1: 187, property_2: 187}]);
+      });
+      it('should run a sum aggregation having other filters', async () => {
+        const q = datastore
+          .createQuery('Character')
+          .filter('family', 'Stark')
+          .filter('appearances', '>=', 20);
+        const aggregate = datastore
+          .createAggregationQuery(q)
+          .addAggregation(AggregateField.sum('appearances').alias('sum1'));
+        const [results] = await datastore.runAggregationQuery(aggregate);
+        assert.deepStrictEqual(results, [{sum1: 169}]);
+      });
+      it('should run a sum aggregate filter with an alias', async () => {
+        const q = datastore.createQuery('Character');
+        const aggregate = datastore
+          .createAggregationQuery(q)
+          .addAggregation(AggregateField.sum('appearances').alias('sum1'));
+        const [results] = await datastore.runAggregationQuery(aggregate);
+        assert.deepStrictEqual(results, [{sum1: 187}]);
+      });
+      it('should do multiple sum aggregations with aliases', async () => {
+        const q = datastore.createQuery('Character');
+        const aggregate = datastore
+          .createAggregationQuery(q)
+          .addAggregations([
+            AggregateField.sum('appearances').alias('sum1'),
+            AggregateField.sum('appearances').alias('sum2'),
+          ]);
+        const [results] = await datastore.runAggregationQuery(aggregate);
+        assert.deepStrictEqual(results, [{sum1: 187, sum2: 187}]);
+      });
+      it('should run a sum aggregation filter with a limit', async () => {
+        // When using a limit the test appears to use data points with the lowest appearance values.
+        const q = datastore.createQuery('Character').limit(5);
+        const aggregate = datastore
+          .createAggregationQuery(q)
+          .addAggregation(AggregateField.sum('appearances'));
+        const [results] = await datastore.runAggregationQuery(aggregate);
+        assert.deepStrictEqual(results, [{property_1: 91}]);
+      });
+      it('should run a sum aggregate filter with a limit and an alias', async () => {
+        const q = datastore.createQuery('Character').limit(7);
+        const aggregate = datastore
+          .createAggregationQuery(q)
+          .addAggregations([AggregateField.sum('appearances').alias('sum1')]);
+        const [results] = await datastore.runAggregationQuery(aggregate);
+        assert.deepStrictEqual(results, [{sum1: 154}]);
+      });
+      it('should run a sum aggregate filter against a non-numeric property value', async () => {
+        const q = datastore.createQuery('Character');
+        const aggregate = datastore
+          .createAggregationQuery(q)
+          .addAggregations([AggregateField.sum('family').alias('sum1')]);
+        const [results] = await datastore.runAggregationQuery(aggregate);
+        assert.deepStrictEqual(results, [{sum1: 0}]);
+      });
+      it('should run a sum aggregate filter against __key__ property value', async () => {
+        const q = datastore.createQuery('Character');
+        const aggregate = datastore
+          .createAggregationQuery(q)
+          .addAggregations([AggregateField.sum('__key__').alias('sum1')]);
+        try {
+          await datastore.runAggregationQuery(aggregate);
+          assert.fail('The request should have failed.');
+        } catch (err: any) {
+          assert.strictEqual(
+            err.message,
+            '3 INVALID_ARGUMENT: Aggregations are not supported for the property: __key__'
+          );
+        }
+      });
+      it('should run a sum aggregate filter against a query that returns no results', async () => {
+        const q = datastore
+          .createQuery('Character')
+          .filter('family', 'NoMatch');
+        const aggregate = datastore
+          .createAggregationQuery(q)
+          .addAggregations([AggregateField.sum('appearances').alias('sum1')]);
+        const [results] = await datastore.runAggregationQuery(aggregate);
+        assert.deepStrictEqual(results, [{sum1: 0}]);
+      });
+      it('should run a sum aggregate filter against a query from before the data creation', async () => {
+        const q = datastore.createQuery('Character');
+        const aggregate = datastore
+          .createAggregationQuery(q)
+          .addAggregations([AggregateField.sum('appearances').alias('sum1')]);
+        const [results] = await datastore.runAggregationQuery(aggregate, {
+          readTime: timeBeforeDataCreation,
+        });
+        assert.deepStrictEqual(results, [{sum1: 0}]);
+      });
+      it('should run a sum aggregate filter using the alias function, but with no alias', async () => {
+        const q = datastore.createQuery('Character');
+        const aggregate = datastore
+          .createAggregationQuery(q)
+          .addAggregations([AggregateField.sum('appearances').alias()]);
+        const [results] = await datastore.runAggregationQuery(aggregate);
+        assert.deepStrictEqual(results, [{property_1: 187}]);
+      });
+    });
+    describe('with an average filter', () => {
+      it('should run an average aggregation', async () => {
+        const q = datastore.createQuery('Character');
+        const aggregate = datastore
+          .createAggregationQuery(q)
+          .addAggregation(AggregateField.average('appearances'));
+        const [results] = await datastore.runAggregationQuery(aggregate);
+        assert.deepStrictEqual(results, [{property_1: 23.375}]);
+      });
+      it('should run an average aggregation with a list of aggregates', async () => {
+        const q = datastore.createQuery('Character');
+        const aggregate = datastore
+          .createAggregationQuery(q)
+          .addAggregations([
+            AggregateField.average('appearances'),
+            AggregateField.average('appearances'),
+          ]);
+        const [results] = await datastore.runAggregationQuery(aggregate);
+        assert.deepStrictEqual(results, [
+          {property_1: 23.375, property_2: 23.375},
+        ]);
+      });
+      it('should run an average aggregation having other filters', async () => {
+        const q = datastore
+          .createQuery('Character')
+          .filter('family', 'Stark')
+          .filter('appearances', '>=', 20);
+        const aggregate = datastore
+          .createAggregationQuery(q)
+          .addAggregation(AggregateField.average('appearances').alias('avg1'));
+        const [results] = await datastore.runAggregationQuery(aggregate);
+        assert.deepStrictEqual(results, [{avg1: 28.166666666666668}]);
+      });
+      it('should run an average aggregate filter with an alias', async () => {
+        const q = datastore.createQuery('Character');
+        const aggregate = datastore
+          .createAggregationQuery(q)
+          .addAggregation(AggregateField.average('appearances').alias('avg1'));
+        const [results] = await datastore.runAggregationQuery(aggregate);
+        assert.deepStrictEqual(results, [{avg1: 23.375}]);
+      });
+      it('should do multiple average aggregations with aliases', async () => {
+        const q = datastore.createQuery('Character');
+        const aggregate = datastore
+          .createAggregationQuery(q)
+          .addAggregations([
+            AggregateField.average('appearances').alias('avg1'),
+            AggregateField.average('appearances').alias('avg2'),
+          ]);
+        const [results] = await datastore.runAggregationQuery(aggregate);
+        assert.deepStrictEqual(results, [{avg1: 23.375, avg2: 23.375}]);
+      });
+      it('should run an average aggregation filter with a limit', async () => {
+        const q = datastore.createQuery('Character').limit(5);
+        const aggregate = datastore
+          .createAggregationQuery(q)
+          .addAggregation(AggregateField.average('appearances'));
+        const [results] = await datastore.runAggregationQuery(aggregate);
+        assert.deepStrictEqual(results, [{property_1: 18.2}]);
+      });
+      it('should run an average aggregate filter with a limit and an alias', async () => {
+        const q = datastore.createQuery('Character').limit(7);
+        const aggregate = datastore
+          .createAggregationQuery(q)
+          .addAggregations([
+            AggregateField.average('appearances').alias('avg1'),
+          ]);
+        const [results] = await datastore.runAggregationQuery(aggregate);
+        assert.deepStrictEqual(results, [{avg1: 22}]);
+      });
+      it('should run an average aggregate filter against a non-numeric property value', async () => {
+        const q = datastore.createQuery('Character');
+        const aggregate = datastore
+          .createAggregationQuery(q)
+          .addAggregations([AggregateField.average('family').alias('avg1')]);
+        const [results] = await datastore.runAggregationQuery(aggregate);
+        assert.deepStrictEqual(results, [{avg1: null}]);
+      });
+      it('should run an average aggregate filter against __key__ property value', async () => {
+        const q = datastore.createQuery('Character');
+        const aggregate = datastore
+          .createAggregationQuery(q)
+          .addAggregations([AggregateField.average('__key__').alias('avg1')]);
+        try {
+          await datastore.runAggregationQuery(aggregate);
+          assert.fail('The request should have failed.');
+        } catch (err: any) {
+          assert.strictEqual(
+            err.message,
+            '3 INVALID_ARGUMENT: Aggregations are not supported for the property: __key__'
+          );
+        }
+      });
+      it('should run an average aggregate filter against a query that returns no results', async () => {
+        const q = datastore
+          .createQuery('Character')
+          .filter('family', 'NoMatch');
+        const aggregate = datastore
+          .createAggregationQuery(q)
+          .addAggregations([
+            AggregateField.average('appearances').alias('avg1'),
+          ]);
+        const [results] = await datastore.runAggregationQuery(aggregate);
+        assert.deepStrictEqual(results, [{avg1: null}]);
+      });
+      it('should run an average aggregate filter against a query from before the data creation', async () => {
+        const q = datastore.createQuery('Character');
+        const aggregate = datastore
+          .createAggregationQuery(q)
+          .addAggregations([
+            AggregateField.average('appearances').alias('avg1'),
+          ]);
+        const [results] = await datastore.runAggregationQuery(aggregate, {
+          readTime: timeBeforeDataCreation,
+        });
+        assert.deepStrictEqual(results, [{avg1: null}]);
+      });
+      it('should run an average aggregate filter using the alias function, but with no alias', async () => {
+        const q = datastore.createQuery('Character');
+        const aggregate = datastore
+          .createAggregationQuery(q)
+          .addAggregations([AggregateField.average('appearances').alias()]);
+        const [results] = await datastore.runAggregationQuery(aggregate);
+        assert.deepStrictEqual(results, [{property_1: 23.375}]);
+      });
+    });
     describe('with a count filter', () => {
       it('should run a count aggregation', async () => {
         const q = datastore.createQuery('Character');
@@ -1012,6 +1294,73 @@ describe('Datastore', () => {
           .addAggregations([AggregateField.count().alias('total')]);
         const [results] = await datastore.runAggregationQuery(aggregate);
         assert.deepStrictEqual(results, [{total: 7}]);
+      });
+      it('should run a count aggregate filter using the alias function, but with no alias', async () => {
+        const q = datastore.createQuery('Character');
+        const aggregate = datastore
+          .createAggregationQuery(q)
+          .addAggregations([AggregateField.count().alias()]);
+        const [results] = await datastore.runAggregationQuery(aggregate);
+        assert.deepStrictEqual(results, [{property_1: 8}]);
+      });
+    });
+    describe('with multiple types of filters', () => {
+      it('should run multiple types of aggregations with a list of aggregates', async () => {
+        const q = datastore.createQuery('Character');
+        const aggregate = datastore
+          .createAggregationQuery(q)
+          .addAggregations([
+            AggregateField.count(),
+            AggregateField.sum('appearances'),
+            AggregateField.average('appearances'),
+          ]);
+        const [results] = await datastore.runAggregationQuery(aggregate);
+        assert.deepStrictEqual(results, [
+          {property_1: 8, property_2: 187, property_3: 23.375},
+        ]);
+      });
+      it('should run multiple types of aggregations with and without aliases', async () => {
+        const q = datastore.createQuery('Character');
+        const aggregate = datastore
+          .createAggregationQuery(q)
+          .addAggregations([
+            AggregateField.count(),
+            AggregateField.average('appearances'),
+            AggregateField.count().alias('alias_count'),
+            AggregateField.sum('appearances').alias('alias_sum'),
+            AggregateField.average('appearances').alias('alias_average'),
+          ]);
+        const [results] = await datastore.runAggregationQuery(aggregate);
+        assert.deepStrictEqual(results, [
+          {
+            property_1: 8,
+            property_2: 23.375,
+            alias_count: 8,
+            alias_sum: 187,
+            alias_average: 23.375,
+          },
+        ]);
+      });
+      it('should throw an error when too many aggregations are run', async () => {
+        const q = datastore.createQuery('Character');
+        const aggregate = datastore
+          .createAggregationQuery(q)
+          .addAggregations([
+            AggregateField.count(),
+            AggregateField.sum('appearances'),
+            AggregateField.average('appearances'),
+            AggregateField.count().alias('alias_count'),
+            AggregateField.sum('appearances').alias('alias_sum'),
+            AggregateField.average('appearances').alias('alias_average'),
+          ]);
+        try {
+          await datastore.runAggregationQuery(aggregate);
+        } catch (err: any) {
+          assert.strictEqual(
+            err.message,
+            '3 INVALID_ARGUMENT: The maximum number of aggregations allowed in an aggregation query is 5. Received: 6'
+          );
+        }
       });
     });
     it('should filter by ancestor', async () => {
@@ -1130,6 +1479,110 @@ describe('Datastore', () => {
     });
   });
 
+  describe('querying the datastore with an overflow data set', () => {
+    const keys = [
+      // Paths:
+      ['Rickard'],
+      ['Rickard', 'Character', 'Eddard'],
+    ].map(path => {
+      return datastore.key(['Book', 'GoT', 'Character'].concat(path));
+    });
+    const characters = [
+      {
+        name: 'Rickard',
+        family: 'Stark',
+        // eslint-disable-next-line @typescript-eslint/no-loss-of-precision
+        appearances: 9223372036854775807,
+        alive: false,
+      },
+      {
+        name: 'Eddard',
+        family: 'Stark',
+        // eslint-disable-next-line @typescript-eslint/no-loss-of-precision
+        appearances: 9223372036854775807,
+        alive: false,
+      },
+    ];
+    before(async () => {
+      const keysToSave = keys.map((key, index) => {
+        return {
+          key,
+          data: characters[index],
+        };
+      });
+      await datastore.save(keysToSave);
+    });
+    after(async () => {
+      await datastore.delete(keys);
+    });
+    it('should run a sum aggregation with an overflow dataset', async () => {
+      const q = datastore.createQuery('Character');
+      const aggregate = datastore
+        .createAggregationQuery(q)
+        .addAggregation(AggregateField.sum('appearances'));
+      const [results] = await datastore.runAggregationQuery(aggregate);
+      assert.deepStrictEqual(results, [{property_1: -18446744073709552000}]);
+    });
+    it('should run an average aggregation with an overflow dataset', async () => {
+      const q = datastore.createQuery('Character');
+      const aggregate = datastore
+        .createAggregationQuery(q)
+        .addAggregation(AggregateField.average('appearances'));
+      const [results] = await datastore.runAggregationQuery(aggregate);
+      assert.deepStrictEqual(results, [{property_1: -9223372036854776000}]);
+    });
+  });
+  describe('querying the datastore with an NaN in the data set', () => {
+    const keys = [
+      // Paths:
+      ['Rickard'],
+      ['Rickard', 'Character', 'Eddard'],
+    ].map(path => {
+      return datastore.key(['Book', 'GoT', 'Character'].concat(path));
+    });
+    const characters = [
+      {
+        name: 'Rickard',
+        family: 'Stark',
+        appearances: 4,
+        alive: false,
+      },
+      {
+        name: 'Eddard',
+        family: 'Stark',
+        appearances: null,
+        alive: false,
+      },
+    ];
+    before(async () => {
+      const keysToSave = keys.map((key, index) => {
+        return {
+          key,
+          data: characters[index],
+        };
+      });
+      await datastore.save(keysToSave);
+    });
+    after(async () => {
+      await datastore.delete(keys);
+    });
+    it('should run a sum aggregation', async () => {
+      const q = datastore.createQuery('Character');
+      const aggregate = datastore
+        .createAggregationQuery(q)
+        .addAggregation(AggregateField.sum('appearances'));
+      const [results] = await datastore.runAggregationQuery(aggregate);
+      assert.deepStrictEqual(results, [{property_1: 4}]);
+    });
+    it('should run an average aggregation', async () => {
+      const q = datastore.createQuery('Character');
+      const aggregate = datastore
+        .createAggregationQuery(q)
+        .addAggregation(AggregateField.average('appearances'));
+      const [results] = await datastore.runAggregationQuery(aggregate);
+      assert.deepStrictEqual(results, [{property_1: 4}]);
+    });
+  });
   describe('transactions', () => {
     it('should run in a transaction', async () => {
       const key = datastore.key(['Company', 'Google']);
@@ -1231,22 +1684,58 @@ describe('Datastore', () => {
       await transaction.commit();
     });
 
-    it('should aggregate query within a transaction', async () => {
-      const transaction = datastore.transaction();
-      await transaction.run();
-      const query = transaction.createQuery('Company');
-      const aggregateQuery = transaction
-        .createAggregationQuery(query)
-        .count('total');
-      let result;
-      try {
-        [result] = await aggregateQuery.run();
-      } catch (e) {
-        await transaction.rollback();
-        return;
-      }
-      assert.deepStrictEqual(result, [{total: 2}]);
-      await transaction.commit();
+    describe('aggregate query within a transaction', async () => {
+      it('should aggregate query within a count transaction', async () => {
+        const transaction = datastore.transaction();
+        await transaction.run();
+        const query = transaction.createQuery('Company');
+        const aggregateQuery = transaction
+          .createAggregationQuery(query)
+          .count('total');
+        let result;
+        try {
+          [result] = await aggregateQuery.run();
+        } catch (e) {
+          await transaction.rollback();
+          assert.fail('The aggregation query run should have been successful');
+        }
+        assert.deepStrictEqual(result, [{total: 2}]);
+        await transaction.commit();
+      });
+      it('should aggregate query within a sum transaction', async () => {
+        const transaction = datastore.transaction();
+        await transaction.run();
+        const query = transaction.createQuery('Company');
+        const aggregateQuery = transaction
+          .createAggregationQuery(query)
+          .sum('rating', 'total rating');
+        let result;
+        try {
+          [result] = await aggregateQuery.run();
+        } catch (e) {
+          await transaction.rollback();
+          assert.fail('The aggregation query run should have been successful');
+        }
+        assert.deepStrictEqual(result, [{'total rating': 200}]);
+        await transaction.commit();
+      });
+      it('should aggregate query within a average transaction', async () => {
+        const transaction = datastore.transaction();
+        await transaction.run();
+        const query = transaction.createQuery('Company');
+        const aggregateQuery = transaction
+          .createAggregationQuery(query)
+          .average('rating', 'average rating');
+        let result;
+        try {
+          [result] = await aggregateQuery.run();
+        } catch (e) {
+          await transaction.rollback();
+          assert.fail('The aggregation query run should have been successful');
+        }
+        assert.deepStrictEqual(result, [{'average rating': 100}]);
+        await transaction.commit();
+      });
     });
 
     it('should read in a readOnly transaction', async () => {

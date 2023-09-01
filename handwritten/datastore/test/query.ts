@@ -58,22 +58,148 @@ describe('Query', () => {
       });
     });
 
-    it('should create a query with a count aggregation', () => {
-      const query = new Query(['kind1']);
-      const firstAggregation = AggregateField.count().alias('total');
-      const secondAggregation = AggregateField.count().alias('total2');
-      const aggregate = new AggregateQuery(query).addAggregations([
-        firstAggregation,
-        secondAggregation,
-      ]);
-      const aggregate2 = new AggregateQuery(query)
-        .count('total')
-        .count('total2');
-      assert.deepStrictEqual(aggregate.aggregations, aggregate2.aggregations);
-      assert.deepStrictEqual(aggregate.aggregations, [
-        firstAggregation,
-        secondAggregation,
-      ]);
+    describe('Aggregation queries', () => {
+      it('should create a query with a count aggregation', () => {
+        const query = new Query(['kind1']);
+        const firstAggregation = AggregateField.count().alias('total');
+        const secondAggregation = AggregateField.count().alias('total2');
+        const aggregate = new AggregateQuery(query).addAggregations([
+          firstAggregation,
+          secondAggregation,
+        ]);
+        const aggregate2 = new AggregateQuery(query)
+          .count('total')
+          .count('total2');
+        assert.deepStrictEqual(aggregate.aggregations, aggregate2.aggregations);
+        assert.deepStrictEqual(aggregate.aggregations, [
+          firstAggregation,
+          secondAggregation,
+        ]);
+      });
+
+      describe('AggregateField toProto', () => {
+        it('should produce the right proto with a count aggregation', () => {
+          assert.deepStrictEqual(
+            AggregateField.count().alias('alias1').toProto(),
+            {
+              alias: 'alias1',
+              count: {},
+            }
+          );
+        });
+        it('should produce the right proto with a sum aggregation', () => {
+          assert.deepStrictEqual(
+            AggregateField.sum('property1').alias('alias1').toProto(),
+            {
+              alias: 'alias1',
+              operator: 'sum',
+              sum: {
+                property: {
+                  name: 'property1',
+                },
+              },
+            }
+          );
+        });
+        it('should produce the right proto with an average aggregation', () => {
+          assert.deepStrictEqual(
+            AggregateField.average('property1').alias('alias1').toProto(),
+            {
+              alias: 'alias1',
+              avg: {
+                property: {
+                  name: 'property1',
+                },
+              },
+              operator: 'avg',
+            }
+          );
+        });
+      });
+
+      describe('comparing equivalent aggregation queries', async () => {
+        function generateAggregateQuery() {
+          return new AggregateQuery(new Query(['kind1']));
+        }
+
+        function compareAggregations(
+          aggregateQuery: AggregateQuery,
+          aggregateFields: AggregateField[]
+        ) {
+          const addAggregationsAggregate = generateAggregateQuery();
+          addAggregationsAggregate.addAggregations(aggregateFields);
+          const addAggregationAggregate = generateAggregateQuery();
+          aggregateFields.forEach(aggregateField =>
+            addAggregationAggregate.addAggregation(aggregateField)
+          );
+          assert.deepStrictEqual(
+            aggregateQuery.aggregations,
+            addAggregationsAggregate.aggregations
+          );
+          assert.deepStrictEqual(
+            aggregateQuery.aggregations,
+            addAggregationAggregate.aggregations
+          );
+          assert.deepStrictEqual(aggregateQuery.aggregations, aggregateFields);
+        }
+        describe('comparing aggregations with an alias', async () => {
+          it('should compare equivalent count aggregation queries', () => {
+            compareAggregations(
+              generateAggregateQuery().count('total1').count('total2'),
+              ['total1', 'total2'].map(alias =>
+                AggregateField.count().alias(alias)
+              )
+            );
+          });
+          it('should compare equivalent sum aggregation queries', () => {
+            compareAggregations(
+              generateAggregateQuery()
+                .sum('property1', 'alias1')
+                .sum('property2', 'alias2'),
+              [
+                AggregateField.sum('property1').alias('alias1'),
+                AggregateField.sum('property2').alias('alias2'),
+              ]
+            );
+          });
+          it('should compare equivalent average aggregation queries', () => {
+            compareAggregations(
+              generateAggregateQuery()
+                .average('property1', 'alias1')
+                .average('property2', 'alias2'),
+              [
+                AggregateField.average('property1').alias('alias1'),
+                AggregateField.average('property2').alias('alias2'),
+              ]
+            );
+          });
+        });
+        describe('comparing aggregations without an alias', async () => {
+          it('should compare equivalent count aggregation queries', () => {
+            compareAggregations(
+              generateAggregateQuery().count().count(),
+              ['total1', 'total2'].map(() => AggregateField.count())
+            );
+          });
+          it('should compare equivalent sum aggregation queries', () => {
+            compareAggregations(
+              generateAggregateQuery().sum('property1').sum('property2'),
+              [AggregateField.sum('property1'), AggregateField.sum('property2')]
+            );
+          });
+          it('should compare equivalent average aggregation queries', () => {
+            compareAggregations(
+              generateAggregateQuery()
+                .average('property1')
+                .average('property2'),
+              [
+                AggregateField.average('property1'),
+                AggregateField.average('property2'),
+              ]
+            );
+          });
+        });
+      });
     });
   });
 

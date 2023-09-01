@@ -276,28 +276,8 @@ class DatastoreRequest {
     }
 
     const makeRequest = (keys: entity.Key[] | KeyProto[]) => {
-      const reqOpts: RequestOptions = {
-        keys,
-      };
-
-      if (options.consistency) {
-        const code = CONSISTENCY_PROTO_CODE[options.consistency.toLowerCase()];
-
-        reqOpts.readOptions = {
-          readConsistency: code,
-        };
-      }
-      if (options.readTime) {
-        if (reqOpts.readOptions === undefined) {
-          reqOpts.readOptions = {};
-        }
-        const readTime = options.readTime;
-        const seconds = readTime / 1000;
-        reqOpts.readOptions.readTime = {
-          seconds: Math.floor(seconds),
-        };
-      }
-
+      const reqOpts = this.getRequestOptions(options);
+      Object.assign(reqOpts, {keys});
       this.request_(
         {
           client: 'DatastoreClient',
@@ -596,7 +576,7 @@ class DatastoreRequest {
       setImmediate(callback, e as Error);
       return;
     }
-    const sharedQueryOpts = this.getSharedQueryOptions(query.query, options);
+    const sharedQueryOpts = this.getQueryOptions(query.query, options);
     const aggregationQueryOptions: AggregationQueryOptions = {
       nestedQuery: queryProto,
       aggregations: query.toProto(),
@@ -811,7 +791,7 @@ class DatastoreRequest {
         setImmediate(onResultSet, e as Error);
         return;
       }
-      const sharedQueryOpts = this.getSharedQueryOptions(query, options);
+      const sharedQueryOpts = this.getQueryOptions(query, options);
 
       const reqOpts: RequestOptions = sharedQueryOpts;
       reqOpts.query = queryProto;
@@ -887,9 +867,8 @@ class DatastoreRequest {
     return stream;
   }
 
-  private getSharedQueryOptions(
-    query: Query,
-    options: RunQueryStreamOptions = {}
+  private getRequestOptions(
+    options: RunQueryStreamOptions
   ): SharedQueryOptions {
     const sharedQueryOpts = {} as SharedQueryOptions;
     if (options.consistency) {
@@ -898,6 +877,24 @@ class DatastoreRequest {
         readConsistency: code,
       };
     }
+    if (options.readTime) {
+      if (sharedQueryOpts.readOptions === undefined) {
+        sharedQueryOpts.readOptions = {};
+      }
+      const readTime = options.readTime;
+      const seconds = readTime / 1000;
+      sharedQueryOpts.readOptions.readTime = {
+        seconds: Math.floor(seconds),
+      };
+    }
+    return sharedQueryOpts;
+  }
+
+  private getQueryOptions(
+    query: Query,
+    options: RunQueryStreamOptions = {}
+  ): SharedQueryOptions {
+    const sharedQueryOpts = this.getRequestOptions(options);
     if (query.namespace) {
       sharedQueryOpts.partitionId = {
         namespaceId: query.namespace,
@@ -1191,7 +1188,7 @@ export type DeleteResponse = CommitResponse;
  * that a callback is omitted.
  */
 promisifyAll(DatastoreRequest, {
-  exclude: ['getSharedQueryOptions'],
+  exclude: ['getQueryOptions', 'getRequestOptions'],
 });
 
 /**
