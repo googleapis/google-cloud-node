@@ -40,6 +40,11 @@ function main(name) {
    *  (_), and hyphens (-). The maximum length is 40 characters.
    */
   // const requestId = 'abc123'
+  /**
+   *  Force delete the conversion workspace, even if there's a running migration
+   *  that is using the workspace.
+   */
+  // const force = true
 
   // Imports the Clouddms library
   const {DataMigrationServiceClient} = require('@google-cloud/dms').v1;

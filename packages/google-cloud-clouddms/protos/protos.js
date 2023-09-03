@@ -495,6 +495,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.clouddms.v1.DataMigrationService|generateTcpProxyScript}.
+                         * @memberof google.cloud.clouddms.v1.DataMigrationService
+                         * @typedef GenerateTcpProxyScriptCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.clouddms.v1.TcpProxyScript} [response] TcpProxyScript
+                         */
+    
+                        /**
+                         * Calls GenerateTcpProxyScript.
+                         * @function generateTcpProxyScript
+                         * @memberof google.cloud.clouddms.v1.DataMigrationService
+                         * @instance
+                         * @param {google.cloud.clouddms.v1.IGenerateTcpProxyScriptRequest} request GenerateTcpProxyScriptRequest message or plain object
+                         * @param {google.cloud.clouddms.v1.DataMigrationService.GenerateTcpProxyScriptCallback} callback Node-style callback called with the error, if any, and TcpProxyScript
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataMigrationService.prototype.generateTcpProxyScript = function generateTcpProxyScript(request, callback) {
+                            return this.rpcCall(generateTcpProxyScript, $root.google.cloud.clouddms.v1.GenerateTcpProxyScriptRequest, $root.google.cloud.clouddms.v1.TcpProxyScript, request, callback);
+                        }, "name", { value: "GenerateTcpProxyScript" });
+    
+                        /**
+                         * Calls GenerateTcpProxyScript.
+                         * @function generateTcpProxyScript
+                         * @memberof google.cloud.clouddms.v1.DataMigrationService
+                         * @instance
+                         * @param {google.cloud.clouddms.v1.IGenerateTcpProxyScriptRequest} request GenerateTcpProxyScriptRequest message or plain object
+                         * @returns {Promise<google.cloud.clouddms.v1.TcpProxyScript>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.clouddms.v1.DataMigrationService|listConnectionProfiles}.
                          * @memberof google.cloud.clouddms.v1.DataMigrationService
                          * @typedef ListConnectionProfilesCallback
@@ -953,6 +986,138 @@
                          * @instance
                          * @param {google.cloud.clouddms.v1.IDeleteConversionWorkspaceRequest} request DeleteConversionWorkspaceRequest message or plain object
                          * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.clouddms.v1.DataMigrationService|createMappingRule}.
+                         * @memberof google.cloud.clouddms.v1.DataMigrationService
+                         * @typedef CreateMappingRuleCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.clouddms.v1.MappingRule} [response] MappingRule
+                         */
+    
+                        /**
+                         * Calls CreateMappingRule.
+                         * @function createMappingRule
+                         * @memberof google.cloud.clouddms.v1.DataMigrationService
+                         * @instance
+                         * @param {google.cloud.clouddms.v1.ICreateMappingRuleRequest} request CreateMappingRuleRequest message or plain object
+                         * @param {google.cloud.clouddms.v1.DataMigrationService.CreateMappingRuleCallback} callback Node-style callback called with the error, if any, and MappingRule
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataMigrationService.prototype.createMappingRule = function createMappingRule(request, callback) {
+                            return this.rpcCall(createMappingRule, $root.google.cloud.clouddms.v1.CreateMappingRuleRequest, $root.google.cloud.clouddms.v1.MappingRule, request, callback);
+                        }, "name", { value: "CreateMappingRule" });
+    
+                        /**
+                         * Calls CreateMappingRule.
+                         * @function createMappingRule
+                         * @memberof google.cloud.clouddms.v1.DataMigrationService
+                         * @instance
+                         * @param {google.cloud.clouddms.v1.ICreateMappingRuleRequest} request CreateMappingRuleRequest message or plain object
+                         * @returns {Promise<google.cloud.clouddms.v1.MappingRule>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.clouddms.v1.DataMigrationService|deleteMappingRule}.
+                         * @memberof google.cloud.clouddms.v1.DataMigrationService
+                         * @typedef DeleteMappingRuleCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteMappingRule.
+                         * @function deleteMappingRule
+                         * @memberof google.cloud.clouddms.v1.DataMigrationService
+                         * @instance
+                         * @param {google.cloud.clouddms.v1.IDeleteMappingRuleRequest} request DeleteMappingRuleRequest message or plain object
+                         * @param {google.cloud.clouddms.v1.DataMigrationService.DeleteMappingRuleCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataMigrationService.prototype.deleteMappingRule = function deleteMappingRule(request, callback) {
+                            return this.rpcCall(deleteMappingRule, $root.google.cloud.clouddms.v1.DeleteMappingRuleRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteMappingRule" });
+    
+                        /**
+                         * Calls DeleteMappingRule.
+                         * @function deleteMappingRule
+                         * @memberof google.cloud.clouddms.v1.DataMigrationService
+                         * @instance
+                         * @param {google.cloud.clouddms.v1.IDeleteMappingRuleRequest} request DeleteMappingRuleRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.clouddms.v1.DataMigrationService|listMappingRules}.
+                         * @memberof google.cloud.clouddms.v1.DataMigrationService
+                         * @typedef ListMappingRulesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.clouddms.v1.ListMappingRulesResponse} [response] ListMappingRulesResponse
+                         */
+    
+                        /**
+                         * Calls ListMappingRules.
+                         * @function listMappingRules
+                         * @memberof google.cloud.clouddms.v1.DataMigrationService
+                         * @instance
+                         * @param {google.cloud.clouddms.v1.IListMappingRulesRequest} request ListMappingRulesRequest message or plain object
+                         * @param {google.cloud.clouddms.v1.DataMigrationService.ListMappingRulesCallback} callback Node-style callback called with the error, if any, and ListMappingRulesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataMigrationService.prototype.listMappingRules = function listMappingRules(request, callback) {
+                            return this.rpcCall(listMappingRules, $root.google.cloud.clouddms.v1.ListMappingRulesRequest, $root.google.cloud.clouddms.v1.ListMappingRulesResponse, request, callback);
+                        }, "name", { value: "ListMappingRules" });
+    
+                        /**
+                         * Calls ListMappingRules.
+                         * @function listMappingRules
+                         * @memberof google.cloud.clouddms.v1.DataMigrationService
+                         * @instance
+                         * @param {google.cloud.clouddms.v1.IListMappingRulesRequest} request ListMappingRulesRequest message or plain object
+                         * @returns {Promise<google.cloud.clouddms.v1.ListMappingRulesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.clouddms.v1.DataMigrationService|getMappingRule}.
+                         * @memberof google.cloud.clouddms.v1.DataMigrationService
+                         * @typedef GetMappingRuleCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.clouddms.v1.MappingRule} [response] MappingRule
+                         */
+    
+                        /**
+                         * Calls GetMappingRule.
+                         * @function getMappingRule
+                         * @memberof google.cloud.clouddms.v1.DataMigrationService
+                         * @instance
+                         * @param {google.cloud.clouddms.v1.IGetMappingRuleRequest} request GetMappingRuleRequest message or plain object
+                         * @param {google.cloud.clouddms.v1.DataMigrationService.GetMappingRuleCallback} callback Node-style callback called with the error, if any, and MappingRule
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataMigrationService.prototype.getMappingRule = function getMappingRule(request, callback) {
+                            return this.rpcCall(getMappingRule, $root.google.cloud.clouddms.v1.GetMappingRuleRequest, $root.google.cloud.clouddms.v1.MappingRule, request, callback);
+                        }, "name", { value: "GetMappingRule" });
+    
+                        /**
+                         * Calls GetMappingRule.
+                         * @function getMappingRule
+                         * @memberof google.cloud.clouddms.v1.DataMigrationService
+                         * @instance
+                         * @param {google.cloud.clouddms.v1.IGetMappingRuleRequest} request GetMappingRuleRequest message or plain object
+                         * @returns {Promise<google.cloud.clouddms.v1.MappingRule>} Promise
                          * @variation 2
                          */
     
@@ -2871,6 +3036,7 @@
                          * @memberof google.cloud.clouddms.v1
                          * @interface IStartMigrationJobRequest
                          * @property {string|null} [name] StartMigrationJobRequest name
+                         * @property {boolean|null} [skipValidation] StartMigrationJobRequest skipValidation
                          */
     
                         /**
@@ -2895,6 +3061,14 @@
                          * @instance
                          */
                         StartMigrationJobRequest.prototype.name = "";
+    
+                        /**
+                         * StartMigrationJobRequest skipValidation.
+                         * @member {boolean} skipValidation
+                         * @memberof google.cloud.clouddms.v1.StartMigrationJobRequest
+                         * @instance
+                         */
+                        StartMigrationJobRequest.prototype.skipValidation = false;
     
                         /**
                          * Creates a new StartMigrationJobRequest instance using the specified properties.
@@ -2922,6 +3096,8 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.skipValidation != null && Object.hasOwnProperty.call(message, "skipValidation"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.skipValidation);
                             return writer;
                         };
     
@@ -2958,6 +3134,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.skipValidation = reader.bool();
                                         break;
                                     }
                                 default:
@@ -2998,6 +3178,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.skipValidation != null && message.hasOwnProperty("skipValidation"))
+                                if (typeof message.skipValidation !== "boolean")
+                                    return "skipValidation: boolean expected";
                             return null;
                         };
     
@@ -3015,6 +3198,8 @@
                             var message = new $root.google.cloud.clouddms.v1.StartMigrationJobRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.skipValidation != null)
+                                message.skipValidation = Boolean(object.skipValidation);
                             return message;
                         };
     
@@ -3031,10 +3216,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.skipValidation = false;
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.skipValidation != null && message.hasOwnProperty("skipValidation"))
+                                object.skipValidation = message.skipValidation;
                             return object;
                         };
     
@@ -3683,6 +3872,8 @@
                          * @memberof google.cloud.clouddms.v1
                          * @interface IVerifyMigrationJobRequest
                          * @property {string|null} [name] VerifyMigrationJobRequest name
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] VerifyMigrationJobRequest updateMask
+                         * @property {google.cloud.clouddms.v1.IMigrationJob|null} [migrationJob] VerifyMigrationJobRequest migrationJob
                          */
     
                         /**
@@ -3707,6 +3898,22 @@
                          * @instance
                          */
                         VerifyMigrationJobRequest.prototype.name = "";
+    
+                        /**
+                         * VerifyMigrationJobRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.clouddms.v1.VerifyMigrationJobRequest
+                         * @instance
+                         */
+                        VerifyMigrationJobRequest.prototype.updateMask = null;
+    
+                        /**
+                         * VerifyMigrationJobRequest migrationJob.
+                         * @member {google.cloud.clouddms.v1.IMigrationJob|null|undefined} migrationJob
+                         * @memberof google.cloud.clouddms.v1.VerifyMigrationJobRequest
+                         * @instance
+                         */
+                        VerifyMigrationJobRequest.prototype.migrationJob = null;
     
                         /**
                          * Creates a new VerifyMigrationJobRequest instance using the specified properties.
@@ -3734,6 +3941,10 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.migrationJob != null && Object.hasOwnProperty.call(message, "migrationJob"))
+                                $root.google.cloud.clouddms.v1.MigrationJob.encode(message.migrationJob, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -3770,6 +3981,14 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.migrationJob = $root.google.cloud.clouddms.v1.MigrationJob.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -3810,6 +4029,16 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.migrationJob != null && message.hasOwnProperty("migrationJob")) {
+                                var error = $root.google.cloud.clouddms.v1.MigrationJob.verify(message.migrationJob);
+                                if (error)
+                                    return "migrationJob." + error;
+                            }
                             return null;
                         };
     
@@ -3827,6 +4056,16 @@
                             var message = new $root.google.cloud.clouddms.v1.VerifyMigrationJobRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.VerifyMigrationJobRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.migrationJob != null) {
+                                if (typeof object.migrationJob !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.VerifyMigrationJobRequest.migrationJob: object expected");
+                                message.migrationJob = $root.google.cloud.clouddms.v1.MigrationJob.fromObject(object.migrationJob);
+                            }
                             return message;
                         };
     
@@ -3843,10 +4082,17 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.updateMask = null;
+                                object.migrationJob = null;
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.migrationJob != null && message.hasOwnProperty("migrationJob"))
+                                object.migrationJob = $root.google.cloud.clouddms.v1.MigrationJob.toObject(message.migrationJob, options);
                             return object;
                         };
     
@@ -3886,6 +4132,7 @@
                          * @memberof google.cloud.clouddms.v1
                          * @interface IRestartMigrationJobRequest
                          * @property {string|null} [name] RestartMigrationJobRequest name
+                         * @property {boolean|null} [skipValidation] RestartMigrationJobRequest skipValidation
                          */
     
                         /**
@@ -3910,6 +4157,14 @@
                          * @instance
                          */
                         RestartMigrationJobRequest.prototype.name = "";
+    
+                        /**
+                         * RestartMigrationJobRequest skipValidation.
+                         * @member {boolean} skipValidation
+                         * @memberof google.cloud.clouddms.v1.RestartMigrationJobRequest
+                         * @instance
+                         */
+                        RestartMigrationJobRequest.prototype.skipValidation = false;
     
                         /**
                          * Creates a new RestartMigrationJobRequest instance using the specified properties.
@@ -3937,6 +4192,8 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.skipValidation != null && Object.hasOwnProperty.call(message, "skipValidation"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.skipValidation);
                             return writer;
                         };
     
@@ -3973,6 +4230,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.skipValidation = reader.bool();
                                         break;
                                     }
                                 default:
@@ -4013,6 +4274,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.skipValidation != null && message.hasOwnProperty("skipValidation"))
+                                if (typeof message.skipValidation !== "boolean")
+                                    return "skipValidation: boolean expected";
                             return null;
                         };
     
@@ -4030,6 +4294,8 @@
                             var message = new $root.google.cloud.clouddms.v1.RestartMigrationJobRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.skipValidation != null)
+                                message.skipValidation = Boolean(object.skipValidation);
                             return message;
                         };
     
@@ -4046,10 +4312,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.skipValidation = false;
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.skipValidation != null && message.hasOwnProperty("skipValidation"))
+                                object.skipValidation = message.skipValidation;
                             return object;
                         };
     
@@ -5069,6 +5339,505 @@
                         };
     
                         return SshScript;
+                    })();
+    
+                    v1.GenerateTcpProxyScriptRequest = (function() {
+    
+                        /**
+                         * Properties of a GenerateTcpProxyScriptRequest.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface IGenerateTcpProxyScriptRequest
+                         * @property {string|null} [migrationJob] GenerateTcpProxyScriptRequest migrationJob
+                         * @property {string|null} [vmName] GenerateTcpProxyScriptRequest vmName
+                         * @property {string|null} [vmMachineType] GenerateTcpProxyScriptRequest vmMachineType
+                         * @property {string|null} [vmZone] GenerateTcpProxyScriptRequest vmZone
+                         * @property {string|null} [vmSubnet] GenerateTcpProxyScriptRequest vmSubnet
+                         */
+    
+                        /**
+                         * Constructs a new GenerateTcpProxyScriptRequest.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents a GenerateTcpProxyScriptRequest.
+                         * @implements IGenerateTcpProxyScriptRequest
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.IGenerateTcpProxyScriptRequest=} [properties] Properties to set
+                         */
+                        function GenerateTcpProxyScriptRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GenerateTcpProxyScriptRequest migrationJob.
+                         * @member {string} migrationJob
+                         * @memberof google.cloud.clouddms.v1.GenerateTcpProxyScriptRequest
+                         * @instance
+                         */
+                        GenerateTcpProxyScriptRequest.prototype.migrationJob = "";
+    
+                        /**
+                         * GenerateTcpProxyScriptRequest vmName.
+                         * @member {string} vmName
+                         * @memberof google.cloud.clouddms.v1.GenerateTcpProxyScriptRequest
+                         * @instance
+                         */
+                        GenerateTcpProxyScriptRequest.prototype.vmName = "";
+    
+                        /**
+                         * GenerateTcpProxyScriptRequest vmMachineType.
+                         * @member {string} vmMachineType
+                         * @memberof google.cloud.clouddms.v1.GenerateTcpProxyScriptRequest
+                         * @instance
+                         */
+                        GenerateTcpProxyScriptRequest.prototype.vmMachineType = "";
+    
+                        /**
+                         * GenerateTcpProxyScriptRequest vmZone.
+                         * @member {string} vmZone
+                         * @memberof google.cloud.clouddms.v1.GenerateTcpProxyScriptRequest
+                         * @instance
+                         */
+                        GenerateTcpProxyScriptRequest.prototype.vmZone = "";
+    
+                        /**
+                         * GenerateTcpProxyScriptRequest vmSubnet.
+                         * @member {string} vmSubnet
+                         * @memberof google.cloud.clouddms.v1.GenerateTcpProxyScriptRequest
+                         * @instance
+                         */
+                        GenerateTcpProxyScriptRequest.prototype.vmSubnet = "";
+    
+                        /**
+                         * Creates a new GenerateTcpProxyScriptRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.GenerateTcpProxyScriptRequest
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IGenerateTcpProxyScriptRequest=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.GenerateTcpProxyScriptRequest} GenerateTcpProxyScriptRequest instance
+                         */
+                        GenerateTcpProxyScriptRequest.create = function create(properties) {
+                            return new GenerateTcpProxyScriptRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GenerateTcpProxyScriptRequest message. Does not implicitly {@link google.cloud.clouddms.v1.GenerateTcpProxyScriptRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.GenerateTcpProxyScriptRequest
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IGenerateTcpProxyScriptRequest} message GenerateTcpProxyScriptRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GenerateTcpProxyScriptRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.migrationJob != null && Object.hasOwnProperty.call(message, "migrationJob"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.migrationJob);
+                            if (message.vmName != null && Object.hasOwnProperty.call(message, "vmName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.vmName);
+                            if (message.vmMachineType != null && Object.hasOwnProperty.call(message, "vmMachineType"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.vmMachineType);
+                            if (message.vmZone != null && Object.hasOwnProperty.call(message, "vmZone"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.vmZone);
+                            if (message.vmSubnet != null && Object.hasOwnProperty.call(message, "vmSubnet"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.vmSubnet);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GenerateTcpProxyScriptRequest message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.GenerateTcpProxyScriptRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.GenerateTcpProxyScriptRequest
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IGenerateTcpProxyScriptRequest} message GenerateTcpProxyScriptRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GenerateTcpProxyScriptRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GenerateTcpProxyScriptRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.GenerateTcpProxyScriptRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.GenerateTcpProxyScriptRequest} GenerateTcpProxyScriptRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GenerateTcpProxyScriptRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.GenerateTcpProxyScriptRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.migrationJob = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.vmName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.vmMachineType = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.vmZone = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.vmSubnet = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GenerateTcpProxyScriptRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.GenerateTcpProxyScriptRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.GenerateTcpProxyScriptRequest} GenerateTcpProxyScriptRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GenerateTcpProxyScriptRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GenerateTcpProxyScriptRequest message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.GenerateTcpProxyScriptRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GenerateTcpProxyScriptRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.migrationJob != null && message.hasOwnProperty("migrationJob"))
+                                if (!$util.isString(message.migrationJob))
+                                    return "migrationJob: string expected";
+                            if (message.vmName != null && message.hasOwnProperty("vmName"))
+                                if (!$util.isString(message.vmName))
+                                    return "vmName: string expected";
+                            if (message.vmMachineType != null && message.hasOwnProperty("vmMachineType"))
+                                if (!$util.isString(message.vmMachineType))
+                                    return "vmMachineType: string expected";
+                            if (message.vmZone != null && message.hasOwnProperty("vmZone"))
+                                if (!$util.isString(message.vmZone))
+                                    return "vmZone: string expected";
+                            if (message.vmSubnet != null && message.hasOwnProperty("vmSubnet"))
+                                if (!$util.isString(message.vmSubnet))
+                                    return "vmSubnet: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GenerateTcpProxyScriptRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.GenerateTcpProxyScriptRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.GenerateTcpProxyScriptRequest} GenerateTcpProxyScriptRequest
+                         */
+                        GenerateTcpProxyScriptRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.GenerateTcpProxyScriptRequest)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.GenerateTcpProxyScriptRequest();
+                            if (object.migrationJob != null)
+                                message.migrationJob = String(object.migrationJob);
+                            if (object.vmName != null)
+                                message.vmName = String(object.vmName);
+                            if (object.vmMachineType != null)
+                                message.vmMachineType = String(object.vmMachineType);
+                            if (object.vmZone != null)
+                                message.vmZone = String(object.vmZone);
+                            if (object.vmSubnet != null)
+                                message.vmSubnet = String(object.vmSubnet);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GenerateTcpProxyScriptRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.GenerateTcpProxyScriptRequest
+                         * @static
+                         * @param {google.cloud.clouddms.v1.GenerateTcpProxyScriptRequest} message GenerateTcpProxyScriptRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GenerateTcpProxyScriptRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.migrationJob = "";
+                                object.vmName = "";
+                                object.vmMachineType = "";
+                                object.vmZone = "";
+                                object.vmSubnet = "";
+                            }
+                            if (message.migrationJob != null && message.hasOwnProperty("migrationJob"))
+                                object.migrationJob = message.migrationJob;
+                            if (message.vmName != null && message.hasOwnProperty("vmName"))
+                                object.vmName = message.vmName;
+                            if (message.vmMachineType != null && message.hasOwnProperty("vmMachineType"))
+                                object.vmMachineType = message.vmMachineType;
+                            if (message.vmZone != null && message.hasOwnProperty("vmZone"))
+                                object.vmZone = message.vmZone;
+                            if (message.vmSubnet != null && message.hasOwnProperty("vmSubnet"))
+                                object.vmSubnet = message.vmSubnet;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GenerateTcpProxyScriptRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.GenerateTcpProxyScriptRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GenerateTcpProxyScriptRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GenerateTcpProxyScriptRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.GenerateTcpProxyScriptRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GenerateTcpProxyScriptRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.GenerateTcpProxyScriptRequest";
+                        };
+    
+                        return GenerateTcpProxyScriptRequest;
+                    })();
+    
+                    v1.TcpProxyScript = (function() {
+    
+                        /**
+                         * Properties of a TcpProxyScript.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface ITcpProxyScript
+                         * @property {string|null} [script] TcpProxyScript script
+                         */
+    
+                        /**
+                         * Constructs a new TcpProxyScript.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents a TcpProxyScript.
+                         * @implements ITcpProxyScript
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.ITcpProxyScript=} [properties] Properties to set
+                         */
+                        function TcpProxyScript(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TcpProxyScript script.
+                         * @member {string} script
+                         * @memberof google.cloud.clouddms.v1.TcpProxyScript
+                         * @instance
+                         */
+                        TcpProxyScript.prototype.script = "";
+    
+                        /**
+                         * Creates a new TcpProxyScript instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.TcpProxyScript
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ITcpProxyScript=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.TcpProxyScript} TcpProxyScript instance
+                         */
+                        TcpProxyScript.create = function create(properties) {
+                            return new TcpProxyScript(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TcpProxyScript message. Does not implicitly {@link google.cloud.clouddms.v1.TcpProxyScript.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.TcpProxyScript
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ITcpProxyScript} message TcpProxyScript message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TcpProxyScript.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.script != null && Object.hasOwnProperty.call(message, "script"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.script);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TcpProxyScript message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.TcpProxyScript.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.TcpProxyScript
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ITcpProxyScript} message TcpProxyScript message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TcpProxyScript.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TcpProxyScript message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.TcpProxyScript
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.TcpProxyScript} TcpProxyScript
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TcpProxyScript.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.TcpProxyScript();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.script = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TcpProxyScript message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.TcpProxyScript
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.TcpProxyScript} TcpProxyScript
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TcpProxyScript.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TcpProxyScript message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.TcpProxyScript
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TcpProxyScript.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.script != null && message.hasOwnProperty("script"))
+                                if (!$util.isString(message.script))
+                                    return "script: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TcpProxyScript message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.TcpProxyScript
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.TcpProxyScript} TcpProxyScript
+                         */
+                        TcpProxyScript.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.TcpProxyScript)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.TcpProxyScript();
+                            if (object.script != null)
+                                message.script = String(object.script);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TcpProxyScript message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.TcpProxyScript
+                         * @static
+                         * @param {google.cloud.clouddms.v1.TcpProxyScript} message TcpProxyScript
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TcpProxyScript.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.script = "";
+                            if (message.script != null && message.hasOwnProperty("script"))
+                                object.script = message.script;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TcpProxyScript to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.TcpProxyScript
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TcpProxyScript.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TcpProxyScript
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.TcpProxyScript
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TcpProxyScript.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.TcpProxyScript";
+                        };
+    
+                        return TcpProxyScript;
                     })();
     
                     v1.ListConnectionProfilesRequest = (function() {
@@ -9715,6 +10484,7 @@
                          * @interface IDeleteConversionWorkspaceRequest
                          * @property {string|null} [name] DeleteConversionWorkspaceRequest name
                          * @property {string|null} [requestId] DeleteConversionWorkspaceRequest requestId
+                         * @property {boolean|null} [force] DeleteConversionWorkspaceRequest force
                          */
     
                         /**
@@ -9749,6 +10519,14 @@
                         DeleteConversionWorkspaceRequest.prototype.requestId = "";
     
                         /**
+                         * DeleteConversionWorkspaceRequest force.
+                         * @member {boolean} force
+                         * @memberof google.cloud.clouddms.v1.DeleteConversionWorkspaceRequest
+                         * @instance
+                         */
+                        DeleteConversionWorkspaceRequest.prototype.force = false;
+    
+                        /**
                          * Creates a new DeleteConversionWorkspaceRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.clouddms.v1.DeleteConversionWorkspaceRequest
@@ -9776,6 +10554,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                             if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            if (message.force != null && Object.hasOwnProperty.call(message, "force"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.force);
                             return writer;
                         };
     
@@ -9816,6 +10596,10 @@
                                     }
                                 case 2: {
                                         message.requestId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.force = reader.bool();
                                         break;
                                     }
                                 default:
@@ -9859,6 +10643,9 @@
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                if (typeof message.force !== "boolean")
+                                    return "force: boolean expected";
                             return null;
                         };
     
@@ -9878,6 +10665,8 @@
                                 message.name = String(object.name);
                             if (object.requestId != null)
                                 message.requestId = String(object.requestId);
+                            if (object.force != null)
+                                message.force = Boolean(object.force);
                             return message;
                         };
     
@@ -9897,11 +10686,14 @@
                             if (options.defaults) {
                                 object.name = "";
                                 object.requestId = "";
+                                object.force = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 object.requestId = message.requestId;
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                object.force = message.force;
                             return object;
                         };
     
@@ -10372,6 +11164,8 @@
                          * @interface IApplyConversionWorkspaceRequest
                          * @property {string|null} [name] ApplyConversionWorkspaceRequest name
                          * @property {string|null} [filter] ApplyConversionWorkspaceRequest filter
+                         * @property {boolean|null} [dryRun] ApplyConversionWorkspaceRequest dryRun
+                         * @property {boolean|null} [autoCommit] ApplyConversionWorkspaceRequest autoCommit
                          * @property {string|null} [connectionProfile] ApplyConversionWorkspaceRequest connectionProfile
                          */
     
@@ -10405,6 +11199,22 @@
                          * @instance
                          */
                         ApplyConversionWorkspaceRequest.prototype.filter = "";
+    
+                        /**
+                         * ApplyConversionWorkspaceRequest dryRun.
+                         * @member {boolean} dryRun
+                         * @memberof google.cloud.clouddms.v1.ApplyConversionWorkspaceRequest
+                         * @instance
+                         */
+                        ApplyConversionWorkspaceRequest.prototype.dryRun = false;
+    
+                        /**
+                         * ApplyConversionWorkspaceRequest autoCommit.
+                         * @member {boolean} autoCommit
+                         * @memberof google.cloud.clouddms.v1.ApplyConversionWorkspaceRequest
+                         * @instance
+                         */
+                        ApplyConversionWorkspaceRequest.prototype.autoCommit = false;
     
                         /**
                          * ApplyConversionWorkspaceRequest connectionProfile.
@@ -10456,6 +11266,10 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                             if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.filter);
+                            if (message.dryRun != null && Object.hasOwnProperty.call(message, "dryRun"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.dryRun);
+                            if (message.autoCommit != null && Object.hasOwnProperty.call(message, "autoCommit"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.autoCommit);
                             if (message.connectionProfile != null && Object.hasOwnProperty.call(message, "connectionProfile"))
                                 writer.uint32(/* id 100, wireType 2 =*/802).string(message.connectionProfile);
                             return writer;
@@ -10498,6 +11312,14 @@
                                     }
                                 case 2: {
                                         message.filter = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.dryRun = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.autoCommit = reader.bool();
                                         break;
                                     }
                                 case 100: {
@@ -10546,6 +11368,12 @@
                             if (message.filter != null && message.hasOwnProperty("filter"))
                                 if (!$util.isString(message.filter))
                                     return "filter: string expected";
+                            if (message.dryRun != null && message.hasOwnProperty("dryRun"))
+                                if (typeof message.dryRun !== "boolean")
+                                    return "dryRun: boolean expected";
+                            if (message.autoCommit != null && message.hasOwnProperty("autoCommit"))
+                                if (typeof message.autoCommit !== "boolean")
+                                    return "autoCommit: boolean expected";
                             if (message.connectionProfile != null && message.hasOwnProperty("connectionProfile")) {
                                 properties.destination = 1;
                                 if (!$util.isString(message.connectionProfile))
@@ -10570,6 +11398,10 @@
                                 message.name = String(object.name);
                             if (object.filter != null)
                                 message.filter = String(object.filter);
+                            if (object.dryRun != null)
+                                message.dryRun = Boolean(object.dryRun);
+                            if (object.autoCommit != null)
+                                message.autoCommit = Boolean(object.autoCommit);
                             if (object.connectionProfile != null)
                                 message.connectionProfile = String(object.connectionProfile);
                             return message;
@@ -10591,11 +11423,17 @@
                             if (options.defaults) {
                                 object.name = "";
                                 object.filter = "";
+                                object.dryRun = false;
+                                object.autoCommit = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.filter != null && message.hasOwnProperty("filter"))
                                 object.filter = message.filter;
+                            if (message.dryRun != null && message.hasOwnProperty("dryRun"))
+                                object.dryRun = message.dryRun;
+                            if (message.autoCommit != null && message.hasOwnProperty("autoCommit"))
+                                object.autoCommit = message.autoCommit;
                             if (message.connectionProfile != null && message.hasOwnProperty("connectionProfile")) {
                                 object.connectionProfile = message.connectionProfile;
                                 if (options.oneofs)
@@ -10631,6 +11469,707 @@
                         };
     
                         return ApplyConversionWorkspaceRequest;
+                    })();
+    
+                    v1.ListMappingRulesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListMappingRulesRequest.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface IListMappingRulesRequest
+                         * @property {string|null} [parent] ListMappingRulesRequest parent
+                         * @property {number|null} [pageSize] ListMappingRulesRequest pageSize
+                         * @property {string|null} [pageToken] ListMappingRulesRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListMappingRulesRequest.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents a ListMappingRulesRequest.
+                         * @implements IListMappingRulesRequest
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.IListMappingRulesRequest=} [properties] Properties to set
+                         */
+                        function ListMappingRulesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListMappingRulesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.clouddms.v1.ListMappingRulesRequest
+                         * @instance
+                         */
+                        ListMappingRulesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListMappingRulesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.clouddms.v1.ListMappingRulesRequest
+                         * @instance
+                         */
+                        ListMappingRulesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListMappingRulesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.clouddms.v1.ListMappingRulesRequest
+                         * @instance
+                         */
+                        ListMappingRulesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListMappingRulesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.ListMappingRulesRequest
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IListMappingRulesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.ListMappingRulesRequest} ListMappingRulesRequest instance
+                         */
+                        ListMappingRulesRequest.create = function create(properties) {
+                            return new ListMappingRulesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListMappingRulesRequest message. Does not implicitly {@link google.cloud.clouddms.v1.ListMappingRulesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.ListMappingRulesRequest
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IListMappingRulesRequest} message ListMappingRulesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMappingRulesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListMappingRulesRequest message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.ListMappingRulesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.ListMappingRulesRequest
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IListMappingRulesRequest} message ListMappingRulesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMappingRulesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListMappingRulesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.ListMappingRulesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.ListMappingRulesRequest} ListMappingRulesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMappingRulesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.ListMappingRulesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListMappingRulesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.ListMappingRulesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.ListMappingRulesRequest} ListMappingRulesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMappingRulesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListMappingRulesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.ListMappingRulesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListMappingRulesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListMappingRulesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.ListMappingRulesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.ListMappingRulesRequest} ListMappingRulesRequest
+                         */
+                        ListMappingRulesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.ListMappingRulesRequest)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.ListMappingRulesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListMappingRulesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.ListMappingRulesRequest
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ListMappingRulesRequest} message ListMappingRulesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListMappingRulesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListMappingRulesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.ListMappingRulesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListMappingRulesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListMappingRulesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.ListMappingRulesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListMappingRulesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.ListMappingRulesRequest";
+                        };
+    
+                        return ListMappingRulesRequest;
+                    })();
+    
+                    v1.ListMappingRulesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListMappingRulesResponse.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface IListMappingRulesResponse
+                         * @property {Array.<google.cloud.clouddms.v1.IMappingRule>|null} [mappingRules] ListMappingRulesResponse mappingRules
+                         * @property {string|null} [nextPageToken] ListMappingRulesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListMappingRulesResponse.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents a ListMappingRulesResponse.
+                         * @implements IListMappingRulesResponse
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.IListMappingRulesResponse=} [properties] Properties to set
+                         */
+                        function ListMappingRulesResponse(properties) {
+                            this.mappingRules = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListMappingRulesResponse mappingRules.
+                         * @member {Array.<google.cloud.clouddms.v1.IMappingRule>} mappingRules
+                         * @memberof google.cloud.clouddms.v1.ListMappingRulesResponse
+                         * @instance
+                         */
+                        ListMappingRulesResponse.prototype.mappingRules = $util.emptyArray;
+    
+                        /**
+                         * ListMappingRulesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.clouddms.v1.ListMappingRulesResponse
+                         * @instance
+                         */
+                        ListMappingRulesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListMappingRulesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.ListMappingRulesResponse
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IListMappingRulesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.ListMappingRulesResponse} ListMappingRulesResponse instance
+                         */
+                        ListMappingRulesResponse.create = function create(properties) {
+                            return new ListMappingRulesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListMappingRulesResponse message. Does not implicitly {@link google.cloud.clouddms.v1.ListMappingRulesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.ListMappingRulesResponse
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IListMappingRulesResponse} message ListMappingRulesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMappingRulesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.mappingRules != null && message.mappingRules.length)
+                                for (var i = 0; i < message.mappingRules.length; ++i)
+                                    $root.google.cloud.clouddms.v1.MappingRule.encode(message.mappingRules[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListMappingRulesResponse message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.ListMappingRulesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.ListMappingRulesResponse
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IListMappingRulesResponse} message ListMappingRulesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMappingRulesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListMappingRulesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.ListMappingRulesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.ListMappingRulesResponse} ListMappingRulesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMappingRulesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.ListMappingRulesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.mappingRules && message.mappingRules.length))
+                                            message.mappingRules = [];
+                                        message.mappingRules.push($root.google.cloud.clouddms.v1.MappingRule.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListMappingRulesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.ListMappingRulesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.ListMappingRulesResponse} ListMappingRulesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMappingRulesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListMappingRulesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.ListMappingRulesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListMappingRulesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.mappingRules != null && message.hasOwnProperty("mappingRules")) {
+                                if (!Array.isArray(message.mappingRules))
+                                    return "mappingRules: array expected";
+                                for (var i = 0; i < message.mappingRules.length; ++i) {
+                                    var error = $root.google.cloud.clouddms.v1.MappingRule.verify(message.mappingRules[i]);
+                                    if (error)
+                                        return "mappingRules." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListMappingRulesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.ListMappingRulesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.ListMappingRulesResponse} ListMappingRulesResponse
+                         */
+                        ListMappingRulesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.ListMappingRulesResponse)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.ListMappingRulesResponse();
+                            if (object.mappingRules) {
+                                if (!Array.isArray(object.mappingRules))
+                                    throw TypeError(".google.cloud.clouddms.v1.ListMappingRulesResponse.mappingRules: array expected");
+                                message.mappingRules = [];
+                                for (var i = 0; i < object.mappingRules.length; ++i) {
+                                    if (typeof object.mappingRules[i] !== "object")
+                                        throw TypeError(".google.cloud.clouddms.v1.ListMappingRulesResponse.mappingRules: object expected");
+                                    message.mappingRules[i] = $root.google.cloud.clouddms.v1.MappingRule.fromObject(object.mappingRules[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListMappingRulesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.ListMappingRulesResponse
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ListMappingRulesResponse} message ListMappingRulesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListMappingRulesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.mappingRules = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.mappingRules && message.mappingRules.length) {
+                                object.mappingRules = [];
+                                for (var j = 0; j < message.mappingRules.length; ++j)
+                                    object.mappingRules[j] = $root.google.cloud.clouddms.v1.MappingRule.toObject(message.mappingRules[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListMappingRulesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.ListMappingRulesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListMappingRulesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListMappingRulesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.ListMappingRulesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListMappingRulesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.ListMappingRulesResponse";
+                        };
+    
+                        return ListMappingRulesResponse;
+                    })();
+    
+                    v1.GetMappingRuleRequest = (function() {
+    
+                        /**
+                         * Properties of a GetMappingRuleRequest.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface IGetMappingRuleRequest
+                         * @property {string|null} [name] GetMappingRuleRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetMappingRuleRequest.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents a GetMappingRuleRequest.
+                         * @implements IGetMappingRuleRequest
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.IGetMappingRuleRequest=} [properties] Properties to set
+                         */
+                        function GetMappingRuleRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetMappingRuleRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.clouddms.v1.GetMappingRuleRequest
+                         * @instance
+                         */
+                        GetMappingRuleRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetMappingRuleRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.GetMappingRuleRequest
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IGetMappingRuleRequest=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.GetMappingRuleRequest} GetMappingRuleRequest instance
+                         */
+                        GetMappingRuleRequest.create = function create(properties) {
+                            return new GetMappingRuleRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetMappingRuleRequest message. Does not implicitly {@link google.cloud.clouddms.v1.GetMappingRuleRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.GetMappingRuleRequest
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IGetMappingRuleRequest} message GetMappingRuleRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetMappingRuleRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetMappingRuleRequest message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.GetMappingRuleRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.GetMappingRuleRequest
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IGetMappingRuleRequest} message GetMappingRuleRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetMappingRuleRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetMappingRuleRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.GetMappingRuleRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.GetMappingRuleRequest} GetMappingRuleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetMappingRuleRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.GetMappingRuleRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetMappingRuleRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.GetMappingRuleRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.GetMappingRuleRequest} GetMappingRuleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetMappingRuleRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetMappingRuleRequest message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.GetMappingRuleRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetMappingRuleRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetMappingRuleRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.GetMappingRuleRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.GetMappingRuleRequest} GetMappingRuleRequest
+                         */
+                        GetMappingRuleRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.GetMappingRuleRequest)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.GetMappingRuleRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetMappingRuleRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.GetMappingRuleRequest
+                         * @static
+                         * @param {google.cloud.clouddms.v1.GetMappingRuleRequest} message GetMappingRuleRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetMappingRuleRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetMappingRuleRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.GetMappingRuleRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetMappingRuleRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetMappingRuleRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.GetMappingRuleRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetMappingRuleRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.GetMappingRuleRequest";
+                        };
+    
+                        return GetMappingRuleRequest;
                     })();
     
                     v1.SeedConversionWorkspaceRequest = (function() {
@@ -10940,6 +12479,7 @@
                          * @property {string|null} [name] ConvertConversionWorkspaceRequest name
                          * @property {boolean|null} [autoCommit] ConvertConversionWorkspaceRequest autoCommit
                          * @property {string|null} [filter] ConvertConversionWorkspaceRequest filter
+                         * @property {boolean|null} [convertFullPath] ConvertConversionWorkspaceRequest convertFullPath
                          */
     
                         /**
@@ -10982,6 +12522,14 @@
                         ConvertConversionWorkspaceRequest.prototype.filter = "";
     
                         /**
+                         * ConvertConversionWorkspaceRequest convertFullPath.
+                         * @member {boolean} convertFullPath
+                         * @memberof google.cloud.clouddms.v1.ConvertConversionWorkspaceRequest
+                         * @instance
+                         */
+                        ConvertConversionWorkspaceRequest.prototype.convertFullPath = false;
+    
+                        /**
                          * Creates a new ConvertConversionWorkspaceRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.clouddms.v1.ConvertConversionWorkspaceRequest
@@ -11011,6 +12559,8 @@
                                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.autoCommit);
                             if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.filter);
+                            if (message.convertFullPath != null && Object.hasOwnProperty.call(message, "convertFullPath"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.convertFullPath);
                             return writer;
                         };
     
@@ -11057,6 +12607,10 @@
                                         message.filter = reader.string();
                                         break;
                                     }
+                                case 6: {
+                                        message.convertFullPath = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -11101,6 +12655,9 @@
                             if (message.filter != null && message.hasOwnProperty("filter"))
                                 if (!$util.isString(message.filter))
                                     return "filter: string expected";
+                            if (message.convertFullPath != null && message.hasOwnProperty("convertFullPath"))
+                                if (typeof message.convertFullPath !== "boolean")
+                                    return "convertFullPath: boolean expected";
                             return null;
                         };
     
@@ -11122,6 +12679,8 @@
                                 message.autoCommit = Boolean(object.autoCommit);
                             if (object.filter != null)
                                 message.filter = String(object.filter);
+                            if (object.convertFullPath != null)
+                                message.convertFullPath = Boolean(object.convertFullPath);
                             return message;
                         };
     
@@ -11142,6 +12701,7 @@
                                 object.name = "";
                                 object.autoCommit = false;
                                 object.filter = "";
+                                object.convertFullPath = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -11149,6 +12709,8 @@
                                 object.autoCommit = message.autoCommit;
                             if (message.filter != null && message.hasOwnProperty("filter"))
                                 object.filter = message.filter;
+                            if (message.convertFullPath != null && message.hasOwnProperty("convertFullPath"))
+                                object.convertFullPath = message.convertFullPath;
                             return object;
                         };
     
@@ -11740,6 +13302,7 @@
                          * @property {boolean|null} [uncommitted] DescribeDatabaseEntitiesRequest uncommitted
                          * @property {string|null} [commitId] DescribeDatabaseEntitiesRequest commitId
                          * @property {string|null} [filter] DescribeDatabaseEntitiesRequest filter
+                         * @property {google.cloud.clouddms.v1.DatabaseEntityView|null} [view] DescribeDatabaseEntitiesRequest view
                          */
     
                         /**
@@ -11814,6 +13377,14 @@
                         DescribeDatabaseEntitiesRequest.prototype.filter = "";
     
                         /**
+                         * DescribeDatabaseEntitiesRequest view.
+                         * @member {google.cloud.clouddms.v1.DatabaseEntityView} view
+                         * @memberof google.cloud.clouddms.v1.DescribeDatabaseEntitiesRequest
+                         * @instance
+                         */
+                        DescribeDatabaseEntitiesRequest.prototype.view = 0;
+    
+                        /**
                          * Creates a new DescribeDatabaseEntitiesRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.clouddms.v1.DescribeDatabaseEntitiesRequest
@@ -11851,6 +13422,8 @@
                                 writer.uint32(/* id 12, wireType 2 =*/98).string(message.commitId);
                             if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
                                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.filter);
+                            if (message.view != null && Object.hasOwnProperty.call(message, "view"))
+                                writer.uint32(/* id 14, wireType 0 =*/112).int32(message.view);
                             return writer;
                         };
     
@@ -11911,6 +13484,10 @@
                                     }
                                 case 13: {
                                         message.filter = reader.string();
+                                        break;
+                                    }
+                                case 14: {
+                                        message.view = reader.int32();
                                         break;
                                     }
                                 default:
@@ -11976,6 +13553,16 @@
                             if (message.filter != null && message.hasOwnProperty("filter"))
                                 if (!$util.isString(message.filter))
                                     return "filter: string expected";
+                            if (message.view != null && message.hasOwnProperty("view"))
+                                switch (message.view) {
+                                default:
+                                    return "view: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -12027,6 +13614,30 @@
                                 message.commitId = String(object.commitId);
                             if (object.filter != null)
                                 message.filter = String(object.filter);
+                            switch (object.view) {
+                            default:
+                                if (typeof object.view === "number") {
+                                    message.view = object.view;
+                                    break;
+                                }
+                                break;
+                            case "DATABASE_ENTITY_VIEW_UNSPECIFIED":
+                            case 0:
+                                message.view = 0;
+                                break;
+                            case "DATABASE_ENTITY_VIEW_BASIC":
+                            case 1:
+                                message.view = 1;
+                                break;
+                            case "DATABASE_ENTITY_VIEW_FULL":
+                            case 2:
+                                message.view = 2;
+                                break;
+                            case "DATABASE_ENTITY_VIEW_ROOT_SUMMARY":
+                            case 3:
+                                message.view = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -12051,6 +13662,7 @@
                                 object.uncommitted = false;
                                 object.commitId = "";
                                 object.filter = "";
+                                object.view = options.enums === String ? "DATABASE_ENTITY_VIEW_UNSPECIFIED" : 0;
                             }
                             if (message.conversionWorkspace != null && message.hasOwnProperty("conversionWorkspace"))
                                 object.conversionWorkspace = message.conversionWorkspace;
@@ -12066,6 +13678,8 @@
                                 object.commitId = message.commitId;
                             if (message.filter != null && message.hasOwnProperty("filter"))
                                 object.filter = message.filter;
+                            if (message.view != null && message.hasOwnProperty("view"))
+                                object.view = options.enums === String ? $root.google.cloud.clouddms.v1.DatabaseEntityView[message.view] === undefined ? message.view : $root.google.cloud.clouddms.v1.DatabaseEntityView[message.view] : message.view;
                             return object;
                         };
     
@@ -13317,6 +14931,511 @@
                         return DescribeConversionWorkspaceRevisionsResponse;
                     })();
     
+                    v1.CreateMappingRuleRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateMappingRuleRequest.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface ICreateMappingRuleRequest
+                         * @property {string|null} [parent] CreateMappingRuleRequest parent
+                         * @property {string|null} [mappingRuleId] CreateMappingRuleRequest mappingRuleId
+                         * @property {google.cloud.clouddms.v1.IMappingRule|null} [mappingRule] CreateMappingRuleRequest mappingRule
+                         * @property {string|null} [requestId] CreateMappingRuleRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new CreateMappingRuleRequest.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents a CreateMappingRuleRequest.
+                         * @implements ICreateMappingRuleRequest
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.ICreateMappingRuleRequest=} [properties] Properties to set
+                         */
+                        function CreateMappingRuleRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateMappingRuleRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.clouddms.v1.CreateMappingRuleRequest
+                         * @instance
+                         */
+                        CreateMappingRuleRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateMappingRuleRequest mappingRuleId.
+                         * @member {string} mappingRuleId
+                         * @memberof google.cloud.clouddms.v1.CreateMappingRuleRequest
+                         * @instance
+                         */
+                        CreateMappingRuleRequest.prototype.mappingRuleId = "";
+    
+                        /**
+                         * CreateMappingRuleRequest mappingRule.
+                         * @member {google.cloud.clouddms.v1.IMappingRule|null|undefined} mappingRule
+                         * @memberof google.cloud.clouddms.v1.CreateMappingRuleRequest
+                         * @instance
+                         */
+                        CreateMappingRuleRequest.prototype.mappingRule = null;
+    
+                        /**
+                         * CreateMappingRuleRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.clouddms.v1.CreateMappingRuleRequest
+                         * @instance
+                         */
+                        CreateMappingRuleRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new CreateMappingRuleRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.CreateMappingRuleRequest
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ICreateMappingRuleRequest=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.CreateMappingRuleRequest} CreateMappingRuleRequest instance
+                         */
+                        CreateMappingRuleRequest.create = function create(properties) {
+                            return new CreateMappingRuleRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateMappingRuleRequest message. Does not implicitly {@link google.cloud.clouddms.v1.CreateMappingRuleRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.CreateMappingRuleRequest
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ICreateMappingRuleRequest} message CreateMappingRuleRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateMappingRuleRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.mappingRuleId != null && Object.hasOwnProperty.call(message, "mappingRuleId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.mappingRuleId);
+                            if (message.mappingRule != null && Object.hasOwnProperty.call(message, "mappingRule"))
+                                $root.google.cloud.clouddms.v1.MappingRule.encode(message.mappingRule, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateMappingRuleRequest message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.CreateMappingRuleRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.CreateMappingRuleRequest
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ICreateMappingRuleRequest} message CreateMappingRuleRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateMappingRuleRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateMappingRuleRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.CreateMappingRuleRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.CreateMappingRuleRequest} CreateMappingRuleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateMappingRuleRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.CreateMappingRuleRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.mappingRuleId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.mappingRule = $root.google.cloud.clouddms.v1.MappingRule.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateMappingRuleRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.CreateMappingRuleRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.CreateMappingRuleRequest} CreateMappingRuleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateMappingRuleRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateMappingRuleRequest message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.CreateMappingRuleRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateMappingRuleRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.mappingRuleId != null && message.hasOwnProperty("mappingRuleId"))
+                                if (!$util.isString(message.mappingRuleId))
+                                    return "mappingRuleId: string expected";
+                            if (message.mappingRule != null && message.hasOwnProperty("mappingRule")) {
+                                var error = $root.google.cloud.clouddms.v1.MappingRule.verify(message.mappingRule);
+                                if (error)
+                                    return "mappingRule." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateMappingRuleRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.CreateMappingRuleRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.CreateMappingRuleRequest} CreateMappingRuleRequest
+                         */
+                        CreateMappingRuleRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.CreateMappingRuleRequest)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.CreateMappingRuleRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.mappingRuleId != null)
+                                message.mappingRuleId = String(object.mappingRuleId);
+                            if (object.mappingRule != null) {
+                                if (typeof object.mappingRule !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.CreateMappingRuleRequest.mappingRule: object expected");
+                                message.mappingRule = $root.google.cloud.clouddms.v1.MappingRule.fromObject(object.mappingRule);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateMappingRuleRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.CreateMappingRuleRequest
+                         * @static
+                         * @param {google.cloud.clouddms.v1.CreateMappingRuleRequest} message CreateMappingRuleRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateMappingRuleRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.mappingRuleId = "";
+                                object.mappingRule = null;
+                                object.requestId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.mappingRuleId != null && message.hasOwnProperty("mappingRuleId"))
+                                object.mappingRuleId = message.mappingRuleId;
+                            if (message.mappingRule != null && message.hasOwnProperty("mappingRule"))
+                                object.mappingRule = $root.google.cloud.clouddms.v1.MappingRule.toObject(message.mappingRule, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateMappingRuleRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.CreateMappingRuleRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateMappingRuleRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateMappingRuleRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.CreateMappingRuleRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateMappingRuleRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.CreateMappingRuleRequest";
+                        };
+    
+                        return CreateMappingRuleRequest;
+                    })();
+    
+                    v1.DeleteMappingRuleRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteMappingRuleRequest.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface IDeleteMappingRuleRequest
+                         * @property {string|null} [name] DeleteMappingRuleRequest name
+                         * @property {string|null} [requestId] DeleteMappingRuleRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new DeleteMappingRuleRequest.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents a DeleteMappingRuleRequest.
+                         * @implements IDeleteMappingRuleRequest
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.IDeleteMappingRuleRequest=} [properties] Properties to set
+                         */
+                        function DeleteMappingRuleRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteMappingRuleRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.clouddms.v1.DeleteMappingRuleRequest
+                         * @instance
+                         */
+                        DeleteMappingRuleRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteMappingRuleRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.clouddms.v1.DeleteMappingRuleRequest
+                         * @instance
+                         */
+                        DeleteMappingRuleRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new DeleteMappingRuleRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.DeleteMappingRuleRequest
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IDeleteMappingRuleRequest=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.DeleteMappingRuleRequest} DeleteMappingRuleRequest instance
+                         */
+                        DeleteMappingRuleRequest.create = function create(properties) {
+                            return new DeleteMappingRuleRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteMappingRuleRequest message. Does not implicitly {@link google.cloud.clouddms.v1.DeleteMappingRuleRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.DeleteMappingRuleRequest
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IDeleteMappingRuleRequest} message DeleteMappingRuleRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteMappingRuleRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteMappingRuleRequest message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.DeleteMappingRuleRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.DeleteMappingRuleRequest
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IDeleteMappingRuleRequest} message DeleteMappingRuleRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteMappingRuleRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteMappingRuleRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.DeleteMappingRuleRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.DeleteMappingRuleRequest} DeleteMappingRuleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteMappingRuleRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.DeleteMappingRuleRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteMappingRuleRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.DeleteMappingRuleRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.DeleteMappingRuleRequest} DeleteMappingRuleRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteMappingRuleRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteMappingRuleRequest message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.DeleteMappingRuleRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteMappingRuleRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteMappingRuleRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.DeleteMappingRuleRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.DeleteMappingRuleRequest} DeleteMappingRuleRequest
+                         */
+                        DeleteMappingRuleRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.DeleteMappingRuleRequest)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.DeleteMappingRuleRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteMappingRuleRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.DeleteMappingRuleRequest
+                         * @static
+                         * @param {google.cloud.clouddms.v1.DeleteMappingRuleRequest} message DeleteMappingRuleRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteMappingRuleRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteMappingRuleRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.DeleteMappingRuleRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteMappingRuleRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteMappingRuleRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.DeleteMappingRuleRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteMappingRuleRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.DeleteMappingRuleRequest";
+                        };
+    
+                        return DeleteMappingRuleRequest;
+                    })();
+    
                     v1.FetchStaticIpsRequest = (function() {
     
                         /**
@@ -13808,6 +15927,24 @@
                         };
     
                         return FetchStaticIpsResponse;
+                    })();
+    
+                    /**
+                     * DatabaseEntityView enum.
+                     * @name google.cloud.clouddms.v1.DatabaseEntityView
+                     * @enum {number}
+                     * @property {number} DATABASE_ENTITY_VIEW_UNSPECIFIED=0 DATABASE_ENTITY_VIEW_UNSPECIFIED value
+                     * @property {number} DATABASE_ENTITY_VIEW_BASIC=1 DATABASE_ENTITY_VIEW_BASIC value
+                     * @property {number} DATABASE_ENTITY_VIEW_FULL=2 DATABASE_ENTITY_VIEW_FULL value
+                     * @property {number} DATABASE_ENTITY_VIEW_ROOT_SUMMARY=3 DATABASE_ENTITY_VIEW_ROOT_SUMMARY value
+                     */
+                    v1.DatabaseEntityView = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DATABASE_ENTITY_VIEW_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "DATABASE_ENTITY_VIEW_BASIC"] = 1;
+                        values[valuesById[2] = "DATABASE_ENTITY_VIEW_FULL"] = 2;
+                        values[valuesById[3] = "DATABASE_ENTITY_VIEW_ROOT_SUMMARY"] = 3;
+                        return values;
                     })();
     
                     v1.SslConfig = (function() {
@@ -14975,6 +17112,7 @@
                          * @property {string|null} [password] OracleConnectionProfile password
                          * @property {boolean|null} [passwordSet] OracleConnectionProfile passwordSet
                          * @property {string|null} [databaseService] OracleConnectionProfile databaseService
+                         * @property {google.cloud.clouddms.v1.ISslConfig|null} [ssl] OracleConnectionProfile ssl
                          * @property {google.cloud.clouddms.v1.IStaticServiceIpConnectivity|null} [staticServiceIpConnectivity] OracleConnectionProfile staticServiceIpConnectivity
                          * @property {google.cloud.clouddms.v1.IForwardSshTunnelConnectivity|null} [forwardSshConnectivity] OracleConnectionProfile forwardSshConnectivity
                          * @property {google.cloud.clouddms.v1.IPrivateConnectivity|null} [privateConnectivity] OracleConnectionProfile privateConnectivity
@@ -15042,6 +17180,14 @@
                          * @instance
                          */
                         OracleConnectionProfile.prototype.databaseService = "";
+    
+                        /**
+                         * OracleConnectionProfile ssl.
+                         * @member {google.cloud.clouddms.v1.ISslConfig|null|undefined} ssl
+                         * @memberof google.cloud.clouddms.v1.OracleConnectionProfile
+                         * @instance
+                         */
+                        OracleConnectionProfile.prototype.ssl = null;
     
                         /**
                          * OracleConnectionProfile staticServiceIpConnectivity.
@@ -15117,6 +17263,8 @@
                                 writer.uint32(/* id 5, wireType 0 =*/40).bool(message.passwordSet);
                             if (message.databaseService != null && Object.hasOwnProperty.call(message, "databaseService"))
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.databaseService);
+                            if (message.ssl != null && Object.hasOwnProperty.call(message, "ssl"))
+                                $root.google.cloud.clouddms.v1.SslConfig.encode(message.ssl, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.staticServiceIpConnectivity != null && Object.hasOwnProperty.call(message, "staticServiceIpConnectivity"))
                                 $root.google.cloud.clouddms.v1.StaticServiceIpConnectivity.encode(message.staticServiceIpConnectivity, writer.uint32(/* id 100, wireType 2 =*/802).fork()).ldelim();
                             if (message.forwardSshConnectivity != null && Object.hasOwnProperty.call(message, "forwardSshConnectivity"))
@@ -15179,6 +17327,10 @@
                                     }
                                 case 6: {
                                         message.databaseService = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.ssl = $root.google.cloud.clouddms.v1.SslConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 100: {
@@ -15247,6 +17399,11 @@
                             if (message.databaseService != null && message.hasOwnProperty("databaseService"))
                                 if (!$util.isString(message.databaseService))
                                     return "databaseService: string expected";
+                            if (message.ssl != null && message.hasOwnProperty("ssl")) {
+                                var error = $root.google.cloud.clouddms.v1.SslConfig.verify(message.ssl);
+                                if (error)
+                                    return "ssl." + error;
+                            }
                             if (message.staticServiceIpConnectivity != null && message.hasOwnProperty("staticServiceIpConnectivity")) {
                                 properties.connectivity = 1;
                                 {
@@ -15302,6 +17459,11 @@
                                 message.passwordSet = Boolean(object.passwordSet);
                             if (object.databaseService != null)
                                 message.databaseService = String(object.databaseService);
+                            if (object.ssl != null) {
+                                if (typeof object.ssl !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.OracleConnectionProfile.ssl: object expected");
+                                message.ssl = $root.google.cloud.clouddms.v1.SslConfig.fromObject(object.ssl);
+                            }
                             if (object.staticServiceIpConnectivity != null) {
                                 if (typeof object.staticServiceIpConnectivity !== "object")
                                     throw TypeError(".google.cloud.clouddms.v1.OracleConnectionProfile.staticServiceIpConnectivity: object expected");
@@ -15340,6 +17502,7 @@
                                 object.password = "";
                                 object.passwordSet = false;
                                 object.databaseService = "";
+                                object.ssl = null;
                             }
                             if (message.host != null && message.hasOwnProperty("host"))
                                 object.host = message.host;
@@ -15353,6 +17516,8 @@
                                 object.passwordSet = message.passwordSet;
                             if (message.databaseService != null && message.hasOwnProperty("databaseService"))
                                 object.databaseService = message.databaseService;
+                            if (message.ssl != null && message.hasOwnProperty("ssl"))
+                                object.ssl = $root.google.cloud.clouddms.v1.SslConfig.toObject(message.ssl, options);
                             if (message.staticServiceIpConnectivity != null && message.hasOwnProperty("staticServiceIpConnectivity")) {
                                 object.staticServiceIpConnectivity = $root.google.cloud.clouddms.v1.StaticServiceIpConnectivity.toObject(message.staticServiceIpConnectivity, options);
                                 if (options.oneofs)
@@ -16595,6 +18760,7 @@
                          * @property {string|null} [collation] CloudSqlSettings collation
                          * @property {string|null} [cmekKeyName] CloudSqlSettings cmekKeyName
                          * @property {google.cloud.clouddms.v1.CloudSqlSettings.SqlAvailabilityType|null} [availabilityType] CloudSqlSettings availabilityType
+                         * @property {google.cloud.clouddms.v1.CloudSqlSettings.Edition|null} [edition] CloudSqlSettings edition
                          */
     
                         /**
@@ -16759,6 +18925,14 @@
                         CloudSqlSettings.prototype.availabilityType = 0;
     
                         /**
+                         * CloudSqlSettings edition.
+                         * @member {google.cloud.clouddms.v1.CloudSqlSettings.Edition} edition
+                         * @memberof google.cloud.clouddms.v1.CloudSqlSettings
+                         * @instance
+                         */
+                        CloudSqlSettings.prototype.edition = 0;
+    
+                        /**
                          * Creates a new CloudSqlSettings instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.clouddms.v1.CloudSqlSettings
@@ -16820,6 +18994,8 @@
                                 writer.uint32(/* id 17, wireType 0 =*/136).int32(message.availabilityType);
                             if (message.secondaryZone != null && Object.hasOwnProperty.call(message, "secondaryZone"))
                                 writer.uint32(/* id 18, wireType 2 =*/146).string(message.secondaryZone);
+                            if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
+                                writer.uint32(/* id 19, wireType 0 =*/152).int32(message.edition);
                             return writer;
                         };
     
@@ -16964,6 +19140,10 @@
                                         message.availabilityType = reader.int32();
                                         break;
                                     }
+                                case 19: {
+                                        message.edition = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -17013,6 +19193,7 @@
                                 case 7:
                                 case 8:
                                 case 17:
+                                case 18:
                                     break;
                                 }
                             if (message.userLabels != null && message.hasOwnProperty("userLabels")) {
@@ -17102,6 +19283,15 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.edition != null && message.hasOwnProperty("edition"))
+                                switch (message.edition) {
+                                default:
+                                    return "edition: enum value expected";
+                                case 0:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -17163,6 +19353,10 @@
                             case "POSTGRES_14":
                             case 17:
                                 message.databaseVersion = 17;
+                                break;
+                            case "POSTGRES_15":
+                            case 18:
+                                message.databaseVersion = 18;
                                 break;
                             }
                             if (object.userLabels) {
@@ -17275,6 +19469,26 @@
                                 message.availabilityType = 2;
                                 break;
                             }
+                            switch (object.edition) {
+                            default:
+                                if (typeof object.edition === "number") {
+                                    message.edition = object.edition;
+                                    break;
+                                }
+                                break;
+                            case "EDITION_UNSPECIFIED":
+                            case 0:
+                                message.edition = 0;
+                                break;
+                            case "ENTERPRISE":
+                            case 2:
+                                message.edition = 2;
+                                break;
+                            case "ENTERPRISE_PLUS":
+                            case 3:
+                                message.edition = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -17312,6 +19526,7 @@
                                 object.cmekKeyName = "";
                                 object.availabilityType = options.enums === String ? "SQL_AVAILABILITY_TYPE_UNSPECIFIED" : 0;
                                 object.secondaryZone = "";
+                                object.edition = options.enums === String ? "EDITION_UNSPECIFIED" : 0;
                             }
                             if (message.databaseVersion != null && message.hasOwnProperty("databaseVersion"))
                                 object.databaseVersion = options.enums === String ? $root.google.cloud.clouddms.v1.CloudSqlSettings.SqlDatabaseVersion[message.databaseVersion] === undefined ? message.databaseVersion : $root.google.cloud.clouddms.v1.CloudSqlSettings.SqlDatabaseVersion[message.databaseVersion] : message.databaseVersion;
@@ -17356,6 +19571,8 @@
                                 object.availabilityType = options.enums === String ? $root.google.cloud.clouddms.v1.CloudSqlSettings.SqlAvailabilityType[message.availabilityType] === undefined ? message.availabilityType : $root.google.cloud.clouddms.v1.CloudSqlSettings.SqlAvailabilityType[message.availabilityType] : message.availabilityType;
                             if (message.secondaryZone != null && message.hasOwnProperty("secondaryZone"))
                                 object.secondaryZone = message.secondaryZone;
+                            if (message.edition != null && message.hasOwnProperty("edition"))
+                                object.edition = options.enums === String ? $root.google.cloud.clouddms.v1.CloudSqlSettings.Edition[message.edition] === undefined ? message.edition : $root.google.cloud.clouddms.v1.CloudSqlSettings.Edition[message.edition] : message.edition;
                             return object;
                         };
     
@@ -17431,6 +19648,7 @@
                          * @property {number} POSTGRES_12=7 POSTGRES_12 value
                          * @property {number} POSTGRES_13=8 POSTGRES_13 value
                          * @property {number} POSTGRES_14=17 POSTGRES_14 value
+                         * @property {number} POSTGRES_15=18 POSTGRES_15 value
                          */
                         CloudSqlSettings.SqlDatabaseVersion = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -17444,6 +19662,7 @@
                             values[valuesById[7] = "POSTGRES_12"] = 7;
                             values[valuesById[8] = "POSTGRES_13"] = 8;
                             values[valuesById[17] = "POSTGRES_14"] = 17;
+                            values[valuesById[18] = "POSTGRES_15"] = 18;
                             return values;
                         })();
     
@@ -17460,6 +19679,22 @@
                             values[valuesById[0] = "SQL_AVAILABILITY_TYPE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "ZONAL"] = 1;
                             values[valuesById[2] = "REGIONAL"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * Edition enum.
+                         * @name google.cloud.clouddms.v1.CloudSqlSettings.Edition
+                         * @enum {number}
+                         * @property {number} EDITION_UNSPECIFIED=0 EDITION_UNSPECIFIED value
+                         * @property {number} ENTERPRISE=2 ENTERPRISE value
+                         * @property {number} ENTERPRISE_PLUS=3 ENTERPRISE_PLUS value
+                         */
+                        CloudSqlSettings.Edition = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "EDITION_UNSPECIFIED"] = 0;
+                            values[valuesById[2] = "ENTERPRISE"] = 2;
+                            values[valuesById[3] = "ENTERPRISE_PLUS"] = 3;
                             return values;
                         })();
     
@@ -20713,6 +22948,7 @@
                          * @property {google.cloud.clouddms.v1.IConversionWorkspaceInfo|null} [conversionWorkspace] MigrationJob conversionWorkspace
                          * @property {string|null} [filter] MigrationJob filter
                          * @property {string|null} [cmekKeyName] MigrationJob cmekKeyName
+                         * @property {google.cloud.clouddms.v1.MigrationJob.IPerformanceConfig|null} [performanceConfig] MigrationJob performanceConfig
                          */
     
                         /**
@@ -20915,6 +23151,14 @@
                          */
                         MigrationJob.prototype.cmekKeyName = "";
     
+                        /**
+                         * MigrationJob performanceConfig.
+                         * @member {google.cloud.clouddms.v1.MigrationJob.IPerformanceConfig|null|undefined} performanceConfig
+                         * @memberof google.cloud.clouddms.v1.MigrationJob
+                         * @instance
+                         */
+                        MigrationJob.prototype.performanceConfig = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -20994,6 +23238,8 @@
                                 writer.uint32(/* id 20, wireType 2 =*/162).string(message.filter);
                             if (message.cmekKeyName != null && Object.hasOwnProperty.call(message, "cmekKeyName"))
                                 writer.uint32(/* id 21, wireType 2 =*/170).string(message.cmekKeyName);
+                            if (message.performanceConfig != null && Object.hasOwnProperty.call(message, "performanceConfig"))
+                                $root.google.cloud.clouddms.v1.MigrationJob.PerformanceConfig.encode(message.performanceConfig, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                             if (message.reverseSshConnectivity != null && Object.hasOwnProperty.call(message, "reverseSshConnectivity"))
                                 $root.google.cloud.clouddms.v1.ReverseSshConnectivity.encode(message.reverseSshConnectivity, writer.uint32(/* id 101, wireType 2 =*/810).fork()).ldelim();
                             if (message.vpcPeeringConnectivity != null && Object.hasOwnProperty.call(message, "vpcPeeringConnectivity"))
@@ -21143,6 +23389,10 @@
                                     }
                                 case 21: {
                                         message.cmekKeyName = reader.string();
+                                        break;
+                                    }
+                                case 22: {
+                                        message.performanceConfig = $root.google.cloud.clouddms.v1.MigrationJob.PerformanceConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -21326,6 +23576,11 @@
                             if (message.cmekKeyName != null && message.hasOwnProperty("cmekKeyName"))
                                 if (!$util.isString(message.cmekKeyName))
                                     return "cmekKeyName: string expected";
+                            if (message.performanceConfig != null && message.hasOwnProperty("performanceConfig")) {
+                                var error = $root.google.cloud.clouddms.v1.MigrationJob.PerformanceConfig.verify(message.performanceConfig);
+                                if (error)
+                                    return "performanceConfig." + error;
+                            }
                             return null;
                         };
     
@@ -21546,6 +23801,11 @@
                                 message.filter = String(object.filter);
                             if (object.cmekKeyName != null)
                                 message.cmekKeyName = String(object.cmekKeyName);
+                            if (object.performanceConfig != null) {
+                                if (typeof object.performanceConfig !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.MigrationJob.performanceConfig: object expected");
+                                message.performanceConfig = $root.google.cloud.clouddms.v1.MigrationJob.PerformanceConfig.fromObject(object.performanceConfig);
+                            }
                             return message;
                         };
     
@@ -21584,6 +23844,7 @@
                                 object.conversionWorkspace = null;
                                 object.filter = "";
                                 object.cmekKeyName = "";
+                                object.performanceConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -21629,6 +23890,8 @@
                                 object.filter = message.filter;
                             if (message.cmekKeyName != null && message.hasOwnProperty("cmekKeyName"))
                                 object.cmekKeyName = message.cmekKeyName;
+                            if (message.performanceConfig != null && message.hasOwnProperty("performanceConfig"))
+                                object.performanceConfig = $root.google.cloud.clouddms.v1.MigrationJob.PerformanceConfig.toObject(message.performanceConfig, options);
                             if (message.reverseSshConnectivity != null && message.hasOwnProperty("reverseSshConnectivity")) {
                                 object.reverseSshConnectivity = $root.google.cloud.clouddms.v1.ReverseSshConnectivity.toObject(message.reverseSshConnectivity, options);
                                 if (options.oneofs)
@@ -22202,6 +24465,256 @@
                             };
     
                             return DumpFlags;
+                        })();
+    
+                        MigrationJob.PerformanceConfig = (function() {
+    
+                            /**
+                             * Properties of a PerformanceConfig.
+                             * @memberof google.cloud.clouddms.v1.MigrationJob
+                             * @interface IPerformanceConfig
+                             * @property {google.cloud.clouddms.v1.MigrationJob.PerformanceConfig.DumpParallelLevel|null} [dumpParallelLevel] PerformanceConfig dumpParallelLevel
+                             */
+    
+                            /**
+                             * Constructs a new PerformanceConfig.
+                             * @memberof google.cloud.clouddms.v1.MigrationJob
+                             * @classdesc Represents a PerformanceConfig.
+                             * @implements IPerformanceConfig
+                             * @constructor
+                             * @param {google.cloud.clouddms.v1.MigrationJob.IPerformanceConfig=} [properties] Properties to set
+                             */
+                            function PerformanceConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PerformanceConfig dumpParallelLevel.
+                             * @member {google.cloud.clouddms.v1.MigrationJob.PerformanceConfig.DumpParallelLevel} dumpParallelLevel
+                             * @memberof google.cloud.clouddms.v1.MigrationJob.PerformanceConfig
+                             * @instance
+                             */
+                            PerformanceConfig.prototype.dumpParallelLevel = 0;
+    
+                            /**
+                             * Creates a new PerformanceConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.clouddms.v1.MigrationJob.PerformanceConfig
+                             * @static
+                             * @param {google.cloud.clouddms.v1.MigrationJob.IPerformanceConfig=} [properties] Properties to set
+                             * @returns {google.cloud.clouddms.v1.MigrationJob.PerformanceConfig} PerformanceConfig instance
+                             */
+                            PerformanceConfig.create = function create(properties) {
+                                return new PerformanceConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PerformanceConfig message. Does not implicitly {@link google.cloud.clouddms.v1.MigrationJob.PerformanceConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.clouddms.v1.MigrationJob.PerformanceConfig
+                             * @static
+                             * @param {google.cloud.clouddms.v1.MigrationJob.IPerformanceConfig} message PerformanceConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PerformanceConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.dumpParallelLevel != null && Object.hasOwnProperty.call(message, "dumpParallelLevel"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.dumpParallelLevel);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PerformanceConfig message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.MigrationJob.PerformanceConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.clouddms.v1.MigrationJob.PerformanceConfig
+                             * @static
+                             * @param {google.cloud.clouddms.v1.MigrationJob.IPerformanceConfig} message PerformanceConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PerformanceConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PerformanceConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.clouddms.v1.MigrationJob.PerformanceConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.clouddms.v1.MigrationJob.PerformanceConfig} PerformanceConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PerformanceConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.MigrationJob.PerformanceConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.dumpParallelLevel = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PerformanceConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.clouddms.v1.MigrationJob.PerformanceConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.clouddms.v1.MigrationJob.PerformanceConfig} PerformanceConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PerformanceConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PerformanceConfig message.
+                             * @function verify
+                             * @memberof google.cloud.clouddms.v1.MigrationJob.PerformanceConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PerformanceConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.dumpParallelLevel != null && message.hasOwnProperty("dumpParallelLevel"))
+                                    switch (message.dumpParallelLevel) {
+                                    default:
+                                        return "dumpParallelLevel: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PerformanceConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.clouddms.v1.MigrationJob.PerformanceConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.clouddms.v1.MigrationJob.PerformanceConfig} PerformanceConfig
+                             */
+                            PerformanceConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.clouddms.v1.MigrationJob.PerformanceConfig)
+                                    return object;
+                                var message = new $root.google.cloud.clouddms.v1.MigrationJob.PerformanceConfig();
+                                switch (object.dumpParallelLevel) {
+                                default:
+                                    if (typeof object.dumpParallelLevel === "number") {
+                                        message.dumpParallelLevel = object.dumpParallelLevel;
+                                        break;
+                                    }
+                                    break;
+                                case "DUMP_PARALLEL_LEVEL_UNSPECIFIED":
+                                case 0:
+                                    message.dumpParallelLevel = 0;
+                                    break;
+                                case "MIN":
+                                case 1:
+                                    message.dumpParallelLevel = 1;
+                                    break;
+                                case "OPTIMAL":
+                                case 2:
+                                    message.dumpParallelLevel = 2;
+                                    break;
+                                case "MAX":
+                                case 3:
+                                    message.dumpParallelLevel = 3;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PerformanceConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.clouddms.v1.MigrationJob.PerformanceConfig
+                             * @static
+                             * @param {google.cloud.clouddms.v1.MigrationJob.PerformanceConfig} message PerformanceConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PerformanceConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.dumpParallelLevel = options.enums === String ? "DUMP_PARALLEL_LEVEL_UNSPECIFIED" : 0;
+                                if (message.dumpParallelLevel != null && message.hasOwnProperty("dumpParallelLevel"))
+                                    object.dumpParallelLevel = options.enums === String ? $root.google.cloud.clouddms.v1.MigrationJob.PerformanceConfig.DumpParallelLevel[message.dumpParallelLevel] === undefined ? message.dumpParallelLevel : $root.google.cloud.clouddms.v1.MigrationJob.PerformanceConfig.DumpParallelLevel[message.dumpParallelLevel] : message.dumpParallelLevel;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PerformanceConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.clouddms.v1.MigrationJob.PerformanceConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PerformanceConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PerformanceConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.clouddms.v1.MigrationJob.PerformanceConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PerformanceConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.clouddms.v1.MigrationJob.PerformanceConfig";
+                            };
+    
+                            /**
+                             * DumpParallelLevel enum.
+                             * @name google.cloud.clouddms.v1.MigrationJob.PerformanceConfig.DumpParallelLevel
+                             * @enum {number}
+                             * @property {number} DUMP_PARALLEL_LEVEL_UNSPECIFIED=0 DUMP_PARALLEL_LEVEL_UNSPECIFIED value
+                             * @property {number} MIN=1 MIN value
+                             * @property {number} OPTIMAL=2 OPTIMAL value
+                             * @property {number} MAX=3 MAX value
+                             */
+                            PerformanceConfig.DumpParallelLevel = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "DUMP_PARALLEL_LEVEL_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "MIN"] = 1;
+                                values[valuesById[2] = "OPTIMAL"] = 2;
+                                values[valuesById[3] = "MAX"] = 3;
+                                return values;
+                            })();
+    
+                            return PerformanceConfig;
                         })();
     
                         return MigrationJob;
@@ -23332,11 +25845,14 @@
                                 case 18:
                                 case 19:
                                 case 21:
+                                case 23:
                                 case 24:
                                 case 25:
                                 case 26:
                                 case 27:
                                 case 28:
+                                case 29:
+                                case 30:
                                     break;
                                 }
                             if (message.errorMessage != null && message.hasOwnProperty("errorMessage"))
@@ -23447,6 +25963,10 @@
                             case 21:
                                 message.errorCode = 21;
                                 break;
+                            case "SOURCE_ALREADY_SETUP":
+                            case 23:
+                                message.errorCode = 23;
+                                break;
                             case "TABLES_WITH_LIMITED_SUPPORT":
                             case 24:
                                 message.errorCode = 24;
@@ -23466,6 +25986,14 @@
                             case "SOURCE_SIZE_EXCEEDS_THRESHOLD":
                             case 28:
                                 message.errorCode = 28;
+                                break;
+                            case "EXISTING_CONFLICTING_DATABASES":
+                            case 29:
+                                message.errorCode = 29;
+                                break;
+                            case "PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE":
+                            case 30:
+                                message.errorCode = 30;
                                 break;
                             }
                             if (object.errorMessage != null)
@@ -23552,11 +26080,14 @@
                          * @property {number} UNSUPPORTED_TABLE_DEFINITION=18 UNSUPPORTED_TABLE_DEFINITION value
                          * @property {number} UNSUPPORTED_DEFINER=19 UNSUPPORTED_DEFINER value
                          * @property {number} CANT_RESTART_RUNNING_MIGRATION=21 CANT_RESTART_RUNNING_MIGRATION value
+                         * @property {number} SOURCE_ALREADY_SETUP=23 SOURCE_ALREADY_SETUP value
                          * @property {number} TABLES_WITH_LIMITED_SUPPORT=24 TABLES_WITH_LIMITED_SUPPORT value
                          * @property {number} UNSUPPORTED_DATABASE_LOCALE=25 UNSUPPORTED_DATABASE_LOCALE value
                          * @property {number} UNSUPPORTED_DATABASE_FDW_CONFIG=26 UNSUPPORTED_DATABASE_FDW_CONFIG value
                          * @property {number} ERROR_RDBMS=27 ERROR_RDBMS value
                          * @property {number} SOURCE_SIZE_EXCEEDS_THRESHOLD=28 SOURCE_SIZE_EXCEEDS_THRESHOLD value
+                         * @property {number} EXISTING_CONFLICTING_DATABASES=29 EXISTING_CONFLICTING_DATABASES value
+                         * @property {number} PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE=30 PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE value
                          */
                         MigrationJobVerificationError.ErrorCode = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -23580,11 +26111,14 @@
                             values[valuesById[18] = "UNSUPPORTED_TABLE_DEFINITION"] = 18;
                             values[valuesById[19] = "UNSUPPORTED_DEFINER"] = 19;
                             values[valuesById[21] = "CANT_RESTART_RUNNING_MIGRATION"] = 21;
+                            values[valuesById[23] = "SOURCE_ALREADY_SETUP"] = 23;
                             values[valuesById[24] = "TABLES_WITH_LIMITED_SUPPORT"] = 24;
                             values[valuesById[25] = "UNSUPPORTED_DATABASE_LOCALE"] = 25;
                             values[valuesById[26] = "UNSUPPORTED_DATABASE_FDW_CONFIG"] = 26;
                             values[valuesById[27] = "ERROR_RDBMS"] = 27;
                             values[valuesById[28] = "SOURCE_SIZE_EXCEEDS_THRESHOLD"] = 28;
+                            values[valuesById[29] = "EXISTING_CONFLICTING_DATABASES"] = 29;
+                            values[valuesById[30] = "PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE"] = 30;
                             return values;
                         })();
     
@@ -26572,6 +29106,6961 @@
                         return BackgroundJobLogEntry;
                     })();
     
+                    v1.MappingRuleFilter = (function() {
+    
+                        /**
+                         * Properties of a MappingRuleFilter.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface IMappingRuleFilter
+                         * @property {string|null} [parentEntity] MappingRuleFilter parentEntity
+                         * @property {string|null} [entityNamePrefix] MappingRuleFilter entityNamePrefix
+                         * @property {string|null} [entityNameSuffix] MappingRuleFilter entityNameSuffix
+                         * @property {string|null} [entityNameContains] MappingRuleFilter entityNameContains
+                         * @property {Array.<string>|null} [entities] MappingRuleFilter entities
+                         */
+    
+                        /**
+                         * Constructs a new MappingRuleFilter.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents a MappingRuleFilter.
+                         * @implements IMappingRuleFilter
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.IMappingRuleFilter=} [properties] Properties to set
+                         */
+                        function MappingRuleFilter(properties) {
+                            this.entities = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MappingRuleFilter parentEntity.
+                         * @member {string} parentEntity
+                         * @memberof google.cloud.clouddms.v1.MappingRuleFilter
+                         * @instance
+                         */
+                        MappingRuleFilter.prototype.parentEntity = "";
+    
+                        /**
+                         * MappingRuleFilter entityNamePrefix.
+                         * @member {string} entityNamePrefix
+                         * @memberof google.cloud.clouddms.v1.MappingRuleFilter
+                         * @instance
+                         */
+                        MappingRuleFilter.prototype.entityNamePrefix = "";
+    
+                        /**
+                         * MappingRuleFilter entityNameSuffix.
+                         * @member {string} entityNameSuffix
+                         * @memberof google.cloud.clouddms.v1.MappingRuleFilter
+                         * @instance
+                         */
+                        MappingRuleFilter.prototype.entityNameSuffix = "";
+    
+                        /**
+                         * MappingRuleFilter entityNameContains.
+                         * @member {string} entityNameContains
+                         * @memberof google.cloud.clouddms.v1.MappingRuleFilter
+                         * @instance
+                         */
+                        MappingRuleFilter.prototype.entityNameContains = "";
+    
+                        /**
+                         * MappingRuleFilter entities.
+                         * @member {Array.<string>} entities
+                         * @memberof google.cloud.clouddms.v1.MappingRuleFilter
+                         * @instance
+                         */
+                        MappingRuleFilter.prototype.entities = $util.emptyArray;
+    
+                        /**
+                         * Creates a new MappingRuleFilter instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.MappingRuleFilter
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IMappingRuleFilter=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.MappingRuleFilter} MappingRuleFilter instance
+                         */
+                        MappingRuleFilter.create = function create(properties) {
+                            return new MappingRuleFilter(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MappingRuleFilter message. Does not implicitly {@link google.cloud.clouddms.v1.MappingRuleFilter.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.MappingRuleFilter
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IMappingRuleFilter} message MappingRuleFilter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MappingRuleFilter.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parentEntity != null && Object.hasOwnProperty.call(message, "parentEntity"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parentEntity);
+                            if (message.entityNamePrefix != null && Object.hasOwnProperty.call(message, "entityNamePrefix"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.entityNamePrefix);
+                            if (message.entityNameSuffix != null && Object.hasOwnProperty.call(message, "entityNameSuffix"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.entityNameSuffix);
+                            if (message.entityNameContains != null && Object.hasOwnProperty.call(message, "entityNameContains"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.entityNameContains);
+                            if (message.entities != null && message.entities.length)
+                                for (var i = 0; i < message.entities.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.entities[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MappingRuleFilter message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.MappingRuleFilter.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.MappingRuleFilter
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IMappingRuleFilter} message MappingRuleFilter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MappingRuleFilter.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MappingRuleFilter message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.MappingRuleFilter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.MappingRuleFilter} MappingRuleFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MappingRuleFilter.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.MappingRuleFilter();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parentEntity = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.entityNamePrefix = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.entityNameSuffix = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.entityNameContains = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.entities && message.entities.length))
+                                            message.entities = [];
+                                        message.entities.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MappingRuleFilter message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.MappingRuleFilter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.MappingRuleFilter} MappingRuleFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MappingRuleFilter.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MappingRuleFilter message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.MappingRuleFilter
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MappingRuleFilter.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parentEntity != null && message.hasOwnProperty("parentEntity"))
+                                if (!$util.isString(message.parentEntity))
+                                    return "parentEntity: string expected";
+                            if (message.entityNamePrefix != null && message.hasOwnProperty("entityNamePrefix"))
+                                if (!$util.isString(message.entityNamePrefix))
+                                    return "entityNamePrefix: string expected";
+                            if (message.entityNameSuffix != null && message.hasOwnProperty("entityNameSuffix"))
+                                if (!$util.isString(message.entityNameSuffix))
+                                    return "entityNameSuffix: string expected";
+                            if (message.entityNameContains != null && message.hasOwnProperty("entityNameContains"))
+                                if (!$util.isString(message.entityNameContains))
+                                    return "entityNameContains: string expected";
+                            if (message.entities != null && message.hasOwnProperty("entities")) {
+                                if (!Array.isArray(message.entities))
+                                    return "entities: array expected";
+                                for (var i = 0; i < message.entities.length; ++i)
+                                    if (!$util.isString(message.entities[i]))
+                                        return "entities: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MappingRuleFilter message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.MappingRuleFilter
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.MappingRuleFilter} MappingRuleFilter
+                         */
+                        MappingRuleFilter.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.MappingRuleFilter)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.MappingRuleFilter();
+                            if (object.parentEntity != null)
+                                message.parentEntity = String(object.parentEntity);
+                            if (object.entityNamePrefix != null)
+                                message.entityNamePrefix = String(object.entityNamePrefix);
+                            if (object.entityNameSuffix != null)
+                                message.entityNameSuffix = String(object.entityNameSuffix);
+                            if (object.entityNameContains != null)
+                                message.entityNameContains = String(object.entityNameContains);
+                            if (object.entities) {
+                                if (!Array.isArray(object.entities))
+                                    throw TypeError(".google.cloud.clouddms.v1.MappingRuleFilter.entities: array expected");
+                                message.entities = [];
+                                for (var i = 0; i < object.entities.length; ++i)
+                                    message.entities[i] = String(object.entities[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MappingRuleFilter message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.MappingRuleFilter
+                         * @static
+                         * @param {google.cloud.clouddms.v1.MappingRuleFilter} message MappingRuleFilter
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MappingRuleFilter.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.entities = [];
+                            if (options.defaults) {
+                                object.parentEntity = "";
+                                object.entityNamePrefix = "";
+                                object.entityNameSuffix = "";
+                                object.entityNameContains = "";
+                            }
+                            if (message.parentEntity != null && message.hasOwnProperty("parentEntity"))
+                                object.parentEntity = message.parentEntity;
+                            if (message.entityNamePrefix != null && message.hasOwnProperty("entityNamePrefix"))
+                                object.entityNamePrefix = message.entityNamePrefix;
+                            if (message.entityNameSuffix != null && message.hasOwnProperty("entityNameSuffix"))
+                                object.entityNameSuffix = message.entityNameSuffix;
+                            if (message.entityNameContains != null && message.hasOwnProperty("entityNameContains"))
+                                object.entityNameContains = message.entityNameContains;
+                            if (message.entities && message.entities.length) {
+                                object.entities = [];
+                                for (var j = 0; j < message.entities.length; ++j)
+                                    object.entities[j] = message.entities[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MappingRuleFilter to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.MappingRuleFilter
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MappingRuleFilter.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MappingRuleFilter
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.MappingRuleFilter
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MappingRuleFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.MappingRuleFilter";
+                        };
+    
+                        return MappingRuleFilter;
+                    })();
+    
+                    v1.MappingRule = (function() {
+    
+                        /**
+                         * Properties of a MappingRule.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface IMappingRule
+                         * @property {string|null} [name] MappingRule name
+                         * @property {string|null} [displayName] MappingRule displayName
+                         * @property {google.cloud.clouddms.v1.MappingRule.State|null} [state] MappingRule state
+                         * @property {google.cloud.clouddms.v1.DatabaseEntityType|null} [ruleScope] MappingRule ruleScope
+                         * @property {google.cloud.clouddms.v1.IMappingRuleFilter|null} [filter] MappingRule filter
+                         * @property {number|Long|null} [ruleOrder] MappingRule ruleOrder
+                         * @property {string|null} [revisionId] MappingRule revisionId
+                         * @property {google.protobuf.ITimestamp|null} [revisionCreateTime] MappingRule revisionCreateTime
+                         * @property {google.cloud.clouddms.v1.ISingleEntityRename|null} [singleEntityRename] MappingRule singleEntityRename
+                         * @property {google.cloud.clouddms.v1.IMultiEntityRename|null} [multiEntityRename] MappingRule multiEntityRename
+                         * @property {google.cloud.clouddms.v1.IEntityMove|null} [entityMove] MappingRule entityMove
+                         * @property {google.cloud.clouddms.v1.ISingleColumnChange|null} [singleColumnChange] MappingRule singleColumnChange
+                         * @property {google.cloud.clouddms.v1.IMultiColumnDatatypeChange|null} [multiColumnDataTypeChange] MappingRule multiColumnDataTypeChange
+                         * @property {google.cloud.clouddms.v1.IConditionalColumnSetValue|null} [conditionalColumnSetValue] MappingRule conditionalColumnSetValue
+                         * @property {google.cloud.clouddms.v1.IConvertRowIdToColumn|null} [convertRowidColumn] MappingRule convertRowidColumn
+                         * @property {google.cloud.clouddms.v1.ISetTablePrimaryKey|null} [setTablePrimaryKey] MappingRule setTablePrimaryKey
+                         * @property {google.cloud.clouddms.v1.ISinglePackageChange|null} [singlePackageChange] MappingRule singlePackageChange
+                         * @property {google.cloud.clouddms.v1.ISourceSqlChange|null} [sourceSqlChange] MappingRule sourceSqlChange
+                         * @property {google.cloud.clouddms.v1.IFilterTableColumns|null} [filterTableColumns] MappingRule filterTableColumns
+                         */
+    
+                        /**
+                         * Constructs a new MappingRule.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents a MappingRule.
+                         * @implements IMappingRule
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.IMappingRule=} [properties] Properties to set
+                         */
+                        function MappingRule(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MappingRule name.
+                         * @member {string} name
+                         * @memberof google.cloud.clouddms.v1.MappingRule
+                         * @instance
+                         */
+                        MappingRule.prototype.name = "";
+    
+                        /**
+                         * MappingRule displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.clouddms.v1.MappingRule
+                         * @instance
+                         */
+                        MappingRule.prototype.displayName = "";
+    
+                        /**
+                         * MappingRule state.
+                         * @member {google.cloud.clouddms.v1.MappingRule.State} state
+                         * @memberof google.cloud.clouddms.v1.MappingRule
+                         * @instance
+                         */
+                        MappingRule.prototype.state = 0;
+    
+                        /**
+                         * MappingRule ruleScope.
+                         * @member {google.cloud.clouddms.v1.DatabaseEntityType} ruleScope
+                         * @memberof google.cloud.clouddms.v1.MappingRule
+                         * @instance
+                         */
+                        MappingRule.prototype.ruleScope = 0;
+    
+                        /**
+                         * MappingRule filter.
+                         * @member {google.cloud.clouddms.v1.IMappingRuleFilter|null|undefined} filter
+                         * @memberof google.cloud.clouddms.v1.MappingRule
+                         * @instance
+                         */
+                        MappingRule.prototype.filter = null;
+    
+                        /**
+                         * MappingRule ruleOrder.
+                         * @member {number|Long} ruleOrder
+                         * @memberof google.cloud.clouddms.v1.MappingRule
+                         * @instance
+                         */
+                        MappingRule.prototype.ruleOrder = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * MappingRule revisionId.
+                         * @member {string} revisionId
+                         * @memberof google.cloud.clouddms.v1.MappingRule
+                         * @instance
+                         */
+                        MappingRule.prototype.revisionId = "";
+    
+                        /**
+                         * MappingRule revisionCreateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} revisionCreateTime
+                         * @memberof google.cloud.clouddms.v1.MappingRule
+                         * @instance
+                         */
+                        MappingRule.prototype.revisionCreateTime = null;
+    
+                        /**
+                         * MappingRule singleEntityRename.
+                         * @member {google.cloud.clouddms.v1.ISingleEntityRename|null|undefined} singleEntityRename
+                         * @memberof google.cloud.clouddms.v1.MappingRule
+                         * @instance
+                         */
+                        MappingRule.prototype.singleEntityRename = null;
+    
+                        /**
+                         * MappingRule multiEntityRename.
+                         * @member {google.cloud.clouddms.v1.IMultiEntityRename|null|undefined} multiEntityRename
+                         * @memberof google.cloud.clouddms.v1.MappingRule
+                         * @instance
+                         */
+                        MappingRule.prototype.multiEntityRename = null;
+    
+                        /**
+                         * MappingRule entityMove.
+                         * @member {google.cloud.clouddms.v1.IEntityMove|null|undefined} entityMove
+                         * @memberof google.cloud.clouddms.v1.MappingRule
+                         * @instance
+                         */
+                        MappingRule.prototype.entityMove = null;
+    
+                        /**
+                         * MappingRule singleColumnChange.
+                         * @member {google.cloud.clouddms.v1.ISingleColumnChange|null|undefined} singleColumnChange
+                         * @memberof google.cloud.clouddms.v1.MappingRule
+                         * @instance
+                         */
+                        MappingRule.prototype.singleColumnChange = null;
+    
+                        /**
+                         * MappingRule multiColumnDataTypeChange.
+                         * @member {google.cloud.clouddms.v1.IMultiColumnDatatypeChange|null|undefined} multiColumnDataTypeChange
+                         * @memberof google.cloud.clouddms.v1.MappingRule
+                         * @instance
+                         */
+                        MappingRule.prototype.multiColumnDataTypeChange = null;
+    
+                        /**
+                         * MappingRule conditionalColumnSetValue.
+                         * @member {google.cloud.clouddms.v1.IConditionalColumnSetValue|null|undefined} conditionalColumnSetValue
+                         * @memberof google.cloud.clouddms.v1.MappingRule
+                         * @instance
+                         */
+                        MappingRule.prototype.conditionalColumnSetValue = null;
+    
+                        /**
+                         * MappingRule convertRowidColumn.
+                         * @member {google.cloud.clouddms.v1.IConvertRowIdToColumn|null|undefined} convertRowidColumn
+                         * @memberof google.cloud.clouddms.v1.MappingRule
+                         * @instance
+                         */
+                        MappingRule.prototype.convertRowidColumn = null;
+    
+                        /**
+                         * MappingRule setTablePrimaryKey.
+                         * @member {google.cloud.clouddms.v1.ISetTablePrimaryKey|null|undefined} setTablePrimaryKey
+                         * @memberof google.cloud.clouddms.v1.MappingRule
+                         * @instance
+                         */
+                        MappingRule.prototype.setTablePrimaryKey = null;
+    
+                        /**
+                         * MappingRule singlePackageChange.
+                         * @member {google.cloud.clouddms.v1.ISinglePackageChange|null|undefined} singlePackageChange
+                         * @memberof google.cloud.clouddms.v1.MappingRule
+                         * @instance
+                         */
+                        MappingRule.prototype.singlePackageChange = null;
+    
+                        /**
+                         * MappingRule sourceSqlChange.
+                         * @member {google.cloud.clouddms.v1.ISourceSqlChange|null|undefined} sourceSqlChange
+                         * @memberof google.cloud.clouddms.v1.MappingRule
+                         * @instance
+                         */
+                        MappingRule.prototype.sourceSqlChange = null;
+    
+                        /**
+                         * MappingRule filterTableColumns.
+                         * @member {google.cloud.clouddms.v1.IFilterTableColumns|null|undefined} filterTableColumns
+                         * @memberof google.cloud.clouddms.v1.MappingRule
+                         * @instance
+                         */
+                        MappingRule.prototype.filterTableColumns = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * MappingRule details.
+                         * @member {"singleEntityRename"|"multiEntityRename"|"entityMove"|"singleColumnChange"|"multiColumnDataTypeChange"|"conditionalColumnSetValue"|"convertRowidColumn"|"setTablePrimaryKey"|"singlePackageChange"|"sourceSqlChange"|"filterTableColumns"|undefined} details
+                         * @memberof google.cloud.clouddms.v1.MappingRule
+                         * @instance
+                         */
+                        Object.defineProperty(MappingRule.prototype, "details", {
+                            get: $util.oneOfGetter($oneOfFields = ["singleEntityRename", "multiEntityRename", "entityMove", "singleColumnChange", "multiColumnDataTypeChange", "conditionalColumnSetValue", "convertRowidColumn", "setTablePrimaryKey", "singlePackageChange", "sourceSqlChange", "filterTableColumns"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new MappingRule instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.MappingRule
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IMappingRule=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.MappingRule} MappingRule instance
+                         */
+                        MappingRule.create = function create(properties) {
+                            return new MappingRule(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MappingRule message. Does not implicitly {@link google.cloud.clouddms.v1.MappingRule.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.MappingRule
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IMappingRule} message MappingRule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MappingRule.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.state);
+                            if (message.ruleScope != null && Object.hasOwnProperty.call(message, "ruleScope"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.ruleScope);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                $root.google.cloud.clouddms.v1.MappingRuleFilter.encode(message.filter, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.ruleOrder != null && Object.hasOwnProperty.call(message, "ruleOrder"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int64(message.ruleOrder);
+                            if (message.revisionId != null && Object.hasOwnProperty.call(message, "revisionId"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.revisionId);
+                            if (message.revisionCreateTime != null && Object.hasOwnProperty.call(message, "revisionCreateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.revisionCreateTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.singleEntityRename != null && Object.hasOwnProperty.call(message, "singleEntityRename"))
+                                $root.google.cloud.clouddms.v1.SingleEntityRename.encode(message.singleEntityRename, writer.uint32(/* id 102, wireType 2 =*/818).fork()).ldelim();
+                            if (message.multiEntityRename != null && Object.hasOwnProperty.call(message, "multiEntityRename"))
+                                $root.google.cloud.clouddms.v1.MultiEntityRename.encode(message.multiEntityRename, writer.uint32(/* id 103, wireType 2 =*/826).fork()).ldelim();
+                            if (message.entityMove != null && Object.hasOwnProperty.call(message, "entityMove"))
+                                $root.google.cloud.clouddms.v1.EntityMove.encode(message.entityMove, writer.uint32(/* id 105, wireType 2 =*/842).fork()).ldelim();
+                            if (message.singleColumnChange != null && Object.hasOwnProperty.call(message, "singleColumnChange"))
+                                $root.google.cloud.clouddms.v1.SingleColumnChange.encode(message.singleColumnChange, writer.uint32(/* id 106, wireType 2 =*/850).fork()).ldelim();
+                            if (message.multiColumnDataTypeChange != null && Object.hasOwnProperty.call(message, "multiColumnDataTypeChange"))
+                                $root.google.cloud.clouddms.v1.MultiColumnDatatypeChange.encode(message.multiColumnDataTypeChange, writer.uint32(/* id 107, wireType 2 =*/858).fork()).ldelim();
+                            if (message.conditionalColumnSetValue != null && Object.hasOwnProperty.call(message, "conditionalColumnSetValue"))
+                                $root.google.cloud.clouddms.v1.ConditionalColumnSetValue.encode(message.conditionalColumnSetValue, writer.uint32(/* id 108, wireType 2 =*/866).fork()).ldelim();
+                            if (message.convertRowidColumn != null && Object.hasOwnProperty.call(message, "convertRowidColumn"))
+                                $root.google.cloud.clouddms.v1.ConvertRowIdToColumn.encode(message.convertRowidColumn, writer.uint32(/* id 114, wireType 2 =*/914).fork()).ldelim();
+                            if (message.setTablePrimaryKey != null && Object.hasOwnProperty.call(message, "setTablePrimaryKey"))
+                                $root.google.cloud.clouddms.v1.SetTablePrimaryKey.encode(message.setTablePrimaryKey, writer.uint32(/* id 115, wireType 2 =*/922).fork()).ldelim();
+                            if (message.singlePackageChange != null && Object.hasOwnProperty.call(message, "singlePackageChange"))
+                                $root.google.cloud.clouddms.v1.SinglePackageChange.encode(message.singlePackageChange, writer.uint32(/* id 116, wireType 2 =*/930).fork()).ldelim();
+                            if (message.sourceSqlChange != null && Object.hasOwnProperty.call(message, "sourceSqlChange"))
+                                $root.google.cloud.clouddms.v1.SourceSqlChange.encode(message.sourceSqlChange, writer.uint32(/* id 117, wireType 2 =*/938).fork()).ldelim();
+                            if (message.filterTableColumns != null && Object.hasOwnProperty.call(message, "filterTableColumns"))
+                                $root.google.cloud.clouddms.v1.FilterTableColumns.encode(message.filterTableColumns, writer.uint32(/* id 118, wireType 2 =*/946).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MappingRule message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.MappingRule.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.MappingRule
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IMappingRule} message MappingRule message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MappingRule.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MappingRule message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.MappingRule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.MappingRule} MappingRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MappingRule.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.MappingRule();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.ruleScope = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.filter = $root.google.cloud.clouddms.v1.MappingRuleFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.ruleOrder = reader.int64();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.revisionId = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.revisionCreateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 102: {
+                                        message.singleEntityRename = $root.google.cloud.clouddms.v1.SingleEntityRename.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 103: {
+                                        message.multiEntityRename = $root.google.cloud.clouddms.v1.MultiEntityRename.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 105: {
+                                        message.entityMove = $root.google.cloud.clouddms.v1.EntityMove.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 106: {
+                                        message.singleColumnChange = $root.google.cloud.clouddms.v1.SingleColumnChange.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 107: {
+                                        message.multiColumnDataTypeChange = $root.google.cloud.clouddms.v1.MultiColumnDatatypeChange.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 108: {
+                                        message.conditionalColumnSetValue = $root.google.cloud.clouddms.v1.ConditionalColumnSetValue.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 114: {
+                                        message.convertRowidColumn = $root.google.cloud.clouddms.v1.ConvertRowIdToColumn.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 115: {
+                                        message.setTablePrimaryKey = $root.google.cloud.clouddms.v1.SetTablePrimaryKey.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 116: {
+                                        message.singlePackageChange = $root.google.cloud.clouddms.v1.SinglePackageChange.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 117: {
+                                        message.sourceSqlChange = $root.google.cloud.clouddms.v1.SourceSqlChange.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 118: {
+                                        message.filterTableColumns = $root.google.cloud.clouddms.v1.FilterTableColumns.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MappingRule message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.MappingRule
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.MappingRule} MappingRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MappingRule.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MappingRule message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.MappingRule
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MappingRule.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.ruleScope != null && message.hasOwnProperty("ruleScope"))
+                                switch (message.ruleScope) {
+                                default:
+                                    return "ruleScope: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                case 13:
+                                case 14:
+                                case 15:
+                                    break;
+                                }
+                            if (message.filter != null && message.hasOwnProperty("filter")) {
+                                var error = $root.google.cloud.clouddms.v1.MappingRuleFilter.verify(message.filter);
+                                if (error)
+                                    return "filter." + error;
+                            }
+                            if (message.ruleOrder != null && message.hasOwnProperty("ruleOrder"))
+                                if (!$util.isInteger(message.ruleOrder) && !(message.ruleOrder && $util.isInteger(message.ruleOrder.low) && $util.isInteger(message.ruleOrder.high)))
+                                    return "ruleOrder: integer|Long expected";
+                            if (message.revisionId != null && message.hasOwnProperty("revisionId"))
+                                if (!$util.isString(message.revisionId))
+                                    return "revisionId: string expected";
+                            if (message.revisionCreateTime != null && message.hasOwnProperty("revisionCreateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.revisionCreateTime);
+                                if (error)
+                                    return "revisionCreateTime." + error;
+                            }
+                            if (message.singleEntityRename != null && message.hasOwnProperty("singleEntityRename")) {
+                                properties.details = 1;
+                                {
+                                    var error = $root.google.cloud.clouddms.v1.SingleEntityRename.verify(message.singleEntityRename);
+                                    if (error)
+                                        return "singleEntityRename." + error;
+                                }
+                            }
+                            if (message.multiEntityRename != null && message.hasOwnProperty("multiEntityRename")) {
+                                if (properties.details === 1)
+                                    return "details: multiple values";
+                                properties.details = 1;
+                                {
+                                    var error = $root.google.cloud.clouddms.v1.MultiEntityRename.verify(message.multiEntityRename);
+                                    if (error)
+                                        return "multiEntityRename." + error;
+                                }
+                            }
+                            if (message.entityMove != null && message.hasOwnProperty("entityMove")) {
+                                if (properties.details === 1)
+                                    return "details: multiple values";
+                                properties.details = 1;
+                                {
+                                    var error = $root.google.cloud.clouddms.v1.EntityMove.verify(message.entityMove);
+                                    if (error)
+                                        return "entityMove." + error;
+                                }
+                            }
+                            if (message.singleColumnChange != null && message.hasOwnProperty("singleColumnChange")) {
+                                if (properties.details === 1)
+                                    return "details: multiple values";
+                                properties.details = 1;
+                                {
+                                    var error = $root.google.cloud.clouddms.v1.SingleColumnChange.verify(message.singleColumnChange);
+                                    if (error)
+                                        return "singleColumnChange." + error;
+                                }
+                            }
+                            if (message.multiColumnDataTypeChange != null && message.hasOwnProperty("multiColumnDataTypeChange")) {
+                                if (properties.details === 1)
+                                    return "details: multiple values";
+                                properties.details = 1;
+                                {
+                                    var error = $root.google.cloud.clouddms.v1.MultiColumnDatatypeChange.verify(message.multiColumnDataTypeChange);
+                                    if (error)
+                                        return "multiColumnDataTypeChange." + error;
+                                }
+                            }
+                            if (message.conditionalColumnSetValue != null && message.hasOwnProperty("conditionalColumnSetValue")) {
+                                if (properties.details === 1)
+                                    return "details: multiple values";
+                                properties.details = 1;
+                                {
+                                    var error = $root.google.cloud.clouddms.v1.ConditionalColumnSetValue.verify(message.conditionalColumnSetValue);
+                                    if (error)
+                                        return "conditionalColumnSetValue." + error;
+                                }
+                            }
+                            if (message.convertRowidColumn != null && message.hasOwnProperty("convertRowidColumn")) {
+                                if (properties.details === 1)
+                                    return "details: multiple values";
+                                properties.details = 1;
+                                {
+                                    var error = $root.google.cloud.clouddms.v1.ConvertRowIdToColumn.verify(message.convertRowidColumn);
+                                    if (error)
+                                        return "convertRowidColumn." + error;
+                                }
+                            }
+                            if (message.setTablePrimaryKey != null && message.hasOwnProperty("setTablePrimaryKey")) {
+                                if (properties.details === 1)
+                                    return "details: multiple values";
+                                properties.details = 1;
+                                {
+                                    var error = $root.google.cloud.clouddms.v1.SetTablePrimaryKey.verify(message.setTablePrimaryKey);
+                                    if (error)
+                                        return "setTablePrimaryKey." + error;
+                                }
+                            }
+                            if (message.singlePackageChange != null && message.hasOwnProperty("singlePackageChange")) {
+                                if (properties.details === 1)
+                                    return "details: multiple values";
+                                properties.details = 1;
+                                {
+                                    var error = $root.google.cloud.clouddms.v1.SinglePackageChange.verify(message.singlePackageChange);
+                                    if (error)
+                                        return "singlePackageChange." + error;
+                                }
+                            }
+                            if (message.sourceSqlChange != null && message.hasOwnProperty("sourceSqlChange")) {
+                                if (properties.details === 1)
+                                    return "details: multiple values";
+                                properties.details = 1;
+                                {
+                                    var error = $root.google.cloud.clouddms.v1.SourceSqlChange.verify(message.sourceSqlChange);
+                                    if (error)
+                                        return "sourceSqlChange." + error;
+                                }
+                            }
+                            if (message.filterTableColumns != null && message.hasOwnProperty("filterTableColumns")) {
+                                if (properties.details === 1)
+                                    return "details: multiple values";
+                                properties.details = 1;
+                                {
+                                    var error = $root.google.cloud.clouddms.v1.FilterTableColumns.verify(message.filterTableColumns);
+                                    if (error)
+                                        return "filterTableColumns." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MappingRule message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.MappingRule
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.MappingRule} MappingRule
+                         */
+                        MappingRule.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.MappingRule)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.MappingRule();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "ENABLED":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "DISABLED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "DELETED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            }
+                            switch (object.ruleScope) {
+                            default:
+                                if (typeof object.ruleScope === "number") {
+                                    message.ruleScope = object.ruleScope;
+                                    break;
+                                }
+                                break;
+                            case "DATABASE_ENTITY_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.ruleScope = 0;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_SCHEMA":
+                            case 1:
+                                message.ruleScope = 1;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_TABLE":
+                            case 2:
+                                message.ruleScope = 2;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_COLUMN":
+                            case 3:
+                                message.ruleScope = 3;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_CONSTRAINT":
+                            case 4:
+                                message.ruleScope = 4;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_INDEX":
+                            case 5:
+                                message.ruleScope = 5;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_TRIGGER":
+                            case 6:
+                                message.ruleScope = 6;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_VIEW":
+                            case 7:
+                                message.ruleScope = 7;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_SEQUENCE":
+                            case 8:
+                                message.ruleScope = 8;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_STORED_PROCEDURE":
+                            case 9:
+                                message.ruleScope = 9;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_FUNCTION":
+                            case 10:
+                                message.ruleScope = 10;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_SYNONYM":
+                            case 11:
+                                message.ruleScope = 11;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_DATABASE_PACKAGE":
+                            case 12:
+                                message.ruleScope = 12;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_UDT":
+                            case 13:
+                                message.ruleScope = 13;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_MATERIALIZED_VIEW":
+                            case 14:
+                                message.ruleScope = 14;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_DATABASE":
+                            case 15:
+                                message.ruleScope = 15;
+                                break;
+                            }
+                            if (object.filter != null) {
+                                if (typeof object.filter !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.MappingRule.filter: object expected");
+                                message.filter = $root.google.cloud.clouddms.v1.MappingRuleFilter.fromObject(object.filter);
+                            }
+                            if (object.ruleOrder != null)
+                                if ($util.Long)
+                                    (message.ruleOrder = $util.Long.fromValue(object.ruleOrder)).unsigned = false;
+                                else if (typeof object.ruleOrder === "string")
+                                    message.ruleOrder = parseInt(object.ruleOrder, 10);
+                                else if (typeof object.ruleOrder === "number")
+                                    message.ruleOrder = object.ruleOrder;
+                                else if (typeof object.ruleOrder === "object")
+                                    message.ruleOrder = new $util.LongBits(object.ruleOrder.low >>> 0, object.ruleOrder.high >>> 0).toNumber();
+                            if (object.revisionId != null)
+                                message.revisionId = String(object.revisionId);
+                            if (object.revisionCreateTime != null) {
+                                if (typeof object.revisionCreateTime !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.MappingRule.revisionCreateTime: object expected");
+                                message.revisionCreateTime = $root.google.protobuf.Timestamp.fromObject(object.revisionCreateTime);
+                            }
+                            if (object.singleEntityRename != null) {
+                                if (typeof object.singleEntityRename !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.MappingRule.singleEntityRename: object expected");
+                                message.singleEntityRename = $root.google.cloud.clouddms.v1.SingleEntityRename.fromObject(object.singleEntityRename);
+                            }
+                            if (object.multiEntityRename != null) {
+                                if (typeof object.multiEntityRename !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.MappingRule.multiEntityRename: object expected");
+                                message.multiEntityRename = $root.google.cloud.clouddms.v1.MultiEntityRename.fromObject(object.multiEntityRename);
+                            }
+                            if (object.entityMove != null) {
+                                if (typeof object.entityMove !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.MappingRule.entityMove: object expected");
+                                message.entityMove = $root.google.cloud.clouddms.v1.EntityMove.fromObject(object.entityMove);
+                            }
+                            if (object.singleColumnChange != null) {
+                                if (typeof object.singleColumnChange !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.MappingRule.singleColumnChange: object expected");
+                                message.singleColumnChange = $root.google.cloud.clouddms.v1.SingleColumnChange.fromObject(object.singleColumnChange);
+                            }
+                            if (object.multiColumnDataTypeChange != null) {
+                                if (typeof object.multiColumnDataTypeChange !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.MappingRule.multiColumnDataTypeChange: object expected");
+                                message.multiColumnDataTypeChange = $root.google.cloud.clouddms.v1.MultiColumnDatatypeChange.fromObject(object.multiColumnDataTypeChange);
+                            }
+                            if (object.conditionalColumnSetValue != null) {
+                                if (typeof object.conditionalColumnSetValue !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.MappingRule.conditionalColumnSetValue: object expected");
+                                message.conditionalColumnSetValue = $root.google.cloud.clouddms.v1.ConditionalColumnSetValue.fromObject(object.conditionalColumnSetValue);
+                            }
+                            if (object.convertRowidColumn != null) {
+                                if (typeof object.convertRowidColumn !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.MappingRule.convertRowidColumn: object expected");
+                                message.convertRowidColumn = $root.google.cloud.clouddms.v1.ConvertRowIdToColumn.fromObject(object.convertRowidColumn);
+                            }
+                            if (object.setTablePrimaryKey != null) {
+                                if (typeof object.setTablePrimaryKey !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.MappingRule.setTablePrimaryKey: object expected");
+                                message.setTablePrimaryKey = $root.google.cloud.clouddms.v1.SetTablePrimaryKey.fromObject(object.setTablePrimaryKey);
+                            }
+                            if (object.singlePackageChange != null) {
+                                if (typeof object.singlePackageChange !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.MappingRule.singlePackageChange: object expected");
+                                message.singlePackageChange = $root.google.cloud.clouddms.v1.SinglePackageChange.fromObject(object.singlePackageChange);
+                            }
+                            if (object.sourceSqlChange != null) {
+                                if (typeof object.sourceSqlChange !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.MappingRule.sourceSqlChange: object expected");
+                                message.sourceSqlChange = $root.google.cloud.clouddms.v1.SourceSqlChange.fromObject(object.sourceSqlChange);
+                            }
+                            if (object.filterTableColumns != null) {
+                                if (typeof object.filterTableColumns !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.MappingRule.filterTableColumns: object expected");
+                                message.filterTableColumns = $root.google.cloud.clouddms.v1.FilterTableColumns.fromObject(object.filterTableColumns);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MappingRule message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.MappingRule
+                         * @static
+                         * @param {google.cloud.clouddms.v1.MappingRule} message MappingRule
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MappingRule.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.displayName = "";
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.ruleScope = options.enums === String ? "DATABASE_ENTITY_TYPE_UNSPECIFIED" : 0;
+                                object.filter = null;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.ruleOrder = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.ruleOrder = options.longs === String ? "0" : 0;
+                                object.revisionId = "";
+                                object.revisionCreateTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.clouddms.v1.MappingRule.State[message.state] === undefined ? message.state : $root.google.cloud.clouddms.v1.MappingRule.State[message.state] : message.state;
+                            if (message.ruleScope != null && message.hasOwnProperty("ruleScope"))
+                                object.ruleScope = options.enums === String ? $root.google.cloud.clouddms.v1.DatabaseEntityType[message.ruleScope] === undefined ? message.ruleScope : $root.google.cloud.clouddms.v1.DatabaseEntityType[message.ruleScope] : message.ruleScope;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = $root.google.cloud.clouddms.v1.MappingRuleFilter.toObject(message.filter, options);
+                            if (message.ruleOrder != null && message.hasOwnProperty("ruleOrder"))
+                                if (typeof message.ruleOrder === "number")
+                                    object.ruleOrder = options.longs === String ? String(message.ruleOrder) : message.ruleOrder;
+                                else
+                                    object.ruleOrder = options.longs === String ? $util.Long.prototype.toString.call(message.ruleOrder) : options.longs === Number ? new $util.LongBits(message.ruleOrder.low >>> 0, message.ruleOrder.high >>> 0).toNumber() : message.ruleOrder;
+                            if (message.revisionId != null && message.hasOwnProperty("revisionId"))
+                                object.revisionId = message.revisionId;
+                            if (message.revisionCreateTime != null && message.hasOwnProperty("revisionCreateTime"))
+                                object.revisionCreateTime = $root.google.protobuf.Timestamp.toObject(message.revisionCreateTime, options);
+                            if (message.singleEntityRename != null && message.hasOwnProperty("singleEntityRename")) {
+                                object.singleEntityRename = $root.google.cloud.clouddms.v1.SingleEntityRename.toObject(message.singleEntityRename, options);
+                                if (options.oneofs)
+                                    object.details = "singleEntityRename";
+                            }
+                            if (message.multiEntityRename != null && message.hasOwnProperty("multiEntityRename")) {
+                                object.multiEntityRename = $root.google.cloud.clouddms.v1.MultiEntityRename.toObject(message.multiEntityRename, options);
+                                if (options.oneofs)
+                                    object.details = "multiEntityRename";
+                            }
+                            if (message.entityMove != null && message.hasOwnProperty("entityMove")) {
+                                object.entityMove = $root.google.cloud.clouddms.v1.EntityMove.toObject(message.entityMove, options);
+                                if (options.oneofs)
+                                    object.details = "entityMove";
+                            }
+                            if (message.singleColumnChange != null && message.hasOwnProperty("singleColumnChange")) {
+                                object.singleColumnChange = $root.google.cloud.clouddms.v1.SingleColumnChange.toObject(message.singleColumnChange, options);
+                                if (options.oneofs)
+                                    object.details = "singleColumnChange";
+                            }
+                            if (message.multiColumnDataTypeChange != null && message.hasOwnProperty("multiColumnDataTypeChange")) {
+                                object.multiColumnDataTypeChange = $root.google.cloud.clouddms.v1.MultiColumnDatatypeChange.toObject(message.multiColumnDataTypeChange, options);
+                                if (options.oneofs)
+                                    object.details = "multiColumnDataTypeChange";
+                            }
+                            if (message.conditionalColumnSetValue != null && message.hasOwnProperty("conditionalColumnSetValue")) {
+                                object.conditionalColumnSetValue = $root.google.cloud.clouddms.v1.ConditionalColumnSetValue.toObject(message.conditionalColumnSetValue, options);
+                                if (options.oneofs)
+                                    object.details = "conditionalColumnSetValue";
+                            }
+                            if (message.convertRowidColumn != null && message.hasOwnProperty("convertRowidColumn")) {
+                                object.convertRowidColumn = $root.google.cloud.clouddms.v1.ConvertRowIdToColumn.toObject(message.convertRowidColumn, options);
+                                if (options.oneofs)
+                                    object.details = "convertRowidColumn";
+                            }
+                            if (message.setTablePrimaryKey != null && message.hasOwnProperty("setTablePrimaryKey")) {
+                                object.setTablePrimaryKey = $root.google.cloud.clouddms.v1.SetTablePrimaryKey.toObject(message.setTablePrimaryKey, options);
+                                if (options.oneofs)
+                                    object.details = "setTablePrimaryKey";
+                            }
+                            if (message.singlePackageChange != null && message.hasOwnProperty("singlePackageChange")) {
+                                object.singlePackageChange = $root.google.cloud.clouddms.v1.SinglePackageChange.toObject(message.singlePackageChange, options);
+                                if (options.oneofs)
+                                    object.details = "singlePackageChange";
+                            }
+                            if (message.sourceSqlChange != null && message.hasOwnProperty("sourceSqlChange")) {
+                                object.sourceSqlChange = $root.google.cloud.clouddms.v1.SourceSqlChange.toObject(message.sourceSqlChange, options);
+                                if (options.oneofs)
+                                    object.details = "sourceSqlChange";
+                            }
+                            if (message.filterTableColumns != null && message.hasOwnProperty("filterTableColumns")) {
+                                object.filterTableColumns = $root.google.cloud.clouddms.v1.FilterTableColumns.toObject(message.filterTableColumns, options);
+                                if (options.oneofs)
+                                    object.details = "filterTableColumns";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MappingRule to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.MappingRule
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MappingRule.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MappingRule
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.MappingRule
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MappingRule.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.MappingRule";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.clouddms.v1.MappingRule.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} ENABLED=1 ENABLED value
+                         * @property {number} DISABLED=2 DISABLED value
+                         * @property {number} DELETED=3 DELETED value
+                         */
+                        MappingRule.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ENABLED"] = 1;
+                            values[valuesById[2] = "DISABLED"] = 2;
+                            values[valuesById[3] = "DELETED"] = 3;
+                            return values;
+                        })();
+    
+                        return MappingRule;
+                    })();
+    
+                    v1.SingleEntityRename = (function() {
+    
+                        /**
+                         * Properties of a SingleEntityRename.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface ISingleEntityRename
+                         * @property {string|null} [newName] SingleEntityRename newName
+                         */
+    
+                        /**
+                         * Constructs a new SingleEntityRename.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents a SingleEntityRename.
+                         * @implements ISingleEntityRename
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.ISingleEntityRename=} [properties] Properties to set
+                         */
+                        function SingleEntityRename(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SingleEntityRename newName.
+                         * @member {string} newName
+                         * @memberof google.cloud.clouddms.v1.SingleEntityRename
+                         * @instance
+                         */
+                        SingleEntityRename.prototype.newName = "";
+    
+                        /**
+                         * Creates a new SingleEntityRename instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.SingleEntityRename
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ISingleEntityRename=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.SingleEntityRename} SingleEntityRename instance
+                         */
+                        SingleEntityRename.create = function create(properties) {
+                            return new SingleEntityRename(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SingleEntityRename message. Does not implicitly {@link google.cloud.clouddms.v1.SingleEntityRename.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.SingleEntityRename
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ISingleEntityRename} message SingleEntityRename message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SingleEntityRename.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.newName != null && Object.hasOwnProperty.call(message, "newName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.newName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SingleEntityRename message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.SingleEntityRename.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.SingleEntityRename
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ISingleEntityRename} message SingleEntityRename message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SingleEntityRename.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SingleEntityRename message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.SingleEntityRename
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.SingleEntityRename} SingleEntityRename
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SingleEntityRename.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.SingleEntityRename();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.newName = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SingleEntityRename message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.SingleEntityRename
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.SingleEntityRename} SingleEntityRename
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SingleEntityRename.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SingleEntityRename message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.SingleEntityRename
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SingleEntityRename.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.newName != null && message.hasOwnProperty("newName"))
+                                if (!$util.isString(message.newName))
+                                    return "newName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SingleEntityRename message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.SingleEntityRename
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.SingleEntityRename} SingleEntityRename
+                         */
+                        SingleEntityRename.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.SingleEntityRename)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.SingleEntityRename();
+                            if (object.newName != null)
+                                message.newName = String(object.newName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SingleEntityRename message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.SingleEntityRename
+                         * @static
+                         * @param {google.cloud.clouddms.v1.SingleEntityRename} message SingleEntityRename
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SingleEntityRename.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.newName = "";
+                            if (message.newName != null && message.hasOwnProperty("newName"))
+                                object.newName = message.newName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SingleEntityRename to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.SingleEntityRename
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SingleEntityRename.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SingleEntityRename
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.SingleEntityRename
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SingleEntityRename.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.SingleEntityRename";
+                        };
+    
+                        return SingleEntityRename;
+                    })();
+    
+                    v1.MultiEntityRename = (function() {
+    
+                        /**
+                         * Properties of a MultiEntityRename.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface IMultiEntityRename
+                         * @property {string|null} [newNamePattern] MultiEntityRename newNamePattern
+                         * @property {google.cloud.clouddms.v1.EntityNameTransformation|null} [sourceNameTransformation] MultiEntityRename sourceNameTransformation
+                         */
+    
+                        /**
+                         * Constructs a new MultiEntityRename.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents a MultiEntityRename.
+                         * @implements IMultiEntityRename
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.IMultiEntityRename=} [properties] Properties to set
+                         */
+                        function MultiEntityRename(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MultiEntityRename newNamePattern.
+                         * @member {string} newNamePattern
+                         * @memberof google.cloud.clouddms.v1.MultiEntityRename
+                         * @instance
+                         */
+                        MultiEntityRename.prototype.newNamePattern = "";
+    
+                        /**
+                         * MultiEntityRename sourceNameTransformation.
+                         * @member {google.cloud.clouddms.v1.EntityNameTransformation} sourceNameTransformation
+                         * @memberof google.cloud.clouddms.v1.MultiEntityRename
+                         * @instance
+                         */
+                        MultiEntityRename.prototype.sourceNameTransformation = 0;
+    
+                        /**
+                         * Creates a new MultiEntityRename instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.MultiEntityRename
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IMultiEntityRename=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.MultiEntityRename} MultiEntityRename instance
+                         */
+                        MultiEntityRename.create = function create(properties) {
+                            return new MultiEntityRename(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MultiEntityRename message. Does not implicitly {@link google.cloud.clouddms.v1.MultiEntityRename.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.MultiEntityRename
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IMultiEntityRename} message MultiEntityRename message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MultiEntityRename.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.newNamePattern != null && Object.hasOwnProperty.call(message, "newNamePattern"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.newNamePattern);
+                            if (message.sourceNameTransformation != null && Object.hasOwnProperty.call(message, "sourceNameTransformation"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.sourceNameTransformation);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MultiEntityRename message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.MultiEntityRename.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.MultiEntityRename
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IMultiEntityRename} message MultiEntityRename message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MultiEntityRename.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MultiEntityRename message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.MultiEntityRename
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.MultiEntityRename} MultiEntityRename
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MultiEntityRename.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.MultiEntityRename();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.newNamePattern = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.sourceNameTransformation = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MultiEntityRename message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.MultiEntityRename
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.MultiEntityRename} MultiEntityRename
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MultiEntityRename.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MultiEntityRename message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.MultiEntityRename
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MultiEntityRename.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.newNamePattern != null && message.hasOwnProperty("newNamePattern"))
+                                if (!$util.isString(message.newNamePattern))
+                                    return "newNamePattern: string expected";
+                            if (message.sourceNameTransformation != null && message.hasOwnProperty("sourceNameTransformation"))
+                                switch (message.sourceNameTransformation) {
+                                default:
+                                    return "sourceNameTransformation: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MultiEntityRename message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.MultiEntityRename
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.MultiEntityRename} MultiEntityRename
+                         */
+                        MultiEntityRename.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.MultiEntityRename)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.MultiEntityRename();
+                            if (object.newNamePattern != null)
+                                message.newNamePattern = String(object.newNamePattern);
+                            switch (object.sourceNameTransformation) {
+                            default:
+                                if (typeof object.sourceNameTransformation === "number") {
+                                    message.sourceNameTransformation = object.sourceNameTransformation;
+                                    break;
+                                }
+                                break;
+                            case "ENTITY_NAME_TRANSFORMATION_UNSPECIFIED":
+                            case 0:
+                                message.sourceNameTransformation = 0;
+                                break;
+                            case "ENTITY_NAME_TRANSFORMATION_NO_TRANSFORMATION":
+                            case 1:
+                                message.sourceNameTransformation = 1;
+                                break;
+                            case "ENTITY_NAME_TRANSFORMATION_LOWER_CASE":
+                            case 2:
+                                message.sourceNameTransformation = 2;
+                                break;
+                            case "ENTITY_NAME_TRANSFORMATION_UPPER_CASE":
+                            case 3:
+                                message.sourceNameTransformation = 3;
+                                break;
+                            case "ENTITY_NAME_TRANSFORMATION_CAPITALIZED_CASE":
+                            case 4:
+                                message.sourceNameTransformation = 4;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MultiEntityRename message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.MultiEntityRename
+                         * @static
+                         * @param {google.cloud.clouddms.v1.MultiEntityRename} message MultiEntityRename
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MultiEntityRename.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.newNamePattern = "";
+                                object.sourceNameTransformation = options.enums === String ? "ENTITY_NAME_TRANSFORMATION_UNSPECIFIED" : 0;
+                            }
+                            if (message.newNamePattern != null && message.hasOwnProperty("newNamePattern"))
+                                object.newNamePattern = message.newNamePattern;
+                            if (message.sourceNameTransformation != null && message.hasOwnProperty("sourceNameTransformation"))
+                                object.sourceNameTransformation = options.enums === String ? $root.google.cloud.clouddms.v1.EntityNameTransformation[message.sourceNameTransformation] === undefined ? message.sourceNameTransformation : $root.google.cloud.clouddms.v1.EntityNameTransformation[message.sourceNameTransformation] : message.sourceNameTransformation;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MultiEntityRename to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.MultiEntityRename
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MultiEntityRename.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MultiEntityRename
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.MultiEntityRename
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MultiEntityRename.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.MultiEntityRename";
+                        };
+    
+                        return MultiEntityRename;
+                    })();
+    
+                    v1.EntityMove = (function() {
+    
+                        /**
+                         * Properties of an EntityMove.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface IEntityMove
+                         * @property {string|null} [newSchema] EntityMove newSchema
+                         */
+    
+                        /**
+                         * Constructs a new EntityMove.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents an EntityMove.
+                         * @implements IEntityMove
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.IEntityMove=} [properties] Properties to set
+                         */
+                        function EntityMove(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * EntityMove newSchema.
+                         * @member {string} newSchema
+                         * @memberof google.cloud.clouddms.v1.EntityMove
+                         * @instance
+                         */
+                        EntityMove.prototype.newSchema = "";
+    
+                        /**
+                         * Creates a new EntityMove instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.EntityMove
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IEntityMove=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.EntityMove} EntityMove instance
+                         */
+                        EntityMove.create = function create(properties) {
+                            return new EntityMove(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified EntityMove message. Does not implicitly {@link google.cloud.clouddms.v1.EntityMove.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.EntityMove
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IEntityMove} message EntityMove message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EntityMove.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.newSchema != null && Object.hasOwnProperty.call(message, "newSchema"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.newSchema);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified EntityMove message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.EntityMove.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.EntityMove
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IEntityMove} message EntityMove message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EntityMove.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an EntityMove message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.EntityMove
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.EntityMove} EntityMove
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EntityMove.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.EntityMove();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.newSchema = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an EntityMove message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.EntityMove
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.EntityMove} EntityMove
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EntityMove.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an EntityMove message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.EntityMove
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        EntityMove.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.newSchema != null && message.hasOwnProperty("newSchema"))
+                                if (!$util.isString(message.newSchema))
+                                    return "newSchema: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an EntityMove message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.EntityMove
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.EntityMove} EntityMove
+                         */
+                        EntityMove.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.EntityMove)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.EntityMove();
+                            if (object.newSchema != null)
+                                message.newSchema = String(object.newSchema);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an EntityMove message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.EntityMove
+                         * @static
+                         * @param {google.cloud.clouddms.v1.EntityMove} message EntityMove
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        EntityMove.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.newSchema = "";
+                            if (message.newSchema != null && message.hasOwnProperty("newSchema"))
+                                object.newSchema = message.newSchema;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this EntityMove to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.EntityMove
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        EntityMove.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for EntityMove
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.EntityMove
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        EntityMove.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.EntityMove";
+                        };
+    
+                        return EntityMove;
+                    })();
+    
+                    v1.SingleColumnChange = (function() {
+    
+                        /**
+                         * Properties of a SingleColumnChange.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface ISingleColumnChange
+                         * @property {string|null} [dataType] SingleColumnChange dataType
+                         * @property {string|null} [charset] SingleColumnChange charset
+                         * @property {string|null} [collation] SingleColumnChange collation
+                         * @property {number|Long|null} [length] SingleColumnChange length
+                         * @property {number|null} [precision] SingleColumnChange precision
+                         * @property {number|null} [scale] SingleColumnChange scale
+                         * @property {number|null} [fractionalSecondsPrecision] SingleColumnChange fractionalSecondsPrecision
+                         * @property {boolean|null} [array] SingleColumnChange array
+                         * @property {number|null} [arrayLength] SingleColumnChange arrayLength
+                         * @property {boolean|null} [nullable] SingleColumnChange nullable
+                         * @property {boolean|null} [autoGenerated] SingleColumnChange autoGenerated
+                         * @property {boolean|null} [udt] SingleColumnChange udt
+                         * @property {google.protobuf.IStruct|null} [customFeatures] SingleColumnChange customFeatures
+                         * @property {Array.<string>|null} [setValues] SingleColumnChange setValues
+                         * @property {string|null} [comment] SingleColumnChange comment
+                         */
+    
+                        /**
+                         * Constructs a new SingleColumnChange.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents a SingleColumnChange.
+                         * @implements ISingleColumnChange
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.ISingleColumnChange=} [properties] Properties to set
+                         */
+                        function SingleColumnChange(properties) {
+                            this.setValues = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SingleColumnChange dataType.
+                         * @member {string} dataType
+                         * @memberof google.cloud.clouddms.v1.SingleColumnChange
+                         * @instance
+                         */
+                        SingleColumnChange.prototype.dataType = "";
+    
+                        /**
+                         * SingleColumnChange charset.
+                         * @member {string} charset
+                         * @memberof google.cloud.clouddms.v1.SingleColumnChange
+                         * @instance
+                         */
+                        SingleColumnChange.prototype.charset = "";
+    
+                        /**
+                         * SingleColumnChange collation.
+                         * @member {string} collation
+                         * @memberof google.cloud.clouddms.v1.SingleColumnChange
+                         * @instance
+                         */
+                        SingleColumnChange.prototype.collation = "";
+    
+                        /**
+                         * SingleColumnChange length.
+                         * @member {number|Long} length
+                         * @memberof google.cloud.clouddms.v1.SingleColumnChange
+                         * @instance
+                         */
+                        SingleColumnChange.prototype.length = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * SingleColumnChange precision.
+                         * @member {number} precision
+                         * @memberof google.cloud.clouddms.v1.SingleColumnChange
+                         * @instance
+                         */
+                        SingleColumnChange.prototype.precision = 0;
+    
+                        /**
+                         * SingleColumnChange scale.
+                         * @member {number} scale
+                         * @memberof google.cloud.clouddms.v1.SingleColumnChange
+                         * @instance
+                         */
+                        SingleColumnChange.prototype.scale = 0;
+    
+                        /**
+                         * SingleColumnChange fractionalSecondsPrecision.
+                         * @member {number} fractionalSecondsPrecision
+                         * @memberof google.cloud.clouddms.v1.SingleColumnChange
+                         * @instance
+                         */
+                        SingleColumnChange.prototype.fractionalSecondsPrecision = 0;
+    
+                        /**
+                         * SingleColumnChange array.
+                         * @member {boolean} array
+                         * @memberof google.cloud.clouddms.v1.SingleColumnChange
+                         * @instance
+                         */
+                        SingleColumnChange.prototype.array = false;
+    
+                        /**
+                         * SingleColumnChange arrayLength.
+                         * @member {number} arrayLength
+                         * @memberof google.cloud.clouddms.v1.SingleColumnChange
+                         * @instance
+                         */
+                        SingleColumnChange.prototype.arrayLength = 0;
+    
+                        /**
+                         * SingleColumnChange nullable.
+                         * @member {boolean} nullable
+                         * @memberof google.cloud.clouddms.v1.SingleColumnChange
+                         * @instance
+                         */
+                        SingleColumnChange.prototype.nullable = false;
+    
+                        /**
+                         * SingleColumnChange autoGenerated.
+                         * @member {boolean} autoGenerated
+                         * @memberof google.cloud.clouddms.v1.SingleColumnChange
+                         * @instance
+                         */
+                        SingleColumnChange.prototype.autoGenerated = false;
+    
+                        /**
+                         * SingleColumnChange udt.
+                         * @member {boolean} udt
+                         * @memberof google.cloud.clouddms.v1.SingleColumnChange
+                         * @instance
+                         */
+                        SingleColumnChange.prototype.udt = false;
+    
+                        /**
+                         * SingleColumnChange customFeatures.
+                         * @member {google.protobuf.IStruct|null|undefined} customFeatures
+                         * @memberof google.cloud.clouddms.v1.SingleColumnChange
+                         * @instance
+                         */
+                        SingleColumnChange.prototype.customFeatures = null;
+    
+                        /**
+                         * SingleColumnChange setValues.
+                         * @member {Array.<string>} setValues
+                         * @memberof google.cloud.clouddms.v1.SingleColumnChange
+                         * @instance
+                         */
+                        SingleColumnChange.prototype.setValues = $util.emptyArray;
+    
+                        /**
+                         * SingleColumnChange comment.
+                         * @member {string} comment
+                         * @memberof google.cloud.clouddms.v1.SingleColumnChange
+                         * @instance
+                         */
+                        SingleColumnChange.prototype.comment = "";
+    
+                        /**
+                         * Creates a new SingleColumnChange instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.SingleColumnChange
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ISingleColumnChange=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.SingleColumnChange} SingleColumnChange instance
+                         */
+                        SingleColumnChange.create = function create(properties) {
+                            return new SingleColumnChange(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SingleColumnChange message. Does not implicitly {@link google.cloud.clouddms.v1.SingleColumnChange.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.SingleColumnChange
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ISingleColumnChange} message SingleColumnChange message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SingleColumnChange.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dataType != null && Object.hasOwnProperty.call(message, "dataType"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.dataType);
+                            if (message.charset != null && Object.hasOwnProperty.call(message, "charset"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.charset);
+                            if (message.collation != null && Object.hasOwnProperty.call(message, "collation"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.collation);
+                            if (message.length != null && Object.hasOwnProperty.call(message, "length"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.length);
+                            if (message.precision != null && Object.hasOwnProperty.call(message, "precision"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.precision);
+                            if (message.scale != null && Object.hasOwnProperty.call(message, "scale"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.scale);
+                            if (message.fractionalSecondsPrecision != null && Object.hasOwnProperty.call(message, "fractionalSecondsPrecision"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.fractionalSecondsPrecision);
+                            if (message.array != null && Object.hasOwnProperty.call(message, "array"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.array);
+                            if (message.arrayLength != null && Object.hasOwnProperty.call(message, "arrayLength"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.arrayLength);
+                            if (message.nullable != null && Object.hasOwnProperty.call(message, "nullable"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.nullable);
+                            if (message.autoGenerated != null && Object.hasOwnProperty.call(message, "autoGenerated"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).bool(message.autoGenerated);
+                            if (message.udt != null && Object.hasOwnProperty.call(message, "udt"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).bool(message.udt);
+                            if (message.customFeatures != null && Object.hasOwnProperty.call(message, "customFeatures"))
+                                $root.google.protobuf.Struct.encode(message.customFeatures, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.setValues != null && message.setValues.length)
+                                for (var i = 0; i < message.setValues.length; ++i)
+                                    writer.uint32(/* id 14, wireType 2 =*/114).string(message.setValues[i]);
+                            if (message.comment != null && Object.hasOwnProperty.call(message, "comment"))
+                                writer.uint32(/* id 15, wireType 2 =*/122).string(message.comment);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SingleColumnChange message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.SingleColumnChange.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.SingleColumnChange
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ISingleColumnChange} message SingleColumnChange message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SingleColumnChange.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SingleColumnChange message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.SingleColumnChange
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.SingleColumnChange} SingleColumnChange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SingleColumnChange.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.SingleColumnChange();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.dataType = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.charset = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.collation = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.length = reader.int64();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.precision = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.scale = reader.int32();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.fractionalSecondsPrecision = reader.int32();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.array = reader.bool();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.arrayLength = reader.int32();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.nullable = reader.bool();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.autoGenerated = reader.bool();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.udt = reader.bool();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.customFeatures = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 14: {
+                                        if (!(message.setValues && message.setValues.length))
+                                            message.setValues = [];
+                                        message.setValues.push(reader.string());
+                                        break;
+                                    }
+                                case 15: {
+                                        message.comment = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SingleColumnChange message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.SingleColumnChange
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.SingleColumnChange} SingleColumnChange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SingleColumnChange.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SingleColumnChange message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.SingleColumnChange
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SingleColumnChange.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dataType != null && message.hasOwnProperty("dataType"))
+                                if (!$util.isString(message.dataType))
+                                    return "dataType: string expected";
+                            if (message.charset != null && message.hasOwnProperty("charset"))
+                                if (!$util.isString(message.charset))
+                                    return "charset: string expected";
+                            if (message.collation != null && message.hasOwnProperty("collation"))
+                                if (!$util.isString(message.collation))
+                                    return "collation: string expected";
+                            if (message.length != null && message.hasOwnProperty("length"))
+                                if (!$util.isInteger(message.length) && !(message.length && $util.isInteger(message.length.low) && $util.isInteger(message.length.high)))
+                                    return "length: integer|Long expected";
+                            if (message.precision != null && message.hasOwnProperty("precision"))
+                                if (!$util.isInteger(message.precision))
+                                    return "precision: integer expected";
+                            if (message.scale != null && message.hasOwnProperty("scale"))
+                                if (!$util.isInteger(message.scale))
+                                    return "scale: integer expected";
+                            if (message.fractionalSecondsPrecision != null && message.hasOwnProperty("fractionalSecondsPrecision"))
+                                if (!$util.isInteger(message.fractionalSecondsPrecision))
+                                    return "fractionalSecondsPrecision: integer expected";
+                            if (message.array != null && message.hasOwnProperty("array"))
+                                if (typeof message.array !== "boolean")
+                                    return "array: boolean expected";
+                            if (message.arrayLength != null && message.hasOwnProperty("arrayLength"))
+                                if (!$util.isInteger(message.arrayLength))
+                                    return "arrayLength: integer expected";
+                            if (message.nullable != null && message.hasOwnProperty("nullable"))
+                                if (typeof message.nullable !== "boolean")
+                                    return "nullable: boolean expected";
+                            if (message.autoGenerated != null && message.hasOwnProperty("autoGenerated"))
+                                if (typeof message.autoGenerated !== "boolean")
+                                    return "autoGenerated: boolean expected";
+                            if (message.udt != null && message.hasOwnProperty("udt"))
+                                if (typeof message.udt !== "boolean")
+                                    return "udt: boolean expected";
+                            if (message.customFeatures != null && message.hasOwnProperty("customFeatures")) {
+                                var error = $root.google.protobuf.Struct.verify(message.customFeatures);
+                                if (error)
+                                    return "customFeatures." + error;
+                            }
+                            if (message.setValues != null && message.hasOwnProperty("setValues")) {
+                                if (!Array.isArray(message.setValues))
+                                    return "setValues: array expected";
+                                for (var i = 0; i < message.setValues.length; ++i)
+                                    if (!$util.isString(message.setValues[i]))
+                                        return "setValues: string[] expected";
+                            }
+                            if (message.comment != null && message.hasOwnProperty("comment"))
+                                if (!$util.isString(message.comment))
+                                    return "comment: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SingleColumnChange message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.SingleColumnChange
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.SingleColumnChange} SingleColumnChange
+                         */
+                        SingleColumnChange.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.SingleColumnChange)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.SingleColumnChange();
+                            if (object.dataType != null)
+                                message.dataType = String(object.dataType);
+                            if (object.charset != null)
+                                message.charset = String(object.charset);
+                            if (object.collation != null)
+                                message.collation = String(object.collation);
+                            if (object.length != null)
+                                if ($util.Long)
+                                    (message.length = $util.Long.fromValue(object.length)).unsigned = false;
+                                else if (typeof object.length === "string")
+                                    message.length = parseInt(object.length, 10);
+                                else if (typeof object.length === "number")
+                                    message.length = object.length;
+                                else if (typeof object.length === "object")
+                                    message.length = new $util.LongBits(object.length.low >>> 0, object.length.high >>> 0).toNumber();
+                            if (object.precision != null)
+                                message.precision = object.precision | 0;
+                            if (object.scale != null)
+                                message.scale = object.scale | 0;
+                            if (object.fractionalSecondsPrecision != null)
+                                message.fractionalSecondsPrecision = object.fractionalSecondsPrecision | 0;
+                            if (object.array != null)
+                                message.array = Boolean(object.array);
+                            if (object.arrayLength != null)
+                                message.arrayLength = object.arrayLength | 0;
+                            if (object.nullable != null)
+                                message.nullable = Boolean(object.nullable);
+                            if (object.autoGenerated != null)
+                                message.autoGenerated = Boolean(object.autoGenerated);
+                            if (object.udt != null)
+                                message.udt = Boolean(object.udt);
+                            if (object.customFeatures != null) {
+                                if (typeof object.customFeatures !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.SingleColumnChange.customFeatures: object expected");
+                                message.customFeatures = $root.google.protobuf.Struct.fromObject(object.customFeatures);
+                            }
+                            if (object.setValues) {
+                                if (!Array.isArray(object.setValues))
+                                    throw TypeError(".google.cloud.clouddms.v1.SingleColumnChange.setValues: array expected");
+                                message.setValues = [];
+                                for (var i = 0; i < object.setValues.length; ++i)
+                                    message.setValues[i] = String(object.setValues[i]);
+                            }
+                            if (object.comment != null)
+                                message.comment = String(object.comment);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SingleColumnChange message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.SingleColumnChange
+                         * @static
+                         * @param {google.cloud.clouddms.v1.SingleColumnChange} message SingleColumnChange
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SingleColumnChange.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.setValues = [];
+                            if (options.defaults) {
+                                object.dataType = "";
+                                object.charset = "";
+                                object.collation = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.length = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.length = options.longs === String ? "0" : 0;
+                                object.precision = 0;
+                                object.scale = 0;
+                                object.fractionalSecondsPrecision = 0;
+                                object.array = false;
+                                object.arrayLength = 0;
+                                object.nullable = false;
+                                object.autoGenerated = false;
+                                object.udt = false;
+                                object.customFeatures = null;
+                                object.comment = "";
+                            }
+                            if (message.dataType != null && message.hasOwnProperty("dataType"))
+                                object.dataType = message.dataType;
+                            if (message.charset != null && message.hasOwnProperty("charset"))
+                                object.charset = message.charset;
+                            if (message.collation != null && message.hasOwnProperty("collation"))
+                                object.collation = message.collation;
+                            if (message.length != null && message.hasOwnProperty("length"))
+                                if (typeof message.length === "number")
+                                    object.length = options.longs === String ? String(message.length) : message.length;
+                                else
+                                    object.length = options.longs === String ? $util.Long.prototype.toString.call(message.length) : options.longs === Number ? new $util.LongBits(message.length.low >>> 0, message.length.high >>> 0).toNumber() : message.length;
+                            if (message.precision != null && message.hasOwnProperty("precision"))
+                                object.precision = message.precision;
+                            if (message.scale != null && message.hasOwnProperty("scale"))
+                                object.scale = message.scale;
+                            if (message.fractionalSecondsPrecision != null && message.hasOwnProperty("fractionalSecondsPrecision"))
+                                object.fractionalSecondsPrecision = message.fractionalSecondsPrecision;
+                            if (message.array != null && message.hasOwnProperty("array"))
+                                object.array = message.array;
+                            if (message.arrayLength != null && message.hasOwnProperty("arrayLength"))
+                                object.arrayLength = message.arrayLength;
+                            if (message.nullable != null && message.hasOwnProperty("nullable"))
+                                object.nullable = message.nullable;
+                            if (message.autoGenerated != null && message.hasOwnProperty("autoGenerated"))
+                                object.autoGenerated = message.autoGenerated;
+                            if (message.udt != null && message.hasOwnProperty("udt"))
+                                object.udt = message.udt;
+                            if (message.customFeatures != null && message.hasOwnProperty("customFeatures"))
+                                object.customFeatures = $root.google.protobuf.Struct.toObject(message.customFeatures, options);
+                            if (message.setValues && message.setValues.length) {
+                                object.setValues = [];
+                                for (var j = 0; j < message.setValues.length; ++j)
+                                    object.setValues[j] = message.setValues[j];
+                            }
+                            if (message.comment != null && message.hasOwnProperty("comment"))
+                                object.comment = message.comment;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SingleColumnChange to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.SingleColumnChange
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SingleColumnChange.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SingleColumnChange
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.SingleColumnChange
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SingleColumnChange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.SingleColumnChange";
+                        };
+    
+                        return SingleColumnChange;
+                    })();
+    
+                    v1.MultiColumnDatatypeChange = (function() {
+    
+                        /**
+                         * Properties of a MultiColumnDatatypeChange.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface IMultiColumnDatatypeChange
+                         * @property {string|null} [sourceDataTypeFilter] MultiColumnDatatypeChange sourceDataTypeFilter
+                         * @property {google.cloud.clouddms.v1.ISourceTextFilter|null} [sourceTextFilter] MultiColumnDatatypeChange sourceTextFilter
+                         * @property {google.cloud.clouddms.v1.ISourceNumericFilter|null} [sourceNumericFilter] MultiColumnDatatypeChange sourceNumericFilter
+                         * @property {string|null} [newDataType] MultiColumnDatatypeChange newDataType
+                         * @property {number|Long|null} [overrideLength] MultiColumnDatatypeChange overrideLength
+                         * @property {number|null} [overrideScale] MultiColumnDatatypeChange overrideScale
+                         * @property {number|null} [overridePrecision] MultiColumnDatatypeChange overridePrecision
+                         * @property {number|null} [overrideFractionalSecondsPrecision] MultiColumnDatatypeChange overrideFractionalSecondsPrecision
+                         * @property {google.protobuf.IStruct|null} [customFeatures] MultiColumnDatatypeChange customFeatures
+                         */
+    
+                        /**
+                         * Constructs a new MultiColumnDatatypeChange.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents a MultiColumnDatatypeChange.
+                         * @implements IMultiColumnDatatypeChange
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.IMultiColumnDatatypeChange=} [properties] Properties to set
+                         */
+                        function MultiColumnDatatypeChange(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MultiColumnDatatypeChange sourceDataTypeFilter.
+                         * @member {string} sourceDataTypeFilter
+                         * @memberof google.cloud.clouddms.v1.MultiColumnDatatypeChange
+                         * @instance
+                         */
+                        MultiColumnDatatypeChange.prototype.sourceDataTypeFilter = "";
+    
+                        /**
+                         * MultiColumnDatatypeChange sourceTextFilter.
+                         * @member {google.cloud.clouddms.v1.ISourceTextFilter|null|undefined} sourceTextFilter
+                         * @memberof google.cloud.clouddms.v1.MultiColumnDatatypeChange
+                         * @instance
+                         */
+                        MultiColumnDatatypeChange.prototype.sourceTextFilter = null;
+    
+                        /**
+                         * MultiColumnDatatypeChange sourceNumericFilter.
+                         * @member {google.cloud.clouddms.v1.ISourceNumericFilter|null|undefined} sourceNumericFilter
+                         * @memberof google.cloud.clouddms.v1.MultiColumnDatatypeChange
+                         * @instance
+                         */
+                        MultiColumnDatatypeChange.prototype.sourceNumericFilter = null;
+    
+                        /**
+                         * MultiColumnDatatypeChange newDataType.
+                         * @member {string} newDataType
+                         * @memberof google.cloud.clouddms.v1.MultiColumnDatatypeChange
+                         * @instance
+                         */
+                        MultiColumnDatatypeChange.prototype.newDataType = "";
+    
+                        /**
+                         * MultiColumnDatatypeChange overrideLength.
+                         * @member {number|Long} overrideLength
+                         * @memberof google.cloud.clouddms.v1.MultiColumnDatatypeChange
+                         * @instance
+                         */
+                        MultiColumnDatatypeChange.prototype.overrideLength = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * MultiColumnDatatypeChange overrideScale.
+                         * @member {number} overrideScale
+                         * @memberof google.cloud.clouddms.v1.MultiColumnDatatypeChange
+                         * @instance
+                         */
+                        MultiColumnDatatypeChange.prototype.overrideScale = 0;
+    
+                        /**
+                         * MultiColumnDatatypeChange overridePrecision.
+                         * @member {number} overridePrecision
+                         * @memberof google.cloud.clouddms.v1.MultiColumnDatatypeChange
+                         * @instance
+                         */
+                        MultiColumnDatatypeChange.prototype.overridePrecision = 0;
+    
+                        /**
+                         * MultiColumnDatatypeChange overrideFractionalSecondsPrecision.
+                         * @member {number} overrideFractionalSecondsPrecision
+                         * @memberof google.cloud.clouddms.v1.MultiColumnDatatypeChange
+                         * @instance
+                         */
+                        MultiColumnDatatypeChange.prototype.overrideFractionalSecondsPrecision = 0;
+    
+                        /**
+                         * MultiColumnDatatypeChange customFeatures.
+                         * @member {google.protobuf.IStruct|null|undefined} customFeatures
+                         * @memberof google.cloud.clouddms.v1.MultiColumnDatatypeChange
+                         * @instance
+                         */
+                        MultiColumnDatatypeChange.prototype.customFeatures = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * MultiColumnDatatypeChange sourceFilter.
+                         * @member {"sourceTextFilter"|"sourceNumericFilter"|undefined} sourceFilter
+                         * @memberof google.cloud.clouddms.v1.MultiColumnDatatypeChange
+                         * @instance
+                         */
+                        Object.defineProperty(MultiColumnDatatypeChange.prototype, "sourceFilter", {
+                            get: $util.oneOfGetter($oneOfFields = ["sourceTextFilter", "sourceNumericFilter"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new MultiColumnDatatypeChange instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.MultiColumnDatatypeChange
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IMultiColumnDatatypeChange=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.MultiColumnDatatypeChange} MultiColumnDatatypeChange instance
+                         */
+                        MultiColumnDatatypeChange.create = function create(properties) {
+                            return new MultiColumnDatatypeChange(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MultiColumnDatatypeChange message. Does not implicitly {@link google.cloud.clouddms.v1.MultiColumnDatatypeChange.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.MultiColumnDatatypeChange
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IMultiColumnDatatypeChange} message MultiColumnDatatypeChange message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MultiColumnDatatypeChange.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.sourceDataTypeFilter != null && Object.hasOwnProperty.call(message, "sourceDataTypeFilter"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.sourceDataTypeFilter);
+                            if (message.newDataType != null && Object.hasOwnProperty.call(message, "newDataType"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.newDataType);
+                            if (message.overrideLength != null && Object.hasOwnProperty.call(message, "overrideLength"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.overrideLength);
+                            if (message.overrideScale != null && Object.hasOwnProperty.call(message, "overrideScale"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.overrideScale);
+                            if (message.overridePrecision != null && Object.hasOwnProperty.call(message, "overridePrecision"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.overridePrecision);
+                            if (message.overrideFractionalSecondsPrecision != null && Object.hasOwnProperty.call(message, "overrideFractionalSecondsPrecision"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.overrideFractionalSecondsPrecision);
+                            if (message.customFeatures != null && Object.hasOwnProperty.call(message, "customFeatures"))
+                                $root.google.protobuf.Struct.encode(message.customFeatures, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.sourceTextFilter != null && Object.hasOwnProperty.call(message, "sourceTextFilter"))
+                                $root.google.cloud.clouddms.v1.SourceTextFilter.encode(message.sourceTextFilter, writer.uint32(/* id 100, wireType 2 =*/802).fork()).ldelim();
+                            if (message.sourceNumericFilter != null && Object.hasOwnProperty.call(message, "sourceNumericFilter"))
+                                $root.google.cloud.clouddms.v1.SourceNumericFilter.encode(message.sourceNumericFilter, writer.uint32(/* id 101, wireType 2 =*/810).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MultiColumnDatatypeChange message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.MultiColumnDatatypeChange.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.MultiColumnDatatypeChange
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IMultiColumnDatatypeChange} message MultiColumnDatatypeChange message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MultiColumnDatatypeChange.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MultiColumnDatatypeChange message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.MultiColumnDatatypeChange
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.MultiColumnDatatypeChange} MultiColumnDatatypeChange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MultiColumnDatatypeChange.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.MultiColumnDatatypeChange();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.sourceDataTypeFilter = reader.string();
+                                        break;
+                                    }
+                                case 100: {
+                                        message.sourceTextFilter = $root.google.cloud.clouddms.v1.SourceTextFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 101: {
+                                        message.sourceNumericFilter = $root.google.cloud.clouddms.v1.SourceNumericFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.newDataType = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.overrideLength = reader.int64();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.overrideScale = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.overridePrecision = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.overrideFractionalSecondsPrecision = reader.int32();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.customFeatures = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MultiColumnDatatypeChange message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.MultiColumnDatatypeChange
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.MultiColumnDatatypeChange} MultiColumnDatatypeChange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MultiColumnDatatypeChange.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MultiColumnDatatypeChange message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.MultiColumnDatatypeChange
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MultiColumnDatatypeChange.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.sourceDataTypeFilter != null && message.hasOwnProperty("sourceDataTypeFilter"))
+                                if (!$util.isString(message.sourceDataTypeFilter))
+                                    return "sourceDataTypeFilter: string expected";
+                            if (message.sourceTextFilter != null && message.hasOwnProperty("sourceTextFilter")) {
+                                properties.sourceFilter = 1;
+                                {
+                                    var error = $root.google.cloud.clouddms.v1.SourceTextFilter.verify(message.sourceTextFilter);
+                                    if (error)
+                                        return "sourceTextFilter." + error;
+                                }
+                            }
+                            if (message.sourceNumericFilter != null && message.hasOwnProperty("sourceNumericFilter")) {
+                                if (properties.sourceFilter === 1)
+                                    return "sourceFilter: multiple values";
+                                properties.sourceFilter = 1;
+                                {
+                                    var error = $root.google.cloud.clouddms.v1.SourceNumericFilter.verify(message.sourceNumericFilter);
+                                    if (error)
+                                        return "sourceNumericFilter." + error;
+                                }
+                            }
+                            if (message.newDataType != null && message.hasOwnProperty("newDataType"))
+                                if (!$util.isString(message.newDataType))
+                                    return "newDataType: string expected";
+                            if (message.overrideLength != null && message.hasOwnProperty("overrideLength"))
+                                if (!$util.isInteger(message.overrideLength) && !(message.overrideLength && $util.isInteger(message.overrideLength.low) && $util.isInteger(message.overrideLength.high)))
+                                    return "overrideLength: integer|Long expected";
+                            if (message.overrideScale != null && message.hasOwnProperty("overrideScale"))
+                                if (!$util.isInteger(message.overrideScale))
+                                    return "overrideScale: integer expected";
+                            if (message.overridePrecision != null && message.hasOwnProperty("overridePrecision"))
+                                if (!$util.isInteger(message.overridePrecision))
+                                    return "overridePrecision: integer expected";
+                            if (message.overrideFractionalSecondsPrecision != null && message.hasOwnProperty("overrideFractionalSecondsPrecision"))
+                                if (!$util.isInteger(message.overrideFractionalSecondsPrecision))
+                                    return "overrideFractionalSecondsPrecision: integer expected";
+                            if (message.customFeatures != null && message.hasOwnProperty("customFeatures")) {
+                                var error = $root.google.protobuf.Struct.verify(message.customFeatures);
+                                if (error)
+                                    return "customFeatures." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MultiColumnDatatypeChange message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.MultiColumnDatatypeChange
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.MultiColumnDatatypeChange} MultiColumnDatatypeChange
+                         */
+                        MultiColumnDatatypeChange.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.MultiColumnDatatypeChange)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.MultiColumnDatatypeChange();
+                            if (object.sourceDataTypeFilter != null)
+                                message.sourceDataTypeFilter = String(object.sourceDataTypeFilter);
+                            if (object.sourceTextFilter != null) {
+                                if (typeof object.sourceTextFilter !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.MultiColumnDatatypeChange.sourceTextFilter: object expected");
+                                message.sourceTextFilter = $root.google.cloud.clouddms.v1.SourceTextFilter.fromObject(object.sourceTextFilter);
+                            }
+                            if (object.sourceNumericFilter != null) {
+                                if (typeof object.sourceNumericFilter !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.MultiColumnDatatypeChange.sourceNumericFilter: object expected");
+                                message.sourceNumericFilter = $root.google.cloud.clouddms.v1.SourceNumericFilter.fromObject(object.sourceNumericFilter);
+                            }
+                            if (object.newDataType != null)
+                                message.newDataType = String(object.newDataType);
+                            if (object.overrideLength != null)
+                                if ($util.Long)
+                                    (message.overrideLength = $util.Long.fromValue(object.overrideLength)).unsigned = false;
+                                else if (typeof object.overrideLength === "string")
+                                    message.overrideLength = parseInt(object.overrideLength, 10);
+                                else if (typeof object.overrideLength === "number")
+                                    message.overrideLength = object.overrideLength;
+                                else if (typeof object.overrideLength === "object")
+                                    message.overrideLength = new $util.LongBits(object.overrideLength.low >>> 0, object.overrideLength.high >>> 0).toNumber();
+                            if (object.overrideScale != null)
+                                message.overrideScale = object.overrideScale | 0;
+                            if (object.overridePrecision != null)
+                                message.overridePrecision = object.overridePrecision | 0;
+                            if (object.overrideFractionalSecondsPrecision != null)
+                                message.overrideFractionalSecondsPrecision = object.overrideFractionalSecondsPrecision | 0;
+                            if (object.customFeatures != null) {
+                                if (typeof object.customFeatures !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.MultiColumnDatatypeChange.customFeatures: object expected");
+                                message.customFeatures = $root.google.protobuf.Struct.fromObject(object.customFeatures);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MultiColumnDatatypeChange message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.MultiColumnDatatypeChange
+                         * @static
+                         * @param {google.cloud.clouddms.v1.MultiColumnDatatypeChange} message MultiColumnDatatypeChange
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MultiColumnDatatypeChange.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.sourceDataTypeFilter = "";
+                                object.newDataType = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.overrideLength = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.overrideLength = options.longs === String ? "0" : 0;
+                                object.overrideScale = 0;
+                                object.overridePrecision = 0;
+                                object.overrideFractionalSecondsPrecision = 0;
+                                object.customFeatures = null;
+                            }
+                            if (message.sourceDataTypeFilter != null && message.hasOwnProperty("sourceDataTypeFilter"))
+                                object.sourceDataTypeFilter = message.sourceDataTypeFilter;
+                            if (message.newDataType != null && message.hasOwnProperty("newDataType"))
+                                object.newDataType = message.newDataType;
+                            if (message.overrideLength != null && message.hasOwnProperty("overrideLength"))
+                                if (typeof message.overrideLength === "number")
+                                    object.overrideLength = options.longs === String ? String(message.overrideLength) : message.overrideLength;
+                                else
+                                    object.overrideLength = options.longs === String ? $util.Long.prototype.toString.call(message.overrideLength) : options.longs === Number ? new $util.LongBits(message.overrideLength.low >>> 0, message.overrideLength.high >>> 0).toNumber() : message.overrideLength;
+                            if (message.overrideScale != null && message.hasOwnProperty("overrideScale"))
+                                object.overrideScale = message.overrideScale;
+                            if (message.overridePrecision != null && message.hasOwnProperty("overridePrecision"))
+                                object.overridePrecision = message.overridePrecision;
+                            if (message.overrideFractionalSecondsPrecision != null && message.hasOwnProperty("overrideFractionalSecondsPrecision"))
+                                object.overrideFractionalSecondsPrecision = message.overrideFractionalSecondsPrecision;
+                            if (message.customFeatures != null && message.hasOwnProperty("customFeatures"))
+                                object.customFeatures = $root.google.protobuf.Struct.toObject(message.customFeatures, options);
+                            if (message.sourceTextFilter != null && message.hasOwnProperty("sourceTextFilter")) {
+                                object.sourceTextFilter = $root.google.cloud.clouddms.v1.SourceTextFilter.toObject(message.sourceTextFilter, options);
+                                if (options.oneofs)
+                                    object.sourceFilter = "sourceTextFilter";
+                            }
+                            if (message.sourceNumericFilter != null && message.hasOwnProperty("sourceNumericFilter")) {
+                                object.sourceNumericFilter = $root.google.cloud.clouddms.v1.SourceNumericFilter.toObject(message.sourceNumericFilter, options);
+                                if (options.oneofs)
+                                    object.sourceFilter = "sourceNumericFilter";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MultiColumnDatatypeChange to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.MultiColumnDatatypeChange
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MultiColumnDatatypeChange.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MultiColumnDatatypeChange
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.MultiColumnDatatypeChange
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MultiColumnDatatypeChange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.MultiColumnDatatypeChange";
+                        };
+    
+                        return MultiColumnDatatypeChange;
+                    })();
+    
+                    v1.SourceTextFilter = (function() {
+    
+                        /**
+                         * Properties of a SourceTextFilter.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface ISourceTextFilter
+                         * @property {number|Long|null} [sourceMinLengthFilter] SourceTextFilter sourceMinLengthFilter
+                         * @property {number|Long|null} [sourceMaxLengthFilter] SourceTextFilter sourceMaxLengthFilter
+                         */
+    
+                        /**
+                         * Constructs a new SourceTextFilter.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents a SourceTextFilter.
+                         * @implements ISourceTextFilter
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.ISourceTextFilter=} [properties] Properties to set
+                         */
+                        function SourceTextFilter(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SourceTextFilter sourceMinLengthFilter.
+                         * @member {number|Long} sourceMinLengthFilter
+                         * @memberof google.cloud.clouddms.v1.SourceTextFilter
+                         * @instance
+                         */
+                        SourceTextFilter.prototype.sourceMinLengthFilter = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * SourceTextFilter sourceMaxLengthFilter.
+                         * @member {number|Long} sourceMaxLengthFilter
+                         * @memberof google.cloud.clouddms.v1.SourceTextFilter
+                         * @instance
+                         */
+                        SourceTextFilter.prototype.sourceMaxLengthFilter = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Creates a new SourceTextFilter instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.SourceTextFilter
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ISourceTextFilter=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.SourceTextFilter} SourceTextFilter instance
+                         */
+                        SourceTextFilter.create = function create(properties) {
+                            return new SourceTextFilter(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SourceTextFilter message. Does not implicitly {@link google.cloud.clouddms.v1.SourceTextFilter.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.SourceTextFilter
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ISourceTextFilter} message SourceTextFilter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SourceTextFilter.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.sourceMinLengthFilter != null && Object.hasOwnProperty.call(message, "sourceMinLengthFilter"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.sourceMinLengthFilter);
+                            if (message.sourceMaxLengthFilter != null && Object.hasOwnProperty.call(message, "sourceMaxLengthFilter"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.sourceMaxLengthFilter);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SourceTextFilter message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.SourceTextFilter.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.SourceTextFilter
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ISourceTextFilter} message SourceTextFilter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SourceTextFilter.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SourceTextFilter message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.SourceTextFilter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.SourceTextFilter} SourceTextFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SourceTextFilter.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.SourceTextFilter();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.sourceMinLengthFilter = reader.int64();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.sourceMaxLengthFilter = reader.int64();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SourceTextFilter message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.SourceTextFilter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.SourceTextFilter} SourceTextFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SourceTextFilter.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SourceTextFilter message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.SourceTextFilter
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SourceTextFilter.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.sourceMinLengthFilter != null && message.hasOwnProperty("sourceMinLengthFilter"))
+                                if (!$util.isInteger(message.sourceMinLengthFilter) && !(message.sourceMinLengthFilter && $util.isInteger(message.sourceMinLengthFilter.low) && $util.isInteger(message.sourceMinLengthFilter.high)))
+                                    return "sourceMinLengthFilter: integer|Long expected";
+                            if (message.sourceMaxLengthFilter != null && message.hasOwnProperty("sourceMaxLengthFilter"))
+                                if (!$util.isInteger(message.sourceMaxLengthFilter) && !(message.sourceMaxLengthFilter && $util.isInteger(message.sourceMaxLengthFilter.low) && $util.isInteger(message.sourceMaxLengthFilter.high)))
+                                    return "sourceMaxLengthFilter: integer|Long expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SourceTextFilter message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.SourceTextFilter
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.SourceTextFilter} SourceTextFilter
+                         */
+                        SourceTextFilter.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.SourceTextFilter)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.SourceTextFilter();
+                            if (object.sourceMinLengthFilter != null)
+                                if ($util.Long)
+                                    (message.sourceMinLengthFilter = $util.Long.fromValue(object.sourceMinLengthFilter)).unsigned = false;
+                                else if (typeof object.sourceMinLengthFilter === "string")
+                                    message.sourceMinLengthFilter = parseInt(object.sourceMinLengthFilter, 10);
+                                else if (typeof object.sourceMinLengthFilter === "number")
+                                    message.sourceMinLengthFilter = object.sourceMinLengthFilter;
+                                else if (typeof object.sourceMinLengthFilter === "object")
+                                    message.sourceMinLengthFilter = new $util.LongBits(object.sourceMinLengthFilter.low >>> 0, object.sourceMinLengthFilter.high >>> 0).toNumber();
+                            if (object.sourceMaxLengthFilter != null)
+                                if ($util.Long)
+                                    (message.sourceMaxLengthFilter = $util.Long.fromValue(object.sourceMaxLengthFilter)).unsigned = false;
+                                else if (typeof object.sourceMaxLengthFilter === "string")
+                                    message.sourceMaxLengthFilter = parseInt(object.sourceMaxLengthFilter, 10);
+                                else if (typeof object.sourceMaxLengthFilter === "number")
+                                    message.sourceMaxLengthFilter = object.sourceMaxLengthFilter;
+                                else if (typeof object.sourceMaxLengthFilter === "object")
+                                    message.sourceMaxLengthFilter = new $util.LongBits(object.sourceMaxLengthFilter.low >>> 0, object.sourceMaxLengthFilter.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SourceTextFilter message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.SourceTextFilter
+                         * @static
+                         * @param {google.cloud.clouddms.v1.SourceTextFilter} message SourceTextFilter
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SourceTextFilter.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.sourceMinLengthFilter = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.sourceMinLengthFilter = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.sourceMaxLengthFilter = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.sourceMaxLengthFilter = options.longs === String ? "0" : 0;
+                            }
+                            if (message.sourceMinLengthFilter != null && message.hasOwnProperty("sourceMinLengthFilter"))
+                                if (typeof message.sourceMinLengthFilter === "number")
+                                    object.sourceMinLengthFilter = options.longs === String ? String(message.sourceMinLengthFilter) : message.sourceMinLengthFilter;
+                                else
+                                    object.sourceMinLengthFilter = options.longs === String ? $util.Long.prototype.toString.call(message.sourceMinLengthFilter) : options.longs === Number ? new $util.LongBits(message.sourceMinLengthFilter.low >>> 0, message.sourceMinLengthFilter.high >>> 0).toNumber() : message.sourceMinLengthFilter;
+                            if (message.sourceMaxLengthFilter != null && message.hasOwnProperty("sourceMaxLengthFilter"))
+                                if (typeof message.sourceMaxLengthFilter === "number")
+                                    object.sourceMaxLengthFilter = options.longs === String ? String(message.sourceMaxLengthFilter) : message.sourceMaxLengthFilter;
+                                else
+                                    object.sourceMaxLengthFilter = options.longs === String ? $util.Long.prototype.toString.call(message.sourceMaxLengthFilter) : options.longs === Number ? new $util.LongBits(message.sourceMaxLengthFilter.low >>> 0, message.sourceMaxLengthFilter.high >>> 0).toNumber() : message.sourceMaxLengthFilter;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SourceTextFilter to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.SourceTextFilter
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SourceTextFilter.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SourceTextFilter
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.SourceTextFilter
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SourceTextFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.SourceTextFilter";
+                        };
+    
+                        return SourceTextFilter;
+                    })();
+    
+                    v1.SourceNumericFilter = (function() {
+    
+                        /**
+                         * Properties of a SourceNumericFilter.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface ISourceNumericFilter
+                         * @property {number|null} [sourceMinScaleFilter] SourceNumericFilter sourceMinScaleFilter
+                         * @property {number|null} [sourceMaxScaleFilter] SourceNumericFilter sourceMaxScaleFilter
+                         * @property {number|null} [sourceMinPrecisionFilter] SourceNumericFilter sourceMinPrecisionFilter
+                         * @property {number|null} [sourceMaxPrecisionFilter] SourceNumericFilter sourceMaxPrecisionFilter
+                         * @property {google.cloud.clouddms.v1.NumericFilterOption|null} [numericFilterOption] SourceNumericFilter numericFilterOption
+                         */
+    
+                        /**
+                         * Constructs a new SourceNumericFilter.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents a SourceNumericFilter.
+                         * @implements ISourceNumericFilter
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.ISourceNumericFilter=} [properties] Properties to set
+                         */
+                        function SourceNumericFilter(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SourceNumericFilter sourceMinScaleFilter.
+                         * @member {number} sourceMinScaleFilter
+                         * @memberof google.cloud.clouddms.v1.SourceNumericFilter
+                         * @instance
+                         */
+                        SourceNumericFilter.prototype.sourceMinScaleFilter = 0;
+    
+                        /**
+                         * SourceNumericFilter sourceMaxScaleFilter.
+                         * @member {number} sourceMaxScaleFilter
+                         * @memberof google.cloud.clouddms.v1.SourceNumericFilter
+                         * @instance
+                         */
+                        SourceNumericFilter.prototype.sourceMaxScaleFilter = 0;
+    
+                        /**
+                         * SourceNumericFilter sourceMinPrecisionFilter.
+                         * @member {number} sourceMinPrecisionFilter
+                         * @memberof google.cloud.clouddms.v1.SourceNumericFilter
+                         * @instance
+                         */
+                        SourceNumericFilter.prototype.sourceMinPrecisionFilter = 0;
+    
+                        /**
+                         * SourceNumericFilter sourceMaxPrecisionFilter.
+                         * @member {number} sourceMaxPrecisionFilter
+                         * @memberof google.cloud.clouddms.v1.SourceNumericFilter
+                         * @instance
+                         */
+                        SourceNumericFilter.prototype.sourceMaxPrecisionFilter = 0;
+    
+                        /**
+                         * SourceNumericFilter numericFilterOption.
+                         * @member {google.cloud.clouddms.v1.NumericFilterOption} numericFilterOption
+                         * @memberof google.cloud.clouddms.v1.SourceNumericFilter
+                         * @instance
+                         */
+                        SourceNumericFilter.prototype.numericFilterOption = 0;
+    
+                        /**
+                         * Creates a new SourceNumericFilter instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.SourceNumericFilter
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ISourceNumericFilter=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.SourceNumericFilter} SourceNumericFilter instance
+                         */
+                        SourceNumericFilter.create = function create(properties) {
+                            return new SourceNumericFilter(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SourceNumericFilter message. Does not implicitly {@link google.cloud.clouddms.v1.SourceNumericFilter.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.SourceNumericFilter
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ISourceNumericFilter} message SourceNumericFilter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SourceNumericFilter.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.sourceMinScaleFilter != null && Object.hasOwnProperty.call(message, "sourceMinScaleFilter"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.sourceMinScaleFilter);
+                            if (message.sourceMaxScaleFilter != null && Object.hasOwnProperty.call(message, "sourceMaxScaleFilter"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.sourceMaxScaleFilter);
+                            if (message.sourceMinPrecisionFilter != null && Object.hasOwnProperty.call(message, "sourceMinPrecisionFilter"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.sourceMinPrecisionFilter);
+                            if (message.sourceMaxPrecisionFilter != null && Object.hasOwnProperty.call(message, "sourceMaxPrecisionFilter"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.sourceMaxPrecisionFilter);
+                            if (message.numericFilterOption != null && Object.hasOwnProperty.call(message, "numericFilterOption"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.numericFilterOption);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SourceNumericFilter message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.SourceNumericFilter.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.SourceNumericFilter
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ISourceNumericFilter} message SourceNumericFilter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SourceNumericFilter.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SourceNumericFilter message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.SourceNumericFilter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.SourceNumericFilter} SourceNumericFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SourceNumericFilter.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.SourceNumericFilter();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.sourceMinScaleFilter = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.sourceMaxScaleFilter = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.sourceMinPrecisionFilter = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.sourceMaxPrecisionFilter = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.numericFilterOption = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SourceNumericFilter message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.SourceNumericFilter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.SourceNumericFilter} SourceNumericFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SourceNumericFilter.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SourceNumericFilter message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.SourceNumericFilter
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SourceNumericFilter.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.sourceMinScaleFilter != null && message.hasOwnProperty("sourceMinScaleFilter"))
+                                if (!$util.isInteger(message.sourceMinScaleFilter))
+                                    return "sourceMinScaleFilter: integer expected";
+                            if (message.sourceMaxScaleFilter != null && message.hasOwnProperty("sourceMaxScaleFilter"))
+                                if (!$util.isInteger(message.sourceMaxScaleFilter))
+                                    return "sourceMaxScaleFilter: integer expected";
+                            if (message.sourceMinPrecisionFilter != null && message.hasOwnProperty("sourceMinPrecisionFilter"))
+                                if (!$util.isInteger(message.sourceMinPrecisionFilter))
+                                    return "sourceMinPrecisionFilter: integer expected";
+                            if (message.sourceMaxPrecisionFilter != null && message.hasOwnProperty("sourceMaxPrecisionFilter"))
+                                if (!$util.isInteger(message.sourceMaxPrecisionFilter))
+                                    return "sourceMaxPrecisionFilter: integer expected";
+                            if (message.numericFilterOption != null && message.hasOwnProperty("numericFilterOption"))
+                                switch (message.numericFilterOption) {
+                                default:
+                                    return "numericFilterOption: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SourceNumericFilter message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.SourceNumericFilter
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.SourceNumericFilter} SourceNumericFilter
+                         */
+                        SourceNumericFilter.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.SourceNumericFilter)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.SourceNumericFilter();
+                            if (object.sourceMinScaleFilter != null)
+                                message.sourceMinScaleFilter = object.sourceMinScaleFilter | 0;
+                            if (object.sourceMaxScaleFilter != null)
+                                message.sourceMaxScaleFilter = object.sourceMaxScaleFilter | 0;
+                            if (object.sourceMinPrecisionFilter != null)
+                                message.sourceMinPrecisionFilter = object.sourceMinPrecisionFilter | 0;
+                            if (object.sourceMaxPrecisionFilter != null)
+                                message.sourceMaxPrecisionFilter = object.sourceMaxPrecisionFilter | 0;
+                            switch (object.numericFilterOption) {
+                            default:
+                                if (typeof object.numericFilterOption === "number") {
+                                    message.numericFilterOption = object.numericFilterOption;
+                                    break;
+                                }
+                                break;
+                            case "NUMERIC_FILTER_OPTION_UNSPECIFIED":
+                            case 0:
+                                message.numericFilterOption = 0;
+                                break;
+                            case "NUMERIC_FILTER_OPTION_ALL":
+                            case 1:
+                                message.numericFilterOption = 1;
+                                break;
+                            case "NUMERIC_FILTER_OPTION_LIMIT":
+                            case 2:
+                                message.numericFilterOption = 2;
+                                break;
+                            case "NUMERIC_FILTER_OPTION_LIMITLESS":
+                            case 3:
+                                message.numericFilterOption = 3;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SourceNumericFilter message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.SourceNumericFilter
+                         * @static
+                         * @param {google.cloud.clouddms.v1.SourceNumericFilter} message SourceNumericFilter
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SourceNumericFilter.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.sourceMinScaleFilter = 0;
+                                object.sourceMaxScaleFilter = 0;
+                                object.sourceMinPrecisionFilter = 0;
+                                object.sourceMaxPrecisionFilter = 0;
+                                object.numericFilterOption = options.enums === String ? "NUMERIC_FILTER_OPTION_UNSPECIFIED" : 0;
+                            }
+                            if (message.sourceMinScaleFilter != null && message.hasOwnProperty("sourceMinScaleFilter"))
+                                object.sourceMinScaleFilter = message.sourceMinScaleFilter;
+                            if (message.sourceMaxScaleFilter != null && message.hasOwnProperty("sourceMaxScaleFilter"))
+                                object.sourceMaxScaleFilter = message.sourceMaxScaleFilter;
+                            if (message.sourceMinPrecisionFilter != null && message.hasOwnProperty("sourceMinPrecisionFilter"))
+                                object.sourceMinPrecisionFilter = message.sourceMinPrecisionFilter;
+                            if (message.sourceMaxPrecisionFilter != null && message.hasOwnProperty("sourceMaxPrecisionFilter"))
+                                object.sourceMaxPrecisionFilter = message.sourceMaxPrecisionFilter;
+                            if (message.numericFilterOption != null && message.hasOwnProperty("numericFilterOption"))
+                                object.numericFilterOption = options.enums === String ? $root.google.cloud.clouddms.v1.NumericFilterOption[message.numericFilterOption] === undefined ? message.numericFilterOption : $root.google.cloud.clouddms.v1.NumericFilterOption[message.numericFilterOption] : message.numericFilterOption;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SourceNumericFilter to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.SourceNumericFilter
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SourceNumericFilter.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SourceNumericFilter
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.SourceNumericFilter
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SourceNumericFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.SourceNumericFilter";
+                        };
+    
+                        return SourceNumericFilter;
+                    })();
+    
+                    v1.ConditionalColumnSetValue = (function() {
+    
+                        /**
+                         * Properties of a ConditionalColumnSetValue.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface IConditionalColumnSetValue
+                         * @property {google.cloud.clouddms.v1.ISourceTextFilter|null} [sourceTextFilter] ConditionalColumnSetValue sourceTextFilter
+                         * @property {google.cloud.clouddms.v1.ISourceNumericFilter|null} [sourceNumericFilter] ConditionalColumnSetValue sourceNumericFilter
+                         * @property {google.cloud.clouddms.v1.IValueTransformation|null} [valueTransformation] ConditionalColumnSetValue valueTransformation
+                         * @property {google.protobuf.IStruct|null} [customFeatures] ConditionalColumnSetValue customFeatures
+                         */
+    
+                        /**
+                         * Constructs a new ConditionalColumnSetValue.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents a ConditionalColumnSetValue.
+                         * @implements IConditionalColumnSetValue
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.IConditionalColumnSetValue=} [properties] Properties to set
+                         */
+                        function ConditionalColumnSetValue(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ConditionalColumnSetValue sourceTextFilter.
+                         * @member {google.cloud.clouddms.v1.ISourceTextFilter|null|undefined} sourceTextFilter
+                         * @memberof google.cloud.clouddms.v1.ConditionalColumnSetValue
+                         * @instance
+                         */
+                        ConditionalColumnSetValue.prototype.sourceTextFilter = null;
+    
+                        /**
+                         * ConditionalColumnSetValue sourceNumericFilter.
+                         * @member {google.cloud.clouddms.v1.ISourceNumericFilter|null|undefined} sourceNumericFilter
+                         * @memberof google.cloud.clouddms.v1.ConditionalColumnSetValue
+                         * @instance
+                         */
+                        ConditionalColumnSetValue.prototype.sourceNumericFilter = null;
+    
+                        /**
+                         * ConditionalColumnSetValue valueTransformation.
+                         * @member {google.cloud.clouddms.v1.IValueTransformation|null|undefined} valueTransformation
+                         * @memberof google.cloud.clouddms.v1.ConditionalColumnSetValue
+                         * @instance
+                         */
+                        ConditionalColumnSetValue.prototype.valueTransformation = null;
+    
+                        /**
+                         * ConditionalColumnSetValue customFeatures.
+                         * @member {google.protobuf.IStruct|null|undefined} customFeatures
+                         * @memberof google.cloud.clouddms.v1.ConditionalColumnSetValue
+                         * @instance
+                         */
+                        ConditionalColumnSetValue.prototype.customFeatures = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ConditionalColumnSetValue sourceFilter.
+                         * @member {"sourceTextFilter"|"sourceNumericFilter"|undefined} sourceFilter
+                         * @memberof google.cloud.clouddms.v1.ConditionalColumnSetValue
+                         * @instance
+                         */
+                        Object.defineProperty(ConditionalColumnSetValue.prototype, "sourceFilter", {
+                            get: $util.oneOfGetter($oneOfFields = ["sourceTextFilter", "sourceNumericFilter"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ConditionalColumnSetValue instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.ConditionalColumnSetValue
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IConditionalColumnSetValue=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.ConditionalColumnSetValue} ConditionalColumnSetValue instance
+                         */
+                        ConditionalColumnSetValue.create = function create(properties) {
+                            return new ConditionalColumnSetValue(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ConditionalColumnSetValue message. Does not implicitly {@link google.cloud.clouddms.v1.ConditionalColumnSetValue.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.ConditionalColumnSetValue
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IConditionalColumnSetValue} message ConditionalColumnSetValue message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConditionalColumnSetValue.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.valueTransformation != null && Object.hasOwnProperty.call(message, "valueTransformation"))
+                                $root.google.cloud.clouddms.v1.ValueTransformation.encode(message.valueTransformation, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.customFeatures != null && Object.hasOwnProperty.call(message, "customFeatures"))
+                                $root.google.protobuf.Struct.encode(message.customFeatures, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.sourceTextFilter != null && Object.hasOwnProperty.call(message, "sourceTextFilter"))
+                                $root.google.cloud.clouddms.v1.SourceTextFilter.encode(message.sourceTextFilter, writer.uint32(/* id 100, wireType 2 =*/802).fork()).ldelim();
+                            if (message.sourceNumericFilter != null && Object.hasOwnProperty.call(message, "sourceNumericFilter"))
+                                $root.google.cloud.clouddms.v1.SourceNumericFilter.encode(message.sourceNumericFilter, writer.uint32(/* id 101, wireType 2 =*/810).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ConditionalColumnSetValue message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.ConditionalColumnSetValue.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.ConditionalColumnSetValue
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IConditionalColumnSetValue} message ConditionalColumnSetValue message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConditionalColumnSetValue.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ConditionalColumnSetValue message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.ConditionalColumnSetValue
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.ConditionalColumnSetValue} ConditionalColumnSetValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConditionalColumnSetValue.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.ConditionalColumnSetValue();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 100: {
+                                        message.sourceTextFilter = $root.google.cloud.clouddms.v1.SourceTextFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 101: {
+                                        message.sourceNumericFilter = $root.google.cloud.clouddms.v1.SourceNumericFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 1: {
+                                        message.valueTransformation = $root.google.cloud.clouddms.v1.ValueTransformation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.customFeatures = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ConditionalColumnSetValue message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.ConditionalColumnSetValue
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.ConditionalColumnSetValue} ConditionalColumnSetValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConditionalColumnSetValue.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ConditionalColumnSetValue message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.ConditionalColumnSetValue
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ConditionalColumnSetValue.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.sourceTextFilter != null && message.hasOwnProperty("sourceTextFilter")) {
+                                properties.sourceFilter = 1;
+                                {
+                                    var error = $root.google.cloud.clouddms.v1.SourceTextFilter.verify(message.sourceTextFilter);
+                                    if (error)
+                                        return "sourceTextFilter." + error;
+                                }
+                            }
+                            if (message.sourceNumericFilter != null && message.hasOwnProperty("sourceNumericFilter")) {
+                                if (properties.sourceFilter === 1)
+                                    return "sourceFilter: multiple values";
+                                properties.sourceFilter = 1;
+                                {
+                                    var error = $root.google.cloud.clouddms.v1.SourceNumericFilter.verify(message.sourceNumericFilter);
+                                    if (error)
+                                        return "sourceNumericFilter." + error;
+                                }
+                            }
+                            if (message.valueTransformation != null && message.hasOwnProperty("valueTransformation")) {
+                                var error = $root.google.cloud.clouddms.v1.ValueTransformation.verify(message.valueTransformation);
+                                if (error)
+                                    return "valueTransformation." + error;
+                            }
+                            if (message.customFeatures != null && message.hasOwnProperty("customFeatures")) {
+                                var error = $root.google.protobuf.Struct.verify(message.customFeatures);
+                                if (error)
+                                    return "customFeatures." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ConditionalColumnSetValue message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.ConditionalColumnSetValue
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.ConditionalColumnSetValue} ConditionalColumnSetValue
+                         */
+                        ConditionalColumnSetValue.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.ConditionalColumnSetValue)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.ConditionalColumnSetValue();
+                            if (object.sourceTextFilter != null) {
+                                if (typeof object.sourceTextFilter !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.ConditionalColumnSetValue.sourceTextFilter: object expected");
+                                message.sourceTextFilter = $root.google.cloud.clouddms.v1.SourceTextFilter.fromObject(object.sourceTextFilter);
+                            }
+                            if (object.sourceNumericFilter != null) {
+                                if (typeof object.sourceNumericFilter !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.ConditionalColumnSetValue.sourceNumericFilter: object expected");
+                                message.sourceNumericFilter = $root.google.cloud.clouddms.v1.SourceNumericFilter.fromObject(object.sourceNumericFilter);
+                            }
+                            if (object.valueTransformation != null) {
+                                if (typeof object.valueTransformation !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.ConditionalColumnSetValue.valueTransformation: object expected");
+                                message.valueTransformation = $root.google.cloud.clouddms.v1.ValueTransformation.fromObject(object.valueTransformation);
+                            }
+                            if (object.customFeatures != null) {
+                                if (typeof object.customFeatures !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.ConditionalColumnSetValue.customFeatures: object expected");
+                                message.customFeatures = $root.google.protobuf.Struct.fromObject(object.customFeatures);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ConditionalColumnSetValue message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.ConditionalColumnSetValue
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ConditionalColumnSetValue} message ConditionalColumnSetValue
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ConditionalColumnSetValue.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.valueTransformation = null;
+                                object.customFeatures = null;
+                            }
+                            if (message.valueTransformation != null && message.hasOwnProperty("valueTransformation"))
+                                object.valueTransformation = $root.google.cloud.clouddms.v1.ValueTransformation.toObject(message.valueTransformation, options);
+                            if (message.customFeatures != null && message.hasOwnProperty("customFeatures"))
+                                object.customFeatures = $root.google.protobuf.Struct.toObject(message.customFeatures, options);
+                            if (message.sourceTextFilter != null && message.hasOwnProperty("sourceTextFilter")) {
+                                object.sourceTextFilter = $root.google.cloud.clouddms.v1.SourceTextFilter.toObject(message.sourceTextFilter, options);
+                                if (options.oneofs)
+                                    object.sourceFilter = "sourceTextFilter";
+                            }
+                            if (message.sourceNumericFilter != null && message.hasOwnProperty("sourceNumericFilter")) {
+                                object.sourceNumericFilter = $root.google.cloud.clouddms.v1.SourceNumericFilter.toObject(message.sourceNumericFilter, options);
+                                if (options.oneofs)
+                                    object.sourceFilter = "sourceNumericFilter";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ConditionalColumnSetValue to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.ConditionalColumnSetValue
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ConditionalColumnSetValue.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ConditionalColumnSetValue
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.ConditionalColumnSetValue
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ConditionalColumnSetValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.ConditionalColumnSetValue";
+                        };
+    
+                        return ConditionalColumnSetValue;
+                    })();
+    
+                    v1.ValueTransformation = (function() {
+    
+                        /**
+                         * Properties of a ValueTransformation.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface IValueTransformation
+                         * @property {google.protobuf.IEmpty|null} [isNull] ValueTransformation isNull
+                         * @property {google.cloud.clouddms.v1.IValueListFilter|null} [valueList] ValueTransformation valueList
+                         * @property {google.cloud.clouddms.v1.IIntComparisonFilter|null} [intComparison] ValueTransformation intComparison
+                         * @property {google.cloud.clouddms.v1.IDoubleComparisonFilter|null} [doubleComparison] ValueTransformation doubleComparison
+                         * @property {google.protobuf.IEmpty|null} [assignNull] ValueTransformation assignNull
+                         * @property {google.cloud.clouddms.v1.IAssignSpecificValue|null} [assignSpecificValue] ValueTransformation assignSpecificValue
+                         * @property {google.protobuf.IEmpty|null} [assignMinValue] ValueTransformation assignMinValue
+                         * @property {google.protobuf.IEmpty|null} [assignMaxValue] ValueTransformation assignMaxValue
+                         * @property {google.cloud.clouddms.v1.IRoundToScale|null} [roundScale] ValueTransformation roundScale
+                         * @property {google.cloud.clouddms.v1.IApplyHash|null} [applyHash] ValueTransformation applyHash
+                         */
+    
+                        /**
+                         * Constructs a new ValueTransformation.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents a ValueTransformation.
+                         * @implements IValueTransformation
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.IValueTransformation=} [properties] Properties to set
+                         */
+                        function ValueTransformation(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ValueTransformation isNull.
+                         * @member {google.protobuf.IEmpty|null|undefined} isNull
+                         * @memberof google.cloud.clouddms.v1.ValueTransformation
+                         * @instance
+                         */
+                        ValueTransformation.prototype.isNull = null;
+    
+                        /**
+                         * ValueTransformation valueList.
+                         * @member {google.cloud.clouddms.v1.IValueListFilter|null|undefined} valueList
+                         * @memberof google.cloud.clouddms.v1.ValueTransformation
+                         * @instance
+                         */
+                        ValueTransformation.prototype.valueList = null;
+    
+                        /**
+                         * ValueTransformation intComparison.
+                         * @member {google.cloud.clouddms.v1.IIntComparisonFilter|null|undefined} intComparison
+                         * @memberof google.cloud.clouddms.v1.ValueTransformation
+                         * @instance
+                         */
+                        ValueTransformation.prototype.intComparison = null;
+    
+                        /**
+                         * ValueTransformation doubleComparison.
+                         * @member {google.cloud.clouddms.v1.IDoubleComparisonFilter|null|undefined} doubleComparison
+                         * @memberof google.cloud.clouddms.v1.ValueTransformation
+                         * @instance
+                         */
+                        ValueTransformation.prototype.doubleComparison = null;
+    
+                        /**
+                         * ValueTransformation assignNull.
+                         * @member {google.protobuf.IEmpty|null|undefined} assignNull
+                         * @memberof google.cloud.clouddms.v1.ValueTransformation
+                         * @instance
+                         */
+                        ValueTransformation.prototype.assignNull = null;
+    
+                        /**
+                         * ValueTransformation assignSpecificValue.
+                         * @member {google.cloud.clouddms.v1.IAssignSpecificValue|null|undefined} assignSpecificValue
+                         * @memberof google.cloud.clouddms.v1.ValueTransformation
+                         * @instance
+                         */
+                        ValueTransformation.prototype.assignSpecificValue = null;
+    
+                        /**
+                         * ValueTransformation assignMinValue.
+                         * @member {google.protobuf.IEmpty|null|undefined} assignMinValue
+                         * @memberof google.cloud.clouddms.v1.ValueTransformation
+                         * @instance
+                         */
+                        ValueTransformation.prototype.assignMinValue = null;
+    
+                        /**
+                         * ValueTransformation assignMaxValue.
+                         * @member {google.protobuf.IEmpty|null|undefined} assignMaxValue
+                         * @memberof google.cloud.clouddms.v1.ValueTransformation
+                         * @instance
+                         */
+                        ValueTransformation.prototype.assignMaxValue = null;
+    
+                        /**
+                         * ValueTransformation roundScale.
+                         * @member {google.cloud.clouddms.v1.IRoundToScale|null|undefined} roundScale
+                         * @memberof google.cloud.clouddms.v1.ValueTransformation
+                         * @instance
+                         */
+                        ValueTransformation.prototype.roundScale = null;
+    
+                        /**
+                         * ValueTransformation applyHash.
+                         * @member {google.cloud.clouddms.v1.IApplyHash|null|undefined} applyHash
+                         * @memberof google.cloud.clouddms.v1.ValueTransformation
+                         * @instance
+                         */
+                        ValueTransformation.prototype.applyHash = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ValueTransformation filter.
+                         * @member {"isNull"|"valueList"|"intComparison"|"doubleComparison"|undefined} filter
+                         * @memberof google.cloud.clouddms.v1.ValueTransformation
+                         * @instance
+                         */
+                        Object.defineProperty(ValueTransformation.prototype, "filter", {
+                            get: $util.oneOfGetter($oneOfFields = ["isNull", "valueList", "intComparison", "doubleComparison"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * ValueTransformation action.
+                         * @member {"assignNull"|"assignSpecificValue"|"assignMinValue"|"assignMaxValue"|"roundScale"|"applyHash"|undefined} action
+                         * @memberof google.cloud.clouddms.v1.ValueTransformation
+                         * @instance
+                         */
+                        Object.defineProperty(ValueTransformation.prototype, "action", {
+                            get: $util.oneOfGetter($oneOfFields = ["assignNull", "assignSpecificValue", "assignMinValue", "assignMaxValue", "roundScale", "applyHash"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ValueTransformation instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.ValueTransformation
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IValueTransformation=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.ValueTransformation} ValueTransformation instance
+                         */
+                        ValueTransformation.create = function create(properties) {
+                            return new ValueTransformation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ValueTransformation message. Does not implicitly {@link google.cloud.clouddms.v1.ValueTransformation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.ValueTransformation
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IValueTransformation} message ValueTransformation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ValueTransformation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.isNull != null && Object.hasOwnProperty.call(message, "isNull"))
+                                $root.google.protobuf.Empty.encode(message.isNull, writer.uint32(/* id 100, wireType 2 =*/802).fork()).ldelim();
+                            if (message.valueList != null && Object.hasOwnProperty.call(message, "valueList"))
+                                $root.google.cloud.clouddms.v1.ValueListFilter.encode(message.valueList, writer.uint32(/* id 101, wireType 2 =*/810).fork()).ldelim();
+                            if (message.intComparison != null && Object.hasOwnProperty.call(message, "intComparison"))
+                                $root.google.cloud.clouddms.v1.IntComparisonFilter.encode(message.intComparison, writer.uint32(/* id 102, wireType 2 =*/818).fork()).ldelim();
+                            if (message.doubleComparison != null && Object.hasOwnProperty.call(message, "doubleComparison"))
+                                $root.google.cloud.clouddms.v1.DoubleComparisonFilter.encode(message.doubleComparison, writer.uint32(/* id 103, wireType 2 =*/826).fork()).ldelim();
+                            if (message.assignNull != null && Object.hasOwnProperty.call(message, "assignNull"))
+                                $root.google.protobuf.Empty.encode(message.assignNull, writer.uint32(/* id 200, wireType 2 =*/1602).fork()).ldelim();
+                            if (message.assignSpecificValue != null && Object.hasOwnProperty.call(message, "assignSpecificValue"))
+                                $root.google.cloud.clouddms.v1.AssignSpecificValue.encode(message.assignSpecificValue, writer.uint32(/* id 201, wireType 2 =*/1610).fork()).ldelim();
+                            if (message.assignMinValue != null && Object.hasOwnProperty.call(message, "assignMinValue"))
+                                $root.google.protobuf.Empty.encode(message.assignMinValue, writer.uint32(/* id 202, wireType 2 =*/1618).fork()).ldelim();
+                            if (message.assignMaxValue != null && Object.hasOwnProperty.call(message, "assignMaxValue"))
+                                $root.google.protobuf.Empty.encode(message.assignMaxValue, writer.uint32(/* id 203, wireType 2 =*/1626).fork()).ldelim();
+                            if (message.roundScale != null && Object.hasOwnProperty.call(message, "roundScale"))
+                                $root.google.cloud.clouddms.v1.RoundToScale.encode(message.roundScale, writer.uint32(/* id 204, wireType 2 =*/1634).fork()).ldelim();
+                            if (message.applyHash != null && Object.hasOwnProperty.call(message, "applyHash"))
+                                $root.google.cloud.clouddms.v1.ApplyHash.encode(message.applyHash, writer.uint32(/* id 205, wireType 2 =*/1642).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ValueTransformation message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.ValueTransformation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.ValueTransformation
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IValueTransformation} message ValueTransformation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ValueTransformation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ValueTransformation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.ValueTransformation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.ValueTransformation} ValueTransformation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ValueTransformation.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.ValueTransformation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 100: {
+                                        message.isNull = $root.google.protobuf.Empty.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 101: {
+                                        message.valueList = $root.google.cloud.clouddms.v1.ValueListFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 102: {
+                                        message.intComparison = $root.google.cloud.clouddms.v1.IntComparisonFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 103: {
+                                        message.doubleComparison = $root.google.cloud.clouddms.v1.DoubleComparisonFilter.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 200: {
+                                        message.assignNull = $root.google.protobuf.Empty.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 201: {
+                                        message.assignSpecificValue = $root.google.cloud.clouddms.v1.AssignSpecificValue.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 202: {
+                                        message.assignMinValue = $root.google.protobuf.Empty.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 203: {
+                                        message.assignMaxValue = $root.google.protobuf.Empty.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 204: {
+                                        message.roundScale = $root.google.cloud.clouddms.v1.RoundToScale.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 205: {
+                                        message.applyHash = $root.google.cloud.clouddms.v1.ApplyHash.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ValueTransformation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.ValueTransformation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.ValueTransformation} ValueTransformation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ValueTransformation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ValueTransformation message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.ValueTransformation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ValueTransformation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.isNull != null && message.hasOwnProperty("isNull")) {
+                                properties.filter = 1;
+                                {
+                                    var error = $root.google.protobuf.Empty.verify(message.isNull);
+                                    if (error)
+                                        return "isNull." + error;
+                                }
+                            }
+                            if (message.valueList != null && message.hasOwnProperty("valueList")) {
+                                if (properties.filter === 1)
+                                    return "filter: multiple values";
+                                properties.filter = 1;
+                                {
+                                    var error = $root.google.cloud.clouddms.v1.ValueListFilter.verify(message.valueList);
+                                    if (error)
+                                        return "valueList." + error;
+                                }
+                            }
+                            if (message.intComparison != null && message.hasOwnProperty("intComparison")) {
+                                if (properties.filter === 1)
+                                    return "filter: multiple values";
+                                properties.filter = 1;
+                                {
+                                    var error = $root.google.cloud.clouddms.v1.IntComparisonFilter.verify(message.intComparison);
+                                    if (error)
+                                        return "intComparison." + error;
+                                }
+                            }
+                            if (message.doubleComparison != null && message.hasOwnProperty("doubleComparison")) {
+                                if (properties.filter === 1)
+                                    return "filter: multiple values";
+                                properties.filter = 1;
+                                {
+                                    var error = $root.google.cloud.clouddms.v1.DoubleComparisonFilter.verify(message.doubleComparison);
+                                    if (error)
+                                        return "doubleComparison." + error;
+                                }
+                            }
+                            if (message.assignNull != null && message.hasOwnProperty("assignNull")) {
+                                properties.action = 1;
+                                {
+                                    var error = $root.google.protobuf.Empty.verify(message.assignNull);
+                                    if (error)
+                                        return "assignNull." + error;
+                                }
+                            }
+                            if (message.assignSpecificValue != null && message.hasOwnProperty("assignSpecificValue")) {
+                                if (properties.action === 1)
+                                    return "action: multiple values";
+                                properties.action = 1;
+                                {
+                                    var error = $root.google.cloud.clouddms.v1.AssignSpecificValue.verify(message.assignSpecificValue);
+                                    if (error)
+                                        return "assignSpecificValue." + error;
+                                }
+                            }
+                            if (message.assignMinValue != null && message.hasOwnProperty("assignMinValue")) {
+                                if (properties.action === 1)
+                                    return "action: multiple values";
+                                properties.action = 1;
+                                {
+                                    var error = $root.google.protobuf.Empty.verify(message.assignMinValue);
+                                    if (error)
+                                        return "assignMinValue." + error;
+                                }
+                            }
+                            if (message.assignMaxValue != null && message.hasOwnProperty("assignMaxValue")) {
+                                if (properties.action === 1)
+                                    return "action: multiple values";
+                                properties.action = 1;
+                                {
+                                    var error = $root.google.protobuf.Empty.verify(message.assignMaxValue);
+                                    if (error)
+                                        return "assignMaxValue." + error;
+                                }
+                            }
+                            if (message.roundScale != null && message.hasOwnProperty("roundScale")) {
+                                if (properties.action === 1)
+                                    return "action: multiple values";
+                                properties.action = 1;
+                                {
+                                    var error = $root.google.cloud.clouddms.v1.RoundToScale.verify(message.roundScale);
+                                    if (error)
+                                        return "roundScale." + error;
+                                }
+                            }
+                            if (message.applyHash != null && message.hasOwnProperty("applyHash")) {
+                                if (properties.action === 1)
+                                    return "action: multiple values";
+                                properties.action = 1;
+                                {
+                                    var error = $root.google.cloud.clouddms.v1.ApplyHash.verify(message.applyHash);
+                                    if (error)
+                                        return "applyHash." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ValueTransformation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.ValueTransformation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.ValueTransformation} ValueTransformation
+                         */
+                        ValueTransformation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.ValueTransformation)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.ValueTransformation();
+                            if (object.isNull != null) {
+                                if (typeof object.isNull !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.ValueTransformation.isNull: object expected");
+                                message.isNull = $root.google.protobuf.Empty.fromObject(object.isNull);
+                            }
+                            if (object.valueList != null) {
+                                if (typeof object.valueList !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.ValueTransformation.valueList: object expected");
+                                message.valueList = $root.google.cloud.clouddms.v1.ValueListFilter.fromObject(object.valueList);
+                            }
+                            if (object.intComparison != null) {
+                                if (typeof object.intComparison !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.ValueTransformation.intComparison: object expected");
+                                message.intComparison = $root.google.cloud.clouddms.v1.IntComparisonFilter.fromObject(object.intComparison);
+                            }
+                            if (object.doubleComparison != null) {
+                                if (typeof object.doubleComparison !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.ValueTransformation.doubleComparison: object expected");
+                                message.doubleComparison = $root.google.cloud.clouddms.v1.DoubleComparisonFilter.fromObject(object.doubleComparison);
+                            }
+                            if (object.assignNull != null) {
+                                if (typeof object.assignNull !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.ValueTransformation.assignNull: object expected");
+                                message.assignNull = $root.google.protobuf.Empty.fromObject(object.assignNull);
+                            }
+                            if (object.assignSpecificValue != null) {
+                                if (typeof object.assignSpecificValue !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.ValueTransformation.assignSpecificValue: object expected");
+                                message.assignSpecificValue = $root.google.cloud.clouddms.v1.AssignSpecificValue.fromObject(object.assignSpecificValue);
+                            }
+                            if (object.assignMinValue != null) {
+                                if (typeof object.assignMinValue !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.ValueTransformation.assignMinValue: object expected");
+                                message.assignMinValue = $root.google.protobuf.Empty.fromObject(object.assignMinValue);
+                            }
+                            if (object.assignMaxValue != null) {
+                                if (typeof object.assignMaxValue !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.ValueTransformation.assignMaxValue: object expected");
+                                message.assignMaxValue = $root.google.protobuf.Empty.fromObject(object.assignMaxValue);
+                            }
+                            if (object.roundScale != null) {
+                                if (typeof object.roundScale !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.ValueTransformation.roundScale: object expected");
+                                message.roundScale = $root.google.cloud.clouddms.v1.RoundToScale.fromObject(object.roundScale);
+                            }
+                            if (object.applyHash != null) {
+                                if (typeof object.applyHash !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.ValueTransformation.applyHash: object expected");
+                                message.applyHash = $root.google.cloud.clouddms.v1.ApplyHash.fromObject(object.applyHash);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ValueTransformation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.ValueTransformation
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ValueTransformation} message ValueTransformation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ValueTransformation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.isNull != null && message.hasOwnProperty("isNull")) {
+                                object.isNull = $root.google.protobuf.Empty.toObject(message.isNull, options);
+                                if (options.oneofs)
+                                    object.filter = "isNull";
+                            }
+                            if (message.valueList != null && message.hasOwnProperty("valueList")) {
+                                object.valueList = $root.google.cloud.clouddms.v1.ValueListFilter.toObject(message.valueList, options);
+                                if (options.oneofs)
+                                    object.filter = "valueList";
+                            }
+                            if (message.intComparison != null && message.hasOwnProperty("intComparison")) {
+                                object.intComparison = $root.google.cloud.clouddms.v1.IntComparisonFilter.toObject(message.intComparison, options);
+                                if (options.oneofs)
+                                    object.filter = "intComparison";
+                            }
+                            if (message.doubleComparison != null && message.hasOwnProperty("doubleComparison")) {
+                                object.doubleComparison = $root.google.cloud.clouddms.v1.DoubleComparisonFilter.toObject(message.doubleComparison, options);
+                                if (options.oneofs)
+                                    object.filter = "doubleComparison";
+                            }
+                            if (message.assignNull != null && message.hasOwnProperty("assignNull")) {
+                                object.assignNull = $root.google.protobuf.Empty.toObject(message.assignNull, options);
+                                if (options.oneofs)
+                                    object.action = "assignNull";
+                            }
+                            if (message.assignSpecificValue != null && message.hasOwnProperty("assignSpecificValue")) {
+                                object.assignSpecificValue = $root.google.cloud.clouddms.v1.AssignSpecificValue.toObject(message.assignSpecificValue, options);
+                                if (options.oneofs)
+                                    object.action = "assignSpecificValue";
+                            }
+                            if (message.assignMinValue != null && message.hasOwnProperty("assignMinValue")) {
+                                object.assignMinValue = $root.google.protobuf.Empty.toObject(message.assignMinValue, options);
+                                if (options.oneofs)
+                                    object.action = "assignMinValue";
+                            }
+                            if (message.assignMaxValue != null && message.hasOwnProperty("assignMaxValue")) {
+                                object.assignMaxValue = $root.google.protobuf.Empty.toObject(message.assignMaxValue, options);
+                                if (options.oneofs)
+                                    object.action = "assignMaxValue";
+                            }
+                            if (message.roundScale != null && message.hasOwnProperty("roundScale")) {
+                                object.roundScale = $root.google.cloud.clouddms.v1.RoundToScale.toObject(message.roundScale, options);
+                                if (options.oneofs)
+                                    object.action = "roundScale";
+                            }
+                            if (message.applyHash != null && message.hasOwnProperty("applyHash")) {
+                                object.applyHash = $root.google.cloud.clouddms.v1.ApplyHash.toObject(message.applyHash, options);
+                                if (options.oneofs)
+                                    object.action = "applyHash";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ValueTransformation to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.ValueTransformation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ValueTransformation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ValueTransformation
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.ValueTransformation
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ValueTransformation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.ValueTransformation";
+                        };
+    
+                        return ValueTransformation;
+                    })();
+    
+                    v1.ConvertRowIdToColumn = (function() {
+    
+                        /**
+                         * Properties of a ConvertRowIdToColumn.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface IConvertRowIdToColumn
+                         * @property {boolean|null} [onlyIfNoPrimaryKey] ConvertRowIdToColumn onlyIfNoPrimaryKey
+                         */
+    
+                        /**
+                         * Constructs a new ConvertRowIdToColumn.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents a ConvertRowIdToColumn.
+                         * @implements IConvertRowIdToColumn
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.IConvertRowIdToColumn=} [properties] Properties to set
+                         */
+                        function ConvertRowIdToColumn(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ConvertRowIdToColumn onlyIfNoPrimaryKey.
+                         * @member {boolean} onlyIfNoPrimaryKey
+                         * @memberof google.cloud.clouddms.v1.ConvertRowIdToColumn
+                         * @instance
+                         */
+                        ConvertRowIdToColumn.prototype.onlyIfNoPrimaryKey = false;
+    
+                        /**
+                         * Creates a new ConvertRowIdToColumn instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.ConvertRowIdToColumn
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IConvertRowIdToColumn=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.ConvertRowIdToColumn} ConvertRowIdToColumn instance
+                         */
+                        ConvertRowIdToColumn.create = function create(properties) {
+                            return new ConvertRowIdToColumn(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ConvertRowIdToColumn message. Does not implicitly {@link google.cloud.clouddms.v1.ConvertRowIdToColumn.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.ConvertRowIdToColumn
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IConvertRowIdToColumn} message ConvertRowIdToColumn message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConvertRowIdToColumn.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.onlyIfNoPrimaryKey != null && Object.hasOwnProperty.call(message, "onlyIfNoPrimaryKey"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.onlyIfNoPrimaryKey);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ConvertRowIdToColumn message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.ConvertRowIdToColumn.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.ConvertRowIdToColumn
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IConvertRowIdToColumn} message ConvertRowIdToColumn message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConvertRowIdToColumn.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ConvertRowIdToColumn message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.ConvertRowIdToColumn
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.ConvertRowIdToColumn} ConvertRowIdToColumn
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConvertRowIdToColumn.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.ConvertRowIdToColumn();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.onlyIfNoPrimaryKey = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ConvertRowIdToColumn message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.ConvertRowIdToColumn
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.ConvertRowIdToColumn} ConvertRowIdToColumn
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConvertRowIdToColumn.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ConvertRowIdToColumn message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.ConvertRowIdToColumn
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ConvertRowIdToColumn.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.onlyIfNoPrimaryKey != null && message.hasOwnProperty("onlyIfNoPrimaryKey"))
+                                if (typeof message.onlyIfNoPrimaryKey !== "boolean")
+                                    return "onlyIfNoPrimaryKey: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ConvertRowIdToColumn message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.ConvertRowIdToColumn
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.ConvertRowIdToColumn} ConvertRowIdToColumn
+                         */
+                        ConvertRowIdToColumn.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.ConvertRowIdToColumn)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.ConvertRowIdToColumn();
+                            if (object.onlyIfNoPrimaryKey != null)
+                                message.onlyIfNoPrimaryKey = Boolean(object.onlyIfNoPrimaryKey);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ConvertRowIdToColumn message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.ConvertRowIdToColumn
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ConvertRowIdToColumn} message ConvertRowIdToColumn
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ConvertRowIdToColumn.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.onlyIfNoPrimaryKey = false;
+                            if (message.onlyIfNoPrimaryKey != null && message.hasOwnProperty("onlyIfNoPrimaryKey"))
+                                object.onlyIfNoPrimaryKey = message.onlyIfNoPrimaryKey;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ConvertRowIdToColumn to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.ConvertRowIdToColumn
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ConvertRowIdToColumn.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ConvertRowIdToColumn
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.ConvertRowIdToColumn
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ConvertRowIdToColumn.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.ConvertRowIdToColumn";
+                        };
+    
+                        return ConvertRowIdToColumn;
+                    })();
+    
+                    v1.SetTablePrimaryKey = (function() {
+    
+                        /**
+                         * Properties of a SetTablePrimaryKey.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface ISetTablePrimaryKey
+                         * @property {Array.<string>|null} [primaryKeyColumns] SetTablePrimaryKey primaryKeyColumns
+                         * @property {string|null} [primaryKey] SetTablePrimaryKey primaryKey
+                         */
+    
+                        /**
+                         * Constructs a new SetTablePrimaryKey.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents a SetTablePrimaryKey.
+                         * @implements ISetTablePrimaryKey
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.ISetTablePrimaryKey=} [properties] Properties to set
+                         */
+                        function SetTablePrimaryKey(properties) {
+                            this.primaryKeyColumns = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SetTablePrimaryKey primaryKeyColumns.
+                         * @member {Array.<string>} primaryKeyColumns
+                         * @memberof google.cloud.clouddms.v1.SetTablePrimaryKey
+                         * @instance
+                         */
+                        SetTablePrimaryKey.prototype.primaryKeyColumns = $util.emptyArray;
+    
+                        /**
+                         * SetTablePrimaryKey primaryKey.
+                         * @member {string} primaryKey
+                         * @memberof google.cloud.clouddms.v1.SetTablePrimaryKey
+                         * @instance
+                         */
+                        SetTablePrimaryKey.prototype.primaryKey = "";
+    
+                        /**
+                         * Creates a new SetTablePrimaryKey instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.SetTablePrimaryKey
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ISetTablePrimaryKey=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.SetTablePrimaryKey} SetTablePrimaryKey instance
+                         */
+                        SetTablePrimaryKey.create = function create(properties) {
+                            return new SetTablePrimaryKey(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SetTablePrimaryKey message. Does not implicitly {@link google.cloud.clouddms.v1.SetTablePrimaryKey.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.SetTablePrimaryKey
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ISetTablePrimaryKey} message SetTablePrimaryKey message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SetTablePrimaryKey.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.primaryKeyColumns != null && message.primaryKeyColumns.length)
+                                for (var i = 0; i < message.primaryKeyColumns.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.primaryKeyColumns[i]);
+                            if (message.primaryKey != null && Object.hasOwnProperty.call(message, "primaryKey"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.primaryKey);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SetTablePrimaryKey message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.SetTablePrimaryKey.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.SetTablePrimaryKey
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ISetTablePrimaryKey} message SetTablePrimaryKey message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SetTablePrimaryKey.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SetTablePrimaryKey message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.SetTablePrimaryKey
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.SetTablePrimaryKey} SetTablePrimaryKey
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SetTablePrimaryKey.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.SetTablePrimaryKey();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.primaryKeyColumns && message.primaryKeyColumns.length))
+                                            message.primaryKeyColumns = [];
+                                        message.primaryKeyColumns.push(reader.string());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.primaryKey = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SetTablePrimaryKey message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.SetTablePrimaryKey
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.SetTablePrimaryKey} SetTablePrimaryKey
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SetTablePrimaryKey.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SetTablePrimaryKey message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.SetTablePrimaryKey
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SetTablePrimaryKey.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.primaryKeyColumns != null && message.hasOwnProperty("primaryKeyColumns")) {
+                                if (!Array.isArray(message.primaryKeyColumns))
+                                    return "primaryKeyColumns: array expected";
+                                for (var i = 0; i < message.primaryKeyColumns.length; ++i)
+                                    if (!$util.isString(message.primaryKeyColumns[i]))
+                                        return "primaryKeyColumns: string[] expected";
+                            }
+                            if (message.primaryKey != null && message.hasOwnProperty("primaryKey"))
+                                if (!$util.isString(message.primaryKey))
+                                    return "primaryKey: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SetTablePrimaryKey message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.SetTablePrimaryKey
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.SetTablePrimaryKey} SetTablePrimaryKey
+                         */
+                        SetTablePrimaryKey.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.SetTablePrimaryKey)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.SetTablePrimaryKey();
+                            if (object.primaryKeyColumns) {
+                                if (!Array.isArray(object.primaryKeyColumns))
+                                    throw TypeError(".google.cloud.clouddms.v1.SetTablePrimaryKey.primaryKeyColumns: array expected");
+                                message.primaryKeyColumns = [];
+                                for (var i = 0; i < object.primaryKeyColumns.length; ++i)
+                                    message.primaryKeyColumns[i] = String(object.primaryKeyColumns[i]);
+                            }
+                            if (object.primaryKey != null)
+                                message.primaryKey = String(object.primaryKey);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SetTablePrimaryKey message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.SetTablePrimaryKey
+                         * @static
+                         * @param {google.cloud.clouddms.v1.SetTablePrimaryKey} message SetTablePrimaryKey
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SetTablePrimaryKey.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.primaryKeyColumns = [];
+                            if (options.defaults)
+                                object.primaryKey = "";
+                            if (message.primaryKeyColumns && message.primaryKeyColumns.length) {
+                                object.primaryKeyColumns = [];
+                                for (var j = 0; j < message.primaryKeyColumns.length; ++j)
+                                    object.primaryKeyColumns[j] = message.primaryKeyColumns[j];
+                            }
+                            if (message.primaryKey != null && message.hasOwnProperty("primaryKey"))
+                                object.primaryKey = message.primaryKey;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SetTablePrimaryKey to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.SetTablePrimaryKey
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SetTablePrimaryKey.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SetTablePrimaryKey
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.SetTablePrimaryKey
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SetTablePrimaryKey.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.SetTablePrimaryKey";
+                        };
+    
+                        return SetTablePrimaryKey;
+                    })();
+    
+                    v1.SinglePackageChange = (function() {
+    
+                        /**
+                         * Properties of a SinglePackageChange.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface ISinglePackageChange
+                         * @property {string|null} [packageDescription] SinglePackageChange packageDescription
+                         * @property {string|null} [packageBody] SinglePackageChange packageBody
+                         */
+    
+                        /**
+                         * Constructs a new SinglePackageChange.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents a SinglePackageChange.
+                         * @implements ISinglePackageChange
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.ISinglePackageChange=} [properties] Properties to set
+                         */
+                        function SinglePackageChange(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SinglePackageChange packageDescription.
+                         * @member {string} packageDescription
+                         * @memberof google.cloud.clouddms.v1.SinglePackageChange
+                         * @instance
+                         */
+                        SinglePackageChange.prototype.packageDescription = "";
+    
+                        /**
+                         * SinglePackageChange packageBody.
+                         * @member {string} packageBody
+                         * @memberof google.cloud.clouddms.v1.SinglePackageChange
+                         * @instance
+                         */
+                        SinglePackageChange.prototype.packageBody = "";
+    
+                        /**
+                         * Creates a new SinglePackageChange instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.SinglePackageChange
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ISinglePackageChange=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.SinglePackageChange} SinglePackageChange instance
+                         */
+                        SinglePackageChange.create = function create(properties) {
+                            return new SinglePackageChange(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SinglePackageChange message. Does not implicitly {@link google.cloud.clouddms.v1.SinglePackageChange.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.SinglePackageChange
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ISinglePackageChange} message SinglePackageChange message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SinglePackageChange.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.packageDescription != null && Object.hasOwnProperty.call(message, "packageDescription"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.packageDescription);
+                            if (message.packageBody != null && Object.hasOwnProperty.call(message, "packageBody"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.packageBody);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SinglePackageChange message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.SinglePackageChange.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.SinglePackageChange
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ISinglePackageChange} message SinglePackageChange message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SinglePackageChange.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SinglePackageChange message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.SinglePackageChange
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.SinglePackageChange} SinglePackageChange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SinglePackageChange.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.SinglePackageChange();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.packageDescription = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.packageBody = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SinglePackageChange message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.SinglePackageChange
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.SinglePackageChange} SinglePackageChange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SinglePackageChange.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SinglePackageChange message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.SinglePackageChange
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SinglePackageChange.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.packageDescription != null && message.hasOwnProperty("packageDescription"))
+                                if (!$util.isString(message.packageDescription))
+                                    return "packageDescription: string expected";
+                            if (message.packageBody != null && message.hasOwnProperty("packageBody"))
+                                if (!$util.isString(message.packageBody))
+                                    return "packageBody: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SinglePackageChange message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.SinglePackageChange
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.SinglePackageChange} SinglePackageChange
+                         */
+                        SinglePackageChange.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.SinglePackageChange)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.SinglePackageChange();
+                            if (object.packageDescription != null)
+                                message.packageDescription = String(object.packageDescription);
+                            if (object.packageBody != null)
+                                message.packageBody = String(object.packageBody);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SinglePackageChange message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.SinglePackageChange
+                         * @static
+                         * @param {google.cloud.clouddms.v1.SinglePackageChange} message SinglePackageChange
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SinglePackageChange.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.packageDescription = "";
+                                object.packageBody = "";
+                            }
+                            if (message.packageDescription != null && message.hasOwnProperty("packageDescription"))
+                                object.packageDescription = message.packageDescription;
+                            if (message.packageBody != null && message.hasOwnProperty("packageBody"))
+                                object.packageBody = message.packageBody;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SinglePackageChange to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.SinglePackageChange
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SinglePackageChange.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SinglePackageChange
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.SinglePackageChange
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SinglePackageChange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.SinglePackageChange";
+                        };
+    
+                        return SinglePackageChange;
+                    })();
+    
+                    v1.SourceSqlChange = (function() {
+    
+                        /**
+                         * Properties of a SourceSqlChange.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface ISourceSqlChange
+                         * @property {string|null} [sqlCode] SourceSqlChange sqlCode
+                         */
+    
+                        /**
+                         * Constructs a new SourceSqlChange.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents a SourceSqlChange.
+                         * @implements ISourceSqlChange
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.ISourceSqlChange=} [properties] Properties to set
+                         */
+                        function SourceSqlChange(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SourceSqlChange sqlCode.
+                         * @member {string} sqlCode
+                         * @memberof google.cloud.clouddms.v1.SourceSqlChange
+                         * @instance
+                         */
+                        SourceSqlChange.prototype.sqlCode = "";
+    
+                        /**
+                         * Creates a new SourceSqlChange instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.SourceSqlChange
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ISourceSqlChange=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.SourceSqlChange} SourceSqlChange instance
+                         */
+                        SourceSqlChange.create = function create(properties) {
+                            return new SourceSqlChange(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SourceSqlChange message. Does not implicitly {@link google.cloud.clouddms.v1.SourceSqlChange.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.SourceSqlChange
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ISourceSqlChange} message SourceSqlChange message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SourceSqlChange.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.sqlCode != null && Object.hasOwnProperty.call(message, "sqlCode"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.sqlCode);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SourceSqlChange message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.SourceSqlChange.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.SourceSqlChange
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ISourceSqlChange} message SourceSqlChange message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SourceSqlChange.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SourceSqlChange message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.SourceSqlChange
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.SourceSqlChange} SourceSqlChange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SourceSqlChange.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.SourceSqlChange();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.sqlCode = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SourceSqlChange message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.SourceSqlChange
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.SourceSqlChange} SourceSqlChange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SourceSqlChange.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SourceSqlChange message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.SourceSqlChange
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SourceSqlChange.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.sqlCode != null && message.hasOwnProperty("sqlCode"))
+                                if (!$util.isString(message.sqlCode))
+                                    return "sqlCode: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SourceSqlChange message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.SourceSqlChange
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.SourceSqlChange} SourceSqlChange
+                         */
+                        SourceSqlChange.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.SourceSqlChange)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.SourceSqlChange();
+                            if (object.sqlCode != null)
+                                message.sqlCode = String(object.sqlCode);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SourceSqlChange message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.SourceSqlChange
+                         * @static
+                         * @param {google.cloud.clouddms.v1.SourceSqlChange} message SourceSqlChange
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SourceSqlChange.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.sqlCode = "";
+                            if (message.sqlCode != null && message.hasOwnProperty("sqlCode"))
+                                object.sqlCode = message.sqlCode;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SourceSqlChange to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.SourceSqlChange
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SourceSqlChange.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SourceSqlChange
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.SourceSqlChange
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SourceSqlChange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.SourceSqlChange";
+                        };
+    
+                        return SourceSqlChange;
+                    })();
+    
+                    v1.FilterTableColumns = (function() {
+    
+                        /**
+                         * Properties of a FilterTableColumns.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface IFilterTableColumns
+                         * @property {Array.<string>|null} [includeColumns] FilterTableColumns includeColumns
+                         * @property {Array.<string>|null} [excludeColumns] FilterTableColumns excludeColumns
+                         */
+    
+                        /**
+                         * Constructs a new FilterTableColumns.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents a FilterTableColumns.
+                         * @implements IFilterTableColumns
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.IFilterTableColumns=} [properties] Properties to set
+                         */
+                        function FilterTableColumns(properties) {
+                            this.includeColumns = [];
+                            this.excludeColumns = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FilterTableColumns includeColumns.
+                         * @member {Array.<string>} includeColumns
+                         * @memberof google.cloud.clouddms.v1.FilterTableColumns
+                         * @instance
+                         */
+                        FilterTableColumns.prototype.includeColumns = $util.emptyArray;
+    
+                        /**
+                         * FilterTableColumns excludeColumns.
+                         * @member {Array.<string>} excludeColumns
+                         * @memberof google.cloud.clouddms.v1.FilterTableColumns
+                         * @instance
+                         */
+                        FilterTableColumns.prototype.excludeColumns = $util.emptyArray;
+    
+                        /**
+                         * Creates a new FilterTableColumns instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.FilterTableColumns
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IFilterTableColumns=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.FilterTableColumns} FilterTableColumns instance
+                         */
+                        FilterTableColumns.create = function create(properties) {
+                            return new FilterTableColumns(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FilterTableColumns message. Does not implicitly {@link google.cloud.clouddms.v1.FilterTableColumns.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.FilterTableColumns
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IFilterTableColumns} message FilterTableColumns message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FilterTableColumns.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.includeColumns != null && message.includeColumns.length)
+                                for (var i = 0; i < message.includeColumns.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.includeColumns[i]);
+                            if (message.excludeColumns != null && message.excludeColumns.length)
+                                for (var i = 0; i < message.excludeColumns.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.excludeColumns[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FilterTableColumns message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.FilterTableColumns.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.FilterTableColumns
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IFilterTableColumns} message FilterTableColumns message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FilterTableColumns.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FilterTableColumns message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.FilterTableColumns
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.FilterTableColumns} FilterTableColumns
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FilterTableColumns.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.FilterTableColumns();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.includeColumns && message.includeColumns.length))
+                                            message.includeColumns = [];
+                                        message.includeColumns.push(reader.string());
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.excludeColumns && message.excludeColumns.length))
+                                            message.excludeColumns = [];
+                                        message.excludeColumns.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FilterTableColumns message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.FilterTableColumns
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.FilterTableColumns} FilterTableColumns
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FilterTableColumns.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FilterTableColumns message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.FilterTableColumns
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FilterTableColumns.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.includeColumns != null && message.hasOwnProperty("includeColumns")) {
+                                if (!Array.isArray(message.includeColumns))
+                                    return "includeColumns: array expected";
+                                for (var i = 0; i < message.includeColumns.length; ++i)
+                                    if (!$util.isString(message.includeColumns[i]))
+                                        return "includeColumns: string[] expected";
+                            }
+                            if (message.excludeColumns != null && message.hasOwnProperty("excludeColumns")) {
+                                if (!Array.isArray(message.excludeColumns))
+                                    return "excludeColumns: array expected";
+                                for (var i = 0; i < message.excludeColumns.length; ++i)
+                                    if (!$util.isString(message.excludeColumns[i]))
+                                        return "excludeColumns: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FilterTableColumns message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.FilterTableColumns
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.FilterTableColumns} FilterTableColumns
+                         */
+                        FilterTableColumns.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.FilterTableColumns)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.FilterTableColumns();
+                            if (object.includeColumns) {
+                                if (!Array.isArray(object.includeColumns))
+                                    throw TypeError(".google.cloud.clouddms.v1.FilterTableColumns.includeColumns: array expected");
+                                message.includeColumns = [];
+                                for (var i = 0; i < object.includeColumns.length; ++i)
+                                    message.includeColumns[i] = String(object.includeColumns[i]);
+                            }
+                            if (object.excludeColumns) {
+                                if (!Array.isArray(object.excludeColumns))
+                                    throw TypeError(".google.cloud.clouddms.v1.FilterTableColumns.excludeColumns: array expected");
+                                message.excludeColumns = [];
+                                for (var i = 0; i < object.excludeColumns.length; ++i)
+                                    message.excludeColumns[i] = String(object.excludeColumns[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FilterTableColumns message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.FilterTableColumns
+                         * @static
+                         * @param {google.cloud.clouddms.v1.FilterTableColumns} message FilterTableColumns
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FilterTableColumns.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.includeColumns = [];
+                                object.excludeColumns = [];
+                            }
+                            if (message.includeColumns && message.includeColumns.length) {
+                                object.includeColumns = [];
+                                for (var j = 0; j < message.includeColumns.length; ++j)
+                                    object.includeColumns[j] = message.includeColumns[j];
+                            }
+                            if (message.excludeColumns && message.excludeColumns.length) {
+                                object.excludeColumns = [];
+                                for (var j = 0; j < message.excludeColumns.length; ++j)
+                                    object.excludeColumns[j] = message.excludeColumns[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FilterTableColumns to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.FilterTableColumns
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FilterTableColumns.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FilterTableColumns
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.FilterTableColumns
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FilterTableColumns.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.FilterTableColumns";
+                        };
+    
+                        return FilterTableColumns;
+                    })();
+    
+                    v1.ValueListFilter = (function() {
+    
+                        /**
+                         * Properties of a ValueListFilter.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface IValueListFilter
+                         * @property {google.cloud.clouddms.v1.ValuePresentInList|null} [valuePresentList] ValueListFilter valuePresentList
+                         * @property {Array.<string>|null} [values] ValueListFilter values
+                         * @property {boolean|null} [ignoreCase] ValueListFilter ignoreCase
+                         */
+    
+                        /**
+                         * Constructs a new ValueListFilter.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents a ValueListFilter.
+                         * @implements IValueListFilter
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.IValueListFilter=} [properties] Properties to set
+                         */
+                        function ValueListFilter(properties) {
+                            this.values = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ValueListFilter valuePresentList.
+                         * @member {google.cloud.clouddms.v1.ValuePresentInList} valuePresentList
+                         * @memberof google.cloud.clouddms.v1.ValueListFilter
+                         * @instance
+                         */
+                        ValueListFilter.prototype.valuePresentList = 0;
+    
+                        /**
+                         * ValueListFilter values.
+                         * @member {Array.<string>} values
+                         * @memberof google.cloud.clouddms.v1.ValueListFilter
+                         * @instance
+                         */
+                        ValueListFilter.prototype.values = $util.emptyArray;
+    
+                        /**
+                         * ValueListFilter ignoreCase.
+                         * @member {boolean} ignoreCase
+                         * @memberof google.cloud.clouddms.v1.ValueListFilter
+                         * @instance
+                         */
+                        ValueListFilter.prototype.ignoreCase = false;
+    
+                        /**
+                         * Creates a new ValueListFilter instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.ValueListFilter
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IValueListFilter=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.ValueListFilter} ValueListFilter instance
+                         */
+                        ValueListFilter.create = function create(properties) {
+                            return new ValueListFilter(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ValueListFilter message. Does not implicitly {@link google.cloud.clouddms.v1.ValueListFilter.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.ValueListFilter
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IValueListFilter} message ValueListFilter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ValueListFilter.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.valuePresentList != null && Object.hasOwnProperty.call(message, "valuePresentList"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.valuePresentList);
+                            if (message.values != null && message.values.length)
+                                for (var i = 0; i < message.values.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.values[i]);
+                            if (message.ignoreCase != null && Object.hasOwnProperty.call(message, "ignoreCase"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.ignoreCase);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ValueListFilter message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.ValueListFilter.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.ValueListFilter
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IValueListFilter} message ValueListFilter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ValueListFilter.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ValueListFilter message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.ValueListFilter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.ValueListFilter} ValueListFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ValueListFilter.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.ValueListFilter();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.valuePresentList = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.values && message.values.length))
+                                            message.values = [];
+                                        message.values.push(reader.string());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.ignoreCase = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ValueListFilter message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.ValueListFilter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.ValueListFilter} ValueListFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ValueListFilter.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ValueListFilter message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.ValueListFilter
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ValueListFilter.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.valuePresentList != null && message.hasOwnProperty("valuePresentList"))
+                                switch (message.valuePresentList) {
+                                default:
+                                    return "valuePresentList: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.values != null && message.hasOwnProperty("values")) {
+                                if (!Array.isArray(message.values))
+                                    return "values: array expected";
+                                for (var i = 0; i < message.values.length; ++i)
+                                    if (!$util.isString(message.values[i]))
+                                        return "values: string[] expected";
+                            }
+                            if (message.ignoreCase != null && message.hasOwnProperty("ignoreCase"))
+                                if (typeof message.ignoreCase !== "boolean")
+                                    return "ignoreCase: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ValueListFilter message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.ValueListFilter
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.ValueListFilter} ValueListFilter
+                         */
+                        ValueListFilter.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.ValueListFilter)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.ValueListFilter();
+                            switch (object.valuePresentList) {
+                            default:
+                                if (typeof object.valuePresentList === "number") {
+                                    message.valuePresentList = object.valuePresentList;
+                                    break;
+                                }
+                                break;
+                            case "VALUE_PRESENT_IN_LIST_UNSPECIFIED":
+                            case 0:
+                                message.valuePresentList = 0;
+                                break;
+                            case "VALUE_PRESENT_IN_LIST_IF_VALUE_LIST":
+                            case 1:
+                                message.valuePresentList = 1;
+                                break;
+                            case "VALUE_PRESENT_IN_LIST_IF_VALUE_NOT_LIST":
+                            case 2:
+                                message.valuePresentList = 2;
+                                break;
+                            }
+                            if (object.values) {
+                                if (!Array.isArray(object.values))
+                                    throw TypeError(".google.cloud.clouddms.v1.ValueListFilter.values: array expected");
+                                message.values = [];
+                                for (var i = 0; i < object.values.length; ++i)
+                                    message.values[i] = String(object.values[i]);
+                            }
+                            if (object.ignoreCase != null)
+                                message.ignoreCase = Boolean(object.ignoreCase);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ValueListFilter message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.ValueListFilter
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ValueListFilter} message ValueListFilter
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ValueListFilter.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.values = [];
+                            if (options.defaults) {
+                                object.valuePresentList = options.enums === String ? "VALUE_PRESENT_IN_LIST_UNSPECIFIED" : 0;
+                                object.ignoreCase = false;
+                            }
+                            if (message.valuePresentList != null && message.hasOwnProperty("valuePresentList"))
+                                object.valuePresentList = options.enums === String ? $root.google.cloud.clouddms.v1.ValuePresentInList[message.valuePresentList] === undefined ? message.valuePresentList : $root.google.cloud.clouddms.v1.ValuePresentInList[message.valuePresentList] : message.valuePresentList;
+                            if (message.values && message.values.length) {
+                                object.values = [];
+                                for (var j = 0; j < message.values.length; ++j)
+                                    object.values[j] = message.values[j];
+                            }
+                            if (message.ignoreCase != null && message.hasOwnProperty("ignoreCase"))
+                                object.ignoreCase = message.ignoreCase;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ValueListFilter to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.ValueListFilter
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ValueListFilter.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ValueListFilter
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.ValueListFilter
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ValueListFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.ValueListFilter";
+                        };
+    
+                        return ValueListFilter;
+                    })();
+    
+                    v1.IntComparisonFilter = (function() {
+    
+                        /**
+                         * Properties of an IntComparisonFilter.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface IIntComparisonFilter
+                         * @property {google.cloud.clouddms.v1.ValueComparison|null} [valueComparison] IntComparisonFilter valueComparison
+                         * @property {number|Long|null} [value] IntComparisonFilter value
+                         */
+    
+                        /**
+                         * Constructs a new IntComparisonFilter.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents an IntComparisonFilter.
+                         * @implements IIntComparisonFilter
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.IIntComparisonFilter=} [properties] Properties to set
+                         */
+                        function IntComparisonFilter(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * IntComparisonFilter valueComparison.
+                         * @member {google.cloud.clouddms.v1.ValueComparison} valueComparison
+                         * @memberof google.cloud.clouddms.v1.IntComparisonFilter
+                         * @instance
+                         */
+                        IntComparisonFilter.prototype.valueComparison = 0;
+    
+                        /**
+                         * IntComparisonFilter value.
+                         * @member {number|Long} value
+                         * @memberof google.cloud.clouddms.v1.IntComparisonFilter
+                         * @instance
+                         */
+                        IntComparisonFilter.prototype.value = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Creates a new IntComparisonFilter instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.IntComparisonFilter
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IIntComparisonFilter=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.IntComparisonFilter} IntComparisonFilter instance
+                         */
+                        IntComparisonFilter.create = function create(properties) {
+                            return new IntComparisonFilter(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified IntComparisonFilter message. Does not implicitly {@link google.cloud.clouddms.v1.IntComparisonFilter.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.IntComparisonFilter
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IIntComparisonFilter} message IntComparisonFilter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IntComparisonFilter.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.valueComparison != null && Object.hasOwnProperty.call(message, "valueComparison"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.valueComparison);
+                            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.value);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified IntComparisonFilter message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.IntComparisonFilter.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.IntComparisonFilter
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IIntComparisonFilter} message IntComparisonFilter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        IntComparisonFilter.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an IntComparisonFilter message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.IntComparisonFilter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.IntComparisonFilter} IntComparisonFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IntComparisonFilter.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.IntComparisonFilter();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.valueComparison = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.value = reader.int64();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an IntComparisonFilter message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.IntComparisonFilter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.IntComparisonFilter} IntComparisonFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        IntComparisonFilter.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an IntComparisonFilter message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.IntComparisonFilter
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        IntComparisonFilter.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.valueComparison != null && message.hasOwnProperty("valueComparison"))
+                                switch (message.valueComparison) {
+                                default:
+                                    return "valueComparison: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.value != null && message.hasOwnProperty("value"))
+                                if (!$util.isInteger(message.value) && !(message.value && $util.isInteger(message.value.low) && $util.isInteger(message.value.high)))
+                                    return "value: integer|Long expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an IntComparisonFilter message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.IntComparisonFilter
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.IntComparisonFilter} IntComparisonFilter
+                         */
+                        IntComparisonFilter.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.IntComparisonFilter)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.IntComparisonFilter();
+                            switch (object.valueComparison) {
+                            default:
+                                if (typeof object.valueComparison === "number") {
+                                    message.valueComparison = object.valueComparison;
+                                    break;
+                                }
+                                break;
+                            case "VALUE_COMPARISON_UNSPECIFIED":
+                            case 0:
+                                message.valueComparison = 0;
+                                break;
+                            case "VALUE_COMPARISON_IF_VALUE_SMALLER_THAN":
+                            case 1:
+                                message.valueComparison = 1;
+                                break;
+                            case "VALUE_COMPARISON_IF_VALUE_SMALLER_EQUAL_THAN":
+                            case 2:
+                                message.valueComparison = 2;
+                                break;
+                            case "VALUE_COMPARISON_IF_VALUE_LARGER_THAN":
+                            case 3:
+                                message.valueComparison = 3;
+                                break;
+                            case "VALUE_COMPARISON_IF_VALUE_LARGER_EQUAL_THAN":
+                            case 4:
+                                message.valueComparison = 4;
+                                break;
+                            }
+                            if (object.value != null)
+                                if ($util.Long)
+                                    (message.value = $util.Long.fromValue(object.value)).unsigned = false;
+                                else if (typeof object.value === "string")
+                                    message.value = parseInt(object.value, 10);
+                                else if (typeof object.value === "number")
+                                    message.value = object.value;
+                                else if (typeof object.value === "object")
+                                    message.value = new $util.LongBits(object.value.low >>> 0, object.value.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an IntComparisonFilter message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.IntComparisonFilter
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IntComparisonFilter} message IntComparisonFilter
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        IntComparisonFilter.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.valueComparison = options.enums === String ? "VALUE_COMPARISON_UNSPECIFIED" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.value = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.value = options.longs === String ? "0" : 0;
+                            }
+                            if (message.valueComparison != null && message.hasOwnProperty("valueComparison"))
+                                object.valueComparison = options.enums === String ? $root.google.cloud.clouddms.v1.ValueComparison[message.valueComparison] === undefined ? message.valueComparison : $root.google.cloud.clouddms.v1.ValueComparison[message.valueComparison] : message.valueComparison;
+                            if (message.value != null && message.hasOwnProperty("value"))
+                                if (typeof message.value === "number")
+                                    object.value = options.longs === String ? String(message.value) : message.value;
+                                else
+                                    object.value = options.longs === String ? $util.Long.prototype.toString.call(message.value) : options.longs === Number ? new $util.LongBits(message.value.low >>> 0, message.value.high >>> 0).toNumber() : message.value;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this IntComparisonFilter to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.IntComparisonFilter
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        IntComparisonFilter.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for IntComparisonFilter
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.IntComparisonFilter
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        IntComparisonFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.IntComparisonFilter";
+                        };
+    
+                        return IntComparisonFilter;
+                    })();
+    
+                    v1.DoubleComparisonFilter = (function() {
+    
+                        /**
+                         * Properties of a DoubleComparisonFilter.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface IDoubleComparisonFilter
+                         * @property {google.cloud.clouddms.v1.ValueComparison|null} [valueComparison] DoubleComparisonFilter valueComparison
+                         * @property {number|null} [value] DoubleComparisonFilter value
+                         */
+    
+                        /**
+                         * Constructs a new DoubleComparisonFilter.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents a DoubleComparisonFilter.
+                         * @implements IDoubleComparisonFilter
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.IDoubleComparisonFilter=} [properties] Properties to set
+                         */
+                        function DoubleComparisonFilter(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DoubleComparisonFilter valueComparison.
+                         * @member {google.cloud.clouddms.v1.ValueComparison} valueComparison
+                         * @memberof google.cloud.clouddms.v1.DoubleComparisonFilter
+                         * @instance
+                         */
+                        DoubleComparisonFilter.prototype.valueComparison = 0;
+    
+                        /**
+                         * DoubleComparisonFilter value.
+                         * @member {number} value
+                         * @memberof google.cloud.clouddms.v1.DoubleComparisonFilter
+                         * @instance
+                         */
+                        DoubleComparisonFilter.prototype.value = 0;
+    
+                        /**
+                         * Creates a new DoubleComparisonFilter instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.DoubleComparisonFilter
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IDoubleComparisonFilter=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.DoubleComparisonFilter} DoubleComparisonFilter instance
+                         */
+                        DoubleComparisonFilter.create = function create(properties) {
+                            return new DoubleComparisonFilter(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DoubleComparisonFilter message. Does not implicitly {@link google.cloud.clouddms.v1.DoubleComparisonFilter.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.DoubleComparisonFilter
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IDoubleComparisonFilter} message DoubleComparisonFilter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DoubleComparisonFilter.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.valueComparison != null && Object.hasOwnProperty.call(message, "valueComparison"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.valueComparison);
+                            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                writer.uint32(/* id 2, wireType 1 =*/17).double(message.value);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DoubleComparisonFilter message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.DoubleComparisonFilter.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.DoubleComparisonFilter
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IDoubleComparisonFilter} message DoubleComparisonFilter message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DoubleComparisonFilter.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DoubleComparisonFilter message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.DoubleComparisonFilter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.DoubleComparisonFilter} DoubleComparisonFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DoubleComparisonFilter.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.DoubleComparisonFilter();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.valueComparison = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.value = reader.double();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DoubleComparisonFilter message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.DoubleComparisonFilter
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.DoubleComparisonFilter} DoubleComparisonFilter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DoubleComparisonFilter.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DoubleComparisonFilter message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.DoubleComparisonFilter
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DoubleComparisonFilter.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.valueComparison != null && message.hasOwnProperty("valueComparison"))
+                                switch (message.valueComparison) {
+                                default:
+                                    return "valueComparison: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.value != null && message.hasOwnProperty("value"))
+                                if (typeof message.value !== "number")
+                                    return "value: number expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DoubleComparisonFilter message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.DoubleComparisonFilter
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.DoubleComparisonFilter} DoubleComparisonFilter
+                         */
+                        DoubleComparisonFilter.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.DoubleComparisonFilter)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.DoubleComparisonFilter();
+                            switch (object.valueComparison) {
+                            default:
+                                if (typeof object.valueComparison === "number") {
+                                    message.valueComparison = object.valueComparison;
+                                    break;
+                                }
+                                break;
+                            case "VALUE_COMPARISON_UNSPECIFIED":
+                            case 0:
+                                message.valueComparison = 0;
+                                break;
+                            case "VALUE_COMPARISON_IF_VALUE_SMALLER_THAN":
+                            case 1:
+                                message.valueComparison = 1;
+                                break;
+                            case "VALUE_COMPARISON_IF_VALUE_SMALLER_EQUAL_THAN":
+                            case 2:
+                                message.valueComparison = 2;
+                                break;
+                            case "VALUE_COMPARISON_IF_VALUE_LARGER_THAN":
+                            case 3:
+                                message.valueComparison = 3;
+                                break;
+                            case "VALUE_COMPARISON_IF_VALUE_LARGER_EQUAL_THAN":
+                            case 4:
+                                message.valueComparison = 4;
+                                break;
+                            }
+                            if (object.value != null)
+                                message.value = Number(object.value);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DoubleComparisonFilter message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.DoubleComparisonFilter
+                         * @static
+                         * @param {google.cloud.clouddms.v1.DoubleComparisonFilter} message DoubleComparisonFilter
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DoubleComparisonFilter.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.valueComparison = options.enums === String ? "VALUE_COMPARISON_UNSPECIFIED" : 0;
+                                object.value = 0;
+                            }
+                            if (message.valueComparison != null && message.hasOwnProperty("valueComparison"))
+                                object.valueComparison = options.enums === String ? $root.google.cloud.clouddms.v1.ValueComparison[message.valueComparison] === undefined ? message.valueComparison : $root.google.cloud.clouddms.v1.ValueComparison[message.valueComparison] : message.valueComparison;
+                            if (message.value != null && message.hasOwnProperty("value"))
+                                object.value = options.json && !isFinite(message.value) ? String(message.value) : message.value;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DoubleComparisonFilter to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.DoubleComparisonFilter
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DoubleComparisonFilter.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DoubleComparisonFilter
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.DoubleComparisonFilter
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DoubleComparisonFilter.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.DoubleComparisonFilter";
+                        };
+    
+                        return DoubleComparisonFilter;
+                    })();
+    
+                    v1.AssignSpecificValue = (function() {
+    
+                        /**
+                         * Properties of an AssignSpecificValue.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface IAssignSpecificValue
+                         * @property {string|null} [value] AssignSpecificValue value
+                         */
+    
+                        /**
+                         * Constructs a new AssignSpecificValue.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents an AssignSpecificValue.
+                         * @implements IAssignSpecificValue
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.IAssignSpecificValue=} [properties] Properties to set
+                         */
+                        function AssignSpecificValue(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AssignSpecificValue value.
+                         * @member {string} value
+                         * @memberof google.cloud.clouddms.v1.AssignSpecificValue
+                         * @instance
+                         */
+                        AssignSpecificValue.prototype.value = "";
+    
+                        /**
+                         * Creates a new AssignSpecificValue instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.AssignSpecificValue
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IAssignSpecificValue=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.AssignSpecificValue} AssignSpecificValue instance
+                         */
+                        AssignSpecificValue.create = function create(properties) {
+                            return new AssignSpecificValue(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AssignSpecificValue message. Does not implicitly {@link google.cloud.clouddms.v1.AssignSpecificValue.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.AssignSpecificValue
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IAssignSpecificValue} message AssignSpecificValue message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AssignSpecificValue.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.value);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AssignSpecificValue message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.AssignSpecificValue.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.AssignSpecificValue
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IAssignSpecificValue} message AssignSpecificValue message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AssignSpecificValue.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AssignSpecificValue message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.AssignSpecificValue
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.AssignSpecificValue} AssignSpecificValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AssignSpecificValue.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.AssignSpecificValue();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.value = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AssignSpecificValue message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.AssignSpecificValue
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.AssignSpecificValue} AssignSpecificValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AssignSpecificValue.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AssignSpecificValue message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.AssignSpecificValue
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AssignSpecificValue.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.value != null && message.hasOwnProperty("value"))
+                                if (!$util.isString(message.value))
+                                    return "value: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AssignSpecificValue message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.AssignSpecificValue
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.AssignSpecificValue} AssignSpecificValue
+                         */
+                        AssignSpecificValue.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.AssignSpecificValue)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.AssignSpecificValue();
+                            if (object.value != null)
+                                message.value = String(object.value);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AssignSpecificValue message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.AssignSpecificValue
+                         * @static
+                         * @param {google.cloud.clouddms.v1.AssignSpecificValue} message AssignSpecificValue
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AssignSpecificValue.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.value = "";
+                            if (message.value != null && message.hasOwnProperty("value"))
+                                object.value = message.value;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AssignSpecificValue to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.AssignSpecificValue
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AssignSpecificValue.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AssignSpecificValue
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.AssignSpecificValue
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AssignSpecificValue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.AssignSpecificValue";
+                        };
+    
+                        return AssignSpecificValue;
+                    })();
+    
+                    v1.ApplyHash = (function() {
+    
+                        /**
+                         * Properties of an ApplyHash.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface IApplyHash
+                         * @property {google.protobuf.IEmpty|null} [uuidFromBytes] ApplyHash uuidFromBytes
+                         */
+    
+                        /**
+                         * Constructs a new ApplyHash.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents an ApplyHash.
+                         * @implements IApplyHash
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.IApplyHash=} [properties] Properties to set
+                         */
+                        function ApplyHash(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ApplyHash uuidFromBytes.
+                         * @member {google.protobuf.IEmpty|null|undefined} uuidFromBytes
+                         * @memberof google.cloud.clouddms.v1.ApplyHash
+                         * @instance
+                         */
+                        ApplyHash.prototype.uuidFromBytes = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ApplyHash hashFunction.
+                         * @member {"uuidFromBytes"|undefined} hashFunction
+                         * @memberof google.cloud.clouddms.v1.ApplyHash
+                         * @instance
+                         */
+                        Object.defineProperty(ApplyHash.prototype, "hashFunction", {
+                            get: $util.oneOfGetter($oneOfFields = ["uuidFromBytes"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ApplyHash instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.ApplyHash
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IApplyHash=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.ApplyHash} ApplyHash instance
+                         */
+                        ApplyHash.create = function create(properties) {
+                            return new ApplyHash(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ApplyHash message. Does not implicitly {@link google.cloud.clouddms.v1.ApplyHash.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.ApplyHash
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IApplyHash} message ApplyHash message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ApplyHash.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.uuidFromBytes != null && Object.hasOwnProperty.call(message, "uuidFromBytes"))
+                                $root.google.protobuf.Empty.encode(message.uuidFromBytes, writer.uint32(/* id 100, wireType 2 =*/802).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ApplyHash message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.ApplyHash.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.ApplyHash
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IApplyHash} message ApplyHash message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ApplyHash.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ApplyHash message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.ApplyHash
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.ApplyHash} ApplyHash
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ApplyHash.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.ApplyHash();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 100: {
+                                        message.uuidFromBytes = $root.google.protobuf.Empty.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ApplyHash message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.ApplyHash
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.ApplyHash} ApplyHash
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ApplyHash.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ApplyHash message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.ApplyHash
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ApplyHash.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.uuidFromBytes != null && message.hasOwnProperty("uuidFromBytes")) {
+                                properties.hashFunction = 1;
+                                {
+                                    var error = $root.google.protobuf.Empty.verify(message.uuidFromBytes);
+                                    if (error)
+                                        return "uuidFromBytes." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ApplyHash message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.ApplyHash
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.ApplyHash} ApplyHash
+                         */
+                        ApplyHash.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.ApplyHash)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.ApplyHash();
+                            if (object.uuidFromBytes != null) {
+                                if (typeof object.uuidFromBytes !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.ApplyHash.uuidFromBytes: object expected");
+                                message.uuidFromBytes = $root.google.protobuf.Empty.fromObject(object.uuidFromBytes);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ApplyHash message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.ApplyHash
+                         * @static
+                         * @param {google.cloud.clouddms.v1.ApplyHash} message ApplyHash
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ApplyHash.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.uuidFromBytes != null && message.hasOwnProperty("uuidFromBytes")) {
+                                object.uuidFromBytes = $root.google.protobuf.Empty.toObject(message.uuidFromBytes, options);
+                                if (options.oneofs)
+                                    object.hashFunction = "uuidFromBytes";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ApplyHash to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.ApplyHash
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ApplyHash.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ApplyHash
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.ApplyHash
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ApplyHash.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.ApplyHash";
+                        };
+    
+                        return ApplyHash;
+                    })();
+    
+                    v1.RoundToScale = (function() {
+    
+                        /**
+                         * Properties of a RoundToScale.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface IRoundToScale
+                         * @property {number|null} [scale] RoundToScale scale
+                         */
+    
+                        /**
+                         * Constructs a new RoundToScale.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents a RoundToScale.
+                         * @implements IRoundToScale
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.IRoundToScale=} [properties] Properties to set
+                         */
+                        function RoundToScale(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RoundToScale scale.
+                         * @member {number} scale
+                         * @memberof google.cloud.clouddms.v1.RoundToScale
+                         * @instance
+                         */
+                        RoundToScale.prototype.scale = 0;
+    
+                        /**
+                         * Creates a new RoundToScale instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.RoundToScale
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IRoundToScale=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.RoundToScale} RoundToScale instance
+                         */
+                        RoundToScale.create = function create(properties) {
+                            return new RoundToScale(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RoundToScale message. Does not implicitly {@link google.cloud.clouddms.v1.RoundToScale.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.RoundToScale
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IRoundToScale} message RoundToScale message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RoundToScale.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.scale != null && Object.hasOwnProperty.call(message, "scale"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.scale);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RoundToScale message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.RoundToScale.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.RoundToScale
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IRoundToScale} message RoundToScale message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RoundToScale.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RoundToScale message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.RoundToScale
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.RoundToScale} RoundToScale
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RoundToScale.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.RoundToScale();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.scale = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RoundToScale message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.RoundToScale
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.RoundToScale} RoundToScale
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RoundToScale.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RoundToScale message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.RoundToScale
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RoundToScale.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.scale != null && message.hasOwnProperty("scale"))
+                                if (!$util.isInteger(message.scale))
+                                    return "scale: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RoundToScale message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.RoundToScale
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.RoundToScale} RoundToScale
+                         */
+                        RoundToScale.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.RoundToScale)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.RoundToScale();
+                            if (object.scale != null)
+                                message.scale = object.scale | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RoundToScale message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.RoundToScale
+                         * @static
+                         * @param {google.cloud.clouddms.v1.RoundToScale} message RoundToScale
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RoundToScale.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.scale = 0;
+                            if (message.scale != null && message.hasOwnProperty("scale"))
+                                object.scale = message.scale;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RoundToScale to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.RoundToScale
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RoundToScale.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RoundToScale
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.RoundToScale
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RoundToScale.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.RoundToScale";
+                        };
+    
+                        return RoundToScale;
+                    })();
+    
                     v1.DatabaseEntity = (function() {
     
                         /**
@@ -26583,6 +36072,9 @@
                          * @property {google.cloud.clouddms.v1.DatabaseEntity.TreeType|null} [tree] DatabaseEntity tree
                          * @property {google.cloud.clouddms.v1.DatabaseEntityType|null} [entityType] DatabaseEntity entityType
                          * @property {Array.<google.cloud.clouddms.v1.IEntityMapping>|null} [mappings] DatabaseEntity mappings
+                         * @property {Array.<google.cloud.clouddms.v1.IEntityDdl>|null} [entityDdl] DatabaseEntity entityDdl
+                         * @property {Array.<google.cloud.clouddms.v1.IEntityIssue>|null} [issues] DatabaseEntity issues
+                         * @property {google.cloud.clouddms.v1.IDatabaseInstanceEntity|null} [database] DatabaseEntity database
                          * @property {google.cloud.clouddms.v1.ISchemaEntity|null} [schema] DatabaseEntity schema
                          * @property {google.cloud.clouddms.v1.ITableEntity|null} [table] DatabaseEntity table
                          * @property {google.cloud.clouddms.v1.IViewEntity|null} [view] DatabaseEntity view
@@ -26591,6 +36083,8 @@
                          * @property {google.cloud.clouddms.v1.IFunctionEntity|null} [databaseFunction] DatabaseEntity databaseFunction
                          * @property {google.cloud.clouddms.v1.ISynonymEntity|null} [synonym] DatabaseEntity synonym
                          * @property {google.cloud.clouddms.v1.IPackageEntity|null} [databasePackage] DatabaseEntity databasePackage
+                         * @property {google.cloud.clouddms.v1.IUDTEntity|null} [udt] DatabaseEntity udt
+                         * @property {google.cloud.clouddms.v1.IMaterializedViewEntity|null} [materializedView] DatabaseEntity materializedView
                          */
     
                         /**
@@ -26603,6 +36097,8 @@
                          */
                         function DatabaseEntity(properties) {
                             this.mappings = [];
+                            this.entityDdl = [];
+                            this.issues = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -26648,6 +36144,30 @@
                          * @instance
                          */
                         DatabaseEntity.prototype.mappings = $util.emptyArray;
+    
+                        /**
+                         * DatabaseEntity entityDdl.
+                         * @member {Array.<google.cloud.clouddms.v1.IEntityDdl>} entityDdl
+                         * @memberof google.cloud.clouddms.v1.DatabaseEntity
+                         * @instance
+                         */
+                        DatabaseEntity.prototype.entityDdl = $util.emptyArray;
+    
+                        /**
+                         * DatabaseEntity issues.
+                         * @member {Array.<google.cloud.clouddms.v1.IEntityIssue>} issues
+                         * @memberof google.cloud.clouddms.v1.DatabaseEntity
+                         * @instance
+                         */
+                        DatabaseEntity.prototype.issues = $util.emptyArray;
+    
+                        /**
+                         * DatabaseEntity database.
+                         * @member {google.cloud.clouddms.v1.IDatabaseInstanceEntity|null|undefined} database
+                         * @memberof google.cloud.clouddms.v1.DatabaseEntity
+                         * @instance
+                         */
+                        DatabaseEntity.prototype.database = null;
     
                         /**
                          * DatabaseEntity schema.
@@ -26713,17 +36233,33 @@
                          */
                         DatabaseEntity.prototype.databasePackage = null;
     
+                        /**
+                         * DatabaseEntity udt.
+                         * @member {google.cloud.clouddms.v1.IUDTEntity|null|undefined} udt
+                         * @memberof google.cloud.clouddms.v1.DatabaseEntity
+                         * @instance
+                         */
+                        DatabaseEntity.prototype.udt = null;
+    
+                        /**
+                         * DatabaseEntity materializedView.
+                         * @member {google.cloud.clouddms.v1.IMaterializedViewEntity|null|undefined} materializedView
+                         * @memberof google.cloud.clouddms.v1.DatabaseEntity
+                         * @instance
+                         */
+                        DatabaseEntity.prototype.materializedView = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * DatabaseEntity entityBody.
-                         * @member {"schema"|"table"|"view"|"sequence"|"storedProcedure"|"databaseFunction"|"synonym"|"databasePackage"|undefined} entityBody
+                         * @member {"database"|"schema"|"table"|"view"|"sequence"|"storedProcedure"|"databaseFunction"|"synonym"|"databasePackage"|"udt"|"materializedView"|undefined} entityBody
                          * @memberof google.cloud.clouddms.v1.DatabaseEntity
                          * @instance
                          */
                         Object.defineProperty(DatabaseEntity.prototype, "entityBody", {
-                            get: $util.oneOfGetter($oneOfFields = ["schema", "table", "view", "sequence", "storedProcedure", "databaseFunction", "synonym", "databasePackage"]),
+                            get: $util.oneOfGetter($oneOfFields = ["database", "schema", "table", "view", "sequence", "storedProcedure", "databaseFunction", "synonym", "databasePackage", "udt", "materializedView"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -26762,6 +36298,14 @@
                             if (message.mappings != null && message.mappings.length)
                                 for (var i = 0; i < message.mappings.length; ++i)
                                     $root.google.cloud.clouddms.v1.EntityMapping.encode(message.mappings[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.entityDdl != null && message.entityDdl.length)
+                                for (var i = 0; i < message.entityDdl.length; ++i)
+                                    $root.google.cloud.clouddms.v1.EntityDdl.encode(message.entityDdl[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.issues != null && message.issues.length)
+                                for (var i = 0; i < message.issues.length; ++i)
+                                    $root.google.cloud.clouddms.v1.EntityIssue.encode(message.issues[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.database != null && Object.hasOwnProperty.call(message, "database"))
+                                $root.google.cloud.clouddms.v1.DatabaseInstanceEntity.encode(message.database, writer.uint32(/* id 101, wireType 2 =*/810).fork()).ldelim();
                             if (message.schema != null && Object.hasOwnProperty.call(message, "schema"))
                                 $root.google.cloud.clouddms.v1.SchemaEntity.encode(message.schema, writer.uint32(/* id 102, wireType 2 =*/818).fork()).ldelim();
                             if (message.table != null && Object.hasOwnProperty.call(message, "table"))
@@ -26778,6 +36322,10 @@
                                 $root.google.cloud.clouddms.v1.SynonymEntity.encode(message.synonym, writer.uint32(/* id 108, wireType 2 =*/866).fork()).ldelim();
                             if (message.databasePackage != null && Object.hasOwnProperty.call(message, "databasePackage"))
                                 $root.google.cloud.clouddms.v1.PackageEntity.encode(message.databasePackage, writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
+                            if (message.udt != null && Object.hasOwnProperty.call(message, "udt"))
+                                $root.google.cloud.clouddms.v1.UDTEntity.encode(message.udt, writer.uint32(/* id 110, wireType 2 =*/882).fork()).ldelim();
+                            if (message.materializedView != null && Object.hasOwnProperty.call(message, "materializedView"))
+                                $root.google.cloud.clouddms.v1.MaterializedViewEntity.encode(message.materializedView, writer.uint32(/* id 111, wireType 2 =*/890).fork()).ldelim();
                             return writer;
                         };
     
@@ -26834,6 +36382,22 @@
                                         message.mappings.push($root.google.cloud.clouddms.v1.EntityMapping.decode(reader, reader.uint32()));
                                         break;
                                     }
+                                case 6: {
+                                        if (!(message.entityDdl && message.entityDdl.length))
+                                            message.entityDdl = [];
+                                        message.entityDdl.push($root.google.cloud.clouddms.v1.EntityDdl.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 7: {
+                                        if (!(message.issues && message.issues.length))
+                                            message.issues = [];
+                                        message.issues.push($root.google.cloud.clouddms.v1.EntityIssue.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 101: {
+                                        message.database = $root.google.cloud.clouddms.v1.DatabaseInstanceEntity.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 102: {
                                         message.schema = $root.google.cloud.clouddms.v1.SchemaEntity.decode(reader, reader.uint32());
                                         break;
@@ -26864,6 +36428,14 @@
                                     }
                                 case 109: {
                                         message.databasePackage = $root.google.cloud.clouddms.v1.PackageEntity.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 110: {
+                                        message.udt = $root.google.cloud.clouddms.v1.UDTEntity.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 111: {
+                                        message.materializedView = $root.google.cloud.clouddms.v1.MaterializedViewEntity.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -26949,7 +36521,35 @@
                                         return "mappings." + error;
                                 }
                             }
+                            if (message.entityDdl != null && message.hasOwnProperty("entityDdl")) {
+                                if (!Array.isArray(message.entityDdl))
+                                    return "entityDdl: array expected";
+                                for (var i = 0; i < message.entityDdl.length; ++i) {
+                                    var error = $root.google.cloud.clouddms.v1.EntityDdl.verify(message.entityDdl[i]);
+                                    if (error)
+                                        return "entityDdl." + error;
+                                }
+                            }
+                            if (message.issues != null && message.hasOwnProperty("issues")) {
+                                if (!Array.isArray(message.issues))
+                                    return "issues: array expected";
+                                for (var i = 0; i < message.issues.length; ++i) {
+                                    var error = $root.google.cloud.clouddms.v1.EntityIssue.verify(message.issues[i]);
+                                    if (error)
+                                        return "issues." + error;
+                                }
+                            }
+                            if (message.database != null && message.hasOwnProperty("database")) {
+                                properties.entityBody = 1;
+                                {
+                                    var error = $root.google.cloud.clouddms.v1.DatabaseInstanceEntity.verify(message.database);
+                                    if (error)
+                                        return "database." + error;
+                                }
+                            }
                             if (message.schema != null && message.hasOwnProperty("schema")) {
+                                if (properties.entityBody === 1)
+                                    return "entityBody: multiple values";
                                 properties.entityBody = 1;
                                 {
                                     var error = $root.google.cloud.clouddms.v1.SchemaEntity.verify(message.schema);
@@ -27025,6 +36625,26 @@
                                     var error = $root.google.cloud.clouddms.v1.PackageEntity.verify(message.databasePackage);
                                     if (error)
                                         return "databasePackage." + error;
+                                }
+                            }
+                            if (message.udt != null && message.hasOwnProperty("udt")) {
+                                if (properties.entityBody === 1)
+                                    return "entityBody: multiple values";
+                                properties.entityBody = 1;
+                                {
+                                    var error = $root.google.cloud.clouddms.v1.UDTEntity.verify(message.udt);
+                                    if (error)
+                                        return "udt." + error;
+                                }
+                            }
+                            if (message.materializedView != null && message.hasOwnProperty("materializedView")) {
+                                if (properties.entityBody === 1)
+                                    return "entityBody: multiple values";
+                                properties.entityBody = 1;
+                                {
+                                    var error = $root.google.cloud.clouddms.v1.MaterializedViewEntity.verify(message.materializedView);
+                                    if (error)
+                                        return "materializedView." + error;
                                 }
                             }
                             return null;
@@ -27152,6 +36772,31 @@
                                     message.mappings[i] = $root.google.cloud.clouddms.v1.EntityMapping.fromObject(object.mappings[i]);
                                 }
                             }
+                            if (object.entityDdl) {
+                                if (!Array.isArray(object.entityDdl))
+                                    throw TypeError(".google.cloud.clouddms.v1.DatabaseEntity.entityDdl: array expected");
+                                message.entityDdl = [];
+                                for (var i = 0; i < object.entityDdl.length; ++i) {
+                                    if (typeof object.entityDdl[i] !== "object")
+                                        throw TypeError(".google.cloud.clouddms.v1.DatabaseEntity.entityDdl: object expected");
+                                    message.entityDdl[i] = $root.google.cloud.clouddms.v1.EntityDdl.fromObject(object.entityDdl[i]);
+                                }
+                            }
+                            if (object.issues) {
+                                if (!Array.isArray(object.issues))
+                                    throw TypeError(".google.cloud.clouddms.v1.DatabaseEntity.issues: array expected");
+                                message.issues = [];
+                                for (var i = 0; i < object.issues.length; ++i) {
+                                    if (typeof object.issues[i] !== "object")
+                                        throw TypeError(".google.cloud.clouddms.v1.DatabaseEntity.issues: object expected");
+                                    message.issues[i] = $root.google.cloud.clouddms.v1.EntityIssue.fromObject(object.issues[i]);
+                                }
+                            }
+                            if (object.database != null) {
+                                if (typeof object.database !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.DatabaseEntity.database: object expected");
+                                message.database = $root.google.cloud.clouddms.v1.DatabaseInstanceEntity.fromObject(object.database);
+                            }
                             if (object.schema != null) {
                                 if (typeof object.schema !== "object")
                                     throw TypeError(".google.cloud.clouddms.v1.DatabaseEntity.schema: object expected");
@@ -27192,6 +36837,16 @@
                                     throw TypeError(".google.cloud.clouddms.v1.DatabaseEntity.databasePackage: object expected");
                                 message.databasePackage = $root.google.cloud.clouddms.v1.PackageEntity.fromObject(object.databasePackage);
                             }
+                            if (object.udt != null) {
+                                if (typeof object.udt !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.DatabaseEntity.udt: object expected");
+                                message.udt = $root.google.cloud.clouddms.v1.UDTEntity.fromObject(object.udt);
+                            }
+                            if (object.materializedView != null) {
+                                if (typeof object.materializedView !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.DatabaseEntity.materializedView: object expected");
+                                message.materializedView = $root.google.cloud.clouddms.v1.MaterializedViewEntity.fromObject(object.materializedView);
+                            }
                             return message;
                         };
     
@@ -27208,8 +36863,11 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.mappings = [];
+                                object.entityDdl = [];
+                                object.issues = [];
+                            }
                             if (options.defaults) {
                                 object.shortName = "";
                                 object.parentEntity = "";
@@ -27228,6 +36886,21 @@
                                 object.mappings = [];
                                 for (var j = 0; j < message.mappings.length; ++j)
                                     object.mappings[j] = $root.google.cloud.clouddms.v1.EntityMapping.toObject(message.mappings[j], options);
+                            }
+                            if (message.entityDdl && message.entityDdl.length) {
+                                object.entityDdl = [];
+                                for (var j = 0; j < message.entityDdl.length; ++j)
+                                    object.entityDdl[j] = $root.google.cloud.clouddms.v1.EntityDdl.toObject(message.entityDdl[j], options);
+                            }
+                            if (message.issues && message.issues.length) {
+                                object.issues = [];
+                                for (var j = 0; j < message.issues.length; ++j)
+                                    object.issues[j] = $root.google.cloud.clouddms.v1.EntityIssue.toObject(message.issues[j], options);
+                            }
+                            if (message.database != null && message.hasOwnProperty("database")) {
+                                object.database = $root.google.cloud.clouddms.v1.DatabaseInstanceEntity.toObject(message.database, options);
+                                if (options.oneofs)
+                                    object.entityBody = "database";
                             }
                             if (message.schema != null && message.hasOwnProperty("schema")) {
                                 object.schema = $root.google.cloud.clouddms.v1.SchemaEntity.toObject(message.schema, options);
@@ -27268,6 +36941,16 @@
                                 object.databasePackage = $root.google.cloud.clouddms.v1.PackageEntity.toObject(message.databasePackage, options);
                                 if (options.oneofs)
                                     object.entityBody = "databasePackage";
+                            }
+                            if (message.udt != null && message.hasOwnProperty("udt")) {
+                                object.udt = $root.google.cloud.clouddms.v1.UDTEntity.toObject(message.udt, options);
+                                if (options.oneofs)
+                                    object.entityBody = "udt";
+                            }
+                            if (message.materializedView != null && message.hasOwnProperty("materializedView")) {
+                                object.materializedView = $root.google.cloud.clouddms.v1.MaterializedViewEntity.toObject(message.materializedView, options);
+                                if (options.oneofs)
+                                    object.entityBody = "materializedView";
                             }
                             return object;
                         };
@@ -27317,6 +37000,214 @@
                         })();
     
                         return DatabaseEntity;
+                    })();
+    
+                    v1.DatabaseInstanceEntity = (function() {
+    
+                        /**
+                         * Properties of a DatabaseInstanceEntity.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface IDatabaseInstanceEntity
+                         * @property {google.protobuf.IStruct|null} [customFeatures] DatabaseInstanceEntity customFeatures
+                         */
+    
+                        /**
+                         * Constructs a new DatabaseInstanceEntity.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents a DatabaseInstanceEntity.
+                         * @implements IDatabaseInstanceEntity
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.IDatabaseInstanceEntity=} [properties] Properties to set
+                         */
+                        function DatabaseInstanceEntity(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DatabaseInstanceEntity customFeatures.
+                         * @member {google.protobuf.IStruct|null|undefined} customFeatures
+                         * @memberof google.cloud.clouddms.v1.DatabaseInstanceEntity
+                         * @instance
+                         */
+                        DatabaseInstanceEntity.prototype.customFeatures = null;
+    
+                        /**
+                         * Creates a new DatabaseInstanceEntity instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.DatabaseInstanceEntity
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IDatabaseInstanceEntity=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.DatabaseInstanceEntity} DatabaseInstanceEntity instance
+                         */
+                        DatabaseInstanceEntity.create = function create(properties) {
+                            return new DatabaseInstanceEntity(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DatabaseInstanceEntity message. Does not implicitly {@link google.cloud.clouddms.v1.DatabaseInstanceEntity.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.DatabaseInstanceEntity
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IDatabaseInstanceEntity} message DatabaseInstanceEntity message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DatabaseInstanceEntity.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.customFeatures != null && Object.hasOwnProperty.call(message, "customFeatures"))
+                                $root.google.protobuf.Struct.encode(message.customFeatures, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DatabaseInstanceEntity message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.DatabaseInstanceEntity.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.DatabaseInstanceEntity
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IDatabaseInstanceEntity} message DatabaseInstanceEntity message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DatabaseInstanceEntity.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DatabaseInstanceEntity message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.DatabaseInstanceEntity
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.DatabaseInstanceEntity} DatabaseInstanceEntity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DatabaseInstanceEntity.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.DatabaseInstanceEntity();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.customFeatures = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DatabaseInstanceEntity message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.DatabaseInstanceEntity
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.DatabaseInstanceEntity} DatabaseInstanceEntity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DatabaseInstanceEntity.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DatabaseInstanceEntity message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.DatabaseInstanceEntity
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DatabaseInstanceEntity.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.customFeatures != null && message.hasOwnProperty("customFeatures")) {
+                                var error = $root.google.protobuf.Struct.verify(message.customFeatures);
+                                if (error)
+                                    return "customFeatures." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DatabaseInstanceEntity message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.DatabaseInstanceEntity
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.DatabaseInstanceEntity} DatabaseInstanceEntity
+                         */
+                        DatabaseInstanceEntity.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.DatabaseInstanceEntity)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.DatabaseInstanceEntity();
+                            if (object.customFeatures != null) {
+                                if (typeof object.customFeatures !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.DatabaseInstanceEntity.customFeatures: object expected");
+                                message.customFeatures = $root.google.protobuf.Struct.fromObject(object.customFeatures);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DatabaseInstanceEntity message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.DatabaseInstanceEntity
+                         * @static
+                         * @param {google.cloud.clouddms.v1.DatabaseInstanceEntity} message DatabaseInstanceEntity
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DatabaseInstanceEntity.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.customFeatures = null;
+                            if (message.customFeatures != null && message.hasOwnProperty("customFeatures"))
+                                object.customFeatures = $root.google.protobuf.Struct.toObject(message.customFeatures, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DatabaseInstanceEntity to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.DatabaseInstanceEntity
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DatabaseInstanceEntity.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DatabaseInstanceEntity
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.DatabaseInstanceEntity
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DatabaseInstanceEntity.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.DatabaseInstanceEntity";
+                        };
+    
+                        return DatabaseInstanceEntity;
                     })();
     
                     v1.SchemaEntity = (function() {
@@ -30728,6 +40619,238 @@
                         return FunctionEntity;
                     })();
     
+                    v1.MaterializedViewEntity = (function() {
+    
+                        /**
+                         * Properties of a MaterializedViewEntity.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface IMaterializedViewEntity
+                         * @property {string|null} [sqlCode] MaterializedViewEntity sqlCode
+                         * @property {google.protobuf.IStruct|null} [customFeatures] MaterializedViewEntity customFeatures
+                         */
+    
+                        /**
+                         * Constructs a new MaterializedViewEntity.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents a MaterializedViewEntity.
+                         * @implements IMaterializedViewEntity
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.IMaterializedViewEntity=} [properties] Properties to set
+                         */
+                        function MaterializedViewEntity(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MaterializedViewEntity sqlCode.
+                         * @member {string} sqlCode
+                         * @memberof google.cloud.clouddms.v1.MaterializedViewEntity
+                         * @instance
+                         */
+                        MaterializedViewEntity.prototype.sqlCode = "";
+    
+                        /**
+                         * MaterializedViewEntity customFeatures.
+                         * @member {google.protobuf.IStruct|null|undefined} customFeatures
+                         * @memberof google.cloud.clouddms.v1.MaterializedViewEntity
+                         * @instance
+                         */
+                        MaterializedViewEntity.prototype.customFeatures = null;
+    
+                        /**
+                         * Creates a new MaterializedViewEntity instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.MaterializedViewEntity
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IMaterializedViewEntity=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.MaterializedViewEntity} MaterializedViewEntity instance
+                         */
+                        MaterializedViewEntity.create = function create(properties) {
+                            return new MaterializedViewEntity(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MaterializedViewEntity message. Does not implicitly {@link google.cloud.clouddms.v1.MaterializedViewEntity.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.MaterializedViewEntity
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IMaterializedViewEntity} message MaterializedViewEntity message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MaterializedViewEntity.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.sqlCode != null && Object.hasOwnProperty.call(message, "sqlCode"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.sqlCode);
+                            if (message.customFeatures != null && Object.hasOwnProperty.call(message, "customFeatures"))
+                                $root.google.protobuf.Struct.encode(message.customFeatures, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MaterializedViewEntity message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.MaterializedViewEntity.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.MaterializedViewEntity
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IMaterializedViewEntity} message MaterializedViewEntity message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MaterializedViewEntity.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MaterializedViewEntity message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.MaterializedViewEntity
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.MaterializedViewEntity} MaterializedViewEntity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MaterializedViewEntity.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.MaterializedViewEntity();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.sqlCode = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.customFeatures = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MaterializedViewEntity message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.MaterializedViewEntity
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.MaterializedViewEntity} MaterializedViewEntity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MaterializedViewEntity.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MaterializedViewEntity message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.MaterializedViewEntity
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MaterializedViewEntity.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.sqlCode != null && message.hasOwnProperty("sqlCode"))
+                                if (!$util.isString(message.sqlCode))
+                                    return "sqlCode: string expected";
+                            if (message.customFeatures != null && message.hasOwnProperty("customFeatures")) {
+                                var error = $root.google.protobuf.Struct.verify(message.customFeatures);
+                                if (error)
+                                    return "customFeatures." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MaterializedViewEntity message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.MaterializedViewEntity
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.MaterializedViewEntity} MaterializedViewEntity
+                         */
+                        MaterializedViewEntity.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.MaterializedViewEntity)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.MaterializedViewEntity();
+                            if (object.sqlCode != null)
+                                message.sqlCode = String(object.sqlCode);
+                            if (object.customFeatures != null) {
+                                if (typeof object.customFeatures !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.MaterializedViewEntity.customFeatures: object expected");
+                                message.customFeatures = $root.google.protobuf.Struct.fromObject(object.customFeatures);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MaterializedViewEntity message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.MaterializedViewEntity
+                         * @static
+                         * @param {google.cloud.clouddms.v1.MaterializedViewEntity} message MaterializedViewEntity
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MaterializedViewEntity.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.sqlCode = "";
+                                object.customFeatures = null;
+                            }
+                            if (message.sqlCode != null && message.hasOwnProperty("sqlCode"))
+                                object.sqlCode = message.sqlCode;
+                            if (message.customFeatures != null && message.hasOwnProperty("customFeatures"))
+                                object.customFeatures = $root.google.protobuf.Struct.toObject(message.customFeatures, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MaterializedViewEntity to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.MaterializedViewEntity
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MaterializedViewEntity.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MaterializedViewEntity
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.MaterializedViewEntity
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MaterializedViewEntity.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.MaterializedViewEntity";
+                        };
+    
+                        return MaterializedViewEntity;
+                    })();
+    
                     v1.SynonymEntity = (function() {
     
                         /**
@@ -31325,6 +41448,261 @@
                         };
     
                         return PackageEntity;
+                    })();
+    
+                    v1.UDTEntity = (function() {
+    
+                        /**
+                         * Properties of a UDTEntity.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface IUDTEntity
+                         * @property {string|null} [udtSqlCode] UDTEntity udtSqlCode
+                         * @property {string|null} [udtBody] UDTEntity udtBody
+                         * @property {google.protobuf.IStruct|null} [customFeatures] UDTEntity customFeatures
+                         */
+    
+                        /**
+                         * Constructs a new UDTEntity.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents a UDTEntity.
+                         * @implements IUDTEntity
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.IUDTEntity=} [properties] Properties to set
+                         */
+                        function UDTEntity(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UDTEntity udtSqlCode.
+                         * @member {string} udtSqlCode
+                         * @memberof google.cloud.clouddms.v1.UDTEntity
+                         * @instance
+                         */
+                        UDTEntity.prototype.udtSqlCode = "";
+    
+                        /**
+                         * UDTEntity udtBody.
+                         * @member {string} udtBody
+                         * @memberof google.cloud.clouddms.v1.UDTEntity
+                         * @instance
+                         */
+                        UDTEntity.prototype.udtBody = "";
+    
+                        /**
+                         * UDTEntity customFeatures.
+                         * @member {google.protobuf.IStruct|null|undefined} customFeatures
+                         * @memberof google.cloud.clouddms.v1.UDTEntity
+                         * @instance
+                         */
+                        UDTEntity.prototype.customFeatures = null;
+    
+                        /**
+                         * Creates a new UDTEntity instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.UDTEntity
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IUDTEntity=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.UDTEntity} UDTEntity instance
+                         */
+                        UDTEntity.create = function create(properties) {
+                            return new UDTEntity(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UDTEntity message. Does not implicitly {@link google.cloud.clouddms.v1.UDTEntity.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.UDTEntity
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IUDTEntity} message UDTEntity message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UDTEntity.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.udtSqlCode != null && Object.hasOwnProperty.call(message, "udtSqlCode"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.udtSqlCode);
+                            if (message.udtBody != null && Object.hasOwnProperty.call(message, "udtBody"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.udtBody);
+                            if (message.customFeatures != null && Object.hasOwnProperty.call(message, "customFeatures"))
+                                $root.google.protobuf.Struct.encode(message.customFeatures, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UDTEntity message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.UDTEntity.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.UDTEntity
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IUDTEntity} message UDTEntity message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UDTEntity.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a UDTEntity message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.UDTEntity
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.UDTEntity} UDTEntity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UDTEntity.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.UDTEntity();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.udtSqlCode = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.udtBody = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.customFeatures = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a UDTEntity message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.UDTEntity
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.UDTEntity} UDTEntity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UDTEntity.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a UDTEntity message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.UDTEntity
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UDTEntity.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.udtSqlCode != null && message.hasOwnProperty("udtSqlCode"))
+                                if (!$util.isString(message.udtSqlCode))
+                                    return "udtSqlCode: string expected";
+                            if (message.udtBody != null && message.hasOwnProperty("udtBody"))
+                                if (!$util.isString(message.udtBody))
+                                    return "udtBody: string expected";
+                            if (message.customFeatures != null && message.hasOwnProperty("customFeatures")) {
+                                var error = $root.google.protobuf.Struct.verify(message.customFeatures);
+                                if (error)
+                                    return "customFeatures." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a UDTEntity message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.UDTEntity
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.UDTEntity} UDTEntity
+                         */
+                        UDTEntity.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.UDTEntity)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.UDTEntity();
+                            if (object.udtSqlCode != null)
+                                message.udtSqlCode = String(object.udtSqlCode);
+                            if (object.udtBody != null)
+                                message.udtBody = String(object.udtBody);
+                            if (object.customFeatures != null) {
+                                if (typeof object.customFeatures !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.UDTEntity.customFeatures: object expected");
+                                message.customFeatures = $root.google.protobuf.Struct.fromObject(object.customFeatures);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a UDTEntity message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.UDTEntity
+                         * @static
+                         * @param {google.cloud.clouddms.v1.UDTEntity} message UDTEntity
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UDTEntity.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.udtSqlCode = "";
+                                object.udtBody = "";
+                                object.customFeatures = null;
+                            }
+                            if (message.udtSqlCode != null && message.hasOwnProperty("udtSqlCode"))
+                                object.udtSqlCode = message.udtSqlCode;
+                            if (message.udtBody != null && message.hasOwnProperty("udtBody"))
+                                object.udtBody = message.udtBody;
+                            if (message.customFeatures != null && message.hasOwnProperty("customFeatures"))
+                                object.customFeatures = $root.google.protobuf.Struct.toObject(message.customFeatures, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UDTEntity to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.UDTEntity
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UDTEntity.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UDTEntity
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.UDTEntity
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UDTEntity.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.UDTEntity";
+                        };
+    
+                        return UDTEntity;
                     })();
     
                     v1.EntityMapping = (function() {
@@ -32073,6 +42451,1285 @@
                         return EntityMappingLogEntry;
                     })();
     
+                    v1.EntityDdl = (function() {
+    
+                        /**
+                         * Properties of an EntityDdl.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface IEntityDdl
+                         * @property {string|null} [ddlType] EntityDdl ddlType
+                         * @property {string|null} [entity] EntityDdl entity
+                         * @property {string|null} [ddl] EntityDdl ddl
+                         * @property {google.cloud.clouddms.v1.DatabaseEntityType|null} [entityType] EntityDdl entityType
+                         * @property {Array.<string>|null} [issueId] EntityDdl issueId
+                         */
+    
+                        /**
+                         * Constructs a new EntityDdl.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents an EntityDdl.
+                         * @implements IEntityDdl
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.IEntityDdl=} [properties] Properties to set
+                         */
+                        function EntityDdl(properties) {
+                            this.issueId = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * EntityDdl ddlType.
+                         * @member {string} ddlType
+                         * @memberof google.cloud.clouddms.v1.EntityDdl
+                         * @instance
+                         */
+                        EntityDdl.prototype.ddlType = "";
+    
+                        /**
+                         * EntityDdl entity.
+                         * @member {string} entity
+                         * @memberof google.cloud.clouddms.v1.EntityDdl
+                         * @instance
+                         */
+                        EntityDdl.prototype.entity = "";
+    
+                        /**
+                         * EntityDdl ddl.
+                         * @member {string} ddl
+                         * @memberof google.cloud.clouddms.v1.EntityDdl
+                         * @instance
+                         */
+                        EntityDdl.prototype.ddl = "";
+    
+                        /**
+                         * EntityDdl entityType.
+                         * @member {google.cloud.clouddms.v1.DatabaseEntityType} entityType
+                         * @memberof google.cloud.clouddms.v1.EntityDdl
+                         * @instance
+                         */
+                        EntityDdl.prototype.entityType = 0;
+    
+                        /**
+                         * EntityDdl issueId.
+                         * @member {Array.<string>} issueId
+                         * @memberof google.cloud.clouddms.v1.EntityDdl
+                         * @instance
+                         */
+                        EntityDdl.prototype.issueId = $util.emptyArray;
+    
+                        /**
+                         * Creates a new EntityDdl instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.EntityDdl
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IEntityDdl=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.EntityDdl} EntityDdl instance
+                         */
+                        EntityDdl.create = function create(properties) {
+                            return new EntityDdl(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified EntityDdl message. Does not implicitly {@link google.cloud.clouddms.v1.EntityDdl.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.EntityDdl
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IEntityDdl} message EntityDdl message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EntityDdl.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.ddlType != null && Object.hasOwnProperty.call(message, "ddlType"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.ddlType);
+                            if (message.entity != null && Object.hasOwnProperty.call(message, "entity"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.entity);
+                            if (message.ddl != null && Object.hasOwnProperty.call(message, "ddl"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.ddl);
+                            if (message.entityType != null && Object.hasOwnProperty.call(message, "entityType"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.entityType);
+                            if (message.issueId != null && message.issueId.length)
+                                for (var i = 0; i < message.issueId.length; ++i)
+                                    writer.uint32(/* id 100, wireType 2 =*/802).string(message.issueId[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified EntityDdl message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.EntityDdl.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.EntityDdl
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IEntityDdl} message EntityDdl message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EntityDdl.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an EntityDdl message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.EntityDdl
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.EntityDdl} EntityDdl
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EntityDdl.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.EntityDdl();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.ddlType = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.entity = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.ddl = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.entityType = reader.int32();
+                                        break;
+                                    }
+                                case 100: {
+                                        if (!(message.issueId && message.issueId.length))
+                                            message.issueId = [];
+                                        message.issueId.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an EntityDdl message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.EntityDdl
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.EntityDdl} EntityDdl
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EntityDdl.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an EntityDdl message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.EntityDdl
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        EntityDdl.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.ddlType != null && message.hasOwnProperty("ddlType"))
+                                if (!$util.isString(message.ddlType))
+                                    return "ddlType: string expected";
+                            if (message.entity != null && message.hasOwnProperty("entity"))
+                                if (!$util.isString(message.entity))
+                                    return "entity: string expected";
+                            if (message.ddl != null && message.hasOwnProperty("ddl"))
+                                if (!$util.isString(message.ddl))
+                                    return "ddl: string expected";
+                            if (message.entityType != null && message.hasOwnProperty("entityType"))
+                                switch (message.entityType) {
+                                default:
+                                    return "entityType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                case 13:
+                                case 14:
+                                case 15:
+                                    break;
+                                }
+                            if (message.issueId != null && message.hasOwnProperty("issueId")) {
+                                if (!Array.isArray(message.issueId))
+                                    return "issueId: array expected";
+                                for (var i = 0; i < message.issueId.length; ++i)
+                                    if (!$util.isString(message.issueId[i]))
+                                        return "issueId: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an EntityDdl message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.EntityDdl
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.EntityDdl} EntityDdl
+                         */
+                        EntityDdl.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.EntityDdl)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.EntityDdl();
+                            if (object.ddlType != null)
+                                message.ddlType = String(object.ddlType);
+                            if (object.entity != null)
+                                message.entity = String(object.entity);
+                            if (object.ddl != null)
+                                message.ddl = String(object.ddl);
+                            switch (object.entityType) {
+                            default:
+                                if (typeof object.entityType === "number") {
+                                    message.entityType = object.entityType;
+                                    break;
+                                }
+                                break;
+                            case "DATABASE_ENTITY_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.entityType = 0;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_SCHEMA":
+                            case 1:
+                                message.entityType = 1;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_TABLE":
+                            case 2:
+                                message.entityType = 2;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_COLUMN":
+                            case 3:
+                                message.entityType = 3;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_CONSTRAINT":
+                            case 4:
+                                message.entityType = 4;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_INDEX":
+                            case 5:
+                                message.entityType = 5;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_TRIGGER":
+                            case 6:
+                                message.entityType = 6;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_VIEW":
+                            case 7:
+                                message.entityType = 7;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_SEQUENCE":
+                            case 8:
+                                message.entityType = 8;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_STORED_PROCEDURE":
+                            case 9:
+                                message.entityType = 9;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_FUNCTION":
+                            case 10:
+                                message.entityType = 10;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_SYNONYM":
+                            case 11:
+                                message.entityType = 11;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_DATABASE_PACKAGE":
+                            case 12:
+                                message.entityType = 12;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_UDT":
+                            case 13:
+                                message.entityType = 13;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_MATERIALIZED_VIEW":
+                            case 14:
+                                message.entityType = 14;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_DATABASE":
+                            case 15:
+                                message.entityType = 15;
+                                break;
+                            }
+                            if (object.issueId) {
+                                if (!Array.isArray(object.issueId))
+                                    throw TypeError(".google.cloud.clouddms.v1.EntityDdl.issueId: array expected");
+                                message.issueId = [];
+                                for (var i = 0; i < object.issueId.length; ++i)
+                                    message.issueId[i] = String(object.issueId[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an EntityDdl message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.EntityDdl
+                         * @static
+                         * @param {google.cloud.clouddms.v1.EntityDdl} message EntityDdl
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        EntityDdl.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.issueId = [];
+                            if (options.defaults) {
+                                object.ddlType = "";
+                                object.entity = "";
+                                object.ddl = "";
+                                object.entityType = options.enums === String ? "DATABASE_ENTITY_TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.ddlType != null && message.hasOwnProperty("ddlType"))
+                                object.ddlType = message.ddlType;
+                            if (message.entity != null && message.hasOwnProperty("entity"))
+                                object.entity = message.entity;
+                            if (message.ddl != null && message.hasOwnProperty("ddl"))
+                                object.ddl = message.ddl;
+                            if (message.entityType != null && message.hasOwnProperty("entityType"))
+                                object.entityType = options.enums === String ? $root.google.cloud.clouddms.v1.DatabaseEntityType[message.entityType] === undefined ? message.entityType : $root.google.cloud.clouddms.v1.DatabaseEntityType[message.entityType] : message.entityType;
+                            if (message.issueId && message.issueId.length) {
+                                object.issueId = [];
+                                for (var j = 0; j < message.issueId.length; ++j)
+                                    object.issueId[j] = message.issueId[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this EntityDdl to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.EntityDdl
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        EntityDdl.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for EntityDdl
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.EntityDdl
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        EntityDdl.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.EntityDdl";
+                        };
+    
+                        return EntityDdl;
+                    })();
+    
+                    v1.EntityIssue = (function() {
+    
+                        /**
+                         * Properties of an EntityIssue.
+                         * @memberof google.cloud.clouddms.v1
+                         * @interface IEntityIssue
+                         * @property {string|null} [id] EntityIssue id
+                         * @property {google.cloud.clouddms.v1.EntityIssue.IssueType|null} [type] EntityIssue type
+                         * @property {google.cloud.clouddms.v1.EntityIssue.IssueSeverity|null} [severity] EntityIssue severity
+                         * @property {string|null} [message] EntityIssue message
+                         * @property {string|null} [code] EntityIssue code
+                         * @property {string|null} [ddl] EntityIssue ddl
+                         * @property {google.cloud.clouddms.v1.EntityIssue.IPosition|null} [position] EntityIssue position
+                         * @property {google.cloud.clouddms.v1.DatabaseEntityType|null} [entityType] EntityIssue entityType
+                         */
+    
+                        /**
+                         * Constructs a new EntityIssue.
+                         * @memberof google.cloud.clouddms.v1
+                         * @classdesc Represents an EntityIssue.
+                         * @implements IEntityIssue
+                         * @constructor
+                         * @param {google.cloud.clouddms.v1.IEntityIssue=} [properties] Properties to set
+                         */
+                        function EntityIssue(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * EntityIssue id.
+                         * @member {string} id
+                         * @memberof google.cloud.clouddms.v1.EntityIssue
+                         * @instance
+                         */
+                        EntityIssue.prototype.id = "";
+    
+                        /**
+                         * EntityIssue type.
+                         * @member {google.cloud.clouddms.v1.EntityIssue.IssueType} type
+                         * @memberof google.cloud.clouddms.v1.EntityIssue
+                         * @instance
+                         */
+                        EntityIssue.prototype.type = 0;
+    
+                        /**
+                         * EntityIssue severity.
+                         * @member {google.cloud.clouddms.v1.EntityIssue.IssueSeverity} severity
+                         * @memberof google.cloud.clouddms.v1.EntityIssue
+                         * @instance
+                         */
+                        EntityIssue.prototype.severity = 0;
+    
+                        /**
+                         * EntityIssue message.
+                         * @member {string} message
+                         * @memberof google.cloud.clouddms.v1.EntityIssue
+                         * @instance
+                         */
+                        EntityIssue.prototype.message = "";
+    
+                        /**
+                         * EntityIssue code.
+                         * @member {string} code
+                         * @memberof google.cloud.clouddms.v1.EntityIssue
+                         * @instance
+                         */
+                        EntityIssue.prototype.code = "";
+    
+                        /**
+                         * EntityIssue ddl.
+                         * @member {string|null|undefined} ddl
+                         * @memberof google.cloud.clouddms.v1.EntityIssue
+                         * @instance
+                         */
+                        EntityIssue.prototype.ddl = null;
+    
+                        /**
+                         * EntityIssue position.
+                         * @member {google.cloud.clouddms.v1.EntityIssue.IPosition|null|undefined} position
+                         * @memberof google.cloud.clouddms.v1.EntityIssue
+                         * @instance
+                         */
+                        EntityIssue.prototype.position = null;
+    
+                        /**
+                         * EntityIssue entityType.
+                         * @member {google.cloud.clouddms.v1.DatabaseEntityType} entityType
+                         * @memberof google.cloud.clouddms.v1.EntityIssue
+                         * @instance
+                         */
+                        EntityIssue.prototype.entityType = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * EntityIssue _ddl.
+                         * @member {"ddl"|undefined} _ddl
+                         * @memberof google.cloud.clouddms.v1.EntityIssue
+                         * @instance
+                         */
+                        Object.defineProperty(EntityIssue.prototype, "_ddl", {
+                            get: $util.oneOfGetter($oneOfFields = ["ddl"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * EntityIssue _position.
+                         * @member {"position"|undefined} _position
+                         * @memberof google.cloud.clouddms.v1.EntityIssue
+                         * @instance
+                         */
+                        Object.defineProperty(EntityIssue.prototype, "_position", {
+                            get: $util.oneOfGetter($oneOfFields = ["position"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new EntityIssue instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.clouddms.v1.EntityIssue
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IEntityIssue=} [properties] Properties to set
+                         * @returns {google.cloud.clouddms.v1.EntityIssue} EntityIssue instance
+                         */
+                        EntityIssue.create = function create(properties) {
+                            return new EntityIssue(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified EntityIssue message. Does not implicitly {@link google.cloud.clouddms.v1.EntityIssue.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.clouddms.v1.EntityIssue
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IEntityIssue} message EntityIssue message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EntityIssue.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.type);
+                            if (message.severity != null && Object.hasOwnProperty.call(message, "severity"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.severity);
+                            if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.message);
+                            if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.code);
+                            if (message.ddl != null && Object.hasOwnProperty.call(message, "ddl"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.ddl);
+                            if (message.position != null && Object.hasOwnProperty.call(message, "position"))
+                                $root.google.cloud.clouddms.v1.EntityIssue.Position.encode(message.position, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.entityType != null && Object.hasOwnProperty.call(message, "entityType"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.entityType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified EntityIssue message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.EntityIssue.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.clouddms.v1.EntityIssue
+                         * @static
+                         * @param {google.cloud.clouddms.v1.IEntityIssue} message EntityIssue message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EntityIssue.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an EntityIssue message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.clouddms.v1.EntityIssue
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.clouddms.v1.EntityIssue} EntityIssue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EntityIssue.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.EntityIssue();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.id = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.severity = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.message = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.code = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.ddl = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.position = $root.google.cloud.clouddms.v1.EntityIssue.Position.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.entityType = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an EntityIssue message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.clouddms.v1.EntityIssue
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.clouddms.v1.EntityIssue} EntityIssue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EntityIssue.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an EntityIssue message.
+                         * @function verify
+                         * @memberof google.cloud.clouddms.v1.EntityIssue
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        EntityIssue.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                if (!$util.isString(message.id))
+                                    return "id: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.severity != null && message.hasOwnProperty("severity"))
+                                switch (message.severity) {
+                                default:
+                                    return "severity: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.message != null && message.hasOwnProperty("message"))
+                                if (!$util.isString(message.message))
+                                    return "message: string expected";
+                            if (message.code != null && message.hasOwnProperty("code"))
+                                if (!$util.isString(message.code))
+                                    return "code: string expected";
+                            if (message.ddl != null && message.hasOwnProperty("ddl")) {
+                                properties._ddl = 1;
+                                if (!$util.isString(message.ddl))
+                                    return "ddl: string expected";
+                            }
+                            if (message.position != null && message.hasOwnProperty("position")) {
+                                properties._position = 1;
+                                {
+                                    var error = $root.google.cloud.clouddms.v1.EntityIssue.Position.verify(message.position);
+                                    if (error)
+                                        return "position." + error;
+                                }
+                            }
+                            if (message.entityType != null && message.hasOwnProperty("entityType"))
+                                switch (message.entityType) {
+                                default:
+                                    return "entityType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                case 13:
+                                case 14:
+                                case 15:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an EntityIssue message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.clouddms.v1.EntityIssue
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.clouddms.v1.EntityIssue} EntityIssue
+                         */
+                        EntityIssue.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.clouddms.v1.EntityIssue)
+                                return object;
+                            var message = new $root.google.cloud.clouddms.v1.EntityIssue();
+                            if (object.id != null)
+                                message.id = String(object.id);
+                            switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
+                            case "ISSUE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "ISSUE_TYPE_DDL":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "ISSUE_TYPE_APPLY":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            case "ISSUE_TYPE_CONVERT":
+                            case 3:
+                                message.type = 3;
+                                break;
+                            }
+                            switch (object.severity) {
+                            default:
+                                if (typeof object.severity === "number") {
+                                    message.severity = object.severity;
+                                    break;
+                                }
+                                break;
+                            case "ISSUE_SEVERITY_UNSPECIFIED":
+                            case 0:
+                                message.severity = 0;
+                                break;
+                            case "ISSUE_SEVERITY_INFO":
+                            case 1:
+                                message.severity = 1;
+                                break;
+                            case "ISSUE_SEVERITY_WARNING":
+                            case 2:
+                                message.severity = 2;
+                                break;
+                            case "ISSUE_SEVERITY_ERROR":
+                            case 3:
+                                message.severity = 3;
+                                break;
+                            }
+                            if (object.message != null)
+                                message.message = String(object.message);
+                            if (object.code != null)
+                                message.code = String(object.code);
+                            if (object.ddl != null)
+                                message.ddl = String(object.ddl);
+                            if (object.position != null) {
+                                if (typeof object.position !== "object")
+                                    throw TypeError(".google.cloud.clouddms.v1.EntityIssue.position: object expected");
+                                message.position = $root.google.cloud.clouddms.v1.EntityIssue.Position.fromObject(object.position);
+                            }
+                            switch (object.entityType) {
+                            default:
+                                if (typeof object.entityType === "number") {
+                                    message.entityType = object.entityType;
+                                    break;
+                                }
+                                break;
+                            case "DATABASE_ENTITY_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.entityType = 0;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_SCHEMA":
+                            case 1:
+                                message.entityType = 1;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_TABLE":
+                            case 2:
+                                message.entityType = 2;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_COLUMN":
+                            case 3:
+                                message.entityType = 3;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_CONSTRAINT":
+                            case 4:
+                                message.entityType = 4;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_INDEX":
+                            case 5:
+                                message.entityType = 5;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_TRIGGER":
+                            case 6:
+                                message.entityType = 6;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_VIEW":
+                            case 7:
+                                message.entityType = 7;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_SEQUENCE":
+                            case 8:
+                                message.entityType = 8;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_STORED_PROCEDURE":
+                            case 9:
+                                message.entityType = 9;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_FUNCTION":
+                            case 10:
+                                message.entityType = 10;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_SYNONYM":
+                            case 11:
+                                message.entityType = 11;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_DATABASE_PACKAGE":
+                            case 12:
+                                message.entityType = 12;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_UDT":
+                            case 13:
+                                message.entityType = 13;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_MATERIALIZED_VIEW":
+                            case 14:
+                                message.entityType = 14;
+                                break;
+                            case "DATABASE_ENTITY_TYPE_DATABASE":
+                            case 15:
+                                message.entityType = 15;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an EntityIssue message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.clouddms.v1.EntityIssue
+                         * @static
+                         * @param {google.cloud.clouddms.v1.EntityIssue} message EntityIssue
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        EntityIssue.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.id = "";
+                                object.type = options.enums === String ? "ISSUE_TYPE_UNSPECIFIED" : 0;
+                                object.severity = options.enums === String ? "ISSUE_SEVERITY_UNSPECIFIED" : 0;
+                                object.message = "";
+                                object.code = "";
+                                object.entityType = options.enums === String ? "DATABASE_ENTITY_TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                object.id = message.id;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.clouddms.v1.EntityIssue.IssueType[message.type] === undefined ? message.type : $root.google.cloud.clouddms.v1.EntityIssue.IssueType[message.type] : message.type;
+                            if (message.severity != null && message.hasOwnProperty("severity"))
+                                object.severity = options.enums === String ? $root.google.cloud.clouddms.v1.EntityIssue.IssueSeverity[message.severity] === undefined ? message.severity : $root.google.cloud.clouddms.v1.EntityIssue.IssueSeverity[message.severity] : message.severity;
+                            if (message.message != null && message.hasOwnProperty("message"))
+                                object.message = message.message;
+                            if (message.code != null && message.hasOwnProperty("code"))
+                                object.code = message.code;
+                            if (message.ddl != null && message.hasOwnProperty("ddl")) {
+                                object.ddl = message.ddl;
+                                if (options.oneofs)
+                                    object._ddl = "ddl";
+                            }
+                            if (message.position != null && message.hasOwnProperty("position")) {
+                                object.position = $root.google.cloud.clouddms.v1.EntityIssue.Position.toObject(message.position, options);
+                                if (options.oneofs)
+                                    object._position = "position";
+                            }
+                            if (message.entityType != null && message.hasOwnProperty("entityType"))
+                                object.entityType = options.enums === String ? $root.google.cloud.clouddms.v1.DatabaseEntityType[message.entityType] === undefined ? message.entityType : $root.google.cloud.clouddms.v1.DatabaseEntityType[message.entityType] : message.entityType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this EntityIssue to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.clouddms.v1.EntityIssue
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        EntityIssue.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for EntityIssue
+                         * @function getTypeUrl
+                         * @memberof google.cloud.clouddms.v1.EntityIssue
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        EntityIssue.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.clouddms.v1.EntityIssue";
+                        };
+    
+                        /**
+                         * IssueType enum.
+                         * @name google.cloud.clouddms.v1.EntityIssue.IssueType
+                         * @enum {number}
+                         * @property {number} ISSUE_TYPE_UNSPECIFIED=0 ISSUE_TYPE_UNSPECIFIED value
+                         * @property {number} ISSUE_TYPE_DDL=1 ISSUE_TYPE_DDL value
+                         * @property {number} ISSUE_TYPE_APPLY=2 ISSUE_TYPE_APPLY value
+                         * @property {number} ISSUE_TYPE_CONVERT=3 ISSUE_TYPE_CONVERT value
+                         */
+                        EntityIssue.IssueType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ISSUE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ISSUE_TYPE_DDL"] = 1;
+                            values[valuesById[2] = "ISSUE_TYPE_APPLY"] = 2;
+                            values[valuesById[3] = "ISSUE_TYPE_CONVERT"] = 3;
+                            return values;
+                        })();
+    
+                        /**
+                         * IssueSeverity enum.
+                         * @name google.cloud.clouddms.v1.EntityIssue.IssueSeverity
+                         * @enum {number}
+                         * @property {number} ISSUE_SEVERITY_UNSPECIFIED=0 ISSUE_SEVERITY_UNSPECIFIED value
+                         * @property {number} ISSUE_SEVERITY_INFO=1 ISSUE_SEVERITY_INFO value
+                         * @property {number} ISSUE_SEVERITY_WARNING=2 ISSUE_SEVERITY_WARNING value
+                         * @property {number} ISSUE_SEVERITY_ERROR=3 ISSUE_SEVERITY_ERROR value
+                         */
+                        EntityIssue.IssueSeverity = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ISSUE_SEVERITY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ISSUE_SEVERITY_INFO"] = 1;
+                            values[valuesById[2] = "ISSUE_SEVERITY_WARNING"] = 2;
+                            values[valuesById[3] = "ISSUE_SEVERITY_ERROR"] = 3;
+                            return values;
+                        })();
+    
+                        EntityIssue.Position = (function() {
+    
+                            /**
+                             * Properties of a Position.
+                             * @memberof google.cloud.clouddms.v1.EntityIssue
+                             * @interface IPosition
+                             * @property {number|null} [line] Position line
+                             * @property {number|null} [column] Position column
+                             * @property {number|null} [offset] Position offset
+                             * @property {number|null} [length] Position length
+                             */
+    
+                            /**
+                             * Constructs a new Position.
+                             * @memberof google.cloud.clouddms.v1.EntityIssue
+                             * @classdesc Represents a Position.
+                             * @implements IPosition
+                             * @constructor
+                             * @param {google.cloud.clouddms.v1.EntityIssue.IPosition=} [properties] Properties to set
+                             */
+                            function Position(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Position line.
+                             * @member {number} line
+                             * @memberof google.cloud.clouddms.v1.EntityIssue.Position
+                             * @instance
+                             */
+                            Position.prototype.line = 0;
+    
+                            /**
+                             * Position column.
+                             * @member {number} column
+                             * @memberof google.cloud.clouddms.v1.EntityIssue.Position
+                             * @instance
+                             */
+                            Position.prototype.column = 0;
+    
+                            /**
+                             * Position offset.
+                             * @member {number} offset
+                             * @memberof google.cloud.clouddms.v1.EntityIssue.Position
+                             * @instance
+                             */
+                            Position.prototype.offset = 0;
+    
+                            /**
+                             * Position length.
+                             * @member {number} length
+                             * @memberof google.cloud.clouddms.v1.EntityIssue.Position
+                             * @instance
+                             */
+                            Position.prototype.length = 0;
+    
+                            /**
+                             * Creates a new Position instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.clouddms.v1.EntityIssue.Position
+                             * @static
+                             * @param {google.cloud.clouddms.v1.EntityIssue.IPosition=} [properties] Properties to set
+                             * @returns {google.cloud.clouddms.v1.EntityIssue.Position} Position instance
+                             */
+                            Position.create = function create(properties) {
+                                return new Position(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Position message. Does not implicitly {@link google.cloud.clouddms.v1.EntityIssue.Position.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.clouddms.v1.EntityIssue.Position
+                             * @static
+                             * @param {google.cloud.clouddms.v1.EntityIssue.IPosition} message Position message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Position.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.line != null && Object.hasOwnProperty.call(message, "line"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.line);
+                                if (message.column != null && Object.hasOwnProperty.call(message, "column"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.column);
+                                if (message.offset != null && Object.hasOwnProperty.call(message, "offset"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.offset);
+                                if (message.length != null && Object.hasOwnProperty.call(message, "length"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.length);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Position message, length delimited. Does not implicitly {@link google.cloud.clouddms.v1.EntityIssue.Position.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.clouddms.v1.EntityIssue.Position
+                             * @static
+                             * @param {google.cloud.clouddms.v1.EntityIssue.IPosition} message Position message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Position.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Position message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.clouddms.v1.EntityIssue.Position
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.clouddms.v1.EntityIssue.Position} Position
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Position.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.clouddms.v1.EntityIssue.Position();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.line = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.column = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.offset = reader.int32();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.length = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Position message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.clouddms.v1.EntityIssue.Position
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.clouddms.v1.EntityIssue.Position} Position
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Position.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Position message.
+                             * @function verify
+                             * @memberof google.cloud.clouddms.v1.EntityIssue.Position
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Position.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.line != null && message.hasOwnProperty("line"))
+                                    if (!$util.isInteger(message.line))
+                                        return "line: integer expected";
+                                if (message.column != null && message.hasOwnProperty("column"))
+                                    if (!$util.isInteger(message.column))
+                                        return "column: integer expected";
+                                if (message.offset != null && message.hasOwnProperty("offset"))
+                                    if (!$util.isInteger(message.offset))
+                                        return "offset: integer expected";
+                                if (message.length != null && message.hasOwnProperty("length"))
+                                    if (!$util.isInteger(message.length))
+                                        return "length: integer expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Position message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.clouddms.v1.EntityIssue.Position
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.clouddms.v1.EntityIssue.Position} Position
+                             */
+                            Position.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.clouddms.v1.EntityIssue.Position)
+                                    return object;
+                                var message = new $root.google.cloud.clouddms.v1.EntityIssue.Position();
+                                if (object.line != null)
+                                    message.line = object.line | 0;
+                                if (object.column != null)
+                                    message.column = object.column | 0;
+                                if (object.offset != null)
+                                    message.offset = object.offset | 0;
+                                if (object.length != null)
+                                    message.length = object.length | 0;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Position message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.clouddms.v1.EntityIssue.Position
+                             * @static
+                             * @param {google.cloud.clouddms.v1.EntityIssue.Position} message Position
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Position.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.line = 0;
+                                    object.column = 0;
+                                    object.offset = 0;
+                                    object.length = 0;
+                                }
+                                if (message.line != null && message.hasOwnProperty("line"))
+                                    object.line = message.line;
+                                if (message.column != null && message.hasOwnProperty("column"))
+                                    object.column = message.column;
+                                if (message.offset != null && message.hasOwnProperty("offset"))
+                                    object.offset = message.offset;
+                                if (message.length != null && message.hasOwnProperty("length"))
+                                    object.length = message.length;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Position to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.clouddms.v1.EntityIssue.Position
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Position.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Position
+                             * @function getTypeUrl
+                             * @memberof google.cloud.clouddms.v1.EntityIssue.Position
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Position.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.clouddms.v1.EntityIssue.Position";
+                            };
+    
+                            return Position;
+                        })();
+    
+                        return EntityIssue;
+                    })();
+    
+                    /**
+                     * ValuePresentInList enum.
+                     * @name google.cloud.clouddms.v1.ValuePresentInList
+                     * @enum {number}
+                     * @property {number} VALUE_PRESENT_IN_LIST_UNSPECIFIED=0 VALUE_PRESENT_IN_LIST_UNSPECIFIED value
+                     * @property {number} VALUE_PRESENT_IN_LIST_IF_VALUE_LIST=1 VALUE_PRESENT_IN_LIST_IF_VALUE_LIST value
+                     * @property {number} VALUE_PRESENT_IN_LIST_IF_VALUE_NOT_LIST=2 VALUE_PRESENT_IN_LIST_IF_VALUE_NOT_LIST value
+                     */
+                    v1.ValuePresentInList = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "VALUE_PRESENT_IN_LIST_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "VALUE_PRESENT_IN_LIST_IF_VALUE_LIST"] = 1;
+                        values[valuesById[2] = "VALUE_PRESENT_IN_LIST_IF_VALUE_NOT_LIST"] = 2;
+                        return values;
+                    })();
+    
                     /**
                      * DatabaseEntityType enum.
                      * @name google.cloud.clouddms.v1.DatabaseEntityType
@@ -32116,6 +43773,26 @@
                     })();
     
                     /**
+                     * EntityNameTransformation enum.
+                     * @name google.cloud.clouddms.v1.EntityNameTransformation
+                     * @enum {number}
+                     * @property {number} ENTITY_NAME_TRANSFORMATION_UNSPECIFIED=0 ENTITY_NAME_TRANSFORMATION_UNSPECIFIED value
+                     * @property {number} ENTITY_NAME_TRANSFORMATION_NO_TRANSFORMATION=1 ENTITY_NAME_TRANSFORMATION_NO_TRANSFORMATION value
+                     * @property {number} ENTITY_NAME_TRANSFORMATION_LOWER_CASE=2 ENTITY_NAME_TRANSFORMATION_LOWER_CASE value
+                     * @property {number} ENTITY_NAME_TRANSFORMATION_UPPER_CASE=3 ENTITY_NAME_TRANSFORMATION_UPPER_CASE value
+                     * @property {number} ENTITY_NAME_TRANSFORMATION_CAPITALIZED_CASE=4 ENTITY_NAME_TRANSFORMATION_CAPITALIZED_CASE value
+                     */
+                    v1.EntityNameTransformation = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "ENTITY_NAME_TRANSFORMATION_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "ENTITY_NAME_TRANSFORMATION_NO_TRANSFORMATION"] = 1;
+                        values[valuesById[2] = "ENTITY_NAME_TRANSFORMATION_LOWER_CASE"] = 2;
+                        values[valuesById[3] = "ENTITY_NAME_TRANSFORMATION_UPPER_CASE"] = 3;
+                        values[valuesById[4] = "ENTITY_NAME_TRANSFORMATION_CAPITALIZED_CASE"] = 4;
+                        return values;
+                    })();
+    
+                    /**
                      * BackgroundJobType enum.
                      * @name google.cloud.clouddms.v1.BackgroundJobType
                      * @enum {number}
@@ -32148,6 +43825,44 @@
                         values[valuesById[0] = "IMPORT_RULES_FILE_FORMAT_UNSPECIFIED"] = 0;
                         values[valuesById[1] = "IMPORT_RULES_FILE_FORMAT_HARBOUR_BRIDGE_SESSION_FILE"] = 1;
                         values[valuesById[2] = "IMPORT_RULES_FILE_FORMAT_ORATOPG_CONFIG_FILE"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * ValueComparison enum.
+                     * @name google.cloud.clouddms.v1.ValueComparison
+                     * @enum {number}
+                     * @property {number} VALUE_COMPARISON_UNSPECIFIED=0 VALUE_COMPARISON_UNSPECIFIED value
+                     * @property {number} VALUE_COMPARISON_IF_VALUE_SMALLER_THAN=1 VALUE_COMPARISON_IF_VALUE_SMALLER_THAN value
+                     * @property {number} VALUE_COMPARISON_IF_VALUE_SMALLER_EQUAL_THAN=2 VALUE_COMPARISON_IF_VALUE_SMALLER_EQUAL_THAN value
+                     * @property {number} VALUE_COMPARISON_IF_VALUE_LARGER_THAN=3 VALUE_COMPARISON_IF_VALUE_LARGER_THAN value
+                     * @property {number} VALUE_COMPARISON_IF_VALUE_LARGER_EQUAL_THAN=4 VALUE_COMPARISON_IF_VALUE_LARGER_EQUAL_THAN value
+                     */
+                    v1.ValueComparison = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "VALUE_COMPARISON_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "VALUE_COMPARISON_IF_VALUE_SMALLER_THAN"] = 1;
+                        values[valuesById[2] = "VALUE_COMPARISON_IF_VALUE_SMALLER_EQUAL_THAN"] = 2;
+                        values[valuesById[3] = "VALUE_COMPARISON_IF_VALUE_LARGER_THAN"] = 3;
+                        values[valuesById[4] = "VALUE_COMPARISON_IF_VALUE_LARGER_EQUAL_THAN"] = 4;
+                        return values;
+                    })();
+    
+                    /**
+                     * NumericFilterOption enum.
+                     * @name google.cloud.clouddms.v1.NumericFilterOption
+                     * @enum {number}
+                     * @property {number} NUMERIC_FILTER_OPTION_UNSPECIFIED=0 NUMERIC_FILTER_OPTION_UNSPECIFIED value
+                     * @property {number} NUMERIC_FILTER_OPTION_ALL=1 NUMERIC_FILTER_OPTION_ALL value
+                     * @property {number} NUMERIC_FILTER_OPTION_LIMIT=2 NUMERIC_FILTER_OPTION_LIMIT value
+                     * @property {number} NUMERIC_FILTER_OPTION_LIMITLESS=3 NUMERIC_FILTER_OPTION_LIMITLESS value
+                     */
+                    v1.NumericFilterOption = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "NUMERIC_FILTER_OPTION_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "NUMERIC_FILTER_OPTION_ALL"] = 1;
+                        values[valuesById[2] = "NUMERIC_FILTER_OPTION_LIMIT"] = 2;
+                        values[valuesById[3] = "NUMERIC_FILTER_OPTION_LIMITLESS"] = 3;
                         return values;
                     })();
     
@@ -49689,6 +61404,181 @@
                 return Any;
             })();
     
+            protobuf.Empty = (function() {
+    
+                /**
+                 * Properties of an Empty.
+                 * @memberof google.protobuf
+                 * @interface IEmpty
+                 */
+    
+                /**
+                 * Constructs a new Empty.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Empty.
+                 * @implements IEmpty
+                 * @constructor
+                 * @param {google.protobuf.IEmpty=} [properties] Properties to set
+                 */
+                function Empty(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Creates a new Empty instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.IEmpty=} [properties] Properties to set
+                 * @returns {google.protobuf.Empty} Empty instance
+                 */
+                Empty.create = function create(properties) {
+                    return new Empty(properties);
+                };
+    
+                /**
+                 * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.IEmpty} message Empty message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Empty.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.IEmpty} message Empty message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Empty.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Empty message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Empty} Empty
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Empty.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Empty message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Empty} Empty
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Empty.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Empty message.
+                 * @function verify
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Empty.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Empty message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Empty} Empty
+                 */
+                Empty.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Empty)
+                        return object;
+                    return new $root.google.protobuf.Empty();
+                };
+    
+                /**
+                 * Creates a plain object from an Empty message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.Empty} message Empty
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Empty.toObject = function toObject() {
+                    return {};
+                };
+    
+                /**
+                 * Converts this Empty to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Empty
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Empty.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Empty
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Empty.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Empty";
+                };
+    
+                return Empty;
+            })();
+    
             protobuf.Struct = (function() {
     
                 /**
@@ -50560,181 +62450,6 @@
                 };
     
                 return ListValue;
-            })();
-    
-            protobuf.Empty = (function() {
-    
-                /**
-                 * Properties of an Empty.
-                 * @memberof google.protobuf
-                 * @interface IEmpty
-                 */
-    
-                /**
-                 * Constructs a new Empty.
-                 * @memberof google.protobuf
-                 * @classdesc Represents an Empty.
-                 * @implements IEmpty
-                 * @constructor
-                 * @param {google.protobuf.IEmpty=} [properties] Properties to set
-                 */
-                function Empty(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Creates a new Empty instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {google.protobuf.IEmpty=} [properties] Properties to set
-                 * @returns {google.protobuf.Empty} Empty instance
-                 */
-                Empty.create = function create(properties) {
-                    return new Empty(properties);
-                };
-    
-                /**
-                 * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {google.protobuf.IEmpty} message Empty message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Empty.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {google.protobuf.IEmpty} message Empty message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Empty.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes an Empty message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Empty} Empty
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Empty.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes an Empty message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Empty} Empty
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Empty.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies an Empty message.
-                 * @function verify
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Empty.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates an Empty message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Empty} Empty
-                 */
-                Empty.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Empty)
-                        return object;
-                    return new $root.google.protobuf.Empty();
-                };
-    
-                /**
-                 * Creates a plain object from an Empty message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {google.protobuf.Empty} message Empty
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Empty.toObject = function toObject() {
-                    return {};
-                };
-    
-                /**
-                 * Converts this Empty to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Empty
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Empty.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for Empty
-                 * @function getTypeUrl
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                Empty.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.protobuf.Empty";
-                };
-    
-                return Empty;
             })();
     
             protobuf.FieldMask = (function() {
