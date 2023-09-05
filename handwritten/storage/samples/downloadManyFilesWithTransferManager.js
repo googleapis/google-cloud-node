@@ -25,7 +25,7 @@ function main(
   firstFileName = 'file1.txt',
   secondFileName = 'file2.txt'
 ) {
-  // [START storage_download_many_files_transfer_manager]
+  // [START storage_transfer_manager_download_many]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
@@ -57,7 +57,7 @@ function main(
   }
 
   downloadManyFilesWithTransferManager().catch(console.error);
-  // [END storage_download_many_files_transfer_manager]
+  // [END storage_transfer_manager_download_many]
 }
 
 process.on('unhandledRejection', err => {

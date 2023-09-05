@@ -25,7 +25,7 @@ function main(
   firstFilePath = './local/path/to/file1.txt',
   secondFilePath = './local/path/to/file2.txt'
 ) {
-  // [START storage_upload_many_files_transfer_manager]
+  // [START storage_transfer_manager_upload_many]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
@@ -57,7 +57,7 @@ function main(
   }
 
   uploadManyFilesWithTransferManager().catch(console.error);
-  // [END storage_upload_many_files_transfer_manager]
+  // [END storage_transfer_manager_upload_many]
 }
 
 process.on('unhandledRejection', err => {

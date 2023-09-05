@@ -29,7 +29,7 @@ function main(
   destFileName = path.join(cwd, fileName),
   chunkSize = 1024
 ) {
-  // [START storage_download_many_files_transfer_manager]
+  // [START storage_transfer_manager_download_chunks_concurrently]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
@@ -67,7 +67,7 @@ function main(
   }
 
   downloadFileInChunksWithTransferManager().catch(console.error);
-  // [END storage_download_many_files_transfer_manager]
+  // [END storage_transfer_manager_download_chunks_concurrently]
 }
 
 process.on('unhandledRejection', err => {
