@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/channel-v3.0.0...channel-v3.0.1) (2023-09-06)
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4584](https://github.com/googleapis/google-cloud-node/issues/4584)) ([13537fc](https://github.com/googleapis/google-cloud-node/commit/13537fcd6e3c552199d5057daf3b00c24033c908))
+* **deps:** Update dependency @google-cloud/local-auth to v3 ([#4546](https://github.com/googleapis/google-cloud-node/issues/4546)) ([f2beef4](https://github.com/googleapis/google-cloud-node/commit/f2beef407ce694af7133d0013221c11e7f093a59))
+* **deps:** Update dependency google-auth-library to v9 ([#4560](https://github.com/googleapis/google-cloud-node/issues/4560)) ([e5099b7](https://github.com/googleapis/google-cloud-node/commit/e5099b7a475e0cfaf0d25aa8d6755cd7bc43cbe0))
+
 ## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/channel-v2.8.0...channel-v3.0.0) (2023-08-06)
 
 

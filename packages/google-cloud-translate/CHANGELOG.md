@@ -4,6 +4,16 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## [8.0.2](https://github.com/googleapis/google-cloud-node/compare/translate-v8.0.1...translate-v8.0.2) (2023-09-06)
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4588](https://github.com/googleapis/google-cloud-node/issues/4588)) ([e5ad564](https://github.com/googleapis/google-cloud-node/commit/e5ad564f74dc7a36c0e8cd8de173428a99f1deae))
+* **deps:** Update dependency @google-cloud/automl to v4 ([#4545](https://github.com/googleapis/google-cloud-node/issues/4545)) ([ccf817a](https://github.com/googleapis/google-cloud-node/commit/ccf817a2ce9f54b6cab93920a29b27fa30105846))
+* **deps:** Update dependency @google-cloud/promisify to v4 ([#4533](https://github.com/googleapis/google-cloud-node/issues/4533)) ([58950c9](https://github.com/googleapis/google-cloud-node/commit/58950c9e39d6f7f7e81d545b8e3a3166f51e457b))
+* **deps:** Update dependency @google-cloud/vision to v4 ([#4534](https://github.com/googleapis/google-cloud-node/issues/4534)) ([df60e7a](https://github.com/googleapis/google-cloud-node/commit/df60e7a2b3757cf75da9828a18df539f55ff2ca3))
+
 ## [8.0.1](https://github.com/googleapis/google-cloud-node/compare/translate-v8.0.0...translate-v8.0.1) (2023-08-09)
 
 

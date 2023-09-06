@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/language-v6.0.0...language-v6.1.0) (2023-09-06)
+
+
+### Features
+
+* [language] Add support for the v2 API ([#4538](https://github.com/googleapis/google-cloud-node/issues/4538)) ([f6ae7e4](https://github.com/googleapis/google-cloud-node/commit/f6ae7e464084f5d6f931e43b19479fa6219427f3))
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4586](https://github.com/googleapis/google-cloud-node/issues/4586)) ([4b18686](https://github.com/googleapis/google-cloud-node/commit/4b186867323b8b15469bf5e1cb890bf703b531b3))
+* **deps:** Update dependency @google-cloud/automl to v4 ([#4545](https://github.com/googleapis/google-cloud-node/issues/4545)) ([ccf817a](https://github.com/googleapis/google-cloud-node/commit/ccf817a2ce9f54b6cab93920a29b27fa30105846))
+
 ## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/language-v5.3.0...language-v6.0.0) (2023-08-06)
 
 

@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/video-stitcher-v1.0.0...video-stitcher-v2.0.0) (2023-09-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* [video-stitcher] use correct child_type annotation ([#4571](https://github.com/googleapis/google-cloud-node/issues/4571))
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4588](https://github.com/googleapis/google-cloud-node/issues/4588)) ([e5ad564](https://github.com/googleapis/google-cloud-node/commit/e5ad564f74dc7a36c0e8cd8de173428a99f1deae))
+* [video-stitcher] use correct child_type annotation ([#4571](https://github.com/googleapis/google-cloud-node/issues/4571)) ([fb59e44](https://github.com/googleapis/google-cloud-node/commit/fb59e44179eddc7e372320e097a6a271babac7eb))
+
 ## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/video-stitcher-v0.4.0...video-stitcher-v1.0.0) (2023-08-06)
 
 

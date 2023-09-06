@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+## [6.0.1](https://github.com/googleapis/google-cloud-node/compare/talent-v6.0.0...talent-v6.0.1) (2023-09-06)
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4588](https://github.com/googleapis/google-cloud-node/issues/4588)) ([e5ad564](https://github.com/googleapis/google-cloud-node/commit/e5ad564f74dc7a36c0e8cd8de173428a99f1deae))
+
 ## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/talent-v5.1.4...talent-v6.0.0) (2023-08-06)
 
 

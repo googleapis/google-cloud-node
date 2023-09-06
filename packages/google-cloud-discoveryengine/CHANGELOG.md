@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.0.0...discoveryengine-v1.1.0) (2023-09-06)
+
+
+### Features
+
+* [discoveryengine] support conversational / multi-turn search ([#4599](https://github.com/googleapis/google-cloud-node/issues/4599)) ([e9d23a8](https://github.com/googleapis/google-cloud-node/commit/e9d23a8deded01c17dd16c532776656eb8ce8934))
+* [discoveryengine] supported bring your own embedding feature ([#4595](https://github.com/googleapis/google-cloud-node/issues/4595)) ([8f1b74f](https://github.com/googleapis/google-cloud-node/commit/8f1b74f5e752501a669db5934f37dc7480a7eba5))
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4585](https://github.com/googleapis/google-cloud-node/issues/4585)) ([b6cea45](https://github.com/googleapis/google-cloud-node/commit/b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251))
+
 ## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v0.8.0...discoveryengine-v1.0.0) (2023-08-06)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/media-translation-v4.0.0...media-translation-v4.0.1) (2023-09-06)
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4586](https://github.com/googleapis/google-cloud-node/issues/4586)) ([4b18686](https://github.com/googleapis/google-cloud-node/commit/4b186867323b8b15469bf5e1cb890bf703b531b3))
+
 ## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/media-translation-v3.1.2...media-translation-v4.0.0) (2023-08-06)
 
 

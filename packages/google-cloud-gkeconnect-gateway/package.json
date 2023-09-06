@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/gke-connect-gateway",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "apigateway client for Node.js",
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/kms-inventory",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Inventory client for Node.js",
   "repository": {
     "type": "git",

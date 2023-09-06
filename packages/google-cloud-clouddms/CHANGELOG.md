@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/dms-v3.0.0...dms-v3.1.0) (2023-09-06)
+
+
+### Features
+
+* [clouddms] Adding GenerateTcpProxyScript API ([#4610](https://github.com/googleapis/google-cloud-node/issues/4610)) ([1a79bf7](https://github.com/googleapis/google-cloud-node/commit/1a79bf704f9cae5b58df19778f52496aeaf9bc06))
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4584](https://github.com/googleapis/google-cloud-node/issues/4584)) ([13537fc](https://github.com/googleapis/google-cloud-node/commit/13537fcd6e3c552199d5057daf3b00c24033c908))
+
 ## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/dms-v2.3.0...dms-v3.0.0) (2023-08-06)
 
 

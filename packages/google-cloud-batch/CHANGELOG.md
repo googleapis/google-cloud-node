@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.1.0...batch-v1.2.0) (2023-09-06)
+
+
+### Features
+
+* [batch] Add more compute resource API descriptions to match with VM's machine type field ([#4564](https://github.com/googleapis/google-cloud-node/issues/4564)) ([dcd8ccf](https://github.com/googleapis/google-cloud-node/commit/dcd8ccf3ca2d19c23e086b7970200f92559aa639))
+* [batch] add stderr_snippet to indicate the real stderr output by runnables to the execution field of status event ([#4570](https://github.com/googleapis/google-cloud-node/issues/4570)) ([fbae423](https://github.com/googleapis/google-cloud-node/commit/fbae42370b68b722949c0aaee6120b9348fe550e))
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4583](https://github.com/googleapis/google-cloud-node/issues/4583)) ([c3ddba8](https://github.com/googleapis/google-cloud-node/commit/c3ddba8df9fee6185e36a4e99f7c67b0319f1242))
+
 ## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.0.0...batch-v1.1.0) (2023-08-09)
 
 

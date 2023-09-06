@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/notebooks-v3.0.0...notebooks-v3.1.0) (2023-09-06)
+
+
+### Features
+
+* [notebooks] clients for Notebooks API V2 ([#4549](https://github.com/googleapis/google-cloud-node/issues/4549)) ([7a5cfa5](https://github.com/googleapis/google-cloud-node/commit/7a5cfa5720b5adc98015a8173158f5c3245c8187))
+* [notebooks] clients for Notebooks API V2 ([#4567](https://github.com/googleapis/google-cloud-node/issues/4567)) ([9cebaa2](https://github.com/googleapis/google-cloud-node/commit/9cebaa2aecc731f8fe9891453fc748f5b2be626b))
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4587](https://github.com/googleapis/google-cloud-node/issues/4587)) ([e3b1e7e](https://github.com/googleapis/google-cloud-node/commit/e3b1e7e46d666abb4df28c3cd69e97c08b88445a))
+
 ## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/notebooks-v2.1.4...notebooks-v3.0.0) (2023-08-06)
 
 

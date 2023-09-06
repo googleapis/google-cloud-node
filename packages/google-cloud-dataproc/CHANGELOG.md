@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v5.0.0...dataproc-v5.1.0) (2023-09-06)
+
+
+### Features
+
+* [dataproc] support min_num_instances for primary worker and InstanceFlexibilityPolicy for secondary worker ([#4574](https://github.com/googleapis/google-cloud-node/issues/4574)) ([5b112a6](https://github.com/googleapis/google-cloud-node/commit/5b112a6f8b73a8e3604c2465bacc64e799a9bcb0))
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4585](https://github.com/googleapis/google-cloud-node/issues/4585)) ([b6cea45](https://github.com/googleapis/google-cloud-node/commit/b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251))
+
 ## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v4.5.0...dataproc-v5.0.0) (2023-08-06)
 
 
