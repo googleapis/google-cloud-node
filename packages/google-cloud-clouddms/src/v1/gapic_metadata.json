@@ -20,6 +20,11 @@
                 "generateSshScript"
               ]
             },
+            "GenerateTcpProxyScript": {
+              "methods": [
+                "generateTcpProxyScript"
+              ]
+            },
             "GetConnectionProfile": {
               "methods": [
                 "getConnectionProfile"
@@ -33,6 +38,21 @@
             "GetConversionWorkspace": {
               "methods": [
                 "getConversionWorkspace"
+              ]
+            },
+            "CreateMappingRule": {
+              "methods": [
+                "createMappingRule"
+              ]
+            },
+            "DeleteMappingRule": {
+              "methods": [
+                "deleteMappingRule"
+              ]
+            },
+            "GetMappingRule": {
+              "methods": [
+                "getMappingRule"
               ]
             },
             "SearchBackgroundJobs": {
@@ -186,6 +206,13 @@
                 "listConversionWorkspaces",
                 "listConversionWorkspacesStream",
                 "listConversionWorkspacesAsync"
+              ]
+            },
+            "ListMappingRules": {
+              "methods": [
+                "listMappingRules",
+                "listMappingRulesStream",
+                "listMappingRulesAsync"
               ]
             },
             "DescribeDatabaseEntities": {
@@ -217,6 +244,11 @@
                 "generateSshScript"
               ]
             },
+            "GenerateTcpProxyScript": {
+              "methods": [
+                "generateTcpProxyScript"
+              ]
+            },
             "GetConnectionProfile": {
               "methods": [
                 "getConnectionProfile"
@@ -230,6 +262,21 @@
             "GetConversionWorkspace": {
               "methods": [
                 "getConversionWorkspace"
+              ]
+            },
+            "CreateMappingRule": {
+              "methods": [
+                "createMappingRule"
+              ]
+            },
+            "DeleteMappingRule": {
+              "methods": [
+                "deleteMappingRule"
+              ]
+            },
+            "GetMappingRule": {
+              "methods": [
+                "getMappingRule"
               ]
             },
             "SearchBackgroundJobs": {
@@ -383,6 +430,13 @@
                 "listConversionWorkspaces",
                 "listConversionWorkspacesStream",
                 "listConversionWorkspacesAsync"
+              ]
+            },
+            "ListMappingRules": {
+              "methods": [
+                "listMappingRules",
+                "listMappingRulesStream",
+                "listMappingRulesAsync"
               ]
             },
             "DescribeDatabaseEntities": {

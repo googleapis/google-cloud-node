@@ -32,6 +32,16 @@ function main() {
    *  Name of the migration job resource to verify.
    */
   // const name = 'abc123'
+  /**
+   *  Optional. Field mask is used to specify the changed fields to be verified.
+   *  It will not update the migration job.
+   */
+  // const updateMask = {}
+  /**
+   *  Optional. The changed migration job parameters to verify.
+   *  It will not update the migration job.
+   */
+  // const migrationJob = {}
 
   // Imports the Clouddms library
   const {DataMigrationServiceClient} = require('@google-cloud/dms').v1;

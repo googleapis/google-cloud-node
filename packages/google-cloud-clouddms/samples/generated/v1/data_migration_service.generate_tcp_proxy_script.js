@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main() {
-  // [START datamigration_v1_generated_DataMigrationService_RestartMigrationJob_async]
+function main(vmName, vmMachineType, vmSubnet) {
+  // [START datamigration_v1_generated_DataMigrationService_GenerateTcpProxyScript_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,14 +29,31 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Name of the migration job resource to restart.
+   *  Name of the migration job resource to generate the TCP Proxy script.
    */
-  // const name = 'abc123'
+  // const migrationJob = 'abc123'
   /**
-   *  Optional. Restart the migration job without running prior configuration
-   *  verification. Defaults to `false`.
+   *  Required. The name of the Compute instance that will host the proxy.
    */
-  // const skipValidation = true
+  // const vmName = 'abc123'
+  /**
+   *  Required. The type of the Compute instance that will host the proxy.
+   */
+  // const vmMachineType = 'abc123'
+  /**
+   *  Optional. The Google Cloud Platform zone to create the VM in. The fully
+   *  qualified name of the zone must be specified, including the region name,
+   *  for example "us-central1-b". If not specified, uses the "-b" zone of the
+   *  destination Connection Profile's region.
+   */
+  // const vmZone = 'abc123'
+  /**
+   *  Required. The name of the subnet the Compute instance will use for private
+   *  connectivity. Must be supplied in the form of
+   *  projects/{project}/regions/{region}/subnetworks/{subnetwork}.
+   *  Note: the region for the subnet must match the Compute instance region.
+   */
+  // const vmSubnet = 'abc123'
 
   // Imports the Clouddms library
   const {DataMigrationServiceClient} = require('@google-cloud/dms').v1;
@@ -44,19 +61,21 @@ function main() {
   // Instantiates a client
   const clouddmsClient = new DataMigrationServiceClient();
 
-  async function callRestartMigrationJob() {
+  async function callGenerateTcpProxyScript() {
     // Construct request
     const request = {
+      vmName,
+      vmMachineType,
+      vmSubnet,
     };
 
     // Run request
-    const [operation] = await clouddmsClient.restartMigrationJob(request);
-    const [response] = await operation.promise();
+    const response = await clouddmsClient.generateTcpProxyScript(request);
     console.log(response);
   }
 
-  callRestartMigrationJob();
-  // [END datamigration_v1_generated_DataMigrationService_RestartMigrationJob_async]
+  callGenerateTcpProxyScript();
+  // [END datamigration_v1_generated_DataMigrationService_GenerateTcpProxyScript_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main() {
-  // [START datamigration_v1_generated_DataMigrationService_RestartMigrationJob_async]
+function main(name) {
+  // [START datamigration_v1_generated_DataMigrationService_GetMappingRule_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,14 +29,14 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Name of the migration job resource to restart.
+   *  Required. Name of the mapping rule resource to get.
+   *  Example: conversionWorkspaces/123/mappingRules/rule123
+   *  In order to retrieve a previous revision of the mapping rule, also provide
+   *  the revision ID.
+   *  Example:
+   *  conversionWorkspace/123/mappingRules/rule123@c7cfa2a8c7cfa2a8c7cfa2a8c7cfa2a8
    */
   // const name = 'abc123'
-  /**
-   *  Optional. Restart the migration job without running prior configuration
-   *  verification. Defaults to `false`.
-   */
-  // const skipValidation = true
 
   // Imports the Clouddms library
   const {DataMigrationServiceClient} = require('@google-cloud/dms').v1;
@@ -44,19 +44,19 @@ function main() {
   // Instantiates a client
   const clouddmsClient = new DataMigrationServiceClient();
 
-  async function callRestartMigrationJob() {
+  async function callGetMappingRule() {
     // Construct request
     const request = {
+      name,
     };
 
     // Run request
-    const [operation] = await clouddmsClient.restartMigrationJob(request);
-    const [response] = await operation.promise();
+    const response = await clouddmsClient.getMappingRule(request);
     console.log(response);
   }
 
-  callRestartMigrationJob();
-  // [END datamigration_v1_generated_DataMigrationService_RestartMigrationJob_async]
+  callGetMappingRule();
+  // [END datamigration_v1_generated_DataMigrationService_GetMappingRule_async]
 }
 
 process.on('unhandledRejection', err => {

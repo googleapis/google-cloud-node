@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main() {
-  // [START datamigration_v1_generated_DataMigrationService_RestartMigrationJob_async]
+function main(name) {
+  // [START datamigration_v1_generated_DataMigrationService_DeleteMappingRule_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,14 +29,17 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Name of the migration job resource to restart.
+   *  Required. Name of the mapping rule resource to delete.
    */
   // const name = 'abc123'
   /**
-   *  Optional. Restart the migration job without running prior configuration
-   *  verification. Defaults to `false`.
+   *  Optional. A unique ID used to identify the request. If the server receives
+   *  two requests with the same ID, then the second request is ignored.
+   *  It is recommended to always set this value to a UUID.
+   *  The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
+   *  (_), and hyphens (-). The maximum length is 40 characters.
    */
-  // const skipValidation = true
+  // const requestId = 'abc123'
 
   // Imports the Clouddms library
   const {DataMigrationServiceClient} = require('@google-cloud/dms').v1;
@@ -44,19 +47,19 @@ function main() {
   // Instantiates a client
   const clouddmsClient = new DataMigrationServiceClient();
 
-  async function callRestartMigrationJob() {
+  async function callDeleteMappingRule() {
     // Construct request
     const request = {
+      name,
     };
 
     // Run request
-    const [operation] = await clouddmsClient.restartMigrationJob(request);
-    const [response] = await operation.promise();
+    const response = await clouddmsClient.deleteMappingRule(request);
     console.log(response);
   }
 
-  callRestartMigrationJob();
-  // [END datamigration_v1_generated_DataMigrationService_RestartMigrationJob_async]
+  callDeleteMappingRule();
+  // [END datamigration_v1_generated_DataMigrationService_DeleteMappingRule_async]
 }
 
 process.on('unhandledRejection', err => {

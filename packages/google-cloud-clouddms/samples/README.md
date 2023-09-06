@@ -17,23 +17,28 @@
   * [Data_migration_service.convert_conversion_workspace](#data_migration_service.convert_conversion_workspace)
   * [Data_migration_service.create_connection_profile](#data_migration_service.create_connection_profile)
   * [Data_migration_service.create_conversion_workspace](#data_migration_service.create_conversion_workspace)
+  * [Data_migration_service.create_mapping_rule](#data_migration_service.create_mapping_rule)
   * [Data_migration_service.create_migration_job](#data_migration_service.create_migration_job)
   * [Data_migration_service.create_private_connection](#data_migration_service.create_private_connection)
   * [Data_migration_service.delete_connection_profile](#data_migration_service.delete_connection_profile)
   * [Data_migration_service.delete_conversion_workspace](#data_migration_service.delete_conversion_workspace)
+  * [Data_migration_service.delete_mapping_rule](#data_migration_service.delete_mapping_rule)
   * [Data_migration_service.delete_migration_job](#data_migration_service.delete_migration_job)
   * [Data_migration_service.delete_private_connection](#data_migration_service.delete_private_connection)
   * [Data_migration_service.describe_conversion_workspace_revisions](#data_migration_service.describe_conversion_workspace_revisions)
   * [Data_migration_service.describe_database_entities](#data_migration_service.describe_database_entities)
   * [Data_migration_service.fetch_static_ips](#data_migration_service.fetch_static_ips)
   * [Data_migration_service.generate_ssh_script](#data_migration_service.generate_ssh_script)
+  * [Data_migration_service.generate_tcp_proxy_script](#data_migration_service.generate_tcp_proxy_script)
   * [Data_migration_service.get_connection_profile](#data_migration_service.get_connection_profile)
   * [Data_migration_service.get_conversion_workspace](#data_migration_service.get_conversion_workspace)
+  * [Data_migration_service.get_mapping_rule](#data_migration_service.get_mapping_rule)
   * [Data_migration_service.get_migration_job](#data_migration_service.get_migration_job)
   * [Data_migration_service.get_private_connection](#data_migration_service.get_private_connection)
   * [Data_migration_service.import_mapping_rules](#data_migration_service.import_mapping_rules)
   * [Data_migration_service.list_connection_profiles](#data_migration_service.list_connection_profiles)
   * [Data_migration_service.list_conversion_workspaces](#data_migration_service.list_conversion_workspaces)
+  * [Data_migration_service.list_mapping_rules](#data_migration_service.list_mapping_rules)
   * [Data_migration_service.list_migration_jobs](#data_migration_service.list_migration_jobs)
   * [Data_migration_service.list_private_connections](#data_migration_service.list_private_connections)
   * [Data_migration_service.promote_migration_job](#data_migration_service.promote_migration_job)
@@ -150,6 +155,23 @@ __Usage:__
 
 
 
+### Data_migration_service.create_mapping_rule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.create_mapping_rule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.create_mapping_rule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.create_mapping_rule.js`
+
+
+-----
+
+
+
+
 ### Data_migration_service.create_migration_job
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.create_migration_job.js).
@@ -211,6 +233,23 @@ __Usage:__
 
 
 `node packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.delete_conversion_workspace.js`
+
+
+-----
+
+
+
+
+### Data_migration_service.delete_mapping_rule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.delete_mapping_rule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.delete_mapping_rule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.delete_mapping_rule.js`
 
 
 -----
@@ -320,6 +359,23 @@ __Usage:__
 
 
 
+### Data_migration_service.generate_tcp_proxy_script
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.generate_tcp_proxy_script.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.generate_tcp_proxy_script.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.generate_tcp_proxy_script.js`
+
+
+-----
+
+
+
+
 ### Data_migration_service.get_connection_profile
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.get_connection_profile.js).
@@ -347,6 +403,23 @@ __Usage:__
 
 
 `node packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.get_conversion_workspace.js`
+
+
+-----
+
+
+
+
+### Data_migration_service.get_mapping_rule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.get_mapping_rule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.get_mapping_rule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.get_mapping_rule.js`
 
 
 -----
@@ -432,6 +505,23 @@ __Usage:__
 
 
 `node packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.list_conversion_workspaces.js`
+
+
+-----
+
+
+
+
+### Data_migration_service.list_mapping_rules
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.list_mapping_rules.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.list_mapping_rules.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.list_mapping_rules.js`
 
 
 -----
