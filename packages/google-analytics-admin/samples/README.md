@@ -44,6 +44,7 @@
   * [Analytics_admin_service.create_google_ads_link](#analytics_admin_service.create_google_ads_link)
   * [Analytics_admin_service.create_measurement_protocol_secret](#analytics_admin_service.create_measurement_protocol_secret)
   * [Analytics_admin_service.create_property](#analytics_admin_service.create_property)
+  * [Analytics_admin_service.create_s_k_ad_network_conversion_value_schema](#analytics_admin_service.create_s_k_ad_network_conversion_value_schema)
   * [Analytics_admin_service.create_search_ads360_link](#analytics_admin_service.create_search_ads360_link)
   * [Analytics_admin_service.create_user_link](#analytics_admin_service.create_user_link)
   * [Analytics_admin_service.create_web_data_stream](#analytics_admin_service.create_web_data_stream)
@@ -64,6 +65,7 @@
   * [Analytics_admin_service.delete_ios_app_data_stream](#analytics_admin_service.delete_ios_app_data_stream)
   * [Analytics_admin_service.delete_measurement_protocol_secret](#analytics_admin_service.delete_measurement_protocol_secret)
   * [Analytics_admin_service.delete_property](#analytics_admin_service.delete_property)
+  * [Analytics_admin_service.delete_s_k_ad_network_conversion_value_schema](#analytics_admin_service.delete_s_k_ad_network_conversion_value_schema)
   * [Analytics_admin_service.delete_search_ads360_link](#analytics_admin_service.delete_search_ads360_link)
   * [Analytics_admin_service.delete_user_link](#analytics_admin_service.delete_user_link)
   * [Analytics_admin_service.delete_web_data_stream](#analytics_admin_service.delete_web_data_stream)
@@ -93,6 +95,7 @@
   * [Analytics_admin_service.get_ios_app_data_stream](#analytics_admin_service.get_ios_app_data_stream)
   * [Analytics_admin_service.get_measurement_protocol_secret](#analytics_admin_service.get_measurement_protocol_secret)
   * [Analytics_admin_service.get_property](#analytics_admin_service.get_property)
+  * [Analytics_admin_service.get_s_k_ad_network_conversion_value_schema](#analytics_admin_service.get_s_k_ad_network_conversion_value_schema)
   * [Analytics_admin_service.get_search_ads360_link](#analytics_admin_service.get_search_ads360_link)
   * [Analytics_admin_service.get_user_link](#analytics_admin_service.get_user_link)
   * [Analytics_admin_service.get_web_data_stream](#analytics_admin_service.get_web_data_stream)
@@ -118,6 +121,7 @@
   * [Analytics_admin_service.list_ios_app_data_streams](#analytics_admin_service.list_ios_app_data_streams)
   * [Analytics_admin_service.list_measurement_protocol_secrets](#analytics_admin_service.list_measurement_protocol_secrets)
   * [Analytics_admin_service.list_properties](#analytics_admin_service.list_properties)
+  * [Analytics_admin_service.list_s_k_ad_network_conversion_value_schemas](#analytics_admin_service.list_s_k_ad_network_conversion_value_schemas)
   * [Analytics_admin_service.list_search_ads360_links](#analytics_admin_service.list_search_ads360_links)
   * [Analytics_admin_service.list_user_links](#analytics_admin_service.list_user_links)
   * [Analytics_admin_service.list_web_data_streams](#analytics_admin_service.list_web_data_streams)
@@ -145,6 +149,7 @@
   * [Analytics_admin_service.update_ios_app_data_stream](#analytics_admin_service.update_ios_app_data_stream)
   * [Analytics_admin_service.update_measurement_protocol_secret](#analytics_admin_service.update_measurement_protocol_secret)
   * [Analytics_admin_service.update_property](#analytics_admin_service.update_property)
+  * [Analytics_admin_service.update_s_k_ad_network_conversion_value_schema](#analytics_admin_service.update_s_k_ad_network_conversion_value_schema)
   * [Analytics_admin_service.update_search_ads360_link](#analytics_admin_service.update_search_ads360_link)
   * [Analytics_admin_service.update_user_link](#analytics_admin_service.update_user_link)
   * [Analytics_admin_service.update_web_data_stream](#analytics_admin_service.update_web_data_stream)
@@ -758,6 +763,23 @@ __Usage:__
 
 
 
+### Analytics_admin_service.create_s_k_ad_network_conversion_value_schema
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.create_s_k_ad_network_conversion_value_schema.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.create_s_k_ad_network_conversion_value_schema.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.create_s_k_ad_network_conversion_value_schema.js`
+
+
+-----
+
+
+
+
 ### Analytics_admin_service.create_search_ads360_link
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.create_search_ads360_link.js).
@@ -1091,6 +1113,23 @@ __Usage:__
 
 
 `node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.delete_property.js`
+
+
+-----
+
+
+
+
+### Analytics_admin_service.delete_s_k_ad_network_conversion_value_schema
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.delete_s_k_ad_network_conversion_value_schema.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.delete_s_k_ad_network_conversion_value_schema.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.delete_s_k_ad_network_conversion_value_schema.js`
 
 
 -----
@@ -1591,6 +1630,23 @@ __Usage:__
 
 
 
+### Analytics_admin_service.get_s_k_ad_network_conversion_value_schema
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.get_s_k_ad_network_conversion_value_schema.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.get_s_k_ad_network_conversion_value_schema.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.get_s_k_ad_network_conversion_value_schema.js`
+
+
+-----
+
+
+
+
 ### Analytics_admin_service.get_search_ads360_link
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.get_search_ads360_link.js).
@@ -2009,6 +2065,23 @@ __Usage:__
 
 
 `node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.list_properties.js`
+
+
+-----
+
+
+
+
+### Analytics_admin_service.list_s_k_ad_network_conversion_value_schemas
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.list_s_k_ad_network_conversion_value_schemas.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.list_s_k_ad_network_conversion_value_schemas.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.list_s_k_ad_network_conversion_value_schemas.js`
 
 
 -----
@@ -2468,6 +2541,23 @@ __Usage:__
 
 
 `node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.update_property.js`
+
+
+-----
+
+
+
+
+### Analytics_admin_service.update_s_k_ad_network_conversion_value_schema
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.update_s_k_ad_network_conversion_value_schema.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.update_s_k_ad_network_conversion_value_schema.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-admin/samples/generated/v1alpha/analytics_admin_service.update_s_k_ad_network_conversion_value_schema.js`
 
 
 -----

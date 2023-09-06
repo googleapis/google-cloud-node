@@ -264,6 +264,10 @@ export class AnalyticsAdminServiceClient {
       propertyUserLinkPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}/userLinks/{user_link}'
       ),
+      sKAdNetworkConversionValueSchemaPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'properties/{property}/dataStreams/{data_stream}/sKAdNetworkConversionValueSchema/{skadnetwork_conversion_value_schema}'
+        ),
       searchAds360LinkPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}/searchAds360Links/{search_ads_360_link}'
       ),
@@ -312,6 +316,11 @@ export class AnalyticsAdminServiceClient {
         'pageToken',
         'nextPageToken',
         'measurementProtocolSecrets'
+      ),
+      listSKAdNetworkConversionValueSchemas: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'skadnetworkConversionValueSchemas'
       ),
       searchChangeHistoryEvents: new this._gaxModule.PageDescriptor(
         'pageToken',
@@ -478,6 +487,11 @@ export class AnalyticsAdminServiceClient {
       'deleteMeasurementProtocolSecret',
       'updateMeasurementProtocolSecret',
       'acknowledgeUserDataCollection',
+      'getSkAdNetworkConversionValueSchema',
+      'createSkAdNetworkConversionValueSchema',
+      'deleteSkAdNetworkConversionValueSchema',
+      'updateSkAdNetworkConversionValueSchema',
+      'listSkAdNetworkConversionValueSchemas',
       'searchChangeHistoryEvents',
       'getGoogleSignalsSettings',
       'updateGoogleSignalsSettings',
@@ -3420,6 +3434,417 @@ export class AnalyticsAdminServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.acknowledgeUserDataCollection(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Looks up a single SKAdNetworkConversionValueSchema.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of SKAdNetwork conversion value schema to look
+   *   up. Format:
+   *   properties/{property}/dataStreams/{dataStream}/sKAdNetworkConversionValueSchema/{skadnetwork_conversion_value_schema}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema|SKAdNetworkConversionValueSchema}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.get_s_k_ad_network_conversion_value_schema.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetSKAdNetworkConversionValueSchema_async
+   */
+  getSKAdNetworkConversionValueSchema(
+    request?: protos.google.analytics.admin.v1alpha.IGetSKAdNetworkConversionValueSchemaRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema,
+      (
+        | protos.google.analytics.admin.v1alpha.IGetSKAdNetworkConversionValueSchemaRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getSKAdNetworkConversionValueSchema(
+    request: protos.google.analytics.admin.v1alpha.IGetSKAdNetworkConversionValueSchemaRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema,
+      | protos.google.analytics.admin.v1alpha.IGetSKAdNetworkConversionValueSchemaRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getSKAdNetworkConversionValueSchema(
+    request: protos.google.analytics.admin.v1alpha.IGetSKAdNetworkConversionValueSchemaRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema,
+      | protos.google.analytics.admin.v1alpha.IGetSKAdNetworkConversionValueSchemaRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getSKAdNetworkConversionValueSchema(
+    request?: protos.google.analytics.admin.v1alpha.IGetSKAdNetworkConversionValueSchemaRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema,
+          | protos.google.analytics.admin.v1alpha.IGetSKAdNetworkConversionValueSchemaRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema,
+      | protos.google.analytics.admin.v1alpha.IGetSKAdNetworkConversionValueSchemaRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema,
+      (
+        | protos.google.analytics.admin.v1alpha.IGetSKAdNetworkConversionValueSchemaRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getSkAdNetworkConversionValueSchema(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Creates a SKAdNetworkConversionValueSchema.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this schema will be created.
+   *   Format: properties/{property}/dataStreams/{dataStream}
+   * @param {google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema} request.skadnetworkConversionValueSchema
+   *   Required. SKAdNetwork conversion value schema to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema|SKAdNetworkConversionValueSchema}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.create_s_k_ad_network_conversion_value_schema.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateSKAdNetworkConversionValueSchema_async
+   */
+  createSKAdNetworkConversionValueSchema(
+    request?: protos.google.analytics.admin.v1alpha.ICreateSKAdNetworkConversionValueSchemaRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema,
+      (
+        | protos.google.analytics.admin.v1alpha.ICreateSKAdNetworkConversionValueSchemaRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createSKAdNetworkConversionValueSchema(
+    request: protos.google.analytics.admin.v1alpha.ICreateSKAdNetworkConversionValueSchemaRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema,
+      | protos.google.analytics.admin.v1alpha.ICreateSKAdNetworkConversionValueSchemaRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createSKAdNetworkConversionValueSchema(
+    request: protos.google.analytics.admin.v1alpha.ICreateSKAdNetworkConversionValueSchemaRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema,
+      | protos.google.analytics.admin.v1alpha.ICreateSKAdNetworkConversionValueSchemaRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createSKAdNetworkConversionValueSchema(
+    request?: protos.google.analytics.admin.v1alpha.ICreateSKAdNetworkConversionValueSchemaRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema,
+          | protos.google.analytics.admin.v1alpha.ICreateSKAdNetworkConversionValueSchemaRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema,
+      | protos.google.analytics.admin.v1alpha.ICreateSKAdNetworkConversionValueSchemaRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema,
+      (
+        | protos.google.analytics.admin.v1alpha.ICreateSKAdNetworkConversionValueSchemaRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createSkAdNetworkConversionValueSchema(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Deletes target SKAdNetworkConversionValueSchema.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the SKAdNetworkConversionValueSchema to delete.
+   *   Format:
+   *   properties/{property}/dataStreams/{dataStream}/sKAdNetworkConversionValueSchema/{skadnetwork_conversion_value_schema}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.delete_s_k_ad_network_conversion_value_schema.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteSKAdNetworkConversionValueSchema_async
+   */
+  deleteSKAdNetworkConversionValueSchema(
+    request?: protos.google.analytics.admin.v1alpha.IDeleteSKAdNetworkConversionValueSchemaRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.analytics.admin.v1alpha.IDeleteSKAdNetworkConversionValueSchemaRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  deleteSKAdNetworkConversionValueSchema(
+    request: protos.google.analytics.admin.v1alpha.IDeleteSKAdNetworkConversionValueSchemaRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteSKAdNetworkConversionValueSchemaRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteSKAdNetworkConversionValueSchema(
+    request: protos.google.analytics.admin.v1alpha.IDeleteSKAdNetworkConversionValueSchemaRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteSKAdNetworkConversionValueSchemaRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteSKAdNetworkConversionValueSchema(
+    request?: protos.google.analytics.admin.v1alpha.IDeleteSKAdNetworkConversionValueSchemaRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteSKAdNetworkConversionValueSchemaRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteSKAdNetworkConversionValueSchemaRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.analytics.admin.v1alpha.IDeleteSKAdNetworkConversionValueSchemaRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteSkAdNetworkConversionValueSchema(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Updates a SKAdNetworkConversionValueSchema.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema} request.skadnetworkConversionValueSchema
+   *   Required. SKAdNetwork conversion value schema to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to be updated. Omitted fields will not be
+   *   updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema|SKAdNetworkConversionValueSchema}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.update_s_k_ad_network_conversion_value_schema.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateSKAdNetworkConversionValueSchema_async
+   */
+  updateSKAdNetworkConversionValueSchema(
+    request?: protos.google.analytics.admin.v1alpha.IUpdateSKAdNetworkConversionValueSchemaRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateSKAdNetworkConversionValueSchemaRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateSKAdNetworkConversionValueSchema(
+    request: protos.google.analytics.admin.v1alpha.IUpdateSKAdNetworkConversionValueSchemaRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema,
+      | protos.google.analytics.admin.v1alpha.IUpdateSKAdNetworkConversionValueSchemaRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSKAdNetworkConversionValueSchema(
+    request: protos.google.analytics.admin.v1alpha.IUpdateSKAdNetworkConversionValueSchemaRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema,
+      | protos.google.analytics.admin.v1alpha.IUpdateSKAdNetworkConversionValueSchemaRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSKAdNetworkConversionValueSchema(
+    request?: protos.google.analytics.admin.v1alpha.IUpdateSKAdNetworkConversionValueSchemaRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema,
+          | protos.google.analytics.admin.v1alpha.IUpdateSKAdNetworkConversionValueSchemaRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema,
+      | protos.google.analytics.admin.v1alpha.IUpdateSKAdNetworkConversionValueSchemaRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateSKAdNetworkConversionValueSchemaRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'skadnetwork_conversion_value_schema.name':
+          request.skadnetworkConversionValueSchema!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateSkAdNetworkConversionValueSchema(
       request,
       options,
       callback
@@ -12381,6 +12806,226 @@ export class AnalyticsAdminServiceClient {
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret>;
   }
   /**
+   * Lists SKAdNetworkConversionValueSchema on a stream.
+   * Properties can have at most one SKAdNetworkConversionValueSchema.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Format:
+   *   properties/{property_id}/dataStreams/{dataStream}/sKAdNetworkConversionValueSchema
+   *   Example: properties/1234/dataStreams/5678/sKAdNetworkConversionValueSchema
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return. The service may return
+   *   fewer than this value, even if there are additional pages.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200; (higher values will be coerced to the maximum)
+   * @param {string} request.pageToken
+   *   A page token, received from a previous
+   *   `ListSKAdNetworkConversionValueSchemas` call. Provide this to retrieve the
+   *   subsequent page. When paginating, all other parameters provided to
+   *   `ListSKAdNetworkConversionValueSchema` must match the call that provided
+   *   the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema|SKAdNetworkConversionValueSchema}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listSKAdNetworkConversionValueSchemasAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listSKAdNetworkConversionValueSchemas(
+    request?: protos.google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema[],
+      protos.google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasRequest | null,
+      protos.google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasResponse,
+    ]
+  >;
+  listSKAdNetworkConversionValueSchemas(
+    request: protos.google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasRequest,
+      | protos.google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema
+    >
+  ): void;
+  listSKAdNetworkConversionValueSchemas(
+    request: protos.google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasRequest,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasRequest,
+      | protos.google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema
+    >
+  ): void;
+  listSKAdNetworkConversionValueSchemas(
+    request?: protos.google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasRequest,
+          | protos.google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema
+        >,
+    callback?: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasRequest,
+      | protos.google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema[],
+      protos.google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasRequest | null,
+      protos.google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listSkAdNetworkConversionValueSchemas(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Format:
+   *   properties/{property_id}/dataStreams/{dataStream}/sKAdNetworkConversionValueSchema
+   *   Example: properties/1234/dataStreams/5678/sKAdNetworkConversionValueSchema
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return. The service may return
+   *   fewer than this value, even if there are additional pages.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200; (higher values will be coerced to the maximum)
+   * @param {string} request.pageToken
+   *   A page token, received from a previous
+   *   `ListSKAdNetworkConversionValueSchemas` call. Provide this to retrieve the
+   *   subsequent page. When paginating, all other parameters provided to
+   *   `ListSKAdNetworkConversionValueSchema` must match the call that provided
+   *   the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema|SKAdNetworkConversionValueSchema} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listSKAdNetworkConversionValueSchemasAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listSKAdNetworkConversionValueSchemasStream(
+    request?: protos.google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listSkAdNetworkConversionValueSchemas'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listSKAdNetworkConversionValueSchemas.createStream(
+      this.innerApiCalls.listSkAdNetworkConversionValueSchemas as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listSKAdNetworkConversionValueSchemas`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Format:
+   *   properties/{property_id}/dataStreams/{dataStream}/sKAdNetworkConversionValueSchema
+   *   Example: properties/1234/dataStreams/5678/sKAdNetworkConversionValueSchema
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return. The service may return
+   *   fewer than this value, even if there are additional pages.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200; (higher values will be coerced to the maximum)
+   * @param {string} request.pageToken
+   *   A page token, received from a previous
+   *   `ListSKAdNetworkConversionValueSchemas` call. Provide this to retrieve the
+   *   subsequent page. When paginating, all other parameters provided to
+   *   `ListSKAdNetworkConversionValueSchema` must match the call that provided
+   *   the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema|SKAdNetworkConversionValueSchema}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/analytics_admin_service.list_s_k_ad_network_conversion_value_schemas.js</caption>
+   * region_tag:analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListSKAdNetworkConversionValueSchemas_async
+   */
+  listSKAdNetworkConversionValueSchemasAsync(
+    request?: protos.google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listSkAdNetworkConversionValueSchemas'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listSKAdNetworkConversionValueSchemas.asyncIterate(
+      this.innerApiCalls['listSkAdNetworkConversionValueSchemas'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema>;
+  }
+  /**
    * Searches through all changes to an account or its children given the
    * specified set of filters.
    *
@@ -16577,6 +17222,73 @@ export class AnalyticsAdminServiceClient {
     return this.pathTemplates.propertyUserLinkPathTemplate.match(
       propertyUserLinkName
     ).user_link;
+  }
+
+  /**
+   * Return a fully-qualified sKAdNetworkConversionValueSchema resource name string.
+   *
+   * @param {string} property
+   * @param {string} data_stream
+   * @param {string} skadnetwork_conversion_value_schema
+   * @returns {string} Resource name string.
+   */
+  sKAdNetworkConversionValueSchemaPath(
+    property: string,
+    dataStream: string,
+    skadnetworkConversionValueSchema: string
+  ) {
+    return this.pathTemplates.sKAdNetworkConversionValueSchemaPathTemplate.render(
+      {
+        property: property,
+        data_stream: dataStream,
+        skadnetwork_conversion_value_schema: skadnetworkConversionValueSchema,
+      }
+    );
+  }
+
+  /**
+   * Parse the property from SKAdNetworkConversionValueSchema resource.
+   *
+   * @param {string} sKAdNetworkConversionValueSchemaName
+   *   A fully-qualified path representing SKAdNetworkConversionValueSchema resource.
+   * @returns {string} A string representing the property.
+   */
+  matchPropertyFromSKAdNetworkConversionValueSchemaName(
+    sKAdNetworkConversionValueSchemaName: string
+  ) {
+    return this.pathTemplates.sKAdNetworkConversionValueSchemaPathTemplate.match(
+      sKAdNetworkConversionValueSchemaName
+    ).property;
+  }
+
+  /**
+   * Parse the data_stream from SKAdNetworkConversionValueSchema resource.
+   *
+   * @param {string} sKAdNetworkConversionValueSchemaName
+   *   A fully-qualified path representing SKAdNetworkConversionValueSchema resource.
+   * @returns {string} A string representing the data_stream.
+   */
+  matchDataStreamFromSKAdNetworkConversionValueSchemaName(
+    sKAdNetworkConversionValueSchemaName: string
+  ) {
+    return this.pathTemplates.sKAdNetworkConversionValueSchemaPathTemplate.match(
+      sKAdNetworkConversionValueSchemaName
+    ).data_stream;
+  }
+
+  /**
+   * Parse the skadnetwork_conversion_value_schema from SKAdNetworkConversionValueSchema resource.
+   *
+   * @param {string} sKAdNetworkConversionValueSchemaName
+   *   A fully-qualified path representing SKAdNetworkConversionValueSchema resource.
+   * @returns {string} A string representing the skadnetwork_conversion_value_schema.
+   */
+  matchSkadnetworkConversionValueSchemaFromSKAdNetworkConversionValueSchemaName(
+    sKAdNetworkConversionValueSchemaName: string
+  ) {
+    return this.pathTemplates.sKAdNetworkConversionValueSchemaPathTemplate.match(
+      sKAdNetworkConversionValueSchemaName
+    ).skadnetwork_conversion_value_schema;
   }
 
   /**
