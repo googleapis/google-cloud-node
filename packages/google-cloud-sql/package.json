@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/sql",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Cloud SQL Admin API client for Node.js",
   "repository": {
     "type": "git",
