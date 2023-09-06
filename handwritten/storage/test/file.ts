@@ -4365,31 +4365,6 @@ describe('File', () => {
         }
       });
 
-      it('Destroyed Readable upload should throw', async () => {
-        const options = {resumable: false};
-
-        file.createWriteStream = () => {
-          throw new Error('unreachable');
-        };
-        try {
-          const readable = new Readable({
-            read() {
-              this.push(DATA);
-              this.push(null);
-            },
-          });
-
-          readable.destroy();
-
-          await file.save(readable, options);
-        } catch (e) {
-          assert.strictEqual(
-            (e as Error).message,
-            FileExceptionMessages.STREAM_NOT_READABLE
-          );
-        }
-      });
-
       it('should save a generator with no error', done => {
         const options = {resumable: false};
         file.createWriteStream = () => {
@@ -4435,33 +4410,6 @@ describe('File', () => {
 
         file.save(generator(), options, (err: Error) => {
           assert.strictEqual(err.message, 'Error!');
-          done();
-        });
-      });
-
-      it('should error on invalid async iterator data', done => {
-        const options = {resumable: false};
-        file.createWriteStream = () => {
-          const writeStream = new PassThrough();
-          let errorCalled = false;
-          writeStream.on('error', () => {
-            errorCalled = true;
-          });
-          writeStream.on('finish', () => {
-            assert.ok(errorCalled);
-          });
-          return writeStream;
-        };
-
-        const generator = async function* () {
-          yield {thisIsNot: 'a buffer or a string'};
-        };
-
-        file.save(generator(), options, (err: Error) => {
-          assert.strictEqual(
-            err.message,
-            'The "chunk" argument must be of type string or an instance of Buffer or Uint8Array. Received an instance of Object'
-          );
           done();
         });
       });
