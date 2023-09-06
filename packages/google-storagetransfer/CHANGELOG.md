@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/storage-transfer-v3.0.0...storage-transfer-v3.0.1) (2023-09-06)
+
+
+### Bug Fixes
+
+* [storagetransfer,grafeas] simplify logic for HTTP/1.1 REST fallback option ([#4590](https://github.com/googleapis/google-cloud-node/issues/4590)) ([14fffdf](https://github.com/googleapis/google-cloud-node/commit/14fffdf46568466e9ae02d5585da9721aa9ad83c))
+
 ## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/storage-transfer-v2.4.0...storage-transfer-v3.0.0) (2023-08-06)
 
 

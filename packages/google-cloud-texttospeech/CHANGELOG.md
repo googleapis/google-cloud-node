@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+## [5.0.1](https://github.com/googleapis/google-cloud-node/compare/text-to-speech-v5.0.0...text-to-speech-v5.0.1) (2023-09-06)
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4588](https://github.com/googleapis/google-cloud-node/issues/4588)) ([e5ad564](https://github.com/googleapis/google-cloud-node/commit/e5ad564f74dc7a36c0e8cd8de173428a99f1deae))
+
 ## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/text-to-speech-v4.2.3...text-to-speech-v5.0.0) (2023-08-06)
 
 

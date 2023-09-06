@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [4.0.2](https://github.com/googleapis/google-cloud-node/compare/vision-v4.0.1...vision-v4.0.2) (2023-09-06)
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4588](https://github.com/googleapis/google-cloud-node/issues/4588)) ([e5ad564](https://github.com/googleapis/google-cloud-node/commit/e5ad564f74dc7a36c0e8cd8de173428a99f1deae))
+* **deps:** Update dependency @google-cloud/promisify to v4 ([#4533](https://github.com/googleapis/google-cloud-node/issues/4533)) ([58950c9](https://github.com/googleapis/google-cloud-node/commit/58950c9e39d6f7f7e81d545b8e3a3166f51e457b))
+* **deps:** Update dependency pureimage to ^0.4.0 ([#4550](https://github.com/googleapis/google-cloud-node/issues/4550)) ([338ba13](https://github.com/googleapis/google-cloud-node/commit/338ba13af6247fb343adc8ffc998faec7dcc06bd))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/vision-v4.0.0...vision-v4.0.1) (2023-08-09)
 
 
