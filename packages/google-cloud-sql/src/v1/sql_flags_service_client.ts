@@ -337,7 +337,7 @@ export class SqlFlagsServiceClient {
     [
       protos.google.cloud.sql.v1.IFlagsListResponse,
       protos.google.cloud.sql.v1.ISqlFlagsListRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   list(
@@ -375,7 +375,7 @@ export class SqlFlagsServiceClient {
     [
       protos.google.cloud.sql.v1.IFlagsListResponse,
       protos.google.cloud.sql.v1.ISqlFlagsListRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

@@ -374,7 +374,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   addServerCa(
@@ -423,7 +423,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesAddServerCaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -473,7 +473,7 @@ export class SqlInstancesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlInstancesCloneRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   clone(
@@ -519,7 +519,7 @@ export class SqlInstancesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlInstancesCloneRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -566,7 +566,7 @@ export class SqlInstancesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlInstancesDeleteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -612,7 +612,7 @@ export class SqlInstancesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlInstancesDeleteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -664,7 +664,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteMasterRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   demoteMaster(
@@ -713,7 +713,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesDemoteMasterRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -762,7 +762,7 @@ export class SqlInstancesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlInstancesExportRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   export(
@@ -808,7 +808,7 @@ export class SqlInstancesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlInstancesExportRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -863,7 +863,7 @@ export class SqlInstancesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlInstancesFailoverRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   failover(
@@ -909,7 +909,7 @@ export class SqlInstancesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlInstancesFailoverRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -958,7 +958,7 @@ export class SqlInstancesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlInstancesReencryptRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   reencrypt(
@@ -1004,7 +1004,7 @@ export class SqlInstancesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlInstancesReencryptRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1051,7 +1051,7 @@ export class SqlInstancesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IDatabaseInstance,
       protos.google.cloud.sql.v1beta4.ISqlInstancesGetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -1097,7 +1097,7 @@ export class SqlInstancesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IDatabaseInstance,
       protos.google.cloud.sql.v1beta4.ISqlInstancesGetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1146,7 +1146,7 @@ export class SqlInstancesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlInstancesImportRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   import(
@@ -1192,7 +1192,7 @@ export class SqlInstancesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlInstancesImportRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1239,7 +1239,7 @@ export class SqlInstancesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlInstancesInsertRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -1285,7 +1285,7 @@ export class SqlInstancesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlInstancesInsertRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1347,7 +1347,7 @@ export class SqlInstancesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IInstancesListResponse,
       protos.google.cloud.sql.v1beta4.ISqlInstancesListRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   list(
@@ -1393,7 +1393,7 @@ export class SqlInstancesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IInstancesListResponse,
       protos.google.cloud.sql.v1beta4.ISqlInstancesListRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1446,7 +1446,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCasRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   listServerCas(
@@ -1495,7 +1495,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesListServerCasRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1544,7 +1544,7 @@ export class SqlInstancesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlInstancesPatchRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patch(
@@ -1590,7 +1590,7 @@ export class SqlInstancesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlInstancesPatchRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1641,7 +1641,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesPromoteReplicaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   promoteReplica(
@@ -1690,7 +1690,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesPromoteReplicaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1741,7 +1741,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesResetSslConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resetSslConfig(
@@ -1790,7 +1790,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesResetSslConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1837,7 +1837,7 @@ export class SqlInstancesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlInstancesRestartRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   restart(
@@ -1883,7 +1883,7 @@ export class SqlInstancesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlInstancesRestartRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1935,7 +1935,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesRestoreBackupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   restoreBackup(
@@ -1984,7 +1984,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesRestoreBackupRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2036,7 +2036,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   rotateServerCa(
@@ -2085,7 +2085,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesRotateServerCaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2135,7 +2135,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesStartReplicaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   startReplica(
@@ -2184,7 +2184,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesStartReplicaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2234,7 +2234,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesStopReplicaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   stopReplica(
@@ -2283,7 +2283,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesStopReplicaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2335,7 +2335,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesTruncateLogRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   truncateLog(
@@ -2384,7 +2384,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesTruncateLogRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2433,7 +2433,7 @@ export class SqlInstancesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlInstancesUpdateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   update(
@@ -2479,7 +2479,7 @@ export class SqlInstancesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlInstancesUpdateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2533,7 +2533,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesCreateEphemeralCertRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createEphemeral(
@@ -2582,7 +2582,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesCreateEphemeralCertRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2633,7 +2633,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesRescheduleMaintenanceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   rescheduleMaintenance(
@@ -2682,7 +2682,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesRescheduleMaintenanceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2740,7 +2740,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   verifyExternalSyncSettings(
@@ -2789,7 +2789,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesVerifyExternalSyncSettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2852,7 +2852,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesStartExternalSyncRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   startExternalSync(
@@ -2901,7 +2901,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesStartExternalSyncRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2953,7 +2953,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesPerformDiskShrinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   performDiskShrink(
@@ -3002,7 +3002,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesPerformDiskShrinkRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3052,7 +3052,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDiskShrinkConfig(
@@ -3101,7 +3101,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesGetDiskShrinkConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3151,7 +3151,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesResetReplicaSizeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resetReplicaSize(
@@ -3200,7 +3200,7 @@ export class SqlInstancesServiceClient {
         | protos.google.cloud.sql.v1beta4.ISqlInstancesResetReplicaSizeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

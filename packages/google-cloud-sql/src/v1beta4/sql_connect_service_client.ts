@@ -344,7 +344,7 @@ export class SqlConnectServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IConnectSettings,
       protos.google.cloud.sql.v1beta4.IGetConnectSettingsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getConnectSettings(
@@ -390,7 +390,7 @@ export class SqlConnectServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IConnectSettings,
       protos.google.cloud.sql.v1beta4.IGetConnectSettingsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -449,7 +449,7 @@ export class SqlConnectServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IGenerateEphemeralCertResponse,
       protos.google.cloud.sql.v1beta4.IGenerateEphemeralCertRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   generateEphemeralCert(
@@ -495,7 +495,7 @@ export class SqlConnectServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IGenerateEphemeralCertResponse,
       protos.google.cloud.sql.v1beta4.IGenerateEphemeralCertRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

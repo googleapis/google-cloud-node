@@ -347,7 +347,7 @@ export class SqlUsersServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlUsersDeleteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -387,7 +387,7 @@ export class SqlUsersServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlUsersDeleteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -438,7 +438,7 @@ export class SqlUsersServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IUser,
       protos.google.cloud.sql.v1beta4.ISqlUsersGetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -478,7 +478,7 @@ export class SqlUsersServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IUser,
       protos.google.cloud.sql.v1beta4.ISqlUsersGetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -527,7 +527,7 @@ export class SqlUsersServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlUsersInsertRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -567,7 +567,7 @@ export class SqlUsersServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlUsersInsertRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -614,7 +614,7 @@ export class SqlUsersServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IUsersListResponse,
       protos.google.cloud.sql.v1beta4.ISqlUsersListRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   list(
@@ -654,7 +654,7 @@ export class SqlUsersServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IUsersListResponse,
       protos.google.cloud.sql.v1beta4.ISqlUsersListRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -706,7 +706,7 @@ export class SqlUsersServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlUsersUpdateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   update(
@@ -746,7 +746,7 @@ export class SqlUsersServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlUsersUpdateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

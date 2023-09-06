@@ -342,7 +342,7 @@ export class SqlBackupRunsServiceClient {
     [
       protos.google.cloud.sql.v1.IOperation,
       protos.google.cloud.sql.v1.ISqlBackupRunsDeleteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -382,7 +382,7 @@ export class SqlBackupRunsServiceClient {
     [
       protos.google.cloud.sql.v1.IOperation,
       protos.google.cloud.sql.v1.ISqlBackupRunsDeleteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -432,7 +432,7 @@ export class SqlBackupRunsServiceClient {
     [
       protos.google.cloud.sql.v1.IBackupRun,
       protos.google.cloud.sql.v1.ISqlBackupRunsGetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -472,7 +472,7 @@ export class SqlBackupRunsServiceClient {
     [
       protos.google.cloud.sql.v1.IBackupRun,
       protos.google.cloud.sql.v1.ISqlBackupRunsGetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -521,7 +521,7 @@ export class SqlBackupRunsServiceClient {
     [
       protos.google.cloud.sql.v1.IOperation,
       protos.google.cloud.sql.v1.ISqlBackupRunsInsertRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -561,7 +561,7 @@ export class SqlBackupRunsServiceClient {
     [
       protos.google.cloud.sql.v1.IOperation,
       protos.google.cloud.sql.v1.ISqlBackupRunsInsertRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -616,7 +616,7 @@ export class SqlBackupRunsServiceClient {
     [
       protos.google.cloud.sql.v1.IBackupRunsListResponse,
       protos.google.cloud.sql.v1.ISqlBackupRunsListRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   list(
@@ -656,7 +656,7 @@ export class SqlBackupRunsServiceClient {
     [
       protos.google.cloud.sql.v1.IBackupRunsListResponse,
       protos.google.cloud.sql.v1.ISqlBackupRunsListRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

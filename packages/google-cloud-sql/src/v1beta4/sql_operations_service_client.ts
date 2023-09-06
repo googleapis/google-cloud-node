@@ -337,7 +337,7 @@ export class SqlOperationsServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlOperationsGetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -383,7 +383,7 @@ export class SqlOperationsServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlOperationsGetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -436,7 +436,7 @@ export class SqlOperationsServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperationsListResponse,
       protos.google.cloud.sql.v1beta4.ISqlOperationsListRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   list(
@@ -482,7 +482,7 @@ export class SqlOperationsServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperationsListResponse,
       protos.google.cloud.sql.v1beta4.ISqlOperationsListRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -528,7 +528,7 @@ export class SqlOperationsServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.sql.v1beta4.ISqlOperationsCancelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   cancel(
@@ -574,7 +574,7 @@ export class SqlOperationsServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.sql.v1beta4.ISqlOperationsCancelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
