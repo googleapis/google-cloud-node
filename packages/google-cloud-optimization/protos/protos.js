@@ -1486,7 +1486,6 @@
                          * @property {google.protobuf.IDuration|null} [timeout] OptimizeToursRequest timeout
                          * @property {google.cloud.optimization.v1.IShipmentModel|null} [model] OptimizeToursRequest model
                          * @property {google.cloud.optimization.v1.OptimizeToursRequest.SolvingMode|null} [solvingMode] OptimizeToursRequest solvingMode
-                         * @property {number|null} [maxValidationErrors] OptimizeToursRequest maxValidationErrors
                          * @property {google.cloud.optimization.v1.OptimizeToursRequest.SearchMode|null} [searchMode] OptimizeToursRequest searchMode
                          * @property {Array.<google.cloud.optimization.v1.IShipmentRoute>|null} [injectedFirstSolutionRoutes] OptimizeToursRequest injectedFirstSolutionRoutes
                          * @property {google.cloud.optimization.v1.IInjectedSolutionConstraint|null} [injectedSolutionConstraint] OptimizeToursRequest injectedSolutionConstraint
@@ -1498,6 +1497,7 @@
                          * @property {boolean|null} [allowLargeDeadlineDespiteInterruptionRisk] OptimizeToursRequest allowLargeDeadlineDespiteInterruptionRisk
                          * @property {boolean|null} [useGeodesicDistances] OptimizeToursRequest useGeodesicDistances
                          * @property {number|null} [geodesicMetersPerSecond] OptimizeToursRequest geodesicMetersPerSecond
+                         * @property {number|null} [maxValidationErrors] OptimizeToursRequest maxValidationErrors
                          * @property {string|null} [label] OptimizeToursRequest label
                          * @property {boolean|null} [populateTravelStepPolylines] OptimizeToursRequest populateTravelStepPolylines
                          */
@@ -1550,14 +1550,6 @@
                          * @instance
                          */
                         OptimizeToursRequest.prototype.solvingMode = 0;
-    
-                        /**
-                         * OptimizeToursRequest maxValidationErrors.
-                         * @member {number|null|undefined} maxValidationErrors
-                         * @memberof google.cloud.optimization.v1.OptimizeToursRequest
-                         * @instance
-                         */
-                        OptimizeToursRequest.prototype.maxValidationErrors = null;
     
                         /**
                          * OptimizeToursRequest searchMode.
@@ -1648,6 +1640,14 @@
                         OptimizeToursRequest.prototype.geodesicMetersPerSecond = null;
     
                         /**
+                         * OptimizeToursRequest maxValidationErrors.
+                         * @member {number|null|undefined} maxValidationErrors
+                         * @memberof google.cloud.optimization.v1.OptimizeToursRequest
+                         * @instance
+                         */
+                        OptimizeToursRequest.prototype.maxValidationErrors = null;
+    
+                        /**
                          * OptimizeToursRequest label.
                          * @member {string} label
                          * @memberof google.cloud.optimization.v1.OptimizeToursRequest
@@ -1667,17 +1667,6 @@
                         var $oneOfFields;
     
                         /**
-                         * OptimizeToursRequest _maxValidationErrors.
-                         * @member {"maxValidationErrors"|undefined} _maxValidationErrors
-                         * @memberof google.cloud.optimization.v1.OptimizeToursRequest
-                         * @instance
-                         */
-                        Object.defineProperty(OptimizeToursRequest.prototype, "_maxValidationErrors", {
-                            get: $util.oneOfGetter($oneOfFields = ["maxValidationErrors"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        /**
                          * OptimizeToursRequest _geodesicMetersPerSecond.
                          * @member {"geodesicMetersPerSecond"|undefined} _geodesicMetersPerSecond
                          * @memberof google.cloud.optimization.v1.OptimizeToursRequest
@@ -1685,6 +1674,17 @@
                          */
                         Object.defineProperty(OptimizeToursRequest.prototype, "_geodesicMetersPerSecond", {
                             get: $util.oneOfGetter($oneOfFields = ["geodesicMetersPerSecond"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * OptimizeToursRequest _maxValidationErrors.
+                         * @member {"maxValidationErrors"|undefined} _maxValidationErrors
+                         * @memberof google.cloud.optimization.v1.OptimizeToursRequest
+                         * @instance
+                         */
+                        Object.defineProperty(OptimizeToursRequest.prototype, "_maxValidationErrors", {
+                            get: $util.oneOfGetter($oneOfFields = ["maxValidationErrors"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -1800,10 +1800,6 @@
                                         message.solvingMode = reader.int32();
                                         break;
                                     }
-                                case 5: {
-                                        message.maxValidationErrors = reader.int32();
-                                        break;
-                                    }
                                 case 6: {
                                         message.searchMode = reader.int32();
                                         break;
@@ -1850,6 +1846,10 @@
                                     }
                                 case 16: {
                                         message.geodesicMetersPerSecond = reader.double();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.maxValidationErrors = reader.int32();
                                         break;
                                     }
                                 case 17: {
@@ -1918,11 +1918,6 @@
                                 case 2:
                                     break;
                                 }
-                            if (message.maxValidationErrors != null && message.hasOwnProperty("maxValidationErrors")) {
-                                properties._maxValidationErrors = 1;
-                                if (!$util.isInteger(message.maxValidationErrors))
-                                    return "maxValidationErrors: integer expected";
-                            }
                             if (message.searchMode != null && message.hasOwnProperty("searchMode"))
                                 switch (message.searchMode) {
                                 default:
@@ -1978,6 +1973,11 @@
                                 if (typeof message.geodesicMetersPerSecond !== "number")
                                     return "geodesicMetersPerSecond: number expected";
                             }
+                            if (message.maxValidationErrors != null && message.hasOwnProperty("maxValidationErrors")) {
+                                properties._maxValidationErrors = 1;
+                                if (!$util.isInteger(message.maxValidationErrors))
+                                    return "maxValidationErrors: integer expected";
+                            }
                             if (message.label != null && message.hasOwnProperty("label"))
                                 if (!$util.isString(message.label))
                                     return "label: string expected";
@@ -2031,8 +2031,6 @@
                                 message.solvingMode = 2;
                                 break;
                             }
-                            if (object.maxValidationErrors != null)
-                                message.maxValidationErrors = object.maxValidationErrors | 0;
                             switch (object.searchMode) {
                             default:
                                 if (typeof object.searchMode === "number") {
@@ -2092,6 +2090,8 @@
                                 message.useGeodesicDistances = Boolean(object.useGeodesicDistances);
                             if (object.geodesicMetersPerSecond != null)
                                 message.geodesicMetersPerSecond = Number(object.geodesicMetersPerSecond);
+                            if (object.maxValidationErrors != null)
+                                message.maxValidationErrors = object.maxValidationErrors | 0;
                             if (object.label != null)
                                 message.label = String(object.label);
                             if (object.populateTravelStepPolylines != null)
@@ -8893,6 +8893,7 @@
                                     return "travelMode: enum value expected";
                                 case 0:
                                 case 1:
+                                case 2:
                                     break;
                                 }
                             if (message.startLocation != null && message.hasOwnProperty("startLocation")) {
@@ -9085,6 +9086,10 @@
                             case "DRIVING":
                             case 1:
                                 message.travelMode = 1;
+                                break;
+                            case "WALKING":
+                            case 2:
+                                message.travelMode = 2;
                                 break;
                             }
                             if (object.startLocation != null) {
@@ -9428,11 +9433,13 @@
                          * @enum {number}
                          * @property {number} TRAVEL_MODE_UNSPECIFIED=0 TRAVEL_MODE_UNSPECIFIED value
                          * @property {number} DRIVING=1 DRIVING value
+                         * @property {number} WALKING=2 WALKING value
                          */
                         Vehicle.TravelMode = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "TRAVEL_MODE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "DRIVING"] = 1;
+                            values[valuesById[2] = "WALKING"] = 2;
                             return values;
                         })();
     
@@ -11343,6 +11350,7 @@
                          * @interface IDistanceLimit
                          * @property {number|Long|null} [maxMeters] DistanceLimit maxMeters
                          * @property {number|Long|null} [softMaxMeters] DistanceLimit softMaxMeters
+                         * @property {number|null} [costPerKilometerBelowSoftMax] DistanceLimit costPerKilometerBelowSoftMax
                          * @property {number|null} [costPerKilometerAboveSoftMax] DistanceLimit costPerKilometerAboveSoftMax
                          */
     
@@ -11378,6 +11386,14 @@
                         DistanceLimit.prototype.softMaxMeters = null;
     
                         /**
+                         * DistanceLimit costPerKilometerBelowSoftMax.
+                         * @member {number|null|undefined} costPerKilometerBelowSoftMax
+                         * @memberof google.cloud.optimization.v1.DistanceLimit
+                         * @instance
+                         */
+                        DistanceLimit.prototype.costPerKilometerBelowSoftMax = null;
+    
+                        /**
                          * DistanceLimit costPerKilometerAboveSoftMax.
                          * @member {number|null|undefined} costPerKilometerAboveSoftMax
                          * @memberof google.cloud.optimization.v1.DistanceLimit
@@ -11407,6 +11423,17 @@
                          */
                         Object.defineProperty(DistanceLimit.prototype, "_softMaxMeters", {
                             get: $util.oneOfGetter($oneOfFields = ["softMaxMeters"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * DistanceLimit _costPerKilometerBelowSoftMax.
+                         * @member {"costPerKilometerBelowSoftMax"|undefined} _costPerKilometerBelowSoftMax
+                         * @memberof google.cloud.optimization.v1.DistanceLimit
+                         * @instance
+                         */
+                        Object.defineProperty(DistanceLimit.prototype, "_costPerKilometerBelowSoftMax", {
+                            get: $util.oneOfGetter($oneOfFields = ["costPerKilometerBelowSoftMax"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -11451,6 +11478,8 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int64(message.softMaxMeters);
                             if (message.costPerKilometerAboveSoftMax != null && Object.hasOwnProperty.call(message, "costPerKilometerAboveSoftMax"))
                                 writer.uint32(/* id 3, wireType 1 =*/25).double(message.costPerKilometerAboveSoftMax);
+                            if (message.costPerKilometerBelowSoftMax != null && Object.hasOwnProperty.call(message, "costPerKilometerBelowSoftMax"))
+                                writer.uint32(/* id 4, wireType 1 =*/33).double(message.costPerKilometerBelowSoftMax);
                             return writer;
                         };
     
@@ -11491,6 +11520,10 @@
                                     }
                                 case 2: {
                                         message.softMaxMeters = reader.int64();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.costPerKilometerBelowSoftMax = reader.double();
                                         break;
                                     }
                                 case 3: {
@@ -11543,6 +11576,11 @@
                                 if (!$util.isInteger(message.softMaxMeters) && !(message.softMaxMeters && $util.isInteger(message.softMaxMeters.low) && $util.isInteger(message.softMaxMeters.high)))
                                     return "softMaxMeters: integer|Long expected";
                             }
+                            if (message.costPerKilometerBelowSoftMax != null && message.hasOwnProperty("costPerKilometerBelowSoftMax")) {
+                                properties._costPerKilometerBelowSoftMax = 1;
+                                if (typeof message.costPerKilometerBelowSoftMax !== "number")
+                                    return "costPerKilometerBelowSoftMax: number expected";
+                            }
                             if (message.costPerKilometerAboveSoftMax != null && message.hasOwnProperty("costPerKilometerAboveSoftMax")) {
                                 properties._costPerKilometerAboveSoftMax = 1;
                                 if (typeof message.costPerKilometerAboveSoftMax !== "number")
@@ -11581,6 +11619,8 @@
                                     message.softMaxMeters = object.softMaxMeters;
                                 else if (typeof object.softMaxMeters === "object")
                                     message.softMaxMeters = new $util.LongBits(object.softMaxMeters.low >>> 0, object.softMaxMeters.high >>> 0).toNumber();
+                            if (object.costPerKilometerBelowSoftMax != null)
+                                message.costPerKilometerBelowSoftMax = Number(object.costPerKilometerBelowSoftMax);
                             if (object.costPerKilometerAboveSoftMax != null)
                                 message.costPerKilometerAboveSoftMax = Number(object.costPerKilometerAboveSoftMax);
                             return message;
@@ -11619,6 +11659,11 @@
                                 object.costPerKilometerAboveSoftMax = options.json && !isFinite(message.costPerKilometerAboveSoftMax) ? String(message.costPerKilometerAboveSoftMax) : message.costPerKilometerAboveSoftMax;
                                 if (options.oneofs)
                                     object._costPerKilometerAboveSoftMax = "costPerKilometerAboveSoftMax";
+                            }
+                            if (message.costPerKilometerBelowSoftMax != null && message.hasOwnProperty("costPerKilometerBelowSoftMax")) {
+                                object.costPerKilometerBelowSoftMax = options.json && !isFinite(message.costPerKilometerBelowSoftMax) ? String(message.costPerKilometerBelowSoftMax) : message.costPerKilometerBelowSoftMax;
+                                if (options.oneofs)
+                                    object._costPerKilometerBelowSoftMax = "costPerKilometerBelowSoftMax";
                             }
                             return object;
                         };

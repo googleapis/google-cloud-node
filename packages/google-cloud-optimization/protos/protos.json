@@ -174,14 +174,14 @@
                     },
                     "OptimizeToursRequest": {
                       "oneofs": {
-                        "_maxValidationErrors": {
-                          "oneof": [
-                            "maxValidationErrors"
-                          ]
-                        },
                         "_geodesicMetersPerSecond": {
                           "oneof": [
                             "geodesicMetersPerSecond"
+                          ]
+                        },
+                        "_maxValidationErrors": {
+                          "oneof": [
+                            "maxValidationErrors"
                           ]
                         }
                       },
@@ -204,13 +204,6 @@
                         "solvingMode": {
                           "type": "SolvingMode",
                           "id": 4
-                        },
-                        "maxValidationErrors": {
-                          "type": "int32",
-                          "id": 5,
-                          "options": {
-                            "proto3_optional": true
-                          }
                         },
                         "searchMode": {
                           "type": "SearchMode",
@@ -257,6 +250,13 @@
                         "geodesicMetersPerSecond": {
                           "type": "double",
                           "id": 16,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxValidationErrors": {
+                          "type": "int32",
+                          "id": 5,
                           "options": {
                             "proto3_optional": true
                           }
@@ -986,7 +986,8 @@
                         "TravelMode": {
                           "values": {
                             "TRAVEL_MODE_UNSPECIFIED": 0,
-                            "DRIVING": 1
+                            "DRIVING": 1,
+                            "WALKING": 2
                           }
                         },
                         "UnloadingPolicy": {
@@ -1208,6 +1209,11 @@
                             "softMaxMeters"
                           ]
                         },
+                        "_costPerKilometerBelowSoftMax": {
+                          "oneof": [
+                            "costPerKilometerBelowSoftMax"
+                          ]
+                        },
                         "_costPerKilometerAboveSoftMax": {
                           "oneof": [
                             "costPerKilometerAboveSoftMax"
@@ -1225,6 +1231,13 @@
                         "softMaxMeters": {
                           "type": "int64",
                           "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "costPerKilometerBelowSoftMax": {
+                          "type": "double",
+                          "id": 4,
                           "options": {
                             "proto3_optional": true
                           }
