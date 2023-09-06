@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-datapolicies-v1.0.0...bigquery-datapolicies-v1.1.0) (2023-09-06)
+
+
+### Features
+
+* [bigquery-datapolicies] support using custom UDF in the data policy ([#4582](https://github.com/googleapis/google-cloud-node/issues/4582)) ([31b9d4e](https://github.com/googleapis/google-cloud-node/commit/31b9d4ecaee09d48db28bbcedbaee9a6d1a7e7b2))
+
+
+### Bug Fixes
+
+* [bigquery-datapolicies] sync the new PredefinedExpression types to the client library ([#4540](https://github.com/googleapis/google-cloud-node/issues/4540)) ([f2b87b4](https://github.com/googleapis/google-cloud-node/commit/f2b87b4581e28bdf5a6d144076f2809e00c8abc9))
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4584](https://github.com/googleapis/google-cloud-node/issues/4584)) ([13537fc](https://github.com/googleapis/google-cloud-node/commit/13537fcd6e3c552199d5057daf3b00c24033c908))
+
 ## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-datapolicies-v0.3.2...bigquery-datapolicies-v1.0.0) (2023-08-06)
 
 

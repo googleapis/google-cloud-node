@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/bare-metal-solution",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "baremetalsolution client for Node.js",
   "repository": {
     "type": "git",

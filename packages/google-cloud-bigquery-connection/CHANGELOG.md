@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/bigquery-connection-v3.0.0...bigquery-connection-v3.0.1) (2023-09-06)
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4584](https://github.com/googleapis/google-cloud-node/issues/4584)) ([13537fc](https://github.com/googleapis/google-cloud-node/commit/13537fcd6e3c552199d5057daf3b00c24033c908))
+
 ## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-connection-v2.3.0...bigquery-connection-v3.0.0) (2023-08-06)
 
 
