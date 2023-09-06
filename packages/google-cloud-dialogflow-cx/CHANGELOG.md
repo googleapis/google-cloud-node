@@ -1,5 +1,18 @@
 # Changelog
 
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v4.0.0...dialogflow-cx-v4.1.0) (2023-09-06)
+
+
+### Features
+
+* [dialogflow-cx] added agent level route group ([#4528](https://github.com/googleapis/google-cloud-node/issues/4528)) ([79da1cb](https://github.com/googleapis/google-cloud-node/commit/79da1cb726eba58e10ac51bf1cf7158e19c5a411))
+* [dialogflow-cx] added generative AI, safety/security and speech endpointing settings ([#4597](https://github.com/googleapis/google-cloud-node/issues/4597)) ([684d671](https://github.com/googleapis/google-cloud-node/commit/684d67134ecf11a73721750b27ad01dec0904306))
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4585](https://github.com/googleapis/google-cloud-node/issues/4585)) ([b6cea45](https://github.com/googleapis/google-cloud-node/commit/b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251))
+
 ## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v3.8.0...dialogflow-cx-v4.0.0) (2023-08-06)
 
 

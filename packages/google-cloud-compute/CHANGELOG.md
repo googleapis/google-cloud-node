@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/compute-v4.0.0...compute-v4.0.1) (2023-09-06)
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4584](https://github.com/googleapis/google-cloud-node/issues/4584)) ([13537fc](https://github.com/googleapis/google-cloud-node/commit/13537fcd6e3c552199d5057daf3b00c24033c908))
+
 ## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/compute-v3.10.0...compute-v4.0.0) (2023-08-06)
 
 

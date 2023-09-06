@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/filestore-v3.0.0...filestore-v3.1.0) (2023-09-06)
+
+
+### Features
+
+* [filestore] add SecurityFlavor to NfsExportOptions ([#4566](https://github.com/googleapis/google-cloud-node/issues/4566)) ([04182c7](https://github.com/googleapis/google-cloud-node/commit/04182c7810a9c716f848776f4d783d5406152634))
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4585](https://github.com/googleapis/google-cloud-node/issues/4585)) ([b6cea45](https://github.com/googleapis/google-cloud-node/commit/b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251))
+
 ## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/filestore-v2.4.1...filestore-v3.0.0) (2023-08-06)
 
 

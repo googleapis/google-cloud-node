@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v1.0.0...contentwarehouse-v1.1.0) (2023-09-06)
+
+
+### Features
+
+* [contentwarehouse] add `disposition_time`, `legal_hold`, `document_is_retention_folder`, `document_is_legal_hold_folder`, `question_answer`, `document_name_filter` field to Document Warehouse API v1 ([#4537](https://github.com/googleapis/google-cloud-node/issues/4537)) ([78fd166](https://github.com/googleapis/google-cloud-node/commit/78fd166534555720b93d2b37f28307c6003390ff))
+* [contentwarehouse] add Pipeline Service to Document Warehouse API v1 ([#4558](https://github.com/googleapis/google-cloud-node/issues/4558)) ([18c7503](https://github.com/googleapis/google-cloud-node/commit/18c750378975440bb8ff8168e7f72b8de24fcfac))
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4585](https://github.com/googleapis/google-cloud-node/issues/4585)) ([b6cea45](https://github.com/googleapis/google-cloud-node/commit/b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251))
+
 ## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v0.5.1...contentwarehouse-v1.0.0) (2023-08-06)
 
 

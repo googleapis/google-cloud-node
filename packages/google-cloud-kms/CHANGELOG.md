@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/kms-v4.0.0...kms-v4.0.1) (2023-09-06)
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4586](https://github.com/googleapis/google-cloud-node/issues/4586)) ([4b18686](https://github.com/googleapis/google-cloud-node/commit/4b186867323b8b15469bf5e1cb890bf703b531b3))
+
 ## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/kms-v3.8.0...kms-v4.0.0) (2023-08-06)
 
 
