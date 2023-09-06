@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,21 +17,13 @@
 const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
-const {describe, it, before} = require('mocha');
-const {SqlUsersServiceClient} = require('@google-cloud/sql').v1;
-const sqlClient = new SqlUsersServiceClient();
+const {describe, it} = require('mocha');
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cwd = path.join(__dirname, '..');
 
 describe('Quickstart', () => {
-  let projectId;
-
-  before(async () => {
-    projectId = await sqlClient.getProjectId();
-  });
-
   it('should run quickstart', async () => {
     const output = execSync('node ./quickstart.js', {cwd});
     assert(output !== null);
