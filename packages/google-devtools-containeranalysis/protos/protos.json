@@ -5159,6 +5159,22 @@
                               }
                             }
                           ]
+                        },
+                        "ExportSBOM": {
+                          "requestType": "ExportSBOMRequest",
+                          "responseType": "ExportSBOMResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/resources/**}:exportSBOM",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/resources/**}:exportSBOM",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -5197,6 +5213,25 @@
                               "id": 2
                             }
                           }
+                        }
+                      }
+                    },
+                    "ExportSBOMRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ExportSBOMResponse": {
+                      "fields": {
+                        "discoveryOccurrenceId": {
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     }

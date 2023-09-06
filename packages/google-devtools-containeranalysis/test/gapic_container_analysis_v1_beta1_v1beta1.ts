@@ -762,4 +762,146 @@ describe('v1beta1.ContainerAnalysisV1Beta1Client', () => {
       );
     });
   });
+
+  describe('exportSBOM', () => {
+    it('invokes exportSBOM without error', async () => {
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.containeranalysis.v1beta1.ExportSBOMRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.containeranalysis.v1beta1.ExportSBOMRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devtools.containeranalysis.v1beta1.ExportSBOMResponse()
+      );
+      client.innerApiCalls.exportSboM = stubSimpleCall(expectedResponse);
+      const [response] = await client.exportSBOM(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.exportSboM as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportSboM as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes exportSBOM without error using callback', async () => {
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.containeranalysis.v1beta1.ExportSBOMRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.containeranalysis.v1beta1.ExportSBOMRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devtools.containeranalysis.v1beta1.ExportSBOMResponse()
+      );
+      client.innerApiCalls.exportSboM =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.exportSBOM(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.devtools.containeranalysis.v1beta1.IExportSBOMResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.exportSboM as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportSboM as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes exportSBOM with error', async () => {
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.containeranalysis.v1beta1.ExportSBOMRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.containeranalysis.v1beta1.ExportSBOMRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.exportSboM = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.exportSBOM(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.exportSboM as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportSboM as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes exportSBOM with closed client', async () => {
+      const client =
+        new containeranalysisv1beta1Module.v1beta1.ContainerAnalysisV1Beta1Client(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.containeranalysis.v1beta1.ExportSBOMRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.containeranalysis.v1beta1.ExportSBOMRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.exportSBOM(request), expectedError);
+    });
+  });
 });
