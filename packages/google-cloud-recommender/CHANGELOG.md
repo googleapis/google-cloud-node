@@ -1,5 +1,17 @@
 # Changelog
 
+## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/recommender-v6.0.0...recommender-v6.1.0) (2023-09-06)
+
+
+### Features
+
+* [recommender] ListRecommenders and ListInsightTypes RPC methods ([#4604](https://github.com/googleapis/google-cloud-node/issues/4604)) ([3b4414b](https://github.com/googleapis/google-cloud-node/commit/3b4414b48877b91dafe0f9540701744dafc3d431))
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4587](https://github.com/googleapis/google-cloud-node/issues/4587)) ([e3b1e7e](https://github.com/googleapis/google-cloud-node/commit/e3b1e7e46d666abb4df28c3cd69e97c08b88445a))
+
 ## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/recommender-v5.0.6...recommender-v6.0.0) (2023-08-06)
 
 
