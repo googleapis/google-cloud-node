@@ -206,17 +206,20 @@ export type PredefinedAcl =
   | 'projectPrivate'
   | 'publicRead';
 
-export interface CreateResumableUploadOptions {
-  chunkSize?: number;
-  highWaterMark?: number;
-  metadata?: FileMetadata;
-  origin?: string;
-  offset?: number;
-  predefinedAcl?: PredefinedAcl;
-  private?: boolean;
-  public?: boolean;
-  uri?: string;
-  userProject?: string;
+type PublicResumableUploadOptions =
+  | 'chunkSize'
+  | 'highWaterMark'
+  | 'metadata'
+  | 'origin'
+  | 'offset'
+  | 'predefinedAcl'
+  | 'private'
+  | 'public'
+  | 'uri'
+  | 'userProject';
+
+export interface CreateResumableUploadOptions
+  extends Pick<resumableUpload.UploadConfig, PublicResumableUploadOptions> {
   preconditionOpts?: PreconditionOptions;
 }
 
