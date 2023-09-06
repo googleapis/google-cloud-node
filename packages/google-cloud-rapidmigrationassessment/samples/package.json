@@ -4,7 +4,7 @@
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=14.0.0"
   },
   "files": [
     "*.js"
@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-cloud/rapidmigrationassessment": "^0.1.0"
+    "@google-cloud/rapidmigrationassessment": "^1.0.0"
   },
   "devDependencies": {
     "c8": "^7.1.0",

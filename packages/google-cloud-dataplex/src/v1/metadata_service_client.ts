@@ -96,8 +96,7 @@ export class MetadataServiceClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -105,7 +104,7 @@ export class MetadataServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new MetadataServiceClient({fallback: 'rest'}, gax);
+   *     const client = new MetadataServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -175,7 +174,7 @@ export class MetadataServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -194,11 +193,20 @@ export class MetadataServiceClient {
       contentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/content/{content}'
       ),
+      dataAttributePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataTaxonomies/{dataTaxonomy}/attributes/{data_attribute_id}'
+      ),
+      dataAttributeBindingPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataAttributeBindings/{data_attribute_binding_id}'
+      ),
       dataScanPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataScans/{dataScan}'
       ),
       dataScanJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dataScans/{dataScan}/jobs/{job}'
+      ),
+      dataTaxonomyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/dataTaxonomies/{data_taxonomy_id}'
       ),
       entityPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}'
@@ -261,7 +269,7 @@ export class MetadataServiceClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
@@ -299,6 +307,15 @@ export class MetadataServiceClient {
             },
             {
               get: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/entryTypes/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/entryGroups/*}:getIamPolicy',
             },
           ],
         },
@@ -339,6 +356,18 @@ export class MetadataServiceClient {
               post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:setIamPolicy',
               body: '*',
             },
+            {
+              post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:setIamPolicy',
+              body: '*',
+            },
           ],
         },
         {
@@ -376,6 +405,18 @@ export class MetadataServiceClient {
             },
             {
               post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:testIamPermissions',
               body: '*',
             },
           ],
@@ -563,9 +604,8 @@ export class MetadataServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataplex.v1.Entity | Entity}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Entity|Entity}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/metadata_service.create_entity.js</caption>
    * region_tag:dataplex_v1_generated_MetadataService_CreateEntity_async
@@ -577,7 +617,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.dataplex.v1.IEntity,
       protos.google.cloud.dataplex.v1.ICreateEntityRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createEntity(
@@ -617,7 +657,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.dataplex.v1.IEntity,
       protos.google.cloud.dataplex.v1.ICreateEntityRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -651,9 +691,8 @@ export class MetadataServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataplex.v1.Entity | Entity}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Entity|Entity}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/metadata_service.update_entity.js</caption>
    * region_tag:dataplex_v1_generated_MetadataService_UpdateEntity_async
@@ -665,7 +704,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.dataplex.v1.IEntity,
       protos.google.cloud.dataplex.v1.IUpdateEntityRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateEntity(
@@ -705,7 +744,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.dataplex.v1.IEntity,
       protos.google.cloud.dataplex.v1.IUpdateEntityRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -736,13 +775,12 @@ export class MetadataServiceClient {
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
    * @param {string} request.etag
    *   Required. The etag associated with the entity, which can be retrieved with
-   *   a {@link |GetEntity} request.
+   *   a {@link protos.|GetEntity} request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/metadata_service.delete_entity.js</caption>
    * region_tag:dataplex_v1_generated_MetadataService_DeleteEntity_async
@@ -754,7 +792,7 @@ export class MetadataServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataplex.v1.IDeleteEntityRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteEntity(
@@ -794,7 +832,7 @@ export class MetadataServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataplex.v1.IDeleteEntityRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -829,9 +867,8 @@ export class MetadataServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataplex.v1.Entity | Entity}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Entity|Entity}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/metadata_service.get_entity.js</caption>
    * region_tag:dataplex_v1_generated_MetadataService_GetEntity_async
@@ -843,7 +880,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.dataplex.v1.IEntity,
       protos.google.cloud.dataplex.v1.IGetEntityRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getEntity(
@@ -881,7 +918,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.dataplex.v1.IEntity,
       protos.google.cloud.dataplex.v1.IGetEntityRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -918,9 +955,8 @@ export class MetadataServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataplex.v1.Partition | Partition}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Partition|Partition}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/metadata_service.create_partition.js</caption>
    * region_tag:dataplex_v1_generated_MetadataService_CreatePartition_async
@@ -932,7 +968,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.dataplex.v1.IPartition,
       protos.google.cloud.dataplex.v1.ICreatePartitionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createPartition(
@@ -978,7 +1014,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.dataplex.v1.IPartition,
       protos.google.cloud.dataplex.v1.ICreatePartitionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1015,9 +1051,8 @@ export class MetadataServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/metadata_service.delete_partition.js</caption>
    * region_tag:dataplex_v1_generated_MetadataService_DeletePartition_async
@@ -1029,7 +1064,7 @@ export class MetadataServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataplex.v1.IDeletePartitionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deletePartition(
@@ -1075,7 +1110,7 @@ export class MetadataServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataplex.v1.IDeletePartitionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1109,9 +1144,8 @@ export class MetadataServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataplex.v1.Partition | Partition}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Partition|Partition}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/metadata_service.get_partition.js</caption>
    * region_tag:dataplex_v1_generated_MetadataService_GetPartition_async
@@ -1123,7 +1157,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.dataplex.v1.IPartition,
       protos.google.cloud.dataplex.v1.IGetPartitionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getPartition(
@@ -1163,7 +1197,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.dataplex.v1.IPartition,
       protos.google.cloud.dataplex.v1.IGetPartitionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1217,14 +1251,13 @@ export class MetadataServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dataplex.v1.Entity | Entity}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.Entity|Entity}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listEntitiesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listEntities(
@@ -1234,7 +1267,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.dataplex.v1.IEntity[],
       protos.google.cloud.dataplex.v1.IListEntitiesRequest | null,
-      protos.google.cloud.dataplex.v1.IListEntitiesResponse
+      protos.google.cloud.dataplex.v1.IListEntitiesResponse,
     ]
   >;
   listEntities(
@@ -1274,7 +1307,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.dataplex.v1.IEntity[],
       protos.google.cloud.dataplex.v1.IListEntitiesRequest | null,
-      protos.google.cloud.dataplex.v1.IListEntitiesResponse
+      protos.google.cloud.dataplex.v1.IListEntitiesResponse,
     ]
   > | void {
     request = request || {};
@@ -1327,13 +1360,12 @@ export class MetadataServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dataplex.v1.Entity | Entity} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.Entity|Entity} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listEntitiesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listEntitiesStream(
@@ -1391,12 +1423,11 @@ export class MetadataServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dataplex.v1.Entity | Entity}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dataplex.v1.Entity|Entity}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/metadata_service.list_entities.js</caption>
    * region_tag:dataplex_v1_generated_MetadataService_ListEntities_async
@@ -1463,14 +1494,13 @@ export class MetadataServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dataplex.v1.Partition | Partition}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.Partition|Partition}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listPartitionsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listPartitions(
@@ -1480,7 +1510,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.dataplex.v1.IPartition[],
       protos.google.cloud.dataplex.v1.IListPartitionsRequest | null,
-      protos.google.cloud.dataplex.v1.IListPartitionsResponse
+      protos.google.cloud.dataplex.v1.IListPartitionsResponse,
     ]
   >;
   listPartitions(
@@ -1526,7 +1556,7 @@ export class MetadataServiceClient {
     [
       protos.google.cloud.dataplex.v1.IPartition[],
       protos.google.cloud.dataplex.v1.IListPartitionsRequest | null,
-      protos.google.cloud.dataplex.v1.IListPartitionsResponse
+      protos.google.cloud.dataplex.v1.IListPartitionsResponse,
     ]
   > | void {
     request = request || {};
@@ -1588,13 +1618,12 @@ export class MetadataServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dataplex.v1.Partition | Partition} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.Partition|Partition} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listPartitionsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listPartitionsStream(
@@ -1661,12 +1690,11 @@ export class MetadataServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dataplex.v1.Partition | Partition}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dataplex.v1.Partition|Partition}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/metadata_service.list_partitions.js</caption>
    * region_tag:dataplex_v1_generated_MetadataService_ListPartitions_async
@@ -1703,8 +1731,7 @@ export class MetadataServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -1750,12 +1777,11 @@ export class MetadataServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -2100,6 +2126,138 @@ export class MetadataServiceClient {
   }
 
   /**
+   * Return a fully-qualified dataAttribute resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} dataTaxonomy
+   * @param {string} data_attribute_id
+   * @returns {string} Resource name string.
+   */
+  dataAttributePath(
+    project: string,
+    location: string,
+    dataTaxonomy: string,
+    dataAttributeId: string
+  ) {
+    return this.pathTemplates.dataAttributePathTemplate.render({
+      project: project,
+      location: location,
+      dataTaxonomy: dataTaxonomy,
+      data_attribute_id: dataAttributeId,
+    });
+  }
+
+  /**
+   * Parse the project from DataAttribute resource.
+   *
+   * @param {string} dataAttributeName
+   *   A fully-qualified path representing DataAttribute resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDataAttributeName(dataAttributeName: string) {
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
+      .project;
+  }
+
+  /**
+   * Parse the location from DataAttribute resource.
+   *
+   * @param {string} dataAttributeName
+   *   A fully-qualified path representing DataAttribute resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDataAttributeName(dataAttributeName: string) {
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
+      .location;
+  }
+
+  /**
+   * Parse the dataTaxonomy from DataAttribute resource.
+   *
+   * @param {string} dataAttributeName
+   *   A fully-qualified path representing DataAttribute resource.
+   * @returns {string} A string representing the dataTaxonomy.
+   */
+  matchDataTaxonomyFromDataAttributeName(dataAttributeName: string) {
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
+      .dataTaxonomy;
+  }
+
+  /**
+   * Parse the data_attribute_id from DataAttribute resource.
+   *
+   * @param {string} dataAttributeName
+   *   A fully-qualified path representing DataAttribute resource.
+   * @returns {string} A string representing the data_attribute_id.
+   */
+  matchDataAttributeIdFromDataAttributeName(dataAttributeName: string) {
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
+      .data_attribute_id;
+  }
+
+  /**
+   * Return a fully-qualified dataAttributeBinding resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_attribute_binding_id
+   * @returns {string} Resource name string.
+   */
+  dataAttributeBindingPath(
+    project: string,
+    location: string,
+    dataAttributeBindingId: string
+  ) {
+    return this.pathTemplates.dataAttributeBindingPathTemplate.render({
+      project: project,
+      location: location,
+      data_attribute_binding_id: dataAttributeBindingId,
+    });
+  }
+
+  /**
+   * Parse the project from DataAttributeBinding resource.
+   *
+   * @param {string} dataAttributeBindingName
+   *   A fully-qualified path representing DataAttributeBinding resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDataAttributeBindingName(dataAttributeBindingName: string) {
+    return this.pathTemplates.dataAttributeBindingPathTemplate.match(
+      dataAttributeBindingName
+    ).project;
+  }
+
+  /**
+   * Parse the location from DataAttributeBinding resource.
+   *
+   * @param {string} dataAttributeBindingName
+   *   A fully-qualified path representing DataAttributeBinding resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDataAttributeBindingName(dataAttributeBindingName: string) {
+    return this.pathTemplates.dataAttributeBindingPathTemplate.match(
+      dataAttributeBindingName
+    ).location;
+  }
+
+  /**
+   * Parse the data_attribute_binding_id from DataAttributeBinding resource.
+   *
+   * @param {string} dataAttributeBindingName
+   *   A fully-qualified path representing DataAttributeBinding resource.
+   * @returns {string} A string representing the data_attribute_binding_id.
+   */
+  matchDataAttributeBindingIdFromDataAttributeBindingName(
+    dataAttributeBindingName: string
+  ) {
+    return this.pathTemplates.dataAttributeBindingPathTemplate.match(
+      dataAttributeBindingName
+    ).data_attribute_binding_id;
+  }
+
+  /**
    * Return a fully-qualified dataScan resource name string.
    *
    * @param {string} project
@@ -2217,6 +2375,58 @@ export class MetadataServiceClient {
   matchJobFromDataScanJobName(dataScanJobName: string) {
     return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
       .job;
+  }
+
+  /**
+   * Return a fully-qualified dataTaxonomy resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_taxonomy_id
+   * @returns {string} Resource name string.
+   */
+  dataTaxonomyPath(project: string, location: string, dataTaxonomyId: string) {
+    return this.pathTemplates.dataTaxonomyPathTemplate.render({
+      project: project,
+      location: location,
+      data_taxonomy_id: dataTaxonomyId,
+    });
+  }
+
+  /**
+   * Parse the project from DataTaxonomy resource.
+   *
+   * @param {string} dataTaxonomyName
+   *   A fully-qualified path representing DataTaxonomy resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDataTaxonomyName(dataTaxonomyName: string) {
+    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName)
+      .project;
+  }
+
+  /**
+   * Parse the location from DataTaxonomy resource.
+   *
+   * @param {string} dataTaxonomyName
+   *   A fully-qualified path representing DataTaxonomy resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDataTaxonomyName(dataTaxonomyName: string) {
+    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName)
+      .location;
+  }
+
+  /**
+   * Parse the data_taxonomy_id from DataTaxonomy resource.
+   *
+   * @param {string} dataTaxonomyName
+   *   A fully-qualified path representing DataTaxonomy resource.
+   * @returns {string} A string representing the data_taxonomy_id.
+   */
+  matchDataTaxonomyIdFromDataTaxonomyName(dataTaxonomyName: string) {
+    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName)
+      .data_taxonomy_id;
   }
 
   /**

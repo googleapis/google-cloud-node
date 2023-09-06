@@ -90,8 +90,7 @@ export class JobsV1Beta3Client {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -99,7 +98,7 @@ export class JobsV1Beta3Client {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new JobsV1Beta3Client({fallback: 'rest'}, gax);
+   *     const client = new JobsV1Beta3Client({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -165,7 +164,7 @@ export class JobsV1Beta3Client {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -361,9 +360,8 @@ export class JobsV1Beta3Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.dataflow.v1beta3.Job | Job}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.dataflow.v1beta3.Job|Job}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta3/jobs_v1_beta3.create_job.js</caption>
    * region_tag:dataflow_v1beta3_generated_JobsV1Beta3_CreateJob_async
@@ -375,7 +373,7 @@ export class JobsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IJob,
       protos.google.dataflow.v1beta3.ICreateJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createJob(
@@ -413,7 +411,7 @@ export class JobsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IJob,
       protos.google.dataflow.v1beta3.ICreateJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -459,9 +457,8 @@ export class JobsV1Beta3Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.dataflow.v1beta3.Job | Job}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.dataflow.v1beta3.Job|Job}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta3/jobs_v1_beta3.get_job.js</caption>
    * region_tag:dataflow_v1beta3_generated_JobsV1Beta3_GetJob_async
@@ -473,7 +470,7 @@ export class JobsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IJob,
       protos.google.dataflow.v1beta3.IGetJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getJob(
@@ -511,7 +508,7 @@ export class JobsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IJob,
       protos.google.dataflow.v1beta3.IGetJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -559,9 +556,8 @@ export class JobsV1Beta3Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.dataflow.v1beta3.Job | Job}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.dataflow.v1beta3.Job|Job}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta3/jobs_v1_beta3.update_job.js</caption>
    * region_tag:dataflow_v1beta3_generated_JobsV1Beta3_UpdateJob_async
@@ -573,7 +569,7 @@ export class JobsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IJob,
       protos.google.dataflow.v1beta3.IUpdateJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateJob(
@@ -611,7 +607,7 @@ export class JobsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IJob,
       protos.google.dataflow.v1beta3.IUpdateJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -644,9 +640,8 @@ export class JobsV1Beta3Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.dataflow.v1beta3.CheckActiveJobsResponse | CheckActiveJobsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.dataflow.v1beta3.CheckActiveJobsResponse|CheckActiveJobsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta3/jobs_v1_beta3.check_active_jobs.js</caption>
    * region_tag:dataflow_v1beta3_generated_JobsV1Beta3_CheckActiveJobs_async
@@ -658,7 +653,7 @@ export class JobsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.ICheckActiveJobsResponse,
       protos.google.dataflow.v1beta3.ICheckActiveJobsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   checkActiveJobs(
@@ -698,7 +693,7 @@ export class JobsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.ICheckActiveJobsResponse,
       protos.google.dataflow.v1beta3.ICheckActiveJobsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -735,9 +730,8 @@ export class JobsV1Beta3Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.dataflow.v1beta3.Snapshot | Snapshot}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.dataflow.v1beta3.Snapshot|Snapshot}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta3/jobs_v1_beta3.snapshot_job.js</caption>
    * region_tag:dataflow_v1beta3_generated_JobsV1Beta3_SnapshotJob_async
@@ -749,7 +743,7 @@ export class JobsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.ISnapshot,
       protos.google.dataflow.v1beta3.ISnapshotJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   snapshotJob(
@@ -787,7 +781,7 @@ export class JobsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.ISnapshot,
       protos.google.dataflow.v1beta3.ISnapshotJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -844,14 +838,13 @@ export class JobsV1Beta3Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.dataflow.v1beta3.Job | Job}.
+   *   The first element of the array is Array of {@link protos.google.dataflow.v1beta3.Job|Job}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listJobsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listJobs(
@@ -861,7 +854,7 @@ export class JobsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IJob[],
       protos.google.dataflow.v1beta3.IListJobsRequest | null,
-      protos.google.dataflow.v1beta3.IListJobsResponse
+      protos.google.dataflow.v1beta3.IListJobsResponse,
     ]
   >;
   listJobs(
@@ -899,7 +892,7 @@ export class JobsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IJob[],
       protos.google.dataflow.v1beta3.IListJobsRequest | null,
-      protos.google.dataflow.v1beta3.IListJobsResponse
+      protos.google.dataflow.v1beta3.IListJobsResponse,
     ]
   > | void {
     request = request || {};
@@ -947,13 +940,12 @@ export class JobsV1Beta3Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.dataflow.v1beta3.Job | Job} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.dataflow.v1beta3.Job|Job} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listJobsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listJobsStream(
@@ -1006,12 +998,11 @@ export class JobsV1Beta3Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.dataflow.v1beta3.Job | Job}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.dataflow.v1beta3.Job|Job}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta3/jobs_v1_beta3.list_jobs.js</caption>
    * region_tag:dataflow_v1beta3_generated_JobsV1Beta3_ListJobs_async
@@ -1064,14 +1055,13 @@ export class JobsV1Beta3Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.dataflow.v1beta3.Job | Job}.
+   *   The first element of the array is Array of {@link protos.google.dataflow.v1beta3.Job|Job}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `aggregatedListJobsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   aggregatedListJobs(
@@ -1081,7 +1071,7 @@ export class JobsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IJob[],
       protos.google.dataflow.v1beta3.IListJobsRequest | null,
-      protos.google.dataflow.v1beta3.IListJobsResponse
+      protos.google.dataflow.v1beta3.IListJobsResponse,
     ]
   >;
   aggregatedListJobs(
@@ -1119,7 +1109,7 @@ export class JobsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IJob[],
       protos.google.dataflow.v1beta3.IListJobsRequest | null,
-      protos.google.dataflow.v1beta3.IListJobsResponse
+      protos.google.dataflow.v1beta3.IListJobsResponse,
     ]
   > | void {
     request = request || {};
@@ -1166,13 +1156,12 @@ export class JobsV1Beta3Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.dataflow.v1beta3.Job | Job} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.dataflow.v1beta3.Job|Job} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `aggregatedListJobsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   aggregatedListJobsStream(
@@ -1224,12 +1213,11 @@ export class JobsV1Beta3Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.dataflow.v1beta3.Job | Job}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.dataflow.v1beta3.Job|Job}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta3/jobs_v1_beta3.aggregated_list_jobs.js</caption>
    * region_tag:dataflow_v1beta3_generated_JobsV1Beta3_AggregatedListJobs_async

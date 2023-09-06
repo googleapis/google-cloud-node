@@ -20,6 +20,7 @@ import {
   DocumentLinkServiceClient,
   DocumentSchemaServiceClient,
   DocumentServiceClient,
+  PipelineServiceClient,
   RuleSetServiceClient,
   SynonymSetServiceClient,
 } from '@google-cloud/contentwarehouse';
@@ -36,6 +37,9 @@ function doStuffWithDocumentSchemaServiceClient(
   client.close();
 }
 function doStuffWithDocumentServiceClient(client: DocumentServiceClient) {
+  client.close();
+}
+function doStuffWithPipelineServiceClient(client: PipelineServiceClient) {
   client.close();
 }
 function doStuffWithRuleSetServiceClient(client: RuleSetServiceClient) {
@@ -55,6 +59,9 @@ function main() {
   // check that the client instance can be created
   const documentServiceClient = new DocumentServiceClient();
   doStuffWithDocumentServiceClient(documentServiceClient);
+  // check that the client instance can be created
+  const pipelineServiceClient = new PipelineServiceClient();
+  doStuffWithPipelineServiceClient(pipelineServiceClient);
   // check that the client instance can be created
   const ruleSetServiceClient = new RuleSetServiceClient();
   doStuffWithRuleSetServiceClient(ruleSetServiceClient);

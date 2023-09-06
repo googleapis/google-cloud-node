@@ -41,7 +41,7 @@ import * as gapicConfig from './pages_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for managing {@link google.cloud.dialogflow.cx.v3.Page|Pages}.
+ *  Service for managing {@link protos.google.cloud.dialogflow.cx.v3.Page|Pages}.
  * @class
  * @memberof v3
  */
@@ -95,8 +95,7 @@ export class PagesClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -104,7 +103,7 @@ export class PagesClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new PagesClient({fallback: 'rest'}, gax);
+   *     const client = new PagesClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -174,7 +173,7 @@ export class PagesClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -189,6 +188,9 @@ export class PagesClient {
     this.pathTemplates = {
       agentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}'
+      ),
+      agentGenerativeSettingsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/generativeSettings'
       ),
       agentValidationResultPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/validationResult'
@@ -233,9 +235,17 @@ export class PagesClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/sessions/{session}/entityTypes/{entity_type}'
         ),
+      projectLocationAgentFlowTransitionRouteGroupPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/transitionRouteGroups/{transition_route_group}'
+        ),
       projectLocationAgentSessionEntityTypePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/agents/{agent}/sessions/{session}/entityTypes/{entity_type}'
+        ),
+      projectLocationAgentTransitionRouteGroupPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agents/{agent}/transitionRouteGroups/{transition_route_group}'
         ),
       securitySettingsPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/securitySettings/{security_settings}'
@@ -245,9 +255,6 @@ export class PagesClient {
       ),
       testCaseResultPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/testCases/{test_case}/results/{result}'
-      ),
-      transitionRouteGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/transitionRouteGroups/{transition_route_group}'
       ),
       versionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/versions/{version}'
@@ -276,7 +283,7 @@ export class PagesClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
@@ -491,9 +498,8 @@ export class PagesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3.Page | Page}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.Page|Page}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/pages.get_page.js</caption>
    * region_tag:dialogflow_v3_generated_Pages_GetPage_async
@@ -505,7 +511,7 @@ export class PagesClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IPage,
       protos.google.cloud.dialogflow.cx.v3.IGetPageRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getPage(
@@ -545,7 +551,7 @@ export class PagesClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IPage,
       protos.google.cloud.dialogflow.cx.v3.IGetPageRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -605,9 +611,8 @@ export class PagesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3.Page | Page}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.Page|Page}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/pages.create_page.js</caption>
    * region_tag:dialogflow_v3_generated_Pages_CreatePage_async
@@ -619,7 +624,7 @@ export class PagesClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IPage,
       protos.google.cloud.dialogflow.cx.v3.ICreatePageRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createPage(
@@ -665,7 +670,7 @@ export class PagesClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IPage,
       protos.google.cloud.dialogflow.cx.v3.ICreatePageRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -724,9 +729,8 @@ export class PagesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3.Page | Page}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.Page|Page}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/pages.update_page.js</caption>
    * region_tag:dialogflow_v3_generated_Pages_UpdatePage_async
@@ -738,7 +742,7 @@ export class PagesClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IPage,
       protos.google.cloud.dialogflow.cx.v3.IUpdatePageRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updatePage(
@@ -784,7 +788,7 @@ export class PagesClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IPage,
       protos.google.cloud.dialogflow.cx.v3.IUpdatePageRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -832,9 +836,8 @@ export class PagesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/pages.delete_page.js</caption>
    * region_tag:dialogflow_v3_generated_Pages_DeletePage_async
@@ -846,7 +849,7 @@ export class PagesClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dialogflow.cx.v3.IDeletePageRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deletePage(
@@ -892,7 +895,7 @@ export class PagesClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dialogflow.cx.v3.IDeletePageRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -953,14 +956,13 @@ export class PagesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dialogflow.cx.v3.Page | Page}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.cx.v3.Page|Page}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listPagesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listPages(
@@ -970,7 +972,7 @@ export class PagesClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IPage[],
       protos.google.cloud.dialogflow.cx.v3.IListPagesRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.IListPagesResponse
+      protos.google.cloud.dialogflow.cx.v3.IListPagesResponse,
     ]
   >;
   listPages(
@@ -1016,7 +1018,7 @@ export class PagesClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IPage[],
       protos.google.cloud.dialogflow.cx.v3.IListPagesRequest | null,
-      protos.google.cloud.dialogflow.cx.v3.IListPagesResponse
+      protos.google.cloud.dialogflow.cx.v3.IListPagesResponse,
     ]
   > | void {
     request = request || {};
@@ -1076,13 +1078,12 @@ export class PagesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dialogflow.cx.v3.Page | Page} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.cx.v3.Page|Page} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listPagesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listPagesStream(
@@ -1147,12 +1148,11 @@ export class PagesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dialogflow.cx.v3.Page | Page}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dialogflow.cx.v3.Page|Page}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/pages.list_pages.js</caption>
    * region_tag:dialogflow_v3_generated_Pages_ListPages_async
@@ -1189,8 +1189,7 @@ export class PagesClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -1236,12 +1235,11 @@ export class PagesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -1484,6 +1482,71 @@ export class PagesClient {
    */
   matchAgentFromAgentName(agentName: string) {
     return this.pathTemplates.agentPathTemplate.match(agentName).agent;
+  }
+
+  /**
+   * Return a fully-qualified agentGenerativeSettings resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @returns {string} Resource name string.
+   */
+  agentGenerativeSettingsPath(
+    project: string,
+    location: string,
+    agent: string
+  ) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+    });
+  }
+
+  /**
+   * Parse the project from AgentGenerativeSettings resource.
+   *
+   * @param {string} agentGenerativeSettingsName
+   *   A fully-qualified path representing AgentGenerativeSettings resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAgentGenerativeSettingsName(
+    agentGenerativeSettingsName: string
+  ) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(
+      agentGenerativeSettingsName
+    ).project;
+  }
+
+  /**
+   * Parse the location from AgentGenerativeSettings resource.
+   *
+   * @param {string} agentGenerativeSettingsName
+   *   A fully-qualified path representing AgentGenerativeSettings resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAgentGenerativeSettingsName(
+    agentGenerativeSettingsName: string
+  ) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(
+      agentGenerativeSettingsName
+    ).location;
+  }
+
+  /**
+   * Parse the agent from AgentGenerativeSettings resource.
+   *
+   * @param {string} agentGenerativeSettingsName
+   *   A fully-qualified path representing AgentGenerativeSettings resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromAgentGenerativeSettingsName(
+    agentGenerativeSettingsName: string
+  ) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(
+      agentGenerativeSettingsName
+    ).agent;
   }
 
   /**
@@ -2483,6 +2546,109 @@ export class PagesClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationAgentFlowTransitionRouteGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @param {string} flow
+   * @param {string} transition_route_group
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentFlowTransitionRouteGroupPath(
+    project: string,
+    location: string,
+    agent: string,
+    flow: string,
+    transitionRouteGroup: string
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        agent: agent,
+        flow: flow,
+        transition_route_group: transitionRouteGroup,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgentFlowTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentFlowTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentFlowTransitionRouteGroupName(
+    projectLocationAgentFlowTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentFlowTransitionRouteGroupName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgentFlowTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentFlowTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentFlowTransitionRouteGroupName(
+    projectLocationAgentFlowTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentFlowTransitionRouteGroupName
+    ).location;
+  }
+
+  /**
+   * Parse the agent from ProjectLocationAgentFlowTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentFlowTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromProjectLocationAgentFlowTransitionRouteGroupName(
+    projectLocationAgentFlowTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentFlowTransitionRouteGroupName
+    ).agent;
+  }
+
+  /**
+   * Parse the flow from ProjectLocationAgentFlowTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentFlowTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
+   * @returns {string} A string representing the flow.
+   */
+  matchFlowFromProjectLocationAgentFlowTransitionRouteGroupName(
+    projectLocationAgentFlowTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentFlowTransitionRouteGroupName
+    ).flow;
+  }
+
+  /**
+   * Parse the transition_route_group from ProjectLocationAgentFlowTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentFlowTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
+   * @returns {string} A string representing the transition_route_group.
+   */
+  matchTransitionRouteGroupFromProjectLocationAgentFlowTransitionRouteGroupName(
+    projectLocationAgentFlowTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentFlowTransitionRouteGroupName
+    ).transition_route_group;
+  }
+
+  /**
    * Return a fully-qualified projectLocationAgentSessionEntityType resource name string.
    *
    * @param {string} project
@@ -2583,6 +2749,91 @@ export class PagesClient {
     return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
       projectLocationAgentSessionEntityTypeName
     ).entity_type;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAgentTransitionRouteGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @param {string} transition_route_group
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentTransitionRouteGroupPath(
+    project: string,
+    location: string,
+    agent: string,
+    transitionRouteGroup: string
+  ) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        agent: agent,
+        transition_route_group: transitionRouteGroup,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgentTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_transition_route_group resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentTransitionRouteGroupName(
+    projectLocationAgentTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentTransitionRouteGroupName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgentTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_transition_route_group resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentTransitionRouteGroupName(
+    projectLocationAgentTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentTransitionRouteGroupName
+    ).location;
+  }
+
+  /**
+   * Parse the agent from ProjectLocationAgentTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_transition_route_group resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromProjectLocationAgentTransitionRouteGroupName(
+    projectLocationAgentTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentTransitionRouteGroupName
+    ).agent;
+  }
+
+  /**
+   * Parse the transition_route_group from ProjectLocationAgentTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_transition_route_group resource.
+   * @returns {string} A string representing the transition_route_group.
+   */
+  matchTransitionRouteGroupFromProjectLocationAgentTransitionRouteGroupName(
+    projectLocationAgentTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentTransitionRouteGroupName
+    ).transition_route_group;
   }
 
   /**
@@ -2801,99 +3052,6 @@ export class PagesClient {
     return this.pathTemplates.testCaseResultPathTemplate.match(
       testCaseResultName
     ).result;
-  }
-
-  /**
-   * Return a fully-qualified transitionRouteGroup resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} agent
-   * @param {string} flow
-   * @param {string} transition_route_group
-   * @returns {string} Resource name string.
-   */
-  transitionRouteGroupPath(
-    project: string,
-    location: string,
-    agent: string,
-    flow: string,
-    transitionRouteGroup: string
-  ) {
-    return this.pathTemplates.transitionRouteGroupPathTemplate.render({
-      project: project,
-      location: location,
-      agent: agent,
-      flow: flow,
-      transition_route_group: transitionRouteGroup,
-    });
-  }
-
-  /**
-   * Parse the project from TransitionRouteGroup resource.
-   *
-   * @param {string} transitionRouteGroupName
-   *   A fully-qualified path representing TransitionRouteGroup resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromTransitionRouteGroupName(transitionRouteGroupName: string) {
-    return this.pathTemplates.transitionRouteGroupPathTemplate.match(
-      transitionRouteGroupName
-    ).project;
-  }
-
-  /**
-   * Parse the location from TransitionRouteGroup resource.
-   *
-   * @param {string} transitionRouteGroupName
-   *   A fully-qualified path representing TransitionRouteGroup resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromTransitionRouteGroupName(transitionRouteGroupName: string) {
-    return this.pathTemplates.transitionRouteGroupPathTemplate.match(
-      transitionRouteGroupName
-    ).location;
-  }
-
-  /**
-   * Parse the agent from TransitionRouteGroup resource.
-   *
-   * @param {string} transitionRouteGroupName
-   *   A fully-qualified path representing TransitionRouteGroup resource.
-   * @returns {string} A string representing the agent.
-   */
-  matchAgentFromTransitionRouteGroupName(transitionRouteGroupName: string) {
-    return this.pathTemplates.transitionRouteGroupPathTemplate.match(
-      transitionRouteGroupName
-    ).agent;
-  }
-
-  /**
-   * Parse the flow from TransitionRouteGroup resource.
-   *
-   * @param {string} transitionRouteGroupName
-   *   A fully-qualified path representing TransitionRouteGroup resource.
-   * @returns {string} A string representing the flow.
-   */
-  matchFlowFromTransitionRouteGroupName(transitionRouteGroupName: string) {
-    return this.pathTemplates.transitionRouteGroupPathTemplate.match(
-      transitionRouteGroupName
-    ).flow;
-  }
-
-  /**
-   * Parse the transition_route_group from TransitionRouteGroup resource.
-   *
-   * @param {string} transitionRouteGroupName
-   *   A fully-qualified path representing TransitionRouteGroup resource.
-   * @returns {string} A string representing the transition_route_group.
-   */
-  matchTransitionRouteGroupFromTransitionRouteGroupName(
-    transitionRouteGroupName: string
-  ) {
-    return this.pathTemplates.transitionRouteGroupPathTemplate.match(
-      transitionRouteGroupName
-    ).transition_route_group;
   }
 
   /**

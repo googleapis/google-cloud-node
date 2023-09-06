@@ -39,7 +39,7 @@ const version = require('../../../package.json').version;
 
 /**
  *  Executions is used to start and manage running instances of
- *  {@link google.cloud.workflows.v1.Workflow|Workflows} called executions.
+ *  {@link protos.google.cloud.workflows.v1.Workflow|Workflows} called executions.
  * @class
  * @memberof v1
  */
@@ -91,8 +91,7 @@ export class ExecutionsClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -100,7 +99,7 @@ export class ExecutionsClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new ExecutionsClient({fallback: 'rest'}, gax);
+   *     const client = new ExecutionsClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -163,7 +162,7 @@ export class ExecutionsClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -346,9 +345,8 @@ export class ExecutionsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.workflows.executions.v1.Execution | Execution}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.workflows.executions.v1.Execution|Execution}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/executions.create_execution.js</caption>
    * region_tag:workflowexecutions_v1_generated_Executions_CreateExecution_async
@@ -363,7 +361,7 @@ export class ExecutionsClient {
         | protos.google.cloud.workflows.executions.v1.ICreateExecutionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createExecution(
@@ -412,7 +410,7 @@ export class ExecutionsClient {
         | protos.google.cloud.workflows.executions.v1.ICreateExecutionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -443,14 +441,13 @@ export class ExecutionsClient {
    *   Format:
    *   projects/{project}/locations/{location}/workflows/{workflow}/executions/{execution}
    * @param {google.cloud.workflows.executions.v1.ExecutionView} [request.view]
-   *   Optional. A view defining which fields should be filled in the returned execution.
-   *   The API will default to the FULL view.
+   *   Optional. A view defining which fields should be filled in the returned
+   *   execution. The API will default to the FULL view.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.workflows.executions.v1.Execution | Execution}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.workflows.executions.v1.Execution|Execution}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/executions.get_execution.js</caption>
    * region_tag:workflowexecutions_v1_generated_Executions_GetExecution_async
@@ -465,7 +462,7 @@ export class ExecutionsClient {
         | protos.google.cloud.workflows.executions.v1.IGetExecutionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getExecution(
@@ -514,7 +511,7 @@ export class ExecutionsClient {
         | protos.google.cloud.workflows.executions.v1.IGetExecutionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -547,9 +544,8 @@ export class ExecutionsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.workflows.executions.v1.Execution | Execution}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.workflows.executions.v1.Execution|Execution}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/executions.cancel_execution.js</caption>
    * region_tag:workflowexecutions_v1_generated_Executions_CancelExecution_async
@@ -564,7 +560,7 @@ export class ExecutionsClient {
         | protos.google.cloud.workflows.executions.v1.ICancelExecutionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   cancelExecution(
@@ -613,7 +609,7 @@ export class ExecutionsClient {
         | protos.google.cloud.workflows.executions.v1.ICancelExecutionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -648,7 +644,7 @@ export class ExecutionsClient {
    *   Format: projects/{project}/locations/{location}/workflows/{workflow}
    * @param {number} request.pageSize
    *   Maximum number of executions to return per call.
-   *   Max supported value depends on the selected Execution view: it's 10000 for
+   *   Max supported value depends on the selected Execution view: it's 1000 for
    *   BASIC and 100 for FULL. The default value used if the field is not
    *   specified is 100, regardless of the selected view. Values greater than
    *   the max value will be coerced down to it.
@@ -658,20 +654,32 @@ export class ExecutionsClient {
    *
    *   When paginating, all other parameters provided to `ListExecutions` must
    *   match the call that provided the page token.
+   *
+   *   Note that pagination is applied to dynamic data. The list of executions
+   *   returned can change between page requests.
    * @param {google.cloud.workflows.executions.v1.ExecutionView} [request.view]
-   *   Optional. A view defining which fields should be filled in the returned executions.
-   *   The API will default to the BASIC view.
+   *   Optional. A view defining which fields should be filled in the returned
+   *   executions. The API will default to the BASIC view.
+   * @param {string} [request.filter]
+   *   Optional. Filters applied to the [Executions.ListExecutions] results.
+   *   The following fields are supported for filtering:
+   *   executionID, state, startTime, endTime, duration, workflowRevisionID,
+   *   stepName, and label.
+   * @param {string} [request.orderBy]
+   *   Optional. The ordering applied to the [Executions.ListExecutions] results.
+   *   By default the ordering is based on descending start time.
+   *   The following fields are supported for order by:
+   *   executionID, startTime, endTime, duration, state, and workflowRevisionID.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.workflows.executions.v1.Execution | Execution}.
+   *   The first element of the array is Array of {@link protos.google.cloud.workflows.executions.v1.Execution|Execution}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listExecutionsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listExecutions(
@@ -681,7 +689,7 @@ export class ExecutionsClient {
     [
       protos.google.cloud.workflows.executions.v1.IExecution[],
       protos.google.cloud.workflows.executions.v1.IListExecutionsRequest | null,
-      protos.google.cloud.workflows.executions.v1.IListExecutionsResponse
+      protos.google.cloud.workflows.executions.v1.IListExecutionsResponse,
     ]
   >;
   listExecutions(
@@ -727,7 +735,7 @@ export class ExecutionsClient {
     [
       protos.google.cloud.workflows.executions.v1.IExecution[],
       protos.google.cloud.workflows.executions.v1.IListExecutionsRequest | null,
-      protos.google.cloud.workflows.executions.v1.IListExecutionsResponse
+      protos.google.cloud.workflows.executions.v1.IListExecutionsResponse,
     ]
   > | void {
     request = request || {};
@@ -758,7 +766,7 @@ export class ExecutionsClient {
    *   Format: projects/{project}/locations/{location}/workflows/{workflow}
    * @param {number} request.pageSize
    *   Maximum number of executions to return per call.
-   *   Max supported value depends on the selected Execution view: it's 10000 for
+   *   Max supported value depends on the selected Execution view: it's 1000 for
    *   BASIC and 100 for FULL. The default value used if the field is not
    *   specified is 100, regardless of the selected view. Values greater than
    *   the max value will be coerced down to it.
@@ -768,19 +776,31 @@ export class ExecutionsClient {
    *
    *   When paginating, all other parameters provided to `ListExecutions` must
    *   match the call that provided the page token.
+   *
+   *   Note that pagination is applied to dynamic data. The list of executions
+   *   returned can change between page requests.
    * @param {google.cloud.workflows.executions.v1.ExecutionView} [request.view]
-   *   Optional. A view defining which fields should be filled in the returned executions.
-   *   The API will default to the BASIC view.
+   *   Optional. A view defining which fields should be filled in the returned
+   *   executions. The API will default to the BASIC view.
+   * @param {string} [request.filter]
+   *   Optional. Filters applied to the [Executions.ListExecutions] results.
+   *   The following fields are supported for filtering:
+   *   executionID, state, startTime, endTime, duration, workflowRevisionID,
+   *   stepName, and label.
+   * @param {string} [request.orderBy]
+   *   Optional. The ordering applied to the [Executions.ListExecutions] results.
+   *   By default the ordering is based on descending start time.
+   *   The following fields are supported for order by:
+   *   executionID, startTime, endTime, duration, state, and workflowRevisionID.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.workflows.executions.v1.Execution | Execution} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.workflows.executions.v1.Execution|Execution} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listExecutionsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listExecutionsStream(
@@ -816,7 +836,7 @@ export class ExecutionsClient {
    *   Format: projects/{project}/locations/{location}/workflows/{workflow}
    * @param {number} request.pageSize
    *   Maximum number of executions to return per call.
-   *   Max supported value depends on the selected Execution view: it's 10000 for
+   *   Max supported value depends on the selected Execution view: it's 1000 for
    *   BASIC and 100 for FULL. The default value used if the field is not
    *   specified is 100, regardless of the selected view. Values greater than
    *   the max value will be coerced down to it.
@@ -826,18 +846,30 @@ export class ExecutionsClient {
    *
    *   When paginating, all other parameters provided to `ListExecutions` must
    *   match the call that provided the page token.
+   *
+   *   Note that pagination is applied to dynamic data. The list of executions
+   *   returned can change between page requests.
    * @param {google.cloud.workflows.executions.v1.ExecutionView} [request.view]
-   *   Optional. A view defining which fields should be filled in the returned executions.
-   *   The API will default to the BASIC view.
+   *   Optional. A view defining which fields should be filled in the returned
+   *   executions. The API will default to the BASIC view.
+   * @param {string} [request.filter]
+   *   Optional. Filters applied to the [Executions.ListExecutions] results.
+   *   The following fields are supported for filtering:
+   *   executionID, state, startTime, endTime, duration, workflowRevisionID,
+   *   stepName, and label.
+   * @param {string} [request.orderBy]
+   *   Optional. The ordering applied to the [Executions.ListExecutions] results.
+   *   By default the ordering is based on descending start time.
+   *   The following fields are supported for order by:
+   *   executionID, startTime, endTime, duration, state, and workflowRevisionID.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.workflows.executions.v1.Execution | Execution}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.workflows.executions.v1.Execution|Execution}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/executions.list_executions.js</caption>
    * region_tag:workflowexecutions_v1_generated_Executions_ListExecutions_async

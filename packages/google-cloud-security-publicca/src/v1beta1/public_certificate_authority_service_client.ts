@@ -90,8 +90,7 @@ export class PublicCertificateAuthorityServiceClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -99,7 +98,7 @@ export class PublicCertificateAuthorityServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new PublicCertificateAuthorityServiceClient({fallback: 'rest'}, gax);
+   *     const client = new PublicCertificateAuthorityServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -166,7 +165,7 @@ export class PublicCertificateAuthorityServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -326,7 +325,7 @@ export class PublicCertificateAuthorityServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Creates a new {@link google.cloud.security.publicca.v1beta1.ExternalAccountKey|ExternalAccountKey} bound to the project.
+   * Creates a new {@link protos.google.cloud.security.publicca.v1beta1.ExternalAccountKey|ExternalAccountKey} bound to the project.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -342,9 +341,8 @@ export class PublicCertificateAuthorityServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.security.publicca.v1beta1.ExternalAccountKey | ExternalAccountKey}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.security.publicca.v1beta1.ExternalAccountKey|ExternalAccountKey}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/public_certificate_authority_service.create_external_account_key.js</caption>
    * region_tag:publicca_v1beta1_generated_PublicCertificateAuthorityService_CreateExternalAccountKey_async
@@ -359,7 +357,7 @@ export class PublicCertificateAuthorityServiceClient {
         | protos.google.cloud.security.publicca.v1beta1.ICreateExternalAccountKeyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createExternalAccountKey(
@@ -408,7 +406,7 @@ export class PublicCertificateAuthorityServiceClient {
         | protos.google.cloud.security.publicca.v1beta1.ICreateExternalAccountKeyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

@@ -93,8 +93,7 @@ export class SecuritySettingsServiceClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -102,7 +101,7 @@ export class SecuritySettingsServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new SecuritySettingsServiceClient({fallback: 'rest'}, gax);
+   *     const client = new SecuritySettingsServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -173,7 +172,7 @@ export class SecuritySettingsServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -188,6 +187,9 @@ export class SecuritySettingsServiceClient {
     this.pathTemplates = {
       agentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}'
+      ),
+      agentGenerativeSettingsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/generativeSettings'
       ),
       agentValidationResultPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/validationResult'
@@ -240,9 +242,17 @@ export class SecuritySettingsServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/sessions/{session}/entityTypes/{entity_type}'
         ),
+      projectLocationAgentFlowTransitionRouteGroupPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/transitionRouteGroups/{transition_route_group}'
+        ),
       projectLocationAgentSessionEntityTypePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/agents/{agent}/sessions/{session}/entityTypes/{entity_type}'
+        ),
+      projectLocationAgentTransitionRouteGroupPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agents/{agent}/transitionRouteGroups/{transition_route_group}'
         ),
       projectLocationDeidentifyTemplatePathTemplate:
         new this._gaxModule.PathTemplate(
@@ -260,9 +270,6 @@ export class SecuritySettingsServiceClient {
       ),
       testCaseResultPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/testCases/{test_case}/results/{result}'
-      ),
-      transitionRouteGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/transitionRouteGroups/{transition_route_group}'
       ),
       versionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/versions/{version}'
@@ -432,16 +439,15 @@ export class SecuritySettingsServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location to create an
-   *   {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings|SecuritySettings}
+   *   {@link protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings|SecuritySettings}
    *   for. Format: `projects/<Project ID>/locations/<Location ID>`.
    * @param {google.cloud.dialogflow.cx.v3beta1.SecuritySettings} request.securitySettings
    *   Required. The security settings to create.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings | SecuritySettings}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings|SecuritySettings}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/security_settings_service.create_security_settings.js</caption>
    * region_tag:dialogflow_v3beta1_generated_SecuritySettingsService_CreateSecuritySettings_async
@@ -456,7 +462,7 @@ export class SecuritySettingsServiceClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.ICreateSecuritySettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createSecuritySettings(
@@ -505,7 +511,7 @@ export class SecuritySettingsServiceClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.ICreateSecuritySettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -532,7 +538,7 @@ export class SecuritySettingsServiceClient {
   }
   /**
    * Retrieves the specified
-   * {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings|SecuritySettings}.
+   * {@link protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings|SecuritySettings}.
    * The returned settings may be stale by up to 1 minute.
    *
    * @param {Object} request
@@ -544,9 +550,8 @@ export class SecuritySettingsServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings | SecuritySettings}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings|SecuritySettings}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/security_settings_service.get_security_settings.js</caption>
    * region_tag:dialogflow_v3beta1_generated_SecuritySettingsService_GetSecuritySettings_async
@@ -561,7 +566,7 @@ export class SecuritySettingsServiceClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.IGetSecuritySettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSecuritySettings(
@@ -610,7 +615,7 @@ export class SecuritySettingsServiceClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.IGetSecuritySettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -633,7 +638,7 @@ export class SecuritySettingsServiceClient {
   }
   /**
    * Updates the specified
-   * {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings|SecuritySettings}.
+   * {@link protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings|SecuritySettings}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -646,9 +651,8 @@ export class SecuritySettingsServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings | SecuritySettings}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings|SecuritySettings}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/security_settings_service.update_security_settings.js</caption>
    * region_tag:dialogflow_v3beta1_generated_SecuritySettingsService_UpdateSecuritySettings_async
@@ -663,7 +667,7 @@ export class SecuritySettingsServiceClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.IUpdateSecuritySettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateSecuritySettings(
@@ -712,7 +716,7 @@ export class SecuritySettingsServiceClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.IUpdateSecuritySettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -739,21 +743,20 @@ export class SecuritySettingsServiceClient {
   }
   /**
    * Deletes the specified
-   * {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings|SecuritySettings}.
+   * {@link protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings|SecuritySettings}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the
-   *   {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings|SecuritySettings} to
+   *   {@link protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings|SecuritySettings} to
    *   delete. Format: `projects/<Project ID>/locations/<Location
    *   ID>/securitySettings/<Security Settings ID>`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/security_settings_service.delete_security_settings.js</caption>
    * region_tag:dialogflow_v3beta1_generated_SecuritySettingsService_DeleteSecuritySettings_async
@@ -768,7 +771,7 @@ export class SecuritySettingsServiceClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteSecuritySettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteSecuritySettings(
@@ -817,7 +820,7 @@ export class SecuritySettingsServiceClient {
         | protos.google.cloud.dialogflow.cx.v3beta1.IDeleteSecuritySettingsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -859,14 +862,13 @@ export class SecuritySettingsServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings | SecuritySettings}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings|SecuritySettings}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listSecuritySettingsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSecuritySettings(
@@ -876,7 +878,7 @@ export class SecuritySettingsServiceClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.ISecuritySettings[],
       protos.google.cloud.dialogflow.cx.v3beta1.IListSecuritySettingsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3beta1.IListSecuritySettingsResponse
+      protos.google.cloud.dialogflow.cx.v3beta1.IListSecuritySettingsResponse,
     ]
   >;
   listSecuritySettings(
@@ -922,7 +924,7 @@ export class SecuritySettingsServiceClient {
     [
       protos.google.cloud.dialogflow.cx.v3beta1.ISecuritySettings[],
       protos.google.cloud.dialogflow.cx.v3beta1.IListSecuritySettingsRequest | null,
-      protos.google.cloud.dialogflow.cx.v3beta1.IListSecuritySettingsResponse
+      protos.google.cloud.dialogflow.cx.v3beta1.IListSecuritySettingsResponse,
     ]
   > | void {
     request = request || {};
@@ -959,13 +961,12 @@ export class SecuritySettingsServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings | SecuritySettings} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings|SecuritySettings} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listSecuritySettingsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSecuritySettingsStream(
@@ -1007,12 +1008,11 @@ export class SecuritySettingsServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings | SecuritySettings}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings|SecuritySettings}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/security_settings_service.list_security_settings.js</caption>
    * region_tag:dialogflow_v3beta1_generated_SecuritySettingsService_ListSecuritySettings_async
@@ -1049,8 +1049,7 @@ export class SecuritySettingsServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -1096,12 +1095,11 @@ export class SecuritySettingsServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -1169,6 +1167,71 @@ export class SecuritySettingsServiceClient {
    */
   matchAgentFromAgentName(agentName: string) {
     return this.pathTemplates.agentPathTemplate.match(agentName).agent;
+  }
+
+  /**
+   * Return a fully-qualified agentGenerativeSettings resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @returns {string} Resource name string.
+   */
+  agentGenerativeSettingsPath(
+    project: string,
+    location: string,
+    agent: string
+  ) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+    });
+  }
+
+  /**
+   * Parse the project from AgentGenerativeSettings resource.
+   *
+   * @param {string} agentGenerativeSettingsName
+   *   A fully-qualified path representing AgentGenerativeSettings resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAgentGenerativeSettingsName(
+    agentGenerativeSettingsName: string
+  ) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(
+      agentGenerativeSettingsName
+    ).project;
+  }
+
+  /**
+   * Parse the location from AgentGenerativeSettings resource.
+   *
+   * @param {string} agentGenerativeSettingsName
+   *   A fully-qualified path representing AgentGenerativeSettings resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAgentGenerativeSettingsName(
+    agentGenerativeSettingsName: string
+  ) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(
+      agentGenerativeSettingsName
+    ).location;
+  }
+
+  /**
+   * Parse the agent from AgentGenerativeSettings resource.
+   *
+   * @param {string} agentGenerativeSettingsName
+   *   A fully-qualified path representing AgentGenerativeSettings resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromAgentGenerativeSettingsName(
+    agentGenerativeSettingsName: string
+  ) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(
+      agentGenerativeSettingsName
+    ).agent;
   }
 
   /**
@@ -2302,6 +2365,109 @@ export class SecuritySettingsServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationAgentFlowTransitionRouteGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @param {string} flow
+   * @param {string} transition_route_group
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentFlowTransitionRouteGroupPath(
+    project: string,
+    location: string,
+    agent: string,
+    flow: string,
+    transitionRouteGroup: string
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        agent: agent,
+        flow: flow,
+        transition_route_group: transitionRouteGroup,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgentFlowTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentFlowTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentFlowTransitionRouteGroupName(
+    projectLocationAgentFlowTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentFlowTransitionRouteGroupName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgentFlowTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentFlowTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentFlowTransitionRouteGroupName(
+    projectLocationAgentFlowTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentFlowTransitionRouteGroupName
+    ).location;
+  }
+
+  /**
+   * Parse the agent from ProjectLocationAgentFlowTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentFlowTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromProjectLocationAgentFlowTransitionRouteGroupName(
+    projectLocationAgentFlowTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentFlowTransitionRouteGroupName
+    ).agent;
+  }
+
+  /**
+   * Parse the flow from ProjectLocationAgentFlowTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentFlowTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
+   * @returns {string} A string representing the flow.
+   */
+  matchFlowFromProjectLocationAgentFlowTransitionRouteGroupName(
+    projectLocationAgentFlowTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentFlowTransitionRouteGroupName
+    ).flow;
+  }
+
+  /**
+   * Parse the transition_route_group from ProjectLocationAgentFlowTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentFlowTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
+   * @returns {string} A string representing the transition_route_group.
+   */
+  matchTransitionRouteGroupFromProjectLocationAgentFlowTransitionRouteGroupName(
+    projectLocationAgentFlowTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentFlowTransitionRouteGroupName
+    ).transition_route_group;
+  }
+
+  /**
    * Return a fully-qualified projectLocationAgentSessionEntityType resource name string.
    *
    * @param {string} project
@@ -2402,6 +2568,91 @@ export class SecuritySettingsServiceClient {
     return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
       projectLocationAgentSessionEntityTypeName
     ).entity_type;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAgentTransitionRouteGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @param {string} transition_route_group
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentTransitionRouteGroupPath(
+    project: string,
+    location: string,
+    agent: string,
+    transitionRouteGroup: string
+  ) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        agent: agent,
+        transition_route_group: transitionRouteGroup,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgentTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_transition_route_group resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentTransitionRouteGroupName(
+    projectLocationAgentTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentTransitionRouteGroupName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgentTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_transition_route_group resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentTransitionRouteGroupName(
+    projectLocationAgentTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentTransitionRouteGroupName
+    ).location;
+  }
+
+  /**
+   * Parse the agent from ProjectLocationAgentTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_transition_route_group resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromProjectLocationAgentTransitionRouteGroupName(
+    projectLocationAgentTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentTransitionRouteGroupName
+    ).agent;
+  }
+
+  /**
+   * Parse the transition_route_group from ProjectLocationAgentTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_transition_route_group resource.
+   * @returns {string} A string representing the transition_route_group.
+   */
+  matchTransitionRouteGroupFromProjectLocationAgentTransitionRouteGroupName(
+    projectLocationAgentTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentTransitionRouteGroupName
+    ).transition_route_group;
   }
 
   /**
@@ -2754,99 +3005,6 @@ export class SecuritySettingsServiceClient {
     return this.pathTemplates.testCaseResultPathTemplate.match(
       testCaseResultName
     ).result;
-  }
-
-  /**
-   * Return a fully-qualified transitionRouteGroup resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} agent
-   * @param {string} flow
-   * @param {string} transition_route_group
-   * @returns {string} Resource name string.
-   */
-  transitionRouteGroupPath(
-    project: string,
-    location: string,
-    agent: string,
-    flow: string,
-    transitionRouteGroup: string
-  ) {
-    return this.pathTemplates.transitionRouteGroupPathTemplate.render({
-      project: project,
-      location: location,
-      agent: agent,
-      flow: flow,
-      transition_route_group: transitionRouteGroup,
-    });
-  }
-
-  /**
-   * Parse the project from TransitionRouteGroup resource.
-   *
-   * @param {string} transitionRouteGroupName
-   *   A fully-qualified path representing TransitionRouteGroup resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromTransitionRouteGroupName(transitionRouteGroupName: string) {
-    return this.pathTemplates.transitionRouteGroupPathTemplate.match(
-      transitionRouteGroupName
-    ).project;
-  }
-
-  /**
-   * Parse the location from TransitionRouteGroup resource.
-   *
-   * @param {string} transitionRouteGroupName
-   *   A fully-qualified path representing TransitionRouteGroup resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromTransitionRouteGroupName(transitionRouteGroupName: string) {
-    return this.pathTemplates.transitionRouteGroupPathTemplate.match(
-      transitionRouteGroupName
-    ).location;
-  }
-
-  /**
-   * Parse the agent from TransitionRouteGroup resource.
-   *
-   * @param {string} transitionRouteGroupName
-   *   A fully-qualified path representing TransitionRouteGroup resource.
-   * @returns {string} A string representing the agent.
-   */
-  matchAgentFromTransitionRouteGroupName(transitionRouteGroupName: string) {
-    return this.pathTemplates.transitionRouteGroupPathTemplate.match(
-      transitionRouteGroupName
-    ).agent;
-  }
-
-  /**
-   * Parse the flow from TransitionRouteGroup resource.
-   *
-   * @param {string} transitionRouteGroupName
-   *   A fully-qualified path representing TransitionRouteGroup resource.
-   * @returns {string} A string representing the flow.
-   */
-  matchFlowFromTransitionRouteGroupName(transitionRouteGroupName: string) {
-    return this.pathTemplates.transitionRouteGroupPathTemplate.match(
-      transitionRouteGroupName
-    ).flow;
-  }
-
-  /**
-   * Parse the transition_route_group from TransitionRouteGroup resource.
-   *
-   * @param {string} transitionRouteGroupName
-   *   A fully-qualified path representing TransitionRouteGroup resource.
-   * @returns {string} A string representing the transition_route_group.
-   */
-  matchTransitionRouteGroupFromTransitionRouteGroupName(
-    transitionRouteGroupName: string
-  ) {
-    return this.pathTemplates.transitionRouteGroupPathTemplate.match(
-      transitionRouteGroupName
-    ).transition_route_group;
   }
 
   /**

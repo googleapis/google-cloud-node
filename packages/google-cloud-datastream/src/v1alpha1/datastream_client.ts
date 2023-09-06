@@ -93,8 +93,7 @@ export class DatastreamClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -102,7 +101,7 @@ export class DatastreamClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new DatastreamClient({fallback: 'rest'}, gax);
+   *     const client = new DatastreamClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -168,7 +167,7 @@ export class DatastreamClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -240,7 +239,7 @@ export class DatastreamClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
@@ -585,9 +584,8 @@ export class DatastreamClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.datastream.v1alpha1.ConnectionProfile | ConnectionProfile}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.datastream.v1alpha1.ConnectionProfile|ConnectionProfile}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.get_connection_profile.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_GetConnectionProfile_async
@@ -602,7 +600,7 @@ export class DatastreamClient {
         | protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getConnectionProfile(
@@ -651,7 +649,7 @@ export class DatastreamClient {
         | protos.google.cloud.datastream.v1alpha1.IGetConnectionProfileRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -699,9 +697,8 @@ export class DatastreamClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.datastream.v1alpha1.DiscoverConnectionProfileResponse | DiscoverConnectionProfileResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.datastream.v1alpha1.DiscoverConnectionProfileResponse|DiscoverConnectionProfileResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.discover_connection_profile.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_DiscoverConnectionProfile_async
@@ -716,7 +713,7 @@ export class DatastreamClient {
         | protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   discoverConnectionProfile(
@@ -765,7 +762,7 @@ export class DatastreamClient {
         | protos.google.cloud.datastream.v1alpha1.IDiscoverConnectionProfileRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -800,9 +797,8 @@ export class DatastreamClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.datastream.v1alpha1.Stream | Stream}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.datastream.v1alpha1.Stream|Stream}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.get_stream.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_GetStream_async
@@ -814,7 +810,7 @@ export class DatastreamClient {
     [
       protos.google.cloud.datastream.v1alpha1.IStream,
       protos.google.cloud.datastream.v1alpha1.IGetStreamRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getStream(
@@ -860,7 +856,7 @@ export class DatastreamClient {
     [
       protos.google.cloud.datastream.v1alpha1.IStream,
       protos.google.cloud.datastream.v1alpha1.IGetStreamRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -891,9 +887,8 @@ export class DatastreamClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.datastream.v1alpha1.PrivateConnection | PrivateConnection}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.datastream.v1alpha1.PrivateConnection|PrivateConnection}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.get_private_connection.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_GetPrivateConnection_async
@@ -908,7 +903,7 @@ export class DatastreamClient {
         | protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getPrivateConnection(
@@ -957,7 +952,7 @@ export class DatastreamClient {
         | protos.google.cloud.datastream.v1alpha1.IGetPrivateConnectionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -988,9 +983,8 @@ export class DatastreamClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.datastream.v1alpha1.Route | Route}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.datastream.v1alpha1.Route|Route}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.get_route.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_GetRoute_async
@@ -1002,7 +996,7 @@ export class DatastreamClient {
     [
       protos.google.cloud.datastream.v1alpha1.IRoute,
       protos.google.cloud.datastream.v1alpha1.IGetRouteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRoute(
@@ -1048,7 +1042,7 @@ export class DatastreamClient {
     [
       protos.google.cloud.datastream.v1alpha1.IRoute,
       protos.google.cloud.datastream.v1alpha1.IGetRouteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1101,8 +1095,7 @@ export class DatastreamClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.create_connection_profile.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_CreateConnectionProfile_async
@@ -1117,7 +1110,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createConnectionProfile(
@@ -1170,7 +1163,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1201,8 +1194,7 @@ export class DatastreamClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.create_connection_profile.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_CreateConnectionProfile_async
@@ -1263,8 +1255,7 @@ export class DatastreamClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.update_connection_profile.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_UpdateConnectionProfile_async
@@ -1279,7 +1270,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateConnectionProfile(
@@ -1332,7 +1323,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1363,8 +1354,7 @@ export class DatastreamClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.update_connection_profile.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_UpdateConnectionProfile_async
@@ -1419,8 +1409,7 @@ export class DatastreamClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.delete_connection_profile.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_DeleteConnectionProfile_async
@@ -1435,7 +1424,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteConnectionProfile(
@@ -1488,7 +1477,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1519,8 +1508,7 @@ export class DatastreamClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.delete_connection_profile.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_DeleteConnectionProfile_async
@@ -1584,8 +1572,7 @@ export class DatastreamClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.create_stream.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_CreateStream_async
@@ -1600,7 +1587,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createStream(
@@ -1653,7 +1640,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1680,8 +1667,7 @@ export class DatastreamClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.create_stream.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_CreateStream_async
@@ -1747,8 +1733,7 @@ export class DatastreamClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.update_stream.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_UpdateStream_async
@@ -1763,7 +1748,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateStream(
@@ -1816,7 +1801,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1843,8 +1828,7 @@ export class DatastreamClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.update_stream.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_UpdateStream_async
@@ -1899,8 +1883,7 @@ export class DatastreamClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.delete_stream.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_DeleteStream_async
@@ -1915,7 +1898,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteStream(
@@ -1968,7 +1951,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1995,8 +1978,7 @@ export class DatastreamClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.delete_stream.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_DeleteStream_async
@@ -2037,8 +2019,7 @@ export class DatastreamClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.fetch_errors.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_FetchErrors_async
@@ -2053,7 +2034,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   fetchErrors(
@@ -2106,7 +2087,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2133,8 +2114,7 @@ export class DatastreamClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.fetch_errors.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_FetchErrors_async
@@ -2193,8 +2173,7 @@ export class DatastreamClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.create_private_connection.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_CreatePrivateConnection_async
@@ -2209,7 +2188,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createPrivateConnection(
@@ -2262,7 +2241,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2293,8 +2272,7 @@ export class DatastreamClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.create_private_connection.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_CreatePrivateConnection_async
@@ -2352,8 +2330,7 @@ export class DatastreamClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.delete_private_connection.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_DeletePrivateConnection_async
@@ -2368,7 +2345,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deletePrivateConnection(
@@ -2421,7 +2398,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2452,8 +2429,7 @@ export class DatastreamClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.delete_private_connection.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_DeletePrivateConnection_async
@@ -2513,8 +2489,7 @@ export class DatastreamClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.create_route.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_CreateRoute_async
@@ -2529,7 +2504,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createRoute(
@@ -2582,7 +2557,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2609,8 +2584,7 @@ export class DatastreamClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.create_route.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_CreateRoute_async
@@ -2665,8 +2639,7 @@ export class DatastreamClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.delete_route.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_DeleteRoute_async
@@ -2681,7 +2654,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteRoute(
@@ -2734,7 +2707,7 @@ export class DatastreamClient {
         protos.google.cloud.datastream.v1alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2761,8 +2734,7 @@ export class DatastreamClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.delete_route.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_DeleteRoute_async
@@ -2815,14 +2787,13 @@ export class DatastreamClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.datastream.v1alpha1.ConnectionProfile | ConnectionProfile}.
+   *   The first element of the array is Array of {@link protos.google.cloud.datastream.v1alpha1.ConnectionProfile|ConnectionProfile}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listConnectionProfilesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listConnectionProfiles(
@@ -2832,7 +2803,7 @@ export class DatastreamClient {
     [
       protos.google.cloud.datastream.v1alpha1.IConnectionProfile[],
       protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse
+      protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse,
     ]
   >;
   listConnectionProfiles(
@@ -2878,7 +2849,7 @@ export class DatastreamClient {
     [
       protos.google.cloud.datastream.v1alpha1.IConnectionProfile[],
       protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse
+      protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesResponse,
     ]
   > | void {
     request = request || {};
@@ -2927,13 +2898,12 @@ export class DatastreamClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.datastream.v1alpha1.ConnectionProfile | ConnectionProfile} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.datastream.v1alpha1.ConnectionProfile|ConnectionProfile} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listConnectionProfilesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listConnectionProfilesStream(
@@ -2983,12 +2953,11 @@ export class DatastreamClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.datastream.v1alpha1.ConnectionProfile | ConnectionProfile}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.datastream.v1alpha1.ConnectionProfile|ConnectionProfile}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.list_connection_profiles.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_ListConnectionProfiles_async
@@ -3038,14 +3007,13 @@ export class DatastreamClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.datastream.v1alpha1.Stream | Stream}.
+   *   The first element of the array is Array of {@link protos.google.cloud.datastream.v1alpha1.Stream|Stream}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listStreamsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listStreams(
@@ -3055,7 +3023,7 @@ export class DatastreamClient {
     [
       protos.google.cloud.datastream.v1alpha1.IStream[],
       protos.google.cloud.datastream.v1alpha1.IListStreamsRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IListStreamsResponse
+      protos.google.cloud.datastream.v1alpha1.IListStreamsResponse,
     ]
   >;
   listStreams(
@@ -3101,7 +3069,7 @@ export class DatastreamClient {
     [
       protos.google.cloud.datastream.v1alpha1.IStream[],
       protos.google.cloud.datastream.v1alpha1.IListStreamsRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IListStreamsResponse
+      protos.google.cloud.datastream.v1alpha1.IListStreamsResponse,
     ]
   > | void {
     request = request || {};
@@ -3146,13 +3114,12 @@ export class DatastreamClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.datastream.v1alpha1.Stream | Stream} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.datastream.v1alpha1.Stream|Stream} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listStreamsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listStreamsStream(
@@ -3202,12 +3169,11 @@ export class DatastreamClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.datastream.v1alpha1.Stream | Stream}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.datastream.v1alpha1.Stream|Stream}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.list_streams.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_ListStreams_async
@@ -3257,8 +3223,7 @@ export class DatastreamClient {
    *   Note that it can affect your quota.
    *   We recommend using `fetchStaticIpsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   fetchStaticIps(
@@ -3268,7 +3233,7 @@ export class DatastreamClient {
     [
       string[],
       protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsResponse
+      protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsResponse,
     ]
   >;
   fetchStaticIps(
@@ -3314,7 +3279,7 @@ export class DatastreamClient {
     [
       string[],
       protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsResponse
+      protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsResponse,
     ]
   > | void {
     request = request || {};
@@ -3356,8 +3321,7 @@ export class DatastreamClient {
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `fetchStaticIpsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   fetchStaticIpsStream(
@@ -3399,12 +3363,11 @@ export class DatastreamClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   string. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.fetch_static_ips.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_FetchStaticIps_async
@@ -3457,14 +3420,13 @@ export class DatastreamClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.datastream.v1alpha1.PrivateConnection | PrivateConnection}.
+   *   The first element of the array is Array of {@link protos.google.cloud.datastream.v1alpha1.PrivateConnection|PrivateConnection}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listPrivateConnectionsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listPrivateConnections(
@@ -3474,7 +3436,7 @@ export class DatastreamClient {
     [
       protos.google.cloud.datastream.v1alpha1.IPrivateConnection[],
       protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse
+      protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse,
     ]
   >;
   listPrivateConnections(
@@ -3520,7 +3482,7 @@ export class DatastreamClient {
     [
       protos.google.cloud.datastream.v1alpha1.IPrivateConnection[],
       protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse
+      protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsResponse,
     ]
   > | void {
     request = request || {};
@@ -3571,13 +3533,12 @@ export class DatastreamClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.datastream.v1alpha1.PrivateConnection | PrivateConnection} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.datastream.v1alpha1.PrivateConnection|PrivateConnection} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listPrivateConnectionsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listPrivateConnectionsStream(
@@ -3629,12 +3590,11 @@ export class DatastreamClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.datastream.v1alpha1.PrivateConnection | PrivateConnection}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.datastream.v1alpha1.PrivateConnection|PrivateConnection}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.list_private_connections.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_ListPrivateConnections_async
@@ -3687,14 +3647,13 @@ export class DatastreamClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.datastream.v1alpha1.Route | Route}.
+   *   The first element of the array is Array of {@link protos.google.cloud.datastream.v1alpha1.Route|Route}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listRoutesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listRoutes(
@@ -3704,7 +3663,7 @@ export class DatastreamClient {
     [
       protos.google.cloud.datastream.v1alpha1.IRoute[],
       protos.google.cloud.datastream.v1alpha1.IListRoutesRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IListRoutesResponse
+      protos.google.cloud.datastream.v1alpha1.IListRoutesResponse,
     ]
   >;
   listRoutes(
@@ -3750,7 +3709,7 @@ export class DatastreamClient {
     [
       protos.google.cloud.datastream.v1alpha1.IRoute[],
       protos.google.cloud.datastream.v1alpha1.IListRoutesRequest | null,
-      protos.google.cloud.datastream.v1alpha1.IListRoutesResponse
+      protos.google.cloud.datastream.v1alpha1.IListRoutesResponse,
     ]
   > | void {
     request = request || {};
@@ -3797,13 +3756,12 @@ export class DatastreamClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.datastream.v1alpha1.Route | Route} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.datastream.v1alpha1.Route|Route} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listRoutesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listRoutesStream(
@@ -3855,12 +3813,11 @@ export class DatastreamClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.datastream.v1alpha1.Route | Route}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.datastream.v1alpha1.Route|Route}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha1/datastream.list_routes.js</caption>
    * region_tag:datastream_v1alpha1_generated_Datastream_ListRoutes_async

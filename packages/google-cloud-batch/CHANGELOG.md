@@ -1,5 +1,34 @@
 # Changelog
 
+## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.0.0...batch-v1.1.0) (2023-08-09)
+
+
+### Features
+
+* [batch] Clarify Batch API proto doc about pubsub notifications ([#4503](https://github.com/googleapis/google-cloud-node/issues/4503)) ([ca2296c](https://github.com/googleapis/google-cloud-node/commit/ca2296c5d180e00f41baca3a03fa0f3f4592fbb3))
+* [batch] Clarify Batch API proto doc about pubsub notifications ([#4518](https://github.com/googleapis/google-cloud-node/issues/4518)) ([e3fb6ad](https://github.com/googleapis/google-cloud-node/commit/e3fb6ad7595f85b0e2f06fedeabb18df4364b224))
+
+## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/batch-v0.10.0...batch-v1.0.0) (2023-08-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))
+
+### Features
+
+* [batch] Add comment to the unsupported order_by field of ListTasksRequest ([#4477](https://github.com/googleapis/google-cloud-node/issues/4477)) ([368606d](https://github.com/googleapis/google-cloud-node/commit/368606dac9ca2d45603ee424a19af8a55b465ad7))
+
+
+### Bug Fixes
+
+* [batch] fix typings for IAM methods ([#4445](https://github.com/googleapis/google-cloud-node/issues/4445)) ([9f9015b](https://github.com/googleapis/google-cloud-node/commit/9f9015bb42598435bb37cfb6181fff8a0e826f83))
+
+
+### Miscellaneous Chores
+
+* Migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443)) ([2260f12](https://github.com/googleapis/google-cloud-node/commit/2260f12543d171bda95345e53475f5f0fdc45770))
+
 ## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/batch-v0.9.0...batch-v0.10.0) (2023-07-04)
 
 

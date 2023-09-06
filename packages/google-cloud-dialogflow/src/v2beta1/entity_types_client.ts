@@ -43,7 +43,7 @@ const version = require('../../../package.json').version;
 
 /**
  *  Service for managing
- *  {@link google.cloud.dialogflow.v2beta1.EntityType|EntityTypes}.
+ *  {@link protos.google.cloud.dialogflow.v2beta1.EntityType|EntityTypes}.
  * @class
  * @memberof v2beta1
  */
@@ -97,8 +97,7 @@ export class EntityTypesClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -106,7 +105,7 @@ export class EntityTypesClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new EntityTypesClient({fallback: 'rest'}, gax);
+   *     const client = new EntityTypesClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -176,7 +175,7 @@ export class EntityTypesClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -332,7 +331,7 @@ export class EntityTypesClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
@@ -607,9 +606,8 @@ export class EntityTypesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2beta1.EntityType | EntityType}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2beta1.EntityType|EntityType}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta1/entity_types.get_entity_type.js</caption>
    * region_tag:dialogflow_v2beta1_generated_EntityTypes_GetEntityType_async
@@ -621,7 +619,7 @@ export class EntityTypesClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IEntityType,
       protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getEntityType(
@@ -667,7 +665,7 @@ export class EntityTypesClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IEntityType,
       protos.google.cloud.dialogflow.v2beta1.IGetEntityTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -713,9 +711,8 @@ export class EntityTypesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2beta1.EntityType | EntityType}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2beta1.EntityType|EntityType}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta1/entity_types.create_entity_type.js</caption>
    * region_tag:dialogflow_v2beta1_generated_EntityTypes_CreateEntityType_async
@@ -730,7 +727,7 @@ export class EntityTypesClient {
         | protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createEntityType(
@@ -779,7 +776,7 @@ export class EntityTypesClient {
         | protos.google.cloud.dialogflow.v2beta1.ICreateEntityTypeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -822,9 +819,8 @@ export class EntityTypesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2beta1.EntityType | EntityType}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2beta1.EntityType|EntityType}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta1/entity_types.update_entity_type.js</caption>
    * region_tag:dialogflow_v2beta1_generated_EntityTypes_UpdateEntityType_async
@@ -839,7 +835,7 @@ export class EntityTypesClient {
         | protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateEntityType(
@@ -888,7 +884,7 @@ export class EntityTypesClient {
         | protos.google.cloud.dialogflow.v2beta1.IUpdateEntityTypeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -927,9 +923,8 @@ export class EntityTypesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta1/entity_types.delete_entity_type.js</caption>
    * region_tag:dialogflow_v2beta1_generated_EntityTypes_DeleteEntityType_async
@@ -944,7 +939,7 @@ export class EntityTypesClient {
         | protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteEntityType(
@@ -993,7 +988,7 @@ export class EntityTypesClient {
         | protos.google.cloud.dialogflow.v2beta1.IDeleteEntityTypeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1025,7 +1020,7 @@ export class EntityTypesClient {
    * - `metadata`: An empty [Struct
    *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
    * - `response`:
-   * {@link google.cloud.dialogflow.v2beta1.BatchUpdateEntityTypesResponse|BatchUpdateEntityTypesResponse}
+   * {@link protos.google.cloud.dialogflow.v2beta1.BatchUpdateEntityTypesResponse|BatchUpdateEntityTypesResponse}
    *
    * Note: You should always train an agent prior to sending it queries. See the
    * [training
@@ -1059,8 +1054,7 @@ export class EntityTypesClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta1/entity_types.batch_update_entity_types.js</caption>
    * region_tag:dialogflow_v2beta1_generated_EntityTypes_BatchUpdateEntityTypes_async
@@ -1075,7 +1069,7 @@ export class EntityTypesClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchUpdateEntityTypes(
@@ -1128,7 +1122,7 @@ export class EntityTypesClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1159,8 +1153,7 @@ export class EntityTypesClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta1/entity_types.batch_update_entity_types.js</caption>
    * region_tag:dialogflow_v2beta1_generated_EntityTypes_BatchUpdateEntityTypes_async
@@ -1220,8 +1213,7 @@ export class EntityTypesClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta1/entity_types.batch_delete_entity_types.js</caption>
    * region_tag:dialogflow_v2beta1_generated_EntityTypes_BatchDeleteEntityTypes_async
@@ -1236,7 +1228,7 @@ export class EntityTypesClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchDeleteEntityTypes(
@@ -1289,7 +1281,7 @@ export class EntityTypesClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1320,8 +1312,7 @@ export class EntityTypesClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta1/entity_types.batch_delete_entity_types.js</caption>
    * region_tag:dialogflow_v2beta1_generated_EntityTypes_BatchDeleteEntityTypes_async
@@ -1384,8 +1375,7 @@ export class EntityTypesClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta1/entity_types.batch_create_entities.js</caption>
    * region_tag:dialogflow_v2beta1_generated_EntityTypes_BatchCreateEntities_async
@@ -1400,7 +1390,7 @@ export class EntityTypesClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchCreateEntities(
@@ -1453,7 +1443,7 @@ export class EntityTypesClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1480,8 +1470,7 @@ export class EntityTypesClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta1/entity_types.batch_create_entities.js</caption>
    * region_tag:dialogflow_v2beta1_generated_EntityTypes_BatchCreateEntities_async
@@ -1548,8 +1537,7 @@ export class EntityTypesClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta1/entity_types.batch_update_entities.js</caption>
    * region_tag:dialogflow_v2beta1_generated_EntityTypes_BatchUpdateEntities_async
@@ -1564,7 +1552,7 @@ export class EntityTypesClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchUpdateEntities(
@@ -1617,7 +1605,7 @@ export class EntityTypesClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1644,8 +1632,7 @@ export class EntityTypesClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta1/entity_types.batch_update_entities.js</caption>
    * region_tag:dialogflow_v2beta1_generated_EntityTypes_BatchUpdateEntities_async
@@ -1710,8 +1697,7 @@ export class EntityTypesClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta1/entity_types.batch_delete_entities.js</caption>
    * region_tag:dialogflow_v2beta1_generated_EntityTypes_BatchDeleteEntities_async
@@ -1726,7 +1712,7 @@ export class EntityTypesClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchDeleteEntities(
@@ -1779,7 +1765,7 @@ export class EntityTypesClient {
         protos.google.protobuf.IStruct
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1806,8 +1792,7 @@ export class EntityTypesClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta1/entity_types.batch_delete_entities.js</caption>
    * region_tag:dialogflow_v2beta1_generated_EntityTypes_BatchDeleteEntities_async
@@ -1856,14 +1841,13 @@ export class EntityTypesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dialogflow.v2beta1.EntityType | EntityType}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.v2beta1.EntityType|EntityType}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listEntityTypesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listEntityTypes(
@@ -1873,7 +1857,7 @@ export class EntityTypesClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IEntityType[],
       protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest | null,
-      protos.google.cloud.dialogflow.v2beta1.IListEntityTypesResponse
+      protos.google.cloud.dialogflow.v2beta1.IListEntityTypesResponse,
     ]
   >;
   listEntityTypes(
@@ -1919,7 +1903,7 @@ export class EntityTypesClient {
     [
       protos.google.cloud.dialogflow.v2beta1.IEntityType[],
       protos.google.cloud.dialogflow.v2beta1.IListEntityTypesRequest | null,
-      protos.google.cloud.dialogflow.v2beta1.IListEntityTypesResponse
+      protos.google.cloud.dialogflow.v2beta1.IListEntityTypesResponse,
     ]
   > | void {
     request = request || {};
@@ -1964,13 +1948,12 @@ export class EntityTypesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dialogflow.v2beta1.EntityType | EntityType} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.v2beta1.EntityType|EntityType} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listEntityTypesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listEntityTypesStream(
@@ -2020,12 +2003,11 @@ export class EntityTypesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dialogflow.v2beta1.EntityType | EntityType}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dialogflow.v2beta1.EntityType|EntityType}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta1/entity_types.list_entity_types.js</caption>
    * region_tag:dialogflow_v2beta1_generated_EntityTypes_ListEntityTypes_async
@@ -2062,8 +2044,7 @@ export class EntityTypesClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -2109,12 +2090,11 @@ export class EntityTypesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

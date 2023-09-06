@@ -6,15 +6,15 @@
     "!system-test/"
   ],
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=14.0.0"
   },
   "scripts": {
     "test": "mocha test/ --recursive --timeout 6000000"
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "@google-cloud/pubsub": "^3.0.0",
-    "@google-cloud/security-center": "^7.6.0"
+    "@google-cloud/pubsub": "^4.0.0",
+    "@google-cloud/security-center": "^8.0.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",

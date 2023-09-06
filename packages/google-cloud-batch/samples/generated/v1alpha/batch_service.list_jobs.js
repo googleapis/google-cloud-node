@@ -37,8 +37,8 @@ function main() {
    */
   // const filter = 'abc123'
   /**
-   *  Sort results. Supported are "name", "name desc", "create_time",
-   *  "create_time desc", and "".
+   *  Optional. Sort results. Supported are "name", "name desc", "create_time",
+   *  and "create_time desc".
    */
   // const orderBy = 'abc123'
   /**

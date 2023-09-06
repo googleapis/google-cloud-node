@@ -22,24 +22,25 @@
   "devDependencies": {
     "@types/js-yaml": "^4.0.5",
     "@types/mocha": "^9.1.1",
-    "@types/node": "^18.0.0",
+    "@types/node": "^20.4.5",
     "@types/nunjucks": "^3.2.1",
     "@types/sinon": "^10.0.11",
     "@types/yargs": "^17.0.10",
     "c8": "^7.11.3",
     "cross-env": "^7.0.3",
-    "gts": "^3.1.0",
+    "gapic-tools": "^0.1.8",
+    "gts": "^5.0.0",
     "mocha": "^9.2.2",
     "sinon": "^15.0.0",
     "snap-shot-it": "^7.9.6",
-    "typescript": "^4.6.4"
+    "typescript": "^5.1.6"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=14.0.0"
   },
   "dependencies": {
-    "@google-cloud/storage": "^6.1.0",
-    "@octokit/rest": "19.0.11",
+    "@google-cloud/storage": "^7.0.0",
+    "@octokit/rest": "19.0.0",
     "js-yaml": "^4.1.0",
     "nunjucks": "^3.2.3",
     "yargs": "^17.5.1"

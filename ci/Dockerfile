@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ARG NODE_VERSION=14
+ARG NODE_VERSION=16
 ARG FLAKYBOT_VERSION=1.1.0
 
 FROM node:${NODE_VERSION}-alpine as build
@@ -46,4 +46,4 @@ COPY --from=build /root/.local/share/pnpm /root/.local/share/pnpm
 RUN apk add --no-cache git bash python3
 
 ENV PNPM_HOME=/root/.local/share/pnpm
-ENV PATH=$PNPM_HOME:$PATH
+ENV PATH=$PNPM_HOME:/bin/flakybot:usr/local/gcloud/google-cloud-sdk/bin:$PATH

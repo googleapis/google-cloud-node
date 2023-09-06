@@ -34,9 +34,9 @@ function main(share, updateMask) {
    */
   // const share = {}
   /**
-   *  Required. Mask of fields to update. At least one path must be supplied in this
-   *  field.
-   *  The elements of the repeated paths field may only include these fields:
+   *  Required. Mask of fields to update. At least one path must be supplied in
+   *  this field. The elements of the repeated paths field may only include these
+   *  fields:
    *  * "description"
    *  * "capacity_gb"
    *  * "labels"

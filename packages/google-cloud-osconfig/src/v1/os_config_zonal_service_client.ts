@@ -96,8 +96,7 @@ export class OsConfigZonalServiceClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -105,7 +104,7 @@ export class OsConfigZonalServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new OsConfigZonalServiceClient({fallback: 'rest'}, gax);
+   *     const client = new OsConfigZonalServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -171,7 +170,7 @@ export class OsConfigZonalServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -243,7 +242,7 @@ export class OsConfigZonalServiceClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
@@ -474,9 +473,8 @@ export class OsConfigZonalServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.osconfig.v1.OSPolicyAssignment | OSPolicyAssignment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.osconfig.v1.OSPolicyAssignment|OSPolicyAssignment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/os_config_zonal_service.get_o_s_policy_assignment.js</caption>
    * region_tag:osconfig_v1_generated_OsConfigZonalService_GetOSPolicyAssignment_async
@@ -488,7 +486,7 @@ export class OsConfigZonalServiceClient {
     [
       protos.google.cloud.osconfig.v1.IOSPolicyAssignment,
       protos.google.cloud.osconfig.v1.IGetOSPolicyAssignmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getOSPolicyAssignment(
@@ -534,7 +532,7 @@ export class OsConfigZonalServiceClient {
     [
       protos.google.cloud.osconfig.v1.IOSPolicyAssignment,
       protos.google.cloud.osconfig.v1.IGetOSPolicyAssignmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -574,9 +572,8 @@ export class OsConfigZonalServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.osconfig.v1.OSPolicyAssignmentReport | OSPolicyAssignmentReport}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.osconfig.v1.OSPolicyAssignmentReport|OSPolicyAssignmentReport}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/os_config_zonal_service.get_o_s_policy_assignment_report.js</caption>
    * region_tag:osconfig_v1_generated_OsConfigZonalService_GetOSPolicyAssignmentReport_async
@@ -591,7 +588,7 @@ export class OsConfigZonalServiceClient {
         | protos.google.cloud.osconfig.v1.IGetOSPolicyAssignmentReportRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getOSPolicyAssignmentReport(
@@ -640,7 +637,7 @@ export class OsConfigZonalServiceClient {
         | protos.google.cloud.osconfig.v1.IGetOSPolicyAssignmentReportRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -686,9 +683,8 @@ export class OsConfigZonalServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.osconfig.v1.Inventory | Inventory}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.osconfig.v1.Inventory|Inventory}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/os_config_zonal_service.get_inventory.js</caption>
    * region_tag:osconfig_v1_generated_OsConfigZonalService_GetInventory_async
@@ -700,7 +696,7 @@ export class OsConfigZonalServiceClient {
     [
       protos.google.cloud.osconfig.v1.IInventory,
       protos.google.cloud.osconfig.v1.IGetInventoryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getInventory(
@@ -740,7 +736,7 @@ export class OsConfigZonalServiceClient {
     [
       protos.google.cloud.osconfig.v1.IInventory,
       protos.google.cloud.osconfig.v1.IGetInventoryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -779,9 +775,8 @@ export class OsConfigZonalServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.osconfig.v1.VulnerabilityReport | VulnerabilityReport}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.osconfig.v1.VulnerabilityReport|VulnerabilityReport}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/os_config_zonal_service.get_vulnerability_report.js</caption>
    * region_tag:osconfig_v1_generated_OsConfigZonalService_GetVulnerabilityReport_async
@@ -796,7 +791,7 @@ export class OsConfigZonalServiceClient {
         | protos.google.cloud.osconfig.v1.IGetVulnerabilityReportRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getVulnerabilityReport(
@@ -845,7 +840,7 @@ export class OsConfigZonalServiceClient {
         | protos.google.cloud.osconfig.v1.IGetVulnerabilityReportRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -904,8 +899,7 @@ export class OsConfigZonalServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/os_config_zonal_service.create_o_s_policy_assignment.js</caption>
    * region_tag:osconfig_v1_generated_OsConfigZonalService_CreateOSPolicyAssignment_async
@@ -920,7 +914,7 @@ export class OsConfigZonalServiceClient {
         protos.google.cloud.osconfig.v1.IOSPolicyAssignmentOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createOSPolicyAssignment(
@@ -973,7 +967,7 @@ export class OsConfigZonalServiceClient {
         protos.google.cloud.osconfig.v1.IOSPolicyAssignmentOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1004,8 +998,7 @@ export class OsConfigZonalServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/os_config_zonal_service.create_o_s_policy_assignment.js</caption>
    * region_tag:osconfig_v1_generated_OsConfigZonalService_CreateOSPolicyAssignment_async
@@ -1057,8 +1050,7 @@ export class OsConfigZonalServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/os_config_zonal_service.update_o_s_policy_assignment.js</caption>
    * region_tag:osconfig_v1_generated_OsConfigZonalService_UpdateOSPolicyAssignment_async
@@ -1073,7 +1065,7 @@ export class OsConfigZonalServiceClient {
         protos.google.cloud.osconfig.v1.IOSPolicyAssignmentOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateOSPolicyAssignment(
@@ -1126,7 +1118,7 @@ export class OsConfigZonalServiceClient {
         protos.google.cloud.osconfig.v1.IOSPolicyAssignmentOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1157,8 +1149,7 @@ export class OsConfigZonalServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/os_config_zonal_service.update_o_s_policy_assignment.js</caption>
    * region_tag:osconfig_v1_generated_OsConfigZonalService_UpdateOSPolicyAssignment_async
@@ -1210,8 +1201,7 @@ export class OsConfigZonalServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/os_config_zonal_service.delete_o_s_policy_assignment.js</caption>
    * region_tag:osconfig_v1_generated_OsConfigZonalService_DeleteOSPolicyAssignment_async
@@ -1226,7 +1216,7 @@ export class OsConfigZonalServiceClient {
         protos.google.cloud.osconfig.v1.IOSPolicyAssignmentOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteOSPolicyAssignment(
@@ -1279,7 +1269,7 @@ export class OsConfigZonalServiceClient {
         protos.google.cloud.osconfig.v1.IOSPolicyAssignmentOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1310,8 +1300,7 @@ export class OsConfigZonalServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/os_config_zonal_service.delete_o_s_policy_assignment.js</caption>
    * region_tag:osconfig_v1_generated_OsConfigZonalService_DeleteOSPolicyAssignment_async
@@ -1357,14 +1346,13 @@ export class OsConfigZonalServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.osconfig.v1.OSPolicyAssignment | OSPolicyAssignment}.
+   *   The first element of the array is Array of {@link protos.google.cloud.osconfig.v1.OSPolicyAssignment|OSPolicyAssignment}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listOSPolicyAssignmentsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listOSPolicyAssignments(
@@ -1374,7 +1362,7 @@ export class OsConfigZonalServiceClient {
     [
       protos.google.cloud.osconfig.v1.IOSPolicyAssignment[],
       protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentsRequest | null,
-      protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentsResponse
+      protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentsResponse,
     ]
   >;
   listOSPolicyAssignments(
@@ -1420,7 +1408,7 @@ export class OsConfigZonalServiceClient {
     [
       protos.google.cloud.osconfig.v1.IOSPolicyAssignment[],
       protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentsRequest | null,
-      protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentsResponse
+      protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentsResponse,
     ]
   > | void {
     request = request || {};
@@ -1461,13 +1449,12 @@ export class OsConfigZonalServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.osconfig.v1.OSPolicyAssignment | OSPolicyAssignment} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.osconfig.v1.OSPolicyAssignment|OSPolicyAssignment} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listOSPolicyAssignmentsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listOSPolicyAssignmentsStream(
@@ -1509,12 +1496,11 @@ export class OsConfigZonalServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.osconfig.v1.OSPolicyAssignment | OSPolicyAssignment}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.osconfig.v1.OSPolicyAssignment|OSPolicyAssignment}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/os_config_zonal_service.list_o_s_policy_assignments.js</caption>
    * region_tag:osconfig_v1_generated_OsConfigZonalService_ListOSPolicyAssignments_async
@@ -1556,14 +1542,13 @@ export class OsConfigZonalServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.osconfig.v1.OSPolicyAssignment | OSPolicyAssignment}.
+   *   The first element of the array is Array of {@link protos.google.cloud.osconfig.v1.OSPolicyAssignment|OSPolicyAssignment}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listOSPolicyAssignmentRevisionsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listOSPolicyAssignmentRevisions(
@@ -1573,7 +1558,7 @@ export class OsConfigZonalServiceClient {
     [
       protos.google.cloud.osconfig.v1.IOSPolicyAssignment[],
       protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsRequest | null,
-      protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsResponse
+      protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsResponse,
     ]
   >;
   listOSPolicyAssignmentRevisions(
@@ -1619,7 +1604,7 @@ export class OsConfigZonalServiceClient {
     [
       protos.google.cloud.osconfig.v1.IOSPolicyAssignment[],
       protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsRequest | null,
-      protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsResponse
+      protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentRevisionsResponse,
     ]
   > | void {
     request = request || {};
@@ -1660,13 +1645,12 @@ export class OsConfigZonalServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.osconfig.v1.OSPolicyAssignment | OSPolicyAssignment} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.osconfig.v1.OSPolicyAssignment|OSPolicyAssignment} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listOSPolicyAssignmentRevisionsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listOSPolicyAssignmentRevisionsStream(
@@ -1709,12 +1693,11 @@ export class OsConfigZonalServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.osconfig.v1.OSPolicyAssignment | OSPolicyAssignment}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.osconfig.v1.OSPolicyAssignment|OSPolicyAssignment}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/os_config_zonal_service.list_o_s_policy_assignment_revisions.js</caption>
    * region_tag:osconfig_v1_generated_OsConfigZonalService_ListOSPolicyAssignmentRevisions_async
@@ -1781,14 +1764,13 @@ export class OsConfigZonalServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.osconfig.v1.OSPolicyAssignmentReport | OSPolicyAssignmentReport}.
+   *   The first element of the array is Array of {@link protos.google.cloud.osconfig.v1.OSPolicyAssignmentReport|OSPolicyAssignmentReport}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listOSPolicyAssignmentReportsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listOSPolicyAssignmentReports(
@@ -1798,7 +1780,7 @@ export class OsConfigZonalServiceClient {
     [
       protos.google.cloud.osconfig.v1.IOSPolicyAssignmentReport[],
       protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsRequest | null,
-      protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsResponse
+      protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsResponse,
     ]
   >;
   listOSPolicyAssignmentReports(
@@ -1844,7 +1826,7 @@ export class OsConfigZonalServiceClient {
     [
       protos.google.cloud.osconfig.v1.IOSPolicyAssignmentReport[],
       protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsRequest | null,
-      protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsResponse
+      protos.google.cloud.osconfig.v1.IListOSPolicyAssignmentReportsResponse,
     ]
   > | void {
     request = request || {};
@@ -1908,13 +1890,12 @@ export class OsConfigZonalServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.osconfig.v1.OSPolicyAssignmentReport | OSPolicyAssignmentReport} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.osconfig.v1.OSPolicyAssignmentReport|OSPolicyAssignmentReport} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listOSPolicyAssignmentReportsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listOSPolicyAssignmentReportsStream(
@@ -1979,12 +1960,11 @@ export class OsConfigZonalServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.osconfig.v1.OSPolicyAssignmentReport | OSPolicyAssignmentReport}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.osconfig.v1.OSPolicyAssignmentReport|OSPolicyAssignmentReport}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/os_config_zonal_service.list_o_s_policy_assignment_reports.js</caption>
    * region_tag:osconfig_v1_generated_OsConfigZonalService_ListOSPolicyAssignmentReports_async
@@ -2036,14 +2016,13 @@ export class OsConfigZonalServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.osconfig.v1.Inventory | Inventory}.
+   *   The first element of the array is Array of {@link protos.google.cloud.osconfig.v1.Inventory|Inventory}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listInventoriesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listInventories(
@@ -2053,7 +2032,7 @@ export class OsConfigZonalServiceClient {
     [
       protos.google.cloud.osconfig.v1.IInventory[],
       protos.google.cloud.osconfig.v1.IListInventoriesRequest | null,
-      protos.google.cloud.osconfig.v1.IListInventoriesResponse
+      protos.google.cloud.osconfig.v1.IListInventoriesResponse,
     ]
   >;
   listInventories(
@@ -2099,7 +2078,7 @@ export class OsConfigZonalServiceClient {
     [
       protos.google.cloud.osconfig.v1.IInventory[],
       protos.google.cloud.osconfig.v1.IListInventoriesRequest | null,
-      protos.google.cloud.osconfig.v1.IListInventoriesResponse
+      protos.google.cloud.osconfig.v1.IListInventoriesResponse,
     ]
   > | void {
     request = request || {};
@@ -2146,13 +2125,12 @@ export class OsConfigZonalServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.osconfig.v1.Inventory | Inventory} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.osconfig.v1.Inventory|Inventory} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listInventoriesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listInventoriesStream(
@@ -2204,12 +2182,11 @@ export class OsConfigZonalServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.osconfig.v1.Inventory | Inventory}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.osconfig.v1.Inventory|Inventory}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/os_config_zonal_service.list_inventories.js</caption>
    * region_tag:osconfig_v1_generated_OsConfigZonalService_ListInventories_async
@@ -2258,14 +2235,13 @@ export class OsConfigZonalServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.osconfig.v1.VulnerabilityReport | VulnerabilityReport}.
+   *   The first element of the array is Array of {@link protos.google.cloud.osconfig.v1.VulnerabilityReport|VulnerabilityReport}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listVulnerabilityReportsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listVulnerabilityReports(
@@ -2275,7 +2251,7 @@ export class OsConfigZonalServiceClient {
     [
       protos.google.cloud.osconfig.v1.IVulnerabilityReport[],
       protos.google.cloud.osconfig.v1.IListVulnerabilityReportsRequest | null,
-      protos.google.cloud.osconfig.v1.IListVulnerabilityReportsResponse
+      protos.google.cloud.osconfig.v1.IListVulnerabilityReportsResponse,
     ]
   >;
   listVulnerabilityReports(
@@ -2321,7 +2297,7 @@ export class OsConfigZonalServiceClient {
     [
       protos.google.cloud.osconfig.v1.IVulnerabilityReport[],
       protos.google.cloud.osconfig.v1.IListVulnerabilityReportsRequest | null,
-      protos.google.cloud.osconfig.v1.IListVulnerabilityReportsResponse
+      protos.google.cloud.osconfig.v1.IListVulnerabilityReportsResponse,
     ]
   > | void {
     request = request || {};
@@ -2369,13 +2345,12 @@ export class OsConfigZonalServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.osconfig.v1.VulnerabilityReport | VulnerabilityReport} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.osconfig.v1.VulnerabilityReport|VulnerabilityReport} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listVulnerabilityReportsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listVulnerabilityReportsStream(
@@ -2424,12 +2399,11 @@ export class OsConfigZonalServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.osconfig.v1.VulnerabilityReport | VulnerabilityReport}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.osconfig.v1.VulnerabilityReport|VulnerabilityReport}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/os_config_zonal_service.list_vulnerability_reports.js</caption>
    * region_tag:osconfig_v1_generated_OsConfigZonalService_ListVulnerabilityReports_async

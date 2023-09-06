@@ -90,8 +90,7 @@ export class ResourcePoliciesClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -99,7 +98,7 @@ export class ResourcePoliciesClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new ResourcePoliciesClient({fallback: 'rest'}, gax);
+   *     const client = new ResourcePoliciesClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -115,11 +114,11 @@ export class ResourcePoliciesClient {
     );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    // Implicitely set 'rest' value for the apis use rest as transport (eg. googleapis-discovery apis).
+    // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
     if (!opts) {
-      opts = {fallback: 'rest'};
+      opts = {fallback: true};
     } else {
-      opts.fallback = opts.fallback ?? 'rest';
+      opts.fallback = opts.fallback ?? true;
     }
     const fallback =
       opts?.fallback ??
@@ -165,7 +164,7 @@ export class ResourcePoliciesClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -246,6 +245,7 @@ export class ResourcePoliciesClient {
       'getIamPolicy',
       'insert',
       'list',
+      'patch',
       'setIamPolicy',
       'testIamPermissions',
     ];
@@ -352,8 +352,7 @@ export class ResourcePoliciesClient {
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
    *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    *   This method is considered to be in beta. This means while
    *   stable it is still a work-in-progress and under active development,
@@ -369,7 +368,7 @@ export class ResourcePoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -415,7 +414,7 @@ export class ResourcePoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -442,7 +441,7 @@ export class ResourcePoliciesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -472,9 +471,8 @@ export class ResourcePoliciesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.compute.v1.ResourcePolicy | ResourcePolicy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.ResourcePolicy|ResourcePolicy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/resource_policies.get.js</caption>
    * region_tag:compute_v1_generated_ResourcePolicies_Get_async
@@ -486,7 +484,7 @@ export class ResourcePoliciesClient {
     [
       protos.google.cloud.compute.v1.IResourcePolicy,
       protos.google.cloud.compute.v1.IGetResourcePolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -532,7 +530,7 @@ export class ResourcePoliciesClient {
     [
       protos.google.cloud.compute.v1.IResourcePolicy,
       protos.google.cloud.compute.v1.IGetResourcePolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -571,9 +569,8 @@ export class ResourcePoliciesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.compute.v1.Policy | Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/resource_policies.get_iam_policy.js</caption>
    * region_tag:compute_v1_generated_ResourcePolicies_GetIamPolicy_async
@@ -588,7 +585,7 @@ export class ResourcePoliciesClient {
         | protos.google.cloud.compute.v1.IGetIamPolicyResourcePolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -637,7 +634,7 @@ export class ResourcePoliciesClient {
         | protos.google.cloud.compute.v1.IGetIamPolicyResourcePolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -678,8 +675,7 @@ export class ResourcePoliciesClient {
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
    *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    *   This method is considered to be in beta. This means while
    *   stable it is still a work-in-progress and under active development,
@@ -695,7 +691,7 @@ export class ResourcePoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -741,7 +737,7 @@ export class ResourcePoliciesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -767,7 +763,134 @@ export class ResourcePoliciesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
+  }
+  /**
+   * Modify the specified resource policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+   * @param {string} request.resourcePolicy
+   *   Id of the resource policy to patch.
+   * @param {google.cloud.compute.v1.ResourcePolicy} request.resourcePolicyResource
+   *   The body resource for this request
+   * @param {string} request.updateMask
+   *   update_mask indicates fields to be updated as part of this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1/resource_policies.patch.js</caption>
+   * region_tag:compute_v1_generated_ResourcePolicies_Patch_async
+   */
+  patch(
+    request?: protos.google.cloud.compute.v1.IPatchResourcePolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  patch(
+    request: protos.google.cloud.compute.v1.IPatchResourcePolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IPatchResourcePolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  patch(
+    request: protos.google.cloud.compute.v1.IPatchResourcePolicyRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IPatchResourcePolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  patch(
+    request?: protos.google.cloud.compute.v1.IPatchResourcePolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IPatchResourcePolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IPatchResourcePolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        resource_policy: request.resourcePolicy ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls
+      .patch(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -799,9 +922,8 @@ export class ResourcePoliciesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.compute.v1.Policy | Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/resource_policies.set_iam_policy.js</caption>
    * region_tag:compute_v1_generated_ResourcePolicies_SetIamPolicy_async
@@ -816,7 +938,7 @@ export class ResourcePoliciesClient {
         | protos.google.cloud.compute.v1.ISetIamPolicyResourcePolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -865,7 +987,7 @@ export class ResourcePoliciesClient {
         | protos.google.cloud.compute.v1.ISetIamPolicyResourcePolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -904,9 +1026,8 @@ export class ResourcePoliciesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.compute.v1.TestPermissionsResponse | TestPermissionsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.TestPermissionsResponse|TestPermissionsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/resource_policies.test_iam_permissions.js</caption>
    * region_tag:compute_v1_generated_ResourcePolicies_TestIamPermissions_async
@@ -921,7 +1042,7 @@ export class ResourcePoliciesClient {
         | protos.google.cloud.compute.v1.ITestIamPermissionsResourcePolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -970,7 +1091,7 @@ export class ResourcePoliciesClient {
         | protos.google.cloud.compute.v1.ITestIamPermissionsResourcePolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1017,12 +1138,11 @@ export class ResourcePoliciesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   as tuple [string, {@link google.cloud.compute.v1.ResourcePoliciesScopedList | ResourcePoliciesScopedList}]. The API will be called under the hood as needed, once per the page,
+   *   as tuple [string, {@link protos.google.cloud.compute.v1.ResourcePoliciesScopedList|ResourcePoliciesScopedList}]. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/resource_policies.aggregated_list.js</caption>
    * region_tag:compute_v1_generated_ResourcePolicies_AggregatedList_async
@@ -1074,14 +1194,13 @@ export class ResourcePoliciesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.compute.v1.ResourcePolicy | ResourcePolicy}.
+   *   The first element of the array is Array of {@link protos.google.cloud.compute.v1.ResourcePolicy|ResourcePolicy}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   list(
@@ -1091,7 +1210,7 @@ export class ResourcePoliciesClient {
     [
       protos.google.cloud.compute.v1.IResourcePolicy[],
       protos.google.cloud.compute.v1.IListResourcePoliciesRequest | null,
-      protos.google.cloud.compute.v1.IResourcePolicyList
+      protos.google.cloud.compute.v1.IResourcePolicyList,
     ]
   >;
   list(
@@ -1129,7 +1248,7 @@ export class ResourcePoliciesClient {
     [
       protos.google.cloud.compute.v1.IResourcePolicy[],
       protos.google.cloud.compute.v1.IListResourcePoliciesRequest | null,
-      protos.google.cloud.compute.v1.IResourcePolicyList
+      protos.google.cloud.compute.v1.IResourcePolicyList,
     ]
   > | void {
     request = request || {};
@@ -1173,13 +1292,12 @@ export class ResourcePoliciesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.compute.v1.ResourcePolicy | ResourcePolicy} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1.ResourcePolicy|ResourcePolicy} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listStream(
@@ -1228,12 +1346,11 @@ export class ResourcePoliciesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.compute.v1.ResourcePolicy | ResourcePolicy}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.compute.v1.ResourcePolicy|ResourcePolicy}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/resource_policies.list.js</caption>
    * region_tag:compute_v1_generated_ResourcePolicies_List_async

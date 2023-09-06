@@ -57,10 +57,8 @@ const version = require('../../../package.json').version;
  *    backups are resources of the form:
  *    `/projects/{project_id}/locations/{location_id}/backup/{backup_id}`
  *
- *  Note that location_id can represent a GCP `zone` or `region` depending on the
- *  resource.
- *  for example:
- *  A zonal Filestore instance:
+ *  Note that location_id can represent a Google Cloud `zone` or `region`
+ *  depending on the resource. for example: A zonal Filestore instance:
  *  * `projects/my-project/locations/us-central1-c/instances/my-basic-tier-filer`
  *  A regional Filestore instance:
  *  * `projects/my-project/locations/us-central1/instances/my-enterprise-filer`
@@ -117,8 +115,7 @@ export class CloudFilestoreManagerClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -126,7 +123,7 @@ export class CloudFilestoreManagerClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new CloudFilestoreManagerClient({fallback: 'rest'}, gax);
+   *     const client = new CloudFilestoreManagerClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -197,7 +194,7 @@ export class CloudFilestoreManagerClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -261,7 +258,7 @@ export class CloudFilestoreManagerClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
@@ -622,9 +619,8 @@ export class CloudFilestoreManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.filestore.v1beta1.Instance | Instance}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.filestore.v1beta1.Instance|Instance}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.get_instance.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_GetInstance_async
@@ -636,7 +632,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.IInstance,
       protos.google.cloud.filestore.v1beta1.IGetInstanceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getInstance(
@@ -682,7 +678,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.IInstance,
       protos.google.cloud.filestore.v1beta1.IGetInstanceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -714,9 +710,8 @@ export class CloudFilestoreManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.filestore.v1beta1.Snapshot | Snapshot}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.filestore.v1beta1.Snapshot|Snapshot}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.get_snapshot.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_GetSnapshot_async
@@ -728,7 +723,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.ISnapshot,
       protos.google.cloud.filestore.v1beta1.IGetSnapshotRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSnapshot(
@@ -774,7 +769,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.ISnapshot,
       protos.google.cloud.filestore.v1beta1.IGetSnapshotRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -806,9 +801,8 @@ export class CloudFilestoreManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.filestore.v1beta1.Backup | Backup}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.filestore.v1beta1.Backup|Backup}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.get_backup.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_GetBackup_async
@@ -820,7 +814,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.IBackup,
       protos.google.cloud.filestore.v1beta1.IGetBackupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getBackup(
@@ -866,7 +860,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.IBackup,
       protos.google.cloud.filestore.v1beta1.IGetBackupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -898,9 +892,8 @@ export class CloudFilestoreManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.filestore.v1beta1.Share | Share}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.filestore.v1beta1.Share|Share}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.get_share.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_GetShare_async
@@ -912,7 +905,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.IShare,
       protos.google.cloud.filestore.v1beta1.IGetShareRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getShare(
@@ -952,7 +945,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.IShare,
       protos.google.cloud.filestore.v1beta1.IGetShareRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -985,7 +978,7 @@ export class CloudFilestoreManagerClient {
    * @param {string} request.parent
    *   Required. The instance's project and location, in the format
    *   `projects/{project_id}/locations/{location}`. In Filestore,
-   *   locations map to GCP zones, for example **us-west1-b**.
+   *   locations map to Google Cloud zones, for example **us-west1-b**.
    * @param {string} request.instanceId
    *   Required. The ID of the instance to create.
    *   The ID must be unique within the specified project and location.
@@ -993,15 +986,14 @@ export class CloudFilestoreManagerClient {
    *   This value must start with a lowercase letter followed by up to 62
    *   lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
    * @param {google.cloud.filestore.v1beta1.Instance} request.instance
-   *   Required. An {@link google.cloud.filestore.v1beta1.Instance|instance resource}
+   *   Required. An {@link protos.google.cloud.filestore.v1beta1.Instance|instance resource}
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.create_instance.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_CreateInstance_async
@@ -1016,7 +1008,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createInstance(
@@ -1069,7 +1061,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1096,8 +1088,7 @@ export class CloudFilestoreManagerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.create_instance.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_CreateInstance_async
@@ -1131,9 +1122,9 @@ export class CloudFilestoreManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Mask of fields to update.  At least one path must be supplied in this
-   *   field.  The elements of the repeated paths field may only include these
-   *   fields:
+   *   Required. Mask of fields to update.  At least one path must be supplied in
+   *   this field.  The elements of the repeated paths field may only include
+   *   these fields:
    *
    *   * "description"
    *   * "file_shares"
@@ -1146,8 +1137,7 @@ export class CloudFilestoreManagerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.update_instance.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_UpdateInstance_async
@@ -1162,7 +1152,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateInstance(
@@ -1215,7 +1205,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1242,8 +1232,7 @@ export class CloudFilestoreManagerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.update_instance.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_UpdateInstance_async
@@ -1284,7 +1273,7 @@ export class CloudFilestoreManagerClient {
    *   Required. The resource name of the instance, in the format
    *   `projects/{project_id}/locations/{location_id}/instances/{instance_id}`.
    * @param {string} request.fileShare
-   *   Required. Name of the file share in the Filestore instance that the snapshot
+   *   Required. Name of the file share in the Filestore instance that the backup
    *   is being restored to.
    * @param {string} request.sourceSnapshot
    *   The resource name of the snapshot, in the format
@@ -1298,8 +1287,7 @@ export class CloudFilestoreManagerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.restore_instance.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_RestoreInstance_async
@@ -1314,7 +1302,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   restoreInstance(
@@ -1367,7 +1355,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1394,8 +1382,7 @@ export class CloudFilestoreManagerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.restore_instance.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_RestoreInstance_async
@@ -1429,11 +1416,12 @@ export class CloudFilestoreManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. projects/{project_id}/locations/{location_id}/instances/{instance_id}.
-   *   The resource name of the instance, in the format
+   *   Required.
+   *   projects/{project_id}/locations/{location_id}/instances/{instance_id}. The
+   *   resource name of the instance, in the format
    * @param {string} request.targetSnapshotId
-   *   Required. The snapshot resource ID, in the format 'my-snapshot', where the specified
-   *   ID is the {snapshot_id} of the fully qualified name like
+   *   Required. The snapshot resource ID, in the format 'my-snapshot', where the
+   *   specified ID is the {snapshot_id} of the fully qualified name like
    *   projects/{project_id}/locations/{location_id}/instances/{instance_id}/snapshots/{snapshot_id}
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1441,8 +1429,7 @@ export class CloudFilestoreManagerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.revert_instance.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_RevertInstance_async
@@ -1457,7 +1444,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   revertInstance(
@@ -1510,7 +1497,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1537,8 +1524,7 @@ export class CloudFilestoreManagerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.revert_instance.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_RevertInstance_async
@@ -1583,8 +1569,7 @@ export class CloudFilestoreManagerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.delete_instance.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_DeleteInstance_async
@@ -1599,7 +1584,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteInstance(
@@ -1652,7 +1637,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1679,8 +1664,7 @@ export class CloudFilestoreManagerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.delete_instance.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_DeleteInstance_async
@@ -1730,8 +1714,7 @@ export class CloudFilestoreManagerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.create_snapshot.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_CreateSnapshot_async
@@ -1746,7 +1729,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createSnapshot(
@@ -1799,7 +1782,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1826,8 +1809,7 @@ export class CloudFilestoreManagerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.create_snapshot.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_CreateSnapshot_async
@@ -1869,8 +1851,7 @@ export class CloudFilestoreManagerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.delete_snapshot.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_DeleteSnapshot_async
@@ -1885,7 +1866,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteSnapshot(
@@ -1938,7 +1919,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1965,8 +1946,7 @@ export class CloudFilestoreManagerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.delete_snapshot.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_DeleteSnapshot_async
@@ -2000,8 +1980,8 @@ export class CloudFilestoreManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Mask of fields to update.  At least one path must be supplied in this
-   *   field.
+   *   Required. Mask of fields to update.  At least one path must be supplied in
+   *   this field.
    * @param {google.cloud.filestore.v1beta1.Snapshot} request.snapshot
    *   Required. A snapshot resource
    * @param {object} [options]
@@ -2010,8 +1990,7 @@ export class CloudFilestoreManagerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.update_snapshot.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_UpdateSnapshot_async
@@ -2026,7 +2005,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateSnapshot(
@@ -2079,7 +2058,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2106,8 +2085,7 @@ export class CloudFilestoreManagerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.update_snapshot.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_UpdateSnapshot_async
@@ -2143,9 +2121,9 @@ export class CloudFilestoreManagerClient {
    * @param {string} request.parent
    *   Required. The backup's project and location, in the format
    *   `projects/{project_id}/locations/{location}`. In Filestore,
-   *   backup locations map to GCP regions, for example **us-west1**.
+   *   backup locations map to Google Cloud regions, for example **us-west1**.
    * @param {google.cloud.filestore.v1beta1.Backup} request.backup
-   *   Required. A {@link google.cloud.filestore.v1beta1.Backup|backup resource}
+   *   Required. A {@link protos.google.cloud.filestore.v1beta1.Backup|backup resource}
    * @param {string} request.backupId
    *   Required. The ID to use for the backup.
    *   The ID must be unique within the specified project and location.
@@ -2158,8 +2136,7 @@ export class CloudFilestoreManagerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.create_backup.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_CreateBackup_async
@@ -2174,7 +2151,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createBackup(
@@ -2227,7 +2204,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2254,8 +2231,7 @@ export class CloudFilestoreManagerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.create_backup.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_CreateBackup_async
@@ -2297,8 +2273,7 @@ export class CloudFilestoreManagerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.delete_backup.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_DeleteBackup_async
@@ -2313,7 +2288,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteBackup(
@@ -2366,7 +2341,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2393,8 +2368,7 @@ export class CloudFilestoreManagerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.delete_backup.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_DeleteBackup_async
@@ -2428,18 +2402,17 @@ export class CloudFilestoreManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.filestore.v1beta1.Backup} request.backup
-   *   Required. A {@link google.cloud.filestore.v1beta1.Backup|backup resource}
+   *   Required. A {@link protos.google.cloud.filestore.v1beta1.Backup|backup resource}
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Mask of fields to update.  At least one path must be supplied in this
-   *   field.
+   *   Required. Mask of fields to update.  At least one path must be supplied in
+   *   this field.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.update_backup.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_UpdateBackup_async
@@ -2454,7 +2427,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateBackup(
@@ -2507,7 +2480,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2534,8 +2507,7 @@ export class CloudFilestoreManagerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.update_backup.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_UpdateBackup_async
@@ -2585,8 +2557,7 @@ export class CloudFilestoreManagerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.create_share.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_CreateShare_async
@@ -2601,7 +2572,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createShare(
@@ -2654,7 +2625,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2681,8 +2652,7 @@ export class CloudFilestoreManagerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.create_share.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_CreateShare_async
@@ -2724,8 +2694,7 @@ export class CloudFilestoreManagerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.delete_share.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_DeleteShare_async
@@ -2740,7 +2709,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteShare(
@@ -2793,7 +2762,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2820,8 +2789,7 @@ export class CloudFilestoreManagerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.delete_share.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_DeleteShare_async
@@ -2858,9 +2826,9 @@ export class CloudFilestoreManagerClient {
    *   Required. A share resource.
    *   Only fields specified in update_mask are updated.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Mask of fields to update. At least one path must be supplied in this
-   *   field.
-   *   The elements of the repeated paths field may only include these fields:
+   *   Required. Mask of fields to update. At least one path must be supplied in
+   *   this field. The elements of the repeated paths field may only include these
+   *   fields:
    *
    *   * "description"
    *   * "capacity_gb"
@@ -2872,8 +2840,7 @@ export class CloudFilestoreManagerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.update_share.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_UpdateShare_async
@@ -2888,7 +2855,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateShare(
@@ -2941,7 +2908,7 @@ export class CloudFilestoreManagerClient {
         protos.google.cloud.common.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2968,8 +2935,7 @@ export class CloudFilestoreManagerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.update_share.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_UpdateShare_async
@@ -3004,10 +2970,11 @@ export class CloudFilestoreManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location for which to retrieve instance information,
-   *   in the format `projects/{project_id}/locations/{location}`. In Cloud
-   *   Filestore, locations map to GCP zones, for example **us-west1-b**. To
-   *   retrieve instance information for all locations, use "-" for the
+   *   Required. The project and location for which to retrieve instance
+   *   information, in the format `projects/{project_id}/locations/{location}`. In
+   *   Cloud Filestore, locations map to Google Cloud zones, for example
+   *   **us-west1-b**. To retrieve instance information for all locations, use "-"
+   *   for the
    *   `{location}` value.
    * @param {number} request.pageSize
    *   The maximum number of items to return.
@@ -3021,14 +2988,13 @@ export class CloudFilestoreManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.filestore.v1beta1.Instance | Instance}.
+   *   The first element of the array is Array of {@link protos.google.cloud.filestore.v1beta1.Instance|Instance}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listInstancesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listInstances(
@@ -3038,7 +3004,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.IInstance[],
       protos.google.cloud.filestore.v1beta1.IListInstancesRequest | null,
-      protos.google.cloud.filestore.v1beta1.IListInstancesResponse
+      protos.google.cloud.filestore.v1beta1.IListInstancesResponse,
     ]
   >;
   listInstances(
@@ -3084,7 +3050,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.IInstance[],
       protos.google.cloud.filestore.v1beta1.IListInstancesRequest | null,
-      protos.google.cloud.filestore.v1beta1.IListInstancesResponse
+      protos.google.cloud.filestore.v1beta1.IListInstancesResponse,
     ]
   > | void {
     request = request || {};
@@ -3111,10 +3077,11 @@ export class CloudFilestoreManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location for which to retrieve instance information,
-   *   in the format `projects/{project_id}/locations/{location}`. In Cloud
-   *   Filestore, locations map to GCP zones, for example **us-west1-b**. To
-   *   retrieve instance information for all locations, use "-" for the
+   *   Required. The project and location for which to retrieve instance
+   *   information, in the format `projects/{project_id}/locations/{location}`. In
+   *   Cloud Filestore, locations map to Google Cloud zones, for example
+   *   **us-west1-b**. To retrieve instance information for all locations, use "-"
+   *   for the
    *   `{location}` value.
    * @param {number} request.pageSize
    *   The maximum number of items to return.
@@ -3128,13 +3095,12 @@ export class CloudFilestoreManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.filestore.v1beta1.Instance | Instance} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.filestore.v1beta1.Instance|Instance} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listInstancesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listInstancesStream(
@@ -3166,10 +3132,11 @@ export class CloudFilestoreManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location for which to retrieve instance information,
-   *   in the format `projects/{project_id}/locations/{location}`. In Cloud
-   *   Filestore, locations map to GCP zones, for example **us-west1-b**. To
-   *   retrieve instance information for all locations, use "-" for the
+   *   Required. The project and location for which to retrieve instance
+   *   information, in the format `projects/{project_id}/locations/{location}`. In
+   *   Cloud Filestore, locations map to Google Cloud zones, for example
+   *   **us-west1-b**. To retrieve instance information for all locations, use "-"
+   *   for the
    *   `{location}` value.
    * @param {number} request.pageSize
    *   The maximum number of items to return.
@@ -3183,12 +3150,11 @@ export class CloudFilestoreManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.filestore.v1beta1.Instance | Instance}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.filestore.v1beta1.Instance|Instance}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.list_instances.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_ListInstances_async
@@ -3236,14 +3202,13 @@ export class CloudFilestoreManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.filestore.v1beta1.Snapshot | Snapshot}.
+   *   The first element of the array is Array of {@link protos.google.cloud.filestore.v1beta1.Snapshot|Snapshot}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listSnapshotsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSnapshots(
@@ -3253,7 +3218,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.ISnapshot[],
       protos.google.cloud.filestore.v1beta1.IListSnapshotsRequest | null,
-      protos.google.cloud.filestore.v1beta1.IListSnapshotsResponse
+      protos.google.cloud.filestore.v1beta1.IListSnapshotsResponse,
     ]
   >;
   listSnapshots(
@@ -3299,7 +3264,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.ISnapshot[],
       protos.google.cloud.filestore.v1beta1.IListSnapshotsRequest | null,
-      protos.google.cloud.filestore.v1beta1.IListSnapshotsResponse
+      protos.google.cloud.filestore.v1beta1.IListSnapshotsResponse,
     ]
   > | void {
     request = request || {};
@@ -3341,13 +3306,12 @@ export class CloudFilestoreManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.filestore.v1beta1.Snapshot | Snapshot} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.filestore.v1beta1.Snapshot|Snapshot} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listSnapshotsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSnapshotsStream(
@@ -3394,12 +3358,11 @@ export class CloudFilestoreManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.filestore.v1beta1.Snapshot | Snapshot}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.filestore.v1beta1.Snapshot|Snapshot}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.list_snapshots.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_ListSnapshots_async
@@ -3432,11 +3395,11 @@ export class CloudFilestoreManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location for which to retrieve backup information,
-   *   in the format `projects/{project_id}/locations/{location}`.
-   *   In Filestore, backup locations map to GCP regions,
-   *   for example **us-west1**.
-   *   To retrieve backup information for all locations, use "-" for the
+   *   Required. The project and location for which to retrieve backup
+   *   information, in the format `projects/{project_id}/locations/{location}`. In
+   *   Filestore, backup locations map to Google Cloud regions, for example
+   *   **us-west1**. To retrieve backup information for all locations, use "-" for
+   *   the
    *   `{location}` value.
    * @param {number} request.pageSize
    *   The maximum number of items to return.
@@ -3450,14 +3413,13 @@ export class CloudFilestoreManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.filestore.v1beta1.Backup | Backup}.
+   *   The first element of the array is Array of {@link protos.google.cloud.filestore.v1beta1.Backup|Backup}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listBackupsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listBackups(
@@ -3467,7 +3429,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.IBackup[],
       protos.google.cloud.filestore.v1beta1.IListBackupsRequest | null,
-      protos.google.cloud.filestore.v1beta1.IListBackupsResponse
+      protos.google.cloud.filestore.v1beta1.IListBackupsResponse,
     ]
   >;
   listBackups(
@@ -3513,7 +3475,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.IBackup[],
       protos.google.cloud.filestore.v1beta1.IListBackupsRequest | null,
-      protos.google.cloud.filestore.v1beta1.IListBackupsResponse
+      protos.google.cloud.filestore.v1beta1.IListBackupsResponse,
     ]
   > | void {
     request = request || {};
@@ -3540,11 +3502,11 @@ export class CloudFilestoreManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location for which to retrieve backup information,
-   *   in the format `projects/{project_id}/locations/{location}`.
-   *   In Filestore, backup locations map to GCP regions,
-   *   for example **us-west1**.
-   *   To retrieve backup information for all locations, use "-" for the
+   *   Required. The project and location for which to retrieve backup
+   *   information, in the format `projects/{project_id}/locations/{location}`. In
+   *   Filestore, backup locations map to Google Cloud regions, for example
+   *   **us-west1**. To retrieve backup information for all locations, use "-" for
+   *   the
    *   `{location}` value.
    * @param {number} request.pageSize
    *   The maximum number of items to return.
@@ -3558,13 +3520,12 @@ export class CloudFilestoreManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.filestore.v1beta1.Backup | Backup} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.filestore.v1beta1.Backup|Backup} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listBackupsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listBackupsStream(
@@ -3596,11 +3557,11 @@ export class CloudFilestoreManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The project and location for which to retrieve backup information,
-   *   in the format `projects/{project_id}/locations/{location}`.
-   *   In Filestore, backup locations map to GCP regions,
-   *   for example **us-west1**.
-   *   To retrieve backup information for all locations, use "-" for the
+   *   Required. The project and location for which to retrieve backup
+   *   information, in the format `projects/{project_id}/locations/{location}`. In
+   *   Filestore, backup locations map to Google Cloud regions, for example
+   *   **us-west1**. To retrieve backup information for all locations, use "-" for
+   *   the
    *   `{location}` value.
    * @param {number} request.pageSize
    *   The maximum number of items to return.
@@ -3614,12 +3575,11 @@ export class CloudFilestoreManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.filestore.v1beta1.Backup | Backup}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.filestore.v1beta1.Backup|Backup}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.list_backups.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_ListBackups_async
@@ -3666,14 +3626,13 @@ export class CloudFilestoreManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.filestore.v1beta1.Share | Share}.
+   *   The first element of the array is Array of {@link protos.google.cloud.filestore.v1beta1.Share|Share}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listSharesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listShares(
@@ -3683,7 +3642,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.IShare[],
       protos.google.cloud.filestore.v1beta1.IListSharesRequest | null,
-      protos.google.cloud.filestore.v1beta1.IListSharesResponse
+      protos.google.cloud.filestore.v1beta1.IListSharesResponse,
     ]
   >;
   listShares(
@@ -3729,7 +3688,7 @@ export class CloudFilestoreManagerClient {
     [
       protos.google.cloud.filestore.v1beta1.IShare[],
       protos.google.cloud.filestore.v1beta1.IListSharesRequest | null,
-      protos.google.cloud.filestore.v1beta1.IListSharesResponse
+      protos.google.cloud.filestore.v1beta1.IListSharesResponse,
     ]
   > | void {
     request = request || {};
@@ -3771,13 +3730,12 @@ export class CloudFilestoreManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.filestore.v1beta1.Share | Share} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.filestore.v1beta1.Share|Share} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listSharesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSharesStream(
@@ -3824,12 +3782,11 @@ export class CloudFilestoreManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.filestore.v1beta1.Share | Share}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.filestore.v1beta1.Share|Share}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cloud_filestore_manager.list_shares.js</caption>
    * region_tag:file_v1beta1_generated_CloudFilestoreManager_ListShares_async
@@ -3866,8 +3823,7 @@ export class CloudFilestoreManagerClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -3913,12 +3869,11 @@ export class CloudFilestoreManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

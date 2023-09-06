@@ -99,8 +99,7 @@ export class DatasetServiceClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -108,7 +107,7 @@ export class DatasetServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new DatasetServiceClient({fallback: 'rest'}, gax);
+   *     const client = new DatasetServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -177,7 +176,7 @@ export class DatasetServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -356,7 +355,7 @@ export class DatasetServiceClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
@@ -1758,9 +1757,8 @@ export class DatasetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1beta1.Dataset | Dataset}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.Dataset|Dataset}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/dataset_service.get_dataset.js</caption>
    * region_tag:aiplatform_v1beta1_generated_DatasetService_GetDataset_async
@@ -1772,7 +1770,7 @@ export class DatasetServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IDataset,
       protos.google.cloud.aiplatform.v1beta1.IGetDatasetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDataset(
@@ -1818,7 +1816,7 @@ export class DatasetServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IDataset,
       protos.google.cloud.aiplatform.v1beta1.IGetDatasetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1849,7 +1847,7 @@ export class DatasetServiceClient {
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. The update mask applies to the resource.
    *   For the `FieldMask` definition, see
-   *   {@link google.protobuf.FieldMask|google.protobuf.FieldMask}. Updatable fields:
+   *   {@link protos.google.protobuf.FieldMask|google.protobuf.FieldMask}. Updatable fields:
    *
    *     * `display_name`
    *     * `description`
@@ -1857,9 +1855,8 @@ export class DatasetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1beta1.Dataset | Dataset}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.Dataset|Dataset}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/dataset_service.update_dataset.js</caption>
    * region_tag:aiplatform_v1beta1_generated_DatasetService_UpdateDataset_async
@@ -1871,7 +1868,7 @@ export class DatasetServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IDataset,
       protos.google.cloud.aiplatform.v1beta1.IUpdateDatasetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDataset(
@@ -1917,7 +1914,7 @@ export class DatasetServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IDataset,
       protos.google.cloud.aiplatform.v1beta1.IUpdateDatasetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1952,9 +1949,8 @@ export class DatasetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1beta1.AnnotationSpec | AnnotationSpec}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.AnnotationSpec|AnnotationSpec}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/dataset_service.get_annotation_spec.js</caption>
    * region_tag:aiplatform_v1beta1_generated_DatasetService_GetAnnotationSpec_async
@@ -1969,7 +1965,7 @@ export class DatasetServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IGetAnnotationSpecRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAnnotationSpec(
@@ -2018,7 +2014,7 @@ export class DatasetServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IGetAnnotationSpecRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2056,8 +2052,7 @@ export class DatasetServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/dataset_service.create_dataset.js</caption>
    * region_tag:aiplatform_v1beta1_generated_DatasetService_CreateDataset_async
@@ -2072,7 +2067,7 @@ export class DatasetServiceClient {
         protos.google.cloud.aiplatform.v1beta1.ICreateDatasetOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDataset(
@@ -2125,7 +2120,7 @@ export class DatasetServiceClient {
         protos.google.cloud.aiplatform.v1beta1.ICreateDatasetOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2152,8 +2147,7 @@ export class DatasetServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/dataset_service.create_dataset.js</caption>
    * region_tag:aiplatform_v1beta1_generated_DatasetService_CreateDataset_async
@@ -2196,8 +2190,7 @@ export class DatasetServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/dataset_service.delete_dataset.js</caption>
    * region_tag:aiplatform_v1beta1_generated_DatasetService_DeleteDataset_async
@@ -2212,7 +2205,7 @@ export class DatasetServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDataset(
@@ -2265,7 +2258,7 @@ export class DatasetServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2292,8 +2285,7 @@ export class DatasetServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/dataset_service.delete_dataset.js</caption>
    * region_tag:aiplatform_v1beta1_generated_DatasetService_DeleteDataset_async
@@ -2339,8 +2331,7 @@ export class DatasetServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/dataset_service.import_data.js</caption>
    * region_tag:aiplatform_v1beta1_generated_DatasetService_ImportData_async
@@ -2355,7 +2346,7 @@ export class DatasetServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IImportDataOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   importData(
@@ -2408,7 +2399,7 @@ export class DatasetServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IImportDataOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2435,8 +2426,7 @@ export class DatasetServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/dataset_service.import_data.js</caption>
    * region_tag:aiplatform_v1beta1_generated_DatasetService_ImportData_async
@@ -2481,8 +2471,7 @@ export class DatasetServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/dataset_service.export_data.js</caption>
    * region_tag:aiplatform_v1beta1_generated_DatasetService_ExportData_async
@@ -2497,7 +2486,7 @@ export class DatasetServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IExportDataOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   exportData(
@@ -2550,7 +2539,7 @@ export class DatasetServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IExportDataOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2577,8 +2566,7 @@ export class DatasetServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/dataset_service.export_data.js</caption>
    * region_tag:aiplatform_v1beta1_generated_DatasetService_ExportData_async
@@ -2621,8 +2609,7 @@ export class DatasetServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/dataset_service.delete_saved_query.js</caption>
    * region_tag:aiplatform_v1beta1_generated_DatasetService_DeleteSavedQuery_async
@@ -2637,7 +2624,7 @@ export class DatasetServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteSavedQuery(
@@ -2690,7 +2677,7 @@ export class DatasetServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2717,8 +2704,7 @@ export class DatasetServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/dataset_service.delete_saved_query.js</caption>
    * region_tag:aiplatform_v1beta1_generated_DatasetService_DeleteSavedQuery_async
@@ -2786,14 +2772,13 @@ export class DatasetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1beta1.Dataset | Dataset}.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.Dataset|Dataset}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listDatasetsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listDatasets(
@@ -2803,7 +2788,7 @@ export class DatasetServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IDataset[],
       protos.google.cloud.aiplatform.v1beta1.IListDatasetsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListDatasetsResponse
+      protos.google.cloud.aiplatform.v1beta1.IListDatasetsResponse,
     ]
   >;
   listDatasets(
@@ -2849,7 +2834,7 @@ export class DatasetServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IDataset[],
       protos.google.cloud.aiplatform.v1beta1.IListDatasetsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListDatasetsResponse
+      protos.google.cloud.aiplatform.v1beta1.IListDatasetsResponse,
     ]
   > | void {
     request = request || {};
@@ -2910,13 +2895,12 @@ export class DatasetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1beta1.Dataset | Dataset} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.Dataset|Dataset} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listDatasetsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listDatasetsStream(
@@ -2982,12 +2966,11 @@ export class DatasetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.aiplatform.v1beta1.Dataset | Dataset}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.aiplatform.v1beta1.Dataset|Dataset}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/dataset_service.list_datasets.js</caption>
    * region_tag:aiplatform_v1beta1_generated_DatasetService_ListDatasets_async
@@ -3036,14 +3019,13 @@ export class DatasetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1beta1.DataItem | DataItem}.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.DataItem|DataItem}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listDataItemsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listDataItems(
@@ -3053,7 +3035,7 @@ export class DatasetServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IDataItem[],
       protos.google.cloud.aiplatform.v1beta1.IListDataItemsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListDataItemsResponse
+      protos.google.cloud.aiplatform.v1beta1.IListDataItemsResponse,
     ]
   >;
   listDataItems(
@@ -3099,7 +3081,7 @@ export class DatasetServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IDataItem[],
       protos.google.cloud.aiplatform.v1beta1.IListDataItemsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListDataItemsResponse
+      protos.google.cloud.aiplatform.v1beta1.IListDataItemsResponse,
     ]
   > | void {
     request = request || {};
@@ -3143,13 +3125,12 @@ export class DatasetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1beta1.DataItem | DataItem} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.DataItem|DataItem} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listDataItemsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listDataItemsStream(
@@ -3198,12 +3179,11 @@ export class DatasetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.aiplatform.v1beta1.DataItem | DataItem}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.aiplatform.v1beta1.DataItem|DataItem}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/dataset_service.list_data_items.js</caption>
    * region_tag:aiplatform_v1beta1_generated_DatasetService_ListDataItems_async
@@ -3279,7 +3259,7 @@ export class DatasetServiceClient {
    *   belong to.
    * @param {google.protobuf.FieldMask} request.fieldMask
    *   Mask specifying which fields of
-   *   {@link google.cloud.aiplatform.v1beta1.DataItemView|DataItemView} to read.
+   *   {@link protos.google.cloud.aiplatform.v1beta1.DataItemView|DataItemView} to read.
    * @param {number} request.annotationsLimit
    *   If set, only up to this many of Annotations will be returned per
    *   DataItemView. The maximum value is 1000. If not set, the maximum value will
@@ -3293,21 +3273,20 @@ export class DatasetServiceClient {
    * @param {string} request.pageToken
    *   A token identifying a page of results for the server to return
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.SearchDataItemsResponse.next_page_token|SearchDataItemsResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1beta1.SearchDataItemsResponse.next_page_token|SearchDataItemsResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.DatasetService.SearchDataItems|DatasetService.SearchDataItems}
+   *   {@link protos.google.cloud.aiplatform.v1beta1.DatasetService.SearchDataItems|DatasetService.SearchDataItems}
    *   call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1beta1.DataItemView | DataItemView}.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.DataItemView|DataItemView}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `searchDataItemsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   searchDataItems(
@@ -3317,7 +3296,7 @@ export class DatasetServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IDataItemView[],
       protos.google.cloud.aiplatform.v1beta1.ISearchDataItemsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.ISearchDataItemsResponse
+      protos.google.cloud.aiplatform.v1beta1.ISearchDataItemsResponse,
     ]
   >;
   searchDataItems(
@@ -3363,7 +3342,7 @@ export class DatasetServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IDataItemView[],
       protos.google.cloud.aiplatform.v1beta1.ISearchDataItemsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.ISearchDataItemsResponse
+      protos.google.cloud.aiplatform.v1beta1.ISearchDataItemsResponse,
     ]
   > | void {
     request = request || {};
@@ -3434,7 +3413,7 @@ export class DatasetServiceClient {
    *   belong to.
    * @param {google.protobuf.FieldMask} request.fieldMask
    *   Mask specifying which fields of
-   *   {@link google.cloud.aiplatform.v1beta1.DataItemView|DataItemView} to read.
+   *   {@link protos.google.cloud.aiplatform.v1beta1.DataItemView|DataItemView} to read.
    * @param {number} request.annotationsLimit
    *   If set, only up to this many of Annotations will be returned per
    *   DataItemView. The maximum value is 1000. If not set, the maximum value will
@@ -3448,20 +3427,19 @@ export class DatasetServiceClient {
    * @param {string} request.pageToken
    *   A token identifying a page of results for the server to return
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.SearchDataItemsResponse.next_page_token|SearchDataItemsResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1beta1.SearchDataItemsResponse.next_page_token|SearchDataItemsResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.DatasetService.SearchDataItems|DatasetService.SearchDataItems}
+   *   {@link protos.google.cloud.aiplatform.v1beta1.DatasetService.SearchDataItems|DatasetService.SearchDataItems}
    *   call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1beta1.DataItemView | DataItemView} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.DataItemView|DataItemView} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `searchDataItemsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   searchDataItemsStream(
@@ -3537,7 +3515,7 @@ export class DatasetServiceClient {
    *   belong to.
    * @param {google.protobuf.FieldMask} request.fieldMask
    *   Mask specifying which fields of
-   *   {@link google.cloud.aiplatform.v1beta1.DataItemView|DataItemView} to read.
+   *   {@link protos.google.cloud.aiplatform.v1beta1.DataItemView|DataItemView} to read.
    * @param {number} request.annotationsLimit
    *   If set, only up to this many of Annotations will be returned per
    *   DataItemView. The maximum value is 1000. If not set, the maximum value will
@@ -3551,19 +3529,18 @@ export class DatasetServiceClient {
    * @param {string} request.pageToken
    *   A token identifying a page of results for the server to return
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.SearchDataItemsResponse.next_page_token|SearchDataItemsResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1beta1.SearchDataItemsResponse.next_page_token|SearchDataItemsResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.DatasetService.SearchDataItems|DatasetService.SearchDataItems}
+   *   {@link protos.google.cloud.aiplatform.v1beta1.DatasetService.SearchDataItems|DatasetService.SearchDataItems}
    *   call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.aiplatform.v1beta1.DataItemView | DataItemView}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.aiplatform.v1beta1.DataItemView|DataItemView}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/dataset_service.search_data_items.js</caption>
    * region_tag:aiplatform_v1beta1_generated_DatasetService_SearchDataItems_async
@@ -3612,14 +3589,13 @@ export class DatasetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1beta1.SavedQuery | SavedQuery}.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.SavedQuery|SavedQuery}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listSavedQueriesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSavedQueries(
@@ -3629,7 +3605,7 @@ export class DatasetServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ISavedQuery[],
       protos.google.cloud.aiplatform.v1beta1.IListSavedQueriesRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListSavedQueriesResponse
+      protos.google.cloud.aiplatform.v1beta1.IListSavedQueriesResponse,
     ]
   >;
   listSavedQueries(
@@ -3675,7 +3651,7 @@ export class DatasetServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ISavedQuery[],
       protos.google.cloud.aiplatform.v1beta1.IListSavedQueriesRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListSavedQueriesResponse
+      protos.google.cloud.aiplatform.v1beta1.IListSavedQueriesResponse,
     ]
   > | void {
     request = request || {};
@@ -3719,13 +3695,12 @@ export class DatasetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1beta1.SavedQuery | SavedQuery} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.SavedQuery|SavedQuery} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listSavedQueriesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSavedQueriesStream(
@@ -3774,12 +3749,11 @@ export class DatasetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.aiplatform.v1beta1.SavedQuery | SavedQuery}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.aiplatform.v1beta1.SavedQuery|SavedQuery}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/dataset_service.list_saved_queries.js</caption>
    * region_tag:aiplatform_v1beta1_generated_DatasetService_ListSavedQueries_async
@@ -3828,14 +3802,13 @@ export class DatasetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1beta1.Annotation | Annotation}.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.Annotation|Annotation}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listAnnotationsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listAnnotations(
@@ -3845,7 +3818,7 @@ export class DatasetServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IAnnotation[],
       protos.google.cloud.aiplatform.v1beta1.IListAnnotationsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListAnnotationsResponse
+      protos.google.cloud.aiplatform.v1beta1.IListAnnotationsResponse,
     ]
   >;
   listAnnotations(
@@ -3891,7 +3864,7 @@ export class DatasetServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.IAnnotation[],
       protos.google.cloud.aiplatform.v1beta1.IListAnnotationsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListAnnotationsResponse
+      protos.google.cloud.aiplatform.v1beta1.IListAnnotationsResponse,
     ]
   > | void {
     request = request || {};
@@ -3935,13 +3908,12 @@ export class DatasetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1beta1.Annotation | Annotation} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.Annotation|Annotation} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAnnotationsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listAnnotationsStream(
@@ -3990,12 +3962,11 @@ export class DatasetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.aiplatform.v1beta1.Annotation | Annotation}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.aiplatform.v1beta1.Annotation|Annotation}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/dataset_service.list_annotations.js</caption>
    * region_tag:aiplatform_v1beta1_generated_DatasetService_ListAnnotations_async
@@ -4060,7 +4031,7 @@ export class DatasetServiceClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
@@ -4081,8 +4052,7 @@ export class DatasetServiceClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -4108,7 +4078,7 @@ export class DatasetServiceClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
@@ -4129,8 +4099,7 @@ export class DatasetServiceClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -4157,7 +4126,7 @@ export class DatasetServiceClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.TestIamPermissionsResponse> {
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
@@ -4172,8 +4141,7 @@ export class DatasetServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -4219,12 +4187,11 @@ export class DatasetServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

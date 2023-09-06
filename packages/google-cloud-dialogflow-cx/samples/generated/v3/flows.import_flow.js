@@ -47,11 +47,16 @@ function main(parent) {
   /**
    *  Uncompressed raw byte content for flow.
    */
-  // const flowContent = 'Buffer.from('string')'
+  // const flowContent = Buffer.from('string')
   /**
    *  Flow import mode. If not specified, `KEEP` is assumed.
    */
   // const importOption = {}
+  /**
+   *  Optional. Specifies the import strategy used when resolving resource
+   *  conflicts.
+   */
+  // const flowImportStrategy = {}
 
   // Imports the Cx library
   const {FlowsClient} = require('@google-cloud/dialogflow-cx').v3;

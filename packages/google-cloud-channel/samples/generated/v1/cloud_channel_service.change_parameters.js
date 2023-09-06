@@ -41,7 +41,7 @@ function main(name, parameters) {
    *  Offer.parameter_definitions google.cloud.channel.v1.Offer.parameter_definitions 
    *  from the desired offer.
    */
-  // const parameters = 1234
+  // const parameters = [1,2,3,4]
   /**
    *  Optional. You can specify an optional unique request ID, and if you need to
    *  retry your request, the server will know to ignore the request if it's

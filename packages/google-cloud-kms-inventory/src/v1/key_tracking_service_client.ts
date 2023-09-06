@@ -91,8 +91,7 @@ export class KeyTrackingServiceClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -100,7 +99,7 @@ export class KeyTrackingServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new KeyTrackingServiceClient({fallback: 'rest'}, gax);
+   *     const client = new KeyTrackingServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -166,7 +165,7 @@ export class KeyTrackingServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -356,7 +355,7 @@ export class KeyTrackingServiceClient {
   // -------------------
   /**
    * Returns aggregate information about the resources protected by the given
-   * Cloud KMS {@link google.cloud.kms.v1.CryptoKey|CryptoKey}. Only resources within
+   * Cloud KMS {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}. Only resources within
    * the same Cloud organization as the key will be returned. The project that
    * holds the key must be part of an organization in order for this call to
    * succeed.
@@ -365,13 +364,12 @@ export class KeyTrackingServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the
-   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey}.
+   *   {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.kms.inventory.v1.ProtectedResourcesSummary | ProtectedResourcesSummary}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.kms.inventory.v1.ProtectedResourcesSummary|ProtectedResourcesSummary}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/key_tracking_service.get_protected_resources_summary.js</caption>
    * region_tag:kmsinventory_v1_generated_KeyTrackingService_GetProtectedResourcesSummary_async
@@ -386,7 +384,7 @@ export class KeyTrackingServiceClient {
         | protos.google.cloud.kms.inventory.v1.IGetProtectedResourcesSummaryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getProtectedResourcesSummary(
@@ -435,7 +433,7 @@ export class KeyTrackingServiceClient {
         | protos.google.cloud.kms.inventory.v1.IGetProtectedResourcesSummaryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -463,7 +461,7 @@ export class KeyTrackingServiceClient {
 
   /**
    * Returns metadata about the resources protected by the given Cloud KMS
-   * {@link google.cloud.kms.v1.CryptoKey|CryptoKey} in the given Cloud organization.
+   * {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey} in the given Cloud organization.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -472,7 +470,7 @@ export class KeyTrackingServiceClient {
    *   Example: organizations/123
    * @param {string} request.cryptoKey
    *   Required. The resource name of the
-   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey}.
+   *   {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}.
    * @param {number} request.pageSize
    *   The maximum number of resources to return. The service may return fewer
    *   than this value.
@@ -480,11 +478,11 @@ export class KeyTrackingServiceClient {
    *   The maximum value is 500; values above 500 will be coerced to 500.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.kms.inventory.v1.KeyTrackingService.SearchProtectedResources|KeyTrackingService.SearchProtectedResources}
+   *   {@link protos.google.cloud.kms.inventory.v1.KeyTrackingService.SearchProtectedResources|KeyTrackingService.SearchProtectedResources}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.kms.inventory.v1.KeyTrackingService.SearchProtectedResources|KeyTrackingService.SearchProtectedResources}
+   *   {@link protos.google.cloud.kms.inventory.v1.KeyTrackingService.SearchProtectedResources|KeyTrackingService.SearchProtectedResources}
    *   must match the call that provided the page token.
    * @param {string[]} [request.resourceTypes]
    *   Optional. A list of resource types that this request searches for. If
@@ -504,14 +502,13 @@ export class KeyTrackingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.kms.inventory.v1.ProtectedResource | ProtectedResource}.
+   *   The first element of the array is Array of {@link protos.google.cloud.kms.inventory.v1.ProtectedResource|ProtectedResource}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `searchProtectedResourcesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   searchProtectedResources(
@@ -521,7 +518,7 @@ export class KeyTrackingServiceClient {
     [
       protos.google.cloud.kms.inventory.v1.IProtectedResource[],
       protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest | null,
-      protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesResponse
+      protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesResponse,
     ]
   >;
   searchProtectedResources(
@@ -567,7 +564,7 @@ export class KeyTrackingServiceClient {
     [
       protos.google.cloud.kms.inventory.v1.IProtectedResource[],
       protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesRequest | null,
-      protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesResponse
+      protos.google.cloud.kms.inventory.v1.ISearchProtectedResourcesResponse,
     ]
   > | void {
     request = request || {};
@@ -602,7 +599,7 @@ export class KeyTrackingServiceClient {
    *   Example: organizations/123
    * @param {string} request.cryptoKey
    *   Required. The resource name of the
-   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey}.
+   *   {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}.
    * @param {number} request.pageSize
    *   The maximum number of resources to return. The service may return fewer
    *   than this value.
@@ -610,11 +607,11 @@ export class KeyTrackingServiceClient {
    *   The maximum value is 500; values above 500 will be coerced to 500.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.kms.inventory.v1.KeyTrackingService.SearchProtectedResources|KeyTrackingService.SearchProtectedResources}
+   *   {@link protos.google.cloud.kms.inventory.v1.KeyTrackingService.SearchProtectedResources|KeyTrackingService.SearchProtectedResources}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.kms.inventory.v1.KeyTrackingService.SearchProtectedResources|KeyTrackingService.SearchProtectedResources}
+   *   {@link protos.google.cloud.kms.inventory.v1.KeyTrackingService.SearchProtectedResources|KeyTrackingService.SearchProtectedResources}
    *   must match the call that provided the page token.
    * @param {string[]} [request.resourceTypes]
    *   Optional. A list of resource types that this request searches for. If
@@ -634,13 +631,12 @@ export class KeyTrackingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.kms.inventory.v1.ProtectedResource | ProtectedResource} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.kms.inventory.v1.ProtectedResource|ProtectedResource} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `searchProtectedResourcesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   searchProtectedResourcesStream(
@@ -676,7 +672,7 @@ export class KeyTrackingServiceClient {
    *   Example: organizations/123
    * @param {string} request.cryptoKey
    *   Required. The resource name of the
-   *   {@link google.cloud.kms.v1.CryptoKey|CryptoKey}.
+   *   {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}.
    * @param {number} request.pageSize
    *   The maximum number of resources to return. The service may return fewer
    *   than this value.
@@ -684,11 +680,11 @@ export class KeyTrackingServiceClient {
    *   The maximum value is 500; values above 500 will be coerced to 500.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.kms.inventory.v1.KeyTrackingService.SearchProtectedResources|KeyTrackingService.SearchProtectedResources}
+   *   {@link protos.google.cloud.kms.inventory.v1.KeyTrackingService.SearchProtectedResources|KeyTrackingService.SearchProtectedResources}
    *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.kms.inventory.v1.KeyTrackingService.SearchProtectedResources|KeyTrackingService.SearchProtectedResources}
+   *   {@link protos.google.cloud.kms.inventory.v1.KeyTrackingService.SearchProtectedResources|KeyTrackingService.SearchProtectedResources}
    *   must match the call that provided the page token.
    * @param {string[]} [request.resourceTypes]
    *   Optional. A list of resource types that this request searches for. If
@@ -708,12 +704,11 @@ export class KeyTrackingServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.kms.inventory.v1.ProtectedResource | ProtectedResource}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.kms.inventory.v1.ProtectedResource|ProtectedResource}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/key_tracking_service.search_protected_resources.js</caption>
    * region_tag:kmsinventory_v1_generated_KeyTrackingService_SearchProtectedResources_async

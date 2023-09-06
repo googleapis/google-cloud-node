@@ -91,8 +91,7 @@ export class SpeechClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -100,7 +99,7 @@ export class SpeechClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new SpeechClient({fallback: 'rest'}, gax);
+   *     const client = new SpeechClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -166,7 +165,7 @@ export class SpeechClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -192,7 +191,7 @@ export class SpeechClient {
     this.descriptors.stream = {
       streamingRecognize: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.BIDI_STREAMING,
-        opts.fallback === 'rest'
+        !!opts.fallback
       ),
     };
 
@@ -204,7 +203,7 @@ export class SpeechClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
@@ -400,9 +399,8 @@ export class SpeechClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.speech.v1p1beta1.RecognizeResponse | RecognizeResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.speech.v1p1beta1.RecognizeResponse|RecognizeResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1p1beta1/speech.recognize.js</caption>
    * region_tag:speech_v1p1beta1_generated_Speech_Recognize_async
@@ -414,7 +412,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v1p1beta1.IRecognizeResponse,
       protos.google.cloud.speech.v1p1beta1.IRecognizeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   recognize(
@@ -454,7 +452,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v1p1beta1.IRecognizeResponse,
       protos.google.cloud.speech.v1p1beta1.IRecognizeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -480,10 +478,9 @@ export class SpeechClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
    *   An object stream which is both readable and writable. It accepts objects
-   *   representing {@link google.cloud.speech.v1p1beta1.StreamingRecognizeRequest | StreamingRecognizeRequest} for write() method, and
-   *   will emit objects representing {@link google.cloud.speech.v1p1beta1.StreamingRecognizeResponse | StreamingRecognizeResponse} on 'data' event asynchronously.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming)
+   *   representing {@link protos.google.cloud.speech.v1p1beta1.StreamingRecognizeRequest|StreamingRecognizeRequest} for write() method, and
+   *   will emit objects representing {@link protos.google.cloud.speech.v1p1beta1.StreamingRecognizeResponse|StreamingRecognizeResponse} on 'data' event asynchronously.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1p1beta1/speech.streaming_recognize.js</caption>
    * region_tag:speech_v1p1beta1_generated_Speech_StreamingRecognize_async
@@ -516,8 +513,7 @@ export class SpeechClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1p1beta1/speech.long_running_recognize.js</caption>
    * region_tag:speech_v1p1beta1_generated_Speech_LongRunningRecognize_async
@@ -532,7 +528,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   longRunningRecognize(
@@ -585,7 +581,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -608,8 +604,7 @@ export class SpeechClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1p1beta1/speech.long_running_recognize.js</caption>
    * region_tag:speech_v1p1beta1_generated_Speech_LongRunningRecognize_async

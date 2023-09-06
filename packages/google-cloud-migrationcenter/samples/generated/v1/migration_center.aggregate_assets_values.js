@@ -36,7 +36,7 @@ function main(parent) {
    *  Array of aggregations to perform.
    *  Up to 25 aggregations can be defined.
    */
-  // const aggregations = 1234
+  // const aggregations = [1,2,3,4]
   /**
    *  The aggregation will be performed on assets that match the provided filter.
    */

@@ -31,7 +31,8 @@ function main(parent) {
   /**
    *  Required. The flow to list all transition route groups for.
    *  Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-   *  ID>/flows/<Flow ID>`.
+   *  ID>/flows/<Flow ID>`
+   *  or `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>.
    */
   // const parent = 'abc123'
   /**

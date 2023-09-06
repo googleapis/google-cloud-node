@@ -45,7 +45,7 @@ function main(name, binaryData) {
   /**
    *  Required. The configuration data for the device.
    */
-  // const binaryData = 'Buffer.from('string')'
+  // const binaryData = Buffer.from('string')
 
   // Imports the Iot library
   const {DeviceManagerClient} = require('@google-cloud/iot').v1;

@@ -37,7 +37,7 @@ function main(index) {
   /**
    *  A list of datapoints to be created/updated.
    */
-  // const datapoints = 1234
+  // const datapoints = [1,2,3,4]
 
   // Imports the Aiplatform library
   const {IndexServiceClient} = require('@google-cloud/aiplatform').v1;

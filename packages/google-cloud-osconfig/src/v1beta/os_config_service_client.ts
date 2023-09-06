@@ -93,8 +93,7 @@ export class OsConfigServiceClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -102,7 +101,7 @@ export class OsConfigServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new OsConfigServiceClient({fallback: 'rest'}, gax);
+   *     const client = new OsConfigServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -168,7 +167,7 @@ export class OsConfigServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -398,9 +397,8 @@ export class OsConfigServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.osconfig.v1beta.PatchJob | PatchJob}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.osconfig.v1beta.PatchJob|PatchJob}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/os_config_service.execute_patch_job.js</caption>
    * region_tag:osconfig_v1beta_generated_OsConfigService_ExecutePatchJob_async
@@ -412,7 +410,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IPatchJob,
       protos.google.cloud.osconfig.v1beta.IExecutePatchJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   executePatchJob(
@@ -458,7 +456,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IPatchJob,
       protos.google.cloud.osconfig.v1beta.IExecutePatchJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -490,9 +488,8 @@ export class OsConfigServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.osconfig.v1beta.PatchJob | PatchJob}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.osconfig.v1beta.PatchJob|PatchJob}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/os_config_service.get_patch_job.js</caption>
    * region_tag:osconfig_v1beta_generated_OsConfigService_GetPatchJob_async
@@ -504,7 +501,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IPatchJob,
       protos.google.cloud.osconfig.v1beta.IGetPatchJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getPatchJob(
@@ -550,7 +547,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IPatchJob,
       protos.google.cloud.osconfig.v1beta.IGetPatchJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -582,9 +579,8 @@ export class OsConfigServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.osconfig.v1beta.PatchJob | PatchJob}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.osconfig.v1beta.PatchJob|PatchJob}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/os_config_service.cancel_patch_job.js</caption>
    * region_tag:osconfig_v1beta_generated_OsConfigService_CancelPatchJob_async
@@ -596,7 +592,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IPatchJob,
       protos.google.cloud.osconfig.v1beta.ICancelPatchJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   cancelPatchJob(
@@ -642,7 +638,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IPatchJob,
       protos.google.cloud.osconfig.v1beta.ICancelPatchJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -683,9 +679,8 @@ export class OsConfigServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.osconfig.v1beta.PatchDeployment | PatchDeployment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.osconfig.v1beta.PatchDeployment|PatchDeployment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/os_config_service.create_patch_deployment.js</caption>
    * region_tag:osconfig_v1beta_generated_OsConfigService_CreatePatchDeployment_async
@@ -700,7 +695,7 @@ export class OsConfigServiceClient {
         | protos.google.cloud.osconfig.v1beta.ICreatePatchDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createPatchDeployment(
@@ -749,7 +744,7 @@ export class OsConfigServiceClient {
         | protos.google.cloud.osconfig.v1beta.ICreatePatchDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -781,9 +776,8 @@ export class OsConfigServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.osconfig.v1beta.PatchDeployment | PatchDeployment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.osconfig.v1beta.PatchDeployment|PatchDeployment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/os_config_service.get_patch_deployment.js</caption>
    * region_tag:osconfig_v1beta_generated_OsConfigService_GetPatchDeployment_async
@@ -798,7 +792,7 @@ export class OsConfigServiceClient {
         | protos.google.cloud.osconfig.v1beta.IGetPatchDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getPatchDeployment(
@@ -847,7 +841,7 @@ export class OsConfigServiceClient {
         | protos.google.cloud.osconfig.v1beta.IGetPatchDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -879,9 +873,8 @@ export class OsConfigServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/os_config_service.delete_patch_deployment.js</caption>
    * region_tag:osconfig_v1beta_generated_OsConfigService_DeletePatchDeployment_async
@@ -896,7 +889,7 @@ export class OsConfigServiceClient {
         | protos.google.cloud.osconfig.v1beta.IDeletePatchDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deletePatchDeployment(
@@ -945,7 +938,7 @@ export class OsConfigServiceClient {
         | protos.google.cloud.osconfig.v1beta.IDeletePatchDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -979,9 +972,8 @@ export class OsConfigServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.osconfig.v1beta.PatchDeployment | PatchDeployment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.osconfig.v1beta.PatchDeployment|PatchDeployment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/os_config_service.update_patch_deployment.js</caption>
    * region_tag:osconfig_v1beta_generated_OsConfigService_UpdatePatchDeployment_async
@@ -996,7 +988,7 @@ export class OsConfigServiceClient {
         | protos.google.cloud.osconfig.v1beta.IUpdatePatchDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updatePatchDeployment(
@@ -1045,7 +1037,7 @@ export class OsConfigServiceClient {
         | protos.google.cloud.osconfig.v1beta.IUpdatePatchDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1078,9 +1070,8 @@ export class OsConfigServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.osconfig.v1beta.PatchDeployment | PatchDeployment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.osconfig.v1beta.PatchDeployment|PatchDeployment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/os_config_service.pause_patch_deployment.js</caption>
    * region_tag:osconfig_v1beta_generated_OsConfigService_PausePatchDeployment_async
@@ -1095,7 +1086,7 @@ export class OsConfigServiceClient {
         | protos.google.cloud.osconfig.v1beta.IPausePatchDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   pausePatchDeployment(
@@ -1144,7 +1135,7 @@ export class OsConfigServiceClient {
         | protos.google.cloud.osconfig.v1beta.IPausePatchDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1177,9 +1168,8 @@ export class OsConfigServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.osconfig.v1beta.PatchDeployment | PatchDeployment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.osconfig.v1beta.PatchDeployment|PatchDeployment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/os_config_service.resume_patch_deployment.js</caption>
    * region_tag:osconfig_v1beta_generated_OsConfigService_ResumePatchDeployment_async
@@ -1194,7 +1184,7 @@ export class OsConfigServiceClient {
         | protos.google.cloud.osconfig.v1beta.IResumePatchDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resumePatchDeployment(
@@ -1243,7 +1233,7 @@ export class OsConfigServiceClient {
         | protos.google.cloud.osconfig.v1beta.IResumePatchDeploymentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1286,9 +1276,8 @@ export class OsConfigServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.osconfig.v1beta.GuestPolicy | GuestPolicy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.osconfig.v1beta.GuestPolicy|GuestPolicy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/os_config_service.create_guest_policy.js</caption>
    * region_tag:osconfig_v1beta_generated_OsConfigService_CreateGuestPolicy_async
@@ -1300,7 +1289,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IGuestPolicy,
       protos.google.cloud.osconfig.v1beta.ICreateGuestPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createGuestPolicy(
@@ -1346,7 +1335,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IGuestPolicy,
       protos.google.cloud.osconfig.v1beta.ICreateGuestPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1378,9 +1367,8 @@ export class OsConfigServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.osconfig.v1beta.GuestPolicy | GuestPolicy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.osconfig.v1beta.GuestPolicy|GuestPolicy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/os_config_service.get_guest_policy.js</caption>
    * region_tag:osconfig_v1beta_generated_OsConfigService_GetGuestPolicy_async
@@ -1392,7 +1380,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IGuestPolicy,
       protos.google.cloud.osconfig.v1beta.IGetGuestPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getGuestPolicy(
@@ -1438,7 +1426,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IGuestPolicy,
       protos.google.cloud.osconfig.v1beta.IGetGuestPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1472,9 +1460,8 @@ export class OsConfigServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.osconfig.v1beta.GuestPolicy | GuestPolicy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.osconfig.v1beta.GuestPolicy|GuestPolicy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/os_config_service.update_guest_policy.js</caption>
    * region_tag:osconfig_v1beta_generated_OsConfigService_UpdateGuestPolicy_async
@@ -1486,7 +1473,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IGuestPolicy,
       protos.google.cloud.osconfig.v1beta.IUpdateGuestPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateGuestPolicy(
@@ -1532,7 +1519,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IGuestPolicy,
       protos.google.cloud.osconfig.v1beta.IUpdateGuestPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1564,9 +1551,8 @@ export class OsConfigServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/os_config_service.delete_guest_policy.js</caption>
    * region_tag:osconfig_v1beta_generated_OsConfigService_DeleteGuestPolicy_async
@@ -1578,7 +1564,7 @@ export class OsConfigServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.osconfig.v1beta.IDeleteGuestPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteGuestPolicy(
@@ -1624,7 +1610,7 @@ export class OsConfigServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.osconfig.v1beta.IDeleteGuestPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1668,9 +1654,8 @@ export class OsConfigServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.osconfig.v1beta.EffectiveGuestPolicy | EffectiveGuestPolicy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.osconfig.v1beta.EffectiveGuestPolicy|EffectiveGuestPolicy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/os_config_service.lookup_effective_guest_policy.js</caption>
    * region_tag:osconfig_v1beta_generated_OsConfigService_LookupEffectiveGuestPolicy_async
@@ -1685,7 +1670,7 @@ export class OsConfigServiceClient {
         | protos.google.cloud.osconfig.v1beta.ILookupEffectiveGuestPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   lookupEffectiveGuestPolicy(
@@ -1734,7 +1719,7 @@ export class OsConfigServiceClient {
         | protos.google.cloud.osconfig.v1beta.ILookupEffectiveGuestPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1779,14 +1764,13 @@ export class OsConfigServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.osconfig.v1beta.PatchJob | PatchJob}.
+   *   The first element of the array is Array of {@link protos.google.cloud.osconfig.v1beta.PatchJob|PatchJob}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listPatchJobsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listPatchJobs(
@@ -1796,7 +1780,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IPatchJob[],
       protos.google.cloud.osconfig.v1beta.IListPatchJobsRequest | null,
-      protos.google.cloud.osconfig.v1beta.IListPatchJobsResponse
+      protos.google.cloud.osconfig.v1beta.IListPatchJobsResponse,
     ]
   >;
   listPatchJobs(
@@ -1842,7 +1826,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IPatchJob[],
       protos.google.cloud.osconfig.v1beta.IListPatchJobsRequest | null,
-      protos.google.cloud.osconfig.v1beta.IListPatchJobsResponse
+      protos.google.cloud.osconfig.v1beta.IListPatchJobsResponse,
     ]
   > | void {
     request = request || {};
@@ -1882,13 +1866,12 @@ export class OsConfigServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.osconfig.v1beta.PatchJob | PatchJob} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.osconfig.v1beta.PatchJob|PatchJob} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listPatchJobsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listPatchJobsStream(
@@ -1933,12 +1916,11 @@ export class OsConfigServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.osconfig.v1beta.PatchJob | PatchJob}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.osconfig.v1beta.PatchJob|PatchJob}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/os_config_service.list_patch_jobs.js</caption>
    * region_tag:osconfig_v1beta_generated_OsConfigService_ListPatchJobs_async
@@ -1983,14 +1965,13 @@ export class OsConfigServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.osconfig.v1beta.PatchJobInstanceDetails | PatchJobInstanceDetails}.
+   *   The first element of the array is Array of {@link protos.google.cloud.osconfig.v1beta.PatchJobInstanceDetails|PatchJobInstanceDetails}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listPatchJobInstanceDetailsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listPatchJobInstanceDetails(
@@ -2000,7 +1981,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IPatchJobInstanceDetails[],
       protos.google.cloud.osconfig.v1beta.IListPatchJobInstanceDetailsRequest | null,
-      protos.google.cloud.osconfig.v1beta.IListPatchJobInstanceDetailsResponse
+      protos.google.cloud.osconfig.v1beta.IListPatchJobInstanceDetailsResponse,
     ]
   >;
   listPatchJobInstanceDetails(
@@ -2046,7 +2027,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IPatchJobInstanceDetails[],
       protos.google.cloud.osconfig.v1beta.IListPatchJobInstanceDetailsRequest | null,
-      protos.google.cloud.osconfig.v1beta.IListPatchJobInstanceDetailsResponse
+      protos.google.cloud.osconfig.v1beta.IListPatchJobInstanceDetailsResponse,
     ]
   > | void {
     request = request || {};
@@ -2090,13 +2071,12 @@ export class OsConfigServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.osconfig.v1beta.PatchJobInstanceDetails | PatchJobInstanceDetails} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.osconfig.v1beta.PatchJobInstanceDetails|PatchJobInstanceDetails} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listPatchJobInstanceDetailsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listPatchJobInstanceDetailsStream(
@@ -2141,12 +2121,11 @@ export class OsConfigServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.osconfig.v1beta.PatchJobInstanceDetails | PatchJobInstanceDetails}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.osconfig.v1beta.PatchJobInstanceDetails|PatchJobInstanceDetails}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/os_config_service.list_patch_job_instance_details.js</caption>
    * region_tag:osconfig_v1beta_generated_OsConfigService_ListPatchJobInstanceDetails_async
@@ -2187,14 +2166,13 @@ export class OsConfigServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.osconfig.v1beta.PatchDeployment | PatchDeployment}.
+   *   The first element of the array is Array of {@link protos.google.cloud.osconfig.v1beta.PatchDeployment|PatchDeployment}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listPatchDeploymentsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listPatchDeployments(
@@ -2204,7 +2182,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IPatchDeployment[],
       protos.google.cloud.osconfig.v1beta.IListPatchDeploymentsRequest | null,
-      protos.google.cloud.osconfig.v1beta.IListPatchDeploymentsResponse
+      protos.google.cloud.osconfig.v1beta.IListPatchDeploymentsResponse,
     ]
   >;
   listPatchDeployments(
@@ -2250,7 +2228,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IPatchDeployment[],
       protos.google.cloud.osconfig.v1beta.IListPatchDeploymentsRequest | null,
-      protos.google.cloud.osconfig.v1beta.IListPatchDeploymentsResponse
+      protos.google.cloud.osconfig.v1beta.IListPatchDeploymentsResponse,
     ]
   > | void {
     request = request || {};
@@ -2286,13 +2264,12 @@ export class OsConfigServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.osconfig.v1beta.PatchDeployment | PatchDeployment} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.osconfig.v1beta.PatchDeployment|PatchDeployment} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listPatchDeploymentsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listPatchDeploymentsStream(
@@ -2333,12 +2310,11 @@ export class OsConfigServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.osconfig.v1beta.PatchDeployment | PatchDeployment}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.osconfig.v1beta.PatchDeployment|PatchDeployment}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/os_config_service.list_patch_deployments.js</caption>
    * region_tag:osconfig_v1beta_generated_OsConfigService_ListPatchDeployments_async
@@ -2380,14 +2356,13 @@ export class OsConfigServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.osconfig.v1beta.GuestPolicy | GuestPolicy}.
+   *   The first element of the array is Array of {@link protos.google.cloud.osconfig.v1beta.GuestPolicy|GuestPolicy}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listGuestPoliciesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listGuestPolicies(
@@ -2397,7 +2372,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IGuestPolicy[],
       protos.google.cloud.osconfig.v1beta.IListGuestPoliciesRequest | null,
-      protos.google.cloud.osconfig.v1beta.IListGuestPoliciesResponse
+      protos.google.cloud.osconfig.v1beta.IListGuestPoliciesResponse,
     ]
   >;
   listGuestPolicies(
@@ -2443,7 +2418,7 @@ export class OsConfigServiceClient {
     [
       protos.google.cloud.osconfig.v1beta.IGuestPolicy[],
       protos.google.cloud.osconfig.v1beta.IListGuestPoliciesRequest | null,
-      protos.google.cloud.osconfig.v1beta.IListGuestPoliciesResponse
+      protos.google.cloud.osconfig.v1beta.IListGuestPoliciesResponse,
     ]
   > | void {
     request = request || {};
@@ -2480,13 +2455,12 @@ export class OsConfigServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.osconfig.v1beta.GuestPolicy | GuestPolicy} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.osconfig.v1beta.GuestPolicy|GuestPolicy} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listGuestPoliciesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listGuestPoliciesStream(
@@ -2528,12 +2502,11 @@ export class OsConfigServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.osconfig.v1beta.GuestPolicy | GuestPolicy}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.osconfig.v1beta.GuestPolicy|GuestPolicy}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/os_config_service.list_guest_policies.js</caption>
    * region_tag:osconfig_v1beta_generated_OsConfigService_ListGuestPolicies_async

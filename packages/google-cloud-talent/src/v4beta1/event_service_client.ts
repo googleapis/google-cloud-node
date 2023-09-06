@@ -88,8 +88,7 @@ export class EventServiceClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -97,7 +96,7 @@ export class EventServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new EventServiceClient({fallback: 'rest'}, gax);
+   *     const client = new EventServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -163,7 +162,7 @@ export class EventServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -354,9 +353,8 @@ export class EventServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.talent.v4beta1.ClientEvent | ClientEvent}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.talent.v4beta1.ClientEvent|ClientEvent}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v4beta1/event_service.create_client_event.js</caption>
    * region_tag:jobs_v4beta1_generated_EventService_CreateClientEvent_async
@@ -368,7 +366,7 @@ export class EventServiceClient {
     [
       protos.google.cloud.talent.v4beta1.IClientEvent,
       protos.google.cloud.talent.v4beta1.ICreateClientEventRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createClientEvent(
@@ -414,7 +412,7 @@ export class EventServiceClient {
     [
       protos.google.cloud.talent.v4beta1.IClientEvent,
       protos.google.cloud.talent.v4beta1.ICreateClientEventRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

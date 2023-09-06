@@ -42,7 +42,7 @@ function main(tensorboard, timeSeries) {
    *  from. Format:
    *  `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}/timeSeries/{time_series}`
    */
-  // const timeSeries = 'abc123'
+  // const timeSeries = ['abc','def']
 
   // Imports the Aiplatform library
   const {TensorboardServiceClient} = require('@google-cloud/aiplatform').v1beta1;

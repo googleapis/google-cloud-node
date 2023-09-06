@@ -87,8 +87,7 @@ export class PlacesClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -96,7 +95,7 @@ export class PlacesClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new PlacesClient({fallback: 'rest'}, gax);
+   *     const client = new PlacesClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -162,7 +161,7 @@ export class PlacesClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -380,9 +379,8 @@ export class PlacesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.maps.places.v1.SearchTextResponse | SearchTextResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.maps.places.v1.SearchTextResponse|SearchTextResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/places.search_text.js</caption>
    * region_tag:places_v1_generated_Places_SearchText_async
@@ -394,7 +392,7 @@ export class PlacesClient {
     [
       protos.google.maps.places.v1.ISearchTextResponse,
       protos.google.maps.places.v1.ISearchTextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   searchText(
@@ -432,7 +430,7 @@ export class PlacesClient {
     [
       protos.google.maps.places.v1.ISearchTextResponse,
       protos.google.maps.places.v1.ISearchTextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

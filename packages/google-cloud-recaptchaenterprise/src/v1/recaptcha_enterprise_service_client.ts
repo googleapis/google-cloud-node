@@ -90,8 +90,7 @@ export class RecaptchaEnterpriseServiceClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -99,7 +98,7 @@ export class RecaptchaEnterpriseServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new RecaptchaEnterpriseServiceClient({fallback: 'rest'}, gax);
+   *     const client = new RecaptchaEnterpriseServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -166,7 +165,7 @@ export class RecaptchaEnterpriseServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -386,9 +385,8 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.recaptchaenterprise.v1.Assessment | Assessment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.Assessment|Assessment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.create_assessment.js</caption>
    * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_CreateAssessment_async
@@ -403,7 +401,7 @@ export class RecaptchaEnterpriseServiceClient {
         | protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAssessment(
@@ -452,7 +450,7 @@ export class RecaptchaEnterpriseServiceClient {
         | protos.google.cloud.recaptchaenterprise.v1.ICreateAssessmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -501,9 +499,8 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.recaptchaenterprise.v1.AnnotateAssessmentResponse | AnnotateAssessmentResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentResponse|AnnotateAssessmentResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.annotate_assessment.js</caption>
    * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_AnnotateAssessment_async
@@ -518,7 +515,7 @@ export class RecaptchaEnterpriseServiceClient {
         | protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   annotateAssessment(
@@ -567,7 +564,7 @@ export class RecaptchaEnterpriseServiceClient {
         | protos.google.cloud.recaptchaenterprise.v1.IAnnotateAssessmentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -601,9 +598,8 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.recaptchaenterprise.v1.Key | Key}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.Key|Key}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.create_key.js</caption>
    * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_CreateKey_async
@@ -615,7 +611,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IKey,
       protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createKey(
@@ -661,7 +657,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IKey,
       protos.google.cloud.recaptchaenterprise.v1.ICreateKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -695,9 +691,8 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse | RetrieveLegacySecretKeyResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse|RetrieveLegacySecretKeyResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.retrieve_legacy_secret_key.js</caption>
    * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_RetrieveLegacySecretKey_async
@@ -712,7 +707,7 @@ export class RecaptchaEnterpriseServiceClient {
         | protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   retrieveLegacySecretKey(
@@ -761,7 +756,7 @@ export class RecaptchaEnterpriseServiceClient {
         | protos.google.cloud.recaptchaenterprise.v1.IRetrieveLegacySecretKeyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -797,9 +792,8 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.recaptchaenterprise.v1.Key | Key}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.Key|Key}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.get_key.js</caption>
    * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_GetKey_async
@@ -811,7 +805,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IKey,
       protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getKey(
@@ -857,7 +851,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IKey,
       protos.google.cloud.recaptchaenterprise.v1.IGetKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -891,9 +885,8 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.recaptchaenterprise.v1.Key | Key}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.Key|Key}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.update_key.js</caption>
    * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_UpdateKey_async
@@ -905,7 +898,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IKey,
       protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateKey(
@@ -951,7 +944,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IKey,
       protos.google.cloud.recaptchaenterprise.v1.IUpdateKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -983,9 +976,8 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.delete_key.js</caption>
    * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_DeleteKey_async
@@ -997,7 +989,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteKey(
@@ -1043,7 +1035,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.recaptchaenterprise.v1.IDeleteKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1089,9 +1081,8 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.recaptchaenterprise.v1.Key | Key}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.Key|Key}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.migrate_key.js</caption>
    * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_MigrateKey_async
@@ -1103,7 +1094,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IKey,
       protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   migrateKey(
@@ -1149,7 +1140,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IKey,
       protos.google.cloud.recaptchaenterprise.v1.IMigrateKeyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1182,9 +1173,8 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.recaptchaenterprise.v1.Metrics | Metrics}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.Metrics|Metrics}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.get_metrics.js</caption>
    * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_GetMetrics_async
@@ -1196,7 +1186,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IMetrics,
       protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getMetrics(
@@ -1242,7 +1232,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IMetrics,
       protos.google.cloud.recaptchaenterprise.v1.IGetMetricsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1281,14 +1271,13 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.recaptchaenterprise.v1.Key | Key}.
+   *   The first element of the array is Array of {@link protos.google.cloud.recaptchaenterprise.v1.Key|Key}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listKeysAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listKeys(
@@ -1298,7 +1287,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IKey[],
       protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest | null,
-      protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse
+      protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse,
     ]
   >;
   listKeys(
@@ -1344,7 +1333,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IKey[],
       protos.google.cloud.recaptchaenterprise.v1.IListKeysRequest | null,
-      protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse
+      protos.google.cloud.recaptchaenterprise.v1.IListKeysResponse,
     ]
   > | void {
     request = request || {};
@@ -1382,13 +1371,12 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.recaptchaenterprise.v1.Key | Key} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.recaptchaenterprise.v1.Key|Key} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listKeysAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listKeysStream(
@@ -1431,12 +1419,11 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.recaptchaenterprise.v1.Key | Key}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.recaptchaenterprise.v1.Key|Key}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.list_keys.js</caption>
    * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListKeys_async
@@ -1484,14 +1471,13 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.recaptchaenterprise.v1.RelatedAccountGroup | RelatedAccountGroup}.
+   *   The first element of the array is Array of {@link protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup|RelatedAccountGroup}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listRelatedAccountGroupsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listRelatedAccountGroups(
@@ -1501,7 +1487,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup[],
       protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest | null,
-      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse
+      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse,
     ]
   >;
   listRelatedAccountGroups(
@@ -1547,7 +1533,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroup[],
       protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsRequest | null,
-      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse
+      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupsResponse,
     ]
   > | void {
     request = request || {};
@@ -1594,13 +1580,12 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.recaptchaenterprise.v1.RelatedAccountGroup | RelatedAccountGroup} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup|RelatedAccountGroup} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listRelatedAccountGroupsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listRelatedAccountGroupsStream(
@@ -1648,12 +1633,11 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.recaptchaenterprise.v1.RelatedAccountGroup | RelatedAccountGroup}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroup|RelatedAccountGroup}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.list_related_account_groups.js</caption>
    * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListRelatedAccountGroups_async
@@ -1701,14 +1685,13 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership | RelatedAccountGroupMembership}.
+   *   The first element of the array is Array of {@link protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership|RelatedAccountGroupMembership}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listRelatedAccountGroupMembershipsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listRelatedAccountGroupMemberships(
@@ -1718,7 +1701,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[],
       protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest | null,
-      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse
+      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse,
     ]
   >;
   listRelatedAccountGroupMemberships(
@@ -1764,7 +1747,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[],
       protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsRequest | null,
-      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse
+      protos.google.cloud.recaptchaenterprise.v1.IListRelatedAccountGroupMembershipsResponse,
     ]
   > | void {
     request = request || {};
@@ -1811,13 +1794,12 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership | RelatedAccountGroupMembership} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership|RelatedAccountGroupMembership} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listRelatedAccountGroupMembershipsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listRelatedAccountGroupMembershipsStream(
@@ -1866,12 +1848,11 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership | RelatedAccountGroupMembership}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership|RelatedAccountGroupMembership}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.list_related_account_group_memberships.js</caption>
    * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListRelatedAccountGroupMemberships_async
@@ -1926,14 +1907,13 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership | RelatedAccountGroupMembership}.
+   *   The first element of the array is Array of {@link protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership|RelatedAccountGroupMembership}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `searchRelatedAccountGroupMembershipsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   searchRelatedAccountGroupMemberships(
@@ -1943,7 +1923,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[],
       protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest | null,
-      protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse
+      protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse,
     ]
   >;
   searchRelatedAccountGroupMemberships(
@@ -1989,7 +1969,7 @@ export class RecaptchaEnterpriseServiceClient {
     [
       protos.google.cloud.recaptchaenterprise.v1.IRelatedAccountGroupMembership[],
       protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsRequest | null,
-      protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse
+      protos.google.cloud.recaptchaenterprise.v1.ISearchRelatedAccountGroupMembershipsResponse,
     ]
   > | void {
     request = request || {};
@@ -2042,13 +2022,12 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership | RelatedAccountGroupMembership} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership|RelatedAccountGroupMembership} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `searchRelatedAccountGroupMembershipsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   searchRelatedAccountGroupMembershipsStream(
@@ -2103,12 +2082,11 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership | RelatedAccountGroupMembership}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership|RelatedAccountGroupMembership}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.search_related_account_group_memberships.js</caption>
    * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_SearchRelatedAccountGroupMemberships_async

@@ -4,6 +4,29 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/vision-v4.0.0...vision-v4.0.1) (2023-08-09)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @google-cloud/promisify to v4 ([#4520](https://github.com/googleapis/google-cloud-node/issues/4520)) ([e0e9343](https://github.com/googleapis/google-cloud-node/commit/e0e93433ca78c88f232498fec56d773c2550658d))
+
+## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/vision-v3.1.4...vision-v4.0.0) (2023-08-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))
+
+### Bug Fixes
+
+* [Many APIs] fix typings for IAM methods ([#4464](https://github.com/googleapis/google-cloud-node/issues/4464)) ([c909357](https://github.com/googleapis/google-cloud-node/commit/c90935765ceee0eea6b9ce21a151707df142cf7d))
+
+
+### Miscellaneous Chores
+
+* Migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443)) ([2260f12](https://github.com/googleapis/google-cloud-node/commit/2260f12543d171bda95345e53475f5f0fdc45770))
+
 ## [3.1.4](https://github.com/googleapis/google-cloud-node/compare/vision-v3.1.3...vision-v3.1.4) (2023-06-28)
 
 

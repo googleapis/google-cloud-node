@@ -4,6 +4,30 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [5.0.1](https://github.com/googleapis/google-cloud-node/compare/asset-v5.0.0...asset-v5.0.1) (2023-08-09)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @google-cloud/compute to v4 ([#4511](https://github.com/googleapis/google-cloud-node/issues/4511)) ([a964b5a](https://github.com/googleapis/google-cloud-node/commit/a964b5aad6bd1ad1cff67c1594ff424553a2e3a3))
+
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/asset-v4.6.4...asset-v5.0.0) (2023-08-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))
+
+### Bug Fixes
+
+* [Many APIs] fix typings for IAM methods ([#4459](https://github.com/googleapis/google-cloud-node/issues/4459)) ([1d510be](https://github.com/googleapis/google-cloud-node/commit/1d510bef5bd7b0ac3552b4729ef3d9ebe1ac3dc4))
+* **deps:** Update dependency @google-cloud/bigquery to v7 ([#4478](https://github.com/googleapis/google-cloud-node/issues/4478)) ([49b51bd](https://github.com/googleapis/google-cloud-node/commit/49b51bdeef5c30a38ff37f68c3b3961353624a82))
+
+
+### Miscellaneous Chores
+
+* Migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443)) ([2260f12](https://github.com/googleapis/google-cloud-node/commit/2260f12543d171bda95345e53475f5f0fdc45770))
+
 ## [4.6.4](https://github.com/googleapis/google-cloud-node/compare/asset-v4.6.3...asset-v4.6.4) (2023-06-28)
 
 

@@ -39,7 +39,7 @@ function main(parent, intents) {
    *  Required. The collection of intents to delete. Only intent `name` must be
    *  filled in.
    */
-  // const intents = 1234
+  // const intents = [1,2,3,4]
 
   // Imports the Dialogflow library
   const {IntentsClient} = require('@google-cloud/dialogflow').v2beta1;

@@ -25,6 +25,7 @@ function main() {
   const documentSchemaServiceClient =
     new contentwarehouse.DocumentSchemaServiceClient();
   const documentServiceClient = new contentwarehouse.DocumentServiceClient();
+  const pipelineServiceClient = new contentwarehouse.PipelineServiceClient();
   const ruleSetServiceClient = new contentwarehouse.RuleSetServiceClient();
   const synonymSetServiceClient =
     new contentwarehouse.SynonymSetServiceClient();

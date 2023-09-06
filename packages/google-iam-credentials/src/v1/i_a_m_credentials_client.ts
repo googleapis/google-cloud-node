@@ -95,8 +95,7 @@ export class IAMCredentialsClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -104,7 +103,7 @@ export class IAMCredentialsClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new IAMCredentialsClient({fallback: 'rest'}, gax);
+   *     const client = new IAMCredentialsClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -170,7 +169,7 @@ export class IAMCredentialsClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -350,9 +349,8 @@ export class IAMCredentialsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.credentials.v1.GenerateAccessTokenResponse | GenerateAccessTokenResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.iam.credentials.v1.GenerateAccessTokenResponse|GenerateAccessTokenResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/i_a_m_credentials.generate_access_token.js</caption>
    * region_tag:iamcredentials_v1_generated_IAMCredentials_GenerateAccessToken_async
@@ -364,7 +362,7 @@ export class IAMCredentialsClient {
     [
       protos.google.iam.credentials.v1.IGenerateAccessTokenResponse,
       protos.google.iam.credentials.v1.IGenerateAccessTokenRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   generateAccessToken(
@@ -410,7 +408,7 @@ export class IAMCredentialsClient {
     [
       protos.google.iam.credentials.v1.IGenerateAccessTokenResponse,
       protos.google.iam.credentials.v1.IGenerateAccessTokenRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -461,9 +459,8 @@ export class IAMCredentialsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.credentials.v1.GenerateIdTokenResponse | GenerateIdTokenResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.iam.credentials.v1.GenerateIdTokenResponse|GenerateIdTokenResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/i_a_m_credentials.generate_id_token.js</caption>
    * region_tag:iamcredentials_v1_generated_IAMCredentials_GenerateIdToken_async
@@ -475,7 +472,7 @@ export class IAMCredentialsClient {
     [
       protos.google.iam.credentials.v1.IGenerateIdTokenResponse,
       protos.google.iam.credentials.v1.IGenerateIdTokenRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   generateIdToken(
@@ -521,7 +518,7 @@ export class IAMCredentialsClient {
     [
       protos.google.iam.credentials.v1.IGenerateIdTokenResponse,
       protos.google.iam.credentials.v1.IGenerateIdTokenRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -568,9 +565,8 @@ export class IAMCredentialsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.credentials.v1.SignBlobResponse | SignBlobResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.iam.credentials.v1.SignBlobResponse|SignBlobResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/i_a_m_credentials.sign_blob.js</caption>
    * region_tag:iamcredentials_v1_generated_IAMCredentials_SignBlob_async
@@ -582,7 +578,7 @@ export class IAMCredentialsClient {
     [
       protos.google.iam.credentials.v1.ISignBlobResponse,
       protos.google.iam.credentials.v1.ISignBlobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   signBlob(
@@ -620,7 +616,7 @@ export class IAMCredentialsClient {
     [
       protos.google.iam.credentials.v1.ISignBlobResponse,
       protos.google.iam.credentials.v1.ISignBlobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -667,9 +663,8 @@ export class IAMCredentialsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.credentials.v1.SignJwtResponse | SignJwtResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.iam.credentials.v1.SignJwtResponse|SignJwtResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/i_a_m_credentials.sign_jwt.js</caption>
    * region_tag:iamcredentials_v1_generated_IAMCredentials_SignJwt_async
@@ -681,7 +676,7 @@ export class IAMCredentialsClient {
     [
       protos.google.iam.credentials.v1.ISignJwtResponse,
       protos.google.iam.credentials.v1.ISignJwtRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   signJwt(
@@ -719,7 +714,7 @@ export class IAMCredentialsClient {
     [
       protos.google.iam.credentials.v1.ISignJwtResponse,
       protos.google.iam.credentials.v1.ISignJwtRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

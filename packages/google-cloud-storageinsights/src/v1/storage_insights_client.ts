@@ -93,8 +93,7 @@ export class StorageInsightsClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -102,7 +101,7 @@ export class StorageInsightsClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new StorageInsightsClient({fallback: 'rest'}, gax);
+   *     const client = new StorageInsightsClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -172,7 +171,7 @@ export class StorageInsightsClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -365,9 +364,8 @@ export class StorageInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.storageinsights.v1.ReportConfig | ReportConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.storageinsights.v1.ReportConfig|ReportConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/storage_insights.get_report_config.js</caption>
    * region_tag:storageinsights_v1_generated_StorageInsights_GetReportConfig_async
@@ -382,7 +380,7 @@ export class StorageInsightsClient {
         | protos.google.cloud.storageinsights.v1.IGetReportConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getReportConfig(
@@ -431,7 +429,7 @@ export class StorageInsightsClient {
         | protos.google.cloud.storageinsights.v1.IGetReportConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -478,9 +476,8 @@ export class StorageInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.storageinsights.v1.ReportConfig | ReportConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.storageinsights.v1.ReportConfig|ReportConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/storage_insights.create_report_config.js</caption>
    * region_tag:storageinsights_v1_generated_StorageInsights_CreateReportConfig_async
@@ -495,7 +492,7 @@ export class StorageInsightsClient {
         | protos.google.cloud.storageinsights.v1.ICreateReportConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createReportConfig(
@@ -544,7 +541,7 @@ export class StorageInsightsClient {
         | protos.google.cloud.storageinsights.v1.ICreateReportConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -595,9 +592,8 @@ export class StorageInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.storageinsights.v1.ReportConfig | ReportConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.storageinsights.v1.ReportConfig|ReportConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/storage_insights.update_report_config.js</caption>
    * region_tag:storageinsights_v1_generated_StorageInsights_UpdateReportConfig_async
@@ -612,7 +608,7 @@ export class StorageInsightsClient {
         | protos.google.cloud.storageinsights.v1.IUpdateReportConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateReportConfig(
@@ -661,7 +657,7 @@ export class StorageInsightsClient {
         | protos.google.cloud.storageinsights.v1.IUpdateReportConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -708,9 +704,8 @@ export class StorageInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/storage_insights.delete_report_config.js</caption>
    * region_tag:storageinsights_v1_generated_StorageInsights_DeleteReportConfig_async
@@ -725,7 +720,7 @@ export class StorageInsightsClient {
         | protos.google.cloud.storageinsights.v1.IDeleteReportConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteReportConfig(
@@ -774,7 +769,7 @@ export class StorageInsightsClient {
         | protos.google.cloud.storageinsights.v1.IDeleteReportConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -805,9 +800,8 @@ export class StorageInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.storageinsights.v1.ReportDetail | ReportDetail}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.storageinsights.v1.ReportDetail|ReportDetail}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/storage_insights.get_report_detail.js</caption>
    * region_tag:storageinsights_v1_generated_StorageInsights_GetReportDetail_async
@@ -822,7 +816,7 @@ export class StorageInsightsClient {
         | protos.google.cloud.storageinsights.v1.IGetReportDetailRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getReportDetail(
@@ -871,7 +865,7 @@ export class StorageInsightsClient {
         | protos.google.cloud.storageinsights.v1.IGetReportDetailRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -912,14 +906,13 @@ export class StorageInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.storageinsights.v1.ReportConfig | ReportConfig}.
+   *   The first element of the array is Array of {@link protos.google.cloud.storageinsights.v1.ReportConfig|ReportConfig}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listReportConfigsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listReportConfigs(
@@ -929,7 +922,7 @@ export class StorageInsightsClient {
     [
       protos.google.cloud.storageinsights.v1.IReportConfig[],
       protos.google.cloud.storageinsights.v1.IListReportConfigsRequest | null,
-      protos.google.cloud.storageinsights.v1.IListReportConfigsResponse
+      protos.google.cloud.storageinsights.v1.IListReportConfigsResponse,
     ]
   >;
   listReportConfigs(
@@ -975,7 +968,7 @@ export class StorageInsightsClient {
     [
       protos.google.cloud.storageinsights.v1.IReportConfig[],
       protos.google.cloud.storageinsights.v1.IListReportConfigsRequest | null,
-      protos.google.cloud.storageinsights.v1.IListReportConfigsResponse
+      protos.google.cloud.storageinsights.v1.IListReportConfigsResponse,
     ]
   > | void {
     request = request || {};
@@ -1015,13 +1008,12 @@ export class StorageInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.storageinsights.v1.ReportConfig | ReportConfig} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.storageinsights.v1.ReportConfig|ReportConfig} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listReportConfigsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listReportConfigsStream(
@@ -1066,12 +1058,11 @@ export class StorageInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.storageinsights.v1.ReportConfig | ReportConfig}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.storageinsights.v1.ReportConfig|ReportConfig}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/storage_insights.list_report_configs.js</caption>
    * region_tag:storageinsights_v1_generated_StorageInsights_ListReportConfigs_async
@@ -1116,14 +1107,13 @@ export class StorageInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.storageinsights.v1.ReportDetail | ReportDetail}.
+   *   The first element of the array is Array of {@link protos.google.cloud.storageinsights.v1.ReportDetail|ReportDetail}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listReportDetailsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listReportDetails(
@@ -1133,7 +1123,7 @@ export class StorageInsightsClient {
     [
       protos.google.cloud.storageinsights.v1.IReportDetail[],
       protos.google.cloud.storageinsights.v1.IListReportDetailsRequest | null,
-      protos.google.cloud.storageinsights.v1.IListReportDetailsResponse
+      protos.google.cloud.storageinsights.v1.IListReportDetailsResponse,
     ]
   >;
   listReportDetails(
@@ -1179,7 +1169,7 @@ export class StorageInsightsClient {
     [
       protos.google.cloud.storageinsights.v1.IReportDetail[],
       protos.google.cloud.storageinsights.v1.IListReportDetailsRequest | null,
-      protos.google.cloud.storageinsights.v1.IListReportDetailsResponse
+      protos.google.cloud.storageinsights.v1.IListReportDetailsResponse,
     ]
   > | void {
     request = request || {};
@@ -1219,13 +1209,12 @@ export class StorageInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.storageinsights.v1.ReportDetail | ReportDetail} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.storageinsights.v1.ReportDetail|ReportDetail} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listReportDetailsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listReportDetailsStream(
@@ -1270,12 +1259,11 @@ export class StorageInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.storageinsights.v1.ReportDetail | ReportDetail}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.storageinsights.v1.ReportDetail|ReportDetail}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/storage_insights.list_report_details.js</caption>
    * region_tag:storageinsights_v1_generated_StorageInsights_ListReportDetails_async
@@ -1312,8 +1300,7 @@ export class StorageInsightsClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -1359,12 +1346,11 @@ export class StorageInsightsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

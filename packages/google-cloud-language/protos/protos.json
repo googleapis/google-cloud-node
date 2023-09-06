@@ -1910,6 +1910,519 @@
                       }
                     }
                   }
+                },
+                "v2": {
+                  "options": {
+                    "go_package": "cloud.google.com/go/language/apiv2/languagepb;languagepb",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "LanguageServiceProto",
+                    "java_package": "com.google.cloud.language.v2"
+                  },
+                  "nested": {
+                    "LanguageService": {
+                      "options": {
+                        "(google.api.default_host)": "language.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-language,https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "AnalyzeSentiment": {
+                          "requestType": "AnalyzeSentimentRequest",
+                          "responseType": "AnalyzeSentimentResponse",
+                          "options": {
+                            "(google.api.http).post": "/v2/documents:analyzeSentiment",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "document"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/documents:analyzeSentiment",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "document,encoding_type"
+                            },
+                            {
+                              "(google.api.method_signature)": "document"
+                            }
+                          ]
+                        },
+                        "AnalyzeEntities": {
+                          "requestType": "AnalyzeEntitiesRequest",
+                          "responseType": "AnalyzeEntitiesResponse",
+                          "options": {
+                            "(google.api.http).post": "/v2/documents:analyzeEntities",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "document"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/documents:analyzeEntities",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "document,encoding_type"
+                            },
+                            {
+                              "(google.api.method_signature)": "document"
+                            }
+                          ]
+                        },
+                        "ClassifyText": {
+                          "requestType": "ClassifyTextRequest",
+                          "responseType": "ClassifyTextResponse",
+                          "options": {
+                            "(google.api.http).post": "/v2/documents:classifyText",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "document"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/documents:classifyText",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "document"
+                            }
+                          ]
+                        },
+                        "ModerateText": {
+                          "requestType": "ModerateTextRequest",
+                          "responseType": "ModerateTextResponse",
+                          "options": {
+                            "(google.api.http).post": "/v2/documents:moderateText",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "document"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/documents:moderateText",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "document"
+                            }
+                          ]
+                        },
+                        "AnnotateText": {
+                          "requestType": "AnnotateTextRequest",
+                          "responseType": "AnnotateTextResponse",
+                          "options": {
+                            "(google.api.http).post": "/v2/documents:annotateText",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "document,features"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/documents:annotateText",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "document,features,encoding_type"
+                            },
+                            {
+                              "(google.api.method_signature)": "document,features"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "Document": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "content",
+                            "gcsContentUri"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "type": {
+                          "type": "Type",
+                          "id": 1
+                        },
+                        "content": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "gcsContentUri": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "PLAIN_TEXT": 1,
+                            "HTML": 2
+                          }
+                        }
+                      }
+                    },
+                    "Sentence": {
+                      "fields": {
+                        "text": {
+                          "type": "TextSpan",
+                          "id": 1
+                        },
+                        "sentiment": {
+                          "type": "Sentiment",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "EncodingType": {
+                      "values": {
+                        "NONE": 0,
+                        "UTF8": 1,
+                        "UTF16": 2,
+                        "UTF32": 3
+                      }
+                    },
+                    "Entity": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "type": {
+                          "type": "Type",
+                          "id": 2
+                        },
+                        "metadata": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 3
+                        },
+                        "mentions": {
+                          "rule": "repeated",
+                          "type": "EntityMention",
+                          "id": 5
+                        },
+                        "sentiment": {
+                          "type": "Sentiment",
+                          "id": 6
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "UNKNOWN": 0,
+                            "PERSON": 1,
+                            "LOCATION": 2,
+                            "ORGANIZATION": 3,
+                            "EVENT": 4,
+                            "WORK_OF_ART": 5,
+                            "CONSUMER_GOOD": 6,
+                            "OTHER": 7,
+                            "PHONE_NUMBER": 9,
+                            "ADDRESS": 10,
+                            "DATE": 11,
+                            "NUMBER": 12,
+                            "PRICE": 13
+                          }
+                        }
+                      }
+                    },
+                    "Sentiment": {
+                      "fields": {
+                        "magnitude": {
+                          "type": "float",
+                          "id": 1
+                        },
+                        "score": {
+                          "type": "float",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "EntityMention": {
+                      "fields": {
+                        "text": {
+                          "type": "TextSpan",
+                          "id": 1
+                        },
+                        "type": {
+                          "type": "Type",
+                          "id": 2
+                        },
+                        "sentiment": {
+                          "type": "Sentiment",
+                          "id": 3
+                        },
+                        "probability": {
+                          "type": "float",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNKNOWN": 0,
+                            "PROPER": 1,
+                            "COMMON": 2
+                          }
+                        }
+                      }
+                    },
+                    "TextSpan": {
+                      "fields": {
+                        "content": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "beginOffset": {
+                          "type": "int32",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ClassificationCategory": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "confidence": {
+                          "type": "float",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "AnalyzeSentimentRequest": {
+                      "fields": {
+                        "document": {
+                          "type": "Document",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "encodingType": {
+                          "type": "EncodingType",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "AnalyzeSentimentResponse": {
+                      "fields": {
+                        "documentSentiment": {
+                          "type": "Sentiment",
+                          "id": 1
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "sentences": {
+                          "rule": "repeated",
+                          "type": "Sentence",
+                          "id": 3
+                        },
+                        "languageSupported": {
+                          "type": "bool",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "AnalyzeEntitiesRequest": {
+                      "fields": {
+                        "document": {
+                          "type": "Document",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "encodingType": {
+                          "type": "EncodingType",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "AnalyzeEntitiesResponse": {
+                      "fields": {
+                        "entities": {
+                          "rule": "repeated",
+                          "type": "Entity",
+                          "id": 1
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "languageSupported": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ClassifyTextRequest": {
+                      "fields": {
+                        "document": {
+                          "type": "Document",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ClassifyTextResponse": {
+                      "fields": {
+                        "categories": {
+                          "rule": "repeated",
+                          "type": "ClassificationCategory",
+                          "id": 1
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "languageSupported": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ModerateTextRequest": {
+                      "fields": {
+                        "document": {
+                          "type": "Document",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ModerateTextResponse": {
+                      "fields": {
+                        "moderationCategories": {
+                          "rule": "repeated",
+                          "type": "ClassificationCategory",
+                          "id": 1
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "languageSupported": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "AnnotateTextRequest": {
+                      "fields": {
+                        "document": {
+                          "type": "Document",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "features": {
+                          "type": "Features",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "encodingType": {
+                          "type": "EncodingType",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "Features": {
+                          "fields": {
+                            "extractEntities": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "extractDocumentSentiment": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "classifyText": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "moderateText": {
+                              "type": "bool",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "AnnotateTextResponse": {
+                      "fields": {
+                        "sentences": {
+                          "rule": "repeated",
+                          "type": "Sentence",
+                          "id": 1
+                        },
+                        "entities": {
+                          "rule": "repeated",
+                          "type": "Entity",
+                          "id": 2
+                        },
+                        "documentSentiment": {
+                          "type": "Sentiment",
+                          "id": 3
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "categories": {
+                          "rule": "repeated",
+                          "type": "ClassificationCategory",
+                          "id": 5
+                        },
+                        "moderationCategories": {
+                          "rule": "repeated",
+                          "type": "ClassificationCategory",
+                          "id": 6
+                        },
+                        "languageSupported": {
+                          "type": "bool",
+                          "id": 7
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -2027,6 +2540,248 @@
               "type": "string",
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
+            },
+            "CommonLanguageSettings": {
+              "fields": {
+                "referenceDocsUri": {
+                  "type": "string",
+                  "id": 1,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
+                "destinations": {
+                  "rule": "repeated",
+                  "type": "ClientLibraryDestination",
+                  "id": 2
+                }
+              }
+            },
+            "ClientLibrarySettings": {
+              "fields": {
+                "version": {
+                  "type": "string",
+                  "id": 1
+                },
+                "launchStage": {
+                  "type": "LaunchStage",
+                  "id": 2
+                },
+                "restNumericEnums": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "javaSettings": {
+                  "type": "JavaSettings",
+                  "id": 21
+                },
+                "cppSettings": {
+                  "type": "CppSettings",
+                  "id": 22
+                },
+                "phpSettings": {
+                  "type": "PhpSettings",
+                  "id": 23
+                },
+                "pythonSettings": {
+                  "type": "PythonSettings",
+                  "id": 24
+                },
+                "nodeSettings": {
+                  "type": "NodeSettings",
+                  "id": 25
+                },
+                "dotnetSettings": {
+                  "type": "DotnetSettings",
+                  "id": 26
+                },
+                "rubySettings": {
+                  "type": "RubySettings",
+                  "id": 27
+                },
+                "goSettings": {
+                  "type": "GoSettings",
+                  "id": 28
+                }
+              }
+            },
+            "Publishing": {
+              "fields": {
+                "methodSettings": {
+                  "rule": "repeated",
+                  "type": "MethodSettings",
+                  "id": 2
+                },
+                "newIssueUri": {
+                  "type": "string",
+                  "id": 101
+                },
+                "documentationUri": {
+                  "type": "string",
+                  "id": 102
+                },
+                "apiShortName": {
+                  "type": "string",
+                  "id": 103
+                },
+                "githubLabel": {
+                  "type": "string",
+                  "id": 104
+                },
+                "codeownerGithubTeams": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 105
+                },
+                "docTagPrefix": {
+                  "type": "string",
+                  "id": 106
+                },
+                "organization": {
+                  "type": "ClientLibraryOrganization",
+                  "id": 107
+                },
+                "librarySettings": {
+                  "rule": "repeated",
+                  "type": "ClientLibrarySettings",
+                  "id": 109
+                }
+              }
+            },
+            "JavaSettings": {
+              "fields": {
+                "libraryPackage": {
+                  "type": "string",
+                  "id": 1
+                },
+                "serviceClassNames": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
+                },
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 3
+                }
+              }
+            },
+            "CppSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "PhpSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "PythonSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "NodeSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "DotnetSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "RubySettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "GoSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "MethodSettings": {
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "longRunning": {
+                  "type": "LongRunning",
+                  "id": 2
+                }
+              },
+              "nested": {
+                "LongRunning": {
+                  "fields": {
+                    "initialPollDelay": {
+                      "type": "google.protobuf.Duration",
+                      "id": 1
+                    },
+                    "pollDelayMultiplier": {
+                      "type": "float",
+                      "id": 2
+                    },
+                    "maxPollDelay": {
+                      "type": "google.protobuf.Duration",
+                      "id": 3
+                    },
+                    "totalPollTimeout": {
+                      "type": "google.protobuf.Duration",
+                      "id": 4
+                    }
+                  }
+                }
+              }
+            },
+            "ClientLibraryOrganization": {
+              "values": {
+                "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED": 0,
+                "CLOUD": 1,
+                "ADS": 2,
+                "PHOTOS": 3,
+                "STREET_VIEW": 4
+              }
+            },
+            "ClientLibraryDestination": {
+              "values": {
+                "CLIENT_LIBRARY_DESTINATION_UNSPECIFIED": 0,
+                "GITHUB": 10,
+                "PACKAGE_MANAGER": 20
+              }
+            },
+            "LaunchStage": {
+              "values": {
+                "LAUNCH_STAGE_UNSPECIFIED": 0,
+                "UNIMPLEMENTED": 6,
+                "PRELAUNCH": 7,
+                "EARLY_ACCESS": 1,
+                "ALPHA": 2,
+                "BETA": 3,
+                "GA": 4,
+                "DEPRECATED": 5
+              }
             },
             "fieldBehavior": {
               "rule": "repeated",
@@ -2600,6 +3355,13 @@
                   "type": "bool",
                   "id": 7
                 },
+                "deprecatedLegacyJsonFieldConflicts": {
+                  "type": "bool",
+                  "id": 11,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -2683,6 +3445,21 @@
                     "default": false
                   }
                 },
+                "debugRedact": {
+                  "type": "bool",
+                  "id": 16,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "retention": {
+                  "type": "OptionRetention",
+                  "id": 17
+                },
+                "target": {
+                  "type": "OptionTargetType",
+                  "id": 18
+                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -2715,6 +3492,27 @@
                     "JS_STRING": 1,
                     "JS_NUMBER": 2
                   }
+                },
+                "OptionRetention": {
+                  "values": {
+                    "RETENTION_UNKNOWN": 0,
+                    "RETENTION_RUNTIME": 1,
+                    "RETENTION_SOURCE": 2
+                  }
+                },
+                "OptionTargetType": {
+                  "values": {
+                    "TARGET_TYPE_UNKNOWN": 0,
+                    "TARGET_TYPE_FILE": 1,
+                    "TARGET_TYPE_EXTENSION_RANGE": 2,
+                    "TARGET_TYPE_MESSAGE": 3,
+                    "TARGET_TYPE_FIELD": 4,
+                    "TARGET_TYPE_ONEOF": 5,
+                    "TARGET_TYPE_ENUM": 6,
+                    "TARGET_TYPE_ENUM_ENTRY": 7,
+                    "TARGET_TYPE_SERVICE": 8,
+                    "TARGET_TYPE_METHOD": 9
+                  }
                 }
               }
             },
@@ -2744,6 +3542,13 @@
                   "id": 3,
                   "options": {
                     "default": false
+                  }
+                },
+                "deprecatedLegacyJsonFieldConflicts": {
+                  "type": "bool",
+                  "id": 6,
+                  "options": {
+                    "deprecated": true
                   }
                 },
                 "uninterpretedOption": {
@@ -2976,6 +3781,18 @@
                       }
                     }
                   }
+                }
+              }
+            },
+            "Duration": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
                 }
               }
             }

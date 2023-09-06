@@ -98,8 +98,7 @@ export class TpuClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -107,7 +106,7 @@ export class TpuClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new TpuClient({fallback: 'rest'}, gax);
+   *     const client = new TpuClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -177,7 +176,7 @@ export class TpuClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -244,7 +243,7 @@ export class TpuClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
@@ -318,6 +317,12 @@ export class TpuClient {
     const deleteQueuedResourceMetadata = protoFilesRoot.lookup(
       '.google.cloud.tpu.v2alpha1.OperationMetadata'
     ) as gax.protobuf.Type;
+    const resetQueuedResourceResponse = protoFilesRoot.lookup(
+      '.google.cloud.tpu.v2alpha1.QueuedResource'
+    ) as gax.protobuf.Type;
+    const resetQueuedResourceMetadata = protoFilesRoot.lookup(
+      '.google.cloud.tpu.v2alpha1.OperationMetadata'
+    ) as gax.protobuf.Type;
     const simulateMaintenanceEventResponse = protoFilesRoot.lookup(
       '.google.cloud.tpu.v2alpha1.Node'
     ) as gax.protobuf.Type;
@@ -360,6 +365,11 @@ export class TpuClient {
         this.operationsClient,
         deleteQueuedResourceResponse.decode.bind(deleteQueuedResourceResponse),
         deleteQueuedResourceMetadata.decode.bind(deleteQueuedResourceMetadata)
+      ),
+      resetQueuedResource: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        resetQueuedResourceResponse.decode.bind(resetQueuedResourceResponse),
+        resetQueuedResourceMetadata.decode.bind(resetQueuedResourceMetadata)
       ),
       simulateMaintenanceEvent: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -433,6 +443,7 @@ export class TpuClient {
       'getQueuedResource',
       'createQueuedResource',
       'deleteQueuedResource',
+      'resetQueuedResource',
       'generateServiceIdentity',
       'listAcceleratorTypes',
       'getAcceleratorType',
@@ -536,9 +547,8 @@ export class TpuClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.tpu.v2alpha1.Node | Node}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.tpu.v2alpha1.Node|Node}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha1/tpu.get_node.js</caption>
    * region_tag:tpu_v2alpha1_generated_Tpu_GetNode_async
@@ -550,7 +560,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.INode,
       protos.google.cloud.tpu.v2alpha1.IGetNodeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getNode(
@@ -588,7 +598,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.INode,
       protos.google.cloud.tpu.v2alpha1.IGetNodeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -619,9 +629,8 @@ export class TpuClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.tpu.v2alpha1.QueuedResource | QueuedResource}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.tpu.v2alpha1.QueuedResource|QueuedResource}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha1/tpu.get_queued_resource.js</caption>
    * region_tag:tpu_v2alpha1_generated_Tpu_GetQueuedResource_async
@@ -633,7 +642,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.IQueuedResource,
       protos.google.cloud.tpu.v2alpha1.IGetQueuedResourceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getQueuedResource(
@@ -679,7 +688,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.IQueuedResource,
       protos.google.cloud.tpu.v2alpha1.IGetQueuedResourceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -710,9 +719,8 @@ export class TpuClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.tpu.v2alpha1.GenerateServiceIdentityResponse | GenerateServiceIdentityResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.tpu.v2alpha1.GenerateServiceIdentityResponse|GenerateServiceIdentityResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha1/tpu.generate_service_identity.js</caption>
    * region_tag:tpu_v2alpha1_generated_Tpu_GenerateServiceIdentity_async
@@ -727,7 +735,7 @@ export class TpuClient {
         | protos.google.cloud.tpu.v2alpha1.IGenerateServiceIdentityRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   generateServiceIdentity(
@@ -776,7 +784,7 @@ export class TpuClient {
         | protos.google.cloud.tpu.v2alpha1.IGenerateServiceIdentityRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -811,9 +819,8 @@ export class TpuClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.tpu.v2alpha1.AcceleratorType | AcceleratorType}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.tpu.v2alpha1.AcceleratorType|AcceleratorType}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha1/tpu.get_accelerator_type.js</caption>
    * region_tag:tpu_v2alpha1_generated_Tpu_GetAcceleratorType_async
@@ -825,7 +832,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.IAcceleratorType,
       protos.google.cloud.tpu.v2alpha1.IGetAcceleratorTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAcceleratorType(
@@ -871,7 +878,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.IAcceleratorType,
       protos.google.cloud.tpu.v2alpha1.IGetAcceleratorTypeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -902,9 +909,8 @@ export class TpuClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.tpu.v2alpha1.RuntimeVersion | RuntimeVersion}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.tpu.v2alpha1.RuntimeVersion|RuntimeVersion}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha1/tpu.get_runtime_version.js</caption>
    * region_tag:tpu_v2alpha1_generated_Tpu_GetRuntimeVersion_async
@@ -916,7 +922,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.IRuntimeVersion,
       protos.google.cloud.tpu.v2alpha1.IGetRuntimeVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRuntimeVersion(
@@ -962,7 +968,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.IRuntimeVersion,
       protos.google.cloud.tpu.v2alpha1.IGetRuntimeVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -998,9 +1004,8 @@ export class TpuClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.tpu.v2alpha1.GetGuestAttributesResponse | GetGuestAttributesResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.tpu.v2alpha1.GetGuestAttributesResponse|GetGuestAttributesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha1/tpu.get_guest_attributes.js</caption>
    * region_tag:tpu_v2alpha1_generated_Tpu_GetGuestAttributes_async
@@ -1012,7 +1017,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.IGetGuestAttributesResponse,
       protos.google.cloud.tpu.v2alpha1.IGetGuestAttributesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getGuestAttributes(
@@ -1058,7 +1063,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.IGetGuestAttributesResponse,
       protos.google.cloud.tpu.v2alpha1.IGetGuestAttributesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1099,8 +1104,7 @@ export class TpuClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha1/tpu.create_node.js</caption>
    * region_tag:tpu_v2alpha1_generated_Tpu_CreateNode_async
@@ -1115,7 +1119,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createNode(
@@ -1168,7 +1172,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1195,8 +1199,7 @@ export class TpuClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha1/tpu.create_node.js</caption>
    * region_tag:tpu_v2alpha1_generated_Tpu_CreateNode_async
@@ -1239,8 +1242,7 @@ export class TpuClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha1/tpu.delete_node.js</caption>
    * region_tag:tpu_v2alpha1_generated_Tpu_DeleteNode_async
@@ -1255,7 +1257,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteNode(
@@ -1308,7 +1310,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1335,8 +1337,7 @@ export class TpuClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha1/tpu.delete_node.js</caption>
    * region_tag:tpu_v2alpha1_generated_Tpu_DeleteNode_async
@@ -1377,8 +1378,7 @@ export class TpuClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha1/tpu.stop_node.js</caption>
    * region_tag:tpu_v2alpha1_generated_Tpu_StopNode_async
@@ -1393,7 +1393,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   stopNode(
@@ -1446,7 +1446,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1473,8 +1473,7 @@ export class TpuClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha1/tpu.stop_node.js</caption>
    * region_tag:tpu_v2alpha1_generated_Tpu_StopNode_async
@@ -1515,8 +1514,7 @@ export class TpuClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha1/tpu.start_node.js</caption>
    * region_tag:tpu_v2alpha1_generated_Tpu_StartNode_async
@@ -1531,7 +1529,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   startNode(
@@ -1584,7 +1582,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1611,8 +1609,7 @@ export class TpuClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha1/tpu.start_node.js</caption>
    * region_tag:tpu_v2alpha1_generated_Tpu_StartNode_async
@@ -1646,7 +1643,7 @@ export class TpuClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Mask of fields from {@link Tpu.Node|Node} to update.
+   *   Required. Mask of fields from {@link protos.Tpu.Node|Node} to update.
    *   Supported fields: [description, tags, labels, metadata,
    *   network_config.enable_external_ips].
    * @param {google.cloud.tpu.v2alpha1.Node} request.node
@@ -1657,8 +1654,7 @@ export class TpuClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha1/tpu.update_node.js</caption>
    * region_tag:tpu_v2alpha1_generated_Tpu_UpdateNode_async
@@ -1673,7 +1669,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateNode(
@@ -1726,7 +1722,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1753,8 +1749,7 @@ export class TpuClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha1/tpu.update_node.js</caption>
    * region_tag:tpu_v2alpha1_generated_Tpu_UpdateNode_async
@@ -1802,8 +1797,7 @@ export class TpuClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha1/tpu.create_queued_resource.js</caption>
    * region_tag:tpu_v2alpha1_generated_Tpu_CreateQueuedResource_async
@@ -1818,7 +1812,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createQueuedResource(
@@ -1871,7 +1865,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1898,8 +1892,7 @@ export class TpuClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha1/tpu.create_queued_resource.js</caption>
    * region_tag:tpu_v2alpha1_generated_Tpu_CreateQueuedResource_async
@@ -1948,8 +1941,7 @@ export class TpuClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha1/tpu.delete_queued_resource.js</caption>
    * region_tag:tpu_v2alpha1_generated_Tpu_DeleteQueuedResource_async
@@ -1964,7 +1956,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteQueuedResource(
@@ -2017,7 +2009,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2044,8 +2036,7 @@ export class TpuClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha1/tpu.delete_queued_resource.js</caption>
    * region_tag:tpu_v2alpha1_generated_Tpu_DeleteQueuedResource_async
@@ -2074,6 +2065,142 @@ export class TpuClient {
     >;
   }
   /**
+   * Resets a QueuedResource TPU instance
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the queued resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2alpha1/tpu.reset_queued_resource.js</caption>
+   * region_tag:tpu_v2alpha1_generated_Tpu_ResetQueuedResource_async
+   */
+  resetQueuedResource(
+    request?: protos.google.cloud.tpu.v2alpha1.IResetQueuedResourceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.tpu.v2alpha1.IQueuedResource,
+        protos.google.cloud.tpu.v2alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  resetQueuedResource(
+    request: protos.google.cloud.tpu.v2alpha1.IResetQueuedResourceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.tpu.v2alpha1.IQueuedResource,
+        protos.google.cloud.tpu.v2alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  resetQueuedResource(
+    request: protos.google.cloud.tpu.v2alpha1.IResetQueuedResourceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.tpu.v2alpha1.IQueuedResource,
+        protos.google.cloud.tpu.v2alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  resetQueuedResource(
+    request?: protos.google.cloud.tpu.v2alpha1.IResetQueuedResourceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.tpu.v2alpha1.IQueuedResource,
+            protos.google.cloud.tpu.v2alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.tpu.v2alpha1.IQueuedResource,
+        protos.google.cloud.tpu.v2alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.tpu.v2alpha1.IQueuedResource,
+        protos.google.cloud.tpu.v2alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.resetQueuedResource(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `resetQueuedResource()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2alpha1/tpu.reset_queued_resource.js</caption>
+   * region_tag:tpu_v2alpha1_generated_Tpu_ResetQueuedResource_async
+   */
+  async checkResetQueuedResourceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.tpu.v2alpha1.QueuedResource,
+      protos.google.cloud.tpu.v2alpha1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.resetQueuedResource,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.tpu.v2alpha1.QueuedResource,
+      protos.google.cloud.tpu.v2alpha1.OperationMetadata
+    >;
+  }
+  /**
    * Simulates a maintenance event.
    *
    * @param {Object} request
@@ -2091,8 +2218,7 @@ export class TpuClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha1/tpu.simulate_maintenance_event.js</caption>
    * region_tag:tpu_v2alpha1_generated_Tpu_SimulateMaintenanceEvent_async
@@ -2107,7 +2233,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   simulateMaintenanceEvent(
@@ -2160,7 +2286,7 @@ export class TpuClient {
         protos.google.cloud.tpu.v2alpha1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2191,8 +2317,7 @@ export class TpuClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha1/tpu.simulate_maintenance_event.js</caption>
    * region_tag:tpu_v2alpha1_generated_Tpu_SimulateMaintenanceEvent_async
@@ -2234,14 +2359,13 @@ export class TpuClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.tpu.v2alpha1.Node | Node}.
+   *   The first element of the array is Array of {@link protos.google.cloud.tpu.v2alpha1.Node|Node}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listNodesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listNodes(
@@ -2251,7 +2375,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.INode[],
       protos.google.cloud.tpu.v2alpha1.IListNodesRequest | null,
-      protos.google.cloud.tpu.v2alpha1.IListNodesResponse
+      protos.google.cloud.tpu.v2alpha1.IListNodesResponse,
     ]
   >;
   listNodes(
@@ -2291,7 +2415,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.INode[],
       protos.google.cloud.tpu.v2alpha1.IListNodesRequest | null,
-      protos.google.cloud.tpu.v2alpha1.IListNodesResponse
+      protos.google.cloud.tpu.v2alpha1.IListNodesResponse,
     ]
   > | void {
     request = request || {};
@@ -2326,13 +2450,12 @@ export class TpuClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.tpu.v2alpha1.Node | Node} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.tpu.v2alpha1.Node|Node} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listNodesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listNodesStream(
@@ -2372,12 +2495,11 @@ export class TpuClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.tpu.v2alpha1.Node | Node}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.tpu.v2alpha1.Node|Node}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha1/tpu.list_nodes.js</caption>
    * region_tag:tpu_v2alpha1_generated_Tpu_ListNodes_async
@@ -2417,14 +2539,13 @@ export class TpuClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.tpu.v2alpha1.QueuedResource | QueuedResource}.
+   *   The first element of the array is Array of {@link protos.google.cloud.tpu.v2alpha1.QueuedResource|QueuedResource}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listQueuedResourcesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listQueuedResources(
@@ -2434,7 +2555,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.IQueuedResource[],
       protos.google.cloud.tpu.v2alpha1.IListQueuedResourcesRequest | null,
-      protos.google.cloud.tpu.v2alpha1.IListQueuedResourcesResponse
+      protos.google.cloud.tpu.v2alpha1.IListQueuedResourcesResponse,
     ]
   >;
   listQueuedResources(
@@ -2480,7 +2601,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.IQueuedResource[],
       protos.google.cloud.tpu.v2alpha1.IListQueuedResourcesRequest | null,
-      protos.google.cloud.tpu.v2alpha1.IListQueuedResourcesResponse
+      protos.google.cloud.tpu.v2alpha1.IListQueuedResourcesResponse,
     ]
   > | void {
     request = request || {};
@@ -2515,13 +2636,12 @@ export class TpuClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.tpu.v2alpha1.QueuedResource | QueuedResource} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.tpu.v2alpha1.QueuedResource|QueuedResource} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listQueuedResourcesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listQueuedResourcesStream(
@@ -2561,12 +2681,11 @@ export class TpuClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.tpu.v2alpha1.QueuedResource | QueuedResource}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.tpu.v2alpha1.QueuedResource|QueuedResource}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha1/tpu.list_queued_resources.js</caption>
    * region_tag:tpu_v2alpha1_generated_Tpu_ListQueuedResources_async
@@ -2610,14 +2729,13 @@ export class TpuClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.tpu.v2alpha1.AcceleratorType | AcceleratorType}.
+   *   The first element of the array is Array of {@link protos.google.cloud.tpu.v2alpha1.AcceleratorType|AcceleratorType}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listAcceleratorTypesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listAcceleratorTypes(
@@ -2627,7 +2745,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.IAcceleratorType[],
       protos.google.cloud.tpu.v2alpha1.IListAcceleratorTypesRequest | null,
-      protos.google.cloud.tpu.v2alpha1.IListAcceleratorTypesResponse
+      protos.google.cloud.tpu.v2alpha1.IListAcceleratorTypesResponse,
     ]
   >;
   listAcceleratorTypes(
@@ -2673,7 +2791,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.IAcceleratorType[],
       protos.google.cloud.tpu.v2alpha1.IListAcceleratorTypesRequest | null,
-      protos.google.cloud.tpu.v2alpha1.IListAcceleratorTypesResponse
+      protos.google.cloud.tpu.v2alpha1.IListAcceleratorTypesResponse,
     ]
   > | void {
     request = request || {};
@@ -2712,13 +2830,12 @@ export class TpuClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.tpu.v2alpha1.AcceleratorType | AcceleratorType} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.tpu.v2alpha1.AcceleratorType|AcceleratorType} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAcceleratorTypesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listAcceleratorTypesStream(
@@ -2762,12 +2879,11 @@ export class TpuClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.tpu.v2alpha1.AcceleratorType | AcceleratorType}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.tpu.v2alpha1.AcceleratorType|AcceleratorType}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha1/tpu.list_accelerator_types.js</caption>
    * region_tag:tpu_v2alpha1_generated_Tpu_ListAcceleratorTypes_async
@@ -2811,14 +2927,13 @@ export class TpuClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.tpu.v2alpha1.RuntimeVersion | RuntimeVersion}.
+   *   The first element of the array is Array of {@link protos.google.cloud.tpu.v2alpha1.RuntimeVersion|RuntimeVersion}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listRuntimeVersionsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listRuntimeVersions(
@@ -2828,7 +2943,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.IRuntimeVersion[],
       protos.google.cloud.tpu.v2alpha1.IListRuntimeVersionsRequest | null,
-      protos.google.cloud.tpu.v2alpha1.IListRuntimeVersionsResponse
+      protos.google.cloud.tpu.v2alpha1.IListRuntimeVersionsResponse,
     ]
   >;
   listRuntimeVersions(
@@ -2874,7 +2989,7 @@ export class TpuClient {
     [
       protos.google.cloud.tpu.v2alpha1.IRuntimeVersion[],
       protos.google.cloud.tpu.v2alpha1.IListRuntimeVersionsRequest | null,
-      protos.google.cloud.tpu.v2alpha1.IListRuntimeVersionsResponse
+      protos.google.cloud.tpu.v2alpha1.IListRuntimeVersionsResponse,
     ]
   > | void {
     request = request || {};
@@ -2913,13 +3028,12 @@ export class TpuClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.tpu.v2alpha1.RuntimeVersion | RuntimeVersion} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.tpu.v2alpha1.RuntimeVersion|RuntimeVersion} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listRuntimeVersionsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listRuntimeVersionsStream(
@@ -2963,12 +3077,11 @@ export class TpuClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.tpu.v2alpha1.RuntimeVersion | RuntimeVersion}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.tpu.v2alpha1.RuntimeVersion|RuntimeVersion}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2alpha1/tpu.list_runtime_versions.js</caption>
    * region_tag:tpu_v2alpha1_generated_Tpu_ListRuntimeVersions_async
@@ -3005,8 +3118,7 @@ export class TpuClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -3052,12 +3164,11 @@ export class TpuClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

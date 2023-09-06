@@ -34,21 +34,18 @@ function main() {
    *  ID (https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
    *  `property` should be the same value as in your `runReport` request.
    *  Example: properties/1234
-   *  Set the Property ID to 0 for compatibility checking on dimensions and
-   *  metrics common to all properties. In this special mode, this method will
-   *  not return custom dimensions and metrics.
    */
   // const property = 'abc123'
   /**
    *  The dimensions in this report. `dimensions` should be the same value as in
    *  your `runReport` request.
    */
-  // const dimensions = 1234
+  // const dimensions = [1,2,3,4]
   /**
    *  The metrics in this report. `metrics` should be the same value as in your
    *  `runReport` request.
    */
-  // const metrics = 1234
+  // const metrics = [1,2,3,4]
   /**
    *  The filter clause of dimensions. `dimensionFilter` should be the same value
    *  as in your `runReport` request.

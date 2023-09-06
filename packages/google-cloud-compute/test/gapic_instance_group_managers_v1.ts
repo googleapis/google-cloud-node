@@ -2886,7 +2886,7 @@ describe('v1.InstanceGroupManagersClient', () => {
       const responses: Array<
         [
           string,
-          protos.google.cloud.compute.v1.IInstanceGroupManagersScopedList
+          protos.google.cloud.compute.v1.IInstanceGroupManagersScopedList,
         ]
       > = [];
       const iterable = client.aggregatedListAsync(request);
@@ -2933,7 +2933,7 @@ describe('v1.InstanceGroupManagersClient', () => {
         const responses: Array<
           [
             string,
-            protos.google.cloud.compute.v1.IInstanceGroupManagersScopedList
+            protos.google.cloud.compute.v1.IInstanceGroupManagersScopedList,
           ]
         > = [];
         for await (const resource of iterable) {

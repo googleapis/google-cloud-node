@@ -97,8 +97,7 @@ export class DataformClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -106,7 +105,7 @@ export class DataformClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new DataformClient({fallback: 'rest'}, gax);
+   *     const client = new DataformClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -178,7 +177,7 @@ export class DataformClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -428,9 +427,8 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataform.v1alpha2.Repository | Repository}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1alpha2.Repository|Repository}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.get_repository.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_GetRepository_async
@@ -442,7 +440,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IRepository,
       protos.google.cloud.dataform.v1alpha2.IGetRepositoryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRepository(
@@ -488,7 +486,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IRepository,
       protos.google.cloud.dataform.v1alpha2.IGetRepositoryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -525,9 +523,8 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataform.v1alpha2.Repository | Repository}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1alpha2.Repository|Repository}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.create_repository.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_CreateRepository_async
@@ -542,7 +539,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.ICreateRepositoryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createRepository(
@@ -591,7 +588,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.ICreateRepositoryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -625,9 +622,8 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataform.v1alpha2.Repository | Repository}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1alpha2.Repository|Repository}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.update_repository.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_UpdateRepository_async
@@ -642,7 +638,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IUpdateRepositoryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateRepository(
@@ -691,7 +687,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IUpdateRepositoryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -726,9 +722,8 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.delete_repository.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_DeleteRepository_async
@@ -743,7 +738,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IDeleteRepositoryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteRepository(
@@ -792,7 +787,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IDeleteRepositoryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -823,9 +818,8 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataform.v1alpha2.FetchRemoteBranchesResponse | FetchRemoteBranchesResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1alpha2.FetchRemoteBranchesResponse|FetchRemoteBranchesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.fetch_remote_branches.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_FetchRemoteBranches_async
@@ -840,7 +834,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IFetchRemoteBranchesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   fetchRemoteBranches(
@@ -889,7 +883,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IFetchRemoteBranchesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -920,9 +914,8 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataform.v1alpha2.Workspace | Workspace}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1alpha2.Workspace|Workspace}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.get_workspace.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_GetWorkspace_async
@@ -934,7 +927,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IWorkspace,
       protos.google.cloud.dataform.v1alpha2.IGetWorkspaceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getWorkspace(
@@ -980,7 +973,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IWorkspace,
       protos.google.cloud.dataform.v1alpha2.IGetWorkspaceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1017,9 +1010,8 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataform.v1alpha2.Workspace | Workspace}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1alpha2.Workspace|Workspace}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.create_workspace.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_CreateWorkspace_async
@@ -1031,7 +1023,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IWorkspace,
       protos.google.cloud.dataform.v1alpha2.ICreateWorkspaceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createWorkspace(
@@ -1077,7 +1069,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IWorkspace,
       protos.google.cloud.dataform.v1alpha2.ICreateWorkspaceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1108,9 +1100,8 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.delete_workspace.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_DeleteWorkspace_async
@@ -1122,7 +1113,7 @@ export class DataformClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataform.v1alpha2.IDeleteWorkspaceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteWorkspace(
@@ -1168,7 +1159,7 @@ export class DataformClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataform.v1alpha2.IDeleteWorkspaceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1199,9 +1190,8 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataform.v1alpha2.InstallNpmPackagesResponse | InstallNpmPackagesResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1alpha2.InstallNpmPackagesResponse|InstallNpmPackagesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.install_npm_packages.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_InstallNpmPackages_async
@@ -1216,7 +1206,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IInstallNpmPackagesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   installNpmPackages(
@@ -1265,7 +1255,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IInstallNpmPackagesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1302,9 +1292,8 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.pull_git_commits.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_PullGitCommits_async
@@ -1316,7 +1305,7 @@ export class DataformClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataform.v1alpha2.IPullGitCommitsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   pullGitCommits(
@@ -1362,7 +1351,7 @@ export class DataformClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataform.v1alpha2.IPullGitCommitsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1396,9 +1385,8 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.push_git_commits.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_PushGitCommits_async
@@ -1410,7 +1398,7 @@ export class DataformClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataform.v1alpha2.IPushGitCommitsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   pushGitCommits(
@@ -1456,7 +1444,7 @@ export class DataformClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataform.v1alpha2.IPushGitCommitsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1487,9 +1475,8 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataform.v1alpha2.FetchFileGitStatusesResponse | FetchFileGitStatusesResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1alpha2.FetchFileGitStatusesResponse|FetchFileGitStatusesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.fetch_file_git_statuses.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_FetchFileGitStatuses_async
@@ -1504,7 +1491,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IFetchFileGitStatusesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   fetchFileGitStatuses(
@@ -1553,7 +1540,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IFetchFileGitStatusesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1588,9 +1575,8 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataform.v1alpha2.FetchGitAheadBehindResponse | FetchGitAheadBehindResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1alpha2.FetchGitAheadBehindResponse|FetchGitAheadBehindResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.fetch_git_ahead_behind.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_FetchGitAheadBehind_async
@@ -1605,7 +1591,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IFetchGitAheadBehindRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   fetchGitAheadBehind(
@@ -1654,7 +1640,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IFetchGitAheadBehindRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1692,9 +1678,8 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.commit_workspace_changes.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_CommitWorkspaceChanges_async
@@ -1709,7 +1694,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.ICommitWorkspaceChangesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   commitWorkspaceChanges(
@@ -1758,7 +1743,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.ICommitWorkspaceChangesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1798,9 +1783,8 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.reset_workspace_changes.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_ResetWorkspaceChanges_async
@@ -1815,7 +1799,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IResetWorkspaceChangesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resetWorkspaceChanges(
@@ -1864,7 +1848,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IResetWorkspaceChangesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1897,9 +1881,8 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataform.v1alpha2.FetchFileDiffResponse | FetchFileDiffResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1alpha2.FetchFileDiffResponse|FetchFileDiffResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.fetch_file_diff.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_FetchFileDiff_async
@@ -1911,7 +1894,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IFetchFileDiffResponse,
       protos.google.cloud.dataform.v1alpha2.IFetchFileDiffRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   fetchFileDiff(
@@ -1957,7 +1940,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IFetchFileDiffResponse,
       protos.google.cloud.dataform.v1alpha2.IFetchFileDiffRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1991,9 +1974,8 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataform.v1alpha2.MakeDirectoryResponse | MakeDirectoryResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1alpha2.MakeDirectoryResponse|MakeDirectoryResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.make_directory.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_MakeDirectory_async
@@ -2005,7 +1987,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IMakeDirectoryResponse,
       protos.google.cloud.dataform.v1alpha2.IMakeDirectoryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   makeDirectory(
@@ -2051,7 +2033,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IMakeDirectoryResponse,
       protos.google.cloud.dataform.v1alpha2.IMakeDirectoryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2085,9 +2067,8 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.remove_directory.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_RemoveDirectory_async
@@ -2099,7 +2080,7 @@ export class DataformClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataform.v1alpha2.IRemoveDirectoryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   removeDirectory(
@@ -2145,7 +2126,7 @@ export class DataformClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataform.v1alpha2.IRemoveDirectoryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2183,9 +2164,8 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataform.v1alpha2.MoveDirectoryResponse | MoveDirectoryResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1alpha2.MoveDirectoryResponse|MoveDirectoryResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.move_directory.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_MoveDirectory_async
@@ -2197,7 +2177,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IMoveDirectoryResponse,
       protos.google.cloud.dataform.v1alpha2.IMoveDirectoryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   moveDirectory(
@@ -2243,7 +2223,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IMoveDirectoryResponse,
       protos.google.cloud.dataform.v1alpha2.IMoveDirectoryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2276,9 +2256,8 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataform.v1alpha2.ReadFileResponse | ReadFileResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1alpha2.ReadFileResponse|ReadFileResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.read_file.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_ReadFile_async
@@ -2290,7 +2269,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IReadFileResponse,
       protos.google.cloud.dataform.v1alpha2.IReadFileRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   readFile(
@@ -2330,7 +2309,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IReadFileResponse,
       protos.google.cloud.dataform.v1alpha2.IReadFileRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2363,9 +2342,8 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.remove_file.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_RemoveFile_async
@@ -2377,7 +2355,7 @@ export class DataformClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataform.v1alpha2.IRemoveFileRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   removeFile(
@@ -2423,7 +2401,7 @@ export class DataformClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataform.v1alpha2.IRemoveFileRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2458,9 +2436,8 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataform.v1alpha2.MoveFileResponse | MoveFileResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1alpha2.MoveFileResponse|MoveFileResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.move_file.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_MoveFile_async
@@ -2472,7 +2449,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IMoveFileResponse,
       protos.google.cloud.dataform.v1alpha2.IMoveFileRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   moveFile(
@@ -2512,7 +2489,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IMoveFileResponse,
       protos.google.cloud.dataform.v1alpha2.IMoveFileRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2547,9 +2524,8 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataform.v1alpha2.WriteFileResponse | WriteFileResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1alpha2.WriteFileResponse|WriteFileResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.write_file.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_WriteFile_async
@@ -2561,7 +2537,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IWriteFileResponse,
       protos.google.cloud.dataform.v1alpha2.IWriteFileRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   writeFile(
@@ -2607,7 +2583,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IWriteFileResponse,
       protos.google.cloud.dataform.v1alpha2.IWriteFileRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2638,9 +2614,8 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataform.v1alpha2.CompilationResult | CompilationResult}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1alpha2.CompilationResult|CompilationResult}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.get_compilation_result.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_GetCompilationResult_async
@@ -2655,7 +2630,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IGetCompilationResultRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCompilationResult(
@@ -2704,7 +2679,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IGetCompilationResultRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2738,9 +2713,8 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataform.v1alpha2.CompilationResult | CompilationResult}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1alpha2.CompilationResult|CompilationResult}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.create_compilation_result.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_CreateCompilationResult_async
@@ -2755,7 +2729,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.ICreateCompilationResultRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCompilationResult(
@@ -2804,7 +2778,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.ICreateCompilationResultRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2839,9 +2813,8 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataform.v1alpha2.WorkflowInvocation | WorkflowInvocation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1alpha2.WorkflowInvocation|WorkflowInvocation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.get_workflow_invocation.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_GetWorkflowInvocation_async
@@ -2856,7 +2829,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IGetWorkflowInvocationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getWorkflowInvocation(
@@ -2905,7 +2878,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IGetWorkflowInvocationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2938,9 +2911,8 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataform.v1alpha2.WorkflowInvocation | WorkflowInvocation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1alpha2.WorkflowInvocation|WorkflowInvocation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.create_workflow_invocation.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_CreateWorkflowInvocation_async
@@ -2955,7 +2927,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.ICreateWorkflowInvocationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createWorkflowInvocation(
@@ -3004,7 +2976,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.ICreateWorkflowInvocationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3039,9 +3011,8 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.delete_workflow_invocation.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_DeleteWorkflowInvocation_async
@@ -3056,7 +3027,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IDeleteWorkflowInvocationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteWorkflowInvocation(
@@ -3105,7 +3076,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.IDeleteWorkflowInvocationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3140,9 +3111,8 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.cancel_workflow_invocation.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_CancelWorkflowInvocation_async
@@ -3157,7 +3127,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.ICancelWorkflowInvocationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   cancelWorkflowInvocation(
@@ -3206,7 +3176,7 @@ export class DataformClient {
         | protos.google.cloud.dataform.v1alpha2.ICancelWorkflowInvocationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3259,14 +3229,13 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dataform.v1alpha2.Repository | Repository}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1alpha2.Repository|Repository}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listRepositoriesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listRepositories(
@@ -3276,7 +3245,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IRepository[],
       protos.google.cloud.dataform.v1alpha2.IListRepositoriesRequest | null,
-      protos.google.cloud.dataform.v1alpha2.IListRepositoriesResponse
+      protos.google.cloud.dataform.v1alpha2.IListRepositoriesResponse,
     ]
   >;
   listRepositories(
@@ -3322,7 +3291,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IRepository[],
       protos.google.cloud.dataform.v1alpha2.IListRepositoriesRequest | null,
-      protos.google.cloud.dataform.v1alpha2.IListRepositoriesResponse
+      protos.google.cloud.dataform.v1alpha2.IListRepositoriesResponse,
     ]
   > | void {
     request = request || {};
@@ -3370,13 +3339,12 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dataform.v1alpha2.Repository | Repository} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1alpha2.Repository|Repository} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listRepositoriesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listRepositoriesStream(
@@ -3429,12 +3397,11 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dataform.v1alpha2.Repository | Repository}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dataform.v1alpha2.Repository|Repository}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.list_repositories.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_ListRepositories_async
@@ -3487,14 +3454,13 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dataform.v1alpha2.Workspace | Workspace}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1alpha2.Workspace|Workspace}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listWorkspacesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listWorkspaces(
@@ -3504,7 +3470,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IWorkspace[],
       protos.google.cloud.dataform.v1alpha2.IListWorkspacesRequest | null,
-      protos.google.cloud.dataform.v1alpha2.IListWorkspacesResponse
+      protos.google.cloud.dataform.v1alpha2.IListWorkspacesResponse,
     ]
   >;
   listWorkspaces(
@@ -3550,7 +3516,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IWorkspace[],
       protos.google.cloud.dataform.v1alpha2.IListWorkspacesRequest | null,
-      protos.google.cloud.dataform.v1alpha2.IListWorkspacesResponse
+      protos.google.cloud.dataform.v1alpha2.IListWorkspacesResponse,
     ]
   > | void {
     request = request || {};
@@ -3598,13 +3564,12 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dataform.v1alpha2.Workspace | Workspace} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1alpha2.Workspace|Workspace} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listWorkspacesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listWorkspacesStream(
@@ -3657,12 +3622,11 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dataform.v1alpha2.Workspace | Workspace}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dataform.v1alpha2.Workspace|Workspace}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.list_workspaces.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_ListWorkspaces_async
@@ -3712,14 +3676,13 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dataform.v1alpha2.QueryDirectoryContentsResponse.DirectoryEntry | DirectoryEntry}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1alpha2.QueryDirectoryContentsResponse.DirectoryEntry|DirectoryEntry}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `queryDirectoryContentsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   queryDirectoryContents(
@@ -3729,7 +3692,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.QueryDirectoryContentsResponse.IDirectoryEntry[],
       protos.google.cloud.dataform.v1alpha2.IQueryDirectoryContentsRequest | null,
-      protos.google.cloud.dataform.v1alpha2.IQueryDirectoryContentsResponse
+      protos.google.cloud.dataform.v1alpha2.IQueryDirectoryContentsResponse,
     ]
   >;
   queryDirectoryContents(
@@ -3775,7 +3738,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.QueryDirectoryContentsResponse.IDirectoryEntry[],
       protos.google.cloud.dataform.v1alpha2.IQueryDirectoryContentsRequest | null,
-      protos.google.cloud.dataform.v1alpha2.IQueryDirectoryContentsResponse
+      protos.google.cloud.dataform.v1alpha2.IQueryDirectoryContentsResponse,
     ]
   > | void {
     request = request || {};
@@ -3824,13 +3787,12 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dataform.v1alpha2.QueryDirectoryContentsResponse.DirectoryEntry | DirectoryEntry} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1alpha2.QueryDirectoryContentsResponse.DirectoryEntry|DirectoryEntry} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `queryDirectoryContentsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   queryDirectoryContentsStream(
@@ -3880,12 +3842,11 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dataform.v1alpha2.QueryDirectoryContentsResponse.DirectoryEntry | DirectoryEntry}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dataform.v1alpha2.QueryDirectoryContentsResponse.DirectoryEntry|DirectoryEntry}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.query_directory_contents.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_QueryDirectoryContents_async
@@ -3932,14 +3893,13 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dataform.v1alpha2.CompilationResult | CompilationResult}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1alpha2.CompilationResult|CompilationResult}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listCompilationResultsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listCompilationResults(
@@ -3949,7 +3909,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.ICompilationResult[],
       protos.google.cloud.dataform.v1alpha2.IListCompilationResultsRequest | null,
-      protos.google.cloud.dataform.v1alpha2.IListCompilationResultsResponse
+      protos.google.cloud.dataform.v1alpha2.IListCompilationResultsResponse,
     ]
   >;
   listCompilationResults(
@@ -3995,7 +3955,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.ICompilationResult[],
       protos.google.cloud.dataform.v1alpha2.IListCompilationResultsRequest | null,
-      protos.google.cloud.dataform.v1alpha2.IListCompilationResultsResponse
+      protos.google.cloud.dataform.v1alpha2.IListCompilationResultsResponse,
     ]
   > | void {
     request = request || {};
@@ -4041,13 +4001,12 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dataform.v1alpha2.CompilationResult | CompilationResult} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1alpha2.CompilationResult|CompilationResult} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listCompilationResultsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listCompilationResultsStream(
@@ -4094,12 +4053,11 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dataform.v1alpha2.CompilationResult | CompilationResult}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dataform.v1alpha2.CompilationResult|CompilationResult}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.list_compilation_results.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_ListCompilationResults_async
@@ -4149,14 +4107,13 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dataform.v1alpha2.CompilationResultAction | CompilationResultAction}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1alpha2.CompilationResultAction|CompilationResultAction}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `queryCompilationResultActionsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   queryCompilationResultActions(
@@ -4166,7 +4123,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.ICompilationResultAction[],
       protos.google.cloud.dataform.v1alpha2.IQueryCompilationResultActionsRequest | null,
-      protos.google.cloud.dataform.v1alpha2.IQueryCompilationResultActionsResponse
+      protos.google.cloud.dataform.v1alpha2.IQueryCompilationResultActionsResponse,
     ]
   >;
   queryCompilationResultActions(
@@ -4212,7 +4169,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.ICompilationResultAction[],
       protos.google.cloud.dataform.v1alpha2.IQueryCompilationResultActionsRequest | null,
-      protos.google.cloud.dataform.v1alpha2.IQueryCompilationResultActionsResponse
+      protos.google.cloud.dataform.v1alpha2.IQueryCompilationResultActionsResponse,
     ]
   > | void {
     request = request || {};
@@ -4261,13 +4218,12 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dataform.v1alpha2.CompilationResultAction | CompilationResultAction} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1alpha2.CompilationResultAction|CompilationResultAction} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `queryCompilationResultActionsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   queryCompilationResultActionsStream(
@@ -4317,12 +4273,11 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dataform.v1alpha2.CompilationResultAction | CompilationResultAction}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dataform.v1alpha2.CompilationResultAction|CompilationResultAction}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.query_compilation_result_actions.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_QueryCompilationResultActions_async
@@ -4369,14 +4324,13 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dataform.v1alpha2.WorkflowInvocation | WorkflowInvocation}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1alpha2.WorkflowInvocation|WorkflowInvocation}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listWorkflowInvocationsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listWorkflowInvocations(
@@ -4386,7 +4340,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IWorkflowInvocation[],
       protos.google.cloud.dataform.v1alpha2.IListWorkflowInvocationsRequest | null,
-      protos.google.cloud.dataform.v1alpha2.IListWorkflowInvocationsResponse
+      protos.google.cloud.dataform.v1alpha2.IListWorkflowInvocationsResponse,
     ]
   >;
   listWorkflowInvocations(
@@ -4432,7 +4386,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IWorkflowInvocation[],
       protos.google.cloud.dataform.v1alpha2.IListWorkflowInvocationsRequest | null,
-      protos.google.cloud.dataform.v1alpha2.IListWorkflowInvocationsResponse
+      protos.google.cloud.dataform.v1alpha2.IListWorkflowInvocationsResponse,
     ]
   > | void {
     request = request || {};
@@ -4478,13 +4432,12 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dataform.v1alpha2.WorkflowInvocation | WorkflowInvocation} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1alpha2.WorkflowInvocation|WorkflowInvocation} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listWorkflowInvocationsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listWorkflowInvocationsStream(
@@ -4531,12 +4484,11 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dataform.v1alpha2.WorkflowInvocation | WorkflowInvocation}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dataform.v1alpha2.WorkflowInvocation|WorkflowInvocation}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.list_workflow_invocations.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_ListWorkflowInvocations_async
@@ -4583,14 +4535,13 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dataform.v1alpha2.WorkflowInvocationAction | WorkflowInvocationAction}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1alpha2.WorkflowInvocationAction|WorkflowInvocationAction}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `queryWorkflowInvocationActionsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   queryWorkflowInvocationActions(
@@ -4600,7 +4551,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IWorkflowInvocationAction[],
       protos.google.cloud.dataform.v1alpha2.IQueryWorkflowInvocationActionsRequest | null,
-      protos.google.cloud.dataform.v1alpha2.IQueryWorkflowInvocationActionsResponse
+      protos.google.cloud.dataform.v1alpha2.IQueryWorkflowInvocationActionsResponse,
     ]
   >;
   queryWorkflowInvocationActions(
@@ -4646,7 +4597,7 @@ export class DataformClient {
     [
       protos.google.cloud.dataform.v1alpha2.IWorkflowInvocationAction[],
       protos.google.cloud.dataform.v1alpha2.IQueryWorkflowInvocationActionsRequest | null,
-      protos.google.cloud.dataform.v1alpha2.IQueryWorkflowInvocationActionsResponse
+      protos.google.cloud.dataform.v1alpha2.IQueryWorkflowInvocationActionsResponse,
     ]
   > | void {
     request = request || {};
@@ -4692,13 +4643,12 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dataform.v1alpha2.WorkflowInvocationAction | WorkflowInvocationAction} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1alpha2.WorkflowInvocationAction|WorkflowInvocationAction} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `queryWorkflowInvocationActionsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   queryWorkflowInvocationActionsStream(
@@ -4746,12 +4696,11 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dataform.v1alpha2.WorkflowInvocationAction | WorkflowInvocationAction}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dataform.v1alpha2.WorkflowInvocationAction|WorkflowInvocationAction}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha2/dataform.query_workflow_invocation_actions.js</caption>
    * region_tag:dataform_v1alpha2_generated_Dataform_QueryWorkflowInvocationActions_async
@@ -4817,7 +4766,7 @@ export class DataformClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
@@ -4838,8 +4787,7 @@ export class DataformClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -4865,7 +4813,7 @@ export class DataformClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
@@ -4886,8 +4834,7 @@ export class DataformClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -4914,7 +4861,7 @@ export class DataformClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.TestIamPermissionsResponse> {
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
@@ -4929,8 +4876,7 @@ export class DataformClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -4976,12 +4922,11 @@ export class DataformClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

@@ -119,7 +119,7 @@ describe('Vision', () => {
         .then(
           (
             responses: [
-              prototypes.google.cloud.vision.v1.IAnnotateImageResponse
+              prototypes.google.cloud.vision.v1.IAnnotateImageResponse,
             ]
           ) => {
             const response = responses[0];

@@ -53,7 +53,7 @@ function main(projectId, zone, clusterId, nodePoolId, nodeVersion, imageType) {
    *  will result in nodes being either created or removed from the node pool,
    *  depending on whether locations are being added or removed.
    */
-  // const locations = 'abc123'
+  // const locations = ['abc','def']
   /**
    *  The desired workload metadata config for the node pool.
    */
@@ -134,6 +134,24 @@ function main(projectId, zone, clusterId, nodePoolId, nodeVersion, imageType) {
    *  Parameters that can be configured on Windows nodes.
    */
   // const windowsNodeConfig = {}
+  /**
+   *  Optional. The desired machine type for nodes in the node pool.
+   *  Initiates an upgrade operation that migrates the nodes in the
+   *  node pool to the specified machine type.
+   */
+  // const machineType = 'abc123'
+  /**
+   *  Optional. The desired disk type for nodes in the node pool.
+   *  Initiates an upgrade operation that migrates the nodes in the
+   *  node pool to the specified disk type.
+   */
+  // const diskType = 'abc123'
+  /**
+   *  Optional. The desired disk size for nodes in the node pool.
+   *  Initiates an upgrade operation that migrates the nodes in the
+   *  node pool to the specified disk size.
+   */
+  // const diskSizeGb = 1234
 
   // Imports the Container library
   const {ClusterManagerClient} = require('@google-cloud/container').v1beta1;

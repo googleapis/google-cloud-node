@@ -91,8 +91,7 @@ export class DashboardsServiceClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -100,7 +99,7 @@ export class DashboardsServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new DashboardsServiceClient({fallback: 'rest'}, gax);
+   *     const client = new DashboardsServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -166,7 +165,7 @@ export class DashboardsServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -369,9 +368,8 @@ export class DashboardsServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.monitoring.dashboard.v1.Dashboard | Dashboard}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.monitoring.dashboard.v1.Dashboard|Dashboard}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dashboards_service.create_dashboard.js</caption>
    * region_tag:monitoring_v1_generated_DashboardsService_CreateDashboard_async
@@ -383,7 +381,7 @@ export class DashboardsServiceClient {
     [
       protos.google.monitoring.dashboard.v1.IDashboard,
       protos.google.monitoring.dashboard.v1.ICreateDashboardRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDashboard(
@@ -429,7 +427,7 @@ export class DashboardsServiceClient {
     [
       protos.google.monitoring.dashboard.v1.IDashboard,
       protos.google.monitoring.dashboard.v1.ICreateDashboardRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -468,9 +466,8 @@ export class DashboardsServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.monitoring.dashboard.v1.Dashboard | Dashboard}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.monitoring.dashboard.v1.Dashboard|Dashboard}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dashboards_service.get_dashboard.js</caption>
    * region_tag:monitoring_v1_generated_DashboardsService_GetDashboard_async
@@ -482,7 +479,7 @@ export class DashboardsServiceClient {
     [
       protos.google.monitoring.dashboard.v1.IDashboard,
       protos.google.monitoring.dashboard.v1.IGetDashboardRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDashboard(
@@ -528,7 +525,7 @@ export class DashboardsServiceClient {
     [
       protos.google.monitoring.dashboard.v1.IDashboard,
       protos.google.monitoring.dashboard.v1.IGetDashboardRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -565,9 +562,8 @@ export class DashboardsServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dashboards_service.delete_dashboard.js</caption>
    * region_tag:monitoring_v1_generated_DashboardsService_DeleteDashboard_async
@@ -579,7 +575,7 @@ export class DashboardsServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.monitoring.dashboard.v1.IDeleteDashboardRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDashboard(
@@ -625,7 +621,7 @@ export class DashboardsServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.monitoring.dashboard.v1.IDeleteDashboardRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -663,9 +659,8 @@ export class DashboardsServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.monitoring.dashboard.v1.Dashboard | Dashboard}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.monitoring.dashboard.v1.Dashboard|Dashboard}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dashboards_service.update_dashboard.js</caption>
    * region_tag:monitoring_v1_generated_DashboardsService_UpdateDashboard_async
@@ -677,7 +672,7 @@ export class DashboardsServiceClient {
     [
       protos.google.monitoring.dashboard.v1.IDashboard,
       protos.google.monitoring.dashboard.v1.IUpdateDashboardRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDashboard(
@@ -723,7 +718,7 @@ export class DashboardsServiceClient {
     [
       protos.google.monitoring.dashboard.v1.IDashboard,
       protos.google.monitoring.dashboard.v1.IUpdateDashboardRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -768,14 +763,13 @@ export class DashboardsServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.monitoring.dashboard.v1.Dashboard | Dashboard}.
+   *   The first element of the array is Array of {@link protos.google.monitoring.dashboard.v1.Dashboard|Dashboard}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listDashboardsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listDashboards(
@@ -785,7 +779,7 @@ export class DashboardsServiceClient {
     [
       protos.google.monitoring.dashboard.v1.IDashboard[],
       protos.google.monitoring.dashboard.v1.IListDashboardsRequest | null,
-      protos.google.monitoring.dashboard.v1.IListDashboardsResponse
+      protos.google.monitoring.dashboard.v1.IListDashboardsResponse,
     ]
   >;
   listDashboards(
@@ -831,7 +825,7 @@ export class DashboardsServiceClient {
     [
       protos.google.monitoring.dashboard.v1.IDashboard[],
       protos.google.monitoring.dashboard.v1.IListDashboardsRequest | null,
-      protos.google.monitoring.dashboard.v1.IListDashboardsResponse
+      protos.google.monitoring.dashboard.v1.IListDashboardsResponse,
     ]
   > | void {
     request = request || {};
@@ -871,13 +865,12 @@ export class DashboardsServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.monitoring.dashboard.v1.Dashboard | Dashboard} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.monitoring.dashboard.v1.Dashboard|Dashboard} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listDashboardsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listDashboardsStream(
@@ -922,12 +915,11 @@ export class DashboardsServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.monitoring.dashboard.v1.Dashboard | Dashboard}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.monitoring.dashboard.v1.Dashboard|Dashboard}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/dashboards_service.list_dashboards.js</caption>
    * region_tag:monitoring_v1_generated_DashboardsService_ListDashboards_async

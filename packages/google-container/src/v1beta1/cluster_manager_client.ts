@@ -89,8 +89,7 @@ export class ClusterManagerClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -98,7 +97,7 @@ export class ClusterManagerClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new ClusterManagerClient({fallback: 'rest'}, gax);
+   *     const client = new ClusterManagerClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -164,7 +163,7 @@ export class ClusterManagerClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -374,9 +373,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.ListClustersResponse | ListClustersResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.ListClustersResponse|ListClustersResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.list_clusters.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_ListClusters_async
@@ -388,7 +386,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IListClustersResponse,
       protos.google.container.v1beta1.IListClustersRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   listClusters(
@@ -428,7 +426,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IListClustersResponse,
       protos.google.container.v1beta1.IListClustersRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -474,9 +472,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.Cluster | Cluster}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.Cluster|Cluster}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.get_cluster.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_GetCluster_async
@@ -488,7 +485,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.ICluster,
       protos.google.container.v1beta1.IGetClusterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCluster(
@@ -526,7 +523,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.ICluster,
       protos.google.container.v1beta1.IGetClusterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -586,9 +583,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.Operation | Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.create_cluster.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_CreateCluster_async
@@ -600,7 +596,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ICreateClusterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCluster(
@@ -640,7 +636,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ICreateClusterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -688,9 +684,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.Operation | Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.update_cluster.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_UpdateCluster_async
@@ -702,7 +697,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.IUpdateClusterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCluster(
@@ -742,7 +737,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.IUpdateClusterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -854,12 +849,23 @@ export class ClusterManagerClient {
    *   Google Compute Engine resources.
    * @param {google.container.v1beta1.WindowsNodeConfig} request.windowsNodeConfig
    *   Parameters that can be configured on Windows nodes.
+   * @param {string} [request.machineType]
+   *   Optional. The desired machine type for nodes in the node pool.
+   *   Initiates an upgrade operation that migrates the nodes in the
+   *   node pool to the specified machine type.
+   * @param {string} [request.diskType]
+   *   Optional. The desired disk type for nodes in the node pool.
+   *   Initiates an upgrade operation that migrates the nodes in the
+   *   node pool to the specified disk type.
+   * @param {number} [request.diskSizeGb]
+   *   Optional. The desired disk size for nodes in the node pool.
+   *   Initiates an upgrade operation that migrates the nodes in the
+   *   node pool to the specified disk size.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.Operation | Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.update_node_pool.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_UpdateNodePool_async
@@ -871,7 +877,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.IUpdateNodePoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateNodePool(
@@ -911,7 +917,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.IUpdateNodePoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -965,9 +971,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.Operation | Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.set_node_pool_autoscaling.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_SetNodePoolAutoscaling_async
@@ -982,7 +987,7 @@ export class ClusterManagerClient {
         | protos.google.container.v1beta1.ISetNodePoolAutoscalingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setNodePoolAutoscaling(
@@ -1031,7 +1036,7 @@ export class ClusterManagerClient {
         | protos.google.container.v1beta1.ISetNodePoolAutoscalingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1095,9 +1100,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.Operation | Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.set_logging_service.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_SetLoggingService_async
@@ -1109,7 +1113,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetLoggingServiceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setLoggingService(
@@ -1155,7 +1159,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetLoggingServiceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1214,9 +1218,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.Operation | Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.set_monitoring_service.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_SetMonitoringService_async
@@ -1228,7 +1231,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetMonitoringServiceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setMonitoringService(
@@ -1274,7 +1277,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetMonitoringServiceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1324,9 +1327,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.Operation | Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.set_addons_config.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_SetAddonsConfig_async
@@ -1338,7 +1340,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetAddonsConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setAddonsConfig(
@@ -1384,7 +1386,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetAddonsConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1442,9 +1444,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.Operation | Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.set_locations.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_SetLocations_async
@@ -1457,7 +1458,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetLocationsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setLocations(
@@ -1497,7 +1498,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetLocationsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1560,9 +1561,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.Operation | Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.update_master.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_UpdateMaster_async
@@ -1574,7 +1574,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.IUpdateMasterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateMaster(
@@ -1614,7 +1614,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.IUpdateMasterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1667,9 +1667,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.Operation | Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.set_master_auth.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_SetMasterAuth_async
@@ -1681,7 +1680,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetMasterAuthRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setMasterAuth(
@@ -1721,7 +1720,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetMasterAuthRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1776,9 +1775,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.Operation | Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.delete_cluster.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_DeleteCluster_async
@@ -1790,7 +1788,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.IDeleteClusterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteCluster(
@@ -1830,7 +1828,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.IDeleteClusterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1875,9 +1873,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.ListOperationsResponse | ListOperationsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.ListOperationsResponse|ListOperationsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.list_operations.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_ListOperations_async
@@ -1889,7 +1886,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IListOperationsResponse,
       protos.google.container.v1beta1.IListOperationsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   listOperations(
@@ -1929,7 +1926,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IListOperationsResponse,
       protos.google.container.v1beta1.IListOperationsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1975,9 +1972,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.Operation | Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.get_operation.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_GetOperation_async
@@ -1989,7 +1985,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.IGetOperationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getOperation(
@@ -2029,7 +2025,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.IGetOperationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2076,9 +2072,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.cancel_operation.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_CancelOperation_async
@@ -2090,7 +2085,7 @@ export class ClusterManagerClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.container.v1beta1.ICancelOperationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   cancelOperation(
@@ -2136,7 +2131,7 @@ export class ClusterManagerClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.container.v1beta1.ICancelOperationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2180,9 +2175,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.ServerConfig | ServerConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.ServerConfig|ServerConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.get_server_config.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_GetServerConfig_async
@@ -2194,7 +2188,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IServerConfig,
       protos.google.container.v1beta1.IGetServerConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getServerConfig(
@@ -2240,7 +2234,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IServerConfig,
       protos.google.container.v1beta1.IGetServerConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2277,9 +2271,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.GetJSONWebKeysResponse | GetJSONWebKeysResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.GetJSONWebKeysResponse|GetJSONWebKeysResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.get_j_s_o_n_web_keys.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_GetJSONWebKeys_async
@@ -2291,7 +2284,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IGetJSONWebKeysResponse,
       protos.google.container.v1beta1.IGetJSONWebKeysRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getJSONWebKeys(
@@ -2331,7 +2324,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IGetJSONWebKeysResponse,
       protos.google.container.v1beta1.IGetJSONWebKeysRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2375,9 +2368,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.ListNodePoolsResponse | ListNodePoolsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.ListNodePoolsResponse|ListNodePoolsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.list_node_pools.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_ListNodePools_async
@@ -2389,7 +2381,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IListNodePoolsResponse,
       protos.google.container.v1beta1.IListNodePoolsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   listNodePools(
@@ -2429,7 +2421,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IListNodePoolsResponse,
       protos.google.container.v1beta1.IListNodePoolsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2480,9 +2472,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.NodePool | NodePool}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.NodePool|NodePool}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.get_node_pool.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_GetNodePool_async
@@ -2494,7 +2485,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.INodePool,
       protos.google.container.v1beta1.IGetNodePoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getNodePool(
@@ -2534,7 +2525,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.INodePool,
       protos.google.container.v1beta1.IGetNodePoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2585,9 +2576,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.Operation | Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.create_node_pool.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_CreateNodePool_async
@@ -2599,7 +2589,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ICreateNodePoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createNodePool(
@@ -2639,7 +2629,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ICreateNodePoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2690,9 +2680,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.Operation | Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.delete_node_pool.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_DeleteNodePool_async
@@ -2704,7 +2693,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.IDeleteNodePoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteNodePool(
@@ -2744,7 +2733,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.IDeleteNodePoolRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2782,9 +2771,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.complete_node_pool_upgrade.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_CompleteNodePoolUpgrade_async
@@ -2799,7 +2787,7 @@ export class ClusterManagerClient {
         | protos.google.container.v1beta1.ICompleteNodePoolUpgradeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   completeNodePoolUpgrade(
@@ -2848,7 +2836,7 @@ export class ClusterManagerClient {
         | protos.google.container.v1beta1.ICompleteNodePoolUpgradeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2904,9 +2892,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.Operation | Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.rollback_node_pool_upgrade.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_RollbackNodePoolUpgrade_async
@@ -2921,7 +2908,7 @@ export class ClusterManagerClient {
         | protos.google.container.v1beta1.IRollbackNodePoolUpgradeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   rollbackNodePoolUpgrade(
@@ -2970,7 +2957,7 @@ export class ClusterManagerClient {
         | protos.google.container.v1beta1.IRollbackNodePoolUpgradeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3028,9 +3015,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.Operation | Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.set_node_pool_management.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_SetNodePoolManagement_async
@@ -3042,7 +3028,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetNodePoolManagementRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setNodePoolManagement(
@@ -3088,7 +3074,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetNodePoolManagementRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3145,9 +3131,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.Operation | Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.set_labels.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_SetLabels_async
@@ -3159,7 +3144,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetLabelsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setLabels(
@@ -3197,7 +3182,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetLabelsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3246,9 +3231,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.Operation | Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.set_legacy_abac.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_SetLegacyAbac_async
@@ -3260,7 +3244,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetLegacyAbacRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setLegacyAbac(
@@ -3300,7 +3284,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetLegacyAbacRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3349,9 +3333,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.Operation | Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.start_i_p_rotation.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_StartIPRotation_async
@@ -3363,7 +3346,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.IStartIPRotationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   startIPRotation(
@@ -3409,7 +3392,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.IStartIPRotationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3456,9 +3439,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.Operation | Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.complete_i_p_rotation.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_CompleteIPRotation_async
@@ -3470,7 +3452,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ICompleteIPRotationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   completeIPRotation(
@@ -3516,7 +3498,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ICompleteIPRotationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3543,7 +3525,7 @@ export class ClusterManagerClient {
   /**
    * SetNodePoolSizeRequest sets the size of a node pool. The new size will be
    * used for all replicas, including future replicas created by modifying
-   * {@link google.container.v1beta1.NodePool.locations|NodePool.locations}.
+   * {@link protos.google.container.v1beta1.NodePool.locations|NodePool.locations}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3571,9 +3553,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.Operation | Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.set_node_pool_size.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_SetNodePoolSize_async
@@ -3585,7 +3566,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetNodePoolSizeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setNodePoolSize(
@@ -3631,7 +3612,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetNodePoolSizeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3681,9 +3662,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.Operation | Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.set_network_policy.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_SetNetworkPolicy_async
@@ -3695,7 +3675,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetNetworkPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setNetworkPolicy(
@@ -3741,7 +3721,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetNetworkPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3789,9 +3769,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.Operation | Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.Operation|Operation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.set_maintenance_policy.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_SetMaintenancePolicy_async
@@ -3803,7 +3782,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetMaintenancePolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setMaintenancePolicy(
@@ -3849,7 +3828,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IOperation,
       protos.google.container.v1beta1.ISetMaintenancePolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3885,9 +3864,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.CheckAutopilotCompatibilityResponse | CheckAutopilotCompatibilityResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.CheckAutopilotCompatibilityResponse|CheckAutopilotCompatibilityResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.check_autopilot_compatibility.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_CheckAutopilotCompatibility_async
@@ -3902,7 +3880,7 @@ export class ClusterManagerClient {
         | protos.google.container.v1beta1.ICheckAutopilotCompatibilityRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   checkAutopilotCompatibility(
@@ -3951,7 +3929,7 @@ export class ClusterManagerClient {
         | protos.google.container.v1beta1.ICheckAutopilotCompatibilityRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3987,9 +3965,8 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.container.v1beta1.ListLocationsResponse | ListLocationsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.container.v1beta1.ListLocationsResponse|ListLocationsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.list_locations.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_ListLocations_async
@@ -4001,7 +3978,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IListLocationsResponse,
       protos.google.container.v1beta1.IListLocationsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   listLocations(
@@ -4041,7 +4018,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IListLocationsResponse,
       protos.google.container.v1beta1.IListLocationsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4087,14 +4064,13 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.container.v1beta1.UsableSubnetwork | UsableSubnetwork}.
+   *   The first element of the array is Array of {@link protos.google.container.v1beta1.UsableSubnetwork|UsableSubnetwork}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listUsableSubnetworksAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listUsableSubnetworks(
@@ -4104,7 +4080,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IUsableSubnetwork[],
       protos.google.container.v1beta1.IListUsableSubnetworksRequest | null,
-      protos.google.container.v1beta1.IListUsableSubnetworksResponse
+      protos.google.container.v1beta1.IListUsableSubnetworksResponse,
     ]
   >;
   listUsableSubnetworks(
@@ -4150,7 +4126,7 @@ export class ClusterManagerClient {
     [
       protos.google.container.v1beta1.IUsableSubnetwork[],
       protos.google.container.v1beta1.IListUsableSubnetworksRequest | null,
-      protos.google.container.v1beta1.IListUsableSubnetworksResponse
+      protos.google.container.v1beta1.IListUsableSubnetworksResponse,
     ]
   > | void {
     request = request || {};
@@ -4195,13 +4171,12 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.container.v1beta1.UsableSubnetwork | UsableSubnetwork} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.container.v1beta1.UsableSubnetwork|UsableSubnetwork} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listUsableSubnetworksAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listUsableSubnetworksStream(
@@ -4251,12 +4226,11 @@ export class ClusterManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.container.v1beta1.UsableSubnetwork | UsableSubnetwork}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.container.v1beta1.UsableSubnetwork|UsableSubnetwork}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/cluster_manager.list_usable_subnetworks.js</caption>
    * region_tag:container_v1beta1_generated_ClusterManager_ListUsableSubnetworks_async

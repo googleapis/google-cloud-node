@@ -9,13 +9,13 @@
   "author": "Google LLC",
   "repository": "googleapis/nodejs-billing-budgets",
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=14.0.0"
   },
   "scripts": {
     "test": "c8 mocha test --timeout=800000"
   },
   "dependencies": {
-    "@google-cloud/billing-budgets": "^4.3.0"
+    "@google-cloud/billing-budgets": "^5.0.0"
   },
   "devDependencies": {
     "c8": "^7.0.0",

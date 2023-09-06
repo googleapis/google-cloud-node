@@ -90,8 +90,7 @@ export class ModelServiceClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -99,7 +98,7 @@ export class ModelServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new ModelServiceClient({fallback: 'rest'}, gax);
+   *     const client = new ModelServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -165,7 +164,7 @@ export class ModelServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -339,9 +338,8 @@ export class ModelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.ai.generativelanguage.v1beta2.Model | Model}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta2.Model|Model}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta2/model_service.get_model.js</caption>
    * region_tag:generativelanguage_v1beta2_generated_ModelService_GetModel_async
@@ -353,7 +351,7 @@ export class ModelServiceClient {
     [
       protos.google.ai.generativelanguage.v1beta2.IModel,
       protos.google.ai.generativelanguage.v1beta2.IGetModelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getModel(
@@ -399,7 +397,7 @@ export class ModelServiceClient {
     [
       protos.google.ai.generativelanguage.v1beta2.IModel,
       protos.google.ai.generativelanguage.v1beta2.IGetModelRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -444,14 +442,13 @@ export class ModelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.ai.generativelanguage.v1beta2.Model | Model}.
+   *   The first element of the array is Array of {@link protos.google.ai.generativelanguage.v1beta2.Model|Model}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listModelsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listModels(
@@ -461,7 +458,7 @@ export class ModelServiceClient {
     [
       protos.google.ai.generativelanguage.v1beta2.IModel[],
       protos.google.ai.generativelanguage.v1beta2.IListModelsRequest | null,
-      protos.google.ai.generativelanguage.v1beta2.IListModelsResponse
+      protos.google.ai.generativelanguage.v1beta2.IListModelsResponse,
     ]
   >;
   listModels(
@@ -507,7 +504,7 @@ export class ModelServiceClient {
     [
       protos.google.ai.generativelanguage.v1beta2.IModel[],
       protos.google.ai.generativelanguage.v1beta2.IListModelsRequest | null,
-      protos.google.ai.generativelanguage.v1beta2.IListModelsResponse
+      protos.google.ai.generativelanguage.v1beta2.IListModelsResponse,
     ]
   > | void {
     request = request || {};
@@ -547,13 +544,12 @@ export class ModelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.ai.generativelanguage.v1beta2.Model | Model} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.ai.generativelanguage.v1beta2.Model|Model} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listModelsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listModelsStream(
@@ -598,12 +594,11 @@ export class ModelServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.ai.generativelanguage.v1beta2.Model | Model}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.ai.generativelanguage.v1beta2.Model|Model}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta2/model_service.list_models.js</caption>
    * region_tag:generativelanguage_v1beta2_generated_ModelService_ListModels_async

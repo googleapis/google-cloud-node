@@ -859,6 +859,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "knowledgeSearchFeedback": {
+                          "type": "KnowledgeSearchFeedback",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -898,6 +905,19 @@
                               "id": 3
                             }
                           }
+                        },
+                        "KnowledgeSearchFeedback": {
+                          "fields": {
+                            "answerCopied": {
+                              "type": "bool",
+                              "id": 1
+                            },
+                            "clickedUris": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
                         }
                       }
                     },
@@ -906,7 +926,8 @@
                         "answer": {
                           "oneof": [
                             "articleSuggestionAnswer",
-                            "faqAnswer"
+                            "faqAnswer",
+                            "dialogflowAssistAnswer"
                           ]
                         }
                       },
@@ -921,6 +942,13 @@
                         "faqAnswer": {
                           "type": "FaqAnswer",
                           "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "dialogflowAssistAnswer": {
+                          "type": "DialogflowAssistAnswer",
+                          "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -1362,7 +1390,8 @@
                         "input": {
                           "oneof": [
                             "textInput",
-                            "eventInput"
+                            "eventInput",
+                            "suggestionInput"
                           ]
                         }
                       },
@@ -1382,6 +1411,10 @@
                         "eventInput": {
                           "type": "EventInput",
                           "id": 8
+                        },
+                        "suggestionInput": {
+                          "type": "SuggestionInput",
+                          "id": 12
                         },
                         "replyAudioConfig": {
                           "type": "OutputAudioConfig",
@@ -1825,6 +1858,53 @@
                         }
                       }
                     },
+                    "IntentSuggestion": {
+                      "oneofs": {
+                        "intent": {
+                          "oneof": [
+                            "intentV2"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "intentV2": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "DialogflowAssistAnswer": {
+                      "oneofs": {
+                        "result": {
+                          "oneof": [
+                            "queryResult",
+                            "intentSuggestion"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "queryResult": {
+                          "type": "QueryResult",
+                          "id": 1
+                        },
+                        "intentSuggestion": {
+                          "type": "IntentSuggestion",
+                          "id": 5
+                        },
+                        "answerRecord": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "SuggestionResult": {
                       "oneofs": {
                         "suggestionResponse": {
@@ -1892,6 +1972,17 @@
                         "containEntities": {
                           "type": "bool",
                           "id": 2
+                        }
+                      }
+                    },
+                    "SuggestionInput": {
+                      "fields": {
+                        "answerRecord": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -2100,6 +2191,10 @@
                         "model": {
                           "type": "string",
                           "id": 2
+                        },
+                        "useTimeoutBasedEndpointing": {
+                          "type": "bool",
+                          "id": 11
                         }
                       }
                     },
@@ -2307,6 +2402,10 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 14
+                        },
+                        "platform": {
+                          "type": "string",
+                          "id": 18
                         }
                       }
                     },
@@ -2512,6 +2611,10 @@
                         "noSpeechTimeout": {
                           "type": "google.protobuf.Duration",
                           "id": 15
+                        },
+                        "endpointingTimeout": {
+                          "type": "google.protobuf.Duration",
+                          "id": 19
                         },
                         "isInputText": {
                           "type": "bool",
@@ -5668,6 +5771,38 @@
                               }
                             }
                           ]
+                        },
+                        "SearchKnowledge": {
+                          "requestType": "SearchKnowledgeRequest",
+                          "responseType": "SearchKnowledgeResponse",
+                          "options": {
+                            "(google.api.http).post": "/v2/{parent=projects/*}/suggestions:searchKnowledge",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v2/{conversation=projects/*/locations/*/conversations/*}/suggestions:searchKnowledge",
+                            "(google.api.http).additional_bindings.body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=projects/*}/suggestions:searchKnowledge",
+                                "body": "*",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v2/{parent=projects/*/locations/*}/suggestions:searchKnowledge",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v2/{conversation=projects/*/conversations/*}/suggestions:searchKnowledge",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v2/{conversation=projects/*/locations/*/conversations/*}/suggestions:searchKnowledge",
+                                    "body": "*"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -5955,6 +6090,10 @@
                               "options": {
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/AnswerRecord"
                               }
+                            },
+                            "baselineModelVersion": {
+                              "type": "string",
+                              "id": 5
                             }
                           }
                         }
@@ -6040,6 +6179,106 @@
                               "keyType": "string",
                               "type": "string",
                               "id": 2
+                            },
+                            "baselineModelVersion": {
+                              "type": "string",
+                              "id": 4
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "SearchKnowledgeRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "query": {
+                          "type": "TextInput",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "conversationProfile": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/ConversationProfile"
+                          }
+                        },
+                        "sessionId": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "conversation": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/Conversation"
+                          }
+                        },
+                        "latestMessage": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/Message"
+                          }
+                        }
+                      }
+                    },
+                    "SearchKnowledgeResponse": {
+                      "fields": {
+                        "answers": {
+                          "rule": "repeated",
+                          "type": "SearchKnowledgeAnswer",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SearchKnowledgeAnswer": {
+                      "fields": {
+                        "answer": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "answerType": {
+                          "type": "AnswerType",
+                          "id": 2
+                        },
+                        "answerSources": {
+                          "rule": "repeated",
+                          "type": "AnswerSource",
+                          "id": 3
+                        },
+                        "answerRecord": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "AnswerType": {
+                          "values": {
+                            "ANSWER_TYPE_UNSPECIFIED": 0,
+                            "FAQ": 1,
+                            "GENERATIVE": 2
+                          }
+                        },
+                        "AnswerSource": {
+                          "fields": {
+                            "title": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "uri": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "snippet": {
+                              "type": "string",
+                              "id": 3
                             }
                           }
                         }
@@ -6480,6 +6719,13 @@
                               "type": "bool",
                               "id": 3
                             },
+                            "disableAgentQueryLogging": {
+                              "type": "bool",
+                              "id": 14,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
                             "suggestionTriggerSettings": {
                               "type": "SuggestionTriggerSettings",
                               "id": 10
@@ -6582,6 +6828,27 @@
                                   "options": {
                                     "(google.api.field_behavior)": "REQUIRED",
                                     "(google.api.resource_reference).type": "dialogflow.googleapis.com/Agent"
+                                  }
+                                },
+                                "humanAgentSideConfig": {
+                                  "type": "HumanAgentSideConfig",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "HumanAgentSideConfig": {
+                                  "fields": {
+                                    "agent": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL",
+                                        "(google.api.resource_reference).type": "dialogflow.googleapis.com/Agent"
+                                      }
+                                    }
                                   }
                                 }
                               }
@@ -6748,7 +7015,8 @@
                             "TYPE_UNSPECIFIED": 0,
                             "ARTICLE_SUGGESTION": 1,
                             "FAQ": 2,
-                            "SMART_REPLY": 3
+                            "SMART_REPLY": 3,
+                            "KNOWLEDGE_SEARCH": 14
                           }
                         }
                       }
@@ -10789,6 +11057,13 @@
                         "summarizationFeedback": {
                           "type": "SummarizationFeedback",
                           "id": 4
+                        },
+                        "knowledgeSearchFeedback": {
+                          "type": "KnowledgeSearchFeedback",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -10826,6 +11101,19 @@
                             "summaryText": {
                               "type": "string",
                               "id": 3
+                            }
+                          }
+                        },
+                        "KnowledgeSearchFeedback": {
+                          "fields": {
+                            "answerCopied": {
+                              "type": "bool",
+                              "id": 1
+                            },
+                            "clickedUris": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
                             }
                           }
                         }
@@ -11508,7 +11796,8 @@
                             "FAQ": 2,
                             "SMART_REPLY": 3,
                             "DIALOGFLOW_ASSIST": 4,
-                            "CONVERSATION_SUMMARIZATION": 8
+                            "CONVERSATION_SUMMARIZATION": 8,
+                            "KNOWLEDGE_SEARCH": 14
                           }
                         }
                       }
@@ -12603,6 +12892,10 @@
                         "model": {
                           "type": "string",
                           "id": 2
+                        },
+                        "useTimeoutBasedEndpointing": {
+                          "type": "bool",
+                          "id": 11
                         }
                       }
                     },
@@ -12825,6 +13118,10 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 14
+                        },
+                        "platform": {
+                          "type": "string",
+                          "id": 18
                         }
                       }
                     },
@@ -13087,6 +13384,10 @@
                         "noSpeechTimeout": {
                           "type": "google.protobuf.Duration",
                           "id": 15
+                        },
+                        "endpointingTimeout": {
+                          "type": "google.protobuf.Duration",
+                          "id": 19
                         },
                         "isInputText": {
                           "type": "bool",
@@ -16312,6 +16613,38 @@
                               }
                             }
                           ]
+                        },
+                        "SearchKnowledge": {
+                          "requestType": "SearchKnowledgeRequest",
+                          "responseType": "SearchKnowledgeResponse",
+                          "options": {
+                            "(google.api.http).post": "/v2beta1/{parent=projects/*}/suggestions:searchKnowledge",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v2beta1/{conversation=projects/*/locations/*/conversations/*}/suggestions:searchKnowledge",
+                            "(google.api.http).additional_bindings.body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta1/{parent=projects/*}/suggestions:searchKnowledge",
+                                "body": "*",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v2beta1/{parent=projects/*/locations/*}/suggestions:searchKnowledge",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v2beta1/{conversation=projects/*/conversations/*}/suggestions:searchKnowledge",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v2beta1/{conversation=projects/*/locations/*/conversations/*}/suggestions:searchKnowledge",
+                                    "body": "*"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -16632,6 +16965,10 @@
                               "options": {
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/AnswerRecord"
                               }
+                            },
+                            "baselineModelVersion": {
+                              "type": "string",
+                              "id": 5
                             }
                           }
                         }
@@ -16717,6 +17054,106 @@
                               "keyType": "string",
                               "type": "string",
                               "id": 2
+                            },
+                            "baselineModelVersion": {
+                              "type": "string",
+                              "id": 4
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "SearchKnowledgeRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "query": {
+                          "type": "TextInput",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "conversationProfile": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/ConversationProfile"
+                          }
+                        },
+                        "sessionId": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "conversation": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/Conversation"
+                          }
+                        },
+                        "latestMessage": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/Message"
+                          }
+                        }
+                      }
+                    },
+                    "SearchKnowledgeResponse": {
+                      "fields": {
+                        "answers": {
+                          "rule": "repeated",
+                          "type": "SearchKnowledgeAnswer",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SearchKnowledgeAnswer": {
+                      "fields": {
+                        "answer": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "answerType": {
+                          "type": "AnswerType",
+                          "id": 2
+                        },
+                        "answerSources": {
+                          "rule": "repeated",
+                          "type": "AnswerSource",
+                          "id": 3
+                        },
+                        "answerRecord": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "AnswerType": {
+                          "values": {
+                            "ANSWER_TYPE_UNSPECIFIED": 0,
+                            "FAQ": 1,
+                            "GENERATIVE": 2
+                          }
+                        },
+                        "AnswerSource": {
+                          "fields": {
+                            "title": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "uri": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "snippet": {
+                              "type": "string",
+                              "id": 3
                             }
                           }
                         }
@@ -17062,6 +17499,13 @@
                             "enableEventBasedSuggestion": {
                               "type": "bool",
                               "id": 3
+                            },
+                            "disableAgentQueryLogging": {
+                              "type": "bool",
+                              "id": 14,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "suggestionTriggerSettings": {
                               "type": "SuggestionTriggerSettings",
@@ -19590,6 +20034,248 @@
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
             },
+            "CommonLanguageSettings": {
+              "fields": {
+                "referenceDocsUri": {
+                  "type": "string",
+                  "id": 1,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
+                "destinations": {
+                  "rule": "repeated",
+                  "type": "ClientLibraryDestination",
+                  "id": 2
+                }
+              }
+            },
+            "ClientLibrarySettings": {
+              "fields": {
+                "version": {
+                  "type": "string",
+                  "id": 1
+                },
+                "launchStage": {
+                  "type": "LaunchStage",
+                  "id": 2
+                },
+                "restNumericEnums": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "javaSettings": {
+                  "type": "JavaSettings",
+                  "id": 21
+                },
+                "cppSettings": {
+                  "type": "CppSettings",
+                  "id": 22
+                },
+                "phpSettings": {
+                  "type": "PhpSettings",
+                  "id": 23
+                },
+                "pythonSettings": {
+                  "type": "PythonSettings",
+                  "id": 24
+                },
+                "nodeSettings": {
+                  "type": "NodeSettings",
+                  "id": 25
+                },
+                "dotnetSettings": {
+                  "type": "DotnetSettings",
+                  "id": 26
+                },
+                "rubySettings": {
+                  "type": "RubySettings",
+                  "id": 27
+                },
+                "goSettings": {
+                  "type": "GoSettings",
+                  "id": 28
+                }
+              }
+            },
+            "Publishing": {
+              "fields": {
+                "methodSettings": {
+                  "rule": "repeated",
+                  "type": "MethodSettings",
+                  "id": 2
+                },
+                "newIssueUri": {
+                  "type": "string",
+                  "id": 101
+                },
+                "documentationUri": {
+                  "type": "string",
+                  "id": 102
+                },
+                "apiShortName": {
+                  "type": "string",
+                  "id": 103
+                },
+                "githubLabel": {
+                  "type": "string",
+                  "id": 104
+                },
+                "codeownerGithubTeams": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 105
+                },
+                "docTagPrefix": {
+                  "type": "string",
+                  "id": 106
+                },
+                "organization": {
+                  "type": "ClientLibraryOrganization",
+                  "id": 107
+                },
+                "librarySettings": {
+                  "rule": "repeated",
+                  "type": "ClientLibrarySettings",
+                  "id": 109
+                }
+              }
+            },
+            "JavaSettings": {
+              "fields": {
+                "libraryPackage": {
+                  "type": "string",
+                  "id": 1
+                },
+                "serviceClassNames": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
+                },
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 3
+                }
+              }
+            },
+            "CppSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "PhpSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "PythonSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "NodeSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "DotnetSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "RubySettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "GoSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "MethodSettings": {
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "longRunning": {
+                  "type": "LongRunning",
+                  "id": 2
+                }
+              },
+              "nested": {
+                "LongRunning": {
+                  "fields": {
+                    "initialPollDelay": {
+                      "type": "google.protobuf.Duration",
+                      "id": 1
+                    },
+                    "pollDelayMultiplier": {
+                      "type": "float",
+                      "id": 2
+                    },
+                    "maxPollDelay": {
+                      "type": "google.protobuf.Duration",
+                      "id": 3
+                    },
+                    "totalPollTimeout": {
+                      "type": "google.protobuf.Duration",
+                      "id": 4
+                    }
+                  }
+                }
+              }
+            },
+            "ClientLibraryOrganization": {
+              "values": {
+                "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED": 0,
+                "CLOUD": 1,
+                "ADS": 2,
+                "PHOTOS": 3,
+                "STREET_VIEW": 4
+              }
+            },
+            "ClientLibraryDestination": {
+              "values": {
+                "CLIENT_LIBRARY_DESTINATION_UNSPECIFIED": 0,
+                "GITHUB": 10,
+                "PACKAGE_MANAGER": 20
+              }
+            },
+            "LaunchStage": {
+              "values": {
+                "LAUNCH_STAGE_UNSPECIFIED": 0,
+                "UNIMPLEMENTED": 6,
+                "PRELAUNCH": 7,
+                "EARLY_ACCESS": 1,
+                "ALPHA": 2,
+                "BETA": 3,
+                "GA": 4,
+                "DEPRECATED": 5
+              }
+            },
             "fieldBehavior": {
               "rule": "repeated",
               "type": "google.api.FieldBehavior",
@@ -20239,6 +20925,13 @@
                   "type": "bool",
                   "id": 7
                 },
+                "deprecatedLegacyJsonFieldConflicts": {
+                  "type": "bool",
+                  "id": 11,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -20322,6 +21015,21 @@
                     "default": false
                   }
                 },
+                "debugRedact": {
+                  "type": "bool",
+                  "id": 16,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "retention": {
+                  "type": "OptionRetention",
+                  "id": 17
+                },
+                "target": {
+                  "type": "OptionTargetType",
+                  "id": 18
+                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -20354,6 +21062,27 @@
                     "JS_STRING": 1,
                     "JS_NUMBER": 2
                   }
+                },
+                "OptionRetention": {
+                  "values": {
+                    "RETENTION_UNKNOWN": 0,
+                    "RETENTION_RUNTIME": 1,
+                    "RETENTION_SOURCE": 2
+                  }
+                },
+                "OptionTargetType": {
+                  "values": {
+                    "TARGET_TYPE_UNKNOWN": 0,
+                    "TARGET_TYPE_FILE": 1,
+                    "TARGET_TYPE_EXTENSION_RANGE": 2,
+                    "TARGET_TYPE_MESSAGE": 3,
+                    "TARGET_TYPE_FIELD": 4,
+                    "TARGET_TYPE_ONEOF": 5,
+                    "TARGET_TYPE_ENUM": 6,
+                    "TARGET_TYPE_ENUM_ENTRY": 7,
+                    "TARGET_TYPE_SERVICE": 8,
+                    "TARGET_TYPE_METHOD": 9
+                  }
                 }
               }
             },
@@ -20383,6 +21112,13 @@
                   "id": 3,
                   "options": {
                     "default": false
+                  }
+                },
+                "deprecatedLegacyJsonFieldConflicts": {
+                  "type": "bool",
+                  "id": 6,
+                  "options": {
+                    "deprecated": true
                   }
                 },
                 "uninterpretedOption": {
@@ -20618,18 +21354,6 @@
                 }
               }
             },
-            "Any": {
-              "fields": {
-                "type_url": {
-                  "type": "string",
-                  "id": 1
-                },
-                "value": {
-                  "type": "bytes",
-                  "id": 2
-                }
-              }
-            },
             "Duration": {
               "fields": {
                 "seconds": {
@@ -20638,6 +21362,18 @@
                 },
                 "nanos": {
                   "type": "int32",
+                  "id": 2
+                }
+              }
+            },
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
                   "id": 2
                 }
               }

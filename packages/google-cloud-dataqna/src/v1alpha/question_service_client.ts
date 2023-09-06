@@ -102,8 +102,7 @@ export class QuestionServiceClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -111,7 +110,7 @@ export class QuestionServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new QuestionServiceClient({fallback: 'rest'}, gax);
+   *     const client = new QuestionServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -174,7 +173,7 @@ export class QuestionServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -349,9 +348,8 @@ export class QuestionServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataqna.v1alpha.Question | Question}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataqna.v1alpha.Question|Question}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha/question_service.get_question.js</caption>
    * region_tag:dataqna_v1alpha_generated_QuestionService_GetQuestion_async
@@ -363,7 +361,7 @@ export class QuestionServiceClient {
     [
       protos.google.cloud.dataqna.v1alpha.IQuestion,
       protos.google.cloud.dataqna.v1alpha.IGetQuestionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getQuestion(
@@ -409,7 +407,7 @@ export class QuestionServiceClient {
     [
       protos.google.cloud.dataqna.v1alpha.IQuestion,
       protos.google.cloud.dataqna.v1alpha.IGetQuestionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -443,9 +441,8 @@ export class QuestionServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataqna.v1alpha.Question | Question}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataqna.v1alpha.Question|Question}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha/question_service.create_question.js</caption>
    * region_tag:dataqna_v1alpha_generated_QuestionService_CreateQuestion_async
@@ -457,7 +454,7 @@ export class QuestionServiceClient {
     [
       protos.google.cloud.dataqna.v1alpha.IQuestion,
       protos.google.cloud.dataqna.v1alpha.ICreateQuestionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createQuestion(
@@ -503,7 +500,7 @@ export class QuestionServiceClient {
     [
       protos.google.cloud.dataqna.v1alpha.IQuestion,
       protos.google.cloud.dataqna.v1alpha.ICreateQuestionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -537,9 +534,8 @@ export class QuestionServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataqna.v1alpha.Question | Question}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataqna.v1alpha.Question|Question}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha/question_service.execute_question.js</caption>
    * region_tag:dataqna_v1alpha_generated_QuestionService_ExecuteQuestion_async
@@ -551,7 +547,7 @@ export class QuestionServiceClient {
     [
       protos.google.cloud.dataqna.v1alpha.IQuestion,
       protos.google.cloud.dataqna.v1alpha.IExecuteQuestionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   executeQuestion(
@@ -597,7 +593,7 @@ export class QuestionServiceClient {
     [
       protos.google.cloud.dataqna.v1alpha.IQuestion,
       protos.google.cloud.dataqna.v1alpha.IExecuteQuestionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -630,9 +626,8 @@ export class QuestionServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataqna.v1alpha.UserFeedback | UserFeedback}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataqna.v1alpha.UserFeedback|UserFeedback}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha/question_service.get_user_feedback.js</caption>
    * region_tag:dataqna_v1alpha_generated_QuestionService_GetUserFeedback_async
@@ -644,7 +639,7 @@ export class QuestionServiceClient {
     [
       protos.google.cloud.dataqna.v1alpha.IUserFeedback,
       protos.google.cloud.dataqna.v1alpha.IGetUserFeedbackRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getUserFeedback(
@@ -690,7 +685,7 @@ export class QuestionServiceClient {
     [
       protos.google.cloud.dataqna.v1alpha.IUserFeedback,
       protos.google.cloud.dataqna.v1alpha.IGetUserFeedbackRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -727,9 +722,8 @@ export class QuestionServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataqna.v1alpha.UserFeedback | UserFeedback}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataqna.v1alpha.UserFeedback|UserFeedback}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha/question_service.update_user_feedback.js</caption>
    * region_tag:dataqna_v1alpha_generated_QuestionService_UpdateUserFeedback_async
@@ -744,7 +738,7 @@ export class QuestionServiceClient {
         | protos.google.cloud.dataqna.v1alpha.IUpdateUserFeedbackRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateUserFeedback(
@@ -793,7 +787,7 @@ export class QuestionServiceClient {
         | protos.google.cloud.dataqna.v1alpha.IUpdateUserFeedbackRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

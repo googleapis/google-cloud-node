@@ -25,6 +25,8 @@ import type {
   ClientOptions,
   GrpcClientOptions,
   LROperation,
+  LocationsClient,
+  LocationProtos,
 } from 'google-gax';
 
 import * as protos from '../../protos/protos';
@@ -59,6 +61,7 @@ export class UserEventServiceClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
   userEventServiceStub?: Promise<{[name: string]: Function}>;
@@ -91,8 +94,7 @@ export class UserEventServiceClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -100,7 +102,7 @@ export class UserEventServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new UserEventServiceClient({fallback: 'rest'}, gax);
+   *     const client = new UserEventServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -156,6 +158,10 @@ export class UserEventServiceClient {
     if (servicePath === staticMembers.servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
+    this.locationsClient = new this._gaxModule.LocationsClient(
+      this._gaxGrpc,
+      opts
+    );
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -166,7 +172,7 @@ export class UserEventServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -187,6 +193,10 @@ export class UserEventServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}'
         ),
+      projectLocationCollectionDataStoreConversationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/conversations/{conversation}'
+        ),
       projectLocationCollectionDataStoreSchemaPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/schemas/{schema}'
@@ -197,6 +207,10 @@ export class UserEventServiceClient {
       projectLocationDataStoreBranchDocumentPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}'
+        ),
+      projectLocationDataStoreConversationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/conversations/{conversation}'
         ),
       projectLocationDataStoreSchemaPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -212,7 +226,7 @@ export class UserEventServiceClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
@@ -230,6 +244,15 @@ export class UserEventServiceClient {
             },
             {
               get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/schemas/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/targetSites/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/collections/*/engines/*/operations/*}',
             },
             {
               get: '/v1/{name=projects/*/locations/*/collections/*/operations/*}',
@@ -261,7 +284,16 @@ export class UserEventServiceClient {
               get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/schemas/*}/operations',
             },
             {
+              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/targetSites}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine}/operations',
+            },
+            {
               get: '/v1/{name=projects/*/locations/*/collections/*/dataStores/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/collections/*/engines/*}/operations',
             },
             {get: '/v1/{name=projects/*/locations/*/collections/*}/operations'},
             {
@@ -445,9 +477,8 @@ export class UserEventServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.discoveryengine.v1.UserEvent | UserEvent}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1.UserEvent|UserEvent}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/user_event_service.write_user_event.js</caption>
    * region_tag:discoveryengine_v1_generated_UserEventService_WriteUserEvent_async
@@ -459,7 +490,7 @@ export class UserEventServiceClient {
     [
       protos.google.cloud.discoveryengine.v1.IUserEvent,
       protos.google.cloud.discoveryengine.v1.IWriteUserEventRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   writeUserEvent(
@@ -505,7 +536,7 @@ export class UserEventServiceClient {
     [
       protos.google.cloud.discoveryengine.v1.IUserEvent,
       protos.google.cloud.discoveryengine.v1.IWriteUserEventRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -528,7 +559,7 @@ export class UserEventServiceClient {
   }
   /**
    * Writes a single user event from the browser. This uses a GET request to
-   * due to browser restriction of POST-ing to a 3rd party domain.
+   * due to browser restriction of POST-ing to a third-party domain.
    *
    * This method is used only by the Discovery Engine API JavaScript pixel and
    * Google Tag Manager. Users should not call this method directly.
@@ -544,7 +575,7 @@ export class UserEventServiceClient {
    * @param {string} request.uri
    *   The URL including cgi-parameters but excluding the hash fragment with a
    *   length limit of 5,000 characters. This is often more useful than the
-   *   referer URL, because many browsers only send the domain for 3rd party
+   *   referer URL, because many browsers only send the domain for third-party
    *   requests.
    * @param {number} request.ets
    *   The event timestamp in milliseconds. This prevents browser caching of
@@ -553,9 +584,8 @@ export class UserEventServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.api.HttpBody | HttpBody}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.api.HttpBody|HttpBody}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/user_event_service.collect_user_event.js</caption>
    * region_tag:discoveryengine_v1_generated_UserEventService_CollectUserEvent_async
@@ -570,7 +600,7 @@ export class UserEventServiceClient {
         | protos.google.cloud.discoveryengine.v1.ICollectUserEventRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   collectUserEvent(
@@ -619,7 +649,7 @@ export class UserEventServiceClient {
         | protos.google.cloud.discoveryengine.v1.ICollectUserEventRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -653,11 +683,11 @@ export class UserEventServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.discoveryengine.v1.ImportUserEventsRequest.InlineSource} request.inlineSource
-   *   Required. The Inline source for the input content for UserEvents.
+   *   The Inline source for the input content for UserEvents.
    * @param {google.cloud.discoveryengine.v1.GcsSource} request.gcsSource
-   *   Required. Cloud Storage location for the input content.
+   *   Cloud Storage location for the input content.
    * @param {google.cloud.discoveryengine.v1.BigQuerySource} request.bigquerySource
-   *   Required. BigQuery input source.
+   *   BigQuery input source.
    * @param {string} request.parent
    *   Required. Parent DataStore resource name, of the form
    *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`
@@ -670,8 +700,7 @@ export class UserEventServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/user_event_service.import_user_events.js</caption>
    * region_tag:discoveryengine_v1_generated_UserEventService_ImportUserEvents_async
@@ -686,7 +715,7 @@ export class UserEventServiceClient {
         protos.google.cloud.discoveryengine.v1.IImportUserEventsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   importUserEvents(
@@ -739,7 +768,7 @@ export class UserEventServiceClient {
         protos.google.cloud.discoveryengine.v1.IImportUserEventsMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -766,8 +795,7 @@ export class UserEventServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/user_event_service.import_user_events.js</caption>
    * region_tag:discoveryengine_v1_generated_UserEventService_ImportUserEvents_async
@@ -795,6 +823,84 @@ export class UserEventServiceClient {
       protos.google.cloud.discoveryengine.v1.ImportUserEventsMetadata
     >;
   }
+  /**
+   * Gets information about a location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Resource name for the location.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example
+   * ```
+   * const [response] = await client.getLocation(request);
+   * ```
+   */
+  getLocation(
+    request: LocationProtos.google.cloud.location.IGetLocationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          LocationProtos.google.cloud.location.ILocation,
+          | LocationProtos.google.cloud.location.IGetLocationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LocationProtos.google.cloud.location.ILocation,
+      | LocationProtos.google.cloud.location.IGetLocationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.getLocation(request, options, callback);
+  }
+
+  /**
+   * Lists information about the supported locations for this service. Returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The resource that owns the locations collection, if applicable.
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example
+   * ```
+   * const iterable = client.listLocationsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   * ```
+   */
+  listLocationsAsync(
+    request: LocationProtos.google.cloud.location.IListLocationsRequest,
+    options?: CallOptions
+  ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.listLocationsAsync(request, options);
+  }
+
   /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
@@ -1181,6 +1287,109 @@ export class UserEventServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationCollectionDataStoreConversation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @param {string} conversation
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreConversationPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string,
+    conversation: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+        conversation: conversation,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreConversation resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreConversationName
+   *   A fully-qualified path representing project_location_collection_data_store_conversation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreConversationName(
+    projectLocationCollectionDataStoreConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(
+      projectLocationCollectionDataStoreConversationName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreConversation resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreConversationName
+   *   A fully-qualified path representing project_location_collection_data_store_conversation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreConversationName(
+    projectLocationCollectionDataStoreConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(
+      projectLocationCollectionDataStoreConversationName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreConversation resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreConversationName
+   *   A fully-qualified path representing project_location_collection_data_store_conversation resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreConversationName(
+    projectLocationCollectionDataStoreConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(
+      projectLocationCollectionDataStoreConversationName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreConversation resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreConversationName
+   *   A fully-qualified path representing project_location_collection_data_store_conversation resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreConversationName(
+    projectLocationCollectionDataStoreConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(
+      projectLocationCollectionDataStoreConversationName
+    ).data_store;
+  }
+
+  /**
+   * Parse the conversation from ProjectLocationCollectionDataStoreConversation resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreConversationName
+   *   A fully-qualified path representing project_location_collection_data_store_conversation resource.
+   * @returns {string} A string representing the conversation.
+   */
+  matchConversationFromProjectLocationCollectionDataStoreConversationName(
+    projectLocationCollectionDataStoreConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(
+      projectLocationCollectionDataStoreConversationName
+    ).conversation;
+  }
+
+  /**
    * Return a fully-qualified projectLocationCollectionDataStoreSchema resource name string.
    *
    * @param {string} project
@@ -1452,6 +1661,91 @@ export class UserEventServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationDataStoreConversation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @param {string} conversation
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreConversationPath(
+    project: string,
+    location: string,
+    dataStore: string,
+    conversation: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+        conversation: conversation,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreConversation resource.
+   *
+   * @param {string} projectLocationDataStoreConversationName
+   *   A fully-qualified path representing project_location_data_store_conversation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreConversationName(
+    projectLocationDataStoreConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(
+      projectLocationDataStoreConversationName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreConversation resource.
+   *
+   * @param {string} projectLocationDataStoreConversationName
+   *   A fully-qualified path representing project_location_data_store_conversation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreConversationName(
+    projectLocationDataStoreConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(
+      projectLocationDataStoreConversationName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreConversation resource.
+   *
+   * @param {string} projectLocationDataStoreConversationName
+   *   A fully-qualified path representing project_location_data_store_conversation resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreConversationName(
+    projectLocationDataStoreConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(
+      projectLocationDataStoreConversationName
+    ).data_store;
+  }
+
+  /**
+   * Parse the conversation from ProjectLocationDataStoreConversation resource.
+   *
+   * @param {string} projectLocationDataStoreConversationName
+   *   A fully-qualified path representing project_location_data_store_conversation resource.
+   * @returns {string} A string representing the conversation.
+   */
+  matchConversationFromProjectLocationDataStoreConversationName(
+    projectLocationDataStoreConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(
+      projectLocationDataStoreConversationName
+    ).conversation;
+  }
+
+  /**
    * Return a fully-qualified projectLocationDataStoreSchema resource name string.
    *
    * @param {string} project
@@ -1547,6 +1841,7 @@ export class UserEventServiceClient {
       return this.userEventServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
+        this.locationsClient.close();
         this.operationsClient.close();
       });
     }

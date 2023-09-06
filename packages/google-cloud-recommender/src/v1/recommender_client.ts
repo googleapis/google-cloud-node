@@ -93,8 +93,7 @@ export class RecommenderClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -102,7 +101,7 @@ export class RecommenderClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new RecommenderClient({fallback: 'rest'}, gax);
+   *     const client = new RecommenderClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -168,7 +167,7 @@ export class RecommenderClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -185,6 +184,10 @@ export class RecommenderClient {
         new this._gaxModule.PathTemplate(
           'billingAccounts/{billing_account}/locations/{location}/insightTypes/{insight_type}'
         ),
+      billingAccountLocationInsightTypeConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'billingAccounts/{billing_account}/locations/{location}/insightTypes/{insight_type}/config'
+        ),
       billingAccountLocationInsightTypeInsightPathTemplate:
         new this._gaxModule.PathTemplate(
           'billingAccounts/{billing_account}/locations/{location}/insightTypes/{insight_type}/insights/{insight}'
@@ -192,6 +195,10 @@ export class RecommenderClient {
       billingAccountLocationRecommenderPathTemplate:
         new this._gaxModule.PathTemplate(
           'billingAccounts/{billing_account}/locations/{location}/recommenders/{recommender}'
+        ),
+      billingAccountLocationRecommenderConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'billingAccounts/{billing_account}/locations/{location}/recommenders/{recommender}/config'
         ),
       billingAccountLocationRecommenderRecommendationPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -330,6 +337,7 @@ export class RecommenderClient {
       'markInsightAccepted',
       'listRecommendations',
       'getRecommendation',
+      'markRecommendationDismissed',
       'markRecommendationClaimed',
       'markRecommendationSucceeded',
       'markRecommendationFailed',
@@ -431,9 +439,8 @@ export class RecommenderClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.recommender.v1.Insight | Insight}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.recommender.v1.Insight|Insight}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/recommender.get_insight.js</caption>
    * region_tag:recommender_v1_generated_Recommender_GetInsight_async
@@ -445,7 +452,7 @@ export class RecommenderClient {
     [
       protos.google.cloud.recommender.v1.IInsight,
       protos.google.cloud.recommender.v1.IGetInsightRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getInsight(
@@ -485,7 +492,7 @@ export class RecommenderClient {
     [
       protos.google.cloud.recommender.v1.IInsight,
       protos.google.cloud.recommender.v1.IGetInsightRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -526,9 +533,8 @@ export class RecommenderClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.recommender.v1.Insight | Insight}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.recommender.v1.Insight|Insight}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/recommender.mark_insight_accepted.js</caption>
    * region_tag:recommender_v1_generated_Recommender_MarkInsightAccepted_async
@@ -543,7 +549,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1.IMarkInsightAcceptedRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   markInsightAccepted(
@@ -592,7 +598,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1.IMarkInsightAcceptedRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -624,9 +630,8 @@ export class RecommenderClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.recommender.v1.Recommendation | Recommendation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.recommender.v1.Recommendation|Recommendation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/recommender.get_recommendation.js</caption>
    * region_tag:recommender_v1_generated_Recommender_GetRecommendation_async
@@ -638,7 +643,7 @@ export class RecommenderClient {
     [
       protos.google.cloud.recommender.v1.IRecommendation,
       protos.google.cloud.recommender.v1.IGetRecommendationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRecommendation(
@@ -684,7 +689,7 @@ export class RecommenderClient {
     [
       protos.google.cloud.recommender.v1.IRecommendation,
       protos.google.cloud.recommender.v1.IGetRecommendationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -706,6 +711,116 @@ export class RecommenderClient {
     return this.innerApiCalls.getRecommendation(request, options, callback);
   }
   /**
+   * Mark the Recommendation State as Dismissed. Users can use this method to
+   * indicate to the Recommender API that an ACTIVE recommendation has to
+   * be marked back as DISMISSED.
+   *
+   * MarkRecommendationDismissed can be applied to recommendations in ACTIVE
+   * state.
+   *
+   * Requires the recommender.*.update IAM permission for the specified
+   * recommender.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Name of the recommendation.
+   * @param {string} request.etag
+   *   Fingerprint of the Recommendation. Provides optimistic locking.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.recommender.v1.Recommendation|Recommendation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/recommender.mark_recommendation_dismissed.js</caption>
+   * region_tag:recommender_v1_generated_Recommender_MarkRecommendationDismissed_async
+   */
+  markRecommendationDismissed(
+    request?: protos.google.cloud.recommender.v1.IMarkRecommendationDismissedRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.recommender.v1.IRecommendation,
+      (
+        | protos.google.cloud.recommender.v1.IMarkRecommendationDismissedRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  markRecommendationDismissed(
+    request: protos.google.cloud.recommender.v1.IMarkRecommendationDismissedRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.recommender.v1.IRecommendation,
+      | protos.google.cloud.recommender.v1.IMarkRecommendationDismissedRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  markRecommendationDismissed(
+    request: protos.google.cloud.recommender.v1.IMarkRecommendationDismissedRequest,
+    callback: Callback<
+      protos.google.cloud.recommender.v1.IRecommendation,
+      | protos.google.cloud.recommender.v1.IMarkRecommendationDismissedRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  markRecommendationDismissed(
+    request?: protos.google.cloud.recommender.v1.IMarkRecommendationDismissedRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.recommender.v1.IRecommendation,
+          | protos.google.cloud.recommender.v1.IMarkRecommendationDismissedRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.recommender.v1.IRecommendation,
+      | protos.google.cloud.recommender.v1.IMarkRecommendationDismissedRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.recommender.v1.IRecommendation,
+      (
+        | protos.google.cloud.recommender.v1.IMarkRecommendationDismissedRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.markRecommendationDismissed(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
    * Marks the Recommendation State as Claimed. Users can use this method to
    * indicate to the Recommender API that they are starting to apply the
    * recommendation themselves. This stops the recommendation content from being
@@ -724,16 +839,15 @@ export class RecommenderClient {
    * @param {number[]} request.stateMetadata
    *   State properties to include with this state. Overwrites any existing
    *   `state_metadata`.
-   *   Keys must match the regex `/^{@link a-z0-9_.-|a-z0-9}{0,62}$/`.
+   *   Keys must match the regex `/^{@link protos.a-z0-9_.-|a-z0-9}{0,62}$/`.
    *   Values must match the regex `/^[a-zA-Z0-9_./-]{0,255}$/`.
    * @param {string} request.etag
    *   Required. Fingerprint of the Recommendation. Provides optimistic locking.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.recommender.v1.Recommendation | Recommendation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.recommender.v1.Recommendation|Recommendation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/recommender.mark_recommendation_claimed.js</caption>
    * region_tag:recommender_v1_generated_Recommender_MarkRecommendationClaimed_async
@@ -748,7 +862,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1.IMarkRecommendationClaimedRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   markRecommendationClaimed(
@@ -797,7 +911,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1.IMarkRecommendationClaimedRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -842,16 +956,15 @@ export class RecommenderClient {
    * @param {number[]} request.stateMetadata
    *   State properties to include with this state. Overwrites any existing
    *   `state_metadata`.
-   *   Keys must match the regex `/^{@link a-z0-9_.-|a-z0-9}{0,62}$/`.
+   *   Keys must match the regex `/^{@link protos.a-z0-9_.-|a-z0-9}{0,62}$/`.
    *   Values must match the regex `/^[a-zA-Z0-9_./-]{0,255}$/`.
    * @param {string} request.etag
    *   Required. Fingerprint of the Recommendation. Provides optimistic locking.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.recommender.v1.Recommendation | Recommendation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.recommender.v1.Recommendation|Recommendation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/recommender.mark_recommendation_succeeded.js</caption>
    * region_tag:recommender_v1_generated_Recommender_MarkRecommendationSucceeded_async
@@ -866,7 +979,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1.IMarkRecommendationSucceededRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   markRecommendationSucceeded(
@@ -915,7 +1028,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1.IMarkRecommendationSucceededRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -960,16 +1073,15 @@ export class RecommenderClient {
    * @param {number[]} request.stateMetadata
    *   State properties to include with this state. Overwrites any existing
    *   `state_metadata`.
-   *   Keys must match the regex `/^{@link a-z0-9_.-|a-z0-9}{0,62}$/`.
+   *   Keys must match the regex `/^{@link protos.a-z0-9_.-|a-z0-9}{0,62}$/`.
    *   Values must match the regex `/^[a-zA-Z0-9_./-]{0,255}$/`.
    * @param {string} request.etag
    *   Required. Fingerprint of the Recommendation. Provides optimistic locking.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.recommender.v1.Recommendation | Recommendation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.recommender.v1.Recommendation|Recommendation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/recommender.mark_recommendation_failed.js</caption>
    * region_tag:recommender_v1_generated_Recommender_MarkRecommendationFailed_async
@@ -984,7 +1096,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1.IMarkRecommendationFailedRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   markRecommendationFailed(
@@ -1033,7 +1145,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1.IMarkRecommendationFailedRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1074,12 +1186,13 @@ export class RecommenderClient {
    *   * `projects/[PROJECT_ID]/locations/[LOCATION]/recommenders/[RECOMMENDER_ID]/config`
    *
    *   * `organizations/[ORGANIZATION_ID]/locations/[LOCATION]/recommenders/[RECOMMENDER_ID]/config`
+   *
+   *   * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION]/recommenders/[RECOMMENDER_ID]/config`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.recommender.v1.RecommenderConfig | RecommenderConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.recommender.v1.RecommenderConfig|RecommenderConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/recommender.get_recommender_config.js</caption>
    * region_tag:recommender_v1_generated_Recommender_GetRecommenderConfig_async
@@ -1094,7 +1207,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1.IGetRecommenderConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRecommenderConfig(
@@ -1143,7 +1256,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1.IGetRecommenderConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1180,9 +1293,8 @@ export class RecommenderClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.recommender.v1.RecommenderConfig | RecommenderConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.recommender.v1.RecommenderConfig|RecommenderConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/recommender.update_recommender_config.js</caption>
    * region_tag:recommender_v1_generated_Recommender_UpdateRecommenderConfig_async
@@ -1197,7 +1309,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1.IUpdateRecommenderConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateRecommenderConfig(
@@ -1246,7 +1358,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1.IUpdateRecommenderConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1282,17 +1394,18 @@ export class RecommenderClient {
    *
    *   Acceptable formats:
    *
-   *   * `projects/[PROJECT_NUMBER]/locations/global/recommenders/[INSIGHT_TYPE_ID]/config`
+   *   * `projects/[PROJECT_NUMBER]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]/config`
    *
-   *   * `projects/[PROJECT_ID]/locations/global/recommenders/[INSIGHT_TYPE_ID]/config`
+   *   * `projects/[PROJECT_ID]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]/config`
    *
-   *   * `organizations/[ORGANIZATION_ID]/locations/global/recommenders/[INSIGHT_TYPE_ID]/config`
+   *   * `organizations/[ORGANIZATION_ID]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]/config`
+   *
+   *   * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]/config`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.recommender.v1.InsightTypeConfig | InsightTypeConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.recommender.v1.InsightTypeConfig|InsightTypeConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/recommender.get_insight_type_config.js</caption>
    * region_tag:recommender_v1_generated_Recommender_GetInsightTypeConfig_async
@@ -1307,7 +1420,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1.IGetInsightTypeConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getInsightTypeConfig(
@@ -1356,7 +1469,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1.IGetInsightTypeConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1393,9 +1506,8 @@ export class RecommenderClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.recommender.v1.InsightTypeConfig | InsightTypeConfig}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.recommender.v1.InsightTypeConfig|InsightTypeConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/recommender.update_insight_type_config.js</caption>
    * region_tag:recommender_v1_generated_Recommender_UpdateInsightTypeConfig_async
@@ -1410,7 +1522,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1.IUpdateInsightTypeConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateInsightTypeConfig(
@@ -1459,7 +1571,7 @@ export class RecommenderClient {
         | protos.google.cloud.recommender.v1.IUpdateInsightTypeConfigRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1543,14 +1655,13 @@ export class RecommenderClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.recommender.v1.Insight | Insight}.
+   *   The first element of the array is Array of {@link protos.google.cloud.recommender.v1.Insight|Insight}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listInsightsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listInsights(
@@ -1560,7 +1671,7 @@ export class RecommenderClient {
     [
       protos.google.cloud.recommender.v1.IInsight[],
       protos.google.cloud.recommender.v1.IListInsightsRequest | null,
-      protos.google.cloud.recommender.v1.IListInsightsResponse
+      protos.google.cloud.recommender.v1.IListInsightsResponse,
     ]
   >;
   listInsights(
@@ -1606,7 +1717,7 @@ export class RecommenderClient {
     [
       protos.google.cloud.recommender.v1.IInsight[],
       protos.google.cloud.recommender.v1.IListInsightsRequest | null,
-      protos.google.cloud.recommender.v1.IListInsightsResponse
+      protos.google.cloud.recommender.v1.IListInsightsResponse,
     ]
   > | void {
     request = request || {};
@@ -1684,13 +1795,12 @@ export class RecommenderClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.recommender.v1.Insight | Insight} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.recommender.v1.Insight|Insight} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listInsightsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listInsightsStream(
@@ -1773,12 +1883,11 @@ export class RecommenderClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.recommender.v1.Insight | Insight}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.recommender.v1.Insight|Insight}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/recommender.list_insights.js</caption>
    * region_tag:recommender_v1_generated_Recommender_ListInsights_async
@@ -1862,14 +1971,13 @@ export class RecommenderClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.recommender.v1.Recommendation | Recommendation}.
+   *   The first element of the array is Array of {@link protos.google.cloud.recommender.v1.Recommendation|Recommendation}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listRecommendationsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listRecommendations(
@@ -1879,7 +1987,7 @@ export class RecommenderClient {
     [
       protos.google.cloud.recommender.v1.IRecommendation[],
       protos.google.cloud.recommender.v1.IListRecommendationsRequest | null,
-      protos.google.cloud.recommender.v1.IListRecommendationsResponse
+      protos.google.cloud.recommender.v1.IListRecommendationsResponse,
     ]
   >;
   listRecommendations(
@@ -1925,7 +2033,7 @@ export class RecommenderClient {
     [
       protos.google.cloud.recommender.v1.IRecommendation[],
       protos.google.cloud.recommender.v1.IListRecommendationsRequest | null,
-      protos.google.cloud.recommender.v1.IListRecommendationsResponse
+      protos.google.cloud.recommender.v1.IListRecommendationsResponse,
     ]
   > | void {
     request = request || {};
@@ -2003,13 +2111,12 @@ export class RecommenderClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.recommender.v1.Recommendation | Recommendation} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.recommender.v1.Recommendation|Recommendation} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listRecommendationsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listRecommendationsStream(
@@ -2092,12 +2199,11 @@ export class RecommenderClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.recommender.v1.Recommendation | Recommendation}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.recommender.v1.Recommendation|Recommendation}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/recommender.list_recommendations.js</caption>
    * region_tag:recommender_v1_generated_Recommender_ListRecommendations_async
@@ -2191,6 +2297,73 @@ export class RecommenderClient {
   ) {
     return this.pathTemplates.billingAccountLocationInsightTypePathTemplate.match(
       billingAccountLocationInsightTypeName
+    ).insight_type;
+  }
+
+  /**
+   * Return a fully-qualified billingAccountLocationInsightTypeConfig resource name string.
+   *
+   * @param {string} billing_account
+   * @param {string} location
+   * @param {string} insight_type
+   * @returns {string} Resource name string.
+   */
+  billingAccountLocationInsightTypeConfigPath(
+    billingAccount: string,
+    location: string,
+    insightType: string
+  ) {
+    return this.pathTemplates.billingAccountLocationInsightTypeConfigPathTemplate.render(
+      {
+        billing_account: billingAccount,
+        location: location,
+        insight_type: insightType,
+      }
+    );
+  }
+
+  /**
+   * Parse the billing_account from BillingAccountLocationInsightTypeConfig resource.
+   *
+   * @param {string} billingAccountLocationInsightTypeConfigName
+   *   A fully-qualified path representing billing_account_location_insight_type_config resource.
+   * @returns {string} A string representing the billing_account.
+   */
+  matchBillingAccountFromBillingAccountLocationInsightTypeConfigName(
+    billingAccountLocationInsightTypeConfigName: string
+  ) {
+    return this.pathTemplates.billingAccountLocationInsightTypeConfigPathTemplate.match(
+      billingAccountLocationInsightTypeConfigName
+    ).billing_account;
+  }
+
+  /**
+   * Parse the location from BillingAccountLocationInsightTypeConfig resource.
+   *
+   * @param {string} billingAccountLocationInsightTypeConfigName
+   *   A fully-qualified path representing billing_account_location_insight_type_config resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromBillingAccountLocationInsightTypeConfigName(
+    billingAccountLocationInsightTypeConfigName: string
+  ) {
+    return this.pathTemplates.billingAccountLocationInsightTypeConfigPathTemplate.match(
+      billingAccountLocationInsightTypeConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the insight_type from BillingAccountLocationInsightTypeConfig resource.
+   *
+   * @param {string} billingAccountLocationInsightTypeConfigName
+   *   A fully-qualified path representing billing_account_location_insight_type_config resource.
+   * @returns {string} A string representing the insight_type.
+   */
+  matchInsightTypeFromBillingAccountLocationInsightTypeConfigName(
+    billingAccountLocationInsightTypeConfigName: string
+  ) {
+    return this.pathTemplates.billingAccountLocationInsightTypeConfigPathTemplate.match(
+      billingAccountLocationInsightTypeConfigName
     ).insight_type;
   }
 
@@ -2343,6 +2516,73 @@ export class RecommenderClient {
   ) {
     return this.pathTemplates.billingAccountLocationRecommenderPathTemplate.match(
       billingAccountLocationRecommenderName
+    ).recommender;
+  }
+
+  /**
+   * Return a fully-qualified billingAccountLocationRecommenderConfig resource name string.
+   *
+   * @param {string} billing_account
+   * @param {string} location
+   * @param {string} recommender
+   * @returns {string} Resource name string.
+   */
+  billingAccountLocationRecommenderConfigPath(
+    billingAccount: string,
+    location: string,
+    recommender: string
+  ) {
+    return this.pathTemplates.billingAccountLocationRecommenderConfigPathTemplate.render(
+      {
+        billing_account: billingAccount,
+        location: location,
+        recommender: recommender,
+      }
+    );
+  }
+
+  /**
+   * Parse the billing_account from BillingAccountLocationRecommenderConfig resource.
+   *
+   * @param {string} billingAccountLocationRecommenderConfigName
+   *   A fully-qualified path representing billing_account_location_recommender_config resource.
+   * @returns {string} A string representing the billing_account.
+   */
+  matchBillingAccountFromBillingAccountLocationRecommenderConfigName(
+    billingAccountLocationRecommenderConfigName: string
+  ) {
+    return this.pathTemplates.billingAccountLocationRecommenderConfigPathTemplate.match(
+      billingAccountLocationRecommenderConfigName
+    ).billing_account;
+  }
+
+  /**
+   * Parse the location from BillingAccountLocationRecommenderConfig resource.
+   *
+   * @param {string} billingAccountLocationRecommenderConfigName
+   *   A fully-qualified path representing billing_account_location_recommender_config resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromBillingAccountLocationRecommenderConfigName(
+    billingAccountLocationRecommenderConfigName: string
+  ) {
+    return this.pathTemplates.billingAccountLocationRecommenderConfigPathTemplate.match(
+      billingAccountLocationRecommenderConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the recommender from BillingAccountLocationRecommenderConfig resource.
+   *
+   * @param {string} billingAccountLocationRecommenderConfigName
+   *   A fully-qualified path representing billing_account_location_recommender_config resource.
+   * @returns {string} A string representing the recommender.
+   */
+  matchRecommenderFromBillingAccountLocationRecommenderConfigName(
+    billingAccountLocationRecommenderConfigName: string
+  ) {
+    return this.pathTemplates.billingAccountLocationRecommenderConfigPathTemplate.match(
+      billingAccountLocationRecommenderConfigName
     ).recommender;
   }
 

@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [BeyondCorp API: Node.js Client](https://github.com/googleapis/google-cloud-node)
+# [BeyondCorp API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-beyondcorp-clientgateways)
 
 [![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/clientconnectorservices.svg)](https://www.npmjs.org/package/@google-cloud/clientconnectorservices)
@@ -14,11 +14,11 @@ BeyondCorp API client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-beyondcorp-clientconnectorservices/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-beyondcorp-clientgateways/CHANGELOG.md).
 
 * [BeyondCorp API Node.js Client API Reference][client-docs]
 
-* [github.com/googleapis/google-cloud-node/packages/google-cloud-beyondcorp-clientconnectorservices](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-beyondcorp-clientconnectorservices)
+* [github.com/googleapis/google-cloud-node/packages/google-cloud-beyondcorp-clientgateways](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-beyondcorp-clientgateways)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -114,17 +114,16 @@ callListClientConnectorServices();
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-beyondcorp-clientgateways/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Client_connector_services_service.create_client_connector_service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-clientconnectorservices/samples/generated/v1/client_connector_services_service.create_client_connector_service.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-beyondcorp-clientconnectorservices/samples/generated/v1/client_connector_services_service.create_client_connector_service.js,samples/README.md) |
-| Client_connector_services_service.delete_client_connector_service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-clientconnectorservices/samples/generated/v1/client_connector_services_service.delete_client_connector_service.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-beyondcorp-clientconnectorservices/samples/generated/v1/client_connector_services_service.delete_client_connector_service.js,samples/README.md) |
-| Client_connector_services_service.get_client_connector_service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-clientconnectorservices/samples/generated/v1/client_connector_services_service.get_client_connector_service.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-beyondcorp-clientconnectorservices/samples/generated/v1/client_connector_services_service.get_client_connector_service.js,samples/README.md) |
-| Client_connector_services_service.list_client_connector_services | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-clientconnectorservices/samples/generated/v1/client_connector_services_service.list_client_connector_services.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-beyondcorp-clientconnectorservices/samples/generated/v1/client_connector_services_service.list_client_connector_services.js,samples/README.md) |
-| Client_connector_services_service.update_client_connector_service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-clientconnectorservices/samples/generated/v1/client_connector_services_service.update_client_connector_service.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-beyondcorp-clientconnectorservices/samples/generated/v1/client_connector_services_service.update_client_connector_service.js,samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-clientconnectorservices/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-beyondcorp-clientconnectorservices/samples/quickstart.js,samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-clientconnectorservices/samples/test/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-beyondcorp-clientconnectorservices/samples/test/quickstart.js,samples/README.md) |
+| Client_connector_services_service.create_client_connector_service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-clientconnectorservices/samples/generated/v1/client_connector_services_service.create_client_connector_service.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-beyondcorp-clientconnectorservices/samples/generated/v1/client_connector_services_service.create_client_connector_service.js,packages/google-cloud-beyondcorp-clientgateways/samples/README.md) |
+| Client_connector_services_service.delete_client_connector_service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-clientconnectorservices/samples/generated/v1/client_connector_services_service.delete_client_connector_service.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-beyondcorp-clientconnectorservices/samples/generated/v1/client_connector_services_service.delete_client_connector_service.js,packages/google-cloud-beyondcorp-clientgateways/samples/README.md) |
+| Client_connector_services_service.get_client_connector_service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-clientconnectorservices/samples/generated/v1/client_connector_services_service.get_client_connector_service.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-beyondcorp-clientconnectorservices/samples/generated/v1/client_connector_services_service.get_client_connector_service.js,packages/google-cloud-beyondcorp-clientgateways/samples/README.md) |
+| Client_connector_services_service.list_client_connector_services | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-clientconnectorservices/samples/generated/v1/client_connector_services_service.list_client_connector_services.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-beyondcorp-clientconnectorservices/samples/generated/v1/client_connector_services_service.list_client_connector_services.js,packages/google-cloud-beyondcorp-clientgateways/samples/README.md) |
+| Client_connector_services_service.update_client_connector_service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-clientconnectorservices/samples/generated/v1/client_connector_services_service.update_client_connector_service.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-beyondcorp-clientconnectorservices/samples/generated/v1/client_connector_services_service.update_client_connector_service.js,packages/google-cloud-beyondcorp-clientgateways/samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-clientconnectorservices/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-beyondcorp-clientconnectorservices/samples/quickstart.js,packages/google-cloud-beyondcorp-clientgateways/samples/README.md) |
 
 
 
@@ -133,7 +132,7 @@ also contains samples.
 
 ## Supported Node.js Versions
 
-Our client libraries follow the [Node.js release schedule](https://nodejs.org/en/about/releases/).
+Our client libraries follow the [Node.js release schedule](https://github.com/nodejs/release#release-schedule).
 Libraries are compatible with all current _active_ and _maintenance_ versions of
 Node.js.
 If you are using an end-of-life version of Node.js, we recommend that you update

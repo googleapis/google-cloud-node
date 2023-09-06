@@ -87,8 +87,7 @@ export class SpeechTranslationServiceClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -96,7 +95,7 @@ export class SpeechTranslationServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new SpeechTranslationServiceClient({fallback: 'rest'}, gax);
+   *     const client = new SpeechTranslationServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -163,7 +162,7 @@ export class SpeechTranslationServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -177,7 +176,7 @@ export class SpeechTranslationServiceClient {
     this.descriptors.stream = {
       streamingTranslateSpeech: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.BIDI_STREAMING,
-        opts.fallback === 'rest'
+        !!opts.fallback
       ),
     };
 
@@ -335,10 +334,9 @@ export class SpeechTranslationServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
    *   An object stream which is both readable and writable. It accepts objects
-   *   representing {@link google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechRequest | StreamingTranslateSpeechRequest} for write() method, and
-   *   will emit objects representing {@link google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResponse | StreamingTranslateSpeechResponse} on 'data' event asynchronously.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming)
+   *   representing {@link protos.google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechRequest|StreamingTranslateSpeechRequest} for write() method, and
+   *   will emit objects representing {@link protos.google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResponse|StreamingTranslateSpeechResponse} on 'data' event asynchronously.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/speech_translation_service.streaming_translate_speech.js</caption>
    * region_tag:mediatranslation_v1beta1_generated_SpeechTranslationService_StreamingTranslateSpeech_async

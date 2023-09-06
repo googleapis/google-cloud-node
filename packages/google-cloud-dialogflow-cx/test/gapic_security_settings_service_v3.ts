@@ -1723,6 +1723,86 @@ describe('v3.SecuritySettingsServiceClient', () => {
       });
     });
 
+    describe('agentGenerativeSettings', () => {
+      const fakePath = '/rendered/path/agentGenerativeSettings';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        agent: 'agentValue',
+      };
+      const client =
+        new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.agentGenerativeSettingsPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.agentGenerativeSettingsPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('agentGenerativeSettingsPath', () => {
+        const result = client.agentGenerativeSettingsPath(
+          'projectValue',
+          'locationValue',
+          'agentValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.agentGenerativeSettingsPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromAgentGenerativeSettingsName', () => {
+        const result =
+          client.matchProjectFromAgentGenerativeSettingsName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.agentGenerativeSettingsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromAgentGenerativeSettingsName', () => {
+        const result =
+          client.matchLocationFromAgentGenerativeSettingsName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.agentGenerativeSettingsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAgentFromAgentGenerativeSettingsName', () => {
+        const result =
+          client.matchAgentFromAgentGenerativeSettingsName(fakePath);
+        assert.strictEqual(result, 'agentValue');
+        assert(
+          (
+            client.pathTemplates.agentGenerativeSettingsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('agentValidationResult', () => {
       const fakePath = '/rendered/path/agentValidationResult';
       const expectedParameters = {
@@ -3069,6 +3149,133 @@ describe('v3.SecuritySettingsServiceClient', () => {
       });
     });
 
+    describe('projectLocationAgentFlowTransitionRouteGroup', () => {
+      const fakePath =
+        '/rendered/path/projectLocationAgentFlowTransitionRouteGroup';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        agent: 'agentValue',
+        flow: 'flowValue',
+        transition_route_group: 'transitionRouteGroupValue',
+      };
+      const client =
+        new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationAgentFlowTransitionRouteGroupPath', () => {
+        const result = client.projectLocationAgentFlowTransitionRouteGroupPath(
+          'projectValue',
+          'locationValue',
+          'agentValue',
+          'flowValue',
+          'transitionRouteGroupValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAgentFlowTransitionRouteGroupPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationAgentFlowTransitionRouteGroupName', () => {
+        const result =
+          client.matchProjectFromProjectLocationAgentFlowTransitionRouteGroupName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAgentFlowTransitionRouteGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationAgentFlowTransitionRouteGroupName', () => {
+        const result =
+          client.matchLocationFromProjectLocationAgentFlowTransitionRouteGroupName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAgentFlowTransitionRouteGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAgentFromProjectLocationAgentFlowTransitionRouteGroupName', () => {
+        const result =
+          client.matchAgentFromProjectLocationAgentFlowTransitionRouteGroupName(
+            fakePath
+          );
+        assert.strictEqual(result, 'agentValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAgentFlowTransitionRouteGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFlowFromProjectLocationAgentFlowTransitionRouteGroupName', () => {
+        const result =
+          client.matchFlowFromProjectLocationAgentFlowTransitionRouteGroupName(
+            fakePath
+          );
+        assert.strictEqual(result, 'flowValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAgentFlowTransitionRouteGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTransitionRouteGroupFromProjectLocationAgentFlowTransitionRouteGroupName', () => {
+        const result =
+          client.matchTransitionRouteGroupFromProjectLocationAgentFlowTransitionRouteGroupName(
+            fakePath
+          );
+        assert.strictEqual(result, 'transitionRouteGroupValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAgentFlowTransitionRouteGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('projectLocationAgentSessionEntityType', () => {
       const fakePath = '/rendered/path/projectLocationAgentSessionEntityType';
       const expectedParameters = {
@@ -3187,6 +3394,114 @@ describe('v3.SecuritySettingsServiceClient', () => {
           (
             client.pathTemplates
               .projectLocationAgentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationAgentTransitionRouteGroup', () => {
+      const fakePath =
+        '/rendered/path/projectLocationAgentTransitionRouteGroup';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        agent: 'agentValue',
+        transition_route_group: 'transitionRouteGroupValue',
+      };
+      const client =
+        new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationAgentTransitionRouteGroupPath', () => {
+        const result = client.projectLocationAgentTransitionRouteGroupPath(
+          'projectValue',
+          'locationValue',
+          'agentValue',
+          'transitionRouteGroupValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAgentTransitionRouteGroupPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationAgentTransitionRouteGroupName', () => {
+        const result =
+          client.matchProjectFromProjectLocationAgentTransitionRouteGroupName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAgentTransitionRouteGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationAgentTransitionRouteGroupName', () => {
+        const result =
+          client.matchLocationFromProjectLocationAgentTransitionRouteGroupName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAgentTransitionRouteGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAgentFromProjectLocationAgentTransitionRouteGroupName', () => {
+        const result =
+          client.matchAgentFromProjectLocationAgentTransitionRouteGroupName(
+            fakePath
+          );
+        assert.strictEqual(result, 'agentValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAgentTransitionRouteGroupPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTransitionRouteGroupFromProjectLocationAgentTransitionRouteGroupName', () => {
+        const result =
+          client.matchTransitionRouteGroupFromProjectLocationAgentTransitionRouteGroupName(
+            fakePath
+          );
+        assert.strictEqual(result, 'transitionRouteGroupValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationAgentTransitionRouteGroupPathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -3588,118 +3903,6 @@ describe('v3.SecuritySettingsServiceClient', () => {
         assert.strictEqual(result, 'resultValue');
         assert(
           (client.pathTemplates.testCaseResultPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('transitionRouteGroup', () => {
-      const fakePath = '/rendered/path/transitionRouteGroup';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        agent: 'agentValue',
-        flow: 'flowValue',
-        transition_route_group: 'transitionRouteGroupValue',
-      };
-      const client =
-        new securitysettingsserviceModule.v3.SecuritySettingsServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      client.pathTemplates.transitionRouteGroupPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.transitionRouteGroupPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('transitionRouteGroupPath', () => {
-        const result = client.transitionRouteGroupPath(
-          'projectValue',
-          'locationValue',
-          'agentValue',
-          'flowValue',
-          'transitionRouteGroupValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.transitionRouteGroupPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromTransitionRouteGroupName', () => {
-        const result =
-          client.matchProjectFromTransitionRouteGroupName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (
-            client.pathTemplates.transitionRouteGroupPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromTransitionRouteGroupName', () => {
-        const result =
-          client.matchLocationFromTransitionRouteGroupName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (
-            client.pathTemplates.transitionRouteGroupPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAgentFromTransitionRouteGroupName', () => {
-        const result = client.matchAgentFromTransitionRouteGroupName(fakePath);
-        assert.strictEqual(result, 'agentValue');
-        assert(
-          (
-            client.pathTemplates.transitionRouteGroupPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchFlowFromTransitionRouteGroupName', () => {
-        const result = client.matchFlowFromTransitionRouteGroupName(fakePath);
-        assert.strictEqual(result, 'flowValue');
-        assert(
-          (
-            client.pathTemplates.transitionRouteGroupPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchTransitionRouteGroupFromTransitionRouteGroupName', () => {
-        const result =
-          client.matchTransitionRouteGroupFromTransitionRouteGroupName(
-            fakePath
-          );
-        assert.strictEqual(result, 'transitionRouteGroupValue');
-        assert(
-          (
-            client.pathTemplates.transitionRouteGroupPathTemplate
-              .match as SinonStub
-          )
             .getCall(-1)
             .calledWith(fakePath)
         );

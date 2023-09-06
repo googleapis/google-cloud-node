@@ -90,8 +90,7 @@ export class InstanceGroupsClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -99,7 +98,7 @@ export class InstanceGroupsClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new InstanceGroupsClient({fallback: 'rest'}, gax);
+   *     const client = new InstanceGroupsClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -115,11 +114,11 @@ export class InstanceGroupsClient {
     );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    // Implicitely set 'rest' value for the apis use rest as transport (eg. googleapis-discovery apis).
+    // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
     if (!opts) {
-      opts = {fallback: 'rest'};
+      opts = {fallback: true};
     } else {
-      opts.fallback = opts.fallback ?? 'rest';
+      opts.fallback = opts.fallback ?? true;
     }
     const fallback =
       opts?.fallback ??
@@ -165,7 +164,7 @@ export class InstanceGroupsClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -360,8 +359,7 @@ export class InstanceGroupsClient {
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
    *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    *   This method is considered to be in beta. This means while
    *   stable it is still a work-in-progress and under active development,
@@ -377,7 +375,7 @@ export class InstanceGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   addInstances(
@@ -423,7 +421,7 @@ export class InstanceGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -450,7 +448,7 @@ export class InstanceGroupsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -484,8 +482,7 @@ export class InstanceGroupsClient {
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
    *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    *   This method is considered to be in beta. This means while
    *   stable it is still a work-in-progress and under active development,
@@ -501,7 +498,7 @@ export class InstanceGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -547,7 +544,7 @@ export class InstanceGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -574,7 +571,7 @@ export class InstanceGroupsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -604,9 +601,8 @@ export class InstanceGroupsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.compute.v1.InstanceGroup | InstanceGroup}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.InstanceGroup|InstanceGroup}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/instance_groups.get.js</caption>
    * region_tag:compute_v1_generated_InstanceGroups_Get_async
@@ -618,7 +614,7 @@ export class InstanceGroupsClient {
     [
       protos.google.cloud.compute.v1.IInstanceGroup,
       protos.google.cloud.compute.v1.IGetInstanceGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -664,7 +660,7 @@ export class InstanceGroupsClient {
     [
       protos.google.cloud.compute.v1.IInstanceGroup,
       protos.google.cloud.compute.v1.IGetInstanceGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -705,8 +701,7 @@ export class InstanceGroupsClient {
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
    *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    *   This method is considered to be in beta. This means while
    *   stable it is still a work-in-progress and under active development,
@@ -722,7 +717,7 @@ export class InstanceGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -768,7 +763,7 @@ export class InstanceGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -794,7 +789,7 @@ export class InstanceGroupsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -830,8 +825,7 @@ export class InstanceGroupsClient {
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
    *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    *   This method is considered to be in beta. This means while
    *   stable it is still a work-in-progress and under active development,
@@ -847,7 +841,7 @@ export class InstanceGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   removeInstances(
@@ -893,7 +887,7 @@ export class InstanceGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -920,7 +914,7 @@ export class InstanceGroupsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -956,8 +950,7 @@ export class InstanceGroupsClient {
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
    *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    *   This method is considered to be in beta. This means while
    *   stable it is still a work-in-progress and under active development,
@@ -973,7 +966,7 @@ export class InstanceGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setNamedPorts(
@@ -1019,7 +1012,7 @@ export class InstanceGroupsClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1046,7 +1039,7 @@ export class InstanceGroupsClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -1086,12 +1079,11 @@ export class InstanceGroupsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   as tuple [string, {@link google.cloud.compute.v1.InstanceGroupsScopedList | InstanceGroupsScopedList}]. The API will be called under the hood as needed, once per the page,
+   *   as tuple [string, {@link protos.google.cloud.compute.v1.InstanceGroupsScopedList|InstanceGroupsScopedList}]. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/instance_groups.aggregated_list.js</caption>
    * region_tag:compute_v1_generated_InstanceGroups_AggregatedList_async
@@ -1143,14 +1135,13 @@ export class InstanceGroupsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.compute.v1.InstanceGroup | InstanceGroup}.
+   *   The first element of the array is Array of {@link protos.google.cloud.compute.v1.InstanceGroup|InstanceGroup}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   list(
@@ -1160,7 +1151,7 @@ export class InstanceGroupsClient {
     [
       protos.google.cloud.compute.v1.IInstanceGroup[],
       protos.google.cloud.compute.v1.IListInstanceGroupsRequest | null,
-      protos.google.cloud.compute.v1.IInstanceGroupList
+      protos.google.cloud.compute.v1.IInstanceGroupList,
     ]
   >;
   list(
@@ -1198,7 +1189,7 @@ export class InstanceGroupsClient {
     [
       protos.google.cloud.compute.v1.IInstanceGroup[],
       protos.google.cloud.compute.v1.IListInstanceGroupsRequest | null,
-      protos.google.cloud.compute.v1.IInstanceGroupList
+      protos.google.cloud.compute.v1.IInstanceGroupList,
     ]
   > | void {
     request = request || {};
@@ -1242,13 +1233,12 @@ export class InstanceGroupsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.compute.v1.InstanceGroup | InstanceGroup} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1.InstanceGroup|InstanceGroup} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listStream(
@@ -1297,12 +1287,11 @@ export class InstanceGroupsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.compute.v1.InstanceGroup | InstanceGroup}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.compute.v1.InstanceGroup|InstanceGroup}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/instance_groups.list.js</caption>
    * region_tag:compute_v1_generated_InstanceGroups_List_async
@@ -1355,14 +1344,13 @@ export class InstanceGroupsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.compute.v1.InstanceWithNamedPorts | InstanceWithNamedPorts}.
+   *   The first element of the array is Array of {@link protos.google.cloud.compute.v1.InstanceWithNamedPorts|InstanceWithNamedPorts}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listInstancesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listInstances(
@@ -1372,7 +1360,7 @@ export class InstanceGroupsClient {
     [
       protos.google.cloud.compute.v1.IInstanceWithNamedPorts[],
       protos.google.cloud.compute.v1.IListInstancesInstanceGroupsRequest | null,
-      protos.google.cloud.compute.v1.IInstanceGroupsListInstances
+      protos.google.cloud.compute.v1.IInstanceGroupsListInstances,
     ]
   >;
   listInstances(
@@ -1418,7 +1406,7 @@ export class InstanceGroupsClient {
     [
       protos.google.cloud.compute.v1.IInstanceWithNamedPorts[],
       protos.google.cloud.compute.v1.IListInstancesInstanceGroupsRequest | null,
-      protos.google.cloud.compute.v1.IInstanceGroupsListInstances
+      protos.google.cloud.compute.v1.IInstanceGroupsListInstances,
     ]
   > | void {
     request = request || {};
@@ -1467,13 +1455,12 @@ export class InstanceGroupsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.compute.v1.InstanceWithNamedPorts | InstanceWithNamedPorts} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1.InstanceWithNamedPorts|InstanceWithNamedPorts} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listInstancesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listInstancesStream(
@@ -1527,12 +1514,11 @@ export class InstanceGroupsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.compute.v1.InstanceWithNamedPorts | InstanceWithNamedPorts}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.compute.v1.InstanceWithNamedPorts|InstanceWithNamedPorts}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/instance_groups.list_instances.js</caption>
    * region_tag:compute_v1_generated_InstanceGroups_ListInstances_async

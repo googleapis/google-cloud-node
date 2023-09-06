@@ -29,6 +29,84 @@
         }
       }
     },
+    "ConversationalSearchService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ConversationalSearchServiceClient",
+          "rpcs": {
+            "ConverseConversation": {
+              "methods": [
+                "converseConversation"
+              ]
+            },
+            "CreateConversation": {
+              "methods": [
+                "createConversation"
+              ]
+            },
+            "DeleteConversation": {
+              "methods": [
+                "deleteConversation"
+              ]
+            },
+            "UpdateConversation": {
+              "methods": [
+                "updateConversation"
+              ]
+            },
+            "GetConversation": {
+              "methods": [
+                "getConversation"
+              ]
+            },
+            "ListConversations": {
+              "methods": [
+                "listConversations",
+                "listConversationsStream",
+                "listConversationsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ConversationalSearchServiceClient",
+          "rpcs": {
+            "ConverseConversation": {
+              "methods": [
+                "converseConversation"
+              ]
+            },
+            "CreateConversation": {
+              "methods": [
+                "createConversation"
+              ]
+            },
+            "DeleteConversation": {
+              "methods": [
+                "deleteConversation"
+              ]
+            },
+            "UpdateConversation": {
+              "methods": [
+                "updateConversation"
+              ]
+            },
+            "GetConversation": {
+              "methods": [
+                "getConversation"
+              ]
+            },
+            "ListConversations": {
+              "methods": [
+                "listConversations",
+                "listConversationsStream",
+                "listConversationsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "DocumentService": {
       "clients": {
         "grpc": {

@@ -96,8 +96,7 @@ export class SpeechClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -105,7 +104,7 @@ export class SpeechClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new SpeechClient({fallback: 'rest'}, gax);
+   *     const client = new SpeechClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -175,7 +174,7 @@ export class SpeechClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -240,7 +239,7 @@ export class SpeechClient {
     this.descriptors.stream = {
       streamingRecognize: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.BIDI_STREAMING,
-        opts.fallback === 'rest'
+        !!opts.fallback
       ),
     };
 
@@ -252,7 +251,7 @@ export class SpeechClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
@@ -606,8 +605,8 @@ export class SpeechClient {
   // -------------------
   /**
    * Returns the requested
-   * {@link google.cloud.speech.v2.Recognizer|Recognizer}. Fails with
-   * {@link google.rpc.Code.NOT_FOUND|NOT_FOUND} if the requested Recognizer doesn't
+   * {@link protos.google.cloud.speech.v2.Recognizer|Recognizer}. Fails with
+   * {@link protos.google.rpc.Code.NOT_FOUND|NOT_FOUND} if the requested Recognizer doesn't
    * exist.
    *
    * @param {Object} request
@@ -618,9 +617,8 @@ export class SpeechClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.speech.v2.Recognizer | Recognizer}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.speech.v2.Recognizer|Recognizer}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.get_recognizer.js</caption>
    * region_tag:speech_v2_generated_Speech_GetRecognizer_async
@@ -632,7 +630,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.IRecognizer,
       protos.google.cloud.speech.v2.IGetRecognizerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRecognizer(
@@ -672,7 +670,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.IRecognizer,
       protos.google.cloud.speech.v2.IGetRecognizerRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -707,44 +705,43 @@ export class SpeechClient {
    * @param {google.cloud.speech.v2.RecognitionConfig} request.config
    *   Features and audio metadata to use for the Automatic Speech Recognition.
    *   This field in combination with the
-   *   {@link google.cloud.speech.v2.RecognizeRequest.config_mask|config_mask} field
+   *   {@link protos.google.cloud.speech.v2.RecognizeRequest.config_mask|config_mask} field
    *   can be used to override parts of the
-   *   {@link google.cloud.speech.v2.Recognizer.default_recognition_config|default_recognition_config}
+   *   {@link protos.google.cloud.speech.v2.Recognizer.default_recognition_config|default_recognition_config}
    *   of the Recognizer resource.
    * @param {google.protobuf.FieldMask} request.configMask
    *   The list of fields in
-   *   {@link google.cloud.speech.v2.RecognizeRequest.config|config} that override the
+   *   {@link protos.google.cloud.speech.v2.RecognizeRequest.config|config} that override the
    *   values in the
-   *   {@link google.cloud.speech.v2.Recognizer.default_recognition_config|default_recognition_config}
+   *   {@link protos.google.cloud.speech.v2.Recognizer.default_recognition_config|default_recognition_config}
    *   of the recognizer during this recognition request. If no mask is provided,
    *   all non-default valued fields in
-   *   {@link google.cloud.speech.v2.RecognizeRequest.config|config} override the
+   *   {@link protos.google.cloud.speech.v2.RecognizeRequest.config|config} override the
    *   values in the recognizer for this recognition request. If a mask is
    *   provided, only the fields listed in the mask override the config in the
    *   recognizer for this recognition request. If a wildcard (`*`) is provided,
-   *   {@link google.cloud.speech.v2.RecognizeRequest.config|config} completely
+   *   {@link protos.google.cloud.speech.v2.RecognizeRequest.config|config} completely
    *   overrides and replaces the config in the recognizer for this recognition
    *   request.
    * @param {Buffer} request.content
    *   The audio data bytes encoded as specified in
-   *   {@link google.cloud.speech.v2.RecognitionConfig|RecognitionConfig}. As
+   *   {@link protos.google.cloud.speech.v2.RecognitionConfig|RecognitionConfig}. As
    *   with all bytes fields, proto buffers use a pure binary representation,
    *   whereas JSON representations use base64.
    * @param {string} request.uri
    *   URI that points to a file that contains audio data bytes as specified in
-   *   {@link google.cloud.speech.v2.RecognitionConfig|RecognitionConfig}. The file
+   *   {@link protos.google.cloud.speech.v2.RecognitionConfig|RecognitionConfig}. The file
    *   must not be compressed (for example, gzip). Currently, only Google Cloud
    *   Storage URIs are supported, which must be specified in the following
    *   format: `gs://bucket_name/object_name` (other URI formats return
-   *   {@link google.rpc.Code.INVALID_ARGUMENT|INVALID_ARGUMENT}). For more
+   *   {@link protos.google.rpc.Code.INVALID_ARGUMENT|INVALID_ARGUMENT}). For more
    *   information, see [Request
    *   URIs](https://cloud.google.com/storage/docs/reference-uris).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.speech.v2.RecognizeResponse | RecognizeResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.speech.v2.RecognizeResponse|RecognizeResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.recognize.js</caption>
    * region_tag:speech_v2_generated_Speech_Recognize_async
@@ -756,7 +753,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.IRecognizeResponse,
       protos.google.cloud.speech.v2.IRecognizeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   recognize(
@@ -794,7 +791,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.IRecognizeResponse,
       protos.google.cloud.speech.v2.IRecognizeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -816,7 +813,7 @@ export class SpeechClient {
     return this.innerApiCalls.recognize(request, options, callback);
   }
   /**
-   * Returns the requested {@link google.cloud.speech.v2.Config|Config}.
+   * Returns the requested {@link protos.google.cloud.speech.v2.Config|Config}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -827,9 +824,8 @@ export class SpeechClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.speech.v2.Config | Config}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.speech.v2.Config|Config}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.get_config.js</caption>
    * region_tag:speech_v2_generated_Speech_GetConfig_async
@@ -841,7 +837,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.IConfig,
       protos.google.cloud.speech.v2.IGetConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getConfig(
@@ -879,7 +875,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.IConfig,
       protos.google.cloud.speech.v2.IGetConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -901,7 +897,7 @@ export class SpeechClient {
     return this.innerApiCalls.getConfig(request, options, callback);
   }
   /**
-   * Updates the {@link google.cloud.speech.v2.Config|Config}.
+   * Updates the {@link protos.google.cloud.speech.v2.Config|Config}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -915,9 +911,8 @@ export class SpeechClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.speech.v2.Config | Config}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.speech.v2.Config|Config}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.update_config.js</caption>
    * region_tag:speech_v2_generated_Speech_UpdateConfig_async
@@ -929,7 +924,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.IConfig,
       protos.google.cloud.speech.v2.IUpdateConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateConfig(
@@ -967,7 +962,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.IConfig,
       protos.google.cloud.speech.v2.IUpdateConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -990,7 +985,7 @@ export class SpeechClient {
   }
   /**
    * Returns the requested
-   * {@link google.cloud.speech.v2.CustomClass|CustomClass}.
+   * {@link protos.google.cloud.speech.v2.CustomClass|CustomClass}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1000,9 +995,8 @@ export class SpeechClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.speech.v2.CustomClass | CustomClass}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.speech.v2.CustomClass|CustomClass}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.get_custom_class.js</caption>
    * region_tag:speech_v2_generated_Speech_GetCustomClass_async
@@ -1014,7 +1008,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.ICustomClass,
       protos.google.cloud.speech.v2.IGetCustomClassRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCustomClass(
@@ -1054,7 +1048,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.ICustomClass,
       protos.google.cloud.speech.v2.IGetCustomClassRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1077,7 +1071,7 @@ export class SpeechClient {
   }
   /**
    * Returns the requested
-   * {@link google.cloud.speech.v2.PhraseSet|PhraseSet}.
+   * {@link protos.google.cloud.speech.v2.PhraseSet|PhraseSet}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1087,9 +1081,8 @@ export class SpeechClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.speech.v2.PhraseSet | PhraseSet}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.speech.v2.PhraseSet|PhraseSet}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.get_phrase_set.js</caption>
    * region_tag:speech_v2_generated_Speech_GetPhraseSet_async
@@ -1101,7 +1094,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.IPhraseSet,
       protos.google.cloud.speech.v2.IGetPhraseSetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getPhraseSet(
@@ -1139,7 +1132,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.IPhraseSet,
       protos.google.cloud.speech.v2.IGetPhraseSetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1169,10 +1162,9 @@ export class SpeechClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
    *   An object stream which is both readable and writable. It accepts objects
-   *   representing {@link google.cloud.speech.v2.StreamingRecognizeRequest | StreamingRecognizeRequest} for write() method, and
-   *   will emit objects representing {@link google.cloud.speech.v2.StreamingRecognizeResponse | StreamingRecognizeResponse} on 'data' event asynchronously.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming)
+   *   representing {@link protos.google.cloud.speech.v2.StreamingRecognizeRequest|StreamingRecognizeRequest} for write() method, and
+   *   will emit objects representing {@link protos.google.cloud.speech.v2.StreamingRecognizeResponse|StreamingRecognizeResponse} on 'data' event asynchronously.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.streaming_recognize.js</caption>
    * region_tag:speech_v2_generated_Speech_StreamingRecognize_async
@@ -1183,7 +1175,7 @@ export class SpeechClient {
   }
 
   /**
-   * Creates a {@link google.cloud.speech.v2.Recognizer|Recognizer}.
+   * Creates a {@link protos.google.cloud.speech.v2.Recognizer|Recognizer}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1197,7 +1189,7 @@ export class SpeechClient {
    *   the Recognizer's resource name.
    *
    *   This value should be 4-63 characters, and valid characters
-   *   are /{@link 0-9|a-z}-/.
+   *   are /{@link protos.0-9|a-z}-/.
    * @param {string} request.parent
    *   Required. The project and location where this Recognizer will be created.
    *   The expected format is `projects/{project}/locations/{location}`.
@@ -1207,8 +1199,7 @@ export class SpeechClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.create_recognizer.js</caption>
    * region_tag:speech_v2_generated_Speech_CreateRecognizer_async
@@ -1223,7 +1214,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createRecognizer(
@@ -1276,7 +1267,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1303,8 +1294,7 @@ export class SpeechClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.create_recognizer.js</caption>
    * region_tag:speech_v2_generated_Speech_CreateRecognizer_async
@@ -1333,7 +1323,7 @@ export class SpeechClient {
     >;
   }
   /**
-   * Updates the {@link google.cloud.speech.v2.Recognizer|Recognizer}.
+   * Updates the {@link protos.google.cloud.speech.v2.Recognizer|Recognizer}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1354,8 +1344,7 @@ export class SpeechClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.update_recognizer.js</caption>
    * region_tag:speech_v2_generated_Speech_UpdateRecognizer_async
@@ -1370,7 +1359,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateRecognizer(
@@ -1423,7 +1412,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1450,8 +1439,7 @@ export class SpeechClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.update_recognizer.js</caption>
    * region_tag:speech_v2_generated_Speech_UpdateRecognizer_async
@@ -1480,7 +1468,7 @@ export class SpeechClient {
     >;
   }
   /**
-   * Deletes the {@link google.cloud.speech.v2.Recognizer|Recognizer}.
+   * Deletes the {@link protos.google.cloud.speech.v2.Recognizer|Recognizer}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1503,8 +1491,7 @@ export class SpeechClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.delete_recognizer.js</caption>
    * region_tag:speech_v2_generated_Speech_DeleteRecognizer_async
@@ -1519,7 +1506,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteRecognizer(
@@ -1572,7 +1559,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1599,8 +1586,7 @@ export class SpeechClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.delete_recognizer.js</caption>
    * region_tag:speech_v2_generated_Speech_DeleteRecognizer_async
@@ -1629,7 +1615,7 @@ export class SpeechClient {
     >;
   }
   /**
-   * Undeletes the {@link google.cloud.speech.v2.Recognizer|Recognizer}.
+   * Undeletes the {@link protos.google.cloud.speech.v2.Recognizer|Recognizer}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1649,8 +1635,7 @@ export class SpeechClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.undelete_recognizer.js</caption>
    * region_tag:speech_v2_generated_Speech_UndeleteRecognizer_async
@@ -1665,7 +1650,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   undeleteRecognizer(
@@ -1718,7 +1703,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1745,8 +1730,7 @@ export class SpeechClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.undelete_recognizer.js</caption>
    * region_tag:speech_v2_generated_Speech_UndeleteRecognizer_async
@@ -1789,22 +1773,22 @@ export class SpeechClient {
    * @param {google.cloud.speech.v2.RecognitionConfig} request.config
    *   Features and audio metadata to use for the Automatic Speech Recognition.
    *   This field in combination with the
-   *   {@link google.cloud.speech.v2.BatchRecognizeRequest.config_mask|config_mask}
+   *   {@link protos.google.cloud.speech.v2.BatchRecognizeRequest.config_mask|config_mask}
    *   field can be used to override parts of the
-   *   {@link google.cloud.speech.v2.Recognizer.default_recognition_config|default_recognition_config}
+   *   {@link protos.google.cloud.speech.v2.Recognizer.default_recognition_config|default_recognition_config}
    *   of the Recognizer resource.
    * @param {google.protobuf.FieldMask} request.configMask
    *   The list of fields in
-   *   {@link google.cloud.speech.v2.BatchRecognizeRequest.config|config} that override
+   *   {@link protos.google.cloud.speech.v2.BatchRecognizeRequest.config|config} that override
    *   the values in the
-   *   {@link google.cloud.speech.v2.Recognizer.default_recognition_config|default_recognition_config}
+   *   {@link protos.google.cloud.speech.v2.Recognizer.default_recognition_config|default_recognition_config}
    *   of the recognizer during this recognition request. If no mask is provided,
    *   all given fields in
-   *   {@link google.cloud.speech.v2.BatchRecognizeRequest.config|config} override the
+   *   {@link protos.google.cloud.speech.v2.BatchRecognizeRequest.config|config} override the
    *   values in the recognizer for this recognition request. If a mask is
    *   provided, only the fields listed in the mask override the config in the
    *   recognizer for this recognition request. If a wildcard (`*`) is provided,
-   *   {@link google.cloud.speech.v2.BatchRecognizeRequest.config|config} completely
+   *   {@link protos.google.cloud.speech.v2.BatchRecognizeRequest.config|config} completely
    *   overrides and replaces the config in the recognizer for this recognition
    *   request.
    * @param {number[]} request.files
@@ -1820,8 +1804,7 @@ export class SpeechClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.batch_recognize.js</caption>
    * region_tag:speech_v2_generated_Speech_BatchRecognize_async
@@ -1836,7 +1819,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchRecognize(
@@ -1889,7 +1872,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1916,8 +1899,7 @@ export class SpeechClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.batch_recognize.js</caption>
    * region_tag:speech_v2_generated_Speech_BatchRecognize_async
@@ -1946,7 +1928,7 @@ export class SpeechClient {
     >;
   }
   /**
-   * Creates a {@link google.cloud.speech.v2.CustomClass|CustomClass}.
+   * Creates a {@link protos.google.cloud.speech.v2.CustomClass|CustomClass}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1960,7 +1942,7 @@ export class SpeechClient {
    *   the CustomClass's resource name.
    *
    *   This value should be 4-63 characters, and valid characters
-   *   are /{@link 0-9|a-z}-/.
+   *   are /{@link protos.0-9|a-z}-/.
    * @param {string} request.parent
    *   Required. The project and location where this CustomClass will be created.
    *   The expected format is `projects/{project}/locations/{location}`.
@@ -1970,8 +1952,7 @@ export class SpeechClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.create_custom_class.js</caption>
    * region_tag:speech_v2_generated_Speech_CreateCustomClass_async
@@ -1986,7 +1967,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCustomClass(
@@ -2039,7 +2020,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2066,8 +2047,7 @@ export class SpeechClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.create_custom_class.js</caption>
    * region_tag:speech_v2_generated_Speech_CreateCustomClass_async
@@ -2096,7 +2076,7 @@ export class SpeechClient {
     >;
   }
   /**
-   * Updates the {@link google.cloud.speech.v2.CustomClass|CustomClass}.
+   * Updates the {@link protos.google.cloud.speech.v2.CustomClass|CustomClass}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2118,8 +2098,7 @@ export class SpeechClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.update_custom_class.js</caption>
    * region_tag:speech_v2_generated_Speech_UpdateCustomClass_async
@@ -2134,7 +2113,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCustomClass(
@@ -2187,7 +2166,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2214,8 +2193,7 @@ export class SpeechClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.update_custom_class.js</caption>
    * region_tag:speech_v2_generated_Speech_UpdateCustomClass_async
@@ -2244,7 +2222,7 @@ export class SpeechClient {
     >;
   }
   /**
-   * Deletes the {@link google.cloud.speech.v2.CustomClass|CustomClass}.
+   * Deletes the {@link protos.google.cloud.speech.v2.CustomClass|CustomClass}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2268,8 +2246,7 @@ export class SpeechClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.delete_custom_class.js</caption>
    * region_tag:speech_v2_generated_Speech_DeleteCustomClass_async
@@ -2284,7 +2261,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteCustomClass(
@@ -2337,7 +2314,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2364,8 +2341,7 @@ export class SpeechClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.delete_custom_class.js</caption>
    * region_tag:speech_v2_generated_Speech_DeleteCustomClass_async
@@ -2394,7 +2370,7 @@ export class SpeechClient {
     >;
   }
   /**
-   * Undeletes the {@link google.cloud.speech.v2.CustomClass|CustomClass}.
+   * Undeletes the {@link protos.google.cloud.speech.v2.CustomClass|CustomClass}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2415,8 +2391,7 @@ export class SpeechClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.undelete_custom_class.js</caption>
    * region_tag:speech_v2_generated_Speech_UndeleteCustomClass_async
@@ -2431,7 +2406,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   undeleteCustomClass(
@@ -2484,7 +2459,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2511,8 +2486,7 @@ export class SpeechClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.undelete_custom_class.js</caption>
    * region_tag:speech_v2_generated_Speech_UndeleteCustomClass_async
@@ -2541,7 +2515,7 @@ export class SpeechClient {
     >;
   }
   /**
-   * Creates a {@link google.cloud.speech.v2.PhraseSet|PhraseSet}.
+   * Creates a {@link protos.google.cloud.speech.v2.PhraseSet|PhraseSet}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2555,7 +2529,7 @@ export class SpeechClient {
    *   the PhraseSet's resource name.
    *
    *   This value should be 4-63 characters, and valid characters
-   *   are /{@link 0-9|a-z}-/.
+   *   are /{@link protos.0-9|a-z}-/.
    * @param {string} request.parent
    *   Required. The project and location where this PhraseSet will be created.
    *   The expected format is `projects/{project}/locations/{location}`.
@@ -2565,8 +2539,7 @@ export class SpeechClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.create_phrase_set.js</caption>
    * region_tag:speech_v2_generated_Speech_CreatePhraseSet_async
@@ -2581,7 +2554,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createPhraseSet(
@@ -2634,7 +2607,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2661,8 +2634,7 @@ export class SpeechClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.create_phrase_set.js</caption>
    * region_tag:speech_v2_generated_Speech_CreatePhraseSet_async
@@ -2691,7 +2663,7 @@ export class SpeechClient {
     >;
   }
   /**
-   * Updates the {@link google.cloud.speech.v2.PhraseSet|PhraseSet}.
+   * Updates the {@link protos.google.cloud.speech.v2.PhraseSet|PhraseSet}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2712,8 +2684,7 @@ export class SpeechClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.update_phrase_set.js</caption>
    * region_tag:speech_v2_generated_Speech_UpdatePhraseSet_async
@@ -2728,7 +2699,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updatePhraseSet(
@@ -2781,7 +2752,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2808,8 +2779,7 @@ export class SpeechClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.update_phrase_set.js</caption>
    * region_tag:speech_v2_generated_Speech_UpdatePhraseSet_async
@@ -2838,7 +2808,7 @@ export class SpeechClient {
     >;
   }
   /**
-   * Deletes the {@link google.cloud.speech.v2.PhraseSet|PhraseSet}.
+   * Deletes the {@link protos.google.cloud.speech.v2.PhraseSet|PhraseSet}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2861,8 +2831,7 @@ export class SpeechClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.delete_phrase_set.js</caption>
    * region_tag:speech_v2_generated_Speech_DeletePhraseSet_async
@@ -2877,7 +2846,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deletePhraseSet(
@@ -2930,7 +2899,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2957,8 +2926,7 @@ export class SpeechClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.delete_phrase_set.js</caption>
    * region_tag:speech_v2_generated_Speech_DeletePhraseSet_async
@@ -2987,7 +2955,7 @@ export class SpeechClient {
     >;
   }
   /**
-   * Undeletes the {@link google.cloud.speech.v2.PhraseSet|PhraseSet}.
+   * Undeletes the {@link protos.google.cloud.speech.v2.PhraseSet|PhraseSet}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -3007,8 +2975,7 @@ export class SpeechClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.undelete_phrase_set.js</caption>
    * region_tag:speech_v2_generated_Speech_UndeletePhraseSet_async
@@ -3023,7 +2990,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   undeletePhraseSet(
@@ -3076,7 +3043,7 @@ export class SpeechClient {
         protos.google.cloud.speech.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3103,8 +3070,7 @@ export class SpeechClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.undelete_phrase_set.js</caption>
    * region_tag:speech_v2_generated_Speech_UndeletePhraseSet_async
@@ -3146,25 +3112,24 @@ export class SpeechClient {
    *   The maximum value is 100; values above 100 will be coerced to 100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.speech.v2.Speech.ListRecognizers|ListRecognizers} call.
+   *   {@link protos.google.cloud.speech.v2.Speech.ListRecognizers|ListRecognizers} call.
    *   Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.speech.v2.Speech.ListRecognizers|ListRecognizers} must match
+   *   {@link protos.google.cloud.speech.v2.Speech.ListRecognizers|ListRecognizers} must match
    *   the call that provided the page token.
    * @param {boolean} request.showDeleted
    *   Whether, or not, to show resources that have been deleted.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.speech.v2.Recognizer | Recognizer}.
+   *   The first element of the array is Array of {@link protos.google.cloud.speech.v2.Recognizer|Recognizer}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listRecognizersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listRecognizers(
@@ -3174,7 +3139,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.IRecognizer[],
       protos.google.cloud.speech.v2.IListRecognizersRequest | null,
-      protos.google.cloud.speech.v2.IListRecognizersResponse
+      protos.google.cloud.speech.v2.IListRecognizersResponse,
     ]
   >;
   listRecognizers(
@@ -3214,7 +3179,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.IRecognizer[],
       protos.google.cloud.speech.v2.IListRecognizersRequest | null,
-      protos.google.cloud.speech.v2.IListRecognizersResponse
+      protos.google.cloud.speech.v2.IListRecognizersResponse,
     ]
   > | void {
     request = request || {};
@@ -3249,24 +3214,23 @@ export class SpeechClient {
    *   The maximum value is 100; values above 100 will be coerced to 100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.speech.v2.Speech.ListRecognizers|ListRecognizers} call.
+   *   {@link protos.google.cloud.speech.v2.Speech.ListRecognizers|ListRecognizers} call.
    *   Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.speech.v2.Speech.ListRecognizers|ListRecognizers} must match
+   *   {@link protos.google.cloud.speech.v2.Speech.ListRecognizers|ListRecognizers} must match
    *   the call that provided the page token.
    * @param {boolean} request.showDeleted
    *   Whether, or not, to show resources that have been deleted.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.speech.v2.Recognizer | Recognizer} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.speech.v2.Recognizer|Recognizer} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listRecognizersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listRecognizersStream(
@@ -3306,23 +3270,22 @@ export class SpeechClient {
    *   The maximum value is 100; values above 100 will be coerced to 100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.speech.v2.Speech.ListRecognizers|ListRecognizers} call.
+   *   {@link protos.google.cloud.speech.v2.Speech.ListRecognizers|ListRecognizers} call.
    *   Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.speech.v2.Speech.ListRecognizers|ListRecognizers} must match
+   *   {@link protos.google.cloud.speech.v2.Speech.ListRecognizers|ListRecognizers} must match
    *   the call that provided the page token.
    * @param {boolean} request.showDeleted
    *   Whether, or not, to show resources that have been deleted.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.speech.v2.Recognizer | Recognizer}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.speech.v2.Recognizer|Recognizer}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.list_recognizers.js</caption>
    * region_tag:speech_v2_generated_Speech_ListRecognizers_async
@@ -3363,25 +3326,24 @@ export class SpeechClient {
    *   Note that a call might return fewer results than the requested page size.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.speech.v2.Speech.ListCustomClasses|ListCustomClasses} call.
+   *   {@link protos.google.cloud.speech.v2.Speech.ListCustomClasses|ListCustomClasses} call.
    *   Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.speech.v2.Speech.ListCustomClasses|ListCustomClasses} must
+   *   {@link protos.google.cloud.speech.v2.Speech.ListCustomClasses|ListCustomClasses} must
    *   match the call that provided the page token.
    * @param {boolean} request.showDeleted
    *   Whether, or not, to show resources that have been deleted.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.speech.v2.CustomClass | CustomClass}.
+   *   The first element of the array is Array of {@link protos.google.cloud.speech.v2.CustomClass|CustomClass}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listCustomClassesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listCustomClasses(
@@ -3391,7 +3353,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.ICustomClass[],
       protos.google.cloud.speech.v2.IListCustomClassesRequest | null,
-      protos.google.cloud.speech.v2.IListCustomClassesResponse
+      protos.google.cloud.speech.v2.IListCustomClassesResponse,
     ]
   >;
   listCustomClasses(
@@ -3437,7 +3399,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.ICustomClass[],
       protos.google.cloud.speech.v2.IListCustomClassesRequest | null,
-      protos.google.cloud.speech.v2.IListCustomClassesResponse
+      protos.google.cloud.speech.v2.IListCustomClassesResponse,
     ]
   > | void {
     request = request || {};
@@ -3473,24 +3435,23 @@ export class SpeechClient {
    *   Note that a call might return fewer results than the requested page size.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.speech.v2.Speech.ListCustomClasses|ListCustomClasses} call.
+   *   {@link protos.google.cloud.speech.v2.Speech.ListCustomClasses|ListCustomClasses} call.
    *   Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.speech.v2.Speech.ListCustomClasses|ListCustomClasses} must
+   *   {@link protos.google.cloud.speech.v2.Speech.ListCustomClasses|ListCustomClasses} must
    *   match the call that provided the page token.
    * @param {boolean} request.showDeleted
    *   Whether, or not, to show resources that have been deleted.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.speech.v2.CustomClass | CustomClass} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.speech.v2.CustomClass|CustomClass} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listCustomClassesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listCustomClassesStream(
@@ -3531,23 +3492,22 @@ export class SpeechClient {
    *   Note that a call might return fewer results than the requested page size.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.speech.v2.Speech.ListCustomClasses|ListCustomClasses} call.
+   *   {@link protos.google.cloud.speech.v2.Speech.ListCustomClasses|ListCustomClasses} call.
    *   Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.speech.v2.Speech.ListCustomClasses|ListCustomClasses} must
+   *   {@link protos.google.cloud.speech.v2.Speech.ListCustomClasses|ListCustomClasses} must
    *   match the call that provided the page token.
    * @param {boolean} request.showDeleted
    *   Whether, or not, to show resources that have been deleted.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.speech.v2.CustomClass | CustomClass}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.speech.v2.CustomClass|CustomClass}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.list_custom_classes.js</caption>
    * region_tag:speech_v2_generated_Speech_ListCustomClasses_async
@@ -3587,25 +3547,24 @@ export class SpeechClient {
    *   The maximum value is 100; values above 100 will be coerced to 100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.speech.v2.Speech.ListPhraseSets|ListPhraseSets} call.
+   *   {@link protos.google.cloud.speech.v2.Speech.ListPhraseSets|ListPhraseSets} call.
    *   Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.speech.v2.Speech.ListPhraseSets|ListPhraseSets} must match
+   *   {@link protos.google.cloud.speech.v2.Speech.ListPhraseSets|ListPhraseSets} must match
    *   the call that provided the page token.
    * @param {boolean} request.showDeleted
    *   Whether, or not, to show resources that have been deleted.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.speech.v2.PhraseSet | PhraseSet}.
+   *   The first element of the array is Array of {@link protos.google.cloud.speech.v2.PhraseSet|PhraseSet}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listPhraseSetsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listPhraseSets(
@@ -3615,7 +3574,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.IPhraseSet[],
       protos.google.cloud.speech.v2.IListPhraseSetsRequest | null,
-      protos.google.cloud.speech.v2.IListPhraseSetsResponse
+      protos.google.cloud.speech.v2.IListPhraseSetsResponse,
     ]
   >;
   listPhraseSets(
@@ -3655,7 +3614,7 @@ export class SpeechClient {
     [
       protos.google.cloud.speech.v2.IPhraseSet[],
       protos.google.cloud.speech.v2.IListPhraseSetsRequest | null,
-      protos.google.cloud.speech.v2.IListPhraseSetsResponse
+      protos.google.cloud.speech.v2.IListPhraseSetsResponse,
     ]
   > | void {
     request = request || {};
@@ -3690,24 +3649,23 @@ export class SpeechClient {
    *   The maximum value is 100; values above 100 will be coerced to 100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.speech.v2.Speech.ListPhraseSets|ListPhraseSets} call.
+   *   {@link protos.google.cloud.speech.v2.Speech.ListPhraseSets|ListPhraseSets} call.
    *   Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.speech.v2.Speech.ListPhraseSets|ListPhraseSets} must match
+   *   {@link protos.google.cloud.speech.v2.Speech.ListPhraseSets|ListPhraseSets} must match
    *   the call that provided the page token.
    * @param {boolean} request.showDeleted
    *   Whether, or not, to show resources that have been deleted.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.speech.v2.PhraseSet | PhraseSet} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.speech.v2.PhraseSet|PhraseSet} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listPhraseSetsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listPhraseSetsStream(
@@ -3747,23 +3705,22 @@ export class SpeechClient {
    *   The maximum value is 100; values above 100 will be coerced to 100.
    * @param {string} request.pageToken
    *   A page token, received from a previous
-   *   {@link google.cloud.speech.v2.Speech.ListPhraseSets|ListPhraseSets} call.
+   *   {@link protos.google.cloud.speech.v2.Speech.ListPhraseSets|ListPhraseSets} call.
    *   Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link google.cloud.speech.v2.Speech.ListPhraseSets|ListPhraseSets} must match
+   *   {@link protos.google.cloud.speech.v2.Speech.ListPhraseSets|ListPhraseSets} must match
    *   the call that provided the page token.
    * @param {boolean} request.showDeleted
    *   Whether, or not, to show resources that have been deleted.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.speech.v2.PhraseSet | PhraseSet}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.speech.v2.PhraseSet|PhraseSet}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/speech.list_phrase_sets.js</caption>
    * region_tag:speech_v2_generated_Speech_ListPhraseSets_async
@@ -3800,8 +3757,7 @@ export class SpeechClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -3847,12 +3803,11 @@ export class SpeechClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

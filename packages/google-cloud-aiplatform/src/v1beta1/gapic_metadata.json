@@ -2059,6 +2059,16 @@
               "methods": [
                 "explain"
               ]
+            },
+            "CountTokens": {
+              "methods": [
+                "countTokens"
+              ]
+            },
+            "ServerStreamingPredict": {
+              "methods": [
+                "serverStreamingPredict"
+              ]
             }
           }
         },
@@ -2078,6 +2088,11 @@
             "Explain": {
               "methods": [
                 "explain"
+              ]
+            },
+            "CountTokens": {
+              "methods": [
+                "countTokens"
               ]
             }
           }

@@ -822,6 +822,12 @@ export namespace google {
 
                     /** Document updater */
                     updater?: (string|null);
+
+                    /** Document dispositionTime */
+                    dispositionTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Document legalHold */
+                    legalHold?: (boolean|null);
                 }
 
                 /** Represents a Document. */
@@ -895,6 +901,12 @@ export namespace google {
 
                     /** Document updater. */
                     public updater: string;
+
+                    /** Document dispositionTime. */
+                    public dispositionTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Document legalHold. */
+                    public legalHold: boolean;
 
                     /** Document structuredContent. */
                     public structuredContent?: ("plainText"|"cloudAiDocument");
@@ -1003,6 +1015,12 @@ export namespace google {
 
                     /** DocumentReference deleteTime */
                     deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DocumentReference documentIsRetentionFolder */
+                    documentIsRetentionFolder?: (boolean|null);
+
+                    /** DocumentReference documentIsLegalHoldFolder */
+                    documentIsLegalHoldFolder?: (boolean|null);
                 }
 
                 /** Represents a DocumentReference. */
@@ -1034,6 +1052,12 @@ export namespace google {
 
                     /** DocumentReference deleteTime. */
                     public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DocumentReference documentIsRetentionFolder. */
+                    public documentIsRetentionFolder: boolean;
+
+                    /** DocumentReference documentIsLegalHoldFolder. */
+                    public documentIsLegalHoldFolder: boolean;
 
                     /**
                      * Creates a new DocumentReference instance using the specified properties.
@@ -5857,6 +5881,9 @@ export namespace google {
 
                     /** SearchDocumentsResponse histogramQueryResults */
                     histogramQueryResults?: (google.cloud.contentwarehouse.v1.IHistogramQueryResult[]|null);
+
+                    /** SearchDocumentsResponse questionAnswer */
+                    questionAnswer?: (string|null);
                 }
 
                 /** Represents a SearchDocumentsResponse. */
@@ -5882,6 +5909,9 @@ export namespace google {
 
                     /** SearchDocumentsResponse histogramQueryResults. */
                     public histogramQueryResults: google.cloud.contentwarehouse.v1.IHistogramQueryResult[];
+
+                    /** SearchDocumentsResponse questionAnswer. */
+                    public questionAnswer: string;
 
                     /**
                      * Creates a new SearchDocumentsResponse instance using the specified properties.
@@ -7363,6 +7393,9 @@ export namespace google {
                     /** DocumentQuery folderNameFilter */
                     folderNameFilter?: (string|null);
 
+                    /** DocumentQuery documentNameFilter */
+                    documentNameFilter?: (string[]|null);
+
                     /** DocumentQuery queryContext */
                     queryContext?: (string[]|null);
 
@@ -7405,6 +7438,9 @@ export namespace google {
 
                     /** DocumentQuery folderNameFilter. */
                     public folderNameFilter: string;
+
+                    /** DocumentQuery documentNameFilter. */
+                    public documentNameFilter: string[];
 
                     /** DocumentQuery queryContext. */
                     public queryContext: string[];
@@ -7602,7 +7638,8 @@ export namespace google {
                     enum TimeField {
                         TIME_FIELD_UNSPECIFIED = 0,
                         CREATE_TIME = 1,
-                        UPDATE_TIME = 2
+                        UPDATE_TIME = 2,
+                        DISPOSITION_TIME = 3
                     }
                 }
 
@@ -8589,7 +8626,9 @@ export namespace google {
                     enum TriggerType {
                         UNKNOWN = 0,
                         ON_CREATE = 1,
-                        ON_UPDATE = 4
+                        ON_UPDATE = 4,
+                        ON_CREATE_LINK = 7,
+                        ON_DELETE_LINK = 8
                     }
                 }
 
@@ -10083,6 +10122,1519 @@ export namespace google {
                         ACTION_TIMED_OUT = 3,
                         ACTION_PENDING = 4
                     }
+                }
+
+                /** Represents a PipelineService */
+                class PipelineService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new PipelineService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new PipelineService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): PipelineService;
+
+                    /**
+                     * Calls RunPipeline.
+                     * @param request RunPipelineRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public runPipeline(request: google.cloud.contentwarehouse.v1.IRunPipelineRequest, callback: google.cloud.contentwarehouse.v1.PipelineService.RunPipelineCallback): void;
+
+                    /**
+                     * Calls RunPipeline.
+                     * @param request RunPipelineRequest message or plain object
+                     * @returns Promise
+                     */
+                    public runPipeline(request: google.cloud.contentwarehouse.v1.IRunPipelineRequest): Promise<google.longrunning.Operation>;
+                }
+
+                namespace PipelineService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.contentwarehouse.v1.PipelineService|runPipeline}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type RunPipelineCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                }
+
+                /** Properties of a RunPipelineRequest. */
+                interface IRunPipelineRequest {
+
+                    /** RunPipelineRequest name */
+                    name?: (string|null);
+
+                    /** RunPipelineRequest gcsIngestPipeline */
+                    gcsIngestPipeline?: (google.cloud.contentwarehouse.v1.IGcsIngestPipeline|null);
+
+                    /** RunPipelineRequest gcsIngestWithDocAiProcessorsPipeline */
+                    gcsIngestWithDocAiProcessorsPipeline?: (google.cloud.contentwarehouse.v1.IGcsIngestWithDocAiProcessorsPipeline|null);
+
+                    /** RunPipelineRequest exportCdwPipeline */
+                    exportCdwPipeline?: (google.cloud.contentwarehouse.v1.IExportToCdwPipeline|null);
+
+                    /** RunPipelineRequest processWithDocAiPipeline */
+                    processWithDocAiPipeline?: (google.cloud.contentwarehouse.v1.IProcessWithDocAiPipeline|null);
+
+                    /** RunPipelineRequest requestMetadata */
+                    requestMetadata?: (google.cloud.contentwarehouse.v1.IRequestMetadata|null);
+                }
+
+                /** Represents a RunPipelineRequest. */
+                class RunPipelineRequest implements IRunPipelineRequest {
+
+                    /**
+                     * Constructs a new RunPipelineRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contentwarehouse.v1.IRunPipelineRequest);
+
+                    /** RunPipelineRequest name. */
+                    public name: string;
+
+                    /** RunPipelineRequest gcsIngestPipeline. */
+                    public gcsIngestPipeline?: (google.cloud.contentwarehouse.v1.IGcsIngestPipeline|null);
+
+                    /** RunPipelineRequest gcsIngestWithDocAiProcessorsPipeline. */
+                    public gcsIngestWithDocAiProcessorsPipeline?: (google.cloud.contentwarehouse.v1.IGcsIngestWithDocAiProcessorsPipeline|null);
+
+                    /** RunPipelineRequest exportCdwPipeline. */
+                    public exportCdwPipeline?: (google.cloud.contentwarehouse.v1.IExportToCdwPipeline|null);
+
+                    /** RunPipelineRequest processWithDocAiPipeline. */
+                    public processWithDocAiPipeline?: (google.cloud.contentwarehouse.v1.IProcessWithDocAiPipeline|null);
+
+                    /** RunPipelineRequest requestMetadata. */
+                    public requestMetadata?: (google.cloud.contentwarehouse.v1.IRequestMetadata|null);
+
+                    /** RunPipelineRequest pipeline. */
+                    public pipeline?: ("gcsIngestPipeline"|"gcsIngestWithDocAiProcessorsPipeline"|"exportCdwPipeline"|"processWithDocAiPipeline");
+
+                    /**
+                     * Creates a new RunPipelineRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RunPipelineRequest instance
+                     */
+                    public static create(properties?: google.cloud.contentwarehouse.v1.IRunPipelineRequest): google.cloud.contentwarehouse.v1.RunPipelineRequest;
+
+                    /**
+                     * Encodes the specified RunPipelineRequest message. Does not implicitly {@link google.cloud.contentwarehouse.v1.RunPipelineRequest.verify|verify} messages.
+                     * @param message RunPipelineRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contentwarehouse.v1.IRunPipelineRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RunPipelineRequest message, length delimited. Does not implicitly {@link google.cloud.contentwarehouse.v1.RunPipelineRequest.verify|verify} messages.
+                     * @param message RunPipelineRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contentwarehouse.v1.IRunPipelineRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RunPipelineRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RunPipelineRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contentwarehouse.v1.RunPipelineRequest;
+
+                    /**
+                     * Decodes a RunPipelineRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RunPipelineRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contentwarehouse.v1.RunPipelineRequest;
+
+                    /**
+                     * Verifies a RunPipelineRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RunPipelineRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RunPipelineRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contentwarehouse.v1.RunPipelineRequest;
+
+                    /**
+                     * Creates a plain object from a RunPipelineRequest message. Also converts values to other types if specified.
+                     * @param message RunPipelineRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contentwarehouse.v1.RunPipelineRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RunPipelineRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RunPipelineRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RunPipelineResponse. */
+                interface IRunPipelineResponse {
+                }
+
+                /** Represents a RunPipelineResponse. */
+                class RunPipelineResponse implements IRunPipelineResponse {
+
+                    /**
+                     * Constructs a new RunPipelineResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contentwarehouse.v1.IRunPipelineResponse);
+
+                    /**
+                     * Creates a new RunPipelineResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RunPipelineResponse instance
+                     */
+                    public static create(properties?: google.cloud.contentwarehouse.v1.IRunPipelineResponse): google.cloud.contentwarehouse.v1.RunPipelineResponse;
+
+                    /**
+                     * Encodes the specified RunPipelineResponse message. Does not implicitly {@link google.cloud.contentwarehouse.v1.RunPipelineResponse.verify|verify} messages.
+                     * @param message RunPipelineResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contentwarehouse.v1.IRunPipelineResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RunPipelineResponse message, length delimited. Does not implicitly {@link google.cloud.contentwarehouse.v1.RunPipelineResponse.verify|verify} messages.
+                     * @param message RunPipelineResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contentwarehouse.v1.IRunPipelineResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RunPipelineResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RunPipelineResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contentwarehouse.v1.RunPipelineResponse;
+
+                    /**
+                     * Decodes a RunPipelineResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RunPipelineResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contentwarehouse.v1.RunPipelineResponse;
+
+                    /**
+                     * Verifies a RunPipelineResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RunPipelineResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RunPipelineResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contentwarehouse.v1.RunPipelineResponse;
+
+                    /**
+                     * Creates a plain object from a RunPipelineResponse message. Also converts values to other types if specified.
+                     * @param message RunPipelineResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contentwarehouse.v1.RunPipelineResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RunPipelineResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RunPipelineResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RunPipelineMetadata. */
+                interface IRunPipelineMetadata {
+
+                    /** RunPipelineMetadata totalFileCount */
+                    totalFileCount?: (number|null);
+
+                    /** RunPipelineMetadata failedFileCount */
+                    failedFileCount?: (number|null);
+
+                    /** RunPipelineMetadata userInfo */
+                    userInfo?: (google.cloud.contentwarehouse.v1.IUserInfo|null);
+
+                    /** RunPipelineMetadata gcsIngestPipelineMetadata */
+                    gcsIngestPipelineMetadata?: (google.cloud.contentwarehouse.v1.RunPipelineMetadata.IGcsIngestPipelineMetadata|null);
+
+                    /** RunPipelineMetadata exportToCdwPipelineMetadata */
+                    exportToCdwPipelineMetadata?: (google.cloud.contentwarehouse.v1.RunPipelineMetadata.IExportToCdwPipelineMetadata|null);
+
+                    /** RunPipelineMetadata processWithDocAiPipelineMetadata */
+                    processWithDocAiPipelineMetadata?: (google.cloud.contentwarehouse.v1.RunPipelineMetadata.IProcessWithDocAiPipelineMetadata|null);
+
+                    /** RunPipelineMetadata individualDocumentStatuses */
+                    individualDocumentStatuses?: (google.cloud.contentwarehouse.v1.RunPipelineMetadata.IIndividualDocumentStatus[]|null);
+                }
+
+                /** Represents a RunPipelineMetadata. */
+                class RunPipelineMetadata implements IRunPipelineMetadata {
+
+                    /**
+                     * Constructs a new RunPipelineMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contentwarehouse.v1.IRunPipelineMetadata);
+
+                    /** RunPipelineMetadata totalFileCount. */
+                    public totalFileCount: number;
+
+                    /** RunPipelineMetadata failedFileCount. */
+                    public failedFileCount: number;
+
+                    /** RunPipelineMetadata userInfo. */
+                    public userInfo?: (google.cloud.contentwarehouse.v1.IUserInfo|null);
+
+                    /** RunPipelineMetadata gcsIngestPipelineMetadata. */
+                    public gcsIngestPipelineMetadata?: (google.cloud.contentwarehouse.v1.RunPipelineMetadata.IGcsIngestPipelineMetadata|null);
+
+                    /** RunPipelineMetadata exportToCdwPipelineMetadata. */
+                    public exportToCdwPipelineMetadata?: (google.cloud.contentwarehouse.v1.RunPipelineMetadata.IExportToCdwPipelineMetadata|null);
+
+                    /** RunPipelineMetadata processWithDocAiPipelineMetadata. */
+                    public processWithDocAiPipelineMetadata?: (google.cloud.contentwarehouse.v1.RunPipelineMetadata.IProcessWithDocAiPipelineMetadata|null);
+
+                    /** RunPipelineMetadata individualDocumentStatuses. */
+                    public individualDocumentStatuses: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IIndividualDocumentStatus[];
+
+                    /** RunPipelineMetadata pipelineMetadata. */
+                    public pipelineMetadata?: ("gcsIngestPipelineMetadata"|"exportToCdwPipelineMetadata"|"processWithDocAiPipelineMetadata");
+
+                    /**
+                     * Creates a new RunPipelineMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RunPipelineMetadata instance
+                     */
+                    public static create(properties?: google.cloud.contentwarehouse.v1.IRunPipelineMetadata): google.cloud.contentwarehouse.v1.RunPipelineMetadata;
+
+                    /**
+                     * Encodes the specified RunPipelineMetadata message. Does not implicitly {@link google.cloud.contentwarehouse.v1.RunPipelineMetadata.verify|verify} messages.
+                     * @param message RunPipelineMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contentwarehouse.v1.IRunPipelineMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RunPipelineMetadata message, length delimited. Does not implicitly {@link google.cloud.contentwarehouse.v1.RunPipelineMetadata.verify|verify} messages.
+                     * @param message RunPipelineMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contentwarehouse.v1.IRunPipelineMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RunPipelineMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RunPipelineMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contentwarehouse.v1.RunPipelineMetadata;
+
+                    /**
+                     * Decodes a RunPipelineMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RunPipelineMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contentwarehouse.v1.RunPipelineMetadata;
+
+                    /**
+                     * Verifies a RunPipelineMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RunPipelineMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RunPipelineMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contentwarehouse.v1.RunPipelineMetadata;
+
+                    /**
+                     * Creates a plain object from a RunPipelineMetadata message. Also converts values to other types if specified.
+                     * @param message RunPipelineMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contentwarehouse.v1.RunPipelineMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RunPipelineMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RunPipelineMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RunPipelineMetadata {
+
+                    /** Properties of a GcsIngestPipelineMetadata. */
+                    interface IGcsIngestPipelineMetadata {
+
+                        /** GcsIngestPipelineMetadata inputPath */
+                        inputPath?: (string|null);
+                    }
+
+                    /** Represents a GcsIngestPipelineMetadata. */
+                    class GcsIngestPipelineMetadata implements IGcsIngestPipelineMetadata {
+
+                        /**
+                         * Constructs a new GcsIngestPipelineMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IGcsIngestPipelineMetadata);
+
+                        /** GcsIngestPipelineMetadata inputPath. */
+                        public inputPath: string;
+
+                        /**
+                         * Creates a new GcsIngestPipelineMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GcsIngestPipelineMetadata instance
+                         */
+                        public static create(properties?: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IGcsIngestPipelineMetadata): google.cloud.contentwarehouse.v1.RunPipelineMetadata.GcsIngestPipelineMetadata;
+
+                        /**
+                         * Encodes the specified GcsIngestPipelineMetadata message. Does not implicitly {@link google.cloud.contentwarehouse.v1.RunPipelineMetadata.GcsIngestPipelineMetadata.verify|verify} messages.
+                         * @param message GcsIngestPipelineMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IGcsIngestPipelineMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GcsIngestPipelineMetadata message, length delimited. Does not implicitly {@link google.cloud.contentwarehouse.v1.RunPipelineMetadata.GcsIngestPipelineMetadata.verify|verify} messages.
+                         * @param message GcsIngestPipelineMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IGcsIngestPipelineMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GcsIngestPipelineMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GcsIngestPipelineMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contentwarehouse.v1.RunPipelineMetadata.GcsIngestPipelineMetadata;
+
+                        /**
+                         * Decodes a GcsIngestPipelineMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GcsIngestPipelineMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contentwarehouse.v1.RunPipelineMetadata.GcsIngestPipelineMetadata;
+
+                        /**
+                         * Verifies a GcsIngestPipelineMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GcsIngestPipelineMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GcsIngestPipelineMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contentwarehouse.v1.RunPipelineMetadata.GcsIngestPipelineMetadata;
+
+                        /**
+                         * Creates a plain object from a GcsIngestPipelineMetadata message. Also converts values to other types if specified.
+                         * @param message GcsIngestPipelineMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contentwarehouse.v1.RunPipelineMetadata.GcsIngestPipelineMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GcsIngestPipelineMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GcsIngestPipelineMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an ExportToCdwPipelineMetadata. */
+                    interface IExportToCdwPipelineMetadata {
+
+                        /** ExportToCdwPipelineMetadata documents */
+                        documents?: (string[]|null);
+
+                        /** ExportToCdwPipelineMetadata docAiDataset */
+                        docAiDataset?: (string|null);
+
+                        /** ExportToCdwPipelineMetadata outputPath */
+                        outputPath?: (string|null);
+                    }
+
+                    /** Represents an ExportToCdwPipelineMetadata. */
+                    class ExportToCdwPipelineMetadata implements IExportToCdwPipelineMetadata {
+
+                        /**
+                         * Constructs a new ExportToCdwPipelineMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IExportToCdwPipelineMetadata);
+
+                        /** ExportToCdwPipelineMetadata documents. */
+                        public documents: string[];
+
+                        /** ExportToCdwPipelineMetadata docAiDataset. */
+                        public docAiDataset: string;
+
+                        /** ExportToCdwPipelineMetadata outputPath. */
+                        public outputPath: string;
+
+                        /**
+                         * Creates a new ExportToCdwPipelineMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ExportToCdwPipelineMetadata instance
+                         */
+                        public static create(properties?: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IExportToCdwPipelineMetadata): google.cloud.contentwarehouse.v1.RunPipelineMetadata.ExportToCdwPipelineMetadata;
+
+                        /**
+                         * Encodes the specified ExportToCdwPipelineMetadata message. Does not implicitly {@link google.cloud.contentwarehouse.v1.RunPipelineMetadata.ExportToCdwPipelineMetadata.verify|verify} messages.
+                         * @param message ExportToCdwPipelineMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IExportToCdwPipelineMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ExportToCdwPipelineMetadata message, length delimited. Does not implicitly {@link google.cloud.contentwarehouse.v1.RunPipelineMetadata.ExportToCdwPipelineMetadata.verify|verify} messages.
+                         * @param message ExportToCdwPipelineMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IExportToCdwPipelineMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ExportToCdwPipelineMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ExportToCdwPipelineMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contentwarehouse.v1.RunPipelineMetadata.ExportToCdwPipelineMetadata;
+
+                        /**
+                         * Decodes an ExportToCdwPipelineMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ExportToCdwPipelineMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contentwarehouse.v1.RunPipelineMetadata.ExportToCdwPipelineMetadata;
+
+                        /**
+                         * Verifies an ExportToCdwPipelineMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ExportToCdwPipelineMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ExportToCdwPipelineMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contentwarehouse.v1.RunPipelineMetadata.ExportToCdwPipelineMetadata;
+
+                        /**
+                         * Creates a plain object from an ExportToCdwPipelineMetadata message. Also converts values to other types if specified.
+                         * @param message ExportToCdwPipelineMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contentwarehouse.v1.RunPipelineMetadata.ExportToCdwPipelineMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ExportToCdwPipelineMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ExportToCdwPipelineMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ProcessWithDocAiPipelineMetadata. */
+                    interface IProcessWithDocAiPipelineMetadata {
+
+                        /** ProcessWithDocAiPipelineMetadata documents */
+                        documents?: (string[]|null);
+
+                        /** ProcessWithDocAiPipelineMetadata processorInfo */
+                        processorInfo?: (google.cloud.contentwarehouse.v1.IProcessorInfo|null);
+                    }
+
+                    /** Represents a ProcessWithDocAiPipelineMetadata. */
+                    class ProcessWithDocAiPipelineMetadata implements IProcessWithDocAiPipelineMetadata {
+
+                        /**
+                         * Constructs a new ProcessWithDocAiPipelineMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IProcessWithDocAiPipelineMetadata);
+
+                        /** ProcessWithDocAiPipelineMetadata documents. */
+                        public documents: string[];
+
+                        /** ProcessWithDocAiPipelineMetadata processorInfo. */
+                        public processorInfo?: (google.cloud.contentwarehouse.v1.IProcessorInfo|null);
+
+                        /**
+                         * Creates a new ProcessWithDocAiPipelineMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ProcessWithDocAiPipelineMetadata instance
+                         */
+                        public static create(properties?: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IProcessWithDocAiPipelineMetadata): google.cloud.contentwarehouse.v1.RunPipelineMetadata.ProcessWithDocAiPipelineMetadata;
+
+                        /**
+                         * Encodes the specified ProcessWithDocAiPipelineMetadata message. Does not implicitly {@link google.cloud.contentwarehouse.v1.RunPipelineMetadata.ProcessWithDocAiPipelineMetadata.verify|verify} messages.
+                         * @param message ProcessWithDocAiPipelineMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IProcessWithDocAiPipelineMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ProcessWithDocAiPipelineMetadata message, length delimited. Does not implicitly {@link google.cloud.contentwarehouse.v1.RunPipelineMetadata.ProcessWithDocAiPipelineMetadata.verify|verify} messages.
+                         * @param message ProcessWithDocAiPipelineMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IProcessWithDocAiPipelineMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ProcessWithDocAiPipelineMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ProcessWithDocAiPipelineMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contentwarehouse.v1.RunPipelineMetadata.ProcessWithDocAiPipelineMetadata;
+
+                        /**
+                         * Decodes a ProcessWithDocAiPipelineMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ProcessWithDocAiPipelineMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contentwarehouse.v1.RunPipelineMetadata.ProcessWithDocAiPipelineMetadata;
+
+                        /**
+                         * Verifies a ProcessWithDocAiPipelineMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ProcessWithDocAiPipelineMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ProcessWithDocAiPipelineMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contentwarehouse.v1.RunPipelineMetadata.ProcessWithDocAiPipelineMetadata;
+
+                        /**
+                         * Creates a plain object from a ProcessWithDocAiPipelineMetadata message. Also converts values to other types if specified.
+                         * @param message ProcessWithDocAiPipelineMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contentwarehouse.v1.RunPipelineMetadata.ProcessWithDocAiPipelineMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ProcessWithDocAiPipelineMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ProcessWithDocAiPipelineMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an IndividualDocumentStatus. */
+                    interface IIndividualDocumentStatus {
+
+                        /** IndividualDocumentStatus documentId */
+                        documentId?: (string|null);
+
+                        /** IndividualDocumentStatus status */
+                        status?: (google.rpc.IStatus|null);
+                    }
+
+                    /** Represents an IndividualDocumentStatus. */
+                    class IndividualDocumentStatus implements IIndividualDocumentStatus {
+
+                        /**
+                         * Constructs a new IndividualDocumentStatus.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IIndividualDocumentStatus);
+
+                        /** IndividualDocumentStatus documentId. */
+                        public documentId: string;
+
+                        /** IndividualDocumentStatus status. */
+                        public status?: (google.rpc.IStatus|null);
+
+                        /**
+                         * Creates a new IndividualDocumentStatus instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns IndividualDocumentStatus instance
+                         */
+                        public static create(properties?: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IIndividualDocumentStatus): google.cloud.contentwarehouse.v1.RunPipelineMetadata.IndividualDocumentStatus;
+
+                        /**
+                         * Encodes the specified IndividualDocumentStatus message. Does not implicitly {@link google.cloud.contentwarehouse.v1.RunPipelineMetadata.IndividualDocumentStatus.verify|verify} messages.
+                         * @param message IndividualDocumentStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IIndividualDocumentStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified IndividualDocumentStatus message, length delimited. Does not implicitly {@link google.cloud.contentwarehouse.v1.RunPipelineMetadata.IndividualDocumentStatus.verify|verify} messages.
+                         * @param message IndividualDocumentStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IIndividualDocumentStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an IndividualDocumentStatus message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns IndividualDocumentStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contentwarehouse.v1.RunPipelineMetadata.IndividualDocumentStatus;
+
+                        /**
+                         * Decodes an IndividualDocumentStatus message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns IndividualDocumentStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contentwarehouse.v1.RunPipelineMetadata.IndividualDocumentStatus;
+
+                        /**
+                         * Verifies an IndividualDocumentStatus message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an IndividualDocumentStatus message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns IndividualDocumentStatus
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contentwarehouse.v1.RunPipelineMetadata.IndividualDocumentStatus;
+
+                        /**
+                         * Creates a plain object from an IndividualDocumentStatus message. Also converts values to other types if specified.
+                         * @param message IndividualDocumentStatus
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contentwarehouse.v1.RunPipelineMetadata.IndividualDocumentStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this IndividualDocumentStatus to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for IndividualDocumentStatus
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a ProcessorInfo. */
+                interface IProcessorInfo {
+
+                    /** ProcessorInfo processorName */
+                    processorName?: (string|null);
+
+                    /** ProcessorInfo documentType */
+                    documentType?: (string|null);
+
+                    /** ProcessorInfo schemaName */
+                    schemaName?: (string|null);
+                }
+
+                /** Represents a ProcessorInfo. */
+                class ProcessorInfo implements IProcessorInfo {
+
+                    /**
+                     * Constructs a new ProcessorInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contentwarehouse.v1.IProcessorInfo);
+
+                    /** ProcessorInfo processorName. */
+                    public processorName: string;
+
+                    /** ProcessorInfo documentType. */
+                    public documentType: string;
+
+                    /** ProcessorInfo schemaName. */
+                    public schemaName: string;
+
+                    /**
+                     * Creates a new ProcessorInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ProcessorInfo instance
+                     */
+                    public static create(properties?: google.cloud.contentwarehouse.v1.IProcessorInfo): google.cloud.contentwarehouse.v1.ProcessorInfo;
+
+                    /**
+                     * Encodes the specified ProcessorInfo message. Does not implicitly {@link google.cloud.contentwarehouse.v1.ProcessorInfo.verify|verify} messages.
+                     * @param message ProcessorInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contentwarehouse.v1.IProcessorInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ProcessorInfo message, length delimited. Does not implicitly {@link google.cloud.contentwarehouse.v1.ProcessorInfo.verify|verify} messages.
+                     * @param message ProcessorInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contentwarehouse.v1.IProcessorInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ProcessorInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ProcessorInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contentwarehouse.v1.ProcessorInfo;
+
+                    /**
+                     * Decodes a ProcessorInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ProcessorInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contentwarehouse.v1.ProcessorInfo;
+
+                    /**
+                     * Verifies a ProcessorInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ProcessorInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ProcessorInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contentwarehouse.v1.ProcessorInfo;
+
+                    /**
+                     * Creates a plain object from a ProcessorInfo message. Also converts values to other types if specified.
+                     * @param message ProcessorInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contentwarehouse.v1.ProcessorInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ProcessorInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ProcessorInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an IngestPipelineConfig. */
+                interface IIngestPipelineConfig {
+
+                    /** IngestPipelineConfig documentAclPolicy */
+                    documentAclPolicy?: (google.iam.v1.IPolicy|null);
+
+                    /** IngestPipelineConfig enableDocumentTextExtraction */
+                    enableDocumentTextExtraction?: (boolean|null);
+
+                    /** IngestPipelineConfig folder */
+                    folder?: (string|null);
+                }
+
+                /** Represents an IngestPipelineConfig. */
+                class IngestPipelineConfig implements IIngestPipelineConfig {
+
+                    /**
+                     * Constructs a new IngestPipelineConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contentwarehouse.v1.IIngestPipelineConfig);
+
+                    /** IngestPipelineConfig documentAclPolicy. */
+                    public documentAclPolicy?: (google.iam.v1.IPolicy|null);
+
+                    /** IngestPipelineConfig enableDocumentTextExtraction. */
+                    public enableDocumentTextExtraction: boolean;
+
+                    /** IngestPipelineConfig folder. */
+                    public folder: string;
+
+                    /**
+                     * Creates a new IngestPipelineConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns IngestPipelineConfig instance
+                     */
+                    public static create(properties?: google.cloud.contentwarehouse.v1.IIngestPipelineConfig): google.cloud.contentwarehouse.v1.IngestPipelineConfig;
+
+                    /**
+                     * Encodes the specified IngestPipelineConfig message. Does not implicitly {@link google.cloud.contentwarehouse.v1.IngestPipelineConfig.verify|verify} messages.
+                     * @param message IngestPipelineConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contentwarehouse.v1.IIngestPipelineConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified IngestPipelineConfig message, length delimited. Does not implicitly {@link google.cloud.contentwarehouse.v1.IngestPipelineConfig.verify|verify} messages.
+                     * @param message IngestPipelineConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contentwarehouse.v1.IIngestPipelineConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an IngestPipelineConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns IngestPipelineConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contentwarehouse.v1.IngestPipelineConfig;
+
+                    /**
+                     * Decodes an IngestPipelineConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns IngestPipelineConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contentwarehouse.v1.IngestPipelineConfig;
+
+                    /**
+                     * Verifies an IngestPipelineConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an IngestPipelineConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns IngestPipelineConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contentwarehouse.v1.IngestPipelineConfig;
+
+                    /**
+                     * Creates a plain object from an IngestPipelineConfig message. Also converts values to other types if specified.
+                     * @param message IngestPipelineConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contentwarehouse.v1.IngestPipelineConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this IngestPipelineConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IngestPipelineConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GcsIngestPipeline. */
+                interface IGcsIngestPipeline {
+
+                    /** GcsIngestPipeline inputPath */
+                    inputPath?: (string|null);
+
+                    /** GcsIngestPipeline schemaName */
+                    schemaName?: (string|null);
+
+                    /** GcsIngestPipeline processorType */
+                    processorType?: (string|null);
+
+                    /** GcsIngestPipeline skipIngestedDocuments */
+                    skipIngestedDocuments?: (boolean|null);
+
+                    /** GcsIngestPipeline pipelineConfig */
+                    pipelineConfig?: (google.cloud.contentwarehouse.v1.IIngestPipelineConfig|null);
+                }
+
+                /** Represents a GcsIngestPipeline. */
+                class GcsIngestPipeline implements IGcsIngestPipeline {
+
+                    /**
+                     * Constructs a new GcsIngestPipeline.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contentwarehouse.v1.IGcsIngestPipeline);
+
+                    /** GcsIngestPipeline inputPath. */
+                    public inputPath: string;
+
+                    /** GcsIngestPipeline schemaName. */
+                    public schemaName: string;
+
+                    /** GcsIngestPipeline processorType. */
+                    public processorType: string;
+
+                    /** GcsIngestPipeline skipIngestedDocuments. */
+                    public skipIngestedDocuments: boolean;
+
+                    /** GcsIngestPipeline pipelineConfig. */
+                    public pipelineConfig?: (google.cloud.contentwarehouse.v1.IIngestPipelineConfig|null);
+
+                    /**
+                     * Creates a new GcsIngestPipeline instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GcsIngestPipeline instance
+                     */
+                    public static create(properties?: google.cloud.contentwarehouse.v1.IGcsIngestPipeline): google.cloud.contentwarehouse.v1.GcsIngestPipeline;
+
+                    /**
+                     * Encodes the specified GcsIngestPipeline message. Does not implicitly {@link google.cloud.contentwarehouse.v1.GcsIngestPipeline.verify|verify} messages.
+                     * @param message GcsIngestPipeline message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contentwarehouse.v1.IGcsIngestPipeline, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GcsIngestPipeline message, length delimited. Does not implicitly {@link google.cloud.contentwarehouse.v1.GcsIngestPipeline.verify|verify} messages.
+                     * @param message GcsIngestPipeline message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contentwarehouse.v1.IGcsIngestPipeline, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GcsIngestPipeline message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GcsIngestPipeline
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contentwarehouse.v1.GcsIngestPipeline;
+
+                    /**
+                     * Decodes a GcsIngestPipeline message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GcsIngestPipeline
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contentwarehouse.v1.GcsIngestPipeline;
+
+                    /**
+                     * Verifies a GcsIngestPipeline message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GcsIngestPipeline message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GcsIngestPipeline
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contentwarehouse.v1.GcsIngestPipeline;
+
+                    /**
+                     * Creates a plain object from a GcsIngestPipeline message. Also converts values to other types if specified.
+                     * @param message GcsIngestPipeline
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contentwarehouse.v1.GcsIngestPipeline, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GcsIngestPipeline to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GcsIngestPipeline
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GcsIngestWithDocAiProcessorsPipeline. */
+                interface IGcsIngestWithDocAiProcessorsPipeline {
+
+                    /** GcsIngestWithDocAiProcessorsPipeline inputPath */
+                    inputPath?: (string|null);
+
+                    /** GcsIngestWithDocAiProcessorsPipeline splitClassifyProcessorInfo */
+                    splitClassifyProcessorInfo?: (google.cloud.contentwarehouse.v1.IProcessorInfo|null);
+
+                    /** GcsIngestWithDocAiProcessorsPipeline extractProcessorInfos */
+                    extractProcessorInfos?: (google.cloud.contentwarehouse.v1.IProcessorInfo[]|null);
+
+                    /** GcsIngestWithDocAiProcessorsPipeline processorResultsFolderPath */
+                    processorResultsFolderPath?: (string|null);
+
+                    /** GcsIngestWithDocAiProcessorsPipeline skipIngestedDocuments */
+                    skipIngestedDocuments?: (boolean|null);
+
+                    /** GcsIngestWithDocAiProcessorsPipeline pipelineConfig */
+                    pipelineConfig?: (google.cloud.contentwarehouse.v1.IIngestPipelineConfig|null);
+                }
+
+                /** Represents a GcsIngestWithDocAiProcessorsPipeline. */
+                class GcsIngestWithDocAiProcessorsPipeline implements IGcsIngestWithDocAiProcessorsPipeline {
+
+                    /**
+                     * Constructs a new GcsIngestWithDocAiProcessorsPipeline.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contentwarehouse.v1.IGcsIngestWithDocAiProcessorsPipeline);
+
+                    /** GcsIngestWithDocAiProcessorsPipeline inputPath. */
+                    public inputPath: string;
+
+                    /** GcsIngestWithDocAiProcessorsPipeline splitClassifyProcessorInfo. */
+                    public splitClassifyProcessorInfo?: (google.cloud.contentwarehouse.v1.IProcessorInfo|null);
+
+                    /** GcsIngestWithDocAiProcessorsPipeline extractProcessorInfos. */
+                    public extractProcessorInfos: google.cloud.contentwarehouse.v1.IProcessorInfo[];
+
+                    /** GcsIngestWithDocAiProcessorsPipeline processorResultsFolderPath. */
+                    public processorResultsFolderPath: string;
+
+                    /** GcsIngestWithDocAiProcessorsPipeline skipIngestedDocuments. */
+                    public skipIngestedDocuments: boolean;
+
+                    /** GcsIngestWithDocAiProcessorsPipeline pipelineConfig. */
+                    public pipelineConfig?: (google.cloud.contentwarehouse.v1.IIngestPipelineConfig|null);
+
+                    /**
+                     * Creates a new GcsIngestWithDocAiProcessorsPipeline instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GcsIngestWithDocAiProcessorsPipeline instance
+                     */
+                    public static create(properties?: google.cloud.contentwarehouse.v1.IGcsIngestWithDocAiProcessorsPipeline): google.cloud.contentwarehouse.v1.GcsIngestWithDocAiProcessorsPipeline;
+
+                    /**
+                     * Encodes the specified GcsIngestWithDocAiProcessorsPipeline message. Does not implicitly {@link google.cloud.contentwarehouse.v1.GcsIngestWithDocAiProcessorsPipeline.verify|verify} messages.
+                     * @param message GcsIngestWithDocAiProcessorsPipeline message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contentwarehouse.v1.IGcsIngestWithDocAiProcessorsPipeline, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GcsIngestWithDocAiProcessorsPipeline message, length delimited. Does not implicitly {@link google.cloud.contentwarehouse.v1.GcsIngestWithDocAiProcessorsPipeline.verify|verify} messages.
+                     * @param message GcsIngestWithDocAiProcessorsPipeline message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contentwarehouse.v1.IGcsIngestWithDocAiProcessorsPipeline, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GcsIngestWithDocAiProcessorsPipeline message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GcsIngestWithDocAiProcessorsPipeline
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contentwarehouse.v1.GcsIngestWithDocAiProcessorsPipeline;
+
+                    /**
+                     * Decodes a GcsIngestWithDocAiProcessorsPipeline message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GcsIngestWithDocAiProcessorsPipeline
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contentwarehouse.v1.GcsIngestWithDocAiProcessorsPipeline;
+
+                    /**
+                     * Verifies a GcsIngestWithDocAiProcessorsPipeline message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GcsIngestWithDocAiProcessorsPipeline message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GcsIngestWithDocAiProcessorsPipeline
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contentwarehouse.v1.GcsIngestWithDocAiProcessorsPipeline;
+
+                    /**
+                     * Creates a plain object from a GcsIngestWithDocAiProcessorsPipeline message. Also converts values to other types if specified.
+                     * @param message GcsIngestWithDocAiProcessorsPipeline
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contentwarehouse.v1.GcsIngestWithDocAiProcessorsPipeline, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GcsIngestWithDocAiProcessorsPipeline to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GcsIngestWithDocAiProcessorsPipeline
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExportToCdwPipeline. */
+                interface IExportToCdwPipeline {
+
+                    /** ExportToCdwPipeline documents */
+                    documents?: (string[]|null);
+
+                    /** ExportToCdwPipeline exportFolderPath */
+                    exportFolderPath?: (string|null);
+
+                    /** ExportToCdwPipeline docAiDataset */
+                    docAiDataset?: (string|null);
+
+                    /** ExportToCdwPipeline trainingSplitRatio */
+                    trainingSplitRatio?: (number|null);
+                }
+
+                /** Represents an ExportToCdwPipeline. */
+                class ExportToCdwPipeline implements IExportToCdwPipeline {
+
+                    /**
+                     * Constructs a new ExportToCdwPipeline.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contentwarehouse.v1.IExportToCdwPipeline);
+
+                    /** ExportToCdwPipeline documents. */
+                    public documents: string[];
+
+                    /** ExportToCdwPipeline exportFolderPath. */
+                    public exportFolderPath: string;
+
+                    /** ExportToCdwPipeline docAiDataset. */
+                    public docAiDataset: string;
+
+                    /** ExportToCdwPipeline trainingSplitRatio. */
+                    public trainingSplitRatio: number;
+
+                    /**
+                     * Creates a new ExportToCdwPipeline instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportToCdwPipeline instance
+                     */
+                    public static create(properties?: google.cloud.contentwarehouse.v1.IExportToCdwPipeline): google.cloud.contentwarehouse.v1.ExportToCdwPipeline;
+
+                    /**
+                     * Encodes the specified ExportToCdwPipeline message. Does not implicitly {@link google.cloud.contentwarehouse.v1.ExportToCdwPipeline.verify|verify} messages.
+                     * @param message ExportToCdwPipeline message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contentwarehouse.v1.IExportToCdwPipeline, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportToCdwPipeline message, length delimited. Does not implicitly {@link google.cloud.contentwarehouse.v1.ExportToCdwPipeline.verify|verify} messages.
+                     * @param message ExportToCdwPipeline message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contentwarehouse.v1.IExportToCdwPipeline, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportToCdwPipeline message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportToCdwPipeline
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contentwarehouse.v1.ExportToCdwPipeline;
+
+                    /**
+                     * Decodes an ExportToCdwPipeline message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportToCdwPipeline
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contentwarehouse.v1.ExportToCdwPipeline;
+
+                    /**
+                     * Verifies an ExportToCdwPipeline message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportToCdwPipeline message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportToCdwPipeline
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contentwarehouse.v1.ExportToCdwPipeline;
+
+                    /**
+                     * Creates a plain object from an ExportToCdwPipeline message. Also converts values to other types if specified.
+                     * @param message ExportToCdwPipeline
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contentwarehouse.v1.ExportToCdwPipeline, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportToCdwPipeline to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportToCdwPipeline
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ProcessWithDocAiPipeline. */
+                interface IProcessWithDocAiPipeline {
+
+                    /** ProcessWithDocAiPipeline documents */
+                    documents?: (string[]|null);
+
+                    /** ProcessWithDocAiPipeline exportFolderPath */
+                    exportFolderPath?: (string|null);
+
+                    /** ProcessWithDocAiPipeline processorInfo */
+                    processorInfo?: (google.cloud.contentwarehouse.v1.IProcessorInfo|null);
+
+                    /** ProcessWithDocAiPipeline processorResultsFolderPath */
+                    processorResultsFolderPath?: (string|null);
+                }
+
+                /** Represents a ProcessWithDocAiPipeline. */
+                class ProcessWithDocAiPipeline implements IProcessWithDocAiPipeline {
+
+                    /**
+                     * Constructs a new ProcessWithDocAiPipeline.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contentwarehouse.v1.IProcessWithDocAiPipeline);
+
+                    /** ProcessWithDocAiPipeline documents. */
+                    public documents: string[];
+
+                    /** ProcessWithDocAiPipeline exportFolderPath. */
+                    public exportFolderPath: string;
+
+                    /** ProcessWithDocAiPipeline processorInfo. */
+                    public processorInfo?: (google.cloud.contentwarehouse.v1.IProcessorInfo|null);
+
+                    /** ProcessWithDocAiPipeline processorResultsFolderPath. */
+                    public processorResultsFolderPath: string;
+
+                    /**
+                     * Creates a new ProcessWithDocAiPipeline instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ProcessWithDocAiPipeline instance
+                     */
+                    public static create(properties?: google.cloud.contentwarehouse.v1.IProcessWithDocAiPipeline): google.cloud.contentwarehouse.v1.ProcessWithDocAiPipeline;
+
+                    /**
+                     * Encodes the specified ProcessWithDocAiPipeline message. Does not implicitly {@link google.cloud.contentwarehouse.v1.ProcessWithDocAiPipeline.verify|verify} messages.
+                     * @param message ProcessWithDocAiPipeline message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contentwarehouse.v1.IProcessWithDocAiPipeline, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ProcessWithDocAiPipeline message, length delimited. Does not implicitly {@link google.cloud.contentwarehouse.v1.ProcessWithDocAiPipeline.verify|verify} messages.
+                     * @param message ProcessWithDocAiPipeline message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contentwarehouse.v1.IProcessWithDocAiPipeline, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ProcessWithDocAiPipeline message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ProcessWithDocAiPipeline
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contentwarehouse.v1.ProcessWithDocAiPipeline;
+
+                    /**
+                     * Decodes a ProcessWithDocAiPipeline message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ProcessWithDocAiPipeline
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contentwarehouse.v1.ProcessWithDocAiPipeline;
+
+                    /**
+                     * Verifies a ProcessWithDocAiPipeline message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ProcessWithDocAiPipeline message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ProcessWithDocAiPipeline
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contentwarehouse.v1.ProcessWithDocAiPipeline;
+
+                    /**
+                     * Creates a plain object from a ProcessWithDocAiPipeline message. Also converts values to other types if specified.
+                     * @param message ProcessWithDocAiPipeline
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contentwarehouse.v1.ProcessWithDocAiPipeline, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ProcessWithDocAiPipeline to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ProcessWithDocAiPipeline
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Represents a RuleSetService */
@@ -17117,6 +18669,1448 @@ export namespace google {
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
+
+        /** Properties of a CommonLanguageSettings. */
+        interface ICommonLanguageSettings {
+
+            /** CommonLanguageSettings referenceDocsUri */
+            referenceDocsUri?: (string|null);
+
+            /** CommonLanguageSettings destinations */
+            destinations?: (google.api.ClientLibraryDestination[]|null);
+        }
+
+        /** Represents a CommonLanguageSettings. */
+        class CommonLanguageSettings implements ICommonLanguageSettings {
+
+            /**
+             * Constructs a new CommonLanguageSettings.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ICommonLanguageSettings);
+
+            /** CommonLanguageSettings referenceDocsUri. */
+            public referenceDocsUri: string;
+
+            /** CommonLanguageSettings destinations. */
+            public destinations: google.api.ClientLibraryDestination[];
+
+            /**
+             * Creates a new CommonLanguageSettings instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns CommonLanguageSettings instance
+             */
+            public static create(properties?: google.api.ICommonLanguageSettings): google.api.CommonLanguageSettings;
+
+            /**
+             * Encodes the specified CommonLanguageSettings message. Does not implicitly {@link google.api.CommonLanguageSettings.verify|verify} messages.
+             * @param message CommonLanguageSettings message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ICommonLanguageSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified CommonLanguageSettings message, length delimited. Does not implicitly {@link google.api.CommonLanguageSettings.verify|verify} messages.
+             * @param message CommonLanguageSettings message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ICommonLanguageSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a CommonLanguageSettings message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns CommonLanguageSettings
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.CommonLanguageSettings;
+
+            /**
+             * Decodes a CommonLanguageSettings message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns CommonLanguageSettings
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.CommonLanguageSettings;
+
+            /**
+             * Verifies a CommonLanguageSettings message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a CommonLanguageSettings message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns CommonLanguageSettings
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.CommonLanguageSettings;
+
+            /**
+             * Creates a plain object from a CommonLanguageSettings message. Also converts values to other types if specified.
+             * @param message CommonLanguageSettings
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.CommonLanguageSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this CommonLanguageSettings to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for CommonLanguageSettings
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a ClientLibrarySettings. */
+        interface IClientLibrarySettings {
+
+            /** ClientLibrarySettings version */
+            version?: (string|null);
+
+            /** ClientLibrarySettings launchStage */
+            launchStage?: (google.api.LaunchStage|keyof typeof google.api.LaunchStage|null);
+
+            /** ClientLibrarySettings restNumericEnums */
+            restNumericEnums?: (boolean|null);
+
+            /** ClientLibrarySettings javaSettings */
+            javaSettings?: (google.api.IJavaSettings|null);
+
+            /** ClientLibrarySettings cppSettings */
+            cppSettings?: (google.api.ICppSettings|null);
+
+            /** ClientLibrarySettings phpSettings */
+            phpSettings?: (google.api.IPhpSettings|null);
+
+            /** ClientLibrarySettings pythonSettings */
+            pythonSettings?: (google.api.IPythonSettings|null);
+
+            /** ClientLibrarySettings nodeSettings */
+            nodeSettings?: (google.api.INodeSettings|null);
+
+            /** ClientLibrarySettings dotnetSettings */
+            dotnetSettings?: (google.api.IDotnetSettings|null);
+
+            /** ClientLibrarySettings rubySettings */
+            rubySettings?: (google.api.IRubySettings|null);
+
+            /** ClientLibrarySettings goSettings */
+            goSettings?: (google.api.IGoSettings|null);
+        }
+
+        /** Represents a ClientLibrarySettings. */
+        class ClientLibrarySettings implements IClientLibrarySettings {
+
+            /**
+             * Constructs a new ClientLibrarySettings.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IClientLibrarySettings);
+
+            /** ClientLibrarySettings version. */
+            public version: string;
+
+            /** ClientLibrarySettings launchStage. */
+            public launchStage: (google.api.LaunchStage|keyof typeof google.api.LaunchStage);
+
+            /** ClientLibrarySettings restNumericEnums. */
+            public restNumericEnums: boolean;
+
+            /** ClientLibrarySettings javaSettings. */
+            public javaSettings?: (google.api.IJavaSettings|null);
+
+            /** ClientLibrarySettings cppSettings. */
+            public cppSettings?: (google.api.ICppSettings|null);
+
+            /** ClientLibrarySettings phpSettings. */
+            public phpSettings?: (google.api.IPhpSettings|null);
+
+            /** ClientLibrarySettings pythonSettings. */
+            public pythonSettings?: (google.api.IPythonSettings|null);
+
+            /** ClientLibrarySettings nodeSettings. */
+            public nodeSettings?: (google.api.INodeSettings|null);
+
+            /** ClientLibrarySettings dotnetSettings. */
+            public dotnetSettings?: (google.api.IDotnetSettings|null);
+
+            /** ClientLibrarySettings rubySettings. */
+            public rubySettings?: (google.api.IRubySettings|null);
+
+            /** ClientLibrarySettings goSettings. */
+            public goSettings?: (google.api.IGoSettings|null);
+
+            /**
+             * Creates a new ClientLibrarySettings instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ClientLibrarySettings instance
+             */
+            public static create(properties?: google.api.IClientLibrarySettings): google.api.ClientLibrarySettings;
+
+            /**
+             * Encodes the specified ClientLibrarySettings message. Does not implicitly {@link google.api.ClientLibrarySettings.verify|verify} messages.
+             * @param message ClientLibrarySettings message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IClientLibrarySettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ClientLibrarySettings message, length delimited. Does not implicitly {@link google.api.ClientLibrarySettings.verify|verify} messages.
+             * @param message ClientLibrarySettings message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IClientLibrarySettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ClientLibrarySettings message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ClientLibrarySettings
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ClientLibrarySettings;
+
+            /**
+             * Decodes a ClientLibrarySettings message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ClientLibrarySettings
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ClientLibrarySettings;
+
+            /**
+             * Verifies a ClientLibrarySettings message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ClientLibrarySettings message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ClientLibrarySettings
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ClientLibrarySettings;
+
+            /**
+             * Creates a plain object from a ClientLibrarySettings message. Also converts values to other types if specified.
+             * @param message ClientLibrarySettings
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ClientLibrarySettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ClientLibrarySettings to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ClientLibrarySettings
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Publishing. */
+        interface IPublishing {
+
+            /** Publishing methodSettings */
+            methodSettings?: (google.api.IMethodSettings[]|null);
+
+            /** Publishing newIssueUri */
+            newIssueUri?: (string|null);
+
+            /** Publishing documentationUri */
+            documentationUri?: (string|null);
+
+            /** Publishing apiShortName */
+            apiShortName?: (string|null);
+
+            /** Publishing githubLabel */
+            githubLabel?: (string|null);
+
+            /** Publishing codeownerGithubTeams */
+            codeownerGithubTeams?: (string[]|null);
+
+            /** Publishing docTagPrefix */
+            docTagPrefix?: (string|null);
+
+            /** Publishing organization */
+            organization?: (google.api.ClientLibraryOrganization|keyof typeof google.api.ClientLibraryOrganization|null);
+
+            /** Publishing librarySettings */
+            librarySettings?: (google.api.IClientLibrarySettings[]|null);
+        }
+
+        /** Represents a Publishing. */
+        class Publishing implements IPublishing {
+
+            /**
+             * Constructs a new Publishing.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IPublishing);
+
+            /** Publishing methodSettings. */
+            public methodSettings: google.api.IMethodSettings[];
+
+            /** Publishing newIssueUri. */
+            public newIssueUri: string;
+
+            /** Publishing documentationUri. */
+            public documentationUri: string;
+
+            /** Publishing apiShortName. */
+            public apiShortName: string;
+
+            /** Publishing githubLabel. */
+            public githubLabel: string;
+
+            /** Publishing codeownerGithubTeams. */
+            public codeownerGithubTeams: string[];
+
+            /** Publishing docTagPrefix. */
+            public docTagPrefix: string;
+
+            /** Publishing organization. */
+            public organization: (google.api.ClientLibraryOrganization|keyof typeof google.api.ClientLibraryOrganization);
+
+            /** Publishing librarySettings. */
+            public librarySettings: google.api.IClientLibrarySettings[];
+
+            /**
+             * Creates a new Publishing instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Publishing instance
+             */
+            public static create(properties?: google.api.IPublishing): google.api.Publishing;
+
+            /**
+             * Encodes the specified Publishing message. Does not implicitly {@link google.api.Publishing.verify|verify} messages.
+             * @param message Publishing message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IPublishing, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Publishing message, length delimited. Does not implicitly {@link google.api.Publishing.verify|verify} messages.
+             * @param message Publishing message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IPublishing, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Publishing message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Publishing
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Publishing;
+
+            /**
+             * Decodes a Publishing message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Publishing
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Publishing;
+
+            /**
+             * Verifies a Publishing message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Publishing message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Publishing
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.Publishing;
+
+            /**
+             * Creates a plain object from a Publishing message. Also converts values to other types if specified.
+             * @param message Publishing
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.Publishing, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Publishing to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Publishing
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a JavaSettings. */
+        interface IJavaSettings {
+
+            /** JavaSettings libraryPackage */
+            libraryPackage?: (string|null);
+
+            /** JavaSettings serviceClassNames */
+            serviceClassNames?: ({ [k: string]: string }|null);
+
+            /** JavaSettings common */
+            common?: (google.api.ICommonLanguageSettings|null);
+        }
+
+        /** Represents a JavaSettings. */
+        class JavaSettings implements IJavaSettings {
+
+            /**
+             * Constructs a new JavaSettings.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IJavaSettings);
+
+            /** JavaSettings libraryPackage. */
+            public libraryPackage: string;
+
+            /** JavaSettings serviceClassNames. */
+            public serviceClassNames: { [k: string]: string };
+
+            /** JavaSettings common. */
+            public common?: (google.api.ICommonLanguageSettings|null);
+
+            /**
+             * Creates a new JavaSettings instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns JavaSettings instance
+             */
+            public static create(properties?: google.api.IJavaSettings): google.api.JavaSettings;
+
+            /**
+             * Encodes the specified JavaSettings message. Does not implicitly {@link google.api.JavaSettings.verify|verify} messages.
+             * @param message JavaSettings message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IJavaSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified JavaSettings message, length delimited. Does not implicitly {@link google.api.JavaSettings.verify|verify} messages.
+             * @param message JavaSettings message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IJavaSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a JavaSettings message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns JavaSettings
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.JavaSettings;
+
+            /**
+             * Decodes a JavaSettings message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns JavaSettings
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.JavaSettings;
+
+            /**
+             * Verifies a JavaSettings message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a JavaSettings message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns JavaSettings
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.JavaSettings;
+
+            /**
+             * Creates a plain object from a JavaSettings message. Also converts values to other types if specified.
+             * @param message JavaSettings
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.JavaSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this JavaSettings to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for JavaSettings
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a CppSettings. */
+        interface ICppSettings {
+
+            /** CppSettings common */
+            common?: (google.api.ICommonLanguageSettings|null);
+        }
+
+        /** Represents a CppSettings. */
+        class CppSettings implements ICppSettings {
+
+            /**
+             * Constructs a new CppSettings.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ICppSettings);
+
+            /** CppSettings common. */
+            public common?: (google.api.ICommonLanguageSettings|null);
+
+            /**
+             * Creates a new CppSettings instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns CppSettings instance
+             */
+            public static create(properties?: google.api.ICppSettings): google.api.CppSettings;
+
+            /**
+             * Encodes the specified CppSettings message. Does not implicitly {@link google.api.CppSettings.verify|verify} messages.
+             * @param message CppSettings message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ICppSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified CppSettings message, length delimited. Does not implicitly {@link google.api.CppSettings.verify|verify} messages.
+             * @param message CppSettings message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ICppSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a CppSettings message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns CppSettings
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.CppSettings;
+
+            /**
+             * Decodes a CppSettings message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns CppSettings
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.CppSettings;
+
+            /**
+             * Verifies a CppSettings message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a CppSettings message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns CppSettings
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.CppSettings;
+
+            /**
+             * Creates a plain object from a CppSettings message. Also converts values to other types if specified.
+             * @param message CppSettings
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.CppSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this CppSettings to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for CppSettings
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a PhpSettings. */
+        interface IPhpSettings {
+
+            /** PhpSettings common */
+            common?: (google.api.ICommonLanguageSettings|null);
+        }
+
+        /** Represents a PhpSettings. */
+        class PhpSettings implements IPhpSettings {
+
+            /**
+             * Constructs a new PhpSettings.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IPhpSettings);
+
+            /** PhpSettings common. */
+            public common?: (google.api.ICommonLanguageSettings|null);
+
+            /**
+             * Creates a new PhpSettings instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns PhpSettings instance
+             */
+            public static create(properties?: google.api.IPhpSettings): google.api.PhpSettings;
+
+            /**
+             * Encodes the specified PhpSettings message. Does not implicitly {@link google.api.PhpSettings.verify|verify} messages.
+             * @param message PhpSettings message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IPhpSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified PhpSettings message, length delimited. Does not implicitly {@link google.api.PhpSettings.verify|verify} messages.
+             * @param message PhpSettings message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IPhpSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a PhpSettings message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns PhpSettings
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.PhpSettings;
+
+            /**
+             * Decodes a PhpSettings message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns PhpSettings
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.PhpSettings;
+
+            /**
+             * Verifies a PhpSettings message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a PhpSettings message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns PhpSettings
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.PhpSettings;
+
+            /**
+             * Creates a plain object from a PhpSettings message. Also converts values to other types if specified.
+             * @param message PhpSettings
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.PhpSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this PhpSettings to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for PhpSettings
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a PythonSettings. */
+        interface IPythonSettings {
+
+            /** PythonSettings common */
+            common?: (google.api.ICommonLanguageSettings|null);
+        }
+
+        /** Represents a PythonSettings. */
+        class PythonSettings implements IPythonSettings {
+
+            /**
+             * Constructs a new PythonSettings.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IPythonSettings);
+
+            /** PythonSettings common. */
+            public common?: (google.api.ICommonLanguageSettings|null);
+
+            /**
+             * Creates a new PythonSettings instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns PythonSettings instance
+             */
+            public static create(properties?: google.api.IPythonSettings): google.api.PythonSettings;
+
+            /**
+             * Encodes the specified PythonSettings message. Does not implicitly {@link google.api.PythonSettings.verify|verify} messages.
+             * @param message PythonSettings message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IPythonSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified PythonSettings message, length delimited. Does not implicitly {@link google.api.PythonSettings.verify|verify} messages.
+             * @param message PythonSettings message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IPythonSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a PythonSettings message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns PythonSettings
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.PythonSettings;
+
+            /**
+             * Decodes a PythonSettings message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns PythonSettings
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.PythonSettings;
+
+            /**
+             * Verifies a PythonSettings message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a PythonSettings message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns PythonSettings
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.PythonSettings;
+
+            /**
+             * Creates a plain object from a PythonSettings message. Also converts values to other types if specified.
+             * @param message PythonSettings
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.PythonSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this PythonSettings to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for PythonSettings
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a NodeSettings. */
+        interface INodeSettings {
+
+            /** NodeSettings common */
+            common?: (google.api.ICommonLanguageSettings|null);
+        }
+
+        /** Represents a NodeSettings. */
+        class NodeSettings implements INodeSettings {
+
+            /**
+             * Constructs a new NodeSettings.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.INodeSettings);
+
+            /** NodeSettings common. */
+            public common?: (google.api.ICommonLanguageSettings|null);
+
+            /**
+             * Creates a new NodeSettings instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns NodeSettings instance
+             */
+            public static create(properties?: google.api.INodeSettings): google.api.NodeSettings;
+
+            /**
+             * Encodes the specified NodeSettings message. Does not implicitly {@link google.api.NodeSettings.verify|verify} messages.
+             * @param message NodeSettings message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.INodeSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified NodeSettings message, length delimited. Does not implicitly {@link google.api.NodeSettings.verify|verify} messages.
+             * @param message NodeSettings message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.INodeSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a NodeSettings message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns NodeSettings
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.NodeSettings;
+
+            /**
+             * Decodes a NodeSettings message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns NodeSettings
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.NodeSettings;
+
+            /**
+             * Verifies a NodeSettings message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a NodeSettings message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns NodeSettings
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.NodeSettings;
+
+            /**
+             * Creates a plain object from a NodeSettings message. Also converts values to other types if specified.
+             * @param message NodeSettings
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.NodeSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this NodeSettings to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for NodeSettings
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a DotnetSettings. */
+        interface IDotnetSettings {
+
+            /** DotnetSettings common */
+            common?: (google.api.ICommonLanguageSettings|null);
+        }
+
+        /** Represents a DotnetSettings. */
+        class DotnetSettings implements IDotnetSettings {
+
+            /**
+             * Constructs a new DotnetSettings.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IDotnetSettings);
+
+            /** DotnetSettings common. */
+            public common?: (google.api.ICommonLanguageSettings|null);
+
+            /**
+             * Creates a new DotnetSettings instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns DotnetSettings instance
+             */
+            public static create(properties?: google.api.IDotnetSettings): google.api.DotnetSettings;
+
+            /**
+             * Encodes the specified DotnetSettings message. Does not implicitly {@link google.api.DotnetSettings.verify|verify} messages.
+             * @param message DotnetSettings message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IDotnetSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified DotnetSettings message, length delimited. Does not implicitly {@link google.api.DotnetSettings.verify|verify} messages.
+             * @param message DotnetSettings message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IDotnetSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a DotnetSettings message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns DotnetSettings
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.DotnetSettings;
+
+            /**
+             * Decodes a DotnetSettings message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns DotnetSettings
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.DotnetSettings;
+
+            /**
+             * Verifies a DotnetSettings message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a DotnetSettings message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns DotnetSettings
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.DotnetSettings;
+
+            /**
+             * Creates a plain object from a DotnetSettings message. Also converts values to other types if specified.
+             * @param message DotnetSettings
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.DotnetSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this DotnetSettings to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for DotnetSettings
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a RubySettings. */
+        interface IRubySettings {
+
+            /** RubySettings common */
+            common?: (google.api.ICommonLanguageSettings|null);
+        }
+
+        /** Represents a RubySettings. */
+        class RubySettings implements IRubySettings {
+
+            /**
+             * Constructs a new RubySettings.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IRubySettings);
+
+            /** RubySettings common. */
+            public common?: (google.api.ICommonLanguageSettings|null);
+
+            /**
+             * Creates a new RubySettings instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns RubySettings instance
+             */
+            public static create(properties?: google.api.IRubySettings): google.api.RubySettings;
+
+            /**
+             * Encodes the specified RubySettings message. Does not implicitly {@link google.api.RubySettings.verify|verify} messages.
+             * @param message RubySettings message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IRubySettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified RubySettings message, length delimited. Does not implicitly {@link google.api.RubySettings.verify|verify} messages.
+             * @param message RubySettings message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IRubySettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a RubySettings message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns RubySettings
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.RubySettings;
+
+            /**
+             * Decodes a RubySettings message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns RubySettings
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.RubySettings;
+
+            /**
+             * Verifies a RubySettings message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a RubySettings message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns RubySettings
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.RubySettings;
+
+            /**
+             * Creates a plain object from a RubySettings message. Also converts values to other types if specified.
+             * @param message RubySettings
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.RubySettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this RubySettings to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for RubySettings
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a GoSettings. */
+        interface IGoSettings {
+
+            /** GoSettings common */
+            common?: (google.api.ICommonLanguageSettings|null);
+        }
+
+        /** Represents a GoSettings. */
+        class GoSettings implements IGoSettings {
+
+            /**
+             * Constructs a new GoSettings.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IGoSettings);
+
+            /** GoSettings common. */
+            public common?: (google.api.ICommonLanguageSettings|null);
+
+            /**
+             * Creates a new GoSettings instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns GoSettings instance
+             */
+            public static create(properties?: google.api.IGoSettings): google.api.GoSettings;
+
+            /**
+             * Encodes the specified GoSettings message. Does not implicitly {@link google.api.GoSettings.verify|verify} messages.
+             * @param message GoSettings message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IGoSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified GoSettings message, length delimited. Does not implicitly {@link google.api.GoSettings.verify|verify} messages.
+             * @param message GoSettings message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IGoSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a GoSettings message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns GoSettings
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.GoSettings;
+
+            /**
+             * Decodes a GoSettings message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns GoSettings
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.GoSettings;
+
+            /**
+             * Verifies a GoSettings message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a GoSettings message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns GoSettings
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.GoSettings;
+
+            /**
+             * Creates a plain object from a GoSettings message. Also converts values to other types if specified.
+             * @param message GoSettings
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.GoSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this GoSettings to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for GoSettings
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a MethodSettings. */
+        interface IMethodSettings {
+
+            /** MethodSettings selector */
+            selector?: (string|null);
+
+            /** MethodSettings longRunning */
+            longRunning?: (google.api.MethodSettings.ILongRunning|null);
+        }
+
+        /** Represents a MethodSettings. */
+        class MethodSettings implements IMethodSettings {
+
+            /**
+             * Constructs a new MethodSettings.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IMethodSettings);
+
+            /** MethodSettings selector. */
+            public selector: string;
+
+            /** MethodSettings longRunning. */
+            public longRunning?: (google.api.MethodSettings.ILongRunning|null);
+
+            /**
+             * Creates a new MethodSettings instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns MethodSettings instance
+             */
+            public static create(properties?: google.api.IMethodSettings): google.api.MethodSettings;
+
+            /**
+             * Encodes the specified MethodSettings message. Does not implicitly {@link google.api.MethodSettings.verify|verify} messages.
+             * @param message MethodSettings message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IMethodSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified MethodSettings message, length delimited. Does not implicitly {@link google.api.MethodSettings.verify|verify} messages.
+             * @param message MethodSettings message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IMethodSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a MethodSettings message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns MethodSettings
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.MethodSettings;
+
+            /**
+             * Decodes a MethodSettings message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns MethodSettings
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.MethodSettings;
+
+            /**
+             * Verifies a MethodSettings message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a MethodSettings message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns MethodSettings
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.MethodSettings;
+
+            /**
+             * Creates a plain object from a MethodSettings message. Also converts values to other types if specified.
+             * @param message MethodSettings
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.MethodSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this MethodSettings to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for MethodSettings
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace MethodSettings {
+
+            /** Properties of a LongRunning. */
+            interface ILongRunning {
+
+                /** LongRunning initialPollDelay */
+                initialPollDelay?: (google.protobuf.IDuration|null);
+
+                /** LongRunning pollDelayMultiplier */
+                pollDelayMultiplier?: (number|null);
+
+                /** LongRunning maxPollDelay */
+                maxPollDelay?: (google.protobuf.IDuration|null);
+
+                /** LongRunning totalPollTimeout */
+                totalPollTimeout?: (google.protobuf.IDuration|null);
+            }
+
+            /** Represents a LongRunning. */
+            class LongRunning implements ILongRunning {
+
+                /**
+                 * Constructs a new LongRunning.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.api.MethodSettings.ILongRunning);
+
+                /** LongRunning initialPollDelay. */
+                public initialPollDelay?: (google.protobuf.IDuration|null);
+
+                /** LongRunning pollDelayMultiplier. */
+                public pollDelayMultiplier: number;
+
+                /** LongRunning maxPollDelay. */
+                public maxPollDelay?: (google.protobuf.IDuration|null);
+
+                /** LongRunning totalPollTimeout. */
+                public totalPollTimeout?: (google.protobuf.IDuration|null);
+
+                /**
+                 * Creates a new LongRunning instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns LongRunning instance
+                 */
+                public static create(properties?: google.api.MethodSettings.ILongRunning): google.api.MethodSettings.LongRunning;
+
+                /**
+                 * Encodes the specified LongRunning message. Does not implicitly {@link google.api.MethodSettings.LongRunning.verify|verify} messages.
+                 * @param message LongRunning message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.api.MethodSettings.ILongRunning, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified LongRunning message, length delimited. Does not implicitly {@link google.api.MethodSettings.LongRunning.verify|verify} messages.
+                 * @param message LongRunning message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.api.MethodSettings.ILongRunning, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a LongRunning message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns LongRunning
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.MethodSettings.LongRunning;
+
+                /**
+                 * Decodes a LongRunning message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns LongRunning
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.MethodSettings.LongRunning;
+
+                /**
+                 * Verifies a LongRunning message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a LongRunning message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns LongRunning
+                 */
+                public static fromObject(object: { [k: string]: any }): google.api.MethodSettings.LongRunning;
+
+                /**
+                 * Creates a plain object from a LongRunning message. Also converts values to other types if specified.
+                 * @param message LongRunning
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.api.MethodSettings.LongRunning, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this LongRunning to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for LongRunning
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+        }
+
+        /** ClientLibraryOrganization enum. */
+        enum ClientLibraryOrganization {
+            CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED = 0,
+            CLOUD = 1,
+            ADS = 2,
+            PHOTOS = 3,
+            STREET_VIEW = 4
+        }
+
+        /** ClientLibraryDestination enum. */
+        enum ClientLibraryDestination {
+            CLIENT_LIBRARY_DESTINATION_UNSPECIFIED = 0,
+            GITHUB = 10,
+            PACKAGE_MANAGER = 20
+        }
+
+        /** LaunchStage enum. */
+        enum LaunchStage {
+            LAUNCH_STAGE_UNSPECIFIED = 0,
+            UNIMPLEMENTED = 6,
+            PRELAUNCH = 7,
+            EARLY_ACCESS = 1,
+            ALPHA = 2,
+            BETA = 3,
+            GA = 4,
+            DEPRECATED = 5
+        }
     }
 
     /** Namespace protobuf. */
@@ -18960,6 +21954,9 @@ export namespace google {
             /** MessageOptions mapEntry */
             mapEntry?: (boolean|null);
 
+            /** MessageOptions deprecatedLegacyJsonFieldConflicts */
+            deprecatedLegacyJsonFieldConflicts?: (boolean|null);
+
             /** MessageOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -18987,6 +21984,9 @@ export namespace google {
 
             /** MessageOptions mapEntry. */
             public mapEntry: boolean;
+
+            /** MessageOptions deprecatedLegacyJsonFieldConflicts. */
+            public deprecatedLegacyJsonFieldConflicts: boolean;
 
             /** MessageOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -19093,6 +22093,15 @@ export namespace google {
             /** FieldOptions weak */
             weak?: (boolean|null);
 
+            /** FieldOptions debugRedact */
+            debugRedact?: (boolean|null);
+
+            /** FieldOptions retention */
+            retention?: (google.protobuf.FieldOptions.OptionRetention|keyof typeof google.protobuf.FieldOptions.OptionRetention|null);
+
+            /** FieldOptions target */
+            target?: (google.protobuf.FieldOptions.OptionTargetType|keyof typeof google.protobuf.FieldOptions.OptionTargetType|null);
+
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -19132,6 +22141,15 @@ export namespace google {
 
             /** FieldOptions weak. */
             public weak: boolean;
+
+            /** FieldOptions debugRedact. */
+            public debugRedact: boolean;
+
+            /** FieldOptions retention. */
+            public retention: (google.protobuf.FieldOptions.OptionRetention|keyof typeof google.protobuf.FieldOptions.OptionRetention);
+
+            /** FieldOptions target. */
+            public target: (google.protobuf.FieldOptions.OptionTargetType|keyof typeof google.protobuf.FieldOptions.OptionTargetType);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -19228,6 +22246,27 @@ export namespace google {
                 JS_NORMAL = 0,
                 JS_STRING = 1,
                 JS_NUMBER = 2
+            }
+
+            /** OptionRetention enum. */
+            enum OptionRetention {
+                RETENTION_UNKNOWN = 0,
+                RETENTION_RUNTIME = 1,
+                RETENTION_SOURCE = 2
+            }
+
+            /** OptionTargetType enum. */
+            enum OptionTargetType {
+                TARGET_TYPE_UNKNOWN = 0,
+                TARGET_TYPE_FILE = 1,
+                TARGET_TYPE_EXTENSION_RANGE = 2,
+                TARGET_TYPE_MESSAGE = 3,
+                TARGET_TYPE_FIELD = 4,
+                TARGET_TYPE_ONEOF = 5,
+                TARGET_TYPE_ENUM = 6,
+                TARGET_TYPE_ENUM_ENTRY = 7,
+                TARGET_TYPE_SERVICE = 8,
+                TARGET_TYPE_METHOD = 9
             }
         }
 
@@ -19337,6 +22376,9 @@ export namespace google {
             /** EnumOptions deprecated */
             deprecated?: (boolean|null);
 
+            /** EnumOptions deprecatedLegacyJsonFieldConflicts */
+            deprecatedLegacyJsonFieldConflicts?: (boolean|null);
+
             /** EnumOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -19355,6 +22397,9 @@ export namespace google {
 
             /** EnumOptions deprecated. */
             public deprecated: boolean;
+
+            /** EnumOptions deprecatedLegacyJsonFieldConflicts. */
+            public deprecatedLegacyJsonFieldConflicts: boolean;
 
             /** EnumOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];

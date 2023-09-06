@@ -100,8 +100,7 @@ export class ScheduleServiceClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -109,7 +108,7 @@ export class ScheduleServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new ScheduleServiceClient({fallback: 'rest'}, gax);
+   *     const client = new ScheduleServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -178,7 +177,7 @@ export class ScheduleServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -337,7 +336,7 @@ export class ScheduleServiceClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
@@ -1690,9 +1689,8 @@ export class ScheduleServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1beta1.Schedule | Schedule}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.Schedule|Schedule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/schedule_service.create_schedule.js</caption>
    * region_tag:aiplatform_v1beta1_generated_ScheduleService_CreateSchedule_async
@@ -1704,7 +1702,7 @@ export class ScheduleServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ISchedule,
       protos.google.cloud.aiplatform.v1beta1.ICreateScheduleRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createSchedule(
@@ -1750,7 +1748,7 @@ export class ScheduleServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ISchedule,
       protos.google.cloud.aiplatform.v1beta1.ICreateScheduleRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1783,9 +1781,8 @@ export class ScheduleServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1beta1.Schedule | Schedule}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.Schedule|Schedule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/schedule_service.get_schedule.js</caption>
    * region_tag:aiplatform_v1beta1_generated_ScheduleService_GetSchedule_async
@@ -1797,7 +1794,7 @@ export class ScheduleServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ISchedule,
       protos.google.cloud.aiplatform.v1beta1.IGetScheduleRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSchedule(
@@ -1843,7 +1840,7 @@ export class ScheduleServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ISchedule,
       protos.google.cloud.aiplatform.v1beta1.IGetScheduleRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1866,7 +1863,7 @@ export class ScheduleServiceClient {
   }
   /**
    * Pauses a Schedule. Will mark
-   * {@link google.cloud.aiplatform.v1beta1.Schedule.state|Schedule.state} to
+   * {@link protos.google.cloud.aiplatform.v1beta1.Schedule.state|Schedule.state} to
    * 'PAUSED'. If the schedule is paused, no new runs will be created. Already
    * created runs will NOT be paused or canceled.
    *
@@ -1879,9 +1876,8 @@ export class ScheduleServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/schedule_service.pause_schedule.js</caption>
    * region_tag:aiplatform_v1beta1_generated_ScheduleService_PauseSchedule_async
@@ -1893,7 +1889,7 @@ export class ScheduleServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.aiplatform.v1beta1.IPauseScheduleRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   pauseSchedule(
@@ -1939,7 +1935,7 @@ export class ScheduleServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.aiplatform.v1beta1.IPauseScheduleRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1962,12 +1958,12 @@ export class ScheduleServiceClient {
   }
   /**
    * Resumes a paused Schedule to start scheduling new runs. Will mark
-   * {@link google.cloud.aiplatform.v1beta1.Schedule.state|Schedule.state} to
+   * {@link protos.google.cloud.aiplatform.v1beta1.Schedule.state|Schedule.state} to
    * 'ACTIVE'. Only paused Schedule can be resumed.
    *
    * When the Schedule is resumed, new runs will be scheduled starting from the
    * next execution time after the current time based on the time_specification
-   * in the Schedule. If {@link |Schedule.catchUp} is set up true, all
+   * in the Schedule. If {@link protos.|Schedule.catchUp} is set up true, all
    * missed runs will be scheduled for backfill first.
    *
    * @param {Object} request
@@ -1980,14 +1976,13 @@ export class ScheduleServiceClient {
    *   Optional. Whether to backfill missed runs when the schedule is resumed from
    *   PAUSED state. If set to true, all missed runs will be scheduled. New runs
    *   will be scheduled after the backfill is complete. This will also update
-   *   {@link google.cloud.aiplatform.v1beta1.Schedule.catch_up|Schedule.catch_up}
+   *   {@link protos.google.cloud.aiplatform.v1beta1.Schedule.catch_up|Schedule.catch_up}
    *   field. Default to false.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/schedule_service.resume_schedule.js</caption>
    * region_tag:aiplatform_v1beta1_generated_ScheduleService_ResumeSchedule_async
@@ -1999,7 +1994,7 @@ export class ScheduleServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.aiplatform.v1beta1.IResumeScheduleRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resumeSchedule(
@@ -2045,7 +2040,7 @@ export class ScheduleServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.aiplatform.v1beta1.IResumeScheduleRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2080,17 +2075,18 @@ export class ScheduleServiceClient {
    * @param {google.cloud.aiplatform.v1beta1.Schedule} request.schedule
    *   Required. The Schedule which replaces the resource on the server.
    *   The following restrictions will be applied:
+   *
    *     * The scheduled request type cannot be changed.
+   *     * The non-empty fields cannot be unset.
    *     * The output_only fields will be ignored if specified.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. The update mask applies to the resource. See
-   *   {@link google.protobuf.FieldMask|google.protobuf.FieldMask}.
+   *   {@link protos.google.protobuf.FieldMask|google.protobuf.FieldMask}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1beta1.Schedule | Schedule}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.Schedule|Schedule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/schedule_service.update_schedule.js</caption>
    * region_tag:aiplatform_v1beta1_generated_ScheduleService_UpdateSchedule_async
@@ -2102,7 +2098,7 @@ export class ScheduleServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ISchedule,
       protos.google.cloud.aiplatform.v1beta1.IUpdateScheduleRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateSchedule(
@@ -2148,7 +2144,7 @@ export class ScheduleServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ISchedule,
       protos.google.cloud.aiplatform.v1beta1.IUpdateScheduleRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2185,8 +2181,7 @@ export class ScheduleServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/schedule_service.delete_schedule.js</caption>
    * region_tag:aiplatform_v1beta1_generated_ScheduleService_DeleteSchedule_async
@@ -2201,7 +2196,7 @@ export class ScheduleServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteSchedule(
@@ -2254,7 +2249,7 @@ export class ScheduleServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2281,8 +2276,7 @@ export class ScheduleServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/schedule_service.delete_schedule.js</caption>
    * region_tag:aiplatform_v1beta1_generated_ScheduleService_DeleteSchedule_async
@@ -2355,9 +2349,9 @@ export class ScheduleServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.ListSchedulesResponse.next_page_token|ListSchedulesResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1beta1.ListSchedulesResponse.next_page_token|ListSchedulesResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.ScheduleService.ListSchedules|ScheduleService.ListSchedules}
+   *   {@link protos.google.cloud.aiplatform.v1beta1.ScheduleService.ListSchedules|ScheduleService.ListSchedules}
    *   call.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by. The default sort order is in
@@ -2372,6 +2366,7 @@ export class ScheduleServiceClient {
    *   descending order.
    *
    *   Supported fields:
+   *
    *     * `create_time`
    *     * `start_time`
    *     * `end_time`
@@ -2379,14 +2374,13 @@ export class ScheduleServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1beta1.Schedule | Schedule}.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.Schedule|Schedule}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listSchedulesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSchedules(
@@ -2396,7 +2390,7 @@ export class ScheduleServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ISchedule[],
       protos.google.cloud.aiplatform.v1beta1.IListSchedulesRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListSchedulesResponse
+      protos.google.cloud.aiplatform.v1beta1.IListSchedulesResponse,
     ]
   >;
   listSchedules(
@@ -2442,7 +2436,7 @@ export class ScheduleServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ISchedule[],
       protos.google.cloud.aiplatform.v1beta1.IListSchedulesRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListSchedulesResponse
+      protos.google.cloud.aiplatform.v1beta1.IListSchedulesResponse,
     ]
   > | void {
     request = request || {};
@@ -2508,9 +2502,9 @@ export class ScheduleServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.ListSchedulesResponse.next_page_token|ListSchedulesResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1beta1.ListSchedulesResponse.next_page_token|ListSchedulesResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.ScheduleService.ListSchedules|ScheduleService.ListSchedules}
+   *   {@link protos.google.cloud.aiplatform.v1beta1.ScheduleService.ListSchedules|ScheduleService.ListSchedules}
    *   call.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by. The default sort order is in
@@ -2525,6 +2519,7 @@ export class ScheduleServiceClient {
    *   descending order.
    *
    *   Supported fields:
+   *
    *     * `create_time`
    *     * `start_time`
    *     * `end_time`
@@ -2532,13 +2527,12 @@ export class ScheduleServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1beta1.Schedule | Schedule} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.Schedule|Schedule} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listSchedulesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSchedulesStream(
@@ -2609,9 +2603,9 @@ export class ScheduleServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.ListSchedulesResponse.next_page_token|ListSchedulesResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1beta1.ListSchedulesResponse.next_page_token|ListSchedulesResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.ScheduleService.ListSchedules|ScheduleService.ListSchedules}
+   *   {@link protos.google.cloud.aiplatform.v1beta1.ScheduleService.ListSchedules|ScheduleService.ListSchedules}
    *   call.
    * @param {string} request.orderBy
    *   A comma-separated list of fields to order by. The default sort order is in
@@ -2626,6 +2620,7 @@ export class ScheduleServiceClient {
    *   descending order.
    *
    *   Supported fields:
+   *
    *     * `create_time`
    *     * `start_time`
    *     * `end_time`
@@ -2633,12 +2628,11 @@ export class ScheduleServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.aiplatform.v1beta1.Schedule | Schedule}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.aiplatform.v1beta1.Schedule|Schedule}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/schedule_service.list_schedules.js</caption>
    * region_tag:aiplatform_v1beta1_generated_ScheduleService_ListSchedules_async
@@ -2703,7 +2697,7 @@ export class ScheduleServiceClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
@@ -2724,8 +2718,7 @@ export class ScheduleServiceClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -2751,7 +2744,7 @@ export class ScheduleServiceClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
@@ -2772,8 +2765,7 @@ export class ScheduleServiceClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -2800,7 +2792,7 @@ export class ScheduleServiceClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.TestIamPermissionsResponse> {
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
@@ -2815,8 +2807,7 @@ export class ScheduleServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -2862,12 +2853,11 @@ export class ScheduleServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

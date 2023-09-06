@@ -102,8 +102,7 @@ export class GrafeasV1Beta1Client {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -111,7 +110,7 @@ export class GrafeasV1Beta1Client {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new GrafeasV1Beta1Client({fallback: 'rest'}, gax);
+   *     const client = new GrafeasV1Beta1Client({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -177,7 +176,7 @@ export class GrafeasV1Beta1Client {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -366,9 +365,8 @@ export class GrafeasV1Beta1Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link grafeas.v1beta1.Occurrence | Occurrence}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.grafeas.v1beta1.Occurrence|Occurrence}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/grafeas_v1_beta1.get_occurrence.js</caption>
    * region_tag:containeranalysis_v1beta1_generated_GrafeasV1Beta1_GetOccurrence_async
@@ -380,7 +378,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.IOccurrence,
       protos.grafeas.v1beta1.IGetOccurrenceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getOccurrence(
@@ -418,7 +416,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.IOccurrence,
       protos.grafeas.v1beta1.IGetOccurrenceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -452,9 +450,8 @@ export class GrafeasV1Beta1Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/grafeas_v1_beta1.delete_occurrence.js</caption>
    * region_tag:containeranalysis_v1beta1_generated_GrafeasV1Beta1_DeleteOccurrence_async
@@ -466,7 +463,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.google.protobuf.IEmpty,
       protos.grafeas.v1beta1.IDeleteOccurrenceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteOccurrence(
@@ -504,7 +501,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.google.protobuf.IEmpty,
       protos.grafeas.v1beta1.IDeleteOccurrenceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -538,9 +535,8 @@ export class GrafeasV1Beta1Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link grafeas.v1beta1.Occurrence | Occurrence}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.grafeas.v1beta1.Occurrence|Occurrence}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/grafeas_v1_beta1.create_occurrence.js</caption>
    * region_tag:containeranalysis_v1beta1_generated_GrafeasV1Beta1_CreateOccurrence_async
@@ -552,7 +548,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.IOccurrence,
       protos.grafeas.v1beta1.ICreateOccurrenceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createOccurrence(
@@ -590,7 +586,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.IOccurrence,
       protos.grafeas.v1beta1.ICreateOccurrenceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -624,9 +620,8 @@ export class GrafeasV1Beta1Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link grafeas.v1beta1.BatchCreateOccurrencesResponse | BatchCreateOccurrencesResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.grafeas.v1beta1.BatchCreateOccurrencesResponse|BatchCreateOccurrencesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/grafeas_v1_beta1.batch_create_occurrences.js</caption>
    * region_tag:containeranalysis_v1beta1_generated_GrafeasV1Beta1_BatchCreateOccurrences_async
@@ -638,7 +633,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.IBatchCreateOccurrencesResponse,
       protos.grafeas.v1beta1.IBatchCreateOccurrencesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchCreateOccurrences(
@@ -678,7 +673,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.IBatchCreateOccurrencesResponse,
       protos.grafeas.v1beta1.IBatchCreateOccurrencesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -718,9 +713,8 @@ export class GrafeasV1Beta1Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link grafeas.v1beta1.Occurrence | Occurrence}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.grafeas.v1beta1.Occurrence|Occurrence}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/grafeas_v1_beta1.update_occurrence.js</caption>
    * region_tag:containeranalysis_v1beta1_generated_GrafeasV1Beta1_UpdateOccurrence_async
@@ -732,7 +726,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.IOccurrence,
       protos.grafeas.v1beta1.IUpdateOccurrenceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateOccurrence(
@@ -770,7 +764,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.IOccurrence,
       protos.grafeas.v1beta1.IUpdateOccurrenceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -803,9 +797,8 @@ export class GrafeasV1Beta1Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link grafeas.v1beta1.Note | Note}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.grafeas.v1beta1.Note|Note}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/grafeas_v1_beta1.get_occurrence_note.js</caption>
    * region_tag:containeranalysis_v1beta1_generated_GrafeasV1Beta1_GetOccurrenceNote_async
@@ -817,7 +810,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.INote,
       protos.grafeas.v1beta1.IGetOccurrenceNoteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getOccurrenceNote(
@@ -855,7 +848,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.INote,
       protos.grafeas.v1beta1.IGetOccurrenceNoteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -887,9 +880,8 @@ export class GrafeasV1Beta1Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link grafeas.v1beta1.Note | Note}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.grafeas.v1beta1.Note|Note}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/grafeas_v1_beta1.get_note.js</caption>
    * region_tag:containeranalysis_v1beta1_generated_GrafeasV1Beta1_GetNote_async
@@ -901,7 +893,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.INote,
       protos.grafeas.v1beta1.IGetNoteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getNote(
@@ -939,7 +931,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.INote,
       protos.grafeas.v1beta1.IGetNoteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -971,9 +963,8 @@ export class GrafeasV1Beta1Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/grafeas_v1_beta1.delete_note.js</caption>
    * region_tag:containeranalysis_v1beta1_generated_GrafeasV1Beta1_DeleteNote_async
@@ -985,7 +976,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.google.protobuf.IEmpty,
       protos.grafeas.v1beta1.IDeleteNoteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteNote(
@@ -1023,7 +1014,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.google.protobuf.IEmpty,
       protos.grafeas.v1beta1.IDeleteNoteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1059,9 +1050,8 @@ export class GrafeasV1Beta1Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link grafeas.v1beta1.Note | Note}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.grafeas.v1beta1.Note|Note}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/grafeas_v1_beta1.create_note.js</caption>
    * region_tag:containeranalysis_v1beta1_generated_GrafeasV1Beta1_CreateNote_async
@@ -1073,7 +1063,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.INote,
       protos.grafeas.v1beta1.ICreateNoteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createNote(
@@ -1111,7 +1101,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.INote,
       protos.grafeas.v1beta1.ICreateNoteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1145,9 +1135,8 @@ export class GrafeasV1Beta1Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link grafeas.v1beta1.BatchCreateNotesResponse | BatchCreateNotesResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.grafeas.v1beta1.BatchCreateNotesResponse|BatchCreateNotesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/grafeas_v1_beta1.batch_create_notes.js</caption>
    * region_tag:containeranalysis_v1beta1_generated_GrafeasV1Beta1_BatchCreateNotes_async
@@ -1159,7 +1148,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.IBatchCreateNotesResponse,
       protos.grafeas.v1beta1.IBatchCreateNotesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchCreateNotes(
@@ -1197,7 +1186,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.IBatchCreateNotesResponse,
       protos.grafeas.v1beta1.IBatchCreateNotesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1233,9 +1222,8 @@ export class GrafeasV1Beta1Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link grafeas.v1beta1.Note | Note}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.grafeas.v1beta1.Note|Note}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/grafeas_v1_beta1.update_note.js</caption>
    * region_tag:containeranalysis_v1beta1_generated_GrafeasV1Beta1_UpdateNote_async
@@ -1247,7 +1235,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.INote,
       protos.grafeas.v1beta1.IUpdateNoteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateNote(
@@ -1285,7 +1273,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.INote,
       protos.grafeas.v1beta1.IUpdateNoteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1319,9 +1307,8 @@ export class GrafeasV1Beta1Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link grafeas.v1beta1.VulnerabilityOccurrencesSummary | VulnerabilityOccurrencesSummary}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.grafeas.v1beta1.VulnerabilityOccurrencesSummary|VulnerabilityOccurrencesSummary}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/grafeas_v1_beta1.get_vulnerability_occurrences_summary.js</caption>
    * region_tag:containeranalysis_v1beta1_generated_GrafeasV1Beta1_GetVulnerabilityOccurrencesSummary_async
@@ -1336,7 +1323,7 @@ export class GrafeasV1Beta1Client {
         | protos.grafeas.v1beta1.IGetVulnerabilityOccurrencesSummaryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getVulnerabilityOccurrencesSummary(
@@ -1385,7 +1372,7 @@ export class GrafeasV1Beta1Client {
         | protos.grafeas.v1beta1.IGetVulnerabilityOccurrencesSummaryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1428,14 +1415,13 @@ export class GrafeasV1Beta1Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link grafeas.v1beta1.Occurrence | Occurrence}.
+   *   The first element of the array is Array of {@link protos.grafeas.v1beta1.Occurrence|Occurrence}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listOccurrencesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listOccurrences(
@@ -1445,7 +1431,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.IOccurrence[],
       protos.grafeas.v1beta1.IListOccurrencesRequest | null,
-      protos.grafeas.v1beta1.IListOccurrencesResponse
+      protos.grafeas.v1beta1.IListOccurrencesResponse,
     ]
   >;
   listOccurrences(
@@ -1483,7 +1469,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.IOccurrence[],
       protos.grafeas.v1beta1.IListOccurrencesRequest | null,
-      protos.grafeas.v1beta1.IListOccurrencesResponse
+      protos.grafeas.v1beta1.IListOccurrencesResponse,
     ]
   > | void {
     request = request || {};
@@ -1521,13 +1507,12 @@ export class GrafeasV1Beta1Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link grafeas.v1beta1.Occurrence | Occurrence} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.grafeas.v1beta1.Occurrence|Occurrence} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listOccurrencesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listOccurrencesStream(
@@ -1570,12 +1555,11 @@ export class GrafeasV1Beta1Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link grafeas.v1beta1.Occurrence | Occurrence}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.grafeas.v1beta1.Occurrence|Occurrence}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/grafeas_v1_beta1.list_occurrences.js</caption>
    * region_tag:containeranalysis_v1beta1_generated_GrafeasV1Beta1_ListOccurrences_async
@@ -1618,14 +1602,13 @@ export class GrafeasV1Beta1Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link grafeas.v1beta1.Note | Note}.
+   *   The first element of the array is Array of {@link protos.grafeas.v1beta1.Note|Note}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listNotesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listNotes(
@@ -1635,7 +1618,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.INote[],
       protos.grafeas.v1beta1.IListNotesRequest | null,
-      protos.grafeas.v1beta1.IListNotesResponse
+      protos.grafeas.v1beta1.IListNotesResponse,
     ]
   >;
   listNotes(
@@ -1673,7 +1656,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.INote[],
       protos.grafeas.v1beta1.IListNotesRequest | null,
-      protos.grafeas.v1beta1.IListNotesResponse
+      protos.grafeas.v1beta1.IListNotesResponse,
     ]
   > | void {
     request = request || {};
@@ -1711,13 +1694,12 @@ export class GrafeasV1Beta1Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link grafeas.v1beta1.Note | Note} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.grafeas.v1beta1.Note|Note} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listNotesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listNotesStream(
@@ -1760,12 +1742,11 @@ export class GrafeasV1Beta1Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link grafeas.v1beta1.Note | Note}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.grafeas.v1beta1.Note|Note}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/grafeas_v1_beta1.list_notes.js</caption>
    * region_tag:containeranalysis_v1beta1_generated_GrafeasV1Beta1_ListNotes_async
@@ -1810,14 +1791,13 @@ export class GrafeasV1Beta1Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link grafeas.v1beta1.Occurrence | Occurrence}.
+   *   The first element of the array is Array of {@link protos.grafeas.v1beta1.Occurrence|Occurrence}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listNoteOccurrencesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listNoteOccurrences(
@@ -1827,7 +1807,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.IOccurrence[],
       protos.grafeas.v1beta1.IListNoteOccurrencesRequest | null,
-      protos.grafeas.v1beta1.IListNoteOccurrencesResponse
+      protos.grafeas.v1beta1.IListNoteOccurrencesResponse,
     ]
   >;
   listNoteOccurrences(
@@ -1867,7 +1847,7 @@ export class GrafeasV1Beta1Client {
     [
       protos.grafeas.v1beta1.IOccurrence[],
       protos.grafeas.v1beta1.IListNoteOccurrencesRequest | null,
-      protos.grafeas.v1beta1.IListNoteOccurrencesResponse
+      protos.grafeas.v1beta1.IListNoteOccurrencesResponse,
     ]
   > | void {
     request = request || {};
@@ -1905,13 +1885,12 @@ export class GrafeasV1Beta1Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link grafeas.v1beta1.Occurrence | Occurrence} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.grafeas.v1beta1.Occurrence|Occurrence} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listNoteOccurrencesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listNoteOccurrencesStream(
@@ -1954,12 +1933,11 @@ export class GrafeasV1Beta1Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link grafeas.v1beta1.Occurrence | Occurrence}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.grafeas.v1beta1.Occurrence|Occurrence}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/grafeas_v1_beta1.list_note_occurrences.js</caption>
    * region_tag:containeranalysis_v1beta1_generated_GrafeasV1Beta1_ListNoteOccurrences_async

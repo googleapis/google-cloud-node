@@ -99,8 +99,7 @@ export class AlloyDBAdminClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -108,7 +107,7 @@ export class AlloyDBAdminClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new AlloyDBAdminClient({fallback: 'rest'}, gax);
+   *     const client = new AlloyDBAdminClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -180,7 +179,7 @@ export class AlloyDBAdminClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -255,7 +254,7 @@ export class AlloyDBAdminClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
@@ -666,9 +665,8 @@ export class AlloyDBAdminClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.alloydb.v1.Cluster | Cluster}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.alloydb.v1.Cluster|Cluster}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.get_cluster.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_GetCluster_async
@@ -680,7 +678,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1.ICluster,
       protos.google.cloud.alloydb.v1.IGetClusterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCluster(
@@ -718,7 +716,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1.ICluster,
       protos.google.cloud.alloydb.v1.IGetClusterRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -752,9 +750,8 @@ export class AlloyDBAdminClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.alloydb.v1.Instance | Instance}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.alloydb.v1.Instance|Instance}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.get_instance.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_GetInstance_async
@@ -766,7 +763,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1.IInstance,
       protos.google.cloud.alloydb.v1.IGetInstanceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getInstance(
@@ -804,7 +801,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1.IInstance,
       protos.google.cloud.alloydb.v1.IGetInstanceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -835,9 +832,8 @@ export class AlloyDBAdminClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.alloydb.v1.Backup | Backup}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.alloydb.v1.Backup|Backup}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.get_backup.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_GetBackup_async
@@ -849,7 +845,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1.IBackup,
       protos.google.cloud.alloydb.v1.IGetBackupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getBackup(
@@ -887,7 +883,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1.IBackup,
       protos.google.cloud.alloydb.v1.IGetBackupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -919,9 +915,8 @@ export class AlloyDBAdminClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.alloydb.v1.User | User}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.alloydb.v1.User|User}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.get_user.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_GetUser_async
@@ -933,7 +928,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1.IUser,
       protos.google.cloud.alloydb.v1.IGetUserRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getUser(
@@ -971,7 +966,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1.IUser,
       protos.google.cloud.alloydb.v1.IGetUserRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1023,9 +1018,8 @@ export class AlloyDBAdminClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.alloydb.v1.User | User}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.alloydb.v1.User|User}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.create_user.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_CreateUser_async
@@ -1037,7 +1031,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1.IUser,
       protos.google.cloud.alloydb.v1.ICreateUserRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createUser(
@@ -1075,7 +1069,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1.IUser,
       protos.google.cloud.alloydb.v1.ICreateUserRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1131,9 +1125,8 @@ export class AlloyDBAdminClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.alloydb.v1.User | User}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.alloydb.v1.User|User}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.update_user.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_UpdateUser_async
@@ -1145,7 +1138,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1.IUser,
       protos.google.cloud.alloydb.v1.IUpdateUserRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateUser(
@@ -1183,7 +1176,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1.IUser,
       protos.google.cloud.alloydb.v1.IUpdateUserRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1232,9 +1225,8 @@ export class AlloyDBAdminClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.delete_user.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_DeleteUser_async
@@ -1246,7 +1238,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.alloydb.v1.IDeleteUserRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteUser(
@@ -1284,7 +1276,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.alloydb.v1.IDeleteUserRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1342,8 +1334,7 @@ export class AlloyDBAdminClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.create_cluster.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_CreateCluster_async
@@ -1358,7 +1349,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCluster(
@@ -1411,7 +1402,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1438,8 +1429,7 @@ export class AlloyDBAdminClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.create_cluster.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_CreateCluster_async
@@ -1507,8 +1497,7 @@ export class AlloyDBAdminClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.update_cluster.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_UpdateCluster_async
@@ -1523,7 +1512,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCluster(
@@ -1576,7 +1565,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1603,8 +1592,7 @@ export class AlloyDBAdminClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.update_cluster.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_UpdateCluster_async
@@ -1669,8 +1657,7 @@ export class AlloyDBAdminClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.delete_cluster.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_DeleteCluster_async
@@ -1685,7 +1672,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteCluster(
@@ -1738,7 +1725,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1765,8 +1752,7 @@ export class AlloyDBAdminClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.delete_cluster.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_DeleteCluster_async
@@ -1832,8 +1818,7 @@ export class AlloyDBAdminClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.promote_cluster.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_PromoteCluster_async
@@ -1848,7 +1833,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   promoteCluster(
@@ -1901,7 +1886,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1928,8 +1913,7 @@ export class AlloyDBAdminClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.promote_cluster.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_PromoteCluster_async
@@ -2000,8 +1984,7 @@ export class AlloyDBAdminClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.restore_cluster.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_RestoreCluster_async
@@ -2016,7 +1999,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   restoreCluster(
@@ -2069,7 +2052,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2096,8 +2079,7 @@ export class AlloyDBAdminClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.restore_cluster.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_RestoreCluster_async
@@ -2162,8 +2144,7 @@ export class AlloyDBAdminClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.create_secondary_cluster.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_CreateSecondaryCluster_async
@@ -2178,7 +2159,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createSecondaryCluster(
@@ -2231,7 +2212,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2262,8 +2243,7 @@ export class AlloyDBAdminClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.create_secondary_cluster.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_CreateSecondaryCluster_async
@@ -2327,8 +2307,7 @@ export class AlloyDBAdminClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.create_instance.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_CreateInstance_async
@@ -2343,7 +2322,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createInstance(
@@ -2396,7 +2375,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2423,8 +2402,7 @@ export class AlloyDBAdminClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.create_instance.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_CreateInstance_async
@@ -2488,8 +2466,7 @@ export class AlloyDBAdminClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.create_secondary_instance.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_CreateSecondaryInstance_async
@@ -2504,7 +2481,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createSecondaryInstance(
@@ -2557,7 +2534,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2588,8 +2565,7 @@ export class AlloyDBAdminClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.create_secondary_instance.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_CreateSecondaryInstance_async
@@ -2655,8 +2631,7 @@ export class AlloyDBAdminClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.batch_create_instances.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_BatchCreateInstances_async
@@ -2671,7 +2646,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchCreateInstances(
@@ -2724,7 +2699,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2751,8 +2726,7 @@ export class AlloyDBAdminClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.batch_create_instances.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_BatchCreateInstances_async
@@ -2820,8 +2794,7 @@ export class AlloyDBAdminClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.update_instance.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_UpdateInstance_async
@@ -2836,7 +2809,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateInstance(
@@ -2889,7 +2862,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2916,8 +2889,7 @@ export class AlloyDBAdminClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.update_instance.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_UpdateInstance_async
@@ -2980,8 +2952,7 @@ export class AlloyDBAdminClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.delete_instance.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_DeleteInstance_async
@@ -2996,7 +2967,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteInstance(
@@ -3049,7 +3020,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3076,8 +3047,7 @@ export class AlloyDBAdminClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.delete_instance.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_DeleteInstance_async
@@ -3138,8 +3108,7 @@ export class AlloyDBAdminClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.failover_instance.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_FailoverInstance_async
@@ -3154,7 +3123,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   failoverInstance(
@@ -3207,7 +3176,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3234,8 +3203,7 @@ export class AlloyDBAdminClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.failover_instance.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_FailoverInstance_async
@@ -3298,8 +3266,7 @@ export class AlloyDBAdminClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.inject_fault.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_InjectFault_async
@@ -3314,7 +3281,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   injectFault(
@@ -3367,7 +3334,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3394,8 +3361,7 @@ export class AlloyDBAdminClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.inject_fault.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_InjectFault_async
@@ -3455,8 +3421,7 @@ export class AlloyDBAdminClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.restart_instance.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_RestartInstance_async
@@ -3471,7 +3436,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   restartInstance(
@@ -3524,7 +3489,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3551,8 +3516,7 @@ export class AlloyDBAdminClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.restart_instance.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_RestartInstance_async
@@ -3614,8 +3578,7 @@ export class AlloyDBAdminClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.create_backup.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_CreateBackup_async
@@ -3630,7 +3593,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createBackup(
@@ -3683,7 +3646,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3710,8 +3673,7 @@ export class AlloyDBAdminClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.create_backup.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_CreateBackup_async
@@ -3778,8 +3740,7 @@ export class AlloyDBAdminClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.update_backup.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_UpdateBackup_async
@@ -3794,7 +3755,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateBackup(
@@ -3847,7 +3808,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3874,8 +3835,7 @@ export class AlloyDBAdminClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.update_backup.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_UpdateBackup_async
@@ -3938,8 +3898,7 @@ export class AlloyDBAdminClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.delete_backup.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_DeleteBackup_async
@@ -3954,7 +3913,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteBackup(
@@ -4007,7 +3966,7 @@ export class AlloyDBAdminClient {
         protos.google.cloud.alloydb.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -4034,8 +3993,7 @@ export class AlloyDBAdminClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.delete_backup.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_DeleteBackup_async
@@ -4085,14 +4043,13 @@ export class AlloyDBAdminClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.alloydb.v1.Cluster | Cluster}.
+   *   The first element of the array is Array of {@link protos.google.cloud.alloydb.v1.Cluster|Cluster}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listClustersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listClusters(
@@ -4102,7 +4059,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1.ICluster[],
       protos.google.cloud.alloydb.v1.IListClustersRequest | null,
-      protos.google.cloud.alloydb.v1.IListClustersResponse
+      protos.google.cloud.alloydb.v1.IListClustersResponse,
     ]
   >;
   listClusters(
@@ -4142,7 +4099,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1.ICluster[],
       protos.google.cloud.alloydb.v1.IListClustersRequest | null,
-      protos.google.cloud.alloydb.v1.IListClustersResponse
+      protos.google.cloud.alloydb.v1.IListClustersResponse,
     ]
   > | void {
     request = request || {};
@@ -4185,13 +4142,12 @@ export class AlloyDBAdminClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.alloydb.v1.Cluster | Cluster} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.alloydb.v1.Cluster|Cluster} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listClustersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listClustersStream(
@@ -4239,12 +4195,11 @@ export class AlloyDBAdminClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.alloydb.v1.Cluster | Cluster}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.alloydb.v1.Cluster|Cluster}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.list_clusters.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_ListClusters_async
@@ -4294,14 +4249,13 @@ export class AlloyDBAdminClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.alloydb.v1.Instance | Instance}.
+   *   The first element of the array is Array of {@link protos.google.cloud.alloydb.v1.Instance|Instance}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listInstancesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listInstances(
@@ -4311,7 +4265,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1.IInstance[],
       protos.google.cloud.alloydb.v1.IListInstancesRequest | null,
-      protos.google.cloud.alloydb.v1.IListInstancesResponse
+      protos.google.cloud.alloydb.v1.IListInstancesResponse,
     ]
   >;
   listInstances(
@@ -4351,7 +4305,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1.IInstance[],
       protos.google.cloud.alloydb.v1.IListInstancesRequest | null,
-      protos.google.cloud.alloydb.v1.IListInstancesResponse
+      protos.google.cloud.alloydb.v1.IListInstancesResponse,
     ]
   > | void {
     request = request || {};
@@ -4396,13 +4350,12 @@ export class AlloyDBAdminClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.alloydb.v1.Instance | Instance} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.alloydb.v1.Instance|Instance} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listInstancesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listInstancesStream(
@@ -4452,12 +4405,11 @@ export class AlloyDBAdminClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.alloydb.v1.Instance | Instance}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.alloydb.v1.Instance|Instance}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.list_instances.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_ListInstances_async
@@ -4502,14 +4454,13 @@ export class AlloyDBAdminClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.alloydb.v1.Backup | Backup}.
+   *   The first element of the array is Array of {@link protos.google.cloud.alloydb.v1.Backup|Backup}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listBackupsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listBackups(
@@ -4519,7 +4470,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1.IBackup[],
       protos.google.cloud.alloydb.v1.IListBackupsRequest | null,
-      protos.google.cloud.alloydb.v1.IListBackupsResponse
+      protos.google.cloud.alloydb.v1.IListBackupsResponse,
     ]
   >;
   listBackups(
@@ -4559,7 +4510,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1.IBackup[],
       protos.google.cloud.alloydb.v1.IListBackupsRequest | null,
-      protos.google.cloud.alloydb.v1.IListBackupsResponse
+      protos.google.cloud.alloydb.v1.IListBackupsResponse,
     ]
   > | void {
     request = request || {};
@@ -4599,13 +4550,12 @@ export class AlloyDBAdminClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.alloydb.v1.Backup | Backup} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.alloydb.v1.Backup|Backup} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listBackupsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listBackupsStream(
@@ -4650,12 +4600,11 @@ export class AlloyDBAdminClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.alloydb.v1.Backup | Backup}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.alloydb.v1.Backup|Backup}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.list_backups.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_ListBackups_async
@@ -4702,14 +4651,13 @@ export class AlloyDBAdminClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.alloydb.v1.SupportedDatabaseFlag | SupportedDatabaseFlag}.
+   *   The first element of the array is Array of {@link protos.google.cloud.alloydb.v1.SupportedDatabaseFlag|SupportedDatabaseFlag}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listSupportedDatabaseFlagsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSupportedDatabaseFlags(
@@ -4719,7 +4667,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1.ISupportedDatabaseFlag[],
       protos.google.cloud.alloydb.v1.IListSupportedDatabaseFlagsRequest | null,
-      protos.google.cloud.alloydb.v1.IListSupportedDatabaseFlagsResponse
+      protos.google.cloud.alloydb.v1.IListSupportedDatabaseFlagsResponse,
     ]
   >;
   listSupportedDatabaseFlags(
@@ -4765,7 +4713,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1.ISupportedDatabaseFlag[],
       protos.google.cloud.alloydb.v1.IListSupportedDatabaseFlagsRequest | null,
-      protos.google.cloud.alloydb.v1.IListSupportedDatabaseFlagsResponse
+      protos.google.cloud.alloydb.v1.IListSupportedDatabaseFlagsResponse,
     ]
   > | void {
     request = request || {};
@@ -4811,13 +4759,12 @@ export class AlloyDBAdminClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.alloydb.v1.SupportedDatabaseFlag | SupportedDatabaseFlag} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.alloydb.v1.SupportedDatabaseFlag|SupportedDatabaseFlag} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listSupportedDatabaseFlagsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSupportedDatabaseFlagsStream(
@@ -4864,12 +4811,11 @@ export class AlloyDBAdminClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.alloydb.v1.SupportedDatabaseFlag | SupportedDatabaseFlag}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.alloydb.v1.SupportedDatabaseFlag|SupportedDatabaseFlag}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.list_supported_database_flags.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_ListSupportedDatabaseFlags_async
@@ -4914,14 +4860,13 @@ export class AlloyDBAdminClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.alloydb.v1.User | User}.
+   *   The first element of the array is Array of {@link protos.google.cloud.alloydb.v1.User|User}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listUsersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listUsers(
@@ -4931,7 +4876,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1.IUser[],
       protos.google.cloud.alloydb.v1.IListUsersRequest | null,
-      protos.google.cloud.alloydb.v1.IListUsersResponse
+      protos.google.cloud.alloydb.v1.IListUsersResponse,
     ]
   >;
   listUsers(
@@ -4969,7 +4914,7 @@ export class AlloyDBAdminClient {
     [
       protos.google.cloud.alloydb.v1.IUser[],
       protos.google.cloud.alloydb.v1.IListUsersRequest | null,
-      protos.google.cloud.alloydb.v1.IListUsersResponse
+      protos.google.cloud.alloydb.v1.IListUsersResponse,
     ]
   > | void {
     request = request || {};
@@ -5009,13 +4954,12 @@ export class AlloyDBAdminClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.alloydb.v1.User | User} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.alloydb.v1.User|User} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listUsersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listUsersStream(
@@ -5060,12 +5004,11 @@ export class AlloyDBAdminClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.alloydb.v1.User | User}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.alloydb.v1.User|User}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/alloy_d_b_admin.list_users.js</caption>
    * region_tag:alloydb_v1_generated_AlloyDBAdmin_ListUsers_async
@@ -5130,7 +5073,7 @@ export class AlloyDBAdminClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
@@ -5151,8 +5094,7 @@ export class AlloyDBAdminClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -5178,7 +5120,7 @@ export class AlloyDBAdminClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
@@ -5199,8 +5141,7 @@ export class AlloyDBAdminClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -5227,7 +5168,7 @@ export class AlloyDBAdminClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.TestIamPermissionsResponse> {
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
@@ -5242,8 +5183,7 @@ export class AlloyDBAdminClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -5289,12 +5229,11 @@ export class AlloyDBAdminClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

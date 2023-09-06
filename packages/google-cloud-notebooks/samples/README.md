@@ -78,7 +78,18 @@
   * [Notebook_service.stop_instance](#notebook_service.stop_instance)
   * [Notebook_service.upgrade_instance](#notebook_service.upgrade_instance)
   * [Notebook_service.upgrade_instance_internal](#notebook_service.upgrade_instance_internal)
-  * [Quickstart](#quickstart)
+  * [Notebook_service.check_instance_upgradability](#notebook_service.check_instance_upgradability)
+  * [Notebook_service.create_instance](#notebook_service.create_instance)
+  * [Notebook_service.delete_instance](#notebook_service.delete_instance)
+  * [Notebook_service.diagnose_instance](#notebook_service.diagnose_instance)
+  * [Notebook_service.get_instance](#notebook_service.get_instance)
+  * [Notebook_service.list_instances](#notebook_service.list_instances)
+  * [Notebook_service.reset_instance](#notebook_service.reset_instance)
+  * [Notebook_service.rollback_instance](#notebook_service.rollback_instance)
+  * [Notebook_service.start_instance](#notebook_service.start_instance)
+  * [Notebook_service.stop_instance](#notebook_service.stop_instance)
+  * [Notebook_service.update_instance](#notebook_service.update_instance)
+  * [Notebook_service.upgrade_instance](#notebook_service.upgrade_instance)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -1218,6 +1229,210 @@ __Usage:__
 
 
 
+### Notebook_service.check_instance_upgradability
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v2/notebook_service.check_instance_upgradability.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-notebooks/samples/generated/v2/notebook_service.check_instance_upgradability.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-notebooks/samples/generated/v2/notebook_service.check_instance_upgradability.js`
+
+
+-----
+
+
+
+
+### Notebook_service.create_instance
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v2/notebook_service.create_instance.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-notebooks/samples/generated/v2/notebook_service.create_instance.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-notebooks/samples/generated/v2/notebook_service.create_instance.js`
+
+
+-----
+
+
+
+
+### Notebook_service.delete_instance
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v2/notebook_service.delete_instance.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-notebooks/samples/generated/v2/notebook_service.delete_instance.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-notebooks/samples/generated/v2/notebook_service.delete_instance.js`
+
+
+-----
+
+
+
+
+### Notebook_service.diagnose_instance
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v2/notebook_service.diagnose_instance.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-notebooks/samples/generated/v2/notebook_service.diagnose_instance.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-notebooks/samples/generated/v2/notebook_service.diagnose_instance.js`
+
+
+-----
+
+
+
+
+### Notebook_service.get_instance
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v2/notebook_service.get_instance.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-notebooks/samples/generated/v2/notebook_service.get_instance.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-notebooks/samples/generated/v2/notebook_service.get_instance.js`
+
+
+-----
+
+
+
+
+### Notebook_service.list_instances
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v2/notebook_service.list_instances.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-notebooks/samples/generated/v2/notebook_service.list_instances.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-notebooks/samples/generated/v2/notebook_service.list_instances.js`
+
+
+-----
+
+
+
+
+### Notebook_service.reset_instance
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v2/notebook_service.reset_instance.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-notebooks/samples/generated/v2/notebook_service.reset_instance.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-notebooks/samples/generated/v2/notebook_service.reset_instance.js`
+
+
+-----
+
+
+
+
+### Notebook_service.rollback_instance
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v2/notebook_service.rollback_instance.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-notebooks/samples/generated/v2/notebook_service.rollback_instance.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-notebooks/samples/generated/v2/notebook_service.rollback_instance.js`
+
+
+-----
+
+
+
+
+### Notebook_service.start_instance
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v2/notebook_service.start_instance.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-notebooks/samples/generated/v2/notebook_service.start_instance.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-notebooks/samples/generated/v2/notebook_service.start_instance.js`
+
+
+-----
+
+
+
+
+### Notebook_service.stop_instance
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v2/notebook_service.stop_instance.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-notebooks/samples/generated/v2/notebook_service.stop_instance.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-notebooks/samples/generated/v2/notebook_service.stop_instance.js`
+
+
+-----
+
+
+
+
+### Notebook_service.update_instance
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v2/notebook_service.update_instance.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-notebooks/samples/generated/v2/notebook_service.update_instance.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-notebooks/samples/generated/v2/notebook_service.update_instance.js`
+
+
+-----
+
+
+
+
+### Notebook_service.upgrade_instance
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/generated/v2/notebook_service.upgrade_instance.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-notebooks/samples/generated/v2/notebook_service.upgrade_instance.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-notebooks/samples/generated/v2/notebook_service.upgrade_instance.js`
+
+
+-----
+
+
+
+
 ### Quickstart
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/quickstart.js).
@@ -1228,23 +1443,6 @@ __Usage:__
 
 
 `node packages/google-cloud-notebooks/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-notebooks/samples/test/quickstart.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-notebooks/samples/test/quickstart.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-notebooks/samples/test/quickstart.js`
 
 
 

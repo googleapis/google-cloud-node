@@ -96,8 +96,7 @@ export class JobControllerClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -105,7 +104,7 @@ export class JobControllerClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new JobControllerClient({fallback: 'rest'}, gax);
+   *     const client = new JobControllerClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -172,7 +171,7 @@ export class JobControllerClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -228,7 +227,7 @@ export class JobControllerClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
@@ -532,7 +531,7 @@ export class JobControllerClient {
    *   receives two
    *   [SubmitJobRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.SubmitJobRequest)s
    *   with the same id, then the second request will be ignored and the
-   *   first {@link google.cloud.dataproc.v1.Job|Job} created and stored in the backend
+   *   first {@link protos.google.cloud.dataproc.v1.Job|Job} created and stored in the backend
    *   is returned.
    *
    *   It is recommended to always set this value to a
@@ -543,9 +542,8 @@ export class JobControllerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataproc.v1.Job | Job}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataproc.v1.Job|Job}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/job_controller.submit_job.js</caption>
    * region_tag:dataproc_v1_generated_JobController_SubmitJob_async
@@ -557,7 +555,7 @@ export class JobControllerClient {
     [
       protos.google.cloud.dataproc.v1.IJob,
       protos.google.cloud.dataproc.v1.ISubmitJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   submitJob(
@@ -595,7 +593,7 @@ export class JobControllerClient {
     [
       protos.google.cloud.dataproc.v1.IJob,
       protos.google.cloud.dataproc.v1.ISubmitJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -632,9 +630,8 @@ export class JobControllerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataproc.v1.Job | Job}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataproc.v1.Job|Job}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/job_controller.get_job.js</caption>
    * region_tag:dataproc_v1_generated_JobController_GetJob_async
@@ -646,7 +643,7 @@ export class JobControllerClient {
     [
       protos.google.cloud.dataproc.v1.IJob,
       protos.google.cloud.dataproc.v1.IGetJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getJob(
@@ -684,7 +681,7 @@ export class JobControllerClient {
     [
       protos.google.cloud.dataproc.v1.IJob,
       protos.google.cloud.dataproc.v1.IGetJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -731,9 +728,8 @@ export class JobControllerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataproc.v1.Job | Job}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataproc.v1.Job|Job}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/job_controller.update_job.js</caption>
    * region_tag:dataproc_v1_generated_JobController_UpdateJob_async
@@ -745,7 +741,7 @@ export class JobControllerClient {
     [
       protos.google.cloud.dataproc.v1.IJob,
       protos.google.cloud.dataproc.v1.IUpdateJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateJob(
@@ -783,7 +779,7 @@ export class JobControllerClient {
     [
       protos.google.cloud.dataproc.v1.IJob,
       protos.google.cloud.dataproc.v1.IUpdateJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -825,9 +821,8 @@ export class JobControllerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataproc.v1.Job | Job}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataproc.v1.Job|Job}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/job_controller.cancel_job.js</caption>
    * region_tag:dataproc_v1_generated_JobController_CancelJob_async
@@ -839,7 +834,7 @@ export class JobControllerClient {
     [
       protos.google.cloud.dataproc.v1.IJob,
       protos.google.cloud.dataproc.v1.ICancelJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   cancelJob(
@@ -877,7 +872,7 @@ export class JobControllerClient {
     [
       protos.google.cloud.dataproc.v1.IJob,
       protos.google.cloud.dataproc.v1.ICancelJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -916,9 +911,8 @@ export class JobControllerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/job_controller.delete_job.js</caption>
    * region_tag:dataproc_v1_generated_JobController_DeleteJob_async
@@ -930,7 +924,7 @@ export class JobControllerClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataproc.v1.IDeleteJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteJob(
@@ -968,7 +962,7 @@ export class JobControllerClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.dataproc.v1.IDeleteJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1009,7 +1003,7 @@ export class JobControllerClient {
    *   receives two
    *   [SubmitJobRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.SubmitJobRequest)s
    *   with the same id, then the second request will be ignored and the
-   *   first {@link google.cloud.dataproc.v1.Job|Job} created and stored in the backend
+   *   first {@link protos.google.cloud.dataproc.v1.Job|Job} created and stored in the backend
    *   is returned.
    *
    *   It is recommended to always set this value to a
@@ -1023,8 +1017,7 @@ export class JobControllerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/job_controller.submit_job_as_operation.js</caption>
    * region_tag:dataproc_v1_generated_JobController_SubmitJobAsOperation_async
@@ -1039,7 +1032,7 @@ export class JobControllerClient {
         protos.google.cloud.dataproc.v1.IJobMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   submitJobAsOperation(
@@ -1092,7 +1085,7 @@ export class JobControllerClient {
         protos.google.cloud.dataproc.v1.IJobMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1120,8 +1113,7 @@ export class JobControllerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/job_controller.submit_job_as_operation.js</caption>
    * region_tag:dataproc_v1_generated_JobController_SubmitJobAsOperation_async
@@ -1190,14 +1182,13 @@ export class JobControllerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dataproc.v1.Job | Job}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dataproc.v1.Job|Job}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listJobsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listJobs(
@@ -1207,7 +1198,7 @@ export class JobControllerClient {
     [
       protos.google.cloud.dataproc.v1.IJob[],
       protos.google.cloud.dataproc.v1.IListJobsRequest | null,
-      protos.google.cloud.dataproc.v1.IListJobsResponse
+      protos.google.cloud.dataproc.v1.IListJobsResponse,
     ]
   >;
   listJobs(
@@ -1245,7 +1236,7 @@ export class JobControllerClient {
     [
       protos.google.cloud.dataproc.v1.IJob[],
       protos.google.cloud.dataproc.v1.IListJobsRequest | null,
-      protos.google.cloud.dataproc.v1.IListJobsResponse
+      protos.google.cloud.dataproc.v1.IListJobsResponse,
     ]
   > | void {
     request = request || {};
@@ -1308,13 +1299,12 @@ export class JobControllerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dataproc.v1.Job | Job} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dataproc.v1.Job|Job} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listJobsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listJobsStream(
@@ -1382,12 +1372,11 @@ export class JobControllerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dataproc.v1.Job | Job}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dataproc.v1.Job|Job}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/job_controller.list_jobs.js</caption>
    * region_tag:dataproc_v1_generated_JobController_ListJobs_async
@@ -1453,7 +1442,7 @@ export class JobControllerClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
@@ -1474,8 +1463,7 @@ export class JobControllerClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -1501,7 +1489,7 @@ export class JobControllerClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
@@ -1522,8 +1510,7 @@ export class JobControllerClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -1550,7 +1537,7 @@ export class JobControllerClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.TestIamPermissionsResponse> {
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 

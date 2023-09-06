@@ -106,8 +106,7 @@ export class BareMetalSolutionClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -115,7 +114,7 @@ export class BareMetalSolutionClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new BareMetalSolutionClient({fallback: 'rest'}, gax);
+   *     const client = new BareMetalSolutionClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -187,7 +186,7 @@ export class BareMetalSolutionClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -203,6 +202,12 @@ export class BareMetalSolutionClient {
       instancePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}'
       ),
+      instanceConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instanceConfigs/{instance_config}'
+      ),
+      instanceQuotaPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instanceQuotas/{instance_quota}'
+      ),
       lunPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/volumes/{volume}/luns/{lun}'
       ),
@@ -212,11 +217,32 @@ export class BareMetalSolutionClient {
       networkPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/networks/{network}'
       ),
+      networkConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/networkConfigs/{network_config}'
+      ),
+      osImagePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/osImages/{os_image}'
+      ),
+      provisioningConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/provisioningConfigs/{provisioning_config}'
+      ),
+      provisioningQuotaPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/provisioningQuotas/{provisioning_quota}'
+      ),
       serverNetworkTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/serverNetworkTemplate/{server_network_template}'
       ),
+      sshKeyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/sshKeys/{ssh_key}'
+      ),
       volumePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/volumes/{volume}'
+      ),
+      volumeConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/volumeConfigs/{volume_config}'
+      ),
+      volumeSnapshotPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/volumes/{volume}/snapshots/{snapshot}'
       ),
     };
 
@@ -229,6 +255,11 @@ export class BareMetalSolutionClient {
         'nextPageToken',
         'instances'
       ),
+      listSSHKeys: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'sshKeys'
+      ),
       listVolumes: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -238,6 +269,11 @@ export class BareMetalSolutionClient {
         'pageToken',
         'nextPageToken',
         'networks'
+      ),
+      listVolumeSnapshots: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'volumeSnapshots'
       ),
       listLuns: new this._gaxModule.PageDescriptor(
         'pageToken',
@@ -249,6 +285,16 @@ export class BareMetalSolutionClient {
         'nextPageToken',
         'nfsShares'
       ),
+      listProvisioningQuotas: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'provisioningQuotas'
+      ),
+      listOSImages: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'osImages'
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
@@ -259,7 +305,7 @@ export class BareMetalSolutionClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
@@ -299,6 +345,18 @@ export class BareMetalSolutionClient {
     const stopInstanceMetadata = protoFilesRoot.lookup(
       '.google.cloud.baremetalsolution.v2.OperationMetadata'
     ) as gax.protobuf.Type;
+    const enableInteractiveSerialConsoleResponse = protoFilesRoot.lookup(
+      '.google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleResponse'
+    ) as gax.protobuf.Type;
+    const enableInteractiveSerialConsoleMetadata = protoFilesRoot.lookup(
+      '.google.cloud.baremetalsolution.v2.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const disableInteractiveSerialConsoleResponse = protoFilesRoot.lookup(
+      '.google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleResponse'
+    ) as gax.protobuf.Type;
+    const disableInteractiveSerialConsoleMetadata = protoFilesRoot.lookup(
+      '.google.cloud.baremetalsolution.v2.OperationMetadata'
+    ) as gax.protobuf.Type;
     const detachLunResponse = protoFilesRoot.lookup(
       '.google.cloud.baremetalsolution.v2.Instance'
     ) as gax.protobuf.Type;
@@ -309,6 +367,12 @@ export class BareMetalSolutionClient {
       '.google.cloud.baremetalsolution.v2.Volume'
     ) as gax.protobuf.Type;
     const updateVolumeMetadata = protoFilesRoot.lookup(
+      '.google.cloud.baremetalsolution.v2.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const evictVolumeResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const evictVolumeMetadata = protoFilesRoot.lookup(
       '.google.cloud.baremetalsolution.v2.OperationMetadata'
     ) as gax.protobuf.Type;
     const resizeVolumeResponse = protoFilesRoot.lookup(
@@ -323,10 +387,34 @@ export class BareMetalSolutionClient {
     const updateNetworkMetadata = protoFilesRoot.lookup(
       '.google.cloud.baremetalsolution.v2.OperationMetadata'
     ) as gax.protobuf.Type;
+    const restoreVolumeSnapshotResponse = protoFilesRoot.lookup(
+      '.google.cloud.baremetalsolution.v2.VolumeSnapshot'
+    ) as gax.protobuf.Type;
+    const restoreVolumeSnapshotMetadata = protoFilesRoot.lookup(
+      '.google.cloud.baremetalsolution.v2.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const evictLunResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const evictLunMetadata = protoFilesRoot.lookup(
+      '.google.cloud.baremetalsolution.v2.OperationMetadata'
+    ) as gax.protobuf.Type;
     const updateNfsShareResponse = protoFilesRoot.lookup(
       '.google.cloud.baremetalsolution.v2.NfsShare'
     ) as gax.protobuf.Type;
     const updateNfsShareMetadata = protoFilesRoot.lookup(
+      '.google.cloud.baremetalsolution.v2.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const createNfsShareResponse = protoFilesRoot.lookup(
+      '.google.cloud.baremetalsolution.v2.NfsShare'
+    ) as gax.protobuf.Type;
+    const createNfsShareMetadata = protoFilesRoot.lookup(
+      '.google.cloud.baremetalsolution.v2.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteNfsShareResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteNfsShareMetadata = protoFilesRoot.lookup(
       '.google.cloud.baremetalsolution.v2.OperationMetadata'
     ) as gax.protobuf.Type;
 
@@ -351,6 +439,25 @@ export class BareMetalSolutionClient {
         stopInstanceResponse.decode.bind(stopInstanceResponse),
         stopInstanceMetadata.decode.bind(stopInstanceMetadata)
       ),
+      enableInteractiveSerialConsole: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        enableInteractiveSerialConsoleResponse.decode.bind(
+          enableInteractiveSerialConsoleResponse
+        ),
+        enableInteractiveSerialConsoleMetadata.decode.bind(
+          enableInteractiveSerialConsoleMetadata
+        )
+      ),
+      disableInteractiveSerialConsole:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          disableInteractiveSerialConsoleResponse.decode.bind(
+            disableInteractiveSerialConsoleResponse
+          ),
+          disableInteractiveSerialConsoleMetadata.decode.bind(
+            disableInteractiveSerialConsoleMetadata
+          )
+        ),
       detachLun: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         detachLunResponse.decode.bind(detachLunResponse),
@@ -360,6 +467,11 @@ export class BareMetalSolutionClient {
         this.operationsClient,
         updateVolumeResponse.decode.bind(updateVolumeResponse),
         updateVolumeMetadata.decode.bind(updateVolumeMetadata)
+      ),
+      evictVolume: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        evictVolumeResponse.decode.bind(evictVolumeResponse),
+        evictVolumeMetadata.decode.bind(evictVolumeMetadata)
       ),
       resizeVolume: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -371,10 +483,32 @@ export class BareMetalSolutionClient {
         updateNetworkResponse.decode.bind(updateNetworkResponse),
         updateNetworkMetadata.decode.bind(updateNetworkMetadata)
       ),
+      restoreVolumeSnapshot: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        restoreVolumeSnapshotResponse.decode.bind(
+          restoreVolumeSnapshotResponse
+        ),
+        restoreVolumeSnapshotMetadata.decode.bind(restoreVolumeSnapshotMetadata)
+      ),
+      evictLun: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        evictLunResponse.decode.bind(evictLunResponse),
+        evictLunMetadata.decode.bind(evictLunMetadata)
+      ),
       updateNfsShare: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateNfsShareResponse.decode.bind(updateNfsShareResponse),
         updateNfsShareMetadata.decode.bind(updateNfsShareMetadata)
+      ),
+      createNfsShare: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createNfsShareResponse.decode.bind(createNfsShareResponse),
+        createNfsShareMetadata.decode.bind(createNfsShareMetadata)
+      ),
+      deleteNfsShare: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteNfsShareResponse.decode.bind(deleteNfsShareResponse),
+        deleteNfsShareMetadata.decode.bind(deleteNfsShareMetadata)
       ),
     };
 
@@ -432,23 +566,47 @@ export class BareMetalSolutionClient {
       'listInstances',
       'getInstance',
       'updateInstance',
+      'renameInstance',
       'resetInstance',
       'startInstance',
       'stopInstance',
+      'enableInteractiveSerialConsole',
+      'disableInteractiveSerialConsole',
       'detachLun',
+      'listSshKeys',
+      'createSshKey',
+      'deleteSshKey',
       'listVolumes',
       'getVolume',
       'updateVolume',
+      'renameVolume',
+      'evictVolume',
       'resizeVolume',
       'listNetworks',
       'listNetworkUsage',
       'getNetwork',
       'updateNetwork',
+      'createVolumeSnapshot',
+      'restoreVolumeSnapshot',
+      'deleteVolumeSnapshot',
+      'getVolumeSnapshot',
+      'listVolumeSnapshots',
       'getLun',
       'listLuns',
+      'evictLun',
       'getNfsShare',
       'listNfsShares',
       'updateNfsShare',
+      'createNfsShare',
+      'renameNfsShare',
+      'deleteNfsShare',
+      'listProvisioningQuotas',
+      'submitProvisioningConfig',
+      'getProvisioningConfig',
+      'createProvisioningConfig',
+      'updateProvisioningConfig',
+      'renameNetwork',
+      'listOsImages',
     ];
     for (const methodName of bareMetalSolutionStubMethods) {
       const callPromise = this.bareMetalSolutionStub.then(
@@ -545,9 +703,8 @@ export class BareMetalSolutionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.baremetalsolution.v2.Instance | Instance}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.baremetalsolution.v2.Instance|Instance}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/bare_metal_solution.get_instance.js</caption>
    * region_tag:baremetalsolution_v2_generated_BareMetalSolution_GetInstance_async
@@ -559,7 +716,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.IInstance,
       protos.google.cloud.baremetalsolution.v2.IGetInstanceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getInstance(
@@ -605,7 +762,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.IInstance,
       protos.google.cloud.baremetalsolution.v2.IGetInstanceRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -627,6 +784,296 @@ export class BareMetalSolutionClient {
     return this.innerApiCalls.getInstance(request, options, callback);
   }
   /**
+   * RenameInstance sets a new name for an instance.
+   * Use with caution, previous names become immediately invalidated.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The `name` field is used to identify the instance.
+   *   Format: projects/{project}/locations/{location}/instances/{instance}
+   * @param {string} request.newInstanceId
+   *   Required. The new `id` of the instance.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.baremetalsolution.v2.Instance|Instance}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bare_metal_solution.rename_instance.js</caption>
+   * region_tag:baremetalsolution_v2_generated_BareMetalSolution_RenameInstance_async
+   */
+  renameInstance(
+    request?: protos.google.cloud.baremetalsolution.v2.IRenameInstanceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.baremetalsolution.v2.IInstance,
+      (
+        | protos.google.cloud.baremetalsolution.v2.IRenameInstanceRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  renameInstance(
+    request: protos.google.cloud.baremetalsolution.v2.IRenameInstanceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.baremetalsolution.v2.IInstance,
+      | protos.google.cloud.baremetalsolution.v2.IRenameInstanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  renameInstance(
+    request: protos.google.cloud.baremetalsolution.v2.IRenameInstanceRequest,
+    callback: Callback<
+      protos.google.cloud.baremetalsolution.v2.IInstance,
+      | protos.google.cloud.baremetalsolution.v2.IRenameInstanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  renameInstance(
+    request?: protos.google.cloud.baremetalsolution.v2.IRenameInstanceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.baremetalsolution.v2.IInstance,
+          | protos.google.cloud.baremetalsolution.v2.IRenameInstanceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.baremetalsolution.v2.IInstance,
+      | protos.google.cloud.baremetalsolution.v2.IRenameInstanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.baremetalsolution.v2.IInstance,
+      (
+        | protos.google.cloud.baremetalsolution.v2.IRenameInstanceRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.renameInstance(request, options, callback);
+  }
+  /**
+   * Register a public SSH key in the specified project for use with the
+   * interactive serial console feature.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent containing the SSH keys.
+   * @param {google.cloud.baremetalsolution.v2.SSHKey} request.sshKey
+   *   Required. The SSH key to register.
+   * @param {string} request.sshKeyId
+   *   Required. The ID to use for the key, which will become the final component
+   *   of the key's resource name.
+   *
+   *   This value must match the regex:
+   *     [a-zA-Z0-9@.\-_]{1,64}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.baremetalsolution.v2.SSHKey|SSHKey}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bare_metal_solution.create_s_s_h_key.js</caption>
+   * region_tag:baremetalsolution_v2_generated_BareMetalSolution_CreateSSHKey_async
+   */
+  createSSHKey(
+    request?: protos.google.cloud.baremetalsolution.v2.ICreateSSHKeyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.baremetalsolution.v2.ISSHKey,
+      protos.google.cloud.baremetalsolution.v2.ICreateSSHKeyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  createSSHKey(
+    request: protos.google.cloud.baremetalsolution.v2.ICreateSSHKeyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.baremetalsolution.v2.ISSHKey,
+      | protos.google.cloud.baremetalsolution.v2.ICreateSSHKeyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createSSHKey(
+    request: protos.google.cloud.baremetalsolution.v2.ICreateSSHKeyRequest,
+    callback: Callback<
+      protos.google.cloud.baremetalsolution.v2.ISSHKey,
+      | protos.google.cloud.baremetalsolution.v2.ICreateSSHKeyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createSSHKey(
+    request?: protos.google.cloud.baremetalsolution.v2.ICreateSSHKeyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.baremetalsolution.v2.ISSHKey,
+          | protos.google.cloud.baremetalsolution.v2.ICreateSSHKeyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.baremetalsolution.v2.ISSHKey,
+      | protos.google.cloud.baremetalsolution.v2.ICreateSSHKeyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.baremetalsolution.v2.ISSHKey,
+      protos.google.cloud.baremetalsolution.v2.ICreateSSHKeyRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createSshKey(request, options, callback);
+  }
+  /**
+   * Deletes a public SSH key registered in the specified project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the SSH key to delete.
+   *   Currently, the only valid value for the location is "global".
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bare_metal_solution.delete_s_s_h_key.js</caption>
+   * region_tag:baremetalsolution_v2_generated_BareMetalSolution_DeleteSSHKey_async
+   */
+  deleteSSHKey(
+    request?: protos.google.cloud.baremetalsolution.v2.IDeleteSSHKeyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.baremetalsolution.v2.IDeleteSSHKeyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteSSHKey(
+    request: protos.google.cloud.baremetalsolution.v2.IDeleteSSHKeyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.baremetalsolution.v2.IDeleteSSHKeyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteSSHKey(
+    request: protos.google.cloud.baremetalsolution.v2.IDeleteSSHKeyRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.baremetalsolution.v2.IDeleteSSHKeyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteSSHKey(
+    request?: protos.google.cloud.baremetalsolution.v2.IDeleteSSHKeyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.baremetalsolution.v2.IDeleteSSHKeyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.baremetalsolution.v2.IDeleteSSHKeyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.baremetalsolution.v2.IDeleteSSHKeyRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteSshKey(request, options, callback);
+  }
+  /**
    * Get details of a single storage volume.
    *
    * @param {Object} request
@@ -636,9 +1083,8 @@ export class BareMetalSolutionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.baremetalsolution.v2.Volume | Volume}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.baremetalsolution.v2.Volume|Volume}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/bare_metal_solution.get_volume.js</caption>
    * region_tag:baremetalsolution_v2_generated_BareMetalSolution_GetVolume_async
@@ -650,7 +1096,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.IVolume,
       protos.google.cloud.baremetalsolution.v2.IGetVolumeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getVolume(
@@ -696,7 +1142,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.IVolume,
       protos.google.cloud.baremetalsolution.v2.IGetVolumeRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -718,6 +1164,100 @@ export class BareMetalSolutionClient {
     return this.innerApiCalls.getVolume(request, options, callback);
   }
   /**
+   * RenameVolume sets a new name for a volume.
+   * Use with caution, previous names become immediately invalidated.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The `name` field is used to identify the volume.
+   *   Format: projects/{project}/locations/{location}/volumes/{volume}
+   * @param {string} request.newVolumeId
+   *   Required. The new `id` of the volume.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.baremetalsolution.v2.Volume|Volume}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bare_metal_solution.rename_volume.js</caption>
+   * region_tag:baremetalsolution_v2_generated_BareMetalSolution_RenameVolume_async
+   */
+  renameVolume(
+    request?: protos.google.cloud.baremetalsolution.v2.IRenameVolumeRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.baremetalsolution.v2.IVolume,
+      protos.google.cloud.baremetalsolution.v2.IRenameVolumeRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  renameVolume(
+    request: protos.google.cloud.baremetalsolution.v2.IRenameVolumeRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.baremetalsolution.v2.IVolume,
+      | protos.google.cloud.baremetalsolution.v2.IRenameVolumeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  renameVolume(
+    request: protos.google.cloud.baremetalsolution.v2.IRenameVolumeRequest,
+    callback: Callback<
+      protos.google.cloud.baremetalsolution.v2.IVolume,
+      | protos.google.cloud.baremetalsolution.v2.IRenameVolumeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  renameVolume(
+    request?: protos.google.cloud.baremetalsolution.v2.IRenameVolumeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.baremetalsolution.v2.IVolume,
+          | protos.google.cloud.baremetalsolution.v2.IRenameVolumeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.baremetalsolution.v2.IVolume,
+      | protos.google.cloud.baremetalsolution.v2.IRenameVolumeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.baremetalsolution.v2.IVolume,
+      protos.google.cloud.baremetalsolution.v2.IRenameVolumeRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.renameVolume(request, options, callback);
+  }
+  /**
    * List all Networks (and used IPs for each Network) in the vendor account
    * associated with the specified project.
    *
@@ -728,9 +1268,8 @@ export class BareMetalSolutionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.baremetalsolution.v2.ListNetworkUsageResponse | ListNetworkUsageResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.baremetalsolution.v2.ListNetworkUsageResponse|ListNetworkUsageResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/bare_metal_solution.list_network_usage.js</caption>
    * region_tag:baremetalsolution_v2_generated_BareMetalSolution_ListNetworkUsage_async
@@ -745,7 +1284,7 @@ export class BareMetalSolutionClient {
         | protos.google.cloud.baremetalsolution.v2.IListNetworkUsageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   listNetworkUsage(
@@ -794,7 +1333,7 @@ export class BareMetalSolutionClient {
         | protos.google.cloud.baremetalsolution.v2.IListNetworkUsageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -825,9 +1364,8 @@ export class BareMetalSolutionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.baremetalsolution.v2.Network | Network}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.baremetalsolution.v2.Network|Network}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/bare_metal_solution.get_network.js</caption>
    * region_tag:baremetalsolution_v2_generated_BareMetalSolution_GetNetwork_async
@@ -839,7 +1377,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.INetwork,
       protos.google.cloud.baremetalsolution.v2.IGetNetworkRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getNetwork(
@@ -885,7 +1423,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.INetwork,
       protos.google.cloud.baremetalsolution.v2.IGetNetworkRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -907,6 +1445,299 @@ export class BareMetalSolutionClient {
     return this.innerApiCalls.getNetwork(request, options, callback);
   }
   /**
+   * Takes a snapshot of a boot volume.
+   * Returns INVALID_ARGUMENT if called for a non-boot volume.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The volume to snapshot.
+   * @param {google.cloud.baremetalsolution.v2.VolumeSnapshot} request.volumeSnapshot
+   *   Required. The snapshot to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.baremetalsolution.v2.VolumeSnapshot|VolumeSnapshot}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bare_metal_solution.create_volume_snapshot.js</caption>
+   * region_tag:baremetalsolution_v2_generated_BareMetalSolution_CreateVolumeSnapshot_async
+   */
+  createVolumeSnapshot(
+    request?: protos.google.cloud.baremetalsolution.v2.ICreateVolumeSnapshotRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot,
+      (
+        | protos.google.cloud.baremetalsolution.v2.ICreateVolumeSnapshotRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createVolumeSnapshot(
+    request: protos.google.cloud.baremetalsolution.v2.ICreateVolumeSnapshotRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot,
+      | protos.google.cloud.baremetalsolution.v2.ICreateVolumeSnapshotRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createVolumeSnapshot(
+    request: protos.google.cloud.baremetalsolution.v2.ICreateVolumeSnapshotRequest,
+    callback: Callback<
+      protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot,
+      | protos.google.cloud.baremetalsolution.v2.ICreateVolumeSnapshotRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createVolumeSnapshot(
+    request?: protos.google.cloud.baremetalsolution.v2.ICreateVolumeSnapshotRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot,
+          | protos.google.cloud.baremetalsolution.v2.ICreateVolumeSnapshotRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot,
+      | protos.google.cloud.baremetalsolution.v2.ICreateVolumeSnapshotRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot,
+      (
+        | protos.google.cloud.baremetalsolution.v2.ICreateVolumeSnapshotRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createVolumeSnapshot(request, options, callback);
+  }
+  /**
+   * Deletes a volume snapshot.
+   * Returns INVALID_ARGUMENT if called for a non-boot volume.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the snapshot to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bare_metal_solution.delete_volume_snapshot.js</caption>
+   * region_tag:baremetalsolution_v2_generated_BareMetalSolution_DeleteVolumeSnapshot_async
+   */
+  deleteVolumeSnapshot(
+    request?: protos.google.cloud.baremetalsolution.v2.IDeleteVolumeSnapshotRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.baremetalsolution.v2.IDeleteVolumeSnapshotRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  deleteVolumeSnapshot(
+    request: protos.google.cloud.baremetalsolution.v2.IDeleteVolumeSnapshotRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.baremetalsolution.v2.IDeleteVolumeSnapshotRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteVolumeSnapshot(
+    request: protos.google.cloud.baremetalsolution.v2.IDeleteVolumeSnapshotRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.baremetalsolution.v2.IDeleteVolumeSnapshotRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteVolumeSnapshot(
+    request?: protos.google.cloud.baremetalsolution.v2.IDeleteVolumeSnapshotRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.baremetalsolution.v2.IDeleteVolumeSnapshotRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.baremetalsolution.v2.IDeleteVolumeSnapshotRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.baremetalsolution.v2.IDeleteVolumeSnapshotRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteVolumeSnapshot(request, options, callback);
+  }
+  /**
+   * Returns the specified snapshot resource.
+   * Returns INVALID_ARGUMENT if called for a non-boot volume.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the snapshot.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.baremetalsolution.v2.VolumeSnapshot|VolumeSnapshot}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bare_metal_solution.get_volume_snapshot.js</caption>
+   * region_tag:baremetalsolution_v2_generated_BareMetalSolution_GetVolumeSnapshot_async
+   */
+  getVolumeSnapshot(
+    request?: protos.google.cloud.baremetalsolution.v2.IGetVolumeSnapshotRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot,
+      (
+        | protos.google.cloud.baremetalsolution.v2.IGetVolumeSnapshotRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getVolumeSnapshot(
+    request: protos.google.cloud.baremetalsolution.v2.IGetVolumeSnapshotRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot,
+      | protos.google.cloud.baremetalsolution.v2.IGetVolumeSnapshotRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getVolumeSnapshot(
+    request: protos.google.cloud.baremetalsolution.v2.IGetVolumeSnapshotRequest,
+    callback: Callback<
+      protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot,
+      | protos.google.cloud.baremetalsolution.v2.IGetVolumeSnapshotRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getVolumeSnapshot(
+    request?: protos.google.cloud.baremetalsolution.v2.IGetVolumeSnapshotRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot,
+          | protos.google.cloud.baremetalsolution.v2.IGetVolumeSnapshotRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot,
+      | protos.google.cloud.baremetalsolution.v2.IGetVolumeSnapshotRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot,
+      (
+        | protos.google.cloud.baremetalsolution.v2.IGetVolumeSnapshotRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getVolumeSnapshot(request, options, callback);
+  }
+  /**
    * Get details of a single storage logical unit number(LUN).
    *
    * @param {Object} request
@@ -916,9 +1747,8 @@ export class BareMetalSolutionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.baremetalsolution.v2.Lun | Lun}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.baremetalsolution.v2.Lun|Lun}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/bare_metal_solution.get_lun.js</caption>
    * region_tag:baremetalsolution_v2_generated_BareMetalSolution_GetLun_async
@@ -930,7 +1760,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.ILun,
       protos.google.cloud.baremetalsolution.v2.IGetLunRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getLun(
@@ -976,7 +1806,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.ILun,
       protos.google.cloud.baremetalsolution.v2.IGetLunRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1007,9 +1837,8 @@ export class BareMetalSolutionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.baremetalsolution.v2.NfsShare | NfsShare}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.baremetalsolution.v2.NfsShare|NfsShare}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/bare_metal_solution.get_nfs_share.js</caption>
    * region_tag:baremetalsolution_v2_generated_BareMetalSolution_GetNfsShare_async
@@ -1021,7 +1850,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.INfsShare,
       protos.google.cloud.baremetalsolution.v2.IGetNfsShareRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getNfsShare(
@@ -1067,7 +1896,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.INfsShare,
       protos.google.cloud.baremetalsolution.v2.IGetNfsShareRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1087,6 +1916,619 @@ export class BareMetalSolutionClient {
       });
     this.initialize();
     return this.innerApiCalls.getNfsShare(request, options, callback);
+  }
+  /**
+   * RenameNfsShare sets a new name for an nfsshare.
+   * Use with caution, previous names become immediately invalidated.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The `name` field is used to identify the nfsshare.
+   *   Format: projects/{project}/locations/{location}/nfsshares/{nfsshare}
+   * @param {string} request.newNfsshareId
+   *   Required. The new `id` of the nfsshare.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.baremetalsolution.v2.NfsShare|NfsShare}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bare_metal_solution.rename_nfs_share.js</caption>
+   * region_tag:baremetalsolution_v2_generated_BareMetalSolution_RenameNfsShare_async
+   */
+  renameNfsShare(
+    request?: protos.google.cloud.baremetalsolution.v2.IRenameNfsShareRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.baremetalsolution.v2.INfsShare,
+      (
+        | protos.google.cloud.baremetalsolution.v2.IRenameNfsShareRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  renameNfsShare(
+    request: protos.google.cloud.baremetalsolution.v2.IRenameNfsShareRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.baremetalsolution.v2.INfsShare,
+      | protos.google.cloud.baremetalsolution.v2.IRenameNfsShareRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  renameNfsShare(
+    request: protos.google.cloud.baremetalsolution.v2.IRenameNfsShareRequest,
+    callback: Callback<
+      protos.google.cloud.baremetalsolution.v2.INfsShare,
+      | protos.google.cloud.baremetalsolution.v2.IRenameNfsShareRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  renameNfsShare(
+    request?: protos.google.cloud.baremetalsolution.v2.IRenameNfsShareRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.baremetalsolution.v2.INfsShare,
+          | protos.google.cloud.baremetalsolution.v2.IRenameNfsShareRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.baremetalsolution.v2.INfsShare,
+      | protos.google.cloud.baremetalsolution.v2.IRenameNfsShareRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.baremetalsolution.v2.INfsShare,
+      (
+        | protos.google.cloud.baremetalsolution.v2.IRenameNfsShareRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.renameNfsShare(request, options, callback);
+  }
+  /**
+   * Submit a provisiong configuration for a given project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent project and location containing the
+   *   ProvisioningConfig.
+   * @param {google.cloud.baremetalsolution.v2.ProvisioningConfig} request.provisioningConfig
+   *   Required. The ProvisioningConfig to create.
+   * @param {string} [request.email]
+   *   Optional. Email provided to send a confirmation with provisioning config
+   *   to.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.baremetalsolution.v2.SubmitProvisioningConfigResponse|SubmitProvisioningConfigResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bare_metal_solution.submit_provisioning_config.js</caption>
+   * region_tag:baremetalsolution_v2_generated_BareMetalSolution_SubmitProvisioningConfig_async
+   */
+  submitProvisioningConfig(
+    request?: protos.google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigResponse,
+      (
+        | protos.google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  submitProvisioningConfig(
+    request: protos.google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigResponse,
+      | protos.google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  submitProvisioningConfig(
+    request: protos.google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigRequest,
+    callback: Callback<
+      protos.google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigResponse,
+      | protos.google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  submitProvisioningConfig(
+    request?: protos.google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigResponse,
+          | protos.google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigResponse,
+      | protos.google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigResponse,
+      (
+        | protos.google.cloud.baremetalsolution.v2.ISubmitProvisioningConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.submitProvisioningConfig(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Get ProvisioningConfig by name.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the ProvisioningConfig.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.baremetalsolution.v2.ProvisioningConfig|ProvisioningConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bare_metal_solution.get_provisioning_config.js</caption>
+   * region_tag:baremetalsolution_v2_generated_BareMetalSolution_GetProvisioningConfig_async
+   */
+  getProvisioningConfig(
+    request?: protos.google.cloud.baremetalsolution.v2.IGetProvisioningConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.baremetalsolution.v2.IProvisioningConfig,
+      (
+        | protos.google.cloud.baremetalsolution.v2.IGetProvisioningConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getProvisioningConfig(
+    request: protos.google.cloud.baremetalsolution.v2.IGetProvisioningConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.baremetalsolution.v2.IProvisioningConfig,
+      | protos.google.cloud.baremetalsolution.v2.IGetProvisioningConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getProvisioningConfig(
+    request: protos.google.cloud.baremetalsolution.v2.IGetProvisioningConfigRequest,
+    callback: Callback<
+      protos.google.cloud.baremetalsolution.v2.IProvisioningConfig,
+      | protos.google.cloud.baremetalsolution.v2.IGetProvisioningConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getProvisioningConfig(
+    request?: protos.google.cloud.baremetalsolution.v2.IGetProvisioningConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.baremetalsolution.v2.IProvisioningConfig,
+          | protos.google.cloud.baremetalsolution.v2.IGetProvisioningConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.baremetalsolution.v2.IProvisioningConfig,
+      | protos.google.cloud.baremetalsolution.v2.IGetProvisioningConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.baremetalsolution.v2.IProvisioningConfig,
+      (
+        | protos.google.cloud.baremetalsolution.v2.IGetProvisioningConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getProvisioningConfig(request, options, callback);
+  }
+  /**
+   * Create new ProvisioningConfig.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent project and location containing the
+   *   ProvisioningConfig.
+   * @param {google.cloud.baremetalsolution.v2.ProvisioningConfig} request.provisioningConfig
+   *   Required. The ProvisioningConfig to create.
+   * @param {string} [request.email]
+   *   Optional. Email provided to send a confirmation with provisioning config
+   *   to.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.baremetalsolution.v2.ProvisioningConfig|ProvisioningConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bare_metal_solution.create_provisioning_config.js</caption>
+   * region_tag:baremetalsolution_v2_generated_BareMetalSolution_CreateProvisioningConfig_async
+   */
+  createProvisioningConfig(
+    request?: protos.google.cloud.baremetalsolution.v2.ICreateProvisioningConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.baremetalsolution.v2.IProvisioningConfig,
+      (
+        | protos.google.cloud.baremetalsolution.v2.ICreateProvisioningConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createProvisioningConfig(
+    request: protos.google.cloud.baremetalsolution.v2.ICreateProvisioningConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.baremetalsolution.v2.IProvisioningConfig,
+      | protos.google.cloud.baremetalsolution.v2.ICreateProvisioningConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createProvisioningConfig(
+    request: protos.google.cloud.baremetalsolution.v2.ICreateProvisioningConfigRequest,
+    callback: Callback<
+      protos.google.cloud.baremetalsolution.v2.IProvisioningConfig,
+      | protos.google.cloud.baremetalsolution.v2.ICreateProvisioningConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createProvisioningConfig(
+    request?: protos.google.cloud.baremetalsolution.v2.ICreateProvisioningConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.baremetalsolution.v2.IProvisioningConfig,
+          | protos.google.cloud.baremetalsolution.v2.ICreateProvisioningConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.baremetalsolution.v2.IProvisioningConfig,
+      | protos.google.cloud.baremetalsolution.v2.ICreateProvisioningConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.baremetalsolution.v2.IProvisioningConfig,
+      (
+        | protos.google.cloud.baremetalsolution.v2.ICreateProvisioningConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createProvisioningConfig(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Update existing ProvisioningConfig.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.baremetalsolution.v2.ProvisioningConfig} request.provisioningConfig
+   *   Required. The ProvisioningConfig to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to update.
+   * @param {string} [request.email]
+   *   Optional. Email provided to send a confirmation with provisioning config
+   *   to.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.baremetalsolution.v2.ProvisioningConfig|ProvisioningConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bare_metal_solution.update_provisioning_config.js</caption>
+   * region_tag:baremetalsolution_v2_generated_BareMetalSolution_UpdateProvisioningConfig_async
+   */
+  updateProvisioningConfig(
+    request?: protos.google.cloud.baremetalsolution.v2.IUpdateProvisioningConfigRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.baremetalsolution.v2.IProvisioningConfig,
+      (
+        | protos.google.cloud.baremetalsolution.v2.IUpdateProvisioningConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateProvisioningConfig(
+    request: protos.google.cloud.baremetalsolution.v2.IUpdateProvisioningConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.baremetalsolution.v2.IProvisioningConfig,
+      | protos.google.cloud.baremetalsolution.v2.IUpdateProvisioningConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateProvisioningConfig(
+    request: protos.google.cloud.baremetalsolution.v2.IUpdateProvisioningConfigRequest,
+    callback: Callback<
+      protos.google.cloud.baremetalsolution.v2.IProvisioningConfig,
+      | protos.google.cloud.baremetalsolution.v2.IUpdateProvisioningConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateProvisioningConfig(
+    request?: protos.google.cloud.baremetalsolution.v2.IUpdateProvisioningConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.baremetalsolution.v2.IProvisioningConfig,
+          | protos.google.cloud.baremetalsolution.v2.IUpdateProvisioningConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.baremetalsolution.v2.IProvisioningConfig,
+      | protos.google.cloud.baremetalsolution.v2.IUpdateProvisioningConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.baremetalsolution.v2.IProvisioningConfig,
+      (
+        | protos.google.cloud.baremetalsolution.v2.IUpdateProvisioningConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'provisioning_config.name': request.provisioningConfig!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateProvisioningConfig(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * RenameNetwork sets a new name for a network.
+   * Use with caution, previous names become immediately invalidated.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The `name` field is used to identify the network.
+   *   Format: projects/{project}/locations/{location}/networks/{network}
+   * @param {string} request.newNetworkId
+   *   Required. The new `id` of the network.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.baremetalsolution.v2.Network|Network}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bare_metal_solution.rename_network.js</caption>
+   * region_tag:baremetalsolution_v2_generated_BareMetalSolution_RenameNetwork_async
+   */
+  renameNetwork(
+    request?: protos.google.cloud.baremetalsolution.v2.IRenameNetworkRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.baremetalsolution.v2.INetwork,
+      (
+        | protos.google.cloud.baremetalsolution.v2.IRenameNetworkRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  renameNetwork(
+    request: protos.google.cloud.baremetalsolution.v2.IRenameNetworkRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.baremetalsolution.v2.INetwork,
+      | protos.google.cloud.baremetalsolution.v2.IRenameNetworkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  renameNetwork(
+    request: protos.google.cloud.baremetalsolution.v2.IRenameNetworkRequest,
+    callback: Callback<
+      protos.google.cloud.baremetalsolution.v2.INetwork,
+      | protos.google.cloud.baremetalsolution.v2.IRenameNetworkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  renameNetwork(
+    request?: protos.google.cloud.baremetalsolution.v2.IRenameNetworkRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.baremetalsolution.v2.INetwork,
+          | protos.google.cloud.baremetalsolution.v2.IRenameNetworkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.baremetalsolution.v2.INetwork,
+      | protos.google.cloud.baremetalsolution.v2.IRenameNetworkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.baremetalsolution.v2.INetwork,
+      (
+        | protos.google.cloud.baremetalsolution.v2.IRenameNetworkRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.renameNetwork(request, options, callback);
   }
 
   /**
@@ -1111,8 +2553,7 @@ export class BareMetalSolutionClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/bare_metal_solution.update_instance.js</caption>
    * region_tag:baremetalsolution_v2_generated_BareMetalSolution_UpdateInstance_async
@@ -1127,7 +2568,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateInstance(
@@ -1180,7 +2621,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1207,8 +2648,7 @@ export class BareMetalSolutionClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/bare_metal_solution.update_instance.js</caption>
    * region_tag:baremetalsolution_v2_generated_BareMetalSolution_UpdateInstance_async
@@ -1250,8 +2690,7 @@ export class BareMetalSolutionClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/bare_metal_solution.reset_instance.js</caption>
    * region_tag:baremetalsolution_v2_generated_BareMetalSolution_ResetInstance_async
@@ -1266,7 +2705,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resetInstance(
@@ -1319,7 +2758,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1346,8 +2785,7 @@ export class BareMetalSolutionClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/bare_metal_solution.reset_instance.js</caption>
    * region_tag:baremetalsolution_v2_generated_BareMetalSolution_ResetInstance_async
@@ -1388,8 +2826,7 @@ export class BareMetalSolutionClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/bare_metal_solution.start_instance.js</caption>
    * region_tag:baremetalsolution_v2_generated_BareMetalSolution_StartInstance_async
@@ -1404,7 +2841,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   startInstance(
@@ -1457,7 +2894,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1484,8 +2921,7 @@ export class BareMetalSolutionClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/bare_metal_solution.start_instance.js</caption>
    * region_tag:baremetalsolution_v2_generated_BareMetalSolution_StartInstance_async
@@ -1526,8 +2962,7 @@ export class BareMetalSolutionClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/bare_metal_solution.stop_instance.js</caption>
    * region_tag:baremetalsolution_v2_generated_BareMetalSolution_StopInstance_async
@@ -1542,7 +2977,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   stopInstance(
@@ -1595,7 +3030,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1622,8 +3057,7 @@ export class BareMetalSolutionClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/bare_metal_solution.stop_instance.js</caption>
    * region_tag:baremetalsolution_v2_generated_BareMetalSolution_StopInstance_async
@@ -1652,6 +3086,286 @@ export class BareMetalSolutionClient {
     >;
   }
   /**
+   * Enable the interactive serial console feature on an instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bare_metal_solution.enable_interactive_serial_console.js</caption>
+   * region_tag:baremetalsolution_v2_generated_BareMetalSolution_EnableInteractiveSerialConsole_async
+   */
+  enableInteractiveSerialConsole(
+    request?: protos.google.cloud.baremetalsolution.v2.IEnableInteractiveSerialConsoleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.baremetalsolution.v2.IEnableInteractiveSerialConsoleResponse,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  enableInteractiveSerialConsole(
+    request: protos.google.cloud.baremetalsolution.v2.IEnableInteractiveSerialConsoleRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.baremetalsolution.v2.IEnableInteractiveSerialConsoleResponse,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  enableInteractiveSerialConsole(
+    request: protos.google.cloud.baremetalsolution.v2.IEnableInteractiveSerialConsoleRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.baremetalsolution.v2.IEnableInteractiveSerialConsoleResponse,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  enableInteractiveSerialConsole(
+    request?: protos.google.cloud.baremetalsolution.v2.IEnableInteractiveSerialConsoleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.baremetalsolution.v2.IEnableInteractiveSerialConsoleResponse,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.baremetalsolution.v2.IEnableInteractiveSerialConsoleResponse,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.baremetalsolution.v2.IEnableInteractiveSerialConsoleResponse,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.enableInteractiveSerialConsole(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `enableInteractiveSerialConsole()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bare_metal_solution.enable_interactive_serial_console.js</caption>
+   * region_tag:baremetalsolution_v2_generated_BareMetalSolution_EnableInteractiveSerialConsole_async
+   */
+  async checkEnableInteractiveSerialConsoleProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleResponse,
+      protos.google.cloud.baremetalsolution.v2.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.enableInteractiveSerialConsole,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleResponse,
+      protos.google.cloud.baremetalsolution.v2.OperationMetadata
+    >;
+  }
+  /**
+   * Disable the interactive serial console feature on an instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bare_metal_solution.disable_interactive_serial_console.js</caption>
+   * region_tag:baremetalsolution_v2_generated_BareMetalSolution_DisableInteractiveSerialConsole_async
+   */
+  disableInteractiveSerialConsole(
+    request?: protos.google.cloud.baremetalsolution.v2.IDisableInteractiveSerialConsoleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.baremetalsolution.v2.IDisableInteractiveSerialConsoleResponse,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  disableInteractiveSerialConsole(
+    request: protos.google.cloud.baremetalsolution.v2.IDisableInteractiveSerialConsoleRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.baremetalsolution.v2.IDisableInteractiveSerialConsoleResponse,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  disableInteractiveSerialConsole(
+    request: protos.google.cloud.baremetalsolution.v2.IDisableInteractiveSerialConsoleRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.baremetalsolution.v2.IDisableInteractiveSerialConsoleResponse,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  disableInteractiveSerialConsole(
+    request?: protos.google.cloud.baremetalsolution.v2.IDisableInteractiveSerialConsoleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.baremetalsolution.v2.IDisableInteractiveSerialConsoleResponse,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.baremetalsolution.v2.IDisableInteractiveSerialConsoleResponse,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.baremetalsolution.v2.IDisableInteractiveSerialConsoleResponse,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.disableInteractiveSerialConsole(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `disableInteractiveSerialConsole()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bare_metal_solution.disable_interactive_serial_console.js</caption>
+   * region_tag:baremetalsolution_v2_generated_BareMetalSolution_DisableInteractiveSerialConsole_async
+   */
+  async checkDisableInteractiveSerialConsoleProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleResponse,
+      protos.google.cloud.baremetalsolution.v2.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.disableInteractiveSerialConsole,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleResponse,
+      protos.google.cloud.baremetalsolution.v2.OperationMetadata
+    >;
+  }
+  /**
    * Detach LUN from Instance.
    *
    * @param {Object} request
@@ -1660,14 +3374,15 @@ export class BareMetalSolutionClient {
    *   Required. Name of the instance.
    * @param {string} request.lun
    *   Required. Name of the Lun to detach.
+   * @param {boolean} request.skipReboot
+   *   If true, performs lun unmapping without instance reboot.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/bare_metal_solution.detach_lun.js</caption>
    * region_tag:baremetalsolution_v2_generated_BareMetalSolution_DetachLun_async
@@ -1682,7 +3397,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   detachLun(
@@ -1735,7 +3450,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1762,8 +3477,7 @@ export class BareMetalSolutionClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/bare_metal_solution.detach_lun.js</caption>
    * region_tag:baremetalsolution_v2_generated_BareMetalSolution_DetachLun_async
@@ -1804,19 +3518,14 @@ export class BareMetalSolutionClient {
    * @param {google.protobuf.FieldMask} request.updateMask
    *   The list of fields to update.
    *   The only currently supported fields are:
-   *     `snapshot_auto_delete_behavior`
-   *     `snapshot_schedule_policy_name`
    *     'labels'
-   *     'snapshot_enabled'
-   *     'snapshot_reservation_detail.reserved_space_percent'
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/bare_metal_solution.update_volume.js</caption>
    * region_tag:baremetalsolution_v2_generated_BareMetalSolution_UpdateVolume_async
@@ -1831,7 +3540,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateVolume(
@@ -1884,7 +3593,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1911,8 +3620,7 @@ export class BareMetalSolutionClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/bare_metal_solution.update_volume.js</caption>
    * region_tag:baremetalsolution_v2_generated_BareMetalSolution_UpdateVolume_async
@@ -1941,6 +3649,143 @@ export class BareMetalSolutionClient {
     >;
   }
   /**
+   * Skips volume's cooloff and deletes it now.
+   * Volume must be in cooloff state.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Volume.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bare_metal_solution.evict_volume.js</caption>
+   * region_tag:baremetalsolution_v2_generated_BareMetalSolution_EvictVolume_async
+   */
+  evictVolume(
+    request?: protos.google.cloud.baremetalsolution.v2.IEvictVolumeRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  evictVolume(
+    request: protos.google.cloud.baremetalsolution.v2.IEvictVolumeRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  evictVolume(
+    request: protos.google.cloud.baremetalsolution.v2.IEvictVolumeRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  evictVolume(
+    request?: protos.google.cloud.baremetalsolution.v2.IEvictVolumeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.evictVolume(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `evictVolume()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bare_metal_solution.evict_volume.js</caption>
+   * region_tag:baremetalsolution_v2_generated_BareMetalSolution_EvictVolume_async
+   */
+  async checkEvictVolumeProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.baremetalsolution.v2.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.evictVolume,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.baremetalsolution.v2.OperationMetadata
+    >;
+  }
+  /**
    * Emergency Volume resize.
    *
    * @param {Object} request
@@ -1955,8 +3800,7 @@ export class BareMetalSolutionClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/bare_metal_solution.resize_volume.js</caption>
    * region_tag:baremetalsolution_v2_generated_BareMetalSolution_ResizeVolume_async
@@ -1971,7 +3815,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resizeVolume(
@@ -2024,7 +3868,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2051,8 +3895,7 @@ export class BareMetalSolutionClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/bare_metal_solution.resize_volume.js</caption>
    * region_tag:baremetalsolution_v2_generated_BareMetalSolution_ResizeVolume_async
@@ -2093,15 +3936,14 @@ export class BareMetalSolutionClient {
    * @param {google.protobuf.FieldMask} request.updateMask
    *   The list of fields to update.
    *   The only currently supported fields are:
-   *     `labels`, `reservations`
+   *     `labels`, `reservations`, `vrf.vlan_attachments`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/bare_metal_solution.update_network.js</caption>
    * region_tag:baremetalsolution_v2_generated_BareMetalSolution_UpdateNetwork_async
@@ -2116,7 +3958,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateNetwork(
@@ -2169,7 +4011,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2196,8 +4038,7 @@ export class BareMetalSolutionClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/bare_metal_solution.update_network.js</caption>
    * region_tag:baremetalsolution_v2_generated_BareMetalSolution_UpdateNetwork_async
@@ -2226,6 +4067,281 @@ export class BareMetalSolutionClient {
     >;
   }
   /**
+   * Uses the specified snapshot to restore its parent volume.
+   * Returns INVALID_ARGUMENT if called for a non-boot volume.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.volumeSnapshot
+   *   Required. Name of the snapshot which will be used to restore its parent
+   *   volume.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bare_metal_solution.restore_volume_snapshot.js</caption>
+   * region_tag:baremetalsolution_v2_generated_BareMetalSolution_RestoreVolumeSnapshot_async
+   */
+  restoreVolumeSnapshot(
+    request?: protos.google.cloud.baremetalsolution.v2.IRestoreVolumeSnapshotRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  restoreVolumeSnapshot(
+    request: protos.google.cloud.baremetalsolution.v2.IRestoreVolumeSnapshotRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  restoreVolumeSnapshot(
+    request: protos.google.cloud.baremetalsolution.v2.IRestoreVolumeSnapshotRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  restoreVolumeSnapshot(
+    request?: protos.google.cloud.baremetalsolution.v2.IRestoreVolumeSnapshotRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        volume_snapshot: request.volumeSnapshot ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.restoreVolumeSnapshot(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `restoreVolumeSnapshot()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bare_metal_solution.restore_volume_snapshot.js</caption>
+   * region_tag:baremetalsolution_v2_generated_BareMetalSolution_RestoreVolumeSnapshot_async
+   */
+  async checkRestoreVolumeSnapshotProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.baremetalsolution.v2.VolumeSnapshot,
+      protos.google.cloud.baremetalsolution.v2.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.restoreVolumeSnapshot,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.baremetalsolution.v2.VolumeSnapshot,
+      protos.google.cloud.baremetalsolution.v2.OperationMetadata
+    >;
+  }
+  /**
+   * Skips lun's cooloff and deletes it now.
+   * Lun must be in cooloff state.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the lun.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bare_metal_solution.evict_lun.js</caption>
+   * region_tag:baremetalsolution_v2_generated_BareMetalSolution_EvictLun_async
+   */
+  evictLun(
+    request?: protos.google.cloud.baremetalsolution.v2.IEvictLunRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  evictLun(
+    request: protos.google.cloud.baremetalsolution.v2.IEvictLunRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  evictLun(
+    request: protos.google.cloud.baremetalsolution.v2.IEvictLunRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  evictLun(
+    request?: protos.google.cloud.baremetalsolution.v2.IEvictLunRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.evictLun(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `evictLun()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bare_metal_solution.evict_lun.js</caption>
+   * region_tag:baremetalsolution_v2_generated_BareMetalSolution_EvictLun_async
+   */
+  async checkEvictLunProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.baremetalsolution.v2.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.evictLun,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.baremetalsolution.v2.OperationMetadata
+    >;
+  }
+  /**
    * Update details of a single NFS share.
    *
    * @param {Object} request
@@ -2239,14 +4355,14 @@ export class BareMetalSolutionClient {
    *   The list of fields to update.
    *   The only currently supported fields are:
    *     `labels`
+   *     `allowed_clients`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/bare_metal_solution.update_nfs_share.js</caption>
    * region_tag:baremetalsolution_v2_generated_BareMetalSolution_UpdateNfsShare_async
@@ -2261,7 +4377,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateNfsShare(
@@ -2314,7 +4430,7 @@ export class BareMetalSolutionClient {
         protos.google.cloud.baremetalsolution.v2.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2341,8 +4457,7 @@ export class BareMetalSolutionClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/bare_metal_solution.update_nfs_share.js</caption>
    * region_tag:baremetalsolution_v2_generated_BareMetalSolution_UpdateNfsShare_async
@@ -2371,6 +4486,280 @@ export class BareMetalSolutionClient {
     >;
   }
   /**
+   * Create an NFS share.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent project and location.
+   * @param {google.cloud.baremetalsolution.v2.NfsShare} request.nfsShare
+   *   Required. The NfsShare to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bare_metal_solution.create_nfs_share.js</caption>
+   * region_tag:baremetalsolution_v2_generated_BareMetalSolution_CreateNfsShare_async
+   */
+  createNfsShare(
+    request?: protos.google.cloud.baremetalsolution.v2.ICreateNfsShareRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.baremetalsolution.v2.INfsShare,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createNfsShare(
+    request: protos.google.cloud.baremetalsolution.v2.ICreateNfsShareRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.baremetalsolution.v2.INfsShare,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createNfsShare(
+    request: protos.google.cloud.baremetalsolution.v2.ICreateNfsShareRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.baremetalsolution.v2.INfsShare,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createNfsShare(
+    request?: protos.google.cloud.baremetalsolution.v2.ICreateNfsShareRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.baremetalsolution.v2.INfsShare,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.baremetalsolution.v2.INfsShare,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.baremetalsolution.v2.INfsShare,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createNfsShare(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `createNfsShare()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bare_metal_solution.create_nfs_share.js</caption>
+   * region_tag:baremetalsolution_v2_generated_BareMetalSolution_CreateNfsShare_async
+   */
+  async checkCreateNfsShareProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.baremetalsolution.v2.NfsShare,
+      protos.google.cloud.baremetalsolution.v2.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createNfsShare,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.baremetalsolution.v2.NfsShare,
+      protos.google.cloud.baremetalsolution.v2.OperationMetadata
+    >;
+  }
+  /**
+   * Delete an NFS share. The underlying volume is automatically deleted.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the NFS share to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bare_metal_solution.delete_nfs_share.js</caption>
+   * region_tag:baremetalsolution_v2_generated_BareMetalSolution_DeleteNfsShare_async
+   */
+  deleteNfsShare(
+    request?: protos.google.cloud.baremetalsolution.v2.IDeleteNfsShareRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteNfsShare(
+    request: protos.google.cloud.baremetalsolution.v2.IDeleteNfsShareRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteNfsShare(
+    request: protos.google.cloud.baremetalsolution.v2.IDeleteNfsShareRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteNfsShare(
+    request?: protos.google.cloud.baremetalsolution.v2.IDeleteNfsShareRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.baremetalsolution.v2.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteNfsShare(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteNfsShare()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bare_metal_solution.delete_nfs_share.js</caption>
+   * region_tag:baremetalsolution_v2_generated_BareMetalSolution_DeleteNfsShare_async
+   */
+  async checkDeleteNfsShareProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.baremetalsolution.v2.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteNfsShare,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.baremetalsolution.v2.OperationMetadata
+    >;
+  }
+  /**
    * List servers in a given project and location.
    *
    * @param {Object} request
@@ -2387,14 +4776,13 @@ export class BareMetalSolutionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.baremetalsolution.v2.Instance | Instance}.
+   *   The first element of the array is Array of {@link protos.google.cloud.baremetalsolution.v2.Instance|Instance}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listInstancesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listInstances(
@@ -2404,7 +4792,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.IInstance[],
       protos.google.cloud.baremetalsolution.v2.IListInstancesRequest | null,
-      protos.google.cloud.baremetalsolution.v2.IListInstancesResponse
+      protos.google.cloud.baremetalsolution.v2.IListInstancesResponse,
     ]
   >;
   listInstances(
@@ -2450,7 +4838,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.IInstance[],
       protos.google.cloud.baremetalsolution.v2.IListInstancesRequest | null,
-      protos.google.cloud.baremetalsolution.v2.IListInstancesResponse
+      protos.google.cloud.baremetalsolution.v2.IListInstancesResponse,
     ]
   > | void {
     request = request || {};
@@ -2488,13 +4876,12 @@ export class BareMetalSolutionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.baremetalsolution.v2.Instance | Instance} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.baremetalsolution.v2.Instance|Instance} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listInstancesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listInstancesStream(
@@ -2537,12 +4924,11 @@ export class BareMetalSolutionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.baremetalsolution.v2.Instance | Instance}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.baremetalsolution.v2.Instance|Instance}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/bare_metal_solution.list_instances.js</caption>
    * region_tag:baremetalsolution_v2_generated_BareMetalSolution_ListInstances_async
@@ -2569,6 +4955,196 @@ export class BareMetalSolutionClient {
     ) as AsyncIterable<protos.google.cloud.baremetalsolution.v2.IInstance>;
   }
   /**
+   * Lists the public SSH keys registered for the specified project.
+   * These SSH keys are used only for the interactive serial console feature.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent containing the SSH keys.
+   *   Currently, the only valid value for the location is "global".
+   * @param {number} request.pageSize
+   *   The maximum number of items to return.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous List request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.baremetalsolution.v2.SSHKey|SSHKey}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listSSHKeysAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listSSHKeys(
+    request?: protos.google.cloud.baremetalsolution.v2.IListSSHKeysRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.baremetalsolution.v2.ISSHKey[],
+      protos.google.cloud.baremetalsolution.v2.IListSSHKeysRequest | null,
+      protos.google.cloud.baremetalsolution.v2.IListSSHKeysResponse,
+    ]
+  >;
+  listSSHKeys(
+    request: protos.google.cloud.baremetalsolution.v2.IListSSHKeysRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.baremetalsolution.v2.IListSSHKeysRequest,
+      | protos.google.cloud.baremetalsolution.v2.IListSSHKeysResponse
+      | null
+      | undefined,
+      protos.google.cloud.baremetalsolution.v2.ISSHKey
+    >
+  ): void;
+  listSSHKeys(
+    request: protos.google.cloud.baremetalsolution.v2.IListSSHKeysRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.baremetalsolution.v2.IListSSHKeysRequest,
+      | protos.google.cloud.baremetalsolution.v2.IListSSHKeysResponse
+      | null
+      | undefined,
+      protos.google.cloud.baremetalsolution.v2.ISSHKey
+    >
+  ): void;
+  listSSHKeys(
+    request?: protos.google.cloud.baremetalsolution.v2.IListSSHKeysRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.baremetalsolution.v2.IListSSHKeysRequest,
+          | protos.google.cloud.baremetalsolution.v2.IListSSHKeysResponse
+          | null
+          | undefined,
+          protos.google.cloud.baremetalsolution.v2.ISSHKey
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.baremetalsolution.v2.IListSSHKeysRequest,
+      | protos.google.cloud.baremetalsolution.v2.IListSSHKeysResponse
+      | null
+      | undefined,
+      protos.google.cloud.baremetalsolution.v2.ISSHKey
+    >
+  ): Promise<
+    [
+      protos.google.cloud.baremetalsolution.v2.ISSHKey[],
+      protos.google.cloud.baremetalsolution.v2.IListSSHKeysRequest | null,
+      protos.google.cloud.baremetalsolution.v2.IListSSHKeysResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listSshKeys(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent containing the SSH keys.
+   *   Currently, the only valid value for the location is "global".
+   * @param {number} request.pageSize
+   *   The maximum number of items to return.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous List request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.baremetalsolution.v2.SSHKey|SSHKey} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listSSHKeysAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listSSHKeysStream(
+    request?: protos.google.cloud.baremetalsolution.v2.IListSSHKeysRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listSshKeys'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listSSHKeys.createStream(
+      this.innerApiCalls.listSshKeys as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listSSHKeys`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent containing the SSH keys.
+   *   Currently, the only valid value for the location is "global".
+   * @param {number} request.pageSize
+   *   The maximum number of items to return.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous List request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.baremetalsolution.v2.SSHKey|SSHKey}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bare_metal_solution.list_s_s_h_keys.js</caption>
+   * region_tag:baremetalsolution_v2_generated_BareMetalSolution_ListSSHKeys_async
+   */
+  listSSHKeysAsync(
+    request?: protos.google.cloud.baremetalsolution.v2.IListSSHKeysRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.baremetalsolution.v2.ISSHKey> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listSshKeys'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listSSHKeys.asyncIterate(
+      this.innerApiCalls['listSshKeys'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.baremetalsolution.v2.ISSHKey>;
+  }
+  /**
    * List storage volumes in a given project and location.
    *
    * @param {Object} request
@@ -2585,14 +5161,13 @@ export class BareMetalSolutionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.baremetalsolution.v2.Volume | Volume}.
+   *   The first element of the array is Array of {@link protos.google.cloud.baremetalsolution.v2.Volume|Volume}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listVolumesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listVolumes(
@@ -2602,7 +5177,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.IVolume[],
       protos.google.cloud.baremetalsolution.v2.IListVolumesRequest | null,
-      protos.google.cloud.baremetalsolution.v2.IListVolumesResponse
+      protos.google.cloud.baremetalsolution.v2.IListVolumesResponse,
     ]
   >;
   listVolumes(
@@ -2648,7 +5223,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.IVolume[],
       protos.google.cloud.baremetalsolution.v2.IListVolumesRequest | null,
-      protos.google.cloud.baremetalsolution.v2.IListVolumesResponse
+      protos.google.cloud.baremetalsolution.v2.IListVolumesResponse,
     ]
   > | void {
     request = request || {};
@@ -2686,13 +5261,12 @@ export class BareMetalSolutionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.baremetalsolution.v2.Volume | Volume} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.baremetalsolution.v2.Volume|Volume} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listVolumesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listVolumesStream(
@@ -2735,12 +5309,11 @@ export class BareMetalSolutionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.baremetalsolution.v2.Volume | Volume}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.baremetalsolution.v2.Volume|Volume}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/bare_metal_solution.list_volumes.js</caption>
    * region_tag:baremetalsolution_v2_generated_BareMetalSolution_ListVolumes_async
@@ -2783,14 +5356,13 @@ export class BareMetalSolutionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.baremetalsolution.v2.Network | Network}.
+   *   The first element of the array is Array of {@link protos.google.cloud.baremetalsolution.v2.Network|Network}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listNetworksAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listNetworks(
@@ -2800,7 +5372,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.INetwork[],
       protos.google.cloud.baremetalsolution.v2.IListNetworksRequest | null,
-      protos.google.cloud.baremetalsolution.v2.IListNetworksResponse
+      protos.google.cloud.baremetalsolution.v2.IListNetworksResponse,
     ]
   >;
   listNetworks(
@@ -2846,7 +5418,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.INetwork[],
       protos.google.cloud.baremetalsolution.v2.IListNetworksRequest | null,
-      protos.google.cloud.baremetalsolution.v2.IListNetworksResponse
+      protos.google.cloud.baremetalsolution.v2.IListNetworksResponse,
     ]
   > | void {
     request = request || {};
@@ -2884,13 +5456,12 @@ export class BareMetalSolutionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.baremetalsolution.v2.Network | Network} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.baremetalsolution.v2.Network|Network} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listNetworksAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listNetworksStream(
@@ -2933,12 +5504,11 @@ export class BareMetalSolutionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.baremetalsolution.v2.Network | Network}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.baremetalsolution.v2.Network|Network}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/bare_metal_solution.list_networks.js</caption>
    * region_tag:baremetalsolution_v2_generated_BareMetalSolution_ListNetworks_async
@@ -2965,6 +5535,197 @@ export class BareMetalSolutionClient {
     ) as AsyncIterable<protos.google.cloud.baremetalsolution.v2.INetwork>;
   }
   /**
+   * Retrieves the list of snapshots for the specified volume.
+   * Returns a response with an empty list of snapshots if called
+   * for a non-boot volume.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListVolumesRequest.
+   * @param {number} request.pageSize
+   *   Requested page size. The server might return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results from the server.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.baremetalsolution.v2.VolumeSnapshot|VolumeSnapshot}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listVolumeSnapshotsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listVolumeSnapshots(
+    request?: protos.google.cloud.baremetalsolution.v2.IListVolumeSnapshotsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot[],
+      protos.google.cloud.baremetalsolution.v2.IListVolumeSnapshotsRequest | null,
+      protos.google.cloud.baremetalsolution.v2.IListVolumeSnapshotsResponse,
+    ]
+  >;
+  listVolumeSnapshots(
+    request: protos.google.cloud.baremetalsolution.v2.IListVolumeSnapshotsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.baremetalsolution.v2.IListVolumeSnapshotsRequest,
+      | protos.google.cloud.baremetalsolution.v2.IListVolumeSnapshotsResponse
+      | null
+      | undefined,
+      protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot
+    >
+  ): void;
+  listVolumeSnapshots(
+    request: protos.google.cloud.baremetalsolution.v2.IListVolumeSnapshotsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.baremetalsolution.v2.IListVolumeSnapshotsRequest,
+      | protos.google.cloud.baremetalsolution.v2.IListVolumeSnapshotsResponse
+      | null
+      | undefined,
+      protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot
+    >
+  ): void;
+  listVolumeSnapshots(
+    request?: protos.google.cloud.baremetalsolution.v2.IListVolumeSnapshotsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.baremetalsolution.v2.IListVolumeSnapshotsRequest,
+          | protos.google.cloud.baremetalsolution.v2.IListVolumeSnapshotsResponse
+          | null
+          | undefined,
+          protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.baremetalsolution.v2.IListVolumeSnapshotsRequest,
+      | protos.google.cloud.baremetalsolution.v2.IListVolumeSnapshotsResponse
+      | null
+      | undefined,
+      protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot
+    >
+  ): Promise<
+    [
+      protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot[],
+      protos.google.cloud.baremetalsolution.v2.IListVolumeSnapshotsRequest | null,
+      protos.google.cloud.baremetalsolution.v2.IListVolumeSnapshotsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listVolumeSnapshots(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListVolumesRequest.
+   * @param {number} request.pageSize
+   *   Requested page size. The server might return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results from the server.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.baremetalsolution.v2.VolumeSnapshot|VolumeSnapshot} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listVolumeSnapshotsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listVolumeSnapshotsStream(
+    request?: protos.google.cloud.baremetalsolution.v2.IListVolumeSnapshotsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listVolumeSnapshots'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listVolumeSnapshots.createStream(
+      this.innerApiCalls.listVolumeSnapshots as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listVolumeSnapshots`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListVolumesRequest.
+   * @param {number} request.pageSize
+   *   Requested page size. The server might return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results from the server.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.baremetalsolution.v2.VolumeSnapshot|VolumeSnapshot}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bare_metal_solution.list_volume_snapshots.js</caption>
+   * region_tag:baremetalsolution_v2_generated_BareMetalSolution_ListVolumeSnapshots_async
+   */
+  listVolumeSnapshotsAsync(
+    request?: protos.google.cloud.baremetalsolution.v2.IListVolumeSnapshotsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listVolumeSnapshots'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listVolumeSnapshots.asyncIterate(
+      this.innerApiCalls['listVolumeSnapshots'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot>;
+  }
+  /**
    * List storage volume luns for given storage volume.
    *
    * @param {Object} request
@@ -2979,14 +5740,13 @@ export class BareMetalSolutionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.baremetalsolution.v2.Lun | Lun}.
+   *   The first element of the array is Array of {@link protos.google.cloud.baremetalsolution.v2.Lun|Lun}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listLunsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listLuns(
@@ -2996,7 +5756,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.ILun[],
       protos.google.cloud.baremetalsolution.v2.IListLunsRequest | null,
-      protos.google.cloud.baremetalsolution.v2.IListLunsResponse
+      protos.google.cloud.baremetalsolution.v2.IListLunsResponse,
     ]
   >;
   listLuns(
@@ -3042,7 +5802,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.ILun[],
       protos.google.cloud.baremetalsolution.v2.IListLunsRequest | null,
-      protos.google.cloud.baremetalsolution.v2.IListLunsResponse
+      protos.google.cloud.baremetalsolution.v2.IListLunsResponse,
     ]
   > | void {
     request = request || {};
@@ -3078,13 +5838,12 @@ export class BareMetalSolutionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.baremetalsolution.v2.Lun | Lun} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.baremetalsolution.v2.Lun|Lun} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listLunsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listLunsStream(
@@ -3125,12 +5884,11 @@ export class BareMetalSolutionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.baremetalsolution.v2.Lun | Lun}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.baremetalsolution.v2.Lun|Lun}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/bare_metal_solution.list_luns.js</caption>
    * region_tag:baremetalsolution_v2_generated_BareMetalSolution_ListLuns_async
@@ -3173,14 +5931,13 @@ export class BareMetalSolutionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.baremetalsolution.v2.NfsShare | NfsShare}.
+   *   The first element of the array is Array of {@link protos.google.cloud.baremetalsolution.v2.NfsShare|NfsShare}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listNfsSharesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listNfsShares(
@@ -3190,7 +5947,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.INfsShare[],
       protos.google.cloud.baremetalsolution.v2.IListNfsSharesRequest | null,
-      protos.google.cloud.baremetalsolution.v2.IListNfsSharesResponse
+      protos.google.cloud.baremetalsolution.v2.IListNfsSharesResponse,
     ]
   >;
   listNfsShares(
@@ -3236,7 +5993,7 @@ export class BareMetalSolutionClient {
     [
       protos.google.cloud.baremetalsolution.v2.INfsShare[],
       protos.google.cloud.baremetalsolution.v2.IListNfsSharesRequest | null,
-      protos.google.cloud.baremetalsolution.v2.IListNfsSharesResponse
+      protos.google.cloud.baremetalsolution.v2.IListNfsSharesResponse,
     ]
   > | void {
     request = request || {};
@@ -3274,13 +6031,12 @@ export class BareMetalSolutionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.baremetalsolution.v2.NfsShare | NfsShare} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.baremetalsolution.v2.NfsShare|NfsShare} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listNfsSharesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listNfsSharesStream(
@@ -3323,12 +6079,11 @@ export class BareMetalSolutionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.baremetalsolution.v2.NfsShare | NfsShare}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.baremetalsolution.v2.NfsShare|NfsShare}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/bare_metal_solution.list_nfs_shares.js</caption>
    * region_tag:baremetalsolution_v2_generated_BareMetalSolution_ListNfsShares_async
@@ -3353,6 +6108,400 @@ export class BareMetalSolutionClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.baremetalsolution.v2.INfsShare>;
+  }
+  /**
+   * List the budget details to provision resources on a given project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListProvisioningQuotasRequest.
+   * @param {number} request.pageSize
+   *   Requested page size. The server might return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   *   Notice that page_size field is not supported and won't be respected in
+   *   the API request for now, will be updated when pagination is supported.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results from the server.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.baremetalsolution.v2.ProvisioningQuota|ProvisioningQuota}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listProvisioningQuotasAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listProvisioningQuotas(
+    request?: protos.google.cloud.baremetalsolution.v2.IListProvisioningQuotasRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.baremetalsolution.v2.IProvisioningQuota[],
+      protos.google.cloud.baremetalsolution.v2.IListProvisioningQuotasRequest | null,
+      protos.google.cloud.baremetalsolution.v2.IListProvisioningQuotasResponse,
+    ]
+  >;
+  listProvisioningQuotas(
+    request: protos.google.cloud.baremetalsolution.v2.IListProvisioningQuotasRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.baremetalsolution.v2.IListProvisioningQuotasRequest,
+      | protos.google.cloud.baremetalsolution.v2.IListProvisioningQuotasResponse
+      | null
+      | undefined,
+      protos.google.cloud.baremetalsolution.v2.IProvisioningQuota
+    >
+  ): void;
+  listProvisioningQuotas(
+    request: protos.google.cloud.baremetalsolution.v2.IListProvisioningQuotasRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.baremetalsolution.v2.IListProvisioningQuotasRequest,
+      | protos.google.cloud.baremetalsolution.v2.IListProvisioningQuotasResponse
+      | null
+      | undefined,
+      protos.google.cloud.baremetalsolution.v2.IProvisioningQuota
+    >
+  ): void;
+  listProvisioningQuotas(
+    request?: protos.google.cloud.baremetalsolution.v2.IListProvisioningQuotasRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.baremetalsolution.v2.IListProvisioningQuotasRequest,
+          | protos.google.cloud.baremetalsolution.v2.IListProvisioningQuotasResponse
+          | null
+          | undefined,
+          protos.google.cloud.baremetalsolution.v2.IProvisioningQuota
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.baremetalsolution.v2.IListProvisioningQuotasRequest,
+      | protos.google.cloud.baremetalsolution.v2.IListProvisioningQuotasResponse
+      | null
+      | undefined,
+      protos.google.cloud.baremetalsolution.v2.IProvisioningQuota
+    >
+  ): Promise<
+    [
+      protos.google.cloud.baremetalsolution.v2.IProvisioningQuota[],
+      protos.google.cloud.baremetalsolution.v2.IListProvisioningQuotasRequest | null,
+      protos.google.cloud.baremetalsolution.v2.IListProvisioningQuotasResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listProvisioningQuotas(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListProvisioningQuotasRequest.
+   * @param {number} request.pageSize
+   *   Requested page size. The server might return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   *   Notice that page_size field is not supported and won't be respected in
+   *   the API request for now, will be updated when pagination is supported.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results from the server.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.baremetalsolution.v2.ProvisioningQuota|ProvisioningQuota} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listProvisioningQuotasAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listProvisioningQuotasStream(
+    request?: protos.google.cloud.baremetalsolution.v2.IListProvisioningQuotasRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listProvisioningQuotas'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listProvisioningQuotas.createStream(
+      this.innerApiCalls.listProvisioningQuotas as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listProvisioningQuotas`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListProvisioningQuotasRequest.
+   * @param {number} request.pageSize
+   *   Requested page size. The server might return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   *   Notice that page_size field is not supported and won't be respected in
+   *   the API request for now, will be updated when pagination is supported.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results from the server.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.baremetalsolution.v2.ProvisioningQuota|ProvisioningQuota}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bare_metal_solution.list_provisioning_quotas.js</caption>
+   * region_tag:baremetalsolution_v2_generated_BareMetalSolution_ListProvisioningQuotas_async
+   */
+  listProvisioningQuotasAsync(
+    request?: protos.google.cloud.baremetalsolution.v2.IListProvisioningQuotasRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.baremetalsolution.v2.IProvisioningQuota> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listProvisioningQuotas'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listProvisioningQuotas.asyncIterate(
+      this.innerApiCalls['listProvisioningQuotas'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.baremetalsolution.v2.IProvisioningQuota>;
+  }
+  /**
+   * Retrieves the list of OS images which are currently approved.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListProvisioningQuotasRequest.
+   * @param {number} request.pageSize
+   *   Requested page size. The server might return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   *   Notice that page_size field is not supported and won't be respected in
+   *   the API request for now, will be updated when pagination is supported.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results from the server.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.baremetalsolution.v2.OSImage|OSImage}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listOSImagesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listOSImages(
+    request?: protos.google.cloud.baremetalsolution.v2.IListOSImagesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.baremetalsolution.v2.IOSImage[],
+      protos.google.cloud.baremetalsolution.v2.IListOSImagesRequest | null,
+      protos.google.cloud.baremetalsolution.v2.IListOSImagesResponse,
+    ]
+  >;
+  listOSImages(
+    request: protos.google.cloud.baremetalsolution.v2.IListOSImagesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.baremetalsolution.v2.IListOSImagesRequest,
+      | protos.google.cloud.baremetalsolution.v2.IListOSImagesResponse
+      | null
+      | undefined,
+      protos.google.cloud.baremetalsolution.v2.IOSImage
+    >
+  ): void;
+  listOSImages(
+    request: protos.google.cloud.baremetalsolution.v2.IListOSImagesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.baremetalsolution.v2.IListOSImagesRequest,
+      | protos.google.cloud.baremetalsolution.v2.IListOSImagesResponse
+      | null
+      | undefined,
+      protos.google.cloud.baremetalsolution.v2.IOSImage
+    >
+  ): void;
+  listOSImages(
+    request?: protos.google.cloud.baremetalsolution.v2.IListOSImagesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.baremetalsolution.v2.IListOSImagesRequest,
+          | protos.google.cloud.baremetalsolution.v2.IListOSImagesResponse
+          | null
+          | undefined,
+          protos.google.cloud.baremetalsolution.v2.IOSImage
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.baremetalsolution.v2.IListOSImagesRequest,
+      | protos.google.cloud.baremetalsolution.v2.IListOSImagesResponse
+      | null
+      | undefined,
+      protos.google.cloud.baremetalsolution.v2.IOSImage
+    >
+  ): Promise<
+    [
+      protos.google.cloud.baremetalsolution.v2.IOSImage[],
+      protos.google.cloud.baremetalsolution.v2.IListOSImagesRequest | null,
+      protos.google.cloud.baremetalsolution.v2.IListOSImagesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listOsImages(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListProvisioningQuotasRequest.
+   * @param {number} request.pageSize
+   *   Requested page size. The server might return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   *   Notice that page_size field is not supported and won't be respected in
+   *   the API request for now, will be updated when pagination is supported.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results from the server.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.baremetalsolution.v2.OSImage|OSImage} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listOSImagesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listOSImagesStream(
+    request?: protos.google.cloud.baremetalsolution.v2.IListOSImagesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listOsImages'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listOSImages.createStream(
+      this.innerApiCalls.listOsImages as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listOSImages`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListProvisioningQuotasRequest.
+   * @param {number} request.pageSize
+   *   Requested page size. The server might return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   *   Notice that page_size field is not supported and won't be respected in
+   *   the API request for now, will be updated when pagination is supported.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results from the server.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.baremetalsolution.v2.OSImage|OSImage}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/bare_metal_solution.list_o_s_images.js</caption>
+   * region_tag:baremetalsolution_v2_generated_BareMetalSolution_ListOSImages_async
+   */
+  listOSImagesAsync(
+    request?: protos.google.cloud.baremetalsolution.v2.IListOSImagesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.baremetalsolution.v2.IOSImage> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listOsImages'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listOSImages.asyncIterate(
+      this.innerApiCalls['listOsImages'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.baremetalsolution.v2.IOSImage>;
   }
   /**
    * Gets the access control policy for a resource. Returns an empty policy
@@ -3393,7 +6542,7 @@ export class BareMetalSolutionClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
@@ -3414,8 +6563,7 @@ export class BareMetalSolutionClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -3441,7 +6589,7 @@ export class BareMetalSolutionClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
@@ -3462,8 +6610,7 @@ export class BareMetalSolutionClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -3490,7 +6637,7 @@ export class BareMetalSolutionClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.TestIamPermissionsResponse> {
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
@@ -3505,8 +6652,7 @@ export class BareMetalSolutionClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -3552,12 +6698,11 @@ export class BareMetalSolutionClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -3803,6 +6948,117 @@ export class BareMetalSolutionClient {
   }
 
   /**
+   * Return a fully-qualified instanceConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance_config
+   * @returns {string} Resource name string.
+   */
+  instanceConfigPath(
+    project: string,
+    location: string,
+    instanceConfig: string
+  ) {
+    return this.pathTemplates.instanceConfigPathTemplate.render({
+      project: project,
+      location: location,
+      instance_config: instanceConfig,
+    });
+  }
+
+  /**
+   * Parse the project from InstanceConfig resource.
+   *
+   * @param {string} instanceConfigName
+   *   A fully-qualified path representing InstanceConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromInstanceConfigName(instanceConfigName: string) {
+    return this.pathTemplates.instanceConfigPathTemplate.match(
+      instanceConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from InstanceConfig resource.
+   *
+   * @param {string} instanceConfigName
+   *   A fully-qualified path representing InstanceConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromInstanceConfigName(instanceConfigName: string) {
+    return this.pathTemplates.instanceConfigPathTemplate.match(
+      instanceConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the instance_config from InstanceConfig resource.
+   *
+   * @param {string} instanceConfigName
+   *   A fully-qualified path representing InstanceConfig resource.
+   * @returns {string} A string representing the instance_config.
+   */
+  matchInstanceConfigFromInstanceConfigName(instanceConfigName: string) {
+    return this.pathTemplates.instanceConfigPathTemplate.match(
+      instanceConfigName
+    ).instance_config;
+  }
+
+  /**
+   * Return a fully-qualified instanceQuota resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance_quota
+   * @returns {string} Resource name string.
+   */
+  instanceQuotaPath(project: string, location: string, instanceQuota: string) {
+    return this.pathTemplates.instanceQuotaPathTemplate.render({
+      project: project,
+      location: location,
+      instance_quota: instanceQuota,
+    });
+  }
+
+  /**
+   * Parse the project from InstanceQuota resource.
+   *
+   * @param {string} instanceQuotaName
+   *   A fully-qualified path representing InstanceQuota resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromInstanceQuotaName(instanceQuotaName: string) {
+    return this.pathTemplates.instanceQuotaPathTemplate.match(instanceQuotaName)
+      .project;
+  }
+
+  /**
+   * Parse the location from InstanceQuota resource.
+   *
+   * @param {string} instanceQuotaName
+   *   A fully-qualified path representing InstanceQuota resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromInstanceQuotaName(instanceQuotaName: string) {
+    return this.pathTemplates.instanceQuotaPathTemplate.match(instanceQuotaName)
+      .location;
+  }
+
+  /**
+   * Parse the instance_quota from InstanceQuota resource.
+   *
+   * @param {string} instanceQuotaName
+   *   A fully-qualified path representing InstanceQuota resource.
+   * @returns {string} A string representing the instance_quota.
+   */
+  matchInstanceQuotaFromInstanceQuotaName(instanceQuotaName: string) {
+    return this.pathTemplates.instanceQuotaPathTemplate.match(instanceQuotaName)
+      .instance_quota;
+  }
+
+  /**
    * Return a fully-qualified lun resource name string.
    *
    * @param {string} project
@@ -3964,6 +7220,229 @@ export class BareMetalSolutionClient {
   }
 
   /**
+   * Return a fully-qualified networkConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} network_config
+   * @returns {string} Resource name string.
+   */
+  networkConfigPath(project: string, location: string, networkConfig: string) {
+    return this.pathTemplates.networkConfigPathTemplate.render({
+      project: project,
+      location: location,
+      network_config: networkConfig,
+    });
+  }
+
+  /**
+   * Parse the project from NetworkConfig resource.
+   *
+   * @param {string} networkConfigName
+   *   A fully-qualified path representing NetworkConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNetworkConfigName(networkConfigName: string) {
+    return this.pathTemplates.networkConfigPathTemplate.match(networkConfigName)
+      .project;
+  }
+
+  /**
+   * Parse the location from NetworkConfig resource.
+   *
+   * @param {string} networkConfigName
+   *   A fully-qualified path representing NetworkConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromNetworkConfigName(networkConfigName: string) {
+    return this.pathTemplates.networkConfigPathTemplate.match(networkConfigName)
+      .location;
+  }
+
+  /**
+   * Parse the network_config from NetworkConfig resource.
+   *
+   * @param {string} networkConfigName
+   *   A fully-qualified path representing NetworkConfig resource.
+   * @returns {string} A string representing the network_config.
+   */
+  matchNetworkConfigFromNetworkConfigName(networkConfigName: string) {
+    return this.pathTemplates.networkConfigPathTemplate.match(networkConfigName)
+      .network_config;
+  }
+
+  /**
+   * Return a fully-qualified osImage resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} os_image
+   * @returns {string} Resource name string.
+   */
+  osImagePath(project: string, location: string, osImage: string) {
+    return this.pathTemplates.osImagePathTemplate.render({
+      project: project,
+      location: location,
+      os_image: osImage,
+    });
+  }
+
+  /**
+   * Parse the project from OsImage resource.
+   *
+   * @param {string} osImageName
+   *   A fully-qualified path representing OsImage resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromOsImageName(osImageName: string) {
+    return this.pathTemplates.osImagePathTemplate.match(osImageName).project;
+  }
+
+  /**
+   * Parse the location from OsImage resource.
+   *
+   * @param {string} osImageName
+   *   A fully-qualified path representing OsImage resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOsImageName(osImageName: string) {
+    return this.pathTemplates.osImagePathTemplate.match(osImageName).location;
+  }
+
+  /**
+   * Parse the os_image from OsImage resource.
+   *
+   * @param {string} osImageName
+   *   A fully-qualified path representing OsImage resource.
+   * @returns {string} A string representing the os_image.
+   */
+  matchOsImageFromOsImageName(osImageName: string) {
+    return this.pathTemplates.osImagePathTemplate.match(osImageName).os_image;
+  }
+
+  /**
+   * Return a fully-qualified provisioningConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} provisioning_config
+   * @returns {string} Resource name string.
+   */
+  provisioningConfigPath(
+    project: string,
+    location: string,
+    provisioningConfig: string
+  ) {
+    return this.pathTemplates.provisioningConfigPathTemplate.render({
+      project: project,
+      location: location,
+      provisioning_config: provisioningConfig,
+    });
+  }
+
+  /**
+   * Parse the project from ProvisioningConfig resource.
+   *
+   * @param {string} provisioningConfigName
+   *   A fully-qualified path representing ProvisioningConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProvisioningConfigName(provisioningConfigName: string) {
+    return this.pathTemplates.provisioningConfigPathTemplate.match(
+      provisioningConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProvisioningConfig resource.
+   *
+   * @param {string} provisioningConfigName
+   *   A fully-qualified path representing ProvisioningConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProvisioningConfigName(provisioningConfigName: string) {
+    return this.pathTemplates.provisioningConfigPathTemplate.match(
+      provisioningConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the provisioning_config from ProvisioningConfig resource.
+   *
+   * @param {string} provisioningConfigName
+   *   A fully-qualified path representing ProvisioningConfig resource.
+   * @returns {string} A string representing the provisioning_config.
+   */
+  matchProvisioningConfigFromProvisioningConfigName(
+    provisioningConfigName: string
+  ) {
+    return this.pathTemplates.provisioningConfigPathTemplate.match(
+      provisioningConfigName
+    ).provisioning_config;
+  }
+
+  /**
+   * Return a fully-qualified provisioningQuota resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} provisioning_quota
+   * @returns {string} Resource name string.
+   */
+  provisioningQuotaPath(
+    project: string,
+    location: string,
+    provisioningQuota: string
+  ) {
+    return this.pathTemplates.provisioningQuotaPathTemplate.render({
+      project: project,
+      location: location,
+      provisioning_quota: provisioningQuota,
+    });
+  }
+
+  /**
+   * Parse the project from ProvisioningQuota resource.
+   *
+   * @param {string} provisioningQuotaName
+   *   A fully-qualified path representing ProvisioningQuota resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProvisioningQuotaName(provisioningQuotaName: string) {
+    return this.pathTemplates.provisioningQuotaPathTemplate.match(
+      provisioningQuotaName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProvisioningQuota resource.
+   *
+   * @param {string} provisioningQuotaName
+   *   A fully-qualified path representing ProvisioningQuota resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProvisioningQuotaName(provisioningQuotaName: string) {
+    return this.pathTemplates.provisioningQuotaPathTemplate.match(
+      provisioningQuotaName
+    ).location;
+  }
+
+  /**
+   * Parse the provisioning_quota from ProvisioningQuota resource.
+   *
+   * @param {string} provisioningQuotaName
+   *   A fully-qualified path representing ProvisioningQuota resource.
+   * @returns {string} A string representing the provisioning_quota.
+   */
+  matchProvisioningQuotaFromProvisioningQuotaName(
+    provisioningQuotaName: string
+  ) {
+    return this.pathTemplates.provisioningQuotaPathTemplate.match(
+      provisioningQuotaName
+    ).provisioning_quota;
+  }
+
+  /**
    * Return a fully-qualified serverNetworkTemplate resource name string.
    *
    * @param {string} project
@@ -4027,6 +7506,55 @@ export class BareMetalSolutionClient {
   }
 
   /**
+   * Return a fully-qualified sshKey resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} ssh_key
+   * @returns {string} Resource name string.
+   */
+  sshKeyPath(project: string, location: string, sshKey: string) {
+    return this.pathTemplates.sshKeyPathTemplate.render({
+      project: project,
+      location: location,
+      ssh_key: sshKey,
+    });
+  }
+
+  /**
+   * Parse the project from SshKey resource.
+   *
+   * @param {string} sshKeyName
+   *   A fully-qualified path representing SshKey resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSshKeyName(sshKeyName: string) {
+    return this.pathTemplates.sshKeyPathTemplate.match(sshKeyName).project;
+  }
+
+  /**
+   * Parse the location from SshKey resource.
+   *
+   * @param {string} sshKeyName
+   *   A fully-qualified path representing SshKey resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSshKeyName(sshKeyName: string) {
+    return this.pathTemplates.sshKeyPathTemplate.match(sshKeyName).location;
+  }
+
+  /**
+   * Parse the ssh_key from SshKey resource.
+   *
+   * @param {string} sshKeyName
+   *   A fully-qualified path representing SshKey resource.
+   * @returns {string} A string representing the ssh_key.
+   */
+  matchSshKeyFromSshKeyName(sshKeyName: string) {
+    return this.pathTemplates.sshKeyPathTemplate.match(sshKeyName).ssh_key;
+  }
+
+  /**
    * Return a fully-qualified volume resource name string.
    *
    * @param {string} project
@@ -4073,6 +7601,133 @@ export class BareMetalSolutionClient {
    */
   matchVolumeFromVolumeName(volumeName: string) {
     return this.pathTemplates.volumePathTemplate.match(volumeName).volume;
+  }
+
+  /**
+   * Return a fully-qualified volumeConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} volume_config
+   * @returns {string} Resource name string.
+   */
+  volumeConfigPath(project: string, location: string, volumeConfig: string) {
+    return this.pathTemplates.volumeConfigPathTemplate.render({
+      project: project,
+      location: location,
+      volume_config: volumeConfig,
+    });
+  }
+
+  /**
+   * Parse the project from VolumeConfig resource.
+   *
+   * @param {string} volumeConfigName
+   *   A fully-qualified path representing VolumeConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromVolumeConfigName(volumeConfigName: string) {
+    return this.pathTemplates.volumeConfigPathTemplate.match(volumeConfigName)
+      .project;
+  }
+
+  /**
+   * Parse the location from VolumeConfig resource.
+   *
+   * @param {string} volumeConfigName
+   *   A fully-qualified path representing VolumeConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromVolumeConfigName(volumeConfigName: string) {
+    return this.pathTemplates.volumeConfigPathTemplate.match(volumeConfigName)
+      .location;
+  }
+
+  /**
+   * Parse the volume_config from VolumeConfig resource.
+   *
+   * @param {string} volumeConfigName
+   *   A fully-qualified path representing VolumeConfig resource.
+   * @returns {string} A string representing the volume_config.
+   */
+  matchVolumeConfigFromVolumeConfigName(volumeConfigName: string) {
+    return this.pathTemplates.volumeConfigPathTemplate.match(volumeConfigName)
+      .volume_config;
+  }
+
+  /**
+   * Return a fully-qualified volumeSnapshot resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} volume
+   * @param {string} snapshot
+   * @returns {string} Resource name string.
+   */
+  volumeSnapshotPath(
+    project: string,
+    location: string,
+    volume: string,
+    snapshot: string
+  ) {
+    return this.pathTemplates.volumeSnapshotPathTemplate.render({
+      project: project,
+      location: location,
+      volume: volume,
+      snapshot: snapshot,
+    });
+  }
+
+  /**
+   * Parse the project from VolumeSnapshot resource.
+   *
+   * @param {string} volumeSnapshotName
+   *   A fully-qualified path representing VolumeSnapshot resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromVolumeSnapshotName(volumeSnapshotName: string) {
+    return this.pathTemplates.volumeSnapshotPathTemplate.match(
+      volumeSnapshotName
+    ).project;
+  }
+
+  /**
+   * Parse the location from VolumeSnapshot resource.
+   *
+   * @param {string} volumeSnapshotName
+   *   A fully-qualified path representing VolumeSnapshot resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromVolumeSnapshotName(volumeSnapshotName: string) {
+    return this.pathTemplates.volumeSnapshotPathTemplate.match(
+      volumeSnapshotName
+    ).location;
+  }
+
+  /**
+   * Parse the volume from VolumeSnapshot resource.
+   *
+   * @param {string} volumeSnapshotName
+   *   A fully-qualified path representing VolumeSnapshot resource.
+   * @returns {string} A string representing the volume.
+   */
+  matchVolumeFromVolumeSnapshotName(volumeSnapshotName: string) {
+    return this.pathTemplates.volumeSnapshotPathTemplate.match(
+      volumeSnapshotName
+    ).volume;
+  }
+
+  /**
+   * Parse the snapshot from VolumeSnapshot resource.
+   *
+   * @param {string} volumeSnapshotName
+   *   A fully-qualified path representing VolumeSnapshot resource.
+   * @returns {string} A string representing the snapshot.
+   */
+  matchSnapshotFromVolumeSnapshotName(volumeSnapshotName: string) {
+    return this.pathTemplates.volumeSnapshotPathTemplate.match(
+      volumeSnapshotName
+    ).snapshot;
   }
 
   /**

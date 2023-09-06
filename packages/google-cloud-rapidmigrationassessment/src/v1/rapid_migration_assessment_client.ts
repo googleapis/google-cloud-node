@@ -96,8 +96,7 @@ export class RapidMigrationAssessmentClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -105,7 +104,7 @@ export class RapidMigrationAssessmentClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new RapidMigrationAssessmentClient({fallback: 'rest'}, gax);
+   *     const client = new RapidMigrationAssessmentClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -176,7 +175,7 @@ export class RapidMigrationAssessmentClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -219,7 +218,7 @@ export class RapidMigrationAssessmentClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
@@ -490,9 +489,8 @@ export class RapidMigrationAssessmentClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.rapidmigrationassessment.v1.Annotation | Annotation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.rapidmigrationassessment.v1.Annotation|Annotation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/rapid_migration_assessment.get_annotation.js</caption>
    * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_GetAnnotation_async
@@ -507,7 +505,7 @@ export class RapidMigrationAssessmentClient {
         | protos.google.cloud.rapidmigrationassessment.v1.IGetAnnotationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAnnotation(
@@ -556,7 +554,7 @@ export class RapidMigrationAssessmentClient {
         | protos.google.cloud.rapidmigrationassessment.v1.IGetAnnotationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -587,9 +585,8 @@ export class RapidMigrationAssessmentClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.rapidmigrationassessment.v1.Collector | Collector}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.rapidmigrationassessment.v1.Collector|Collector}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/rapid_migration_assessment.get_collector.js</caption>
    * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_GetCollector_async
@@ -604,7 +601,7 @@ export class RapidMigrationAssessmentClient {
         | protos.google.cloud.rapidmigrationassessment.v1.IGetCollectorRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getCollector(
@@ -653,7 +650,7 @@ export class RapidMigrationAssessmentClient {
         | protos.google.cloud.rapidmigrationassessment.v1.IGetCollectorRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -695,8 +692,7 @@ export class RapidMigrationAssessmentClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/rapid_migration_assessment.create_collector.js</caption>
    * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_CreateCollector_async
@@ -711,7 +707,7 @@ export class RapidMigrationAssessmentClient {
         protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createCollector(
@@ -764,7 +760,7 @@ export class RapidMigrationAssessmentClient {
         protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -791,8 +787,7 @@ export class RapidMigrationAssessmentClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/rapid_migration_assessment.create_collector.js</caption>
    * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_CreateCollector_async
@@ -837,8 +832,7 @@ export class RapidMigrationAssessmentClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/rapid_migration_assessment.create_annotation.js</caption>
    * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_CreateAnnotation_async
@@ -853,7 +847,7 @@ export class RapidMigrationAssessmentClient {
         protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAnnotation(
@@ -906,7 +900,7 @@ export class RapidMigrationAssessmentClient {
         protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -933,8 +927,7 @@ export class RapidMigrationAssessmentClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/rapid_migration_assessment.create_annotation.js</caption>
    * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_CreateAnnotation_async
@@ -995,8 +988,7 @@ export class RapidMigrationAssessmentClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/rapid_migration_assessment.update_collector.js</caption>
    * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_UpdateCollector_async
@@ -1011,7 +1003,7 @@ export class RapidMigrationAssessmentClient {
         protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateCollector(
@@ -1064,7 +1056,7 @@ export class RapidMigrationAssessmentClient {
         protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1091,8 +1083,7 @@ export class RapidMigrationAssessmentClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/rapid_migration_assessment.update_collector.js</caption>
    * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_UpdateCollector_async
@@ -1147,8 +1138,7 @@ export class RapidMigrationAssessmentClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/rapid_migration_assessment.delete_collector.js</caption>
    * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_DeleteCollector_async
@@ -1163,7 +1153,7 @@ export class RapidMigrationAssessmentClient {
         protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteCollector(
@@ -1216,7 +1206,7 @@ export class RapidMigrationAssessmentClient {
         protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1243,8 +1233,7 @@ export class RapidMigrationAssessmentClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/rapid_migration_assessment.delete_collector.js</caption>
    * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_DeleteCollector_async
@@ -1299,8 +1288,7 @@ export class RapidMigrationAssessmentClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/rapid_migration_assessment.resume_collector.js</caption>
    * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_ResumeCollector_async
@@ -1315,7 +1303,7 @@ export class RapidMigrationAssessmentClient {
         protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resumeCollector(
@@ -1368,7 +1356,7 @@ export class RapidMigrationAssessmentClient {
         protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1395,8 +1383,7 @@ export class RapidMigrationAssessmentClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/rapid_migration_assessment.resume_collector.js</caption>
    * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_ResumeCollector_async
@@ -1451,8 +1438,7 @@ export class RapidMigrationAssessmentClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/rapid_migration_assessment.register_collector.js</caption>
    * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_RegisterCollector_async
@@ -1467,7 +1453,7 @@ export class RapidMigrationAssessmentClient {
         protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   registerCollector(
@@ -1520,7 +1506,7 @@ export class RapidMigrationAssessmentClient {
         protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1547,8 +1533,7 @@ export class RapidMigrationAssessmentClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/rapid_migration_assessment.register_collector.js</caption>
    * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_RegisterCollector_async
@@ -1603,8 +1588,7 @@ export class RapidMigrationAssessmentClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/rapid_migration_assessment.pause_collector.js</caption>
    * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_PauseCollector_async
@@ -1619,7 +1603,7 @@ export class RapidMigrationAssessmentClient {
         protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   pauseCollector(
@@ -1672,7 +1656,7 @@ export class RapidMigrationAssessmentClient {
         protos.google.cloud.rapidmigrationassessment.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1699,8 +1683,7 @@ export class RapidMigrationAssessmentClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/rapid_migration_assessment.pause_collector.js</caption>
    * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_PauseCollector_async
@@ -1747,14 +1730,13 @@ export class RapidMigrationAssessmentClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.rapidmigrationassessment.v1.Collector | Collector}.
+   *   The first element of the array is Array of {@link protos.google.cloud.rapidmigrationassessment.v1.Collector|Collector}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listCollectorsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listCollectors(
@@ -1764,7 +1746,7 @@ export class RapidMigrationAssessmentClient {
     [
       protos.google.cloud.rapidmigrationassessment.v1.ICollector[],
       protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest | null,
-      protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsResponse
+      protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsResponse,
     ]
   >;
   listCollectors(
@@ -1810,7 +1792,7 @@ export class RapidMigrationAssessmentClient {
     [
       protos.google.cloud.rapidmigrationassessment.v1.ICollector[],
       protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest | null,
-      protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsResponse
+      protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsResponse,
     ]
   > | void {
     request = request || {};
@@ -1850,13 +1832,12 @@ export class RapidMigrationAssessmentClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.rapidmigrationassessment.v1.Collector | Collector} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.rapidmigrationassessment.v1.Collector|Collector} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listCollectorsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listCollectorsStream(
@@ -1901,12 +1882,11 @@ export class RapidMigrationAssessmentClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.rapidmigrationassessment.v1.Collector | Collector}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.rapidmigrationassessment.v1.Collector|Collector}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/rapid_migration_assessment.list_collectors.js</caption>
    * region_tag:rapidmigrationassessment_v1_generated_RapidMigrationAssessment_ListCollectors_async
@@ -1943,8 +1923,7 @@ export class RapidMigrationAssessmentClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -1990,12 +1969,11 @@ export class RapidMigrationAssessmentClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

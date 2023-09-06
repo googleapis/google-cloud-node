@@ -20,6 +20,7 @@
   * [Recommender.list_recommendations](#recommender.list_recommendations)
   * [Recommender.mark_insight_accepted](#recommender.mark_insight_accepted)
   * [Recommender.mark_recommendation_claimed](#recommender.mark_recommendation_claimed)
+  * [Recommender.mark_recommendation_dismissed](#recommender.mark_recommendation_dismissed)
   * [Recommender.mark_recommendation_failed](#recommender.mark_recommendation_failed)
   * [Recommender.mark_recommendation_succeeded](#recommender.mark_recommendation_succeeded)
   * [Recommender.update_insight_type_config](#recommender.update_insight_type_config)
@@ -28,15 +29,16 @@
   * [Recommender.get_insight_type_config](#recommender.get_insight_type_config)
   * [Recommender.get_recommendation](#recommender.get_recommendation)
   * [Recommender.get_recommender_config](#recommender.get_recommender_config)
+  * [Recommender.list_insight_types](#recommender.list_insight_types)
   * [Recommender.list_insights](#recommender.list_insights)
   * [Recommender.list_recommendations](#recommender.list_recommendations)
+  * [Recommender.list_recommenders](#recommender.list_recommenders)
   * [Recommender.mark_insight_accepted](#recommender.mark_insight_accepted)
   * [Recommender.mark_recommendation_claimed](#recommender.mark_recommendation_claimed)
   * [Recommender.mark_recommendation_failed](#recommender.mark_recommendation_failed)
   * [Recommender.mark_recommendation_succeeded](#recommender.mark_recommendation_succeeded)
   * [Recommender.update_insight_type_config](#recommender.update_insight_type_config)
   * [Recommender.update_recommender_config](#recommender.update_recommender_config)
-  * [Quickstart](#quickstart)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -190,6 +192,23 @@ __Usage:__
 
 
 
+### Recommender.mark_recommendation_dismissed
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recommender/samples/generated/v1/recommender.mark_recommendation_dismissed.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recommender/samples/generated/v1/recommender.mark_recommendation_dismissed.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-recommender/samples/generated/v1/recommender.mark_recommendation_dismissed.js`
+
+
+-----
+
+
+
+
 ### Recommender.mark_recommendation_failed
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recommender/samples/generated/v1/recommender.mark_recommendation_failed.js).
@@ -326,6 +345,23 @@ __Usage:__
 
 
 
+### Recommender.list_insight_types
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recommender/samples/generated/v1beta1/recommender.list_insight_types.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recommender/samples/generated/v1beta1/recommender.list_insight_types.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-recommender/samples/generated/v1beta1/recommender.list_insight_types.js`
+
+
+-----
+
+
+
+
 ### Recommender.list_insights
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recommender/samples/generated/v1beta1/recommender.list_insights.js).
@@ -353,6 +389,23 @@ __Usage:__
 
 
 `node packages/google-cloud-recommender/samples/generated/v1beta1/recommender.list_recommendations.js`
+
+
+-----
+
+
+
+
+### Recommender.list_recommenders
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recommender/samples/generated/v1beta1/recommender.list_recommenders.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recommender/samples/generated/v1beta1/recommender.list_recommenders.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-recommender/samples/generated/v1beta1/recommender.list_recommenders.js`
 
 
 -----
@@ -472,23 +525,6 @@ __Usage:__
 
 
 `node packages/google-cloud-recommender/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recommender/samples/test/quickstart.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recommender/samples/test/quickstart.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-recommender/samples/test/quickstart.js`
 
 
 

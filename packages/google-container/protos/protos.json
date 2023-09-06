@@ -2929,6 +2929,27 @@
                     "windowsNodeConfig": {
                       "type": "WindowsNodeConfig",
                       "id": 34
+                    },
+                    "machineType": {
+                      "type": "string",
+                      "id": 36,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "diskType": {
+                      "type": "string",
+                      "id": 37,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "diskSizeGb": {
+                      "type": "int64",
+                      "id": 38,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -3836,6 +3857,13 @@
                         "type": {
                           "type": "Type",
                           "id": 1
+                        },
+                        "tpuTopology": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "policyName": {
                           "type": "string",
@@ -5524,7 +5552,13 @@
                         "SYSTEM_COMPONENTS": 1,
                         "APISERVER": 3,
                         "SCHEDULER": 4,
-                        "CONTROLLER_MANAGER": 5
+                        "CONTROLLER_MANAGER": 5,
+                        "STORAGE": 7,
+                        "HPA": 8,
+                        "POD": 9,
+                        "DAEMONSET": 10,
+                        "DEPLOYMENT": 11,
+                        "STATEFULSET": 12
                       }
                     }
                   }
@@ -7555,6 +7589,14 @@
                     "evaluationMode": {
                       "type": "EvaluationMode",
                       "id": 2
+                    },
+                    "policyBindings": {
+                      "rule": "repeated",
+                      "type": "PolicyBinding",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   },
                   "nested": {
@@ -7562,7 +7604,27 @@
                       "values": {
                         "EVALUATION_MODE_UNSPECIFIED": 0,
                         "DISABLED": 1,
-                        "PROJECT_SINGLETON_POLICY_ENFORCE": 2
+                        "PROJECT_SINGLETON_POLICY_ENFORCE": 2,
+                        "POLICY_BINDINGS": 5,
+                        "POLICY_BINDINGS_AND_PROJECT_SINGLETON_POLICY_ENFORCE": 6
+                      }
+                    },
+                    "PolicyBinding": {
+                      "oneofs": {
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
                       }
                     }
                   }
@@ -8842,6 +8904,27 @@
                     "windowsNodeConfig": {
                       "type": "WindowsNodeConfig",
                       "id": 34
+                    },
+                    "machineType": {
+                      "type": "string",
+                      "id": 36,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "diskType": {
+                      "type": "string",
+                      "id": 37,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "diskSizeGb": {
+                      "type": "int64",
+                      "id": 38,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -11724,7 +11807,13 @@
                         "WORKLOADS": 2,
                         "APISERVER": 3,
                         "SCHEDULER": 4,
-                        "CONTROLLER_MANAGER": 5
+                        "CONTROLLER_MANAGER": 5,
+                        "STORAGE": 7,
+                        "HPA": 8,
+                        "POD": 9,
+                        "DAEMONSET": 10,
+                        "DEPLOYMENT": 11,
+                        "STATEFULSET": 12
                       }
                     }
                   }
@@ -11875,6 +11964,248 @@
               "type": "string",
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
+            },
+            "CommonLanguageSettings": {
+              "fields": {
+                "referenceDocsUri": {
+                  "type": "string",
+                  "id": 1,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
+                "destinations": {
+                  "rule": "repeated",
+                  "type": "ClientLibraryDestination",
+                  "id": 2
+                }
+              }
+            },
+            "ClientLibrarySettings": {
+              "fields": {
+                "version": {
+                  "type": "string",
+                  "id": 1
+                },
+                "launchStage": {
+                  "type": "LaunchStage",
+                  "id": 2
+                },
+                "restNumericEnums": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "javaSettings": {
+                  "type": "JavaSettings",
+                  "id": 21
+                },
+                "cppSettings": {
+                  "type": "CppSettings",
+                  "id": 22
+                },
+                "phpSettings": {
+                  "type": "PhpSettings",
+                  "id": 23
+                },
+                "pythonSettings": {
+                  "type": "PythonSettings",
+                  "id": 24
+                },
+                "nodeSettings": {
+                  "type": "NodeSettings",
+                  "id": 25
+                },
+                "dotnetSettings": {
+                  "type": "DotnetSettings",
+                  "id": 26
+                },
+                "rubySettings": {
+                  "type": "RubySettings",
+                  "id": 27
+                },
+                "goSettings": {
+                  "type": "GoSettings",
+                  "id": 28
+                }
+              }
+            },
+            "Publishing": {
+              "fields": {
+                "methodSettings": {
+                  "rule": "repeated",
+                  "type": "MethodSettings",
+                  "id": 2
+                },
+                "newIssueUri": {
+                  "type": "string",
+                  "id": 101
+                },
+                "documentationUri": {
+                  "type": "string",
+                  "id": 102
+                },
+                "apiShortName": {
+                  "type": "string",
+                  "id": 103
+                },
+                "githubLabel": {
+                  "type": "string",
+                  "id": 104
+                },
+                "codeownerGithubTeams": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 105
+                },
+                "docTagPrefix": {
+                  "type": "string",
+                  "id": 106
+                },
+                "organization": {
+                  "type": "ClientLibraryOrganization",
+                  "id": 107
+                },
+                "librarySettings": {
+                  "rule": "repeated",
+                  "type": "ClientLibrarySettings",
+                  "id": 109
+                }
+              }
+            },
+            "JavaSettings": {
+              "fields": {
+                "libraryPackage": {
+                  "type": "string",
+                  "id": 1
+                },
+                "serviceClassNames": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
+                },
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 3
+                }
+              }
+            },
+            "CppSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "PhpSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "PythonSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "NodeSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "DotnetSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "RubySettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "GoSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "MethodSettings": {
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "longRunning": {
+                  "type": "LongRunning",
+                  "id": 2
+                }
+              },
+              "nested": {
+                "LongRunning": {
+                  "fields": {
+                    "initialPollDelay": {
+                      "type": "google.protobuf.Duration",
+                      "id": 1
+                    },
+                    "pollDelayMultiplier": {
+                      "type": "float",
+                      "id": 2
+                    },
+                    "maxPollDelay": {
+                      "type": "google.protobuf.Duration",
+                      "id": 3
+                    },
+                    "totalPollTimeout": {
+                      "type": "google.protobuf.Duration",
+                      "id": 4
+                    }
+                  }
+                }
+              }
+            },
+            "ClientLibraryOrganization": {
+              "values": {
+                "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED": 0,
+                "CLOUD": 1,
+                "ADS": 2,
+                "PHOTOS": 3,
+                "STREET_VIEW": 4
+              }
+            },
+            "ClientLibraryDestination": {
+              "values": {
+                "CLIENT_LIBRARY_DESTINATION_UNSPECIFIED": 0,
+                "GITHUB": 10,
+                "PACKAGE_MANAGER": 20
+              }
+            },
+            "LaunchStage": {
+              "values": {
+                "LAUNCH_STAGE_UNSPECIFIED": 0,
+                "UNIMPLEMENTED": 6,
+                "PRELAUNCH": 7,
+                "EARLY_ACCESS": 1,
+                "ALPHA": 2,
+                "BETA": 3,
+                "GA": 4,
+                "DEPRECATED": 5
+              }
             },
             "fieldBehavior": {
               "rule": "repeated",
@@ -12525,6 +12856,13 @@
                   "type": "bool",
                   "id": 7
                 },
+                "deprecatedLegacyJsonFieldConflicts": {
+                  "type": "bool",
+                  "id": 11,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -12608,6 +12946,21 @@
                     "default": false
                   }
                 },
+                "debugRedact": {
+                  "type": "bool",
+                  "id": 16,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "retention": {
+                  "type": "OptionRetention",
+                  "id": 17
+                },
+                "target": {
+                  "type": "OptionTargetType",
+                  "id": 18
+                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -12640,6 +12993,27 @@
                     "JS_STRING": 1,
                     "JS_NUMBER": 2
                   }
+                },
+                "OptionRetention": {
+                  "values": {
+                    "RETENTION_UNKNOWN": 0,
+                    "RETENTION_RUNTIME": 1,
+                    "RETENTION_SOURCE": 2
+                  }
+                },
+                "OptionTargetType": {
+                  "values": {
+                    "TARGET_TYPE_UNKNOWN": 0,
+                    "TARGET_TYPE_FILE": 1,
+                    "TARGET_TYPE_EXTENSION_RANGE": 2,
+                    "TARGET_TYPE_MESSAGE": 3,
+                    "TARGET_TYPE_FIELD": 4,
+                    "TARGET_TYPE_ONEOF": 5,
+                    "TARGET_TYPE_ENUM": 6,
+                    "TARGET_TYPE_ENUM_ENTRY": 7,
+                    "TARGET_TYPE_SERVICE": 8,
+                    "TARGET_TYPE_METHOD": 9
+                  }
                 }
               }
             },
@@ -12669,6 +13043,13 @@
                   "id": 3,
                   "options": {
                     "default": false
+                  }
+                },
+                "deprecatedLegacyJsonFieldConflicts": {
+                  "type": "bool",
+                  "id": 6,
+                  "options": {
+                    "deprecated": true
                   }
                 },
                 "uninterpretedOption": {

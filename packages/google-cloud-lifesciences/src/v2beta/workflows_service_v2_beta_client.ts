@@ -94,8 +94,7 @@ export class WorkflowsServiceV2BetaClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -103,7 +102,7 @@ export class WorkflowsServiceV2BetaClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new WorkflowsServiceV2BetaClient({fallback: 'rest'}, gax);
+   *     const client = new WorkflowsServiceV2BetaClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -174,7 +173,7 @@ export class WorkflowsServiceV2BetaClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -191,7 +190,7 @@ export class WorkflowsServiceV2BetaClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
@@ -372,10 +371,10 @@ export class WorkflowsServiceV2BetaClient {
   /**
    * Runs a pipeline.  The returned Operation's [metadata]
    * [google.longrunning.Operation.metadata] field will contain a
-   * {@link google.cloud.lifesciences.v2beta.Metadata|google.cloud.lifesciences.v2beta.Metadata}
+   * {@link protos.google.cloud.lifesciences.v2beta.Metadata|google.cloud.lifesciences.v2beta.Metadata}
    * object describing the status of the pipeline execution. The
-   * {@link google.longrunning.Operation.response|response} field will contain a
-   * {@link google.cloud.lifesciences.v2beta.RunPipelineResponse|google.cloud.lifesciences.v2beta.RunPipelineResponse}
+   * {@link protos.google.longrunning.Operation.response|response} field will contain a
+   * {@link protos.google.cloud.lifesciences.v2beta.RunPipelineResponse|google.cloud.lifesciences.v2beta.RunPipelineResponse}
    * object if the pipeline completes successfully.
    *
    * **Note:** Before you can use this method, the *Life Sciences Service Agent*
@@ -412,8 +411,7 @@ export class WorkflowsServiceV2BetaClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta/workflows_service_v2_beta.run_pipeline.js</caption>
    * region_tag:lifesciences_v2beta_generated_WorkflowsServiceV2Beta_RunPipeline_async
@@ -428,7 +426,7 @@ export class WorkflowsServiceV2BetaClient {
         protos.google.cloud.lifesciences.v2beta.IMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   runPipeline(
@@ -481,7 +479,7 @@ export class WorkflowsServiceV2BetaClient {
         protos.google.cloud.lifesciences.v2beta.IMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -508,8 +506,7 @@ export class WorkflowsServiceV2BetaClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta/workflows_service_v2_beta.run_pipeline.js</caption>
    * region_tag:lifesciences_v2beta_generated_WorkflowsServiceV2Beta_RunPipeline_async
@@ -548,8 +545,7 @@ export class WorkflowsServiceV2BetaClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -595,12 +591,11 @@ export class WorkflowsServiceV2BetaClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

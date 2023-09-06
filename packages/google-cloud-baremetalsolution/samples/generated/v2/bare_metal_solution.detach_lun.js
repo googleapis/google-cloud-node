@@ -36,6 +36,10 @@ function main(instance, lun) {
    *  Required. Name of the Lun to detach.
    */
   // const lun = 'abc123'
+  /**
+   *  If true, performs lun unmapping without instance reboot.
+   */
+  // const skipReboot = true
 
   // Imports the Baremetalsolution library
   const {BareMetalSolutionClient} = require('@google-cloud/bare-metal-solution').v2;

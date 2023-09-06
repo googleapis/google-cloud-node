@@ -49,7 +49,7 @@ function main(modelDeploymentMonitoringJob, deployedModelId, objectives) {
   /**
    *  Required. Objectives of the stats to retrieve.
    */
-  // const objectives = 1234
+  // const objectives = [1,2,3,4]
   /**
    *  The standard list page size.
    */

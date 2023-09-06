@@ -99,8 +99,7 @@ export class IndexEndpointServiceClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -108,7 +107,7 @@ export class IndexEndpointServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new IndexEndpointServiceClient({fallback: 'rest'}, gax);
+   *     const client = new IndexEndpointServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -177,7 +176,7 @@ export class IndexEndpointServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -282,6 +281,9 @@ export class IndexEndpointServiceClient {
       savedQueryPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}'
       ),
+      schedulePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/schedules/{schedule}'
+      ),
       specialistPoolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/specialistPools/{specialist_pool}'
       ),
@@ -327,7 +329,7 @@ export class IndexEndpointServiceClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
@@ -1577,9 +1579,8 @@ export class IndexEndpointServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.IndexEndpoint | IndexEndpoint}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.IndexEndpoint|IndexEndpoint}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/index_endpoint_service.get_index_endpoint.js</caption>
    * region_tag:aiplatform_v1_generated_IndexEndpointService_GetIndexEndpoint_async
@@ -1591,7 +1592,7 @@ export class IndexEndpointServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IIndexEndpoint,
       protos.google.cloud.aiplatform.v1.IGetIndexEndpointRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIndexEndpoint(
@@ -1637,7 +1638,7 @@ export class IndexEndpointServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IIndexEndpoint,
       protos.google.cloud.aiplatform.v1.IGetIndexEndpointRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1667,13 +1668,12 @@ export class IndexEndpointServiceClient {
    *   Required. The IndexEndpoint which replaces the resource on the server.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. The update mask applies to the resource. See
-   *   {@link google.protobuf.FieldMask|google.protobuf.FieldMask}.
+   *   {@link protos.google.protobuf.FieldMask|google.protobuf.FieldMask}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1.IndexEndpoint | IndexEndpoint}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.IndexEndpoint|IndexEndpoint}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/index_endpoint_service.update_index_endpoint.js</caption>
    * region_tag:aiplatform_v1_generated_IndexEndpointService_UpdateIndexEndpoint_async
@@ -1685,7 +1685,7 @@ export class IndexEndpointServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IIndexEndpoint,
       protos.google.cloud.aiplatform.v1.IUpdateIndexEndpointRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateIndexEndpoint(
@@ -1731,7 +1731,7 @@ export class IndexEndpointServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IIndexEndpoint,
       protos.google.cloud.aiplatform.v1.IUpdateIndexEndpointRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1769,8 +1769,7 @@ export class IndexEndpointServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/index_endpoint_service.create_index_endpoint.js</caption>
    * region_tag:aiplatform_v1_generated_IndexEndpointService_CreateIndexEndpoint_async
@@ -1785,7 +1784,7 @@ export class IndexEndpointServiceClient {
         protos.google.cloud.aiplatform.v1.ICreateIndexEndpointOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createIndexEndpoint(
@@ -1838,7 +1837,7 @@ export class IndexEndpointServiceClient {
         protos.google.cloud.aiplatform.v1.ICreateIndexEndpointOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1865,8 +1864,7 @@ export class IndexEndpointServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/index_endpoint_service.create_index_endpoint.js</caption>
    * region_tag:aiplatform_v1_generated_IndexEndpointService_CreateIndexEndpoint_async
@@ -1909,8 +1907,7 @@ export class IndexEndpointServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/index_endpoint_service.delete_index_endpoint.js</caption>
    * region_tag:aiplatform_v1_generated_IndexEndpointService_DeleteIndexEndpoint_async
@@ -1925,7 +1922,7 @@ export class IndexEndpointServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteIndexEndpoint(
@@ -1978,7 +1975,7 @@ export class IndexEndpointServiceClient {
         protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2005,8 +2002,7 @@ export class IndexEndpointServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/index_endpoint_service.delete_index_endpoint.js</caption>
    * region_tag:aiplatform_v1_generated_IndexEndpointService_DeleteIndexEndpoint_async
@@ -2053,8 +2049,7 @@ export class IndexEndpointServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/index_endpoint_service.deploy_index.js</caption>
    * region_tag:aiplatform_v1_generated_IndexEndpointService_DeployIndex_async
@@ -2069,7 +2064,7 @@ export class IndexEndpointServiceClient {
         protos.google.cloud.aiplatform.v1.IDeployIndexOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deployIndex(
@@ -2122,7 +2117,7 @@ export class IndexEndpointServiceClient {
         protos.google.cloud.aiplatform.v1.IDeployIndexOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2149,8 +2144,7 @@ export class IndexEndpointServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/index_endpoint_service.deploy_index.js</caption>
    * region_tag:aiplatform_v1_generated_IndexEndpointService_DeployIndex_async
@@ -2197,8 +2191,7 @@ export class IndexEndpointServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/index_endpoint_service.undeploy_index.js</caption>
    * region_tag:aiplatform_v1_generated_IndexEndpointService_UndeployIndex_async
@@ -2213,7 +2206,7 @@ export class IndexEndpointServiceClient {
         protos.google.cloud.aiplatform.v1.IUndeployIndexOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   undeployIndex(
@@ -2266,7 +2259,7 @@ export class IndexEndpointServiceClient {
         protos.google.cloud.aiplatform.v1.IUndeployIndexOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2293,8 +2286,7 @@ export class IndexEndpointServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/index_endpoint_service.undeploy_index.js</caption>
    * region_tag:aiplatform_v1_generated_IndexEndpointService_UndeployIndex_async
@@ -2333,16 +2325,15 @@ export class IndexEndpointServiceClient {
    *   `projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}`
    * @param {google.cloud.aiplatform.v1.DeployedIndex} request.deployedIndex
    *   Required. The DeployedIndex to be updated within the IndexEndpoint.
-   *   Currently, the updatable fields are {@link automatic_resources|DeployedIndex}
-   *   and {@link dedicated_resources|DeployedIndex}
+   *   Currently, the updatable fields are {@link protos.automatic_resources|DeployedIndex}
+   *   and {@link protos.dedicated_resources|DeployedIndex}
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/index_endpoint_service.mutate_deployed_index.js</caption>
    * region_tag:aiplatform_v1_generated_IndexEndpointService_MutateDeployedIndex_async
@@ -2357,7 +2348,7 @@ export class IndexEndpointServiceClient {
         protos.google.cloud.aiplatform.v1.IMutateDeployedIndexOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   mutateDeployedIndex(
@@ -2410,7 +2401,7 @@ export class IndexEndpointServiceClient {
         protos.google.cloud.aiplatform.v1.IMutateDeployedIndexOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2437,8 +2428,7 @@ export class IndexEndpointServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/index_endpoint_service.mutate_deployed_index.js</caption>
    * region_tag:aiplatform_v1_generated_IndexEndpointService_MutateDeployedIndex_async
@@ -2480,7 +2470,7 @@ export class IndexEndpointServiceClient {
    *
    *     * `index_endpoint` supports = and !=. `index_endpoint` represents the
    *        IndexEndpoint ID, ie. the last segment of the IndexEndpoint's
-   *        {@link google.cloud.aiplatform.v1.IndexEndpoint.name|resourcename}.
+   *        {@link protos.google.cloud.aiplatform.v1.IndexEndpoint.name|resourcename}.
    *     * `display_name` supports =, != and regex()
    *               (uses [re2](https://github.com/google/re2/wiki/Syntax) syntax)
    *     * `labels` supports general map functions that is:
@@ -2498,23 +2488,22 @@ export class IndexEndpointServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListIndexEndpointsResponse.next_page_token|ListIndexEndpointsResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1.ListIndexEndpointsResponse.next_page_token|ListIndexEndpointsResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1.IndexEndpointService.ListIndexEndpoints|IndexEndpointService.ListIndexEndpoints}
+   *   {@link protos.google.cloud.aiplatform.v1.IndexEndpointService.ListIndexEndpoints|IndexEndpointService.ListIndexEndpoints}
    *   call.
    * @param {google.protobuf.FieldMask} [request.readMask]
    *   Optional. Mask specifying which fields to read.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1.IndexEndpoint | IndexEndpoint}.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.IndexEndpoint|IndexEndpoint}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listIndexEndpointsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listIndexEndpoints(
@@ -2524,7 +2513,7 @@ export class IndexEndpointServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IIndexEndpoint[],
       protos.google.cloud.aiplatform.v1.IListIndexEndpointsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListIndexEndpointsResponse
+      protos.google.cloud.aiplatform.v1.IListIndexEndpointsResponse,
     ]
   >;
   listIndexEndpoints(
@@ -2570,7 +2559,7 @@ export class IndexEndpointServiceClient {
     [
       protos.google.cloud.aiplatform.v1.IIndexEndpoint[],
       protos.google.cloud.aiplatform.v1.IListIndexEndpointsRequest | null,
-      protos.google.cloud.aiplatform.v1.IListIndexEndpointsResponse
+      protos.google.cloud.aiplatform.v1.IListIndexEndpointsResponse,
     ]
   > | void {
     request = request || {};
@@ -2605,7 +2594,7 @@ export class IndexEndpointServiceClient {
    *
    *     * `index_endpoint` supports = and !=. `index_endpoint` represents the
    *        IndexEndpoint ID, ie. the last segment of the IndexEndpoint's
-   *        {@link google.cloud.aiplatform.v1.IndexEndpoint.name|resourcename}.
+   *        {@link protos.google.cloud.aiplatform.v1.IndexEndpoint.name|resourcename}.
    *     * `display_name` supports =, != and regex()
    *               (uses [re2](https://github.com/google/re2/wiki/Syntax) syntax)
    *     * `labels` supports general map functions that is:
@@ -2623,22 +2612,21 @@ export class IndexEndpointServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListIndexEndpointsResponse.next_page_token|ListIndexEndpointsResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1.ListIndexEndpointsResponse.next_page_token|ListIndexEndpointsResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1.IndexEndpointService.ListIndexEndpoints|IndexEndpointService.ListIndexEndpoints}
+   *   {@link protos.google.cloud.aiplatform.v1.IndexEndpointService.ListIndexEndpoints|IndexEndpointService.ListIndexEndpoints}
    *   call.
    * @param {google.protobuf.FieldMask} [request.readMask]
    *   Optional. Mask specifying which fields to read.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1.IndexEndpoint | IndexEndpoint} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.IndexEndpoint|IndexEndpoint} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listIndexEndpointsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listIndexEndpointsStream(
@@ -2678,7 +2666,7 @@ export class IndexEndpointServiceClient {
    *
    *     * `index_endpoint` supports = and !=. `index_endpoint` represents the
    *        IndexEndpoint ID, ie. the last segment of the IndexEndpoint's
-   *        {@link google.cloud.aiplatform.v1.IndexEndpoint.name|resourcename}.
+   *        {@link protos.google.cloud.aiplatform.v1.IndexEndpoint.name|resourcename}.
    *     * `display_name` supports =, != and regex()
    *               (uses [re2](https://github.com/google/re2/wiki/Syntax) syntax)
    *     * `labels` supports general map functions that is:
@@ -2696,21 +2684,20 @@ export class IndexEndpointServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. The standard list page token.
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1.ListIndexEndpointsResponse.next_page_token|ListIndexEndpointsResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1.ListIndexEndpointsResponse.next_page_token|ListIndexEndpointsResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1.IndexEndpointService.ListIndexEndpoints|IndexEndpointService.ListIndexEndpoints}
+   *   {@link protos.google.cloud.aiplatform.v1.IndexEndpointService.ListIndexEndpoints|IndexEndpointService.ListIndexEndpoints}
    *   call.
    * @param {google.protobuf.FieldMask} [request.readMask]
    *   Optional. Mask specifying which fields to read.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.aiplatform.v1.IndexEndpoint | IndexEndpoint}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.aiplatform.v1.IndexEndpoint|IndexEndpoint}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/index_endpoint_service.list_index_endpoints.js</caption>
    * region_tag:aiplatform_v1_generated_IndexEndpointService_ListIndexEndpoints_async
@@ -2775,7 +2762,7 @@ export class IndexEndpointServiceClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
@@ -2796,8 +2783,7 @@ export class IndexEndpointServiceClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -2823,7 +2809,7 @@ export class IndexEndpointServiceClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
@@ -2844,8 +2830,7 @@ export class IndexEndpointServiceClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -2872,7 +2857,7 @@ export class IndexEndpointServiceClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.TestIamPermissionsResponse> {
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
@@ -2887,8 +2872,7 @@ export class IndexEndpointServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -2934,12 +2918,11 @@ export class IndexEndpointServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -5042,6 +5025,55 @@ export class IndexEndpointServiceClient {
   matchSavedQueryFromSavedQueryName(savedQueryName: string) {
     return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName)
       .saved_query;
+  }
+
+  /**
+   * Return a fully-qualified schedule resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} schedule
+   * @returns {string} Resource name string.
+   */
+  schedulePath(project: string, location: string, schedule: string) {
+    return this.pathTemplates.schedulePathTemplate.render({
+      project: project,
+      location: location,
+      schedule: schedule,
+    });
+  }
+
+  /**
+   * Parse the project from Schedule resource.
+   *
+   * @param {string} scheduleName
+   *   A fully-qualified path representing Schedule resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromScheduleName(scheduleName: string) {
+    return this.pathTemplates.schedulePathTemplate.match(scheduleName).project;
+  }
+
+  /**
+   * Parse the location from Schedule resource.
+   *
+   * @param {string} scheduleName
+   *   A fully-qualified path representing Schedule resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromScheduleName(scheduleName: string) {
+    return this.pathTemplates.schedulePathTemplate.match(scheduleName).location;
+  }
+
+  /**
+   * Parse the schedule from Schedule resource.
+   *
+   * @param {string} scheduleName
+   *   A fully-qualified path representing Schedule resource.
+   * @returns {string} A string representing the schedule.
+   */
+  matchScheduleFromScheduleName(scheduleName: string) {
+    return this.pathTemplates.schedulePathTemplate.match(scheduleName).schedule;
   }
 
   /**

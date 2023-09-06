@@ -138,7 +138,7 @@ function main(placement, userEvent) {
    *  * `filterSyntaxV2`: Boolean. False by default. If set to true, the `filter`
    *    field is interpreteted according to the new, attribute-based syntax.
    */
-  // const params = 1234
+  // const params = [1,2,3,4]
   /**
    *  The labels applied to a resource must meet the following requirements:
    *  * Each resource can have multiple labels, up to a maximum of 64.
@@ -156,7 +156,7 @@ function main(placement, userEvent) {
    *  Document (https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
    *  for more details.
    */
-  // const labels = 1234
+  // const labels = [1,2,3,4]
 
   // Imports the Retail library
   const {PredictionServiceClient} = require('@google-cloud/retail').v2;

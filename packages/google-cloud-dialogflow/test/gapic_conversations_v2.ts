@@ -897,6 +897,156 @@ describe('v2.ConversationsClient', () => {
     });
   });
 
+  describe('searchKnowledge', () => {
+    it('invokes searchKnowledge without error', async () => {
+      const client = new conversationsModule.v2.ConversationsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.SearchKnowledgeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.SearchKnowledgeRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.SearchKnowledgeRequest',
+        ['conversation']
+      );
+      request.conversation = defaultValue2;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}&conversation=${defaultValue2}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.SearchKnowledgeResponse()
+      );
+      client.innerApiCalls.searchKnowledge = stubSimpleCall(expectedResponse);
+      const [response] = await client.searchKnowledge(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.searchKnowledge as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchKnowledge as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes searchKnowledge without error using callback', async () => {
+      const client = new conversationsModule.v2.ConversationsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.SearchKnowledgeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.SearchKnowledgeRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.SearchKnowledgeRequest',
+        ['conversation']
+      );
+      request.conversation = defaultValue2;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}&conversation=${defaultValue2}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.SearchKnowledgeResponse()
+      );
+      client.innerApiCalls.searchKnowledge =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.searchKnowledge(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.dialogflow.v2.ISearchKnowledgeResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.searchKnowledge as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchKnowledge as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes searchKnowledge with error', async () => {
+      const client = new conversationsModule.v2.ConversationsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.SearchKnowledgeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.SearchKnowledgeRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.SearchKnowledgeRequest',
+        ['conversation']
+      );
+      request.conversation = defaultValue2;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}&conversation=${defaultValue2}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.searchKnowledge = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.searchKnowledge(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.searchKnowledge as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchKnowledge as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes searchKnowledge with closed client', async () => {
+      const client = new conversationsModule.v2.ConversationsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2.SearchKnowledgeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.SearchKnowledgeRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.SearchKnowledgeRequest',
+        ['conversation']
+      );
+      request.conversation = defaultValue2;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.searchKnowledge(request), expectedError);
+    });
+  });
+
   describe('listConversations', () => {
     it('invokes listConversations without error', async () => {
       const client = new conversationsModule.v2.ConversationsClient({

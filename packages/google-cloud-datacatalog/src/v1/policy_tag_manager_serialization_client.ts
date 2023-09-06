@@ -91,8 +91,7 @@ export class PolicyTagManagerSerializationClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -100,7 +99,7 @@ export class PolicyTagManagerSerializationClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new PolicyTagManagerSerializationClient({fallback: 'rest'}, gax);
+   *     const client = new PolicyTagManagerSerializationClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -164,7 +163,7 @@ export class PolicyTagManagerSerializationClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -367,9 +366,8 @@ export class PolicyTagManagerSerializationClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.datacatalog.v1.Taxonomy | Taxonomy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.datacatalog.v1.Taxonomy|Taxonomy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/policy_tag_manager_serialization.replace_taxonomy.js</caption>
    * region_tag:datacatalog_v1_generated_PolicyTagManagerSerialization_ReplaceTaxonomy_async
@@ -381,7 +379,7 @@ export class PolicyTagManagerSerializationClient {
     [
       protos.google.cloud.datacatalog.v1.ITaxonomy,
       protos.google.cloud.datacatalog.v1.IReplaceTaxonomyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   replaceTaxonomy(
@@ -427,7 +425,7 @@ export class PolicyTagManagerSerializationClient {
     [
       protos.google.cloud.datacatalog.v1.ITaxonomy,
       protos.google.cloud.datacatalog.v1.IReplaceTaxonomyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -470,9 +468,8 @@ export class PolicyTagManagerSerializationClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.datacatalog.v1.ImportTaxonomiesResponse | ImportTaxonomiesResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.datacatalog.v1.ImportTaxonomiesResponse|ImportTaxonomiesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/policy_tag_manager_serialization.import_taxonomies.js</caption>
    * region_tag:datacatalog_v1_generated_PolicyTagManagerSerialization_ImportTaxonomies_async
@@ -484,7 +481,7 @@ export class PolicyTagManagerSerializationClient {
     [
       protos.google.cloud.datacatalog.v1.IImportTaxonomiesResponse,
       protos.google.cloud.datacatalog.v1.IImportTaxonomiesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   importTaxonomies(
@@ -530,7 +527,7 @@ export class PolicyTagManagerSerializationClient {
     [
       protos.google.cloud.datacatalog.v1.IImportTaxonomiesResponse,
       protos.google.cloud.datacatalog.v1.IImportTaxonomiesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -572,9 +569,8 @@ export class PolicyTagManagerSerializationClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.datacatalog.v1.ExportTaxonomiesResponse | ExportTaxonomiesResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.datacatalog.v1.ExportTaxonomiesResponse|ExportTaxonomiesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/policy_tag_manager_serialization.export_taxonomies.js</caption>
    * region_tag:datacatalog_v1_generated_PolicyTagManagerSerialization_ExportTaxonomies_async
@@ -586,7 +582,7 @@ export class PolicyTagManagerSerializationClient {
     [
       protos.google.cloud.datacatalog.v1.IExportTaxonomiesResponse,
       protos.google.cloud.datacatalog.v1.IExportTaxonomiesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   exportTaxonomies(
@@ -632,7 +628,7 @@ export class PolicyTagManagerSerializationClient {
     [
       protos.google.cloud.datacatalog.v1.IExportTaxonomiesResponse,
       protos.google.cloud.datacatalog.v1.IExportTaxonomiesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

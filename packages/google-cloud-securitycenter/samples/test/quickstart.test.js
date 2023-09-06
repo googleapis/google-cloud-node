@@ -21,9 +21,9 @@ const {describe, it} = require('mocha');
 const {execSync} = require('child_process');
 const exec = cmd => execSync(cmd, {encoding: 'utf8'});
 
-describe('listAllAssets', () => {
-  it('should print all assets in org', () => {
-    const output = exec('node quickstart.js google');
-    assert.notMatch(output, /undefined/);
+describe('quickstart', () => {
+  it('should print all sources in project', () => {
+    const output = exec('node quickstart.js');
+    assert.match(output, /sources listed/);
   });
 });

@@ -43,7 +43,7 @@ function main(name) {
    *  Optional. Optional reasons for the annotation that will be assigned to the
    *  Event.
    */
-  // const reasons = 1234
+  // const reasons = [1,2,3,4]
   /**
    *  Optional. Optional unique stable hashed user identifier to apply to the
    *  assessment. This is an alternative to setting the hashed_account_id in
@@ -51,7 +51,7 @@ function main(name) {
    *  in the initial request. It is recommended that the identifier is hashed
    *  using hmac-sha256 with stable secret.
    */
-  // const hashedAccountId = 'Buffer.from('string')'
+  // const hashedAccountId = Buffer.from('string')
   /**
    *  Optional. If the assessment is part of a payment transaction, provide
    *  details on payment lifecycle events that occur in the transaction.

@@ -92,8 +92,7 @@ export class AuthorizedDomainsClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -101,7 +100,7 @@ export class AuthorizedDomainsClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new AuthorizedDomainsClient({fallback: 'rest'}, gax);
+   *     const client = new AuthorizedDomainsClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -167,7 +166,7 @@ export class AuthorizedDomainsClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -347,14 +346,13 @@ export class AuthorizedDomainsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.appengine.v1.AuthorizedDomain | AuthorizedDomain}.
+   *   The first element of the array is Array of {@link protos.google.appengine.v1.AuthorizedDomain|AuthorizedDomain}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listAuthorizedDomainsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listAuthorizedDomains(
@@ -364,7 +362,7 @@ export class AuthorizedDomainsClient {
     [
       protos.google.appengine.v1.IAuthorizedDomain[],
       protos.google.appengine.v1.IListAuthorizedDomainsRequest | null,
-      protos.google.appengine.v1.IListAuthorizedDomainsResponse
+      protos.google.appengine.v1.IListAuthorizedDomainsResponse,
     ]
   >;
   listAuthorizedDomains(
@@ -410,7 +408,7 @@ export class AuthorizedDomainsClient {
     [
       protos.google.appengine.v1.IAuthorizedDomain[],
       protos.google.appengine.v1.IListAuthorizedDomainsRequest | null,
-      protos.google.appengine.v1.IListAuthorizedDomainsResponse
+      protos.google.appengine.v1.IListAuthorizedDomainsResponse,
     ]
   > | void {
     request = request || {};
@@ -445,13 +443,12 @@ export class AuthorizedDomainsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.appengine.v1.AuthorizedDomain | AuthorizedDomain} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.appengine.v1.AuthorizedDomain|AuthorizedDomain} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAuthorizedDomainsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listAuthorizedDomainsStream(
@@ -491,12 +488,11 @@ export class AuthorizedDomainsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.appengine.v1.AuthorizedDomain | AuthorizedDomain}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.appengine.v1.AuthorizedDomain|AuthorizedDomain}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/authorized_domains.list_authorized_domains.js</caption>
    * region_tag:appengine_v1_generated_AuthorizedDomains_ListAuthorizedDomains_async

@@ -88,8 +88,7 @@ export class ValidationHelperV1Client {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -97,7 +96,7 @@ export class ValidationHelperV1Client {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new ValidationHelperV1Client({fallback: 'rest'}, gax);
+   *     const client = new ValidationHelperV1Client({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -163,7 +162,7 @@ export class ValidationHelperV1Client {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -330,26 +329,25 @@ export class ValidationHelperV1Client {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.attestor
-   *   Required. The resource name of the {@link google.cloud.binaryauthorization.v1.Attestor|Attestor} of the
-   *   {@link grafeas.v1.Occurrence|occurrence}, in the format
+   *   Required. The resource name of the {@link protos.google.cloud.binaryauthorization.v1.Attestor|Attestor} of the
+   *   {@link protos.grafeas.v1.Occurrence|occurrence}, in the format
    *   `projects/* /attestors/*`.
    * @param {grafeas.v1.AttestationOccurrence} request.attestation
-   *   Required. An {@link grafeas.v1.AttestationOccurrence|AttestationOccurrence} to
+   *   Required. An {@link protos.grafeas.v1.AttestationOccurrence|AttestationOccurrence} to
    *   be checked that it can be verified by the Attestor. It does not have to be
    *   an existing entity in Container Analysis. It must otherwise be a valid
    *   AttestationOccurrence.
    * @param {string} request.occurrenceNote
-   *   Required. The resource name of the {@link grafeas.v1.Note|Note} to which the
-   *   containing {@link grafeas.v1.Occurrence|Occurrence} is associated.
+   *   Required. The resource name of the {@link protos.grafeas.v1.Note|Note} to which the
+   *   containing {@link protos.grafeas.v1.Occurrence|Occurrence} is associated.
    * @param {string} request.occurrenceResourceUri
    *   Required. The URI of the artifact (e.g. container image) that is the
-   *   subject of the containing {@link grafeas.v1.Occurrence|Occurrence}.
+   *   subject of the containing {@link protos.grafeas.v1.Occurrence|Occurrence}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.binaryauthorization.v1.ValidateAttestationOccurrenceResponse | ValidateAttestationOccurrenceResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.binaryauthorization.v1.ValidateAttestationOccurrenceResponse|ValidateAttestationOccurrenceResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/validation_helper_v1.validate_attestation_occurrence.js</caption>
    * region_tag:binaryauthorization_v1_generated_ValidationHelperV1_ValidateAttestationOccurrence_async
@@ -364,7 +362,7 @@ export class ValidationHelperV1Client {
         | protos.google.cloud.binaryauthorization.v1.IValidateAttestationOccurrenceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   validateAttestationOccurrence(
@@ -413,7 +411,7 @@ export class ValidationHelperV1Client {
         | protos.google.cloud.binaryauthorization.v1.IValidateAttestationOccurrenceRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

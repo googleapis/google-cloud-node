@@ -40,7 +40,7 @@ function main(inputConfig) {
    */
   // const inputConfig = {}
   /**
-   *  Optional. The desired output location. This field is only needed in
+   *  The desired output location. This field is only needed in
    *  BatchProcessDocumentsRequest.
    */
   // const outputConfig = {}

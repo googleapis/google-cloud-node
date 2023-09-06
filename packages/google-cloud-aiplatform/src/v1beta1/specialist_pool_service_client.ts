@@ -104,8 +104,7 @@ export class SpecialistPoolServiceClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -113,7 +112,7 @@ export class SpecialistPoolServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new SpecialistPoolServiceClient({fallback: 'rest'}, gax);
+   *     const client = new SpecialistPoolServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -183,7 +182,7 @@ export class SpecialistPoolServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -342,7 +341,7 @@ export class SpecialistPoolServiceClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
@@ -1715,9 +1714,8 @@ export class SpecialistPoolServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.aiplatform.v1beta1.SpecialistPool | SpecialistPool}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.SpecialistPool|SpecialistPool}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/specialist_pool_service.get_specialist_pool.js</caption>
    * region_tag:aiplatform_v1beta1_generated_SpecialistPoolService_GetSpecialistPool_async
@@ -1732,7 +1730,7 @@ export class SpecialistPoolServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IGetSpecialistPoolRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSpecialistPool(
@@ -1781,7 +1779,7 @@ export class SpecialistPoolServiceClient {
         | protos.google.cloud.aiplatform.v1beta1.IGetSpecialistPoolRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1819,8 +1817,7 @@ export class SpecialistPoolServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/specialist_pool_service.create_specialist_pool.js</caption>
    * region_tag:aiplatform_v1beta1_generated_SpecialistPoolService_CreateSpecialistPool_async
@@ -1835,7 +1832,7 @@ export class SpecialistPoolServiceClient {
         protos.google.cloud.aiplatform.v1beta1.ICreateSpecialistPoolOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createSpecialistPool(
@@ -1888,7 +1885,7 @@ export class SpecialistPoolServiceClient {
         protos.google.cloud.aiplatform.v1beta1.ICreateSpecialistPoolOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1915,8 +1912,7 @@ export class SpecialistPoolServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/specialist_pool_service.create_specialist_pool.js</caption>
    * region_tag:aiplatform_v1beta1_generated_SpecialistPoolService_CreateSpecialistPool_async
@@ -1962,8 +1958,7 @@ export class SpecialistPoolServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/specialist_pool_service.delete_specialist_pool.js</caption>
    * region_tag:aiplatform_v1beta1_generated_SpecialistPoolService_DeleteSpecialistPool_async
@@ -1978,7 +1973,7 @@ export class SpecialistPoolServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteSpecialistPool(
@@ -2031,7 +2026,7 @@ export class SpecialistPoolServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2058,8 +2053,7 @@ export class SpecialistPoolServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/specialist_pool_service.delete_specialist_pool.js</caption>
    * region_tag:aiplatform_v1beta1_generated_SpecialistPoolService_DeleteSpecialistPool_async
@@ -2102,8 +2096,7 @@ export class SpecialistPoolServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/specialist_pool_service.update_specialist_pool.js</caption>
    * region_tag:aiplatform_v1beta1_generated_SpecialistPoolService_UpdateSpecialistPool_async
@@ -2118,7 +2111,7 @@ export class SpecialistPoolServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IUpdateSpecialistPoolOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateSpecialistPool(
@@ -2171,7 +2164,7 @@ export class SpecialistPoolServiceClient {
         protos.google.cloud.aiplatform.v1beta1.IUpdateSpecialistPoolOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2198,8 +2191,7 @@ export class SpecialistPoolServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/specialist_pool_service.update_specialist_pool.js</caption>
    * region_tag:aiplatform_v1beta1_generated_SpecialistPoolService_UpdateSpecialistPool_async
@@ -2240,23 +2232,22 @@ export class SpecialistPoolServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained by
-   *   {@link google.cloud.aiplatform.v1beta1.ListSpecialistPoolsResponse.next_page_token|ListSpecialistPoolsResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1beta1.ListSpecialistPoolsResponse.next_page_token|ListSpecialistPoolsResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.SpecialistPoolService.ListSpecialistPools|SpecialistPoolService.ListSpecialistPools}
+   *   {@link protos.google.cloud.aiplatform.v1beta1.SpecialistPoolService.ListSpecialistPools|SpecialistPoolService.ListSpecialistPools}
    *   call. Return first page if empty.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read. FieldMask represents a set of
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.aiplatform.v1beta1.SpecialistPool | SpecialistPool}.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1beta1.SpecialistPool|SpecialistPool}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listSpecialistPoolsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSpecialistPools(
@@ -2266,7 +2257,7 @@ export class SpecialistPoolServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ISpecialistPool[],
       protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsResponse
+      protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsResponse,
     ]
   >;
   listSpecialistPools(
@@ -2312,7 +2303,7 @@ export class SpecialistPoolServiceClient {
     [
       protos.google.cloud.aiplatform.v1beta1.ISpecialistPool[],
       protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsResponse
+      protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsResponse,
     ]
   > | void {
     request = request || {};
@@ -2346,22 +2337,21 @@ export class SpecialistPoolServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained by
-   *   {@link google.cloud.aiplatform.v1beta1.ListSpecialistPoolsResponse.next_page_token|ListSpecialistPoolsResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1beta1.ListSpecialistPoolsResponse.next_page_token|ListSpecialistPoolsResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.SpecialistPoolService.ListSpecialistPools|SpecialistPoolService.ListSpecialistPools}
+   *   {@link protos.google.cloud.aiplatform.v1beta1.SpecialistPoolService.ListSpecialistPools|SpecialistPoolService.ListSpecialistPools}
    *   call. Return first page if empty.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read. FieldMask represents a set of
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.aiplatform.v1beta1.SpecialistPool | SpecialistPool} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1beta1.SpecialistPool|SpecialistPool} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listSpecialistPoolsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listSpecialistPoolsStream(
@@ -2400,21 +2390,20 @@ export class SpecialistPoolServiceClient {
    * @param {string} request.pageToken
    *   The standard list page token.
    *   Typically obtained by
-   *   {@link google.cloud.aiplatform.v1beta1.ListSpecialistPoolsResponse.next_page_token|ListSpecialistPoolsResponse.next_page_token}
+   *   {@link protos.google.cloud.aiplatform.v1beta1.ListSpecialistPoolsResponse.next_page_token|ListSpecialistPoolsResponse.next_page_token}
    *   of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.SpecialistPoolService.ListSpecialistPools|SpecialistPoolService.ListSpecialistPools}
+   *   {@link protos.google.cloud.aiplatform.v1beta1.SpecialistPoolService.ListSpecialistPools|SpecialistPoolService.ListSpecialistPools}
    *   call. Return first page if empty.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read. FieldMask represents a set of
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.aiplatform.v1beta1.SpecialistPool | SpecialistPool}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.aiplatform.v1beta1.SpecialistPool|SpecialistPool}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta1/specialist_pool_service.list_specialist_pools.js</caption>
    * region_tag:aiplatform_v1beta1_generated_SpecialistPoolService_ListSpecialistPools_async
@@ -2479,7 +2468,7 @@ export class SpecialistPoolServiceClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
@@ -2500,8 +2489,7 @@ export class SpecialistPoolServiceClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -2527,7 +2515,7 @@ export class SpecialistPoolServiceClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
@@ -2548,8 +2536,7 @@ export class SpecialistPoolServiceClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -2576,7 +2563,7 @@ export class SpecialistPoolServiceClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.TestIamPermissionsResponse> {
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
@@ -2591,8 +2578,7 @@ export class SpecialistPoolServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -2638,12 +2624,11 @@ export class SpecialistPoolServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

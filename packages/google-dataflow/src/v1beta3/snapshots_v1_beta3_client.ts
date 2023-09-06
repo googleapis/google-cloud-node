@@ -87,8 +87,7 @@ export class SnapshotsV1Beta3Client {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -96,7 +95,7 @@ export class SnapshotsV1Beta3Client {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new SnapshotsV1Beta3Client({fallback: 'rest'}, gax);
+   *     const client = new SnapshotsV1Beta3Client({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -162,7 +161,7 @@ export class SnapshotsV1Beta3Client {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -326,9 +325,8 @@ export class SnapshotsV1Beta3Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.dataflow.v1beta3.Snapshot | Snapshot}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.dataflow.v1beta3.Snapshot|Snapshot}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta3/snapshots_v1_beta3.get_snapshot.js</caption>
    * region_tag:dataflow_v1beta3_generated_SnapshotsV1Beta3_GetSnapshot_async
@@ -340,7 +338,7 @@ export class SnapshotsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.ISnapshot,
       protos.google.dataflow.v1beta3.IGetSnapshotRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSnapshot(
@@ -378,7 +376,7 @@ export class SnapshotsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.ISnapshot,
       protos.google.dataflow.v1beta3.IGetSnapshotRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -415,9 +413,8 @@ export class SnapshotsV1Beta3Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.dataflow.v1beta3.DeleteSnapshotResponse | DeleteSnapshotResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.dataflow.v1beta3.DeleteSnapshotResponse|DeleteSnapshotResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta3/snapshots_v1_beta3.delete_snapshot.js</caption>
    * region_tag:dataflow_v1beta3_generated_SnapshotsV1Beta3_DeleteSnapshot_async
@@ -429,7 +426,7 @@ export class SnapshotsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IDeleteSnapshotResponse,
       protos.google.dataflow.v1beta3.IDeleteSnapshotRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteSnapshot(
@@ -469,7 +466,7 @@ export class SnapshotsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IDeleteSnapshotResponse,
       protos.google.dataflow.v1beta3.IDeleteSnapshotRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -506,9 +503,8 @@ export class SnapshotsV1Beta3Client {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.dataflow.v1beta3.ListSnapshotsResponse | ListSnapshotsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.dataflow.v1beta3.ListSnapshotsResponse|ListSnapshotsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta3/snapshots_v1_beta3.list_snapshots.js</caption>
    * region_tag:dataflow_v1beta3_generated_SnapshotsV1Beta3_ListSnapshots_async
@@ -520,7 +516,7 @@ export class SnapshotsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IListSnapshotsResponse,
       protos.google.dataflow.v1beta3.IListSnapshotsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   listSnapshots(
@@ -560,7 +556,7 @@ export class SnapshotsV1Beta3Client {
     [
       protos.google.dataflow.v1beta3.IListSnapshotsResponse,
       protos.google.dataflow.v1beta3.IListSnapshotsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

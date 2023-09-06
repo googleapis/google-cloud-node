@@ -4,7 +4,7 @@
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=14.0.0"
   },
   "repository": "googleapis/nodejs-datacatalog",
   "private": true,
@@ -15,13 +15,13 @@
     "test": "mocha --timeout 600000"
   },
   "dependencies": {
-    "@google-cloud/bigquery": "^6.0.0",
-    "@google-cloud/datacatalog": "^3.5.0",
+    "@google-cloud/bigquery": "^7.0.0",
+    "@google-cloud/datacatalog": "^4.0.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "execa": "^7.0.0",
+    "execa": "^8.0.0",
     "mocha": "^8.0.0"
   }
 }

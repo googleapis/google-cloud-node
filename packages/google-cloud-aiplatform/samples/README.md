@@ -175,6 +175,14 @@
   * [Prediction_service.explain](#prediction_service.explain)
   * [Prediction_service.predict](#prediction_service.predict)
   * [Prediction_service.raw_predict](#prediction_service.raw_predict)
+  * [Prediction_service.server_streaming_predict](#prediction_service.server_streaming_predict)
+  * [Schedule_service.create_schedule](#schedule_service.create_schedule)
+  * [Schedule_service.delete_schedule](#schedule_service.delete_schedule)
+  * [Schedule_service.get_schedule](#schedule_service.get_schedule)
+  * [Schedule_service.list_schedules](#schedule_service.list_schedules)
+  * [Schedule_service.pause_schedule](#schedule_service.pause_schedule)
+  * [Schedule_service.resume_schedule](#schedule_service.resume_schedule)
+  * [Schedule_service.update_schedule](#schedule_service.update_schedule)
   * [Specialist_pool_service.create_specialist_pool](#specialist_pool_service.create_specialist_pool)
   * [Specialist_pool_service.delete_specialist_pool](#specialist_pool_service.delete_specialist_pool)
   * [Specialist_pool_service.get_specialist_pool](#specialist_pool_service.get_specialist_pool)
@@ -201,6 +209,7 @@
   * [Tensorboard_service.list_tensorboard_time_series](#tensorboard_service.list_tensorboard_time_series)
   * [Tensorboard_service.list_tensorboards](#tensorboard_service.list_tensorboards)
   * [Tensorboard_service.read_tensorboard_blob_data](#tensorboard_service.read_tensorboard_blob_data)
+  * [Tensorboard_service.read_tensorboard_size](#tensorboard_service.read_tensorboard_size)
   * [Tensorboard_service.read_tensorboard_time_series_data](#tensorboard_service.read_tensorboard_time_series_data)
   * [Tensorboard_service.read_tensorboard_usage](#tensorboard_service.read_tensorboard_usage)
   * [Tensorboard_service.update_tensorboard](#tensorboard_service.update_tensorboard)
@@ -393,9 +402,11 @@
   * [Pipeline_service.get_training_pipeline](#pipeline_service.get_training_pipeline)
   * [Pipeline_service.list_pipeline_jobs](#pipeline_service.list_pipeline_jobs)
   * [Pipeline_service.list_training_pipelines](#pipeline_service.list_training_pipelines)
+  * [Prediction_service.count_tokens](#prediction_service.count_tokens)
   * [Prediction_service.explain](#prediction_service.explain)
   * [Prediction_service.predict](#prediction_service.predict)
   * [Prediction_service.raw_predict](#prediction_service.raw_predict)
+  * [Prediction_service.server_streaming_predict](#prediction_service.server_streaming_predict)
   * [Schedule_service.create_schedule](#schedule_service.create_schedule)
   * [Schedule_service.delete_schedule](#schedule_service.delete_schedule)
   * [Schedule_service.get_schedule](#schedule_service.get_schedule)
@@ -3241,6 +3252,142 @@ __Usage:__
 
 
 
+### Prediction_service.server_streaming_predict
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.server_streaming_predict.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.server_streaming_predict.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/prediction_service.server_streaming_predict.js`
+
+
+-----
+
+
+
+
+### Schedule_service.create_schedule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.create_schedule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.create_schedule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.create_schedule.js`
+
+
+-----
+
+
+
+
+### Schedule_service.delete_schedule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.delete_schedule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.delete_schedule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.delete_schedule.js`
+
+
+-----
+
+
+
+
+### Schedule_service.get_schedule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.get_schedule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.get_schedule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.get_schedule.js`
+
+
+-----
+
+
+
+
+### Schedule_service.list_schedules
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.list_schedules.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.list_schedules.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.list_schedules.js`
+
+
+-----
+
+
+
+
+### Schedule_service.pause_schedule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.pause_schedule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.pause_schedule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.pause_schedule.js`
+
+
+-----
+
+
+
+
+### Schedule_service.resume_schedule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.resume_schedule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.resume_schedule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.resume_schedule.js`
+
+
+-----
+
+
+
+
+### Schedule_service.update_schedule
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.update_schedule.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.update_schedule.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/schedule_service.update_schedule.js`
+
+
+-----
+
+
+
+
 ### Specialist_pool_service.create_specialist_pool
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/specialist_pool_service.create_specialist_pool.js).
@@ -3676,6 +3823,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.read_tensorboard_blob_data.js`
+
+
+-----
+
+
+
+
+### Tensorboard_service.read_tensorboard_size
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.read_tensorboard_size.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.read_tensorboard_size.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/tensorboard_service.read_tensorboard_size.js`
 
 
 -----
@@ -6947,6 +7111,23 @@ __Usage:__
 
 
 
+### Prediction_service.count_tokens
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.count_tokens.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.count_tokens.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.count_tokens.js`
+
+
+-----
+
+
+
+
 ### Prediction_service.explain
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.explain.js).
@@ -6991,6 +7172,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.raw_predict.js`
+
+
+-----
+
+
+
+
+### Prediction_service.server_streaming_predict
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.server_streaming_predict.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.server_streaming_predict.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.server_streaming_predict.js`
 
 
 -----

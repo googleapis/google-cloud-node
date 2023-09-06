@@ -37,7 +37,7 @@ function main(parent, names) {
    *  Required. Format of test case names: `projects/<Project ID>/locations/
    *  <Location ID>/agents/<AgentID>/testCases/<TestCase ID>`.
    */
-  // const names = 'abc123'
+  // const names = ['abc','def']
 
   // Imports the Cx library
   const {TestCasesClient} = require('@google-cloud/dialogflow-cx').v3beta1;

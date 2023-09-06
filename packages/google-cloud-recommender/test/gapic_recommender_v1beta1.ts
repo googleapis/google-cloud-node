@@ -2237,6 +2237,484 @@ describe('v1beta1.RecommenderClient', () => {
     });
   });
 
+  describe('listRecommenders', () => {
+    it('invokes listRecommenders without error', async () => {
+      const client = new recommenderModule.v1beta1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1beta1.ListRecommendersRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.RecommenderType()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.RecommenderType()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.RecommenderType()
+        ),
+      ];
+      client.innerApiCalls.listRecommenders = stubSimpleCall(expectedResponse);
+      const [response] = await client.listRecommenders(request);
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes listRecommenders without error using callback', async () => {
+      const client = new recommenderModule.v1beta1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1beta1.ListRecommendersRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.RecommenderType()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.RecommenderType()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.RecommenderType()
+        ),
+      ];
+      client.innerApiCalls.listRecommenders =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listRecommenders(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.recommender.v1beta1.IRecommenderType[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes listRecommenders with error', async () => {
+      const client = new recommenderModule.v1beta1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1beta1.ListRecommendersRequest()
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listRecommenders = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listRecommenders(request), expectedError);
+    });
+
+    it('invokes listRecommendersStream without error', async () => {
+      const client = new recommenderModule.v1beta1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1beta1.ListRecommendersRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.RecommenderType()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.RecommenderType()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.RecommenderType()
+        ),
+      ];
+      client.descriptors.page.listRecommenders.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listRecommendersStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.recommender.v1beta1.RecommenderType[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.recommender.v1beta1.RecommenderType
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listRecommenders.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listRecommenders, request)
+      );
+    });
+
+    it('invokes listRecommendersStream with error', async () => {
+      const client = new recommenderModule.v1beta1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1beta1.ListRecommendersRequest()
+      );
+      const expectedError = new Error('expected');
+      client.descriptors.page.listRecommenders.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listRecommendersStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.recommender.v1beta1.RecommenderType[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.recommender.v1beta1.RecommenderType
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listRecommenders.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listRecommenders, request)
+      );
+    });
+
+    it('uses async iteration with listRecommenders without error', async () => {
+      const client = new recommenderModule.v1beta1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1beta1.ListRecommendersRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.RecommenderType()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.RecommenderType()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.RecommenderType()
+        ),
+      ];
+      client.descriptors.page.listRecommenders.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.recommender.v1beta1.IRecommenderType[] =
+        [];
+      const iterable = client.listRecommendersAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listRecommenders.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+    });
+
+    it('uses async iteration with listRecommenders with error', async () => {
+      const client = new recommenderModule.v1beta1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1beta1.ListRecommendersRequest()
+      );
+      const expectedError = new Error('expected');
+      client.descriptors.page.listRecommenders.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listRecommendersAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.recommender.v1beta1.IRecommenderType[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listRecommenders.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+    });
+  });
+
+  describe('listInsightTypes', () => {
+    it('invokes listInsightTypes without error', async () => {
+      const client = new recommenderModule.v1beta1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1beta1.ListInsightTypesRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.InsightType()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.InsightType()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.InsightType()
+        ),
+      ];
+      client.innerApiCalls.listInsightTypes = stubSimpleCall(expectedResponse);
+      const [response] = await client.listInsightTypes(request);
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes listInsightTypes without error using callback', async () => {
+      const client = new recommenderModule.v1beta1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1beta1.ListInsightTypesRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.InsightType()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.InsightType()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.InsightType()
+        ),
+      ];
+      client.innerApiCalls.listInsightTypes =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listInsightTypes(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.recommender.v1beta1.IInsightType[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes listInsightTypes with error', async () => {
+      const client = new recommenderModule.v1beta1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1beta1.ListInsightTypesRequest()
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listInsightTypes = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listInsightTypes(request), expectedError);
+    });
+
+    it('invokes listInsightTypesStream without error', async () => {
+      const client = new recommenderModule.v1beta1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1beta1.ListInsightTypesRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.InsightType()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.InsightType()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.InsightType()
+        ),
+      ];
+      client.descriptors.page.listInsightTypes.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listInsightTypesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.recommender.v1beta1.InsightType[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.recommender.v1beta1.InsightType) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listInsightTypes.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listInsightTypes, request)
+      );
+    });
+
+    it('invokes listInsightTypesStream with error', async () => {
+      const client = new recommenderModule.v1beta1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1beta1.ListInsightTypesRequest()
+      );
+      const expectedError = new Error('expected');
+      client.descriptors.page.listInsightTypes.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listInsightTypesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.recommender.v1beta1.InsightType[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.recommender.v1beta1.InsightType) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listInsightTypes.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listInsightTypes, request)
+      );
+    });
+
+    it('uses async iteration with listInsightTypes without error', async () => {
+      const client = new recommenderModule.v1beta1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1beta1.ListInsightTypesRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.InsightType()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.InsightType()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recommender.v1beta1.InsightType()
+        ),
+      ];
+      client.descriptors.page.listInsightTypes.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.recommender.v1beta1.IInsightType[] =
+        [];
+      const iterable = client.listInsightTypesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listInsightTypes.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+    });
+
+    it('uses async iteration with listInsightTypes with error', async () => {
+      const client = new recommenderModule.v1beta1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recommender.v1beta1.ListInsightTypesRequest()
+      );
+      const expectedError = new Error('expected');
+      client.descriptors.page.listInsightTypes.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listInsightTypesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.recommender.v1beta1.IInsightType[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listInsightTypes.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+    });
+  });
+
   describe('Path templates', () => {
     describe('billingAccountLocationInsightType', () => {
       const fakePath = '/rendered/path/billingAccountLocationInsightType';
@@ -2974,6 +3452,44 @@ describe('v1beta1.RecommenderClient', () => {
               .folderLocationRecommenderRecommendationPathTemplate
               .match as SinonStub
           )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('insightType', () => {
+      const fakePath = '/rendered/path/insightType';
+      const expectedParameters = {
+        insight_type: 'insightTypeValue',
+      };
+      const client = new recommenderModule.v1beta1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.insightTypePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.insightTypePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('insightTypePath', () => {
+        const result = client.insightTypePath('insightTypeValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.insightTypePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchInsightTypeFromInsightTypeName', () => {
+        const result = client.matchInsightTypeFromInsightTypeName(fakePath);
+        assert.strictEqual(result, 'insightTypeValue');
+        assert(
+          (client.pathTemplates.insightTypePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -4051,6 +4567,44 @@ describe('v1beta1.RecommenderClient', () => {
               .projectLocationRecommenderRecommendationPathTemplate
               .match as SinonStub
           )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('recommender', () => {
+      const fakePath = '/rendered/path/recommender';
+      const expectedParameters = {
+        recommender: 'recommenderValue',
+      };
+      const client = new recommenderModule.v1beta1.RecommenderClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.recommenderPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.recommenderPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('recommenderPath', () => {
+        const result = client.recommenderPath('recommenderValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.recommenderPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchRecommenderFromRecommenderName', () => {
+        const result = client.matchRecommenderFromRecommenderName(fakePath);
+        assert.strictEqual(result, 'recommenderValue');
+        assert(
+          (client.pathTemplates.recommenderPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

@@ -103,8 +103,7 @@ export class AccessContextManagerClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -112,7 +111,7 @@ export class AccessContextManagerClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new AccessContextManagerClient({fallback: 'rest'}, gax);
+   *     const client = new AccessContextManagerClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -178,7 +177,7 @@ export class AccessContextManagerClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -242,7 +241,7 @@ export class AccessContextManagerClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
@@ -631,9 +630,8 @@ export class AccessContextManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.identity.accesscontextmanager.v1.AccessPolicy | AccessPolicy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.identity.accesscontextmanager.v1.AccessPolicy|AccessPolicy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.get_access_policy.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_GetAccessPolicy_async
@@ -648,7 +646,7 @@ export class AccessContextManagerClient {
         | protos.google.identity.accesscontextmanager.v1.IGetAccessPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAccessPolicy(
@@ -697,7 +695,7 @@ export class AccessContextManagerClient {
         | protos.google.identity.accesscontextmanager.v1.IGetAccessPolicyRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -743,9 +741,8 @@ export class AccessContextManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.identity.accesscontextmanager.v1.AccessLevel | AccessLevel}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.identity.accesscontextmanager.v1.AccessLevel|AccessLevel}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.get_access_level.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_GetAccessLevel_async
@@ -760,7 +757,7 @@ export class AccessContextManagerClient {
         | protos.google.identity.accesscontextmanager.v1.IGetAccessLevelRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getAccessLevel(
@@ -809,7 +806,7 @@ export class AccessContextManagerClient {
         | protos.google.identity.accesscontextmanager.v1.IGetAccessLevelRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -846,9 +843,8 @@ export class AccessContextManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.identity.accesscontextmanager.v1.ServicePerimeter | ServicePerimeter}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.identity.accesscontextmanager.v1.ServicePerimeter|ServicePerimeter}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.get_service_perimeter.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_GetServicePerimeter_async
@@ -863,7 +859,7 @@ export class AccessContextManagerClient {
         | protos.google.identity.accesscontextmanager.v1.IGetServicePerimeterRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getServicePerimeter(
@@ -912,7 +908,7 @@ export class AccessContextManagerClient {
         | protos.google.identity.accesscontextmanager.v1.IGetServicePerimeterRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -945,9 +941,8 @@ export class AccessContextManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.identity.accesscontextmanager.v1.GcpUserAccessBinding | GcpUserAccessBinding}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding|GcpUserAccessBinding}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.get_gcp_user_access_binding.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_GetGcpUserAccessBinding_async
@@ -962,7 +957,7 @@ export class AccessContextManagerClient {
         | protos.google.identity.accesscontextmanager.v1.IGetGcpUserAccessBindingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getGcpUserAccessBinding(
@@ -1011,7 +1006,7 @@ export class AccessContextManagerClient {
         | protos.google.identity.accesscontextmanager.v1.IGetGcpUserAccessBindingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1038,7 +1033,7 @@ export class AccessContextManagerClient {
   }
   /**
    * Sets the IAM policy for the specified Access Context Manager
-   * {@link google.identity.accesscontextmanager.v1.AccessPolicy|access policy}.
+   * {@link protos.google.identity.accesscontextmanager.v1.AccessPolicy|access policy}.
    * This method replaces the existing IAM policy on the access policy. The IAM
    * policy controls the set of users who can perform specific operations on the
    * Access Context Manager [access
@@ -1063,9 +1058,8 @@ export class AccessContextManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.set_iam_policy.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_SetIamPolicy_async
@@ -1077,7 +1071,7 @@ export class AccessContextManagerClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -1115,7 +1109,7 @@ export class AccessContextManagerClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1138,7 +1132,7 @@ export class AccessContextManagerClient {
   }
   /**
    * Gets the IAM policy for the specified Access Context Manager
-   * {@link google.identity.accesscontextmanager.v1.AccessPolicy|access policy}.
+   * {@link protos.google.identity.accesscontextmanager.v1.AccessPolicy|access policy}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1151,9 +1145,8 @@ export class AccessContextManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.get_iam_policy.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_GetIamPolicy_async
@@ -1165,7 +1158,7 @@ export class AccessContextManagerClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -1203,7 +1196,7 @@ export class AccessContextManagerClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1227,8 +1220,8 @@ export class AccessContextManagerClient {
   /**
    * Returns the IAM permissions that the caller has on the specified Access
    * Context Manager resource. The resource can be an
-   * {@link google.identity.accesscontextmanager.v1.AccessPolicy|AccessPolicy},
-   * {@link google.identity.accesscontextmanager.v1.AccessLevel|AccessLevel}, or
+   * {@link protos.google.identity.accesscontextmanager.v1.AccessPolicy|AccessPolicy},
+   * {@link protos.google.identity.accesscontextmanager.v1.AccessLevel|AccessLevel}, or
    * [ServicePerimeter][google.identity.accesscontextmanager.v1.ServicePerimeter
    * ]. This method does not support other resources.
    *
@@ -1245,9 +1238,8 @@ export class AccessContextManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.test_iam_permissions.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_TestIamPermissions_async
@@ -1259,7 +1251,7 @@ export class AccessContextManagerClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -1297,7 +1289,7 @@ export class AccessContextManagerClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1367,8 +1359,7 @@ export class AccessContextManagerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.create_access_policy.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_CreateAccessPolicy_async
@@ -1383,7 +1374,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAccessPolicy(
@@ -1436,7 +1427,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1459,8 +1450,7 @@ export class AccessContextManagerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.create_access_policy.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_CreateAccessPolicy_async
@@ -1508,8 +1498,7 @@ export class AccessContextManagerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.update_access_policy.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_UpdateAccessPolicy_async
@@ -1524,7 +1513,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAccessPolicy(
@@ -1577,7 +1566,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1604,8 +1593,7 @@ export class AccessContextManagerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.update_access_policy.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_UpdateAccessPolicy_async
@@ -1652,8 +1640,7 @@ export class AccessContextManagerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.delete_access_policy.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_DeleteAccessPolicy_async
@@ -1668,7 +1655,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAccessPolicy(
@@ -1721,7 +1708,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1748,8 +1735,7 @@ export class AccessContextManagerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.delete_access_policy.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_DeleteAccessPolicy_async
@@ -1805,8 +1791,7 @@ export class AccessContextManagerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.create_access_level.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_CreateAccessLevel_async
@@ -1821,7 +1806,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createAccessLevel(
@@ -1874,7 +1859,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1901,8 +1886,7 @@ export class AccessContextManagerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.create_access_level.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_CreateAccessLevel_async
@@ -1956,8 +1940,7 @@ export class AccessContextManagerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.update_access_level.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_UpdateAccessLevel_async
@@ -1972,7 +1955,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateAccessLevel(
@@ -2025,7 +2008,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2052,8 +2035,7 @@ export class AccessContextManagerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.update_access_level.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_UpdateAccessLevel_async
@@ -2103,8 +2085,7 @@ export class AccessContextManagerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.delete_access_level.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_DeleteAccessLevel_async
@@ -2119,7 +2100,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteAccessLevel(
@@ -2172,7 +2153,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2199,8 +2180,7 @@ export class AccessContextManagerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.delete_access_level.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_DeleteAccessLevel_async
@@ -2276,8 +2256,7 @@ export class AccessContextManagerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.replace_access_levels.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_ReplaceAccessLevels_async
@@ -2292,7 +2271,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   replaceAccessLevels(
@@ -2345,7 +2324,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2372,8 +2351,7 @@ export class AccessContextManagerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.replace_access_levels.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_ReplaceAccessLevels_async
@@ -2430,8 +2408,7 @@ export class AccessContextManagerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.create_service_perimeter.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_CreateServicePerimeter_async
@@ -2446,7 +2423,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createServicePerimeter(
@@ -2499,7 +2476,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2530,8 +2507,7 @@ export class AccessContextManagerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.create_service_perimeter.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_CreateServicePerimeter_async
@@ -2582,8 +2558,7 @@ export class AccessContextManagerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.update_service_perimeter.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_UpdateServicePerimeter_async
@@ -2598,7 +2573,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateServicePerimeter(
@@ -2651,7 +2626,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2682,8 +2657,7 @@ export class AccessContextManagerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.update_service_perimeter.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_UpdateServicePerimeter_async
@@ -2733,8 +2707,7 @@ export class AccessContextManagerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.delete_service_perimeter.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_DeleteServicePerimeter_async
@@ -2749,7 +2722,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteServicePerimeter(
@@ -2802,7 +2775,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2833,8 +2806,7 @@ export class AccessContextManagerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.delete_service_perimeter.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_DeleteServicePerimeter_async
@@ -2906,8 +2878,7 @@ export class AccessContextManagerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.replace_service_perimeters.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_ReplaceServicePerimeters_async
@@ -2922,7 +2893,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   replaceServicePerimeters(
@@ -2975,7 +2946,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3006,8 +2977,7 @@ export class AccessContextManagerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.replace_service_perimeters.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_ReplaceServicePerimeters_async
@@ -3038,7 +3008,7 @@ export class AccessContextManagerClient {
   /**
    * Commits the dry-run specification for all the [service perimeters]
    * [google.identity.accesscontextmanager.v1.ServicePerimeter] in an
-   * {@link google.identity.accesscontextmanager.v1.AccessPolicy|access policy}.
+   * {@link protos.google.identity.accesscontextmanager.v1.AccessPolicy|access policy}.
    * A commit operation on a service perimeter involves copying its `spec` field
    * to the `status` field of the service perimeter. Only [service perimeters]
    * [google.identity.accesscontextmanager.v1.ServicePerimeter] with
@@ -3076,8 +3046,7 @@ export class AccessContextManagerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.commit_service_perimeters.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_CommitServicePerimeters_async
@@ -3092,7 +3061,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   commitServicePerimeters(
@@ -3145,7 +3114,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IAccessContextManagerOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3176,8 +3145,7 @@ export class AccessContextManagerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.commit_service_perimeters.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_CommitServicePerimeters_async
@@ -3230,8 +3198,7 @@ export class AccessContextManagerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.create_gcp_user_access_binding.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_CreateGcpUserAccessBinding_async
@@ -3246,7 +3213,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createGcpUserAccessBinding(
@@ -3299,7 +3266,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3330,8 +3297,7 @@ export class AccessContextManagerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.create_gcp_user_access_binding.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_CreateGcpUserAccessBinding_async
@@ -3384,8 +3350,7 @@ export class AccessContextManagerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.update_gcp_user_access_binding.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_UpdateGcpUserAccessBinding_async
@@ -3400,7 +3365,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateGcpUserAccessBinding(
@@ -3453,7 +3418,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3485,8 +3450,7 @@ export class AccessContextManagerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.update_gcp_user_access_binding.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_UpdateGcpUserAccessBinding_async
@@ -3531,8 +3495,7 @@ export class AccessContextManagerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.delete_gcp_user_access_binding.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_DeleteGcpUserAccessBinding_async
@@ -3547,7 +3510,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteGcpUserAccessBinding(
@@ -3600,7 +3563,7 @@ export class AccessContextManagerClient {
         protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBindingOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3631,8 +3594,7 @@ export class AccessContextManagerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.delete_gcp_user_access_binding.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_DeleteGcpUserAccessBinding_async
@@ -3681,14 +3643,13 @@ export class AccessContextManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.identity.accesscontextmanager.v1.AccessPolicy | AccessPolicy}.
+   *   The first element of the array is Array of {@link protos.google.identity.accesscontextmanager.v1.AccessPolicy|AccessPolicy}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listAccessPoliciesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listAccessPolicies(
@@ -3698,7 +3659,7 @@ export class AccessContextManagerClient {
     [
       protos.google.identity.accesscontextmanager.v1.IAccessPolicy[],
       protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest | null,
-      protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesResponse
+      protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesResponse,
     ]
   >;
   listAccessPolicies(
@@ -3744,7 +3705,7 @@ export class AccessContextManagerClient {
     [
       protos.google.identity.accesscontextmanager.v1.IAccessPolicy[],
       protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest | null,
-      protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesResponse
+      protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesResponse,
     ]
   > | void {
     request = request || {};
@@ -3780,13 +3741,12 @@ export class AccessContextManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.identity.accesscontextmanager.v1.AccessPolicy | AccessPolicy} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.identity.accesscontextmanager.v1.AccessPolicy|AccessPolicy} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAccessPoliciesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listAccessPoliciesStream(
@@ -3827,12 +3787,11 @@ export class AccessContextManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.identity.accesscontextmanager.v1.AccessPolicy | AccessPolicy}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.identity.accesscontextmanager.v1.AccessPolicy|AccessPolicy}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.list_access_policies.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_ListAccessPolicies_async
@@ -3882,14 +3841,13 @@ export class AccessContextManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.identity.accesscontextmanager.v1.AccessLevel | AccessLevel}.
+   *   The first element of the array is Array of {@link protos.google.identity.accesscontextmanager.v1.AccessLevel|AccessLevel}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listAccessLevelsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listAccessLevels(
@@ -3899,7 +3857,7 @@ export class AccessContextManagerClient {
     [
       protos.google.identity.accesscontextmanager.v1.IAccessLevel[],
       protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest | null,
-      protos.google.identity.accesscontextmanager.v1.IListAccessLevelsResponse
+      protos.google.identity.accesscontextmanager.v1.IListAccessLevelsResponse,
     ]
   >;
   listAccessLevels(
@@ -3945,7 +3903,7 @@ export class AccessContextManagerClient {
     [
       protos.google.identity.accesscontextmanager.v1.IAccessLevel[],
       protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest | null,
-      protos.google.identity.accesscontextmanager.v1.IListAccessLevelsResponse
+      protos.google.identity.accesscontextmanager.v1.IListAccessLevelsResponse,
     ]
   > | void {
     request = request || {};
@@ -3992,13 +3950,12 @@ export class AccessContextManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.identity.accesscontextmanager.v1.AccessLevel | AccessLevel} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.identity.accesscontextmanager.v1.AccessLevel|AccessLevel} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAccessLevelsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listAccessLevelsStream(
@@ -4050,12 +4007,11 @@ export class AccessContextManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.identity.accesscontextmanager.v1.AccessLevel | AccessLevel}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.identity.accesscontextmanager.v1.AccessLevel|AccessLevel}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.list_access_levels.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_ListAccessLevels_async
@@ -4105,14 +4061,13 @@ export class AccessContextManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.identity.accesscontextmanager.v1.ServicePerimeter | ServicePerimeter}.
+   *   The first element of the array is Array of {@link protos.google.identity.accesscontextmanager.v1.ServicePerimeter|ServicePerimeter}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listServicePerimetersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listServicePerimeters(
@@ -4122,7 +4077,7 @@ export class AccessContextManagerClient {
     [
       protos.google.identity.accesscontextmanager.v1.IServicePerimeter[],
       protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest | null,
-      protos.google.identity.accesscontextmanager.v1.IListServicePerimetersResponse
+      protos.google.identity.accesscontextmanager.v1.IListServicePerimetersResponse,
     ]
   >;
   listServicePerimeters(
@@ -4168,7 +4123,7 @@ export class AccessContextManagerClient {
     [
       protos.google.identity.accesscontextmanager.v1.IServicePerimeter[],
       protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest | null,
-      protos.google.identity.accesscontextmanager.v1.IListServicePerimetersResponse
+      protos.google.identity.accesscontextmanager.v1.IListServicePerimetersResponse,
     ]
   > | void {
     request = request || {};
@@ -4211,13 +4166,12 @@ export class AccessContextManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.identity.accesscontextmanager.v1.ServicePerimeter | ServicePerimeter} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.identity.accesscontextmanager.v1.ServicePerimeter|ServicePerimeter} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listServicePerimetersAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listServicePerimetersStream(
@@ -4265,12 +4219,11 @@ export class AccessContextManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.identity.accesscontextmanager.v1.ServicePerimeter | ServicePerimeter}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.identity.accesscontextmanager.v1.ServicePerimeter|ServicePerimeter}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.list_service_perimeters.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_ListServicePerimeters_async
@@ -4316,14 +4269,13 @@ export class AccessContextManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.identity.accesscontextmanager.v1.GcpUserAccessBinding | GcpUserAccessBinding}.
+   *   The first element of the array is Array of {@link protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding|GcpUserAccessBinding}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listGcpUserAccessBindingsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listGcpUserAccessBindings(
@@ -4333,7 +4285,7 @@ export class AccessContextManagerClient {
     [
       protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding[],
       protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest | null,
-      protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsResponse
+      protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsResponse,
     ]
   >;
   listGcpUserAccessBindings(
@@ -4379,7 +4331,7 @@ export class AccessContextManagerClient {
     [
       protos.google.identity.accesscontextmanager.v1.IGcpUserAccessBinding[],
       protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest | null,
-      protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsResponse
+      protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsResponse,
     ]
   > | void {
     request = request || {};
@@ -4422,13 +4374,12 @@ export class AccessContextManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.identity.accesscontextmanager.v1.GcpUserAccessBinding | GcpUserAccessBinding} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding|GcpUserAccessBinding} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listGcpUserAccessBindingsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listGcpUserAccessBindingsStream(
@@ -4472,12 +4423,11 @@ export class AccessContextManagerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.identity.accesscontextmanager.v1.GcpUserAccessBinding | GcpUserAccessBinding}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.identity.accesscontextmanager.v1.GcpUserAccessBinding|GcpUserAccessBinding}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/access_context_manager.list_gcp_user_access_bindings.js</caption>
    * region_tag:accesscontextmanager_v1_generated_AccessContextManager_ListGcpUserAccessBindings_async

@@ -90,8 +90,7 @@ export class QuotaControllerClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -99,7 +98,7 @@ export class QuotaControllerClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new QuotaControllerClient({fallback: 'rest'}, gax);
+   *     const client = new QuotaControllerClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -165,7 +164,7 @@ export class QuotaControllerClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -328,7 +327,7 @@ export class QuotaControllerClient {
    *   Name of the service as specified in the service configuration. For example,
    *   `"pubsub.googleapis.com"`.
    *
-   *   See {@link google.api.Service|google.api.Service} for the definition of a service name.
+   *   See {@link protos.google.api.Service|google.api.Service} for the definition of a service name.
    * @param {google.api.servicecontrol.v1.QuotaOperation} request.allocateOperation
    *   Operation that describes the quota allocation.
    * @param {string} request.serviceConfigId
@@ -338,9 +337,8 @@ export class QuotaControllerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.api.servicecontrol.v1.AllocateQuotaResponse | AllocateQuotaResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.api.servicecontrol.v1.AllocateQuotaResponse|AllocateQuotaResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/quota_controller.allocate_quota.js</caption>
    * region_tag:servicecontrol_v1_generated_QuotaController_AllocateQuota_async
@@ -352,7 +350,7 @@ export class QuotaControllerClient {
     [
       protos.google.api.servicecontrol.v1.IAllocateQuotaResponse,
       protos.google.api.servicecontrol.v1.IAllocateQuotaRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   allocateQuota(
@@ -398,7 +396,7 @@ export class QuotaControllerClient {
     [
       protos.google.api.servicecontrol.v1.IAllocateQuotaResponse,
       protos.google.api.servicecontrol.v1.IAllocateQuotaRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

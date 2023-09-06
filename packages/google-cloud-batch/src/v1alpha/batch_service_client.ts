@@ -98,8 +98,7 @@ export class BatchServiceClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -107,7 +106,7 @@ export class BatchServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new BatchServiceClient({fallback: 'rest'}, gax);
+   *     const client = new BatchServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -177,7 +176,7 @@ export class BatchServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -231,7 +230,7 @@ export class BatchServiceClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
@@ -458,9 +457,8 @@ export class BatchServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.batch.v1alpha.Job | Job}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.batch.v1alpha.Job|Job}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha/batch_service.create_job.js</caption>
    * region_tag:batch_v1alpha_generated_BatchService_CreateJob_async
@@ -472,7 +470,7 @@ export class BatchServiceClient {
     [
       protos.google.cloud.batch.v1alpha.IJob,
       protos.google.cloud.batch.v1alpha.ICreateJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createJob(
@@ -512,7 +510,7 @@ export class BatchServiceClient {
     [
       protos.google.cloud.batch.v1alpha.IJob,
       protos.google.cloud.batch.v1alpha.ICreateJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -543,9 +541,8 @@ export class BatchServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.batch.v1alpha.Job | Job}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.batch.v1alpha.Job|Job}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha/batch_service.get_job.js</caption>
    * region_tag:batch_v1alpha_generated_BatchService_GetJob_async
@@ -557,7 +554,7 @@ export class BatchServiceClient {
     [
       protos.google.cloud.batch.v1alpha.IJob,
       protos.google.cloud.batch.v1alpha.IGetJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getJob(
@@ -595,7 +592,7 @@ export class BatchServiceClient {
     [
       protos.google.cloud.batch.v1alpha.IJob,
       protos.google.cloud.batch.v1alpha.IGetJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -626,9 +623,8 @@ export class BatchServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.batch.v1alpha.Task | Task}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.batch.v1alpha.Task|Task}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha/batch_service.get_task.js</caption>
    * region_tag:batch_v1alpha_generated_BatchService_GetTask_async
@@ -640,7 +636,7 @@ export class BatchServiceClient {
     [
       protos.google.cloud.batch.v1alpha.ITask,
       protos.google.cloud.batch.v1alpha.IGetTaskRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getTask(
@@ -678,7 +674,7 @@ export class BatchServiceClient {
     [
       protos.google.cloud.batch.v1alpha.ITask,
       protos.google.cloud.batch.v1alpha.IGetTaskRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -729,8 +725,7 @@ export class BatchServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha/batch_service.delete_job.js</caption>
    * region_tag:batch_v1alpha_generated_BatchService_DeleteJob_async
@@ -745,7 +740,7 @@ export class BatchServiceClient {
         protos.google.cloud.batch.v1alpha.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteJob(
@@ -798,7 +793,7 @@ export class BatchServiceClient {
         protos.google.cloud.batch.v1alpha.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -825,8 +820,7 @@ export class BatchServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha/batch_service.delete_job.js</caption>
    * region_tag:batch_v1alpha_generated_BatchService_DeleteJob_async
@@ -863,9 +857,9 @@ export class BatchServiceClient {
    *   Parent path.
    * @param {string} request.filter
    *   List filter.
-   * @param {string} request.orderBy
-   *   Sort results. Supported are "name", "name desc", "create_time",
-   *   "create_time desc", and "".
+   * @param {string} [request.orderBy]
+   *   Optional. Sort results. Supported are "name", "name desc", "create_time",
+   *   and "create_time desc".
    * @param {number} request.pageSize
    *   Page size.
    * @param {string} request.pageToken
@@ -873,14 +867,13 @@ export class BatchServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.batch.v1alpha.Job | Job}.
+   *   The first element of the array is Array of {@link protos.google.cloud.batch.v1alpha.Job|Job}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listJobsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listJobs(
@@ -890,7 +883,7 @@ export class BatchServiceClient {
     [
       protos.google.cloud.batch.v1alpha.IJob[],
       protos.google.cloud.batch.v1alpha.IListJobsRequest | null,
-      protos.google.cloud.batch.v1alpha.IListJobsResponse
+      protos.google.cloud.batch.v1alpha.IListJobsResponse,
     ]
   >;
   listJobs(
@@ -930,7 +923,7 @@ export class BatchServiceClient {
     [
       protos.google.cloud.batch.v1alpha.IJob[],
       protos.google.cloud.batch.v1alpha.IListJobsRequest | null,
-      protos.google.cloud.batch.v1alpha.IListJobsResponse
+      protos.google.cloud.batch.v1alpha.IListJobsResponse,
     ]
   > | void {
     request = request || {};
@@ -960,9 +953,9 @@ export class BatchServiceClient {
    *   Parent path.
    * @param {string} request.filter
    *   List filter.
-   * @param {string} request.orderBy
-   *   Sort results. Supported are "name", "name desc", "create_time",
-   *   "create_time desc", and "".
+   * @param {string} [request.orderBy]
+   *   Optional. Sort results. Supported are "name", "name desc", "create_time",
+   *   and "create_time desc".
    * @param {number} request.pageSize
    *   Page size.
    * @param {string} request.pageToken
@@ -970,13 +963,12 @@ export class BatchServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.batch.v1alpha.Job | Job} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.batch.v1alpha.Job|Job} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listJobsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listJobsStream(
@@ -1011,9 +1003,9 @@ export class BatchServiceClient {
    *   Parent path.
    * @param {string} request.filter
    *   List filter.
-   * @param {string} request.orderBy
-   *   Sort results. Supported are "name", "name desc", "create_time",
-   *   "create_time desc", and "".
+   * @param {string} [request.orderBy]
+   *   Optional. Sort results. Supported are "name", "name desc", "create_time",
+   *   and "create_time desc".
    * @param {number} request.pageSize
    *   Page size.
    * @param {string} request.pageToken
@@ -1021,12 +1013,11 @@ export class BatchServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.batch.v1alpha.Job | Job}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.batch.v1alpha.Job|Job}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha/batch_service.list_jobs.js</caption>
    * region_tag:batch_v1alpha_generated_BatchService_ListJobs_async
@@ -1066,8 +1057,7 @@ export class BatchServiceClient {
    *   Filter string should be of the format State=TaskStatus.State e.g.
    *   State=RUNNING
    * @param {string} request.orderBy
-   *   Sort results. Supported are "name", "name desc", "create_time",
-   *   "create_time desc", and "".
+   *   Not implemented.
    * @param {number} request.pageSize
    *   Page size.
    * @param {string} request.pageToken
@@ -1075,14 +1065,13 @@ export class BatchServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.batch.v1alpha.Task | Task}.
+   *   The first element of the array is Array of {@link protos.google.cloud.batch.v1alpha.Task|Task}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listTasksAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listTasks(
@@ -1092,7 +1081,7 @@ export class BatchServiceClient {
     [
       protos.google.cloud.batch.v1alpha.ITask[],
       protos.google.cloud.batch.v1alpha.IListTasksRequest | null,
-      protos.google.cloud.batch.v1alpha.IListTasksResponse
+      protos.google.cloud.batch.v1alpha.IListTasksResponse,
     ]
   >;
   listTasks(
@@ -1132,7 +1121,7 @@ export class BatchServiceClient {
     [
       protos.google.cloud.batch.v1alpha.ITask[],
       protos.google.cloud.batch.v1alpha.IListTasksRequest | null,
-      protos.google.cloud.batch.v1alpha.IListTasksResponse
+      protos.google.cloud.batch.v1alpha.IListTasksResponse,
     ]
   > | void {
     request = request || {};
@@ -1167,8 +1156,7 @@ export class BatchServiceClient {
    *   Filter string should be of the format State=TaskStatus.State e.g.
    *   State=RUNNING
    * @param {string} request.orderBy
-   *   Sort results. Supported are "name", "name desc", "create_time",
-   *   "create_time desc", and "".
+   *   Not implemented.
    * @param {number} request.pageSize
    *   Page size.
    * @param {string} request.pageToken
@@ -1176,13 +1164,12 @@ export class BatchServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.batch.v1alpha.Task | Task} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.batch.v1alpha.Task|Task} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listTasksAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listTasksStream(
@@ -1222,8 +1209,7 @@ export class BatchServiceClient {
    *   Filter string should be of the format State=TaskStatus.State e.g.
    *   State=RUNNING
    * @param {string} request.orderBy
-   *   Sort results. Supported are "name", "name desc", "create_time",
-   *   "create_time desc", and "".
+   *   Not implemented.
    * @param {number} request.pageSize
    *   Page size.
    * @param {string} request.pageToken
@@ -1231,12 +1217,11 @@ export class BatchServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.batch.v1alpha.Task | Task}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.batch.v1alpha.Task|Task}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1alpha/batch_service.list_tasks.js</caption>
    * region_tag:batch_v1alpha_generated_BatchService_ListTasks_async
@@ -1273,8 +1258,7 @@ export class BatchServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -1320,12 +1304,11 @@ export class BatchServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

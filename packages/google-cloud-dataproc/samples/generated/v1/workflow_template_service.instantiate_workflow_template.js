@@ -61,7 +61,7 @@ function main(name) {
    *  Optional. Map from parameter names to values that should be used for those
    *  parameters. Values may not exceed 1000 characters.
    */
-  // const parameters = 1234
+  // const parameters = [1,2,3,4]
 
   // Imports the Dataproc library
   const {WorkflowTemplateServiceClient} = require('@google-cloud/dataproc').v1;

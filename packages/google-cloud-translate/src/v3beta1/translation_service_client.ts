@@ -93,8 +93,7 @@ export class TranslationServiceClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -102,7 +101,7 @@ export class TranslationServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new TranslationServiceClient({fallback: 'rest'}, gax);
+   *     const client = new TranslationServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -168,7 +167,7 @@ export class TranslationServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -208,7 +207,7 @@ export class TranslationServiceClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
@@ -518,9 +517,8 @@ export class TranslationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.translation.v3beta1.TranslateTextResponse | TranslateTextResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.translation.v3beta1.TranslateTextResponse|TranslateTextResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/translation_service.translate_text.js</caption>
    * region_tag:translate_v3beta1_generated_TranslationService_TranslateText_async
@@ -532,7 +530,7 @@ export class TranslationServiceClient {
     [
       protos.google.cloud.translation.v3beta1.ITranslateTextResponse,
       protos.google.cloud.translation.v3beta1.ITranslateTextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   translateText(
@@ -578,7 +576,7 @@ export class TranslationServiceClient {
     [
       protos.google.cloud.translation.v3beta1.ITranslateTextResponse,
       protos.google.cloud.translation.v3beta1.ITranslateTextRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -643,9 +641,8 @@ export class TranslationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.translation.v3beta1.DetectLanguageResponse | DetectLanguageResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.translation.v3beta1.DetectLanguageResponse|DetectLanguageResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/translation_service.detect_language.js</caption>
    * region_tag:translate_v3beta1_generated_TranslationService_DetectLanguage_async
@@ -660,7 +657,7 @@ export class TranslationServiceClient {
         | protos.google.cloud.translation.v3beta1.IDetectLanguageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   detectLanguage(
@@ -709,7 +706,7 @@ export class TranslationServiceClient {
         | protos.google.cloud.translation.v3beta1.IDetectLanguageRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -770,9 +767,8 @@ export class TranslationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.translation.v3beta1.SupportedLanguages | SupportedLanguages}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.translation.v3beta1.SupportedLanguages|SupportedLanguages}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/translation_service.get_supported_languages.js</caption>
    * region_tag:translate_v3beta1_generated_TranslationService_GetSupportedLanguages_async
@@ -787,7 +783,7 @@ export class TranslationServiceClient {
         | protos.google.cloud.translation.v3beta1.IGetSupportedLanguagesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSupportedLanguages(
@@ -836,7 +832,7 @@ export class TranslationServiceClient {
         | protos.google.cloud.translation.v3beta1.IGetSupportedLanguagesRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -920,12 +916,27 @@ export class TranslationServiceClient {
    *
    *   See https://cloud.google.com/translate/docs/advanced/labels for more
    *   information.
+   * @param {string} [request.customizedAttribution]
+   *   Optional. This flag is to support user customized attribution.
+   *   If not provided, the default is `Machine Translated by Google`.
+   *   Customized attribution should follow rules in
+   *   https://cloud.google.com/translate/attribution#attribution_and_logos
+   * @param {boolean} [request.isTranslateNativePdfOnly]
+   *   Optional. is_translate_native_pdf_only field for external customers.
+   *   If true, the page limit of online native pdf translation is 300 and only
+   *   native pdf pages will be translated.
+   * @param {boolean} [request.enableShadowRemovalNativePdf]
+   *   Optional. If true, use the text removal server to remove the shadow text on
+   *   background image for native pdf translation.
+   *   Shadow removal feature can only be enabled when
+   *   is_translate_native_pdf_only: false && pdf_native_only: false
+   * @param {boolean} [request.enableRotationCorrection]
+   *   Optional. If true, enable auto rotation correction in DVS.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.translation.v3beta1.TranslateDocumentResponse | TranslateDocumentResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.translation.v3beta1.TranslateDocumentResponse|TranslateDocumentResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/translation_service.translate_document.js</caption>
    * region_tag:translate_v3beta1_generated_TranslationService_TranslateDocument_async
@@ -940,7 +951,7 @@ export class TranslationServiceClient {
         | protos.google.cloud.translation.v3beta1.ITranslateDocumentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   translateDocument(
@@ -989,7 +1000,7 @@ export class TranslationServiceClient {
         | protos.google.cloud.translation.v3beta1.ITranslateDocumentRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1021,9 +1032,8 @@ export class TranslationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.translation.v3beta1.Glossary | Glossary}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.translation.v3beta1.Glossary|Glossary}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/translation_service.get_glossary.js</caption>
    * region_tag:translate_v3beta1_generated_TranslationService_GetGlossary_async
@@ -1035,7 +1045,7 @@ export class TranslationServiceClient {
     [
       protos.google.cloud.translation.v3beta1.IGlossary,
       protos.google.cloud.translation.v3beta1.IGetGlossaryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getGlossary(
@@ -1081,7 +1091,7 @@ export class TranslationServiceClient {
     [
       protos.google.cloud.translation.v3beta1.IGlossary,
       protos.google.cloud.translation.v3beta1.IGetGlossaryRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1171,8 +1181,7 @@ export class TranslationServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/translation_service.batch_translate_text.js</caption>
    * region_tag:translate_v3beta1_generated_TranslationService_BatchTranslateText_async
@@ -1187,7 +1196,7 @@ export class TranslationServiceClient {
         protos.google.cloud.translation.v3beta1.IBatchTranslateMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchTranslateText(
@@ -1240,7 +1249,7 @@ export class TranslationServiceClient {
         protos.google.cloud.translation.v3beta1.IBatchTranslateMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1267,8 +1276,7 @@ export class TranslationServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/translation_service.batch_translate_text.js</caption>
    * region_tag:translate_v3beta1_generated_TranslationService_BatchTranslateText_async
@@ -1297,7 +1305,7 @@ export class TranslationServiceClient {
     >;
   }
   /**
-   * Translates a large volume of documents in asynchronous batch mode.
+   * Translates a large volume of document in asynchronous batch mode.
    * This function provides real-time output as the inputs are being processed.
    * If caller cancels a request, the partial results (for an input file, it's
    * all or nothing) may still be available on the specified output location.
@@ -1320,7 +1328,7 @@ export class TranslationServiceClient {
    * @param {string} request.sourceLanguageCode
    *   Required. The BCP-47 language code of the input document if known, for
    *   example, "en-US" or "sr-Latn". Supported language codes are listed in
-   *   Language Support (https://cloud.google.com/translate/docs/languages).
+   *   [Language Support](https://cloud.google.com/translate/docs/languages).
    * @param {string[]} request.targetLanguageCodes
    *   Required. The BCP-47 language code to use for translation of the input
    *   document. Specify up to 10 language codes here.
@@ -1362,14 +1370,25 @@ export class TranslationServiceClient {
    *
    *   If nothing specified, output files will be in the same format as the
    *   original file.
+   * @param {string} [request.customizedAttribution]
+   *   Optional. This flag is to support user customized attribution.
+   *   If not provided, the default is `Machine Translated by Google`.
+   *   Customized attribution should follow rules in
+   *   https://cloud.google.com/translate/attribution#attribution_and_logos
+   * @param {boolean} [request.enableShadowRemovalNativePdf]
+   *   Optional. If true, use the text removal server to remove the shadow text on
+   *   background image for native pdf translation.
+   *   Shadow removal feature can only be enabled when
+   *   is_translate_native_pdf_only: false && pdf_native_only: false
+   * @param {boolean} [request.enableRotationCorrection]
+   *   Optional. If true, enable auto rotation correction in DVS.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/translation_service.batch_translate_document.js</caption>
    * region_tag:translate_v3beta1_generated_TranslationService_BatchTranslateDocument_async
@@ -1384,7 +1403,7 @@ export class TranslationServiceClient {
         protos.google.cloud.translation.v3beta1.IBatchTranslateDocumentMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchTranslateDocument(
@@ -1437,7 +1456,7 @@ export class TranslationServiceClient {
         protos.google.cloud.translation.v3beta1.IBatchTranslateDocumentMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1468,8 +1487,7 @@ export class TranslationServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/translation_service.batch_translate_document.js</caption>
    * region_tag:translate_v3beta1_generated_TranslationService_BatchTranslateDocument_async
@@ -1513,8 +1531,7 @@ export class TranslationServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/translation_service.create_glossary.js</caption>
    * region_tag:translate_v3beta1_generated_TranslationService_CreateGlossary_async
@@ -1529,7 +1546,7 @@ export class TranslationServiceClient {
         protos.google.cloud.translation.v3beta1.ICreateGlossaryMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createGlossary(
@@ -1582,7 +1599,7 @@ export class TranslationServiceClient {
         protos.google.cloud.translation.v3beta1.ICreateGlossaryMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1609,8 +1626,7 @@ export class TranslationServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/translation_service.create_glossary.js</caption>
    * region_tag:translate_v3beta1_generated_TranslationService_CreateGlossary_async
@@ -1653,8 +1669,7 @@ export class TranslationServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/translation_service.delete_glossary.js</caption>
    * region_tag:translate_v3beta1_generated_TranslationService_DeleteGlossary_async
@@ -1669,7 +1684,7 @@ export class TranslationServiceClient {
         protos.google.cloud.translation.v3beta1.IDeleteGlossaryMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteGlossary(
@@ -1722,7 +1737,7 @@ export class TranslationServiceClient {
         protos.google.cloud.translation.v3beta1.IDeleteGlossaryMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1749,8 +1764,7 @@ export class TranslationServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/translation_service.delete_glossary.js</caption>
    * region_tag:translate_v3beta1_generated_TranslationService_DeleteGlossary_async
@@ -1814,14 +1828,13 @@ export class TranslationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.translation.v3beta1.Glossary | Glossary}.
+   *   The first element of the array is Array of {@link protos.google.cloud.translation.v3beta1.Glossary|Glossary}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listGlossariesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listGlossaries(
@@ -1831,7 +1844,7 @@ export class TranslationServiceClient {
     [
       protos.google.cloud.translation.v3beta1.IGlossary[],
       protos.google.cloud.translation.v3beta1.IListGlossariesRequest | null,
-      protos.google.cloud.translation.v3beta1.IListGlossariesResponse
+      protos.google.cloud.translation.v3beta1.IListGlossariesResponse,
     ]
   >;
   listGlossaries(
@@ -1877,7 +1890,7 @@ export class TranslationServiceClient {
     [
       protos.google.cloud.translation.v3beta1.IGlossary[],
       protos.google.cloud.translation.v3beta1.IListGlossariesRequest | null,
-      protos.google.cloud.translation.v3beta1.IListGlossariesResponse
+      protos.google.cloud.translation.v3beta1.IListGlossariesResponse,
     ]
   > | void {
     request = request || {};
@@ -1933,13 +1946,12 @@ export class TranslationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.translation.v3beta1.Glossary | Glossary} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.translation.v3beta1.Glossary|Glossary} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listGlossariesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listGlossariesStream(
@@ -2000,12 +2012,11 @@ export class TranslationServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.translation.v3beta1.Glossary | Glossary}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.translation.v3beta1.Glossary|Glossary}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3beta1/translation_service.list_glossaries.js</caption>
    * region_tag:translate_v3beta1_generated_TranslationService_ListGlossaries_async

@@ -93,8 +93,7 @@ export class PredictionServiceClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -102,7 +101,7 @@ export class PredictionServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new PredictionServiceClient({fallback: 'rest'}, gax);
+   *     const client = new PredictionServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -172,7 +171,7 @@ export class PredictionServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -216,7 +215,7 @@ export class PredictionServiceClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
@@ -405,14 +404,14 @@ export class PredictionServiceClient {
    *   request is required for event logging.
    *
    *   Don't set
-   *   {@link google.cloud.retail.v2beta.UserEvent.visitor_id|UserEvent.visitor_id} or
-   *   {@link google.cloud.retail.v2beta.UserInfo.user_id|UserInfo.user_id} to the same
+   *   {@link protos.google.cloud.retail.v2beta.UserEvent.visitor_id|UserEvent.visitor_id} or
+   *   {@link protos.google.cloud.retail.v2beta.UserInfo.user_id|UserInfo.user_id} to the same
    *   fixed ID for different users. If you are trying to receive non-personalized
    *   recommendations (not recommended; this can negatively impact model
    *   performance), instead set
-   *   {@link google.cloud.retail.v2beta.UserEvent.visitor_id|UserEvent.visitor_id} to
+   *   {@link protos.google.cloud.retail.v2beta.UserEvent.visitor_id|UserEvent.visitor_id} to
    *   a random unique ID and leave
-   *   {@link google.cloud.retail.v2beta.UserInfo.user_id|UserInfo.user_id} unset.
+   *   {@link protos.google.cloud.retail.v2beta.UserInfo.user_id|UserInfo.user_id} unset.
    * @param {number} request.pageSize
    *   Maximum number of results to return. Set this property to the number of
    *   prediction results needed. If zero, the service will choose a reasonable
@@ -514,9 +513,8 @@ export class PredictionServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.retail.v2beta.PredictResponse | PredictResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2beta.PredictResponse|PredictResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2beta/prediction_service.predict.js</caption>
    * region_tag:retail_v2beta_generated_PredictionService_Predict_async
@@ -528,7 +526,7 @@ export class PredictionServiceClient {
     [
       protos.google.cloud.retail.v2beta.IPredictResponse,
       protos.google.cloud.retail.v2beta.IPredictRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   predict(
@@ -566,7 +564,7 @@ export class PredictionServiceClient {
     [
       protos.google.cloud.retail.v2beta.IPredictResponse,
       protos.google.cloud.retail.v2beta.IPredictRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -599,8 +597,7 @@ export class PredictionServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -646,12 +643,11 @@ export class PredictionServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

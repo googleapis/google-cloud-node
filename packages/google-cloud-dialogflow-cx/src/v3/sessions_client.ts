@@ -41,7 +41,7 @@ const version = require('../../../package.json').version;
 /**
  *  A session represents an interaction with a user. You retrieve user input
  *  and pass it to the
- *  {@link google.cloud.dialogflow.cx.v3.Sessions.DetectIntent|DetectIntent} method to
+ *  {@link protos.google.cloud.dialogflow.cx.v3.Sessions.DetectIntent|DetectIntent} method to
  *  determine user intent and respond.
  * @class
  * @memberof v3
@@ -96,8 +96,7 @@ export class SessionsClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -105,7 +104,7 @@ export class SessionsClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new SessionsClient({fallback: 'rest'}, gax);
+   *     const client = new SessionsClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -175,7 +174,7 @@ export class SessionsClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -190,6 +189,9 @@ export class SessionsClient {
     this.pathTemplates = {
       agentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}'
+      ),
+      agentGenerativeSettingsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/generativeSettings'
       ),
       agentValidationResultPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/validationResult'
@@ -232,12 +234,20 @@ export class SessionsClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/sessions/{session}/entityTypes/{entity_type}'
         ),
+      projectLocationAgentFlowTransitionRouteGroupPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/transitionRouteGroups/{transition_route_group}'
+        ),
       projectLocationAgentSessionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/sessions/{session}'
       ),
       projectLocationAgentSessionEntityTypePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/agents/{agent}/sessions/{session}/entityTypes/{entity_type}'
+        ),
+      projectLocationAgentTransitionRouteGroupPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agents/{agent}/transitionRouteGroups/{transition_route_group}'
         ),
       securitySettingsPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/securitySettings/{security_settings}'
@@ -247,9 +257,6 @@ export class SessionsClient {
       ),
       testCaseResultPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/testCases/{test_case}/results/{result}'
-      ),
-      transitionRouteGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/transitionRouteGroups/{transition_route_group}'
       ),
       versionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/versions/{version}'
@@ -264,7 +271,7 @@ export class SessionsClient {
     this.descriptors.stream = {
       streamingDetectIntent: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.BIDI_STREAMING,
-        opts.fallback === 'rest'
+        !!opts.fallback
       ),
     };
 
@@ -276,7 +283,7 @@ export class SessionsClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
@@ -506,9 +513,8 @@ export class SessionsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3.DetectIntentResponse | DetectIntentResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.DetectIntentResponse|DetectIntentResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/sessions.detect_intent.js</caption>
    * region_tag:dialogflow_v3_generated_Sessions_DetectIntent_async
@@ -520,7 +526,7 @@ export class SessionsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IDetectIntentResponse,
       protos.google.cloud.dialogflow.cx.v3.IDetectIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   detectIntent(
@@ -566,7 +572,7 @@ export class SessionsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IDetectIntentResponse,
       protos.google.cloud.dialogflow.cx.v3.IDetectIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -615,9 +621,8 @@ export class SessionsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3.MatchIntentResponse | MatchIntentResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.MatchIntentResponse|MatchIntentResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/sessions.match_intent.js</caption>
    * region_tag:dialogflow_v3_generated_Sessions_MatchIntent_async
@@ -629,7 +634,7 @@ export class SessionsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IMatchIntentResponse,
       protos.google.cloud.dialogflow.cx.v3.IMatchIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   matchIntent(
@@ -675,7 +680,7 @@ export class SessionsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IMatchIntentResponse,
       protos.google.cloud.dialogflow.cx.v3.IMatchIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -698,11 +703,11 @@ export class SessionsClient {
   }
   /**
    * Fulfills a matched intent returned by
-   * {@link google.cloud.dialogflow.cx.v3.Sessions.MatchIntent|MatchIntent}. Must be
+   * {@link protos.google.cloud.dialogflow.cx.v3.Sessions.MatchIntent|MatchIntent}. Must be
    * called after
-   * {@link google.cloud.dialogflow.cx.v3.Sessions.MatchIntent|MatchIntent}, with
+   * {@link protos.google.cloud.dialogflow.cx.v3.Sessions.MatchIntent|MatchIntent}, with
    * input from
-   * {@link google.cloud.dialogflow.cx.v3.MatchIntentResponse|MatchIntentResponse}.
+   * {@link protos.google.cloud.dialogflow.cx.v3.MatchIntentResponse|MatchIntentResponse}.
    * Otherwise, the behavior is undefined.
    *
    * @param {Object} request
@@ -717,9 +722,8 @@ export class SessionsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.cx.v3.FulfillIntentResponse | FulfillIntentResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3.FulfillIntentResponse|FulfillIntentResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/sessions.fulfill_intent.js</caption>
    * region_tag:dialogflow_v3_generated_Sessions_FulfillIntent_async
@@ -731,7 +735,7 @@ export class SessionsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IFulfillIntentResponse,
       protos.google.cloud.dialogflow.cx.v3.IFulfillIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   fulfillIntent(
@@ -777,7 +781,7 @@ export class SessionsClient {
     [
       protos.google.cloud.dialogflow.cx.v3.IFulfillIntentResponse,
       protos.google.cloud.dialogflow.cx.v3.IFulfillIntentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -813,10 +817,9 @@ export class SessionsClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
    *   An object stream which is both readable and writable. It accepts objects
-   *   representing {@link google.cloud.dialogflow.cx.v3.StreamingDetectIntentRequest | StreamingDetectIntentRequest} for write() method, and
-   *   will emit objects representing {@link google.cloud.dialogflow.cx.v3.StreamingDetectIntentResponse | StreamingDetectIntentResponse} on 'data' event asynchronously.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming)
+   *   representing {@link protos.google.cloud.dialogflow.cx.v3.StreamingDetectIntentRequest|StreamingDetectIntentRequest} for write() method, and
+   *   will emit objects representing {@link protos.google.cloud.dialogflow.cx.v3.StreamingDetectIntentResponse|StreamingDetectIntentResponse} on 'data' event asynchronously.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/sessions.streaming_detect_intent.js</caption>
    * region_tag:dialogflow_v3_generated_Sessions_StreamingDetectIntent_async
@@ -837,8 +840,7 @@ export class SessionsClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -884,12 +886,11 @@ export class SessionsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -1132,6 +1133,71 @@ export class SessionsClient {
    */
   matchAgentFromAgentName(agentName: string) {
     return this.pathTemplates.agentPathTemplate.match(agentName).agent;
+  }
+
+  /**
+   * Return a fully-qualified agentGenerativeSettings resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @returns {string} Resource name string.
+   */
+  agentGenerativeSettingsPath(
+    project: string,
+    location: string,
+    agent: string
+  ) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+    });
+  }
+
+  /**
+   * Parse the project from AgentGenerativeSettings resource.
+   *
+   * @param {string} agentGenerativeSettingsName
+   *   A fully-qualified path representing AgentGenerativeSettings resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAgentGenerativeSettingsName(
+    agentGenerativeSettingsName: string
+  ) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(
+      agentGenerativeSettingsName
+    ).project;
+  }
+
+  /**
+   * Parse the location from AgentGenerativeSettings resource.
+   *
+   * @param {string} agentGenerativeSettingsName
+   *   A fully-qualified path representing AgentGenerativeSettings resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAgentGenerativeSettingsName(
+    agentGenerativeSettingsName: string
+  ) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(
+      agentGenerativeSettingsName
+    ).location;
+  }
+
+  /**
+   * Parse the agent from AgentGenerativeSettings resource.
+   *
+   * @param {string} agentGenerativeSettingsName
+   *   A fully-qualified path representing AgentGenerativeSettings resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromAgentGenerativeSettingsName(
+    agentGenerativeSettingsName: string
+  ) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(
+      agentGenerativeSettingsName
+    ).agent;
   }
 
   /**
@@ -2175,6 +2241,109 @@ export class SessionsClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationAgentFlowTransitionRouteGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @param {string} flow
+   * @param {string} transition_route_group
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentFlowTransitionRouteGroupPath(
+    project: string,
+    location: string,
+    agent: string,
+    flow: string,
+    transitionRouteGroup: string
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        agent: agent,
+        flow: flow,
+        transition_route_group: transitionRouteGroup,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgentFlowTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentFlowTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentFlowTransitionRouteGroupName(
+    projectLocationAgentFlowTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentFlowTransitionRouteGroupName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgentFlowTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentFlowTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentFlowTransitionRouteGroupName(
+    projectLocationAgentFlowTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentFlowTransitionRouteGroupName
+    ).location;
+  }
+
+  /**
+   * Parse the agent from ProjectLocationAgentFlowTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentFlowTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromProjectLocationAgentFlowTransitionRouteGroupName(
+    projectLocationAgentFlowTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentFlowTransitionRouteGroupName
+    ).agent;
+  }
+
+  /**
+   * Parse the flow from ProjectLocationAgentFlowTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentFlowTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
+   * @returns {string} A string representing the flow.
+   */
+  matchFlowFromProjectLocationAgentFlowTransitionRouteGroupName(
+    projectLocationAgentFlowTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentFlowTransitionRouteGroupName
+    ).flow;
+  }
+
+  /**
+   * Parse the transition_route_group from ProjectLocationAgentFlowTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentFlowTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_flow_transition_route_group resource.
+   * @returns {string} A string representing the transition_route_group.
+   */
+  matchTransitionRouteGroupFromProjectLocationAgentFlowTransitionRouteGroupName(
+    projectLocationAgentFlowTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentFlowTransitionRouteGroupName
+    ).transition_route_group;
+  }
+
+  /**
    * Return a fully-qualified projectLocationAgentSession resource name string.
    *
    * @param {string} project
@@ -2358,6 +2527,91 @@ export class SessionsClient {
     return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
       projectLocationAgentSessionEntityTypeName
     ).entity_type;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAgentTransitionRouteGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @param {string} transition_route_group
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentTransitionRouteGroupPath(
+    project: string,
+    location: string,
+    agent: string,
+    transitionRouteGroup: string
+  ) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        agent: agent,
+        transition_route_group: transitionRouteGroup,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgentTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_transition_route_group resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentTransitionRouteGroupName(
+    projectLocationAgentTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentTransitionRouteGroupName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgentTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_transition_route_group resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentTransitionRouteGroupName(
+    projectLocationAgentTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentTransitionRouteGroupName
+    ).location;
+  }
+
+  /**
+   * Parse the agent from ProjectLocationAgentTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_transition_route_group resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromProjectLocationAgentTransitionRouteGroupName(
+    projectLocationAgentTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentTransitionRouteGroupName
+    ).agent;
+  }
+
+  /**
+   * Parse the transition_route_group from ProjectLocationAgentTransitionRouteGroup resource.
+   *
+   * @param {string} projectLocationAgentTransitionRouteGroupName
+   *   A fully-qualified path representing project_location_agent_transition_route_group resource.
+   * @returns {string} A string representing the transition_route_group.
+   */
+  matchTransitionRouteGroupFromProjectLocationAgentTransitionRouteGroupName(
+    projectLocationAgentTransitionRouteGroupName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match(
+      projectLocationAgentTransitionRouteGroupName
+    ).transition_route_group;
   }
 
   /**
@@ -2576,99 +2830,6 @@ export class SessionsClient {
     return this.pathTemplates.testCaseResultPathTemplate.match(
       testCaseResultName
     ).result;
-  }
-
-  /**
-   * Return a fully-qualified transitionRouteGroup resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} agent
-   * @param {string} flow
-   * @param {string} transition_route_group
-   * @returns {string} Resource name string.
-   */
-  transitionRouteGroupPath(
-    project: string,
-    location: string,
-    agent: string,
-    flow: string,
-    transitionRouteGroup: string
-  ) {
-    return this.pathTemplates.transitionRouteGroupPathTemplate.render({
-      project: project,
-      location: location,
-      agent: agent,
-      flow: flow,
-      transition_route_group: transitionRouteGroup,
-    });
-  }
-
-  /**
-   * Parse the project from TransitionRouteGroup resource.
-   *
-   * @param {string} transitionRouteGroupName
-   *   A fully-qualified path representing TransitionRouteGroup resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromTransitionRouteGroupName(transitionRouteGroupName: string) {
-    return this.pathTemplates.transitionRouteGroupPathTemplate.match(
-      transitionRouteGroupName
-    ).project;
-  }
-
-  /**
-   * Parse the location from TransitionRouteGroup resource.
-   *
-   * @param {string} transitionRouteGroupName
-   *   A fully-qualified path representing TransitionRouteGroup resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromTransitionRouteGroupName(transitionRouteGroupName: string) {
-    return this.pathTemplates.transitionRouteGroupPathTemplate.match(
-      transitionRouteGroupName
-    ).location;
-  }
-
-  /**
-   * Parse the agent from TransitionRouteGroup resource.
-   *
-   * @param {string} transitionRouteGroupName
-   *   A fully-qualified path representing TransitionRouteGroup resource.
-   * @returns {string} A string representing the agent.
-   */
-  matchAgentFromTransitionRouteGroupName(transitionRouteGroupName: string) {
-    return this.pathTemplates.transitionRouteGroupPathTemplate.match(
-      transitionRouteGroupName
-    ).agent;
-  }
-
-  /**
-   * Parse the flow from TransitionRouteGroup resource.
-   *
-   * @param {string} transitionRouteGroupName
-   *   A fully-qualified path representing TransitionRouteGroup resource.
-   * @returns {string} A string representing the flow.
-   */
-  matchFlowFromTransitionRouteGroupName(transitionRouteGroupName: string) {
-    return this.pathTemplates.transitionRouteGroupPathTemplate.match(
-      transitionRouteGroupName
-    ).flow;
-  }
-
-  /**
-   * Parse the transition_route_group from TransitionRouteGroup resource.
-   *
-   * @param {string} transitionRouteGroupName
-   *   A fully-qualified path representing TransitionRouteGroup resource.
-   * @returns {string} A string representing the transition_route_group.
-   */
-  matchTransitionRouteGroupFromTransitionRouteGroupName(
-    transitionRouteGroupName: string
-  ) {
-    return this.pathTemplates.transitionRouteGroupPathTemplate.match(
-      transitionRouteGroupName
-    ).transition_route_group;
   }
 
   /**

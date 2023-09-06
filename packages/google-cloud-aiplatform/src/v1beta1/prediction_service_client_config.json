@@ -29,8 +29,16 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "ServerStreamingPredict": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "Explain": {
           "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CountTokens": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }

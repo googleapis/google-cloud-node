@@ -64,7 +64,7 @@ function main(recognizer) {
    *  Audio files with file metadata for ASR.
    *  The maximum number of files allowed to be specified is 5.
    */
-  // const files = 1234
+  // const files = [1,2,3,4]
   /**
    *  Configuration options for where to output the transcripts of each file.
    */

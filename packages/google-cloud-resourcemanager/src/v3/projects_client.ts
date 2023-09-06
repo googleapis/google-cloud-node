@@ -93,8 +93,7 @@ export class ProjectsClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -102,7 +101,7 @@ export class ProjectsClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new ProjectsClient({fallback: 'rest'}, gax);
+   *     const client = new ProjectsClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -168,7 +167,7 @@ export class ProjectsClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -224,7 +223,7 @@ export class ProjectsClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
@@ -459,9 +458,8 @@ export class ProjectsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.resourcemanager.v3.Project | Project}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.resourcemanager.v3.Project|Project}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/projects.get_project.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Projects_GetProject_async
@@ -473,7 +471,7 @@ export class ProjectsClient {
     [
       protos.google.cloud.resourcemanager.v3.IProject,
       protos.google.cloud.resourcemanager.v3.IGetProjectRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getProject(
@@ -519,7 +517,7 @@ export class ProjectsClient {
     [
       protos.google.cloud.resourcemanager.v3.IProject,
       protos.google.cloud.resourcemanager.v3.IGetProjectRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -556,9 +554,8 @@ export class ProjectsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/projects.get_iam_policy.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Projects_GetIamPolicy_async
@@ -570,7 +567,7 @@ export class ProjectsClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -608,7 +605,7 @@ export class ProjectsClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -691,9 +688,8 @@ export class ProjectsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/projects.set_iam_policy.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Projects_SetIamPolicy_async
@@ -705,7 +701,7 @@ export class ProjectsClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -743,7 +739,7 @@ export class ProjectsClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -781,9 +777,8 @@ export class ProjectsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/projects.test_iam_permissions.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Projects_TestIamPermissions_async
@@ -795,7 +790,7 @@ export class ProjectsClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -833,7 +828,7 @@ export class ProjectsClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -880,8 +875,7 @@ export class ProjectsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/projects.create_project.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Projects_CreateProject_async
@@ -896,7 +890,7 @@ export class ProjectsClient {
         protos.google.cloud.resourcemanager.v3.ICreateProjectMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createProject(
@@ -949,7 +943,7 @@ export class ProjectsClient {
         protos.google.cloud.resourcemanager.v3.ICreateProjectMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -972,8 +966,7 @@ export class ProjectsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/projects.create_project.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Projects_CreateProject_async
@@ -1021,8 +1014,7 @@ export class ProjectsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/projects.update_project.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Projects_UpdateProject_async
@@ -1037,7 +1029,7 @@ export class ProjectsClient {
         protos.google.cloud.resourcemanager.v3.IUpdateProjectMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateProject(
@@ -1090,7 +1082,7 @@ export class ProjectsClient {
         protos.google.cloud.resourcemanager.v3.IUpdateProjectMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1117,8 +1109,7 @@ export class ProjectsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/projects.update_project.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Projects_UpdateProject_async
@@ -1176,8 +1167,7 @@ export class ProjectsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/projects.move_project.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Projects_MoveProject_async
@@ -1192,7 +1182,7 @@ export class ProjectsClient {
         protos.google.cloud.resourcemanager.v3.IMoveProjectMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   moveProject(
@@ -1245,7 +1235,7 @@ export class ProjectsClient {
         protos.google.cloud.resourcemanager.v3.IMoveProjectMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1272,8 +1262,7 @@ export class ProjectsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/projects.move_project.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Projects_MoveProject_async
@@ -1306,12 +1295,12 @@ export class ProjectsClient {
    * `name` (for example, `projects/415104041262`) for deletion.
    *
    * This method will only affect the project if it has a lifecycle state of
-   * {@link google.cloud.resourcemanager.v3.Project.State.ACTIVE|ACTIVE}.
+   * {@link protos.google.cloud.resourcemanager.v3.Project.State.ACTIVE|ACTIVE}.
    *
    * This method changes the Project's lifecycle state from
-   * {@link google.cloud.resourcemanager.v3.Project.State.ACTIVE|ACTIVE}
+   * {@link protos.google.cloud.resourcemanager.v3.Project.State.ACTIVE|ACTIVE}
    * to
-   * {@link google.cloud.resourcemanager.v3.Project.State.DELETE_REQUESTED|DELETE_REQUESTED}.
+   * {@link protos.google.cloud.resourcemanager.v3.Project.State.DELETE_REQUESTED|DELETE_REQUESTED}.
    * The deletion starts at an unspecified time,
    * at which point the Project is no longer accessible.
    *
@@ -1327,7 +1316,7 @@ export class ProjectsClient {
    * [google.cloud.resourcemanager.v3.Projects.GetProject],
    * [ListProjects]
    * [google.cloud.resourcemanager.v3.Projects.ListProjects], and
-   * {@link google.cloud.resourcemanager.v3.Projects.SearchProjects|SearchProjects}
+   * {@link protos.google.cloud.resourcemanager.v3.Projects.SearchProjects|SearchProjects}
    * methods.
    *
    * This method behaves idempotently, such that deleting a `DELETE_REQUESTED`
@@ -1346,8 +1335,7 @@ export class ProjectsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/projects.delete_project.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Projects_DeleteProject_async
@@ -1362,7 +1350,7 @@ export class ProjectsClient {
         protos.google.cloud.resourcemanager.v3.IDeleteProjectMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteProject(
@@ -1415,7 +1403,7 @@ export class ProjectsClient {
         protos.google.cloud.resourcemanager.v3.IDeleteProjectMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1442,8 +1430,7 @@ export class ProjectsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/projects.delete_project.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Projects_DeleteProject_async
@@ -1494,8 +1481,7 @@ export class ProjectsClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/projects.undelete_project.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Projects_UndeleteProject_async
@@ -1510,7 +1496,7 @@ export class ProjectsClient {
         protos.google.cloud.resourcemanager.v3.IUndeleteProjectMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   undeleteProject(
@@ -1563,7 +1549,7 @@ export class ProjectsClient {
         protos.google.cloud.resourcemanager.v3.IUndeleteProjectMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1590,8 +1576,7 @@ export class ProjectsClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/projects.undelete_project.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Projects_UndeleteProject_async
@@ -1650,14 +1635,13 @@ export class ProjectsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.resourcemanager.v3.Project | Project}.
+   *   The first element of the array is Array of {@link protos.google.cloud.resourcemanager.v3.Project|Project}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listProjectsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listProjects(
@@ -1667,7 +1651,7 @@ export class ProjectsClient {
     [
       protos.google.cloud.resourcemanager.v3.IProject[],
       protos.google.cloud.resourcemanager.v3.IListProjectsRequest | null,
-      protos.google.cloud.resourcemanager.v3.IListProjectsResponse
+      protos.google.cloud.resourcemanager.v3.IListProjectsResponse,
     ]
   >;
   listProjects(
@@ -1713,7 +1697,7 @@ export class ProjectsClient {
     [
       protos.google.cloud.resourcemanager.v3.IProject[],
       protos.google.cloud.resourcemanager.v3.IListProjectsRequest | null,
-      protos.google.cloud.resourcemanager.v3.IListProjectsResponse
+      protos.google.cloud.resourcemanager.v3.IListProjectsResponse,
     ]
   > | void {
     request = request || {};
@@ -1756,13 +1740,12 @@ export class ProjectsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.resourcemanager.v3.Project | Project} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.resourcemanager.v3.Project|Project} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listProjectsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listProjectsStream(
@@ -1810,12 +1793,11 @@ export class ProjectsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.resourcemanager.v3.Project | Project}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.resourcemanager.v3.Project|Project}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/projects.list_projects.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Projects_ListProjects_async
@@ -1847,7 +1829,7 @@ export class ProjectsClient {
    * that a newly created project may not appear in the results or recent
    * updates to an existing project may not be reflected in the results. To
    * retrieve the latest state of a project, use the
-   * {@link google.cloud.resourcemanager.v3.Projects.GetProject|GetProject} method.
+   * {@link protos.google.cloud.resourcemanager.v3.Projects.GetProject|GetProject} method.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1896,14 +1878,13 @@ export class ProjectsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.resourcemanager.v3.Project | Project}.
+   *   The first element of the array is Array of {@link protos.google.cloud.resourcemanager.v3.Project|Project}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `searchProjectsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   searchProjects(
@@ -1913,7 +1894,7 @@ export class ProjectsClient {
     [
       protos.google.cloud.resourcemanager.v3.IProject[],
       protos.google.cloud.resourcemanager.v3.ISearchProjectsRequest | null,
-      protos.google.cloud.resourcemanager.v3.ISearchProjectsResponse
+      protos.google.cloud.resourcemanager.v3.ISearchProjectsResponse,
     ]
   >;
   searchProjects(
@@ -1959,7 +1940,7 @@ export class ProjectsClient {
     [
       protos.google.cloud.resourcemanager.v3.IProject[],
       protos.google.cloud.resourcemanager.v3.ISearchProjectsRequest | null,
-      protos.google.cloud.resourcemanager.v3.ISearchProjectsResponse
+      protos.google.cloud.resourcemanager.v3.ISearchProjectsResponse,
     ]
   > | void {
     request = request || {};
@@ -2026,13 +2007,12 @@ export class ProjectsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.resourcemanager.v3.Project | Project} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.resourcemanager.v3.Project|Project} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `searchProjectsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   searchProjectsStream(
@@ -2104,12 +2084,11 @@ export class ProjectsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.resourcemanager.v3.Project | Project}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.resourcemanager.v3.Project|Project}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v3/projects.search_projects.js</caption>
    * region_tag:cloudresourcemanager_v3_generated_Projects_SearchProjects_async

@@ -47,7 +47,7 @@ function main() {
    *  represented as an AttributeContext, and contains all attributes around an
    *  API access.
    */
-  // const operations = 1234
+  // const operations = [1,2,3,4]
 
   // Imports the Servicecontrol library
   const {ServiceControllerClient} = require('@google-cloud/servicecontrol').v2;

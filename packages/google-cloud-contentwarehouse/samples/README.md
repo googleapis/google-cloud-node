@@ -29,6 +29,7 @@
   * [Document_service.search_documents](#document_service.search_documents)
   * [Document_service.set_acl](#document_service.set_acl)
   * [Document_service.update_document](#document_service.update_document)
+  * [Pipeline_service.run_pipeline](#pipeline_service.run_pipeline)
   * [Rule_set_service.create_rule_set](#rule_set_service.create_rule_set)
   * [Rule_set_service.delete_rule_set](#rule_set_service.delete_rule_set)
   * [Rule_set_service.get_rule_set](#rule_set_service.get_rule_set)
@@ -39,7 +40,6 @@
   * [Synonym_set_service.get_synonym_set](#synonym_set_service.get_synonym_set)
   * [Synonym_set_service.list_synonym_sets](#synonym_set_service.list_synonym_sets)
   * [Synonym_set_service.update_synonym_set](#synonym_set_service.update_synonym_set)
-  * [Quickstart](#quickstart)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -346,6 +346,23 @@ __Usage:__
 
 
 
+### Pipeline_service.run_pipeline
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/pipeline_service.run_pipeline.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/generated/v1/pipeline_service.run_pipeline.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-contentwarehouse/samples/generated/v1/pipeline_service.run_pipeline.js`
+
+
+-----
+
+
+
+
 ### Rule_set_service.create_rule_set
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/generated/v1/rule_set_service.create_rule_set.js).
@@ -526,23 +543,6 @@ __Usage:__
 
 
 `node packages/google-cloud-contentwarehouse/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contentwarehouse/samples/test/quickstart.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contentwarehouse/samples/test/quickstart.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-contentwarehouse/samples/test/quickstart.js`
 
 
 

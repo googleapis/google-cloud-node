@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Private Catalog: Node.js Client](https://github.com/googleapis/google-cloud-node)
+# [Private Catalog: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-privatecatalog)
 
 [![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/private-catalog.svg)](https://www.npmjs.org/package/@google-cloud/private-catalog)
@@ -83,15 +83,14 @@ searchCatalogs();
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-privatecatalog/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Private_catalog.search_catalogs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_catalogs.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_catalogs.js,samples/README.md) |
-| Private_catalog.search_products | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_products.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_products.js,samples/README.md) |
-| Private_catalog.search_versions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_versions.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_versions.js,samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privatecatalog/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privatecatalog/samples/quickstart.js,samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privatecatalog/samples/test/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privatecatalog/samples/test/quickstart.js,samples/README.md) |
+| Private_catalog.search_catalogs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_catalogs.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_catalogs.js,packages/google-cloud-privatecatalog/samples/README.md) |
+| Private_catalog.search_products | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_products.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_products.js,packages/google-cloud-privatecatalog/samples/README.md) |
+| Private_catalog.search_versions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_versions.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privatecatalog/samples/generated/v1beta1/private_catalog.search_versions.js,packages/google-cloud-privatecatalog/samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privatecatalog/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-privatecatalog/samples/quickstart.js,packages/google-cloud-privatecatalog/samples/README.md) |
 
 
 
@@ -100,7 +99,7 @@ also contains samples.
 
 ## Supported Node.js Versions
 
-Our client libraries follow the [Node.js release schedule](https://nodejs.org/en/about/releases/).
+Our client libraries follow the [Node.js release schedule](https://github.com/nodejs/release#release-schedule).
 Libraries are compatible with all current _active_ and _maintenance_ versions of
 Node.js.
 If you are using an end-of-life version of Node.js, we recommend that you update

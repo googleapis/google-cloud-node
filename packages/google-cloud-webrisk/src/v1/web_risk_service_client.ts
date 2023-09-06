@@ -92,8 +92,7 @@ export class WebRiskServiceClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -101,7 +100,7 @@ export class WebRiskServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new WebRiskServiceClient({fallback: 'rest'}, gax);
+   *     const client = new WebRiskServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -167,7 +166,7 @@ export class WebRiskServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -193,7 +192,7 @@ export class WebRiskServiceClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
@@ -396,9 +395,8 @@ export class WebRiskServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.webrisk.v1.ComputeThreatListDiffResponse | ComputeThreatListDiffResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.webrisk.v1.ComputeThreatListDiffResponse|ComputeThreatListDiffResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/web_risk_service.compute_threat_list_diff.js</caption>
    * region_tag:webrisk_v1_generated_WebRiskService_ComputeThreatListDiff_async
@@ -410,7 +408,7 @@ export class WebRiskServiceClient {
     [
       protos.google.cloud.webrisk.v1.IComputeThreatListDiffResponse,
       protos.google.cloud.webrisk.v1.IComputeThreatListDiffRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   computeThreatListDiff(
@@ -456,7 +454,7 @@ export class WebRiskServiceClient {
     [
       protos.google.cloud.webrisk.v1.IComputeThreatListDiffResponse,
       protos.google.cloud.webrisk.v1.IComputeThreatListDiffRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -490,9 +488,8 @@ export class WebRiskServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.webrisk.v1.SearchUrisResponse | SearchUrisResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.webrisk.v1.SearchUrisResponse|SearchUrisResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/web_risk_service.search_uris.js</caption>
    * region_tag:webrisk_v1_generated_WebRiskService_SearchUris_async
@@ -504,7 +501,7 @@ export class WebRiskServiceClient {
     [
       protos.google.cloud.webrisk.v1.ISearchUrisResponse,
       protos.google.cloud.webrisk.v1.ISearchUrisRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   searchUris(
@@ -542,7 +539,7 @@ export class WebRiskServiceClient {
     [
       protos.google.cloud.webrisk.v1.ISearchUrisResponse,
       protos.google.cloud.webrisk.v1.ISearchUrisRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -579,9 +576,8 @@ export class WebRiskServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.webrisk.v1.SearchHashesResponse | SearchHashesResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.webrisk.v1.SearchHashesResponse|SearchHashesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/web_risk_service.search_hashes.js</caption>
    * region_tag:webrisk_v1_generated_WebRiskService_SearchHashes_async
@@ -593,7 +589,7 @@ export class WebRiskServiceClient {
     [
       protos.google.cloud.webrisk.v1.ISearchHashesResponse,
       protos.google.cloud.webrisk.v1.ISearchHashesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   searchHashes(
@@ -633,7 +629,7 @@ export class WebRiskServiceClient {
     [
       protos.google.cloud.webrisk.v1.ISearchHashesResponse,
       protos.google.cloud.webrisk.v1.ISearchHashesRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -669,9 +665,8 @@ export class WebRiskServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.webrisk.v1.Submission | Submission}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.webrisk.v1.Submission|Submission}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/web_risk_service.create_submission.js</caption>
    * region_tag:webrisk_v1_generated_WebRiskService_CreateSubmission_async
@@ -683,7 +678,7 @@ export class WebRiskServiceClient {
     [
       protos.google.cloud.webrisk.v1.ISubmission,
       protos.google.cloud.webrisk.v1.ICreateSubmissionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createSubmission(
@@ -729,7 +724,7 @@ export class WebRiskServiceClient {
     [
       protos.google.cloud.webrisk.v1.ISubmission,
       protos.google.cloud.webrisk.v1.ICreateSubmissionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -780,8 +775,7 @@ export class WebRiskServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/web_risk_service.submit_uri.js</caption>
    * region_tag:webrisk_v1_generated_WebRiskService_SubmitUri_async
@@ -796,7 +790,7 @@ export class WebRiskServiceClient {
         protos.google.cloud.webrisk.v1.ISubmitUriMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   submitUri(
@@ -849,7 +843,7 @@ export class WebRiskServiceClient {
         protos.google.cloud.webrisk.v1.ISubmitUriMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -876,8 +870,7 @@ export class WebRiskServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/web_risk_service.submit_uri.js</caption>
    * region_tag:webrisk_v1_generated_WebRiskService_SubmitUri_async

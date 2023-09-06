@@ -90,8 +90,7 @@ export class GlobalPublicDelegatedPrefixesClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -99,7 +98,7 @@ export class GlobalPublicDelegatedPrefixesClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new GlobalPublicDelegatedPrefixesClient({fallback: 'rest'}, gax);
+   *     const client = new GlobalPublicDelegatedPrefixesClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -116,11 +115,11 @@ export class GlobalPublicDelegatedPrefixesClient {
     );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    // Implicitely set 'rest' value for the apis use rest as transport (eg. googleapis-discovery apis).
+    // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
     if (!opts) {
-      opts = {fallback: 'rest'};
+      opts = {fallback: true};
     } else {
-      opts.fallback = opts.fallback ?? 'rest';
+      opts.fallback = opts.fallback ?? true;
     }
     const fallback =
       opts?.fallback ??
@@ -166,7 +165,7 @@ export class GlobalPublicDelegatedPrefixesClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -344,8 +343,7 @@ export class GlobalPublicDelegatedPrefixesClient {
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
    *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    *   This method is considered to be in beta. This means while
    *   stable it is still a work-in-progress and under active development,
@@ -361,7 +359,7 @@ export class GlobalPublicDelegatedPrefixesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -407,7 +405,7 @@ export class GlobalPublicDelegatedPrefixesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -433,7 +431,7 @@ export class GlobalPublicDelegatedPrefixesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -461,9 +459,8 @@ export class GlobalPublicDelegatedPrefixesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.compute.v1.PublicDelegatedPrefix | PublicDelegatedPrefix}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.PublicDelegatedPrefix|PublicDelegatedPrefix}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/global_public_delegated_prefixes.get.js</caption>
    * region_tag:compute_v1_generated_GlobalPublicDelegatedPrefixes_Get_async
@@ -478,7 +475,7 @@ export class GlobalPublicDelegatedPrefixesClient {
         | protos.google.cloud.compute.v1.IGetGlobalPublicDelegatedPrefixeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -527,7 +524,7 @@ export class GlobalPublicDelegatedPrefixesClient {
         | protos.google.cloud.compute.v1.IGetGlobalPublicDelegatedPrefixeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -565,8 +562,7 @@ export class GlobalPublicDelegatedPrefixesClient {
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
    *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    *   This method is considered to be in beta. This means while
    *   stable it is still a work-in-progress and under active development,
@@ -582,7 +578,7 @@ export class GlobalPublicDelegatedPrefixesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -628,7 +624,7 @@ export class GlobalPublicDelegatedPrefixesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -653,7 +649,7 @@ export class GlobalPublicDelegatedPrefixesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -687,8 +683,7 @@ export class GlobalPublicDelegatedPrefixesClient {
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
    *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    *   This method is considered to be in beta. This means while
    *   stable it is still a work-in-progress and under active development,
@@ -704,7 +699,7 @@ export class GlobalPublicDelegatedPrefixesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patch(
@@ -750,7 +745,7 @@ export class GlobalPublicDelegatedPrefixesClient {
     [
       LROperation<protos.google.cloud.compute.v1.IOperation, null>,
       protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -776,7 +771,7 @@ export class GlobalPublicDelegatedPrefixesClient {
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
+          protos.google.cloud.compute.v1.IOperation,
         ]) => {
           return [
             {
@@ -813,14 +808,13 @@ export class GlobalPublicDelegatedPrefixesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.compute.v1.PublicDelegatedPrefix | PublicDelegatedPrefix}.
+   *   The first element of the array is Array of {@link protos.google.cloud.compute.v1.PublicDelegatedPrefix|PublicDelegatedPrefix}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   list(
@@ -830,7 +824,7 @@ export class GlobalPublicDelegatedPrefixesClient {
     [
       protos.google.cloud.compute.v1.IPublicDelegatedPrefix[],
       protos.google.cloud.compute.v1.IListGlobalPublicDelegatedPrefixesRequest | null,
-      protos.google.cloud.compute.v1.IPublicDelegatedPrefixList
+      protos.google.cloud.compute.v1.IPublicDelegatedPrefixList,
     ]
   >;
   list(
@@ -876,7 +870,7 @@ export class GlobalPublicDelegatedPrefixesClient {
     [
       protos.google.cloud.compute.v1.IPublicDelegatedPrefix[],
       protos.google.cloud.compute.v1.IListGlobalPublicDelegatedPrefixesRequest | null,
-      protos.google.cloud.compute.v1.IPublicDelegatedPrefixList
+      protos.google.cloud.compute.v1.IPublicDelegatedPrefixList,
     ]
   > | void {
     request = request || {};
@@ -917,13 +911,12 @@ export class GlobalPublicDelegatedPrefixesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.compute.v1.PublicDelegatedPrefix | PublicDelegatedPrefix} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1.PublicDelegatedPrefix|PublicDelegatedPrefix} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listStream(
@@ -969,12 +962,11 @@ export class GlobalPublicDelegatedPrefixesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.compute.v1.PublicDelegatedPrefix | PublicDelegatedPrefix}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.compute.v1.PublicDelegatedPrefix|PublicDelegatedPrefix}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/global_public_delegated_prefixes.list.js</caption>
    * region_tag:compute_v1_generated_GlobalPublicDelegatedPrefixes_List_async

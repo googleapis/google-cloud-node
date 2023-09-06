@@ -4,6 +4,29 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [6.0.1](https://github.com/googleapis/google-cloud-node/compare/speech-v6.0.0...speech-v6.0.1) (2023-08-09)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency proto3-json-serializer to v2 ([#4523](https://github.com/googleapis/google-cloud-node/issues/4523)) ([da600c6](https://github.com/googleapis/google-cloud-node/commit/da600c6d3a6fb9793ec1b647aef4197116866f8b))
+
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/speech-v5.6.0...speech-v6.0.0) (2023-08-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))
+
+### Bug Fixes
+
+* [Many APIs] fix typings for IAM methods ([#4463](https://github.com/googleapis/google-cloud-node/issues/4463)) ([64109b0](https://github.com/googleapis/google-cloud-node/commit/64109b007521c418cefe09c18a92cc6eaef0932c))
+
+
+### Miscellaneous Chores
+
+* Migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443)) ([2260f12](https://github.com/googleapis/google-cloud-node/commit/2260f12543d171bda95345e53475f5f0fdc45770))
+
 ## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/speech-v5.5.1...speech-v5.6.0) (2023-07-11)
 
 

@@ -39,7 +39,7 @@ function main(attributesConfig, attributeKeys) {
    *  CatalogAttribute google.cloud.retail.v2beta.CatalogAttribute s to delete.
    *  A maximum of 1000 catalog attributes can be deleted in a batch.
    */
-  // const attributeKeys = 'abc123'
+  // const attributeKeys = ['abc','def']
 
   // Imports the Retail library
   const {CatalogServiceClient} = require('@google-cloud/retail').v2beta;

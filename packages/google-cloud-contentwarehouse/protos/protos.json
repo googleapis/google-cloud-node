@@ -112,6 +112,11 @@
                       }
                     },
                     "DatabaseType": {
+                      "valuesOptions": {
+                        "DB_CLOUD_SQL_POSTGRES": {
+                          "deprecated": true
+                        }
+                      },
                       "values": {
                         "DB_UNKNOWN": 0,
                         "DB_INFRA_SPANNER": 1,
@@ -259,6 +264,20 @@
                         "updater": {
                           "type": "string",
                           "id": 14
+                        },
+                        "dispositionTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "legalHold": {
+                          "type": "bool",
+                          "id": 23,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -304,6 +323,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "documentIsRetentionFolder": {
+                          "type": "bool",
+                          "id": 8
+                        },
+                        "documentIsLegalHoldFolder": {
+                          "type": "bool",
+                          "id": 9
                         }
                       }
                     },
@@ -1461,6 +1488,10 @@
                           "rule": "repeated",
                           "type": "HistogramQueryResult",
                           "id": 6
+                        },
+                        "questionAnswer": {
+                          "type": "string",
+                          "id": 7
                         }
                       },
                       "nested": {
@@ -1784,6 +1815,11 @@
                           "type": "string",
                           "id": 9
                         },
+                        "documentNameFilter": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 14
+                        },
                         "queryContext": {
                           "rule": "repeated",
                           "type": "string",
@@ -1816,7 +1852,8 @@
                           "values": {
                             "TIME_FIELD_UNSPECIFIED": 0,
                             "CREATE_TIME": 1,
-                            "UPDATE_TIME": 2
+                            "UPDATE_TIME": 2,
+                            "DISPOSITION_TIME": 3
                           }
                         }
                       }
@@ -1994,7 +2031,9 @@
                           "values": {
                             "UNKNOWN": 0,
                             "ON_CREATE": 1,
-                            "ON_UPDATE": 4
+                            "ON_UPDATE": 4,
+                            "ON_CREATE_LINK": 7,
+                            "ON_DELETE_LINK": 8
                           }
                         }
                       }
@@ -2229,6 +2268,320 @@
                             "ACTION_TIMED_OUT": 3,
                             "ACTION_PENDING": 4
                           }
+                        }
+                      }
+                    },
+                    "PipelineService": {
+                      "options": {
+                        "(google.api.default_host)": "contentwarehouse.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "RunPipeline": {
+                          "requestType": "RunPipelineRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*}:runPipeline",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "RunPipelineResponse",
+                            "(google.longrunning.operation_info).metadata_type": "RunPipelineMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*}:runPipeline",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "RunPipelineResponse",
+                                "metadata_type": "RunPipelineMetadata"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "RunPipelineRequest": {
+                      "oneofs": {
+                        "pipeline": {
+                          "oneof": [
+                            "gcsIngestPipeline",
+                            "gcsIngestWithDocAiProcessorsPipeline",
+                            "exportCdwPipeline",
+                            "processWithDocAiPipeline"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "contentwarehouse.googleapis.com/Location"
+                          }
+                        },
+                        "gcsIngestPipeline": {
+                          "type": "GcsIngestPipeline",
+                          "id": 2
+                        },
+                        "gcsIngestWithDocAiProcessorsPipeline": {
+                          "type": "GcsIngestWithDocAiProcessorsPipeline",
+                          "id": 3
+                        },
+                        "exportCdwPipeline": {
+                          "type": "ExportToCdwPipeline",
+                          "id": 4
+                        },
+                        "processWithDocAiPipeline": {
+                          "type": "ProcessWithDocAiPipeline",
+                          "id": 5
+                        },
+                        "requestMetadata": {
+                          "type": "RequestMetadata",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "RunPipelineResponse": {
+                      "fields": {}
+                    },
+                    "RunPipelineMetadata": {
+                      "oneofs": {
+                        "pipelineMetadata": {
+                          "oneof": [
+                            "gcsIngestPipelineMetadata",
+                            "exportToCdwPipelineMetadata",
+                            "processWithDocAiPipelineMetadata"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "totalFileCount": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "failedFileCount": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "userInfo": {
+                          "type": "UserInfo",
+                          "id": 3
+                        },
+                        "gcsIngestPipelineMetadata": {
+                          "type": "GcsIngestPipelineMetadata",
+                          "id": 4
+                        },
+                        "exportToCdwPipelineMetadata": {
+                          "type": "ExportToCdwPipelineMetadata",
+                          "id": 6
+                        },
+                        "processWithDocAiPipelineMetadata": {
+                          "type": "ProcessWithDocAiPipelineMetadata",
+                          "id": 7
+                        },
+                        "individualDocumentStatuses": {
+                          "rule": "repeated",
+                          "type": "IndividualDocumentStatus",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "GcsIngestPipelineMetadata": {
+                          "fields": {
+                            "inputPath": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "ExportToCdwPipelineMetadata": {
+                          "fields": {
+                            "documents": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            },
+                            "docAiDataset": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "outputPath": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "ProcessWithDocAiPipelineMetadata": {
+                          "fields": {
+                            "documents": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            },
+                            "processorInfo": {
+                              "type": "ProcessorInfo",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "IndividualDocumentStatus": {
+                          "fields": {
+                            "documentId": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "status": {
+                              "type": "google.rpc.Status",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ProcessorInfo": {
+                      "fields": {
+                        "processorName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "documentType": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "schemaName": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "IngestPipelineConfig": {
+                      "fields": {
+                        "documentAclPolicy": {
+                          "type": "google.iam.v1.Policy",
+                          "id": 1
+                        },
+                        "enableDocumentTextExtraction": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "folder": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GcsIngestPipeline": {
+                      "fields": {
+                        "inputPath": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "schemaName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "processorType": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "skipIngestedDocuments": {
+                          "type": "bool",
+                          "id": 4
+                        },
+                        "pipelineConfig": {
+                          "type": "IngestPipelineConfig",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GcsIngestWithDocAiProcessorsPipeline": {
+                      "fields": {
+                        "inputPath": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "splitClassifyProcessorInfo": {
+                          "type": "ProcessorInfo",
+                          "id": 2
+                        },
+                        "extractProcessorInfos": {
+                          "rule": "repeated",
+                          "type": "ProcessorInfo",
+                          "id": 3
+                        },
+                        "processorResultsFolderPath": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "skipIngestedDocuments": {
+                          "type": "bool",
+                          "id": 5
+                        },
+                        "pipelineConfig": {
+                          "type": "IngestPipelineConfig",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ExportToCdwPipeline": {
+                      "fields": {
+                        "documents": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "exportFolderPath": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "docAiDataset": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "trainingSplitRatio": {
+                          "type": "float",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ProcessWithDocAiPipeline": {
+                      "fields": {
+                        "documents": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "exportFolderPath": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "processorInfo": {
+                          "type": "ProcessorInfo",
+                          "id": 3
+                        },
+                        "processorResultsFolderPath": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
@@ -3734,9 +4087,9 @@
         },
         "api": {
           "options": {
-            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
+            "go_package": "google.golang.org/genproto/googleapis/api;api",
             "java_multiple_files": true,
-            "java_outer_classname": "ClientProto",
+            "java_outer_classname": "LaunchStageProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -3939,6 +4292,248 @@
               "type": "string",
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
+            },
+            "CommonLanguageSettings": {
+              "fields": {
+                "referenceDocsUri": {
+                  "type": "string",
+                  "id": 1,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
+                "destinations": {
+                  "rule": "repeated",
+                  "type": "ClientLibraryDestination",
+                  "id": 2
+                }
+              }
+            },
+            "ClientLibrarySettings": {
+              "fields": {
+                "version": {
+                  "type": "string",
+                  "id": 1
+                },
+                "launchStage": {
+                  "type": "LaunchStage",
+                  "id": 2
+                },
+                "restNumericEnums": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "javaSettings": {
+                  "type": "JavaSettings",
+                  "id": 21
+                },
+                "cppSettings": {
+                  "type": "CppSettings",
+                  "id": 22
+                },
+                "phpSettings": {
+                  "type": "PhpSettings",
+                  "id": 23
+                },
+                "pythonSettings": {
+                  "type": "PythonSettings",
+                  "id": 24
+                },
+                "nodeSettings": {
+                  "type": "NodeSettings",
+                  "id": 25
+                },
+                "dotnetSettings": {
+                  "type": "DotnetSettings",
+                  "id": 26
+                },
+                "rubySettings": {
+                  "type": "RubySettings",
+                  "id": 27
+                },
+                "goSettings": {
+                  "type": "GoSettings",
+                  "id": 28
+                }
+              }
+            },
+            "Publishing": {
+              "fields": {
+                "methodSettings": {
+                  "rule": "repeated",
+                  "type": "MethodSettings",
+                  "id": 2
+                },
+                "newIssueUri": {
+                  "type": "string",
+                  "id": 101
+                },
+                "documentationUri": {
+                  "type": "string",
+                  "id": 102
+                },
+                "apiShortName": {
+                  "type": "string",
+                  "id": 103
+                },
+                "githubLabel": {
+                  "type": "string",
+                  "id": 104
+                },
+                "codeownerGithubTeams": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 105
+                },
+                "docTagPrefix": {
+                  "type": "string",
+                  "id": 106
+                },
+                "organization": {
+                  "type": "ClientLibraryOrganization",
+                  "id": 107
+                },
+                "librarySettings": {
+                  "rule": "repeated",
+                  "type": "ClientLibrarySettings",
+                  "id": 109
+                }
+              }
+            },
+            "JavaSettings": {
+              "fields": {
+                "libraryPackage": {
+                  "type": "string",
+                  "id": 1
+                },
+                "serviceClassNames": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
+                },
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 3
+                }
+              }
+            },
+            "CppSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "PhpSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "PythonSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "NodeSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "DotnetSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "RubySettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "GoSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "MethodSettings": {
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "longRunning": {
+                  "type": "LongRunning",
+                  "id": 2
+                }
+              },
+              "nested": {
+                "LongRunning": {
+                  "fields": {
+                    "initialPollDelay": {
+                      "type": "google.protobuf.Duration",
+                      "id": 1
+                    },
+                    "pollDelayMultiplier": {
+                      "type": "float",
+                      "id": 2
+                    },
+                    "maxPollDelay": {
+                      "type": "google.protobuf.Duration",
+                      "id": 3
+                    },
+                    "totalPollTimeout": {
+                      "type": "google.protobuf.Duration",
+                      "id": 4
+                    }
+                  }
+                }
+              }
+            },
+            "ClientLibraryOrganization": {
+              "values": {
+                "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED": 0,
+                "CLOUD": 1,
+                "ADS": 2,
+                "PHOTOS": 3,
+                "STREET_VIEW": 4
+              }
+            },
+            "ClientLibraryDestination": {
+              "values": {
+                "CLIENT_LIBRARY_DESTINATION_UNSPECIFIED": 0,
+                "GITHUB": 10,
+                "PACKAGE_MANAGER": 20
+              }
+            },
+            "LaunchStage": {
+              "values": {
+                "LAUNCH_STAGE_UNSPECIFIED": 0,
+                "UNIMPLEMENTED": 6,
+                "PRELAUNCH": 7,
+                "EARLY_ACCESS": 1,
+                "ALPHA": 2,
+                "BETA": 3,
+                "GA": 4,
+                "DEPRECATED": 5
+              }
             }
           }
         },
@@ -4494,6 +5089,13 @@
                   "type": "bool",
                   "id": 7
                 },
+                "deprecatedLegacyJsonFieldConflicts": {
+                  "type": "bool",
+                  "id": 11,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -4577,6 +5179,21 @@
                     "default": false
                   }
                 },
+                "debugRedact": {
+                  "type": "bool",
+                  "id": 16,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "retention": {
+                  "type": "OptionRetention",
+                  "id": 17
+                },
+                "target": {
+                  "type": "OptionTargetType",
+                  "id": 18
+                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -4609,6 +5226,27 @@
                     "JS_STRING": 1,
                     "JS_NUMBER": 2
                   }
+                },
+                "OptionRetention": {
+                  "values": {
+                    "RETENTION_UNKNOWN": 0,
+                    "RETENTION_RUNTIME": 1,
+                    "RETENTION_SOURCE": 2
+                  }
+                },
+                "OptionTargetType": {
+                  "values": {
+                    "TARGET_TYPE_UNKNOWN": 0,
+                    "TARGET_TYPE_FILE": 1,
+                    "TARGET_TYPE_EXTENSION_RANGE": 2,
+                    "TARGET_TYPE_MESSAGE": 3,
+                    "TARGET_TYPE_FIELD": 4,
+                    "TARGET_TYPE_ONEOF": 5,
+                    "TARGET_TYPE_ENUM": 6,
+                    "TARGET_TYPE_ENUM_ENTRY": 7,
+                    "TARGET_TYPE_SERVICE": 8,
+                    "TARGET_TYPE_METHOD": 9
+                  }
                 }
               }
             },
@@ -4638,6 +5276,13 @@
                   "id": 3,
                   "options": {
                     "default": false
+                  }
+                },
+                "deprecatedLegacyJsonFieldConflicts": {
+                  "type": "bool",
+                  "id": 6,
+                  "options": {
+                    "deprecated": true
                   }
                 },
                 "uninterpretedOption": {

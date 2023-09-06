@@ -5,7 +5,7 @@
   "author": "Google Inc.",
   "private": true,
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=14.0.0"
   },
   "files": [
     "*.js"
@@ -15,7 +15,7 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "@google-cloud/tasks": "^3.2.0",
+    "@google-cloud/tasks": "^4.0.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.3"
   },

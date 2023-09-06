@@ -88,8 +88,7 @@ export class BetaAnalyticsDataClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -97,7 +96,7 @@ export class BetaAnalyticsDataClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new BetaAnalyticsDataClient({fallback: 'rest'}, gax);
+   *     const client = new BetaAnalyticsDataClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -163,7 +162,7 @@ export class BetaAnalyticsDataClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -359,7 +358,7 @@ export class BetaAnalyticsDataClient {
    *   response rows for both date ranges. In a cohort request, this `dateRanges`
    *   must be unspecified.
    * @param {google.analytics.data.v1beta.FilterExpression} request.dimensionFilter
-   *   Dimension filters allow you to ask for only specific dimension values in
+   *   Dimension filters let you ask for only specific dimension values in
    *   the report. To learn more, see [Fundamentals of Dimension
    *   Filters](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#dimension_filters)
    *   for examples. Metrics cannot be used in this filter.
@@ -378,7 +377,7 @@ export class BetaAnalyticsDataClient {
    *   [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
    * @param {number} request.limit
    *   The number of rows to return. If unspecified, 10,000 rows are returned. The
-   *   API returns a maximum of 100,000 rows per request, no matter how many you
+   *   API returns a maximum of 250,000 rows per request, no matter how many you
    *   ask for. `limit` must be positive.
    *
    *   The API can also return fewer rows than the requested `limit`, if there
@@ -404,15 +403,21 @@ export class BetaAnalyticsDataClient {
    *   If false or unspecified, each row with all metrics equal to 0 will not be
    *   returned. If true, these rows will be returned if they are not separately
    *   removed by a filter.
+   *
+   *   Regardless of this `keep_empty_rows` setting, only data recorded by the
+   *   Google Analytics (GA4) property can be displayed in a report.
+   *
+   *   For example if a property never logs a `purchase` event, then a query for
+   *   the `eventName` dimension and  `eventCount` metric will not have a row
+   *   eventName: "purchase" and eventCount: 0.
    * @param {boolean} request.returnPropertyQuota
    *   Toggles whether to return the current state of this Analytics Property's
    *   quota. Quota is returned in [PropertyQuota](#PropertyQuota).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.analytics.data.v1beta.RunReportResponse | RunReportResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1beta.RunReportResponse|RunReportResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/beta_analytics_data.run_report.js</caption>
    * region_tag:analyticsdata_v1beta_generated_BetaAnalyticsData_RunReport_async
@@ -424,7 +429,7 @@ export class BetaAnalyticsDataClient {
     [
       protos.google.analytics.data.v1beta.IRunReportResponse,
       protos.google.analytics.data.v1beta.IRunReportRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   runReport(
@@ -464,7 +469,7 @@ export class BetaAnalyticsDataClient {
     [
       protos.google.analytics.data.v1beta.IRunReportResponse,
       protos.google.analytics.data.v1beta.IRunReportRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -538,15 +543,21 @@ export class BetaAnalyticsDataClient {
    *   If false or unspecified, each row with all metrics equal to 0 will not be
    *   returned. If true, these rows will be returned if they are not separately
    *   removed by a filter.
+   *
+   *   Regardless of this `keep_empty_rows` setting, only data recorded by the
+   *   Google Analytics (GA4) property can be displayed in a report.
+   *
+   *   For example if a property never logs a `purchase` event, then a query for
+   *   the `eventName` dimension and  `eventCount` metric will not have a row
+   *   eventName: "purchase" and eventCount: 0.
    * @param {boolean} request.returnPropertyQuota
    *   Toggles whether to return the current state of this Analytics Property's
    *   quota. Quota is returned in [PropertyQuota](#PropertyQuota).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.analytics.data.v1beta.RunPivotReportResponse | RunPivotReportResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1beta.RunPivotReportResponse|RunPivotReportResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/beta_analytics_data.run_pivot_report.js</caption>
    * region_tag:analyticsdata_v1beta_generated_BetaAnalyticsData_RunPivotReport_async
@@ -558,7 +569,7 @@ export class BetaAnalyticsDataClient {
     [
       protos.google.analytics.data.v1beta.IRunPivotReportResponse,
       protos.google.analytics.data.v1beta.IRunPivotReportRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   runPivotReport(
@@ -604,7 +615,7 @@ export class BetaAnalyticsDataClient {
     [
       protos.google.analytics.data.v1beta.IRunPivotReportResponse,
       protos.google.analytics.data.v1beta.IRunPivotReportRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -647,9 +658,8 @@ export class BetaAnalyticsDataClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.analytics.data.v1beta.BatchRunReportsResponse | BatchRunReportsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1beta.BatchRunReportsResponse|BatchRunReportsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/beta_analytics_data.batch_run_reports.js</caption>
    * region_tag:analyticsdata_v1beta_generated_BetaAnalyticsData_BatchRunReports_async
@@ -661,7 +671,7 @@ export class BetaAnalyticsDataClient {
     [
       protos.google.analytics.data.v1beta.IBatchRunReportsResponse,
       protos.google.analytics.data.v1beta.IBatchRunReportsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchRunReports(
@@ -707,7 +717,7 @@ export class BetaAnalyticsDataClient {
     [
       protos.google.analytics.data.v1beta.IBatchRunReportsResponse,
       protos.google.analytics.data.v1beta.IBatchRunReportsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -750,9 +760,8 @@ export class BetaAnalyticsDataClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.analytics.data.v1beta.BatchRunPivotReportsResponse | BatchRunPivotReportsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1beta.BatchRunPivotReportsResponse|BatchRunPivotReportsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/beta_analytics_data.batch_run_pivot_reports.js</caption>
    * region_tag:analyticsdata_v1beta_generated_BetaAnalyticsData_BatchRunPivotReports_async
@@ -767,7 +776,7 @@ export class BetaAnalyticsDataClient {
         | protos.google.analytics.data.v1beta.IBatchRunPivotReportsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   batchRunPivotReports(
@@ -816,7 +825,7 @@ export class BetaAnalyticsDataClient {
         | protos.google.analytics.data.v1beta.IBatchRunPivotReportsRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -866,9 +875,8 @@ export class BetaAnalyticsDataClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.analytics.data.v1beta.Metadata | Metadata}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1beta.Metadata|Metadata}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/beta_analytics_data.get_metadata.js</caption>
    * region_tag:analyticsdata_v1beta_generated_BetaAnalyticsData_GetMetadata_async
@@ -880,7 +888,7 @@ export class BetaAnalyticsDataClient {
     [
       protos.google.analytics.data.v1beta.IMetadata,
       protos.google.analytics.data.v1beta.IGetMetadataRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getMetadata(
@@ -926,7 +934,7 @@ export class BetaAnalyticsDataClient {
     [
       protos.google.analytics.data.v1beta.IMetadata,
       protos.google.analytics.data.v1beta.IGetMetadataRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -978,7 +986,7 @@ export class BetaAnalyticsDataClient {
    *   SQL having-clause. Dimensions cannot be used in this filter.
    * @param {number} request.limit
    *   The number of rows to return. If unspecified, 10,000 rows are returned. The
-   *   API returns a maximum of 100,000 rows per request, no matter how many you
+   *   API returns a maximum of 250,000 rows per request, no matter how many you
    *   ask for. `limit` must be positive.
    *
    *   The API can also return fewer rows than the requested `limit`, if there
@@ -1003,9 +1011,8 @@ export class BetaAnalyticsDataClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.analytics.data.v1beta.RunRealtimeReportResponse | RunRealtimeReportResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1beta.RunRealtimeReportResponse|RunRealtimeReportResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/beta_analytics_data.run_realtime_report.js</caption>
    * region_tag:analyticsdata_v1beta_generated_BetaAnalyticsData_RunRealtimeReport_async
@@ -1017,7 +1024,7 @@ export class BetaAnalyticsDataClient {
     [
       protos.google.analytics.data.v1beta.IRunRealtimeReportResponse,
       protos.google.analytics.data.v1beta.IRunRealtimeReportRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   runRealtimeReport(
@@ -1063,7 +1070,7 @@ export class BetaAnalyticsDataClient {
     [
       protos.google.analytics.data.v1beta.IRunRealtimeReportResponse,
       protos.google.analytics.data.v1beta.IRunRealtimeReportRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1105,10 +1112,6 @@ export class BetaAnalyticsDataClient {
    *   `property` should be the same value as in your `runReport` request.
    *
    *   Example: properties/1234
-   *
-   *   Set the Property ID to 0 for compatibility checking on dimensions and
-   *   metrics common to all properties. In this special mode, this method will
-   *   not return custom dimensions and metrics.
    * @param {number[]} request.dimensions
    *   The dimensions in this report. `dimensions` should be the same value as in
    *   your `runReport` request.
@@ -1128,9 +1131,8 @@ export class BetaAnalyticsDataClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.analytics.data.v1beta.CheckCompatibilityResponse | CheckCompatibilityResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1beta.CheckCompatibilityResponse|CheckCompatibilityResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta/beta_analytics_data.check_compatibility.js</caption>
    * region_tag:analyticsdata_v1beta_generated_BetaAnalyticsData_CheckCompatibility_async
@@ -1145,7 +1147,7 @@ export class BetaAnalyticsDataClient {
         | protos.google.analytics.data.v1beta.ICheckCompatibilityRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   checkCompatibility(
@@ -1194,7 +1196,7 @@ export class BetaAnalyticsDataClient {
         | protos.google.analytics.data.v1beta.ICheckCompatibilityRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

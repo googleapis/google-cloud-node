@@ -339,7 +339,9 @@ describe('v2.RoutesClient', () => {
       );
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      const stream = client.computeRouteMatrix(request);
+      const stream = client.computeRouteMatrix(request, {
+        retryRequestOptions: {noResponseRetries: 0},
+      });
       const promise = new Promise((resolve, reject) => {
         stream.on(
           'data',

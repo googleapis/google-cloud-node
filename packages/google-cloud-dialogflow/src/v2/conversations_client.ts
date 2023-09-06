@@ -41,7 +41,7 @@ const version = require('../../../package.json').version;
 
 /**
  *  Service for managing
- *  {@link google.cloud.dialogflow.v2.Conversation|Conversations}.
+ *  {@link protos.google.cloud.dialogflow.v2.Conversation|Conversations}.
  * @class
  * @memberof v2
  */
@@ -94,8 +94,7 @@ export class ConversationsClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -103,7 +102,7 @@ export class ConversationsClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new ConversationsClient({fallback: 'rest'}, gax);
+   *     const client = new ConversationsClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -173,7 +172,7 @@ export class ConversationsClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -401,6 +400,7 @@ export class ConversationsClient {
       'listMessages',
       'suggestConversationSummary',
       'generateStatelessSummary',
+      'searchKnowledge',
     ];
     for (const methodName of conversationsStubMethods) {
       const callPromise = this.conversationsStub.then(
@@ -502,12 +502,12 @@ export class ConversationsClient {
    * But we will provide suggestions which are generated from conversation.
    *
    * If
-   * {@link google.cloud.dialogflow.v2.Conversation.conversation_profile|Conversation.conversation_profile}
+   * {@link protos.google.cloud.dialogflow.v2.Conversation.conversation_profile|Conversation.conversation_profile}
    * is configured for a dialogflow agent, conversation will start from
    * `Automated Agent Stage`, otherwise, it will start from `Assist Stage`. And
    * during `Automated Agent Stage`, once an
-   * {@link google.cloud.dialogflow.v2.Intent|Intent} with
-   * {@link google.cloud.dialogflow.v2.Intent.live_agent_handoff|Intent.live_agent_handoff}
+   * {@link protos.google.cloud.dialogflow.v2.Intent|Intent} with
+   * {@link protos.google.cloud.dialogflow.v2.Intent.live_agent_handoff|Intent.live_agent_handoff}
    * is triggered, conversation will transfer to Assist Stage.
    *
    * @param {Object} request
@@ -523,7 +523,7 @@ export class ConversationsClient {
    *   auto-generated one to you.
    *
    *   The conversation ID must be compliant with the regression fomula
-   *   "{@link a-zA-Z0-9_-|a-zA-Z}*" with the characters length in range of [3,64].
+   *   `{@link protos.a-zA-Z0-9_-|a-zA-Z}*` with the characters length in range of [3,64].
    *   If the field is provided, the caller is resposible for
    *   1. the uniqueness of the ID, otherwise the request will be rejected.
    *   2. the consistency for whether to use custom ID or not under a project to
@@ -531,9 +531,8 @@ export class ConversationsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2.Conversation | Conversation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2.Conversation|Conversation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/conversations.create_conversation.js</caption>
    * region_tag:dialogflow_v2_generated_Conversations_CreateConversation_async
@@ -545,7 +544,7 @@ export class ConversationsClient {
     [
       protos.google.cloud.dialogflow.v2.IConversation,
       protos.google.cloud.dialogflow.v2.ICreateConversationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createConversation(
@@ -591,7 +590,7 @@ export class ConversationsClient {
     [
       protos.google.cloud.dialogflow.v2.IConversation,
       protos.google.cloud.dialogflow.v2.ICreateConversationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -624,9 +623,8 @@ export class ConversationsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2.Conversation | Conversation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2.Conversation|Conversation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/conversations.get_conversation.js</caption>
    * region_tag:dialogflow_v2_generated_Conversations_GetConversation_async
@@ -638,7 +636,7 @@ export class ConversationsClient {
     [
       protos.google.cloud.dialogflow.v2.IConversation,
       protos.google.cloud.dialogflow.v2.IGetConversationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getConversation(
@@ -684,7 +682,7 @@ export class ConversationsClient {
     [
       protos.google.cloud.dialogflow.v2.IConversation,
       protos.google.cloud.dialogflow.v2.IGetConversationRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -718,9 +716,8 @@ export class ConversationsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2.Conversation | Conversation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2.Conversation|Conversation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/conversations.complete_conversation.js</caption>
    * region_tag:dialogflow_v2_generated_Conversations_CompleteConversation_async
@@ -735,7 +732,7 @@ export class ConversationsClient {
         | protos.google.cloud.dialogflow.v2.ICompleteConversationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   completeConversation(
@@ -784,7 +781,7 @@ export class ConversationsClient {
         | protos.google.cloud.dialogflow.v2.ICompleteConversationRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -832,9 +829,8 @@ export class ConversationsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2.SuggestConversationSummaryResponse | SuggestConversationSummaryResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2.SuggestConversationSummaryResponse|SuggestConversationSummaryResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/conversations.suggest_conversation_summary.js</caption>
    * region_tag:dialogflow_v2_generated_Conversations_SuggestConversationSummary_async
@@ -849,7 +845,7 @@ export class ConversationsClient {
         | protos.google.cloud.dialogflow.v2.ISuggestConversationSummaryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   suggestConversationSummary(
@@ -898,7 +894,7 @@ export class ConversationsClient {
         | protos.google.cloud.dialogflow.v2.ISuggestConversationSummaryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -948,9 +944,8 @@ export class ConversationsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dialogflow.v2.GenerateStatelessSummaryResponse | GenerateStatelessSummaryResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2.GenerateStatelessSummaryResponse|GenerateStatelessSummaryResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/conversations.generate_stateless_summary.js</caption>
    * region_tag:dialogflow_v2_generated_Conversations_GenerateStatelessSummary_async
@@ -965,7 +960,7 @@ export class ConversationsClient {
         | protos.google.cloud.dialogflow.v2.IGenerateStatelessSummaryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   generateStatelessSummary(
@@ -1014,7 +1009,7 @@ export class ConversationsClient {
         | protos.google.cloud.dialogflow.v2.IGenerateStatelessSummaryRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1039,6 +1034,122 @@ export class ConversationsClient {
       options,
       callback
     );
+  }
+  /**
+   * Get answers for the given query based on knowledge documents.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   The parent resource contains the conversation profile
+   *   Format: 'projects/<Project ID>' or `projects/<Project
+   *   ID>/locations/<Location ID>`.
+   * @param {google.cloud.dialogflow.v2.TextInput} request.query
+   *   Required. The natural language text query for knowledge search.
+   * @param {string} request.conversationProfile
+   *   Required. The conversation profile used to configure the search.
+   *   Format: `projects/<Project ID>/locations/<Location
+   *   ID>/conversationProfiles/<Conversation Profile ID>`.
+   * @param {string} request.sessionId
+   *   The ID of the search session.
+   *   The session_id can be combined with Dialogflow V3 Agent ID retrieved from
+   *   conversation profile or on its own to identify a search session. The search
+   *   history of the same session will impact the search result. It's up to the
+   *   API caller to choose an appropriate `Session ID`. It can be a random number
+   *   or some type of session identifiers (preferably hashed). The length must
+   *   not exceed 36 characters.
+   * @param {string} request.conversation
+   *   The conversation (between human agent and end user) where the search
+   *   request is triggered. Format: `projects/<Project ID>/locations/<Location
+   *   ID>/conversations/<Conversation ID>`.
+   * @param {string} request.latestMessage
+   *   The name of the latest conversation message when the request is
+   *   triggered.
+   *   Format: `projects/<Project ID>/locations/<Location
+   *   ID>/conversations/<Conversation ID>/messages/<Message ID>`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2.SearchKnowledgeResponse|SearchKnowledgeResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/conversations.search_knowledge.js</caption>
+   * region_tag:dialogflow_v2_generated_Conversations_SearchKnowledge_async
+   */
+  searchKnowledge(
+    request?: protos.google.cloud.dialogflow.v2.ISearchKnowledgeRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2.ISearchKnowledgeResponse,
+      protos.google.cloud.dialogflow.v2.ISearchKnowledgeRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  searchKnowledge(
+    request: protos.google.cloud.dialogflow.v2.ISearchKnowledgeRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2.ISearchKnowledgeResponse,
+      | protos.google.cloud.dialogflow.v2.ISearchKnowledgeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  searchKnowledge(
+    request: protos.google.cloud.dialogflow.v2.ISearchKnowledgeRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2.ISearchKnowledgeResponse,
+      | protos.google.cloud.dialogflow.v2.ISearchKnowledgeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  searchKnowledge(
+    request?: protos.google.cloud.dialogflow.v2.ISearchKnowledgeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.dialogflow.v2.ISearchKnowledgeResponse,
+          | protos.google.cloud.dialogflow.v2.ISearchKnowledgeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dialogflow.v2.ISearchKnowledgeResponse,
+      | protos.google.cloud.dialogflow.v2.ISearchKnowledgeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2.ISearchKnowledgeResponse,
+      protos.google.cloud.dialogflow.v2.ISearchKnowledgeRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+        conversation: request.conversation ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.searchKnowledge(request, options, callback);
   }
 
   /**
@@ -1075,14 +1186,13 @@ export class ConversationsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dialogflow.v2.Conversation | Conversation}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.v2.Conversation|Conversation}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listConversationsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listConversations(
@@ -1092,7 +1202,7 @@ export class ConversationsClient {
     [
       protos.google.cloud.dialogflow.v2.IConversation[],
       protos.google.cloud.dialogflow.v2.IListConversationsRequest | null,
-      protos.google.cloud.dialogflow.v2.IListConversationsResponse
+      protos.google.cloud.dialogflow.v2.IListConversationsResponse,
     ]
   >;
   listConversations(
@@ -1138,7 +1248,7 @@ export class ConversationsClient {
     [
       protos.google.cloud.dialogflow.v2.IConversation[],
       protos.google.cloud.dialogflow.v2.IListConversationsRequest | null,
-      protos.google.cloud.dialogflow.v2.IListConversationsResponse
+      protos.google.cloud.dialogflow.v2.IListConversationsResponse,
     ]
   > | void {
     request = request || {};
@@ -1193,13 +1303,12 @@ export class ConversationsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dialogflow.v2.Conversation | Conversation} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.v2.Conversation|Conversation} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listConversationsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listConversationsStream(
@@ -1259,12 +1368,11 @@ export class ConversationsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dialogflow.v2.Conversation | Conversation}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dialogflow.v2.Conversation|Conversation}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/conversations.list_conversations.js</caption>
    * region_tag:dialogflow_v2_generated_Conversations_ListConversations_async
@@ -1320,14 +1428,13 @@ export class ConversationsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.dialogflow.v2.Message | Message}.
+   *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.v2.Message|Message}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listMessagesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listMessages(
@@ -1337,7 +1444,7 @@ export class ConversationsClient {
     [
       protos.google.cloud.dialogflow.v2.IMessage[],
       protos.google.cloud.dialogflow.v2.IListMessagesRequest | null,
-      protos.google.cloud.dialogflow.v2.IListMessagesResponse
+      protos.google.cloud.dialogflow.v2.IListMessagesResponse,
     ]
   >;
   listMessages(
@@ -1383,7 +1490,7 @@ export class ConversationsClient {
     [
       protos.google.cloud.dialogflow.v2.IMessage[],
       protos.google.cloud.dialogflow.v2.IListMessagesRequest | null,
-      protos.google.cloud.dialogflow.v2.IListMessagesResponse
+      protos.google.cloud.dialogflow.v2.IListMessagesResponse,
     ]
   > | void {
     request = request || {};
@@ -1430,13 +1537,12 @@ export class ConversationsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.dialogflow.v2.Message | Message} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.v2.Message|Message} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listMessagesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listMessagesStream(
@@ -1488,12 +1594,11 @@ export class ConversationsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.dialogflow.v2.Message | Message}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.dialogflow.v2.Message|Message}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/conversations.list_messages.js</caption>
    * region_tag:dialogflow_v2_generated_Conversations_ListMessages_async
@@ -1530,8 +1635,7 @@ export class ConversationsClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -1577,12 +1681,11 @@ export class ConversationsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

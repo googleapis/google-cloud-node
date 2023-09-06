@@ -100,8 +100,7 @@ export class CloudDeployClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -109,7 +108,7 @@ export class CloudDeployClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new CloudDeployClient({fallback: 'rest'}, gax);
+   *     const client = new CloudDeployClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -181,7 +180,7 @@ export class CloudDeployClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -274,7 +273,7 @@ export class CloudDeployClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
@@ -615,9 +614,8 @@ export class CloudDeployClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.deploy.v1.DeliveryPipeline | DeliveryPipeline}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.deploy.v1.DeliveryPipeline|DeliveryPipeline}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.get_delivery_pipeline.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_GetDeliveryPipeline_async
@@ -629,7 +627,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IDeliveryPipeline,
       protos.google.cloud.deploy.v1.IGetDeliveryPipelineRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDeliveryPipeline(
@@ -675,7 +673,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IDeliveryPipeline,
       protos.google.cloud.deploy.v1.IGetDeliveryPipelineRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -707,9 +705,8 @@ export class CloudDeployClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.deploy.v1.Target | Target}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.deploy.v1.Target|Target}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.get_target.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_GetTarget_async
@@ -721,7 +718,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.ITarget,
       protos.google.cloud.deploy.v1.IGetTargetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getTarget(
@@ -759,7 +756,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.ITarget,
       protos.google.cloud.deploy.v1.IGetTargetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -791,9 +788,8 @@ export class CloudDeployClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.deploy.v1.Release | Release}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.deploy.v1.Release|Release}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.get_release.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_GetRelease_async
@@ -805,7 +801,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IRelease,
       protos.google.cloud.deploy.v1.IGetReleaseRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRelease(
@@ -843,7 +839,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IRelease,
       protos.google.cloud.deploy.v1.IGetReleaseRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -876,9 +872,8 @@ export class CloudDeployClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.deploy.v1.AbandonReleaseResponse | AbandonReleaseResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.deploy.v1.AbandonReleaseResponse|AbandonReleaseResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.abandon_release.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_AbandonRelease_async
@@ -890,7 +885,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IAbandonReleaseResponse,
       protos.google.cloud.deploy.v1.IAbandonReleaseRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   abandonRelease(
@@ -930,7 +925,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IAbandonReleaseResponse,
       protos.google.cloud.deploy.v1.IAbandonReleaseRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -965,9 +960,8 @@ export class CloudDeployClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.deploy.v1.ApproveRolloutResponse | ApproveRolloutResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.deploy.v1.ApproveRolloutResponse|ApproveRolloutResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.approve_rollout.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_ApproveRollout_async
@@ -979,7 +973,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IApproveRolloutResponse,
       protos.google.cloud.deploy.v1.IApproveRolloutRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   approveRollout(
@@ -1019,7 +1013,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IApproveRolloutResponse,
       protos.google.cloud.deploy.v1.IApproveRolloutRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1054,9 +1048,8 @@ export class CloudDeployClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.deploy.v1.AdvanceRolloutResponse | AdvanceRolloutResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.deploy.v1.AdvanceRolloutResponse|AdvanceRolloutResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.advance_rollout.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_AdvanceRollout_async
@@ -1068,7 +1061,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IAdvanceRolloutResponse,
       protos.google.cloud.deploy.v1.IAdvanceRolloutRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   advanceRollout(
@@ -1108,7 +1101,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IAdvanceRolloutResponse,
       protos.google.cloud.deploy.v1.IAdvanceRolloutRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1141,9 +1134,8 @@ export class CloudDeployClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.deploy.v1.CancelRolloutResponse | CancelRolloutResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.deploy.v1.CancelRolloutResponse|CancelRolloutResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.cancel_rollout.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_CancelRollout_async
@@ -1155,7 +1147,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.ICancelRolloutResponse,
       protos.google.cloud.deploy.v1.ICancelRolloutRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   cancelRollout(
@@ -1195,7 +1187,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.ICancelRolloutResponse,
       protos.google.cloud.deploy.v1.ICancelRolloutRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1227,9 +1219,8 @@ export class CloudDeployClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.deploy.v1.Rollout | Rollout}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.deploy.v1.Rollout|Rollout}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.get_rollout.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_GetRollout_async
@@ -1241,7 +1232,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IRollout,
       protos.google.cloud.deploy.v1.IGetRolloutRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRollout(
@@ -1279,7 +1270,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IRollout,
       protos.google.cloud.deploy.v1.IGetRolloutRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1316,9 +1307,8 @@ export class CloudDeployClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.deploy.v1.IgnoreJobResponse | IgnoreJobResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.deploy.v1.IgnoreJobResponse|IgnoreJobResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.ignore_job.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_IgnoreJob_async
@@ -1330,7 +1320,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IIgnoreJobResponse,
       protos.google.cloud.deploy.v1.IIgnoreJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   ignoreJob(
@@ -1368,7 +1358,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IIgnoreJobResponse,
       protos.google.cloud.deploy.v1.IIgnoreJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1405,9 +1395,8 @@ export class CloudDeployClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.deploy.v1.RetryJobResponse | RetryJobResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.deploy.v1.RetryJobResponse|RetryJobResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.retry_job.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_RetryJob_async
@@ -1419,7 +1408,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IRetryJobResponse,
       protos.google.cloud.deploy.v1.IRetryJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   retryJob(
@@ -1457,7 +1446,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IRetryJobResponse,
       protos.google.cloud.deploy.v1.IRetryJobRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1489,9 +1478,8 @@ export class CloudDeployClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.deploy.v1.JobRun | JobRun}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.deploy.v1.JobRun|JobRun}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.get_job_run.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_GetJobRun_async
@@ -1503,7 +1491,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IJobRun,
       protos.google.cloud.deploy.v1.IGetJobRunRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getJobRun(
@@ -1541,7 +1529,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IJobRun,
       protos.google.cloud.deploy.v1.IGetJobRunRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1574,9 +1562,8 @@ export class CloudDeployClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.deploy.v1.TerminateJobRunResponse | TerminateJobRunResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.deploy.v1.TerminateJobRunResponse|TerminateJobRunResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.terminate_job_run.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_TerminateJobRun_async
@@ -1588,7 +1575,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.ITerminateJobRunResponse,
       protos.google.cloud.deploy.v1.ITerminateJobRunRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   terminateJobRun(
@@ -1628,7 +1615,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.ITerminateJobRunResponse,
       protos.google.cloud.deploy.v1.ITerminateJobRunRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1659,9 +1646,8 @@ export class CloudDeployClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.deploy.v1.Config | Config}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.deploy.v1.Config|Config}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.get_config.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_GetConfig_async
@@ -1673,7 +1659,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IConfig,
       protos.google.cloud.deploy.v1.IGetConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getConfig(
@@ -1711,7 +1697,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IConfig,
       protos.google.cloud.deploy.v1.IGetConfigRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1768,8 +1754,7 @@ export class CloudDeployClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.create_delivery_pipeline.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_CreateDeliveryPipeline_async
@@ -1784,7 +1769,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDeliveryPipeline(
@@ -1837,7 +1822,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1868,8 +1853,7 @@ export class CloudDeployClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.create_delivery_pipeline.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_CreateDeliveryPipeline_async
@@ -1936,8 +1920,7 @@ export class CloudDeployClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.update_delivery_pipeline.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_UpdateDeliveryPipeline_async
@@ -1952,7 +1935,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDeliveryPipeline(
@@ -2005,7 +1988,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2036,8 +2019,7 @@ export class CloudDeployClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.update_delivery_pipeline.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_UpdateDeliveryPipeline_async
@@ -2107,8 +2089,7 @@ export class CloudDeployClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.delete_delivery_pipeline.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_DeleteDeliveryPipeline_async
@@ -2123,7 +2104,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDeliveryPipeline(
@@ -2176,7 +2157,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2207,8 +2188,7 @@ export class CloudDeployClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.delete_delivery_pipeline.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_DeleteDeliveryPipeline_async
@@ -2272,8 +2252,7 @@ export class CloudDeployClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.create_target.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_CreateTarget_async
@@ -2288,7 +2267,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createTarget(
@@ -2341,7 +2320,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2368,8 +2347,7 @@ export class CloudDeployClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.create_target.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_CreateTarget_async
@@ -2436,8 +2414,7 @@ export class CloudDeployClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.update_target.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_UpdateTarget_async
@@ -2452,7 +2429,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateTarget(
@@ -2505,7 +2482,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2532,8 +2509,7 @@ export class CloudDeployClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.update_target.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_UpdateTarget_async
@@ -2599,8 +2575,7 @@ export class CloudDeployClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.delete_target.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_DeleteTarget_async
@@ -2615,7 +2590,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteTarget(
@@ -2668,7 +2643,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2695,8 +2670,7 @@ export class CloudDeployClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.delete_target.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_DeleteTarget_async
@@ -2760,8 +2734,7 @@ export class CloudDeployClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.create_release.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_CreateRelease_async
@@ -2776,7 +2749,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createRelease(
@@ -2829,7 +2802,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2856,8 +2829,7 @@ export class CloudDeployClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.create_release.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_CreateRelease_async
@@ -2924,8 +2896,7 @@ export class CloudDeployClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.create_rollout.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_CreateRollout_async
@@ -2940,7 +2911,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createRollout(
@@ -2993,7 +2964,7 @@ export class CloudDeployClient {
         protos.google.cloud.deploy.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -3020,8 +2991,7 @@ export class CloudDeployClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.create_rollout.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_CreateRollout_async
@@ -3076,14 +3046,13 @@ export class CloudDeployClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.deploy.v1.DeliveryPipeline | DeliveryPipeline}.
+   *   The first element of the array is Array of {@link protos.google.cloud.deploy.v1.DeliveryPipeline|DeliveryPipeline}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listDeliveryPipelinesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listDeliveryPipelines(
@@ -3093,7 +3062,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IDeliveryPipeline[],
       protos.google.cloud.deploy.v1.IListDeliveryPipelinesRequest | null,
-      protos.google.cloud.deploy.v1.IListDeliveryPipelinesResponse
+      protos.google.cloud.deploy.v1.IListDeliveryPipelinesResponse,
     ]
   >;
   listDeliveryPipelines(
@@ -3139,7 +3108,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IDeliveryPipeline[],
       protos.google.cloud.deploy.v1.IListDeliveryPipelinesRequest | null,
-      protos.google.cloud.deploy.v1.IListDeliveryPipelinesResponse
+      protos.google.cloud.deploy.v1.IListDeliveryPipelinesResponse,
     ]
   > | void {
     request = request || {};
@@ -3187,13 +3156,12 @@ export class CloudDeployClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.deploy.v1.DeliveryPipeline | DeliveryPipeline} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.deploy.v1.DeliveryPipeline|DeliveryPipeline} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listDeliveryPipelinesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listDeliveryPipelinesStream(
@@ -3246,12 +3214,11 @@ export class CloudDeployClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.deploy.v1.DeliveryPipeline | DeliveryPipeline}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.deploy.v1.DeliveryPipeline|DeliveryPipeline}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.list_delivery_pipelines.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_ListDeliveryPipelines_async
@@ -3305,14 +3272,13 @@ export class CloudDeployClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.deploy.v1.Target | Target}.
+   *   The first element of the array is Array of {@link protos.google.cloud.deploy.v1.Target|Target}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listTargetsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listTargets(
@@ -3322,7 +3288,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.ITarget[],
       protos.google.cloud.deploy.v1.IListTargetsRequest | null,
-      protos.google.cloud.deploy.v1.IListTargetsResponse
+      protos.google.cloud.deploy.v1.IListTargetsResponse,
     ]
   >;
   listTargets(
@@ -3360,7 +3326,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.ITarget[],
       protos.google.cloud.deploy.v1.IListTargetsRequest | null,
-      protos.google.cloud.deploy.v1.IListTargetsResponse
+      protos.google.cloud.deploy.v1.IListTargetsResponse,
     ]
   > | void {
     request = request || {};
@@ -3409,13 +3375,12 @@ export class CloudDeployClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.deploy.v1.Target | Target} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.deploy.v1.Target|Target} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listTargetsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listTargetsStream(
@@ -3469,12 +3434,11 @@ export class CloudDeployClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.deploy.v1.Target | Target}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.deploy.v1.Target|Target}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.list_targets.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_ListTargets_async
@@ -3528,14 +3492,13 @@ export class CloudDeployClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.deploy.v1.Release | Release}.
+   *   The first element of the array is Array of {@link protos.google.cloud.deploy.v1.Release|Release}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listReleasesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listReleases(
@@ -3545,7 +3508,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IRelease[],
       protos.google.cloud.deploy.v1.IListReleasesRequest | null,
-      protos.google.cloud.deploy.v1.IListReleasesResponse
+      protos.google.cloud.deploy.v1.IListReleasesResponse,
     ]
   >;
   listReleases(
@@ -3585,7 +3548,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IRelease[],
       protos.google.cloud.deploy.v1.IListReleasesRequest | null,
-      protos.google.cloud.deploy.v1.IListReleasesResponse
+      protos.google.cloud.deploy.v1.IListReleasesResponse,
     ]
   > | void {
     request = request || {};
@@ -3634,13 +3597,12 @@ export class CloudDeployClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.deploy.v1.Release | Release} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.deploy.v1.Release|Release} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listReleasesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listReleasesStream(
@@ -3694,12 +3656,11 @@ export class CloudDeployClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.deploy.v1.Release | Release}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.deploy.v1.Release|Release}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.list_releases.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_ListReleases_async
@@ -3752,14 +3713,13 @@ export class CloudDeployClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.deploy.v1.Rollout | Rollout}.
+   *   The first element of the array is Array of {@link protos.google.cloud.deploy.v1.Rollout|Rollout}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listRolloutsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listRollouts(
@@ -3769,7 +3729,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IRollout[],
       protos.google.cloud.deploy.v1.IListRolloutsRequest | null,
-      protos.google.cloud.deploy.v1.IListRolloutsResponse
+      protos.google.cloud.deploy.v1.IListRolloutsResponse,
     ]
   >;
   listRollouts(
@@ -3809,7 +3769,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IRollout[],
       protos.google.cloud.deploy.v1.IListRolloutsRequest | null,
-      protos.google.cloud.deploy.v1.IListRolloutsResponse
+      protos.google.cloud.deploy.v1.IListRolloutsResponse,
     ]
   > | void {
     request = request || {};
@@ -3857,13 +3817,12 @@ export class CloudDeployClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.deploy.v1.Rollout | Rollout} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.deploy.v1.Rollout|Rollout} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listRolloutsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listRolloutsStream(
@@ -3916,12 +3875,11 @@ export class CloudDeployClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.deploy.v1.Rollout | Rollout}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.deploy.v1.Rollout|Rollout}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.list_rollouts.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_ListRollouts_async
@@ -3974,14 +3932,13 @@ export class CloudDeployClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.deploy.v1.JobRun | JobRun}.
+   *   The first element of the array is Array of {@link protos.google.cloud.deploy.v1.JobRun|JobRun}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listJobRunsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listJobRuns(
@@ -3991,7 +3948,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IJobRun[],
       protos.google.cloud.deploy.v1.IListJobRunsRequest | null,
-      protos.google.cloud.deploy.v1.IListJobRunsResponse
+      protos.google.cloud.deploy.v1.IListJobRunsResponse,
     ]
   >;
   listJobRuns(
@@ -4029,7 +3986,7 @@ export class CloudDeployClient {
     [
       protos.google.cloud.deploy.v1.IJobRun[],
       protos.google.cloud.deploy.v1.IListJobRunsRequest | null,
-      protos.google.cloud.deploy.v1.IListJobRunsResponse
+      protos.google.cloud.deploy.v1.IListJobRunsResponse,
     ]
   > | void {
     request = request || {};
@@ -4077,13 +4034,12 @@ export class CloudDeployClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.deploy.v1.JobRun | JobRun} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.deploy.v1.JobRun|JobRun} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listJobRunsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listJobRunsStream(
@@ -4136,12 +4092,11 @@ export class CloudDeployClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.deploy.v1.JobRun | JobRun}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.deploy.v1.JobRun|JobRun}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_deploy.list_job_runs.js</caption>
    * region_tag:clouddeploy_v1_generated_CloudDeploy_ListJobRuns_async
@@ -4206,7 +4161,7 @@ export class CloudDeployClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
@@ -4227,8 +4182,7 @@ export class CloudDeployClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -4254,7 +4208,7 @@ export class CloudDeployClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
@@ -4275,8 +4229,7 @@ export class CloudDeployClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -4303,7 +4256,7 @@ export class CloudDeployClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.TestIamPermissionsResponse> {
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
@@ -4318,8 +4271,7 @@ export class CloudDeployClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -4365,12 +4317,11 @@ export class CloudDeployClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

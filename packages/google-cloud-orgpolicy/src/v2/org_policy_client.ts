@@ -109,8 +109,7 @@ export class OrgPolicyClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -118,7 +117,7 @@ export class OrgPolicyClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new OrgPolicyClient({fallback: 'rest'}, gax);
+   *     const client = new OrgPolicyClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -184,7 +183,7 @@ export class OrgPolicyClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -391,9 +390,8 @@ export class OrgPolicyClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.orgpolicy.v2.Policy | Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.orgpolicy.v2.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/org_policy.get_policy.js</caption>
    * region_tag:orgpolicy_v2_generated_OrgPolicy_GetPolicy_async
@@ -405,7 +403,7 @@ export class OrgPolicyClient {
     [
       protos.google.cloud.orgpolicy.v2.IPolicy,
       protos.google.cloud.orgpolicy.v2.IGetPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getPolicy(
@@ -443,7 +441,7 @@ export class OrgPolicyClient {
     [
       protos.google.cloud.orgpolicy.v2.IPolicy,
       protos.google.cloud.orgpolicy.v2.IGetPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -479,9 +477,8 @@ export class OrgPolicyClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.orgpolicy.v2.Policy | Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.orgpolicy.v2.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/org_policy.get_effective_policy.js</caption>
    * region_tag:orgpolicy_v2_generated_OrgPolicy_GetEffectivePolicy_async
@@ -493,7 +490,7 @@ export class OrgPolicyClient {
     [
       protos.google.cloud.orgpolicy.v2.IPolicy,
       protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getEffectivePolicy(
@@ -539,7 +536,7 @@ export class OrgPolicyClient {
     [
       protos.google.cloud.orgpolicy.v2.IPolicy,
       protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -582,9 +579,8 @@ export class OrgPolicyClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.orgpolicy.v2.Policy | Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.orgpolicy.v2.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/org_policy.create_policy.js</caption>
    * region_tag:orgpolicy_v2_generated_OrgPolicy_CreatePolicy_async
@@ -596,7 +592,7 @@ export class OrgPolicyClient {
     [
       protos.google.cloud.orgpolicy.v2.IPolicy,
       protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createPolicy(
@@ -636,7 +632,7 @@ export class OrgPolicyClient {
     [
       protos.google.cloud.orgpolicy.v2.IPolicy,
       protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -679,9 +675,8 @@ export class OrgPolicyClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.orgpolicy.v2.Policy | Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.orgpolicy.v2.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/org_policy.update_policy.js</caption>
    * region_tag:orgpolicy_v2_generated_OrgPolicy_UpdatePolicy_async
@@ -693,7 +688,7 @@ export class OrgPolicyClient {
     [
       protos.google.cloud.orgpolicy.v2.IPolicy,
       protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updatePolicy(
@@ -733,7 +728,7 @@ export class OrgPolicyClient {
     [
       protos.google.cloud.orgpolicy.v2.IPolicy,
       protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -768,9 +763,8 @@ export class OrgPolicyClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/org_policy.delete_policy.js</caption>
    * region_tag:orgpolicy_v2_generated_OrgPolicy_DeletePolicy_async
@@ -782,7 +776,7 @@ export class OrgPolicyClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deletePolicy(
@@ -822,7 +816,7 @@ export class OrgPolicyClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -866,14 +860,13 @@ export class OrgPolicyClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.orgpolicy.v2.Constraint | Constraint}.
+   *   The first element of the array is Array of {@link protos.google.cloud.orgpolicy.v2.Constraint|Constraint}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listConstraintsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listConstraints(
@@ -883,7 +876,7 @@ export class OrgPolicyClient {
     [
       protos.google.cloud.orgpolicy.v2.IConstraint[],
       protos.google.cloud.orgpolicy.v2.IListConstraintsRequest | null,
-      protos.google.cloud.orgpolicy.v2.IListConstraintsResponse
+      protos.google.cloud.orgpolicy.v2.IListConstraintsResponse,
     ]
   >;
   listConstraints(
@@ -929,7 +922,7 @@ export class OrgPolicyClient {
     [
       protos.google.cloud.orgpolicy.v2.IConstraint[],
       protos.google.cloud.orgpolicy.v2.IListConstraintsRequest | null,
-      protos.google.cloud.orgpolicy.v2.IListConstraintsResponse
+      protos.google.cloud.orgpolicy.v2.IListConstraintsResponse,
     ]
   > | void {
     request = request || {};
@@ -972,13 +965,12 @@ export class OrgPolicyClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.orgpolicy.v2.Constraint | Constraint} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.orgpolicy.v2.Constraint|Constraint} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listConstraintsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listConstraintsStream(
@@ -1026,12 +1018,11 @@ export class OrgPolicyClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.orgpolicy.v2.Constraint | Constraint}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.orgpolicy.v2.Constraint|Constraint}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/org_policy.list_constraints.js</caption>
    * region_tag:orgpolicy_v2_generated_OrgPolicy_ListConstraints_async
@@ -1080,14 +1071,13 @@ export class OrgPolicyClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.orgpolicy.v2.Policy | Policy}.
+   *   The first element of the array is Array of {@link protos.google.cloud.orgpolicy.v2.Policy|Policy}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listPoliciesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listPolicies(
@@ -1097,7 +1087,7 @@ export class OrgPolicyClient {
     [
       protos.google.cloud.orgpolicy.v2.IPolicy[],
       protos.google.cloud.orgpolicy.v2.IListPoliciesRequest | null,
-      protos.google.cloud.orgpolicy.v2.IListPoliciesResponse
+      protos.google.cloud.orgpolicy.v2.IListPoliciesResponse,
     ]
   >;
   listPolicies(
@@ -1137,7 +1127,7 @@ export class OrgPolicyClient {
     [
       protos.google.cloud.orgpolicy.v2.IPolicy[],
       protos.google.cloud.orgpolicy.v2.IListPoliciesRequest | null,
-      protos.google.cloud.orgpolicy.v2.IListPoliciesResponse
+      protos.google.cloud.orgpolicy.v2.IListPoliciesResponse,
     ]
   > | void {
     request = request || {};
@@ -1181,13 +1171,12 @@ export class OrgPolicyClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.orgpolicy.v2.Policy | Policy} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.orgpolicy.v2.Policy|Policy} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listPoliciesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listPoliciesStream(
@@ -1236,12 +1225,11 @@ export class OrgPolicyClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.orgpolicy.v2.Policy | Policy}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.orgpolicy.v2.Policy|Policy}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/org_policy.list_policies.js</caption>
    * region_tag:orgpolicy_v2_generated_OrgPolicy_ListPolicies_async

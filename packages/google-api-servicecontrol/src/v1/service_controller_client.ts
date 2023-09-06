@@ -90,8 +90,7 @@ export class ServiceControllerClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -99,7 +98,7 @@ export class ServiceControllerClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new ServiceControllerClient({fallback: 'rest'}, gax);
+   *     const client = new ServiceControllerClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -165,7 +164,7 @@ export class ServiceControllerClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -321,7 +320,7 @@ export class ServiceControllerClient {
    * propagation, therefore callers MUST NOT depend on the `Check` method having
    * the latest policy information.
    *
-   * NOTE: the {@link google.api.servicecontrol.v1.CheckRequest|CheckRequest} has
+   * NOTE: the {@link protos.google.api.servicecontrol.v1.CheckRequest|CheckRequest} has
    * the size limit (wire-format byte size) of 1MB.
    *
    * This method requires the `servicemanagement.services.check` permission
@@ -348,9 +347,8 @@ export class ServiceControllerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.api.servicecontrol.v1.CheckResponse | CheckResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.api.servicecontrol.v1.CheckResponse|CheckResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/service_controller.check.js</caption>
    * region_tag:servicecontrol_v1_generated_ServiceController_Check_async
@@ -362,7 +360,7 @@ export class ServiceControllerClient {
     [
       protos.google.api.servicecontrol.v1.ICheckResponse,
       protos.google.api.servicecontrol.v1.ICheckRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   check(
@@ -400,7 +398,7 @@ export class ServiceControllerClient {
     [
       protos.google.api.servicecontrol.v1.ICheckResponse,
       protos.google.api.servicecontrol.v1.ICheckRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -431,7 +429,7 @@ export class ServiceControllerClient {
    * the aggregation time window to avoid data loss risk more than 0.01%
    * for business and compliance reasons.
    *
-   * NOTE: the {@link google.api.servicecontrol.v1.ReportRequest|ReportRequest} has
+   * NOTE: the {@link protos.google.api.servicecontrol.v1.ReportRequest|ReportRequest} has
    * the size limit (wire-format byte size) of 1MB.
    *
    * This method requires the `servicemanagement.services.report` permission
@@ -457,7 +455,7 @@ export class ServiceControllerClient {
    *
    *   There is no limit on the number of operations in the same ReportRequest,
    *   however the ReportRequest size should be no larger than 1MB. See
-   *   {@link google.api.servicecontrol.v1.ReportResponse.report_errors|ReportResponse.report_errors}
+   *   {@link protos.google.api.servicecontrol.v1.ReportResponse.report_errors|ReportResponse.report_errors}
    *   for partial failure behavior.
    * @param {string} request.serviceConfigId
    *   Specifies which version of service config should be used to process the
@@ -468,9 +466,8 @@ export class ServiceControllerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.api.servicecontrol.v1.ReportResponse | ReportResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.api.servicecontrol.v1.ReportResponse|ReportResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/service_controller.report.js</caption>
    * region_tag:servicecontrol_v1_generated_ServiceController_Report_async
@@ -482,7 +479,7 @@ export class ServiceControllerClient {
     [
       protos.google.api.servicecontrol.v1.IReportResponse,
       protos.google.api.servicecontrol.v1.IReportRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   report(
@@ -520,7 +517,7 @@ export class ServiceControllerClient {
     [
       protos.google.api.servicecontrol.v1.IReportResponse,
       protos.google.api.servicecontrol.v1.IReportRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

@@ -89,8 +89,7 @@ export class TetherClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -98,7 +97,7 @@ export class TetherClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new TetherClient({fallback: 'rest'}, gax);
+   *     const client = new TetherClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -164,7 +163,7 @@ export class TetherClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -178,7 +177,7 @@ export class TetherClient {
     this.descriptors.stream = {
       egress: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.BIDI_STREAMING,
-        opts.fallback === 'rest'
+        !!opts.fallback
       ),
     };
 
@@ -340,10 +339,9 @@ export class TetherClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
    *   An object stream which is both readable and writable. It accepts objects
-   *   representing {@link google.cloud.apigeeconnect.v1.EgressResponse | EgressResponse} for write() method, and
-   *   will emit objects representing {@link google.cloud.apigeeconnect.v1.EgressRequest | EgressRequest} on 'data' event asynchronously.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming)
+   *   representing {@link protos.google.cloud.apigeeconnect.v1.EgressResponse|EgressResponse} for write() method, and
+   *   will emit objects representing {@link protos.google.cloud.apigeeconnect.v1.EgressRequest|EgressRequest} on 'data' event asynchronously.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/tether.egress.js</caption>
    * region_tag:apigeeconnect_v1_generated_Tether_Egress_async

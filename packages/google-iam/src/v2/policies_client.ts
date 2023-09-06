@@ -92,8 +92,7 @@ export class PoliciesClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -101,7 +100,7 @@ export class PoliciesClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new PoliciesClient({fallback: 'rest'}, gax);
+   *     const client = new PoliciesClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -167,7 +166,7 @@ export class PoliciesClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -195,7 +194,7 @@ export class PoliciesClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
@@ -404,9 +403,8 @@ export class PoliciesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v2.Policy | Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.iam.v2.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/policies.get_policy.js</caption>
    * region_tag:iam_v2_generated_Policies_GetPolicy_async
@@ -418,7 +416,7 @@ export class PoliciesClient {
     [
       protos.google.iam.v2.IPolicy,
       protos.google.iam.v2.IGetPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getPolicy(
@@ -456,7 +454,7 @@ export class PoliciesClient {
     [
       protos.google.iam.v2.IPolicy,
       protos.google.iam.v2.IGetPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -508,8 +506,7 @@ export class PoliciesClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/policies.create_policy.js</caption>
    * region_tag:iam_v2_generated_Policies_CreatePolicy_async
@@ -524,7 +521,7 @@ export class PoliciesClient {
         protos.google.iam.v2.IPolicyOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createPolicy(
@@ -577,7 +574,7 @@ export class PoliciesClient {
         protos.google.iam.v2.IPolicyOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -604,8 +601,7 @@ export class PoliciesClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/policies.create_policy.js</caption>
    * region_tag:iam_v2_generated_Policies_CreatePolicy_async
@@ -640,7 +636,7 @@ export class PoliciesClient {
    *
    * To update a policy, you should use a read-modify-write loop:
    *
-   * 1. Use {@link google.iam.v2.Policies.GetPolicy|GetPolicy} to read the current version of the policy.
+   * 1. Use {@link protos.google.iam.v2.Policies.GetPolicy|GetPolicy} to read the current version of the policy.
    * 2. Modify the policy as needed.
    * 3. Use `UpdatePolicy` to write the updated policy.
    *
@@ -660,8 +656,7 @@ export class PoliciesClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/policies.update_policy.js</caption>
    * region_tag:iam_v2_generated_Policies_UpdatePolicy_async
@@ -676,7 +671,7 @@ export class PoliciesClient {
         protos.google.iam.v2.IPolicyOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updatePolicy(
@@ -729,7 +724,7 @@ export class PoliciesClient {
         protos.google.iam.v2.IPolicyOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -756,8 +751,7 @@ export class PoliciesClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/policies.update_policy.js</caption>
    * region_tag:iam_v2_generated_Policies_UpdatePolicy_async
@@ -814,8 +808,7 @@ export class PoliciesClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/policies.delete_policy.js</caption>
    * region_tag:iam_v2_generated_Policies_DeletePolicy_async
@@ -830,7 +823,7 @@ export class PoliciesClient {
         protos.google.iam.v2.IPolicyOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deletePolicy(
@@ -883,7 +876,7 @@ export class PoliciesClient {
         protos.google.iam.v2.IPolicyOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -910,8 +903,7 @@ export class PoliciesClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/policies.delete_policy.js</caption>
    * region_tag:iam_v2_generated_Policies_DeletePolicy_async
@@ -965,19 +957,18 @@ export class PoliciesClient {
    *   The maximum number of policies to return. IAM ignores this value and uses
    *   the value 1000.
    * @param {string} request.pageToken
-   *   A page token received in a {@link google.iam.v2.ListPoliciesResponse|ListPoliciesResponse}. Provide this token to
+   *   A page token received in a {@link protos.google.iam.v2.ListPoliciesResponse|ListPoliciesResponse}. Provide this token to
    *   retrieve the next page.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.iam.v2.Policy | Policy}.
+   *   The first element of the array is Array of {@link protos.google.iam.v2.Policy|Policy}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listPoliciesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listPolicies(
@@ -987,7 +978,7 @@ export class PoliciesClient {
     [
       protos.google.iam.v2.IPolicy[],
       protos.google.iam.v2.IListPoliciesRequest | null,
-      protos.google.iam.v2.IListPoliciesResponse
+      protos.google.iam.v2.IListPoliciesResponse,
     ]
   >;
   listPolicies(
@@ -1025,7 +1016,7 @@ export class PoliciesClient {
     [
       protos.google.iam.v2.IPolicy[],
       protos.google.iam.v2.IListPoliciesRequest | null,
-      protos.google.iam.v2.IListPoliciesResponse
+      protos.google.iam.v2.IListPoliciesResponse,
     ]
   > | void {
     request = request || {};
@@ -1068,18 +1059,17 @@ export class PoliciesClient {
    *   The maximum number of policies to return. IAM ignores this value and uses
    *   the value 1000.
    * @param {string} request.pageToken
-   *   A page token received in a {@link google.iam.v2.ListPoliciesResponse|ListPoliciesResponse}. Provide this token to
+   *   A page token received in a {@link protos.google.iam.v2.ListPoliciesResponse|ListPoliciesResponse}. Provide this token to
    *   retrieve the next page.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.iam.v2.Policy | Policy} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.iam.v2.Policy|Policy} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listPoliciesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listPoliciesStream(
@@ -1127,17 +1117,16 @@ export class PoliciesClient {
    *   The maximum number of policies to return. IAM ignores this value and uses
    *   the value 1000.
    * @param {string} request.pageToken
-   *   A page token received in a {@link google.iam.v2.ListPoliciesResponse|ListPoliciesResponse}. Provide this token to
+   *   A page token received in a {@link protos.google.iam.v2.ListPoliciesResponse|ListPoliciesResponse}. Provide this token to
    *   retrieve the next page.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.iam.v2.Policy | Policy}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.iam.v2.Policy|Policy}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v2/policies.list_policies.js</caption>
    * region_tag:iam_v2_generated_Policies_ListPolicies_async

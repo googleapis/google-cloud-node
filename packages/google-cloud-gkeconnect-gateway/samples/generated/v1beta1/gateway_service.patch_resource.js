@@ -35,12 +35,12 @@ function main() {
   /**
    *  The HTTP request/response body as raw binary.
    */
-  // const data = 'Buffer.from('string')'
+  // const data = Buffer.from('string')
   /**
    *  Application specific response metadata. Must be set in the first response
    *  for streaming APIs.
    */
-  // const extensions = 1234
+  // const extensions = [1,2,3,4]
 
   // Imports the Gateway library
   const {GatewayServiceClient} = require('@google-cloud/gke-connect-gateway').v1beta1;

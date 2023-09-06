@@ -39,7 +39,7 @@ function main(project) {
    *  connections to. The identifier should correspond to a `hashed_account_id`
    *  provided in a previous `CreateAssessment` or `AnnotateAssessment` call.
    */
-  // const hashedAccountId = 'Buffer.from('string')'
+  // const hashedAccountId = Buffer.from('string')
   /**
    *  Optional. The maximum number of groups to return. The service might return
    *  fewer than this value. If unspecified, at most 50 groups are returned. The

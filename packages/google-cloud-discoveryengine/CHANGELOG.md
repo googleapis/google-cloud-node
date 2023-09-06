@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v0.8.0...discoveryengine-v1.0.0) (2023-08-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))
+* [discoveryengine] fix typings for IAM methods ([#4457](https://github.com/googleapis/google-cloud-node/issues/4457)) and update node 14
+
+### Bug Fixes
+
+* [discoveryengine] fix typings for IAM methods ([#4457](https://github.com/googleapis/google-cloud-node/issues/4457)) and update node 14 ([91b7527](https://github.com/googleapis/google-cloud-node/commit/91b75277f651cbe16c10987c56743868a48dd3f1))
+
+
+### Miscellaneous Chores
+
+* Migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443)) ([2260f12](https://github.com/googleapis/google-cloud-node/commit/2260f12543d171bda95345e53475f5f0fdc45770))
+
 ## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v0.7.0...discoveryengine-v0.8.0) (2023-06-28)
 
 

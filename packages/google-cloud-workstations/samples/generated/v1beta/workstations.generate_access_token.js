@@ -29,11 +29,6 @@ function main(workstation) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the workstation for which the access token should be
-   *  generated.
-   */
-  // const workstation = 'abc123'
-  /**
    *  Desired expiration time of the access token. This value must
    *  be at most 24 hours in the future. If a value is not specified, the
    *  token's expiration time will be set to a default value of 1 hour in the
@@ -46,6 +41,11 @@ function main(workstation) {
    *  will be set to a default value of 1 hour.
    */
   // const ttl = {}
+  /**
+   *  Required. Name of the workstation for which the access token should be
+   *  generated.
+   */
+  // const workstation = 'abc123'
 
   // Imports the Workstations library
   const {WorkstationsClient} = require('@google-cloud/workstations').v1beta;

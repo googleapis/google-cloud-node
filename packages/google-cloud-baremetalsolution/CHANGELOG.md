@@ -1,5 +1,28 @@
 # Changelog
 
+## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/bare-metal-solution-v1.0.0...bare-metal-solution-v1.1.0) (2023-08-09)
+
+
+### Features
+
+* **baremetalsolution:** [baremetalsolution] several new resources and RPCs ([#4517](https://github.com/googleapis/google-cloud-node/issues/4517)) ([0e3d600](https://github.com/googleapis/google-cloud-node/commit/0e3d600371265cd8fc0609b55086e39d0d4d5df0))
+
+## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/bare-metal-solution-v0.3.2...bare-metal-solution-v1.0.0) (2023-08-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))
+
+### Bug Fixes
+
+* [Many APIs] fix typings for IAM methods ([#4459](https://github.com/googleapis/google-cloud-node/issues/4459)) ([1d510be](https://github.com/googleapis/google-cloud-node/commit/1d510bef5bd7b0ac3552b4729ef3d9ebe1ac3dc4))
+
+
+### Miscellaneous Chores
+
+* Migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443)) ([2260f12](https://github.com/googleapis/google-cloud-node/commit/2260f12543d171bda95345e53475f5f0fdc45770))
+
 ## [0.3.2](https://github.com/googleapis/google-cloud-node/compare/bare-metal-solution-v0.3.1...bare-metal-solution-v0.3.2) (2023-04-13)
 
 

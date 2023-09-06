@@ -31,7 +31,7 @@ function main(requests, outputConfig) {
   /**
    *  Required. Individual image annotation requests for this batch.
    */
-  // const requests = 1234
+  // const requests = [1,2,3,4]
   /**
    *  Required. The desired output location and metadata (e.g. format).
    */

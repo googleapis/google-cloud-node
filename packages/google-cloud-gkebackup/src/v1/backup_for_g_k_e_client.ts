@@ -100,8 +100,7 @@ export class BackupForGKEClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -109,7 +108,7 @@ export class BackupForGKEClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new BackupForGKEClient({fallback: 'rest'}, gax);
+   *     const client = new BackupForGKEClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -181,7 +180,7 @@ export class BackupForGKEClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -261,7 +260,7 @@ export class BackupForGKEClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
@@ -676,9 +675,8 @@ export class BackupForGKEClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.gkebackup.v1.BackupPlan | BackupPlan}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkebackup.v1.BackupPlan|BackupPlan}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.get_backup_plan.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_GetBackupPlan_async
@@ -690,7 +688,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IBackupPlan,
       protos.google.cloud.gkebackup.v1.IGetBackupPlanRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getBackupPlan(
@@ -730,7 +728,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IBackupPlan,
       protos.google.cloud.gkebackup.v1.IGetBackupPlanRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -762,9 +760,8 @@ export class BackupForGKEClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.gkebackup.v1.Backup | Backup}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkebackup.v1.Backup|Backup}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.get_backup.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_GetBackup_async
@@ -776,7 +773,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IBackup,
       protos.google.cloud.gkebackup.v1.IGetBackupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getBackup(
@@ -814,7 +811,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IBackup,
       protos.google.cloud.gkebackup.v1.IGetBackupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -846,9 +843,8 @@ export class BackupForGKEClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.gkebackup.v1.VolumeBackup | VolumeBackup}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkebackup.v1.VolumeBackup|VolumeBackup}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.get_volume_backup.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_GetVolumeBackup_async
@@ -860,7 +856,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IVolumeBackup,
       protos.google.cloud.gkebackup.v1.IGetVolumeBackupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getVolumeBackup(
@@ -906,7 +902,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IVolumeBackup,
       protos.google.cloud.gkebackup.v1.IGetVolumeBackupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -938,9 +934,8 @@ export class BackupForGKEClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.gkebackup.v1.RestorePlan | RestorePlan}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkebackup.v1.RestorePlan|RestorePlan}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.get_restore_plan.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_GetRestorePlan_async
@@ -952,7 +947,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IRestorePlan,
       protos.google.cloud.gkebackup.v1.IGetRestorePlanRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRestorePlan(
@@ -998,7 +993,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IRestorePlan,
       protos.google.cloud.gkebackup.v1.IGetRestorePlanRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1030,9 +1025,8 @@ export class BackupForGKEClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.gkebackup.v1.Restore | Restore}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkebackup.v1.Restore|Restore}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.get_restore.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_GetRestore_async
@@ -1044,7 +1038,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IRestore,
       protos.google.cloud.gkebackup.v1.IGetRestoreRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getRestore(
@@ -1084,7 +1078,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IRestore,
       protos.google.cloud.gkebackup.v1.IGetRestoreRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1116,9 +1110,8 @@ export class BackupForGKEClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.gkebackup.v1.VolumeRestore | VolumeRestore}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.gkebackup.v1.VolumeRestore|VolumeRestore}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.get_volume_restore.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_GetVolumeRestore_async
@@ -1130,7 +1123,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IVolumeRestore,
       protos.google.cloud.gkebackup.v1.IGetVolumeRestoreRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getVolumeRestore(
@@ -1176,7 +1169,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IVolumeRestore,
       protos.google.cloud.gkebackup.v1.IGetVolumeRestoreRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1223,8 +1216,7 @@ export class BackupForGKEClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.create_backup_plan.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_CreateBackupPlan_async
@@ -1239,7 +1231,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createBackupPlan(
@@ -1292,7 +1284,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1319,8 +1311,7 @@ export class BackupForGKEClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.create_backup_plan.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_CreateBackupPlan_async
@@ -1372,8 +1363,7 @@ export class BackupForGKEClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.update_backup_plan.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_UpdateBackupPlan_async
@@ -1388,7 +1378,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateBackupPlan(
@@ -1441,7 +1431,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1468,8 +1458,7 @@ export class BackupForGKEClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.update_backup_plan.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_UpdateBackupPlan_async
@@ -1507,7 +1496,7 @@ export class BackupForGKEClient {
    *   Format: `projects/* /locations/* /backupPlans/*`
    * @param {string} request.etag
    *   If provided, this value must match the current value of the
-   *   target BackupPlan's {@link google.cloud.gkebackup.v1.BackupPlan.etag|etag} field
+   *   target BackupPlan's {@link protos.google.cloud.gkebackup.v1.BackupPlan.etag|etag} field
    *   or the request is rejected.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1515,8 +1504,7 @@ export class BackupForGKEClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.delete_backup_plan.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_DeleteBackupPlan_async
@@ -1531,7 +1519,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteBackupPlan(
@@ -1584,7 +1572,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1611,8 +1599,7 @@ export class BackupForGKEClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.delete_backup_plan.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_DeleteBackupPlan_async
@@ -1654,19 +1641,18 @@ export class BackupForGKEClient {
    *   The client-provided short name for the Backup resource.
    *   This name must:
    *
-   *    - be between 1 and 63 characters long (inclusive)
-   *    - consist of only lower-case ASCII letters, numbers, and dashes
-   *    - start with a lower-case letter
-   *    - end with a lower-case letter or number
-   *    - be unique within the set of Backups in this BackupPlan
+   *   - be between 1 and 63 characters long (inclusive)
+   *   - consist of only lower-case ASCII letters, numbers, and dashes
+   *   - start with a lower-case letter
+   *   - end with a lower-case letter or number
+   *   - be unique within the set of Backups in this BackupPlan
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.create_backup.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_CreateBackup_async
@@ -1681,7 +1667,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createBackup(
@@ -1734,7 +1720,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1761,8 +1747,7 @@ export class BackupForGKEClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.create_backup.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_CreateBackup_async
@@ -1813,8 +1798,7 @@ export class BackupForGKEClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.update_backup.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_UpdateBackup_async
@@ -1829,7 +1813,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateBackup(
@@ -1882,7 +1866,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1909,8 +1893,7 @@ export class BackupForGKEClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.update_backup.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_UpdateBackup_async
@@ -1948,7 +1931,7 @@ export class BackupForGKEClient {
    *   Format: `projects/* /locations/* /backupPlans/* /backups/*`
    * @param {string} request.etag
    *   If provided, this value must match the current value of the
-   *   target Backup's {@link google.cloud.gkebackup.v1.Backup.etag|etag} field or the
+   *   target Backup's {@link protos.google.cloud.gkebackup.v1.Backup.etag|etag} field or the
    *   request is rejected.
    * @param {boolean} request.force
    *   If set to true, any VolumeBackups below this Backup will also be deleted.
@@ -1960,8 +1943,7 @@ export class BackupForGKEClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.delete_backup.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_DeleteBackup_async
@@ -1976,7 +1958,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteBackup(
@@ -2029,7 +2011,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2056,8 +2038,7 @@ export class BackupForGKEClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.delete_backup.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_DeleteBackup_async
@@ -2099,19 +2080,18 @@ export class BackupForGKEClient {
    *   Required. The client-provided short name for the RestorePlan resource.
    *   This name must:
    *
-   *    - be between 1 and 63 characters long (inclusive)
-   *    - consist of only lower-case ASCII letters, numbers, and dashes
-   *    - start with a lower-case letter
-   *    - end with a lower-case letter or number
-   *    - be unique within the set of RestorePlans in this location
+   *   - be between 1 and 63 characters long (inclusive)
+   *   - consist of only lower-case ASCII letters, numbers, and dashes
+   *   - start with a lower-case letter
+   *   - end with a lower-case letter or number
+   *   - be unique within the set of RestorePlans in this location
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.create_restore_plan.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_CreateRestorePlan_async
@@ -2126,7 +2106,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createRestorePlan(
@@ -2179,7 +2159,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2206,8 +2186,7 @@ export class BackupForGKEClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.create_restore_plan.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_CreateRestorePlan_async
@@ -2258,8 +2237,7 @@ export class BackupForGKEClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.update_restore_plan.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_UpdateRestorePlan_async
@@ -2274,7 +2252,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateRestorePlan(
@@ -2327,7 +2305,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2354,8 +2332,7 @@ export class BackupForGKEClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.update_restore_plan.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_UpdateRestorePlan_async
@@ -2393,7 +2370,7 @@ export class BackupForGKEClient {
    *   Format: `projects/* /locations/* /restorePlans/*`
    * @param {string} request.etag
    *   If provided, this value must match the current value of the
-   *   target RestorePlan's {@link google.cloud.gkebackup.v1.RestorePlan.etag|etag}
+   *   target RestorePlan's {@link protos.google.cloud.gkebackup.v1.RestorePlan.etag|etag}
    *   field or the request is rejected.
    * @param {boolean} request.force
    *   If set to true, any Restores below this RestorePlan will also be deleted.
@@ -2405,8 +2382,7 @@ export class BackupForGKEClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.delete_restore_plan.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_DeleteRestorePlan_async
@@ -2421,7 +2397,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteRestorePlan(
@@ -2474,7 +2450,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2501,8 +2477,7 @@ export class BackupForGKEClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.delete_restore_plan.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_DeleteRestorePlan_async
@@ -2544,19 +2519,18 @@ export class BackupForGKEClient {
    *   Required. The client-provided short name for the Restore resource.
    *   This name must:
    *
-   *    - be between 1 and 63 characters long (inclusive)
-   *    - consist of only lower-case ASCII letters, numbers, and dashes
-   *    - start with a lower-case letter
-   *    - end with a lower-case letter or number
-   *    - be unique within the set of Restores in this RestorePlan.
+   *   - be between 1 and 63 characters long (inclusive)
+   *   - consist of only lower-case ASCII letters, numbers, and dashes
+   *   - start with a lower-case letter
+   *   - end with a lower-case letter or number
+   *   - be unique within the set of Restores in this RestorePlan.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.create_restore.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_CreateRestore_async
@@ -2571,7 +2545,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createRestore(
@@ -2624,7 +2598,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2651,8 +2625,7 @@ export class BackupForGKEClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.create_restore.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_CreateRestore_async
@@ -2703,8 +2676,7 @@ export class BackupForGKEClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.update_restore.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_UpdateRestore_async
@@ -2719,7 +2691,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateRestore(
@@ -2772,7 +2744,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2799,8 +2771,7 @@ export class BackupForGKEClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.update_restore.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_UpdateRestore_async
@@ -2838,7 +2809,7 @@ export class BackupForGKEClient {
    *   Format: `projects/* /locations/* /restorePlans/* /restores/*`
    * @param {string} request.etag
    *   If provided, this value must match the current value of the
-   *   target Restore's {@link google.cloud.gkebackup.v1.Restore.etag|etag} field or
+   *   target Restore's {@link protos.google.cloud.gkebackup.v1.Restore.etag|etag} field or
    *   the request is rejected.
    * @param {boolean} request.force
    *   If set to true, any VolumeRestores below this restore will also be deleted.
@@ -2850,8 +2821,7 @@ export class BackupForGKEClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.delete_restore.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_DeleteRestore_async
@@ -2866,7 +2836,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteRestore(
@@ -2919,7 +2889,7 @@ export class BackupForGKEClient {
         protos.google.cloud.gkebackup.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -2946,8 +2916,7 @@ export class BackupForGKEClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.delete_restore.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_DeleteRestore_async
@@ -2988,11 +2957,11 @@ export class BackupForGKEClient {
    *   If not specified, a default value will be chosen by the service.
    *   Note that the response may inclue a partial list and a caller should
    *   only rely on the response's
-   *   {@link google.cloud.gkebackup.v1.ListBackupPlansResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListBackupPlansResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The value of
-   *   {@link google.cloud.gkebackup.v1.ListBackupPlansResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListBackupPlansResponse.next_page_token|next_page_token}
    *   received from a previous `ListBackupPlans` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to
@@ -3004,14 +2973,13 @@ export class BackupForGKEClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.gkebackup.v1.BackupPlan | BackupPlan}.
+   *   The first element of the array is Array of {@link protos.google.cloud.gkebackup.v1.BackupPlan|BackupPlan}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listBackupPlansAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listBackupPlans(
@@ -3021,7 +2989,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IBackupPlan[],
       protos.google.cloud.gkebackup.v1.IListBackupPlansRequest | null,
-      protos.google.cloud.gkebackup.v1.IListBackupPlansResponse
+      protos.google.cloud.gkebackup.v1.IListBackupPlansResponse,
     ]
   >;
   listBackupPlans(
@@ -3067,7 +3035,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IBackupPlan[],
       protos.google.cloud.gkebackup.v1.IListBackupPlansRequest | null,
-      protos.google.cloud.gkebackup.v1.IListBackupPlansResponse
+      protos.google.cloud.gkebackup.v1.IListBackupPlansResponse,
     ]
   > | void {
     request = request || {};
@@ -3101,11 +3069,11 @@ export class BackupForGKEClient {
    *   If not specified, a default value will be chosen by the service.
    *   Note that the response may inclue a partial list and a caller should
    *   only rely on the response's
-   *   {@link google.cloud.gkebackup.v1.ListBackupPlansResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListBackupPlansResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The value of
-   *   {@link google.cloud.gkebackup.v1.ListBackupPlansResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListBackupPlansResponse.next_page_token|next_page_token}
    *   received from a previous `ListBackupPlans` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to
@@ -3117,13 +3085,12 @@ export class BackupForGKEClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.gkebackup.v1.BackupPlan | BackupPlan} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.gkebackup.v1.BackupPlan|BackupPlan} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listBackupPlansAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listBackupPlansStream(
@@ -3162,11 +3129,11 @@ export class BackupForGKEClient {
    *   If not specified, a default value will be chosen by the service.
    *   Note that the response may inclue a partial list and a caller should
    *   only rely on the response's
-   *   {@link google.cloud.gkebackup.v1.ListBackupPlansResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListBackupPlansResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The value of
-   *   {@link google.cloud.gkebackup.v1.ListBackupPlansResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListBackupPlansResponse.next_page_token|next_page_token}
    *   received from a previous `ListBackupPlans` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to
@@ -3178,12 +3145,11 @@ export class BackupForGKEClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.gkebackup.v1.BackupPlan | BackupPlan}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.gkebackup.v1.BackupPlan|BackupPlan}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.list_backup_plans.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_ListBackupPlans_async
@@ -3222,11 +3188,11 @@ export class BackupForGKEClient {
    *   If not specified, a default value will be chosen by the service.
    *   Note that the response may inclue a partial list and a caller should
    *   only rely on the response's
-   *   {@link google.cloud.gkebackup.v1.ListBackupsResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListBackupsResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The value of
-   *   {@link google.cloud.gkebackup.v1.ListBackupsResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListBackupsResponse.next_page_token|next_page_token}
    *   received from a previous `ListBackups` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to
@@ -3238,14 +3204,13 @@ export class BackupForGKEClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.gkebackup.v1.Backup | Backup}.
+   *   The first element of the array is Array of {@link protos.google.cloud.gkebackup.v1.Backup|Backup}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listBackupsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listBackups(
@@ -3255,7 +3220,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IBackup[],
       protos.google.cloud.gkebackup.v1.IListBackupsRequest | null,
-      protos.google.cloud.gkebackup.v1.IListBackupsResponse
+      protos.google.cloud.gkebackup.v1.IListBackupsResponse,
     ]
   >;
   listBackups(
@@ -3295,7 +3260,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IBackup[],
       protos.google.cloud.gkebackup.v1.IListBackupsRequest | null,
-      protos.google.cloud.gkebackup.v1.IListBackupsResponse
+      protos.google.cloud.gkebackup.v1.IListBackupsResponse,
     ]
   > | void {
     request = request || {};
@@ -3329,11 +3294,11 @@ export class BackupForGKEClient {
    *   If not specified, a default value will be chosen by the service.
    *   Note that the response may inclue a partial list and a caller should
    *   only rely on the response's
-   *   {@link google.cloud.gkebackup.v1.ListBackupsResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListBackupsResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The value of
-   *   {@link google.cloud.gkebackup.v1.ListBackupsResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListBackupsResponse.next_page_token|next_page_token}
    *   received from a previous `ListBackups` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to
@@ -3345,13 +3310,12 @@ export class BackupForGKEClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.gkebackup.v1.Backup | Backup} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.gkebackup.v1.Backup|Backup} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listBackupsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listBackupsStream(
@@ -3390,11 +3354,11 @@ export class BackupForGKEClient {
    *   If not specified, a default value will be chosen by the service.
    *   Note that the response may inclue a partial list and a caller should
    *   only rely on the response's
-   *   {@link google.cloud.gkebackup.v1.ListBackupsResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListBackupsResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The value of
-   *   {@link google.cloud.gkebackup.v1.ListBackupsResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListBackupsResponse.next_page_token|next_page_token}
    *   received from a previous `ListBackups` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to
@@ -3406,12 +3370,11 @@ export class BackupForGKEClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.gkebackup.v1.Backup | Backup}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.gkebackup.v1.Backup|Backup}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.list_backups.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_ListBackups_async
@@ -3450,11 +3413,11 @@ export class BackupForGKEClient {
    *   If not specified, a default value will be chosen by the service.
    *   Note that the response may inclue a partial list and a caller should
    *   only rely on the response's
-   *   {@link google.cloud.gkebackup.v1.ListVolumeBackupsResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListVolumeBackupsResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The value of
-   *   {@link google.cloud.gkebackup.v1.ListVolumeBackupsResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListVolumeBackupsResponse.next_page_token|next_page_token}
    *   received from a previous `ListVolumeBackups` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to
@@ -3466,14 +3429,13 @@ export class BackupForGKEClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.gkebackup.v1.VolumeBackup | VolumeBackup}.
+   *   The first element of the array is Array of {@link protos.google.cloud.gkebackup.v1.VolumeBackup|VolumeBackup}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listVolumeBackupsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listVolumeBackups(
@@ -3483,7 +3445,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IVolumeBackup[],
       protos.google.cloud.gkebackup.v1.IListVolumeBackupsRequest | null,
-      protos.google.cloud.gkebackup.v1.IListVolumeBackupsResponse
+      protos.google.cloud.gkebackup.v1.IListVolumeBackupsResponse,
     ]
   >;
   listVolumeBackups(
@@ -3529,7 +3491,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IVolumeBackup[],
       protos.google.cloud.gkebackup.v1.IListVolumeBackupsRequest | null,
-      protos.google.cloud.gkebackup.v1.IListVolumeBackupsResponse
+      protos.google.cloud.gkebackup.v1.IListVolumeBackupsResponse,
     ]
   > | void {
     request = request || {};
@@ -3563,11 +3525,11 @@ export class BackupForGKEClient {
    *   If not specified, a default value will be chosen by the service.
    *   Note that the response may inclue a partial list and a caller should
    *   only rely on the response's
-   *   {@link google.cloud.gkebackup.v1.ListVolumeBackupsResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListVolumeBackupsResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The value of
-   *   {@link google.cloud.gkebackup.v1.ListVolumeBackupsResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListVolumeBackupsResponse.next_page_token|next_page_token}
    *   received from a previous `ListVolumeBackups` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to
@@ -3579,13 +3541,12 @@ export class BackupForGKEClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.gkebackup.v1.VolumeBackup | VolumeBackup} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.gkebackup.v1.VolumeBackup|VolumeBackup} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listVolumeBackupsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listVolumeBackupsStream(
@@ -3624,11 +3585,11 @@ export class BackupForGKEClient {
    *   If not specified, a default value will be chosen by the service.
    *   Note that the response may inclue a partial list and a caller should
    *   only rely on the response's
-   *   {@link google.cloud.gkebackup.v1.ListVolumeBackupsResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListVolumeBackupsResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The value of
-   *   {@link google.cloud.gkebackup.v1.ListVolumeBackupsResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListVolumeBackupsResponse.next_page_token|next_page_token}
    *   received from a previous `ListVolumeBackups` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to
@@ -3640,12 +3601,11 @@ export class BackupForGKEClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.gkebackup.v1.VolumeBackup | VolumeBackup}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.gkebackup.v1.VolumeBackup|VolumeBackup}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.list_volume_backups.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_ListVolumeBackups_async
@@ -3684,11 +3644,11 @@ export class BackupForGKEClient {
    *   If not specified, a default value will be chosen by the service.
    *   Note that the response may inclue a partial list and a caller should
    *   only rely on the response's
-   *   {@link google.cloud.gkebackup.v1.ListRestorePlansResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListRestorePlansResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The value of
-   *   {@link google.cloud.gkebackup.v1.ListRestorePlansResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListRestorePlansResponse.next_page_token|next_page_token}
    *   received from a previous `ListRestorePlans` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to
@@ -3700,14 +3660,13 @@ export class BackupForGKEClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.gkebackup.v1.RestorePlan | RestorePlan}.
+   *   The first element of the array is Array of {@link protos.google.cloud.gkebackup.v1.RestorePlan|RestorePlan}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listRestorePlansAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listRestorePlans(
@@ -3717,7 +3676,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IRestorePlan[],
       protos.google.cloud.gkebackup.v1.IListRestorePlansRequest | null,
-      protos.google.cloud.gkebackup.v1.IListRestorePlansResponse
+      protos.google.cloud.gkebackup.v1.IListRestorePlansResponse,
     ]
   >;
   listRestorePlans(
@@ -3763,7 +3722,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IRestorePlan[],
       protos.google.cloud.gkebackup.v1.IListRestorePlansRequest | null,
-      protos.google.cloud.gkebackup.v1.IListRestorePlansResponse
+      protos.google.cloud.gkebackup.v1.IListRestorePlansResponse,
     ]
   > | void {
     request = request || {};
@@ -3797,11 +3756,11 @@ export class BackupForGKEClient {
    *   If not specified, a default value will be chosen by the service.
    *   Note that the response may inclue a partial list and a caller should
    *   only rely on the response's
-   *   {@link google.cloud.gkebackup.v1.ListRestorePlansResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListRestorePlansResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The value of
-   *   {@link google.cloud.gkebackup.v1.ListRestorePlansResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListRestorePlansResponse.next_page_token|next_page_token}
    *   received from a previous `ListRestorePlans` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to
@@ -3813,13 +3772,12 @@ export class BackupForGKEClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.gkebackup.v1.RestorePlan | RestorePlan} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.gkebackup.v1.RestorePlan|RestorePlan} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listRestorePlansAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listRestorePlansStream(
@@ -3858,11 +3816,11 @@ export class BackupForGKEClient {
    *   If not specified, a default value will be chosen by the service.
    *   Note that the response may inclue a partial list and a caller should
    *   only rely on the response's
-   *   {@link google.cloud.gkebackup.v1.ListRestorePlansResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListRestorePlansResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The value of
-   *   {@link google.cloud.gkebackup.v1.ListRestorePlansResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListRestorePlansResponse.next_page_token|next_page_token}
    *   received from a previous `ListRestorePlans` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to
@@ -3874,12 +3832,11 @@ export class BackupForGKEClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.gkebackup.v1.RestorePlan | RestorePlan}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.gkebackup.v1.RestorePlan|RestorePlan}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.list_restore_plans.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_ListRestorePlans_async
@@ -3918,11 +3875,11 @@ export class BackupForGKEClient {
    *   If not specified, a default value will be chosen by the service.
    *   Note that the response may inclue a partial list and a caller should
    *   only rely on the response's
-   *   {@link google.cloud.gkebackup.v1.ListRestoresResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListRestoresResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The value of
-   *   {@link google.cloud.gkebackup.v1.ListRestoresResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListRestoresResponse.next_page_token|next_page_token}
    *   received from a previous `ListRestores` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to `ListRestores`
@@ -3934,14 +3891,13 @@ export class BackupForGKEClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.gkebackup.v1.Restore | Restore}.
+   *   The first element of the array is Array of {@link protos.google.cloud.gkebackup.v1.Restore|Restore}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listRestoresAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listRestores(
@@ -3951,7 +3907,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IRestore[],
       protos.google.cloud.gkebackup.v1.IListRestoresRequest | null,
-      protos.google.cloud.gkebackup.v1.IListRestoresResponse
+      protos.google.cloud.gkebackup.v1.IListRestoresResponse,
     ]
   >;
   listRestores(
@@ -3991,7 +3947,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IRestore[],
       protos.google.cloud.gkebackup.v1.IListRestoresRequest | null,
-      protos.google.cloud.gkebackup.v1.IListRestoresResponse
+      protos.google.cloud.gkebackup.v1.IListRestoresResponse,
     ]
   > | void {
     request = request || {};
@@ -4025,11 +3981,11 @@ export class BackupForGKEClient {
    *   If not specified, a default value will be chosen by the service.
    *   Note that the response may inclue a partial list and a caller should
    *   only rely on the response's
-   *   {@link google.cloud.gkebackup.v1.ListRestoresResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListRestoresResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The value of
-   *   {@link google.cloud.gkebackup.v1.ListRestoresResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListRestoresResponse.next_page_token|next_page_token}
    *   received from a previous `ListRestores` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to `ListRestores`
@@ -4041,13 +3997,12 @@ export class BackupForGKEClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.gkebackup.v1.Restore | Restore} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.gkebackup.v1.Restore|Restore} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listRestoresAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listRestoresStream(
@@ -4086,11 +4041,11 @@ export class BackupForGKEClient {
    *   If not specified, a default value will be chosen by the service.
    *   Note that the response may inclue a partial list and a caller should
    *   only rely on the response's
-   *   {@link google.cloud.gkebackup.v1.ListRestoresResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListRestoresResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The value of
-   *   {@link google.cloud.gkebackup.v1.ListRestoresResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListRestoresResponse.next_page_token|next_page_token}
    *   received from a previous `ListRestores` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to `ListRestores`
@@ -4102,12 +4057,11 @@ export class BackupForGKEClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.gkebackup.v1.Restore | Restore}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.gkebackup.v1.Restore|Restore}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.list_restores.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_ListRestores_async
@@ -4146,11 +4100,11 @@ export class BackupForGKEClient {
    *   If not specified, a default value will be chosen by the service.
    *   Note that the response may inclue a partial list and a caller should
    *   only rely on the response's
-   *   {@link google.cloud.gkebackup.v1.ListVolumeRestoresResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListVolumeRestoresResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The value of
-   *   {@link google.cloud.gkebackup.v1.ListVolumeRestoresResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListVolumeRestoresResponse.next_page_token|next_page_token}
    *   received from a previous `ListVolumeRestores` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to
@@ -4162,14 +4116,13 @@ export class BackupForGKEClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.gkebackup.v1.VolumeRestore | VolumeRestore}.
+   *   The first element of the array is Array of {@link protos.google.cloud.gkebackup.v1.VolumeRestore|VolumeRestore}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listVolumeRestoresAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listVolumeRestores(
@@ -4179,7 +4132,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IVolumeRestore[],
       protos.google.cloud.gkebackup.v1.IListVolumeRestoresRequest | null,
-      protos.google.cloud.gkebackup.v1.IListVolumeRestoresResponse
+      protos.google.cloud.gkebackup.v1.IListVolumeRestoresResponse,
     ]
   >;
   listVolumeRestores(
@@ -4225,7 +4178,7 @@ export class BackupForGKEClient {
     [
       protos.google.cloud.gkebackup.v1.IVolumeRestore[],
       protos.google.cloud.gkebackup.v1.IListVolumeRestoresRequest | null,
-      protos.google.cloud.gkebackup.v1.IListVolumeRestoresResponse
+      protos.google.cloud.gkebackup.v1.IListVolumeRestoresResponse,
     ]
   > | void {
     request = request || {};
@@ -4259,11 +4212,11 @@ export class BackupForGKEClient {
    *   If not specified, a default value will be chosen by the service.
    *   Note that the response may inclue a partial list and a caller should
    *   only rely on the response's
-   *   {@link google.cloud.gkebackup.v1.ListVolumeRestoresResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListVolumeRestoresResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The value of
-   *   {@link google.cloud.gkebackup.v1.ListVolumeRestoresResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListVolumeRestoresResponse.next_page_token|next_page_token}
    *   received from a previous `ListVolumeRestores` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to
@@ -4275,13 +4228,12 @@ export class BackupForGKEClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.gkebackup.v1.VolumeRestore | VolumeRestore} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.gkebackup.v1.VolumeRestore|VolumeRestore} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listVolumeRestoresAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listVolumeRestoresStream(
@@ -4320,11 +4272,11 @@ export class BackupForGKEClient {
    *   If not specified, a default value will be chosen by the service.
    *   Note that the response may inclue a partial list and a caller should
    *   only rely on the response's
-   *   {@link google.cloud.gkebackup.v1.ListVolumeRestoresResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListVolumeRestoresResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
    * @param {string} request.pageToken
    *   The value of
-   *   {@link google.cloud.gkebackup.v1.ListVolumeRestoresResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.gkebackup.v1.ListVolumeRestoresResponse.next_page_token|next_page_token}
    *   received from a previous `ListVolumeRestores` call.
    *   Provide this to retrieve the subsequent page in a multi-page list of
    *   results. When paginating, all other parameters provided to
@@ -4336,12 +4288,11 @@ export class BackupForGKEClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.gkebackup.v1.VolumeRestore | VolumeRestore}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.gkebackup.v1.VolumeRestore|VolumeRestore}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/backup_for_g_k_e.list_volume_restores.js</caption>
    * region_tag:gkebackup_v1_generated_BackupForGKE_ListVolumeRestores_async
@@ -4406,7 +4357,7 @@ export class BackupForGKEClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
@@ -4427,8 +4378,7 @@ export class BackupForGKEClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -4454,7 +4404,7 @@ export class BackupForGKEClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
@@ -4475,8 +4425,7 @@ export class BackupForGKEClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -4503,7 +4452,7 @@ export class BackupForGKEClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.TestIamPermissionsResponse> {
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
@@ -4518,8 +4467,7 @@ export class BackupForGKEClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -4565,12 +4513,11 @@ export class BackupForGKEClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

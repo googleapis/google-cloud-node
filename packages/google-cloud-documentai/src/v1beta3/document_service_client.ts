@@ -94,8 +94,7 @@ export class DocumentServiceClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -103,7 +102,7 @@ export class DocumentServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new DocumentServiceClient({fallback: 'rest'}, gax);
+   *     const client = new DocumentServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -173,7 +172,7 @@ export class DocumentServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -214,7 +213,7 @@ export class DocumentServiceClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
@@ -265,12 +264,34 @@ export class DocumentServiceClient {
     const updateDatasetMetadata = protoFilesRoot.lookup(
       '.google.cloud.documentai.v1beta3.UpdateDatasetOperationMetadata'
     ) as gax.protobuf.Type;
+    const importDocumentsResponse = protoFilesRoot.lookup(
+      '.google.cloud.documentai.v1beta3.ImportDocumentsResponse'
+    ) as gax.protobuf.Type;
+    const importDocumentsMetadata = protoFilesRoot.lookup(
+      '.google.cloud.documentai.v1beta3.ImportDocumentsMetadata'
+    ) as gax.protobuf.Type;
+    const batchDeleteDocumentsResponse = protoFilesRoot.lookup(
+      '.google.cloud.documentai.v1beta3.BatchDeleteDocumentsResponse'
+    ) as gax.protobuf.Type;
+    const batchDeleteDocumentsMetadata = protoFilesRoot.lookup(
+      '.google.cloud.documentai.v1beta3.BatchDeleteDocumentsMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       updateDataset: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateDatasetResponse.decode.bind(updateDatasetResponse),
         updateDatasetMetadata.decode.bind(updateDatasetMetadata)
+      ),
+      importDocuments: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        importDocumentsResponse.decode.bind(importDocumentsResponse),
+        importDocumentsMetadata.decode.bind(importDocumentsMetadata)
+      ),
+      batchDeleteDocuments: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        batchDeleteDocumentsResponse.decode.bind(batchDeleteDocumentsResponse),
+        batchDeleteDocumentsMetadata.decode.bind(batchDeleteDocumentsMetadata)
       ),
     };
 
@@ -325,6 +346,9 @@ export class DocumentServiceClient {
     // and create an API call method for each.
     const documentServiceStubMethods = [
       'updateDataset',
+      'importDocuments',
+      'getDocument',
+      'batchDeleteDocuments',
       'getDatasetSchema',
       'updateDatasetSchema',
     ];
@@ -411,6 +435,106 @@ export class DocumentServiceClient {
   // -- Service calls --
   // -------------------
   /**
+   * Returns relevant fields present in the requested document.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.dataset
+   *   Required. The resource name of the dataset that the document belongs to .
+   *   Format:
+   *   projects/{project}/locations/{location}/processors/{processor}/dataset
+   * @param {google.cloud.documentai.v1beta3.DocumentId} request.documentId
+   *   Required. Document identifier.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   If set, only fields listed here will be returned. Otherwise, all fields
+   *   will be returned by default.
+   * @param {google.cloud.documentai.v1beta3.DocumentPageRange} request.pageRange
+   *   List of pages for which the fields specified in the `read_mask` must
+   *   be served.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.documentai.v1beta3.GetDocumentResponse|GetDocumentResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta3/document_service.get_document.js</caption>
+   * region_tag:documentai_v1beta3_generated_DocumentService_GetDocument_async
+   */
+  getDocument(
+    request?: protos.google.cloud.documentai.v1beta3.IGetDocumentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.documentai.v1beta3.IGetDocumentResponse,
+      protos.google.cloud.documentai.v1beta3.IGetDocumentRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getDocument(
+    request: protos.google.cloud.documentai.v1beta3.IGetDocumentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.documentai.v1beta3.IGetDocumentResponse,
+      | protos.google.cloud.documentai.v1beta3.IGetDocumentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getDocument(
+    request: protos.google.cloud.documentai.v1beta3.IGetDocumentRequest,
+    callback: Callback<
+      protos.google.cloud.documentai.v1beta3.IGetDocumentResponse,
+      | protos.google.cloud.documentai.v1beta3.IGetDocumentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getDocument(
+    request?: protos.google.cloud.documentai.v1beta3.IGetDocumentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.documentai.v1beta3.IGetDocumentResponse,
+          | protos.google.cloud.documentai.v1beta3.IGetDocumentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.documentai.v1beta3.IGetDocumentResponse,
+      | protos.google.cloud.documentai.v1beta3.IGetDocumentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.documentai.v1beta3.IGetDocumentResponse,
+      protos.google.cloud.documentai.v1beta3.IGetDocumentRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        dataset: request.dataset ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getDocument(request, options, callback);
+  }
+  /**
    * Gets the `DatasetSchema` of a `Dataset`.
    *
    * @param {Object} request
@@ -424,9 +548,8 @@ export class DocumentServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.documentai.v1beta3.DatasetSchema | DatasetSchema}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.documentai.v1beta3.DatasetSchema|DatasetSchema}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta3/document_service.get_dataset_schema.js</caption>
    * region_tag:documentai_v1beta3_generated_DocumentService_GetDatasetSchema_async
@@ -441,7 +564,7 @@ export class DocumentServiceClient {
         | protos.google.cloud.documentai.v1beta3.IGetDatasetSchemaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDatasetSchema(
@@ -490,7 +613,7 @@ export class DocumentServiceClient {
         | protos.google.cloud.documentai.v1beta3.IGetDatasetSchemaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -524,9 +647,8 @@ export class DocumentServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.documentai.v1beta3.DatasetSchema | DatasetSchema}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.documentai.v1beta3.DatasetSchema|DatasetSchema}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta3/document_service.update_dataset_schema.js</caption>
    * region_tag:documentai_v1beta3_generated_DocumentService_UpdateDatasetSchema_async
@@ -541,7 +663,7 @@ export class DocumentServiceClient {
         | protos.google.cloud.documentai.v1beta3.IUpdateDatasetSchemaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDatasetSchema(
@@ -590,7 +712,7 @@ export class DocumentServiceClient {
         | protos.google.cloud.documentai.v1beta3.IUpdateDatasetSchemaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -628,8 +750,7 @@ export class DocumentServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta3/document_service.update_dataset.js</caption>
    * region_tag:documentai_v1beta3_generated_DocumentService_UpdateDataset_async
@@ -644,7 +765,7 @@ export class DocumentServiceClient {
         protos.google.cloud.documentai.v1beta3.IUpdateDatasetOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDataset(
@@ -697,7 +818,7 @@ export class DocumentServiceClient {
         protos.google.cloud.documentai.v1beta3.IUpdateDatasetOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -724,8 +845,7 @@ export class DocumentServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1beta3/document_service.update_dataset.js</caption>
    * region_tag:documentai_v1beta3_generated_DocumentService_UpdateDataset_async
@@ -754,6 +874,290 @@ export class DocumentServiceClient {
     >;
   }
   /**
+   * Import documents into a dataset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.dataset
+   *   Required. The dataset resource name.
+   *   Format:
+   *   projects/{project}/locations/{location}/processors/{processor}/dataset
+   * @param {number[]} request.batchDocumentsImportConfigs
+   *   Required. The Cloud Storage uri containing raw documents that must be
+   *   imported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta3/document_service.import_documents.js</caption>
+   * region_tag:documentai_v1beta3_generated_DocumentService_ImportDocuments_async
+   */
+  importDocuments(
+    request?: protos.google.cloud.documentai.v1beta3.IImportDocumentsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.documentai.v1beta3.IImportDocumentsResponse,
+        protos.google.cloud.documentai.v1beta3.IImportDocumentsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  importDocuments(
+    request: protos.google.cloud.documentai.v1beta3.IImportDocumentsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.documentai.v1beta3.IImportDocumentsResponse,
+        protos.google.cloud.documentai.v1beta3.IImportDocumentsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importDocuments(
+    request: protos.google.cloud.documentai.v1beta3.IImportDocumentsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.documentai.v1beta3.IImportDocumentsResponse,
+        protos.google.cloud.documentai.v1beta3.IImportDocumentsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importDocuments(
+    request?: protos.google.cloud.documentai.v1beta3.IImportDocumentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.documentai.v1beta3.IImportDocumentsResponse,
+            protos.google.cloud.documentai.v1beta3.IImportDocumentsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.documentai.v1beta3.IImportDocumentsResponse,
+        protos.google.cloud.documentai.v1beta3.IImportDocumentsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.documentai.v1beta3.IImportDocumentsResponse,
+        protos.google.cloud.documentai.v1beta3.IImportDocumentsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        dataset: request.dataset ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.importDocuments(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `importDocuments()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta3/document_service.import_documents.js</caption>
+   * region_tag:documentai_v1beta3_generated_DocumentService_ImportDocuments_async
+   */
+  async checkImportDocumentsProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.documentai.v1beta3.ImportDocumentsResponse,
+      protos.google.cloud.documentai.v1beta3.ImportDocumentsMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.importDocuments,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.documentai.v1beta3.ImportDocumentsResponse,
+      protos.google.cloud.documentai.v1beta3.ImportDocumentsMetadata
+    >;
+  }
+  /**
+   * Deletes a set of documents.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.dataset
+   *   Required. The dataset resource name.
+   *   Format:
+   *   projects/{project}/locations/{location}/processors/{processor}/dataset
+   * @param {google.cloud.documentai.v1beta3.BatchDatasetDocuments} request.datasetDocuments
+   *   Required. Dataset documents input. If given `filter`, all documents
+   *   satisfying the filter will be deleted. If given documentIds, a maximum of
+   *   50 documents can be deleted in a batch. The request will be rejected if
+   *   more than 50 document_ids are provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta3/document_service.batch_delete_documents.js</caption>
+   * region_tag:documentai_v1beta3_generated_DocumentService_BatchDeleteDocuments_async
+   */
+  batchDeleteDocuments(
+    request?: protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsResponse,
+        protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchDeleteDocuments(
+    request: protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsResponse,
+        protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchDeleteDocuments(
+    request: protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsResponse,
+        protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchDeleteDocuments(
+    request?: protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsResponse,
+            protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsResponse,
+        protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsResponse,
+        protos.google.cloud.documentai.v1beta3.IBatchDeleteDocumentsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        dataset: request.dataset ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.batchDeleteDocuments(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `batchDeleteDocuments()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta3/document_service.batch_delete_documents.js</caption>
+   * region_tag:documentai_v1beta3_generated_DocumentService_BatchDeleteDocuments_async
+   */
+  async checkBatchDeleteDocumentsProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.documentai.v1beta3.BatchDeleteDocumentsResponse,
+      protos.google.cloud.documentai.v1beta3.BatchDeleteDocumentsMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.batchDeleteDocuments,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.documentai.v1beta3.BatchDeleteDocumentsResponse,
+      protos.google.cloud.documentai.v1beta3.BatchDeleteDocumentsMetadata
+    >;
+  }
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -764,8 +1168,7 @@ export class DocumentServiceClient {
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
    *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example
    * ```
@@ -811,12 +1214,11 @@ export class DocumentServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
    *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example
    * ```

@@ -641,7 +641,9 @@ describe('v1.FeaturestoreOnlineServingServiceClient', () => {
       request.entityType = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      const stream = client.streamingReadFeatureValues(request);
+      const stream = client.streamingReadFeatureValues(request, {
+        retryRequestOptions: {noResponseRetries: 0},
+      });
       const promise = new Promise((resolve, reject) => {
         stream.on(
           'data',
@@ -3456,6 +3458,73 @@ describe('v1.FeaturestoreOnlineServingServiceClient', () => {
         assert.strictEqual(result, 'savedQueryValue');
         assert(
           (client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('schedule', () => {
+      const fakePath = '/rendered/path/schedule';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        schedule: 'scheduleValue',
+      };
+      const client =
+        new featurestoreonlineservingserviceModule.v1.FeaturestoreOnlineServingServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.schedulePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.schedulePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('schedulePath', () => {
+        const result = client.schedulePath(
+          'projectValue',
+          'locationValue',
+          'scheduleValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.schedulePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromScheduleName', () => {
+        const result = client.matchProjectFromScheduleName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.schedulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromScheduleName', () => {
+        const result = client.matchLocationFromScheduleName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.schedulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchScheduleFromScheduleName', () => {
+        const result = client.matchScheduleFromScheduleName(fakePath);
+        assert.strictEqual(result, 'scheduleValue');
+        assert(
+          (client.pathTemplates.schedulePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

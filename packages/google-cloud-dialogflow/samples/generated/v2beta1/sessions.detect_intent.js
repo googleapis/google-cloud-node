@@ -58,10 +58,10 @@ function main(session, queryInput) {
   // const queryParams = {}
   /**
    *  Required. The input specification. It can be set to:
-   *  1.  an audio config
-   *      which instructs the speech recognizer how to process the speech audio,
-   *  2.  a conversational query in the form of text, or
-   *  3.  an event that specifies which intent to trigger.
+   *  1. an audio config which instructs the speech recognizer how to process
+   *  the speech audio,
+   *  2. a conversational query in the form of text, or
+   *  3. an event that specifies which intent to trigger.
    */
   // const queryInput = {}
   /**
@@ -85,7 +85,7 @@ function main(session, queryInput) {
    *  should be populated iff `query_input` is set to an input audio config.
    *  A single request can contain up to 1 minute of speech audio data.
    */
-  // const inputAudio = 'Buffer.from('string')'
+  // const inputAudio = Buffer.from('string')
 
   // Imports the Dialogflow library
   const {SessionsClient} = require('@google-cloud/dialogflow').v2beta1;

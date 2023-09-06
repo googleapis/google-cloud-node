@@ -90,8 +90,7 @@ export class DocumentSchemaServiceClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -99,7 +98,7 @@ export class DocumentSchemaServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new DocumentSchemaServiceClient({fallback: 'rest'}, gax);
+   *     const client = new DocumentSchemaServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -166,7 +165,7 @@ export class DocumentSchemaServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -365,9 +364,8 @@ export class DocumentSchemaServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.contentwarehouse.v1.DocumentSchema | DocumentSchema}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.contentwarehouse.v1.DocumentSchema|DocumentSchema}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/document_schema_service.create_document_schema.js</caption>
    * region_tag:contentwarehouse_v1_generated_DocumentSchemaService_CreateDocumentSchema_async
@@ -382,7 +380,7 @@ export class DocumentSchemaServiceClient {
         | protos.google.cloud.contentwarehouse.v1.ICreateDocumentSchemaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDocumentSchema(
@@ -431,7 +429,7 @@ export class DocumentSchemaServiceClient {
         | protos.google.cloud.contentwarehouse.v1.ICreateDocumentSchemaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -457,7 +455,7 @@ export class DocumentSchemaServiceClient {
    * Document Schema is non-empty and does not equal the existing name.
    * Supports only appending new properties, adding new ENUM possible values,
    * and updating the
-   * {@link google.cloud.contentwarehouse.v1.EnumTypeOptions.validation_check_disabled|EnumTypeOptions.validation_check_disabled}
+   * {@link protos.google.cloud.contentwarehouse.v1.EnumTypeOptions.validation_check_disabled|EnumTypeOptions.validation_check_disabled}
    * flag for ENUM possible values. Updating existing properties will result
    * into INVALID_ARGUMENT.
    *
@@ -472,9 +470,8 @@ export class DocumentSchemaServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.contentwarehouse.v1.DocumentSchema | DocumentSchema}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.contentwarehouse.v1.DocumentSchema|DocumentSchema}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/document_schema_service.update_document_schema.js</caption>
    * region_tag:contentwarehouse_v1_generated_DocumentSchemaService_UpdateDocumentSchema_async
@@ -489,7 +486,7 @@ export class DocumentSchemaServiceClient {
         | protos.google.cloud.contentwarehouse.v1.IUpdateDocumentSchemaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDocumentSchema(
@@ -538,7 +535,7 @@ export class DocumentSchemaServiceClient {
         | protos.google.cloud.contentwarehouse.v1.IUpdateDocumentSchemaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -570,9 +567,8 @@ export class DocumentSchemaServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.contentwarehouse.v1.DocumentSchema | DocumentSchema}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.contentwarehouse.v1.DocumentSchema|DocumentSchema}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/document_schema_service.get_document_schema.js</caption>
    * region_tag:contentwarehouse_v1_generated_DocumentSchemaService_GetDocumentSchema_async
@@ -587,7 +583,7 @@ export class DocumentSchemaServiceClient {
         | protos.google.cloud.contentwarehouse.v1.IGetDocumentSchemaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDocumentSchema(
@@ -636,7 +632,7 @@ export class DocumentSchemaServiceClient {
         | protos.google.cloud.contentwarehouse.v1.IGetDocumentSchemaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -669,9 +665,8 @@ export class DocumentSchemaServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/document_schema_service.delete_document_schema.js</caption>
    * region_tag:contentwarehouse_v1_generated_DocumentSchemaService_DeleteDocumentSchema_async
@@ -686,7 +681,7 @@ export class DocumentSchemaServiceClient {
         | protos.google.cloud.contentwarehouse.v1.IDeleteDocumentSchemaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDocumentSchema(
@@ -735,7 +730,7 @@ export class DocumentSchemaServiceClient {
         | protos.google.cloud.contentwarehouse.v1.IDeleteDocumentSchemaRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -779,14 +774,13 @@ export class DocumentSchemaServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.contentwarehouse.v1.DocumentSchema | DocumentSchema}.
+   *   The first element of the array is Array of {@link protos.google.cloud.contentwarehouse.v1.DocumentSchema|DocumentSchema}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listDocumentSchemasAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listDocumentSchemas(
@@ -796,7 +790,7 @@ export class DocumentSchemaServiceClient {
     [
       protos.google.cloud.contentwarehouse.v1.IDocumentSchema[],
       protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest | null,
-      protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasResponse
+      protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasResponse,
     ]
   >;
   listDocumentSchemas(
@@ -842,7 +836,7 @@ export class DocumentSchemaServiceClient {
     [
       protos.google.cloud.contentwarehouse.v1.IDocumentSchema[],
       protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest | null,
-      protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasResponse
+      protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasResponse,
     ]
   > | void {
     request = request || {};
@@ -885,13 +879,12 @@ export class DocumentSchemaServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.contentwarehouse.v1.DocumentSchema | DocumentSchema} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.contentwarehouse.v1.DocumentSchema|DocumentSchema} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listDocumentSchemasAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listDocumentSchemasStream(
@@ -939,12 +932,11 @@ export class DocumentSchemaServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.contentwarehouse.v1.DocumentSchema | DocumentSchema}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.contentwarehouse.v1.DocumentSchema|DocumentSchema}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/document_schema_service.list_document_schemas.js</caption>
    * region_tag:contentwarehouse_v1_generated_DocumentSchemaService_ListDocumentSchemas_async

@@ -350,7 +350,7 @@ export class SecretManagerServiceClient {
     [
       protos.google.cloud.secrets.v1beta1.ISecret,
       protos.google.cloud.secrets.v1beta1.ICreateSecretRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createSecret(
@@ -422,7 +422,7 @@ export class SecretManagerServiceClient {
     [
       protos.google.cloud.secrets.v1beta1.ISecret,
       protos.google.cloud.secrets.v1beta1.ICreateSecretRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -450,7 +450,7 @@ export class SecretManagerServiceClient {
     [
       protos.google.cloud.secrets.v1beta1.ISecretVersion,
       protos.google.cloud.secrets.v1beta1.IAddSecretVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   addSecretVersion(
@@ -517,7 +517,7 @@ export class SecretManagerServiceClient {
     [
       protos.google.cloud.secrets.v1beta1.ISecretVersion,
       protos.google.cloud.secrets.v1beta1.IAddSecretVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -545,7 +545,7 @@ export class SecretManagerServiceClient {
     [
       protos.google.cloud.secrets.v1beta1.ISecret,
       protos.google.cloud.secrets.v1beta1.IGetSecretRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSecret(
@@ -602,7 +602,7 @@ export class SecretManagerServiceClient {
     [
       protos.google.cloud.secrets.v1beta1.ISecret,
       protos.google.cloud.secrets.v1beta1.IGetSecretRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -630,7 +630,7 @@ export class SecretManagerServiceClient {
     [
       protos.google.cloud.secrets.v1beta1.ISecret,
       protos.google.cloud.secrets.v1beta1.IUpdateSecretRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateSecret(
@@ -695,7 +695,7 @@ export class SecretManagerServiceClient {
     [
       protos.google.cloud.secrets.v1beta1.ISecret,
       protos.google.cloud.secrets.v1beta1.IUpdateSecretRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -723,7 +723,7 @@ export class SecretManagerServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.secrets.v1beta1.IDeleteSecretRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteSecret(
@@ -787,7 +787,7 @@ export class SecretManagerServiceClient {
     [
       protos.google.protobuf.IEmpty,
       protos.google.cloud.secrets.v1beta1.IDeleteSecretRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -815,7 +815,7 @@ export class SecretManagerServiceClient {
     [
       protos.google.cloud.secrets.v1beta1.ISecretVersion,
       protos.google.cloud.secrets.v1beta1.IGetSecretVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getSecretVersion(
@@ -884,7 +884,7 @@ export class SecretManagerServiceClient {
     [
       protos.google.cloud.secrets.v1beta1.ISecretVersion,
       protos.google.cloud.secrets.v1beta1.IGetSecretVersionRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -915,7 +915,7 @@ export class SecretManagerServiceClient {
         | protos.google.cloud.secrets.v1beta1.IAccessSecretVersionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   accessSecretVersion(
@@ -985,7 +985,7 @@ export class SecretManagerServiceClient {
         | protos.google.cloud.secrets.v1beta1.IAccessSecretVersionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1016,7 +1016,7 @@ export class SecretManagerServiceClient {
         | protos.google.cloud.secrets.v1beta1.IDisableSecretVersionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   disableSecretVersion(
@@ -1086,7 +1086,7 @@ export class SecretManagerServiceClient {
         | protos.google.cloud.secrets.v1beta1.IDisableSecretVersionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1117,7 +1117,7 @@ export class SecretManagerServiceClient {
         | protos.google.cloud.secrets.v1beta1.IEnableSecretVersionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   enableSecretVersion(
@@ -1187,7 +1187,7 @@ export class SecretManagerServiceClient {
         | protos.google.cloud.secrets.v1beta1.IEnableSecretVersionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1218,7 +1218,7 @@ export class SecretManagerServiceClient {
         | protos.google.cloud.secrets.v1beta1.IDestroySecretVersionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   destroySecretVersion(
@@ -1289,7 +1289,7 @@ export class SecretManagerServiceClient {
         | protos.google.cloud.secrets.v1beta1.IDestroySecretVersionRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1317,7 +1317,7 @@ export class SecretManagerServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -1382,7 +1382,7 @@ export class SecretManagerServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1410,7 +1410,7 @@ export class SecretManagerServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -1470,7 +1470,7 @@ export class SecretManagerServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1498,7 +1498,7 @@ export class SecretManagerServiceClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -1565,7 +1565,7 @@ export class SecretManagerServiceClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1594,7 +1594,7 @@ export class SecretManagerServiceClient {
     [
       protos.google.cloud.secrets.v1beta1.ISecret[],
       protos.google.cloud.secrets.v1beta1.IListSecretsRequest | null,
-      protos.google.cloud.secrets.v1beta1.IListSecretsResponse
+      protos.google.cloud.secrets.v1beta1.IListSecretsResponse,
     ]
   >;
   listSecrets(
@@ -1668,7 +1668,7 @@ export class SecretManagerServiceClient {
     [
       protos.google.cloud.secrets.v1beta1.ISecret[],
       protos.google.cloud.secrets.v1beta1.IListSecretsRequest | null,
-      protos.google.cloud.secrets.v1beta1.IListSecretsResponse
+      protos.google.cloud.secrets.v1beta1.IListSecretsResponse,
     ]
   > | void {
     request = request || {};
@@ -1797,7 +1797,7 @@ export class SecretManagerServiceClient {
     [
       protos.google.cloud.secrets.v1beta1.ISecretVersion[],
       protos.google.cloud.secrets.v1beta1.IListSecretVersionsRequest | null,
-      protos.google.cloud.secrets.v1beta1.IListSecretVersionsResponse
+      protos.google.cloud.secrets.v1beta1.IListSecretVersionsResponse,
     ]
   >;
   listSecretVersions(
@@ -1873,7 +1873,7 @@ export class SecretManagerServiceClient {
     [
       protos.google.cloud.secrets.v1beta1.ISecretVersion[],
       protos.google.cloud.secrets.v1beta1.IListSecretVersionsRequest | null,
-      protos.google.cloud.secrets.v1beta1.IListSecretVersionsResponse
+      protos.google.cloud.secrets.v1beta1.IListSecretVersionsResponse,
     ]
   > | void {
     request = request || {};

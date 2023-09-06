@@ -95,8 +95,7 @@ export class NodeGroupControllerClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -104,7 +103,7 @@ export class NodeGroupControllerClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new NodeGroupControllerClient({fallback: 'rest'}, gax);
+   *     const client = new NodeGroupControllerClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -171,7 +170,7 @@ export class NodeGroupControllerClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -225,7 +224,7 @@ export class NodeGroupControllerClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
@@ -529,9 +528,8 @@ export class NodeGroupControllerClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.dataproc.v1.NodeGroup | NodeGroup}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataproc.v1.NodeGroup|NodeGroup}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/node_group_controller.get_node_group.js</caption>
    * region_tag:dataproc_v1_generated_NodeGroupController_GetNodeGroup_async
@@ -543,7 +541,7 @@ export class NodeGroupControllerClient {
     [
       protos.google.cloud.dataproc.v1.INodeGroup,
       protos.google.cloud.dataproc.v1.IGetNodeGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getNodeGroup(
@@ -583,7 +581,7 @@ export class NodeGroupControllerClient {
     [
       protos.google.cloud.dataproc.v1.INodeGroup,
       protos.google.cloud.dataproc.v1.IGetNodeGroupRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -607,7 +605,7 @@ export class NodeGroupControllerClient {
 
   /**
    * Creates a node group in a cluster. The returned
-   * {@link google.longrunning.Operation.metadata|Operation.metadata} is
+   * {@link protos.google.longrunning.Operation.metadata|Operation.metadata} is
    * [NodeGroupOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#nodegroupoperationmetadata).
    *
    * @param {Object} request
@@ -628,7 +626,7 @@ export class NodeGroupControllerClient {
    *   two
    *   [CreateNodeGroupRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.CreateNodeGroupRequests)
    *   with the same ID, the second request is ignored and the
-   *   first {@link google.longrunning.Operation|google.longrunning.Operation} created
+   *   first {@link protos.google.longrunning.Operation|google.longrunning.Operation} created
    *   and stored in the backend is returned.
    *
    *   Recommendation: Set this value to a
@@ -642,8 +640,7 @@ export class NodeGroupControllerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/node_group_controller.create_node_group.js</caption>
    * region_tag:dataproc_v1_generated_NodeGroupController_CreateNodeGroup_async
@@ -658,7 +655,7 @@ export class NodeGroupControllerClient {
         protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createNodeGroup(
@@ -711,7 +708,7 @@ export class NodeGroupControllerClient {
         protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -738,8 +735,7 @@ export class NodeGroupControllerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/node_group_controller.create_node_group.js</caption>
    * region_tag:dataproc_v1_generated_NodeGroupController_CreateNodeGroup_async
@@ -769,7 +765,7 @@ export class NodeGroupControllerClient {
   }
   /**
    * Resizes a node group in a cluster. The returned
-   * {@link google.longrunning.Operation.metadata|Operation.metadata} is
+   * {@link protos.google.longrunning.Operation.metadata|Operation.metadata} is
    * [NodeGroupOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#nodegroupoperationmetadata).
    *
    * @param {Object} request
@@ -787,7 +783,7 @@ export class NodeGroupControllerClient {
    *   two
    *   [ResizeNodeGroupRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.ResizeNodeGroupRequests)
    *   with the same ID, the second request is ignored and the
-   *   first {@link google.longrunning.Operation|google.longrunning.Operation} created
+   *   first {@link protos.google.longrunning.Operation|google.longrunning.Operation} created
    *   and stored in the backend is returned.
    *
    *   Recommendation: Set this value to a
@@ -796,7 +792,7 @@ export class NodeGroupControllerClient {
    *   The ID must contain only letters (a-z, A-Z), numbers (0-9),
    *   underscores (_), and hyphens (-). The maximum length is 40 characters.
    * @param {google.protobuf.Duration} [request.gracefulDecommissionTimeout]
-   *   Optional. Timeout for graceful YARN decomissioning. [Graceful
+   *   Optional. Timeout for graceful YARN decommissioning. [Graceful
    *   decommissioning]
    *   (https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/scaling-clusters#graceful_decommissioning)
    *   allows the removal of nodes from the Compute Engine node group
@@ -814,8 +810,7 @@ export class NodeGroupControllerClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/node_group_controller.resize_node_group.js</caption>
    * region_tag:dataproc_v1_generated_NodeGroupController_ResizeNodeGroup_async
@@ -830,7 +825,7 @@ export class NodeGroupControllerClient {
         protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   resizeNodeGroup(
@@ -883,7 +878,7 @@ export class NodeGroupControllerClient {
         protos.google.cloud.dataproc.v1.INodeGroupOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -910,8 +905,7 @@ export class NodeGroupControllerClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/node_group_controller.resize_node_group.js</caption>
    * region_tag:dataproc_v1_generated_NodeGroupController_ResizeNodeGroup_async
@@ -978,7 +972,7 @@ export class NodeGroupControllerClient {
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
@@ -999,8 +993,7 @@ export class NodeGroupControllerClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -1026,7 +1019,7 @@ export class NodeGroupControllerClient {
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.Policy> {
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
@@ -1047,8 +1040,7 @@ export class NodeGroupControllerClient {
    * @param {string[]} request.permissions
    *   The set of permissions to check for the `resource`. Permissions with
    *   wildcards (such as '*' or 'storage.*') are not allowed. For more
-   *   information see
-   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
    * @param {Object} [options]
    *   Optional parameters. You can override the default settings for this call, e.g, timeout,
    *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
@@ -1075,7 +1067,7 @@ export class NodeGroupControllerClient {
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
     >
-  ): Promise<IamProtos.google.iam.v1.TestIamPermissionsResponse> {
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 

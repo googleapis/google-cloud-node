@@ -95,8 +95,7 @@ export class AnalyticsHubServiceClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -104,7 +103,7 @@ export class AnalyticsHubServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new AnalyticsHubServiceClient({fallback: 'rest'}, gax);
+   *     const client = new AnalyticsHubServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -167,7 +166,7 @@ export class AnalyticsHubServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -375,9 +374,8 @@ export class AnalyticsHubServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.bigquery.analyticshub.v1.DataExchange | DataExchange}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.analyticshub.v1.DataExchange|DataExchange}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/analytics_hub_service.get_data_exchange.js</caption>
    * region_tag:analyticshub_v1_generated_AnalyticsHubService_GetDataExchange_async
@@ -392,7 +390,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.IGetDataExchangeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getDataExchange(
@@ -441,7 +439,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.IGetDataExchangeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -481,9 +479,8 @@ export class AnalyticsHubServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.bigquery.analyticshub.v1.DataExchange | DataExchange}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.analyticshub.v1.DataExchange|DataExchange}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/analytics_hub_service.create_data_exchange.js</caption>
    * region_tag:analyticshub_v1_generated_AnalyticsHubService_CreateDataExchange_async
@@ -498,7 +495,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.ICreateDataExchangeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createDataExchange(
@@ -547,7 +544,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.ICreateDataExchangeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -582,9 +579,8 @@ export class AnalyticsHubServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.bigquery.analyticshub.v1.DataExchange | DataExchange}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.analyticshub.v1.DataExchange|DataExchange}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/analytics_hub_service.update_data_exchange.js</caption>
    * region_tag:analyticshub_v1_generated_AnalyticsHubService_UpdateDataExchange_async
@@ -599,7 +595,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.IUpdateDataExchangeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateDataExchange(
@@ -648,7 +644,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.IUpdateDataExchangeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -680,9 +676,8 @@ export class AnalyticsHubServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/analytics_hub_service.delete_data_exchange.js</caption>
    * region_tag:analyticshub_v1_generated_AnalyticsHubService_DeleteDataExchange_async
@@ -697,7 +692,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.IDeleteDataExchangeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteDataExchange(
@@ -746,7 +741,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.IDeleteDataExchangeRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -778,9 +773,8 @@ export class AnalyticsHubServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.bigquery.analyticshub.v1.Listing | Listing}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.analyticshub.v1.Listing|Listing}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/analytics_hub_service.get_listing.js</caption>
    * region_tag:analyticshub_v1_generated_AnalyticsHubService_GetListing_async
@@ -795,7 +789,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.IGetListingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getListing(
@@ -844,7 +838,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.IGetListingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -884,9 +878,8 @@ export class AnalyticsHubServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.bigquery.analyticshub.v1.Listing | Listing}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.analyticshub.v1.Listing|Listing}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/analytics_hub_service.create_listing.js</caption>
    * region_tag:analyticshub_v1_generated_AnalyticsHubService_CreateListing_async
@@ -901,7 +894,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.ICreateListingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   createListing(
@@ -950,7 +943,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.ICreateListingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -985,9 +978,8 @@ export class AnalyticsHubServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.bigquery.analyticshub.v1.Listing | Listing}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.analyticshub.v1.Listing|Listing}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/analytics_hub_service.update_listing.js</caption>
    * region_tag:analyticshub_v1_generated_AnalyticsHubService_UpdateListing_async
@@ -1002,7 +994,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.IUpdateListingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   updateListing(
@@ -1051,7 +1043,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.IUpdateListingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1083,9 +1075,8 @@ export class AnalyticsHubServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.protobuf.Empty | Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/analytics_hub_service.delete_listing.js</caption>
    * region_tag:analyticshub_v1_generated_AnalyticsHubService_DeleteListing_async
@@ -1100,7 +1091,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.IDeleteListingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   deleteListing(
@@ -1149,7 +1140,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.IDeleteListingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1188,9 +1179,8 @@ export class AnalyticsHubServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.bigquery.analyticshub.v1.SubscribeListingResponse | SubscribeListingResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.analyticshub.v1.SubscribeListingResponse|SubscribeListingResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/analytics_hub_service.subscribe_listing.js</caption>
    * region_tag:analyticshub_v1_generated_AnalyticsHubService_SubscribeListing_async
@@ -1205,7 +1195,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.ISubscribeListingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   >;
   subscribeListing(
@@ -1254,7 +1244,7 @@ export class AnalyticsHubServiceClient {
         | protos.google.cloud.bigquery.analyticshub.v1.ISubscribeListingRequest
         | undefined
       ),
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1289,9 +1279,8 @@ export class AnalyticsHubServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/analytics_hub_service.get_iam_policy.js</caption>
    * region_tag:analyticshub_v1_generated_AnalyticsHubService_GetIamPolicy_async
@@ -1303,7 +1292,7 @@ export class AnalyticsHubServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getIamPolicy(
@@ -1341,7 +1330,7 @@ export class AnalyticsHubServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.IGetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1384,9 +1373,8 @@ export class AnalyticsHubServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/analytics_hub_service.set_iam_policy.js</caption>
    * region_tag:analyticshub_v1_generated_AnalyticsHubService_SetIamPolicy_async
@@ -1398,7 +1386,7 @@ export class AnalyticsHubServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   setIamPolicy(
@@ -1436,7 +1424,7 @@ export class AnalyticsHubServiceClient {
     [
       protos.google.iam.v1.IPolicy,
       protos.google.iam.v1.ISetIamPolicyRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1473,9 +1461,8 @@ export class AnalyticsHubServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/analytics_hub_service.test_iam_permissions.js</caption>
    * region_tag:analyticshub_v1_generated_AnalyticsHubService_TestIamPermissions_async
@@ -1487,7 +1474,7 @@ export class AnalyticsHubServiceClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   testIamPermissions(
@@ -1525,7 +1512,7 @@ export class AnalyticsHubServiceClient {
     [
       protos.google.iam.v1.ITestIamPermissionsResponse,
       protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1564,14 +1551,13 @@ export class AnalyticsHubServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.bigquery.analyticshub.v1.DataExchange | DataExchange}.
+   *   The first element of the array is Array of {@link protos.google.cloud.bigquery.analyticshub.v1.DataExchange|DataExchange}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listDataExchangesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listDataExchanges(
@@ -1581,7 +1567,7 @@ export class AnalyticsHubServiceClient {
     [
       protos.google.cloud.bigquery.analyticshub.v1.IDataExchange[],
       protos.google.cloud.bigquery.analyticshub.v1.IListDataExchangesRequest | null,
-      protos.google.cloud.bigquery.analyticshub.v1.IListDataExchangesResponse
+      protos.google.cloud.bigquery.analyticshub.v1.IListDataExchangesResponse,
     ]
   >;
   listDataExchanges(
@@ -1627,7 +1613,7 @@ export class AnalyticsHubServiceClient {
     [
       protos.google.cloud.bigquery.analyticshub.v1.IDataExchange[],
       protos.google.cloud.bigquery.analyticshub.v1.IListDataExchangesRequest | null,
-      protos.google.cloud.bigquery.analyticshub.v1.IListDataExchangesResponse
+      protos.google.cloud.bigquery.analyticshub.v1.IListDataExchangesResponse,
     ]
   > | void {
     request = request || {};
@@ -1665,13 +1651,12 @@ export class AnalyticsHubServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.bigquery.analyticshub.v1.DataExchange | DataExchange} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.bigquery.analyticshub.v1.DataExchange|DataExchange} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listDataExchangesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listDataExchangesStream(
@@ -1714,12 +1699,11 @@ export class AnalyticsHubServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.bigquery.analyticshub.v1.DataExchange | DataExchange}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.bigquery.analyticshub.v1.DataExchange|DataExchange}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/analytics_hub_service.list_data_exchanges.js</caption>
    * region_tag:analyticshub_v1_generated_AnalyticsHubService_ListDataExchanges_async
@@ -1763,14 +1747,13 @@ export class AnalyticsHubServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.bigquery.analyticshub.v1.DataExchange | DataExchange}.
+   *   The first element of the array is Array of {@link protos.google.cloud.bigquery.analyticshub.v1.DataExchange|DataExchange}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listOrgDataExchangesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listOrgDataExchanges(
@@ -1780,7 +1763,7 @@ export class AnalyticsHubServiceClient {
     [
       protos.google.cloud.bigquery.analyticshub.v1.IDataExchange[],
       protos.google.cloud.bigquery.analyticshub.v1.IListOrgDataExchangesRequest | null,
-      protos.google.cloud.bigquery.analyticshub.v1.IListOrgDataExchangesResponse
+      protos.google.cloud.bigquery.analyticshub.v1.IListOrgDataExchangesResponse,
     ]
   >;
   listOrgDataExchanges(
@@ -1826,7 +1809,7 @@ export class AnalyticsHubServiceClient {
     [
       protos.google.cloud.bigquery.analyticshub.v1.IDataExchange[],
       protos.google.cloud.bigquery.analyticshub.v1.IListOrgDataExchangesRequest | null,
-      protos.google.cloud.bigquery.analyticshub.v1.IListOrgDataExchangesResponse
+      protos.google.cloud.bigquery.analyticshub.v1.IListOrgDataExchangesResponse,
     ]
   > | void {
     request = request || {};
@@ -1864,13 +1847,12 @@ export class AnalyticsHubServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.bigquery.analyticshub.v1.DataExchange | DataExchange} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.bigquery.analyticshub.v1.DataExchange|DataExchange} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listOrgDataExchangesAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listOrgDataExchangesStream(
@@ -1913,12 +1895,11 @@ export class AnalyticsHubServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.bigquery.analyticshub.v1.DataExchange | DataExchange}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.bigquery.analyticshub.v1.DataExchange|DataExchange}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/analytics_hub_service.list_org_data_exchanges.js</caption>
    * region_tag:analyticshub_v1_generated_AnalyticsHubService_ListOrgDataExchanges_async
@@ -1961,14 +1942,13 @@ export class AnalyticsHubServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link google.cloud.bigquery.analyticshub.v1.Listing | Listing}.
+   *   The first element of the array is Array of {@link protos.google.cloud.bigquery.analyticshub.v1.Listing|Listing}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
    *   We recommend using `listListingsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listListings(
@@ -1978,7 +1958,7 @@ export class AnalyticsHubServiceClient {
     [
       protos.google.cloud.bigquery.analyticshub.v1.IListing[],
       protos.google.cloud.bigquery.analyticshub.v1.IListListingsRequest | null,
-      protos.google.cloud.bigquery.analyticshub.v1.IListListingsResponse
+      protos.google.cloud.bigquery.analyticshub.v1.IListListingsResponse,
     ]
   >;
   listListings(
@@ -2024,7 +2004,7 @@ export class AnalyticsHubServiceClient {
     [
       protos.google.cloud.bigquery.analyticshub.v1.IListing[],
       protos.google.cloud.bigquery.analyticshub.v1.IListListingsRequest | null,
-      protos.google.cloud.bigquery.analyticshub.v1.IListListingsResponse
+      protos.google.cloud.bigquery.analyticshub.v1.IListListingsResponse,
     ]
   > | void {
     request = request || {};
@@ -2062,13 +2042,12 @@ export class AnalyticsHubServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link google.cloud.bigquery.analyticshub.v1.Listing | Listing} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.bigquery.analyticshub.v1.Listing|Listing} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listListingsAsync()`
    *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
   listListingsStream(
@@ -2111,12 +2090,11 @@ export class AnalyticsHubServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link google.cloud.bigquery.analyticshub.v1.Listing | Listing}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.bigquery.analyticshub.v1.Listing|Listing}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/analytics_hub_service.list_listings.js</caption>
    * region_tag:analyticshub_v1_generated_AnalyticsHubService_ListListings_async

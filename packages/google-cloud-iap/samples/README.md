@@ -34,7 +34,6 @@
   * [Identity_aware_proxy_admin_v1_beta1.set_iam_policy](#identity_aware_proxy_admin_v1_beta1.set_iam_policy)
   * [Identity_aware_proxy_admin_v1_beta1.test_iam_permissions](#identity_aware_proxy_admin_v1_beta1.test_iam_permissions)
   * [Quickstart](#quickstart)
-  * [Quickstart](#quickstart)
 
 ## Before you begin
 
@@ -418,23 +417,6 @@ __Usage:__
 
 
 `node packages/google-cloud-iap/samples/quickstart.js`
-
-
------
-
-
-
-
-### Quickstart
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-iap/samples/test/quickstart.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-iap/samples/test/quickstart.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-iap/samples/test/quickstart.js`
 
 
 

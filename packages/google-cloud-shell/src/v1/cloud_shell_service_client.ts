@@ -97,8 +97,7 @@ export class CloudShellServiceClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -106,7 +105,7 @@ export class CloudShellServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new CloudShellServiceClient({fallback: 'rest'}, gax);
+   *     const client = new CloudShellServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -172,7 +171,7 @@ export class CloudShellServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -198,7 +197,7 @@ export class CloudShellServiceClient {
       auth: this.auth,
       grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
-    if (opts.fallback === 'rest') {
+    if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [];
     }
@@ -402,9 +401,8 @@ export class CloudShellServiceClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link google.cloud.shell.v1.Environment | Environment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   The first element of the array is an object representing {@link protos.google.cloud.shell.v1.Environment|Environment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_shell_service.get_environment.js</caption>
    * region_tag:cloudshell_v1_generated_CloudShellService_GetEnvironment_async
@@ -416,7 +414,7 @@ export class CloudShellServiceClient {
     [
       protos.google.cloud.shell.v1.IEnvironment,
       protos.google.cloud.shell.v1.IGetEnvironmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   getEnvironment(
@@ -456,7 +454,7 @@ export class CloudShellServiceClient {
     [
       protos.google.cloud.shell.v1.IEnvironment,
       protos.google.cloud.shell.v1.IGetEnvironmentRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -505,8 +503,7 @@ export class CloudShellServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_shell_service.start_environment.js</caption>
    * region_tag:cloudshell_v1_generated_CloudShellService_StartEnvironment_async
@@ -521,7 +518,7 @@ export class CloudShellServiceClient {
         protos.google.cloud.shell.v1.IStartEnvironmentMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   startEnvironment(
@@ -574,7 +571,7 @@ export class CloudShellServiceClient {
         protos.google.cloud.shell.v1.IStartEnvironmentMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -601,8 +598,7 @@ export class CloudShellServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_shell_service.start_environment.js</caption>
    * region_tag:cloudshell_v1_generated_CloudShellService_StartEnvironment_async
@@ -655,8 +651,7 @@ export class CloudShellServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_shell_service.authorize_environment.js</caption>
    * region_tag:cloudshell_v1_generated_CloudShellService_AuthorizeEnvironment_async
@@ -671,7 +666,7 @@ export class CloudShellServiceClient {
         protos.google.cloud.shell.v1.IAuthorizeEnvironmentMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   authorizeEnvironment(
@@ -724,7 +719,7 @@ export class CloudShellServiceClient {
         protos.google.cloud.shell.v1.IAuthorizeEnvironmentMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -751,8 +746,7 @@ export class CloudShellServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_shell_service.authorize_environment.js</caption>
    * region_tag:cloudshell_v1_generated_CloudShellService_AuthorizeEnvironment_async
@@ -803,8 +797,7 @@ export class CloudShellServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_shell_service.add_public_key.js</caption>
    * region_tag:cloudshell_v1_generated_CloudShellService_AddPublicKey_async
@@ -819,7 +812,7 @@ export class CloudShellServiceClient {
         protos.google.cloud.shell.v1.IAddPublicKeyMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   addPublicKey(
@@ -872,7 +865,7 @@ export class CloudShellServiceClient {
         protos.google.cloud.shell.v1.IAddPublicKeyMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -899,8 +892,7 @@ export class CloudShellServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_shell_service.add_public_key.js</caption>
    * region_tag:cloudshell_v1_generated_CloudShellService_AddPublicKey_async
@@ -947,8 +939,7 @@ export class CloudShellServiceClient {
    *   The first element of the array is an object representing
    *   a long running operation. Its `promise()` method returns a promise
    *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_shell_service.remove_public_key.js</caption>
    * region_tag:cloudshell_v1_generated_CloudShellService_RemovePublicKey_async
@@ -963,7 +954,7 @@ export class CloudShellServiceClient {
         protos.google.cloud.shell.v1.IRemovePublicKeyMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   removePublicKey(
@@ -1016,7 +1007,7 @@ export class CloudShellServiceClient {
         protos.google.cloud.shell.v1.IRemovePublicKeyMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -1043,8 +1034,7 @@ export class CloudShellServiceClient {
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/cloud_shell_service.remove_public_key.js</caption>
    * region_tag:cloudshell_v1_generated_CloudShellService_RemovePublicKey_async

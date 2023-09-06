@@ -21,6 +21,8 @@ const discoveryengine = require('@google-cloud/discoveryengine');
 
 function main() {
   const completionServiceClient = new discoveryengine.CompletionServiceClient();
+  const conversationalSearchServiceClient =
+    new discoveryengine.ConversationalSearchServiceClient();
   const documentServiceClient = new discoveryengine.DocumentServiceClient();
   const schemaServiceClient = new discoveryengine.SchemaServiceClient();
   const searchServiceClient = new discoveryengine.SearchServiceClient();
