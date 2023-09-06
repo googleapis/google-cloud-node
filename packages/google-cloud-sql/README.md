@@ -57,42 +57,23 @@ npm install @google-cloud/sql
 ### Using the client library
 
 ```javascript
-/**
- * This snippet has been automatically generated and should be regarded as a code template only.
- * It will require modifications to work.
- * It may require correct/in-range values for request initialization.
- * TODO(developer): Uncomment these variables before running the sample.
- */
-/**
- *  Cloud SQL instance ID. This does not include the project ID.
- */
-// const instance = 'abc123'
-/**
- *  Maximum number of operations per response.
- */
-// const maxResults = 1234
-/**
- *  A previously-returned page token representing part of the larger set of
- *  results to view.
- */
-// const pageToken = 'abc123'
-/**
- *  Project ID of the project that contains the instance.
- */
-// const project = 'my-project'
-
 // Imports the Sql library
-const {SqlOperationsServiceClient} = require('@google-cloud/sql').v1beta4;
+const sqladmin = require('@google-cloud/sql').v1;
 
-// Instantiates a client
-const sqlClient = new SqlOperationsServiceClient();
+// Instantiates a client. Use HTTP/1.1 fallback mode instead of gRPC.
+const instancesClient = new sqladmin.SqlInstancesServiceClient({fallback: 'rest'});
 
 async function callList() {
+  // Get project ID
+  const project = await instancesClient.getProjectId();
+
   // Construct request
-  const request = {};
+  const request = {
+    project: project,
+  };
 
   // Run request
-  const response = await sqlClient.list(request);
+  const response = await instancesClient.list(request);
   console.log(response);
 }
 

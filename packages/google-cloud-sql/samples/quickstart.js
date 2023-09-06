@@ -24,7 +24,9 @@ function main() {
   const sqladmin = require('@google-cloud/sql').v1;
 
   // Instantiates a client. Use HTTP/1.1 fallback mode instead of gRPC.
-  const instancesClient = new sqladmin.SqlInstancesServiceClient({fallback: 'rest'});
+  const instancesClient = new sqladmin.SqlInstancesServiceClient({
+    fallback: 'rest',
+  });
 
   async function callList() {
     // Get project ID
