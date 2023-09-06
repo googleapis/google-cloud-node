@@ -337,7 +337,7 @@ export class SqlTiersServiceClient {
     [
       protos.google.cloud.sql.v1beta4.ITiersListResponse,
       protos.google.cloud.sql.v1beta4.ISqlTiersListRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   list(
@@ -377,7 +377,7 @@ export class SqlTiersServiceClient {
     [
       protos.google.cloud.sql.v1beta4.ITiersListResponse,
       protos.google.cloud.sql.v1beta4.ISqlTiersListRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

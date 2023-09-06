@@ -340,7 +340,7 @@ export class SqlSslCertsServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlSslCertsDeleteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -386,7 +386,7 @@ export class SqlSslCertsServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlSslCertsDeleteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -438,7 +438,7 @@ export class SqlSslCertsServiceClient {
     [
       protos.google.cloud.sql.v1beta4.ISslCert,
       protos.google.cloud.sql.v1beta4.ISqlSslCertsGetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -478,7 +478,7 @@ export class SqlSslCertsServiceClient {
     [
       protos.google.cloud.sql.v1beta4.ISslCert,
       protos.google.cloud.sql.v1beta4.ISqlSslCertsGetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -529,7 +529,7 @@ export class SqlSslCertsServiceClient {
     [
       protos.google.cloud.sql.v1beta4.ISslCertsInsertResponse,
       protos.google.cloud.sql.v1beta4.ISqlSslCertsInsertRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -575,7 +575,7 @@ export class SqlSslCertsServiceClient {
     [
       protos.google.cloud.sql.v1beta4.ISslCertsInsertResponse,
       protos.google.cloud.sql.v1beta4.ISqlSslCertsInsertRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -622,7 +622,7 @@ export class SqlSslCertsServiceClient {
     [
       protos.google.cloud.sql.v1beta4.ISslCertsListResponse,
       protos.google.cloud.sql.v1beta4.ISqlSslCertsListRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   list(
@@ -668,7 +668,7 @@ export class SqlSslCertsServiceClient {
     [
       protos.google.cloud.sql.v1beta4.ISslCertsListResponse,
       protos.google.cloud.sql.v1beta4.ISqlSslCertsListRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

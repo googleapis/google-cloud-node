@@ -346,7 +346,7 @@ export class SqlDatabasesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlDatabasesDeleteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -392,7 +392,7 @@ export class SqlDatabasesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlDatabasesDeleteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -443,7 +443,7 @@ export class SqlDatabasesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IDatabase,
       protos.google.cloud.sql.v1beta4.ISqlDatabasesGetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -489,7 +489,7 @@ export class SqlDatabasesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IDatabase,
       protos.google.cloud.sql.v1beta4.ISqlDatabasesGetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -541,7 +541,7 @@ export class SqlDatabasesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlDatabasesInsertRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -587,7 +587,7 @@ export class SqlDatabasesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlDatabasesInsertRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -634,7 +634,7 @@ export class SqlDatabasesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IDatabasesListResponse,
       protos.google.cloud.sql.v1beta4.ISqlDatabasesListRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   list(
@@ -680,7 +680,7 @@ export class SqlDatabasesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IDatabasesListResponse,
       protos.google.cloud.sql.v1beta4.ISqlDatabasesListRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -731,7 +731,7 @@ export class SqlDatabasesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlDatabasesUpdateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   patch(
@@ -777,7 +777,7 @@ export class SqlDatabasesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlDatabasesUpdateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -829,7 +829,7 @@ export class SqlDatabasesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlDatabasesUpdateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   update(
@@ -875,7 +875,7 @@ export class SqlDatabasesServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlDatabasesUpdateRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

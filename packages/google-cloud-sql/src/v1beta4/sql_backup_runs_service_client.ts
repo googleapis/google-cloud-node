@@ -341,7 +341,7 @@ export class SqlBackupRunsServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlBackupRunsDeleteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -387,7 +387,7 @@ export class SqlBackupRunsServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlBackupRunsDeleteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -437,7 +437,7 @@ export class SqlBackupRunsServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IBackupRun,
       protos.google.cloud.sql.v1beta4.ISqlBackupRunsGetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -483,7 +483,7 @@ export class SqlBackupRunsServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IBackupRun,
       protos.google.cloud.sql.v1beta4.ISqlBackupRunsGetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -532,7 +532,7 @@ export class SqlBackupRunsServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlBackupRunsInsertRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -578,7 +578,7 @@ export class SqlBackupRunsServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IOperation,
       protos.google.cloud.sql.v1beta4.ISqlBackupRunsInsertRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -633,7 +633,7 @@ export class SqlBackupRunsServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IBackupRunsListResponse,
       protos.google.cloud.sql.v1beta4.ISqlBackupRunsListRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   list(
@@ -679,7 +679,7 @@ export class SqlBackupRunsServiceClient {
     [
       protos.google.cloud.sql.v1beta4.IBackupRunsListResponse,
       protos.google.cloud.sql.v1beta4.ISqlBackupRunsListRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};

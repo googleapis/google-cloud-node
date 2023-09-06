@@ -341,7 +341,7 @@ export class SqlSslCertsServiceClient {
     [
       protos.google.cloud.sql.v1.IOperation,
       protos.google.cloud.sql.v1.ISqlSslCertsDeleteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   delete(
@@ -381,7 +381,7 @@ export class SqlSslCertsServiceClient {
     [
       protos.google.cloud.sql.v1.IOperation,
       protos.google.cloud.sql.v1.ISqlSslCertsDeleteRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -433,7 +433,7 @@ export class SqlSslCertsServiceClient {
     [
       protos.google.cloud.sql.v1.ISslCert,
       protos.google.cloud.sql.v1.ISqlSslCertsGetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   get(
@@ -471,7 +471,7 @@ export class SqlSslCertsServiceClient {
     [
       protos.google.cloud.sql.v1.ISslCert,
       protos.google.cloud.sql.v1.ISqlSslCertsGetRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -522,7 +522,7 @@ export class SqlSslCertsServiceClient {
     [
       protos.google.cloud.sql.v1.ISslCertsInsertResponse,
       protos.google.cloud.sql.v1.ISqlSslCertsInsertRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   insert(
@@ -562,7 +562,7 @@ export class SqlSslCertsServiceClient {
     [
       protos.google.cloud.sql.v1.ISslCertsInsertResponse,
       protos.google.cloud.sql.v1.ISqlSslCertsInsertRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -609,7 +609,7 @@ export class SqlSslCertsServiceClient {
     [
       protos.google.cloud.sql.v1.ISslCertsListResponse,
       protos.google.cloud.sql.v1.ISqlSslCertsListRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   >;
   list(
@@ -647,7 +647,7 @@ export class SqlSslCertsServiceClient {
     [
       protos.google.cloud.sql.v1.ISslCertsListResponse,
       protos.google.cloud.sql.v1.ISqlSslCertsListRequest | undefined,
-      {} | undefined
+      {} | undefined,
     ]
   > | void {
     request = request || {};
