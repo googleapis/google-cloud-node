@@ -8,7 +8,7 @@ jobs:
       matrix:
         node: [14]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
@@ -27,7 +27,7 @@ jobs:
       matrix:
         node: [14, 16, 18, 20]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v2
         with:
           version: ^6.24.1
