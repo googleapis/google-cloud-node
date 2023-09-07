@@ -18,8 +18,8 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const { Client } = require('@google-cloud/config').v1;
-const infra-managerClient = new Client();
+const { ConfigClient } = require('@google-cloud/config').v1;
+const configClient = new ConfigClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
@@ -29,7 +29,7 @@ describe('Quickstart', () => {
   let projectId;
 
   before(async () => {
-    projectId = await infra-managerClient.getProjectId();
+    projectId = await configClient.getProjectId();
   });
 
   it('should run quickstart', async () => {
