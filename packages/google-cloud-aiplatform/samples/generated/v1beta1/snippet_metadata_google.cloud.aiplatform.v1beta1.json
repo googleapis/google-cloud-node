@@ -10322,7 +10322,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 68,
+                    "end": 105,
                     "type": "FULL"
                 }
             ],
@@ -10342,6 +10342,10 @@
                     {
                         "name": "client_id",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "contexts",
+                        "type": "TYPE_MESSAGE[]"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
