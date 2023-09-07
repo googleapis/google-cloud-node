@@ -1655,7 +1655,10 @@
                         },
                         "channelPartnerGranularity": {
                           "type": "ChannelPartnerGranularity",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "effectiveInvoiceMonth": {
                           "type": "google.type.Date",
@@ -1697,6 +1700,9 @@
                           }
                         },
                         "ChannelPartnerGranularity": {
+                          "options": {
+                            "deprecated": true
+                          },
                           "fields": {}
                         }
                       }
