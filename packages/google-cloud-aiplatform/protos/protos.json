@@ -7163,6 +7163,19 @@
                         }
                       }
                     },
+                    "TrialContext": {
+                      "fields": {
+                        "description": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "parameters": {
+                          "rule": "repeated",
+                          "type": "Trial.Parameter",
+                          "id": 2
+                        }
+                      }
+                    },
                     "StudySpec": {
                       "oneofs": {
                         "automatedStoppingSpec": {
@@ -7723,6 +7736,13 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         }
                       },
                       "nested": {
@@ -7904,6 +7924,13 @@
                           "id": 14,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
                           }
                         }
                       }
@@ -20440,6 +20467,14 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "contexts": {
+                          "rule": "repeated",
+                          "type": "TrialContext",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -28712,6 +28747,19 @@
                         }
                       }
                     },
+                    "TrialContext": {
+                      "fields": {
+                        "description": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "parameters": {
+                          "rule": "repeated",
+                          "type": "Trial.Parameter",
+                          "id": 2
+                        }
+                      }
+                    },
                     "StudySpec": {
                       "oneofs": {
                         "automatedStoppingSpec": {
@@ -29327,6 +29375,13 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         }
                       },
                       "nested": {
@@ -29508,6 +29563,13 @@
                           "id": 14,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
                           }
                         }
                       }
@@ -42856,6 +42918,14 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "contexts": {
+                          "rule": "repeated",
+                          "type": "TrialContext",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }

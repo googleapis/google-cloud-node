@@ -593,6 +593,15 @@ export class PipelineServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',
             },
             {
+              post: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*/operations/*}:cancel',
+            },
+            {
               post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',
             },
             {
@@ -846,6 +855,18 @@ export class PipelineServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',
             },
             {
@@ -927,6 +948,14 @@ export class PipelineServiceClient {
             {
               delete:
                 '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/featureGroups/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
             },
             {
               delete:
@@ -1048,6 +1077,15 @@ export class PipelineServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*/operations/*}',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}',
             },
             {
@@ -1127,6 +1165,12 @@ export class PipelineServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
             },
           ],
         },
@@ -1237,6 +1281,15 @@ export class PipelineServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/endpoints/*}/operations',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/extensions/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*}/operations',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/featurestores/*}/operations',
             },
             {
@@ -1314,6 +1367,12 @@ export class PipelineServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*}/operations',
             },
           ],
         },
@@ -1440,6 +1499,15 @@ export class PipelineServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/endpoints/*/operations/*}:wait',
             },
             {
+              post: '/v1beta1/{name=projects/*/locations/*/extensionControllers/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/extensions/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/extensions/*/deployments/*/operations/*}:wait',
+            },
+            {
               post: '/v1beta1/{name=projects/*/locations/*/featurestores/*/operations/*}:wait',
             },
             {
@@ -1516,6 +1584,12 @@ export class PipelineServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
             },
           ],
         },
