@@ -199,6 +199,9 @@ export class CloudChannelServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      billingAccountPathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/billingAccounts/{billing_account}'
+      ),
       channelPartnerLinkPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/channelPartnerLinks/{channel_partner_link}'
       ),
@@ -583,6 +586,7 @@ export class CloudChannelServiceClient {
       'listOffers',
       'listPurchasableSkus',
       'listPurchasableOffers',
+      'queryEligibleBillingAccounts',
       'registerSubscriber',
       'unregisterSubscriber',
       'listSubscribers',
@@ -895,8 +899,11 @@ export class CloudChannelServiceClient {
    *
    * Possible error codes:
    *
-   * * PERMISSION_DENIED: The reseller account making the request is different
-   * from the reseller account in the API request.
+   * * PERMISSION_DENIED:
+   *     * The reseller account making the request is different from the
+   *     reseller account in the API request.
+   *     * You are not authorized to create a customer. See
+   *     https://support.google.com/channelservices/answer/9759265
    * * INVALID_ARGUMENT:
    *     * Required request parameters are missing or invalid.
    *     * Domain field value doesn't match the primary email domain.
@@ -1188,8 +1195,11 @@ export class CloudChannelServiceClient {
    *
    * Possible error codes:
    *
-   * * PERMISSION_DENIED: The reseller account making the request is different
-   * from the reseller account in the API request.
+   * * PERMISSION_DENIED:
+   *     * The reseller account making the request is different from the
+   *     reseller account in the API request.
+   *     * You are not authorized to import the customer. See
+   *     https://support.google.com/channelservices/answer/9759265
    * * NOT_FOUND: Cloud Identity doesn't exist or was deleted.
    * * INVALID_ARGUMENT: Required parameters are missing, or the auth_token is
    * expired or invalid.
@@ -1902,12 +1912,12 @@ export class CloudChannelServiceClient {
    * * The new config will not modify exports used with other configs.
    * Changes to the config may be immediate, but may take up to 24 hours.
    * * There is a limit of ten configs for any
-   * {@link protos.google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.entitlement|RepricingConfig.EntitlementGranularity.entitlement}
-   * or
+   * {@link protos.google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.entitlement|RepricingConfig.EntitlementGranularity.entitlement},
+   * for any
    * {@link protos.google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}.
    * * The contained
    * {@link protos.google.cloud.channel.v1.CustomerRepricingConfig.repricing_config|CustomerRepricingConfig.repricing_config}
-   * vaule must be different from the value used in the current config for a
+   * value must be different from the value used in the current config for a
    * {@link protos.google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.entitlement|RepricingConfig.EntitlementGranularity.entitlement}.
    *
    * Possible Error Codes:
@@ -2416,10 +2426,12 @@ export class CloudChannelServiceClient {
    * * The new config will not modify exports used with other configs.
    * Changes to the config may be immediate, but may take up to 24 hours.
    * * There is a limit of ten configs for any ChannelPartner or
+   * {@link protos.google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.entitlement|RepricingConfig.EntitlementGranularity.entitlement},
+   * for any
    * {@link protos.google.cloud.channel.v1.RepricingConfig.effective_invoice_month|RepricingConfig.effective_invoice_month}.
    * * The contained
    * {@link protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig.repricing_config|ChannelPartnerRepricingConfig.repricing_config}
-   * vaule must be different from the value used in the current config for a
+   * value must be different from the value used in the current config for a
    * ChannelPartner.
    *
    * Possible Error Codes:
@@ -2884,6 +2896,121 @@ export class CloudChannelServiceClient {
     return this.innerApiCalls.lookupOffer(request, options, callback);
   }
   /**
+   * Lists the billing accounts that are eligible to purchase particular SKUs
+   * for a given customer.
+   *
+   * Possible error codes:
+   *
+   * * PERMISSION_DENIED: The customer doesn't belong to the reseller.
+   * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
+   *
+   * Return value:
+   * Based on the provided list of SKUs, returns a list of SKU groups that must
+   * be purchased using the same billing account and the billing accounts
+   * eligible to purchase each SKU group.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.customer
+   *   Required. The resource name of the customer to list eligible billing
+   *   accounts for. Format: accounts/{account_id}/customers/{customer_id}.
+   * @param {string[]} request.skus
+   *   Required. List of SKUs to list eligible billing accounts for. At least one
+   *   SKU is required. Format: products/{product_id}/skus/{sku_id}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.channel.v1.QueryEligibleBillingAccountsResponse|QueryEligibleBillingAccountsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_channel_service.query_eligible_billing_accounts.js</caption>
+   * region_tag:cloudchannel_v1_generated_CloudChannelService_QueryEligibleBillingAccounts_async
+   */
+  queryEligibleBillingAccounts(
+    request?: protos.google.cloud.channel.v1.IQueryEligibleBillingAccountsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.IQueryEligibleBillingAccountsResponse,
+      (
+        | protos.google.cloud.channel.v1.IQueryEligibleBillingAccountsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  queryEligibleBillingAccounts(
+    request: protos.google.cloud.channel.v1.IQueryEligibleBillingAccountsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.channel.v1.IQueryEligibleBillingAccountsResponse,
+      | protos.google.cloud.channel.v1.IQueryEligibleBillingAccountsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  queryEligibleBillingAccounts(
+    request: protos.google.cloud.channel.v1.IQueryEligibleBillingAccountsRequest,
+    callback: Callback<
+      protos.google.cloud.channel.v1.IQueryEligibleBillingAccountsResponse,
+      | protos.google.cloud.channel.v1.IQueryEligibleBillingAccountsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  queryEligibleBillingAccounts(
+    request?: protos.google.cloud.channel.v1.IQueryEligibleBillingAccountsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.channel.v1.IQueryEligibleBillingAccountsResponse,
+          | protos.google.cloud.channel.v1.IQueryEligibleBillingAccountsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.channel.v1.IQueryEligibleBillingAccountsResponse,
+      | protos.google.cloud.channel.v1.IQueryEligibleBillingAccountsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.IQueryEligibleBillingAccountsResponse,
+      (
+        | protos.google.cloud.channel.v1.IQueryEligibleBillingAccountsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        customer: request.customer ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.queryEligibleBillingAccounts(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
    * Registers a service account with subscriber privileges on the Cloud Pub/Sub
    * topic for this Channel Services account. After you create a
    * subscriber, you get the events through
@@ -3113,7 +3240,10 @@ export class CloudChannelServiceClient {
    *
    * Possible error codes:
    *
-   * *  PERMISSION_DENIED: The customer doesn't belong to the reseller.
+   * *  PERMISSION_DENIED:
+   *      * The customer doesn't belong to the reseller.
+   *      * You are not authorized to provision cloud identity id. See
+   *      https://support.google.com/channelservices/answer/9759265
    * *  INVALID_ARGUMENT: Required request parameters are missing or invalid.
    * *  NOT_FOUND: The customer was not found.
    * *  ALREADY_EXISTS: The customer's primary email already exists. Retry
@@ -3279,7 +3409,10 @@ export class CloudChannelServiceClient {
    *
    * Possible error codes:
    *
-   * * PERMISSION_DENIED: The customer doesn't belong to the reseller.
+   * * PERMISSION_DENIED:
+   *     * The customer doesn't belong to the reseller.
+   *     * The reseller is not authorized to transact on this Product. See
+   *     https://support.google.com/channelservices/answer/9759265
    * * INVALID_ARGUMENT:
    *     * Required request parameters are missing or invalid.
    *     * There is already a customer entitlement for a SKU from the same
@@ -3871,6 +4004,12 @@ export class CloudChannelServiceClient {
    *   The request ID must be a valid [UUID](https://tools.ietf.org/html/rfc4122)
    *   with the exception that zero UUID is not supported
    *   (`00000000-0000-0000-0000-000000000000`).
+   * @param {string} [request.billingAccount]
+   *   Optional. The billing account resource name that is used to pay for this
+   *   entitlement when setting up billing on a trial subscription.
+   *
+   *   This field is only relevant for multi-currency accounts. It should be
+   *   left empty for single currency accounts.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4703,7 +4842,10 @@ export class CloudChannelServiceClient {
    *
    * Possible error codes:
    *
-   * * PERMISSION_DENIED: The customer doesn't belong to the reseller.
+   * * PERMISSION_DENIED:
+   *     * The customer doesn't belong to the reseller.
+   *     * The reseller is not authorized to transact on this Product. See
+   *     https://support.google.com/channelservices/answer/9759265
    * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    * * NOT_FOUND: The customer or offer resource was not found.
    * * ALREADY_EXISTS: The SKU was already transferred for the customer.
@@ -5819,6 +5961,8 @@ export class CloudChannelServiceClient {
    *     auth token.
    *     * The reseller account making the request is different
    *     from the reseller account in the query.
+   *     * The reseller is not authorized to transact on this Product. See
+   *     https://support.google.com/channelservices/answer/9759265
    * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    *
    * Return value:
@@ -5851,6 +5995,12 @@ export class CloudChannelServiceClient {
    *   Optional. The BCP-47 language code. For example, "en-US". The
    *   response will localize in the corresponding language code, if specified.
    *   The default value is "en-US".
+   * @param {string} [request.billingAccount]
+   *   Optional. The Billing Account to look up Offers for. Format:
+   *   accounts/{account_id}/billingAccounts/{billing_account_id}.
+   *
+   *   This field is only relevant for multi-currency accounts. It should be left
+   *   empty for single currency accounts.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5970,6 +6120,12 @@ export class CloudChannelServiceClient {
    *   Optional. The BCP-47 language code. For example, "en-US". The
    *   response will localize in the corresponding language code, if specified.
    *   The default value is "en-US".
+   * @param {string} [request.billingAccount]
+   *   Optional. The Billing Account to look up Offers for. Format:
+   *   accounts/{account_id}/billingAccounts/{billing_account_id}.
+   *
+   *   This field is only relevant for multi-currency accounts. It should be left
+   *   empty for single currency accounts.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -6033,6 +6189,12 @@ export class CloudChannelServiceClient {
    *   Optional. The BCP-47 language code. For example, "en-US". The
    *   response will localize in the corresponding language code, if specified.
    *   The default value is "en-US".
+   * @param {string} [request.billingAccount]
+   *   Optional. The Billing Account to look up Offers for. Format:
+   *   accounts/{account_id}/billingAccounts/{billing_account_id}.
+   *
+   *   This field is only relevant for multi-currency accounts. It should be left
+   *   empty for single currency accounts.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -8179,7 +8341,10 @@ export class CloudChannelServiceClient {
    *
    * Possible error codes:
    *
-   * * PERMISSION_DENIED: The customer doesn't belong to the reseller
+   * * PERMISSION_DENIED:
+   *     * The customer doesn't belong to the reseller
+   *     * The reseller is not authorized to transact on this Product. See
+   *     https://support.google.com/channelservices/answer/9759265
    * * INVALID_ARGUMENT: Required request parameters are missing or invalid.
    *
    * @param {Object} request
@@ -9052,6 +9217,46 @@ export class CloudChannelServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified billingAccount resource name string.
+   *
+   * @param {string} account
+   * @param {string} billing_account
+   * @returns {string} Resource name string.
+   */
+  billingAccountPath(account: string, billingAccount: string) {
+    return this.pathTemplates.billingAccountPathTemplate.render({
+      account: account,
+      billing_account: billingAccount,
+    });
+  }
+
+  /**
+   * Parse the account from BillingAccount resource.
+   *
+   * @param {string} billingAccountName
+   *   A fully-qualified path representing BillingAccount resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromBillingAccountName(billingAccountName: string) {
+    return this.pathTemplates.billingAccountPathTemplate.match(
+      billingAccountName
+    ).account;
+  }
+
+  /**
+   * Parse the billing_account from BillingAccount resource.
+   *
+   * @param {string} billingAccountName
+   *   A fully-qualified path representing BillingAccount resource.
+   * @returns {string} A string representing the billing_account.
+   */
+  matchBillingAccountFromBillingAccountName(billingAccountName: string) {
+    return this.pathTemplates.billingAccountPathTemplate.match(
+      billingAccountName
+    ).billing_account;
+  }
 
   /**
    * Return a fully-qualified channelPartnerLink resource name string.

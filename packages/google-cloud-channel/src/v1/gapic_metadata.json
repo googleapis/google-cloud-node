@@ -157,6 +157,11 @@
                 "lookupOffer"
               ]
             },
+            "QueryEligibleBillingAccounts": {
+              "methods": [
+                "queryEligibleBillingAccounts"
+              ]
+            },
             "RegisterSubscriber": {
               "methods": [
                 "registerSubscriber"
@@ -432,6 +437,11 @@
             "LookupOffer": {
               "methods": [
                 "lookupOffer"
+              ]
+            },
+            "QueryEligibleBillingAccounts": {
+              "methods": [
+                "queryEligibleBillingAccounts"
               ]
             },
             "RegisterSubscriber": {
