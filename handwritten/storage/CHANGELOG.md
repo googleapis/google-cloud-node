@@ -4,6 +4,30 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [7.1.0](https://github.com/googleapis/nodejs-storage/compare/v7.0.1...v7.1.0) (2023-09-07)
+
+
+### Features
+
+* Export `ApiError` ([#2291](https://github.com/googleapis/nodejs-storage/issues/2291)) ([c1d1b35](https://github.com/googleapis/nodejs-storage/commit/c1d1b3505b1c6b0306f632a48cbd7d774b2b94d0))
+* Support iterables in file@save ([4356dd0](https://github.com/googleapis/nodejs-storage/commit/4356dd0e6bea5241c4cacd1a58697a332ccf4784))
+* Support iterables in file@save ([49327ff](https://github.com/googleapis/nodejs-storage/commit/49327ff576b2367d9efdff2f82a515b0538ee471))
+* Support iterables in file@save ([c0d9d58](https://github.com/googleapis/nodejs-storage/commit/c0d9d58b56a9a3485b6c0e5eb92411bb094f7bcb))
+
+
+### Bug Fixes
+
+* `File#save` iterable fixes ([#2293](https://github.com/googleapis/nodejs-storage/issues/2293)) ([87c3f41](https://github.com/googleapis/nodejs-storage/commit/87c3f419e2a5a3a30ea581aaa6127dfac261be17))
+* **deps:** Update dependency @google-cloud/paginator to v5 ([#2263](https://github.com/googleapis/nodejs-storage/issues/2263)) ([0c9b342](https://github.com/googleapis/nodejs-storage/commit/0c9b3425b47c3031ec4bac6d45d8cdca48b2f1a6))
+* **deps:** Update dependency @google-cloud/projectify to v4 ([#2264](https://github.com/googleapis/nodejs-storage/issues/2264)) ([c881bae](https://github.com/googleapis/nodejs-storage/commit/c881bae96b40f609d2b7a8d7388c6a76d34faab1))
+* **deps:** Update dependency @google-cloud/promisify to v4 ([#2262](https://github.com/googleapis/nodejs-storage/issues/2262)) ([9d46ff3](https://github.com/googleapis/nodejs-storage/commit/9d46ff3c02315c5a3516aa5f2755ee0471ba036b))
+* **deps:** Update dependency @google-cloud/pubsub to v4 ([#2256](https://github.com/googleapis/nodejs-storage/issues/2256)) ([18282bb](https://github.com/googleapis/nodejs-storage/commit/18282bbefe1201e51867c676a86301f8086aaf1e))
+
+
+### Miscellaneous Chores
+
+* Release 7.1.0 ([#2274](https://github.com/googleapis/nodejs-storage/issues/2274)) ([e0f45c2](https://github.com/googleapis/nodejs-storage/commit/e0f45c24b44d11c72ff40cc534be11cb2a65192f))
+
 ## [7.0.1](https://github.com/googleapis/nodejs-storage/compare/v7.0.0...v7.0.1) (2023-08-07)
 
 
