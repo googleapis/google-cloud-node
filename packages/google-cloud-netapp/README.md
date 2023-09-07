@@ -100,7 +100,7 @@ async function callListStoragePools() {
   // Run request
   const iterable = await netappClient.listStoragePoolsAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
