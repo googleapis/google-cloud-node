@@ -145,7 +145,8 @@
     "packages/google-cloud-migrationcenter": {},
     "packages/google-cloud-sql": {},
     "packages/google-cloud-commerce-consumer-procurement": {},
-    "packages/google-cloud-policytroubleshooter-iam": {}
+    "packages/google-cloud-policytroubleshooter-iam": {},
+    "packages/google-cloud-config": {}
   },
   "plugins": [
     {
