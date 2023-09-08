@@ -2,7 +2,11 @@
   "name": "@google-cloud/policy-troubleshooter-iam",
   "version": "0.2.0",
   "description": "Iam client for Node.js",
-  "repository": "googleapis/nodejs-iam",
+  "repository": {
+    "type": "git",
+    "directory": "packages/google-cloud-policytroubleshooter-iam",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
   "license": "Apache-2.0",
   "author": "Google LLC",
   "main": "build/src/index.js",
