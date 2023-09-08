@@ -28,6 +28,7 @@
     "policies",
     "policy troubleshooter"
   ],
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-policytroubleshooter-iam",
   "scripts": {
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
