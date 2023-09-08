@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/optimization-v3.0.1...optimization-v3.1.0) (2023-09-08)
+
+
+### Features
+
+* [optimization] added support for walking mode and cost_per_kilometer_below_soft_max ([#4620](https://github.com/googleapis/google-cloud-node/issues/4620)) ([083c352](https://github.com/googleapis/google-cloud-node/commit/083c3528fb32cc692df4c33cfbba3d2cca371e59))
+
 ## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/optimization-v3.0.0...optimization-v3.0.1) (2023-09-06)
 
 
