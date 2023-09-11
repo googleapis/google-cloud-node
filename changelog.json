@@ -4,6 +4,143 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "2ba7b489e6109e5bf3d5e7276a0b94558ebd48d0",
+          "message": "Publication issues with containeranalysis and policytroubleshooter",
+          "issues": [
+            "4628"
+          ]
+        }
+      ],
+      "version": "0.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policy-troubleshooter-iam",
+      "id": "87b6854d-c52e-4806-a534-c65af8240326",
+      "createTime": "2023-09-11T17:58:23.549Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "2ba7b489e6109e5bf3d5e7276a0b94558ebd48d0",
+          "message": "Publication issues with containeranalysis and policytroubleshooter",
+          "issues": [
+            "4628"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/containeranalysis",
+      "id": "e8f47a9c-a50c-40f6-bde4-fe68063e13f4",
+      "createTime": "2023-09-11T17:58:23.543Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7d4c40ffab7fe98257560f2986acfcb888f15747",
+          "message": "Update dependency @google-cloud/dataform to v1",
+          "issues": [
+            "4631"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "fix",
+          "sha": "b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4585"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "a4507aa1166832c2d9624cb55879a543f65ec4cb",
+          "message": "Update dependency @google-cloud/dataform to v1",
+          "issues": [
+            "4532"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "chore",
+          "sha": "2260f12543d171bda95345e53475f5f0fdc45770",
+          "message": "Migrate to Node 14",
+          "issues": [
+            "4443"
+          ],
+          "breakingChangeNote": "migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))"
+        },
+        {
+          "type": "fix",
+          "sha": "c32965c0c4a5975ba37371ecd819d9cffb080aa5",
+          "message": "[Many APIs] fix typings for IAM methods",
+          "issues": [
+            "4460"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "1.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataform",
+      "id": "837f5fb7-2785-48e5-8cd2-1e18d77c0cf1",
+      "createTime": "2023-09-11T17:58:23.534Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0805d0f4417a853f5c0f365f357f078f8c481c17",
+          "message": "[channel] mark ChannelPartnerGranularity as deprecated and offer alternatives",
+          "issues": [
+            "4623"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/channel",
+      "id": "6d83562e-f819-4029-9ef8-198da00b8a3e",
+      "createTime": "2023-09-11T17:58:23.528Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "32d823a8ea1613ebb653978a7cd0686f9af2724b",
+          "message": "Add encryption_spec to index.proto and index_endpoint.proto",
+          "issues": [
+            "4596"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "92574196-9798-4eaf-877d-e2342a1d0da2",
+      "createTime": "2023-09-11T17:58:23.522Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "6e6e5c1e519e801c41a4b6febe2eeea82174c6d3",
           "message": "Add initial files for google.cloud.netapp.v1",
@@ -18618,5 +18755,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-09-08T00:22:54.021Z"
+  "updateTime": "2023-09-11T17:58:23.549Z"
 }

@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/channel-v3.0.1...channel-v3.1.0) (2023-09-11)
+
+
+### Features
+
+* [channel] mark ChannelPartnerGranularity as deprecated and offer alternatives ([#4623](https://github.com/googleapis/google-cloud-node/issues/4623)) ([0805d0f](https://github.com/googleapis/google-cloud-node/commit/0805d0f4417a853f5c0f365f357f078f8c481c17))
+
 ## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/channel-v3.0.0...channel-v3.0.1) (2023-09-06)
 
 
