@@ -14,6 +14,46 @@
                     "java_package": "com.google.cloud.channel.v1"
                   },
                   "nested": {
+                    "BillingAccount": {
+                      "options": {
+                        "(google.api.resource).type": "cloudchannel.googleapis.com/BillingAccount",
+                        "(google.api.resource).pattern": "accounts/{account}/billingAccounts/{billing_account}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "currencyCode": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "regionCode": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
                     "ChannelPartnerLinkView": {
                       "values": {
                         "UNSPECIFIED": 0,
@@ -742,7 +782,8 @@
                             "REASON_UNSPECIFIED": 0,
                             "PENDING_TOS_ACCEPTANCE": 1,
                             "SKU_NOT_ELIGIBLE": 2,
-                            "SKU_SUSPENDED": 3
+                            "SKU_SUSPENDED": 3,
+                            "CHANNEL_PARTNER_NOT_AUTHORIZED_FOR_SKU": 4
                           }
                         }
                       }
@@ -879,7 +920,8 @@
                             "PARAMETER_TYPE_UNSPECIFIED": 0,
                             "INT64": 1,
                             "STRING": 2,
-                            "DOUBLE": 3
+                            "DOUBLE": 3,
+                            "BOOLEAN": 4
                           }
                         }
                       }
@@ -1613,7 +1655,10 @@
                         },
                         "channelPartnerGranularity": {
                           "type": "ChannelPartnerGranularity",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "effectiveInvoiceMonth": {
                           "type": "google.type.Date",
@@ -1655,6 +1700,9 @@
                           }
                         },
                         "ChannelPartnerGranularity": {
+                          "options": {
+                            "deprecated": true
+                          },
                           "fields": {}
                         }
                       }
@@ -2572,6 +2620,20 @@
                             }
                           ]
                         },
+                        "QueryEligibleBillingAccounts": {
+                          "requestType": "QueryEligibleBillingAccountsRequest",
+                          "responseType": "QueryEligibleBillingAccountsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{customer=accounts/*/customers/*}:queryEligibleBillingAccounts"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{customer=accounts/*/customers/*}:queryEligibleBillingAccounts"
+                              }
+                            }
+                          ]
+                        },
                         "RegisterSubscriber": {
                           "requestType": "RegisterSubscriberRequest",
                           "responseType": "RegisterSubscriberResponse",
@@ -3014,6 +3076,13 @@
                         "languageCode": {
                           "type": "string",
                           "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "billingAccount": {
+                          "type": "string",
+                          "id": 8,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -3659,6 +3728,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "billingAccount": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4070,6 +4146,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
+                            },
+                            "billingAccount": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -4085,6 +4168,13 @@
                             "newSku": {
                               "type": "string",
                               "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "billingAccount": {
+                              "type": "string",
+                              "id": 3,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -4110,6 +4200,57 @@
                       "fields": {
                         "offer": {
                           "type": "Offer",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "QueryEligibleBillingAccountsRequest": {
+                      "fields": {
+                        "customer": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudchannel.googleapis.com/Customer"
+                          }
+                        },
+                        "skus": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "QueryEligibleBillingAccountsResponse": {
+                      "fields": {
+                        "skuPurchaseGroups": {
+                          "rule": "repeated",
+                          "type": "SkuPurchaseGroup",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "SkuPurchaseGroup": {
+                      "fields": {
+                        "skus": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "billingAccountPurchaseInfos": {
+                          "rule": "repeated",
+                          "type": "BillingAccountPurchaseInfo",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "BillingAccountPurchaseInfo": {
+                      "fields": {
+                        "billingAccount": {
+                          "type": "BillingAccount",
                           "id": 1
                         }
                       }
@@ -5771,18 +5912,6 @@
                 }
               }
             },
-            "Any": {
-              "fields": {
-                "type_url": {
-                  "type": "string",
-                  "id": 1
-                },
-                "value": {
-                  "type": "bytes",
-                  "id": 2
-                }
-              }
-            },
             "Timestamp": {
               "fields": {
                 "seconds": {
@@ -5791,6 +5920,18 @@
                 },
                 "nanos": {
                   "type": "int32",
+                  "id": 2
+                }
+              }
+            },
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
                   "id": 2
                 }
               }
