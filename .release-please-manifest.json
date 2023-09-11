@@ -27,7 +27,7 @@
   "packages/google-cloud-bigquery-datapolicies": "1.1.0",
   "packages/google-cloud-bigquery-datatransfer": "4.0.1",
   "packages/google-cloud-bigquery-reservation": "3.0.1",
-  "packages/google-cloud-billing": "4.0.1",
+  "packages/google-cloud-billing": "4.0.2",
   "packages/google-cloud-billing-budgets": "5.1.0",
   "packages/google-cloud-binaryauthorization": "3.1.0",
   "packages/google-cloud-certificatemanager": "1.0.1",
@@ -38,7 +38,7 @@
   "packages/google-cloud-contentwarehouse": "1.1.0",
   "packages/google-cloud-datacatalog": "4.0.1",
   "packages/google-cloud-datacatalog-lineage": "1.0.1",
-  "packages/google-cloud-dataform": "1.0.0",
+  "packages/google-cloud-dataform": "0.4.1",
   "packages/google-cloud-datafusion": "3.0.1",
   "packages/google-cloud-datalabeling": "4.0.1",
   "packages/google-cloud-dataplex": "3.0.1",
@@ -76,7 +76,7 @@
   "packages/google-cloud-networkmanagement": "3.1.0",
   "packages/google-cloud-networksecurity": "2.0.1",
   "packages/google-cloud-notebooks": "3.1.0",
-  "packages/google-cloud-optimization": "3.0.1",
+  "packages/google-cloud-optimization": "3.1.0",
   "packages/google-cloud-orchestration-airflow-service": "3.0.1",
   "packages/google-cloud-orgpolicy": "3.0.1",
   "packages/google-cloud-osconfig": "3.0.1",
@@ -144,5 +144,7 @@
   "packages/google-cloud-migrationcenter": "1.0.1",
   "packages/google-cloud-commerce-consumer-procurement": "0.1.1",
   "packages/google-cloud-policytroubleshooter-iam": "0.2.0",
-  "packages/google-cloud-sql": "0.1.0"
+  "packages/google-cloud-sql": "0.1.0",
+  "packages/google-cloud-config": "0.1.0",
+  "packages/google-cloud-netapp": "0.1.0"
 }

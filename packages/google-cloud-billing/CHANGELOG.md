@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.0.2](https://github.com/googleapis/google-cloud-node/compare/billing-v4.0.1...billing-v4.0.2) (2023-09-08)
+
+
+### Bug Fixes
+
+* [billing] fixed resource_reference for name in GetProjectBillingInfo ([#4619](https://github.com/googleapis/google-cloud-node/issues/4619)) ([9bcc6c6](https://github.com/googleapis/google-cloud-node/commit/9bcc6c65f72a6a3d6c1f027635f1707880c7cc66))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/billing-v4.0.0...billing-v4.0.1) (2023-09-06)
 
 
