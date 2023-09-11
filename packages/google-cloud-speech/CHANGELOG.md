@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [6.0.2](https://github.com/googleapis/google-cloud-node/compare/speech-v6.0.1...speech-v6.0.2) (2023-09-06)
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4588](https://github.com/googleapis/google-cloud-node/issues/4588)) ([e5ad564](https://github.com/googleapis/google-cloud-node/commit/e5ad564f74dc7a36c0e8cd8de173428a99f1deae))
+* **deps:** Update dependency google-proto-files to v4 ([#4548](https://github.com/googleapis/google-cloud-node/issues/4548)) ([892810a](https://github.com/googleapis/google-cloud-node/commit/892810a80bd84060c2446edc4fa284d92af1e2f2))
+
 ## [6.0.1](https://github.com/googleapis/google-cloud-node/compare/speech-v6.0.0...speech-v6.0.1) (2023-08-09)
 
 

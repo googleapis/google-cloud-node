@@ -48,11 +48,12 @@ function main(dataStore, query) {
    *  API calls. Do not use it when there is no traffic for Search API.
    *  * `user-event` - Using suggestions generated from user-imported search
    *  events.
+   *  * `document-completable` - Using suggestions taken directly from
+   *  user-imported document fields marked as completable.
    *  Default values:
    *  * `document` is the default model for regular dataStores.
    *  * `search-history` is the default model for
-   *  IndustryVertical.SITE_SEARCH google.cloud.discoveryengine.v1.IndustryVertical.SITE_SEARCH 
-   *  dataStores.
+   *  IndustryVertical.SITE_SEARCH   dataStores.
    */
   // const queryModel = 'abc123'
   /**
@@ -69,6 +70,13 @@ function main(dataStore, query) {
    *  characters. Otherwise, an `INVALID_ARGUMENT` error is returned.
    */
   // const userPseudoId = 'abc123'
+  /**
+   *  Indicates if tail suggestions should be returned if there are no
+   *  suggestions that match the full query. Even if set to true, if there are
+   *  suggestions that match the full query, those are returned and no
+   *  tail suggestions are returned.
+   */
+  // const includeTailSuggestions = true
 
   // Imports the Discoveryengine library
   const {CompletionServiceClient} = require('@google-cloud/discoveryengine').v1;

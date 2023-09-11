@@ -29,6 +29,11 @@
               "methods": [
                 "generatePackagesSummary"
               ]
+            },
+            "ExportSBOM": {
+              "methods": [
+                "exportSBOM"
+              ]
             }
           }
         },
@@ -53,6 +58,11 @@
             "GeneratePackagesSummary": {
               "methods": [
                 "generatePackagesSummary"
+              ]
+            },
+            "ExportSBOM": {
+              "methods": [
+                "exportSBOM"
               ]
             }
           }

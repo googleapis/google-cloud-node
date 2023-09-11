@@ -38,13 +38,14 @@ function main(workstationCluster, updateMask) {
    */
   // const updateMask = {}
   /**
-   *  If set, validate the request and preview the review, but do not actually
-   *  apply it.
+   *  Optional. If set, validate the request and preview the review, but do not
+   *  actually apply it.
    */
   // const validateOnly = true
   /**
-   *  If set, and the workstation cluster is not found, a new workstation
-   *  cluster will be created. In this situation, update_mask is ignored.
+   *  Optional. If set, and the workstation cluster is not found, a new
+   *  workstation cluster will be created. In this situation, update_mask is
+   *  ignored.
    */
   // const allowMissing = true
 

@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-cx",
-        "version": "4.0.0",
+        "version": "4.1.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -424,6 +424,94 @@
                 "method": {
                     "shortName": "GetAgentValidationResult",
                     "fullName": "google.cloud.dialogflow.cx.v3.Agents.GetAgentValidationResult",
+                    "service": {
+                        "shortName": "Agents",
+                        "fullName": "google.cloud.dialogflow.cx.v3.Agents"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v3_generated_Agents_GetGenerativeSettings_async",
+            "title": "Agents getGenerativeSettings Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets the generative settings for the agent.",
+            "canonical": true,
+            "file": "agents.get_generative_settings.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetGenerativeSettings",
+                "fullName": "google.cloud.dialogflow.cx.v3.Agents.GetGenerativeSettings",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "language_code",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.dialogflow.cx.v3.GenerativeSettings",
+                "client": {
+                    "shortName": "AgentsClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3.AgentsClient"
+                },
+                "method": {
+                    "shortName": "GetGenerativeSettings",
+                    "fullName": "google.cloud.dialogflow.cx.v3.Agents.GetGenerativeSettings",
+                    "service": {
+                        "shortName": "Agents",
+                        "fullName": "google.cloud.dialogflow.cx.v3.Agents"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "dialogflow_v3_generated_Agents_UpdateGenerativeSettings_async",
+            "title": "Agents updateGenerativeSettings Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates the generative settings for the agent.",
+            "canonical": true,
+            "file": "agents.update_generative_settings.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 58,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateGenerativeSettings",
+                "fullName": "google.cloud.dialogflow.cx.v3.Agents.UpdateGenerativeSettings",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "generative_settings",
+                        "type": ".google.cloud.dialogflow.cx.v3.GenerativeSettings"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.dialogflow.cx.v3.GenerativeSettings",
+                "client": {
+                    "shortName": "AgentsClient",
+                    "fullName": "google.cloud.dialogflow.cx.v3.AgentsClient"
+                },
+                "method": {
+                    "shortName": "UpdateGenerativeSettings",
+                    "fullName": "google.cloud.dialogflow.cx.v3.Agents.UpdateGenerativeSettings",
                     "service": {
                         "shortName": "Agents",
                         "fullName": "google.cloud.dialogflow.cx.v3.Agents"

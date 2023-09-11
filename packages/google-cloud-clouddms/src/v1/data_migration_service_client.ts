@@ -201,6 +201,9 @@ export class DataMigrationServiceClient {
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
+      mappingRulePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/conversionWorkspaces/{conversion_workspace}/mappingRules/{mapping_rule}'
+      ),
       migrationJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/migrationJobs/{migration_job}'
       ),
@@ -235,6 +238,11 @@ export class DataMigrationServiceClient {
         'pageToken',
         'nextPageToken',
         'conversionWorkspaces'
+      ),
+      listMappingRules: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'mappingRules'
       ),
       describeDatabaseEntities: new this._gaxModule.PageDescriptor(
         'pageToken',
@@ -713,6 +721,7 @@ export class DataMigrationServiceClient {
       'verifyMigrationJob',
       'restartMigrationJob',
       'generateSshScript',
+      'generateTcpProxyScript',
       'listConnectionProfiles',
       'getConnectionProfile',
       'createConnectionProfile',
@@ -727,6 +736,10 @@ export class DataMigrationServiceClient {
       'createConversionWorkspace',
       'updateConversionWorkspace',
       'deleteConversionWorkspace',
+      'createMappingRule',
+      'deleteMappingRule',
+      'listMappingRules',
+      'getMappingRule',
       'seedConversionWorkspace',
       'importMappingRules',
       'convertConversionWorkspace',
@@ -1013,6 +1026,121 @@ export class DataMigrationServiceClient {
     return this.innerApiCalls.generateSshScript(request, options, callback);
   }
   /**
+   * Generate a TCP Proxy configuration script to configure a cloud-hosted VM
+   * running a TCP Proxy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.migrationJob
+   *   Name of the migration job resource to generate the TCP Proxy script.
+   * @param {string} request.vmName
+   *   Required. The name of the Compute instance that will host the proxy.
+   * @param {string} request.vmMachineType
+   *   Required. The type of the Compute instance that will host the proxy.
+   * @param {string} [request.vmZone]
+   *   Optional. The Google Cloud Platform zone to create the VM in. The fully
+   *   qualified name of the zone must be specified, including the region name,
+   *   for example "us-central1-b". If not specified, uses the "-b" zone of the
+   *   destination Connection Profile's region.
+   * @param {string} request.vmSubnet
+   *   Required. The name of the subnet the Compute instance will use for private
+   *   connectivity. Must be supplied in the form of
+   *   projects/{project}/regions/{region}/subnetworks/{subnetwork}.
+   *   Note: the region for the subnet must match the Compute instance region.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.clouddms.v1.TcpProxyScript|TcpProxyScript}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.generate_tcp_proxy_script.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_GenerateTcpProxyScript_async
+   */
+  generateTcpProxyScript(
+    request?: protos.google.cloud.clouddms.v1.IGenerateTcpProxyScriptRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.clouddms.v1.ITcpProxyScript,
+      (
+        | protos.google.cloud.clouddms.v1.IGenerateTcpProxyScriptRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  generateTcpProxyScript(
+    request: protos.google.cloud.clouddms.v1.IGenerateTcpProxyScriptRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.clouddms.v1.ITcpProxyScript,
+      | protos.google.cloud.clouddms.v1.IGenerateTcpProxyScriptRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  generateTcpProxyScript(
+    request: protos.google.cloud.clouddms.v1.IGenerateTcpProxyScriptRequest,
+    callback: Callback<
+      protos.google.cloud.clouddms.v1.ITcpProxyScript,
+      | protos.google.cloud.clouddms.v1.IGenerateTcpProxyScriptRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  generateTcpProxyScript(
+    request?: protos.google.cloud.clouddms.v1.IGenerateTcpProxyScriptRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.clouddms.v1.ITcpProxyScript,
+          | protos.google.cloud.clouddms.v1.IGenerateTcpProxyScriptRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.clouddms.v1.ITcpProxyScript,
+      | protos.google.cloud.clouddms.v1.IGenerateTcpProxyScriptRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.clouddms.v1.ITcpProxyScript,
+      (
+        | protos.google.cloud.clouddms.v1.IGenerateTcpProxyScriptRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        migration_job: request.migrationJob ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.generateTcpProxyScript(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
    * Gets details of a single connection profile.
    *
    * @param {Object} request
@@ -1293,6 +1421,298 @@ export class DataMigrationServiceClient {
     );
   }
   /**
+   * Creates a new mapping rule for a given conversion workspace.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent which owns this collection of mapping rules.
+   * @param {string} request.mappingRuleId
+   *   Required. The ID of the rule to create.
+   * @param {google.cloud.clouddms.v1.MappingRule} request.mappingRule
+   *   Required. Represents a [mapping rule]
+   *   (https://cloud.google.com/database-migration/reference/rest/v1/projects.locations.mappingRules)
+   *   object.
+   * @param {string} request.requestId
+   *   A unique ID used to identify the request. If the server receives two
+   *   requests with the same ID, then the second request is ignored.
+   *
+   *   It is recommended to always set this value to a UUID.
+   *
+   *   The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
+   *   (_), and hyphens (-). The maximum length is 40 characters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.clouddms.v1.MappingRule|MappingRule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.create_mapping_rule.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_CreateMappingRule_async
+   */
+  createMappingRule(
+    request?: protos.google.cloud.clouddms.v1.ICreateMappingRuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.clouddms.v1.IMappingRule,
+      protos.google.cloud.clouddms.v1.ICreateMappingRuleRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  createMappingRule(
+    request: protos.google.cloud.clouddms.v1.ICreateMappingRuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.clouddms.v1.IMappingRule,
+      | protos.google.cloud.clouddms.v1.ICreateMappingRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createMappingRule(
+    request: protos.google.cloud.clouddms.v1.ICreateMappingRuleRequest,
+    callback: Callback<
+      protos.google.cloud.clouddms.v1.IMappingRule,
+      | protos.google.cloud.clouddms.v1.ICreateMappingRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createMappingRule(
+    request?: protos.google.cloud.clouddms.v1.ICreateMappingRuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.clouddms.v1.IMappingRule,
+          | protos.google.cloud.clouddms.v1.ICreateMappingRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.clouddms.v1.IMappingRule,
+      | protos.google.cloud.clouddms.v1.ICreateMappingRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.clouddms.v1.IMappingRule,
+      protos.google.cloud.clouddms.v1.ICreateMappingRuleRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createMappingRule(request, options, callback);
+  }
+  /**
+   * Deletes a single mapping rule.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the mapping rule resource to delete.
+   * @param {string} [request.requestId]
+   *   Optional. A unique ID used to identify the request. If the server receives
+   *   two requests with the same ID, then the second request is ignored.
+   *
+   *   It is recommended to always set this value to a UUID.
+   *
+   *   The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
+   *   (_), and hyphens (-). The maximum length is 40 characters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.delete_mapping_rule.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_DeleteMappingRule_async
+   */
+  deleteMappingRule(
+    request?: protos.google.cloud.clouddms.v1.IDeleteMappingRuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.clouddms.v1.IDeleteMappingRuleRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteMappingRule(
+    request: protos.google.cloud.clouddms.v1.IDeleteMappingRuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.clouddms.v1.IDeleteMappingRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteMappingRule(
+    request: protos.google.cloud.clouddms.v1.IDeleteMappingRuleRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.clouddms.v1.IDeleteMappingRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteMappingRule(
+    request?: protos.google.cloud.clouddms.v1.IDeleteMappingRuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.clouddms.v1.IDeleteMappingRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.clouddms.v1.IDeleteMappingRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.clouddms.v1.IDeleteMappingRuleRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteMappingRule(request, options, callback);
+  }
+  /**
+   * Gets the details of a mapping rule.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the mapping rule resource to get.
+   *   Example: conversionWorkspaces/123/mappingRules/rule123
+   *
+   *   In order to retrieve a previous revision of the mapping rule, also provide
+   *   the revision ID.
+   *   Example:
+   *   conversionWorkspace/123/mappingRules/rule123@c7cfa2a8c7cfa2a8c7cfa2a8c7cfa2a8
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.clouddms.v1.MappingRule|MappingRule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.get_mapping_rule.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_GetMappingRule_async
+   */
+  getMappingRule(
+    request?: protos.google.cloud.clouddms.v1.IGetMappingRuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.clouddms.v1.IMappingRule,
+      protos.google.cloud.clouddms.v1.IGetMappingRuleRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getMappingRule(
+    request: protos.google.cloud.clouddms.v1.IGetMappingRuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.clouddms.v1.IMappingRule,
+      protos.google.cloud.clouddms.v1.IGetMappingRuleRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getMappingRule(
+    request: protos.google.cloud.clouddms.v1.IGetMappingRuleRequest,
+    callback: Callback<
+      protos.google.cloud.clouddms.v1.IMappingRule,
+      protos.google.cloud.clouddms.v1.IGetMappingRuleRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getMappingRule(
+    request?: protos.google.cloud.clouddms.v1.IGetMappingRuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.clouddms.v1.IMappingRule,
+          | protos.google.cloud.clouddms.v1.IGetMappingRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.clouddms.v1.IMappingRule,
+      protos.google.cloud.clouddms.v1.IGetMappingRuleRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.clouddms.v1.IMappingRule,
+      protos.google.cloud.clouddms.v1.IGetMappingRuleRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getMappingRule(request, options, callback);
+  }
+  /**
    * Searches/lists the background jobs for a specific
    * conversion workspace.
    *
@@ -1518,9 +1938,9 @@ export class DataMigrationServiceClient {
    *   Required. Represents a [migration
    *   job](https://cloud.google.com/database-migration/docs/reference/rest/v1/projects.locations.migrationJobs)
    *   object.
-   * @param {string} request.requestId
-   *   A unique ID used to identify the request. If the server receives two
-   *   requests with the same ID, then the second request is ignored.
+   * @param {string} [request.requestId]
+   *   Optional. A unique ID used to identify the request. If the server receives
+   *   two requests with the same ID, then the second request is ignored.
    *
    *   It is recommended to always set this value to a UUID.
    *
@@ -1957,6 +2377,9 @@ export class DataMigrationServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Name of the migration job resource to start.
+   * @param {boolean} [request.skipValidation]
+   *   Optional. Start the migration job without running prior configuration
+   *   verification. Defaults to `false`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2504,6 +2927,12 @@ export class DataMigrationServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Name of the migration job resource to verify.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to specify the changed fields to be verified.
+   *   It will not update the migration job.
+   * @param {google.cloud.clouddms.v1.MigrationJob} [request.migrationJob]
+   *   Optional. The changed migration job parameters to verify.
+   *   It will not update the migration job.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2642,6 +3071,9 @@ export class DataMigrationServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Name of the migration job resource to restart.
+   * @param {boolean} [request.skipValidation]
+   *   Optional. Restart the migration job without running prior configuration
+   *   verification. Defaults to `false`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3863,6 +4295,9 @@ export class DataMigrationServiceClient {
    *
    *   The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
    *   (_), and hyphens (-). The maximum length is 40 characters.
+   * @param {boolean} request.force
+   *   Force delete the conversion workspace, even if there's a running migration
+   *   that is using the workspace.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4009,10 +4444,11 @@ export class DataMigrationServiceClient {
    * @param {boolean} request.autoCommit
    *   Should the conversion workspace be committed automatically after the
    *   seed operation.
-   * @param {string} request.sourceConnectionProfile
-   *   Fully qualified (Uri) name of the source connection profile.
-   * @param {string} request.destinationConnectionProfile
-   *   Fully qualified (Uri) name of the destination connection profile.
+   * @param {string} [request.sourceConnectionProfile]
+   *   Optional. Fully qualified (Uri) name of the source connection profile.
+   * @param {string} [request.destinationConnectionProfile]
+   *   Optional. Fully qualified (Uri) name of the destination connection
+   *   profile.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4157,12 +4593,12 @@ export class DataMigrationServiceClient {
    *   in the form of:
    *   projects/{project}/locations/{location}/conversionWorkspaces/{conversion_workspace}.
    * @param {google.cloud.clouddms.v1.ImportRulesFileFormat} request.rulesFormat
-   *   The format of the rules content file.
+   *   Required. The format of the rules content file.
    * @param {number[]} request.rulesFiles
-   *   One or more rules files.
+   *   Required. One or more rules files.
    * @param {boolean} request.autoCommit
-   *   Should the conversion workspace be committed automatically after the
-   *   import operation.
+   *   Required. Should the conversion workspace be committed automatically after
+   *   the import operation.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4300,12 +4736,16 @@ export class DataMigrationServiceClient {
    * @param {string} request.name
    *   Name of the conversion workspace resource to convert in the form of:
    *   projects/{project}/locations/{location}/conversionWorkspaces/{conversion_workspace}.
-   * @param {boolean} request.autoCommit
-   *   Specifies whether the conversion workspace is to be committed automatically
-   *   after the conversion.
-   * @param {string} request.filter
-   *   Filter the entities to convert. Leaving this field empty will convert all
-   *   of the entities. Supports Google AIP-160 style filtering.
+   * @param {boolean} [request.autoCommit]
+   *   Optional. Specifies whether the conversion workspace is to be committed
+   *   automatically after the conversion.
+   * @param {string} [request.filter]
+   *   Optional. Filter the entities to convert. Leaving this field empty will
+   *   convert all of the entities. Supports Google AIP-160 style filtering.
+   * @param {boolean} [request.convertFullPath]
+   *   Optional. Automatically convert the full entity path for each entity
+   *   specified by the filter. For example, if the filter specifies a table, that
+   *   table schema (and database if there is one) will also be converted.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4733,8 +5173,16 @@ export class DataMigrationServiceClient {
    * @param {string} request.filter
    *   Filter which entities to apply. Leaving this field empty will apply all of
    *   the entities. Supports Google AIP 160 based filtering.
-   * @param {string} request.connectionProfile
-   *   Fully qualified (Uri) name of the destination connection profile.
+   * @param {boolean} [request.dryRun]
+   *   Optional. Only validates the apply process, but doesn't change the
+   *   destination database. Only works for PostgreSQL destination connection
+   *   profile.
+   * @param {boolean} [request.autoCommit]
+   *   Optional. Specifies whether the conversion workspace is to be committed
+   *   automatically after the apply.
+   * @param {string} [request.connectionProfile]
+   *   Optional. Fully qualified (Uri) name of the destination connection
+   *   profile.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5836,6 +6284,213 @@ export class DataMigrationServiceClient {
     ) as AsyncIterable<protos.google.cloud.clouddms.v1.IConversionWorkspace>;
   }
   /**
+   * Lists the mapping rules for a specific conversion workspace.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the conversion workspace resource whose mapping rules are
+   *   listed in the form of:
+   *   projects/{project}/locations/{location}/conversionWorkspaces/{conversion_workspace}.
+   * @param {number} request.pageSize
+   *   The maximum number of rules to return. The service may return
+   *   fewer than this value.
+   * @param {string} request.pageToken
+   *   The nextPageToken value received in the previous call to
+   *   mappingRules.list, used in the subsequent request to retrieve the next
+   *   page of results. On first call this should be left blank. When paginating,
+   *   all other parameters provided to mappingRules.list must match the call
+   *   that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.clouddms.v1.MappingRule|MappingRule}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listMappingRulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listMappingRules(
+    request?: protos.google.cloud.clouddms.v1.IListMappingRulesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.clouddms.v1.IMappingRule[],
+      protos.google.cloud.clouddms.v1.IListMappingRulesRequest | null,
+      protos.google.cloud.clouddms.v1.IListMappingRulesResponse,
+    ]
+  >;
+  listMappingRules(
+    request: protos.google.cloud.clouddms.v1.IListMappingRulesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.clouddms.v1.IListMappingRulesRequest,
+      | protos.google.cloud.clouddms.v1.IListMappingRulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.clouddms.v1.IMappingRule
+    >
+  ): void;
+  listMappingRules(
+    request: protos.google.cloud.clouddms.v1.IListMappingRulesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.clouddms.v1.IListMappingRulesRequest,
+      | protos.google.cloud.clouddms.v1.IListMappingRulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.clouddms.v1.IMappingRule
+    >
+  ): void;
+  listMappingRules(
+    request?: protos.google.cloud.clouddms.v1.IListMappingRulesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.clouddms.v1.IListMappingRulesRequest,
+          | protos.google.cloud.clouddms.v1.IListMappingRulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.clouddms.v1.IMappingRule
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.clouddms.v1.IListMappingRulesRequest,
+      | protos.google.cloud.clouddms.v1.IListMappingRulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.clouddms.v1.IMappingRule
+    >
+  ): Promise<
+    [
+      protos.google.cloud.clouddms.v1.IMappingRule[],
+      protos.google.cloud.clouddms.v1.IListMappingRulesRequest | null,
+      protos.google.cloud.clouddms.v1.IListMappingRulesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listMappingRules(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the conversion workspace resource whose mapping rules are
+   *   listed in the form of:
+   *   projects/{project}/locations/{location}/conversionWorkspaces/{conversion_workspace}.
+   * @param {number} request.pageSize
+   *   The maximum number of rules to return. The service may return
+   *   fewer than this value.
+   * @param {string} request.pageToken
+   *   The nextPageToken value received in the previous call to
+   *   mappingRules.list, used in the subsequent request to retrieve the next
+   *   page of results. On first call this should be left blank. When paginating,
+   *   all other parameters provided to mappingRules.list must match the call
+   *   that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.clouddms.v1.MappingRule|MappingRule} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listMappingRulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listMappingRulesStream(
+    request?: protos.google.cloud.clouddms.v1.IListMappingRulesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listMappingRules'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listMappingRules.createStream(
+      this.innerApiCalls.listMappingRules as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listMappingRules`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the conversion workspace resource whose mapping rules are
+   *   listed in the form of:
+   *   projects/{project}/locations/{location}/conversionWorkspaces/{conversion_workspace}.
+   * @param {number} request.pageSize
+   *   The maximum number of rules to return. The service may return
+   *   fewer than this value.
+   * @param {string} request.pageToken
+   *   The nextPageToken value received in the previous call to
+   *   mappingRules.list, used in the subsequent request to retrieve the next
+   *   page of results. On first call this should be left blank. When paginating,
+   *   all other parameters provided to mappingRules.list must match the call
+   *   that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.clouddms.v1.MappingRule|MappingRule}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_migration_service.list_mapping_rules.js</caption>
+   * region_tag:datamigration_v1_generated_DataMigrationService_ListMappingRules_async
+   */
+  listMappingRulesAsync(
+    request?: protos.google.cloud.clouddms.v1.IListMappingRulesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.clouddms.v1.IMappingRule> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listMappingRules'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listMappingRules.asyncIterate(
+      this.innerApiCalls['listMappingRules'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.clouddms.v1.IMappingRule>;
+  }
+  /**
    * Describes the database entities tree for a specific conversion workspace
    * and a specific tree type.
    *
@@ -5849,26 +6504,29 @@ export class DataMigrationServiceClient {
    *   Required. Name of the conversion workspace resource whose database entities
    *   are described. Must be in the form of:
    *   projects/{project}/locations/{location}/conversionWorkspaces/{conversion_workspace}.
-   * @param {number} request.pageSize
-   *   The maximum number of entities to return. The service may return
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of entities to return. The service may return
    *   fewer entities than the value specifies.
-   * @param {string} request.pageToken
-   *   The nextPageToken value received in the previous call to
+   * @param {string} [request.pageToken]
+   *   Optional. The nextPageToken value received in the previous call to
    *   conversionWorkspace.describeDatabaseEntities, used in the subsequent
    *   request to retrieve the next page of results. On first call this should be
    *   left blank. When paginating, all other parameters provided to
    *   conversionWorkspace.describeDatabaseEntities must match the call that
    *   provided the page token.
    * @param {google.cloud.clouddms.v1.DescribeDatabaseEntitiesRequest.DBTreeType} request.tree
-   *   The tree to fetch.
-   * @param {boolean} request.uncommitted
-   *   Whether to retrieve the latest committed version of the entities or the
-   *   latest version. This field is ignored if a specific commit_id is specified.
-   * @param {string} request.commitId
-   *   Request a specific commit ID. If not specified, the entities from the
-   *   latest commit are returned.
-   * @param {string} request.filter
-   *   Filter the returned entities based on AIP-160 standard.
+   *   Required. The tree to fetch.
+   * @param {boolean} [request.uncommitted]
+   *   Optional. Whether to retrieve the latest committed version of the entities
+   *   or the latest version. This field is ignored if a specific commit_id is
+   *   specified.
+   * @param {string} [request.commitId]
+   *   Optional. Request a specific commit ID. If not specified, the entities from
+   *   the latest commit are returned.
+   * @param {string} [request.filter]
+   *   Optional. Filter the returned entities based on AIP-160 standard.
+   * @param {google.cloud.clouddms.v1.DatabaseEntityView} [request.view]
+   *   Optional. Results view based on AIP-157
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5968,26 +6626,29 @@ export class DataMigrationServiceClient {
    *   Required. Name of the conversion workspace resource whose database entities
    *   are described. Must be in the form of:
    *   projects/{project}/locations/{location}/conversionWorkspaces/{conversion_workspace}.
-   * @param {number} request.pageSize
-   *   The maximum number of entities to return. The service may return
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of entities to return. The service may return
    *   fewer entities than the value specifies.
-   * @param {string} request.pageToken
-   *   The nextPageToken value received in the previous call to
+   * @param {string} [request.pageToken]
+   *   Optional. The nextPageToken value received in the previous call to
    *   conversionWorkspace.describeDatabaseEntities, used in the subsequent
    *   request to retrieve the next page of results. On first call this should be
    *   left blank. When paginating, all other parameters provided to
    *   conversionWorkspace.describeDatabaseEntities must match the call that
    *   provided the page token.
    * @param {google.cloud.clouddms.v1.DescribeDatabaseEntitiesRequest.DBTreeType} request.tree
-   *   The tree to fetch.
-   * @param {boolean} request.uncommitted
-   *   Whether to retrieve the latest committed version of the entities or the
-   *   latest version. This field is ignored if a specific commit_id is specified.
-   * @param {string} request.commitId
-   *   Request a specific commit ID. If not specified, the entities from the
-   *   latest commit are returned.
-   * @param {string} request.filter
-   *   Filter the returned entities based on AIP-160 standard.
+   *   Required. The tree to fetch.
+   * @param {boolean} [request.uncommitted]
+   *   Optional. Whether to retrieve the latest committed version of the entities
+   *   or the latest version. This field is ignored if a specific commit_id is
+   *   specified.
+   * @param {string} [request.commitId]
+   *   Optional. Request a specific commit ID. If not specified, the entities from
+   *   the latest commit are returned.
+   * @param {string} [request.filter]
+   *   Optional. Filter the returned entities based on AIP-160 standard.
+   * @param {google.cloud.clouddms.v1.DatabaseEntityView} [request.view]
+   *   Optional. Results view based on AIP-157
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -6031,26 +6692,29 @@ export class DataMigrationServiceClient {
    *   Required. Name of the conversion workspace resource whose database entities
    *   are described. Must be in the form of:
    *   projects/{project}/locations/{location}/conversionWorkspaces/{conversion_workspace}.
-   * @param {number} request.pageSize
-   *   The maximum number of entities to return. The service may return
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of entities to return. The service may return
    *   fewer entities than the value specifies.
-   * @param {string} request.pageToken
-   *   The nextPageToken value received in the previous call to
+   * @param {string} [request.pageToken]
+   *   Optional. The nextPageToken value received in the previous call to
    *   conversionWorkspace.describeDatabaseEntities, used in the subsequent
    *   request to retrieve the next page of results. On first call this should be
    *   left blank. When paginating, all other parameters provided to
    *   conversionWorkspace.describeDatabaseEntities must match the call that
    *   provided the page token.
    * @param {google.cloud.clouddms.v1.DescribeDatabaseEntitiesRequest.DBTreeType} request.tree
-   *   The tree to fetch.
-   * @param {boolean} request.uncommitted
-   *   Whether to retrieve the latest committed version of the entities or the
-   *   latest version. This field is ignored if a specific commit_id is specified.
-   * @param {string} request.commitId
-   *   Request a specific commit ID. If not specified, the entities from the
-   *   latest commit are returned.
-   * @param {string} request.filter
-   *   Filter the returned entities based on AIP-160 standard.
+   *   Required. The tree to fetch.
+   * @param {boolean} [request.uncommitted]
+   *   Optional. Whether to retrieve the latest committed version of the entities
+   *   or the latest version. This field is ignored if a specific commit_id is
+   *   specified.
+   * @param {string} [request.commitId]
+   *   Optional. Request a specific commit ID. If not specified, the entities from
+   *   the latest commit are returned.
+   * @param {string} [request.filter]
+   *   Optional. Filter the returned entities based on AIP-160 standard.
+   * @param {google.cloud.clouddms.v1.DatabaseEntityView} [request.view]
+   *   Optional. Results view based on AIP-157
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -6825,6 +7489,77 @@ export class DataMigrationServiceClient {
    */
   matchLocationFromLocationName(locationName: string) {
     return this.pathTemplates.locationPathTemplate.match(locationName).location;
+  }
+
+  /**
+   * Return a fully-qualified mappingRule resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} conversion_workspace
+   * @param {string} mapping_rule
+   * @returns {string} Resource name string.
+   */
+  mappingRulePath(
+    project: string,
+    location: string,
+    conversionWorkspace: string,
+    mappingRule: string
+  ) {
+    return this.pathTemplates.mappingRulePathTemplate.render({
+      project: project,
+      location: location,
+      conversion_workspace: conversionWorkspace,
+      mapping_rule: mappingRule,
+    });
+  }
+
+  /**
+   * Parse the project from MappingRule resource.
+   *
+   * @param {string} mappingRuleName
+   *   A fully-qualified path representing MappingRule resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMappingRuleName(mappingRuleName: string) {
+    return this.pathTemplates.mappingRulePathTemplate.match(mappingRuleName)
+      .project;
+  }
+
+  /**
+   * Parse the location from MappingRule resource.
+   *
+   * @param {string} mappingRuleName
+   *   A fully-qualified path representing MappingRule resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMappingRuleName(mappingRuleName: string) {
+    return this.pathTemplates.mappingRulePathTemplate.match(mappingRuleName)
+      .location;
+  }
+
+  /**
+   * Parse the conversion_workspace from MappingRule resource.
+   *
+   * @param {string} mappingRuleName
+   *   A fully-qualified path representing MappingRule resource.
+   * @returns {string} A string representing the conversion_workspace.
+   */
+  matchConversionWorkspaceFromMappingRuleName(mappingRuleName: string) {
+    return this.pathTemplates.mappingRulePathTemplate.match(mappingRuleName)
+      .conversion_workspace;
+  }
+
+  /**
+   * Parse the mapping_rule from MappingRule resource.
+   *
+   * @param {string} mappingRuleName
+   *   A fully-qualified path representing MappingRule resource.
+   * @returns {string} A string representing the mapping_rule.
+   */
+  matchMappingRuleFromMappingRuleName(mappingRuleName: string) {
+    return this.pathTemplates.mappingRulePathTemplate.match(mappingRuleName)
+      .mapping_rule;
   }
 
   /**

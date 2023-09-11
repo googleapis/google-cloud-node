@@ -189,6 +189,9 @@ export class WebhooksClient {
       agentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}'
       ),
+      agentGenerativeSettingsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/generativeSettings'
+      ),
       agentValidationResultPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/validationResult'
       ),
@@ -1346,6 +1349,71 @@ export class WebhooksClient {
    */
   matchAgentFromAgentName(agentName: string) {
     return this.pathTemplates.agentPathTemplate.match(agentName).agent;
+  }
+
+  /**
+   * Return a fully-qualified agentGenerativeSettings resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @returns {string} Resource name string.
+   */
+  agentGenerativeSettingsPath(
+    project: string,
+    location: string,
+    agent: string
+  ) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+    });
+  }
+
+  /**
+   * Parse the project from AgentGenerativeSettings resource.
+   *
+   * @param {string} agentGenerativeSettingsName
+   *   A fully-qualified path representing AgentGenerativeSettings resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAgentGenerativeSettingsName(
+    agentGenerativeSettingsName: string
+  ) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(
+      agentGenerativeSettingsName
+    ).project;
+  }
+
+  /**
+   * Parse the location from AgentGenerativeSettings resource.
+   *
+   * @param {string} agentGenerativeSettingsName
+   *   A fully-qualified path representing AgentGenerativeSettings resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAgentGenerativeSettingsName(
+    agentGenerativeSettingsName: string
+  ) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(
+      agentGenerativeSettingsName
+    ).location;
+  }
+
+  /**
+   * Parse the agent from AgentGenerativeSettings resource.
+   *
+   * @param {string} agentGenerativeSettingsName
+   *   A fully-qualified path representing AgentGenerativeSettings resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromAgentGenerativeSettingsName(
+    agentGenerativeSettingsName: string
+  ) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(
+      agentGenerativeSettingsName
+    ).agent;
   }
 
   /**

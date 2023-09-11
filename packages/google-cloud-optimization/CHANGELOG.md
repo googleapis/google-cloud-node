@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/optimization-v3.0.1...optimization-v3.1.0) (2023-09-08)
+
+
+### Features
+
+* [optimization] added support for walking mode and cost_per_kilometer_below_soft_max ([#4620](https://github.com/googleapis/google-cloud-node/issues/4620)) ([083c352](https://github.com/googleapis/google-cloud-node/commit/083c3528fb32cc692df4c33cfbba3d2cca371e59))
+
+## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/optimization-v3.0.0...optimization-v3.0.1) (2023-09-06)
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4587](https://github.com/googleapis/google-cloud-node/issues/4587)) ([e3b1e7e](https://github.com/googleapis/google-cloud-node/commit/e3b1e7e46d666abb4df28c3cd69e97c08b88445a))
+
 ## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/optimization-v2.2.2...optimization-v3.0.0) (2023-08-06)
 
 

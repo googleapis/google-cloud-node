@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.1.0...container-v5.2.0) (2023-09-06)
+
+
+### Features
+
+* [container] Add preview support for monitoring a cluster's pods for compliance with a provided Binary Authorization platform policy via Binary Authorization Continuous Validation ([#4541](https://github.com/googleapis/google-cloud-node/issues/4541)) ([9a4f139](https://github.com/googleapis/google-cloud-node/commit/9a4f139fc9f6f1988774df8325432d24296e8764))
+* [container] add UpdateNodePoolRequest.machine_type, disk_type, disk_size_gb ([#4591](https://github.com/googleapis/google-cloud-node/issues/4591)) ([b07e25f](https://github.com/googleapis/google-cloud-node/commit/b07e25fad34f0071d33baabeee9a9b971760971e))
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4589](https://github.com/googleapis/google-cloud-node/issues/4589)) ([07967ad](https://github.com/googleapis/google-cloud-node/commit/07967add1b5fc28b548cf74721b595ea0ba90d5b))
+
 ## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.0.0...container-v5.1.0) (2023-08-09)
 
 

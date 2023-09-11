@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/tpu-v3.0.0...tpu-v3.1.0) (2023-09-06)
+
+
+### Features
+
+* [tpu] Add ResetQueueResource to the TPU service ([#4577](https://github.com/googleapis/google-cloud-node/issues/4577)) ([c395570](https://github.com/googleapis/google-cloud-node/commit/c3955701db6a18741ad837668282ab0907009e43))
+* [tpu] publish boot_disk_config to support CHD with KMS ([#4606](https://github.com/googleapis/google-cloud-node/issues/4606)) ([0bf8b21](https://github.com/googleapis/google-cloud-node/commit/0bf8b2169a448f87a8301749f343fd07679a6c08))
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4588](https://github.com/googleapis/google-cloud-node/issues/4588)) ([e5ad564](https://github.com/googleapis/google-cloud-node/commit/e5ad564f74dc7a36c0e8cd8de173428a99f1deae))
+
 ## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/tpu-v2.7.0...tpu-v3.0.0) (2023-08-06)
 
 

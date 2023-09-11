@@ -33,8 +33,8 @@ function main(name, etag) {
    */
   // const name = 'abc123'
   /**
-   *  Optional. State properties user wish to include with this state.  Full replace of the
-   *  current state_metadata.
+   *  Optional. State properties user wish to include with this state.  Full
+   *  replace of the current state_metadata.
    */
   // const stateMetadata = [1,2,3,4]
   /**

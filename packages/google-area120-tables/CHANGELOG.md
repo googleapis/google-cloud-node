@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/area120-tables-v3.0.0...area120-tables-v3.0.1) (2023-09-06)
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4583](https://github.com/googleapis/google-cloud-node/issues/4583)) ([c3ddba8](https://github.com/googleapis/google-cloud-node/commit/c3ddba8df9fee6185e36a4e99f7c67b0319f1242))
+* **deps:** Update dependency google-auth-library to v9 ([#4560](https://github.com/googleapis/google-cloud-node/issues/4560)) ([e5099b7](https://github.com/googleapis/google-cloud-node/commit/e5099b7a475e0cfaf0d25aa8d6755cd7bc43cbe0))
+
 ## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/area120-tables-v2.2.2...area120-tables-v3.0.0) (2023-08-06)
 
 

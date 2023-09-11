@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/os-login-v5.0.0...os-login-v5.1.0) (2023-09-06)
+
+
+### Features
+
+* [oslogin] launch signSshPublicKey in beta ([#4552](https://github.com/googleapis/google-cloud-node/issues/4552)) ([48f07c1](https://github.com/googleapis/google-cloud-node/commit/48f07c18aa1cc93b67e4bc46078f21d908f7becc))
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4587](https://github.com/googleapis/google-cloud-node/issues/4587)) ([e3b1e7e](https://github.com/googleapis/google-cloud-node/commit/e3b1e7e46d666abb4df28c3cd69e97c08b88445a))
+
 ## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/os-login-v4.1.2...os-login-v5.0.0) (2023-08-06)
 
 

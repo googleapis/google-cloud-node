@@ -2779,6 +2779,76 @@ export namespace google {
                     public acknowledgeUserDataCollection(request: google.analytics.admin.v1alpha.IAcknowledgeUserDataCollectionRequest): Promise<google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionResponse>;
 
                     /**
+                     * Calls GetSKAdNetworkConversionValueSchema.
+                     * @param request GetSKAdNetworkConversionValueSchemaRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SKAdNetworkConversionValueSchema
+                     */
+                    public getSKAdNetworkConversionValueSchema(request: google.analytics.admin.v1alpha.IGetSKAdNetworkConversionValueSchemaRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.GetSKAdNetworkConversionValueSchemaCallback): void;
+
+                    /**
+                     * Calls GetSKAdNetworkConversionValueSchema.
+                     * @param request GetSKAdNetworkConversionValueSchemaRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getSKAdNetworkConversionValueSchema(request: google.analytics.admin.v1alpha.IGetSKAdNetworkConversionValueSchemaRequest): Promise<google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema>;
+
+                    /**
+                     * Calls CreateSKAdNetworkConversionValueSchema.
+                     * @param request CreateSKAdNetworkConversionValueSchemaRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SKAdNetworkConversionValueSchema
+                     */
+                    public createSKAdNetworkConversionValueSchema(request: google.analytics.admin.v1alpha.ICreateSKAdNetworkConversionValueSchemaRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.CreateSKAdNetworkConversionValueSchemaCallback): void;
+
+                    /**
+                     * Calls CreateSKAdNetworkConversionValueSchema.
+                     * @param request CreateSKAdNetworkConversionValueSchemaRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createSKAdNetworkConversionValueSchema(request: google.analytics.admin.v1alpha.ICreateSKAdNetworkConversionValueSchemaRequest): Promise<google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema>;
+
+                    /**
+                     * Calls DeleteSKAdNetworkConversionValueSchema.
+                     * @param request DeleteSKAdNetworkConversionValueSchemaRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteSKAdNetworkConversionValueSchema(request: google.analytics.admin.v1alpha.IDeleteSKAdNetworkConversionValueSchemaRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteSKAdNetworkConversionValueSchemaCallback): void;
+
+                    /**
+                     * Calls DeleteSKAdNetworkConversionValueSchema.
+                     * @param request DeleteSKAdNetworkConversionValueSchemaRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteSKAdNetworkConversionValueSchema(request: google.analytics.admin.v1alpha.IDeleteSKAdNetworkConversionValueSchemaRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls UpdateSKAdNetworkConversionValueSchema.
+                     * @param request UpdateSKAdNetworkConversionValueSchemaRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SKAdNetworkConversionValueSchema
+                     */
+                    public updateSKAdNetworkConversionValueSchema(request: google.analytics.admin.v1alpha.IUpdateSKAdNetworkConversionValueSchemaRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateSKAdNetworkConversionValueSchemaCallback): void;
+
+                    /**
+                     * Calls UpdateSKAdNetworkConversionValueSchema.
+                     * @param request UpdateSKAdNetworkConversionValueSchemaRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateSKAdNetworkConversionValueSchema(request: google.analytics.admin.v1alpha.IUpdateSKAdNetworkConversionValueSchemaRequest): Promise<google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema>;
+
+                    /**
+                     * Calls ListSKAdNetworkConversionValueSchemas.
+                     * @param request ListSKAdNetworkConversionValueSchemasRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListSKAdNetworkConversionValueSchemasResponse
+                     */
+                    public listSKAdNetworkConversionValueSchemas(request: google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasRequest, callback: google.analytics.admin.v1alpha.AnalyticsAdminService.ListSKAdNetworkConversionValueSchemasCallback): void;
+
+                    /**
+                     * Calls ListSKAdNetworkConversionValueSchemas.
+                     * @param request ListSKAdNetworkConversionValueSchemasRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listSKAdNetworkConversionValueSchemas(request: google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasRequest): Promise<google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasResponse>;
+
+                    /**
                      * Calls SearchChangeHistoryEvents.
                      * @param request SearchChangeHistoryEventsRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and SearchChangeHistoryEventsResponse
@@ -4250,6 +4320,41 @@ export namespace google {
                      * @param [response] AcknowledgeUserDataCollectionResponse
                      */
                     type AcknowledgeUserDataCollectionCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|getSKAdNetworkConversionValueSchema}.
+                     * @param error Error, if any
+                     * @param [response] SKAdNetworkConversionValueSchema
+                     */
+                    type GetSKAdNetworkConversionValueSchemaCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|createSKAdNetworkConversionValueSchema}.
+                     * @param error Error, if any
+                     * @param [response] SKAdNetworkConversionValueSchema
+                     */
+                    type CreateSKAdNetworkConversionValueSchemaCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|deleteSKAdNetworkConversionValueSchema}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteSKAdNetworkConversionValueSchemaCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|updateSKAdNetworkConversionValueSchema}.
+                     * @param error Error, if any
+                     * @param [response] SKAdNetworkConversionValueSchema
+                     */
+                    type UpdateSKAdNetworkConversionValueSchemaCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|listSKAdNetworkConversionValueSchemas}.
+                     * @param error Error, if any
+                     * @param [response] ListSKAdNetworkConversionValueSchemasResponse
+                     */
+                    type ListSKAdNetworkConversionValueSchemasCallback = (error: (Error|null), response?: google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasResponse) => void;
 
                     /**
                      * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService|searchChangeHistoryEvents}.
@@ -10368,6 +10473,618 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ListMeasurementProtocolSecretsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetSKAdNetworkConversionValueSchemaRequest. */
+                interface IGetSKAdNetworkConversionValueSchemaRequest {
+
+                    /** GetSKAdNetworkConversionValueSchemaRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetSKAdNetworkConversionValueSchemaRequest. */
+                class GetSKAdNetworkConversionValueSchemaRequest implements IGetSKAdNetworkConversionValueSchemaRequest {
+
+                    /**
+                     * Constructs a new GetSKAdNetworkConversionValueSchemaRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IGetSKAdNetworkConversionValueSchemaRequest);
+
+                    /** GetSKAdNetworkConversionValueSchemaRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetSKAdNetworkConversionValueSchemaRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetSKAdNetworkConversionValueSchemaRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IGetSKAdNetworkConversionValueSchemaRequest): google.analytics.admin.v1alpha.GetSKAdNetworkConversionValueSchemaRequest;
+
+                    /**
+                     * Encodes the specified GetSKAdNetworkConversionValueSchemaRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.GetSKAdNetworkConversionValueSchemaRequest.verify|verify} messages.
+                     * @param message GetSKAdNetworkConversionValueSchemaRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IGetSKAdNetworkConversionValueSchemaRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetSKAdNetworkConversionValueSchemaRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.GetSKAdNetworkConversionValueSchemaRequest.verify|verify} messages.
+                     * @param message GetSKAdNetworkConversionValueSchemaRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IGetSKAdNetworkConversionValueSchemaRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetSKAdNetworkConversionValueSchemaRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetSKAdNetworkConversionValueSchemaRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.GetSKAdNetworkConversionValueSchemaRequest;
+
+                    /**
+                     * Decodes a GetSKAdNetworkConversionValueSchemaRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetSKAdNetworkConversionValueSchemaRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.GetSKAdNetworkConversionValueSchemaRequest;
+
+                    /**
+                     * Verifies a GetSKAdNetworkConversionValueSchemaRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetSKAdNetworkConversionValueSchemaRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetSKAdNetworkConversionValueSchemaRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.GetSKAdNetworkConversionValueSchemaRequest;
+
+                    /**
+                     * Creates a plain object from a GetSKAdNetworkConversionValueSchemaRequest message. Also converts values to other types if specified.
+                     * @param message GetSKAdNetworkConversionValueSchemaRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.GetSKAdNetworkConversionValueSchemaRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetSKAdNetworkConversionValueSchemaRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetSKAdNetworkConversionValueSchemaRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateSKAdNetworkConversionValueSchemaRequest. */
+                interface ICreateSKAdNetworkConversionValueSchemaRequest {
+
+                    /** CreateSKAdNetworkConversionValueSchemaRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateSKAdNetworkConversionValueSchemaRequest skadnetworkConversionValueSchema */
+                    skadnetworkConversionValueSchema?: (google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema|null);
+                }
+
+                /** Represents a CreateSKAdNetworkConversionValueSchemaRequest. */
+                class CreateSKAdNetworkConversionValueSchemaRequest implements ICreateSKAdNetworkConversionValueSchemaRequest {
+
+                    /**
+                     * Constructs a new CreateSKAdNetworkConversionValueSchemaRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.ICreateSKAdNetworkConversionValueSchemaRequest);
+
+                    /** CreateSKAdNetworkConversionValueSchemaRequest parent. */
+                    public parent: string;
+
+                    /** CreateSKAdNetworkConversionValueSchemaRequest skadnetworkConversionValueSchema. */
+                    public skadnetworkConversionValueSchema?: (google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema|null);
+
+                    /**
+                     * Creates a new CreateSKAdNetworkConversionValueSchemaRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateSKAdNetworkConversionValueSchemaRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.ICreateSKAdNetworkConversionValueSchemaRequest): google.analytics.admin.v1alpha.CreateSKAdNetworkConversionValueSchemaRequest;
+
+                    /**
+                     * Encodes the specified CreateSKAdNetworkConversionValueSchemaRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.CreateSKAdNetworkConversionValueSchemaRequest.verify|verify} messages.
+                     * @param message CreateSKAdNetworkConversionValueSchemaRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.ICreateSKAdNetworkConversionValueSchemaRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateSKAdNetworkConversionValueSchemaRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.CreateSKAdNetworkConversionValueSchemaRequest.verify|verify} messages.
+                     * @param message CreateSKAdNetworkConversionValueSchemaRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.ICreateSKAdNetworkConversionValueSchemaRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateSKAdNetworkConversionValueSchemaRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateSKAdNetworkConversionValueSchemaRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.CreateSKAdNetworkConversionValueSchemaRequest;
+
+                    /**
+                     * Decodes a CreateSKAdNetworkConversionValueSchemaRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateSKAdNetworkConversionValueSchemaRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.CreateSKAdNetworkConversionValueSchemaRequest;
+
+                    /**
+                     * Verifies a CreateSKAdNetworkConversionValueSchemaRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateSKAdNetworkConversionValueSchemaRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateSKAdNetworkConversionValueSchemaRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.CreateSKAdNetworkConversionValueSchemaRequest;
+
+                    /**
+                     * Creates a plain object from a CreateSKAdNetworkConversionValueSchemaRequest message. Also converts values to other types if specified.
+                     * @param message CreateSKAdNetworkConversionValueSchemaRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.CreateSKAdNetworkConversionValueSchemaRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateSKAdNetworkConversionValueSchemaRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateSKAdNetworkConversionValueSchemaRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteSKAdNetworkConversionValueSchemaRequest. */
+                interface IDeleteSKAdNetworkConversionValueSchemaRequest {
+
+                    /** DeleteSKAdNetworkConversionValueSchemaRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteSKAdNetworkConversionValueSchemaRequest. */
+                class DeleteSKAdNetworkConversionValueSchemaRequest implements IDeleteSKAdNetworkConversionValueSchemaRequest {
+
+                    /**
+                     * Constructs a new DeleteSKAdNetworkConversionValueSchemaRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IDeleteSKAdNetworkConversionValueSchemaRequest);
+
+                    /** DeleteSKAdNetworkConversionValueSchemaRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteSKAdNetworkConversionValueSchemaRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteSKAdNetworkConversionValueSchemaRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IDeleteSKAdNetworkConversionValueSchemaRequest): google.analytics.admin.v1alpha.DeleteSKAdNetworkConversionValueSchemaRequest;
+
+                    /**
+                     * Encodes the specified DeleteSKAdNetworkConversionValueSchemaRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.DeleteSKAdNetworkConversionValueSchemaRequest.verify|verify} messages.
+                     * @param message DeleteSKAdNetworkConversionValueSchemaRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IDeleteSKAdNetworkConversionValueSchemaRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteSKAdNetworkConversionValueSchemaRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.DeleteSKAdNetworkConversionValueSchemaRequest.verify|verify} messages.
+                     * @param message DeleteSKAdNetworkConversionValueSchemaRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IDeleteSKAdNetworkConversionValueSchemaRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteSKAdNetworkConversionValueSchemaRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteSKAdNetworkConversionValueSchemaRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.DeleteSKAdNetworkConversionValueSchemaRequest;
+
+                    /**
+                     * Decodes a DeleteSKAdNetworkConversionValueSchemaRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteSKAdNetworkConversionValueSchemaRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.DeleteSKAdNetworkConversionValueSchemaRequest;
+
+                    /**
+                     * Verifies a DeleteSKAdNetworkConversionValueSchemaRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteSKAdNetworkConversionValueSchemaRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteSKAdNetworkConversionValueSchemaRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.DeleteSKAdNetworkConversionValueSchemaRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteSKAdNetworkConversionValueSchemaRequest message. Also converts values to other types if specified.
+                     * @param message DeleteSKAdNetworkConversionValueSchemaRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.DeleteSKAdNetworkConversionValueSchemaRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteSKAdNetworkConversionValueSchemaRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteSKAdNetworkConversionValueSchemaRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateSKAdNetworkConversionValueSchemaRequest. */
+                interface IUpdateSKAdNetworkConversionValueSchemaRequest {
+
+                    /** UpdateSKAdNetworkConversionValueSchemaRequest skadnetworkConversionValueSchema */
+                    skadnetworkConversionValueSchema?: (google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema|null);
+
+                    /** UpdateSKAdNetworkConversionValueSchemaRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateSKAdNetworkConversionValueSchemaRequest. */
+                class UpdateSKAdNetworkConversionValueSchemaRequest implements IUpdateSKAdNetworkConversionValueSchemaRequest {
+
+                    /**
+                     * Constructs a new UpdateSKAdNetworkConversionValueSchemaRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IUpdateSKAdNetworkConversionValueSchemaRequest);
+
+                    /** UpdateSKAdNetworkConversionValueSchemaRequest skadnetworkConversionValueSchema. */
+                    public skadnetworkConversionValueSchema?: (google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema|null);
+
+                    /** UpdateSKAdNetworkConversionValueSchemaRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateSKAdNetworkConversionValueSchemaRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateSKAdNetworkConversionValueSchemaRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IUpdateSKAdNetworkConversionValueSchemaRequest): google.analytics.admin.v1alpha.UpdateSKAdNetworkConversionValueSchemaRequest;
+
+                    /**
+                     * Encodes the specified UpdateSKAdNetworkConversionValueSchemaRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateSKAdNetworkConversionValueSchemaRequest.verify|verify} messages.
+                     * @param message UpdateSKAdNetworkConversionValueSchemaRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IUpdateSKAdNetworkConversionValueSchemaRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateSKAdNetworkConversionValueSchemaRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateSKAdNetworkConversionValueSchemaRequest.verify|verify} messages.
+                     * @param message UpdateSKAdNetworkConversionValueSchemaRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IUpdateSKAdNetworkConversionValueSchemaRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateSKAdNetworkConversionValueSchemaRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateSKAdNetworkConversionValueSchemaRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.UpdateSKAdNetworkConversionValueSchemaRequest;
+
+                    /**
+                     * Decodes an UpdateSKAdNetworkConversionValueSchemaRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateSKAdNetworkConversionValueSchemaRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.UpdateSKAdNetworkConversionValueSchemaRequest;
+
+                    /**
+                     * Verifies an UpdateSKAdNetworkConversionValueSchemaRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateSKAdNetworkConversionValueSchemaRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateSKAdNetworkConversionValueSchemaRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.UpdateSKAdNetworkConversionValueSchemaRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateSKAdNetworkConversionValueSchemaRequest message. Also converts values to other types if specified.
+                     * @param message UpdateSKAdNetworkConversionValueSchemaRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.UpdateSKAdNetworkConversionValueSchemaRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateSKAdNetworkConversionValueSchemaRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateSKAdNetworkConversionValueSchemaRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSKAdNetworkConversionValueSchemasRequest. */
+                interface IListSKAdNetworkConversionValueSchemasRequest {
+
+                    /** ListSKAdNetworkConversionValueSchemasRequest parent */
+                    parent?: (string|null);
+
+                    /** ListSKAdNetworkConversionValueSchemasRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListSKAdNetworkConversionValueSchemasRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListSKAdNetworkConversionValueSchemasRequest. */
+                class ListSKAdNetworkConversionValueSchemasRequest implements IListSKAdNetworkConversionValueSchemasRequest {
+
+                    /**
+                     * Constructs a new ListSKAdNetworkConversionValueSchemasRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasRequest);
+
+                    /** ListSKAdNetworkConversionValueSchemasRequest parent. */
+                    public parent: string;
+
+                    /** ListSKAdNetworkConversionValueSchemasRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListSKAdNetworkConversionValueSchemasRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListSKAdNetworkConversionValueSchemasRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSKAdNetworkConversionValueSchemasRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasRequest): google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasRequest;
+
+                    /**
+                     * Encodes the specified ListSKAdNetworkConversionValueSchemasRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasRequest.verify|verify} messages.
+                     * @param message ListSKAdNetworkConversionValueSchemasRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSKAdNetworkConversionValueSchemasRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasRequest.verify|verify} messages.
+                     * @param message ListSKAdNetworkConversionValueSchemasRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSKAdNetworkConversionValueSchemasRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSKAdNetworkConversionValueSchemasRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasRequest;
+
+                    /**
+                     * Decodes a ListSKAdNetworkConversionValueSchemasRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSKAdNetworkConversionValueSchemasRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasRequest;
+
+                    /**
+                     * Verifies a ListSKAdNetworkConversionValueSchemasRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSKAdNetworkConversionValueSchemasRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSKAdNetworkConversionValueSchemasRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasRequest;
+
+                    /**
+                     * Creates a plain object from a ListSKAdNetworkConversionValueSchemasRequest message. Also converts values to other types if specified.
+                     * @param message ListSKAdNetworkConversionValueSchemasRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSKAdNetworkConversionValueSchemasRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSKAdNetworkConversionValueSchemasRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSKAdNetworkConversionValueSchemasResponse. */
+                interface IListSKAdNetworkConversionValueSchemasResponse {
+
+                    /** ListSKAdNetworkConversionValueSchemasResponse skadnetworkConversionValueSchemas */
+                    skadnetworkConversionValueSchemas?: (google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema[]|null);
+
+                    /** ListSKAdNetworkConversionValueSchemasResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListSKAdNetworkConversionValueSchemasResponse. */
+                class ListSKAdNetworkConversionValueSchemasResponse implements IListSKAdNetworkConversionValueSchemasResponse {
+
+                    /**
+                     * Constructs a new ListSKAdNetworkConversionValueSchemasResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasResponse);
+
+                    /** ListSKAdNetworkConversionValueSchemasResponse skadnetworkConversionValueSchemas. */
+                    public skadnetworkConversionValueSchemas: google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema[];
+
+                    /** ListSKAdNetworkConversionValueSchemasResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListSKAdNetworkConversionValueSchemasResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSKAdNetworkConversionValueSchemasResponse instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasResponse): google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasResponse;
+
+                    /**
+                     * Encodes the specified ListSKAdNetworkConversionValueSchemasResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasResponse.verify|verify} messages.
+                     * @param message ListSKAdNetworkConversionValueSchemasResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSKAdNetworkConversionValueSchemasResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasResponse.verify|verify} messages.
+                     * @param message ListSKAdNetworkConversionValueSchemasResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IListSKAdNetworkConversionValueSchemasResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSKAdNetworkConversionValueSchemasResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSKAdNetworkConversionValueSchemasResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasResponse;
+
+                    /**
+                     * Decodes a ListSKAdNetworkConversionValueSchemasResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSKAdNetworkConversionValueSchemasResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasResponse;
+
+                    /**
+                     * Verifies a ListSKAdNetworkConversionValueSchemasResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSKAdNetworkConversionValueSchemasResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSKAdNetworkConversionValueSchemasResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasResponse;
+
+                    /**
+                     * Creates a plain object from a ListSKAdNetworkConversionValueSchemasResponse message. Also converts values to other types if specified.
+                     * @param message ListSKAdNetworkConversionValueSchemasResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.ListSKAdNetworkConversionValueSchemasResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSKAdNetworkConversionValueSchemasResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSKAdNetworkConversionValueSchemasResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -24910,6 +25627,7 @@ export namespace google {
                     EXPANDED_DATA_SET = 21,
                     CHANNEL_GROUP = 22,
                     ENHANCED_MEASUREMENT_SETTINGS = 24,
+                    SKADNETWORK_CONVERSION_VALUE_SCHEMA = 26,
                     ADSENSE_LINK = 27,
                     AUDIENCE = 28,
                     EVENT_CREATE_RULE = 29
@@ -24953,6 +25671,14 @@ export namespace google {
                     PROPERTY_TYPE_ORDINARY = 1,
                     PROPERTY_TYPE_SUBPROPERTY = 2,
                     PROPERTY_TYPE_ROLLUP = 3
+                }
+
+                /** CoarseValue enum. */
+                enum CoarseValue {
+                    COARSE_VALUE_UNSPECIFIED = 0,
+                    COARSE_VALUE_LOW = 1,
+                    COARSE_VALUE_MEDIUM = 2,
+                    COARSE_VALUE_HIGH = 3
                 }
 
                 /** Properties of an Account. */
@@ -26754,6 +27480,487 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a SKAdNetworkConversionValueSchema. */
+                interface ISKAdNetworkConversionValueSchema {
+
+                    /** SKAdNetworkConversionValueSchema name */
+                    name?: (string|null);
+
+                    /** SKAdNetworkConversionValueSchema postbackWindowOne */
+                    postbackWindowOne?: (google.analytics.admin.v1alpha.IPostbackWindow|null);
+
+                    /** SKAdNetworkConversionValueSchema postbackWindowTwo */
+                    postbackWindowTwo?: (google.analytics.admin.v1alpha.IPostbackWindow|null);
+
+                    /** SKAdNetworkConversionValueSchema postbackWindowThree */
+                    postbackWindowThree?: (google.analytics.admin.v1alpha.IPostbackWindow|null);
+
+                    /** SKAdNetworkConversionValueSchema applyConversionValues */
+                    applyConversionValues?: (boolean|null);
+                }
+
+                /** Represents a SKAdNetworkConversionValueSchema. */
+                class SKAdNetworkConversionValueSchema implements ISKAdNetworkConversionValueSchema {
+
+                    /**
+                     * Constructs a new SKAdNetworkConversionValueSchema.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema);
+
+                    /** SKAdNetworkConversionValueSchema name. */
+                    public name: string;
+
+                    /** SKAdNetworkConversionValueSchema postbackWindowOne. */
+                    public postbackWindowOne?: (google.analytics.admin.v1alpha.IPostbackWindow|null);
+
+                    /** SKAdNetworkConversionValueSchema postbackWindowTwo. */
+                    public postbackWindowTwo?: (google.analytics.admin.v1alpha.IPostbackWindow|null);
+
+                    /** SKAdNetworkConversionValueSchema postbackWindowThree. */
+                    public postbackWindowThree?: (google.analytics.admin.v1alpha.IPostbackWindow|null);
+
+                    /** SKAdNetworkConversionValueSchema applyConversionValues. */
+                    public applyConversionValues: boolean;
+
+                    /**
+                     * Creates a new SKAdNetworkConversionValueSchema instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SKAdNetworkConversionValueSchema instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema): google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema;
+
+                    /**
+                     * Encodes the specified SKAdNetworkConversionValueSchema message. Does not implicitly {@link google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema.verify|verify} messages.
+                     * @param message SKAdNetworkConversionValueSchema message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SKAdNetworkConversionValueSchema message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema.verify|verify} messages.
+                     * @param message SKAdNetworkConversionValueSchema message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SKAdNetworkConversionValueSchema message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SKAdNetworkConversionValueSchema
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema;
+
+                    /**
+                     * Decodes a SKAdNetworkConversionValueSchema message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SKAdNetworkConversionValueSchema
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema;
+
+                    /**
+                     * Verifies a SKAdNetworkConversionValueSchema message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SKAdNetworkConversionValueSchema message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SKAdNetworkConversionValueSchema
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema;
+
+                    /**
+                     * Creates a plain object from a SKAdNetworkConversionValueSchema message. Also converts values to other types if specified.
+                     * @param message SKAdNetworkConversionValueSchema
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.SKAdNetworkConversionValueSchema, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SKAdNetworkConversionValueSchema to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SKAdNetworkConversionValueSchema
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PostbackWindow. */
+                interface IPostbackWindow {
+
+                    /** PostbackWindow conversionValues */
+                    conversionValues?: (google.analytics.admin.v1alpha.IConversionValues[]|null);
+
+                    /** PostbackWindow postbackWindowSettingsEnabled */
+                    postbackWindowSettingsEnabled?: (boolean|null);
+                }
+
+                /** Represents a PostbackWindow. */
+                class PostbackWindow implements IPostbackWindow {
+
+                    /**
+                     * Constructs a new PostbackWindow.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IPostbackWindow);
+
+                    /** PostbackWindow conversionValues. */
+                    public conversionValues: google.analytics.admin.v1alpha.IConversionValues[];
+
+                    /** PostbackWindow postbackWindowSettingsEnabled. */
+                    public postbackWindowSettingsEnabled: boolean;
+
+                    /**
+                     * Creates a new PostbackWindow instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PostbackWindow instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IPostbackWindow): google.analytics.admin.v1alpha.PostbackWindow;
+
+                    /**
+                     * Encodes the specified PostbackWindow message. Does not implicitly {@link google.analytics.admin.v1alpha.PostbackWindow.verify|verify} messages.
+                     * @param message PostbackWindow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IPostbackWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PostbackWindow message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.PostbackWindow.verify|verify} messages.
+                     * @param message PostbackWindow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IPostbackWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PostbackWindow message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PostbackWindow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.PostbackWindow;
+
+                    /**
+                     * Decodes a PostbackWindow message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PostbackWindow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.PostbackWindow;
+
+                    /**
+                     * Verifies a PostbackWindow message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PostbackWindow message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PostbackWindow
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.PostbackWindow;
+
+                    /**
+                     * Creates a plain object from a PostbackWindow message. Also converts values to other types if specified.
+                     * @param message PostbackWindow
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.PostbackWindow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PostbackWindow to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PostbackWindow
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ConversionValues. */
+                interface IConversionValues {
+
+                    /** ConversionValues displayName */
+                    displayName?: (string|null);
+
+                    /** ConversionValues fineValue */
+                    fineValue?: (number|null);
+
+                    /** ConversionValues coarseValue */
+                    coarseValue?: (google.analytics.admin.v1alpha.CoarseValue|keyof typeof google.analytics.admin.v1alpha.CoarseValue|null);
+
+                    /** ConversionValues eventMappings */
+                    eventMappings?: (google.analytics.admin.v1alpha.IEventMapping[]|null);
+
+                    /** ConversionValues lockEnabled */
+                    lockEnabled?: (boolean|null);
+                }
+
+                /** Represents a ConversionValues. */
+                class ConversionValues implements IConversionValues {
+
+                    /**
+                     * Constructs a new ConversionValues.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IConversionValues);
+
+                    /** ConversionValues displayName. */
+                    public displayName: string;
+
+                    /** ConversionValues fineValue. */
+                    public fineValue?: (number|null);
+
+                    /** ConversionValues coarseValue. */
+                    public coarseValue: (google.analytics.admin.v1alpha.CoarseValue|keyof typeof google.analytics.admin.v1alpha.CoarseValue);
+
+                    /** ConversionValues eventMappings. */
+                    public eventMappings: google.analytics.admin.v1alpha.IEventMapping[];
+
+                    /** ConversionValues lockEnabled. */
+                    public lockEnabled: boolean;
+
+                    /** ConversionValues _fineValue. */
+                    public _fineValue?: "fineValue";
+
+                    /**
+                     * Creates a new ConversionValues instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConversionValues instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IConversionValues): google.analytics.admin.v1alpha.ConversionValues;
+
+                    /**
+                     * Encodes the specified ConversionValues message. Does not implicitly {@link google.analytics.admin.v1alpha.ConversionValues.verify|verify} messages.
+                     * @param message ConversionValues message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IConversionValues, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConversionValues message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ConversionValues.verify|verify} messages.
+                     * @param message ConversionValues message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IConversionValues, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConversionValues message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConversionValues
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.ConversionValues;
+
+                    /**
+                     * Decodes a ConversionValues message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConversionValues
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.ConversionValues;
+
+                    /**
+                     * Verifies a ConversionValues message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConversionValues message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConversionValues
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.ConversionValues;
+
+                    /**
+                     * Creates a plain object from a ConversionValues message. Also converts values to other types if specified.
+                     * @param message ConversionValues
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.ConversionValues, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConversionValues to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConversionValues
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EventMapping. */
+                interface IEventMapping {
+
+                    /** EventMapping eventName */
+                    eventName?: (string|null);
+
+                    /** EventMapping minEventCount */
+                    minEventCount?: (number|Long|string|null);
+
+                    /** EventMapping maxEventCount */
+                    maxEventCount?: (number|Long|string|null);
+
+                    /** EventMapping minEventValue */
+                    minEventValue?: (number|null);
+
+                    /** EventMapping maxEventValue */
+                    maxEventValue?: (number|null);
+                }
+
+                /** Represents an EventMapping. */
+                class EventMapping implements IEventMapping {
+
+                    /**
+                     * Constructs a new EventMapping.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1alpha.IEventMapping);
+
+                    /** EventMapping eventName. */
+                    public eventName: string;
+
+                    /** EventMapping minEventCount. */
+                    public minEventCount?: (number|Long|string|null);
+
+                    /** EventMapping maxEventCount. */
+                    public maxEventCount?: (number|Long|string|null);
+
+                    /** EventMapping minEventValue. */
+                    public minEventValue?: (number|null);
+
+                    /** EventMapping maxEventValue. */
+                    public maxEventValue?: (number|null);
+
+                    /** EventMapping _minEventCount. */
+                    public _minEventCount?: "minEventCount";
+
+                    /** EventMapping _maxEventCount. */
+                    public _maxEventCount?: "maxEventCount";
+
+                    /** EventMapping _minEventValue. */
+                    public _minEventValue?: "minEventValue";
+
+                    /** EventMapping _maxEventValue. */
+                    public _maxEventValue?: "maxEventValue";
+
+                    /**
+                     * Creates a new EventMapping instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EventMapping instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1alpha.IEventMapping): google.analytics.admin.v1alpha.EventMapping;
+
+                    /**
+                     * Encodes the specified EventMapping message. Does not implicitly {@link google.analytics.admin.v1alpha.EventMapping.verify|verify} messages.
+                     * @param message EventMapping message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1alpha.IEventMapping, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EventMapping message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.EventMapping.verify|verify} messages.
+                     * @param message EventMapping message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1alpha.IEventMapping, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EventMapping message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EventMapping
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1alpha.EventMapping;
+
+                    /**
+                     * Decodes an EventMapping message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EventMapping
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1alpha.EventMapping;
+
+                    /**
+                     * Verifies an EventMapping message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EventMapping message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EventMapping
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1alpha.EventMapping;
+
+                    /**
+                     * Creates a plain object from an EventMapping message. Also converts values to other types if specified.
+                     * @param message EventMapping
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1alpha.EventMapping, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EventMapping to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EventMapping
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a ChangeHistoryEvent. */
                 interface IChangeHistoryEvent {
 
@@ -27058,6 +28265,9 @@ export namespace google {
                         /** ChangeHistoryResource enhancedMeasurementSettings */
                         enhancedMeasurementSettings?: (google.analytics.admin.v1alpha.IEnhancedMeasurementSettings|null);
 
+                        /** ChangeHistoryResource skadnetworkConversionValueSchema */
+                        skadnetworkConversionValueSchema?: (google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema|null);
+
                         /** ChangeHistoryResource adsenseLink */
                         adsenseLink?: (google.analytics.admin.v1alpha.IAdSenseLink|null);
 
@@ -27134,6 +28344,9 @@ export namespace google {
                         /** ChangeHistoryResource enhancedMeasurementSettings. */
                         public enhancedMeasurementSettings?: (google.analytics.admin.v1alpha.IEnhancedMeasurementSettings|null);
 
+                        /** ChangeHistoryResource skadnetworkConversionValueSchema. */
+                        public skadnetworkConversionValueSchema?: (google.analytics.admin.v1alpha.ISKAdNetworkConversionValueSchema|null);
+
                         /** ChangeHistoryResource adsenseLink. */
                         public adsenseLink?: (google.analytics.admin.v1alpha.IAdSenseLink|null);
 
@@ -27144,7 +28357,7 @@ export namespace google {
                         public eventCreateRule?: (google.analytics.admin.v1alpha.IEventCreateRule|null);
 
                         /** ChangeHistoryResource resource. */
-                        public resource?: ("account"|"property"|"firebaseLink"|"googleAdsLink"|"googleSignalsSettings"|"displayVideo_360AdvertiserLink"|"displayVideo_360AdvertiserLinkProposal"|"conversionEvent"|"measurementProtocolSecret"|"customDimension"|"customMetric"|"dataRetentionSettings"|"searchAds_360Link"|"dataStream"|"attributionSettings"|"expandedDataSet"|"channelGroup"|"bigqueryLink"|"enhancedMeasurementSettings"|"adsenseLink"|"audience"|"eventCreateRule");
+                        public resource?: ("account"|"property"|"firebaseLink"|"googleAdsLink"|"googleSignalsSettings"|"displayVideo_360AdvertiserLink"|"displayVideo_360AdvertiserLinkProposal"|"conversionEvent"|"measurementProtocolSecret"|"customDimension"|"customMetric"|"dataRetentionSettings"|"searchAds_360Link"|"dataStream"|"attributionSettings"|"expandedDataSet"|"channelGroup"|"bigqueryLink"|"enhancedMeasurementSettings"|"skadnetworkConversionValueSchema"|"adsenseLink"|"audience"|"eventCreateRule");
 
                         /**
                          * Creates a new ChangeHistoryResource instance using the specified properties.
@@ -28692,8 +29905,8 @@ export namespace google {
                     /** BigQueryLink streamingExportEnabled */
                     streamingExportEnabled?: (boolean|null);
 
-                    /** BigQueryLink enterpriseExportEnabled */
-                    enterpriseExportEnabled?: (boolean|null);
+                    /** BigQueryLink freshDailyExportEnabled */
+                    freshDailyExportEnabled?: (boolean|null);
 
                     /** BigQueryLink includeAdvertisingId */
                     includeAdvertisingId?: (boolean|null);
@@ -28729,8 +29942,8 @@ export namespace google {
                     /** BigQueryLink streamingExportEnabled. */
                     public streamingExportEnabled: boolean;
 
-                    /** BigQueryLink enterpriseExportEnabled. */
-                    public enterpriseExportEnabled: boolean;
+                    /** BigQueryLink freshDailyExportEnabled. */
+                    public freshDailyExportEnabled: boolean;
 
                     /** BigQueryLink includeAdvertisingId. */
                     public includeAdvertisingId: boolean;

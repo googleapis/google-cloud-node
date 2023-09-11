@@ -35,6 +35,10 @@
         "GeneratePackagesSummary": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "ExportSBOM": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }

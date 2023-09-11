@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/optimization",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "optimization client for Node.js",
   "repository": {
     "type": "git",

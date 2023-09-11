@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.1.1](https://github.com/googleapis/google-cloud-node/compare/policy-troubleshooter-v3.1.0...policy-troubleshooter-v3.1.1) (2023-09-06)
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4587](https://github.com/googleapis/google-cloud-node/issues/4587)) ([e3b1e7e](https://github.com/googleapis/google-cloud-node/commit/e3b1e7e46d666abb4df28c3cd69e97c08b88445a))
+* **deps:** Update dependency @google-cloud/local-auth to v3 ([#4546](https://github.com/googleapis/google-cloud-node/issues/4546)) ([f2beef4](https://github.com/googleapis/google-cloud-node/commit/f2beef407ce694af7133d0013221c11e7f093a59))
+
 ## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/policy-troubleshooter-v3.0.0...policy-troubleshooter-v3.1.0) (2023-08-09)
 
 

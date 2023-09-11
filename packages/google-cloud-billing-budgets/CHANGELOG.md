@@ -1,5 +1,17 @@
 # Changelog
 
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/billing-budgets-v5.0.0...billing-budgets-v5.1.0) (2023-09-06)
+
+
+### Features
+
+* [billing-budgets] Supported project-level-budgets in Public Budget API V1 ([#4575](https://github.com/googleapis/google-cloud-node/issues/4575)) ([ce0e79e](https://github.com/googleapis/google-cloud-node/commit/ce0e79e50a2858106390d89459f0977e6360927e))
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4584](https://github.com/googleapis/google-cloud-node/issues/4584)) ([13537fc](https://github.com/googleapis/google-cloud-node/commit/13537fcd6e3c552199d5057daf3b00c24033c908))
+
 ## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/billing-budgets-v4.3.0...billing-budgets-v5.0.0) (2023-08-06)
 
 

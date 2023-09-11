@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v5.0.1...containeranalysis-v5.1.0) (2023-09-06)
+
+
+### Features
+
+* [containeranalysis] add ExportSBOM API method ([#4607](https://github.com/googleapis/google-cloud-node/issues/4607)) ([8443053](https://github.com/googleapis/google-cloud-node/commit/8443053fb025ea54d4381e622684776b99b8081c))
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4589](https://github.com/googleapis/google-cloud-node/issues/4589)) ([07967ad](https://github.com/googleapis/google-cloud-node/commit/07967add1b5fc28b548cf74721b595ea0ba90d5b))
+
 ## [5.0.1](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v5.0.0...containeranalysis-v5.0.1) (2023-08-09)
 
 

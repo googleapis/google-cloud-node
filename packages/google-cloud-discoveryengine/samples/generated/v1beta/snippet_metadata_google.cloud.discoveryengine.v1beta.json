@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-discoveryengine",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -78,7 +78,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 101,
                     "type": "FULL"
                 }
             ],
@@ -106,6 +106,14 @@
                     {
                         "name": "safe_search",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "user_labels",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "summary_spec",
+                        "type": ".google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec.SummarySpec"
                     }
                 ],
                 "resultType": ".google.cloud.discoveryengine.v1beta.ConverseConversationResponse",
@@ -978,7 +986,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 193,
+                    "end": 224,
                     "type": "FULL"
                 }
             ],
@@ -1054,6 +1062,14 @@
                     {
                         "name": "content_search_spec",
                         "type": ".google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec"
+                    },
+                    {
+                        "name": "embedding_spec",
+                        "type": ".google.cloud.discoveryengine.v1beta.SearchRequest.EmbeddingSpec"
+                    },
+                    {
+                        "name": "ranking_expression",
+                        "type": "TYPE_STRING"
                     },
                     {
                         "name": "safe_search",

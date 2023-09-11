@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/googleapis/google-cloud-node/compare/bare-metal-solution-v1.1.0...bare-metal-solution-v1.1.1) (2023-09-06)
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4583](https://github.com/googleapis/google-cloud-node/issues/4583)) ([c3ddba8](https://github.com/googleapis/google-cloud-node/commit/c3ddba8df9fee6185e36a4e99f7c67b0319f1242))
+
 ## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/bare-metal-solution-v1.0.0...bare-metal-solution-v1.1.0) (2023-08-09)
 
 

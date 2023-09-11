@@ -149,6 +149,7 @@
   * [Conversations.get_conversation](#conversations.get_conversation)
   * [Conversations.list_conversations](#conversations.list_conversations)
   * [Conversations.list_messages](#conversations.list_messages)
+  * [Conversations.search_knowledge](#conversations.search_knowledge)
   * [Conversations.suggest_conversation_summary](#conversations.suggest_conversation_summary)
   * [Documents.create_document](#documents.create_document)
   * [Documents.delete_document](#documents.delete_document)
@@ -2549,6 +2550,23 @@ __Usage:__
 
 
 `node packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.list_messages.js`
+
+
+-----
+
+
+
+
+### Conversations.search_knowledge
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.search_knowledge.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.search_knowledge.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.search_knowledge.js`
 
 
 -----

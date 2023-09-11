@@ -40,11 +40,12 @@ function main() {
    */
   // const autoCommit = true
   /**
-   *  Fully qualified (Uri) name of the source connection profile.
+   *  Optional. Fully qualified (Uri) name of the source connection profile.
    */
   // const sourceConnectionProfile = 'abc123'
   /**
-   *  Fully qualified (Uri) name of the destination connection profile.
+   *  Optional. Fully qualified (Uri) name of the destination connection
+   *  profile.
    */
   // const destinationConnectionProfile = 'abc123'
 

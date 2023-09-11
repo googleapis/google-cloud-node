@@ -647,9 +647,6 @@ export namespace google {
                     /** OptimizeToursRequest solvingMode */
                     solvingMode?: (google.cloud.optimization.v1.OptimizeToursRequest.SolvingMode|keyof typeof google.cloud.optimization.v1.OptimizeToursRequest.SolvingMode|null);
 
-                    /** OptimizeToursRequest maxValidationErrors */
-                    maxValidationErrors?: (number|null);
-
                     /** OptimizeToursRequest searchMode */
                     searchMode?: (google.cloud.optimization.v1.OptimizeToursRequest.SearchMode|keyof typeof google.cloud.optimization.v1.OptimizeToursRequest.SearchMode|null);
 
@@ -683,6 +680,9 @@ export namespace google {
                     /** OptimizeToursRequest geodesicMetersPerSecond */
                     geodesicMetersPerSecond?: (number|null);
 
+                    /** OptimizeToursRequest maxValidationErrors */
+                    maxValidationErrors?: (number|null);
+
                     /** OptimizeToursRequest label */
                     label?: (string|null);
 
@@ -710,9 +710,6 @@ export namespace google {
 
                     /** OptimizeToursRequest solvingMode. */
                     public solvingMode: (google.cloud.optimization.v1.OptimizeToursRequest.SolvingMode|keyof typeof google.cloud.optimization.v1.OptimizeToursRequest.SolvingMode);
-
-                    /** OptimizeToursRequest maxValidationErrors. */
-                    public maxValidationErrors?: (number|null);
 
                     /** OptimizeToursRequest searchMode. */
                     public searchMode: (google.cloud.optimization.v1.OptimizeToursRequest.SearchMode|keyof typeof google.cloud.optimization.v1.OptimizeToursRequest.SearchMode);
@@ -747,17 +744,20 @@ export namespace google {
                     /** OptimizeToursRequest geodesicMetersPerSecond. */
                     public geodesicMetersPerSecond?: (number|null);
 
+                    /** OptimizeToursRequest maxValidationErrors. */
+                    public maxValidationErrors?: (number|null);
+
                     /** OptimizeToursRequest label. */
                     public label: string;
 
                     /** OptimizeToursRequest populateTravelStepPolylines. */
                     public populateTravelStepPolylines: boolean;
 
-                    /** OptimizeToursRequest _maxValidationErrors. */
-                    public _maxValidationErrors?: "maxValidationErrors";
-
                     /** OptimizeToursRequest _geodesicMetersPerSecond. */
                     public _geodesicMetersPerSecond?: "geodesicMetersPerSecond";
+
+                    /** OptimizeToursRequest _maxValidationErrors. */
+                    public _maxValidationErrors?: "maxValidationErrors";
 
                     /**
                      * Creates a new OptimizeToursRequest instance using the specified properties.
@@ -3208,7 +3208,8 @@ export namespace google {
                     /** TravelMode enum. */
                     enum TravelMode {
                         TRAVEL_MODE_UNSPECIFIED = 0,
-                        DRIVING = 1
+                        DRIVING = 1,
+                        WALKING = 2
                     }
 
                     /** UnloadingPolicy enum. */
@@ -3939,6 +3940,9 @@ export namespace google {
                     /** DistanceLimit softMaxMeters */
                     softMaxMeters?: (number|Long|string|null);
 
+                    /** DistanceLimit costPerKilometerBelowSoftMax */
+                    costPerKilometerBelowSoftMax?: (number|null);
+
                     /** DistanceLimit costPerKilometerAboveSoftMax */
                     costPerKilometerAboveSoftMax?: (number|null);
                 }
@@ -3958,6 +3962,9 @@ export namespace google {
                     /** DistanceLimit softMaxMeters. */
                     public softMaxMeters?: (number|Long|string|null);
 
+                    /** DistanceLimit costPerKilometerBelowSoftMax. */
+                    public costPerKilometerBelowSoftMax?: (number|null);
+
                     /** DistanceLimit costPerKilometerAboveSoftMax. */
                     public costPerKilometerAboveSoftMax?: (number|null);
 
@@ -3966,6 +3973,9 @@ export namespace google {
 
                     /** DistanceLimit _softMaxMeters. */
                     public _softMaxMeters?: "softMaxMeters";
+
+                    /** DistanceLimit _costPerKilometerBelowSoftMax. */
+                    public _costPerKilometerBelowSoftMax?: "costPerKilometerBelowSoftMax";
 
                     /** DistanceLimit _costPerKilometerAboveSoftMax. */
                     public _costPerKilometerAboveSoftMax?: "costPerKilometerAboveSoftMax";

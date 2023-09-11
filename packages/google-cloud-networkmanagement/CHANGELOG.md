@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.0.0...network-management-v3.1.0) (2023-09-06)
+
+
+### Features
+
+* [networkmanagement] add fields related to PBR and NCC routes to API ([#4526](https://github.com/googleapis/google-cloud-node/issues/4526)) ([b4aff98](https://github.com/googleapis/google-cloud-node/commit/b4aff9860827a424342f434118eb60fb55bc2919))
+* [networkmanagement] add new enum values for network firewall policies to API ([#4536](https://github.com/googleapis/google-cloud-node/issues/4536)) ([170262c](https://github.com/googleapis/google-cloud-node/commit/170262c77ae252d1d2297eb9fa5980e7da8fb70e))
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4586](https://github.com/googleapis/google-cloud-node/issues/4586)) ([4b18686](https://github.com/googleapis/google-cloud-node/commit/4b186867323b8b15469bf5e1cb890bf703b531b3))
+
 ## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v2.5.0...network-management-v3.0.0) (2023-08-06)
 
 

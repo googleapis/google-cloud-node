@@ -25,6 +25,8 @@ import type {
   ClientOptions,
   PaginationCallback,
   GaxCall,
+  LocationsClient,
+  LocationProtos,
 } from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
@@ -59,6 +61,7 @@ export class SearchServiceClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   searchServiceStub?: Promise<{[name: string]: Function}>;
 
@@ -154,6 +157,10 @@ export class SearchServiceClient {
     if (servicePath === staticMembers.servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
+    this.locationsClient = new this._gaxModule.LocationsClient(
+      this._gaxGrpc,
+      opts
+    );
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -185,6 +192,10 @@ export class SearchServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}'
         ),
+      projectLocationCollectionDataStoreConversationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/conversations/{conversation}'
+        ),
       projectLocationCollectionDataStoreSchemaPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/schemas/{schema}'
@@ -200,6 +211,10 @@ export class SearchServiceClient {
       projectLocationDataStoreBranchDocumentPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}'
+        ),
+      projectLocationDataStoreConversationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/conversations/{conversation}'
         ),
       projectLocationDataStoreSchemaPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -373,10 +388,12 @@ export class SearchServiceClient {
    *   documents under the default branch.
    * @param {string} request.query
    *   Raw search query.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.ImageQuery} request.imageQuery
+   *   Raw image query.
    * @param {number} request.pageSize
    *   Maximum number of {@link protos.google.cloud.discoveryengine.v1.Document|Document}s to
    *   return. If unspecified, defaults to a reasonable value. The maximum allowed
-   *   value is 100. Values above 100 will be coerced to 100.
+   *   value is 100. Values above 100 are coerced to 100.
    *
    *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
    * @param {string} request.pageToken
@@ -397,10 +414,31 @@ export class SearchServiceClient {
    *   unset.
    *
    *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   * @param {string} request.filter
+   *   The filter syntax consists of an expression language for constructing a
+   *   predicate from one or more fields of the documents being filtered. Filter
+   *   expression is case-sensitive.
+   *
+   *   If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
+   * @param {string} request.orderBy
+   *   The order in which documents are returned. Documents can be ordered by
+   *   a field in an {@link protos.google.cloud.discoveryengine.v1.Document|Document} object.
+   *   Leave it unset if ordered by relevance. `order_by` expression is
+   *   case-sensitive.
+   *
+   *   If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
    * @param {google.cloud.discoveryengine.v1.UserInfo} request.userInfo
    *   Information about the end user.
-   *   Highly recommended for analytics. The user_agent string in UserInfo will
-   *   be used to deduce device_type for analytics.
+   *   Highly recommended for analytics.
+   *   {@link protos.google.cloud.discoveryengine.v1.UserInfo.user_agent|UserInfo.user_agent}
+   *   is used to deduce `device_type` for analytics.
+   * @param {number[]} request.facetSpecs
+   *   Facet specifications for faceted search. If empty, no facets are returned.
+   *
+   *   A maximum of 100 values are allowed. Otherwise, an  `INVALID_ARGUMENT`
+   *   error is returned.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.BoostSpec} request.boostSpec
+   *   Boost specification to boost certain documents.
    * @param {number[]} request.params
    *   Additional search parameters.
    *
@@ -413,10 +451,10 @@ export class SearchServiceClient {
    *     which enables image searching.
    * @param {google.cloud.discoveryengine.v1.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
    *   The query expansion specification that specifies the conditions under which
-   *   query expansion will occur.
+   *   query expansion occurs.
    * @param {google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
    *   The spell correction specification that specifies the mode under
-   *   which spell correction will take effect.
+   *   which spell correction takes effect.
    * @param {string} request.userPseudoId
    *   A unique identifier for tracking visitors. For example, this could be
    *   implemented with an HTTP cookie, which should be able to uniquely identify
@@ -433,11 +471,10 @@ export class SearchServiceClient {
    *   The field must be a UTF-8 encoded string with a length limit of 128
    *   characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
    * @param {google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec} request.contentSearchSpec
-   *   The content search spec that configs the desired behavior of content
-   *   search.
+   *   A specification for configuring the behavior of content search.
    * @param {boolean} request.safeSearch
    *   Whether to turn on safe search. This is only supported for
-   *   {@link protos.|ContentConfig.PUBLIC_WEBSITE}.
+   *   website search.
    * @param {number[]} request.userLabels
    *   The user labels applied to a resource must meet the following requirements:
    *
@@ -554,10 +591,12 @@ export class SearchServiceClient {
    *   documents under the default branch.
    * @param {string} request.query
    *   Raw search query.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.ImageQuery} request.imageQuery
+   *   Raw image query.
    * @param {number} request.pageSize
    *   Maximum number of {@link protos.google.cloud.discoveryengine.v1.Document|Document}s to
    *   return. If unspecified, defaults to a reasonable value. The maximum allowed
-   *   value is 100. Values above 100 will be coerced to 100.
+   *   value is 100. Values above 100 are coerced to 100.
    *
    *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
    * @param {string} request.pageToken
@@ -578,10 +617,31 @@ export class SearchServiceClient {
    *   unset.
    *
    *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   * @param {string} request.filter
+   *   The filter syntax consists of an expression language for constructing a
+   *   predicate from one or more fields of the documents being filtered. Filter
+   *   expression is case-sensitive.
+   *
+   *   If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
+   * @param {string} request.orderBy
+   *   The order in which documents are returned. Documents can be ordered by
+   *   a field in an {@link protos.google.cloud.discoveryengine.v1.Document|Document} object.
+   *   Leave it unset if ordered by relevance. `order_by` expression is
+   *   case-sensitive.
+   *
+   *   If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
    * @param {google.cloud.discoveryengine.v1.UserInfo} request.userInfo
    *   Information about the end user.
-   *   Highly recommended for analytics. The user_agent string in UserInfo will
-   *   be used to deduce device_type for analytics.
+   *   Highly recommended for analytics.
+   *   {@link protos.google.cloud.discoveryengine.v1.UserInfo.user_agent|UserInfo.user_agent}
+   *   is used to deduce `device_type` for analytics.
+   * @param {number[]} request.facetSpecs
+   *   Facet specifications for faceted search. If empty, no facets are returned.
+   *
+   *   A maximum of 100 values are allowed. Otherwise, an  `INVALID_ARGUMENT`
+   *   error is returned.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.BoostSpec} request.boostSpec
+   *   Boost specification to boost certain documents.
    * @param {number[]} request.params
    *   Additional search parameters.
    *
@@ -594,10 +654,10 @@ export class SearchServiceClient {
    *     which enables image searching.
    * @param {google.cloud.discoveryengine.v1.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
    *   The query expansion specification that specifies the conditions under which
-   *   query expansion will occur.
+   *   query expansion occurs.
    * @param {google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
    *   The spell correction specification that specifies the mode under
-   *   which spell correction will take effect.
+   *   which spell correction takes effect.
    * @param {string} request.userPseudoId
    *   A unique identifier for tracking visitors. For example, this could be
    *   implemented with an HTTP cookie, which should be able to uniquely identify
@@ -614,11 +674,10 @@ export class SearchServiceClient {
    *   The field must be a UTF-8 encoded string with a length limit of 128
    *   characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
    * @param {google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec} request.contentSearchSpec
-   *   The content search spec that configs the desired behavior of content
-   *   search.
+   *   A specification for configuring the behavior of content search.
    * @param {boolean} request.safeSearch
    *   Whether to turn on safe search. This is only supported for
-   *   {@link protos.|ContentConfig.PUBLIC_WEBSITE}.
+   *   website search.
    * @param {number[]} request.userLabels
    *   The user labels applied to a resource must meet the following requirements:
    *
@@ -689,10 +748,12 @@ export class SearchServiceClient {
    *   documents under the default branch.
    * @param {string} request.query
    *   Raw search query.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.ImageQuery} request.imageQuery
+   *   Raw image query.
    * @param {number} request.pageSize
    *   Maximum number of {@link protos.google.cloud.discoveryengine.v1.Document|Document}s to
    *   return. If unspecified, defaults to a reasonable value. The maximum allowed
-   *   value is 100. Values above 100 will be coerced to 100.
+   *   value is 100. Values above 100 are coerced to 100.
    *
    *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
    * @param {string} request.pageToken
@@ -713,10 +774,31 @@ export class SearchServiceClient {
    *   unset.
    *
    *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   * @param {string} request.filter
+   *   The filter syntax consists of an expression language for constructing a
+   *   predicate from one or more fields of the documents being filtered. Filter
+   *   expression is case-sensitive.
+   *
+   *   If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
+   * @param {string} request.orderBy
+   *   The order in which documents are returned. Documents can be ordered by
+   *   a field in an {@link protos.google.cloud.discoveryengine.v1.Document|Document} object.
+   *   Leave it unset if ordered by relevance. `order_by` expression is
+   *   case-sensitive.
+   *
+   *   If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
    * @param {google.cloud.discoveryengine.v1.UserInfo} request.userInfo
    *   Information about the end user.
-   *   Highly recommended for analytics. The user_agent string in UserInfo will
-   *   be used to deduce device_type for analytics.
+   *   Highly recommended for analytics.
+   *   {@link protos.google.cloud.discoveryengine.v1.UserInfo.user_agent|UserInfo.user_agent}
+   *   is used to deduce `device_type` for analytics.
+   * @param {number[]} request.facetSpecs
+   *   Facet specifications for faceted search. If empty, no facets are returned.
+   *
+   *   A maximum of 100 values are allowed. Otherwise, an  `INVALID_ARGUMENT`
+   *   error is returned.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.BoostSpec} request.boostSpec
+   *   Boost specification to boost certain documents.
    * @param {number[]} request.params
    *   Additional search parameters.
    *
@@ -729,10 +811,10 @@ export class SearchServiceClient {
    *     which enables image searching.
    * @param {google.cloud.discoveryengine.v1.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
    *   The query expansion specification that specifies the conditions under which
-   *   query expansion will occur.
+   *   query expansion occurs.
    * @param {google.cloud.discoveryengine.v1.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
    *   The spell correction specification that specifies the mode under
-   *   which spell correction will take effect.
+   *   which spell correction takes effect.
    * @param {string} request.userPseudoId
    *   A unique identifier for tracking visitors. For example, this could be
    *   implemented with an HTTP cookie, which should be able to uniquely identify
@@ -749,11 +831,10 @@ export class SearchServiceClient {
    *   The field must be a UTF-8 encoded string with a length limit of 128
    *   characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
    * @param {google.cloud.discoveryengine.v1.SearchRequest.ContentSearchSpec} request.contentSearchSpec
-   *   The content search spec that configs the desired behavior of content
-   *   search.
+   *   A specification for configuring the behavior of content search.
    * @param {boolean} request.safeSearch
    *   Whether to turn on safe search. This is only supported for
-   *   {@link protos.|ContentConfig.PUBLIC_WEBSITE}.
+   *   website search.
    * @param {number[]} request.userLabels
    *   The user labels applied to a resource must meet the following requirements:
    *
@@ -805,6 +886,84 @@ export class SearchServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.discoveryengine.v1.SearchResponse.ISearchResult>;
   }
+  /**
+   * Gets information about a location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Resource name for the location.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example
+   * ```
+   * const [response] = await client.getLocation(request);
+   * ```
+   */
+  getLocation(
+    request: LocationProtos.google.cloud.location.IGetLocationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          LocationProtos.google.cloud.location.ILocation,
+          | LocationProtos.google.cloud.location.IGetLocationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LocationProtos.google.cloud.location.ILocation,
+      | LocationProtos.google.cloud.location.IGetLocationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.getLocation(request, options, callback);
+  }
+
+  /**
+   * Lists information about the supported locations for this service. Returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The resource that owns the locations collection, if applicable.
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example
+   * ```
+   * const iterable = client.listLocationsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   * ```
+   */
+  listLocationsAsync(
+    request: LocationProtos.google.cloud.location.IListLocationsRequest,
+    options?: CallOptions
+  ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.listLocationsAsync(request, options);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
@@ -1031,6 +1190,109 @@ export class SearchServiceClient {
     return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(
       projectLocationCollectionDataStoreBranchDocumentName
     ).document;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionDataStoreConversation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @param {string} conversation
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreConversationPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string,
+    conversation: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+        conversation: conversation,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreConversation resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreConversationName
+   *   A fully-qualified path representing project_location_collection_data_store_conversation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreConversationName(
+    projectLocationCollectionDataStoreConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(
+      projectLocationCollectionDataStoreConversationName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreConversation resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreConversationName
+   *   A fully-qualified path representing project_location_collection_data_store_conversation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreConversationName(
+    projectLocationCollectionDataStoreConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(
+      projectLocationCollectionDataStoreConversationName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreConversation resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreConversationName
+   *   A fully-qualified path representing project_location_collection_data_store_conversation resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreConversationName(
+    projectLocationCollectionDataStoreConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(
+      projectLocationCollectionDataStoreConversationName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreConversation resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreConversationName
+   *   A fully-qualified path representing project_location_collection_data_store_conversation resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreConversationName(
+    projectLocationCollectionDataStoreConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(
+      projectLocationCollectionDataStoreConversationName
+    ).data_store;
+  }
+
+  /**
+   * Parse the conversation from ProjectLocationCollectionDataStoreConversation resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreConversationName
+   *   A fully-qualified path representing project_location_collection_data_store_conversation resource.
+   * @returns {string} A string representing the conversation.
+   */
+  matchConversationFromProjectLocationCollectionDataStoreConversationName(
+    projectLocationCollectionDataStoreConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(
+      projectLocationCollectionDataStoreConversationName
+    ).conversation;
   }
 
   /**
@@ -1428,6 +1690,91 @@ export class SearchServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationDataStoreConversation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @param {string} conversation
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreConversationPath(
+    project: string,
+    location: string,
+    dataStore: string,
+    conversation: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+        conversation: conversation,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreConversation resource.
+   *
+   * @param {string} projectLocationDataStoreConversationName
+   *   A fully-qualified path representing project_location_data_store_conversation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreConversationName(
+    projectLocationDataStoreConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(
+      projectLocationDataStoreConversationName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreConversation resource.
+   *
+   * @param {string} projectLocationDataStoreConversationName
+   *   A fully-qualified path representing project_location_data_store_conversation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreConversationName(
+    projectLocationDataStoreConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(
+      projectLocationDataStoreConversationName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreConversation resource.
+   *
+   * @param {string} projectLocationDataStoreConversationName
+   *   A fully-qualified path representing project_location_data_store_conversation resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreConversationName(
+    projectLocationDataStoreConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(
+      projectLocationDataStoreConversationName
+    ).data_store;
+  }
+
+  /**
+   * Parse the conversation from ProjectLocationDataStoreConversation resource.
+   *
+   * @param {string} projectLocationDataStoreConversationName
+   *   A fully-qualified path representing project_location_data_store_conversation resource.
+   * @returns {string} A string representing the conversation.
+   */
+  matchConversationFromProjectLocationDataStoreConversationName(
+    projectLocationDataStoreConversationName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(
+      projectLocationDataStoreConversationName
+    ).conversation;
+  }
+
+  /**
    * Return a fully-qualified projectLocationDataStoreSchema resource name string.
    *
    * @param {string} project
@@ -1608,6 +1955,7 @@ export class SearchServiceClient {
       return this.searchServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
+        this.locationsClient.close();
       });
     }
     return Promise.resolve();

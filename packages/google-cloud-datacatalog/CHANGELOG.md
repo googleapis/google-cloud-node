@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v4.0.0...datacatalog-v4.0.1) (2023-09-06)
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4585](https://github.com/googleapis/google-cloud-node/issues/4585)) ([b6cea45](https://github.com/googleapis/google-cloud-node/commit/b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251))
+
 ## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v3.5.0...datacatalog-v4.0.0) (2023-08-06)
 
 

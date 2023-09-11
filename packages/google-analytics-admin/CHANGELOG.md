@@ -1,5 +1,24 @@
 # Changelog
 
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/admin-v5.0.0...admin-v6.0.0) (2023-09-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* [analytics-admin] rename the `enterprise_daily_export_enabled` field to `fresh_daily_export_enabled` in the `BigQueryLink` resource ([#4600](https://github.com/googleapis/google-cloud-node/issues/4600))
+
+### Features
+
+* [analytics-admin] add `UpdateConversionEvent` method to the Admin API v1 beta ([#4580](https://github.com/googleapis/google-cloud-node/issues/4580)) ([6d66eee](https://github.com/googleapis/google-cloud-node/commit/6d66eeea059099ac95ed2d880a70062f13f59c45))
+
+
+### Bug Fixes
+
+* [analytics-admin] rename the `enterprise_daily_export_enabled` field to `fresh_daily_export_enabled` in the `BigQueryLink` resource ([#4600](https://github.com/googleapis/google-cloud-node/issues/4600)) ([7fdbeb3](https://github.com/googleapis/google-cloud-node/commit/7fdbeb3454702e6b567827d11f2dd659a9a576e9))
+* [analytics-admin] rename the `intraday_export_enabled` field to `enterprise_export_enabled`  in the `BigQueryLink` resource ([#4530](https://github.com/googleapis/google-cloud-node/issues/4530)) ([d08dad1](https://github.com/googleapis/google-cloud-node/commit/d08dad15797114ac462da437ffc3e9253af3527b))
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4583](https://github.com/googleapis/google-cloud-node/issues/4583)) ([c3ddba8](https://github.com/googleapis/google-cloud-node/commit/c3ddba8df9fee6185e36a4e99f7c67b0319f1242))
+* **deps:** Update dependency google-auth-library to v9 ([#4560](https://github.com/googleapis/google-cloud-node/issues/4560)) ([e5099b7](https://github.com/googleapis/google-cloud-node/commit/e5099b7a475e0cfaf0d25aa8d6755cd7bc43cbe0))
+
 ## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/admin-v4.9.0...admin-v5.0.0) (2023-08-06)
 
 

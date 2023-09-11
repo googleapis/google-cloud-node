@@ -33,16 +33,17 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  If set, validate the request and preview the review, but do not apply it.
+   *  Optional. If set, validate the request and preview the review, but do not
+   *  apply it.
    */
   // const validateOnly = true
   /**
-   *  If set, the request will be rejected if the latest version of the
+   *  Optional. If set, the request will be rejected if the latest version of the
    *  workstation cluster on the server does not have this ETag.
    */
   // const etag = 'abc123'
   /**
-   *  If set, any workstation configurations and workstations in the
+   *  Optional. If set, any workstation configurations and workstations in the
    *  workstation cluster are also deleted. Otherwise, the request only
    *  works if the workstation cluster has no configurations or workstations.
    */

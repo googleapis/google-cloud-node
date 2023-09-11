@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/workflows-v3.0.0...workflows-v3.1.0) (2023-09-06)
+
+
+### Features
+
+* [workflows] add UNAVAILABLE and QUEUED to state enum ([#4563](https://github.com/googleapis/google-cloud-node/issues/4563)) ([25d4a43](https://github.com/googleapis/google-cloud-node/commit/25d4a43dac6acc96b7fa81e5c8dfda80522e3c4c))
+* [workflows] add UNAVAILABLE to state enum of workflow deployment ([#4553](https://github.com/googleapis/google-cloud-node/issues/4553)) ([428bd8f](https://github.com/googleapis/google-cloud-node/commit/428bd8fa31750c400810c911c29ab0687514642f))
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4589](https://github.com/googleapis/google-cloud-node/issues/4589)) ([07967ad](https://github.com/googleapis/google-cloud-node/commit/07967add1b5fc28b548cf74721b595ea0ba90d5b))
+
 ## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/workflows-v2.3.2...workflows-v3.0.0) (2023-08-06)
 
 

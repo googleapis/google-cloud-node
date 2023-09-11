@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.0.0...dialogflow-v6.1.0) (2023-09-06)
+
+
+### Features
+
+* [dialogflow] added baseline model version used to generate the summary ([#4542](https://github.com/googleapis/google-cloud-node/issues/4542)) ([33cde0c](https://github.com/googleapis/google-cloud-node/commit/33cde0cebf4f305464f38ca55e8b233445fb58d4))
+* [dialogflow] added speech endpointing setting ([#4592](https://github.com/googleapis/google-cloud-node/issues/4592)) ([3566230](https://github.com/googleapis/google-cloud-node/commit/356623044c6a5afd573ace5e83ef9cbda7006f14))
+* [dialogflow] added speech endpointing setting ([#4598](https://github.com/googleapis/google-cloud-node/issues/4598)) ([cbe3d5b](https://github.com/googleapis/google-cloud-node/commit/cbe3d5b047185e5f186a78ff369c973fa39cb639))
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4585](https://github.com/googleapis/google-cloud-node/issues/4585)) ([b6cea45](https://github.com/googleapis/google-cloud-node/commit/b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251))
+
 ## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v5.9.0...dialogflow-v6.0.0) (2023-08-06)
 
 

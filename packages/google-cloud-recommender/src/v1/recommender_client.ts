@@ -184,6 +184,10 @@ export class RecommenderClient {
         new this._gaxModule.PathTemplate(
           'billingAccounts/{billing_account}/locations/{location}/insightTypes/{insight_type}'
         ),
+      billingAccountLocationInsightTypeConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'billingAccounts/{billing_account}/locations/{location}/insightTypes/{insight_type}/config'
+        ),
       billingAccountLocationInsightTypeInsightPathTemplate:
         new this._gaxModule.PathTemplate(
           'billingAccounts/{billing_account}/locations/{location}/insightTypes/{insight_type}/insights/{insight}'
@@ -191,6 +195,10 @@ export class RecommenderClient {
       billingAccountLocationRecommenderPathTemplate:
         new this._gaxModule.PathTemplate(
           'billingAccounts/{billing_account}/locations/{location}/recommenders/{recommender}'
+        ),
+      billingAccountLocationRecommenderConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'billingAccounts/{billing_account}/locations/{location}/recommenders/{recommender}/config'
         ),
       billingAccountLocationRecommenderRecommendationPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -329,6 +337,7 @@ export class RecommenderClient {
       'markInsightAccepted',
       'listRecommendations',
       'getRecommendation',
+      'markRecommendationDismissed',
       'markRecommendationClaimed',
       'markRecommendationSucceeded',
       'markRecommendationFailed',
@@ -702,6 +711,116 @@ export class RecommenderClient {
     return this.innerApiCalls.getRecommendation(request, options, callback);
   }
   /**
+   * Mark the Recommendation State as Dismissed. Users can use this method to
+   * indicate to the Recommender API that an ACTIVE recommendation has to
+   * be marked back as DISMISSED.
+   *
+   * MarkRecommendationDismissed can be applied to recommendations in ACTIVE
+   * state.
+   *
+   * Requires the recommender.*.update IAM permission for the specified
+   * recommender.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Name of the recommendation.
+   * @param {string} request.etag
+   *   Fingerprint of the Recommendation. Provides optimistic locking.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.recommender.v1.Recommendation|Recommendation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/recommender.mark_recommendation_dismissed.js</caption>
+   * region_tag:recommender_v1_generated_Recommender_MarkRecommendationDismissed_async
+   */
+  markRecommendationDismissed(
+    request?: protos.google.cloud.recommender.v1.IMarkRecommendationDismissedRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.recommender.v1.IRecommendation,
+      (
+        | protos.google.cloud.recommender.v1.IMarkRecommendationDismissedRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  markRecommendationDismissed(
+    request: protos.google.cloud.recommender.v1.IMarkRecommendationDismissedRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.recommender.v1.IRecommendation,
+      | protos.google.cloud.recommender.v1.IMarkRecommendationDismissedRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  markRecommendationDismissed(
+    request: protos.google.cloud.recommender.v1.IMarkRecommendationDismissedRequest,
+    callback: Callback<
+      protos.google.cloud.recommender.v1.IRecommendation,
+      | protos.google.cloud.recommender.v1.IMarkRecommendationDismissedRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  markRecommendationDismissed(
+    request?: protos.google.cloud.recommender.v1.IMarkRecommendationDismissedRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.recommender.v1.IRecommendation,
+          | protos.google.cloud.recommender.v1.IMarkRecommendationDismissedRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.recommender.v1.IRecommendation,
+      | protos.google.cloud.recommender.v1.IMarkRecommendationDismissedRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.recommender.v1.IRecommendation,
+      (
+        | protos.google.cloud.recommender.v1.IMarkRecommendationDismissedRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.markRecommendationDismissed(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
    * Marks the Recommendation State as Claimed. Users can use this method to
    * indicate to the Recommender API that they are starting to apply the
    * recommendation themselves. This stops the recommendation content from being
@@ -1067,6 +1186,8 @@ export class RecommenderClient {
    *   * `projects/[PROJECT_ID]/locations/[LOCATION]/recommenders/[RECOMMENDER_ID]/config`
    *
    *   * `organizations/[ORGANIZATION_ID]/locations/[LOCATION]/recommenders/[RECOMMENDER_ID]/config`
+   *
+   *   * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION]/recommenders/[RECOMMENDER_ID]/config`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1273,11 +1394,13 @@ export class RecommenderClient {
    *
    *   Acceptable formats:
    *
-   *   * `projects/[PROJECT_NUMBER]/locations/global/recommenders/[INSIGHT_TYPE_ID]/config`
+   *   * `projects/[PROJECT_NUMBER]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]/config`
    *
-   *   * `projects/[PROJECT_ID]/locations/global/recommenders/[INSIGHT_TYPE_ID]/config`
+   *   * `projects/[PROJECT_ID]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]/config`
    *
-   *   * `organizations/[ORGANIZATION_ID]/locations/global/recommenders/[INSIGHT_TYPE_ID]/config`
+   *   * `organizations/[ORGANIZATION_ID]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]/config`
+   *
+   *   * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]/config`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2178,6 +2301,73 @@ export class RecommenderClient {
   }
 
   /**
+   * Return a fully-qualified billingAccountLocationInsightTypeConfig resource name string.
+   *
+   * @param {string} billing_account
+   * @param {string} location
+   * @param {string} insight_type
+   * @returns {string} Resource name string.
+   */
+  billingAccountLocationInsightTypeConfigPath(
+    billingAccount: string,
+    location: string,
+    insightType: string
+  ) {
+    return this.pathTemplates.billingAccountLocationInsightTypeConfigPathTemplate.render(
+      {
+        billing_account: billingAccount,
+        location: location,
+        insight_type: insightType,
+      }
+    );
+  }
+
+  /**
+   * Parse the billing_account from BillingAccountLocationInsightTypeConfig resource.
+   *
+   * @param {string} billingAccountLocationInsightTypeConfigName
+   *   A fully-qualified path representing billing_account_location_insight_type_config resource.
+   * @returns {string} A string representing the billing_account.
+   */
+  matchBillingAccountFromBillingAccountLocationInsightTypeConfigName(
+    billingAccountLocationInsightTypeConfigName: string
+  ) {
+    return this.pathTemplates.billingAccountLocationInsightTypeConfigPathTemplate.match(
+      billingAccountLocationInsightTypeConfigName
+    ).billing_account;
+  }
+
+  /**
+   * Parse the location from BillingAccountLocationInsightTypeConfig resource.
+   *
+   * @param {string} billingAccountLocationInsightTypeConfigName
+   *   A fully-qualified path representing billing_account_location_insight_type_config resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromBillingAccountLocationInsightTypeConfigName(
+    billingAccountLocationInsightTypeConfigName: string
+  ) {
+    return this.pathTemplates.billingAccountLocationInsightTypeConfigPathTemplate.match(
+      billingAccountLocationInsightTypeConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the insight_type from BillingAccountLocationInsightTypeConfig resource.
+   *
+   * @param {string} billingAccountLocationInsightTypeConfigName
+   *   A fully-qualified path representing billing_account_location_insight_type_config resource.
+   * @returns {string} A string representing the insight_type.
+   */
+  matchInsightTypeFromBillingAccountLocationInsightTypeConfigName(
+    billingAccountLocationInsightTypeConfigName: string
+  ) {
+    return this.pathTemplates.billingAccountLocationInsightTypeConfigPathTemplate.match(
+      billingAccountLocationInsightTypeConfigName
+    ).insight_type;
+  }
+
+  /**
    * Return a fully-qualified billingAccountLocationInsightTypeInsight resource name string.
    *
    * @param {string} billing_account
@@ -2326,6 +2516,73 @@ export class RecommenderClient {
   ) {
     return this.pathTemplates.billingAccountLocationRecommenderPathTemplate.match(
       billingAccountLocationRecommenderName
+    ).recommender;
+  }
+
+  /**
+   * Return a fully-qualified billingAccountLocationRecommenderConfig resource name string.
+   *
+   * @param {string} billing_account
+   * @param {string} location
+   * @param {string} recommender
+   * @returns {string} Resource name string.
+   */
+  billingAccountLocationRecommenderConfigPath(
+    billingAccount: string,
+    location: string,
+    recommender: string
+  ) {
+    return this.pathTemplates.billingAccountLocationRecommenderConfigPathTemplate.render(
+      {
+        billing_account: billingAccount,
+        location: location,
+        recommender: recommender,
+      }
+    );
+  }
+
+  /**
+   * Parse the billing_account from BillingAccountLocationRecommenderConfig resource.
+   *
+   * @param {string} billingAccountLocationRecommenderConfigName
+   *   A fully-qualified path representing billing_account_location_recommender_config resource.
+   * @returns {string} A string representing the billing_account.
+   */
+  matchBillingAccountFromBillingAccountLocationRecommenderConfigName(
+    billingAccountLocationRecommenderConfigName: string
+  ) {
+    return this.pathTemplates.billingAccountLocationRecommenderConfigPathTemplate.match(
+      billingAccountLocationRecommenderConfigName
+    ).billing_account;
+  }
+
+  /**
+   * Parse the location from BillingAccountLocationRecommenderConfig resource.
+   *
+   * @param {string} billingAccountLocationRecommenderConfigName
+   *   A fully-qualified path representing billing_account_location_recommender_config resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromBillingAccountLocationRecommenderConfigName(
+    billingAccountLocationRecommenderConfigName: string
+  ) {
+    return this.pathTemplates.billingAccountLocationRecommenderConfigPathTemplate.match(
+      billingAccountLocationRecommenderConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the recommender from BillingAccountLocationRecommenderConfig resource.
+   *
+   * @param {string} billingAccountLocationRecommenderConfigName
+   *   A fully-qualified path representing billing_account_location_recommender_config resource.
+   * @returns {string} A string representing the recommender.
+   */
+  matchRecommenderFromBillingAccountLocationRecommenderConfigName(
+    billingAccountLocationRecommenderConfigName: string
+  ) {
+    return this.pathTemplates.billingAccountLocationRecommenderConfigPathTemplate.match(
+      billingAccountLocationRecommenderConfigName
     ).recommender;
   }
 

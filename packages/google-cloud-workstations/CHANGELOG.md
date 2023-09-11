@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/workstations-v1.0.0...workstations-v1.1.0) (2023-09-06)
+
+
+### Features
+
+* [workstations] add config service_account_scopes ([#4603](https://github.com/googleapis/google-cloud-node/issues/4603)) ([28cc071](https://github.com/googleapis/google-cloud-node/commit/28cc071d5a093fe87bc87a976eb1ab88c6e11a2d))
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4589](https://github.com/googleapis/google-cloud-node/issues/4589)) ([07967ad](https://github.com/googleapis/google-cloud-node/commit/07967add1b5fc28b548cf74721b595ea0ba90d5b))
+
 ## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/workstations-v0.2.0...workstations-v1.0.0) (2023-08-06)
 
 

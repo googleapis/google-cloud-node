@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(parent) {
+function main(parent, rulesFormat, rulesFiles, autoCommit) {
   // [START datamigration_v1_generated_DataMigrationService_ImportMappingRules_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -35,16 +35,16 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  The format of the rules content file.
+   *  Required. The format of the rules content file.
    */
   // const rulesFormat = {}
   /**
-   *  One or more rules files.
+   *  Required. One or more rules files.
    */
   // const rulesFiles = [1,2,3,4]
   /**
-   *  Should the conversion workspace be committed automatically after the
-   *  import operation.
+   *  Required. Should the conversion workspace be committed automatically after
+   *  the import operation.
    */
   // const autoCommit = true
 
@@ -58,6 +58,9 @@ function main(parent) {
     // Construct request
     const request = {
       parent,
+      rulesFormat,
+      rulesFiles,
+      autoCommit,
     };
 
     // Run request

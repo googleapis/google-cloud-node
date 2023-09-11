@@ -2510,6 +2510,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "bootDiskConfig": {
+                          "type": "BootDiskConfig",
+                          "id": 49,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -3415,6 +3422,39 @@
                         "enableSecureBoot": {
                           "type": "bool",
                           "id": 1
+                        }
+                      }
+                    },
+                    "BootDiskConfig": {
+                      "fields": {
+                        "customerEncryptionKey": {
+                          "type": "CustomerEncryptionKey",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "enableConfidentialCompute": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CustomerEncryptionKey": {
+                      "oneofs": {
+                        "key": {
+                          "oneof": [
+                            "kmsKeyName"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "kmsKeyName": {
+                          "type": "string",
+                          "id": 7
                         }
                       }
                     }

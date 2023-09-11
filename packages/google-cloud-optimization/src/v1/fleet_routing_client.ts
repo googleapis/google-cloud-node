@@ -394,14 +394,6 @@ export class FleetRoutingClient {
    *   Shipment model to solve.
    * @param {google.cloud.optimization.v1.OptimizeToursRequest.SolvingMode} request.solvingMode
    *   By default, the solving mode is `DEFAULT_SOLVE` (0).
-   * @param {number} request.maxValidationErrors
-   *   Truncates the number of validation errors returned. These errors are
-   *   typically attached to an INVALID_ARGUMENT error payload as a BadRequest
-   *   error detail (https://cloud.google.com/apis/design/errors#error_details),
-   *   unless solving_mode=VALIDATE_ONLY: see the
-   *   {@link protos.google.cloud.optimization.v1.OptimizeToursResponse.validation_errors|OptimizeToursResponse.validation_errors}
-   *   field.
-   *   This defaults to 100 and is capped at 10,000.
    * @param {google.cloud.optimization.v1.OptimizeToursRequest.SearchMode} request.searchMode
    *   Search mode used to solve the request.
    * @param {number[]} request.injectedFirstSolutionRoutes
@@ -556,6 +548,14 @@ export class FleetRoutingClient {
    *   When `use_geodesic_distances` is true, this field must be set and defines
    *   the speed applied to compute travel times. Its value must be at least 1.0
    *   meters/seconds.
+   * @param {number} request.maxValidationErrors
+   *   Truncates the number of validation errors returned. These errors are
+   *   typically attached to an INVALID_ARGUMENT error payload as a BadRequest
+   *   error detail (https://cloud.google.com/apis/design/errors#error_details),
+   *   unless solving_mode=VALIDATE_ONLY: see the
+   *   {@link protos.google.cloud.optimization.v1.OptimizeToursResponse.validation_errors|OptimizeToursResponse.validation_errors}
+   *   field.
+   *   This defaults to 100 and is capped at 10,000.
    * @param {string} request.label
    *   Label that may be used to identify this request, reported back in the
    *   {@link protos.google.cloud.optimization.v1.OptimizeToursResponse.request_label|OptimizeToursResponse.request_label}.

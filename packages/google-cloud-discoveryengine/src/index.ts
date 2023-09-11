@@ -21,6 +21,8 @@ import * as v1beta from './v1beta';
 
 const CompletionServiceClient = v1.CompletionServiceClient;
 type CompletionServiceClient = v1.CompletionServiceClient;
+const ConversationalSearchServiceClient = v1.ConversationalSearchServiceClient;
+type ConversationalSearchServiceClient = v1.ConversationalSearchServiceClient;
 const DocumentServiceClient = v1.DocumentServiceClient;
 type DocumentServiceClient = v1.DocumentServiceClient;
 const SchemaServiceClient = v1.SchemaServiceClient;
@@ -34,6 +36,7 @@ export {
   v1,
   v1beta,
   CompletionServiceClient,
+  ConversationalSearchServiceClient,
   DocumentServiceClient,
   SchemaServiceClient,
   SearchServiceClient,
@@ -43,6 +46,7 @@ export default {
   v1,
   v1beta,
   CompletionServiceClient,
+  ConversationalSearchServiceClient,
   DocumentServiceClient,
   SchemaServiceClient,
   SearchServiceClient,

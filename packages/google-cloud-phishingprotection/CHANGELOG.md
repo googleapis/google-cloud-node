@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/phishing-protection?activeTab=versions
 
+## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/phishing-protection-v4.0.0...phishing-protection-v4.0.1) (2023-09-06)
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4587](https://github.com/googleapis/google-cloud-node/issues/4587)) ([e3b1e7e](https://github.com/googleapis/google-cloud-node/commit/e3b1e7e46d666abb4df28c3cd69e97c08b88445a))
+
 ## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/phishing-protection-v3.0.8...phishing-protection-v4.0.0) (2023-08-06)
 
 

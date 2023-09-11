@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/network-connectivity-v3.0.0...network-connectivity-v3.0.1) (2023-09-06)
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4586](https://github.com/googleapis/google-cloud-node/issues/4586)) ([4b18686](https://github.com/googleapis/google-cloud-node/commit/4b186867323b8b15469bf5e1cb890bf703b531b3))
+
 ## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/network-connectivity-v2.3.3...network-connectivity-v3.0.0) (2023-08-06)
 
 

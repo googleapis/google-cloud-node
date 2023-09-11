@@ -5,6 +5,3089 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "6e6e5c1e519e801c41a4b6febe2eeea82174c6d3",
+          "message": "Add initial files for google.cloud.netapp.v1",
+          "issues": [
+            "4626"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "2260f12543d171bda95345e53475f5f0fdc45770",
+          "message": "Migrate to Node 14",
+          "issues": [
+            "4443"
+          ],
+          "breakingChangeNote": "migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))"
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/netapp",
+      "id": "e3b8b833-9ada-4d9e-bcb6-e5c46d058645",
+      "createTime": "2023-09-08T00:22:54.021Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "04aa151ecebb2ec3b9c0100d9417e6ca8266463d",
+          "message": "Add initial files for google.cloud.config.v1",
+          "issues": [
+            "4627"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "2260f12543d171bda95345e53475f5f0fdc45770",
+          "message": "Migrate to Node 14",
+          "issues": [
+            "4443"
+          ],
+          "breakingChangeNote": "migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))"
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/config",
+      "id": "12dbeff4-b3fb-4191-a414-41f82bda0ada",
+      "createTime": "2023-09-08T00:22:54.013Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "083c3528fb32cc692df4c33cfbba3d2cca371e59",
+          "message": "[optimization] added support for walking mode and cost_per_kilometer_below_soft_max",
+          "issues": [
+            "4620"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/optimization",
+      "id": "828371c7-d484-455b-bcd2-7fd7be785dd3",
+      "createTime": "2023-09-08T00:22:54.004Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4585"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "a4507aa1166832c2d9624cb55879a543f65ec4cb",
+          "message": "Update dependency @google-cloud/dataform to v1",
+          "issues": [
+            "4532"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "chore",
+          "sha": "2260f12543d171bda95345e53475f5f0fdc45770",
+          "message": "Migrate to Node 14",
+          "issues": [
+            "4443"
+          ],
+          "breakingChangeNote": "migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))"
+        },
+        {
+          "type": "fix",
+          "sha": "c32965c0c4a5975ba37371ecd819d9cffb080aa5",
+          "message": "[Many APIs] fix typings for IAM methods",
+          "issues": [
+            "4460"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "fix",
+          "sha": "65ee10e09d7c69e00bdfd7be2a591c866873ceda",
+          "message": "Revert package.json version",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "d1cef14fabc0b1e3dbc957f70f383a5464f7c840",
+          "message": "Roll back dependency @google-cloud/dataform to ^0.4.0",
+          "issues": [
+            "4044"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataform",
+      "id": "b40de479-8d97-4eb3-97d2-d7104b20f871",
+      "createTime": "2023-09-08T00:22:53.998Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9bcc6c65f72a6a3d6c1f027635f1707880c7cc66",
+          "message": "[billing] fixed resource_reference for name in GetProjectBillingInfo",
+          "issues": [
+            "4619"
+          ]
+        }
+      ],
+      "version": "4.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/billing",
+      "id": "136b0b58-5cdd-48bf-af4d-9084f7df1bbe",
+      "createTime": "2023-09-08T00:22:53.988Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e3b1e7e46d666abb4df28c3cd69e97c08b88445a",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4587"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "70ffd7fca0cdf88b66aa0e8c03e4f9de23f843e1",
+          "message": "[iam] add troubleshooter v3 api clients",
+          "issues": [
+            "4551"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policy-troubleshooter-iam",
+      "id": "bdb70ada-4fa1-4407-9e9a-623dff4a4e58",
+      "createTime": "2023-09-06T13:53:27.977Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "13537fcd6e3c552199d5057daf3b00c24033c908",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4584"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/procurement",
+      "id": "3bd7bbc7-71e6-4a01-b52d-495e1aa5a335",
+      "createTime": "2023-09-06T13:53:27.971Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "afd40d572ffb0d19444c75133d623f4dd88865f7",
+          "message": "Add initial files for google.cloud.sql.v1",
+          "issues": [
+            "4465"
+          ]
+        },
+        {
+          "type": "chore",
+          "sha": "2260f12543d171bda95345e53475f5f0fdc45770",
+          "message": "Migrate to Node 14",
+          "issues": [
+            "4443"
+          ],
+          "breakingChangeNote": "migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))"
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "3f066dcf-4fab-4dc6-8750-dce219751266",
+      "createTime": "2023-09-06T13:53:27.964Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4b186867323b8b15469bf5e1cb890bf703b531b3",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4586"
+          ]
+        }
+      ],
+      "version": "1.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/migrationcenter",
+      "id": "ba639fad-c7ec-4a31-ba97-a3b40955ca19",
+      "createTime": "2023-09-06T13:53:27.958Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e3b1e7e46d666abb4df28c3cd69e97c08b88445a",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4587"
+          ]
+        }
+      ],
+      "version": "1.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/rapidmigrationassessment",
+      "id": "b7168025-5586-4805-bfe4-5f180f35c1c4",
+      "createTime": "2023-09-06T13:53:27.953Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07967add1b5fc28b548cf74721b595ea0ba90d5b",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4589"
+          ]
+        }
+      ],
+      "version": "1.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/places",
+      "id": "134d42f4-4204-4512-aa49-b398f23d7f48",
+      "createTime": "2023-09-06T13:53:27.945Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e5ad564f74dc7a36c0e8cd8de173428a99f1deae",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4588"
+          ]
+        }
+      ],
+      "version": "1.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/support",
+      "id": "bfffb0a5-7665-4daa-b14b-0fb9f319cd91",
+      "createTime": "2023-09-06T13:53:27.939Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e5ad564f74dc7a36c0e8cd8de173428a99f1deae",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4588"
+          ]
+        }
+      ],
+      "version": "1.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storageinsights",
+      "id": "14c51217-1412-4244-b32a-eefbd380938c",
+      "createTime": "2023-09-06T13:53:27.934Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c3ddba8df9fee6185e36a4e99f7c67b0319f1242",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4583"
+          ]
+        }
+      ],
+      "version": "1.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ai/generativelanguage",
+      "id": "d923ea27-483d-45a5-89cd-cadccd070cb3",
+      "createTime": "2023-09-06T13:53:27.926Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "13537fcd6e3c552199d5057daf3b00c24033c908",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4584"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "e122185997c379f9db4be159c754b8ed16be4e7b",
+          "message": "[confidentialcomputing] Add a new field `partial_errors` to `VerifyAttestationResponse` proto",
+          "issues": [
+            "4527"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/confidentialcomputing",
+      "id": "1f8b563d-605f-4b2c-8f40-421eea8deafa",
+      "createTime": "2023-09-06T13:53:27.921Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "28cc071d5a093fe87bc87a976eb1ab88c6e11a2d",
+          "message": "[workstations] add config service_account_scopes",
+          "issues": [
+            "4603"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "07967add1b5fc28b548cf74721b595ea0ba90d5b",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4589"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workstations",
+      "id": "08d2296b-e77f-47a4-b3c8-a4ba4b06d45d",
+      "createTime": "2023-09-06T13:53:27.915Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c3ddba8df9fee6185e36a4e99f7c67b0319f1242",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4583"
+          ]
+        }
+      ],
+      "version": "1.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "f7ab6f93-d322-4c52-bd99-e3ba3453eb56",
+      "createTime": "2023-09-06T13:53:27.895Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c3ddba8df9fee6185e36a4e99f7c67b0319f1242",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4583"
+          ]
+        }
+      ],
+      "version": "1.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/advisorynotifications",
+      "id": "c6b5dafe-c492-4e8a-bfbd-018f5c107fbc",
+      "createTime": "2023-09-06T13:53:27.890Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4b186867323b8b15469bf5e1cb890bf703b531b3",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4586"
+          ]
+        }
+      ],
+      "version": "1.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms-inventory",
+      "id": "e017e7e8-6bcb-4391-be4b-de3ba38cc789",
+      "createTime": "2023-09-06T13:53:27.884Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "14fffdf46568466e9ae02d5585da9721aa9ad83c",
+          "message": "[storagetransfer,grafeas] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4590"
+          ]
+        }
+      ],
+      "version": "5.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/grafeas",
+      "id": "7e5a62ea-35a9-404a-aa73-292193a33b55",
+      "createTime": "2023-09-06T13:53:27.876Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "14fffdf46568466e9ae02d5585da9721aa9ad83c",
+          "message": "[storagetransfer,grafeas] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4590"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-transfer",
+      "id": "80e172a4-0b8a-41ee-a818-4940f8dc6bf2",
+      "createTime": "2023-09-06T13:53:27.871Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07967add1b5fc28b548cf74721b595ea0ba90d5b",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4589"
+          ]
+        }
+      ],
+      "version": "5.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dlp",
+      "id": "317f3ce0-b981-4f12-9eda-46a297c68709",
+      "createTime": "2023-09-06T13:53:27.865Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07967add1b5fc28b548cf74721b595ea0ba90d5b",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4589"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/monitoring-dashboards",
+      "id": "87e7baf0-f98b-4d27-a055-c0acffc41516",
+      "createTime": "2023-09-06T13:53:27.859Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07967add1b5fc28b548cf74721b595ea0ba90d5b",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4589"
+          ]
+        }
+      ],
+      "version": "1.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/routing",
+      "id": "d0bfaee2-e1d8-4ccd-82b8-c9edba878654",
+      "createTime": "2023-09-06T13:53:27.853Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07967add1b5fc28b548cf74721b595ea0ba90d5b",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4589"
+          ]
+        }
+      ],
+      "version": "1.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/maps-platform-datasets",
+      "id": "461879e2-9416-46d0-82e1-c90ed60bb4e0",
+      "createTime": "2023-09-06T13:53:27.847Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07967add1b5fc28b548cf74721b595ea0ba90d5b",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4589"
+          ]
+        }
+      ],
+      "version": "2.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/addressvalidation",
+      "id": "839a0770-397f-4f7c-ab44-7f247e15c17d",
+      "createTime": "2023-09-06T13:53:27.840Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07967add1b5fc28b548cf74721b595ea0ba90d5b",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4589"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/access-context-manager",
+      "id": "917a10e7-0260-4765-9b15-d69cd26f294c",
+      "createTime": "2023-09-06T13:53:27.835Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07967add1b5fc28b548cf74721b595ea0ba90d5b",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4589"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iam-credentials",
+      "id": "5a5a7672-e1e8-456b-8032-dc0b175b3807",
+      "createTime": "2023-09-06T13:53:27.829Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07967add1b5fc28b548cf74721b595ea0ba90d5b",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4589"
+          ]
+        }
+      ],
+      "version": "1.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iam",
+      "id": "2302183b-0cb3-4a5e-b046-96f84c0cf8dc",
+      "createTime": "2023-09-06T13:53:27.822Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8443053fb025ea54d4381e622684776b99b8081c",
+          "message": "[containeranalysis] add ExportSBOM API method",
+          "issues": [
+            "4607"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "07967add1b5fc28b548cf74721b595ea0ba90d5b",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4589"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/containeranalysis",
+      "id": "c233bf15-a42e-422d-8472-d89177b2974b",
+      "createTime": "2023-09-06T13:53:27.817Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07967add1b5fc28b548cf74721b595ea0ba90d5b",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4589"
+          ]
+        }
+      ],
+      "version": "4.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "21200e65-091a-4f64-9fd4-587fd09058a1",
+      "createTime": "2023-09-06T13:53:27.811Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07967add1b5fc28b548cf74721b595ea0ba90d5b",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4589"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/artifact-registry",
+      "id": "4f36e4c3-d35f-4132-aa9d-101cfb77094a",
+      "createTime": "2023-09-06T13:53:27.797Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07967add1b5fc28b548cf74721b595ea0ba90d5b",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4589"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataflow",
+      "id": "9b9a3128-fd7b-419a-84b5-4679b81aae93",
+      "createTime": "2023-09-06T13:53:27.792Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b07e25fad34f0071d33baabeee9a9b971760971e",
+          "message": "[container] add UpdateNodePoolRequest.machine_type, disk_type, disk_size_gb",
+          "issues": [
+            "4591"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "07967add1b5fc28b548cf74721b595ea0ba90d5b",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4589"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "9a4f139fc9f6f1988774df8325432d24296e8764",
+          "message": "[container] Add preview support for monitoring a cluster's pods for compliance with a provided Binary Authorization platform policy via Binary Authorization Continuous Validation",
+          "issues": [
+            "4541"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "9f8003bf-3a31-465c-91c4-4bd614b76943",
+      "createTime": "2023-09-06T13:53:27.786Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07967add1b5fc28b548cf74721b595ea0ba90d5b",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4589"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "25d4a43dac6acc96b7fa81e5c8dfda80522e3c4c",
+          "message": "[workflows] add UNAVAILABLE and QUEUED to state enum",
+          "issues": [
+            "4563"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "428bd8fa31750c400810c911c29ab0687514642f",
+          "message": "[workflows] add UNAVAILABLE to state enum of workflow deployment",
+          "issues": [
+            "4553"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workflows",
+      "id": "a0a6bc2f-f6d1-46ea-8021-cc967476b599",
+      "createTime": "2023-09-06T13:53:27.779Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07967add1b5fc28b548cf74721b595ea0ba90d5b",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4589"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/web-security-scanner",
+      "id": "7c7e4063-798a-44a5-af3e-d202d8f6eb39",
+      "createTime": "2023-09-06T13:53:27.773Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07967add1b5fc28b548cf74721b595ea0ba90d5b",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4589"
+          ]
+        }
+      ],
+      "version": "4.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/web-risk",
+      "id": "5c6ff628-9708-47af-b423-0e568f4f23a1",
+      "createTime": "2023-09-06T13:53:27.767Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07967add1b5fc28b548cf74721b595ea0ba90d5b",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4589"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vpc-access",
+      "id": "d074472b-e611-43d4-98cb-a9637c1ab366",
+      "createTime": "2023-09-06T13:53:27.755Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "07967add1b5fc28b548cf74721b595ea0ba90d5b",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4589"
+          ]
+        }
+      ],
+      "version": "1.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmwareengine",
+      "id": "d78f5707-ce13-4e57-8385-80ea61cb7e0a",
+      "createTime": "2023-09-06T13:53:27.750Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e5ad564f74dc7a36c0e8cd8de173428a99f1deae",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4588"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmmigration",
+      "id": "8a1b7081-0531-4786-a490-b9e432e667e4",
+      "createTime": "2023-09-06T13:53:27.744Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e5ad564f74dc7a36c0e8cd8de173428a99f1deae",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4588"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "338ba13af6247fb343adc8ffc998faec7dcc06bd",
+          "message": "Update dependency pureimage to ^0.4.0",
+          "issues": [
+            "4550"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "fix",
+          "sha": "58950c9e39d6f7f7e81d545b8e3a3166f51e457b",
+          "message": "Update dependency @google-cloud/promisify to v4",
+          "issues": [
+            "4533"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "4.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vision",
+      "id": "e3acefaf-97a4-4d57-ab83-4a9b669df1fd",
+      "createTime": "2023-09-06T13:53:27.737Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e5ad564f74dc7a36c0e8cd8de173428a99f1deae",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4588"
+          ]
+        }
+      ],
+      "version": "5.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-intelligence",
+      "id": "db319528-cdba-4f48-a188-74f3492495d9",
+      "createTime": "2023-09-06T13:53:27.732Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e5ad564f74dc7a36c0e8cd8de173428a99f1deae",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4588"
+          ]
+        }
+      ],
+      "version": "3.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-transcoder",
+      "id": "1da5355a-e275-4ebf-ae06-9a0ccc27b2a6",
+      "createTime": "2023-09-06T13:53:27.726Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e5ad564f74dc7a36c0e8cd8de173428a99f1deae",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4588"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "fb59e44179eddc7e372320e097a6a271babac7eb",
+          "message": "[video-stitcher] use correct child_type annotation",
+          "issues": [
+            "4571"
+          ],
+          "breakingChangeNote": "[video-stitcher] use correct child_type annotation ([#4571](https://github.com/googleapis/google-cloud-node/issues/4571))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-stitcher",
+      "id": "debdff69-3a90-4d95-8fe9-58366348aa77",
+      "createTime": "2023-09-06T13:53:27.719Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e5ad564f74dc7a36c0e8cd8de173428a99f1deae",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4588"
+          ]
+        }
+      ],
+      "version": "1.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/livestream",
+      "id": "0bc70d47-aa2a-4a82-8de7-db76a2266c5a",
+      "createTime": "2023-09-06T13:53:27.714Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e5ad564f74dc7a36c0e8cd8de173428a99f1deae",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4588"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "df60e7a2b3757cf75da9828a18df539f55ff2ca3",
+          "message": "Update dependency @google-cloud/vision to v4",
+          "issues": [
+            "4534"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "fix",
+          "sha": "58950c9e39d6f7f7e81d545b8e3a3166f51e457b",
+          "message": "Update dependency @google-cloud/promisify to v4",
+          "issues": [
+            "4533"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "fix",
+          "sha": "ccf817a2ce9f54b6cab93920a29b27fa30105846",
+          "message": "Update dependency @google-cloud/automl to v4",
+          "issues": [
+            "4545"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "8.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/translate",
+      "id": "43212441-c040-45d7-b812-01bb4e5ff580",
+      "createTime": "2023-09-06T13:53:27.700Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0bf8b2169a448f87a8301749f343fd07679a6c08",
+          "message": "[tpu] publish boot_disk_config to support CHD with KMS",
+          "issues": [
+            "4606"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "e5ad564f74dc7a36c0e8cd8de173428a99f1deae",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4588"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "c3955701db6a18741ad837668282ab0907009e43",
+          "message": "[tpu] Add ResetQueueResource to the TPU service",
+          "issues": [
+            "4577"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tpu",
+      "id": "216fcf31-1339-4062-b80a-0b6b70d73c91",
+      "createTime": "2023-09-06T13:53:27.693Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e5ad564f74dc7a36c0e8cd8de173428a99f1deae",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4588"
+          ]
+        }
+      ],
+      "version": "5.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/text-to-speech",
+      "id": "30bf00a5-1275-4cbe-9b44-91ca8983d3e4",
+      "createTime": "2023-09-06T13:53:27.687Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e5ad564f74dc7a36c0e8cd8de173428a99f1deae",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4588"
+          ]
+        }
+      ],
+      "version": "4.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "fc81ec58-c06b-43e9-a012-666524824bf8",
+      "createTime": "2023-09-06T13:53:27.682Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e5ad564f74dc7a36c0e8cd8de173428a99f1deae",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4588"
+          ]
+        }
+      ],
+      "version": "6.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/talent",
+      "id": "6ad779ce-6ee7-473d-87c8-96254650378d",
+      "createTime": "2023-09-06T13:53:27.674Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e5ad564f74dc7a36c0e8cd8de173428a99f1deae",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4588"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "892810a80bd84060c2446edc4fa284d92af1e2f2",
+          "message": "Update dependency google-proto-files to v4",
+          "issues": [
+            "4548"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "6.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "68f60dc1-5ba1-4b72-9dbf-f9f829bb879b",
+      "createTime": "2023-09-06T13:53:27.669Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e5ad564f74dc7a36c0e8cd8de173428a99f1deae",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4588"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/shell",
+      "id": "f3505803-3948-4f41-9eba-5e09b8379dba",
+      "createTime": "2023-09-06T13:53:27.663Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e5ad564f74dc7a36c0e8cd8de173428a99f1deae",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4588"
+          ]
+        }
+      ],
+      "version": "5.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-directory",
+      "id": "70467d9c-2dfc-4f70-b4f2-0c07d70495e1",
+      "createTime": "2023-09-06T13:53:27.656Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e5ad564f74dc7a36c0e8cd8de173428a99f1deae",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4588"
+          ]
+        }
+      ],
+      "version": "8.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "8a45f3de-20b1-4587-b0f1-66c0225ee7b5",
+      "createTime": "2023-09-06T13:53:27.650Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e5ad564f74dc7a36c0e8cd8de173428a99f1deae",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4588"
+          ]
+        }
+      ],
+      "version": "1.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/publicca",
+      "id": "62edd791-150f-414b-8de2-aa2878813c87",
+      "createTime": "2023-09-06T13:53:27.644Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e5ad564f74dc7a36c0e8cd8de173428a99f1deae",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4588"
+          ]
+        }
+      ],
+      "version": "5.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-private-ca",
+      "id": "622fd205-ed78-4a89-85f2-c465a0bc19f6",
+      "createTime": "2023-09-06T13:53:27.637Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e5ad564f74dc7a36c0e8cd8de173428a99f1deae",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4588"
+          ]
+        }
+      ],
+      "version": "5.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/secret-manager",
+      "id": "349fd6a2-0706-4f8f-9cf4-ed8fb0f4d926",
+      "createTime": "2023-09-06T13:53:27.631Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e3b1e7e46d666abb4df28c3cd69e97c08b88445a",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4587"
+          ]
+        }
+      ],
+      "version": "4.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/scheduler",
+      "id": "a6899380-beff-4c33-83a8-56c12f7a1231",
+      "createTime": "2023-09-06T13:53:27.625Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e3b1e7e46d666abb4df28c3cd69e97c08b88445a",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4587"
+          ]
+        }
+      ],
+      "version": "1.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/run",
+      "id": "473668e0-358e-4d35-b756-394e3be6ebec",
+      "createTime": "2023-09-06T13:53:27.618Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e3b1e7e46d666abb4df28c3cd69e97c08b88445a",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4587"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/retail",
+      "id": "0a40f997-294e-47fd-b7a6-62e3894337e1",
+      "createTime": "2023-09-06T13:53:27.613Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e3b1e7e46d666abb4df28c3cd69e97c08b88445a",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4587"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/resource-settings",
+      "id": "da10ab92-2f6e-4fbd-9e01-9b3c85c82e4c",
+      "createTime": "2023-09-06T13:53:27.596Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e3b1e7e46d666abb4df28c3cd69e97c08b88445a",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4587"
+          ]
+        }
+      ],
+      "version": "5.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/resource-manager",
+      "id": "3cdbc6be-387b-4ca0-b461-5c53c5dd19d8",
+      "createTime": "2023-09-06T13:53:27.589Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e3b1e7e46d666abb4df28c3cd69e97c08b88445a",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4587"
+          ]
+        }
+      ],
+      "version": "4.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis",
+      "id": "1a51b34a-53b7-4248-a08d-8aae727c4088",
+      "createTime": "2023-09-06T13:53:27.584Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3b4414b48877b91dafe0f9540701744dafc3d431",
+          "message": "[recommender] ListRecommenders and ListInsightTypes RPC methods",
+          "issues": [
+            "4604"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "e3b1e7e46d666abb4df28c3cd69e97c08b88445a",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4587"
+          ]
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recommender",
+      "id": "486ca1e0-b8c8-411e-826d-bec396aa5009",
+      "createTime": "2023-09-06T13:53:27.578Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e3b1e7e46d666abb4df28c3cd69e97c08b88445a",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4587"
+          ]
+        }
+      ],
+      "version": "4.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "0f8a2355-a30e-4923-980e-341291814716",
+      "createTime": "2023-09-06T13:53:27.571Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e3b1e7e46d666abb4df28c3cd69e97c08b88445a",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4587"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/private-catalog",
+      "id": "010bf174-027f-4fd4-8142-8846738089dd",
+      "createTime": "2023-09-06T13:53:27.565Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e3b1e7e46d666abb4df28c3cd69e97c08b88445a",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4587"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "f2beef407ce694af7133d0013221c11e7f093a59",
+          "message": "Update dependency @google-cloud/local-auth to v3",
+          "issues": [
+            "4546"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policy-troubleshooter",
+      "id": "21a5ac5d-0943-40d3-a299-a496ef2b9def",
+      "createTime": "2023-09-06T13:53:27.559Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e3b1e7e46d666abb4df28c3cd69e97c08b88445a",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4587"
+          ]
+        }
+      ],
+      "version": "4.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/phishing-protection",
+      "id": "322b559e-823c-443c-9158-00505149e36a",
+      "createTime": "2023-09-06T13:53:27.552Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e3b1e7e46d666abb4df28c3cd69e97c08b88445a",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4587"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "48f07c18aa1cc93b67e4bc46078f21d908f7becc",
+          "message": "[oslogin] launch signSshPublicKey in beta",
+          "issues": [
+            "4552"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-login",
+      "id": "b7eddab7-4244-48b1-a5c9-aea1521a6da5",
+      "createTime": "2023-09-06T13:53:27.547Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e3b1e7e46d666abb4df28c3cd69e97c08b88445a",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4587"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-config",
+      "id": "bda961e0-1569-4409-bf57-ac9a2adebaa0",
+      "createTime": "2023-09-06T13:53:27.542Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e3b1e7e46d666abb4df28c3cd69e97c08b88445a",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4587"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/org-policy",
+      "id": "6b381aba-f74c-4650-b556-b484ee592162",
+      "createTime": "2023-09-06T13:53:27.534Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e3b1e7e46d666abb4df28c3cd69e97c08b88445a",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4587"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/orchestration-airflow",
+      "id": "50e85080-0db3-4f0d-b367-8d018e5b6d36",
+      "createTime": "2023-09-06T13:53:27.529Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e3b1e7e46d666abb4df28c3cd69e97c08b88445a",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4587"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/optimization",
+      "id": "21e5221c-c304-419c-83f4-e03a19d6b136",
+      "createTime": "2023-09-06T13:53:27.524Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e3b1e7e46d666abb4df28c3cd69e97c08b88445a",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4587"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "9cebaa2aecc731f8fe9891453fc748f5b2be626b",
+          "message": "[notebooks] clients for Notebooks API V2",
+          "issues": [
+            "4567"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "7a5cfa5720b5adc98015a8173158f5c3245c8187",
+          "message": "[notebooks] clients for Notebooks API V2",
+          "issues": [
+            "4549"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/notebooks",
+      "id": "b3c56d5f-2d0c-4cd7-b8ce-205e798f9d9a",
+      "createTime": "2023-09-06T13:53:27.517Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e3b1e7e46d666abb4df28c3cd69e97c08b88445a",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4587"
+          ]
+        }
+      ],
+      "version": "2.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-security",
+      "id": "75c21912-94b0-44bb-ac2e-bf1fc8ea9f86",
+      "createTime": "2023-09-06T13:53:27.510Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4b186867323b8b15469bf5e1cb890bf703b531b3",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4586"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "170262c77ae252d1d2297eb9fa5980e7da8fb70e",
+          "message": "[networkmanagement] add new enum values for network firewall policies to API",
+          "issues": [
+            "4536"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "b4aff9860827a424342f434118eb60fb55bc2919",
+          "message": "[networkmanagement] add fields related to PBR and NCC routes to API",
+          "issues": [
+            "4526"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-management",
+      "id": "c5d1f5df-929e-46c9-9459-f97262de1eeb",
+      "createTime": "2023-09-06T13:53:27.492Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4b186867323b8b15469bf5e1cb890bf703b531b3",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4586"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-connectivity",
+      "id": "5497518c-e62d-4a3f-8e3e-5e4598dc897c",
+      "createTime": "2023-09-06T13:53:27.486Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4b186867323b8b15469bf5e1cb890bf703b531b3",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4586"
+          ]
+        }
+      ],
+      "version": "4.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc-metastore",
+      "id": "ae7a0c47-b74a-4501-8438-1935acc29836",
+      "createTime": "2023-09-06T13:53:27.480Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4b186867323b8b15469bf5e1cb890bf703b531b3",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4586"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/memcache",
+      "id": "d1c8be15-3b9e-405a-8b4c-de87854dd8f0",
+      "createTime": "2023-09-06T13:53:27.475Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4b186867323b8b15469bf5e1cb890bf703b531b3",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4586"
+          ]
+        }
+      ],
+      "version": "4.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/media-translation",
+      "id": "a7fe7561-222f-4051-aaf1-6aa5cd279903",
+      "createTime": "2023-09-06T13:53:27.468Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4b186867323b8b15469bf5e1cb890bf703b531b3",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4586"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/managed-identities",
+      "id": "41b69daf-11b3-471c-a924-3ee7e5a7120a",
+      "createTime": "2023-09-06T13:53:27.463Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4b186867323b8b15469bf5e1cb890bf703b531b3",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4586"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/life-sciences",
+      "id": "883f2ab1-a2b3-4f7d-8fe0-ed3802313cb1",
+      "createTime": "2023-09-06T13:53:27.457Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4b186867323b8b15469bf5e1cb890bf703b531b3",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4586"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "f6ae7e464084f5d6f931e43b19479fa6219427f3",
+          "message": "[language] Add support for the v2 API",
+          "issues": [
+            "4538"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "ccf817a2ce9f54b6cab93920a29b27fa30105846",
+          "message": "Update dependency @google-cloud/automl to v4",
+          "issues": [
+            "4545"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/language",
+      "id": "607e00a2-d498-4dd8-88dc-8a1275f3376b",
+      "createTime": "2023-09-06T13:53:27.451Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4b186867323b8b15469bf5e1cb890bf703b531b3",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4586"
+          ]
+        }
+      ],
+      "version": "4.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms",
+      "id": "18ac564b-3604-4be9-880f-04d2f3d66167",
+      "createTime": "2023-09-06T13:53:27.446Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4b186867323b8b15469bf5e1cb890bf703b531b3",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4586"
+          ]
+        }
+      ],
+      "version": "4.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iot",
+      "id": "957083e8-2158-45c5-9d11-00a5f411cf36",
+      "createTime": "2023-09-06T13:53:27.441Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4b186867323b8b15469bf5e1cb890bf703b531b3",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4586"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/ids",
+      "id": "c1b90001-b1e4-4a25-88b2-e6dc783b006a",
+      "createTime": "2023-09-06T13:53:27.434Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4b186867323b8b15469bf5e1cb890bf703b531b3",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4586"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iap",
+      "id": "db0a0555-326c-4a8e-b952-adbdd4a9f6d7",
+      "createTime": "2023-09-06T13:53:27.428Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4b186867323b8b15469bf5e1cb890bf703b531b3",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4586"
+          ]
+        }
+      ],
+      "version": "1.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gsuiteaddons",
+      "id": "f2d0634f-b101-471f-a850-a634a78a1bf2",
+      "createTime": "2023-09-06T13:53:27.423Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4b186867323b8b15469bf5e1cb890bf703b531b3",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4586"
+          ]
+        }
+      ],
+      "version": "1.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gkemulticloud",
+      "id": "91b19f3a-c43c-41ac-b0b8-157db75fa070",
+      "createTime": "2023-09-06T13:53:27.415Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4b186867323b8b15469bf5e1cb890bf703b531b3",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4586"
+          ]
+        }
+      ],
+      "version": "4.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-hub",
+      "id": "9c8ba624-f514-42a6-b868-24ad71cab03d",
+      "createTime": "2023-09-06T13:53:27.398Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4b186867323b8b15469bf5e1cb890bf703b531b3",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4586"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-connect-gateway",
+      "id": "3d52eff3-32fd-4fa8-9a62-03d2b2adb2de",
+      "createTime": "2023-09-06T13:53:27.393Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4b186867323b8b15469bf5e1cb890bf703b531b3",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4586"
+          ]
+        }
+      ],
+      "version": "1.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-backup",
+      "id": "e407a9f0-1b2f-4a7a-9e8f-8e67146ff3f2",
+      "createTime": "2023-09-06T13:53:27.386Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4b186867323b8b15469bf5e1cb890bf703b531b3",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4586"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/functions",
+      "id": "101dd9da-0c32-4c5e-be1d-497144294f68",
+      "createTime": "2023-09-06T13:53:27.381Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4585"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "04182c7810a9c716f848776f4d783d5406152634",
+          "message": "[filestore] add SecurityFlavor to NfsExportOptions",
+          "issues": [
+            "4566"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/filestore",
+      "id": "2a5be41e-359b-4af6-a77b-a7a479150f60",
+      "createTime": "2023-09-06T13:53:27.375Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4585"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc-publishing",
+      "id": "18a09c28-53e3-4690-8c62-14d2c279779f",
+      "createTime": "2023-09-06T13:53:27.368Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4585"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc",
+      "id": "a2f8e646-8059-474b-9556-995a9a4b6573",
+      "createTime": "2023-09-06T13:53:27.363Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4585"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/essential-contacts",
+      "id": "e996316e-8f6e-4472-b3d3-22085f5de96e",
+      "createTime": "2023-09-06T13:53:27.358Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4585"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/domains",
+      "id": "4ea788a3-ccb8-456d-bebc-a51824d69d2f",
+      "createTime": "2023-09-06T13:53:27.350Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4585"
+          ]
+        }
+      ],
+      "version": "8.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "7b296c27-57e2-41a2-aa76-45d5f2208a35",
+      "createTime": "2023-09-06T13:53:27.342Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e9d23a8deded01c17dd16c532776656eb8ce8934",
+          "message": "[discoveryengine] support conversational / multi-turn search",
+          "issues": [
+            "4599"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "8f1b74f5e752501a669db5934f37dc7480a7eba5",
+          "message": "[discoveryengine] supported bring your own embedding feature",
+          "issues": [
+            "4595"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4585"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "23aae383-fcee-44b9-8e27-3be6f1be78d8",
+      "createTime": "2023-09-06T13:53:27.336Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "684d67134ecf11a73721750b27ad01dec0904306",
+          "message": "[dialogflow-cx] added generative AI, safety/security and speech endpointing settings",
+          "issues": [
+            "4597"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4585"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "79da1cb726eba58e10ac51bf1cf7158e19c5a411",
+          "message": "[dialogflow-cx] added agent level route group",
+          "issues": [
+            "4528"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "23bd2d63-319d-48c5-bb1d-6353c5f01a84",
+      "createTime": "2023-09-06T13:53:27.329Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cbe3d5b047185e5f186a78ff369c973fa39cb639",
+          "message": "[dialogflow] added speech endpointing setting",
+          "issues": [
+            "4598"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "356623044c6a5afd573ace5e83ef9cbda7006f14",
+          "message": "[dialogflow] added speech endpointing setting",
+          "issues": [
+            "4592"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4585"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "33cde0cebf4f305464f38ca55e8b233445fb58d4",
+          "message": "[dialogflow] added baseline model version used to generate the summary",
+          "issues": [
+            "4542"
+          ]
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "6f07e02c-2f75-4451-bf30-eb849c251d89",
+      "createTime": "2023-09-06T13:53:27.323Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4585"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/deploy",
+      "id": "99100a6b-cb30-45f7-b50f-f3bb66ac23c0",
+      "createTime": "2023-09-06T13:53:27.317Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4585"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datastream",
+      "id": "93deb189-92e9-471d-99e5-55dc3c8c4ad1",
+      "createTime": "2023-09-06T13:53:27.298Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4585"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/data-qna",
+      "id": "77b0ce18-1d16-4306-8753-06c65293c3cb",
+      "createTime": "2023-09-06T13:53:27.292Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4585"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "5b112a6f8b73a8e3604c2465bacc64e799a9bcb0",
+          "message": "[dataproc] support min_num_instances for primary worker and InstanceFlexibilityPolicy for secondary worker",
+          "issues": [
+            "4574"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "76581c8c-e0c7-40fb-8de3-065b03f958b9",
+      "createTime": "2023-09-06T13:53:27.287Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4585"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "003c4a0e-3bf4-48ce-b5c4-5feb463c7f17",
+      "createTime": "2023-09-06T13:53:27.278Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4585"
+          ]
+        }
+      ],
+      "version": "4.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datalabeling",
+      "id": "eb87884a-d129-4f5a-90aa-82d2364fc27b",
+      "createTime": "2023-09-06T13:53:27.273Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4585"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/data-fusion",
+      "id": "1f16e5e1-f1aa-418f-b81f-b4c97cf695ba",
+      "createTime": "2023-09-06T13:53:27.268Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4585"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "a4507aa1166832c2d9624cb55879a543f65ec4cb",
+          "message": "Update dependency @google-cloud/dataform to v1",
+          "issues": [
+            "4532"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "chore",
+          "sha": "2260f12543d171bda95345e53475f5f0fdc45770",
+          "message": "Migrate to Node 14",
+          "issues": [
+            "4443"
+          ],
+          "breakingChangeNote": "migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))"
+        },
+        {
+          "type": "fix",
+          "sha": "c32965c0c4a5975ba37371ecd819d9cffb080aa5",
+          "message": "[Many APIs] fix typings for IAM methods",
+          "issues": [
+            "4460"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "1.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataform",
+      "id": "d3e08f3d-e8b7-4298-a24f-0f989dc2ff26",
+      "createTime": "2023-09-06T13:53:27.263Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4585"
+          ]
+        }
+      ],
+      "version": "1.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/lineage",
+      "id": "df882408-19a8-4038-9f65-aa3b697a3ca7",
+      "createTime": "2023-09-06T13:53:27.256Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4585"
+          ]
+        }
+      ],
+      "version": "4.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datacatalog",
+      "id": "29ec0ada-299b-4b0b-8f71-da56b9632d62",
+      "createTime": "2023-09-06T13:53:27.251Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4585"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "18c750378975440bb8ff8168e7f72b8de24fcfac",
+          "message": "[contentwarehouse] add Pipeline Service to Document Warehouse API v1",
+          "issues": [
+            "4558"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "78fd166534555720b93d2b37f28307c6003390ff",
+          "message": "[contentwarehouse] add `disposition_time`, `legal_hold`, `document_is_retention_folder`, `document_is_legal_hold_folder`, `question_answer`, `document_name_filter` field to Document Warehouse API v1",
+          "issues": [
+            "4537"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contentwarehouse",
+      "id": "8e41b958-4619-4fe6-9d5e-e43683916883",
+      "createTime": "2023-09-06T13:53:27.246Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "13537fcd6e3c552199d5057daf3b00c24033c908",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4584"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contact-center-insights",
+      "id": "86f143e0-0cd6-4d36-adf2-b9fe95afdf66",
+      "createTime": "2023-09-06T13:53:27.240Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "13537fcd6e3c552199d5057daf3b00c24033c908",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4584"
+          ]
+        }
+      ],
+      "version": "4.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "5e496cb5-821b-4b62-a232-f437a704a845",
+      "createTime": "2023-09-06T13:53:27.232Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1a79bf704f9cae5b58df19778f52496aeaf9bc06",
+          "message": "[clouddms] Adding GenerateTcpProxyScript API",
+          "issues": [
+            "4610"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "13537fcd6e3c552199d5057daf3b00c24033c908",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4584"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dms",
+      "id": "e41134a1-e956-4d24-b12d-0dff355fb9b4",
+      "createTime": "2023-09-06T13:53:27.225Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "13537fcd6e3c552199d5057daf3b00c24033c908",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4584"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "e5099b7a475e0cfaf0d25aa8d6755cd7bc43cbe0",
+          "message": "Update dependency google-auth-library to v9",
+          "issues": [
+            "4560"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "fix",
+          "sha": "f2beef407ce694af7133d0013221c11e7f093a59",
+          "message": "Update dependency @google-cloud/local-auth to v3",
+          "issues": [
+            "4546"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/channel",
+      "id": "0d5f8932-6f6b-4099-944c-cc66d3484583",
+      "createTime": "2023-09-06T13:53:27.217Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "13537fcd6e3c552199d5057daf3b00c24033c908",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4584"
+          ]
+        }
+      ],
+      "version": "1.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/certificate-manager",
+      "id": "3f9d75c6-6fb1-46cd-ba61-3128a204e040",
+      "createTime": "2023-09-06T13:53:27.210Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "13537fcd6e3c552199d5057daf3b00c24033c908",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4584"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "844ffbc2f828a2f19081a3761b90b0fb4428e564",
+          "message": "[binaryauthorization] Adds support for check-based platform policy evaluation to Binary Authorization Continuous Validation logs",
+          "issues": [
+            "4555"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/binary-authorization",
+      "id": "511dbb44-4ede-4bd1-a958-ca48ed5fd197",
+      "createTime": "2023-09-06T13:53:27.199Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "13537fcd6e3c552199d5057daf3b00c24033c908",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4584"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "ce0e79e50a2858106390d89459f0977e6360927e",
+          "message": "[billing-budgets] Supported project-level-budgets in Public Budget API V1",
+          "issues": [
+            "4575"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/billing-budgets",
+      "id": "b74e0fdb-e256-4076-afff-4337cb946627",
+      "createTime": "2023-09-06T13:53:27.194Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "13537fcd6e3c552199d5057daf3b00c24033c908",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4584"
+          ]
+        }
+      ],
+      "version": "4.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/billing",
+      "id": "47fe6da0-4351-49b0-ac50-b6e32627b6c4",
+      "createTime": "2023-09-06T13:53:27.189Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "13537fcd6e3c552199d5057daf3b00c24033c908",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4584"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-reservation",
+      "id": "f7dc58ee-c236-499f-bc75-cf2869754d27",
+      "createTime": "2023-09-06T13:53:27.184Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "13537fcd6e3c552199d5057daf3b00c24033c908",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4584"
+          ]
+        }
+      ],
+      "version": "4.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-data-transfer",
+      "id": "5cc92381-944c-4694-91da-918220174a06",
+      "createTime": "2023-09-06T13:53:27.178Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "13537fcd6e3c552199d5057daf3b00c24033c908",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4584"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "31b9d4ecaee09d48db28bbcedbaee9a6d1a7e7b2",
+          "message": "[bigquery-datapolicies] support using custom UDF in the data policy",
+          "issues": [
+            "4582"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "f2b87b4581e28bdf5a6d144076f2809e00c8abc9",
+          "message": "[bigquery-datapolicies] sync the new PredefinedExpression types to the client library",
+          "issues": [
+            "4540"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-datapolicies",
+      "id": "e0e06197-299e-4fec-a91e-a868145e2977",
+      "createTime": "2023-09-06T13:53:27.173Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "13537fcd6e3c552199d5057daf3b00c24033c908",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4584"
+          ]
+        }
+      ],
+      "version": "1.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-data-exchange",
+      "id": "35865078-b0c8-4057-b558-743432d79449",
+      "createTime": "2023-09-06T13:53:27.167Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "13537fcd6e3c552199d5057daf3b00c24033c908",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4584"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-connection",
+      "id": "dd31dbaa-818a-41be-a0bc-8ec90d84a1ca",
+      "createTime": "2023-09-06T13:53:27.163Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "13537fcd6e3c552199d5057daf3b00c24033c908",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4584"
+          ]
+        }
+      ],
+      "version": "1.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-analyticshub",
+      "id": "def2ab38-f40b-4780-9e08-3fe557414b6c",
+      "createTime": "2023-09-06T13:53:27.156Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "13537fcd6e3c552199d5057daf3b00c24033c908",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4584"
+          ]
+        }
+      ],
+      "version": "1.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/clientgateways",
+      "id": "0c00ddb3-b381-4c7b-afe2-0e4f6224fa2f",
+      "createTime": "2023-09-06T13:53:27.150Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "13537fcd6e3c552199d5057daf3b00c24033c908",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4584"
+          ]
+        }
+      ],
+      "version": "2.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/clientconnectorservices",
+      "id": "da87aa81-c6c1-484a-891d-db830837dce8",
+      "createTime": "2023-09-06T13:53:27.145Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "13537fcd6e3c552199d5057daf3b00c24033c908",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4584"
+          ]
+        }
+      ],
+      "version": "1.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appgateways",
+      "id": "a93eb6ff-1da1-47f4-b1f7-a3f0aa616ef5",
+      "createTime": "2023-09-06T13:53:27.140Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "13537fcd6e3c552199d5057daf3b00c24033c908",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4584"
+          ]
+        }
+      ],
+      "version": "1.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appconnectors",
+      "id": "2866ae5e-1b69-4e46-a3db-354a1f6b829e",
+      "createTime": "2023-09-06T13:53:27.134Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c3ddba8df9fee6185e36a4e99f7c67b0319f1242",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4583"
+          ]
+        }
+      ],
+      "version": "1.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appconnections",
+      "id": "aad35da6-84de-47c6-b5db-e24a0bf4613c",
+      "createTime": "2023-09-06T13:53:27.128Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c3ddba8df9fee6185e36a4e99f7c67b0319f1242",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4583"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "fbae42370b68b722949c0aaee6120b9348fe550e",
+          "message": "[batch] add stderr_snippet to indicate the real stderr output by runnables to the execution field of status event",
+          "issues": [
+            "4570"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "dcd8ccf3ca2d19c23e086b7970200f92559aa639",
+          "message": "[batch] Add more compute resource API descriptions to match with VM's machine type field",
+          "issues": [
+            "4564"
+          ]
+        }
+      ],
+      "version": "1.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "36e73f7d-4ab0-4ef2-941a-347921530d53",
+      "createTime": "2023-09-06T13:53:27.123Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c3ddba8df9fee6185e36a4e99f7c67b0319f1242",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4583"
+          ]
+        }
+      ],
+      "version": "1.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bare-metal-solution",
+      "id": "da2be481-29f4-42f6-9b14-95cb832f86b0",
+      "createTime": "2023-09-06T13:53:27.118Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c3ddba8df9fee6185e36a4e99f7c67b0319f1242",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4583"
+          ]
+        }
+      ],
+      "version": "4.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/assured-workloads",
+      "id": "9942498a-3d1d-48f7-bd04-6b7e9a179ee3",
+      "createTime": "2023-09-06T13:53:27.112Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c3ddba8df9fee6185e36a4e99f7c67b0319f1242",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4583"
+          ]
+        }
+      ],
+      "version": "5.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/asset",
+      "id": "40ff95df-1260-4d63-990c-c281f1cbcce6",
+      "createTime": "2023-09-06T13:53:27.098Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c3ddba8df9fee6185e36a4e99f7c67b0319f1242",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4583"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apigee-connect",
+      "id": "a767673b-aef5-47e0-9299-0f4ec50eea88",
+      "createTime": "2023-09-06T13:53:27.093Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c3ddba8df9fee6185e36a4e99f7c67b0319f1242",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4583"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/api-gateway",
+      "id": "43f0c60c-3e25-4c0f-948d-630219ad58ec",
+      "createTime": "2023-09-06T13:53:27.088Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c3ddba8df9fee6185e36a4e99f7c67b0319f1242",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4583"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "7253ef13b805900f4e686c18bd55b7f0b299e8bb",
+          "message": "Add NVIDIA_H100_80GB and TPU_V5_LITEPOD to AcceleratorType",
+          "issues": [
+            "4557"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "30b43846-0d73-43fd-8a90-249936fd982c",
+      "createTime": "2023-09-06T13:53:27.082Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c3ddba8df9fee6185e36a4e99f7c67b0319f1242",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4583"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/access-approval",
+      "id": "320811d7-0e17-453e-89bb-0b62751845f7",
+      "createTime": "2023-09-06T13:53:27.076Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c3ddba8df9fee6185e36a4e99f7c67b0319f1242",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4583"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "e5099b7a475e0cfaf0d25aa8d6755cd7bc43cbe0",
+          "message": "Update dependency google-auth-library to v9",
+          "issues": [
+            "4560"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google/area120-tables",
+      "id": "98d5e0fb-2c74-4abd-9270-f654275edce0",
+      "createTime": "2023-09-06T13:53:27.072Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c3ddba8df9fee6185e36a4e99f7c67b0319f1242",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4583"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appengine-admin",
+      "id": "51d8cf9c-3bd5-4c55-ac42-f2d07913e69b",
+      "createTime": "2023-09-06T13:53:27.066Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c3ddba8df9fee6185e36a4e99f7c67b0319f1242",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4583"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-usage",
+      "id": "0f1fb0f2-c43f-4e51-b137-67a2314b474b",
+      "createTime": "2023-09-06T13:53:27.060Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c3ddba8df9fee6185e36a4e99f7c67b0319f1242",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4583"
+          ]
+        }
+      ],
+      "version": "2.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-management",
+      "id": "79599f88-a110-4e3d-90a8-7c293f9c1177",
+      "createTime": "2023-09-06T13:53:27.056Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c3ddba8df9fee6185e36a4e99f7c67b0319f1242",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4583"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-control",
+      "id": "15054e56-b32b-4800-8c61-d7599f621ff1",
+      "createTime": "2023-09-06T13:53:27.051Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c3ddba8df9fee6185e36a4e99f7c67b0319f1242",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4583"
+          ]
+        }
+      ],
+      "version": "1.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apikeys",
+      "id": "2fa4e55d-4f14-4cba-912b-cb5efeafbcbd",
+      "createTime": "2023-09-06T13:53:27.043Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c3ddba8df9fee6185e36a4e99f7c67b0319f1242",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4583"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "e5099b7a475e0cfaf0d25aa8d6755cd7bc43cbe0",
+          "message": "Update dependency google-auth-library to v9",
+          "issues": [
+            "4560"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "4.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/data",
+      "id": "14d900d4-2789-4342-b76f-e1fc539824ee",
+      "createTime": "2023-09-06T13:53:27.037Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7fdbeb3454702e6b567827d11f2dd659a9a576e9",
+          "message": "[analytics-admin] rename the `enterprise_daily_export_enabled` field to `fresh_daily_export_enabled` in the `BigQueryLink` resource",
+          "issues": [
+            "4600"
+          ],
+          "breakingChangeNote": "[analytics-admin] rename the `enterprise_daily_export_enabled` field to `fresh_daily_export_enabled` in the `BigQueryLink` resource ([#4600](https://github.com/googleapis/google-cloud-node/issues/4600))"
+        },
+        {
+          "type": "fix",
+          "sha": "c3ddba8df9fee6185e36a4e99f7c67b0319f1242",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4583"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "6d66eeea059099ac95ed2d880a70062f13f59c45",
+          "message": "[analytics-admin] add `UpdateConversionEvent` method to the Admin API v1 beta",
+          "issues": [
+            "4580"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "e5099b7a475e0cfaf0d25aa8d6755cd7bc43cbe0",
+          "message": "Update dependency google-auth-library to v9",
+          "issues": [
+            "4560"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "fix",
+          "sha": "d08dad15797114ac462da437ffc3e9253af3527b",
+          "message": "[analytics-admin] rename the `intraday_export_enabled` field to `enterprise_export_enabled`  in the `BigQueryLink` resource",
+          "issues": [
+            "4530"
+          ]
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/admin",
+      "id": "a92443b1-f162-4bd8-8cce-e89056f1df55",
+      "createTime": "2023-09-06T13:53:27.032Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "cff0faf8dd014d164c160cb0f6a07b5817c1183a",
           "message": "Add initial files for google.cloud.policytroubleshooter.iam.v3beta",
           "issues": [
@@ -15535,5 +18618,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-08-09T17:57:48.750Z"
+  "updateTime": "2023-09-08T00:22:54.021Z"
 }

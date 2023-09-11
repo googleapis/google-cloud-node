@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v1.0.0...confidentialcomputing-v1.1.0) (2023-09-06)
+
+
+### Features
+
+* [confidentialcomputing] Add a new field `partial_errors` to `VerifyAttestationResponse` proto ([#4527](https://github.com/googleapis/google-cloud-node/issues/4527)) ([e122185](https://github.com/googleapis/google-cloud-node/commit/e122185997c379f9db4be159c754b8ed16be4e7b))
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4584](https://github.com/googleapis/google-cloud-node/issues/4584)) ([13537fc](https://github.com/googleapis/google-cloud-node/commit/13537fcd6e3c552199d5057daf3b00c24033c908))
+
 ## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v0.1.0...confidentialcomputing-v1.0.0) (2023-08-06)
 
 

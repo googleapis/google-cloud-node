@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v3.0.0...binary-authorization-v3.1.0) (2023-09-06)
+
+
+### Features
+
+* [binaryauthorization] Adds support for check-based platform policy evaluation to Binary Authorization Continuous Validation logs ([#4555](https://github.com/googleapis/google-cloud-node/issues/4555)) ([844ffbc](https://github.com/googleapis/google-cloud-node/commit/844ffbc2f828a2f19081a3761b90b0fb4428e564))
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4584](https://github.com/googleapis/google-cloud-node/issues/4584)) ([13537fc](https://github.com/googleapis/google-cloud-node/commit/13537fcd6e3c552199d5057daf3b00c24033c908))
+
 ## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v2.5.0...binary-authorization-v3.0.0) (2023-08-06)
 
 

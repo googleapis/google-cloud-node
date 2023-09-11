@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(conversionWorkspace) {
+function main(conversionWorkspace, tree) {
   // [START datamigration_v1_generated_DataMigrationService_DescribeDatabaseEntities_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -35,12 +35,12 @@ function main(conversionWorkspace) {
    */
   // const conversionWorkspace = 'abc123'
   /**
-   *  The maximum number of entities to return. The service may return
+   *  Optional. The maximum number of entities to return. The service may return
    *  fewer entities than the value specifies.
    */
   // const pageSize = 1234
   /**
-   *  The nextPageToken value received in the previous call to
+   *  Optional. The nextPageToken value received in the previous call to
    *  conversionWorkspace.describeDatabaseEntities, used in the subsequent
    *  request to retrieve the next page of results. On first call this should be
    *  left blank. When paginating, all other parameters provided to
@@ -49,23 +49,28 @@ function main(conversionWorkspace) {
    */
   // const pageToken = 'abc123'
   /**
-   *  The tree to fetch.
+   *  Required. The tree to fetch.
    */
   // const tree = {}
   /**
-   *  Whether to retrieve the latest committed version of the entities or the
-   *  latest version. This field is ignored if a specific commit_id is specified.
+   *  Optional. Whether to retrieve the latest committed version of the entities
+   *  or the latest version. This field is ignored if a specific commit_id is
+   *  specified.
    */
   // const uncommitted = true
   /**
-   *  Request a specific commit ID. If not specified, the entities from the
-   *  latest commit are returned.
+   *  Optional. Request a specific commit ID. If not specified, the entities from
+   *  the latest commit are returned.
    */
   // const commitId = 'abc123'
   /**
-   *  Filter the returned entities based on AIP-160 standard.
+   *  Optional. Filter the returned entities based on AIP-160 standard.
    */
   // const filter = 'abc123'
+  /**
+   *  Optional. Results view based on AIP-157
+   */
+  // const view = {}
 
   // Imports the Clouddms library
   const {DataMigrationServiceClient} = require('@google-cloud/dms').v1;
@@ -77,6 +82,7 @@ function main(conversionWorkspace) {
     // Construct request
     const request = {
       conversionWorkspace,
+      tree,
     };
 
     // Run request

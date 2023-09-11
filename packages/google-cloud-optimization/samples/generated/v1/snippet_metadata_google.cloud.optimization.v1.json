@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-optimization",
-        "version": "3.0.0",
+        "version": "3.1.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -48,10 +48,6 @@
                         "type": ".google.cloud.optimization.v1.OptimizeToursRequest.SolvingMode"
                     },
                     {
-                        "name": "max_validation_errors",
-                        "type": "TYPE_INT32"
-                    },
-                    {
                         "name": "search_mode",
                         "type": ".google.cloud.optimization.v1.OptimizeToursRequest.SearchMode"
                     },
@@ -94,6 +90,10 @@
                     {
                         "name": "geodesic_meters_per_second",
                         "type": "TYPE_DOUBLE"
+                    },
+                    {
+                        "name": "max_validation_errors",
+                        "type": "TYPE_INT32"
                     },
                     {
                         "name": "label",

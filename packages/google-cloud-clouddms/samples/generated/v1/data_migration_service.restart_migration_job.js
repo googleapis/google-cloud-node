@@ -32,6 +32,11 @@ function main() {
    *  Name of the migration job resource to restart.
    */
   // const name = 'abc123'
+  /**
+   *  Optional. Restart the migration job without running prior configuration
+   *  verification. Defaults to `false`.
+   */
+  // const skipValidation = true
 
   // Imports the Clouddms library
   const {DataMigrationServiceClient} = require('@google-cloud/dms').v1;

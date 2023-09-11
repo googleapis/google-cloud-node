@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/secret-manager",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "Secrets client for Node.js",
   "repository": {
     "type": "git",

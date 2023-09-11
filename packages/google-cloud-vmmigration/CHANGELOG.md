@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/vmmigration-v3.0.0...vmmigration-v3.0.1) (2023-09-06)
+
+
+### Bug Fixes
+
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4588](https://github.com/googleapis/google-cloud-node/issues/4588)) ([e5ad564](https://github.com/googleapis/google-cloud-node/commit/e5ad564f74dc7a36c0e8cd8de173428a99f1deae))
+
 ## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/vmmigration-v2.3.2...vmmigration-v3.0.0) (2023-08-06)
 
 
