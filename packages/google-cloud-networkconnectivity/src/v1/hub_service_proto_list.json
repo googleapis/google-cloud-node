@@ -1,4 +1,5 @@
 [
   "../../protos/google/cloud/networkconnectivity/v1/common.proto",
-  "../../protos/google/cloud/networkconnectivity/v1/hub.proto"
+  "../../protos/google/cloud/networkconnectivity/v1/hub.proto",
+  "../../protos/google/cloud/networkconnectivity/v1/policy_based_routing.proto"
 ]
