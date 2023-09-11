@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/googleapis/google-cloud-node/compare/policy-troubleshooter-iam-v0.2.0...policy-troubleshooter-iam-v0.2.1) (2023-09-11)
+
+
+### Bug Fixes
+
+* Publication issues with containeranalysis and policytroubleshooter ([#4628](https://github.com/googleapis/google-cloud-node/issues/4628)) ([2ba7b48](https://github.com/googleapis/google-cloud-node/commit/2ba7b489e6109e5bf3d5e7276a0b94558ebd48d0))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/policy-troubleshooter-iam-v0.1.0...policy-troubleshooter-iam-v0.2.0) (2023-09-06)
 
 
