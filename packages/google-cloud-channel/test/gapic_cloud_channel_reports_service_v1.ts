@@ -1466,6 +1466,62 @@ describe('v1.CloudChannelReportsServiceClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('billingAccount', () => {
+      const fakePath = '/rendered/path/billingAccount';
+      const expectedParameters = {
+        account: 'accountValue',
+        billing_account: 'billingAccountValue',
+      };
+      const client =
+        new cloudchannelreportsserviceModule.v1.CloudChannelReportsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.billingAccountPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.billingAccountPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('billingAccountPath', () => {
+        const result = client.billingAccountPath(
+          'accountValue',
+          'billingAccountValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.billingAccountPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchAccountFromBillingAccountName', () => {
+        const result = client.matchAccountFromBillingAccountName(fakePath);
+        assert.strictEqual(result, 'accountValue');
+        assert(
+          (client.pathTemplates.billingAccountPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchBillingAccountFromBillingAccountName', () => {
+        const result =
+          client.matchBillingAccountFromBillingAccountName(fakePath);
+        assert.strictEqual(result, 'billingAccountValue');
+        assert(
+          (client.pathTemplates.billingAccountPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('channelPartnerLink', () => {
       const fakePath = '/rendered/path/channelPartnerLink';
       const expectedParameters = {

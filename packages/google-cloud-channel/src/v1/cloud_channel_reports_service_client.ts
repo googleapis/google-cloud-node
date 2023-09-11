@@ -183,6 +183,9 @@ export class CloudChannelReportsServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      billingAccountPathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/billingAccounts/{billing_account}'
+      ),
       channelPartnerLinkPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/channelPartnerLinks/{channel_partner_link}'
       ),
@@ -1239,6 +1242,46 @@ export class CloudChannelReportsServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified billingAccount resource name string.
+   *
+   * @param {string} account
+   * @param {string} billing_account
+   * @returns {string} Resource name string.
+   */
+  billingAccountPath(account: string, billingAccount: string) {
+    return this.pathTemplates.billingAccountPathTemplate.render({
+      account: account,
+      billing_account: billingAccount,
+    });
+  }
+
+  /**
+   * Parse the account from BillingAccount resource.
+   *
+   * @param {string} billingAccountName
+   *   A fully-qualified path representing BillingAccount resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromBillingAccountName(billingAccountName: string) {
+    return this.pathTemplates.billingAccountPathTemplate.match(
+      billingAccountName
+    ).account;
+  }
+
+  /**
+   * Parse the billing_account from BillingAccount resource.
+   *
+   * @param {string} billingAccountName
+   *   A fully-qualified path representing BillingAccount resource.
+   * @returns {string} A string representing the billing_account.
+   */
+  matchBillingAccountFromBillingAccountName(billingAccountName: string) {
+    return this.pathTemplates.billingAccountPathTemplate.match(
+      billingAccountName
+    ).billing_account;
+  }
 
   /**
    * Return a fully-qualified channelPartnerLink resource name string.

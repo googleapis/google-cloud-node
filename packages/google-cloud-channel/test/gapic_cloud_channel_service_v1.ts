@@ -2996,6 +2996,151 @@ describe('v1.CloudChannelServiceClient', () => {
     });
   });
 
+  describe('queryEligibleBillingAccounts', () => {
+    it('invokes queryEligibleBillingAccounts without error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.QueryEligibleBillingAccountsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.QueryEligibleBillingAccountsRequest',
+        ['customer']
+      );
+      request.customer = defaultValue1;
+      const expectedHeaderRequestParams = `customer=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.channel.v1.QueryEligibleBillingAccountsResponse()
+      );
+      client.innerApiCalls.queryEligibleBillingAccounts =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.queryEligibleBillingAccounts(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.queryEligibleBillingAccounts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryEligibleBillingAccounts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes queryEligibleBillingAccounts without error using callback', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.QueryEligibleBillingAccountsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.QueryEligibleBillingAccountsRequest',
+        ['customer']
+      );
+      request.customer = defaultValue1;
+      const expectedHeaderRequestParams = `customer=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.channel.v1.QueryEligibleBillingAccountsResponse()
+      );
+      client.innerApiCalls.queryEligibleBillingAccounts =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.queryEligibleBillingAccounts(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.channel.v1.IQueryEligibleBillingAccountsResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.queryEligibleBillingAccounts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryEligibleBillingAccounts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes queryEligibleBillingAccounts with error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.QueryEligibleBillingAccountsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.QueryEligibleBillingAccountsRequest',
+        ['customer']
+      );
+      request.customer = defaultValue1;
+      const expectedHeaderRequestParams = `customer=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.queryEligibleBillingAccounts = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.queryEligibleBillingAccounts(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.queryEligibleBillingAccounts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryEligibleBillingAccounts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes queryEligibleBillingAccounts with closed client', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.QueryEligibleBillingAccountsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.channel.v1.QueryEligibleBillingAccountsRequest',
+        ['customer']
+      );
+      request.customer = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.queryEligibleBillingAccounts(request),
+        expectedError
+      );
+    });
+  });
+
   describe('registerSubscriber', () => {
     it('invokes registerSubscriber without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
@@ -11195,6 +11340,61 @@ describe('v1.CloudChannelServiceClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('billingAccount', () => {
+      const fakePath = '/rendered/path/billingAccount';
+      const expectedParameters = {
+        account: 'accountValue',
+        billing_account: 'billingAccountValue',
+      };
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      client.pathTemplates.billingAccountPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.billingAccountPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('billingAccountPath', () => {
+        const result = client.billingAccountPath(
+          'accountValue',
+          'billingAccountValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.billingAccountPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchAccountFromBillingAccountName', () => {
+        const result = client.matchAccountFromBillingAccountName(fakePath);
+        assert.strictEqual(result, 'accountValue');
+        assert(
+          (client.pathTemplates.billingAccountPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchBillingAccountFromBillingAccountName', () => {
+        const result =
+          client.matchBillingAccountFromBillingAccountName(fakePath);
+        assert.strictEqual(result, 'billingAccountValue');
+        assert(
+          (client.pathTemplates.billingAccountPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('channelPartnerLink', () => {
       const fakePath = '/rendered/path/channelPartnerLink';
       const expectedParameters = {

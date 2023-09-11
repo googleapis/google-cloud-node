@@ -63,6 +63,13 @@ function main(name, offer) {
    *  (`00000000-0000-0000-0000-000000000000`).
    */
   // const requestId = 'abc123'
+  /**
+   *  Optional. The billing account resource name that is used to pay for this
+   *  entitlement when setting up billing on a trial subscription.
+   *  This field is only relevant for multi-currency accounts. It should be
+   *  left empty for single currency accounts.
+   */
+  // const billingAccount = 'abc123'
 
   // Imports the Channel library
   const {CloudChannelServiceClient} = require('@google-cloud/channel').v1;

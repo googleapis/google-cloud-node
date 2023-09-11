@@ -66,6 +66,307 @@
                      */
                     var v1 = {};
     
+                    v1.BillingAccount = (function() {
+    
+                        /**
+                         * Properties of a BillingAccount.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IBillingAccount
+                         * @property {string|null} [name] BillingAccount name
+                         * @property {string|null} [displayName] BillingAccount displayName
+                         * @property {google.protobuf.ITimestamp|null} [createTime] BillingAccount createTime
+                         * @property {string|null} [currencyCode] BillingAccount currencyCode
+                         * @property {string|null} [regionCode] BillingAccount regionCode
+                         */
+    
+                        /**
+                         * Constructs a new BillingAccount.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a BillingAccount.
+                         * @implements IBillingAccount
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IBillingAccount=} [properties] Properties to set
+                         */
+                        function BillingAccount(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BillingAccount name.
+                         * @member {string} name
+                         * @memberof google.cloud.channel.v1.BillingAccount
+                         * @instance
+                         */
+                        BillingAccount.prototype.name = "";
+    
+                        /**
+                         * BillingAccount displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.channel.v1.BillingAccount
+                         * @instance
+                         */
+                        BillingAccount.prototype.displayName = "";
+    
+                        /**
+                         * BillingAccount createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.channel.v1.BillingAccount
+                         * @instance
+                         */
+                        BillingAccount.prototype.createTime = null;
+    
+                        /**
+                         * BillingAccount currencyCode.
+                         * @member {string} currencyCode
+                         * @memberof google.cloud.channel.v1.BillingAccount
+                         * @instance
+                         */
+                        BillingAccount.prototype.currencyCode = "";
+    
+                        /**
+                         * BillingAccount regionCode.
+                         * @member {string} regionCode
+                         * @memberof google.cloud.channel.v1.BillingAccount
+                         * @instance
+                         */
+                        BillingAccount.prototype.regionCode = "";
+    
+                        /**
+                         * Creates a new BillingAccount instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.BillingAccount
+                         * @static
+                         * @param {google.cloud.channel.v1.IBillingAccount=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.BillingAccount} BillingAccount instance
+                         */
+                        BillingAccount.create = function create(properties) {
+                            return new BillingAccount(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BillingAccount message. Does not implicitly {@link google.cloud.channel.v1.BillingAccount.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.BillingAccount
+                         * @static
+                         * @param {google.cloud.channel.v1.IBillingAccount} message BillingAccount message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BillingAccount.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.currencyCode != null && Object.hasOwnProperty.call(message, "currencyCode"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.currencyCode);
+                            if (message.regionCode != null && Object.hasOwnProperty.call(message, "regionCode"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.regionCode);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BillingAccount message, length delimited. Does not implicitly {@link google.cloud.channel.v1.BillingAccount.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.BillingAccount
+                         * @static
+                         * @param {google.cloud.channel.v1.IBillingAccount} message BillingAccount message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BillingAccount.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BillingAccount message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.BillingAccount
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.BillingAccount} BillingAccount
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BillingAccount.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.BillingAccount();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.currencyCode = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.regionCode = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BillingAccount message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.BillingAccount
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.BillingAccount} BillingAccount
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BillingAccount.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BillingAccount message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.BillingAccount
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BillingAccount.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.currencyCode != null && message.hasOwnProperty("currencyCode"))
+                                if (!$util.isString(message.currencyCode))
+                                    return "currencyCode: string expected";
+                            if (message.regionCode != null && message.hasOwnProperty("regionCode"))
+                                if (!$util.isString(message.regionCode))
+                                    return "regionCode: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BillingAccount message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.BillingAccount
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.BillingAccount} BillingAccount
+                         */
+                        BillingAccount.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.BillingAccount)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.BillingAccount();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.BillingAccount.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.currencyCode != null)
+                                message.currencyCode = String(object.currencyCode);
+                            if (object.regionCode != null)
+                                message.regionCode = String(object.regionCode);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BillingAccount message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.BillingAccount
+                         * @static
+                         * @param {google.cloud.channel.v1.BillingAccount} message BillingAccount
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BillingAccount.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.displayName = "";
+                                object.createTime = null;
+                                object.currencyCode = "";
+                                object.regionCode = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.currencyCode != null && message.hasOwnProperty("currencyCode"))
+                                object.currencyCode = message.currencyCode;
+                            if (message.regionCode != null && message.hasOwnProperty("regionCode"))
+                                object.regionCode = message.regionCode;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BillingAccount to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.BillingAccount
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BillingAccount.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BillingAccount
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.BillingAccount
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BillingAccount.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.BillingAccount";
+                        };
+    
+                        return BillingAccount;
+                    })();
+    
                     /**
                      * ChannelPartnerLinkView enum.
                      * @name google.cloud.channel.v1.ChannelPartnerLinkView
@@ -6182,6 +6483,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             return null;
@@ -6225,6 +6527,10 @@
                             case "SKU_SUSPENDED":
                             case 3:
                                 message.ineligibilityReason = 3;
+                                break;
+                            case "CHANNEL_PARTNER_NOT_AUTHORIZED_FOR_SKU":
+                            case 4:
+                                message.ineligibilityReason = 4;
                                 break;
                             }
                             return message;
@@ -6291,6 +6597,7 @@
                          * @property {number} PENDING_TOS_ACCEPTANCE=1 PENDING_TOS_ACCEPTANCE value
                          * @property {number} SKU_NOT_ELIGIBLE=2 SKU_NOT_ELIGIBLE value
                          * @property {number} SKU_SUSPENDED=3 SKU_SUSPENDED value
+                         * @property {number} CHANNEL_PARTNER_NOT_AUTHORIZED_FOR_SKU=4 CHANNEL_PARTNER_NOT_AUTHORIZED_FOR_SKU value
                          */
                         TransferEligibility.Reason = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -6298,6 +6605,7 @@
                             values[valuesById[1] = "PENDING_TOS_ACCEPTANCE"] = 1;
                             values[valuesById[2] = "SKU_NOT_ELIGIBLE"] = 2;
                             values[valuesById[3] = "SKU_SUSPENDED"] = 3;
+                            values[valuesById[4] = "CHANNEL_PARTNER_NOT_AUTHORIZED_FOR_SKU"] = 4;
                             return values;
                         })();
     
@@ -7110,6 +7418,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             if (message.minValue != null && message.hasOwnProperty("minValue")) {
@@ -7173,6 +7482,10 @@
                             case "DOUBLE":
                             case 3:
                                 message.parameterType = 3;
+                                break;
+                            case "BOOLEAN":
+                            case 4:
+                                message.parameterType = 4;
                                 break;
                             }
                             if (object.minValue != null) {
@@ -7274,6 +7587,7 @@
                          * @property {number} INT64=1 INT64 value
                          * @property {number} STRING=2 STRING value
                          * @property {number} DOUBLE=3 DOUBLE value
+                         * @property {number} BOOLEAN=4 BOOLEAN value
                          */
                         ParameterDefinition.ParameterType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -7281,6 +7595,7 @@
                             values[valuesById[1] = "INT64"] = 1;
                             values[valuesById[2] = "STRING"] = 2;
                             values[valuesById[3] = "DOUBLE"] = 3;
+                            values[valuesById[4] = "BOOLEAN"] = 4;
                             return values;
                         })();
     
@@ -19138,6 +19453,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.channel.v1.CloudChannelService|queryEligibleBillingAccounts}.
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @typedef QueryEligibleBillingAccountsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.channel.v1.QueryEligibleBillingAccountsResponse} [response] QueryEligibleBillingAccountsResponse
+                         */
+    
+                        /**
+                         * Calls QueryEligibleBillingAccounts.
+                         * @function queryEligibleBillingAccounts
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IQueryEligibleBillingAccountsRequest} request QueryEligibleBillingAccountsRequest message or plain object
+                         * @param {google.cloud.channel.v1.CloudChannelService.QueryEligibleBillingAccountsCallback} callback Node-style callback called with the error, if any, and QueryEligibleBillingAccountsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudChannelService.prototype.queryEligibleBillingAccounts = function queryEligibleBillingAccounts(request, callback) {
+                            return this.rpcCall(queryEligibleBillingAccounts, $root.google.cloud.channel.v1.QueryEligibleBillingAccountsRequest, $root.google.cloud.channel.v1.QueryEligibleBillingAccountsResponse, request, callback);
+                        }, "name", { value: "QueryEligibleBillingAccounts" });
+    
+                        /**
+                         * Calls QueryEligibleBillingAccounts.
+                         * @function queryEligibleBillingAccounts
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IQueryEligibleBillingAccountsRequest} request QueryEligibleBillingAccountsRequest message or plain object
+                         * @returns {Promise<google.cloud.channel.v1.QueryEligibleBillingAccountsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.channel.v1.CloudChannelService|registerSubscriber}.
                          * @memberof google.cloud.channel.v1.CloudChannelService
                          * @typedef RegisterSubscriberCallback
@@ -23168,6 +23516,7 @@
                          * @property {string|null} [pageToken] ListTransferableOffersRequest pageToken
                          * @property {string|null} [sku] ListTransferableOffersRequest sku
                          * @property {string|null} [languageCode] ListTransferableOffersRequest languageCode
+                         * @property {string|null} [billingAccount] ListTransferableOffersRequest billingAccount
                          */
     
                         /**
@@ -23241,6 +23590,14 @@
                          */
                         ListTransferableOffersRequest.prototype.languageCode = "";
     
+                        /**
+                         * ListTransferableOffersRequest billingAccount.
+                         * @member {string} billingAccount
+                         * @memberof google.cloud.channel.v1.ListTransferableOffersRequest
+                         * @instance
+                         */
+                        ListTransferableOffersRequest.prototype.billingAccount = "";
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -23293,6 +23650,8 @@
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.sku);
                             if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
                                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.languageCode);
+                            if (message.billingAccount != null && Object.hasOwnProperty.call(message, "billingAccount"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.billingAccount);
                             return writer;
                         };
     
@@ -23353,6 +23712,10 @@
                                     }
                                 case 7: {
                                         message.languageCode = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.billingAccount = reader.string();
                                         break;
                                     }
                                 default:
@@ -23418,6 +23781,9 @@
                             if (message.languageCode != null && message.hasOwnProperty("languageCode"))
                                 if (!$util.isString(message.languageCode))
                                     return "languageCode: string expected";
+                            if (message.billingAccount != null && message.hasOwnProperty("billingAccount"))
+                                if (!$util.isString(message.billingAccount))
+                                    return "billingAccount: string expected";
                             return null;
                         };
     
@@ -23447,6 +23813,8 @@
                                 message.sku = String(object.sku);
                             if (object.languageCode != null)
                                 message.languageCode = String(object.languageCode);
+                            if (object.billingAccount != null)
+                                message.billingAccount = String(object.billingAccount);
                             return message;
                         };
     
@@ -23469,6 +23837,7 @@
                                 object.pageToken = "";
                                 object.sku = "";
                                 object.languageCode = "";
+                                object.billingAccount = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -23490,6 +23859,8 @@
                                 object.sku = message.sku;
                             if (message.languageCode != null && message.hasOwnProperty("languageCode"))
                                 object.languageCode = message.languageCode;
+                            if (message.billingAccount != null && message.hasOwnProperty("billingAccount"))
+                                object.billingAccount = message.billingAccount;
                             return object;
                         };
     
@@ -31306,6 +31677,7 @@
                          * @property {Array.<google.cloud.channel.v1.IParameter>|null} [parameters] ChangeOfferRequest parameters
                          * @property {string|null} [purchaseOrderId] ChangeOfferRequest purchaseOrderId
                          * @property {string|null} [requestId] ChangeOfferRequest requestId
+                         * @property {string|null} [billingAccount] ChangeOfferRequest billingAccount
                          */
     
                         /**
@@ -31365,6 +31737,14 @@
                         ChangeOfferRequest.prototype.requestId = "";
     
                         /**
+                         * ChangeOfferRequest billingAccount.
+                         * @member {string} billingAccount
+                         * @memberof google.cloud.channel.v1.ChangeOfferRequest
+                         * @instance
+                         */
+                        ChangeOfferRequest.prototype.billingAccount = "";
+    
+                        /**
                          * Creates a new ChangeOfferRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.channel.v1.ChangeOfferRequest
@@ -31399,6 +31779,8 @@
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.purchaseOrderId);
                             if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.requestId);
+                            if (message.billingAccount != null && Object.hasOwnProperty.call(message, "billingAccount"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.billingAccount);
                             return writer;
                         };
     
@@ -31453,6 +31835,10 @@
                                     }
                                 case 6: {
                                         message.requestId = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.billingAccount = reader.string();
                                         break;
                                     }
                                 default:
@@ -31511,6 +31897,9 @@
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
+                            if (message.billingAccount != null && message.hasOwnProperty("billingAccount"))
+                                if (!$util.isString(message.billingAccount))
+                                    return "billingAccount: string expected";
                             return null;
                         };
     
@@ -31544,6 +31933,8 @@
                                 message.purchaseOrderId = String(object.purchaseOrderId);
                             if (object.requestId != null)
                                 message.requestId = String(object.requestId);
+                            if (object.billingAccount != null)
+                                message.billingAccount = String(object.billingAccount);
                             return message;
                         };
     
@@ -31567,6 +31958,7 @@
                                 object.offer = "";
                                 object.purchaseOrderId = "";
                                 object.requestId = "";
+                                object.billingAccount = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -31581,6 +31973,8 @@
                                 object.purchaseOrderId = message.purchaseOrderId;
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 object.requestId = message.requestId;
+                            if (message.billingAccount != null && message.hasOwnProperty("billingAccount"))
+                                object.billingAccount = message.billingAccount;
                             return object;
                         };
     
@@ -35998,6 +36392,7 @@
                              * @memberof google.cloud.channel.v1.ListPurchasableOffersRequest
                              * @interface ICreateEntitlementPurchase
                              * @property {string|null} [sku] CreateEntitlementPurchase sku
+                             * @property {string|null} [billingAccount] CreateEntitlementPurchase billingAccount
                              */
     
                             /**
@@ -36022,6 +36417,14 @@
                              * @instance
                              */
                             CreateEntitlementPurchase.prototype.sku = "";
+    
+                            /**
+                             * CreateEntitlementPurchase billingAccount.
+                             * @member {string} billingAccount
+                             * @memberof google.cloud.channel.v1.ListPurchasableOffersRequest.CreateEntitlementPurchase
+                             * @instance
+                             */
+                            CreateEntitlementPurchase.prototype.billingAccount = "";
     
                             /**
                              * Creates a new CreateEntitlementPurchase instance using the specified properties.
@@ -36049,6 +36452,8 @@
                                     writer = $Writer.create();
                                 if (message.sku != null && Object.hasOwnProperty.call(message, "sku"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.sku);
+                                if (message.billingAccount != null && Object.hasOwnProperty.call(message, "billingAccount"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.billingAccount);
                                 return writer;
                             };
     
@@ -36085,6 +36490,10 @@
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.sku = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.billingAccount = reader.string();
                                             break;
                                         }
                                     default:
@@ -36125,6 +36534,9 @@
                                 if (message.sku != null && message.hasOwnProperty("sku"))
                                     if (!$util.isString(message.sku))
                                         return "sku: string expected";
+                                if (message.billingAccount != null && message.hasOwnProperty("billingAccount"))
+                                    if (!$util.isString(message.billingAccount))
+                                        return "billingAccount: string expected";
                                 return null;
                             };
     
@@ -36142,6 +36554,8 @@
                                 var message = new $root.google.cloud.channel.v1.ListPurchasableOffersRequest.CreateEntitlementPurchase();
                                 if (object.sku != null)
                                     message.sku = String(object.sku);
+                                if (object.billingAccount != null)
+                                    message.billingAccount = String(object.billingAccount);
                                 return message;
                             };
     
@@ -36158,10 +36572,14 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.sku = "";
+                                    object.billingAccount = "";
+                                }
                                 if (message.sku != null && message.hasOwnProperty("sku"))
                                     object.sku = message.sku;
+                                if (message.billingAccount != null && message.hasOwnProperty("billingAccount"))
+                                    object.billingAccount = message.billingAccount;
                                 return object;
                             };
     
@@ -36202,6 +36620,7 @@
                              * @interface IChangeOfferPurchase
                              * @property {string|null} [entitlement] ChangeOfferPurchase entitlement
                              * @property {string|null} [newSku] ChangeOfferPurchase newSku
+                             * @property {string|null} [billingAccount] ChangeOfferPurchase billingAccount
                              */
     
                             /**
@@ -36236,6 +36655,14 @@
                             ChangeOfferPurchase.prototype.newSku = "";
     
                             /**
+                             * ChangeOfferPurchase billingAccount.
+                             * @member {string} billingAccount
+                             * @memberof google.cloud.channel.v1.ListPurchasableOffersRequest.ChangeOfferPurchase
+                             * @instance
+                             */
+                            ChangeOfferPurchase.prototype.billingAccount = "";
+    
+                            /**
                              * Creates a new ChangeOfferPurchase instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.channel.v1.ListPurchasableOffersRequest.ChangeOfferPurchase
@@ -36263,6 +36690,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.entitlement);
                                 if (message.newSku != null && Object.hasOwnProperty.call(message, "newSku"))
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.newSku);
+                                if (message.billingAccount != null && Object.hasOwnProperty.call(message, "billingAccount"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.billingAccount);
                                 return writer;
                             };
     
@@ -36303,6 +36732,10 @@
                                         }
                                     case 2: {
                                             message.newSku = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.billingAccount = reader.string();
                                             break;
                                         }
                                     default:
@@ -36346,6 +36779,9 @@
                                 if (message.newSku != null && message.hasOwnProperty("newSku"))
                                     if (!$util.isString(message.newSku))
                                         return "newSku: string expected";
+                                if (message.billingAccount != null && message.hasOwnProperty("billingAccount"))
+                                    if (!$util.isString(message.billingAccount))
+                                        return "billingAccount: string expected";
                                 return null;
                             };
     
@@ -36365,6 +36801,8 @@
                                     message.entitlement = String(object.entitlement);
                                 if (object.newSku != null)
                                     message.newSku = String(object.newSku);
+                                if (object.billingAccount != null)
+                                    message.billingAccount = String(object.billingAccount);
                                 return message;
                             };
     
@@ -36384,11 +36822,14 @@
                                 if (options.defaults) {
                                     object.entitlement = "";
                                     object.newSku = "";
+                                    object.billingAccount = "";
                                 }
                                 if (message.entitlement != null && message.hasOwnProperty("entitlement"))
                                     object.entitlement = message.entitlement;
                                 if (message.newSku != null && message.hasOwnProperty("newSku"))
                                     object.newSku = message.newSku;
+                                if (message.billingAccount != null && message.hasOwnProperty("billingAccount"))
+                                    object.billingAccount = message.billingAccount;
                                 return object;
                             };
     
@@ -36878,6 +37319,945 @@
                         };
     
                         return PurchasableOffer;
+                    })();
+    
+                    v1.QueryEligibleBillingAccountsRequest = (function() {
+    
+                        /**
+                         * Properties of a QueryEligibleBillingAccountsRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IQueryEligibleBillingAccountsRequest
+                         * @property {string|null} [customer] QueryEligibleBillingAccountsRequest customer
+                         * @property {Array.<string>|null} [skus] QueryEligibleBillingAccountsRequest skus
+                         */
+    
+                        /**
+                         * Constructs a new QueryEligibleBillingAccountsRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a QueryEligibleBillingAccountsRequest.
+                         * @implements IQueryEligibleBillingAccountsRequest
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IQueryEligibleBillingAccountsRequest=} [properties] Properties to set
+                         */
+                        function QueryEligibleBillingAccountsRequest(properties) {
+                            this.skus = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QueryEligibleBillingAccountsRequest customer.
+                         * @member {string} customer
+                         * @memberof google.cloud.channel.v1.QueryEligibleBillingAccountsRequest
+                         * @instance
+                         */
+                        QueryEligibleBillingAccountsRequest.prototype.customer = "";
+    
+                        /**
+                         * QueryEligibleBillingAccountsRequest skus.
+                         * @member {Array.<string>} skus
+                         * @memberof google.cloud.channel.v1.QueryEligibleBillingAccountsRequest
+                         * @instance
+                         */
+                        QueryEligibleBillingAccountsRequest.prototype.skus = $util.emptyArray;
+    
+                        /**
+                         * Creates a new QueryEligibleBillingAccountsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.QueryEligibleBillingAccountsRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IQueryEligibleBillingAccountsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.QueryEligibleBillingAccountsRequest} QueryEligibleBillingAccountsRequest instance
+                         */
+                        QueryEligibleBillingAccountsRequest.create = function create(properties) {
+                            return new QueryEligibleBillingAccountsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QueryEligibleBillingAccountsRequest message. Does not implicitly {@link google.cloud.channel.v1.QueryEligibleBillingAccountsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.QueryEligibleBillingAccountsRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IQueryEligibleBillingAccountsRequest} message QueryEligibleBillingAccountsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryEligibleBillingAccountsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.customer != null && Object.hasOwnProperty.call(message, "customer"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.customer);
+                            if (message.skus != null && message.skus.length)
+                                for (var i = 0; i < message.skus.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.skus[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QueryEligibleBillingAccountsRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.QueryEligibleBillingAccountsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.QueryEligibleBillingAccountsRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IQueryEligibleBillingAccountsRequest} message QueryEligibleBillingAccountsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryEligibleBillingAccountsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QueryEligibleBillingAccountsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.QueryEligibleBillingAccountsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.QueryEligibleBillingAccountsRequest} QueryEligibleBillingAccountsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryEligibleBillingAccountsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.QueryEligibleBillingAccountsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.customer = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.skus && message.skus.length))
+                                            message.skus = [];
+                                        message.skus.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QueryEligibleBillingAccountsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.QueryEligibleBillingAccountsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.QueryEligibleBillingAccountsRequest} QueryEligibleBillingAccountsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryEligibleBillingAccountsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QueryEligibleBillingAccountsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.QueryEligibleBillingAccountsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QueryEligibleBillingAccountsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.customer != null && message.hasOwnProperty("customer"))
+                                if (!$util.isString(message.customer))
+                                    return "customer: string expected";
+                            if (message.skus != null && message.hasOwnProperty("skus")) {
+                                if (!Array.isArray(message.skus))
+                                    return "skus: array expected";
+                                for (var i = 0; i < message.skus.length; ++i)
+                                    if (!$util.isString(message.skus[i]))
+                                        return "skus: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QueryEligibleBillingAccountsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.QueryEligibleBillingAccountsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.QueryEligibleBillingAccountsRequest} QueryEligibleBillingAccountsRequest
+                         */
+                        QueryEligibleBillingAccountsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.QueryEligibleBillingAccountsRequest)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.QueryEligibleBillingAccountsRequest();
+                            if (object.customer != null)
+                                message.customer = String(object.customer);
+                            if (object.skus) {
+                                if (!Array.isArray(object.skus))
+                                    throw TypeError(".google.cloud.channel.v1.QueryEligibleBillingAccountsRequest.skus: array expected");
+                                message.skus = [];
+                                for (var i = 0; i < object.skus.length; ++i)
+                                    message.skus[i] = String(object.skus[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QueryEligibleBillingAccountsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.QueryEligibleBillingAccountsRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.QueryEligibleBillingAccountsRequest} message QueryEligibleBillingAccountsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QueryEligibleBillingAccountsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.skus = [];
+                            if (options.defaults)
+                                object.customer = "";
+                            if (message.customer != null && message.hasOwnProperty("customer"))
+                                object.customer = message.customer;
+                            if (message.skus && message.skus.length) {
+                                object.skus = [];
+                                for (var j = 0; j < message.skus.length; ++j)
+                                    object.skus[j] = message.skus[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QueryEligibleBillingAccountsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.QueryEligibleBillingAccountsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QueryEligibleBillingAccountsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QueryEligibleBillingAccountsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.QueryEligibleBillingAccountsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QueryEligibleBillingAccountsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.QueryEligibleBillingAccountsRequest";
+                        };
+    
+                        return QueryEligibleBillingAccountsRequest;
+                    })();
+    
+                    v1.QueryEligibleBillingAccountsResponse = (function() {
+    
+                        /**
+                         * Properties of a QueryEligibleBillingAccountsResponse.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IQueryEligibleBillingAccountsResponse
+                         * @property {Array.<google.cloud.channel.v1.ISkuPurchaseGroup>|null} [skuPurchaseGroups] QueryEligibleBillingAccountsResponse skuPurchaseGroups
+                         */
+    
+                        /**
+                         * Constructs a new QueryEligibleBillingAccountsResponse.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a QueryEligibleBillingAccountsResponse.
+                         * @implements IQueryEligibleBillingAccountsResponse
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IQueryEligibleBillingAccountsResponse=} [properties] Properties to set
+                         */
+                        function QueryEligibleBillingAccountsResponse(properties) {
+                            this.skuPurchaseGroups = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * QueryEligibleBillingAccountsResponse skuPurchaseGroups.
+                         * @member {Array.<google.cloud.channel.v1.ISkuPurchaseGroup>} skuPurchaseGroups
+                         * @memberof google.cloud.channel.v1.QueryEligibleBillingAccountsResponse
+                         * @instance
+                         */
+                        QueryEligibleBillingAccountsResponse.prototype.skuPurchaseGroups = $util.emptyArray;
+    
+                        /**
+                         * Creates a new QueryEligibleBillingAccountsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.QueryEligibleBillingAccountsResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IQueryEligibleBillingAccountsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.QueryEligibleBillingAccountsResponse} QueryEligibleBillingAccountsResponse instance
+                         */
+                        QueryEligibleBillingAccountsResponse.create = function create(properties) {
+                            return new QueryEligibleBillingAccountsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified QueryEligibleBillingAccountsResponse message. Does not implicitly {@link google.cloud.channel.v1.QueryEligibleBillingAccountsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.QueryEligibleBillingAccountsResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IQueryEligibleBillingAccountsResponse} message QueryEligibleBillingAccountsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryEligibleBillingAccountsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.skuPurchaseGroups != null && message.skuPurchaseGroups.length)
+                                for (var i = 0; i < message.skuPurchaseGroups.length; ++i)
+                                    $root.google.cloud.channel.v1.SkuPurchaseGroup.encode(message.skuPurchaseGroups[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified QueryEligibleBillingAccountsResponse message, length delimited. Does not implicitly {@link google.cloud.channel.v1.QueryEligibleBillingAccountsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.QueryEligibleBillingAccountsResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.IQueryEligibleBillingAccountsResponse} message QueryEligibleBillingAccountsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        QueryEligibleBillingAccountsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a QueryEligibleBillingAccountsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.QueryEligibleBillingAccountsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.QueryEligibleBillingAccountsResponse} QueryEligibleBillingAccountsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryEligibleBillingAccountsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.QueryEligibleBillingAccountsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.skuPurchaseGroups && message.skuPurchaseGroups.length))
+                                            message.skuPurchaseGroups = [];
+                                        message.skuPurchaseGroups.push($root.google.cloud.channel.v1.SkuPurchaseGroup.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a QueryEligibleBillingAccountsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.QueryEligibleBillingAccountsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.QueryEligibleBillingAccountsResponse} QueryEligibleBillingAccountsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        QueryEligibleBillingAccountsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a QueryEligibleBillingAccountsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.QueryEligibleBillingAccountsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        QueryEligibleBillingAccountsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.skuPurchaseGroups != null && message.hasOwnProperty("skuPurchaseGroups")) {
+                                if (!Array.isArray(message.skuPurchaseGroups))
+                                    return "skuPurchaseGroups: array expected";
+                                for (var i = 0; i < message.skuPurchaseGroups.length; ++i) {
+                                    var error = $root.google.cloud.channel.v1.SkuPurchaseGroup.verify(message.skuPurchaseGroups[i]);
+                                    if (error)
+                                        return "skuPurchaseGroups." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a QueryEligibleBillingAccountsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.QueryEligibleBillingAccountsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.QueryEligibleBillingAccountsResponse} QueryEligibleBillingAccountsResponse
+                         */
+                        QueryEligibleBillingAccountsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.QueryEligibleBillingAccountsResponse)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.QueryEligibleBillingAccountsResponse();
+                            if (object.skuPurchaseGroups) {
+                                if (!Array.isArray(object.skuPurchaseGroups))
+                                    throw TypeError(".google.cloud.channel.v1.QueryEligibleBillingAccountsResponse.skuPurchaseGroups: array expected");
+                                message.skuPurchaseGroups = [];
+                                for (var i = 0; i < object.skuPurchaseGroups.length; ++i) {
+                                    if (typeof object.skuPurchaseGroups[i] !== "object")
+                                        throw TypeError(".google.cloud.channel.v1.QueryEligibleBillingAccountsResponse.skuPurchaseGroups: object expected");
+                                    message.skuPurchaseGroups[i] = $root.google.cloud.channel.v1.SkuPurchaseGroup.fromObject(object.skuPurchaseGroups[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a QueryEligibleBillingAccountsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.QueryEligibleBillingAccountsResponse
+                         * @static
+                         * @param {google.cloud.channel.v1.QueryEligibleBillingAccountsResponse} message QueryEligibleBillingAccountsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        QueryEligibleBillingAccountsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.skuPurchaseGroups = [];
+                            if (message.skuPurchaseGroups && message.skuPurchaseGroups.length) {
+                                object.skuPurchaseGroups = [];
+                                for (var j = 0; j < message.skuPurchaseGroups.length; ++j)
+                                    object.skuPurchaseGroups[j] = $root.google.cloud.channel.v1.SkuPurchaseGroup.toObject(message.skuPurchaseGroups[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this QueryEligibleBillingAccountsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.QueryEligibleBillingAccountsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        QueryEligibleBillingAccountsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for QueryEligibleBillingAccountsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.QueryEligibleBillingAccountsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        QueryEligibleBillingAccountsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.QueryEligibleBillingAccountsResponse";
+                        };
+    
+                        return QueryEligibleBillingAccountsResponse;
+                    })();
+    
+                    v1.SkuPurchaseGroup = (function() {
+    
+                        /**
+                         * Properties of a SkuPurchaseGroup.
+                         * @memberof google.cloud.channel.v1
+                         * @interface ISkuPurchaseGroup
+                         * @property {Array.<string>|null} [skus] SkuPurchaseGroup skus
+                         * @property {Array.<google.cloud.channel.v1.IBillingAccountPurchaseInfo>|null} [billingAccountPurchaseInfos] SkuPurchaseGroup billingAccountPurchaseInfos
+                         */
+    
+                        /**
+                         * Constructs a new SkuPurchaseGroup.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a SkuPurchaseGroup.
+                         * @implements ISkuPurchaseGroup
+                         * @constructor
+                         * @param {google.cloud.channel.v1.ISkuPurchaseGroup=} [properties] Properties to set
+                         */
+                        function SkuPurchaseGroup(properties) {
+                            this.skus = [];
+                            this.billingAccountPurchaseInfos = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SkuPurchaseGroup skus.
+                         * @member {Array.<string>} skus
+                         * @memberof google.cloud.channel.v1.SkuPurchaseGroup
+                         * @instance
+                         */
+                        SkuPurchaseGroup.prototype.skus = $util.emptyArray;
+    
+                        /**
+                         * SkuPurchaseGroup billingAccountPurchaseInfos.
+                         * @member {Array.<google.cloud.channel.v1.IBillingAccountPurchaseInfo>} billingAccountPurchaseInfos
+                         * @memberof google.cloud.channel.v1.SkuPurchaseGroup
+                         * @instance
+                         */
+                        SkuPurchaseGroup.prototype.billingAccountPurchaseInfos = $util.emptyArray;
+    
+                        /**
+                         * Creates a new SkuPurchaseGroup instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.SkuPurchaseGroup
+                         * @static
+                         * @param {google.cloud.channel.v1.ISkuPurchaseGroup=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.SkuPurchaseGroup} SkuPurchaseGroup instance
+                         */
+                        SkuPurchaseGroup.create = function create(properties) {
+                            return new SkuPurchaseGroup(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SkuPurchaseGroup message. Does not implicitly {@link google.cloud.channel.v1.SkuPurchaseGroup.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.SkuPurchaseGroup
+                         * @static
+                         * @param {google.cloud.channel.v1.ISkuPurchaseGroup} message SkuPurchaseGroup message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SkuPurchaseGroup.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.skus != null && message.skus.length)
+                                for (var i = 0; i < message.skus.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.skus[i]);
+                            if (message.billingAccountPurchaseInfos != null && message.billingAccountPurchaseInfos.length)
+                                for (var i = 0; i < message.billingAccountPurchaseInfos.length; ++i)
+                                    $root.google.cloud.channel.v1.BillingAccountPurchaseInfo.encode(message.billingAccountPurchaseInfos[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SkuPurchaseGroup message, length delimited. Does not implicitly {@link google.cloud.channel.v1.SkuPurchaseGroup.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.SkuPurchaseGroup
+                         * @static
+                         * @param {google.cloud.channel.v1.ISkuPurchaseGroup} message SkuPurchaseGroup message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SkuPurchaseGroup.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SkuPurchaseGroup message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.SkuPurchaseGroup
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.SkuPurchaseGroup} SkuPurchaseGroup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SkuPurchaseGroup.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.SkuPurchaseGroup();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.skus && message.skus.length))
+                                            message.skus = [];
+                                        message.skus.push(reader.string());
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.billingAccountPurchaseInfos && message.billingAccountPurchaseInfos.length))
+                                            message.billingAccountPurchaseInfos = [];
+                                        message.billingAccountPurchaseInfos.push($root.google.cloud.channel.v1.BillingAccountPurchaseInfo.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SkuPurchaseGroup message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.SkuPurchaseGroup
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.SkuPurchaseGroup} SkuPurchaseGroup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SkuPurchaseGroup.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SkuPurchaseGroup message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.SkuPurchaseGroup
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SkuPurchaseGroup.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.skus != null && message.hasOwnProperty("skus")) {
+                                if (!Array.isArray(message.skus))
+                                    return "skus: array expected";
+                                for (var i = 0; i < message.skus.length; ++i)
+                                    if (!$util.isString(message.skus[i]))
+                                        return "skus: string[] expected";
+                            }
+                            if (message.billingAccountPurchaseInfos != null && message.hasOwnProperty("billingAccountPurchaseInfos")) {
+                                if (!Array.isArray(message.billingAccountPurchaseInfos))
+                                    return "billingAccountPurchaseInfos: array expected";
+                                for (var i = 0; i < message.billingAccountPurchaseInfos.length; ++i) {
+                                    var error = $root.google.cloud.channel.v1.BillingAccountPurchaseInfo.verify(message.billingAccountPurchaseInfos[i]);
+                                    if (error)
+                                        return "billingAccountPurchaseInfos." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SkuPurchaseGroup message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.SkuPurchaseGroup
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.SkuPurchaseGroup} SkuPurchaseGroup
+                         */
+                        SkuPurchaseGroup.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.SkuPurchaseGroup)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.SkuPurchaseGroup();
+                            if (object.skus) {
+                                if (!Array.isArray(object.skus))
+                                    throw TypeError(".google.cloud.channel.v1.SkuPurchaseGroup.skus: array expected");
+                                message.skus = [];
+                                for (var i = 0; i < object.skus.length; ++i)
+                                    message.skus[i] = String(object.skus[i]);
+                            }
+                            if (object.billingAccountPurchaseInfos) {
+                                if (!Array.isArray(object.billingAccountPurchaseInfos))
+                                    throw TypeError(".google.cloud.channel.v1.SkuPurchaseGroup.billingAccountPurchaseInfos: array expected");
+                                message.billingAccountPurchaseInfos = [];
+                                for (var i = 0; i < object.billingAccountPurchaseInfos.length; ++i) {
+                                    if (typeof object.billingAccountPurchaseInfos[i] !== "object")
+                                        throw TypeError(".google.cloud.channel.v1.SkuPurchaseGroup.billingAccountPurchaseInfos: object expected");
+                                    message.billingAccountPurchaseInfos[i] = $root.google.cloud.channel.v1.BillingAccountPurchaseInfo.fromObject(object.billingAccountPurchaseInfos[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SkuPurchaseGroup message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.SkuPurchaseGroup
+                         * @static
+                         * @param {google.cloud.channel.v1.SkuPurchaseGroup} message SkuPurchaseGroup
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SkuPurchaseGroup.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.skus = [];
+                                object.billingAccountPurchaseInfos = [];
+                            }
+                            if (message.skus && message.skus.length) {
+                                object.skus = [];
+                                for (var j = 0; j < message.skus.length; ++j)
+                                    object.skus[j] = message.skus[j];
+                            }
+                            if (message.billingAccountPurchaseInfos && message.billingAccountPurchaseInfos.length) {
+                                object.billingAccountPurchaseInfos = [];
+                                for (var j = 0; j < message.billingAccountPurchaseInfos.length; ++j)
+                                    object.billingAccountPurchaseInfos[j] = $root.google.cloud.channel.v1.BillingAccountPurchaseInfo.toObject(message.billingAccountPurchaseInfos[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SkuPurchaseGroup to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.SkuPurchaseGroup
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SkuPurchaseGroup.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SkuPurchaseGroup
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.SkuPurchaseGroup
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SkuPurchaseGroup.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.SkuPurchaseGroup";
+                        };
+    
+                        return SkuPurchaseGroup;
+                    })();
+    
+                    v1.BillingAccountPurchaseInfo = (function() {
+    
+                        /**
+                         * Properties of a BillingAccountPurchaseInfo.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IBillingAccountPurchaseInfo
+                         * @property {google.cloud.channel.v1.IBillingAccount|null} [billingAccount] BillingAccountPurchaseInfo billingAccount
+                         */
+    
+                        /**
+                         * Constructs a new BillingAccountPurchaseInfo.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a BillingAccountPurchaseInfo.
+                         * @implements IBillingAccountPurchaseInfo
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IBillingAccountPurchaseInfo=} [properties] Properties to set
+                         */
+                        function BillingAccountPurchaseInfo(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BillingAccountPurchaseInfo billingAccount.
+                         * @member {google.cloud.channel.v1.IBillingAccount|null|undefined} billingAccount
+                         * @memberof google.cloud.channel.v1.BillingAccountPurchaseInfo
+                         * @instance
+                         */
+                        BillingAccountPurchaseInfo.prototype.billingAccount = null;
+    
+                        /**
+                         * Creates a new BillingAccountPurchaseInfo instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.BillingAccountPurchaseInfo
+                         * @static
+                         * @param {google.cloud.channel.v1.IBillingAccountPurchaseInfo=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.BillingAccountPurchaseInfo} BillingAccountPurchaseInfo instance
+                         */
+                        BillingAccountPurchaseInfo.create = function create(properties) {
+                            return new BillingAccountPurchaseInfo(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BillingAccountPurchaseInfo message. Does not implicitly {@link google.cloud.channel.v1.BillingAccountPurchaseInfo.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.BillingAccountPurchaseInfo
+                         * @static
+                         * @param {google.cloud.channel.v1.IBillingAccountPurchaseInfo} message BillingAccountPurchaseInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BillingAccountPurchaseInfo.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.billingAccount != null && Object.hasOwnProperty.call(message, "billingAccount"))
+                                $root.google.cloud.channel.v1.BillingAccount.encode(message.billingAccount, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BillingAccountPurchaseInfo message, length delimited. Does not implicitly {@link google.cloud.channel.v1.BillingAccountPurchaseInfo.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.BillingAccountPurchaseInfo
+                         * @static
+                         * @param {google.cloud.channel.v1.IBillingAccountPurchaseInfo} message BillingAccountPurchaseInfo message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BillingAccountPurchaseInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BillingAccountPurchaseInfo message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.BillingAccountPurchaseInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.BillingAccountPurchaseInfo} BillingAccountPurchaseInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BillingAccountPurchaseInfo.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.BillingAccountPurchaseInfo();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.billingAccount = $root.google.cloud.channel.v1.BillingAccount.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BillingAccountPurchaseInfo message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.BillingAccountPurchaseInfo
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.BillingAccountPurchaseInfo} BillingAccountPurchaseInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BillingAccountPurchaseInfo.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BillingAccountPurchaseInfo message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.BillingAccountPurchaseInfo
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BillingAccountPurchaseInfo.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.billingAccount != null && message.hasOwnProperty("billingAccount")) {
+                                var error = $root.google.cloud.channel.v1.BillingAccount.verify(message.billingAccount);
+                                if (error)
+                                    return "billingAccount." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BillingAccountPurchaseInfo message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.BillingAccountPurchaseInfo
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.BillingAccountPurchaseInfo} BillingAccountPurchaseInfo
+                         */
+                        BillingAccountPurchaseInfo.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.BillingAccountPurchaseInfo)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.BillingAccountPurchaseInfo();
+                            if (object.billingAccount != null) {
+                                if (typeof object.billingAccount !== "object")
+                                    throw TypeError(".google.cloud.channel.v1.BillingAccountPurchaseInfo.billingAccount: object expected");
+                                message.billingAccount = $root.google.cloud.channel.v1.BillingAccount.fromObject(object.billingAccount);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BillingAccountPurchaseInfo message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.BillingAccountPurchaseInfo
+                         * @static
+                         * @param {google.cloud.channel.v1.BillingAccountPurchaseInfo} message BillingAccountPurchaseInfo
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BillingAccountPurchaseInfo.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.billingAccount = null;
+                            if (message.billingAccount != null && message.hasOwnProperty("billingAccount"))
+                                object.billingAccount = $root.google.cloud.channel.v1.BillingAccount.toObject(message.billingAccount, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BillingAccountPurchaseInfo to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.BillingAccountPurchaseInfo
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BillingAccountPurchaseInfo.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BillingAccountPurchaseInfo
+                         * @function getTypeUrl
+                         * @memberof google.cloud.channel.v1.BillingAccountPurchaseInfo
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BillingAccountPurchaseInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.channel.v1.BillingAccountPurchaseInfo";
+                        };
+    
+                        return BillingAccountPurchaseInfo;
                     })();
     
                     v1.RegisterSubscriberRequest = (function() {
@@ -54600,242 +55980,6 @@
                 return GeneratedCodeInfo;
             })();
     
-            protobuf.Any = (function() {
-    
-                /**
-                 * Properties of an Any.
-                 * @memberof google.protobuf
-                 * @interface IAny
-                 * @property {string|null} [type_url] Any type_url
-                 * @property {Uint8Array|null} [value] Any value
-                 */
-    
-                /**
-                 * Constructs a new Any.
-                 * @memberof google.protobuf
-                 * @classdesc Represents an Any.
-                 * @implements IAny
-                 * @constructor
-                 * @param {google.protobuf.IAny=} [properties] Properties to set
-                 */
-                function Any(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Any type_url.
-                 * @member {string} type_url
-                 * @memberof google.protobuf.Any
-                 * @instance
-                 */
-                Any.prototype.type_url = "";
-    
-                /**
-                 * Any value.
-                 * @member {Uint8Array} value
-                 * @memberof google.protobuf.Any
-                 * @instance
-                 */
-                Any.prototype.value = $util.newBuffer([]);
-    
-                /**
-                 * Creates a new Any instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.IAny=} [properties] Properties to set
-                 * @returns {google.protobuf.Any} Any instance
-                 */
-                Any.create = function create(properties) {
-                    return new Any(properties);
-                };
-    
-                /**
-                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.IAny} message Any message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Any.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
-                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.IAny} message Any message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Any.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes an Any message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Any} Any
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Any.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.type_url = reader.string();
-                                break;
-                            }
-                        case 2: {
-                                message.value = reader.bytes();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes an Any message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Any} Any
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Any.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies an Any message.
-                 * @function verify
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Any.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type_url != null && message.hasOwnProperty("type_url"))
-                        if (!$util.isString(message.type_url))
-                            return "type_url: string expected";
-                    if (message.value != null && message.hasOwnProperty("value"))
-                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
-                            return "value: buffer expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Any} Any
-                 */
-                Any.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Any)
-                        return object;
-                    var message = new $root.google.protobuf.Any();
-                    if (object.type_url != null)
-                        message.type_url = String(object.type_url);
-                    if (object.value != null)
-                        if (typeof object.value === "string")
-                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
-                        else if (object.value.length >= 0)
-                            message.value = object.value;
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from an Any message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.Any} message Any
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Any.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.type_url = "";
-                        if (options.bytes === String)
-                            object.value = "";
-                        else {
-                            object.value = [];
-                            if (options.bytes !== Array)
-                                object.value = $util.newBuffer(object.value);
-                        }
-                    }
-                    if (message.type_url != null && message.hasOwnProperty("type_url"))
-                        object.type_url = message.type_url;
-                    if (message.value != null && message.hasOwnProperty("value"))
-                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Any to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Any
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Any.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for Any
-                 * @function getTypeUrl
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                Any.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.protobuf.Any";
-                };
-    
-                return Any;
-            })();
-    
             protobuf.Timestamp = (function() {
     
                 /**
@@ -55075,6 +56219,242 @@
                 };
     
                 return Timestamp;
+            })();
+    
+            protobuf.Any = (function() {
+    
+                /**
+                 * Properties of an Any.
+                 * @memberof google.protobuf
+                 * @interface IAny
+                 * @property {string|null} [type_url] Any type_url
+                 * @property {Uint8Array|null} [value] Any value
+                 */
+    
+                /**
+                 * Constructs a new Any.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Any.
+                 * @implements IAny
+                 * @constructor
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 */
+                function Any(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Any type_url.
+                 * @member {string} type_url
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.type_url = "";
+    
+                /**
+                 * Any value.
+                 * @member {Uint8Array} value
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.value = $util.newBuffer([]);
+    
+                /**
+                 * Creates a new Any instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 * @returns {google.protobuf.Any} Any instance
+                 */
+                Any.create = function create(properties) {
+                    return new Any(properties);
+                };
+    
+                /**
+                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type_url = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.value = reader.bytes();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Any message.
+                 * @function verify
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Any.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        if (!$util.isString(message.type_url))
+                            return "type_url: string expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
+                            return "value: buffer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Any} Any
+                 */
+                Any.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Any)
+                        return object;
+                    var message = new $root.google.protobuf.Any();
+                    if (object.type_url != null)
+                        message.type_url = String(object.type_url);
+                    if (object.value != null)
+                        if (typeof object.value === "string")
+                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
+                        else if (object.value.length >= 0)
+                            message.value = object.value;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Any message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.Any} message Any
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Any.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type_url = "";
+                        if (options.bytes === String)
+                            object.value = "";
+                        else {
+                            object.value = [];
+                            if (options.bytes !== Array)
+                                object.value = $util.newBuffer(object.value);
+                        }
+                    }
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        object.type_url = message.type_url;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Any to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Any.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Any
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Any.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Any";
+                };
+    
+                return Any;
             })();
     
             protobuf.Duration = (function() {
