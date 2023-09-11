@@ -26,6 +26,127 @@ export namespace google {
             /** Namespace v1. */
             namespace v1 {
 
+                /** Properties of a BillingAccount. */
+                interface IBillingAccount {
+
+                    /** BillingAccount name */
+                    name?: (string|null);
+
+                    /** BillingAccount displayName */
+                    displayName?: (string|null);
+
+                    /** BillingAccount createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BillingAccount currencyCode */
+                    currencyCode?: (string|null);
+
+                    /** BillingAccount regionCode */
+                    regionCode?: (string|null);
+                }
+
+                /** Represents a BillingAccount. */
+                class BillingAccount implements IBillingAccount {
+
+                    /**
+                     * Constructs a new BillingAccount.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IBillingAccount);
+
+                    /** BillingAccount name. */
+                    public name: string;
+
+                    /** BillingAccount displayName. */
+                    public displayName: string;
+
+                    /** BillingAccount createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BillingAccount currencyCode. */
+                    public currencyCode: string;
+
+                    /** BillingAccount regionCode. */
+                    public regionCode: string;
+
+                    /**
+                     * Creates a new BillingAccount instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BillingAccount instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IBillingAccount): google.cloud.channel.v1.BillingAccount;
+
+                    /**
+                     * Encodes the specified BillingAccount message. Does not implicitly {@link google.cloud.channel.v1.BillingAccount.verify|verify} messages.
+                     * @param message BillingAccount message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IBillingAccount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BillingAccount message, length delimited. Does not implicitly {@link google.cloud.channel.v1.BillingAccount.verify|verify} messages.
+                     * @param message BillingAccount message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IBillingAccount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BillingAccount message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BillingAccount
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.BillingAccount;
+
+                    /**
+                     * Decodes a BillingAccount message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BillingAccount
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.BillingAccount;
+
+                    /**
+                     * Verifies a BillingAccount message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BillingAccount message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BillingAccount
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.BillingAccount;
+
+                    /**
+                     * Creates a plain object from a BillingAccount message. Also converts values to other types if specified.
+                     * @param message BillingAccount
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.BillingAccount, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BillingAccount to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BillingAccount
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** ChannelPartnerLinkView enum. */
                 enum ChannelPartnerLinkView {
                     UNSPECIFIED = 0,
@@ -2260,7 +2381,8 @@ export namespace google {
                         REASON_UNSPECIFIED = 0,
                         PENDING_TOS_ACCEPTANCE = 1,
                         SKU_NOT_ELIGIBLE = 2,
-                        SKU_SUSPENDED = 3
+                        SKU_SUSPENDED = 3,
+                        CHANNEL_PARTNER_NOT_AUTHORIZED_FOR_SKU = 4
                     }
                 }
 
@@ -2594,7 +2716,8 @@ export namespace google {
                         PARAMETER_TYPE_UNSPECIFIED = 0,
                         INT64 = 1,
                         STRING = 2,
-                        DOUBLE = 3
+                        DOUBLE = 3,
+                        BOOLEAN = 4
                     }
                 }
 
@@ -7392,6 +7515,20 @@ export namespace google {
                     public listPurchasableOffers(request: google.cloud.channel.v1.IListPurchasableOffersRequest): Promise<google.cloud.channel.v1.ListPurchasableOffersResponse>;
 
                     /**
+                     * Calls QueryEligibleBillingAccounts.
+                     * @param request QueryEligibleBillingAccountsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and QueryEligibleBillingAccountsResponse
+                     */
+                    public queryEligibleBillingAccounts(request: google.cloud.channel.v1.IQueryEligibleBillingAccountsRequest, callback: google.cloud.channel.v1.CloudChannelService.QueryEligibleBillingAccountsCallback): void;
+
+                    /**
+                     * Calls QueryEligibleBillingAccounts.
+                     * @param request QueryEligibleBillingAccountsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public queryEligibleBillingAccounts(request: google.cloud.channel.v1.IQueryEligibleBillingAccountsRequest): Promise<google.cloud.channel.v1.QueryEligibleBillingAccountsResponse>;
+
+                    /**
                      * Calls RegisterSubscriber.
                      * @param request RegisterSubscriberRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and RegisterSubscriberResponse
@@ -7757,6 +7894,13 @@ export namespace google {
                      * @param [response] ListPurchasableOffersResponse
                      */
                     type ListPurchasableOffersCallback = (error: (Error|null), response?: google.cloud.channel.v1.ListPurchasableOffersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.channel.v1.CloudChannelService|queryEligibleBillingAccounts}.
+                     * @param error Error, if any
+                     * @param [response] QueryEligibleBillingAccountsResponse
+                     */
+                    type QueryEligibleBillingAccountsCallback = (error: (Error|null), response?: google.cloud.channel.v1.QueryEligibleBillingAccountsResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.channel.v1.CloudChannelService|registerSubscriber}.
@@ -9445,6 +9589,9 @@ export namespace google {
 
                     /** ListTransferableOffersRequest languageCode */
                     languageCode?: (string|null);
+
+                    /** ListTransferableOffersRequest billingAccount */
+                    billingAccount?: (string|null);
                 }
 
                 /** Represents a ListTransferableOffersRequest. */
@@ -9476,6 +9623,9 @@ export namespace google {
 
                     /** ListTransferableOffersRequest languageCode. */
                     public languageCode: string;
+
+                    /** ListTransferableOffersRequest billingAccount. */
+                    public billingAccount: string;
 
                     /** ListTransferableOffersRequest transferredCustomerIdentity. */
                     public transferredCustomerIdentity?: ("cloudIdentityId"|"customerName");
@@ -12925,6 +13075,9 @@ export namespace google {
 
                     /** ChangeOfferRequest requestId */
                     requestId?: (string|null);
+
+                    /** ChangeOfferRequest billingAccount */
+                    billingAccount?: (string|null);
                 }
 
                 /** Represents a ChangeOfferRequest. */
@@ -12950,6 +13103,9 @@ export namespace google {
 
                     /** ChangeOfferRequest requestId. */
                     public requestId: string;
+
+                    /** ChangeOfferRequest billingAccount. */
+                    public billingAccount: string;
 
                     /**
                      * Creates a new ChangeOfferRequest instance using the specified properties.
@@ -14890,6 +15046,9 @@ export namespace google {
 
                         /** CreateEntitlementPurchase sku */
                         sku?: (string|null);
+
+                        /** CreateEntitlementPurchase billingAccount */
+                        billingAccount?: (string|null);
                     }
 
                     /** Represents a CreateEntitlementPurchase. */
@@ -14903,6 +15062,9 @@ export namespace google {
 
                         /** CreateEntitlementPurchase sku. */
                         public sku: string;
+
+                        /** CreateEntitlementPurchase billingAccount. */
+                        public billingAccount: string;
 
                         /**
                          * Creates a new CreateEntitlementPurchase instance using the specified properties.
@@ -14990,6 +15152,9 @@ export namespace google {
 
                         /** ChangeOfferPurchase newSku */
                         newSku?: (string|null);
+
+                        /** ChangeOfferPurchase billingAccount */
+                        billingAccount?: (string|null);
                     }
 
                     /** Represents a ChangeOfferPurchase. */
@@ -15006,6 +15171,9 @@ export namespace google {
 
                         /** ChangeOfferPurchase newSku. */
                         public newSku: string;
+
+                        /** ChangeOfferPurchase billingAccount. */
+                        public billingAccount: string;
 
                         /**
                          * Creates a new ChangeOfferPurchase instance using the specified properties.
@@ -15280,6 +15448,406 @@ export namespace google {
 
                     /**
                      * Gets the default type url for PurchasableOffer
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a QueryEligibleBillingAccountsRequest. */
+                interface IQueryEligibleBillingAccountsRequest {
+
+                    /** QueryEligibleBillingAccountsRequest customer */
+                    customer?: (string|null);
+
+                    /** QueryEligibleBillingAccountsRequest skus */
+                    skus?: (string[]|null);
+                }
+
+                /** Represents a QueryEligibleBillingAccountsRequest. */
+                class QueryEligibleBillingAccountsRequest implements IQueryEligibleBillingAccountsRequest {
+
+                    /**
+                     * Constructs a new QueryEligibleBillingAccountsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IQueryEligibleBillingAccountsRequest);
+
+                    /** QueryEligibleBillingAccountsRequest customer. */
+                    public customer: string;
+
+                    /** QueryEligibleBillingAccountsRequest skus. */
+                    public skus: string[];
+
+                    /**
+                     * Creates a new QueryEligibleBillingAccountsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryEligibleBillingAccountsRequest instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IQueryEligibleBillingAccountsRequest): google.cloud.channel.v1.QueryEligibleBillingAccountsRequest;
+
+                    /**
+                     * Encodes the specified QueryEligibleBillingAccountsRequest message. Does not implicitly {@link google.cloud.channel.v1.QueryEligibleBillingAccountsRequest.verify|verify} messages.
+                     * @param message QueryEligibleBillingAccountsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IQueryEligibleBillingAccountsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryEligibleBillingAccountsRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.QueryEligibleBillingAccountsRequest.verify|verify} messages.
+                     * @param message QueryEligibleBillingAccountsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IQueryEligibleBillingAccountsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryEligibleBillingAccountsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryEligibleBillingAccountsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.QueryEligibleBillingAccountsRequest;
+
+                    /**
+                     * Decodes a QueryEligibleBillingAccountsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryEligibleBillingAccountsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.QueryEligibleBillingAccountsRequest;
+
+                    /**
+                     * Verifies a QueryEligibleBillingAccountsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryEligibleBillingAccountsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryEligibleBillingAccountsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.QueryEligibleBillingAccountsRequest;
+
+                    /**
+                     * Creates a plain object from a QueryEligibleBillingAccountsRequest message. Also converts values to other types if specified.
+                     * @param message QueryEligibleBillingAccountsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.QueryEligibleBillingAccountsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryEligibleBillingAccountsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryEligibleBillingAccountsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a QueryEligibleBillingAccountsResponse. */
+                interface IQueryEligibleBillingAccountsResponse {
+
+                    /** QueryEligibleBillingAccountsResponse skuPurchaseGroups */
+                    skuPurchaseGroups?: (google.cloud.channel.v1.ISkuPurchaseGroup[]|null);
+                }
+
+                /** Represents a QueryEligibleBillingAccountsResponse. */
+                class QueryEligibleBillingAccountsResponse implements IQueryEligibleBillingAccountsResponse {
+
+                    /**
+                     * Constructs a new QueryEligibleBillingAccountsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IQueryEligibleBillingAccountsResponse);
+
+                    /** QueryEligibleBillingAccountsResponse skuPurchaseGroups. */
+                    public skuPurchaseGroups: google.cloud.channel.v1.ISkuPurchaseGroup[];
+
+                    /**
+                     * Creates a new QueryEligibleBillingAccountsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryEligibleBillingAccountsResponse instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IQueryEligibleBillingAccountsResponse): google.cloud.channel.v1.QueryEligibleBillingAccountsResponse;
+
+                    /**
+                     * Encodes the specified QueryEligibleBillingAccountsResponse message. Does not implicitly {@link google.cloud.channel.v1.QueryEligibleBillingAccountsResponse.verify|verify} messages.
+                     * @param message QueryEligibleBillingAccountsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IQueryEligibleBillingAccountsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryEligibleBillingAccountsResponse message, length delimited. Does not implicitly {@link google.cloud.channel.v1.QueryEligibleBillingAccountsResponse.verify|verify} messages.
+                     * @param message QueryEligibleBillingAccountsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IQueryEligibleBillingAccountsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryEligibleBillingAccountsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryEligibleBillingAccountsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.QueryEligibleBillingAccountsResponse;
+
+                    /**
+                     * Decodes a QueryEligibleBillingAccountsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryEligibleBillingAccountsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.QueryEligibleBillingAccountsResponse;
+
+                    /**
+                     * Verifies a QueryEligibleBillingAccountsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryEligibleBillingAccountsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryEligibleBillingAccountsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.QueryEligibleBillingAccountsResponse;
+
+                    /**
+                     * Creates a plain object from a QueryEligibleBillingAccountsResponse message. Also converts values to other types if specified.
+                     * @param message QueryEligibleBillingAccountsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.QueryEligibleBillingAccountsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryEligibleBillingAccountsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryEligibleBillingAccountsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SkuPurchaseGroup. */
+                interface ISkuPurchaseGroup {
+
+                    /** SkuPurchaseGroup skus */
+                    skus?: (string[]|null);
+
+                    /** SkuPurchaseGroup billingAccountPurchaseInfos */
+                    billingAccountPurchaseInfos?: (google.cloud.channel.v1.IBillingAccountPurchaseInfo[]|null);
+                }
+
+                /** Represents a SkuPurchaseGroup. */
+                class SkuPurchaseGroup implements ISkuPurchaseGroup {
+
+                    /**
+                     * Constructs a new SkuPurchaseGroup.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.ISkuPurchaseGroup);
+
+                    /** SkuPurchaseGroup skus. */
+                    public skus: string[];
+
+                    /** SkuPurchaseGroup billingAccountPurchaseInfos. */
+                    public billingAccountPurchaseInfos: google.cloud.channel.v1.IBillingAccountPurchaseInfo[];
+
+                    /**
+                     * Creates a new SkuPurchaseGroup instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SkuPurchaseGroup instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.ISkuPurchaseGroup): google.cloud.channel.v1.SkuPurchaseGroup;
+
+                    /**
+                     * Encodes the specified SkuPurchaseGroup message. Does not implicitly {@link google.cloud.channel.v1.SkuPurchaseGroup.verify|verify} messages.
+                     * @param message SkuPurchaseGroup message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.ISkuPurchaseGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SkuPurchaseGroup message, length delimited. Does not implicitly {@link google.cloud.channel.v1.SkuPurchaseGroup.verify|verify} messages.
+                     * @param message SkuPurchaseGroup message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.ISkuPurchaseGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SkuPurchaseGroup message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SkuPurchaseGroup
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.SkuPurchaseGroup;
+
+                    /**
+                     * Decodes a SkuPurchaseGroup message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SkuPurchaseGroup
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.SkuPurchaseGroup;
+
+                    /**
+                     * Verifies a SkuPurchaseGroup message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SkuPurchaseGroup message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SkuPurchaseGroup
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.SkuPurchaseGroup;
+
+                    /**
+                     * Creates a plain object from a SkuPurchaseGroup message. Also converts values to other types if specified.
+                     * @param message SkuPurchaseGroup
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.SkuPurchaseGroup, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SkuPurchaseGroup to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SkuPurchaseGroup
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BillingAccountPurchaseInfo. */
+                interface IBillingAccountPurchaseInfo {
+
+                    /** BillingAccountPurchaseInfo billingAccount */
+                    billingAccount?: (google.cloud.channel.v1.IBillingAccount|null);
+                }
+
+                /** Represents a BillingAccountPurchaseInfo. */
+                class BillingAccountPurchaseInfo implements IBillingAccountPurchaseInfo {
+
+                    /**
+                     * Constructs a new BillingAccountPurchaseInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IBillingAccountPurchaseInfo);
+
+                    /** BillingAccountPurchaseInfo billingAccount. */
+                    public billingAccount?: (google.cloud.channel.v1.IBillingAccount|null);
+
+                    /**
+                     * Creates a new BillingAccountPurchaseInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BillingAccountPurchaseInfo instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IBillingAccountPurchaseInfo): google.cloud.channel.v1.BillingAccountPurchaseInfo;
+
+                    /**
+                     * Encodes the specified BillingAccountPurchaseInfo message. Does not implicitly {@link google.cloud.channel.v1.BillingAccountPurchaseInfo.verify|verify} messages.
+                     * @param message BillingAccountPurchaseInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IBillingAccountPurchaseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BillingAccountPurchaseInfo message, length delimited. Does not implicitly {@link google.cloud.channel.v1.BillingAccountPurchaseInfo.verify|verify} messages.
+                     * @param message BillingAccountPurchaseInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IBillingAccountPurchaseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BillingAccountPurchaseInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BillingAccountPurchaseInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.BillingAccountPurchaseInfo;
+
+                    /**
+                     * Decodes a BillingAccountPurchaseInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BillingAccountPurchaseInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.BillingAccountPurchaseInfo;
+
+                    /**
+                     * Verifies a BillingAccountPurchaseInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BillingAccountPurchaseInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BillingAccountPurchaseInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.BillingAccountPurchaseInfo;
+
+                    /**
+                     * Creates a plain object from a BillingAccountPurchaseInfo message. Also converts values to other types if specified.
+                     * @param message BillingAccountPurchaseInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.BillingAccountPurchaseInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BillingAccountPurchaseInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BillingAccountPurchaseInfo
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -21937,109 +22505,6 @@ export namespace google {
             }
         }
 
-        /** Properties of an Any. */
-        interface IAny {
-
-            /** Any type_url */
-            type_url?: (string|null);
-
-            /** Any value */
-            value?: (Uint8Array|string|null);
-        }
-
-        /** Represents an Any. */
-        class Any implements IAny {
-
-            /**
-             * Constructs a new Any.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IAny);
-
-            /** Any type_url. */
-            public type_url: string;
-
-            /** Any value. */
-            public value: (Uint8Array|string);
-
-            /**
-             * Creates a new Any instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Any instance
-             */
-            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
-
-            /**
-             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-             * @param message Any message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-             * @param message Any message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an Any message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Any
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
-
-            /**
-             * Decodes an Any message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Any
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
-
-            /**
-             * Verifies an Any message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an Any message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Any
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
-
-            /**
-             * Creates a plain object from an Any message. Also converts values to other types if specified.
-             * @param message Any
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Any to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Any
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
         /** Properties of a Timestamp. */
         interface ITimestamp {
 
@@ -22137,6 +22602,109 @@ export namespace google {
 
             /**
              * Gets the default type url for Timestamp
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an Any. */
+        interface IAny {
+
+            /** Any type_url */
+            type_url?: (string|null);
+
+            /** Any value */
+            value?: (Uint8Array|string|null);
+        }
+
+        /** Represents an Any. */
+        class Any implements IAny {
+
+            /**
+             * Constructs a new Any.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IAny);
+
+            /** Any type_url. */
+            public type_url: string;
+
+            /** Any value. */
+            public value: (Uint8Array|string);
+
+            /**
+             * Creates a new Any instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Any instance
+             */
+            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
+
+            /**
+             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
+
+            /**
+             * Verifies an Any message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Any message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Any
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
+
+            /**
+             * Creates a plain object from an Any message. Also converts values to other types if specified.
+             * @param message Any
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Any to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Any
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

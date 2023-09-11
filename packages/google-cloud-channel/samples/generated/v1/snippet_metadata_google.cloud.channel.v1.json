@@ -307,7 +307,7 @@
             "regionTag": "cloudchannel_v1_generated_CloudChannelService_CreateCustomer_async",
             "title": "CloudChannelReportsService createCustomer Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a new [Customer][google.cloud.channel.v1.Customer] resource under the reseller or distributor account. Possible error codes: * PERMISSION_DENIED: The reseller account making the request is different from the reseller account in the API request. * INVALID_ARGUMENT:     * Required request parameters are missing or invalid.     * Domain field value doesn't match the primary email domain. Return value: The newly created [Customer][google.cloud.channel.v1.Customer] resource.",
+            "description": " Creates a new [Customer][google.cloud.channel.v1.Customer] resource under the reseller or distributor account. Possible error codes: * PERMISSION_DENIED:     * The reseller account making the request is different from the     reseller account in the API request.     * You are not authorized to create a customer. See     https://support.google.com/channelservices/answer/9759265 * INVALID_ARGUMENT:     * Required request parameters are missing or invalid.     * Domain field value doesn't match the primary email domain. Return value: The newly created [Customer][google.cloud.channel.v1.Customer] resource.",
             "canonical": true,
             "file": "cloud_channel_service.create_customer.js",
             "language": "JAVASCRIPT",
@@ -435,7 +435,7 @@
             "regionTag": "cloudchannel_v1_generated_CloudChannelService_ImportCustomer_async",
             "title": "CloudChannelReportsService importCustomer Sample",
             "origin": "API_DEFINITION",
-            "description": " Imports a [Customer][google.cloud.channel.v1.Customer] from the Cloud Identity associated with the provided Cloud Identity ID or domain before a TransferEntitlements call. If a linked Customer already exists and overwrite_if_exists is true, it will update that Customer's data. Possible error codes: * PERMISSION_DENIED: The reseller account making the request is different from the reseller account in the API request. * NOT_FOUND: Cloud Identity doesn't exist or was deleted. * INVALID_ARGUMENT: Required parameters are missing, or the auth_token is expired or invalid. * ALREADY_EXISTS: A customer already exists and has conflicting critical fields. Requires an overwrite. Return value: The [Customer][google.cloud.channel.v1.Customer].",
+            "description": " Imports a [Customer][google.cloud.channel.v1.Customer] from the Cloud Identity associated with the provided Cloud Identity ID or domain before a TransferEntitlements call. If a linked Customer already exists and overwrite_if_exists is true, it will update that Customer's data. Possible error codes: * PERMISSION_DENIED:     * The reseller account making the request is different from the     reseller account in the API request.     * You are not authorized to import the customer. See     https://support.google.com/channelservices/answer/9759265 * NOT_FOUND: Cloud Identity doesn't exist or was deleted. * INVALID_ARGUMENT: Required parameters are missing, or the auth_token is expired or invalid. * ALREADY_EXISTS: A customer already exists and has conflicting critical fields. Requires an overwrite. Return value: The [Customer][google.cloud.channel.v1.Customer].",
             "canonical": true,
             "file": "cloud_channel_service.import_customer.js",
             "language": "JAVASCRIPT",
@@ -499,7 +499,7 @@
             "regionTag": "cloudchannel_v1_generated_CloudChannelService_ProvisionCloudIdentity_async",
             "title": "CloudChannelReportsService provisionCloudIdentity Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a Cloud Identity for the given customer using the customer's information, or the information provided here. Possible error codes: *  PERMISSION_DENIED: The customer doesn't belong to the reseller. *  INVALID_ARGUMENT: Required request parameters are missing or invalid. *  NOT_FOUND: The customer was not found. *  ALREADY_EXISTS: The customer's primary email already exists. Retry    after changing the customer's primary contact email. * INTERNAL: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. * UNKNOWN: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. Return value: The ID of a long-running operation. To get the results of the operation, call the GetOperation method of CloudChannelOperationsService. The Operation metadata contains an instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].",
+            "description": " Creates a Cloud Identity for the given customer using the customer's information, or the information provided here. Possible error codes: *  PERMISSION_DENIED:      * The customer doesn't belong to the reseller.      * You are not authorized to provision cloud identity id. See      https://support.google.com/channelservices/answer/9759265 *  INVALID_ARGUMENT: Required request parameters are missing or invalid. *  NOT_FOUND: The customer was not found. *  ALREADY_EXISTS: The customer's primary email already exists. Retry    after changing the customer's primary contact email. * INTERNAL: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. * UNKNOWN: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. Return value: The ID of a long-running operation. To get the results of the operation, call the GetOperation method of CloudChannelOperationsService. The Operation metadata contains an instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].",
             "canonical": true,
             "file": "cloud_channel_service.provision_cloud_identity.js",
             "language": "JAVASCRIPT",
@@ -663,14 +663,14 @@
             "regionTag": "cloudchannel_v1_generated_CloudChannelService_ListTransferableOffers_async",
             "title": "CloudChannelReportsService listTransferableOffers Sample",
             "origin": "API_DEFINITION",
-            "description": " List [TransferableOffer][google.cloud.channel.v1.TransferableOffer]s of a customer based on Cloud Identity ID or Customer Name in the request. Use this method when a reseller gets the entitlement information of an unowned customer. The reseller should provide the customer's Cloud Identity ID or Customer Name. Possible error codes: * PERMISSION_DENIED:     * The customer doesn't belong to the reseller and has no auth token.     * The customer provided incorrect reseller information when generating     auth token.     * The reseller account making the request is different     from the reseller account in the query. * INVALID_ARGUMENT: Required request parameters are missing or invalid. Return value: List of [TransferableOffer][google.cloud.channel.v1.TransferableOffer] for the given customer and SKU.",
+            "description": " List [TransferableOffer][google.cloud.channel.v1.TransferableOffer]s of a customer based on Cloud Identity ID or Customer Name in the request. Use this method when a reseller gets the entitlement information of an unowned customer. The reseller should provide the customer's Cloud Identity ID or Customer Name. Possible error codes: * PERMISSION_DENIED:     * The customer doesn't belong to the reseller and has no auth token.     * The customer provided incorrect reseller information when generating     auth token.     * The reseller account making the request is different     from the reseller account in the query.     * The reseller is not authorized to transact on this Product. See     https://support.google.com/channelservices/answer/9759265 * INVALID_ARGUMENT: Required request parameters are missing or invalid. Return value: List of [TransferableOffer][google.cloud.channel.v1.TransferableOffer] for the given customer and SKU.",
             "canonical": true,
             "file": "cloud_channel_service.list_transferable_offers.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 90,
+                    "end": 97,
                     "type": "FULL"
                 }
             ],
@@ -705,6 +705,10 @@
                     },
                     {
                         "name": "language_code",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "billing_account",
                         "type": "TYPE_STRING"
                     }
                 ],
@@ -767,7 +771,7 @@
             "regionTag": "cloudchannel_v1_generated_CloudChannelService_CreateEntitlement_async",
             "title": "CloudChannelReportsService createEntitlement Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates an entitlement for a customer. Possible error codes: * PERMISSION_DENIED: The customer doesn't belong to the reseller. * INVALID_ARGUMENT:     * Required request parameters are missing or invalid.     * There is already a customer entitlement for a SKU from the same     product family. * INVALID_VALUE: Make sure the OfferId is valid. If it is, contact Google Channel support for further troubleshooting. * NOT_FOUND: The customer or offer resource was not found. * ALREADY_EXISTS:     * The SKU was already purchased for the customer.     * The customer's primary email already exists. Retry     after changing the customer's primary contact email. * CONDITION_NOT_MET or FAILED_PRECONDITION:     * The domain required for purchasing a SKU has not been verified.     * A pre-requisite SKU required to purchase an Add-On SKU is missing.     For example, Google Workspace Business Starter is required to purchase     Vault or Drive.     * (Developer accounts only) Reseller and resold domain must meet the     following naming requirements:         * Domain names must start with goog-test.         * Domain names must include the reseller domain. * INTERNAL: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. * UNKNOWN: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. Return value: The ID of a long-running operation. To get the results of the operation, call the GetOperation method of CloudChannelOperationsService. The Operation metadata will contain an instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].",
+            "description": " Creates an entitlement for a customer. Possible error codes: * PERMISSION_DENIED:     * The customer doesn't belong to the reseller.     * The reseller is not authorized to transact on this Product. See     https://support.google.com/channelservices/answer/9759265 * INVALID_ARGUMENT:     * Required request parameters are missing or invalid.     * There is already a customer entitlement for a SKU from the same     product family. * INVALID_VALUE: Make sure the OfferId is valid. If it is, contact Google Channel support for further troubleshooting. * NOT_FOUND: The customer or offer resource was not found. * ALREADY_EXISTS:     * The SKU was already purchased for the customer.     * The customer's primary email already exists. Retry     after changing the customer's primary contact email. * CONDITION_NOT_MET or FAILED_PRECONDITION:     * The domain required for purchasing a SKU has not been verified.     * A pre-requisite SKU required to purchase an Add-On SKU is missing.     For example, Google Workspace Business Starter is required to purchase     Vault or Drive.     * (Developer accounts only) Reseller and resold domain must meet the     following naming requirements:         * Domain names must start with goog-test.         * Domain names must include the reseller domain. * INTERNAL: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. * UNKNOWN: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. Return value: The ID of a long-running operation. To get the results of the operation, call the GetOperation method of CloudChannelOperationsService. The Operation metadata will contain an instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].",
             "canonical": true,
             "file": "cloud_channel_service.create_entitlement.js",
             "language": "JAVASCRIPT",
@@ -922,7 +926,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 86,
+                    "end": 93,
                     "type": "FULL"
                 }
             ],
@@ -949,6 +953,10 @@
                     },
                     {
                         "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "billing_account",
                         "type": "TYPE_STRING"
                     }
                 ],
@@ -1147,7 +1155,7 @@
             "regionTag": "cloudchannel_v1_generated_CloudChannelService_TransferEntitlements_async",
             "title": "CloudChannelReportsService transferEntitlements Sample",
             "origin": "API_DEFINITION",
-            "description": " Transfers customer entitlements to new reseller. Possible error codes: * PERMISSION_DENIED: The customer doesn't belong to the reseller. * INVALID_ARGUMENT: Required request parameters are missing or invalid. * NOT_FOUND: The customer or offer resource was not found. * ALREADY_EXISTS: The SKU was already transferred for the customer. * CONDITION_NOT_MET or FAILED_PRECONDITION:     * The SKU requires domain verification to transfer, but the domain is     not verified.     * An Add-On SKU (example, Vault or Drive) is missing the     pre-requisite SKU (example, G Suite Basic).     * (Developer accounts only) Reseller and resold domain must meet the     following naming requirements:         * Domain names must start with goog-test.         * Domain names must include the reseller domain.     * Specify all transferring entitlements. * INTERNAL: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. * UNKNOWN: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. Return value: The ID of a long-running operation. To get the results of the operation, call the GetOperation method of CloudChannelOperationsService. The Operation metadata will contain an instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].",
+            "description": " Transfers customer entitlements to new reseller. Possible error codes: * PERMISSION_DENIED:     * The customer doesn't belong to the reseller.     * The reseller is not authorized to transact on this Product. See     https://support.google.com/channelservices/answer/9759265 * INVALID_ARGUMENT: Required request parameters are missing or invalid. * NOT_FOUND: The customer or offer resource was not found. * ALREADY_EXISTS: The SKU was already transferred for the customer. * CONDITION_NOT_MET or FAILED_PRECONDITION:     * The SKU requires domain verification to transfer, but the domain is     not verified.     * An Add-On SKU (example, Vault or Drive) is missing the     pre-requisite SKU (example, G Suite Basic).     * (Developer accounts only) Reseller and resold domain must meet the     following naming requirements:         * Domain names must start with goog-test.         * Domain names must include the reseller domain.     * Specify all transferring entitlements. * INTERNAL: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. * UNKNOWN: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. Return value: The ID of a long-running operation. To get the results of the operation, call the GetOperation method of CloudChannelOperationsService. The Operation metadata will contain an instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].",
             "canonical": true,
             "file": "cloud_channel_service.transfer_entitlements.js",
             "language": "JAVASCRIPT",
@@ -1527,7 +1535,7 @@
             "regionTag": "cloudchannel_v1_generated_CloudChannelService_CreateCustomerRepricingConfig_async",
             "title": "CloudChannelReportsService createCustomerRepricingConfig Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a CustomerRepricingConfig. Call this method to set modifications for a specific customer's bill. You can only create configs if the [RepricingConfig.effective_invoice_month][google.cloud.channel.v1.RepricingConfig.effective_invoice_month] is a future month. If needed, you can create a config for the current month, with some restrictions. When creating a config for a future month, make sure there are no existing configs for that [RepricingConfig.effective_invoice_month][google.cloud.channel.v1.RepricingConfig.effective_invoice_month]. The following restrictions are for creating configs in the current month. * This functionality is reserved for recovering from an erroneous config, and should not be used for regular business cases. * The new config will not modify exports used with other configs. Changes to the config may be immediate, but may take up to 24 hours. * There is a limit of ten configs for any [RepricingConfig.EntitlementGranularity.entitlement][google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.entitlement] or [RepricingConfig.effective_invoice_month][google.cloud.channel.v1.RepricingConfig.effective_invoice_month]. * The contained [CustomerRepricingConfig.repricing_config][google.cloud.channel.v1.CustomerRepricingConfig.repricing_config] vaule must be different from the value used in the current config for a [RepricingConfig.EntitlementGranularity.entitlement][google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.entitlement]. Possible Error Codes: * PERMISSION_DENIED: If the account making the request and the account being queried are different. * INVALID_ARGUMENT: Missing or invalid required parameters in the request. Also displays if the updated config is for the current month or past months. * NOT_FOUND: The [CustomerRepricingConfig][google.cloud.channel.v1.CustomerRepricingConfig] specified does not exist or is not associated with the given account. * INTERNAL: Any non-user error related to technical issues in the backend. In this case, contact Cloud Channel support. Return Value: If successful, the updated [CustomerRepricingConfig][google.cloud.channel.v1.CustomerRepricingConfig] resource, otherwise returns an error.",
+            "description": " Creates a CustomerRepricingConfig. Call this method to set modifications for a specific customer's bill. You can only create configs if the [RepricingConfig.effective_invoice_month][google.cloud.channel.v1.RepricingConfig.effective_invoice_month] is a future month. If needed, you can create a config for the current month, with some restrictions. When creating a config for a future month, make sure there are no existing configs for that [RepricingConfig.effective_invoice_month][google.cloud.channel.v1.RepricingConfig.effective_invoice_month]. The following restrictions are for creating configs in the current month. * This functionality is reserved for recovering from an erroneous config, and should not be used for regular business cases. * The new config will not modify exports used with other configs. Changes to the config may be immediate, but may take up to 24 hours. * There is a limit of ten configs for any [RepricingConfig.EntitlementGranularity.entitlement][google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.entitlement], for any [RepricingConfig.effective_invoice_month][google.cloud.channel.v1.RepricingConfig.effective_invoice_month]. * The contained [CustomerRepricingConfig.repricing_config][google.cloud.channel.v1.CustomerRepricingConfig.repricing_config] value must be different from the value used in the current config for a [RepricingConfig.EntitlementGranularity.entitlement][google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.entitlement]. Possible Error Codes: * PERMISSION_DENIED: If the account making the request and the account being queried are different. * INVALID_ARGUMENT: Missing or invalid required parameters in the request. Also displays if the updated config is for the current month or past months. * NOT_FOUND: The [CustomerRepricingConfig][google.cloud.channel.v1.CustomerRepricingConfig] specified does not exist or is not associated with the given account. * INTERNAL: Any non-user error related to technical issues in the backend. In this case, contact Cloud Channel support. Return Value: If successful, the updated [CustomerRepricingConfig][google.cloud.channel.v1.CustomerRepricingConfig] resource, otherwise returns an error.",
             "canonical": true,
             "file": "cloud_channel_service.create_customer_repricing_config.js",
             "language": "JAVASCRIPT",
@@ -1743,7 +1751,7 @@
             "regionTag": "cloudchannel_v1_generated_CloudChannelService_CreateChannelPartnerRepricingConfig_async",
             "title": "CloudChannelReportsService createChannelPartnerRepricingConfig Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a ChannelPartnerRepricingConfig. Call this method to set modifications for a specific ChannelPartner's bill. You can only create configs if the [RepricingConfig.effective_invoice_month][google.cloud.channel.v1.RepricingConfig.effective_invoice_month] is a future month. If needed, you can create a config for the current month, with some restrictions. When creating a config for a future month, make sure there are no existing configs for that [RepricingConfig.effective_invoice_month][google.cloud.channel.v1.RepricingConfig.effective_invoice_month]. The following restrictions are for creating configs in the current month. * This functionality is reserved for recovering from an erroneous config, and should not be used for regular business cases. * The new config will not modify exports used with other configs. Changes to the config may be immediate, but may take up to 24 hours. * There is a limit of ten configs for any ChannelPartner or [RepricingConfig.effective_invoice_month][google.cloud.channel.v1.RepricingConfig.effective_invoice_month]. * The contained [ChannelPartnerRepricingConfig.repricing_config][google.cloud.channel.v1.ChannelPartnerRepricingConfig.repricing_config] vaule must be different from the value used in the current config for a ChannelPartner. Possible Error Codes: * PERMISSION_DENIED: If the account making the request and the account being queried are different. * INVALID_ARGUMENT: Missing or invalid required parameters in the request. Also displays if the updated config is for the current month or past months. * NOT_FOUND: The [ChannelPartnerRepricingConfig][google.cloud.channel.v1.ChannelPartnerRepricingConfig] specified does not exist or is not associated with the given account. * INTERNAL: Any non-user error related to technical issues in the backend. In this case, contact Cloud Channel support. Return Value: If successful, the updated [ChannelPartnerRepricingConfig][google.cloud.channel.v1.ChannelPartnerRepricingConfig] resource, otherwise returns an error.",
+            "description": " Creates a ChannelPartnerRepricingConfig. Call this method to set modifications for a specific ChannelPartner's bill. You can only create configs if the [RepricingConfig.effective_invoice_month][google.cloud.channel.v1.RepricingConfig.effective_invoice_month] is a future month. If needed, you can create a config for the current month, with some restrictions. When creating a config for a future month, make sure there are no existing configs for that [RepricingConfig.effective_invoice_month][google.cloud.channel.v1.RepricingConfig.effective_invoice_month]. The following restrictions are for creating configs in the current month. * This functionality is reserved for recovering from an erroneous config, and should not be used for regular business cases. * The new config will not modify exports used with other configs. Changes to the config may be immediate, but may take up to 24 hours. * There is a limit of ten configs for any ChannelPartner or [RepricingConfig.EntitlementGranularity.entitlement][google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.entitlement], for any [RepricingConfig.effective_invoice_month][google.cloud.channel.v1.RepricingConfig.effective_invoice_month]. * The contained [ChannelPartnerRepricingConfig.repricing_config][google.cloud.channel.v1.ChannelPartnerRepricingConfig.repricing_config] value must be different from the value used in the current config for a ChannelPartner. Possible Error Codes: * PERMISSION_DENIED: If the account making the request and the account being queried are different. * INVALID_ARGUMENT: Missing or invalid required parameters in the request. Also displays if the updated config is for the current month or past months. * NOT_FOUND: The [ChannelPartnerRepricingConfig][google.cloud.channel.v1.ChannelPartnerRepricingConfig] specified does not exist or is not associated with the given account. * INTERNAL: Any non-user error related to technical issues in the backend. In this case, contact Cloud Channel support. Return Value: If successful, the updated [ChannelPartnerRepricingConfig][google.cloud.channel.v1.ChannelPartnerRepricingConfig] resource, otherwise returns an error.",
             "canonical": true,
             "file": "cloud_channel_service.create_channel_partner_repricing_config.js",
             "language": "JAVASCRIPT",
@@ -2231,7 +2239,7 @@
             "regionTag": "cloudchannel_v1_generated_CloudChannelService_ListPurchasableOffers_async",
             "title": "CloudChannelReportsService listPurchasableOffers Sample",
             "origin": "API_DEFINITION",
-            "description": " Lists the following: * Offers that you can purchase for a customer. * Offers that you can change for an entitlement. Possible error codes: * PERMISSION_DENIED: The customer doesn't belong to the reseller * INVALID_ARGUMENT: Required request parameters are missing or invalid.",
+            "description": " Lists the following: * Offers that you can purchase for a customer. * Offers that you can change for an entitlement. Possible error codes: * PERMISSION_DENIED:     * The customer doesn't belong to the reseller     * The reseller is not authorized to transact on this Product. See     https://support.google.com/channelservices/answer/9759265 * INVALID_ARGUMENT: Required request parameters are missing or invalid.",
             "canonical": true,
             "file": "cloud_channel_service.list_purchasable_offers.js",
             "language": "JAVASCRIPT",
@@ -2280,6 +2288,50 @@
                 "method": {
                     "shortName": "ListPurchasableOffers",
                     "fullName": "google.cloud.channel.v1.CloudChannelService.ListPurchasableOffers",
+                    "service": {
+                        "shortName": "CloudChannelService",
+                        "fullName": "google.cloud.channel.v1.CloudChannelService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "cloudchannel_v1_generated_CloudChannelService_QueryEligibleBillingAccounts_async",
+            "title": "CloudChannelReportsService queryEligibleBillingAccounts Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists the billing accounts that are eligible to purchase particular SKUs for a given customer. Possible error codes: * PERMISSION_DENIED: The customer doesn't belong to the reseller. * INVALID_ARGUMENT: Required request parameters are missing or invalid. Return value: Based on the provided list of SKUs, returns a list of SKU groups that must be purchased using the same billing account and the billing accounts eligible to purchase each SKU group.",
+            "canonical": true,
+            "file": "cloud_channel_service.query_eligible_billing_accounts.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "QueryEligibleBillingAccounts",
+                "fullName": "google.cloud.channel.v1.CloudChannelService.QueryEligibleBillingAccounts",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "customer",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "skus",
+                        "type": "TYPE_STRING[]"
+                    }
+                ],
+                "resultType": ".google.cloud.channel.v1.QueryEligibleBillingAccountsResponse",
+                "client": {
+                    "shortName": "CloudChannelServiceClient",
+                    "fullName": "google.cloud.channel.v1.CloudChannelServiceClient"
+                },
+                "method": {
+                    "shortName": "QueryEligibleBillingAccounts",
+                    "fullName": "google.cloud.channel.v1.CloudChannelService.QueryEligibleBillingAccounts",
                     "service": {
                         "shortName": "CloudChannelService",
                         "fullName": "google.cloud.channel.v1.CloudChannelService"

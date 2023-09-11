@@ -66,6 +66,13 @@ function main(parent, sku) {
    *  The default value is "en-US".
    */
   // const languageCode = 'abc123'
+  /**
+   *  Optional. The Billing Account to look up Offers for. Format:
+   *  accounts/{account_id}/billingAccounts/{billing_account_id}.
+   *  This field is only relevant for multi-currency accounts. It should be left
+   *  empty for single currency accounts.
+   */
+  // const billingAccount = 'abc123'
 
   // Imports the Channel library
   const {CloudChannelServiceClient} = require('@google-cloud/channel').v1;

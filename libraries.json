@@ -2667,6 +2667,24 @@
     "support_documentation": "https://developers.google.com/workspace/add-ons/docs/getting-support"
   },
   {
+    "name": "infra-manager",
+    "name_pretty": "Infrastructure Manager API",
+    "product_documentation": "https://cloud.google.com/infrastructure-manager/docs/overview",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/infra-manager/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/config",
+    "api_id": "config.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "infra-manager",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-config",
+    "support_documentation": "https://cloud.google.com/infrastructure-manager/docs/getting-support"
+  },
+  {
     "name": "lifesciences",
     "name_pretty": "Life Sciences",
     "product_documentation": "https://cloud.google.com/life-sciences/",
@@ -2701,6 +2719,24 @@
     "api_shortname": "migrationcenter",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-migrationcenter",
     "support_documentation": "https://cloud.google.com/migration-center/docs/getting-support"
+  },
+  {
+    "name": "netapp",
+    "name_pretty": "NetApp API",
+    "product_documentation": "https://cloud.google.com/netapp/volumes/docs/discover/overview",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/netapp/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/netapp",
+    "api_id": "netapp.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "netapp",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-netapp",
+    "support_documentation": "https://cloud.google.com/netapp/volumes/docs/getting-support"
   },
   {
     "name": "networksecurity",

@@ -1,4 +1,5 @@
 [
+  "../../protos/google/cloud/channel/v1/billing_accounts.proto",
   "../../protos/google/cloud/channel/v1/channel_partner_links.proto",
   "../../protos/google/cloud/channel/v1/common.proto",
   "../../protos/google/cloud/channel/v1/customers.proto",
