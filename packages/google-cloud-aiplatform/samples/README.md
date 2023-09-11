@@ -392,6 +392,7 @@
   * [Persistent_resource_service.delete_persistent_resource](#persistent_resource_service.delete_persistent_resource)
   * [Persistent_resource_service.get_persistent_resource](#persistent_resource_service.get_persistent_resource)
   * [Persistent_resource_service.list_persistent_resources](#persistent_resource_service.list_persistent_resources)
+  * [Persistent_resource_service.update_persistent_resource](#persistent_resource_service.update_persistent_resource)
   * [Pipeline_service.cancel_pipeline_job](#pipeline_service.cancel_pipeline_job)
   * [Pipeline_service.cancel_training_pipeline](#pipeline_service.cancel_training_pipeline)
   * [Pipeline_service.create_pipeline_job](#pipeline_service.create_pipeline_job)
@@ -6934,6 +6935,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.list_persistent_resources.js`
+
+
+-----
+
+
+
+
+### Persistent_resource_service.update_persistent_resource
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.update_persistent_resource.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.update_persistent_resource.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/persistent_resource_service.update_persistent_resource.js`
 
 
 -----
