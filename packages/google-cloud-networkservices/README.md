@@ -81,7 +81,8 @@ npm install @google-cloud/networkservices
 // const pageToken = 'abc123'
 
 // Imports the Networkservices library
-const {NetworkServicesClient} = require('@google-cloud/networkservices').v1beta1;
+const {NetworkServicesClient} =
+  require('@google-cloud/networkservices').v1beta1;
 
 // Instantiates a client
 const networkservicesClient = new NetworkServicesClient();
@@ -93,9 +94,11 @@ async function callListEndpointPolicies() {
   };
 
   // Run request
-  const iterable = await networkservicesClient.listEndpointPoliciesAsync(request);
+  const iterable = await networkservicesClient.listEndpointPoliciesAsync(
+    request
+  );
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
