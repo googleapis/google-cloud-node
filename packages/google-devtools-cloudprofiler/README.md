@@ -84,7 +84,11 @@ const cloudprofilerClient = new ProfilerServiceClient();
 
 async function callCreateProfile() {
   // Construct request
-  const request = {project, deployment: {projectId, target}, profileType: [profileType]};
+  const request = {
+    project,
+    deployment: {projectId, target},
+    profileType: [profileType],
+  };
 
   // Run request
   const response = await cloudprofilerClient.createProfile(request);
