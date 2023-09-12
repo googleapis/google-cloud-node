@@ -2793,6 +2793,24 @@
     "support_documentation": "https://developers.google.com/maps/documentation/places/web-service/docs/getting-support"
   },
   {
+    "name": "iam",
+    "name_pretty": "Policy Troubleshooter API",
+    "product_documentation": "cloud.google.com/iam/",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/iam/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/policy-troubleshooter-iam",
+    "api_id": "policytroubleshooter.googleapis.com",
+    "default_version": "v3beta",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "iam",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-policytroubleshooter-iam",
+    "support_documentation": "https://cloud.google.com/iam/docs/getting-support"
+  },
+  {
     "name": "cloudprivatecatalog",
     "name_pretty": "Private Catalog",
     "product_documentation": "https://cloud.google.com/private-catalog/",

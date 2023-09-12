@@ -21,6 +21,8 @@ const networkconnectivity = require('@google-cloud/network-connectivity');
 
 function main() {
   const hubServiceClient = new networkconnectivity.HubServiceClient();
+  const policyBasedRoutingServiceClient =
+    new networkconnectivity.PolicyBasedRoutingServiceClient();
 }
 
 main();
