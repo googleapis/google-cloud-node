@@ -147,7 +147,8 @@
     "packages/google-cloud-commerce-consumer-procurement": {},
     "packages/google-cloud-policytroubleshooter-iam": {},
     "packages/google-cloud-config": {},
-    "packages/google-cloud-netapp": {}
+    "packages/google-cloud-netapp": {},
+    "packages/google-cloud-edgecontainer": {}
   },
   "plugins": [
     {

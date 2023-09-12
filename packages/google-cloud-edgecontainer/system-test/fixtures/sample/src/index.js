@@ -16,10 +16,11 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as v1 from './v1';
-const EdgeContainerClient = v1.EdgeContainerClient;
-type EdgeContainerClient = v1.EdgeContainerClient;
-export {v1, EdgeContainerClient};
-export default {v1, EdgeContainerClient};
-import * as protos from '../protos/protos';
-export {protos}
+/* eslint-disable node/no-missing-require, no-unused-vars */
+const edgecontainer = require('@google-cloud/edgecontainer');
+
+function main() {
+  const edgeContainerClient = new edgecontainer.EdgeContainerClient();
+}
+
+main();
