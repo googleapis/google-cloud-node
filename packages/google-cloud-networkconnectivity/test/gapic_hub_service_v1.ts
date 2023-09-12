@@ -3439,6 +3439,62 @@ describe('v1.HubServiceClient', () => {
       });
     });
 
+    describe('policyBasedRoute', () => {
+      const fakePath = '/rendered/path/policyBasedRoute';
+      const expectedParameters = {
+        project: 'projectValue',
+        policy_based_route: 'policyBasedRouteValue',
+      };
+      const client = new hubserviceModule.v1.HubServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.policyBasedRoutePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.policyBasedRoutePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('policyBasedRoutePath', () => {
+        const result = client.policyBasedRoutePath(
+          'projectValue',
+          'policyBasedRouteValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.policyBasedRoutePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromPolicyBasedRouteName', () => {
+        const result = client.matchProjectFromPolicyBasedRouteName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.policyBasedRoutePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPolicyBasedRouteFromPolicyBasedRouteName', () => {
+        const result =
+          client.matchPolicyBasedRouteFromPolicyBasedRouteName(fakePath);
+        assert.strictEqual(result, 'policyBasedRouteValue');
+        assert(
+          (client.pathTemplates.policyBasedRoutePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('spoke', () => {
       const fakePath = '/rendered/path/spoke';
       const expectedParameters = {
