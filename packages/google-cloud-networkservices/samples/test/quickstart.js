@@ -18,8 +18,8 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {Client} = require('@google-cloud/networkservices').v1;
-const networkservicesClient = new Client();
+const {NetworkServicesClient} = require('@google-cloud/networkservices').v1;
+const networkservicesClient = new NetworkServicesClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
