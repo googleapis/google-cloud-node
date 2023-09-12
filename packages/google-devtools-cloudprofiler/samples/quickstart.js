@@ -18,7 +18,7 @@
 
 'use strict';
 
-function main() {
+function main(project, projectId, target, profileType) {
   // [START cloudprofiler_quickstart]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -47,7 +47,7 @@ function main() {
 
   async function callCreateProfile() {
     // Construct request
-    const request = {};
+    const request = {project, deployment: {projectId, target}, profileType: [profileType]};
 
     // Run request
     const response = await cloudprofilerClient.createProfile(request);
