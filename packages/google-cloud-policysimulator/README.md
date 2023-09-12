@@ -58,58 +58,44 @@ npm install @google-cloud/policysimulator
 
 ```javascript
 /**
- * This snippet has been automatically generated and should be regarded as a code template only.
- * It will require modifications to work.
- * It may require correct/in-range values for request initialization.
- * TODO(developer): Uncomment these variables before running the sample.
- */
-/**
- *  Required. The Replay google.cloud.policysimulator.v1.Replay  whose
- *  results are listed, in the following format:
- *  `{projects|folders|organizations}/{resource-id}/locations/global/replays/{replay-id}`
- *  Example:
- *  `projects/my-project/locations/global/replays/506a5f7f-38ce-4d7d-8e03-479ce1833c36`
- */
-// const parent = 'abc123'
-/**
- *  The maximum number of
- *  ReplayResult google.cloud.policysimulator.v1.ReplayResult  objects to
- *  return. Defaults to 5000.
- *  The maximum value is 5000; values above 5000 are rounded down to 5000.
- */
-// const pageSize = 1234
-/**
- *  A page token, received from a previous
- *  Simulator.ListReplayResults google.cloud.policysimulator.v1.Simulator.ListReplayResults
- *  call. Provide this token to retrieve the next page of results.
- *  When paginating, all other parameters provided to
- *  Simulator.ListReplayResults  must match the call that provided the page
- *  token.
- */
-// const pageToken = 'abc123'
+  * This snippet has been automatically generated and should be regarded as a code template only.
+  * It will require modifications to work.
+  * It may require correct/in-range values for request initialization.
+  * TODO(developer): Uncomment these variables before running the sample.
+  */
+ /**
+  *  Required. The parent resource where this
+  *  Replay google.cloud.policysimulator.v1.Replay  will be created. This
+  *  resource must be a project, folder, or organization with a location.
+  *  Example: `projects/my-example-project/locations/global`
+  */
+ // const parent = 'abc123'
+ /**
+  *  Required. The Replay google.cloud.policysimulator.v1.Replay  to create.
+  *  Set `Replay.ReplayConfig` to configure the replay.
+  */
+ // const replay = {}
 
-// Imports the Policysimulator library
-const {SimulatorClient} = require('@google-cloud/policysimulator').v1;
+ // Imports the Policysimulator library
+ const {SimulatorClient} = require('@google-cloud/policysimulator').v1;
 
-// Instantiates a client
-const policysimulatorClient = new SimulatorClient();
+ // Instantiates a client
+ const policysimulatorClient = new SimulatorClient();
 
-async function callListReplayResults() {
-  // Construct request
-  const request = {
-    parent,
-  };
+ async function callCreateReplay() {
+   // Construct request
+   const request = {
+     parent,
+     replay,
+   };
 
-  // Run request
-  const iterable = await policysimulatorClient.listReplayResultsAsync(
-    request
-  );
-  for await (const response of iterable) {
-    console.log(response);
-  }
-}
+   // Run request
+   const [operation] = await policysimulatorClient.createReplay(request);
+   const [response] = await operation.promise();
+   console.log(response);
+ }
 
-callListReplayResults();
+ callCreateReplay();
 
 ```
 
