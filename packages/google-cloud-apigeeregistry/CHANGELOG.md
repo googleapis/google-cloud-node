@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/googleapis/nodejs-apigee-registry/compare/v1.0.0...v1.0.1) (2023-09-07)
+
+
+### Bug Fixes
+
+* Simplify logic for HTTP/1.1 REST fallback option ([#54](https://github.com/googleapis/nodejs-apigee-registry/issues/54)) ([c873226](https://github.com/googleapis/nodejs-apigee-registry/commit/c87322645e01d1e1cf989aa5f8502876d7b77230))
+
 ## [1.0.0](https://github.com/googleapis/nodejs-apigee-registry/compare/v0.3.0...v1.0.0) (2023-08-15)
 
 
