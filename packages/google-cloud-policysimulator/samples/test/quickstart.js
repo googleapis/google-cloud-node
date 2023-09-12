@@ -18,8 +18,8 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {Client} = require('@google-cloud/policysimulator').v1;
-const policysimulatorClient = new Client();
+const {SimulatorClient} = require('@google-cloud/policysimulator').v1;
+const policysimulatorClient = new SimulatorClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
