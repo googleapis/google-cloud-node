@@ -18,7 +18,12 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -99,14 +104,22 @@ export class ProfilerServiceClient {
    *     const client = new ProfilerServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ProfilerServiceClient;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -132,7 +145,7 @@ export class ProfilerServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -146,10 +159,7 @@ export class ProfilerServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -180,8 +190,11 @@ export class ProfilerServiceClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.devtools.cloudprofiler.v2.ProfilerService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.devtools.cloudprofiler.v2.ProfilerService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      {'x-goog-api-client': clientHeader.join(' ')}
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -212,31 +225,40 @@ export class ProfilerServiceClient {
     // Put together the "service stub" for
     // google.devtools.cloudprofiler.v2.ProfilerService.
     this.profilerServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.devtools.cloudprofiler.v2.ProfilerService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.devtools.cloudprofiler.v2.ProfilerService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.devtools.cloudprofiler.v2.ProfilerService'
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.devtools.cloudprofiler.v2
+            .ProfilerService,
+      this._opts,
+      this._providedCustomServicePath
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const profilerServiceStubMethods =
-        ['createProfile', 'createOfflineProfile', 'updateProfile'];
+    const profilerServiceStubMethods = [
+      'createProfile',
+      'createOfflineProfile',
+      'updateProfile',
+    ];
     for (const methodName of profilerServiceStubMethods) {
       const callPromise = this.profilerServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        }
+      );
 
-      const descriptor =
-        undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -284,7 +306,7 @@ export class ProfilerServiceClient {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
       'https://www.googleapis.com/auth/monitoring',
-      'https://www.googleapis.com/auth/monitoring.write'
+      'https://www.googleapis.com/auth/monitoring.write',
     ];
   }
 
@@ -294,8 +316,9 @@ export class ProfilerServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -306,242 +329,308 @@ export class ProfilerServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * CreateProfile creates a new profile resource in the online mode.
- *
- * The server ensures that the new profiles are created at a constant rate per
- * deployment, so the creation request may hang for some time until the next
- * profile session is available.
- *
- * The request may fail with ABORTED error if the creation is not available
- * within ~1m, the response will indicate the duration of the backoff the
- * client should take before attempting creating a profile again. The backoff
- * duration is returned in google.rpc.RetryInfo extension on the response
- * status. To a gRPC client, the extension will be return as a
- * binary-serialized proto in the trailing metadata item named
- * "google.rpc.retryinfo-bin".
- *
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Parent project to create the profile in.
- * @param {google.devtools.cloudprofiler.v2.Deployment} request.deployment
- *   Deployment details.
- * @param {number[]} request.profileType
- *   One or more profile types that the agent is capable of providing.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.devtools.cloudprofiler.v2.Profile|Profile}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/profiler_service.create_profile.js</caption>
- * region_tag:cloudprofiler_v2_generated_ProfilerService_CreateProfile_async
- */
+  /**
+   * CreateProfile creates a new profile resource in the online mode.
+   *
+   * The server ensures that the new profiles are created at a constant rate per
+   * deployment, so the creation request may hang for some time until the next
+   * profile session is available.
+   *
+   * The request may fail with ABORTED error if the creation is not available
+   * within ~1m, the response will indicate the duration of the backoff the
+   * client should take before attempting creating a profile again. The backoff
+   * duration is returned in google.rpc.RetryInfo extension on the response
+   * status. To a gRPC client, the extension will be return as a
+   * binary-serialized proto in the trailing metadata item named
+   * "google.rpc.retryinfo-bin".
+   *
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Parent project to create the profile in.
+   * @param {google.devtools.cloudprofiler.v2.Deployment} request.deployment
+   *   Deployment details.
+   * @param {number[]} request.profileType
+   *   One or more profile types that the agent is capable of providing.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.devtools.cloudprofiler.v2.Profile|Profile}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/profiler_service.create_profile.js</caption>
+   * region_tag:cloudprofiler_v2_generated_ProfilerService_CreateProfile_async
+   */
   createProfile(
-      request?: protos.google.devtools.cloudprofiler.v2.ICreateProfileRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.devtools.cloudprofiler.v2.IProfile,
-        protos.google.devtools.cloudprofiler.v2.ICreateProfileRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.devtools.cloudprofiler.v2.ICreateProfileRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.devtools.cloudprofiler.v2.IProfile,
+      protos.google.devtools.cloudprofiler.v2.ICreateProfileRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   createProfile(
-      request: protos.google.devtools.cloudprofiler.v2.ICreateProfileRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.devtools.cloudprofiler.v2.IProfile,
-          protos.google.devtools.cloudprofiler.v2.ICreateProfileRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.devtools.cloudprofiler.v2.ICreateProfileRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.devtools.cloudprofiler.v2.IProfile,
+      | protos.google.devtools.cloudprofiler.v2.ICreateProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createProfile(
-      request: protos.google.devtools.cloudprofiler.v2.ICreateProfileRequest,
-      callback: Callback<
-          protos.google.devtools.cloudprofiler.v2.IProfile,
-          protos.google.devtools.cloudprofiler.v2.ICreateProfileRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.devtools.cloudprofiler.v2.ICreateProfileRequest,
+    callback: Callback<
+      protos.google.devtools.cloudprofiler.v2.IProfile,
+      | protos.google.devtools.cloudprofiler.v2.ICreateProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createProfile(
-      request?: protos.google.devtools.cloudprofiler.v2.ICreateProfileRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.devtools.cloudprofiler.v2.ICreateProfileRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.devtools.cloudprofiler.v2.IProfile,
-          protos.google.devtools.cloudprofiler.v2.ICreateProfileRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.devtools.cloudprofiler.v2.IProfile,
-          protos.google.devtools.cloudprofiler.v2.ICreateProfileRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.devtools.cloudprofiler.v2.IProfile,
-        protos.google.devtools.cloudprofiler.v2.ICreateProfileRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.devtools.cloudprofiler.v2.ICreateProfileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.devtools.cloudprofiler.v2.IProfile,
+      | protos.google.devtools.cloudprofiler.v2.ICreateProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.devtools.cloudprofiler.v2.IProfile,
+      protos.google.devtools.cloudprofiler.v2.ICreateProfileRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     this.initialize();
     return this.innerApiCalls.createProfile(request, options, callback);
   }
-/**
- * CreateOfflineProfile creates a new profile resource in the offline mode.
- * The client provides the profile to create along with the profile bytes, the
- * server records it.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Parent project to create the profile in.
- * @param {google.devtools.cloudprofiler.v2.Profile} request.profile
- *   Contents of the profile to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.devtools.cloudprofiler.v2.Profile|Profile}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/profiler_service.create_offline_profile.js</caption>
- * region_tag:cloudprofiler_v2_generated_ProfilerService_CreateOfflineProfile_async
- */
+  /**
+   * CreateOfflineProfile creates a new profile resource in the offline mode.
+   * The client provides the profile to create along with the profile bytes, the
+   * server records it.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Parent project to create the profile in.
+   * @param {google.devtools.cloudprofiler.v2.Profile} request.profile
+   *   Contents of the profile to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.devtools.cloudprofiler.v2.Profile|Profile}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/profiler_service.create_offline_profile.js</caption>
+   * region_tag:cloudprofiler_v2_generated_ProfilerService_CreateOfflineProfile_async
+   */
   createOfflineProfile(
-      request?: protos.google.devtools.cloudprofiler.v2.ICreateOfflineProfileRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.devtools.cloudprofiler.v2.IProfile,
-        protos.google.devtools.cloudprofiler.v2.ICreateOfflineProfileRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.devtools.cloudprofiler.v2.ICreateOfflineProfileRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.devtools.cloudprofiler.v2.IProfile,
+      (
+        | protos.google.devtools.cloudprofiler.v2.ICreateOfflineProfileRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createOfflineProfile(
-      request: protos.google.devtools.cloudprofiler.v2.ICreateOfflineProfileRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.devtools.cloudprofiler.v2.IProfile,
-          protos.google.devtools.cloudprofiler.v2.ICreateOfflineProfileRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.devtools.cloudprofiler.v2.ICreateOfflineProfileRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.devtools.cloudprofiler.v2.IProfile,
+      | protos.google.devtools.cloudprofiler.v2.ICreateOfflineProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createOfflineProfile(
-      request: protos.google.devtools.cloudprofiler.v2.ICreateOfflineProfileRequest,
-      callback: Callback<
-          protos.google.devtools.cloudprofiler.v2.IProfile,
-          protos.google.devtools.cloudprofiler.v2.ICreateOfflineProfileRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.devtools.cloudprofiler.v2.ICreateOfflineProfileRequest,
+    callback: Callback<
+      protos.google.devtools.cloudprofiler.v2.IProfile,
+      | protos.google.devtools.cloudprofiler.v2.ICreateOfflineProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   createOfflineProfile(
-      request?: protos.google.devtools.cloudprofiler.v2.ICreateOfflineProfileRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.devtools.cloudprofiler.v2.ICreateOfflineProfileRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.devtools.cloudprofiler.v2.IProfile,
-          protos.google.devtools.cloudprofiler.v2.ICreateOfflineProfileRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.devtools.cloudprofiler.v2.IProfile,
-          protos.google.devtools.cloudprofiler.v2.ICreateOfflineProfileRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.devtools.cloudprofiler.v2.IProfile,
-        protos.google.devtools.cloudprofiler.v2.ICreateOfflineProfileRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.devtools.cloudprofiler.v2.ICreateOfflineProfileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.devtools.cloudprofiler.v2.IProfile,
+      | protos.google.devtools.cloudprofiler.v2.ICreateOfflineProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.devtools.cloudprofiler.v2.IProfile,
+      (
+        | protos.google.devtools.cloudprofiler.v2.ICreateOfflineProfileRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     this.initialize();
     return this.innerApiCalls.createOfflineProfile(request, options, callback);
   }
-/**
- * UpdateProfile updates the profile bytes and labels on the profile resource
- * created in the online mode. Updating the bytes for profiles created in the
- * offline mode is currently not supported: the profile content must be
- * provided at the time of the profile creation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.devtools.cloudprofiler.v2.Profile} request.profile
- *   Profile to update.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Field mask used to specify the fields to be overwritten. Currently only
- *   profile_bytes and labels fields are supported by UpdateProfile, so only
- *   those fields can be specified in the mask. When no mask is provided, all
- *   fields are overwritten.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.devtools.cloudprofiler.v2.Profile|Profile}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/profiler_service.update_profile.js</caption>
- * region_tag:cloudprofiler_v2_generated_ProfilerService_UpdateProfile_async
- */
+  /**
+   * UpdateProfile updates the profile bytes and labels on the profile resource
+   * created in the online mode. Updating the bytes for profiles created in the
+   * offline mode is currently not supported: the profile content must be
+   * provided at the time of the profile creation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.devtools.cloudprofiler.v2.Profile} request.profile
+   *   Profile to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Field mask used to specify the fields to be overwritten. Currently only
+   *   profile_bytes and labels fields are supported by UpdateProfile, so only
+   *   those fields can be specified in the mask. When no mask is provided, all
+   *   fields are overwritten.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.devtools.cloudprofiler.v2.Profile|Profile}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/profiler_service.update_profile.js</caption>
+   * region_tag:cloudprofiler_v2_generated_ProfilerService_UpdateProfile_async
+   */
   updateProfile(
-      request?: protos.google.devtools.cloudprofiler.v2.IUpdateProfileRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.devtools.cloudprofiler.v2.IProfile,
-        protos.google.devtools.cloudprofiler.v2.IUpdateProfileRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.devtools.cloudprofiler.v2.IUpdateProfileRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.devtools.cloudprofiler.v2.IProfile,
+      protos.google.devtools.cloudprofiler.v2.IUpdateProfileRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   updateProfile(
-      request: protos.google.devtools.cloudprofiler.v2.IUpdateProfileRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.devtools.cloudprofiler.v2.IProfile,
-          protos.google.devtools.cloudprofiler.v2.IUpdateProfileRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.devtools.cloudprofiler.v2.IUpdateProfileRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.devtools.cloudprofiler.v2.IProfile,
+      | protos.google.devtools.cloudprofiler.v2.IUpdateProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   updateProfile(
-      request: protos.google.devtools.cloudprofiler.v2.IUpdateProfileRequest,
-      callback: Callback<
-          protos.google.devtools.cloudprofiler.v2.IProfile,
-          protos.google.devtools.cloudprofiler.v2.IUpdateProfileRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.devtools.cloudprofiler.v2.IUpdateProfileRequest,
+    callback: Callback<
+      protos.google.devtools.cloudprofiler.v2.IProfile,
+      | protos.google.devtools.cloudprofiler.v2.IUpdateProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   updateProfile(
-      request?: protos.google.devtools.cloudprofiler.v2.IUpdateProfileRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.devtools.cloudprofiler.v2.IUpdateProfileRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.devtools.cloudprofiler.v2.IProfile,
-          protos.google.devtools.cloudprofiler.v2.IUpdateProfileRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.devtools.cloudprofiler.v2.IProfile,
-          protos.google.devtools.cloudprofiler.v2.IUpdateProfileRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.devtools.cloudprofiler.v2.IProfile,
-        protos.google.devtools.cloudprofiler.v2.IUpdateProfileRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.devtools.cloudprofiler.v2.IUpdateProfileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.devtools.cloudprofiler.v2.IProfile,
+      | protos.google.devtools.cloudprofiler.v2.IUpdateProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.devtools.cloudprofiler.v2.IProfile,
+      protos.google.devtools.cloudprofiler.v2.IUpdateProfileRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'profile.name': request.profile!.name ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'profile.name': request.profile!.name ?? '',
+      });
     this.initialize();
     return this.innerApiCalls.updateProfile(request, options, callback);
   }
@@ -557,7 +646,7 @@ export class ProfilerServiceClient {
    * @param {string} profile
    * @returns {string} Resource name string.
    */
-  profilePath(project:string,profile:string) {
+  profilePath(project: string, profile: string) {
     return this.pathTemplates.profilePathTemplate.render({
       project: project,
       profile: profile,
@@ -592,7 +681,7 @@ export class ProfilerServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });

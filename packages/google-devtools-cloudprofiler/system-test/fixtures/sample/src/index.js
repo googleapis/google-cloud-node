@@ -16,10 +16,11 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as v2 from './v2';
-const ProfilerServiceClient = v2.ProfilerServiceClient;
-type ProfilerServiceClient = v2.ProfilerServiceClient;
-export {v2, ProfilerServiceClient};
-export default {v2, ProfilerServiceClient};
-import * as protos from '../protos/protos';
-export {protos}
+/* eslint-disable node/no-missing-require, no-unused-vars */
+const cloudprofiler = require('@google-cloud/cloudprofiler');
+
+function main() {
+  const profilerServiceClient = new cloudprofiler.ProfilerServiceClient();
+}
+
+main();
