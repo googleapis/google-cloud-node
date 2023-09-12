@@ -84,8 +84,7 @@ const cloudprofilerClient = new ProfilerServiceClient();
 
 async function callCreateProfile() {
   // Construct request
-  const request = {
-  };
+  const request = {};
 
   // Run request
   const response = await cloudprofilerClient.createProfile(request);
