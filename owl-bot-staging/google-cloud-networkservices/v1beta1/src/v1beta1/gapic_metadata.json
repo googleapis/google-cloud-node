@@ -1,0 +1,77 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.networkservices.v1beta1",
+  "libraryPackage": "@google-cloud/networkservices",
+  "services": {
+    "NetworkServices": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "NetworkServicesClient",
+          "rpcs": {
+            "GetEndpointPolicy": {
+              "methods": [
+                "getEndpointPolicy"
+              ]
+            },
+            "CreateEndpointPolicy": {
+              "methods": [
+                "createEndpointPolicy"
+              ]
+            },
+            "UpdateEndpointPolicy": {
+              "methods": [
+                "updateEndpointPolicy"
+              ]
+            },
+            "DeleteEndpointPolicy": {
+              "methods": [
+                "deleteEndpointPolicy"
+              ]
+            },
+            "ListEndpointPolicies": {
+              "methods": [
+                "listEndpointPolicies",
+                "listEndpointPoliciesStream",
+                "listEndpointPoliciesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "NetworkServicesClient",
+          "rpcs": {
+            "GetEndpointPolicy": {
+              "methods": [
+                "getEndpointPolicy"
+              ]
+            },
+            "CreateEndpointPolicy": {
+              "methods": [
+                "createEndpointPolicy"
+              ]
+            },
+            "UpdateEndpointPolicy": {
+              "methods": [
+                "updateEndpointPolicy"
+              ]
+            },
+            "DeleteEndpointPolicy": {
+              "methods": [
+                "deleteEndpointPolicy"
+              ]
+            },
+            "ListEndpointPolicies": {
+              "methods": [
+                "listEndpointPolicies",
+                "listEndpointPoliciesStream",
+                "listEndpointPoliciesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
