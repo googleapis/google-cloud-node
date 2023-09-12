@@ -209,6 +209,9 @@ export class HubServiceClient {
       networkPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/global/networks/{resource_id}'
       ),
+      policyBasedRoutePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/global/PolicyBasedRoutes/{policy_based_route}'
+      ),
       spokePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/spokes/{spoke}'
       ),
@@ -2653,6 +2656,46 @@ export class HubServiceClient {
   matchResourceIdFromNetworkName(networkName: string) {
     return this.pathTemplates.networkPathTemplate.match(networkName)
       .resource_id;
+  }
+
+  /**
+   * Return a fully-qualified policyBasedRoute resource name string.
+   *
+   * @param {string} project
+   * @param {string} policy_based_route
+   * @returns {string} Resource name string.
+   */
+  policyBasedRoutePath(project: string, policyBasedRoute: string) {
+    return this.pathTemplates.policyBasedRoutePathTemplate.render({
+      project: project,
+      policy_based_route: policyBasedRoute,
+    });
+  }
+
+  /**
+   * Parse the project from PolicyBasedRoute resource.
+   *
+   * @param {string} policyBasedRouteName
+   *   A fully-qualified path representing PolicyBasedRoute resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPolicyBasedRouteName(policyBasedRouteName: string) {
+    return this.pathTemplates.policyBasedRoutePathTemplate.match(
+      policyBasedRouteName
+    ).project;
+  }
+
+  /**
+   * Parse the policy_based_route from PolicyBasedRoute resource.
+   *
+   * @param {string} policyBasedRouteName
+   *   A fully-qualified path representing PolicyBasedRoute resource.
+   * @returns {string} A string representing the policy_based_route.
+   */
+  matchPolicyBasedRouteFromPolicyBasedRouteName(policyBasedRouteName: string) {
+    return this.pathTemplates.policyBasedRoutePathTemplate.match(
+      policyBasedRouteName
+    ).policy_based_route;
   }
 
   /**
