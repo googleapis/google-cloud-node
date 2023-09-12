@@ -58,44 +58,44 @@ npm install @google-cloud/policysimulator
 
 ```javascript
 /**
-  * This snippet has been automatically generated and should be regarded as a code template only.
-  * It will require modifications to work.
-  * It may require correct/in-range values for request initialization.
-  * TODO(developer): Uncomment these variables before running the sample.
-  */
- /**
-  *  Required. The parent resource where this
-  *  Replay google.cloud.policysimulator.v1.Replay  will be created. This
-  *  resource must be a project, folder, or organization with a location.
-  *  Example: `projects/my-example-project/locations/global`
-  */
- // const parent = 'abc123'
- /**
-  *  Required. The Replay google.cloud.policysimulator.v1.Replay  to create.
-  *  Set `Replay.ReplayConfig` to configure the replay.
-  */
- // const replay = {}
+ * This snippet has been automatically generated and should be regarded as a code template only.
+ * It will require modifications to work.
+ * It may require correct/in-range values for request initialization.
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+/**
+ *  Required. The parent resource where this
+ *  Replay google.cloud.policysimulator.v1.Replay  will be created. This
+ *  resource must be a project, folder, or organization with a location.
+ *  Example: `projects/my-example-project/locations/global`
+ */
+// const parent = 'abc123'
+/**
+ *  Required. The Replay google.cloud.policysimulator.v1.Replay  to create.
+ *  Set `Replay.ReplayConfig` to configure the replay.
+ */
+// const replay = {}
 
- // Imports the Policysimulator library
- const {SimulatorClient} = require('@google-cloud/policysimulator').v1;
+// Imports the Policysimulator library
+const {SimulatorClient} = require('@google-cloud/policysimulator').v1;
 
- // Instantiates a client
- const policysimulatorClient = new SimulatorClient();
+// Instantiates a client
+const policysimulatorClient = new SimulatorClient();
 
- async function callCreateReplay() {
-   // Construct request
-   const request = {
-     parent,
-     replay,
-   };
+async function callCreateReplay() {
+  // Construct request
+  const request = {
+    parent,
+    replay,
+  };
 
-   // Run request
-   const [operation] = await policysimulatorClient.createReplay(request);
-   const [response] = await operation.promise();
-   console.log(response);
- }
+  // Run request
+  const [operation] = await policysimulatorClient.createReplay(request);
+  const [response] = await operation.promise();
+  console.log(response);
+}
 
- callCreateReplay();
+callCreateReplay();
 
 ```
 
