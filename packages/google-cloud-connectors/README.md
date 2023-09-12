@@ -101,9 +101,11 @@ async function callListRuntimeEntitySchemas() {
   };
 
   // Run request
-  const iterable = await connectorsClient.listRuntimeEntitySchemasAsync(request);
+  const iterable = await connectorsClient.listRuntimeEntitySchemasAsync(
+    request
+  );
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
