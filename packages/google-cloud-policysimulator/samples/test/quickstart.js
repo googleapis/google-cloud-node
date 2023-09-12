@@ -37,7 +37,7 @@ describe('Quickstart', () => {
       `node ./quickstart.js projects/${projectId}/locations/global`,
       {cwd}
     );
-    console.log(output);    
+    console.log(output);
     assert(output !== null);
   });
 });
