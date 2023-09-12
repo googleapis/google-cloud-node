@@ -80,7 +80,7 @@ npm install @google-cloud/policysimulator
 // const pageSize = 1234
 /**
  *  A page token, received from a previous
- *  Simulator.ListReplayResults google.cloud.policysimulator.v1.Simulator.ListReplayResults 
+ *  Simulator.ListReplayResults google.cloud.policysimulator.v1.Simulator.ListReplayResults
  *  call. Provide this token to retrieve the next page of results.
  *  When paginating, all other parameters provided to
  *  Simulator.ListReplayResults  must match the call that provided the page
@@ -101,9 +101,11 @@ async function callListReplayResults() {
   };
 
   // Run request
-  const iterable = await policysimulatorClient.listReplayResultsAsync(request);
+  const iterable = await policysimulatorClient.listReplayResultsAsync(
+    request
+  );
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
