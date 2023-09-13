@@ -64,9 +64,8 @@ npm install @google-cloud/connectors
  * TODO(developer): Uncomment these variables before running the sample.
  */
 /**
- *  Required. Parent resource of RuntimeEntitySchema
- *  Format:
- *  projects/{project}/locations/{location}/connections/{connection}
+ *  Required. Parent resource of the Connection, of the form:
+ *  `projects/* /locations/*`
  */
 // const parent = 'abc123'
 /**
@@ -78,14 +77,18 @@ npm install @google-cloud/connectors
  */
 // const pageToken = 'abc123'
 /**
- *  Required. Filter
- *  Format:
- *  entity="{entityId}"
- *  Only entity field is supported with literal equality operator.
- *  Accepted filter example: entity="Order"
- *  Wildcards are not supported in the filter currently.
+ *  Filter.
  */
 // const filter = 'abc123'
+/**
+ *  Order by parameters.
+ */
+// const orderBy = 'abc123'
+/**
+ *  Specifies which fields of the Connection are returned in the response.
+ *  Defaults to `BASIC` view.
+ */
+// const view = {}
 
 // Imports the Connectors library
 const {ConnectorsClient} = require('@google-cloud/connectors').v1;
@@ -93,23 +96,20 @@ const {ConnectorsClient} = require('@google-cloud/connectors').v1;
 // Instantiates a client
 const connectorsClient = new ConnectorsClient();
 
-async function callListRuntimeEntitySchemas() {
+async function callListConnections() {
   // Construct request
   const request = {
     parent,
-    filter,
   };
 
   // Run request
-  const iterable = await connectorsClient.listRuntimeEntitySchemasAsync(
-    request
-  );
+  const iterable = await connectorsClient.listConnectionsAsync(request);
   for await (const response of iterable) {
     console.log(response);
   }
 }
 
-callListRuntimeEntitySchemas();
+callListConnections();
 
 ```
 
