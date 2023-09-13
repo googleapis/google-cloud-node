@@ -148,6 +148,7 @@
     "packages/google-cloud-policytroubleshooter-iam": {},
     "packages/google-cloud-config": {},
     "packages/google-cloud-netapp": {},
+    "packages/google-cloud-policysimulator": {},
     "packages/google-cloud-edgecontainer": {},
     "packages/google-devtools-cloudprofiler": {},
     "packages/google-cloud-networkservices": {}
