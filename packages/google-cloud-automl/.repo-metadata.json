@@ -2,7 +2,7 @@
   "distribution_name": "@google-cloud/automl",
   "release_level": "stable",
   "product_documentation": "https://cloud.google.com/automl/docs/",
-  "repo": "googleapis/nodejs-automl",
+  "repo": "googleapis/google-cloud-node",
   "default_version": "v1",
   "language": "nodejs",
   "requires_billing": true,
