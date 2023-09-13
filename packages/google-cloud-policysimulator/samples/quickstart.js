@@ -18,7 +18,7 @@
 
 'use strict';
 
-function main(parent) {
+function main(parent, replayName) {
   // [START policysimulator_quickstart]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
