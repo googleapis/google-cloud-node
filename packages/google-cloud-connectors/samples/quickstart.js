@@ -18,7 +18,7 @@
 
 'use strict';
 
-function main(parent, filter) {
+function main(parent) {
   // [START connectors_quickstart]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
