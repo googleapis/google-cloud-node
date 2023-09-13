@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+## [4.0.1](https://github.com/googleapis/nodejs-automl/compare/v4.0.0...v4.0.1) (2023-09-07)
+
+
+### Bug Fixes
+
+* Simplify logic for HTTP/1.1 REST fallback option ([#795](https://github.com/googleapis/nodejs-automl/issues/795)) ([a07f5cb](https://github.com/googleapis/nodejs-automl/commit/a07f5cb7b158fcccdca3e087f673e98e05bcded0))
+
 ## [4.0.0](https://github.com/googleapis/nodejs-automl/compare/v3.1.3...v4.0.0) (2023-08-10)
 
 
