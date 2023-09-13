@@ -2116,8 +2116,8 @@
     "support_documentation": "https://cloud.google.com/security-scanner/docs/getting-support"
   },
   {
-    "name": "workflows",
-    "name_pretty": "Workflows",
+    "name": "workflowexecutions",
+    "name_pretty": "Workflow Executions",
     "product_documentation": "https://cloud.google.com/workflows/docs/",
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/workflows/latest",
     "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
@@ -2125,10 +2125,10 @@
     "language": "nodejs",
     "repo": "googleapis/google-cloud-node",
     "distribution_name": "@google-cloud/workflows",
-    "api_id": "workflows.googleapis.com",
+    "api_id": "workflowexecutions.googleapis.com",
     "requires_billing": true,
     "default_version": "v1",
-    "api_shortname": "workflows",
+    "api_shortname": "workflowexecutions",
     "library_type": "GAPIC_AUTO",
     "codeowner_team": "@googleapis/aap-dpes",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-workflows-executions",
@@ -2680,7 +2680,7 @@
     "default_version": "v1",
     "requires_billing": true,
     "library_type": "GAPIC_AUTO",
-    "api_shortname": "infra-manager",
+    "api_shortname": "config",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-config",
     "support_documentation": "https://cloud.google.com/infrastructure-manager/docs/getting-support"
   },
