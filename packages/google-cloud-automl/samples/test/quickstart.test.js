@@ -30,9 +30,7 @@ describe('Automl List Dataset Tests', () => {
 
   it('should list datasets', async () => {
     const projectId = await client.getProjectId();
-    const list_output = execSync(
-      `node quickstart.js ${projectId} ${LOCATION}`
-    );
+    const list_output = execSync(`node quickstart.js ${projectId} ${LOCATION}`);
 
     assert.match(list_output, /Dataset id/);
   });
