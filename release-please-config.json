@@ -16,6 +16,7 @@
     "packages/google-cloud-alloydb": {},
     "packages/google-cloud-apigateway": {},
     "packages/google-cloud-apigeeconnect": {},
+    "packages/google-cloud-apigeeregistry": {},
     "packages/google-cloud-asset": {},
     "packages/google-cloud-assuredworkloads": {},
     "packages/google-cloud-automl": {},
@@ -153,7 +154,8 @@
     "packages/google-privacy-dlp": {},
     "packages/google-storagetransfer": {},
     "packages/grafeas": {},
-    "packages/typeless-sample-bot": {}
+    "packages/typeless-sample-bot": {},
+    "packages/google-cloud-connectors": {}
   },
   "plugins": [
     {
