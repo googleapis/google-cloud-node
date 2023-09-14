@@ -6,7 +6,7 @@
   "issue_tracker": "https://issuetracker.google.com/savedsearches/559772",
   "release_level": "stable",
   "language": "nodejs",
-  "repo": "googleapis/nodejs-dns",
+  "repo": "googleapis/google-cloud-node",
   "distribution_name": "@google-cloud/dns",
   "api_id": "dns.googleapis.com",
   "requires_billing": true,
