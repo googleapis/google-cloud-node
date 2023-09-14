@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/network-connectivity-v3.0.1...network-connectivity-v3.1.0) (2023-09-14)
+
+
+### Features
+
+* [networkconnectivity] add PolicyBasedRouting APIs ([#4636](https://github.com/googleapis/google-cloud-node/issues/4636)) ([7f6f625](https://github.com/googleapis/google-cloud-node/commit/7f6f62557446160c96677b72185deb9f2794d4cf))
+
 ## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/network-connectivity-v3.0.0...network-connectivity-v3.0.1) (2023-09-06)
 
 

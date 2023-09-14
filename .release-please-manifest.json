@@ -46,7 +46,7 @@
   "packages/google-cloud-contentwarehouse": "1.1.0",
   "packages/google-cloud-datacatalog": "4.0.1",
   "packages/google-cloud-datacatalog-lineage": "1.0.1",
-  "packages/google-cloud-dataform": "1.0.0",
+  "packages/google-cloud-dataform": "0.4.1",
   "packages/google-cloud-datafusion": "3.0.1",
   "packages/google-cloud-datalabeling": "4.0.1",
   "packages/google-cloud-dataplex": "3.0.1",
@@ -84,7 +84,7 @@
   "packages/google-cloud-migrationcenter": "1.0.1",
   "packages/google-cloud-monitoring": "4.0.0",
   "packages/google-cloud-netapp": "0.1.0",
-  "packages/google-cloud-networkconnectivity": "3.0.1",
+  "packages/google-cloud-networkconnectivity": "3.1.0",
   "packages/google-cloud-networkmanagement": "3.1.0",
   "packages/google-cloud-networksecurity": "2.0.1",
   "packages/google-cloud-notebooks": "3.1.0",
@@ -149,5 +149,10 @@
   "packages/google-privacy-dlp": "5.0.1",
   "packages/google-storagetransfer": "3.0.1",
   "packages/grafeas": "5.0.1",
-  "packages/typeless-sample-bot": "2.0.0"
+  "packages/typeless-sample-bot": "2.0.0",
+  "packages/google-cloud-connectors": "0.1.0",
+  "packages/google-cloud-edgecontainer": "0.1.0",
+  "packages/google-cloud-networkservices": "0.1.0",
+  "packages/google-cloud-policysimulator": "0.1.0",
+  "packages/google-devtools-cloudprofiler": "0.1.0"
 }
