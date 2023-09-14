@@ -19,6 +19,7 @@
     "packages/google-cloud-apigeeregistry": {},
     "packages/google-cloud-asset": {},
     "packages/google-cloud-assuredworkloads": {},
+    "packages/google-cloud-automl": {},
     "packages/google-cloud-baremetalsolution": {},
     "packages/google-cloud-batch": {},
     "packages/google-cloud-beyondcorp-appconnections": {},
@@ -42,6 +43,7 @@
     "packages/google-cloud-compute": {},
     "packages/google-cloud-confidentialcomputing": {},
     "packages/google-cloud-config": {},
+    "packages/google-cloud-connectors": {},
     "packages/google-cloud-contactcenterinsights": {},
     "packages/google-cloud-contentwarehouse": {},
     "packages/google-cloud-datacatalog": {},
@@ -152,8 +154,7 @@
     "packages/google-privacy-dlp": {},
     "packages/google-storagetransfer": {},
     "packages/grafeas": {},
-    "packages/typeless-sample-bot": {},
-    "packages/google-cloud-connectors": {}
+    "packages/typeless-sample-bot": {}
   },
   "plugins": [
     {
