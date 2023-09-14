@@ -154,8 +154,7 @@
     "packages/google-privacy-dlp": {},
     "packages/google-storagetransfer": {},
     "packages/grafeas": {},
-    "packages/typeless-sample-bot": {},
-    "packages/google-cloud-connectors": {}
+    "packages/typeless-sample-bot": {}
   },
   "plugins": [
     {
