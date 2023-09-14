@@ -22,7 +22,6 @@ const cp = require('child_process');
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
-const LIST_DATASET_REGION_TAG = 'list_datasets';
 const LOCATION = 'us-central1';
 
 describe('Automl List Dataset Tests', () => {
