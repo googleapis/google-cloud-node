@@ -14,60 +14,93 @@
 
 'use strict';
 
-async function main(
-  projectId,
-  computeRegion,
-  modelId,
-  filePath,
-  scoreThreshold
-) {
+function main(projectId = 'YOUR_PROJECT_ID', location = 'us-central1') {
   // [START automl_quickstart]
-  const automl = require('@google-cloud/automl');
-  const fs = require('fs');
-
-  // Create client for prediction service.
-  const client = new automl.PredictionServiceClient();
-
   /**
-   * TODO(developer): Uncomment the following line before running the sample.
+   * TODO(developer): Uncomment these variables before running the sample.
    */
-  // const projectId = `The GCLOUD_PROJECT string, e.g. "my-gcloud-project"`;
-  // const computeRegion = `region-name, e.g. "us-central1"`;
-  // const modelId = `id of the model, e.g. “ICN723541179344731436”`;
-  // const filePath = `local text file path of content to be classified, e.g. "./resources/flower.png"`;
-  // const scoreThreshold = `value between 0.0 and 1.0, e.g. "0.5"`;
+  // const projectId = 'YOUR_PROJECT_ID';
+  // const location = 'us-central1';
 
-  // Get the full path of the model.
-  const modelFullId = client.modelPath(projectId, computeRegion, modelId);
+  // Imports the Google Cloud AutoML library
+  const {AutoMlClient} = require('@google-cloud/automl').v1;
 
-  // Read the file content for prediction.
-  const content = fs.readFileSync(filePath, 'base64');
+  // Instantiates a client
+  const client = new AutoMlClient();
 
-  const params = {};
+  async function listDatasets() {
+    // Construct request
+    const request = {
+      parent: client.locationPath(projectId, location),
+      filter: 'translation_dataset_metadata:*',
+    };
 
-  if (scoreThreshold) {
-    params.score_threshold = scoreThreshold;
+    const [response] = await client.listDatasets(request);
+
+    console.log('List of datasets:');
+    for (const dataset of response) {
+      console.log(`Dataset name: ${dataset.name}`);
+      console.log(
+        `Dataset id: ${
+          dataset.name.split('/')[dataset.name.split('/').length - 1]
+        }`
+      );
+      console.log(`Dataset display name: ${dataset.displayName}`);
+      console.log('Dataset create time');
+      console.log(`\tseconds ${dataset.createTime.seconds}`);
+      console.log(`\tnanos ${dataset.createTime.nanos / 1e9}`);
+      // [END automl_language_text_classification_list_datasets]
+      // [END automl_translate_list_datasets]
+      // [END automl_vision_classification_list_datasets]
+      // [END automl_vision_object_detection_list_datasets]
+      console.log(
+        `Text extraction dataset metadata: ${dataset.textExtractionDatasetMetadata}`
+      );
+
+      console.log(
+        `Text sentiment dataset metadata: ${dataset.textSentimentDatasetMetadata}`
+      );
+
+      // [START automl_language_text_classification_list_datasets]
+      console.log(
+        `Text classification dataset metadata: ${dataset.textClassificationDatasetMetadata}`
+      );
+      // [END automl_language_text_classification_list_datasets]
+
+      // [START automl_translate_list_datasets]
+      if (dataset.translationDatasetMetadata !== undefined) {
+        console.log('Translation dataset metadata:');
+        console.log(
+          `\tSource language code: ${dataset.translationDatasetMetadata.sourceLanguageCode}`
+        );
+        console.log(
+          `\tTarget language code: ${dataset.translationDatasetMetadata.targetLanguageCode}`
+        );
+      }
+      // [END automl_translate_list_datasets]
+
+      // [START automl_vision_classification_list_datasets]
+      console.log(
+        `Image classification dataset metadata: ${dataset.imageClassificationDatasetMetadata}`
+      );
+      // [END automl_vision_classification_list_datasets]
+
+      // [START automl_vision_object_detection_list_datasets]
+      console.log(
+        `Image object detection dataset metatdata: ${dataset.imageObjectDetectionDatasetMetatdata}`
+      );
+      // [START automl_language_text_classification_list_datasets]
+      // [START automl_translate_list_datasets]
+      // [START automl_vision_classification_list_datasets]
+    }
   }
 
-  // Set the payload by giving the content and type of the file.
-  const payload = {};
-  payload.image = {imageBytes: content};
-
-  // params is additional domain-specific parameters.
-  // currently there is no additional parameters supported.
-  const [response] = await client.predict({
-    name: modelFullId,
-    payload: payload,
-    params: params,
-  });
-  console.log('Prediction results:');
-  response.payload.forEach(result => {
-    console.log(`Predicted class name: ${result.displayName}`);
-    console.log(`Predicted class score: ${result.classification.score}`);
-  });
+  listDatasets();
   // [END automl_quickstart]
 }
-main(...process.argv.slice(2)).catch(err => {
-  console.error(err);
+
+process.on('unhandledRejection', err => {
+  console.error(err.message);
   process.exitCode = 1;
 });
+main(...process.argv.slice(2));
