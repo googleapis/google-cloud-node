@@ -59,6 +59,7 @@
     "packages/google-cloud-dialogflow": {},
     "packages/google-cloud-dialogflow-cx": {},
     "packages/google-cloud-discoveryengine": {},
+    "packages/google-cloud-dns": {},
     "packages/google-cloud-documentai": {},
     "packages/google-cloud-domains": {},
     "packages/google-cloud-edgecontainer": {},

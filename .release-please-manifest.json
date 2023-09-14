@@ -57,6 +57,7 @@
   "packages/google-cloud-dialogflow": "6.1.0",
   "packages/google-cloud-dialogflow-cx": "4.1.0",
   "packages/google-cloud-discoveryengine": "1.1.0",
+  "packages/google-cloud-dns": "4.0.0",
   "packages/google-cloud-documentai": "8.0.1",
   "packages/google-cloud-domains": "3.0.1",
   "packages/google-cloud-essentialcontacts": "3.0.1",
