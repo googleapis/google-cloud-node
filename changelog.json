@@ -4,6 +4,183 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "38140975dcfc5936032d05083eb3f7b9bfe93a7c",
+          "message": "Add initial files for google.devtools.cloudprofiler.v2",
+          "issues": [
+            "4647"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudprofiler",
+      "id": "0c320b60-7087-4465-8f6d-08a151ceebe0",
+      "createTime": "2023-09-14T19:51:47.211Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "21bc46a9615e0c54538ad852ea4478797be7c453",
+          "message": "Add initial files for google.cloud.policysimulator.v1",
+          "issues": [
+            "4642"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policysimulator",
+      "id": "84ea939a-16f4-4a0b-807a-2442f2b478f6",
+      "createTime": "2023-09-14T19:51:47.205Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c01dd83a6b89c069eb16ffcb79d21b2b8e684278",
+          "message": "Add initial files for google.cloud.networkservices.v1",
+          "issues": [
+            "4638"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/networkservices",
+      "id": "02506480-9bb5-4985-95db-6b929a38409f",
+      "createTime": "2023-09-14T19:51:47.197Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7f6f62557446160c96677b72185deb9f2794d4cf",
+          "message": "[networkconnectivity] add PolicyBasedRouting APIs",
+          "issues": [
+            "4636"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-connectivity",
+      "id": "c3347686-f4aa-4b87-aa40-692e248bdfa8",
+      "createTime": "2023-09-14T19:51:47.191Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f826ea9f8e1325d48dd8b343b9af5e994e871108",
+          "message": "Add initial files for google.cloud.edgecontainer.v1",
+          "issues": [
+            "4649"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/edgecontainer",
+      "id": "31a8e961-30bb-460d-a74a-52da59605855",
+      "createTime": "2023-09-14T19:51:47.181Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7d4c40ffab7fe98257560f2986acfcb888f15747",
+          "message": "Update dependency @google-cloud/dataform to v1",
+          "issues": [
+            "4631"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "fix",
+          "sha": "b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4585"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "a4507aa1166832c2d9624cb55879a543f65ec4cb",
+          "message": "Update dependency @google-cloud/dataform to v1",
+          "issues": [
+            "4532"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "chore",
+          "sha": "2260f12543d171bda95345e53475f5f0fdc45770",
+          "message": "Migrate to Node 14",
+          "issues": [
+            "4443"
+          ],
+          "breakingChangeNote": "migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))"
+        },
+        {
+          "type": "fix",
+          "sha": "c32965c0c4a5975ba37371ecd819d9cffb080aa5",
+          "message": "[Many APIs] fix typings for IAM methods",
+          "issues": [
+            "4460"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "fix",
+          "sha": "65ee10e09d7c69e00bdfd7be2a591c866873ceda",
+          "message": "Revert package.json version",
+          "issues": []
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataform",
+      "id": "6994c16c-5a91-4083-8705-5a95b0c32cc4",
+      "createTime": "2023-09-14T19:51:47.169Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "6f5461ac147e39c7028cabe3a7943a2e48f06196",
+          "message": "Add initial files for google.cloud.connectors.v1",
+          "issues": [
+            "4641"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/connectors",
+      "id": "ef1a0879-5454-4a05-9fe5-6fd6e12e9b68",
+      "createTime": "2023-09-14T19:51:47.161Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "2ba7b489e6109e5bf3d5e7276a0b94558ebd48d0",
           "message": "Publication issues with containeranalysis and policytroubleshooter",
@@ -18755,5 +18932,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-09-11T17:58:23.549Z"
+  "updateTime": "2023-09-14T19:51:47.211Z"
 }
