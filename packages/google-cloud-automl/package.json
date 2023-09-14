@@ -1,0 +1,69 @@
+{
+  "name": "@google-cloud/automl",
+  "description": "Cloud AutoML API client for Node.js",
+  "version": "4.0.1",
+  "license": "Apache-2.0",
+  "author": "Google LLC",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": "googleapis/nodejs-automl",
+  "main": "build/src/index.js",
+  "files": [
+    "build/protos",
+    "build/src"
+  ],
+  "keywords": [
+    "google apis client",
+    "google api client",
+    "google apis",
+    "google api",
+    "google",
+    "google cloud platform",
+    "google cloud",
+    "cloud",
+    "google automl",
+    "automl",
+    "Cloud AutoML API"
+  ],
+  "scripts": {
+    "test": "c8 mocha build/test",
+    "samples-test": "cd samples/ && npm link ../ && npm install && npm test && cd ../",
+    "lint": "gts check",
+    "fix": "gts fix",
+    "prelint": "cd samples; npm link ../; npm install",
+    "system-test": "mocha build/system-test",
+    "docs": "jsdoc -c .jsdoc.js",
+    "docs-test": "linkinator docs",
+    "predocs-test": "npm run docs",
+    "clean": "gts clean",
+    "compile": "tsc -p . && cp -r protos build/",
+    "compile-protos": "compileProtos src",
+    "prepare": "npm run compile",
+    "precompile": "gts clean"
+  },
+  "dependencies": {
+    "google-gax": "^4.0.3"
+  },
+  "devDependencies": {
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^20.4.9",
+    "@types/sinon": "^10.0.0",
+    "c8": "^8.0.1",
+    "codecov": "^3.6.5",
+    "gapic-tools": "^0.1.8",
+    "gts": "^5.0.0",
+    "jsdoc": "^4.0.0",
+    "jsdoc-fresh": "^3.0.0",
+    "jsdoc-region-tag": "^3.0.0",
+    "linkinator": "^4.0.0",
+    "mocha": "^9.2.2",
+    "null-loader": "^4.0.0",
+    "pack-n-play": "^1.0.0-2",
+    "sinon": "^15.0.0",
+    "ts-loader": "^9.0.0",
+    "typescript": "^5.1.6",
+    "webpack": "^5.0.0",
+    "webpack-cli": "^5.0.0"
+  }
+}
