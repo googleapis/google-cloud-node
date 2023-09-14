@@ -45,4 +45,3 @@ describe(__filename, () => {
     assert.include(output, 'Zones:');
   });
 });
-
