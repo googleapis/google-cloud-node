@@ -1,0 +1,14 @@
+{
+  "name": "apigeeregistry",
+  "name_pretty": "Apigee Registry API",
+  "product_documentation": "https://cloud.google.com/apigee/docs/api-hub/get-started-registry-api",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/apigee-registry/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "beta",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/apigee-registry",
+  "api_id": "apigeeregistry.googleapis.com",
+  "default_version": "v1",
+  "requires_billing": true
+}
