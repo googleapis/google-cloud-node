@@ -6701,6 +6701,13 @@
                     "hostMaintenancePolicy": {
                       "type": "HostMaintenancePolicy",
                       "id": 44
+                    },
+                    "enableConfidentialStorage": {
+                      "type": "bool",
+                      "id": 46,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -8007,6 +8014,7 @@
                       "type": "ProtectConfig",
                       "id": 137,
                       "options": {
+                        "deprecated": true,
                         "proto3_optional": true
                       }
                     },
@@ -8163,7 +8171,8 @@
                       "values": {
                         "VULNERABILITY_MODE_UNSPECIFIED": 0,
                         "VULNERABILITY_DISABLED": 1,
-                        "VULNERABILITY_BASIC": 2
+                        "VULNERABILITY_BASIC": 2,
+                        "VULNERABILITY_ENTERPRISE": 3
                       }
                     }
                   }
@@ -8395,6 +8404,7 @@
                       "type": "ProtectConfig",
                       "id": 112,
                       "options": {
+                        "deprecated": true,
                         "proto3_optional": true
                       }
                     },
