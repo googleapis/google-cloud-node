@@ -1,0 +1,151 @@
+{
+    "clientLibrary": {
+        "name": "nodejs-cloudprofiler",
+        "version": "0.1.0",
+        "language": "TYPESCRIPT",
+        "apis": [
+            {
+                "id": "google.devtools.cloudprofiler.v2",
+                "version": "v2"
+            }
+        ]
+    },
+    "snippets": [
+        {
+            "regionTag": "cloudprofiler_v2_generated_ProfilerService_CreateProfile_async",
+            "title": "ProfilerService createProfile Sample",
+            "origin": "API_DEFINITION",
+            "description": " CreateProfile creates a new profile resource in the online mode. The server ensures that the new profiles are created at a constant rate per deployment, so the creation request may hang for some time until the next profile session is available. The request may fail with ABORTED error if the creation is not available within ~1m, the response will indicate the duration of the backoff the client should take before attempting creating a profile again. The backoff duration is returned in google.rpc.RetryInfo extension on the response status. To a gRPC client, the extension will be return as a binary-serialized proto in the trailing metadata item named \"google.rpc.retryinfo-bin\".",
+            "canonical": true,
+            "file": "profiler_service.create_profile.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateProfile",
+                "fullName": "google.devtools.cloudprofiler.v2.ProfilerService.CreateProfile",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "deployment",
+                        "type": ".google.devtools.cloudprofiler.v2.Deployment"
+                    },
+                    {
+                        "name": "profile_type",
+                        "type": "TYPE_ENUM[]"
+                    }
+                ],
+                "resultType": ".google.devtools.cloudprofiler.v2.Profile",
+                "client": {
+                    "shortName": "ProfilerServiceClient",
+                    "fullName": "google.devtools.cloudprofiler.v2.ProfilerServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateProfile",
+                    "fullName": "google.devtools.cloudprofiler.v2.ProfilerService.CreateProfile",
+                    "service": {
+                        "shortName": "ProfilerService",
+                        "fullName": "google.devtools.cloudprofiler.v2.ProfilerService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "cloudprofiler_v2_generated_ProfilerService_CreateOfflineProfile_async",
+            "title": "ProfilerService createOfflineProfile Sample",
+            "origin": "API_DEFINITION",
+            "description": " CreateOfflineProfile creates a new profile resource in the offline mode. The client provides the profile to create along with the profile bytes, the server records it.",
+            "canonical": true,
+            "file": "profiler_service.create_offline_profile.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateOfflineProfile",
+                "fullName": "google.devtools.cloudprofiler.v2.ProfilerService.CreateOfflineProfile",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "profile",
+                        "type": ".google.devtools.cloudprofiler.v2.Profile"
+                    }
+                ],
+                "resultType": ".google.devtools.cloudprofiler.v2.Profile",
+                "client": {
+                    "shortName": "ProfilerServiceClient",
+                    "fullName": "google.devtools.cloudprofiler.v2.ProfilerServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateOfflineProfile",
+                    "fullName": "google.devtools.cloudprofiler.v2.ProfilerService.CreateOfflineProfile",
+                    "service": {
+                        "shortName": "ProfilerService",
+                        "fullName": "google.devtools.cloudprofiler.v2.ProfilerService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "cloudprofiler_v2_generated_ProfilerService_UpdateProfile_async",
+            "title": "ProfilerService updateProfile Sample",
+            "origin": "API_DEFINITION",
+            "description": " UpdateProfile updates the profile bytes and labels on the profile resource created in the online mode. Updating the bytes for profiles created in the offline mode is currently not supported: the profile content must be provided at the time of the profile creation.",
+            "canonical": true,
+            "file": "profiler_service.update_profile.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateProfile",
+                "fullName": "google.devtools.cloudprofiler.v2.ProfilerService.UpdateProfile",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "profile",
+                        "type": ".google.devtools.cloudprofiler.v2.Profile"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.devtools.cloudprofiler.v2.Profile",
+                "client": {
+                    "shortName": "ProfilerServiceClient",
+                    "fullName": "google.devtools.cloudprofiler.v2.ProfilerServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateProfile",
+                    "fullName": "google.devtools.cloudprofiler.v2.ProfilerService.UpdateProfile",
+                    "service": {
+                        "shortName": "ProfilerService",
+                        "fullName": "google.devtools.cloudprofiler.v2.ProfilerService"
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Policy Troubleshooter API: Node.js Client](googleapis/nodejs-iam)
+# [Policy Troubleshooter API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-policytroubleshooter-iam)
 
 [![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/policy-troubleshooter-iam.svg)](https://www.npmjs.org/package/@google-cloud/policy-troubleshooter-iam)
@@ -14,11 +14,11 @@ Iam client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](googleapis/nodejs-iam/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-policytroubleshooter-iam/CHANGELOG.md).
 
 * [Policy Troubleshooter API Node.js Client API Reference][client-docs]
 * [Policy Troubleshooter API Documentation][product-docs]
-* [github.com/googleapis/nodejs-iam](googleapis/nodejs-iam)
+* [github.com/googleapis/google-cloud-node/packages/google-cloud-policytroubleshooter-iam](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-policytroubleshooter-iam)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -89,13 +89,13 @@ callTroubleshootIamPolicy();
 
 ## Samples
 
-Samples are in the [`samples/`](googleapis/nodejs-iam/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-policytroubleshooter-iam/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Policy_troubleshooter.troubleshoot_iam_policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-policytroubleshooter-iam/samples/generated/v3/policy_troubleshooter.troubleshoot_iam_policy.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-policytroubleshooter-iam/samples/generated/v3/policy_troubleshooter.troubleshoot_iam_policy.js,googleapis/nodejs-iam/samples/README.md) |
-| Policy_troubleshooter.troubleshoot_iam_policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-policytroubleshooter-iam/samples/generated/v3beta/policy_troubleshooter.troubleshoot_iam_policy.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-policytroubleshooter-iam/samples/generated/v3beta/policy_troubleshooter.troubleshoot_iam_policy.js,googleapis/nodejs-iam/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-policytroubleshooter-iam/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-policytroubleshooter-iam/samples/quickstart.js,googleapis/nodejs-iam/samples/README.md) |
+| Policy_troubleshooter.troubleshoot_iam_policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-policytroubleshooter-iam/samples/generated/v3/policy_troubleshooter.troubleshoot_iam_policy.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-policytroubleshooter-iam/samples/generated/v3/policy_troubleshooter.troubleshoot_iam_policy.js,packages/google-cloud-policytroubleshooter-iam/samples/README.md) |
+| Policy_troubleshooter.troubleshoot_iam_policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-policytroubleshooter-iam/samples/generated/v3beta/policy_troubleshooter.troubleshoot_iam_policy.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-policytroubleshooter-iam/samples/generated/v3beta/policy_troubleshooter.troubleshoot_iam_policy.js,packages/google-cloud-policytroubleshooter-iam/samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-policytroubleshooter-iam/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-policytroubleshooter-iam/samples/quickstart.js,packages/google-cloud-policytroubleshooter-iam/samples/README.md) |
 
 
 

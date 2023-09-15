@@ -814,7 +814,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 65,
+                    "end": 86,
                     "type": "FULL"
                 }
             ],
@@ -834,6 +834,22 @@
                     {
                         "name": "cluster_name",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "tarball_gcs_dir",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "diagnosis_interval",
+                        "type": ".google.type.Interval"
+                    },
+                    {
+                        "name": "jobs",
+                        "type": "TYPE_STRING[]"
+                    },
+                    {
+                        "name": "yarn_application_ids",
+                        "type": "TYPE_STRING[]"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",

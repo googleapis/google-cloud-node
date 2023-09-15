@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-aiplatform",
-        "version": "3.1.0",
+        "version": "3.2.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -7460,6 +7460,50 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1beta1_generated_PersistentResourceService_UpdatePersistentResource_async",
+            "title": "DatasetService updatePersistentResource Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates a PersistentResource.",
+            "canonical": true,
+            "file": "persistent_resource_service.update_persistent_resource.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdatePersistentResource",
+                "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceService.UpdatePersistentResource",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "persistent_resource",
+                        "type": ".google.cloud.aiplatform.v1beta1.PersistentResource"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "PersistentResourceServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdatePersistentResource",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceService.UpdatePersistentResource",
+                    "service": {
+                        "shortName": "PersistentResourceService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.PersistentResourceService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1beta1_generated_PipelineService_CreateTrainingPipeline_async",
             "title": "DatasetService createTrainingPipeline Sample",
             "origin": "API_DEFINITION",
@@ -10278,7 +10322,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 68,
+                    "end": 105,
                     "type": "FULL"
                 }
             ],
@@ -10298,6 +10342,10 @@
                     {
                         "name": "client_id",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "contexts",
+                        "type": "TYPE_MESSAGE[]"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",

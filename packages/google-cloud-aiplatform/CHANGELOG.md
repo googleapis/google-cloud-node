@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.1.0...aiplatform-v3.2.0) (2023-09-11)
+
+
+### Features
+
+* Add encryption_spec to index.proto and index_endpoint.proto ([#4596](https://github.com/googleapis/google-cloud-node/issues/4596)) ([32d823a](https://github.com/googleapis/google-cloud-node/commit/32d823a8ea1613ebb653978a7cd0686f9af2724b))
+
 ## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.0.0...aiplatform-v3.1.0) (2023-09-06)
 
 

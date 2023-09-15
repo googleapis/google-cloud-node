@@ -7163,6 +7163,19 @@
                         }
                       }
                     },
+                    "TrialContext": {
+                      "fields": {
+                        "description": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "parameters": {
+                          "rule": "repeated",
+                          "type": "Trial.Parameter",
+                          "id": 2
+                        }
+                      }
+                    },
                     "StudySpec": {
                       "oneofs": {
                         "automatedStoppingSpec": {
@@ -7723,6 +7736,13 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         }
                       },
                       "nested": {
@@ -7904,6 +7924,13 @@
                           "id": 14,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
                           }
                         }
                       }
@@ -20440,6 +20467,14 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "contexts": {
+                          "rule": "repeated",
+                          "type": "TrialContext",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -28712,6 +28747,19 @@
                         }
                       }
                     },
+                    "TrialContext": {
+                      "fields": {
+                        "description": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "parameters": {
+                          "rule": "repeated",
+                          "type": "Trial.Parameter",
+                          "id": 2
+                        }
+                      }
+                    },
                     "StudySpec": {
                       "oneofs": {
                         "automatedStoppingSpec": {
@@ -29327,6 +29375,13 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         }
                       },
                       "nested": {
@@ -29508,6 +29563,13 @@
                           "id": 14,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
                           }
                         }
                       }
@@ -36393,6 +36455,21 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "resourcePoolImages": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "headNodeResourcePoolId": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -36521,6 +36598,34 @@
                               }
                             }
                           ]
+                        },
+                        "UpdatePersistentResource": {
+                          "requestType": "UpdatePersistentResourceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta1/{persistent_resource.name=projects/*/locations/*/persistentResources/*}",
+                            "(google.api.http).body": "persistent_resource",
+                            "(google.api.method_signature)": "persistent_resource,update_mask",
+                            "(google.longrunning.operation_info).response_type": "PersistentResource",
+                            "(google.longrunning.operation_info).metadata_type": "UpdatePersistentResourceOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{persistent_resource.name=projects/*/locations/*/persistentResources/*}",
+                                "body": "persistent_resource"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "persistent_resource,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "PersistentResource",
+                                "metadata_type": "UpdatePersistentResourceOperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -36551,6 +36656,14 @@
                       }
                     },
                     "CreatePersistentResourceOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "UpdatePersistentResourceOperationMetadata": {
                       "fields": {
                         "genericMetadata": {
                           "type": "GenericOperationMetadata",
@@ -36617,6 +36730,24 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/PersistentResource"
+                          }
+                        }
+                      }
+                    },
+                    "UpdatePersistentResourceRequest": {
+                      "fields": {
+                        "persistentResource": {
+                          "type": "PersistentResource",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -42787,6 +42918,14 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "contexts": {
+                          "rule": "repeated",
+                          "type": "TrialContext",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }

@@ -869,6 +869,226 @@ describe('v1beta1.PersistentResourceServiceClient', () => {
     });
   });
 
+  describe('updatePersistentResource', () => {
+    it('invokes updatePersistentResource without error', async () => {
+      const client =
+        new persistentresourceserviceModule.v1beta1.PersistentResourceServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdatePersistentResourceRequest()
+      );
+      request.persistentResource ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdatePersistentResourceRequest',
+        ['persistentResource', 'name']
+      );
+      request.persistentResource.name = defaultValue1;
+      const expectedHeaderRequestParams = `persistent_resource.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updatePersistentResource =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updatePersistentResource(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updatePersistentResource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePersistentResource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updatePersistentResource without error using callback', async () => {
+      const client =
+        new persistentresourceserviceModule.v1beta1.PersistentResourceServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdatePersistentResourceRequest()
+      );
+      request.persistentResource ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdatePersistentResourceRequest',
+        ['persistentResource', 'name']
+      );
+      request.persistentResource.name = defaultValue1;
+      const expectedHeaderRequestParams = `persistent_resource.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updatePersistentResource =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updatePersistentResource(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.aiplatform.v1beta1.IPersistentResource,
+              protos.google.cloud.aiplatform.v1beta1.IUpdatePersistentResourceOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IPersistentResource,
+        protos.google.cloud.aiplatform.v1beta1.IUpdatePersistentResourceOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updatePersistentResource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePersistentResource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updatePersistentResource with call error', async () => {
+      const client =
+        new persistentresourceserviceModule.v1beta1.PersistentResourceServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdatePersistentResourceRequest()
+      );
+      request.persistentResource ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdatePersistentResourceRequest',
+        ['persistentResource', 'name']
+      );
+      request.persistentResource.name = defaultValue1;
+      const expectedHeaderRequestParams = `persistent_resource.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updatePersistentResource = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updatePersistentResource(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.updatePersistentResource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePersistentResource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updatePersistentResource with LRO error', async () => {
+      const client =
+        new persistentresourceserviceModule.v1beta1.PersistentResourceServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdatePersistentResourceRequest()
+      );
+      request.persistentResource ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdatePersistentResourceRequest',
+        ['persistentResource', 'name']
+      );
+      request.persistentResource.name = defaultValue1;
+      const expectedHeaderRequestParams = `persistent_resource.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updatePersistentResource = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updatePersistentResource(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updatePersistentResource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePersistentResource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdatePersistentResourceProgress without error', async () => {
+      const client =
+        new persistentresourceserviceModule.v1beta1.PersistentResourceServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkUpdatePersistentResourceProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdatePersistentResourceProgress with error', async () => {
+      const client =
+        new persistentresourceserviceModule.v1beta1.PersistentResourceServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdatePersistentResourceProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('listPersistentResources', () => {
     it('invokes listPersistentResources without error', async () => {
       const client =

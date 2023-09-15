@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [5.1.1](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v5.1.0...containeranalysis-v5.1.1) (2023-09-11)
+
+
+### Bug Fixes
+
+* Publication issues with containeranalysis and policytroubleshooter ([#4628](https://github.com/googleapis/google-cloud-node/issues/4628)) ([2ba7b48](https://github.com/googleapis/google-cloud-node/commit/2ba7b489e6109e5bf3d5e7276a0b94558ebd48d0))
+
 ## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v5.0.1...containeranalysis-v5.1.0) (2023-09-06)
 
 
