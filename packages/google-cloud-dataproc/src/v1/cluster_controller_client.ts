@@ -1545,6 +1545,19 @@ export class ClusterControllerClient {
    *   Required. The Dataproc region in which to handle the request.
    * @param {string} request.clusterName
    *   Required. The cluster name.
+   * @param {string} [request.tarballGcsDir]
+   *   Optional. The output Cloud Storage directory for the diagnostic
+   *   tarball. If not specified, a task-specific directory in the cluster's
+   *   staging bucket will be used.
+   * @param {google.type.Interval} [request.diagnosisInterval]
+   *   Optional. Time interval in which diagnosis should be carried out on the
+   *   cluster.
+   * @param {string[]} [request.jobs]
+   *   Optional. Specifies a list of jobs on which diagnosis is to be performed.
+   *   Format: projects/{project}/regions/{region}/jobs/{job}
+   * @param {string[]} [request.yarnApplicationIds]
+   *   Optional. Specifies a list of yarn applications on which diagnosis is to be
+   *   performed.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
