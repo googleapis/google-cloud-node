@@ -4,14 +4,14 @@
       "nested": {
         "protobuf": {
           "options": {
+            "go_package": "google.golang.org/protobuf/types/known/typepb",
             "java_package": "com.google.protobuf",
-            "java_outer_classname": "DescriptorProtos",
-            "java_multiple_files": true,
+            "java_outer_classname": "TypeProto",
+            "csharp_namespace": "Google.Protobuf.WellKnownTypes",
             "objc_class_prefix": "GPB",
-            "csharp_namespace": "Google.Protobuf.Reflection",
-            "go_package": "google.golang.org/protobuf/types/descriptorpb",
             "cc_enable_arenas": true,
-            "optimize_for": "SPEED"
+            "optimize_for": "SPEED",
+            "java_multiple_files": true
           },
           "nested": {
             "Struct": {
@@ -74,276 +74,6 @@
                   "rule": "repeated",
                   "type": "Value",
                   "id": 1
-                }
-              }
-            },
-            "Api": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 1
-                },
-                "methods": {
-                  "rule": "repeated",
-                  "type": "Method",
-                  "id": 2
-                },
-                "options": {
-                  "rule": "repeated",
-                  "type": "Option",
-                  "id": 3
-                },
-                "version": {
-                  "type": "string",
-                  "id": 4
-                },
-                "sourceContext": {
-                  "type": "SourceContext",
-                  "id": 5
-                },
-                "mixins": {
-                  "rule": "repeated",
-                  "type": "Mixin",
-                  "id": 6
-                },
-                "syntax": {
-                  "type": "Syntax",
-                  "id": 7
-                }
-              }
-            },
-            "Method": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 1
-                },
-                "requestTypeUrl": {
-                  "type": "string",
-                  "id": 2
-                },
-                "requestStreaming": {
-                  "type": "bool",
-                  "id": 3
-                },
-                "responseTypeUrl": {
-                  "type": "string",
-                  "id": 4
-                },
-                "responseStreaming": {
-                  "type": "bool",
-                  "id": 5
-                },
-                "options": {
-                  "rule": "repeated",
-                  "type": "Option",
-                  "id": 6
-                },
-                "syntax": {
-                  "type": "Syntax",
-                  "id": 7
-                }
-              }
-            },
-            "Mixin": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 1
-                },
-                "root": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
-            "SourceContext": {
-              "fields": {
-                "fileName": {
-                  "type": "string",
-                  "id": 1
-                }
-              }
-            },
-            "Type": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 1
-                },
-                "fields": {
-                  "rule": "repeated",
-                  "type": "Field",
-                  "id": 2
-                },
-                "oneofs": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 3
-                },
-                "options": {
-                  "rule": "repeated",
-                  "type": "Option",
-                  "id": 4
-                },
-                "sourceContext": {
-                  "type": "SourceContext",
-                  "id": 5
-                },
-                "syntax": {
-                  "type": "Syntax",
-                  "id": 6
-                }
-              }
-            },
-            "Field": {
-              "fields": {
-                "kind": {
-                  "type": "Kind",
-                  "id": 1
-                },
-                "cardinality": {
-                  "type": "Cardinality",
-                  "id": 2
-                },
-                "number": {
-                  "type": "int32",
-                  "id": 3
-                },
-                "name": {
-                  "type": "string",
-                  "id": 4
-                },
-                "typeUrl": {
-                  "type": "string",
-                  "id": 6
-                },
-                "oneofIndex": {
-                  "type": "int32",
-                  "id": 7
-                },
-                "packed": {
-                  "type": "bool",
-                  "id": 8
-                },
-                "options": {
-                  "rule": "repeated",
-                  "type": "Option",
-                  "id": 9
-                },
-                "jsonName": {
-                  "type": "string",
-                  "id": 10
-                },
-                "defaultValue": {
-                  "type": "string",
-                  "id": 11
-                }
-              },
-              "nested": {
-                "Kind": {
-                  "values": {
-                    "TYPE_UNKNOWN": 0,
-                    "TYPE_DOUBLE": 1,
-                    "TYPE_FLOAT": 2,
-                    "TYPE_INT64": 3,
-                    "TYPE_UINT64": 4,
-                    "TYPE_INT32": 5,
-                    "TYPE_FIXED64": 6,
-                    "TYPE_FIXED32": 7,
-                    "TYPE_BOOL": 8,
-                    "TYPE_STRING": 9,
-                    "TYPE_GROUP": 10,
-                    "TYPE_MESSAGE": 11,
-                    "TYPE_BYTES": 12,
-                    "TYPE_UINT32": 13,
-                    "TYPE_ENUM": 14,
-                    "TYPE_SFIXED32": 15,
-                    "TYPE_SFIXED64": 16,
-                    "TYPE_SINT32": 17,
-                    "TYPE_SINT64": 18
-                  }
-                },
-                "Cardinality": {
-                  "values": {
-                    "CARDINALITY_UNKNOWN": 0,
-                    "CARDINALITY_OPTIONAL": 1,
-                    "CARDINALITY_REQUIRED": 2,
-                    "CARDINALITY_REPEATED": 3
-                  }
-                }
-              }
-            },
-            "Enum": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 1
-                },
-                "enumvalue": {
-                  "rule": "repeated",
-                  "type": "EnumValue",
-                  "id": 2
-                },
-                "options": {
-                  "rule": "repeated",
-                  "type": "Option",
-                  "id": 3
-                },
-                "sourceContext": {
-                  "type": "SourceContext",
-                  "id": 4
-                },
-                "syntax": {
-                  "type": "Syntax",
-                  "id": 5
-                }
-              }
-            },
-            "EnumValue": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 1
-                },
-                "number": {
-                  "type": "int32",
-                  "id": 2
-                },
-                "options": {
-                  "rule": "repeated",
-                  "type": "Option",
-                  "id": 3
-                }
-              }
-            },
-            "Option": {
-              "fields": {
-                "name": {
-                  "type": "string",
-                  "id": 1
-                },
-                "value": {
-                  "type": "Any",
-                  "id": 2
-                }
-              }
-            },
-            "Syntax": {
-              "values": {
-                "SYNTAX_PROTO2": 0,
-                "SYNTAX_PROTO3": 1
-              }
-            },
-            "Any": {
-              "fields": {
-                "type_url": {
-                  "type": "string",
-                  "id": 1
-                },
-                "value": {
-                  "type": "bytes",
-                  "id": 2
                 }
               }
             },
@@ -1317,6 +1047,276 @@
                 }
               }
             },
+            "Api": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "methods": {
+                  "rule": "repeated",
+                  "type": "Method",
+                  "id": 2
+                },
+                "options": {
+                  "rule": "repeated",
+                  "type": "Option",
+                  "id": 3
+                },
+                "version": {
+                  "type": "string",
+                  "id": 4
+                },
+                "sourceContext": {
+                  "type": "SourceContext",
+                  "id": 5
+                },
+                "mixins": {
+                  "rule": "repeated",
+                  "type": "Mixin",
+                  "id": 6
+                },
+                "syntax": {
+                  "type": "Syntax",
+                  "id": 7
+                }
+              }
+            },
+            "Method": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "requestTypeUrl": {
+                  "type": "string",
+                  "id": 2
+                },
+                "requestStreaming": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "responseTypeUrl": {
+                  "type": "string",
+                  "id": 4
+                },
+                "responseStreaming": {
+                  "type": "bool",
+                  "id": 5
+                },
+                "options": {
+                  "rule": "repeated",
+                  "type": "Option",
+                  "id": 6
+                },
+                "syntax": {
+                  "type": "Syntax",
+                  "id": 7
+                }
+              }
+            },
+            "Mixin": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "root": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "SourceContext": {
+              "fields": {
+                "fileName": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "Type": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "fields": {
+                  "rule": "repeated",
+                  "type": "Field",
+                  "id": 2
+                },
+                "oneofs": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3
+                },
+                "options": {
+                  "rule": "repeated",
+                  "type": "Option",
+                  "id": 4
+                },
+                "sourceContext": {
+                  "type": "SourceContext",
+                  "id": 5
+                },
+                "syntax": {
+                  "type": "Syntax",
+                  "id": 6
+                }
+              }
+            },
+            "Field": {
+              "fields": {
+                "kind": {
+                  "type": "Kind",
+                  "id": 1
+                },
+                "cardinality": {
+                  "type": "Cardinality",
+                  "id": 2
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "name": {
+                  "type": "string",
+                  "id": 4
+                },
+                "typeUrl": {
+                  "type": "string",
+                  "id": 6
+                },
+                "oneofIndex": {
+                  "type": "int32",
+                  "id": 7
+                },
+                "packed": {
+                  "type": "bool",
+                  "id": 8
+                },
+                "options": {
+                  "rule": "repeated",
+                  "type": "Option",
+                  "id": 9
+                },
+                "jsonName": {
+                  "type": "string",
+                  "id": 10
+                },
+                "defaultValue": {
+                  "type": "string",
+                  "id": 11
+                }
+              },
+              "nested": {
+                "Kind": {
+                  "values": {
+                    "TYPE_UNKNOWN": 0,
+                    "TYPE_DOUBLE": 1,
+                    "TYPE_FLOAT": 2,
+                    "TYPE_INT64": 3,
+                    "TYPE_UINT64": 4,
+                    "TYPE_INT32": 5,
+                    "TYPE_FIXED64": 6,
+                    "TYPE_FIXED32": 7,
+                    "TYPE_BOOL": 8,
+                    "TYPE_STRING": 9,
+                    "TYPE_GROUP": 10,
+                    "TYPE_MESSAGE": 11,
+                    "TYPE_BYTES": 12,
+                    "TYPE_UINT32": 13,
+                    "TYPE_ENUM": 14,
+                    "TYPE_SFIXED32": 15,
+                    "TYPE_SFIXED64": 16,
+                    "TYPE_SINT32": 17,
+                    "TYPE_SINT64": 18
+                  }
+                },
+                "Cardinality": {
+                  "values": {
+                    "CARDINALITY_UNKNOWN": 0,
+                    "CARDINALITY_OPTIONAL": 1,
+                    "CARDINALITY_REQUIRED": 2,
+                    "CARDINALITY_REPEATED": 3
+                  }
+                }
+              }
+            },
+            "Enum": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "enumvalue": {
+                  "rule": "repeated",
+                  "type": "EnumValue",
+                  "id": 2
+                },
+                "options": {
+                  "rule": "repeated",
+                  "type": "Option",
+                  "id": 3
+                },
+                "sourceContext": {
+                  "type": "SourceContext",
+                  "id": 4
+                },
+                "syntax": {
+                  "type": "Syntax",
+                  "id": 5
+                }
+              }
+            },
+            "EnumValue": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "options": {
+                  "rule": "repeated",
+                  "type": "Option",
+                  "id": 3
+                }
+              }
+            },
+            "Option": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "Any",
+                  "id": 2
+                }
+              }
+            },
+            "Syntax": {
+              "values": {
+                "SYNTAX_PROTO2": 0,
+                "SYNTAX_PROTO3": 1
+              }
+            },
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
+                  "id": 2
+                }
+              }
+            },
             "Duration": {
               "fields": {
                 "seconds": {
@@ -1347,7 +1347,7 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "ClientProto",
+            "java_outer_classname": "FieldBehaviorProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -1367,6 +1367,10 @@
                   },
                   "nested": {
                     "Service": {
+                      "options": {
+                        "(google.api.resource).type": "serviceusage.googleapis.com/Service",
+                        "(google.api.resource).pattern": "organizations/{organization}/services/{service}"
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -1876,6 +1880,11 @@
                           "rule": "repeated",
                           "type": "QuotaBucket",
                           "id": 9
+                        },
+                        "supportedLocations": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 11
                         }
                       }
                     },
@@ -1907,6 +1916,10 @@
                         "adminOverride": {
                           "type": "QuotaOverride",
                           "id": 5
+                        },
+                        "producerQuotaPolicy": {
+                          "type": "ProducerQuotaPolicy",
+                          "id": 7
                         },
                         "dimensions": {
                           "keyType": "string",
@@ -1958,6 +1971,35 @@
                         "QUOTA_SAFETY_CHECK_UNSPECIFIED": 0,
                         "LIMIT_DECREASE_BELOW_USAGE": 1,
                         "LIMIT_DECREASE_PERCENTAGE_TOO_HIGH": 2
+                      }
+                    },
+                    "ProducerQuotaPolicy": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "policyValue": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "dimensions": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 3
+                        },
+                        "metric": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "unit": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "container": {
+                          "type": "string",
+                          "id": 6
+                        }
                       }
                     },
                     "AdminQuotaPolicy": {
@@ -3267,6 +3309,83 @@
                 }
               }
             },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                },
+                "style": {
+                  "rule": "repeated",
+                  "type": "Style",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                },
+                "Style": {
+                  "values": {
+                    "STYLE_UNSPECIFIED": 0,
+                    "DECLARATIVE_FRIENDLY": 1
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
             "Usage": {
               "fields": {
                 "requirements": {
@@ -3632,6 +3751,24 @@
                 "CLIENT_LIBRARY_DESTINATION_UNSPECIFIED": 0,
                 "GITHUB": 10,
                 "PACKAGE_MANAGER": 20
+              }
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6,
+                "NON_EMPTY_DEFAULT": 7
               }
             }
           }
