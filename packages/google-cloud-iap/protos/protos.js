@@ -3893,6 +3893,7 @@
                          * @memberof google.cloud.iap.v1
                          * @interface IOAuthSettings
                          * @property {google.protobuf.IStringValue|null} [loginHint] OAuthSettings loginHint
+                         * @property {Array.<string>|null} [programmaticClients] OAuthSettings programmaticClients
                          */
     
                         /**
@@ -3904,6 +3905,7 @@
                          * @param {google.cloud.iap.v1.IOAuthSettings=} [properties] Properties to set
                          */
                         function OAuthSettings(properties) {
+                            this.programmaticClients = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -3917,6 +3919,14 @@
                          * @instance
                          */
                         OAuthSettings.prototype.loginHint = null;
+    
+                        /**
+                         * OAuthSettings programmaticClients.
+                         * @member {Array.<string>} programmaticClients
+                         * @memberof google.cloud.iap.v1.OAuthSettings
+                         * @instance
+                         */
+                        OAuthSettings.prototype.programmaticClients = $util.emptyArray;
     
                         /**
                          * Creates a new OAuthSettings instance using the specified properties.
@@ -3944,6 +3954,9 @@
                                 writer = $Writer.create();
                             if (message.loginHint != null && Object.hasOwnProperty.call(message, "loginHint"))
                                 $root.google.protobuf.StringValue.encode(message.loginHint, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.programmaticClients != null && message.programmaticClients.length)
+                                for (var i = 0; i < message.programmaticClients.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.programmaticClients[i]);
                             return writer;
                         };
     
@@ -3980,6 +3993,12 @@
                                 switch (tag >>> 3) {
                                 case 2: {
                                         message.loginHint = $root.google.protobuf.StringValue.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.programmaticClients && message.programmaticClients.length))
+                                            message.programmaticClients = [];
+                                        message.programmaticClients.push(reader.string());
                                         break;
                                     }
                                 default:
@@ -4022,6 +4041,13 @@
                                 if (error)
                                     return "loginHint." + error;
                             }
+                            if (message.programmaticClients != null && message.hasOwnProperty("programmaticClients")) {
+                                if (!Array.isArray(message.programmaticClients))
+                                    return "programmaticClients: array expected";
+                                for (var i = 0; i < message.programmaticClients.length; ++i)
+                                    if (!$util.isString(message.programmaticClients[i]))
+                                        return "programmaticClients: string[] expected";
+                            }
                             return null;
                         };
     
@@ -4042,6 +4068,13 @@
                                     throw TypeError(".google.cloud.iap.v1.OAuthSettings.loginHint: object expected");
                                 message.loginHint = $root.google.protobuf.StringValue.fromObject(object.loginHint);
                             }
+                            if (object.programmaticClients) {
+                                if (!Array.isArray(object.programmaticClients))
+                                    throw TypeError(".google.cloud.iap.v1.OAuthSettings.programmaticClients: array expected");
+                                message.programmaticClients = [];
+                                for (var i = 0; i < object.programmaticClients.length; ++i)
+                                    message.programmaticClients[i] = String(object.programmaticClients[i]);
+                            }
                             return message;
                         };
     
@@ -4058,10 +4091,17 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.programmaticClients = [];
                             if (options.defaults)
                                 object.loginHint = null;
                             if (message.loginHint != null && message.hasOwnProperty("loginHint"))
                                 object.loginHint = $root.google.protobuf.StringValue.toObject(message.loginHint, options);
+                            if (message.programmaticClients && message.programmaticClients.length) {
+                                object.programmaticClients = [];
+                                for (var j = 0; j < message.programmaticClients.length; ++j)
+                                    object.programmaticClients[j] = message.programmaticClients[j];
+                            }
                             return object;
                         };
     
