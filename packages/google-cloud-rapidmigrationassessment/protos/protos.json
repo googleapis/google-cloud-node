@@ -223,7 +223,7 @@
                             "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/annotations",
                             "(google.api.http).body": "annotation",
                             "(google.api.method_signature)": "parent,annotation",
-                            "(google.longrunning.operation_info).response_type": "google.cloud.rapidmigrationassessment.v1.Annotation",
+                            "(google.longrunning.operation_info).response_type": "Annotation",
                             "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
                           },
                           "parsedOptions": [
@@ -238,7 +238,7 @@
                             },
                             {
                               "(google.longrunning.operation_info)": {
-                                "response_type": "google.cloud.rapidmigrationassessment.v1.Annotation",
+                                "response_type": "Annotation",
                                 "metadata_type": "OperationMetadata"
                               }
                             }

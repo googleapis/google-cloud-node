@@ -42,7 +42,7 @@ import * as gapicConfig from './rapid_migration_assessment_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Rapid Migration Assessment service
+ *  Service describing handlers for resources.
  * @class
  * @memberof v1
  */
@@ -1113,6 +1113,7 @@ export class RapidMigrationAssessmentClient {
   }
   /**
    * Deletes a single Collector - changes state of collector to "Deleting".
+   * Background jobs does final deletion thorugh producer api.
    *
    * @param {Object} request
    *   The request object that will be sent.
