@@ -15,8 +15,8 @@
                     "java_package": "com.google.cloud.contentwarehouse.v1",
                     "php_namespace": "Google\\Cloud\\ContentWarehouse\\V1",
                     "ruby_package": "Google::Cloud::ContentWarehouse::V1",
-                    "(google.api.resource_definition).type": "contentwarehouse.googleapis.com/Location",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}"
+                    "(google.api.resource_definition).type": "cloudfunctions.googleapis.com/CloudFunction",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/functions/{function}"
                   },
                   "nested": {
                     "CreateDocumentMetadata": {
@@ -1886,7 +1886,8 @@
                             "FILE_TYPE_UNSPECIFIED": 0,
                             "ALL": 1,
                             "FOLDER": 2,
-                            "DOCUMENT": 3
+                            "DOCUMENT": 3,
+                            "ROOT_FOLDER": 4
                           }
                         }
                       }
@@ -2477,6 +2478,13 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "cloudFunction": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.resource_reference).type": "cloudfunctions.googleapis.com/CloudFunction"
                           }
                         }
                       }

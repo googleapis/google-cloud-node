@@ -7850,7 +7850,8 @@ export namespace google {
                         FILE_TYPE_UNSPECIFIED = 0,
                         ALL = 1,
                         FOLDER = 2,
-                        DOCUMENT = 3
+                        DOCUMENT = 3,
+                        ROOT_FOLDER = 4
                     }
                 }
 
@@ -11061,6 +11062,9 @@ export namespace google {
 
                     /** IngestPipelineConfig folder */
                     folder?: (string|null);
+
+                    /** IngestPipelineConfig cloudFunction */
+                    cloudFunction?: (string|null);
                 }
 
                 /** Represents an IngestPipelineConfig. */
@@ -11080,6 +11084,9 @@ export namespace google {
 
                     /** IngestPipelineConfig folder. */
                     public folder: string;
+
+                    /** IngestPipelineConfig cloudFunction. */
+                    public cloudFunction: string;
 
                     /**
                      * Creates a new IngestPipelineConfig instance using the specified properties.
