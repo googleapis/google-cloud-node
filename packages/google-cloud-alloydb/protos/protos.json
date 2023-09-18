@@ -454,13 +454,21 @@
                           "type": "DatabaseVersion",
                           "id": 9,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "networkConfig": {
+                          "type": "NetworkConfig",
+                          "id": 29,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "network": {
                           "type": "string",
                           "id": 10,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "compute.googleapis.com/Network"
                           }
@@ -540,6 +548,25 @@
                         }
                       },
                       "nested": {
+                        "NetworkConfig": {
+                          "fields": {
+                            "network": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "compute.googleapis.com/Network"
+                              }
+                            },
+                            "allocatedIpRange": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
                         "SecondaryConfig": {
                           "fields": {
                             "primaryClusterName": {
@@ -710,6 +737,13 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 18
+                        },
+                        "clientConnectionConfig": {
+                          "type": "ClientConnectionConfig",
+                          "id": 23,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -792,6 +826,24 @@
                             "nodeCount": {
                               "type": "int32",
                               "id": 1
+                            }
+                          }
+                        },
+                        "ClientConnectionConfig": {
+                          "fields": {
+                            "requireConnectors": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "sslConfig": {
+                              "type": "SslConfig",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -949,9 +1001,41 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "expiryQuantity": {
+                          "type": "QuantityBasedExpiry",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "databaseVersion": {
+                          "type": "DatabaseVersion",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
+                        "QuantityBasedExpiry": {
+                          "fields": {
+                            "retentionCount": {
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "totalRetentionCount": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
                         "State": {
                           "values": {
                             "STATE_UNSPECIFIED": 0,
