@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/iap-v3.0.1...iap-v3.1.0) (2023-09-19)
+
+
+### Features
+
+* [iap] Adding programmatic_clients attribute to UpdateIapSettings API request ([#4668](https://github.com/googleapis/google-cloud-node/issues/4668)) ([53d2755](https://github.com/googleapis/google-cloud-node/commit/53d275509ced91ba753e7e66ac9c86ef264d82b6))
+
 ## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/iap-v3.0.0...iap-v3.0.1) (2023-09-06)
 
 

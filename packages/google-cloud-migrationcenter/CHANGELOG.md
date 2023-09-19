@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/migrationcenter-v1.0.1...migrationcenter-v1.1.0) (2023-09-19)
+
+
+### Features
+
+* [migrationcenter] added GenericInsight which exposes generic insights on assets ([#4670](https://github.com/googleapis/google-cloud-node/issues/4670)) ([89a2956](https://github.com/googleapis/google-cloud-node/commit/89a29560ab1d89e57aa72708101debff835f45c8))
+
 ## [1.0.1](https://github.com/googleapis/google-cloud-node/compare/migrationcenter-v1.0.0...migrationcenter-v1.0.1) (2023-09-06)
 
 

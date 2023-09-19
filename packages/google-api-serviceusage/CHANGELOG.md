@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/service-usage-v3.0.1...service-usage-v3.1.0) (2023-09-19)
+
+
+### Features
+
+* [serviceusage] introduce resource class serviceusage.googleapis.com/Service ([#4669](https://github.com/googleapis/google-cloud-node/issues/4669)) ([4e7f9ef](https://github.com/googleapis/google-cloud-node/commit/4e7f9efde9d5dd76e785a736063948247eede501))
+
 ## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/service-usage-v3.0.0...service-usage-v3.0.1) (2023-09-06)
 
 

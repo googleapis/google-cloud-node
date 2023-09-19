@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+## [4.0.2](https://github.com/googleapis/google-cloud-node/compare/automl-v4.0.1...automl-v4.0.2) (2023-09-19)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency yargs to v17 ([#4659](https://github.com/googleapis/google-cloud-node/issues/4659)) ([e2ee917](https://github.com/googleapis/google-cloud-node/commit/e2ee9178272268f38adeaf428d8f50779ad86290))
+
 ## [4.0.1](https://github.com/googleapis/nodejs-automl/compare/v4.0.0...v4.0.1) (2023-09-07)
 
 
