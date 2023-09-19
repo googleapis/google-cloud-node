@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v1.1.0...alloydb-v1.2.0) (2023-09-19)
+
+
+### Features
+
+* [alloydb] Added enum value for PG15 ([#4674](https://github.com/googleapis/google-cloud-node/issues/4674)) ([b1c7da6](https://github.com/googleapis/google-cloud-node/commit/b1c7da692c0c62d74f66158ea965dca0500db27f))
+* [alloydb] Added enum value for PG15 ([#4680](https://github.com/googleapis/google-cloud-node/issues/4680)) ([0057f4e](https://github.com/googleapis/google-cloud-node/commit/0057f4eaa3b73c24b5e2eadaaf92338e357a82f0))
+
 ## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v1.0.1...alloydb-v1.1.0) (2023-09-19)
 
 
