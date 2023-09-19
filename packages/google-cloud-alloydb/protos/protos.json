@@ -6300,7 +6300,8 @@
                       "values": {
                         "DATABASE_VERSION_UNSPECIFIED": 0,
                         "POSTGRES_13": 1,
-                        "POSTGRES_14": 2
+                        "POSTGRES_14": 2,
+                        "POSTGRES_15": 3
                       }
                     },
                     "UserPassword": {
@@ -6712,7 +6713,7 @@
                           "type": "DatabaseVersion",
                           "id": 9,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "networkConfig": {
@@ -6726,6 +6727,7 @@
                           "type": "string",
                           "id": 10,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "compute.googleapis.com/Network"
                           }
@@ -6998,6 +7000,13 @@
                         "updatePolicy": {
                           "type": "UpdatePolicy",
                           "id": 22
+                        },
+                        "clientConnectionConfig": {
+                          "type": "ClientConnectionConfig",
+                          "id": 23,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -7096,6 +7105,24 @@
                                 "MODE_UNSPECIFIED": 0,
                                 "DEFAULT": 1,
                                 "FORCE_APPLY": 2
+                              }
+                            }
+                          }
+                        },
+                        "ClientConnectionConfig": {
+                          "fields": {
+                            "requireConnectors": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "sslConfig": {
+                              "type": "SslConfig",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -7289,9 +7316,41 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "expiryQuantity": {
+                          "type": "QuantityBasedExpiry",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "databaseVersion": {
+                          "type": "DatabaseVersion",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
+                        "QuantityBasedExpiry": {
+                          "fields": {
+                            "retentionCount": {
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "totalRetentionCount": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
                         "State": {
                           "values": {
                             "STATE_UNSPECIFIED": 0,
@@ -9137,6 +9196,13 @@
                         "publicKey": {
                           "type": "string",
                           "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "useMetadataExchange": {
+                          "type": "bool",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
