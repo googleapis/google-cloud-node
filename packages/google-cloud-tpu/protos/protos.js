@@ -22874,6 +22874,7 @@
                                 case 6:
                                 case 7:
                                 case 8:
+                                case 9:
                                     break;
                                 }
                             if (message.creatingData != null && message.hasOwnProperty("creatingData")) {
@@ -23020,6 +23021,10 @@
                             case "SUSPENDED":
                             case 8:
                                 message.state = 8;
+                                break;
+                            case "WAITING_FOR_RESOURCES":
+                            case 9:
+                                message.state = 9;
                                 break;
                             }
                             if (object.creatingData != null) {
@@ -23188,6 +23193,7 @@
                          * @property {number} ACTIVE=6 ACTIVE value
                          * @property {number} SUSPENDING=7 SUSPENDING value
                          * @property {number} SUSPENDED=8 SUSPENDED value
+                         * @property {number} WAITING_FOR_RESOURCES=9 WAITING_FOR_RESOURCES value
                          */
                         QueuedResourceState.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -23200,6 +23206,7 @@
                             values[valuesById[6] = "ACTIVE"] = 6;
                             values[valuesById[7] = "SUSPENDING"] = 7;
                             values[valuesById[8] = "SUSPENDED"] = 8;
+                            values[valuesById[9] = "WAITING_FOR_RESOURCES"] = 9;
                             return values;
                         })();
     
