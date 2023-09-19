@@ -3088,7 +3088,8 @@
                       "values": {
                         "DATABASE_VERSION_UNSPECIFIED": 0,
                         "POSTGRES_13": 1,
-                        "POSTGRES_14": 2
+                        "POSTGRES_14": 2,
+                        "POSTGRES_15": 3
                       }
                     },
                     "UserPassword": {
@@ -3514,6 +3515,7 @@
                           "type": "string",
                           "id": 10,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "compute.googleapis.com/Network"
                           }
@@ -3791,6 +3793,13 @@
                           "type": "UpdatePolicy",
                           "id": 22
                         },
+                        "clientConnectionConfig": {
+                          "type": "ClientConnectionConfig",
+                          "id": 23,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "satisfiesPzs": {
                           "type": "bool",
                           "id": 24
@@ -3892,6 +3901,24 @@
                                 "MODE_UNSPECIFIED": 0,
                                 "DEFAULT": 1,
                                 "FORCE_APPLY": 2
+                              }
+                            }
+                          }
+                        },
+                        "ClientConnectionConfig": {
+                          "fields": {
+                            "requireConnectors": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "sslConfig": {
+                              "type": "SslConfig",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -4096,6 +4123,13 @@
                         "satisfiesPzs": {
                           "type": "bool",
                           "id": 21
+                        },
+                        "databaseVersion": {
+                          "type": "DatabaseVersion",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {

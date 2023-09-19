@@ -8788,7 +8788,8 @@ export namespace google {
                 enum DatabaseVersion {
                     DATABASE_VERSION_UNSPECIFIED = 0,
                     POSTGRES_13 = 1,
-                    POSTGRES_14 = 2
+                    POSTGRES_14 = 2,
+                    POSTGRES_15 = 3
                 }
 
                 /** Properties of a UserPassword. */
@@ -10871,6 +10872,9 @@ export namespace google {
                     /** Instance updatePolicy */
                     updatePolicy?: (google.cloud.alloydb.v1alpha.Instance.IUpdatePolicy|null);
 
+                    /** Instance clientConnectionConfig */
+                    clientConnectionConfig?: (google.cloud.alloydb.v1alpha.Instance.IClientConnectionConfig|null);
+
                     /** Instance satisfiesPzs */
                     satisfiesPzs?: (boolean|null);
                 }
@@ -10949,6 +10953,9 @@ export namespace google {
 
                     /** Instance updatePolicy. */
                     public updatePolicy?: (google.cloud.alloydb.v1alpha.Instance.IUpdatePolicy|null);
+
+                    /** Instance clientConnectionConfig. */
+                    public clientConnectionConfig?: (google.cloud.alloydb.v1alpha.Instance.IClientConnectionConfig|null);
 
                     /** Instance satisfiesPzs. */
                     public satisfiesPzs: boolean;
@@ -11573,6 +11580,109 @@ export namespace google {
                         }
                     }
 
+                    /** Properties of a ClientConnectionConfig. */
+                    interface IClientConnectionConfig {
+
+                        /** ClientConnectionConfig requireConnectors */
+                        requireConnectors?: (boolean|null);
+
+                        /** ClientConnectionConfig sslConfig */
+                        sslConfig?: (google.cloud.alloydb.v1alpha.ISslConfig|null);
+                    }
+
+                    /** Represents a ClientConnectionConfig. */
+                    class ClientConnectionConfig implements IClientConnectionConfig {
+
+                        /**
+                         * Constructs a new ClientConnectionConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.alloydb.v1alpha.Instance.IClientConnectionConfig);
+
+                        /** ClientConnectionConfig requireConnectors. */
+                        public requireConnectors: boolean;
+
+                        /** ClientConnectionConfig sslConfig. */
+                        public sslConfig?: (google.cloud.alloydb.v1alpha.ISslConfig|null);
+
+                        /**
+                         * Creates a new ClientConnectionConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ClientConnectionConfig instance
+                         */
+                        public static create(properties?: google.cloud.alloydb.v1alpha.Instance.IClientConnectionConfig): google.cloud.alloydb.v1alpha.Instance.ClientConnectionConfig;
+
+                        /**
+                         * Encodes the specified ClientConnectionConfig message. Does not implicitly {@link google.cloud.alloydb.v1alpha.Instance.ClientConnectionConfig.verify|verify} messages.
+                         * @param message ClientConnectionConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.alloydb.v1alpha.Instance.IClientConnectionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ClientConnectionConfig message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1alpha.Instance.ClientConnectionConfig.verify|verify} messages.
+                         * @param message ClientConnectionConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.alloydb.v1alpha.Instance.IClientConnectionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ClientConnectionConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ClientConnectionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1alpha.Instance.ClientConnectionConfig;
+
+                        /**
+                         * Decodes a ClientConnectionConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ClientConnectionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1alpha.Instance.ClientConnectionConfig;
+
+                        /**
+                         * Verifies a ClientConnectionConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ClientConnectionConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ClientConnectionConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1alpha.Instance.ClientConnectionConfig;
+
+                        /**
+                         * Creates a plain object from a ClientConnectionConfig message. Also converts values to other types if specified.
+                         * @param message ClientConnectionConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.alloydb.v1alpha.Instance.ClientConnectionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ClientConnectionConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ClientConnectionConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** State enum. */
                     enum State {
                         STATE_UNSPECIFIED = 0,
@@ -11782,6 +11892,9 @@ export namespace google {
 
                     /** Backup satisfiesPzs */
                     satisfiesPzs?: (boolean|null);
+
+                    /** Backup databaseVersion */
+                    databaseVersion?: (google.cloud.alloydb.v1alpha.DatabaseVersion|keyof typeof google.cloud.alloydb.v1alpha.DatabaseVersion|null);
                 }
 
                 /** Represents a Backup. */
@@ -11855,6 +11968,9 @@ export namespace google {
 
                     /** Backup satisfiesPzs. */
                     public satisfiesPzs: boolean;
+
+                    /** Backup databaseVersion. */
+                    public databaseVersion: (google.cloud.alloydb.v1alpha.DatabaseVersion|keyof typeof google.cloud.alloydb.v1alpha.DatabaseVersion);
 
                     /**
                      * Creates a new Backup instance using the specified properties.
