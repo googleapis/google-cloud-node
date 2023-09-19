@@ -5,6 +5,218 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "9876892176c305a67b64af4c8481563ee1633576",
+          "message": "[container] add SecurityPostureConfig Enterprise vuln mode to allow customers to enable Advanced Vulnerability Scanning for their clusters",
+          "issues": [
+            "4666"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "af6c2ba0-17c9-493a-929e-7bb0dc361440",
+      "createTime": "2023-09-19T00:45:48.057Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "89a29560ab1d89e57aa72708101debff835f45c8",
+          "message": "[migrationcenter] added GenericInsight which exposes generic insights on assets",
+          "issues": [
+            "4670"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/migrationcenter",
+      "id": "8d755cb0-afd9-4f84-91b5-32f300704a07",
+      "createTime": "2023-09-19T00:45:48.051Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "53d275509ced91ba753e7e66ac9c86ef264d82b6",
+          "message": "[iap] Adding programmatic_clients attribute to UpdateIapSettings API request",
+          "issues": [
+            "4668"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iap",
+      "id": "2e5f5890-5647-4465-8086-2c3cb8e731f4",
+      "createTime": "2023-09-19T00:45:48.044Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9c2bd8e3675ef4021fe166a514e022fe70821f02",
+          "message": "[dataproc] add optional parameters (tarball_gcs_dir, diagnosis_interval, jobs, yarn_application_ids) in DiagnoseClusterRequest",
+          "issues": [
+            "4661"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "6482b8b9-9f98-4dc5-a9ab-453271528b0a",
+      "createTime": "2023-09-19T00:45:48.038Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "240a69f10d1d5e3fe45169dedfc5f1c2d6492df9",
+          "message": "Dataform version",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "7d4c40ffab7fe98257560f2986acfcb888f15747",
+          "message": "Update dependency @google-cloud/dataform to v1",
+          "issues": [
+            "4631"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "fix",
+          "sha": "b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4585"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "a4507aa1166832c2d9624cb55879a543f65ec4cb",
+          "message": "Update dependency @google-cloud/dataform to v1",
+          "issues": [
+            "4532"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "chore",
+          "sha": "2260f12543d171bda95345e53475f5f0fdc45770",
+          "message": "Migrate to Node 14",
+          "issues": [
+            "4443"
+          ],
+          "breakingChangeNote": "migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))"
+        },
+        {
+          "type": "fix",
+          "sha": "c32965c0c4a5975ba37371ecd819d9cffb080aa5",
+          "message": "[Many APIs] fix typings for IAM methods",
+          "issues": [
+            "4460"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "1.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataform",
+      "id": "a7c47d76-d39f-4af9-9719-aa6740055c4a",
+      "createTime": "2023-09-19T00:45:48.032Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "998711e948c717d5b0bd878d1e0e8cf861831d52",
+          "message": "[contentwarehouse] add `ROOT_FOLDER` field to Document Warehouse API v1",
+          "issues": [
+            "4672"
+          ]
+        }
+      ],
+      "version": "1.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contentwarehouse",
+      "id": "14605a0f-edf0-45ec-becd-ba8d3eac2db5",
+      "createTime": "2023-09-19T00:45:48.025Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e2ee9178272268f38adeaf428d8f50779ad86290",
+          "message": "Update dependency yargs to v17",
+          "issues": [
+            "4659"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "4.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/automl",
+      "id": "b0b325d5-bf97-408e-9c75-4fe637077cc6",
+      "createTime": "2023-09-19T00:45:48.019Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "12528e16d13a4aeca66162bd5f51bb1547ec410e",
+          "message": "[alloydb] Changed description for recovery_window_days in ContinuousBackupConfig",
+          "issues": [
+            "4671"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "05994949-d9f5-4713-8e6e-9c7e253c6985",
+      "createTime": "2023-09-19T00:45:48.011Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4e7f9efde9d5dd76e785a736063948247eede501",
+          "message": "[serviceusage] introduce resource class serviceusage.googleapis.com/Service",
+          "issues": [
+            "4669"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-usage",
+      "id": "2269e22e-058c-4820-a28f-3dc571755f38",
+      "createTime": "2023-09-19T00:45:48.004Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "38140975dcfc5936032d05083eb3f7b9bfe93a7c",
           "message": "Add initial files for google.devtools.cloudprofiler.v2",
           "issues": [
@@ -18932,5 +19144,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-09-14T19:51:47.211Z"
+  "updateTime": "2023-09-19T00:45:48.057Z"
 }

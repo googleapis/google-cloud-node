@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v1.0.1...alloydb-v1.1.0) (2023-09-19)
+
+
+### Features
+
+* [alloydb] Changed description for recovery_window_days in ContinuousBackupConfig ([#4671](https://github.com/googleapis/google-cloud-node/issues/4671)) ([12528e1](https://github.com/googleapis/google-cloud-node/commit/12528e16d13a4aeca66162bd5f51bb1547ec410e))
+
 ## [1.0.1](https://github.com/googleapis/google-cloud-node/compare/alloydb-v1.0.0...alloydb-v1.0.1) (2023-09-06)
 
 

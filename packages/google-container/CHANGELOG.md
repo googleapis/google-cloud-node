@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.2.0...container-v5.3.0) (2023-09-19)
+
+
+### Features
+
+* [container] add SecurityPostureConfig Enterprise vuln mode to allow customers to enable Advanced Vulnerability Scanning for their clusters ([#4666](https://github.com/googleapis/google-cloud-node/issues/4666)) ([9876892](https://github.com/googleapis/google-cloud-node/commit/9876892176c305a67b64af4c8481563ee1633576))
+
 ## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.1.0...container-v5.2.0) (2023-09-06)
 
 

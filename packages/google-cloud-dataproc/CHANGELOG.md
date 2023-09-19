@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v5.1.0...dataproc-v5.2.0) (2023-09-19)
+
+
+### Features
+
+* [dataproc] add optional parameters (tarball_gcs_dir, diagnosis_interval, jobs, yarn_application_ids) in DiagnoseClusterRequest ([#4661](https://github.com/googleapis/google-cloud-node/issues/4661)) ([9c2bd8e](https://github.com/googleapis/google-cloud-node/commit/9c2bd8e3675ef4021fe166a514e022fe70821f02))
+
 ## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v5.0.0...dataproc-v5.1.0) (2023-09-06)
 
 

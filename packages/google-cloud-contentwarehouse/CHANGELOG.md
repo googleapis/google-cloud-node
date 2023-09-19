@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v1.1.0...contentwarehouse-v1.2.0) (2023-09-19)
+
+
+### Features
+
+* [contentwarehouse] add `ROOT_FOLDER` field to Document Warehouse API v1 ([#4672](https://github.com/googleapis/google-cloud-node/issues/4672)) ([998711e](https://github.com/googleapis/google-cloud-node/commit/998711e948c717d5b0bd878d1e0e8cf861831d52))
+
 ## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v1.0.0...contentwarehouse-v1.1.0) (2023-09-06)
 
 

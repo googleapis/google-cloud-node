@@ -1,5 +1,27 @@
 # Changelog
 
+## [1.0.1](https://github.com/googleapis/google-cloud-node/compare/dataform-v0.4.1...dataform-v1.0.1) (2023-09-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))
+
+### Bug Fixes
+
+* [Many APIs] fix typings for IAM methods ([#4460](https://github.com/googleapis/google-cloud-node/issues/4460)) ([c32965c](https://github.com/googleapis/google-cloud-node/commit/c32965c0c4a5975ba37371ecd819d9cffb080aa5))
+* [Many APIs] simplify logic for HTTP/1.1 REST fallback option ([#4585](https://github.com/googleapis/google-cloud-node/issues/4585)) ([b6cea45](https://github.com/googleapis/google-cloud-node/commit/b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251))
+* Dataform version ([240a69f](https://github.com/googleapis/google-cloud-node/commit/240a69f10d1d5e3fe45169dedfc5f1c2d6492df9))
+* **deps:** Bump `google-gax` to ^3.5.8 ([#4117](https://github.com/googleapis/google-cloud-node/issues/4117)) ([0b67d88](https://github.com/googleapis/google-cloud-node/commit/0b67d883963643ce1b4f6d2ccd3e8d37adf6e029))
+* **deps:** Update dependency @google-cloud/dataform to v1 ([#4532](https://github.com/googleapis/google-cloud-node/issues/4532)) ([a4507aa](https://github.com/googleapis/google-cloud-node/commit/a4507aa1166832c2d9624cb55879a543f65ec4cb))
+* **deps:** Update dependency @google-cloud/dataform to v1 ([#4631](https://github.com/googleapis/google-cloud-node/issues/4631)) ([7d4c40f](https://github.com/googleapis/google-cloud-node/commit/7d4c40ffab7fe98257560f2986acfcb888f15747))
+* Minify JSON and JS files, and remove .map files ([#4143](https://github.com/googleapis/google-cloud-node/issues/4143)) ([170f7d5](https://github.com/googleapis/google-cloud-node/commit/170f7d57b8fd344d182a8e758867b8124722eebc))
+
+
+### Miscellaneous Chores
+
+* Migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443)) ([2260f12](https://github.com/googleapis/google-cloud-node/commit/2260f12543d171bda95345e53475f5f0fdc45770))
+
 ## [0.4.1](https://github.com/googleapis/google-cloud-node/compare/dataform-v1.0.0...dataform-v0.4.1) (2023-09-14)
 
 
