@@ -22325,6 +22325,9 @@ export namespace google {
 
                 /** NodeConfig hostMaintenancePolicy */
                 hostMaintenancePolicy?: (google.container.v1beta1.IHostMaintenancePolicy|null);
+
+                /** NodeConfig enableConfidentialStorage */
+                enableConfidentialStorage?: (boolean|null);
             }
 
             /** Represents a NodeConfig. */
@@ -22443,6 +22446,9 @@ export namespace google {
 
                 /** NodeConfig hostMaintenancePolicy. */
                 public hostMaintenancePolicy?: (google.container.v1beta1.IHostMaintenancePolicy|null);
+
+                /** NodeConfig enableConfidentialStorage. */
+                public enableConfidentialStorage: boolean;
 
                 /** NodeConfig _fastSocket. */
                 public _fastSocket?: "fastSocket";
@@ -28891,7 +28897,8 @@ export namespace google {
                 enum VulnerabilityMode {
                     VULNERABILITY_MODE_UNSPECIFIED = 0,
                     VULNERABILITY_DISABLED = 1,
-                    VULNERABILITY_BASIC = 2
+                    VULNERABILITY_BASIC = 2,
+                    VULNERABILITY_ENTERPRISE = 3
                 }
             }
 
