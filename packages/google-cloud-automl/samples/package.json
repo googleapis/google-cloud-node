@@ -19,7 +19,7 @@
     "@google-cloud/automl": "^4.0.1",
     "csv": "^6.0.0",
     "mathjs": "^11.0.0",
-    "yargs": "^16.0.0"
+    "yargs": "^17.0.0"
   },
   "devDependencies": {
     "@google-cloud/storage": "^7.0.1",
