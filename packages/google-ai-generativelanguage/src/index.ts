@@ -17,6 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1beta2 from './v1beta2';
+import * as v1beta3 from './v1beta3';
 
 const DiscussServiceClient = v1beta2.DiscussServiceClient;
 type DiscussServiceClient = v1beta2.DiscussServiceClient;
@@ -25,9 +26,16 @@ type ModelServiceClient = v1beta2.ModelServiceClient;
 const TextServiceClient = v1beta2.TextServiceClient;
 type TextServiceClient = v1beta2.TextServiceClient;
 
-export {v1beta2, DiscussServiceClient, ModelServiceClient, TextServiceClient};
+export {
+  v1beta2,
+  v1beta3,
+  DiscussServiceClient,
+  ModelServiceClient,
+  TextServiceClient,
+};
 export default {
   v1beta2,
+  v1beta3,
   DiscussServiceClient,
   ModelServiceClient,
   TextServiceClient,
