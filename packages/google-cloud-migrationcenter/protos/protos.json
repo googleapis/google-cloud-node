@@ -3241,7 +3241,10 @@
                       "fields": {
                         "biosName": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "id": {
                           "type": "string",
@@ -4203,7 +4206,8 @@
                       "oneofs": {
                         "insight": {
                           "oneof": [
-                            "migrationInsight"
+                            "migrationInsight",
+                            "genericInsight"
                           ]
                         }
                       },
@@ -4211,6 +4215,39 @@
                         "migrationInsight": {
                           "type": "MigrationInsight",
                           "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "genericInsight": {
+                          "type": "GenericInsight",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "GenericInsight": {
+                      "fields": {
+                        "messageId": {
+                          "type": "int64",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "defaultMessage": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "additionalInformation": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -4250,24 +4287,6 @@
                         }
                       }
                     },
-                    "FitDescriptor": {
-                      "fields": {
-                        "fitLevel": {
-                          "type": "FitLevel",
-                          "id": 1
-                        }
-                      },
-                      "nested": {
-                        "FitLevel": {
-                          "values": {
-                            "FIT_LEVEL_UNSPECIFIED": 0,
-                            "FIT": 1,
-                            "NO_FIT": 2,
-                            "REQUIRES_EFFORT": 3
-                          }
-                        }
-                      }
-                    },
                     "ComputeEngineShapeDescriptor": {
                       "fields": {
                         "memoryMb": {
@@ -4289,6 +4308,41 @@
                         "machineType": {
                           "type": "string",
                           "id": 5
+                        },
+                        "storage": {
+                          "rule": "repeated",
+                          "type": "ComputeStorageDescriptor",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "ComputeStorageDescriptor": {
+                      "fields": {
+                        "type": {
+                          "type": "PersistentDiskType",
+                          "id": 1
+                        },
+                        "sizeGb": {
+                          "type": "int32",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "FitDescriptor": {
+                      "fields": {
+                        "fitLevel": {
+                          "type": "FitLevel",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "FitLevel": {
+                          "values": {
+                            "FIT_LEVEL_UNSPECIFIED": 0,
+                            "FIT": 1,
+                            "NO_FIT": 2,
+                            "REQUIRES_EFFORT": 3
+                          }
                         }
                       }
                     },
@@ -4482,7 +4536,10 @@
                         },
                         "totalRowsCount": {
                           "type": "int32",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -4585,6 +4642,10 @@
                     },
                     "VirtualMachinePreferences": {
                       "fields": {
+                        "targetProduct": {
+                          "type": "ComputeMigrationTargetProduct",
+                          "id": 2
+                        },
                         "regionPreferences": {
                           "type": "RegionPreferences",
                           "id": 3
@@ -4600,6 +4661,14 @@
                         "computeEnginePreferences": {
                           "type": "ComputeEnginePreferences",
                           "id": 6
+                        },
+                        "vmwareEnginePreferences": {
+                          "type": "VmwareEnginePreferences",
+                          "id": 7
+                        },
+                        "soleTenancyPreferences": {
+                          "type": "SoleTenancyPreferences",
+                          "id": 8
                         }
                       }
                     },
@@ -4627,6 +4696,85 @@
                     "MachineSeries": {
                       "fields": {
                         "code": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "VmwareEnginePreferences": {
+                      "fields": {
+                        "cpuOvercommitRatio": {
+                          "type": "double",
+                          "id": 1
+                        },
+                        "memoryOvercommitRatio": {
+                          "type": "double",
+                          "id": 2
+                        },
+                        "storageDeduplicationCompressionRatio": {
+                          "type": "double",
+                          "id": 3
+                        },
+                        "commitmentPlan": {
+                          "type": "CommitmentPlan",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "CommitmentPlan": {
+                          "values": {
+                            "COMMITMENT_PLAN_UNSPECIFIED": 0,
+                            "ON_DEMAND": 1,
+                            "COMMITMENT_1_YEAR_MONTHLY_PAYMENTS": 2,
+                            "COMMITMENT_3_YEAR_MONTHLY_PAYMENTS": 3,
+                            "COMMITMENT_1_YEAR_UPFRONT_PAYMENT": 4,
+                            "COMMITMENT_3_YEAR_UPFRONT_PAYMENT": 5
+                          }
+                        }
+                      }
+                    },
+                    "SoleTenancyPreferences": {
+                      "fields": {
+                        "cpuOvercommitRatio": {
+                          "type": "double",
+                          "id": 1
+                        },
+                        "hostMaintenancePolicy": {
+                          "type": "HostMaintenancePolicy",
+                          "id": 2
+                        },
+                        "commitmentPlan": {
+                          "type": "CommitmentPlan",
+                          "id": 3
+                        },
+                        "nodeTypes": {
+                          "rule": "repeated",
+                          "type": "SoleTenantNodeType",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "HostMaintenancePolicy": {
+                          "values": {
+                            "HOST_MAINTENANCE_POLICY_UNSPECIFIED": 0,
+                            "HOST_MAINTENANCE_POLICY_DEFAULT": 1,
+                            "HOST_MAINTENANCE_POLICY_RESTART_IN_PLACE": 2,
+                            "HOST_MAINTENANCE_POLICY_MIGRATE_WITHIN_NODE_GROUP": 3
+                          }
+                        },
+                        "CommitmentPlan": {
+                          "values": {
+                            "COMMITMENT_PLAN_UNSPECIFIED": 0,
+                            "ON_DEMAND": 1,
+                            "COMMITMENT_1_YEAR": 2,
+                            "COMMITMENT_3_YEAR": 3
+                          }
+                        }
+                      }
+                    },
+                    "SoleTenantNodeType": {
+                      "fields": {
+                        "nodeName": {
                           "type": "string",
                           "id": 1
                         }
@@ -4817,6 +4965,82 @@
                             }
                           }
                         },
+                        "VmwareEngineFinding": {
+                          "fields": {
+                            "allocatedRegions": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            },
+                            "allocatedAssetCount": {
+                              "type": "int64",
+                              "id": 2
+                            },
+                            "nodeAllocations": {
+                              "rule": "repeated",
+                              "type": "VmwareNodeAllocation",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "VmwareNodeAllocation": {
+                          "fields": {
+                            "vmwareNode": {
+                              "type": "VmwareNode",
+                              "id": 1
+                            },
+                            "nodeCount": {
+                              "type": "int64",
+                              "id": 2
+                            },
+                            "allocatedAssetCount": {
+                              "type": "int64",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "VmwareNode": {
+                          "fields": {
+                            "code": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "SoleTenantFinding": {
+                          "fields": {
+                            "allocatedRegions": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            },
+                            "allocatedAssetCount": {
+                              "type": "int64",
+                              "id": 2
+                            },
+                            "nodeAllocations": {
+                              "rule": "repeated",
+                              "type": "SoleTenantNodeAllocation",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "SoleTenantNodeAllocation": {
+                          "fields": {
+                            "node": {
+                              "type": "SoleTenantNodeType",
+                              "id": 1
+                            },
+                            "nodeCount": {
+                              "type": "int64",
+                              "id": 2
+                            },
+                            "allocatedAssetCount": {
+                              "type": "int64",
+                              "id": 3
+                            }
+                          }
+                        },
                         "GroupPreferenceSetFinding": {
                           "fields": {
                             "displayName": {
@@ -4858,6 +5082,14 @@
                             "computeEngineFinding": {
                               "type": "ComputeEngineFinding",
                               "id": 10
+                            },
+                            "vmwareEngineFinding": {
+                              "type": "VmwareEngineFinding",
+                              "id": 11
+                            },
+                            "soleTenantFinding": {
+                              "type": "SoleTenantFinding",
+                              "id": 12
                             }
                           }
                         },
@@ -4877,7 +5109,10 @@
                             },
                             "overlappingAssetCount": {
                               "type": "int64",
-                              "id": 4
+                              "id": 4,
+                              "options": {
+                                "deprecated": true
+                              }
                             },
                             "preferenceSetFindings": {
                               "rule": "repeated",
@@ -4956,6 +5191,14 @@
                         "COMMITMENT_PLAN_NONE": 1,
                         "COMMITMENT_PLAN_ONE_YEAR": 2,
                         "COMMITMENT_PLAN_THREE_YEARS": 3
+                      }
+                    },
+                    "ComputeMigrationTargetProduct": {
+                      "values": {
+                        "COMPUTE_MIGRATION_TARGET_PRODUCT_UNSPECIFIED": 0,
+                        "COMPUTE_MIGRATION_TARGET_PRODUCT_COMPUTE_ENGINE": 1,
+                        "COMPUTE_MIGRATION_TARGET_PRODUCT_VMWARE_ENGINE": 2,
+                        "COMPUTE_MIGRATION_TARGET_PRODUCT_SOLE_TENANCY": 3
                       }
                     },
                     "ReportView": {

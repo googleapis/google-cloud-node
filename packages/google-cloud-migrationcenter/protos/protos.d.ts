@@ -15345,6 +15345,9 @@ export namespace google {
 
                     /** Insight migrationInsight */
                     migrationInsight?: (google.cloud.migrationcenter.v1.IMigrationInsight|null);
+
+                    /** Insight genericInsight */
+                    genericInsight?: (google.cloud.migrationcenter.v1.IGenericInsight|null);
                 }
 
                 /** Represents an Insight. */
@@ -15359,8 +15362,11 @@ export namespace google {
                     /** Insight migrationInsight. */
                     public migrationInsight?: (google.cloud.migrationcenter.v1.IMigrationInsight|null);
 
+                    /** Insight genericInsight. */
+                    public genericInsight?: (google.cloud.migrationcenter.v1.IGenericInsight|null);
+
                     /** Insight insight. */
-                    public insight?: "migrationInsight";
+                    public insight?: ("migrationInsight"|"genericInsight");
 
                     /**
                      * Creates a new Insight instance using the specified properties.
@@ -15434,6 +15440,115 @@ export namespace google {
 
                     /**
                      * Gets the default type url for Insight
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GenericInsight. */
+                interface IGenericInsight {
+
+                    /** GenericInsight messageId */
+                    messageId?: (number|Long|string|null);
+
+                    /** GenericInsight defaultMessage */
+                    defaultMessage?: (string|null);
+
+                    /** GenericInsight additionalInformation */
+                    additionalInformation?: (string[]|null);
+                }
+
+                /** Represents a GenericInsight. */
+                class GenericInsight implements IGenericInsight {
+
+                    /**
+                     * Constructs a new GenericInsight.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.migrationcenter.v1.IGenericInsight);
+
+                    /** GenericInsight messageId. */
+                    public messageId: (number|Long|string);
+
+                    /** GenericInsight defaultMessage. */
+                    public defaultMessage: string;
+
+                    /** GenericInsight additionalInformation. */
+                    public additionalInformation: string[];
+
+                    /**
+                     * Creates a new GenericInsight instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GenericInsight instance
+                     */
+                    public static create(properties?: google.cloud.migrationcenter.v1.IGenericInsight): google.cloud.migrationcenter.v1.GenericInsight;
+
+                    /**
+                     * Encodes the specified GenericInsight message. Does not implicitly {@link google.cloud.migrationcenter.v1.GenericInsight.verify|verify} messages.
+                     * @param message GenericInsight message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.migrationcenter.v1.IGenericInsight, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GenericInsight message, length delimited. Does not implicitly {@link google.cloud.migrationcenter.v1.GenericInsight.verify|verify} messages.
+                     * @param message GenericInsight message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.migrationcenter.v1.IGenericInsight, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GenericInsight message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GenericInsight
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.migrationcenter.v1.GenericInsight;
+
+                    /**
+                     * Decodes a GenericInsight message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GenericInsight
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.migrationcenter.v1.GenericInsight;
+
+                    /**
+                     * Verifies a GenericInsight message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GenericInsight message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GenericInsight
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.migrationcenter.v1.GenericInsight;
+
+                    /**
+                     * Creates a plain object from a GenericInsight message. Also converts values to other types if specified.
+                     * @param message GenericInsight
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.migrationcenter.v1.GenericInsight, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GenericInsight to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GenericInsight
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -15643,6 +15758,236 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ComputeEngineShapeDescriptor. */
+                interface IComputeEngineShapeDescriptor {
+
+                    /** ComputeEngineShapeDescriptor memoryMb */
+                    memoryMb?: (number|null);
+
+                    /** ComputeEngineShapeDescriptor physicalCoreCount */
+                    physicalCoreCount?: (number|null);
+
+                    /** ComputeEngineShapeDescriptor logicalCoreCount */
+                    logicalCoreCount?: (number|null);
+
+                    /** ComputeEngineShapeDescriptor series */
+                    series?: (string|null);
+
+                    /** ComputeEngineShapeDescriptor machineType */
+                    machineType?: (string|null);
+
+                    /** ComputeEngineShapeDescriptor storage */
+                    storage?: (google.cloud.migrationcenter.v1.IComputeStorageDescriptor[]|null);
+                }
+
+                /** Represents a ComputeEngineShapeDescriptor. */
+                class ComputeEngineShapeDescriptor implements IComputeEngineShapeDescriptor {
+
+                    /**
+                     * Constructs a new ComputeEngineShapeDescriptor.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.migrationcenter.v1.IComputeEngineShapeDescriptor);
+
+                    /** ComputeEngineShapeDescriptor memoryMb. */
+                    public memoryMb: number;
+
+                    /** ComputeEngineShapeDescriptor physicalCoreCount. */
+                    public physicalCoreCount: number;
+
+                    /** ComputeEngineShapeDescriptor logicalCoreCount. */
+                    public logicalCoreCount: number;
+
+                    /** ComputeEngineShapeDescriptor series. */
+                    public series: string;
+
+                    /** ComputeEngineShapeDescriptor machineType. */
+                    public machineType: string;
+
+                    /** ComputeEngineShapeDescriptor storage. */
+                    public storage: google.cloud.migrationcenter.v1.IComputeStorageDescriptor[];
+
+                    /**
+                     * Creates a new ComputeEngineShapeDescriptor instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ComputeEngineShapeDescriptor instance
+                     */
+                    public static create(properties?: google.cloud.migrationcenter.v1.IComputeEngineShapeDescriptor): google.cloud.migrationcenter.v1.ComputeEngineShapeDescriptor;
+
+                    /**
+                     * Encodes the specified ComputeEngineShapeDescriptor message. Does not implicitly {@link google.cloud.migrationcenter.v1.ComputeEngineShapeDescriptor.verify|verify} messages.
+                     * @param message ComputeEngineShapeDescriptor message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.migrationcenter.v1.IComputeEngineShapeDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ComputeEngineShapeDescriptor message, length delimited. Does not implicitly {@link google.cloud.migrationcenter.v1.ComputeEngineShapeDescriptor.verify|verify} messages.
+                     * @param message ComputeEngineShapeDescriptor message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.migrationcenter.v1.IComputeEngineShapeDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ComputeEngineShapeDescriptor message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ComputeEngineShapeDescriptor
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.migrationcenter.v1.ComputeEngineShapeDescriptor;
+
+                    /**
+                     * Decodes a ComputeEngineShapeDescriptor message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ComputeEngineShapeDescriptor
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.migrationcenter.v1.ComputeEngineShapeDescriptor;
+
+                    /**
+                     * Verifies a ComputeEngineShapeDescriptor message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ComputeEngineShapeDescriptor message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ComputeEngineShapeDescriptor
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.migrationcenter.v1.ComputeEngineShapeDescriptor;
+
+                    /**
+                     * Creates a plain object from a ComputeEngineShapeDescriptor message. Also converts values to other types if specified.
+                     * @param message ComputeEngineShapeDescriptor
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.migrationcenter.v1.ComputeEngineShapeDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ComputeEngineShapeDescriptor to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ComputeEngineShapeDescriptor
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ComputeStorageDescriptor. */
+                interface IComputeStorageDescriptor {
+
+                    /** ComputeStorageDescriptor type */
+                    type?: (google.cloud.migrationcenter.v1.PersistentDiskType|keyof typeof google.cloud.migrationcenter.v1.PersistentDiskType|null);
+
+                    /** ComputeStorageDescriptor sizeGb */
+                    sizeGb?: (number|null);
+                }
+
+                /** Represents a ComputeStorageDescriptor. */
+                class ComputeStorageDescriptor implements IComputeStorageDescriptor {
+
+                    /**
+                     * Constructs a new ComputeStorageDescriptor.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.migrationcenter.v1.IComputeStorageDescriptor);
+
+                    /** ComputeStorageDescriptor type. */
+                    public type: (google.cloud.migrationcenter.v1.PersistentDiskType|keyof typeof google.cloud.migrationcenter.v1.PersistentDiskType);
+
+                    /** ComputeStorageDescriptor sizeGb. */
+                    public sizeGb: number;
+
+                    /**
+                     * Creates a new ComputeStorageDescriptor instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ComputeStorageDescriptor instance
+                     */
+                    public static create(properties?: google.cloud.migrationcenter.v1.IComputeStorageDescriptor): google.cloud.migrationcenter.v1.ComputeStorageDescriptor;
+
+                    /**
+                     * Encodes the specified ComputeStorageDescriptor message. Does not implicitly {@link google.cloud.migrationcenter.v1.ComputeStorageDescriptor.verify|verify} messages.
+                     * @param message ComputeStorageDescriptor message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.migrationcenter.v1.IComputeStorageDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ComputeStorageDescriptor message, length delimited. Does not implicitly {@link google.cloud.migrationcenter.v1.ComputeStorageDescriptor.verify|verify} messages.
+                     * @param message ComputeStorageDescriptor message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.migrationcenter.v1.IComputeStorageDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ComputeStorageDescriptor message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ComputeStorageDescriptor
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.migrationcenter.v1.ComputeStorageDescriptor;
+
+                    /**
+                     * Decodes a ComputeStorageDescriptor message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ComputeStorageDescriptor
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.migrationcenter.v1.ComputeStorageDescriptor;
+
+                    /**
+                     * Verifies a ComputeStorageDescriptor message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ComputeStorageDescriptor message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ComputeStorageDescriptor
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.migrationcenter.v1.ComputeStorageDescriptor;
+
+                    /**
+                     * Creates a plain object from a ComputeStorageDescriptor message. Also converts values to other types if specified.
+                     * @param message ComputeStorageDescriptor
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.migrationcenter.v1.ComputeStorageDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ComputeStorageDescriptor to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ComputeStorageDescriptor
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a FitDescriptor. */
                 interface IFitDescriptor {
 
@@ -15749,127 +16094,6 @@ export namespace google {
                         NO_FIT = 2,
                         REQUIRES_EFFORT = 3
                     }
-                }
-
-                /** Properties of a ComputeEngineShapeDescriptor. */
-                interface IComputeEngineShapeDescriptor {
-
-                    /** ComputeEngineShapeDescriptor memoryMb */
-                    memoryMb?: (number|null);
-
-                    /** ComputeEngineShapeDescriptor physicalCoreCount */
-                    physicalCoreCount?: (number|null);
-
-                    /** ComputeEngineShapeDescriptor logicalCoreCount */
-                    logicalCoreCount?: (number|null);
-
-                    /** ComputeEngineShapeDescriptor series */
-                    series?: (string|null);
-
-                    /** ComputeEngineShapeDescriptor machineType */
-                    machineType?: (string|null);
-                }
-
-                /** Represents a ComputeEngineShapeDescriptor. */
-                class ComputeEngineShapeDescriptor implements IComputeEngineShapeDescriptor {
-
-                    /**
-                     * Constructs a new ComputeEngineShapeDescriptor.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.migrationcenter.v1.IComputeEngineShapeDescriptor);
-
-                    /** ComputeEngineShapeDescriptor memoryMb. */
-                    public memoryMb: number;
-
-                    /** ComputeEngineShapeDescriptor physicalCoreCount. */
-                    public physicalCoreCount: number;
-
-                    /** ComputeEngineShapeDescriptor logicalCoreCount. */
-                    public logicalCoreCount: number;
-
-                    /** ComputeEngineShapeDescriptor series. */
-                    public series: string;
-
-                    /** ComputeEngineShapeDescriptor machineType. */
-                    public machineType: string;
-
-                    /**
-                     * Creates a new ComputeEngineShapeDescriptor instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ComputeEngineShapeDescriptor instance
-                     */
-                    public static create(properties?: google.cloud.migrationcenter.v1.IComputeEngineShapeDescriptor): google.cloud.migrationcenter.v1.ComputeEngineShapeDescriptor;
-
-                    /**
-                     * Encodes the specified ComputeEngineShapeDescriptor message. Does not implicitly {@link google.cloud.migrationcenter.v1.ComputeEngineShapeDescriptor.verify|verify} messages.
-                     * @param message ComputeEngineShapeDescriptor message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.migrationcenter.v1.IComputeEngineShapeDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ComputeEngineShapeDescriptor message, length delimited. Does not implicitly {@link google.cloud.migrationcenter.v1.ComputeEngineShapeDescriptor.verify|verify} messages.
-                     * @param message ComputeEngineShapeDescriptor message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.migrationcenter.v1.IComputeEngineShapeDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ComputeEngineShapeDescriptor message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ComputeEngineShapeDescriptor
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.migrationcenter.v1.ComputeEngineShapeDescriptor;
-
-                    /**
-                     * Decodes a ComputeEngineShapeDescriptor message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ComputeEngineShapeDescriptor
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.migrationcenter.v1.ComputeEngineShapeDescriptor;
-
-                    /**
-                     * Verifies a ComputeEngineShapeDescriptor message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ComputeEngineShapeDescriptor message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ComputeEngineShapeDescriptor
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.migrationcenter.v1.ComputeEngineShapeDescriptor;
-
-                    /**
-                     * Creates a plain object from a ComputeEngineShapeDescriptor message. Also converts values to other types if specified.
-                     * @param message ComputeEngineShapeDescriptor
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.migrationcenter.v1.ComputeEngineShapeDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ComputeEngineShapeDescriptor to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ComputeEngineShapeDescriptor
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an Aggregation. */
@@ -17864,6 +18088,9 @@ export namespace google {
                 /** Properties of a VirtualMachinePreferences. */
                 interface IVirtualMachinePreferences {
 
+                    /** VirtualMachinePreferences targetProduct */
+                    targetProduct?: (google.cloud.migrationcenter.v1.ComputeMigrationTargetProduct|keyof typeof google.cloud.migrationcenter.v1.ComputeMigrationTargetProduct|null);
+
                     /** VirtualMachinePreferences regionPreferences */
                     regionPreferences?: (google.cloud.migrationcenter.v1.IRegionPreferences|null);
 
@@ -17875,6 +18102,12 @@ export namespace google {
 
                     /** VirtualMachinePreferences computeEnginePreferences */
                     computeEnginePreferences?: (google.cloud.migrationcenter.v1.IComputeEnginePreferences|null);
+
+                    /** VirtualMachinePreferences vmwareEnginePreferences */
+                    vmwareEnginePreferences?: (google.cloud.migrationcenter.v1.IVmwareEnginePreferences|null);
+
+                    /** VirtualMachinePreferences soleTenancyPreferences */
+                    soleTenancyPreferences?: (google.cloud.migrationcenter.v1.ISoleTenancyPreferences|null);
                 }
 
                 /** Represents a VirtualMachinePreferences. */
@@ -17885,6 +18118,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.migrationcenter.v1.IVirtualMachinePreferences);
+
+                    /** VirtualMachinePreferences targetProduct. */
+                    public targetProduct: (google.cloud.migrationcenter.v1.ComputeMigrationTargetProduct|keyof typeof google.cloud.migrationcenter.v1.ComputeMigrationTargetProduct);
 
                     /** VirtualMachinePreferences regionPreferences. */
                     public regionPreferences?: (google.cloud.migrationcenter.v1.IRegionPreferences|null);
@@ -17897,6 +18133,12 @@ export namespace google {
 
                     /** VirtualMachinePreferences computeEnginePreferences. */
                     public computeEnginePreferences?: (google.cloud.migrationcenter.v1.IComputeEnginePreferences|null);
+
+                    /** VirtualMachinePreferences vmwareEnginePreferences. */
+                    public vmwareEnginePreferences?: (google.cloud.migrationcenter.v1.IVmwareEnginePreferences|null);
+
+                    /** VirtualMachinePreferences soleTenancyPreferences. */
+                    public soleTenancyPreferences?: (google.cloud.migrationcenter.v1.ISoleTenancyPreferences|null);
 
                     /**
                      * Creates a new VirtualMachinePreferences instance using the specified properties.
@@ -18267,6 +18509,365 @@ export namespace google {
 
                     /**
                      * Gets the default type url for MachineSeries
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VmwareEnginePreferences. */
+                interface IVmwareEnginePreferences {
+
+                    /** VmwareEnginePreferences cpuOvercommitRatio */
+                    cpuOvercommitRatio?: (number|null);
+
+                    /** VmwareEnginePreferences memoryOvercommitRatio */
+                    memoryOvercommitRatio?: (number|null);
+
+                    /** VmwareEnginePreferences storageDeduplicationCompressionRatio */
+                    storageDeduplicationCompressionRatio?: (number|null);
+
+                    /** VmwareEnginePreferences commitmentPlan */
+                    commitmentPlan?: (google.cloud.migrationcenter.v1.VmwareEnginePreferences.CommitmentPlan|keyof typeof google.cloud.migrationcenter.v1.VmwareEnginePreferences.CommitmentPlan|null);
+                }
+
+                /** Represents a VmwareEnginePreferences. */
+                class VmwareEnginePreferences implements IVmwareEnginePreferences {
+
+                    /**
+                     * Constructs a new VmwareEnginePreferences.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.migrationcenter.v1.IVmwareEnginePreferences);
+
+                    /** VmwareEnginePreferences cpuOvercommitRatio. */
+                    public cpuOvercommitRatio: number;
+
+                    /** VmwareEnginePreferences memoryOvercommitRatio. */
+                    public memoryOvercommitRatio: number;
+
+                    /** VmwareEnginePreferences storageDeduplicationCompressionRatio. */
+                    public storageDeduplicationCompressionRatio: number;
+
+                    /** VmwareEnginePreferences commitmentPlan. */
+                    public commitmentPlan: (google.cloud.migrationcenter.v1.VmwareEnginePreferences.CommitmentPlan|keyof typeof google.cloud.migrationcenter.v1.VmwareEnginePreferences.CommitmentPlan);
+
+                    /**
+                     * Creates a new VmwareEnginePreferences instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VmwareEnginePreferences instance
+                     */
+                    public static create(properties?: google.cloud.migrationcenter.v1.IVmwareEnginePreferences): google.cloud.migrationcenter.v1.VmwareEnginePreferences;
+
+                    /**
+                     * Encodes the specified VmwareEnginePreferences message. Does not implicitly {@link google.cloud.migrationcenter.v1.VmwareEnginePreferences.verify|verify} messages.
+                     * @param message VmwareEnginePreferences message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.migrationcenter.v1.IVmwareEnginePreferences, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VmwareEnginePreferences message, length delimited. Does not implicitly {@link google.cloud.migrationcenter.v1.VmwareEnginePreferences.verify|verify} messages.
+                     * @param message VmwareEnginePreferences message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.migrationcenter.v1.IVmwareEnginePreferences, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VmwareEnginePreferences message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VmwareEnginePreferences
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.migrationcenter.v1.VmwareEnginePreferences;
+
+                    /**
+                     * Decodes a VmwareEnginePreferences message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VmwareEnginePreferences
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.migrationcenter.v1.VmwareEnginePreferences;
+
+                    /**
+                     * Verifies a VmwareEnginePreferences message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VmwareEnginePreferences message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VmwareEnginePreferences
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.migrationcenter.v1.VmwareEnginePreferences;
+
+                    /**
+                     * Creates a plain object from a VmwareEnginePreferences message. Also converts values to other types if specified.
+                     * @param message VmwareEnginePreferences
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.migrationcenter.v1.VmwareEnginePreferences, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VmwareEnginePreferences to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VmwareEnginePreferences
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace VmwareEnginePreferences {
+
+                    /** CommitmentPlan enum. */
+                    enum CommitmentPlan {
+                        COMMITMENT_PLAN_UNSPECIFIED = 0,
+                        ON_DEMAND = 1,
+                        COMMITMENT_1_YEAR_MONTHLY_PAYMENTS = 2,
+                        COMMITMENT_3_YEAR_MONTHLY_PAYMENTS = 3,
+                        COMMITMENT_1_YEAR_UPFRONT_PAYMENT = 4,
+                        COMMITMENT_3_YEAR_UPFRONT_PAYMENT = 5
+                    }
+                }
+
+                /** Properties of a SoleTenancyPreferences. */
+                interface ISoleTenancyPreferences {
+
+                    /** SoleTenancyPreferences cpuOvercommitRatio */
+                    cpuOvercommitRatio?: (number|null);
+
+                    /** SoleTenancyPreferences hostMaintenancePolicy */
+                    hostMaintenancePolicy?: (google.cloud.migrationcenter.v1.SoleTenancyPreferences.HostMaintenancePolicy|keyof typeof google.cloud.migrationcenter.v1.SoleTenancyPreferences.HostMaintenancePolicy|null);
+
+                    /** SoleTenancyPreferences commitmentPlan */
+                    commitmentPlan?: (google.cloud.migrationcenter.v1.SoleTenancyPreferences.CommitmentPlan|keyof typeof google.cloud.migrationcenter.v1.SoleTenancyPreferences.CommitmentPlan|null);
+
+                    /** SoleTenancyPreferences nodeTypes */
+                    nodeTypes?: (google.cloud.migrationcenter.v1.ISoleTenantNodeType[]|null);
+                }
+
+                /** Represents a SoleTenancyPreferences. */
+                class SoleTenancyPreferences implements ISoleTenancyPreferences {
+
+                    /**
+                     * Constructs a new SoleTenancyPreferences.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.migrationcenter.v1.ISoleTenancyPreferences);
+
+                    /** SoleTenancyPreferences cpuOvercommitRatio. */
+                    public cpuOvercommitRatio: number;
+
+                    /** SoleTenancyPreferences hostMaintenancePolicy. */
+                    public hostMaintenancePolicy: (google.cloud.migrationcenter.v1.SoleTenancyPreferences.HostMaintenancePolicy|keyof typeof google.cloud.migrationcenter.v1.SoleTenancyPreferences.HostMaintenancePolicy);
+
+                    /** SoleTenancyPreferences commitmentPlan. */
+                    public commitmentPlan: (google.cloud.migrationcenter.v1.SoleTenancyPreferences.CommitmentPlan|keyof typeof google.cloud.migrationcenter.v1.SoleTenancyPreferences.CommitmentPlan);
+
+                    /** SoleTenancyPreferences nodeTypes. */
+                    public nodeTypes: google.cloud.migrationcenter.v1.ISoleTenantNodeType[];
+
+                    /**
+                     * Creates a new SoleTenancyPreferences instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SoleTenancyPreferences instance
+                     */
+                    public static create(properties?: google.cloud.migrationcenter.v1.ISoleTenancyPreferences): google.cloud.migrationcenter.v1.SoleTenancyPreferences;
+
+                    /**
+                     * Encodes the specified SoleTenancyPreferences message. Does not implicitly {@link google.cloud.migrationcenter.v1.SoleTenancyPreferences.verify|verify} messages.
+                     * @param message SoleTenancyPreferences message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.migrationcenter.v1.ISoleTenancyPreferences, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SoleTenancyPreferences message, length delimited. Does not implicitly {@link google.cloud.migrationcenter.v1.SoleTenancyPreferences.verify|verify} messages.
+                     * @param message SoleTenancyPreferences message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.migrationcenter.v1.ISoleTenancyPreferences, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SoleTenancyPreferences message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SoleTenancyPreferences
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.migrationcenter.v1.SoleTenancyPreferences;
+
+                    /**
+                     * Decodes a SoleTenancyPreferences message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SoleTenancyPreferences
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.migrationcenter.v1.SoleTenancyPreferences;
+
+                    /**
+                     * Verifies a SoleTenancyPreferences message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SoleTenancyPreferences message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SoleTenancyPreferences
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.migrationcenter.v1.SoleTenancyPreferences;
+
+                    /**
+                     * Creates a plain object from a SoleTenancyPreferences message. Also converts values to other types if specified.
+                     * @param message SoleTenancyPreferences
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.migrationcenter.v1.SoleTenancyPreferences, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SoleTenancyPreferences to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SoleTenancyPreferences
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SoleTenancyPreferences {
+
+                    /** HostMaintenancePolicy enum. */
+                    enum HostMaintenancePolicy {
+                        HOST_MAINTENANCE_POLICY_UNSPECIFIED = 0,
+                        HOST_MAINTENANCE_POLICY_DEFAULT = 1,
+                        HOST_MAINTENANCE_POLICY_RESTART_IN_PLACE = 2,
+                        HOST_MAINTENANCE_POLICY_MIGRATE_WITHIN_NODE_GROUP = 3
+                    }
+
+                    /** CommitmentPlan enum. */
+                    enum CommitmentPlan {
+                        COMMITMENT_PLAN_UNSPECIFIED = 0,
+                        ON_DEMAND = 1,
+                        COMMITMENT_1_YEAR = 2,
+                        COMMITMENT_3_YEAR = 3
+                    }
+                }
+
+                /** Properties of a SoleTenantNodeType. */
+                interface ISoleTenantNodeType {
+
+                    /** SoleTenantNodeType nodeName */
+                    nodeName?: (string|null);
+                }
+
+                /** Represents a SoleTenantNodeType. */
+                class SoleTenantNodeType implements ISoleTenantNodeType {
+
+                    /**
+                     * Constructs a new SoleTenantNodeType.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.migrationcenter.v1.ISoleTenantNodeType);
+
+                    /** SoleTenantNodeType nodeName. */
+                    public nodeName: string;
+
+                    /**
+                     * Creates a new SoleTenantNodeType instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SoleTenantNodeType instance
+                     */
+                    public static create(properties?: google.cloud.migrationcenter.v1.ISoleTenantNodeType): google.cloud.migrationcenter.v1.SoleTenantNodeType;
+
+                    /**
+                     * Encodes the specified SoleTenantNodeType message. Does not implicitly {@link google.cloud.migrationcenter.v1.SoleTenantNodeType.verify|verify} messages.
+                     * @param message SoleTenantNodeType message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.migrationcenter.v1.ISoleTenantNodeType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SoleTenantNodeType message, length delimited. Does not implicitly {@link google.cloud.migrationcenter.v1.SoleTenantNodeType.verify|verify} messages.
+                     * @param message SoleTenantNodeType message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.migrationcenter.v1.ISoleTenantNodeType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SoleTenantNodeType message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SoleTenantNodeType
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.migrationcenter.v1.SoleTenantNodeType;
+
+                    /**
+                     * Decodes a SoleTenantNodeType message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SoleTenantNodeType
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.migrationcenter.v1.SoleTenantNodeType;
+
+                    /**
+                     * Verifies a SoleTenantNodeType message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SoleTenantNodeType message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SoleTenantNodeType
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.migrationcenter.v1.SoleTenantNodeType;
+
+                    /**
+                     * Creates a plain object from a SoleTenantNodeType message. Also converts values to other types if specified.
+                     * @param message SoleTenantNodeType
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.migrationcenter.v1.SoleTenantNodeType, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SoleTenantNodeType to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SoleTenantNodeType
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -19462,6 +20063,539 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a VmwareEngineFinding. */
+                    interface IVmwareEngineFinding {
+
+                        /** VmwareEngineFinding allocatedRegions */
+                        allocatedRegions?: (string[]|null);
+
+                        /** VmwareEngineFinding allocatedAssetCount */
+                        allocatedAssetCount?: (number|Long|string|null);
+
+                        /** VmwareEngineFinding nodeAllocations */
+                        nodeAllocations?: (google.cloud.migrationcenter.v1.ReportSummary.IVmwareNodeAllocation[]|null);
+                    }
+
+                    /** Represents a VmwareEngineFinding. */
+                    class VmwareEngineFinding implements IVmwareEngineFinding {
+
+                        /**
+                         * Constructs a new VmwareEngineFinding.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.migrationcenter.v1.ReportSummary.IVmwareEngineFinding);
+
+                        /** VmwareEngineFinding allocatedRegions. */
+                        public allocatedRegions: string[];
+
+                        /** VmwareEngineFinding allocatedAssetCount. */
+                        public allocatedAssetCount: (number|Long|string);
+
+                        /** VmwareEngineFinding nodeAllocations. */
+                        public nodeAllocations: google.cloud.migrationcenter.v1.ReportSummary.IVmwareNodeAllocation[];
+
+                        /**
+                         * Creates a new VmwareEngineFinding instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns VmwareEngineFinding instance
+                         */
+                        public static create(properties?: google.cloud.migrationcenter.v1.ReportSummary.IVmwareEngineFinding): google.cloud.migrationcenter.v1.ReportSummary.VmwareEngineFinding;
+
+                        /**
+                         * Encodes the specified VmwareEngineFinding message. Does not implicitly {@link google.cloud.migrationcenter.v1.ReportSummary.VmwareEngineFinding.verify|verify} messages.
+                         * @param message VmwareEngineFinding message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.migrationcenter.v1.ReportSummary.IVmwareEngineFinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified VmwareEngineFinding message, length delimited. Does not implicitly {@link google.cloud.migrationcenter.v1.ReportSummary.VmwareEngineFinding.verify|verify} messages.
+                         * @param message VmwareEngineFinding message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.migrationcenter.v1.ReportSummary.IVmwareEngineFinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a VmwareEngineFinding message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns VmwareEngineFinding
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.migrationcenter.v1.ReportSummary.VmwareEngineFinding;
+
+                        /**
+                         * Decodes a VmwareEngineFinding message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns VmwareEngineFinding
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.migrationcenter.v1.ReportSummary.VmwareEngineFinding;
+
+                        /**
+                         * Verifies a VmwareEngineFinding message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a VmwareEngineFinding message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns VmwareEngineFinding
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.migrationcenter.v1.ReportSummary.VmwareEngineFinding;
+
+                        /**
+                         * Creates a plain object from a VmwareEngineFinding message. Also converts values to other types if specified.
+                         * @param message VmwareEngineFinding
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.migrationcenter.v1.ReportSummary.VmwareEngineFinding, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this VmwareEngineFinding to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for VmwareEngineFinding
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a VmwareNodeAllocation. */
+                    interface IVmwareNodeAllocation {
+
+                        /** VmwareNodeAllocation vmwareNode */
+                        vmwareNode?: (google.cloud.migrationcenter.v1.ReportSummary.IVmwareNode|null);
+
+                        /** VmwareNodeAllocation nodeCount */
+                        nodeCount?: (number|Long|string|null);
+
+                        /** VmwareNodeAllocation allocatedAssetCount */
+                        allocatedAssetCount?: (number|Long|string|null);
+                    }
+
+                    /** Represents a VmwareNodeAllocation. */
+                    class VmwareNodeAllocation implements IVmwareNodeAllocation {
+
+                        /**
+                         * Constructs a new VmwareNodeAllocation.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.migrationcenter.v1.ReportSummary.IVmwareNodeAllocation);
+
+                        /** VmwareNodeAllocation vmwareNode. */
+                        public vmwareNode?: (google.cloud.migrationcenter.v1.ReportSummary.IVmwareNode|null);
+
+                        /** VmwareNodeAllocation nodeCount. */
+                        public nodeCount: (number|Long|string);
+
+                        /** VmwareNodeAllocation allocatedAssetCount. */
+                        public allocatedAssetCount: (number|Long|string);
+
+                        /**
+                         * Creates a new VmwareNodeAllocation instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns VmwareNodeAllocation instance
+                         */
+                        public static create(properties?: google.cloud.migrationcenter.v1.ReportSummary.IVmwareNodeAllocation): google.cloud.migrationcenter.v1.ReportSummary.VmwareNodeAllocation;
+
+                        /**
+                         * Encodes the specified VmwareNodeAllocation message. Does not implicitly {@link google.cloud.migrationcenter.v1.ReportSummary.VmwareNodeAllocation.verify|verify} messages.
+                         * @param message VmwareNodeAllocation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.migrationcenter.v1.ReportSummary.IVmwareNodeAllocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified VmwareNodeAllocation message, length delimited. Does not implicitly {@link google.cloud.migrationcenter.v1.ReportSummary.VmwareNodeAllocation.verify|verify} messages.
+                         * @param message VmwareNodeAllocation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.migrationcenter.v1.ReportSummary.IVmwareNodeAllocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a VmwareNodeAllocation message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns VmwareNodeAllocation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.migrationcenter.v1.ReportSummary.VmwareNodeAllocation;
+
+                        /**
+                         * Decodes a VmwareNodeAllocation message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns VmwareNodeAllocation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.migrationcenter.v1.ReportSummary.VmwareNodeAllocation;
+
+                        /**
+                         * Verifies a VmwareNodeAllocation message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a VmwareNodeAllocation message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns VmwareNodeAllocation
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.migrationcenter.v1.ReportSummary.VmwareNodeAllocation;
+
+                        /**
+                         * Creates a plain object from a VmwareNodeAllocation message. Also converts values to other types if specified.
+                         * @param message VmwareNodeAllocation
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.migrationcenter.v1.ReportSummary.VmwareNodeAllocation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this VmwareNodeAllocation to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for VmwareNodeAllocation
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a VmwareNode. */
+                    interface IVmwareNode {
+
+                        /** VmwareNode code */
+                        code?: (string|null);
+                    }
+
+                    /** Represents a VmwareNode. */
+                    class VmwareNode implements IVmwareNode {
+
+                        /**
+                         * Constructs a new VmwareNode.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.migrationcenter.v1.ReportSummary.IVmwareNode);
+
+                        /** VmwareNode code. */
+                        public code: string;
+
+                        /**
+                         * Creates a new VmwareNode instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns VmwareNode instance
+                         */
+                        public static create(properties?: google.cloud.migrationcenter.v1.ReportSummary.IVmwareNode): google.cloud.migrationcenter.v1.ReportSummary.VmwareNode;
+
+                        /**
+                         * Encodes the specified VmwareNode message. Does not implicitly {@link google.cloud.migrationcenter.v1.ReportSummary.VmwareNode.verify|verify} messages.
+                         * @param message VmwareNode message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.migrationcenter.v1.ReportSummary.IVmwareNode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified VmwareNode message, length delimited. Does not implicitly {@link google.cloud.migrationcenter.v1.ReportSummary.VmwareNode.verify|verify} messages.
+                         * @param message VmwareNode message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.migrationcenter.v1.ReportSummary.IVmwareNode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a VmwareNode message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns VmwareNode
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.migrationcenter.v1.ReportSummary.VmwareNode;
+
+                        /**
+                         * Decodes a VmwareNode message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns VmwareNode
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.migrationcenter.v1.ReportSummary.VmwareNode;
+
+                        /**
+                         * Verifies a VmwareNode message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a VmwareNode message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns VmwareNode
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.migrationcenter.v1.ReportSummary.VmwareNode;
+
+                        /**
+                         * Creates a plain object from a VmwareNode message. Also converts values to other types if specified.
+                         * @param message VmwareNode
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.migrationcenter.v1.ReportSummary.VmwareNode, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this VmwareNode to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for VmwareNode
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SoleTenantFinding. */
+                    interface ISoleTenantFinding {
+
+                        /** SoleTenantFinding allocatedRegions */
+                        allocatedRegions?: (string[]|null);
+
+                        /** SoleTenantFinding allocatedAssetCount */
+                        allocatedAssetCount?: (number|Long|string|null);
+
+                        /** SoleTenantFinding nodeAllocations */
+                        nodeAllocations?: (google.cloud.migrationcenter.v1.ReportSummary.ISoleTenantNodeAllocation[]|null);
+                    }
+
+                    /** Represents a SoleTenantFinding. */
+                    class SoleTenantFinding implements ISoleTenantFinding {
+
+                        /**
+                         * Constructs a new SoleTenantFinding.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.migrationcenter.v1.ReportSummary.ISoleTenantFinding);
+
+                        /** SoleTenantFinding allocatedRegions. */
+                        public allocatedRegions: string[];
+
+                        /** SoleTenantFinding allocatedAssetCount. */
+                        public allocatedAssetCount: (number|Long|string);
+
+                        /** SoleTenantFinding nodeAllocations. */
+                        public nodeAllocations: google.cloud.migrationcenter.v1.ReportSummary.ISoleTenantNodeAllocation[];
+
+                        /**
+                         * Creates a new SoleTenantFinding instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SoleTenantFinding instance
+                         */
+                        public static create(properties?: google.cloud.migrationcenter.v1.ReportSummary.ISoleTenantFinding): google.cloud.migrationcenter.v1.ReportSummary.SoleTenantFinding;
+
+                        /**
+                         * Encodes the specified SoleTenantFinding message. Does not implicitly {@link google.cloud.migrationcenter.v1.ReportSummary.SoleTenantFinding.verify|verify} messages.
+                         * @param message SoleTenantFinding message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.migrationcenter.v1.ReportSummary.ISoleTenantFinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SoleTenantFinding message, length delimited. Does not implicitly {@link google.cloud.migrationcenter.v1.ReportSummary.SoleTenantFinding.verify|verify} messages.
+                         * @param message SoleTenantFinding message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.migrationcenter.v1.ReportSummary.ISoleTenantFinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SoleTenantFinding message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SoleTenantFinding
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.migrationcenter.v1.ReportSummary.SoleTenantFinding;
+
+                        /**
+                         * Decodes a SoleTenantFinding message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SoleTenantFinding
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.migrationcenter.v1.ReportSummary.SoleTenantFinding;
+
+                        /**
+                         * Verifies a SoleTenantFinding message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SoleTenantFinding message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SoleTenantFinding
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.migrationcenter.v1.ReportSummary.SoleTenantFinding;
+
+                        /**
+                         * Creates a plain object from a SoleTenantFinding message. Also converts values to other types if specified.
+                         * @param message SoleTenantFinding
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.migrationcenter.v1.ReportSummary.SoleTenantFinding, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SoleTenantFinding to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SoleTenantFinding
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SoleTenantNodeAllocation. */
+                    interface ISoleTenantNodeAllocation {
+
+                        /** SoleTenantNodeAllocation node */
+                        node?: (google.cloud.migrationcenter.v1.ISoleTenantNodeType|null);
+
+                        /** SoleTenantNodeAllocation nodeCount */
+                        nodeCount?: (number|Long|string|null);
+
+                        /** SoleTenantNodeAllocation allocatedAssetCount */
+                        allocatedAssetCount?: (number|Long|string|null);
+                    }
+
+                    /** Represents a SoleTenantNodeAllocation. */
+                    class SoleTenantNodeAllocation implements ISoleTenantNodeAllocation {
+
+                        /**
+                         * Constructs a new SoleTenantNodeAllocation.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.migrationcenter.v1.ReportSummary.ISoleTenantNodeAllocation);
+
+                        /** SoleTenantNodeAllocation node. */
+                        public node?: (google.cloud.migrationcenter.v1.ISoleTenantNodeType|null);
+
+                        /** SoleTenantNodeAllocation nodeCount. */
+                        public nodeCount: (number|Long|string);
+
+                        /** SoleTenantNodeAllocation allocatedAssetCount. */
+                        public allocatedAssetCount: (number|Long|string);
+
+                        /**
+                         * Creates a new SoleTenantNodeAllocation instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SoleTenantNodeAllocation instance
+                         */
+                        public static create(properties?: google.cloud.migrationcenter.v1.ReportSummary.ISoleTenantNodeAllocation): google.cloud.migrationcenter.v1.ReportSummary.SoleTenantNodeAllocation;
+
+                        /**
+                         * Encodes the specified SoleTenantNodeAllocation message. Does not implicitly {@link google.cloud.migrationcenter.v1.ReportSummary.SoleTenantNodeAllocation.verify|verify} messages.
+                         * @param message SoleTenantNodeAllocation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.migrationcenter.v1.ReportSummary.ISoleTenantNodeAllocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SoleTenantNodeAllocation message, length delimited. Does not implicitly {@link google.cloud.migrationcenter.v1.ReportSummary.SoleTenantNodeAllocation.verify|verify} messages.
+                         * @param message SoleTenantNodeAllocation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.migrationcenter.v1.ReportSummary.ISoleTenantNodeAllocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SoleTenantNodeAllocation message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SoleTenantNodeAllocation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.migrationcenter.v1.ReportSummary.SoleTenantNodeAllocation;
+
+                        /**
+                         * Decodes a SoleTenantNodeAllocation message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SoleTenantNodeAllocation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.migrationcenter.v1.ReportSummary.SoleTenantNodeAllocation;
+
+                        /**
+                         * Verifies a SoleTenantNodeAllocation message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SoleTenantNodeAllocation message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SoleTenantNodeAllocation
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.migrationcenter.v1.ReportSummary.SoleTenantNodeAllocation;
+
+                        /**
+                         * Creates a plain object from a SoleTenantNodeAllocation message. Also converts values to other types if specified.
+                         * @param message SoleTenantNodeAllocation
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.migrationcenter.v1.ReportSummary.SoleTenantNodeAllocation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SoleTenantNodeAllocation to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SoleTenantNodeAllocation
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a GroupPreferenceSetFinding. */
                     interface IGroupPreferenceSetFinding {
 
@@ -19494,6 +20628,12 @@ export namespace google {
 
                         /** GroupPreferenceSetFinding computeEngineFinding */
                         computeEngineFinding?: (google.cloud.migrationcenter.v1.ReportSummary.IComputeEngineFinding|null);
+
+                        /** GroupPreferenceSetFinding vmwareEngineFinding */
+                        vmwareEngineFinding?: (google.cloud.migrationcenter.v1.ReportSummary.IVmwareEngineFinding|null);
+
+                        /** GroupPreferenceSetFinding soleTenantFinding */
+                        soleTenantFinding?: (google.cloud.migrationcenter.v1.ReportSummary.ISoleTenantFinding|null);
                     }
 
                     /** Represents a GroupPreferenceSetFinding. */
@@ -19534,6 +20674,12 @@ export namespace google {
 
                         /** GroupPreferenceSetFinding computeEngineFinding. */
                         public computeEngineFinding?: (google.cloud.migrationcenter.v1.ReportSummary.IComputeEngineFinding|null);
+
+                        /** GroupPreferenceSetFinding vmwareEngineFinding. */
+                        public vmwareEngineFinding?: (google.cloud.migrationcenter.v1.ReportSummary.IVmwareEngineFinding|null);
+
+                        /** GroupPreferenceSetFinding soleTenantFinding. */
+                        public soleTenantFinding?: (google.cloud.migrationcenter.v1.ReportSummary.ISoleTenantFinding|null);
 
                         /**
                          * Creates a new GroupPreferenceSetFinding instance using the specified properties.
@@ -19803,6 +20949,14 @@ export namespace google {
                     COMMITMENT_PLAN_NONE = 1,
                     COMMITMENT_PLAN_ONE_YEAR = 2,
                     COMMITMENT_PLAN_THREE_YEARS = 3
+                }
+
+                /** ComputeMigrationTargetProduct enum. */
+                enum ComputeMigrationTargetProduct {
+                    COMPUTE_MIGRATION_TARGET_PRODUCT_UNSPECIFIED = 0,
+                    COMPUTE_MIGRATION_TARGET_PRODUCT_COMPUTE_ENGINE = 1,
+                    COMPUTE_MIGRATION_TARGET_PRODUCT_VMWARE_ENGINE = 2,
+                    COMPUTE_MIGRATION_TARGET_PRODUCT_SOLE_TENANCY = 3
                 }
 
                 /** ReportView enum. */
