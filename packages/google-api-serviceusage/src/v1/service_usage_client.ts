@@ -65,6 +65,7 @@ export class ServiceUsageClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
   serviceUsageStub?: Promise<{[name: string]: Function}>;
 
@@ -178,6 +179,21 @@ export class ServiceUsageClient {
     }
     // Load the applicable protos.
     this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
+
+    // This API contains "path templates"; forward-slash-separated
+    // identifiers to uniquely identify resources within the API.
+    // Create useful helper objects for these.
+    this.pathTemplates = {
+      folderServicePathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/services/{service}'
+      ),
+      organizationServicePathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/services/{service}'
+      ),
+      projectServicePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/services/{service}'
+      ),
+    };
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
@@ -1269,6 +1285,304 @@ export class ServiceUsageClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.api.serviceusage.v1.IService>;
+  }
+  /**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   *   for the details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   *   {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<[protos.google.longrunning.Operation]> {
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | iteration protocols}.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+  cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.CancelOperationRequest,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   * for the details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.deleteOperation(request, options, callback);
+  }
+
+  // --------------------
+  // -- Path templates --
+  // --------------------
+
+  /**
+   * Return a fully-qualified folderService resource name string.
+   *
+   * @param {string} folder
+   * @param {string} service
+   * @returns {string} Resource name string.
+   */
+  folderServicePath(folder: string, service: string) {
+    return this.pathTemplates.folderServicePathTemplate.render({
+      folder: folder,
+      service: service,
+    });
+  }
+
+  /**
+   * Parse the folder from FolderService resource.
+   *
+   * @param {string} folderServiceName
+   *   A fully-qualified path representing folder_service resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderServiceName(folderServiceName: string) {
+    return this.pathTemplates.folderServicePathTemplate.match(folderServiceName)
+      .folder;
+  }
+
+  /**
+   * Parse the service from FolderService resource.
+   *
+   * @param {string} folderServiceName
+   *   A fully-qualified path representing folder_service resource.
+   * @returns {string} A string representing the service.
+   */
+  matchServiceFromFolderServiceName(folderServiceName: string) {
+    return this.pathTemplates.folderServicePathTemplate.match(folderServiceName)
+      .service;
+  }
+
+  /**
+   * Return a fully-qualified organizationService resource name string.
+   *
+   * @param {string} organization
+   * @param {string} service
+   * @returns {string} Resource name string.
+   */
+  organizationServicePath(organization: string, service: string) {
+    return this.pathTemplates.organizationServicePathTemplate.render({
+      organization: organization,
+      service: service,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationService resource.
+   *
+   * @param {string} organizationServiceName
+   *   A fully-qualified path representing organization_service resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationServiceName(
+    organizationServiceName: string
+  ) {
+    return this.pathTemplates.organizationServicePathTemplate.match(
+      organizationServiceName
+    ).organization;
+  }
+
+  /**
+   * Parse the service from OrganizationService resource.
+   *
+   * @param {string} organizationServiceName
+   *   A fully-qualified path representing organization_service resource.
+   * @returns {string} A string representing the service.
+   */
+  matchServiceFromOrganizationServiceName(organizationServiceName: string) {
+    return this.pathTemplates.organizationServicePathTemplate.match(
+      organizationServiceName
+    ).service;
+  }
+
+  /**
+   * Return a fully-qualified projectService resource name string.
+   *
+   * @param {string} project
+   * @param {string} service
+   * @returns {string} Resource name string.
+   */
+  projectServicePath(project: string, service: string) {
+    return this.pathTemplates.projectServicePathTemplate.render({
+      project: project,
+      service: service,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectService resource.
+   *
+   * @param {string} projectServiceName
+   *   A fully-qualified path representing project_service resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectServiceName(projectServiceName: string) {
+    return this.pathTemplates.projectServicePathTemplate.match(
+      projectServiceName
+    ).project;
+  }
+
+  /**
+   * Parse the service from ProjectService resource.
+   *
+   * @param {string} projectServiceName
+   *   A fully-qualified path representing project_service resource.
+   * @returns {string} A string representing the service.
+   */
+  matchServiceFromProjectServiceName(projectServiceName: string) {
+    return this.pathTemplates.projectServicePathTemplate.match(
+      projectServiceName
+    ).service;
   }
 
   /**
