@@ -4,6 +4,106 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "240a69f10d1d5e3fe45169dedfc5f1c2d6492df9",
+          "message": "Dataform version",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "7d4c40ffab7fe98257560f2986acfcb888f15747",
+          "message": "Update dependency @google-cloud/dataform to v1",
+          "issues": [
+            "4631"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "fix",
+          "sha": "b6cea45d03faaa7bd6e5daa36ebd0063a1e1f251",
+          "message": "[Many APIs] simplify logic for HTTP/1.1 REST fallback option",
+          "issues": [
+            "4585"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "a4507aa1166832c2d9624cb55879a543f65ec4cb",
+          "message": "Update dependency @google-cloud/dataform to v1",
+          "issues": [
+            "4532"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "chore",
+          "sha": "2260f12543d171bda95345e53475f5f0fdc45770",
+          "message": "Migrate to Node 14",
+          "issues": [
+            "4443"
+          ],
+          "breakingChangeNote": "migrate to Node 14 ([#4443](https://github.com/googleapis/google-cloud-node/issues/4443))"
+        },
+        {
+          "type": "fix",
+          "sha": "c32965c0c4a5975ba37371ecd819d9cffb080aa5",
+          "message": "[Many APIs] fix typings for IAM methods",
+          "issues": [
+            "4460"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "170f7d57b8fd344d182a8e758867b8124722eebc",
+          "message": "Minify JSON and JS files, and remove .map files",
+          "issues": [
+            "4143"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0b67d883963643ce1b4f6d2ccd3e8d37adf6e029",
+          "message": "Bump `google-gax` to ^3.5.8",
+          "issues": [
+            "4117"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "1.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataform",
+      "id": "0a9d822b-772b-457d-a7a9-2bc1db872033",
+      "createTime": "2023-09-19T20:28:26.883Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0057f4eaa3b73c24b5e2eadaaf92338e357a82f0",
+          "message": "[alloydb] Added enum value for PG15",
+          "issues": [
+            "4680"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "b1c7da692c0c62d74f66158ea965dca0500db27f",
+          "message": "[alloydb] Added enum value for PG15",
+          "issues": [
+            "4674"
+          ]
+        }
+      ],
+      "version": "1.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "9ca11328-5c4b-45f7-a382-0a1621dd851b",
+      "createTime": "2023-09-19T20:28:26.875Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "9876892176c305a67b64af4c8481563ee1633576",
           "message": "[container] add SecurityPostureConfig Enterprise vuln mode to allow customers to enable Advanced Vulnerability Scanning for their clusters",
@@ -19144,5 +19244,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-09-19T00:45:48.057Z"
+  "updateTime": "2023-09-19T20:28:26.883Z"
 }
