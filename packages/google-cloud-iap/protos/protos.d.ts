@@ -1814,6 +1814,9 @@ export namespace google {
 
                     /** OAuthSettings loginHint */
                     loginHint?: (google.protobuf.IStringValue|null);
+
+                    /** OAuthSettings programmaticClients */
+                    programmaticClients?: (string[]|null);
                 }
 
                 /** Represents a OAuthSettings. */
@@ -1827,6 +1830,9 @@ export namespace google {
 
                     /** OAuthSettings loginHint. */
                     public loginHint?: (google.protobuf.IStringValue|null);
+
+                    /** OAuthSettings programmaticClients. */
+                    public programmaticClients: string[];
 
                     /**
                      * Creates a new OAuthSettings instance using the specified properties.

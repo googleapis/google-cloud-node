@@ -548,6 +548,11 @@
                         "loginHint": {
                           "type": "google.protobuf.StringValue",
                           "id": 2
+                        },
+                        "programmaticClients": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },
