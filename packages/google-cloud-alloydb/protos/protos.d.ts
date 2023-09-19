@@ -18044,7 +18044,8 @@ export namespace google {
                 enum DatabaseVersion {
                     DATABASE_VERSION_UNSPECIFIED = 0,
                     POSTGRES_13 = 1,
-                    POSTGRES_14 = 2
+                    POSTGRES_14 = 2,
+                    POSTGRES_15 = 3
                 }
 
                 /** Properties of a UserPassword. */
@@ -20120,6 +20121,9 @@ export namespace google {
 
                     /** Instance updatePolicy */
                     updatePolicy?: (google.cloud.alloydb.v1beta.Instance.IUpdatePolicy|null);
+
+                    /** Instance clientConnectionConfig */
+                    clientConnectionConfig?: (google.cloud.alloydb.v1beta.Instance.IClientConnectionConfig|null);
                 }
 
                 /** Represents an Instance. */
@@ -20196,6 +20200,9 @@ export namespace google {
 
                     /** Instance updatePolicy. */
                     public updatePolicy?: (google.cloud.alloydb.v1beta.Instance.IUpdatePolicy|null);
+
+                    /** Instance clientConnectionConfig. */
+                    public clientConnectionConfig?: (google.cloud.alloydb.v1beta.Instance.IClientConnectionConfig|null);
 
                     /**
                      * Creates a new Instance instance using the specified properties.
@@ -20817,6 +20824,109 @@ export namespace google {
                         }
                     }
 
+                    /** Properties of a ClientConnectionConfig. */
+                    interface IClientConnectionConfig {
+
+                        /** ClientConnectionConfig requireConnectors */
+                        requireConnectors?: (boolean|null);
+
+                        /** ClientConnectionConfig sslConfig */
+                        sslConfig?: (google.cloud.alloydb.v1beta.ISslConfig|null);
+                    }
+
+                    /** Represents a ClientConnectionConfig. */
+                    class ClientConnectionConfig implements IClientConnectionConfig {
+
+                        /**
+                         * Constructs a new ClientConnectionConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.alloydb.v1beta.Instance.IClientConnectionConfig);
+
+                        /** ClientConnectionConfig requireConnectors. */
+                        public requireConnectors: boolean;
+
+                        /** ClientConnectionConfig sslConfig. */
+                        public sslConfig?: (google.cloud.alloydb.v1beta.ISslConfig|null);
+
+                        /**
+                         * Creates a new ClientConnectionConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ClientConnectionConfig instance
+                         */
+                        public static create(properties?: google.cloud.alloydb.v1beta.Instance.IClientConnectionConfig): google.cloud.alloydb.v1beta.Instance.ClientConnectionConfig;
+
+                        /**
+                         * Encodes the specified ClientConnectionConfig message. Does not implicitly {@link google.cloud.alloydb.v1beta.Instance.ClientConnectionConfig.verify|verify} messages.
+                         * @param message ClientConnectionConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.alloydb.v1beta.Instance.IClientConnectionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ClientConnectionConfig message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1beta.Instance.ClientConnectionConfig.verify|verify} messages.
+                         * @param message ClientConnectionConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.alloydb.v1beta.Instance.IClientConnectionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ClientConnectionConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ClientConnectionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1beta.Instance.ClientConnectionConfig;
+
+                        /**
+                         * Decodes a ClientConnectionConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ClientConnectionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1beta.Instance.ClientConnectionConfig;
+
+                        /**
+                         * Verifies a ClientConnectionConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ClientConnectionConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ClientConnectionConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1beta.Instance.ClientConnectionConfig;
+
+                        /**
+                         * Creates a plain object from a ClientConnectionConfig message. Also converts values to other types if specified.
+                         * @param message ClientConnectionConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.alloydb.v1beta.Instance.ClientConnectionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ClientConnectionConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ClientConnectionConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** State enum. */
                     enum State {
                         STATE_UNSPECIFIED = 0,
@@ -21020,6 +21130,12 @@ export namespace google {
 
                     /** Backup expiryTime */
                     expiryTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Backup expiryQuantity */
+                    expiryQuantity?: (google.cloud.alloydb.v1beta.Backup.IQuantityBasedExpiry|null);
+
+                    /** Backup databaseVersion */
+                    databaseVersion?: (google.cloud.alloydb.v1beta.DatabaseVersion|keyof typeof google.cloud.alloydb.v1beta.DatabaseVersion|null);
                 }
 
                 /** Represents a Backup. */
@@ -21087,6 +21203,12 @@ export namespace google {
 
                     /** Backup expiryTime. */
                     public expiryTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Backup expiryQuantity. */
+                    public expiryQuantity?: (google.cloud.alloydb.v1beta.Backup.IQuantityBasedExpiry|null);
+
+                    /** Backup databaseVersion. */
+                    public databaseVersion: (google.cloud.alloydb.v1beta.DatabaseVersion|keyof typeof google.cloud.alloydb.v1beta.DatabaseVersion);
 
                     /**
                      * Creates a new Backup instance using the specified properties.
@@ -21167,6 +21289,109 @@ export namespace google {
                 }
 
                 namespace Backup {
+
+                    /** Properties of a QuantityBasedExpiry. */
+                    interface IQuantityBasedExpiry {
+
+                        /** QuantityBasedExpiry retentionCount */
+                        retentionCount?: (number|null);
+
+                        /** QuantityBasedExpiry totalRetentionCount */
+                        totalRetentionCount?: (number|null);
+                    }
+
+                    /** Represents a QuantityBasedExpiry. */
+                    class QuantityBasedExpiry implements IQuantityBasedExpiry {
+
+                        /**
+                         * Constructs a new QuantityBasedExpiry.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.alloydb.v1beta.Backup.IQuantityBasedExpiry);
+
+                        /** QuantityBasedExpiry retentionCount. */
+                        public retentionCount: number;
+
+                        /** QuantityBasedExpiry totalRetentionCount. */
+                        public totalRetentionCount: number;
+
+                        /**
+                         * Creates a new QuantityBasedExpiry instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns QuantityBasedExpiry instance
+                         */
+                        public static create(properties?: google.cloud.alloydb.v1beta.Backup.IQuantityBasedExpiry): google.cloud.alloydb.v1beta.Backup.QuantityBasedExpiry;
+
+                        /**
+                         * Encodes the specified QuantityBasedExpiry message. Does not implicitly {@link google.cloud.alloydb.v1beta.Backup.QuantityBasedExpiry.verify|verify} messages.
+                         * @param message QuantityBasedExpiry message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.alloydb.v1beta.Backup.IQuantityBasedExpiry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified QuantityBasedExpiry message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1beta.Backup.QuantityBasedExpiry.verify|verify} messages.
+                         * @param message QuantityBasedExpiry message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.alloydb.v1beta.Backup.IQuantityBasedExpiry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a QuantityBasedExpiry message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns QuantityBasedExpiry
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1beta.Backup.QuantityBasedExpiry;
+
+                        /**
+                         * Decodes a QuantityBasedExpiry message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns QuantityBasedExpiry
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1beta.Backup.QuantityBasedExpiry;
+
+                        /**
+                         * Verifies a QuantityBasedExpiry message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a QuantityBasedExpiry message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns QuantityBasedExpiry
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1beta.Backup.QuantityBasedExpiry;
+
+                        /**
+                         * Creates a plain object from a QuantityBasedExpiry message. Also converts values to other types if specified.
+                         * @param message QuantityBasedExpiry
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.alloydb.v1beta.Backup.QuantityBasedExpiry, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this QuantityBasedExpiry to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for QuantityBasedExpiry
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
 
                     /** State enum. */
                     enum State {
@@ -26009,6 +26234,9 @@ export namespace google {
 
                     /** GenerateClientCertificateRequest publicKey */
                     publicKey?: (string|null);
+
+                    /** GenerateClientCertificateRequest useMetadataExchange */
+                    useMetadataExchange?: (boolean|null);
                 }
 
                 /** Represents a GenerateClientCertificateRequest. */
@@ -26034,6 +26262,9 @@ export namespace google {
 
                     /** GenerateClientCertificateRequest publicKey. */
                     public publicKey: string;
+
+                    /** GenerateClientCertificateRequest useMetadataExchange. */
+                    public useMetadataExchange: boolean;
 
                     /**
                      * Creates a new GenerateClientCertificateRequest instance using the specified properties.
