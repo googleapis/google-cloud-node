@@ -364,6 +364,9 @@ export class DataplexServiceClient {
             {
               get: '/v1/{resource=projects/*/locations/*/entryGroups/*}:getIamPolicy',
             },
+            {
+              get: '/v1/{resource=projects/*/locations/*/governanceRules/*}:getIamPolicy',
+            },
           ],
         },
         {
@@ -415,6 +418,10 @@ export class DataplexServiceClient {
               post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:setIamPolicy',
               body: '*',
             },
+            {
+              post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:setIamPolicy',
+              body: '*',
+            },
           ],
         },
         {
@@ -464,6 +471,10 @@ export class DataplexServiceClient {
             },
             {
               post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:testIamPermissions',
               body: '*',
             },
           ],
