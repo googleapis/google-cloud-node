@@ -317,6 +317,9 @@ export class MetadataServiceClient {
             {
               get: '/v1/{resource=projects/*/locations/*/entryGroups/*}:getIamPolicy',
             },
+            {
+              get: '/v1/{resource=projects/*/locations/*/governanceRules/*}:getIamPolicy',
+            },
           ],
         },
         {
@@ -368,6 +371,10 @@ export class MetadataServiceClient {
               post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:setIamPolicy',
               body: '*',
             },
+            {
+              post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:setIamPolicy',
+              body: '*',
+            },
           ],
         },
         {
@@ -417,6 +424,10 @@ export class MetadataServiceClient {
             },
             {
               post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:testIamPermissions',
               body: '*',
             },
           ],
