@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/googleapis/google-cloud-node/compare/config-v0.1.0...config-v0.1.1) (2023-09-20)
+
+
+### Bug Fixes
+
+* [infra-manager] change the config service's Ruby namespace to avoid a collision with a base class in the Ruby client platform ([#4684](https://github.com/googleapis/google-cloud-node/issues/4684)) ([d611d3f](https://github.com/googleapis/google-cloud-node/commit/d611d3ffada146439d3badebd2b4627b0ac45376))
+
 ## 0.1.0 (2023-09-08)
 
 

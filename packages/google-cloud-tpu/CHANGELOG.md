@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/tpu-v3.1.0...tpu-v3.2.0) (2023-09-20)
+
+
+### Features
+
+* [tpu] added new WAITING_FOR_RESOURCES state for QueuedResourceState ([#4682](https://github.com/googleapis/google-cloud-node/issues/4682)) ([f8dcd67](https://github.com/googleapis/google-cloud-node/commit/f8dcd673bbc0c28e2b2d08acd1bca1183781951b))
+
 ## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/tpu-v3.0.0...tpu-v3.1.0) (2023-09-06)
 
 

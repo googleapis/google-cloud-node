@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.0.1...dataplex-v3.1.0) (2023-09-20)
+
+
+### Features
+
+* [dataplex] additional HTTP bindings for IAM methods ([#4683](https://github.com/googleapis/google-cloud-node/issues/4683)) ([fb6e827](https://github.com/googleapis/google-cloud-node/commit/fb6e827399bad7b39d3a058c2eb8ad2275e967d1))
+
 ## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.0.0...dataplex-v3.0.1) (2023-09-06)
 
 
