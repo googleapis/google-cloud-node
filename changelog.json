@@ -4,6 +4,74 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "f8dcd673bbc0c28e2b2d08acd1bca1183781951b",
+          "message": "[tpu] added new WAITING_FOR_RESOURCES state for QueuedResourceState",
+          "issues": [
+            "4682"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tpu",
+      "id": "33eddb29-d522-4b28-85e7-b014e23e9f5b",
+      "createTime": "2023-09-20T00:11:06.049Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "fb6e827399bad7b39d3a058c2eb8ad2275e967d1",
+          "message": "[dataplex] additional HTTP bindings for IAM methods",
+          "issues": [
+            "4683"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "d51efc0f-fb13-4552-8b1b-c3fbb91e8b81",
+      "createTime": "2023-09-20T00:11:06.043Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "d611d3ffada146439d3badebd2b4627b0ac45376",
+          "message": "[infra-manager] change the config service's Ruby namespace to avoid a collision with a base class in the Ruby client platform",
+          "issues": [
+            "4684"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/config",
+      "id": "c01348a2-3e00-42e5-93f1-bd473d282e17",
+      "createTime": "2023-09-20T00:11:06.037Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "bf0f0e27911d56cb3e24ae8fb7ef29a2ae9ab9a6",
+          "message": "[generativelanguage] Upgrade to API v1beta3",
+          "issues": [
+            "4681"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ai/generativelanguage",
+      "id": "77b0d4ea-000b-4acc-8d58-b63247e517cb",
+      "createTime": "2023-09-20T00:11:06.028Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "240a69f10d1d5e3fe45169dedfc5f1c2d6492df9",
           "message": "Dataform version",
@@ -19244,5 +19312,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-09-19T20:28:26.883Z"
+  "updateTime": "2023-09-20T00:11:06.049Z"
 }

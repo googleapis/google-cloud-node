@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v1.0.1...generativelanguage-v1.1.0) (2023-09-20)
+
+
+### Features
+
+* [generativelanguage] Upgrade to API v1beta3 ([#4681](https://github.com/googleapis/google-cloud-node/issues/4681)) ([bf0f0e2](https://github.com/googleapis/google-cloud-node/commit/bf0f0e27911d56cb3e24ae8fb7ef29a2ae9ab9a6))
+
 ## [1.0.1](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v1.0.0...generativelanguage-v1.0.1) (2023-09-06)
 
 
