@@ -567,7 +567,7 @@ export class CloudBillingClient {
    * typically given to billing account
    * [administrators](https://cloud.google.com/billing/docs/how-to/billing-access).
    * This method will return an error if the parent account has not been
-   * provisioned as a reseller account.
+   * provisioned for subaccounts.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1180,9 +1180,9 @@ export class CloudBillingClient {
    *   call. If unspecified, the first page of results is returned.
    * @param {string} request.filter
    *   Options for how to filter the returned billing accounts.
-   *   Currently this only supports filtering for
+   *   This only supports filtering for
    *   [subaccounts](https://cloud.google.com/billing/docs/concepts) under a
-   *   single provided reseller billing account.
+   *   single provided parent billing account.
    *   (e.g. "master_billing_account=billingAccounts/012345-678901-ABCDEF").
    *   Boolean algebra and other fields are not currently supported.
    * @param {object} [options]
@@ -1281,9 +1281,9 @@ export class CloudBillingClient {
    *   call. If unspecified, the first page of results is returned.
    * @param {string} request.filter
    *   Options for how to filter the returned billing accounts.
-   *   Currently this only supports filtering for
+   *   This only supports filtering for
    *   [subaccounts](https://cloud.google.com/billing/docs/concepts) under a
-   *   single provided reseller billing account.
+   *   single provided parent billing account.
    *   (e.g. "master_billing_account=billingAccounts/012345-678901-ABCDEF").
    *   Boolean algebra and other fields are not currently supported.
    * @param {object} [options]
@@ -1330,9 +1330,9 @@ export class CloudBillingClient {
    *   call. If unspecified, the first page of results is returned.
    * @param {string} request.filter
    *   Options for how to filter the returned billing accounts.
-   *   Currently this only supports filtering for
+   *   This only supports filtering for
    *   [subaccounts](https://cloud.google.com/billing/docs/concepts) under a
-   *   single provided reseller billing account.
+   *   single provided parent billing account.
    *   (e.g. "master_billing_account=billingAccounts/012345-678901-ABCDEF").
    *   Boolean algebra and other fields are not currently supported.
    * @param {object} [options]
