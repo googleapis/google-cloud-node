@@ -196,7 +196,11 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
         if (res.data && res.data.error) {
           throw res.data.error;
         }
-        const parsedXML = this.xmlParser.parse(res.data);
+        const parsedXML = this.xmlParser.parse<{
+          InitiateMultipartUploadResult: {
+            UploadId: string;
+          };
+        }>(res.data);
         this.uploadId = parsedXML.InitiateMultipartUploadResult.UploadId;
       } catch (e) {
         this.#handleErrorResponse(e as Error, bail);
