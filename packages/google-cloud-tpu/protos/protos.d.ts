@@ -9551,7 +9551,8 @@ export namespace google {
                         DELETING = 5,
                         ACTIVE = 6,
                         SUSPENDING = 7,
-                        SUSPENDED = 8
+                        SUSPENDED = 8,
+                        WAITING_FOR_RESOURCES = 9
                     }
 
                     /** Properties of a CreatingData. */
