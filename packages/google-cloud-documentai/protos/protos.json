@@ -1150,6 +1150,10 @@
                         "mimeType": {
                           "type": "string",
                           "id": 2
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
@@ -1274,7 +1278,10 @@
                         },
                         "computeStyleInfo": {
                           "type": "bool",
-                          "id": 8
+                          "id": 8,
+                          "options": {
+                            "deprecated": true
+                          }
                         }
                       },
                       "nested": {
@@ -3027,6 +3034,21 @@
                         }
                       }
                     },
+                    "ProcessorVersionAlias": {
+                      "fields": {
+                        "alias": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "processorVersion": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "documentai.googleapis.com/ProcessorVersion"
+                          }
+                        }
+                      }
+                    },
                     "Processor": {
                       "options": {
                         "(google.api.resource).type": "documentai.googleapis.com/Processor",
@@ -3060,6 +3082,14 @@
                           "id": 9,
                           "options": {
                             "(google.api.resource_reference).type": "documentai.googleapis.com/ProcessorVersion"
+                          }
+                        },
+                        "processorVersionAliases": {
+                          "rule": "repeated",
+                          "type": "ProcessorVersionAlias",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
                         "processEndpoint": {
