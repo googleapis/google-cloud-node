@@ -70,7 +70,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 72,
+                    "end": 77,
                     "type": "FULL"
                 }
             ],
@@ -94,6 +94,10 @@
                     {
                         "name": "redaction_config",
                         "type": ".google.cloud.contactcenterinsights.v1.RedactionConfig"
+                    },
+                    {
+                        "name": "speech_config",
+                        "type": ".google.cloud.contactcenterinsights.v1.SpeechConfig"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
@@ -538,7 +542,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 66,
+                    "end": 67,
                     "type": "FULL"
                 }
             ],

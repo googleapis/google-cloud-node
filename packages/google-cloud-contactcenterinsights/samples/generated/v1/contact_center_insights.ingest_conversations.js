@@ -29,7 +29,8 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  A cloud storage bucket source.
+   *  A cloud storage bucket source. Note that any previously ingested objects
+   *  from the source will be skipped to avoid duplication.
    */
   // const gcsSource = {}
   /**

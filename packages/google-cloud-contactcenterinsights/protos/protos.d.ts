@@ -1547,6 +1547,9 @@ export namespace google {
 
                     /** UploadConversationRequest redactionConfig */
                     redactionConfig?: (google.cloud.contactcenterinsights.v1.IRedactionConfig|null);
+
+                    /** UploadConversationRequest speechConfig */
+                    speechConfig?: (google.cloud.contactcenterinsights.v1.ISpeechConfig|null);
                 }
 
                 /** Represents an UploadConversationRequest. */
@@ -1569,6 +1572,9 @@ export namespace google {
 
                     /** UploadConversationRequest redactionConfig. */
                     public redactionConfig?: (google.cloud.contactcenterinsights.v1.IRedactionConfig|null);
+
+                    /** UploadConversationRequest speechConfig. */
+                    public speechConfig?: (google.cloud.contactcenterinsights.v1.ISpeechConfig|null);
 
                     /**
                      * Creates a new UploadConversationRequest instance using the specified properties.
@@ -12284,6 +12290,9 @@ export namespace google {
 
                     /** Settings redactionConfig */
                     redactionConfig?: (google.cloud.contactcenterinsights.v1.IRedactionConfig|null);
+
+                    /** Settings speechConfig */
+                    speechConfig?: (google.cloud.contactcenterinsights.v1.ISpeechConfig|null);
                 }
 
                 /** Represents a Settings. */
@@ -12318,6 +12327,9 @@ export namespace google {
 
                     /** Settings redactionConfig. */
                     public redactionConfig?: (google.cloud.contactcenterinsights.v1.IRedactionConfig|null);
+
+                    /** Settings speechConfig. */
+                    public speechConfig?: (google.cloud.contactcenterinsights.v1.ISpeechConfig|null);
 
                     /**
                      * Creates a new Settings instance using the specified properties.
@@ -12606,6 +12618,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for RedactionConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SpeechConfig. */
+                interface ISpeechConfig {
+
+                    /** SpeechConfig speechRecognizer */
+                    speechRecognizer?: (string|null);
+                }
+
+                /** Represents a SpeechConfig. */
+                class SpeechConfig implements ISpeechConfig {
+
+                    /**
+                     * Constructs a new SpeechConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.ISpeechConfig);
+
+                    /** SpeechConfig speechRecognizer. */
+                    public speechRecognizer: string;
+
+                    /**
+                     * Creates a new SpeechConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SpeechConfig instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.ISpeechConfig): google.cloud.contactcenterinsights.v1.SpeechConfig;
+
+                    /**
+                     * Encodes the specified SpeechConfig message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.SpeechConfig.verify|verify} messages.
+                     * @param message SpeechConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.ISpeechConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SpeechConfig message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.SpeechConfig.verify|verify} messages.
+                     * @param message SpeechConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.ISpeechConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SpeechConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SpeechConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.SpeechConfig;
+
+                    /**
+                     * Decodes a SpeechConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SpeechConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.SpeechConfig;
+
+                    /**
+                     * Verifies a SpeechConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SpeechConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SpeechConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.SpeechConfig;
+
+                    /**
+                     * Creates a plain object from a SpeechConfig message. Also converts values to other types if specified.
+                     * @param message SpeechConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.SpeechConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SpeechConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SpeechConfig
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

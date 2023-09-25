@@ -3157,6 +3157,7 @@
                          * @property {google.cloud.contactcenterinsights.v1.IConversation|null} [conversation] UploadConversationRequest conversation
                          * @property {string|null} [conversationId] UploadConversationRequest conversationId
                          * @property {google.cloud.contactcenterinsights.v1.IRedactionConfig|null} [redactionConfig] UploadConversationRequest redactionConfig
+                         * @property {google.cloud.contactcenterinsights.v1.ISpeechConfig|null} [speechConfig] UploadConversationRequest speechConfig
                          */
     
                         /**
@@ -3207,6 +3208,14 @@
                         UploadConversationRequest.prototype.redactionConfig = null;
     
                         /**
+                         * UploadConversationRequest speechConfig.
+                         * @member {google.cloud.contactcenterinsights.v1.ISpeechConfig|null|undefined} speechConfig
+                         * @memberof google.cloud.contactcenterinsights.v1.UploadConversationRequest
+                         * @instance
+                         */
+                        UploadConversationRequest.prototype.speechConfig = null;
+    
+                        /**
                          * Creates a new UploadConversationRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.contactcenterinsights.v1.UploadConversationRequest
@@ -3238,6 +3247,8 @@
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.conversationId);
                             if (message.redactionConfig != null && Object.hasOwnProperty.call(message, "redactionConfig"))
                                 $root.google.cloud.contactcenterinsights.v1.RedactionConfig.encode(message.redactionConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.speechConfig != null && Object.hasOwnProperty.call(message, "speechConfig"))
+                                $root.google.cloud.contactcenterinsights.v1.SpeechConfig.encode(message.speechConfig, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             return writer;
                         };
     
@@ -3286,6 +3297,10 @@
                                     }
                                 case 4: {
                                         message.redactionConfig = $root.google.cloud.contactcenterinsights.v1.RedactionConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 11: {
+                                        message.speechConfig = $root.google.cloud.contactcenterinsights.v1.SpeechConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -3339,6 +3354,11 @@
                                 if (error)
                                     return "redactionConfig." + error;
                             }
+                            if (message.speechConfig != null && message.hasOwnProperty("speechConfig")) {
+                                var error = $root.google.cloud.contactcenterinsights.v1.SpeechConfig.verify(message.speechConfig);
+                                if (error)
+                                    return "speechConfig." + error;
+                            }
                             return null;
                         };
     
@@ -3368,6 +3388,11 @@
                                     throw TypeError(".google.cloud.contactcenterinsights.v1.UploadConversationRequest.redactionConfig: object expected");
                                 message.redactionConfig = $root.google.cloud.contactcenterinsights.v1.RedactionConfig.fromObject(object.redactionConfig);
                             }
+                            if (object.speechConfig != null) {
+                                if (typeof object.speechConfig !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.UploadConversationRequest.speechConfig: object expected");
+                                message.speechConfig = $root.google.cloud.contactcenterinsights.v1.SpeechConfig.fromObject(object.speechConfig);
+                            }
                             return message;
                         };
     
@@ -3389,6 +3414,7 @@
                                 object.conversation = null;
                                 object.conversationId = "";
                                 object.redactionConfig = null;
+                                object.speechConfig = null;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -3398,6 +3424,8 @@
                                 object.conversationId = message.conversationId;
                             if (message.redactionConfig != null && message.hasOwnProperty("redactionConfig"))
                                 object.redactionConfig = $root.google.cloud.contactcenterinsights.v1.RedactionConfig.toObject(message.redactionConfig, options);
+                            if (message.speechConfig != null && message.hasOwnProperty("speechConfig"))
+                                object.speechConfig = $root.google.cloud.contactcenterinsights.v1.SpeechConfig.toObject(message.speechConfig, options);
                             return object;
                         };
     
@@ -29065,6 +29093,7 @@
                          * @property {Object.<string,string>|null} [pubsubNotificationSettings] Settings pubsubNotificationSettings
                          * @property {google.cloud.contactcenterinsights.v1.Settings.IAnalysisConfig|null} [analysisConfig] Settings analysisConfig
                          * @property {google.cloud.contactcenterinsights.v1.IRedactionConfig|null} [redactionConfig] Settings redactionConfig
+                         * @property {google.cloud.contactcenterinsights.v1.ISpeechConfig|null} [speechConfig] Settings speechConfig
                          */
     
                         /**
@@ -29148,6 +29177,14 @@
                         Settings.prototype.redactionConfig = null;
     
                         /**
+                         * Settings speechConfig.
+                         * @member {google.cloud.contactcenterinsights.v1.ISpeechConfig|null|undefined} speechConfig
+                         * @memberof google.cloud.contactcenterinsights.v1.Settings
+                         * @instance
+                         */
+                        Settings.prototype.speechConfig = null;
+    
+                        /**
                          * Creates a new Settings instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.contactcenterinsights.v1.Settings
@@ -29188,6 +29225,8 @@
                                 $root.google.cloud.contactcenterinsights.v1.Settings.AnalysisConfig.encode(message.analysisConfig, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.redactionConfig != null && Object.hasOwnProperty.call(message, "redactionConfig"))
                                 $root.google.cloud.contactcenterinsights.v1.RedactionConfig.encode(message.redactionConfig, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.speechConfig != null && Object.hasOwnProperty.call(message, "speechConfig"))
+                                $root.google.cloud.contactcenterinsights.v1.SpeechConfig.encode(message.speechConfig, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             return writer;
                         };
     
@@ -29273,6 +29312,10 @@
                                         message.redactionConfig = $root.google.cloud.contactcenterinsights.v1.RedactionConfig.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 11: {
+                                        message.speechConfig = $root.google.cloud.contactcenterinsights.v1.SpeechConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -29347,6 +29390,11 @@
                                 if (error)
                                     return "redactionConfig." + error;
                             }
+                            if (message.speechConfig != null && message.hasOwnProperty("speechConfig")) {
+                                var error = $root.google.cloud.contactcenterinsights.v1.SpeechConfig.verify(message.speechConfig);
+                                if (error)
+                                    return "speechConfig." + error;
+                            }
                             return null;
                         };
     
@@ -29398,6 +29446,11 @@
                                     throw TypeError(".google.cloud.contactcenterinsights.v1.Settings.redactionConfig: object expected");
                                 message.redactionConfig = $root.google.cloud.contactcenterinsights.v1.RedactionConfig.fromObject(object.redactionConfig);
                             }
+                            if (object.speechConfig != null) {
+                                if (typeof object.speechConfig !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.Settings.speechConfig: object expected");
+                                message.speechConfig = $root.google.cloud.contactcenterinsights.v1.SpeechConfig.fromObject(object.speechConfig);
+                            }
                             return message;
                         };
     
@@ -29424,6 +29477,7 @@
                                 object.conversationTtl = null;
                                 object.analysisConfig = null;
                                 object.redactionConfig = null;
+                                object.speechConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -29445,6 +29499,8 @@
                                 object.analysisConfig = $root.google.cloud.contactcenterinsights.v1.Settings.AnalysisConfig.toObject(message.analysisConfig, options);
                             if (message.redactionConfig != null && message.hasOwnProperty("redactionConfig"))
                                 object.redactionConfig = $root.google.cloud.contactcenterinsights.v1.RedactionConfig.toObject(message.redactionConfig, options);
+                            if (message.speechConfig != null && message.hasOwnProperty("speechConfig"))
+                                object.speechConfig = $root.google.cloud.contactcenterinsights.v1.SpeechConfig.toObject(message.speechConfig, options);
                             return object;
                         };
     
@@ -29957,6 +30013,209 @@
                         };
     
                         return RedactionConfig;
+                    })();
+    
+                    v1.SpeechConfig = (function() {
+    
+                        /**
+                         * Properties of a SpeechConfig.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface ISpeechConfig
+                         * @property {string|null} [speechRecognizer] SpeechConfig speechRecognizer
+                         */
+    
+                        /**
+                         * Constructs a new SpeechConfig.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents a SpeechConfig.
+                         * @implements ISpeechConfig
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.ISpeechConfig=} [properties] Properties to set
+                         */
+                        function SpeechConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SpeechConfig speechRecognizer.
+                         * @member {string} speechRecognizer
+                         * @memberof google.cloud.contactcenterinsights.v1.SpeechConfig
+                         * @instance
+                         */
+                        SpeechConfig.prototype.speechRecognizer = "";
+    
+                        /**
+                         * Creates a new SpeechConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.SpeechConfig
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.ISpeechConfig=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.SpeechConfig} SpeechConfig instance
+                         */
+                        SpeechConfig.create = function create(properties) {
+                            return new SpeechConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SpeechConfig message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.SpeechConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.SpeechConfig
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.ISpeechConfig} message SpeechConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SpeechConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.speechRecognizer != null && Object.hasOwnProperty.call(message, "speechRecognizer"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.speechRecognizer);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SpeechConfig message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.SpeechConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.SpeechConfig
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.ISpeechConfig} message SpeechConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SpeechConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SpeechConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.SpeechConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.SpeechConfig} SpeechConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SpeechConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.SpeechConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.speechRecognizer = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SpeechConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.SpeechConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.SpeechConfig} SpeechConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SpeechConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SpeechConfig message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.SpeechConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SpeechConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.speechRecognizer != null && message.hasOwnProperty("speechRecognizer"))
+                                if (!$util.isString(message.speechRecognizer))
+                                    return "speechRecognizer: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SpeechConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.SpeechConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.SpeechConfig} SpeechConfig
+                         */
+                        SpeechConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.SpeechConfig)
+                                return object;
+                            var message = new $root.google.cloud.contactcenterinsights.v1.SpeechConfig();
+                            if (object.speechRecognizer != null)
+                                message.speechRecognizer = String(object.speechRecognizer);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SpeechConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.SpeechConfig
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.SpeechConfig} message SpeechConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SpeechConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.speechRecognizer = "";
+                            if (message.speechRecognizer != null && message.hasOwnProperty("speechRecognizer"))
+                                object.speechRecognizer = message.speechRecognizer;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SpeechConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.SpeechConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SpeechConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SpeechConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.contactcenterinsights.v1.SpeechConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SpeechConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.contactcenterinsights.v1.SpeechConfig";
+                        };
+    
+                        return SpeechConfig;
                     })();
     
                     v1.RuntimeAnnotation = (function() {

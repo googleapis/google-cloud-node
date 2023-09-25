@@ -994,6 +994,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "speechConfig": {
+                          "type": "SpeechConfig",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -3032,6 +3039,13 @@
                         "redactionConfig": {
                           "type": "RedactionConfig",
                           "id": 10
+                        },
+                        "speechConfig": {
+                          "type": "SpeechConfig",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -3062,6 +3076,17 @@
                         "inspectTemplate": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "SpeechConfig": {
+                      "fields": {
+                        "speechRecognizer": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "speech.googleapis.com/Recognizer"
+                          }
                         }
                       }
                     },
