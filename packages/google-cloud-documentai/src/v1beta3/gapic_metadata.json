@@ -299,6 +299,13 @@
               "methods": [
                 "batchDeleteDocuments"
               ]
+            },
+            "ListDocuments": {
+              "methods": [
+                "listDocuments",
+                "listDocumentsStream",
+                "listDocumentsAsync"
+              ]
             }
           }
         },
@@ -333,6 +340,13 @@
             "BatchDeleteDocuments": {
               "methods": [
                 "batchDeleteDocuments"
+              ]
+            },
+            "ListDocuments": {
+              "methods": [
+                "listDocuments",
+                "listDocumentsStream",
+                "listDocumentsAsync"
               ]
             }
           }

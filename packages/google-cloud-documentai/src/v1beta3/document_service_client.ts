@@ -25,10 +25,12 @@ import type {
   ClientOptions,
   GrpcClientOptions,
   LROperation,
+  PaginationCallback,
+  GaxCall,
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -205,6 +207,17 @@ export class DocumentServiceClient {
       ),
     };
 
+    // Some of the methods on this service return "paged" results,
+    // (e.g. 50 results at a time, with tokens to get subsequent
+    // pages). Denote the keys used for pagination and results.
+    this.descriptors.page = {
+      listDocuments: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'documentMetadata'
+      ),
+    };
+
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
@@ -348,6 +361,7 @@ export class DocumentServiceClient {
       'updateDataset',
       'importDocuments',
       'getDocument',
+      'listDocuments',
       'batchDeleteDocuments',
       'getDatasetSchema',
       'updateDatasetSchema',
@@ -367,7 +381,10 @@ export class DocumentServiceClient {
         }
       );
 
-      const descriptor = this.descriptors.longrunning[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        this.descriptors.longrunning[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -1156,6 +1173,315 @@ export class DocumentServiceClient {
       protos.google.cloud.documentai.v1beta3.BatchDeleteDocumentsResponse,
       protos.google.cloud.documentai.v1beta3.BatchDeleteDocumentsMetadata
     >;
+  }
+  /**
+   * Returns a list of documents present in the dataset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.dataset
+   *   Required. The resource name of the dataset to be listed.
+   *   Format:
+   *   projects/{project}/locations/{location}/processors/{processor}/dataset
+   * @param {number} request.pageSize
+   *   The maximum number of documents to return. The service may return
+   *   fewer than this value.
+   *   If unspecified, at most 20 documents will be returned.
+   *   The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListDocuments` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListDocuments`
+   *   must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Query to filter the documents based on
+   *   https://google.aip.dev/160.
+   *   ## Currently support query strings are:
+   *
+   *   `SplitType=DATASET_SPLIT_TEST|DATASET_SPLIT_TRAIN|DATASET_SPLIT_UNASSIGNED`
+   *   - `LabelingState=DOCUMENT_LABELED|DOCUMENT_UNLABELED|DOCUMENT_AUTO_LABELED`
+   *   - `DisplayName=\"file_name.pdf\"`
+   *   - `EntityType=abc/def`
+   *   - `TagName=\"auto-labeling-running\"|\"sampled\"`
+   *
+   *   Note:
+   *   - Only `AND`, `=` and `!=` are supported.
+   *       e.g. `DisplayName=file_name AND EntityType!=abc` IS supported.
+   *   - Wildcard `*` is supported only in `DisplayName` filter
+   *   - No duplicate filter keys are allowed,
+   *       e.g. `EntityType=a AND EntityType=b` is NOT supported.
+   *   - String match is case sensitive (for filter `DisplayName` & `EntityType`).
+   * @param {boolean} [request.returnTotalSize]
+   *   Optional. Controls if the ListDocuments request requires a total size
+   *   of matched documents. See ListDocumentsResponse.total_size.
+   *
+   *   Enabling this flag may adversely impact performance.
+   *
+   *   Defaults to false.
+   * @param {number} [request.skip]
+   *   Optional. Number of results to skip beginning from the `page_token` if
+   *   provided. https://google.aip.dev/158#skipping-results. It must be a
+   *   non-negative integer. Negative values wil be rejected. Note that this is
+   *   not the number of pages to skip. If this value causes the cursor to move
+   *   past the end of results, `ListDocumentsResponse.document_metadata` and
+   *   `ListDocumentsResponse.next_page_token` will be empty.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.documentai.v1beta3.DocumentMetadata|DocumentMetadata}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listDocumentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listDocuments(
+    request?: protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.documentai.v1beta3.IDocumentMetadata[],
+      protos.google.cloud.documentai.v1beta3.IListDocumentsRequest | null,
+      protos.google.cloud.documentai.v1beta3.IListDocumentsResponse,
+    ]
+  >;
+  listDocuments(
+    request: protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
+      | protos.google.cloud.documentai.v1beta3.IListDocumentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.documentai.v1beta3.IDocumentMetadata
+    >
+  ): void;
+  listDocuments(
+    request: protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
+      | protos.google.cloud.documentai.v1beta3.IListDocumentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.documentai.v1beta3.IDocumentMetadata
+    >
+  ): void;
+  listDocuments(
+    request?: protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
+          | protos.google.cloud.documentai.v1beta3.IListDocumentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.documentai.v1beta3.IDocumentMetadata
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
+      | protos.google.cloud.documentai.v1beta3.IListDocumentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.documentai.v1beta3.IDocumentMetadata
+    >
+  ): Promise<
+    [
+      protos.google.cloud.documentai.v1beta3.IDocumentMetadata[],
+      protos.google.cloud.documentai.v1beta3.IListDocumentsRequest | null,
+      protos.google.cloud.documentai.v1beta3.IListDocumentsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        dataset: request.dataset ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listDocuments(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.dataset
+   *   Required. The resource name of the dataset to be listed.
+   *   Format:
+   *   projects/{project}/locations/{location}/processors/{processor}/dataset
+   * @param {number} request.pageSize
+   *   The maximum number of documents to return. The service may return
+   *   fewer than this value.
+   *   If unspecified, at most 20 documents will be returned.
+   *   The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListDocuments` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListDocuments`
+   *   must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Query to filter the documents based on
+   *   https://google.aip.dev/160.
+   *   ## Currently support query strings are:
+   *
+   *   `SplitType=DATASET_SPLIT_TEST|DATASET_SPLIT_TRAIN|DATASET_SPLIT_UNASSIGNED`
+   *   - `LabelingState=DOCUMENT_LABELED|DOCUMENT_UNLABELED|DOCUMENT_AUTO_LABELED`
+   *   - `DisplayName=\"file_name.pdf\"`
+   *   - `EntityType=abc/def`
+   *   - `TagName=\"auto-labeling-running\"|\"sampled\"`
+   *
+   *   Note:
+   *   - Only `AND`, `=` and `!=` are supported.
+   *       e.g. `DisplayName=file_name AND EntityType!=abc` IS supported.
+   *   - Wildcard `*` is supported only in `DisplayName` filter
+   *   - No duplicate filter keys are allowed,
+   *       e.g. `EntityType=a AND EntityType=b` is NOT supported.
+   *   - String match is case sensitive (for filter `DisplayName` & `EntityType`).
+   * @param {boolean} [request.returnTotalSize]
+   *   Optional. Controls if the ListDocuments request requires a total size
+   *   of matched documents. See ListDocumentsResponse.total_size.
+   *
+   *   Enabling this flag may adversely impact performance.
+   *
+   *   Defaults to false.
+   * @param {number} [request.skip]
+   *   Optional. Number of results to skip beginning from the `page_token` if
+   *   provided. https://google.aip.dev/158#skipping-results. It must be a
+   *   non-negative integer. Negative values wil be rejected. Note that this is
+   *   not the number of pages to skip. If this value causes the cursor to move
+   *   past the end of results, `ListDocumentsResponse.document_metadata` and
+   *   `ListDocumentsResponse.next_page_token` will be empty.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.documentai.v1beta3.DocumentMetadata|DocumentMetadata} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listDocumentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listDocumentsStream(
+    request?: protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        dataset: request.dataset ?? '',
+      });
+    const defaultCallSettings = this._defaults['listDocuments'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listDocuments.createStream(
+      this.innerApiCalls.listDocuments as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listDocuments`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.dataset
+   *   Required. The resource name of the dataset to be listed.
+   *   Format:
+   *   projects/{project}/locations/{location}/processors/{processor}/dataset
+   * @param {number} request.pageSize
+   *   The maximum number of documents to return. The service may return
+   *   fewer than this value.
+   *   If unspecified, at most 20 documents will be returned.
+   *   The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListDocuments` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListDocuments`
+   *   must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Query to filter the documents based on
+   *   https://google.aip.dev/160.
+   *   ## Currently support query strings are:
+   *
+   *   `SplitType=DATASET_SPLIT_TEST|DATASET_SPLIT_TRAIN|DATASET_SPLIT_UNASSIGNED`
+   *   - `LabelingState=DOCUMENT_LABELED|DOCUMENT_UNLABELED|DOCUMENT_AUTO_LABELED`
+   *   - `DisplayName=\"file_name.pdf\"`
+   *   - `EntityType=abc/def`
+   *   - `TagName=\"auto-labeling-running\"|\"sampled\"`
+   *
+   *   Note:
+   *   - Only `AND`, `=` and `!=` are supported.
+   *       e.g. `DisplayName=file_name AND EntityType!=abc` IS supported.
+   *   - Wildcard `*` is supported only in `DisplayName` filter
+   *   - No duplicate filter keys are allowed,
+   *       e.g. `EntityType=a AND EntityType=b` is NOT supported.
+   *   - String match is case sensitive (for filter `DisplayName` & `EntityType`).
+   * @param {boolean} [request.returnTotalSize]
+   *   Optional. Controls if the ListDocuments request requires a total size
+   *   of matched documents. See ListDocumentsResponse.total_size.
+   *
+   *   Enabling this flag may adversely impact performance.
+   *
+   *   Defaults to false.
+   * @param {number} [request.skip]
+   *   Optional. Number of results to skip beginning from the `page_token` if
+   *   provided. https://google.aip.dev/158#skipping-results. It must be a
+   *   non-negative integer. Negative values wil be rejected. Note that this is
+   *   not the number of pages to skip. If this value causes the cursor to move
+   *   past the end of results, `ListDocumentsResponse.document_metadata` and
+   *   `ListDocumentsResponse.next_page_token` will be empty.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.documentai.v1beta3.DocumentMetadata|DocumentMetadata}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta3/document_service.list_documents.js</caption>
+   * region_tag:documentai_v1beta3_generated_DocumentService_ListDocuments_async
+   */
+  listDocumentsAsync(
+    request?: protos.google.cloud.documentai.v1beta3.IListDocumentsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.documentai.v1beta3.IDocumentMetadata> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        dataset: request.dataset ?? '',
+      });
+    const defaultCallSettings = this._defaults['listDocuments'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listDocuments.asyncIterate(
+      this.innerApiCalls['listDocuments'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.documentai.v1beta3.IDocumentMetadata>;
   }
   /**
    * Gets information about a location.

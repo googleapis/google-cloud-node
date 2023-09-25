@@ -6904,6 +6904,10 @@
                         "mimeType": {
                           "type": "string",
                           "id": 2
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
@@ -7070,11 +7074,52 @@
                         }
                       }
                     },
+                    "SummaryOptions": {
+                      "fields": {
+                        "length": {
+                          "type": "Length",
+                          "id": 1
+                        },
+                        "format": {
+                          "type": "Format",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Length": {
+                          "values": {
+                            "LENGTH_UNSPECIFIED": 0,
+                            "BRIEF": 1,
+                            "MODERATE": 2,
+                            "COMPREHENSIVE": 3
+                          }
+                        },
+                        "Format": {
+                          "values": {
+                            "FORMAT_UNSPECIFIED": 0,
+                            "PARAGRAPH": 1,
+                            "BULLETS": 2
+                          }
+                        }
+                      }
+                    },
+                    "FieldExtractionMetadata": {
+                      "fields": {
+                        "summaryOptions": {
+                          "type": "SummaryOptions",
+                          "id": 2
+                        }
+                      }
+                    },
                     "PropertyMetadata": {
                       "fields": {
                         "inactive": {
                           "type": "bool",
                           "id": 3
+                        },
+                        "fieldExtractionMetadata": {
+                          "type": "FieldExtractionMetadata",
+                          "id": 9
                         }
                       }
                     },
@@ -7776,6 +7821,13 @@
                         "ocrConfig": {
                           "type": "OcrConfig",
                           "id": 1
+                        },
+                        "schemaOverride": {
+                          "type": "DocumentSchema",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -9064,6 +9116,21 @@
                         }
                       }
                     },
+                    "ProcessorVersionAlias": {
+                      "fields": {
+                        "alias": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "processorVersion": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "documentai.googleapis.com/ProcessorVersion"
+                          }
+                        }
+                      }
+                    },
                     "Processor": {
                       "options": {
                         "(google.api.resource).type": "documentai.googleapis.com/Processor",
@@ -9097,6 +9164,14 @@
                           "id": 9,
                           "options": {
                             "(google.api.resource_reference).type": "documentai.googleapis.com/ProcessorVersion"
+                          }
+                        },
+                        "processorVersionAliases": {
+                          "rule": "repeated",
+                          "type": "ProcessorVersionAlias",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
                         "processEndpoint": {
@@ -9258,6 +9333,26 @@
                             }
                           ]
                         },
+                        "ListDocuments": {
+                          "requestType": "ListDocumentsRequest",
+                          "responseType": "ListDocumentsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta3/{dataset=projects/*/locations/*/processors/*/dataset}:listDocuments",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "dataset"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta3/{dataset=projects/*/locations/*/processors/*/dataset}:listDocuments",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "dataset"
+                            }
+                          ]
+                        },
                         "BatchDeleteDocuments": {
                           "requestType": "BatchDeleteDocumentsRequest",
                           "responseType": "google.longrunning.Operation",
@@ -9332,6 +9427,14 @@
                         "DATASET_SPLIT_TRAIN": 1,
                         "DATASET_SPLIT_TEST": 2,
                         "DATASET_SPLIT_UNASSIGNED": 3
+                      }
+                    },
+                    "DocumentLabelingState": {
+                      "values": {
+                        "DOCUMENT_LABELING_STATE_UNSPECIFIED": 0,
+                        "DOCUMENT_LABELED": 1,
+                        "DOCUMENT_UNLABELED": 2,
+                        "DOCUMENT_AUTO_LABELED": 3
                       }
                     },
                     "UpdateDatasetRequest": {
@@ -9503,6 +9606,64 @@
                         }
                       }
                     },
+                    "ListDocumentsRequest": {
+                      "fields": {
+                        "dataset": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "documentai.googleapis.com/Dataset"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "returnTotalSize": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "skip": {
+                          "type": "int32",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListDocumentsResponse": {
+                      "fields": {
+                        "documentMetadata": {
+                          "rule": "repeated",
+                          "type": "DocumentMetadata",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "totalSize": {
+                          "type": "int32",
+                          "id": 3
+                        }
+                      }
+                    },
                     "BatchDeleteDocumentsRequest": {
                       "fields": {
                         "dataset": {
@@ -9599,6 +9760,30 @@
                         "end": {
                           "type": "int32",
                           "id": 2
+                        }
+                      }
+                    },
+                    "DocumentMetadata": {
+                      "fields": {
+                        "documentId": {
+                          "type": "DocumentId",
+                          "id": 1
+                        },
+                        "pageCount": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "datasetType": {
+                          "type": "DatasetSplitType",
+                          "id": 3
+                        },
+                        "labelingState": {
+                          "type": "DocumentLabelingState",
+                          "id": 5
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 6
                         }
                       }
                     }
