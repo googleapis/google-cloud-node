@@ -37,8 +37,8 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  Optional. A SQL statement that's compatible with BigQuery Standard
-   *  SQL (http://cloud/bigquery/docs/reference/standard-sql/enabling-standard-sql).
+   *  Optional. A SQL statement that's compatible with BigQuery
+   *  SQL (https://cloud.google.com/bigquery/docs/introduction-sql).
    */
   // const statement = 'abc123'
   /**
