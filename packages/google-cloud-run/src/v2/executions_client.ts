@@ -260,12 +260,23 @@ export class ExecutionsClient {
     const deleteExecutionMetadata = protoFilesRoot.lookup(
       '.google.cloud.run.v2.Execution'
     ) as gax.protobuf.Type;
+    const cancelExecutionResponse = protoFilesRoot.lookup(
+      '.google.cloud.run.v2.Execution'
+    ) as gax.protobuf.Type;
+    const cancelExecutionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.run.v2.Execution'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       deleteExecution: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteExecutionResponse.decode.bind(deleteExecutionResponse),
         deleteExecutionMetadata.decode.bind(deleteExecutionMetadata)
+      ),
+      cancelExecution: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        cancelExecutionResponse.decode.bind(cancelExecutionResponse),
+        cancelExecutionMetadata.decode.bind(cancelExecutionMetadata)
       ),
     };
 
@@ -322,6 +333,7 @@ export class ExecutionsClient {
       'getExecution',
       'listExecutions',
       'deleteExecution',
+      'cancelExecution',
     ];
     for (const methodName of executionsStubMethods) {
       const callPromise = this.executionsStub.then(
@@ -416,8 +428,8 @@ export class ExecutionsClient {
    * @param {string} request.name
    *   Required. The full name of the Execution.
    *   Format:
-   *   projects/{project}/locations/{location}/jobs/{job}/executions/{execution},
-   *   where {project} can be project id or number.
+   *   `projects/{project}/locations/{location}/jobs/{job}/executions/{execution}`,
+   *   where `{project}` can be project id or number.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -502,8 +514,8 @@ export class ExecutionsClient {
    * @param {string} request.name
    *   Required. The name of the Execution to delete.
    *   Format:
-   *   projects/{project}/locations/{location}/jobs/{job}/executions/{execution},
-   *   where {project} can be project id or number.
+   *   `projects/{project}/locations/{location}/jobs/{job}/executions/{execution}`,
+   *   where `{project}` can be project id or number.
    * @param {boolean} request.validateOnly
    *   Indicates that the request should be validated without actually
    *   deleting any resources.
@@ -640,6 +652,151 @@ export class ExecutionsClient {
     >;
   }
   /**
+   * Cancels an Execution.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Execution to cancel.
+   *   Format:
+   *   `projects/{project}/locations/{location}/jobs/{job}/executions/{execution}`,
+   *   where `{project}` can be project id or number.
+   * @param {boolean} request.validateOnly
+   *   Indicates that the request should be validated without actually
+   *   cancelling any resources.
+   * @param {string} request.etag
+   *   A system-generated fingerprint for this version of the resource.
+   *   This may be used to detect modification conflict during updates.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/executions.cancel_execution.js</caption>
+   * region_tag:run_v2_generated_Executions_CancelExecution_async
+   */
+  cancelExecution(
+    request?: protos.google.cloud.run.v2.ICancelExecutionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.run.v2.IExecution,
+        protos.google.cloud.run.v2.IExecution
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  cancelExecution(
+    request: protos.google.cloud.run.v2.ICancelExecutionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.run.v2.IExecution,
+        protos.google.cloud.run.v2.IExecution
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  cancelExecution(
+    request: protos.google.cloud.run.v2.ICancelExecutionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.run.v2.IExecution,
+        protos.google.cloud.run.v2.IExecution
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  cancelExecution(
+    request?: protos.google.cloud.run.v2.ICancelExecutionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.run.v2.IExecution,
+            protos.google.cloud.run.v2.IExecution
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.run.v2.IExecution,
+        protos.google.cloud.run.v2.IExecution
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.run.v2.IExecution,
+        protos.google.cloud.run.v2.IExecution
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.cancelExecution(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `cancelExecution()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/executions.cancel_execution.js</caption>
+   * region_tag:run_v2_generated_Executions_CancelExecution_async
+   */
+  async checkCancelExecutionProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.run.v2.Execution,
+      protos.google.cloud.run.v2.Execution
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.cancelExecution,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.run.v2.Execution,
+      protos.google.cloud.run.v2.Execution
+    >;
+  }
+  /**
    * Lists Executions from a Job.
    *
    * @param {Object} request
@@ -647,8 +804,8 @@ export class ExecutionsClient {
    * @param {string} request.parent
    *   Required. The Execution from which the Executions should be listed.
    *   To list all Executions across Jobs, use "-" instead of Job name.
-   *   Format: projects/{project}/locations/{location}/jobs/{job}, where {project}
-   *   can be project id or number.
+   *   Format: `projects/{project}/locations/{location}/jobs/{job}`, where
+   *   `{project}` can be project id or number.
    * @param {number} request.pageSize
    *   Maximum number of Executions to return in this call.
    * @param {string} request.pageToken
@@ -742,8 +899,8 @@ export class ExecutionsClient {
    * @param {string} request.parent
    *   Required. The Execution from which the Executions should be listed.
    *   To list all Executions across Jobs, use "-" instead of Job name.
-   *   Format: projects/{project}/locations/{location}/jobs/{job}, where {project}
-   *   can be project id or number.
+   *   Format: `projects/{project}/locations/{location}/jobs/{job}`, where
+   *   `{project}` can be project id or number.
    * @param {number} request.pageSize
    *   Maximum number of Executions to return in this call.
    * @param {string} request.pageToken
@@ -793,8 +950,8 @@ export class ExecutionsClient {
    * @param {string} request.parent
    *   Required. The Execution from which the Executions should be listed.
    *   To list all Executions across Jobs, use "-" instead of Job name.
-   *   Format: projects/{project}/locations/{location}/jobs/{job}, where {project}
-   *   can be project id or number.
+   *   Format: `projects/{project}/locations/{location}/jobs/{job}`, where
+   *   `{project}` can be project id or number.
    * @param {number} request.pageSize
    *   Maximum number of Executions to return in this call.
    * @param {string} request.pageToken
