@@ -1282,6 +1282,14 @@
                           "options": {
                             "deprecated": true
                           }
+                        },
+                        "disableCharacterBoxesDetection": {
+                          "type": "bool",
+                          "id": 10
+                        },
+                        "premiumFeatures": {
+                          "type": "PremiumFeatures",
+                          "id": 11
                         }
                       },
                       "nested": {
@@ -1291,6 +1299,22 @@
                               "rule": "repeated",
                               "type": "string",
                               "id": 1
+                            }
+                          }
+                        },
+                        "PremiumFeatures": {
+                          "fields": {
+                            "enableSelectionMarkDetection": {
+                              "type": "bool",
+                              "id": 3
+                            },
+                            "computeStyleInfo": {
+                              "type": "bool",
+                              "id": 4
+                            },
+                            "enableMathOcr": {
+                              "type": "bool",
+                              "id": 5
                             }
                           }
                         }
@@ -1811,10 +1835,45 @@
                       }
                     },
                     "ProcessOptions": {
+                      "oneofs": {
+                        "pageRange": {
+                          "oneof": [
+                            "individualPageSelector",
+                            "fromStart",
+                            "fromEnd"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "individualPageSelector": {
+                          "type": "IndividualPageSelector",
+                          "id": 5
+                        },
+                        "fromStart": {
+                          "type": "int32",
+                          "id": 6
+                        },
+                        "fromEnd": {
+                          "type": "int32",
+                          "id": 7
+                        },
                         "ocrConfig": {
                           "type": "OcrConfig",
                           "id": 1
+                        }
+                      },
+                      "nested": {
+                        "IndividualPageSelector": {
+                          "fields": {
+                            "pages": {
+                              "rule": "repeated",
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
                         }
                       }
                     },

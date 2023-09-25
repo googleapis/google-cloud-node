@@ -5767,6 +5767,12 @@ export namespace google {
 
                     /** OcrConfig computeStyleInfo */
                     computeStyleInfo?: (boolean|null);
+
+                    /** OcrConfig disableCharacterBoxesDetection */
+                    disableCharacterBoxesDetection?: (boolean|null);
+
+                    /** OcrConfig premiumFeatures */
+                    premiumFeatures?: (google.cloud.documentai.v1.OcrConfig.IPremiumFeatures|null);
                 }
 
                 /** Represents an OcrConfig. */
@@ -5795,6 +5801,12 @@ export namespace google {
 
                     /** OcrConfig computeStyleInfo. */
                     public computeStyleInfo: boolean;
+
+                    /** OcrConfig disableCharacterBoxesDetection. */
+                    public disableCharacterBoxesDetection: boolean;
+
+                    /** OcrConfig premiumFeatures. */
+                    public premiumFeatures?: (google.cloud.documentai.v1.OcrConfig.IPremiumFeatures|null);
 
                     /**
                      * Creates a new OcrConfig instance using the specified properties.
@@ -5967,6 +5979,115 @@ export namespace google {
 
                         /**
                          * Gets the default type url for Hints
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PremiumFeatures. */
+                    interface IPremiumFeatures {
+
+                        /** PremiumFeatures enableSelectionMarkDetection */
+                        enableSelectionMarkDetection?: (boolean|null);
+
+                        /** PremiumFeatures computeStyleInfo */
+                        computeStyleInfo?: (boolean|null);
+
+                        /** PremiumFeatures enableMathOcr */
+                        enableMathOcr?: (boolean|null);
+                    }
+
+                    /** Represents a PremiumFeatures. */
+                    class PremiumFeatures implements IPremiumFeatures {
+
+                        /**
+                         * Constructs a new PremiumFeatures.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1.OcrConfig.IPremiumFeatures);
+
+                        /** PremiumFeatures enableSelectionMarkDetection. */
+                        public enableSelectionMarkDetection: boolean;
+
+                        /** PremiumFeatures computeStyleInfo. */
+                        public computeStyleInfo: boolean;
+
+                        /** PremiumFeatures enableMathOcr. */
+                        public enableMathOcr: boolean;
+
+                        /**
+                         * Creates a new PremiumFeatures instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PremiumFeatures instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1.OcrConfig.IPremiumFeatures): google.cloud.documentai.v1.OcrConfig.PremiumFeatures;
+
+                        /**
+                         * Encodes the specified PremiumFeatures message. Does not implicitly {@link google.cloud.documentai.v1.OcrConfig.PremiumFeatures.verify|verify} messages.
+                         * @param message PremiumFeatures message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1.OcrConfig.IPremiumFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PremiumFeatures message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.OcrConfig.PremiumFeatures.verify|verify} messages.
+                         * @param message PremiumFeatures message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1.OcrConfig.IPremiumFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PremiumFeatures message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PremiumFeatures
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.OcrConfig.PremiumFeatures;
+
+                        /**
+                         * Decodes a PremiumFeatures message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PremiumFeatures
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.OcrConfig.PremiumFeatures;
+
+                        /**
+                         * Verifies a PremiumFeatures message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PremiumFeatures message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PremiumFeatures
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.OcrConfig.PremiumFeatures;
+
+                        /**
+                         * Creates a plain object from a PremiumFeatures message. Also converts values to other types if specified.
+                         * @param message PremiumFeatures
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1.OcrConfig.PremiumFeatures, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PremiumFeatures to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PremiumFeatures
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -6463,6 +6584,15 @@ export namespace google {
                 /** Properties of a ProcessOptions. */
                 interface IProcessOptions {
 
+                    /** ProcessOptions individualPageSelector */
+                    individualPageSelector?: (google.cloud.documentai.v1.ProcessOptions.IIndividualPageSelector|null);
+
+                    /** ProcessOptions fromStart */
+                    fromStart?: (number|null);
+
+                    /** ProcessOptions fromEnd */
+                    fromEnd?: (number|null);
+
                     /** ProcessOptions ocrConfig */
                     ocrConfig?: (google.cloud.documentai.v1.IOcrConfig|null);
                 }
@@ -6476,8 +6606,20 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.documentai.v1.IProcessOptions);
 
+                    /** ProcessOptions individualPageSelector. */
+                    public individualPageSelector?: (google.cloud.documentai.v1.ProcessOptions.IIndividualPageSelector|null);
+
+                    /** ProcessOptions fromStart. */
+                    public fromStart?: (number|null);
+
+                    /** ProcessOptions fromEnd. */
+                    public fromEnd?: (number|null);
+
                     /** ProcessOptions ocrConfig. */
                     public ocrConfig?: (google.cloud.documentai.v1.IOcrConfig|null);
+
+                    /** ProcessOptions pageRange. */
+                    public pageRange?: ("individualPageSelector"|"fromStart"|"fromEnd");
 
                     /**
                      * Creates a new ProcessOptions instance using the specified properties.
@@ -6555,6 +6697,106 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ProcessOptions {
+
+                    /** Properties of an IndividualPageSelector. */
+                    interface IIndividualPageSelector {
+
+                        /** IndividualPageSelector pages */
+                        pages?: (number[]|null);
+                    }
+
+                    /** Represents an IndividualPageSelector. */
+                    class IndividualPageSelector implements IIndividualPageSelector {
+
+                        /**
+                         * Constructs a new IndividualPageSelector.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1.ProcessOptions.IIndividualPageSelector);
+
+                        /** IndividualPageSelector pages. */
+                        public pages: number[];
+
+                        /**
+                         * Creates a new IndividualPageSelector instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns IndividualPageSelector instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1.ProcessOptions.IIndividualPageSelector): google.cloud.documentai.v1.ProcessOptions.IndividualPageSelector;
+
+                        /**
+                         * Encodes the specified IndividualPageSelector message. Does not implicitly {@link google.cloud.documentai.v1.ProcessOptions.IndividualPageSelector.verify|verify} messages.
+                         * @param message IndividualPageSelector message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1.ProcessOptions.IIndividualPageSelector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified IndividualPageSelector message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.ProcessOptions.IndividualPageSelector.verify|verify} messages.
+                         * @param message IndividualPageSelector message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1.ProcessOptions.IIndividualPageSelector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an IndividualPageSelector message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns IndividualPageSelector
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.ProcessOptions.IndividualPageSelector;
+
+                        /**
+                         * Decodes an IndividualPageSelector message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns IndividualPageSelector
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.ProcessOptions.IndividualPageSelector;
+
+                        /**
+                         * Verifies an IndividualPageSelector message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an IndividualPageSelector message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns IndividualPageSelector
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.ProcessOptions.IndividualPageSelector;
+
+                        /**
+                         * Creates a plain object from an IndividualPageSelector message. Also converts values to other types if specified.
+                         * @param message IndividualPageSelector
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1.ProcessOptions.IndividualPageSelector, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this IndividualPageSelector to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for IndividualPageSelector
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a ProcessRequest. */
