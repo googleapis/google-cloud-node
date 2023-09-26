@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, repositoryId, repository) {
-  // [START artifactregistry_v1_generated_ArtifactRegistry_CreateRepository_async]
+function main(parent) {
+  // [START analyticshub_v1_generated_AnalyticsHubService_ListSubscriptions_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,41 +29,44 @@ function main(parent, repositoryId, repository) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the parent resource where the repository will be
-   *  created.
+   *  Required. The parent resource path of the subscription.
+   *  e.g. projects/myproject/locations/US
    */
   // const parent = 'abc123'
   /**
-   *  The repository id to use for this repository.
+   *  The filter expression may be used to filter by Data Exchange or Listing.
    */
-  // const repositoryId = 'abc123'
+  // const filter = 'abc123'
   /**
-   *  The repository to be created.
+   *  The maximum number of results to return in a single response page.
    */
-  // const repository = {}
+  // const pageSize = 1234
+  /**
+   *  Page token, returned by a previous call.
+   */
+  // const pageToken = 'abc123'
 
-  // Imports the Artifactregistry library
-  const {ArtifactRegistryClient} = require('@google-cloud/artifact-registry').v1;
+  // Imports the Analyticshub library
+  const {AnalyticsHubServiceClient} = require('@google-cloud/bigquery-analyticshub').v1;
 
   // Instantiates a client
-  const artifactregistryClient = new ArtifactRegistryClient();
+  const analyticshubClient = new AnalyticsHubServiceClient();
 
-  async function callCreateRepository() {
+  async function callListSubscriptions() {
     // Construct request
     const request = {
       parent,
-      repositoryId,
-      repository,
     };
 
     // Run request
-    const [operation] = await artifactregistryClient.createRepository(request);
-    const [response] = await operation.promise();
-    console.log(response);
+    const iterable = await analyticshubClient.listSubscriptionsAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callCreateRepository();
-  // [END artifactregistry_v1_generated_ArtifactRegistry_CreateRepository_async]
+  callListSubscriptions();
+  // [END analyticshub_v1_generated_AnalyticsHubService_ListSubscriptions_async]
 }
 
 process.on('unhandledRejection', err => {

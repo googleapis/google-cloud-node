@@ -544,6 +544,322 @@
             }
         },
         {
+            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_SubscribeDataExchange_async",
+            "title": "AnalyticsHubService subscribeDataExchange Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a Subscription to a Data Exchange. This is a long-running operation as it will create one or more linked datasets.",
+            "canonical": true,
+            "file": "analytics_hub_service.subscribe_data_exchange.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 71,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SubscribeDataExchange",
+                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubscribeDataExchange",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "destination",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "subscription",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "subscriber_contact",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "AnalyticsHubServiceClient",
+                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+                },
+                "method": {
+                    "shortName": "SubscribeDataExchange",
+                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubscribeDataExchange",
+                    "service": {
+                        "shortName": "AnalyticsHubService",
+                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_RefreshSubscription_async",
+            "title": "AnalyticsHubService refreshSubscription Sample",
+            "origin": "API_DEFINITION",
+            "description": " Refreshes a Subscription to a Data Exchange. A Data Exchange can become stale when a publisher adds or removes data. This is a long-running operation as it may create many linked datasets.",
+            "canonical": true,
+            "file": "analytics_hub_service.refresh_subscription.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RefreshSubscription",
+                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.RefreshSubscription",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "AnalyticsHubServiceClient",
+                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+                },
+                "method": {
+                    "shortName": "RefreshSubscription",
+                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.RefreshSubscription",
+                    "service": {
+                        "shortName": "AnalyticsHubService",
+                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_GetSubscription_async",
+            "title": "AnalyticsHubService getSubscription Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets the details of a Subscription.",
+            "canonical": true,
+            "file": "analytics_hub_service.get_subscription.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetSubscription",
+                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetSubscription",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.bigquery.analyticshub.v1.Subscription",
+                "client": {
+                    "shortName": "AnalyticsHubServiceClient",
+                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+                },
+                "method": {
+                    "shortName": "GetSubscription",
+                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetSubscription",
+                    "service": {
+                        "shortName": "AnalyticsHubService",
+                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_ListSubscriptions_async",
+            "title": "AnalyticsHubService listSubscriptions Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists all subscriptions in a given project and location.",
+            "canonical": true,
+            "file": "analytics_hub_service.list_subscriptions.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 68,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListSubscriptions",
+                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListSubscriptions",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.bigquery.analyticshub.v1.ListSubscriptionsResponse",
+                "client": {
+                    "shortName": "AnalyticsHubServiceClient",
+                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+                },
+                "method": {
+                    "shortName": "ListSubscriptions",
+                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListSubscriptions",
+                    "service": {
+                        "shortName": "AnalyticsHubService",
+                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_ListSharedResourceSubscriptions_async",
+            "title": "AnalyticsHubService listSharedResourceSubscriptions Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists all subscriptions on a given Data Exchange or Listing.",
+            "canonical": true,
+            "file": "analytics_hub_service.list_shared_resource_subscriptions.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 71,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListSharedResourceSubscriptions",
+                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListSharedResourceSubscriptions",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "resource",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "include_deleted_subscriptions",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.bigquery.analyticshub.v1.ListSharedResourceSubscriptionsResponse",
+                "client": {
+                    "shortName": "AnalyticsHubServiceClient",
+                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+                },
+                "method": {
+                    "shortName": "ListSharedResourceSubscriptions",
+                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListSharedResourceSubscriptions",
+                    "service": {
+                        "shortName": "AnalyticsHubService",
+                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_RevokeSubscription_async",
+            "title": "AnalyticsHubService revokeSubscription Sample",
+            "origin": "API_DEFINITION",
+            "description": " Revokes a given subscription.",
+            "canonical": true,
+            "file": "analytics_hub_service.revoke_subscription.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RevokeSubscription",
+                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.RevokeSubscription",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.bigquery.analyticshub.v1.RevokeSubscriptionResponse",
+                "client": {
+                    "shortName": "AnalyticsHubServiceClient",
+                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+                },
+                "method": {
+                    "shortName": "RevokeSubscription",
+                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.RevokeSubscription",
+                    "service": {
+                        "shortName": "AnalyticsHubService",
+                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_DeleteSubscription_async",
+            "title": "AnalyticsHubService deleteSubscription Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a subscription.",
+            "canonical": true,
+            "file": "analytics_hub_service.delete_subscription.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteSubscription",
+                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteSubscription",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "AnalyticsHubServiceClient",
+                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteSubscription",
+                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteSubscription",
+                    "service": {
+                        "shortName": "AnalyticsHubService",
+                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "analyticshub_v1_generated_AnalyticsHubService_GetIamPolicy_async",
             "title": "AnalyticsHubService getIamPolicy Sample",
             "origin": "API_DEFINITION",

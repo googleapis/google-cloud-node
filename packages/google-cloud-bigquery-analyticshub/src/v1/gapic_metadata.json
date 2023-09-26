@@ -55,6 +55,16 @@
                 "subscribeListing"
               ]
             },
+            "GetSubscription": {
+              "methods": [
+                "getSubscription"
+              ]
+            },
+            "RevokeSubscription": {
+              "methods": [
+                "revokeSubscription"
+              ]
+            },
             "GetIamPolicy": {
               "methods": [
                 "getIamPolicy"
@@ -68,6 +78,21 @@
             "TestIamPermissions": {
               "methods": [
                 "testIamPermissions"
+              ]
+            },
+            "SubscribeDataExchange": {
+              "methods": [
+                "subscribeDataExchange"
+              ]
+            },
+            "RefreshSubscription": {
+              "methods": [
+                "refreshSubscription"
+              ]
+            },
+            "DeleteSubscription": {
+              "methods": [
+                "deleteSubscription"
               ]
             },
             "ListDataExchanges": {
@@ -89,6 +114,20 @@
                 "listListings",
                 "listListingsStream",
                 "listListingsAsync"
+              ]
+            },
+            "ListSubscriptions": {
+              "methods": [
+                "listSubscriptions",
+                "listSubscriptionsStream",
+                "listSubscriptionsAsync"
+              ]
+            },
+            "ListSharedResourceSubscriptions": {
+              "methods": [
+                "listSharedResourceSubscriptions",
+                "listSharedResourceSubscriptionsStream",
+                "listSharedResourceSubscriptionsAsync"
               ]
             }
           }
@@ -141,6 +180,16 @@
                 "subscribeListing"
               ]
             },
+            "GetSubscription": {
+              "methods": [
+                "getSubscription"
+              ]
+            },
+            "RevokeSubscription": {
+              "methods": [
+                "revokeSubscription"
+              ]
+            },
             "GetIamPolicy": {
               "methods": [
                 "getIamPolicy"
@@ -154,6 +203,21 @@
             "TestIamPermissions": {
               "methods": [
                 "testIamPermissions"
+              ]
+            },
+            "SubscribeDataExchange": {
+              "methods": [
+                "subscribeDataExchange"
+              ]
+            },
+            "RefreshSubscription": {
+              "methods": [
+                "refreshSubscription"
+              ]
+            },
+            "DeleteSubscription": {
+              "methods": [
+                "deleteSubscription"
               ]
             },
             "ListDataExchanges": {
@@ -175,6 +239,20 @@
                 "listListings",
                 "listListingsStream",
                 "listListingsAsync"
+              ]
+            },
+            "ListSubscriptions": {
+              "methods": [
+                "listSubscriptions",
+                "listSubscriptionsStream",
+                "listSubscriptionsAsync"
+              ]
+            },
+            "ListSharedResourceSubscriptions": {
+              "methods": [
+                "listSharedResourceSubscriptions",
+                "listSharedResourceSubscriptionsStream",
+                "listSharedResourceSubscriptionsAsync"
               ]
             }
           }

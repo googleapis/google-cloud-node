@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, repositoryId, repository) {
-  // [START artifactregistry_v1_generated_ArtifactRegistry_CreateRepository_async]
+function main(name) {
+  // [START analyticshub_v1_generated_AnalyticsHubService_RevokeSubscription_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,41 +29,30 @@ function main(parent, repositoryId, repository) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the parent resource where the repository will be
-   *  created.
+   *  Required. Resource name of the subscription to revoke.
+   *  e.g. projects/123/locations/US/subscriptions/456
    */
-  // const parent = 'abc123'
-  /**
-   *  The repository id to use for this repository.
-   */
-  // const repositoryId = 'abc123'
-  /**
-   *  The repository to be created.
-   */
-  // const repository = {}
+  // const name = 'abc123'
 
-  // Imports the Artifactregistry library
-  const {ArtifactRegistryClient} = require('@google-cloud/artifact-registry').v1;
+  // Imports the Analyticshub library
+  const {AnalyticsHubServiceClient} = require('@google-cloud/bigquery-analyticshub').v1;
 
   // Instantiates a client
-  const artifactregistryClient = new ArtifactRegistryClient();
+  const analyticshubClient = new AnalyticsHubServiceClient();
 
-  async function callCreateRepository() {
+  async function callRevokeSubscription() {
     // Construct request
     const request = {
-      parent,
-      repositoryId,
-      repository,
+      name,
     };
 
     // Run request
-    const [operation] = await artifactregistryClient.createRepository(request);
-    const [response] = await operation.promise();
+    const response = await analyticshubClient.revokeSubscription(request);
     console.log(response);
   }
 
-  callCreateRepository();
-  // [END artifactregistry_v1_generated_ArtifactRegistry_CreateRepository_async]
+  callRevokeSubscription();
+  // [END analyticshub_v1_generated_AnalyticsHubService_RevokeSubscription_async]
 }
 
 process.on('unhandledRejection', err => {
