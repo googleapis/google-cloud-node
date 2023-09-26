@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START analyticshub_v1_generated_AnalyticsHubService_DeleteDataExchange_async]
+function main(resource) {
+  // [START analyticshub_v1_generated_AnalyticsHubService_ListSharedResourceSubscriptions_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,10 +29,25 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The full name of the data exchange resource that you want to
-   *  delete. For example, `projects/myproject/locations/US/dataExchanges/123`.
+   *  Required. Resource name of the requested target. This resource may be
+   *  either a Listing or a DataExchange. e.g.
+   *  projects/123/locations/US/dataExchanges/456 OR e.g.
+   *  projects/123/locations/US/dataExchanges/456/listings/789
    */
-  // const name = 'abc123'
+  // const resource = 'abc123'
+  /**
+   *  If selected, includes deleted subscriptions in the response
+   *  (up to 63 days after deletion).
+   */
+  // const includeDeletedSubscriptions = true
+  /**
+   *  The maximum number of results to return in a single response page.
+   */
+  // const pageSize = 1234
+  /**
+   *  Page token, returned by a previous call.
+   */
+  // const pageToken = 'abc123'
 
   // Imports the Analyticshub library
   const {AnalyticsHubServiceClient} = require('@google-cloud/bigquery-analyticshub').v1;
@@ -40,19 +55,21 @@ function main(name) {
   // Instantiates a client
   const analyticshubClient = new AnalyticsHubServiceClient();
 
-  async function callDeleteDataExchange() {
+  async function callListSharedResourceSubscriptions() {
     // Construct request
     const request = {
-      name,
+      resource,
     };
 
     // Run request
-    const response = await analyticshubClient.deleteDataExchange(request);
-    console.log(response);
+    const iterable = await analyticshubClient.listSharedResourceSubscriptionsAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callDeleteDataExchange();
-  // [END analyticshub_v1_generated_AnalyticsHubService_DeleteDataExchange_async]
+  callListSharedResourceSubscriptions();
+  // [END analyticshub_v1_generated_AnalyticsHubService_ListSharedResourceSubscriptions_async]
 }
 
 process.on('unhandledRejection', err => {

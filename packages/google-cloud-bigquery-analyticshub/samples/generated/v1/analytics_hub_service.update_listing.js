@@ -29,9 +29,9 @@ function main(updateMask, listing) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Field mask specifies the fields to update in the listing resource. The
-   *  fields specified in the `updateMask` are relative to the resource and are
-   *  not a full request.
+   *  Required. Field mask specifies the fields to update in the listing
+   *  resource. The fields specified in the `updateMask` are relative to the
+   *  resource and are not a full request.
    */
   // const updateMask = {}
   /**

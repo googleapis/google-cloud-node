@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START analyticshub_v1_generated_AnalyticsHubService_DeleteDataExchange_async]
+  // [START analyticshub_v1_generated_AnalyticsHubService_RevokeSubscription_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,8 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The full name of the data exchange resource that you want to
-   *  delete. For example, `projects/myproject/locations/US/dataExchanges/123`.
+   *  Required. Resource name of the subscription to revoke.
+   *  e.g. projects/123/locations/US/subscriptions/456
    */
   // const name = 'abc123'
 
@@ -40,19 +40,19 @@ function main(name) {
   // Instantiates a client
   const analyticshubClient = new AnalyticsHubServiceClient();
 
-  async function callDeleteDataExchange() {
+  async function callRevokeSubscription() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const response = await analyticshubClient.deleteDataExchange(request);
+    const response = await analyticshubClient.revokeSubscription(request);
     console.log(response);
   }
 
-  callDeleteDataExchange();
-  // [END analyticshub_v1_generated_AnalyticsHubService_DeleteDataExchange_async]
+  callRevokeSubscription();
+  // [END analyticshub_v1_generated_AnalyticsHubService_RevokeSubscription_async]
 }
 
 process.on('unhandledRejection', err => {

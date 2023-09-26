@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START analyticshub_v1_generated_AnalyticsHubService_DeleteDataExchange_async]
+function main(name, destination, subscription) {
+  // [START analyticshub_v1_generated_AnalyticsHubService_SubscribeDataExchange_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,10 +29,24 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The full name of the data exchange resource that you want to
-   *  delete. For example, `projects/myproject/locations/US/dataExchanges/123`.
+   *  Required. Resource name of the Data Exchange.
+   *  e.g. `projects/publisherproject/locations/US/dataExchanges/123`
    */
   // const name = 'abc123'
+  /**
+   *  Required. The parent resource path of the Subscription.
+   *  e.g. `projects/subscriberproject/locations/US`
+   */
+  // const destination = 'abc123'
+  /**
+   *  Required. Name of the subscription to create.
+   *  e.g. `subscription1`
+   */
+  // const subscription = 'abc123'
+  /**
+   *  Email of the subscriber.
+   */
+  // const subscriberContact = 'abc123'
 
   // Imports the Analyticshub library
   const {AnalyticsHubServiceClient} = require('@google-cloud/bigquery-analyticshub').v1;
@@ -40,19 +54,22 @@ function main(name) {
   // Instantiates a client
   const analyticshubClient = new AnalyticsHubServiceClient();
 
-  async function callDeleteDataExchange() {
+  async function callSubscribeDataExchange() {
     // Construct request
     const request = {
       name,
+      destination,
+      subscription,
     };
 
     // Run request
-    const response = await analyticshubClient.deleteDataExchange(request);
+    const [operation] = await analyticshubClient.subscribeDataExchange(request);
+    const [response] = await operation.promise();
     console.log(response);
   }
 
-  callDeleteDataExchange();
-  // [END analyticshub_v1_generated_AnalyticsHubService_DeleteDataExchange_async]
+  callSubscribeDataExchange();
+  // [END analyticshub_v1_generated_AnalyticsHubService_SubscribeDataExchange_async]
 }
 
 process.on('unhandledRejection', err => {
