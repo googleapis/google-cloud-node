@@ -26,6 +26,10 @@ import * as retry from 'async-retry';
 import {ApiError} from './nodejs-common';
 import {GaxiosResponse, Headers} from 'gaxios';
 import {createHash} from 'crypto';
+import {GCCL_GCS_CMD_KEY} from './nodejs-common/util';
+import {getRuntimeTrackingString} from './util';
+
+const packageJson = require('../../package.json');
 
 /**
  * Default number of concurrently executing promises to use when calling uploadManyFiles.
@@ -64,6 +68,21 @@ const UPLOAD_IN_CHUNKS_DEFAULT_CHUNK_SIZE = 32 * 1024 * 1024;
 const DEFAULT_PARALLEL_CHUNKED_UPLOAD_LIMIT = 2;
 
 const EMPTY_REGEX = '(?:)';
+
+/**
+ * The `gccl-gcs-cmd` value for the `X-Goog-API-Client` header.
+ * Example: `gccl-gcs-cmd/tm.upload_many`
+ *
+ * @see {@link GCCL_GCS_CMD}.
+ * @see {@link GCCL_GCS_CMD_KEY}.
+ */
+const GCCL_GCS_CMD_FEATURE = {
+  UPLOAD_MANY: 'tm.upload_many',
+  DOWNLOAD_MANY: 'tm.download_many',
+  UPLOAD_SHARDED: 'tm.upload_sharded',
+  DOWNLOAD_SHARDED: 'tm.download_sharded',
+};
+
 export interface UploadManyFilesOptions {
   concurrencyLimit?: number;
   skipIfExists?: boolean;
@@ -170,8 +189,9 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     this.uploadId = uploadId || '';
     this.bucket = bucket;
     this.fileName = fileName;
-    // eslint-disable-next-line prettier/prettier
-    this.baseUrl = `https://${bucket.name}.${new URL(this.bucket.storage.apiEndpoint).hostname}/${fileName}`;
+    this.baseUrl = `https://${bucket.name}.${
+      new URL(this.bucket.storage.apiEndpoint).hostname
+    }/${fileName}`;
     this.xmlBuilder = new XMLBuilder({arrayNodeName: 'Part'});
     this.xmlParser = new XMLParser();
     this.partsMap = partsMap || new Map<number, string>();
@@ -183,28 +203,52 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     };
   }
 
+  #setGoogApiClientHeaders(headers: Headers = {}): Headers {
+    let headerFound = false;
+
+    for (const [key, value] of Object.entries(headers)) {
+      if (key.toLocaleLowerCase().trim() === 'x-goog-api-client') {
+        headerFound = true;
+
+        // Prepend command feature to value, if not already there
+        if (!value.includes(GCCL_GCS_CMD_FEATURE.UPLOAD_SHARDED)) {
+          headers[
+            key
+          ] = `${value} gccl-gcs-cmd/${GCCL_GCS_CMD_FEATURE.UPLOAD_SHARDED}`;
+        }
+        break;
+      }
+    }
+
+    // If the header isn't present, add it
+    if (!headerFound) {
+      headers['x-goog-api-client'] = `${getRuntimeTrackingString()} gccl/${
+        packageJson.version
+      } gccl-gcs-cmd/${GCCL_GCS_CMD_FEATURE.UPLOAD_SHARDED}`;
+    }
+
+    return headers;
+  }
+
   /**
    * Initiates a multipart upload (MPU) to the XML API and stores the resultant upload id.
    *
    * @returns {Promise<void>}
    */
-  async initiateUpload(headers: {[key: string]: string} = {}): Promise<void> {
+  async initiateUpload(headers: Headers = {}): Promise<void> {
     const url = `${this.baseUrl}?uploads`;
     return retry(async bail => {
       try {
         const res = await this.authClient.request({
+          headers: this.#setGoogApiClientHeaders(headers),
           method: 'POST',
           url,
-          headers,
         });
+
         if (res.data && res.data.error) {
           throw res.data.error;
         }
-        const parsedXML = this.xmlParser.parse<{
-          InitiateMultipartUploadResult: {
-            UploadId: string;
-          };
-        }>(res.data);
+        const parsedXML = this.xmlParser.parse(res.data);
         this.uploadId = parsedXML.InitiateMultipartUploadResult.UploadId;
       } catch (e) {
         this.#handleErrorResponse(e as Error, bail);
@@ -227,7 +271,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     validation?: 'md5' | false
   ): Promise<void> {
     const url = `${this.baseUrl}?partNumber=${partNumber}&uploadId=${this.uploadId}`;
-    let headers: Headers = {};
+    let headers: Headers = this.#setGoogApiClientHeaders();
 
     if (validation === 'md5') {
       const hash = createHash('md5').update(chunk).digest('base64');
@@ -274,6 +318,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     return retry(async bail => {
       try {
         const res = await this.authClient.request({
+          headers: this.#setGoogApiClientHeaders(),
           url,
           method: 'POST',
           body,
@@ -426,6 +471,7 @@ export class TransferManager {
 
       const passThroughOptionsCopy: UploadOptions = {
         ...options.passthroughOptions,
+        [GCCL_GCS_CMD_KEY]: GCCL_GCS_CMD_FEATURE.UPLOAD_MANY,
       };
 
       passThroughOptionsCopy.destination = filePath;
@@ -435,6 +481,7 @@ export class TransferManager {
           passThroughOptionsCopy.destination
         );
       }
+
       promises.push(
         limit(() =>
           this.bucket.upload(filePath, passThroughOptionsCopy as UploadOptions)
@@ -519,6 +566,7 @@ export class TransferManager {
     for (const file of files) {
       const passThroughOptionsCopy = {
         ...options.passthroughOptions,
+        [GCCL_GCS_CMD_KEY]: GCCL_GCS_CMD_FEATURE.DOWNLOAD_MANY,
       };
 
       if (options.prefix) {
@@ -531,6 +579,7 @@ export class TransferManager {
       if (options.stripPrefix) {
         passThroughOptionsCopy.destination = file.name.replace(regex, '');
       }
+
       promises.push(limit(() => file.download(passThroughOptionsCopy)));
     }
 
@@ -601,9 +650,15 @@ export class TransferManager {
       chunkEnd = chunkEnd > size ? size : chunkEnd;
       promises.push(
         limit(() =>
-          file.download({start: chunkStart, end: chunkEnd}).then(resp => {
-            return fileToWrite.write(resp[0], 0, resp[0].length, chunkStart);
-          })
+          file
+            .download({
+              start: chunkStart,
+              end: chunkEnd,
+              [GCCL_GCS_CMD_KEY]: GCCL_GCS_CMD_FEATURE.DOWNLOAD_SHARDED,
+            })
+            .then(resp => {
+              return fileToWrite.write(resp[0], 0, resp[0].length, chunkStart);
+            })
         )
       );
 

@@ -35,6 +35,7 @@ import {
   PROTOCOL_REGEX,
 } from '../src/resumable-upload';
 import {GaxiosOptions, GaxiosError, GaxiosResponse} from 'gaxios';
+import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util';
 
 nock.disableNetConnect();
 
@@ -51,7 +52,7 @@ const RESUMABLE_INCOMPLETE_STATUS_CODE = 308;
 const CHUNK_SIZE_MULTIPLE = 2 ** 18;
 const queryPath = '/?userProject=user-project-id';
 const X_GOOG_API_HEADER_REGEX =
-  /^gl-node\/(?<nodeVersion>[^W]+) gccl\/(?<gccl>[^W]+) gccl-invocation-id\/(?<gcclInvocationId>[^W]+)$/;
+  /^gl-node\/(?<nodeVersion>[^W]+) gccl\/(?<gccl>[^W]+) gccl-invocation-id\/(?<gcclInvocationId>[^W]+) gccl-gcs-cmd\/(?<gcclGcsCmd>[^W]+)$/;
 
 function mockAuthorizeRequest(
   code = 200,
@@ -113,6 +114,7 @@ describe('resumable-upload', () => {
       authConfig: {keyFile},
       apiEndpoint: API_ENDPOINT,
       retryOptions: {...RETRY_OPTIONS},
+      [GCCL_GCS_CMD_KEY]: 'sample.command',
     });
   });
 
@@ -1494,7 +1496,7 @@ describe('resumable-upload', () => {
   describe('#makeRequest', () => {
     it('should set encryption headers', async () => {
       const key = crypto.randomBytes(32);
-      const up = upload({
+      up = upload({
         bucket: 'BUCKET',
         file: FILE,
         key,

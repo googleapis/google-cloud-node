@@ -27,6 +27,7 @@ import retry = require('async-retry');
 import {RetryOptions, PreconditionOptions} from './storage';
 import * as uuid from 'uuid';
 import {getRuntimeTrackingString} from './util';
+import {GCCL_GCS_CMD_KEY} from './nodejs-common/util';
 
 const NOT_FOUND_STATUS_CODE = 404;
 const RESUMABLE_INCOMPLETE_STATUS_CODE = 308;
@@ -193,6 +194,8 @@ export interface UploadConfig extends Pick<WritableOptions, 'highWaterMark'> {
    * Configuration options for retrying retryable errors.
    */
   retryOptions: RetryOptions;
+
+  [GCCL_GCS_CMD_KEY]?: string;
 }
 
 export interface ConfigMetadata {
@@ -274,6 +277,7 @@ export class Upload extends Writable {
   private localWriteCache: Buffer[] = [];
   private localWriteCacheByteLength = 0;
   private upstreamEnded = false;
+  #gcclGcsCmd?: string;
 
   constructor(cfg: UploadConfig) {
     super(cfg);
@@ -346,6 +350,8 @@ export class Upload extends Writable {
       ? Number(cfg.metadata.contentLength)
       : NaN;
     this.contentLength = isNaN(contentLength) ? '*' : contentLength;
+
+    this.#gcclGcsCmd = cfg[GCCL_GCS_CMD_KEY];
 
     this.once('writing', () => {
       if (this.uri) {
@@ -585,6 +591,14 @@ export class Upload extends Writable {
       delete metadata.contentType;
     }
 
+    let googAPIClient = `${getRuntimeTrackingString()} gccl/${
+      packageJson.version
+    } gccl-invocation-id/${this.currentInvocationId.uri}`;
+
+    if (this.#gcclGcsCmd) {
+      googAPIClient += ` gccl-gcs-cmd/${this.#gcclGcsCmd}`;
+    }
+
     // Check if headers already exist before creating new ones
     const reqOpts: GaxiosOptions = {
       method: 'POST',
@@ -598,9 +612,7 @@ export class Upload extends Writable {
       ),
       data: metadata,
       headers: {
-        'x-goog-api-client': `${getRuntimeTrackingString()} gccl/${
-          packageJson.version
-        } gccl-invocation-id/${this.currentInvocationId.uri}`,
+        'x-goog-api-client': googAPIClient,
         ...headers,
       },
     };
@@ -766,10 +778,16 @@ export class Upload extends Writable {
       },
     });
 
+    let googAPIClient = `${getRuntimeTrackingString()} gccl/${
+      packageJson.version
+    } gccl-invocation-id/${this.currentInvocationId.chunk}`;
+
+    if (this.#gcclGcsCmd) {
+      googAPIClient += ` gccl-gcs-cmd/${this.#gcclGcsCmd}`;
+    }
+
     const headers: GaxiosOptions['headers'] = {
-      'x-goog-api-client': `${getRuntimeTrackingString()} gccl/${
-        packageJson.version
-      } gccl-invocation-id/${this.currentInvocationId.chunk}`,
+      'x-goog-api-client': googAPIClient,
     };
 
     // If using multiple chunk upload, set appropriate header
@@ -904,15 +922,21 @@ export class Upload extends Writable {
   }
 
   private async getAndSetOffset() {
+    let googAPIClient = `${getRuntimeTrackingString()} gccl/${
+      packageJson.version
+    } gccl-invocation-id/${this.currentInvocationId.offset}`;
+
+    if (this.#gcclGcsCmd) {
+      googAPIClient += ` gccl-gcs-cmd/${this.#gcclGcsCmd}`;
+    }
+
     const opts: GaxiosOptions = {
       method: 'PUT',
       url: this.uri!,
       headers: {
         'Content-Length': 0,
         'Content-Range': 'bytes */*',
-        'x-goog-api-client': `${getRuntimeTrackingString()} gccl/${
-          packageJson.version
-        } gccl-invocation-id/${this.currentInvocationId.offset}`,
+        'x-goog-api-client': googAPIClient,
       },
     };
     try {

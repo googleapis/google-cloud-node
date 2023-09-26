@@ -40,6 +40,7 @@ import {
   DecorateRequestOptions,
   Duplexify,
   DuplexifyConstructor,
+  GCCL_GCS_CMD_KEY,
   GoogleErrorBody,
   GoogleInnerError,
   MakeAuthenticatedRequestFactoryConfig,
@@ -546,6 +547,7 @@ describe('common/util', () => {
         qs: {
           uploadType: 'media',
         },
+        [GCCL_GCS_CMD_KEY]: 'some.value',
       } as DecorateRequestOptions;
 
       util.makeWritableStream(dup, {
@@ -556,6 +558,7 @@ describe('common/util', () => {
           assert.strictEqual(request.method, req.method);
           assert.deepStrictEqual(request.qs, req.qs);
           assert.strictEqual(request.uri, req.uri);
+          assert.strictEqual(request[GCCL_GCS_CMD_KEY], req[GCCL_GCS_CMD_KEY]);
 
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const mp = request.multipart as any[];

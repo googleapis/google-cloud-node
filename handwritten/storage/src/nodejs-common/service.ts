@@ -21,6 +21,7 @@ import {Interceptor} from './service-object';
 import {
   BodyResponseCallback,
   DecorateRequestOptions,
+  GCCL_GCS_CMD_KEY,
   MakeAuthenticatedRequest,
   PackageJson,
   util,
@@ -252,6 +253,12 @@ export class Service {
         pkg.version
       } gccl-invocation-id/${uuid.v4()}`,
     };
+
+    if (reqOpts[GCCL_GCS_CMD_KEY]) {
+      reqOpts.headers[
+        'x-goog-api-client'
+      ] += ` gccl-gcs-cmd/${reqOpts[GCCL_GCS_CMD_KEY]}`;
+    }
 
     if (reqOpts.shouldReturnStream) {
       return this.makeAuthenticatedRequest(reqOpts) as {} as r.Request;

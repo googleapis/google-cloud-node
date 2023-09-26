@@ -59,6 +59,7 @@ import {
   BaseMetadata,
   SetMetadataOptions,
 } from '../src/nodejs-common/service-object';
+import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util';
 
 class HTTPError extends Error {
   code: number;
@@ -1035,6 +1036,24 @@ describe('File', () => {
       };
 
       file.createReadStream(options).resume();
+    });
+
+    it('should pass the `GCCL_GCS_CMD_KEY` to `requestStream`', done => {
+      const expected = 'expected/value';
+
+      file.requestStream = (opts: DecorateRequestOptions) => {
+        assert.equal(opts[GCCL_GCS_CMD_KEY], expected);
+
+        process.nextTick(() => done());
+
+        return duplexify();
+      };
+
+      file
+        .createReadStream({
+          [GCCL_GCS_CMD_KEY]: expected,
+        })
+        .resume();
     });
 
     describe('authenticating', () => {
@@ -4932,6 +4951,7 @@ describe('File', () => {
       makeWritableStreamOverride = (stream: {}, options_: any) => {
         assert.deepStrictEqual(options_.metadata, options.metadata);
         assert.deepStrictEqual(options_.request, {
+          [GCCL_GCS_CMD_KEY]: undefined,
           qs: {
             name: file.name,
             predefinedAcl: options.predefinedAcl,

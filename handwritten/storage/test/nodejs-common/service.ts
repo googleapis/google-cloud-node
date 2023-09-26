@@ -29,6 +29,7 @@ import {
 import {
   BodyResponseCallback,
   DecorateRequestOptions,
+  GCCL_GCS_CMD_KEY,
   MakeAuthenticatedRequest,
   MakeAuthenticatedRequestFactoryConfig,
   util,
@@ -524,6 +525,23 @@ describe('Service', () => {
       };
 
       service.request_(reqOpts, assert.ifError);
+    });
+
+    it('should add the `gccl-gcs-cmd` to the api-client header when provided', done => {
+      const expected = 'example.expected/value';
+      service.makeAuthenticatedRequest = (reqOpts: DecorateRequestOptions) => {
+        const pkg = service.packageJson;
+        const r = new RegExp(
+          `^gl-node/${process.versions.node} gccl/${pkg.version} gccl-invocation-id/(?<gcclInvocationId>[^W]+) gccl-gcs-cmd/${expected}$`
+        );
+        assert.ok(r.test(reqOpts.headers!['x-goog-api-client']));
+        done();
+      };
+
+      service.request_(
+        {...reqOpts, [GCCL_GCS_CMD_KEY]: expected},
+        assert.ifError
+      );
     });
 
     describe('projectIdRequired', () => {

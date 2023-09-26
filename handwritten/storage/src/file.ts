@@ -61,6 +61,7 @@ import {
   ApiError,
   Duplexify,
   DuplexifyConstructor,
+  GCCL_GCS_CMD_KEY,
 } from './nodejs-common/util';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const duplexify: DuplexifyConstructor = require('duplexify');
@@ -221,6 +222,7 @@ type PublicResumableUploadOptions =
 export interface CreateResumableUploadOptions
   extends Pick<resumableUpload.UploadConfig, PublicResumableUploadOptions> {
   preconditionOpts?: PreconditionOptions;
+  [GCCL_GCS_CMD_KEY]?: resumableUpload.UploadConfig[typeof GCCL_GCS_CMD_KEY];
 }
 
 export type CreateResumableUploadResponse = [string];
@@ -371,6 +373,7 @@ export interface CreateReadStreamOptions {
   start?: number;
   end?: number;
   decompress?: boolean;
+  [GCCL_GCS_CMD_KEY]?: string;
 }
 
 export interface SaveOptions extends CreateWriteStreamOptions {
@@ -1580,11 +1583,15 @@ class File extends ServiceObject<File, FileMetadata> {
         headers.Range = `bytes=${tailRequest ? end : `${start}-${end}`}`;
       }
 
-      const reqOpts = {
+      const reqOpts: DecorateRequestOptions = {
         uri: '',
         headers,
         qs: query,
       };
+
+      if (options[GCCL_GCS_CMD_KEY]) {
+        reqOpts[GCCL_GCS_CMD_KEY] = options[GCCL_GCS_CMD_KEY];
+      }
 
       this.requestStream(reqOpts)
         .on('error', err => {
@@ -1738,6 +1745,7 @@ class File extends ServiceObject<File, FileMetadata> {
         userProject: options.userProject || this.userProject,
         retryOptions: retryOptions,
         params: options?.preconditionOpts || this.instancePreconditionOpts,
+        [GCCL_GCS_CMD_KEY]: options[GCCL_GCS_CMD_KEY],
       },
       callback!
     );
@@ -3907,6 +3915,7 @@ class File extends ServiceObject<File, FileMetadata> {
       params: options?.preconditionOpts || this.instancePreconditionOpts,
       chunkSize: options?.chunkSize,
       highWaterMark: options?.highWaterMark,
+      [GCCL_GCS_CMD_KEY]: options[GCCL_GCS_CMD_KEY],
     });
 
     uploadStream
@@ -3951,6 +3960,7 @@ class File extends ServiceObject<File, FileMetadata> {
         name: this.name,
       },
       uri: uri,
+      [GCCL_GCS_CMD_KEY]: options[GCCL_GCS_CMD_KEY],
     };
 
     if (this.generation !== undefined) {
