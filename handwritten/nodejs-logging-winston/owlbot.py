@@ -28,7 +28,7 @@ s.copy(templates, excludes=[
     ".github/CODEOWNERS",
     ".github/sync-repo-settings.yaml"
 ]) 
-node.fix_hermetic()
+node.fix()
 
 
 # --------------------------------------------------------------------------
