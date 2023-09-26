@@ -29,7 +29,8 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the parent resource whose repositories will be listed.
+   *  Required. The name of the parent resource whose repositories will be
+   *  listed.
    */
   // const parent = 'abc123'
   /**
