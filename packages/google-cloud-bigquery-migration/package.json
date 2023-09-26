@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/bigquery-migration",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "bigquery-migration client for Node.js",
   "repository": "googleapis/nodejs-bigquery-migration",
   "license": "Apache-2.0",

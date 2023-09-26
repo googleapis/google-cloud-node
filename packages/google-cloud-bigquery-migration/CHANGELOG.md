@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/googleapis/nodejs-bigquery-migration/compare/v1.0.0...v1.0.1) (2023-09-26)
+
+
+### Bug Fixes
+
+* Simplify logic for HTTP/1.1 REST fallback option ([#55](https://github.com/googleapis/nodejs-bigquery-migration/issues/55)) ([12fa279](https://github.com/googleapis/nodejs-bigquery-migration/commit/12fa27927a53668cc3dff1ff717ecce54301491c))
+
 ## [1.0.0](https://github.com/googleapis/nodejs-bigquery-migration/compare/v0.2.1...v1.0.0) (2023-08-10)
 
 
