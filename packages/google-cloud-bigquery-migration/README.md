@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [BigQuery Migration API: Node.js Client](https://github.com/googleapis/nodejs-bigquery-migration)
+# [BigQuery Migration API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-bigquery-migration)
 
 [![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/bigquery-migration.svg)](https://www.npmjs.org/package/@google-cloud/bigquery-migration)
@@ -14,11 +14,11 @@ bigquery-migration client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-bigquery-migration/blob/main/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-bigquery-migration/CHANGELOG.md).
 
 * [BigQuery Migration API Node.js Client API Reference][client-docs]
 * [BigQuery Migration API Documentation][product-docs]
-* [github.com/googleapis/nodejs-bigquery-migration](https://github.com/googleapis/nodejs-bigquery-migration)
+* [github.com/googleapis/google-cloud-node/packages/google-cloud-bigquery-migration](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-bigquery-migration)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -32,7 +32,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
 
-
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -54,6 +54,30 @@ npm install @google-cloud/bigquery-migration
 ```
 
 
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-bigquery-migration/samples) directory. Each sample's `README.md` has instructions for running its sample.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Migration_service.create_migration_workflow | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.create_migration_workflow.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.create_migration_workflow.js,packages/google-cloud-bigquery-migration/samples/README.md) |
+| Migration_service.delete_migration_workflow | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.delete_migration_workflow.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.delete_migration_workflow.js,packages/google-cloud-bigquery-migration/samples/README.md) |
+| Migration_service.get_migration_subtask | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.get_migration_subtask.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.get_migration_subtask.js,packages/google-cloud-bigquery-migration/samples/README.md) |
+| Migration_service.get_migration_workflow | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.get_migration_workflow.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.get_migration_workflow.js,packages/google-cloud-bigquery-migration/samples/README.md) |
+| Migration_service.list_migration_subtasks | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.list_migration_subtasks.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.list_migration_subtasks.js,packages/google-cloud-bigquery-migration/samples/README.md) |
+| Migration_service.list_migration_workflows | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.list_migration_workflows.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.list_migration_workflows.js,packages/google-cloud-bigquery-migration/samples/README.md) |
+| Migration_service.start_migration_workflow | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.start_migration_workflow.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/generated/v2/migration_service.start_migration_workflow.js,packages/google-cloud-bigquery-migration/samples/README.md) |
+| Migration_service.create_migration_workflow | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.create_migration_workflow.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.create_migration_workflow.js,packages/google-cloud-bigquery-migration/samples/README.md) |
+| Migration_service.delete_migration_workflow | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.delete_migration_workflow.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.delete_migration_workflow.js,packages/google-cloud-bigquery-migration/samples/README.md) |
+| Migration_service.get_migration_subtask | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.get_migration_subtask.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.get_migration_subtask.js,packages/google-cloud-bigquery-migration/samples/README.md) |
+| Migration_service.get_migration_workflow | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.get_migration_workflow.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.get_migration_workflow.js,packages/google-cloud-bigquery-migration/samples/README.md) |
+| Migration_service.list_migration_subtasks | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.list_migration_subtasks.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.list_migration_subtasks.js,packages/google-cloud-bigquery-migration/samples/README.md) |
+| Migration_service.list_migration_workflows | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.list_migration_workflows.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.list_migration_workflows.js,packages/google-cloud-bigquery-migration/samples/README.md) |
+| Migration_service.start_migration_workflow | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.start_migration_workflow.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/generated/v2alpha/migration_service.start_migration_workflow.js,packages/google-cloud-bigquery-migration/samples/README.md) |
+| Sql_translation_service.translate_query | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/generated/v2alpha/sql_translation_service.translate_query.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/generated/v2alpha/sql_translation_service.translate_query.js,packages/google-cloud-bigquery-migration/samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-migration/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-migration/samples/quickstart.js,packages/google-cloud-bigquery-migration/samples/README.md) |
 
 
 
@@ -103,7 +127,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-bigquery-migration/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -115,7 +139,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-bigquery-migration/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/bigquery-migration/latest
 [product-docs]: https://cloud.google.com/bigquery/docs/migration-intro
