@@ -1,0 +1,283 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.certificatemanager.v1",
+  "libraryPackage": "@google-cloud/certificate-manager",
+  "services": {
+    "CertificateManager": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CertificateManagerClient",
+          "rpcs": {
+            "GetCertificate": {
+              "methods": [
+                "getCertificate"
+              ]
+            },
+            "GetCertificateMap": {
+              "methods": [
+                "getCertificateMap"
+              ]
+            },
+            "GetCertificateMapEntry": {
+              "methods": [
+                "getCertificateMapEntry"
+              ]
+            },
+            "GetDnsAuthorization": {
+              "methods": [
+                "getDnsAuthorization"
+              ]
+            },
+            "GetCertificateIssuanceConfig": {
+              "methods": [
+                "getCertificateIssuanceConfig"
+              ]
+            },
+            "CreateCertificate": {
+              "methods": [
+                "createCertificate"
+              ]
+            },
+            "UpdateCertificate": {
+              "methods": [
+                "updateCertificate"
+              ]
+            },
+            "DeleteCertificate": {
+              "methods": [
+                "deleteCertificate"
+              ]
+            },
+            "CreateCertificateMap": {
+              "methods": [
+                "createCertificateMap"
+              ]
+            },
+            "UpdateCertificateMap": {
+              "methods": [
+                "updateCertificateMap"
+              ]
+            },
+            "DeleteCertificateMap": {
+              "methods": [
+                "deleteCertificateMap"
+              ]
+            },
+            "CreateCertificateMapEntry": {
+              "methods": [
+                "createCertificateMapEntry"
+              ]
+            },
+            "UpdateCertificateMapEntry": {
+              "methods": [
+                "updateCertificateMapEntry"
+              ]
+            },
+            "DeleteCertificateMapEntry": {
+              "methods": [
+                "deleteCertificateMapEntry"
+              ]
+            },
+            "CreateDnsAuthorization": {
+              "methods": [
+                "createDnsAuthorization"
+              ]
+            },
+            "UpdateDnsAuthorization": {
+              "methods": [
+                "updateDnsAuthorization"
+              ]
+            },
+            "DeleteDnsAuthorization": {
+              "methods": [
+                "deleteDnsAuthorization"
+              ]
+            },
+            "CreateCertificateIssuanceConfig": {
+              "methods": [
+                "createCertificateIssuanceConfig"
+              ]
+            },
+            "DeleteCertificateIssuanceConfig": {
+              "methods": [
+                "deleteCertificateIssuanceConfig"
+              ]
+            },
+            "ListCertificates": {
+              "methods": [
+                "listCertificates",
+                "listCertificatesStream",
+                "listCertificatesAsync"
+              ]
+            },
+            "ListCertificateMaps": {
+              "methods": [
+                "listCertificateMaps",
+                "listCertificateMapsStream",
+                "listCertificateMapsAsync"
+              ]
+            },
+            "ListCertificateMapEntries": {
+              "methods": [
+                "listCertificateMapEntries",
+                "listCertificateMapEntriesStream",
+                "listCertificateMapEntriesAsync"
+              ]
+            },
+            "ListDnsAuthorizations": {
+              "methods": [
+                "listDnsAuthorizations",
+                "listDnsAuthorizationsStream",
+                "listDnsAuthorizationsAsync"
+              ]
+            },
+            "ListCertificateIssuanceConfigs": {
+              "methods": [
+                "listCertificateIssuanceConfigs",
+                "listCertificateIssuanceConfigsStream",
+                "listCertificateIssuanceConfigsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CertificateManagerClient",
+          "rpcs": {
+            "GetCertificate": {
+              "methods": [
+                "getCertificate"
+              ]
+            },
+            "GetCertificateMap": {
+              "methods": [
+                "getCertificateMap"
+              ]
+            },
+            "GetCertificateMapEntry": {
+              "methods": [
+                "getCertificateMapEntry"
+              ]
+            },
+            "GetDnsAuthorization": {
+              "methods": [
+                "getDnsAuthorization"
+              ]
+            },
+            "GetCertificateIssuanceConfig": {
+              "methods": [
+                "getCertificateIssuanceConfig"
+              ]
+            },
+            "CreateCertificate": {
+              "methods": [
+                "createCertificate"
+              ]
+            },
+            "UpdateCertificate": {
+              "methods": [
+                "updateCertificate"
+              ]
+            },
+            "DeleteCertificate": {
+              "methods": [
+                "deleteCertificate"
+              ]
+            },
+            "CreateCertificateMap": {
+              "methods": [
+                "createCertificateMap"
+              ]
+            },
+            "UpdateCertificateMap": {
+              "methods": [
+                "updateCertificateMap"
+              ]
+            },
+            "DeleteCertificateMap": {
+              "methods": [
+                "deleteCertificateMap"
+              ]
+            },
+            "CreateCertificateMapEntry": {
+              "methods": [
+                "createCertificateMapEntry"
+              ]
+            },
+            "UpdateCertificateMapEntry": {
+              "methods": [
+                "updateCertificateMapEntry"
+              ]
+            },
+            "DeleteCertificateMapEntry": {
+              "methods": [
+                "deleteCertificateMapEntry"
+              ]
+            },
+            "CreateDnsAuthorization": {
+              "methods": [
+                "createDnsAuthorization"
+              ]
+            },
+            "UpdateDnsAuthorization": {
+              "methods": [
+                "updateDnsAuthorization"
+              ]
+            },
+            "DeleteDnsAuthorization": {
+              "methods": [
+                "deleteDnsAuthorization"
+              ]
+            },
+            "CreateCertificateIssuanceConfig": {
+              "methods": [
+                "createCertificateIssuanceConfig"
+              ]
+            },
+            "DeleteCertificateIssuanceConfig": {
+              "methods": [
+                "deleteCertificateIssuanceConfig"
+              ]
+            },
+            "ListCertificates": {
+              "methods": [
+                "listCertificates",
+                "listCertificatesStream",
+                "listCertificatesAsync"
+              ]
+            },
+            "ListCertificateMaps": {
+              "methods": [
+                "listCertificateMaps",
+                "listCertificateMapsStream",
+                "listCertificateMapsAsync"
+              ]
+            },
+            "ListCertificateMapEntries": {
+              "methods": [
+                "listCertificateMapEntries",
+                "listCertificateMapEntriesStream",
+                "listCertificateMapEntriesAsync"
+              ]
+            },
+            "ListDnsAuthorizations": {
+              "methods": [
+                "listDnsAuthorizations",
+                "listDnsAuthorizationsStream",
+                "listDnsAuthorizationsAsync"
+              ]
+            },
+            "ListCertificateIssuanceConfigs": {
+              "methods": [
+                "listCertificateIssuanceConfigs",
+                "listCertificateIssuanceConfigsStream",
+                "listCertificateIssuanceConfigsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
