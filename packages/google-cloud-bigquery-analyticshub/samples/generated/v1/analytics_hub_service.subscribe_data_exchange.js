@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, repositoryId, repository) {
-  // [START artifactregistry_v1_generated_ArtifactRegistry_CreateRepository_async]
+function main(name, destination, subscription) {
+  // [START analyticshub_v1_generated_AnalyticsHubService_SubscribeDataExchange_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,41 +29,47 @@ function main(parent, repositoryId, repository) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the parent resource where the repository will be
-   *  created.
+   *  Required. Resource name of the Data Exchange.
+   *  e.g. `projects/publisherproject/locations/US/dataExchanges/123`
    */
-  // const parent = 'abc123'
+  // const name = 'abc123'
   /**
-   *  The repository id to use for this repository.
+   *  Required. The parent resource path of the Subscription.
+   *  e.g. `projects/subscriberproject/locations/US`
    */
-  // const repositoryId = 'abc123'
+  // const destination = 'abc123'
   /**
-   *  The repository to be created.
+   *  Required. Name of the subscription to create.
+   *  e.g. `subscription1`
    */
-  // const repository = {}
+  // const subscription = 'abc123'
+  /**
+   *  Email of the subscriber.
+   */
+  // const subscriberContact = 'abc123'
 
-  // Imports the Artifactregistry library
-  const {ArtifactRegistryClient} = require('@google-cloud/artifact-registry').v1;
+  // Imports the Analyticshub library
+  const {AnalyticsHubServiceClient} = require('@google-cloud/bigquery-analyticshub').v1;
 
   // Instantiates a client
-  const artifactregistryClient = new ArtifactRegistryClient();
+  const analyticshubClient = new AnalyticsHubServiceClient();
 
-  async function callCreateRepository() {
+  async function callSubscribeDataExchange() {
     // Construct request
     const request = {
-      parent,
-      repositoryId,
-      repository,
+      name,
+      destination,
+      subscription,
     };
 
     // Run request
-    const [operation] = await artifactregistryClient.createRepository(request);
+    const [operation] = await analyticshubClient.subscribeDataExchange(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callCreateRepository();
-  // [END artifactregistry_v1_generated_ArtifactRegistry_CreateRepository_async]
+  callSubscribeDataExchange();
+  // [END analyticshub_v1_generated_AnalyticsHubService_SubscribeDataExchange_async]
 }
 
 process.on('unhandledRejection', err => {

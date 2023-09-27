@@ -23,6 +23,8 @@ import type {
   CallOptions,
   Descriptors,
   ClientOptions,
+  GrpcClientOptions,
+  LROperation,
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
@@ -65,6 +67,7 @@ export class AnalyticsHubServiceClient {
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
+  operationsClient: gax.OperationsClient;
   analyticsHubServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -188,6 +191,12 @@ export class AnalyticsHubServiceClient {
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
+      subscriptionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/subscriptions/{subscription}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -208,6 +217,70 @@ export class AnalyticsHubServiceClient {
         'pageToken',
         'nextPageToken',
         'listings'
+      ),
+      listSubscriptions: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'subscriptions'
+      ),
+      listSharedResourceSubscriptions: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'sharedResourceSubscriptions'
+      ),
+    };
+
+    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    // This API contains "long-running operations", which return a
+    // an Operation object that allows for tracking of the operation,
+    // rather than holding a request open.
+    const lroOptions: GrpcClientOptions = {
+      auth: this.auth,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+    };
+    if (opts.fallback) {
+      lroOptions.protoJson = protoFilesRoot;
+      lroOptions.httpRules = [];
+    }
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
+    const subscribeDataExchangeResponse = protoFilesRoot.lookup(
+      '.google.cloud.bigquery.analyticshub.v1.SubscribeDataExchangeResponse'
+    ) as gax.protobuf.Type;
+    const subscribeDataExchangeMetadata = protoFilesRoot.lookup(
+      '.google.cloud.bigquery.analyticshub.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const refreshSubscriptionResponse = protoFilesRoot.lookup(
+      '.google.cloud.bigquery.analyticshub.v1.RefreshSubscriptionResponse'
+    ) as gax.protobuf.Type;
+    const refreshSubscriptionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.bigquery.analyticshub.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteSubscriptionResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteSubscriptionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.bigquery.analyticshub.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+
+    this.descriptors.longrunning = {
+      subscribeDataExchange: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        subscribeDataExchangeResponse.decode.bind(
+          subscribeDataExchangeResponse
+        ),
+        subscribeDataExchangeMetadata.decode.bind(subscribeDataExchangeMetadata)
+      ),
+      refreshSubscription: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        refreshSubscriptionResponse.decode.bind(refreshSubscriptionResponse),
+        refreshSubscriptionMetadata.decode.bind(refreshSubscriptionMetadata)
+      ),
+      deleteSubscription: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteSubscriptionResponse.decode.bind(deleteSubscriptionResponse),
+        deleteSubscriptionMetadata.decode.bind(deleteSubscriptionMetadata)
       ),
     };
 
@@ -274,6 +347,13 @@ export class AnalyticsHubServiceClient {
       'updateListing',
       'deleteListing',
       'subscribeListing',
+      'subscribeDataExchange',
+      'refreshSubscription',
+      'getSubscription',
+      'listSubscriptions',
+      'listSharedResourceSubscriptions',
+      'revokeSubscription',
+      'deleteSubscription',
       'getIamPolicy',
       'setIamPolicy',
       'testIamPermissions',
@@ -293,7 +373,10 @@ export class AnalyticsHubServiceClient {
         }
       );
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        this.descriptors.longrunning[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -671,8 +754,8 @@ export class AnalyticsHubServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The full name of the data exchange resource that you want to delete.
-   *   For example, `projects/myproject/locations/US/dataExchanges/123`.
+   *   Required. The full name of the data exchange resource that you want to
+   *   delete. For example, `projects/myproject/locations/US/dataExchanges/123`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -970,9 +1053,9 @@ export class AnalyticsHubServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask specifies the fields to update in the listing resource. The
-   *   fields specified in the `updateMask` are relative to the resource and are
-   *   not a full request.
+   *   Required. Field mask specifies the fields to update in the listing
+   *   resource. The fields specified in the `updateMask` are relative to the
+   *   resource and are not a full request.
    * @param {google.cloud.bigquery.analyticshub.v1.Listing} request.listing
    *   Required. The listing to update.
    * @param {object} [options]
@@ -1266,6 +1349,200 @@ export class AnalyticsHubServiceClient {
     return this.innerApiCalls.subscribeListing(request, options, callback);
   }
   /**
+   * Gets the details of a Subscription.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the subscription.
+   *   e.g. projects/123/locations/US/subscriptions/456
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.analyticshub.v1.Subscription|Subscription}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/analytics_hub_service.get_subscription.js</caption>
+   * region_tag:analyticshub_v1_generated_AnalyticsHubService_GetSubscription_async
+   */
+  getSubscription(
+    request?: protos.google.cloud.bigquery.analyticshub.v1.IGetSubscriptionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.bigquery.analyticshub.v1.ISubscription,
+      (
+        | protos.google.cloud.bigquery.analyticshub.v1.IGetSubscriptionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getSubscription(
+    request: protos.google.cloud.bigquery.analyticshub.v1.IGetSubscriptionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.bigquery.analyticshub.v1.ISubscription,
+      | protos.google.cloud.bigquery.analyticshub.v1.IGetSubscriptionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getSubscription(
+    request: protos.google.cloud.bigquery.analyticshub.v1.IGetSubscriptionRequest,
+    callback: Callback<
+      protos.google.cloud.bigquery.analyticshub.v1.ISubscription,
+      | protos.google.cloud.bigquery.analyticshub.v1.IGetSubscriptionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getSubscription(
+    request?: protos.google.cloud.bigquery.analyticshub.v1.IGetSubscriptionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.bigquery.analyticshub.v1.ISubscription,
+          | protos.google.cloud.bigquery.analyticshub.v1.IGetSubscriptionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.bigquery.analyticshub.v1.ISubscription,
+      | protos.google.cloud.bigquery.analyticshub.v1.IGetSubscriptionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.bigquery.analyticshub.v1.ISubscription,
+      (
+        | protos.google.cloud.bigquery.analyticshub.v1.IGetSubscriptionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getSubscription(request, options, callback);
+  }
+  /**
+   * Revokes a given subscription.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the subscription to revoke.
+   *   e.g. projects/123/locations/US/subscriptions/456
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.analyticshub.v1.RevokeSubscriptionResponse|RevokeSubscriptionResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/analytics_hub_service.revoke_subscription.js</caption>
+   * region_tag:analyticshub_v1_generated_AnalyticsHubService_RevokeSubscription_async
+   */
+  revokeSubscription(
+    request?: protos.google.cloud.bigquery.analyticshub.v1.IRevokeSubscriptionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.bigquery.analyticshub.v1.IRevokeSubscriptionResponse,
+      (
+        | protos.google.cloud.bigquery.analyticshub.v1.IRevokeSubscriptionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  revokeSubscription(
+    request: protos.google.cloud.bigquery.analyticshub.v1.IRevokeSubscriptionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.bigquery.analyticshub.v1.IRevokeSubscriptionResponse,
+      | protos.google.cloud.bigquery.analyticshub.v1.IRevokeSubscriptionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  revokeSubscription(
+    request: protos.google.cloud.bigquery.analyticshub.v1.IRevokeSubscriptionRequest,
+    callback: Callback<
+      protos.google.cloud.bigquery.analyticshub.v1.IRevokeSubscriptionResponse,
+      | protos.google.cloud.bigquery.analyticshub.v1.IRevokeSubscriptionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  revokeSubscription(
+    request?: protos.google.cloud.bigquery.analyticshub.v1.IRevokeSubscriptionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.bigquery.analyticshub.v1.IRevokeSubscriptionResponse,
+          | protos.google.cloud.bigquery.analyticshub.v1.IRevokeSubscriptionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.bigquery.analyticshub.v1.IRevokeSubscriptionResponse,
+      | protos.google.cloud.bigquery.analyticshub.v1.IRevokeSubscriptionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.bigquery.analyticshub.v1.IRevokeSubscriptionResponse,
+      (
+        | protos.google.cloud.bigquery.analyticshub.v1.IRevokeSubscriptionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.revokeSubscription(request, options, callback);
+  }
+  /**
    * Gets the IAM policy.
    *
    * @param {Object} request
@@ -1535,6 +1812,428 @@ export class AnalyticsHubServiceClient {
   }
 
   /**
+   * Creates a Subscription to a Data Exchange. This is a long-running operation
+   * as it will create one or more linked datasets.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the Data Exchange.
+   *   e.g. `projects/publisherproject/locations/US/dataExchanges/123`
+   * @param {string} request.destination
+   *   Required. The parent resource path of the Subscription.
+   *   e.g. `projects/subscriberproject/locations/US`
+   * @param {string} request.subscription
+   *   Required. Name of the subscription to create.
+   *   e.g. `subscription1`
+   * @param {string} request.subscriberContact
+   *   Email of the subscriber.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/analytics_hub_service.subscribe_data_exchange.js</caption>
+   * region_tag:analyticshub_v1_generated_AnalyticsHubService_SubscribeDataExchange_async
+   */
+  subscribeDataExchange(
+    request?: protos.google.cloud.bigquery.analyticshub.v1.ISubscribeDataExchangeRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.bigquery.analyticshub.v1.ISubscribeDataExchangeResponse,
+        protos.google.cloud.bigquery.analyticshub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  subscribeDataExchange(
+    request: protos.google.cloud.bigquery.analyticshub.v1.ISubscribeDataExchangeRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.bigquery.analyticshub.v1.ISubscribeDataExchangeResponse,
+        protos.google.cloud.bigquery.analyticshub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  subscribeDataExchange(
+    request: protos.google.cloud.bigquery.analyticshub.v1.ISubscribeDataExchangeRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.bigquery.analyticshub.v1.ISubscribeDataExchangeResponse,
+        protos.google.cloud.bigquery.analyticshub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  subscribeDataExchange(
+    request?: protos.google.cloud.bigquery.analyticshub.v1.ISubscribeDataExchangeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.bigquery.analyticshub.v1.ISubscribeDataExchangeResponse,
+            protos.google.cloud.bigquery.analyticshub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.bigquery.analyticshub.v1.ISubscribeDataExchangeResponse,
+        protos.google.cloud.bigquery.analyticshub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.bigquery.analyticshub.v1.ISubscribeDataExchangeResponse,
+        protos.google.cloud.bigquery.analyticshub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.subscribeDataExchange(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `subscribeDataExchange()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/analytics_hub_service.subscribe_data_exchange.js</caption>
+   * region_tag:analyticshub_v1_generated_AnalyticsHubService_SubscribeDataExchange_async
+   */
+  async checkSubscribeDataExchangeProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.bigquery.analyticshub.v1.SubscribeDataExchangeResponse,
+      protos.google.cloud.bigquery.analyticshub.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.subscribeDataExchange,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.bigquery.analyticshub.v1.SubscribeDataExchangeResponse,
+      protos.google.cloud.bigquery.analyticshub.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Refreshes a Subscription to a Data Exchange. A Data Exchange can become
+   * stale when a publisher adds or removes data. This is a long-running
+   * operation as it may create many linked datasets.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the Subscription to refresh.
+   *   e.g. `projects/subscriberproject/locations/US/subscriptions/123`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/analytics_hub_service.refresh_subscription.js</caption>
+   * region_tag:analyticshub_v1_generated_AnalyticsHubService_RefreshSubscription_async
+   */
+  refreshSubscription(
+    request?: protos.google.cloud.bigquery.analyticshub.v1.IRefreshSubscriptionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.bigquery.analyticshub.v1.IRefreshSubscriptionResponse,
+        protos.google.cloud.bigquery.analyticshub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  refreshSubscription(
+    request: protos.google.cloud.bigquery.analyticshub.v1.IRefreshSubscriptionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.bigquery.analyticshub.v1.IRefreshSubscriptionResponse,
+        protos.google.cloud.bigquery.analyticshub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  refreshSubscription(
+    request: protos.google.cloud.bigquery.analyticshub.v1.IRefreshSubscriptionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.bigquery.analyticshub.v1.IRefreshSubscriptionResponse,
+        protos.google.cloud.bigquery.analyticshub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  refreshSubscription(
+    request?: protos.google.cloud.bigquery.analyticshub.v1.IRefreshSubscriptionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.bigquery.analyticshub.v1.IRefreshSubscriptionResponse,
+            protos.google.cloud.bigquery.analyticshub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.bigquery.analyticshub.v1.IRefreshSubscriptionResponse,
+        protos.google.cloud.bigquery.analyticshub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.bigquery.analyticshub.v1.IRefreshSubscriptionResponse,
+        protos.google.cloud.bigquery.analyticshub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.refreshSubscription(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `refreshSubscription()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/analytics_hub_service.refresh_subscription.js</caption>
+   * region_tag:analyticshub_v1_generated_AnalyticsHubService_RefreshSubscription_async
+   */
+  async checkRefreshSubscriptionProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.bigquery.analyticshub.v1.RefreshSubscriptionResponse,
+      protos.google.cloud.bigquery.analyticshub.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.refreshSubscription,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.bigquery.analyticshub.v1.RefreshSubscriptionResponse,
+      protos.google.cloud.bigquery.analyticshub.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Deletes a subscription.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the subscription to delete.
+   *   e.g. projects/123/locations/US/subscriptions/456
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/analytics_hub_service.delete_subscription.js</caption>
+   * region_tag:analyticshub_v1_generated_AnalyticsHubService_DeleteSubscription_async
+   */
+  deleteSubscription(
+    request?: protos.google.cloud.bigquery.analyticshub.v1.IDeleteSubscriptionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.analyticshub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteSubscription(
+    request: protos.google.cloud.bigquery.analyticshub.v1.IDeleteSubscriptionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.analyticshub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteSubscription(
+    request: protos.google.cloud.bigquery.analyticshub.v1.IDeleteSubscriptionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.analyticshub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteSubscription(
+    request?: protos.google.cloud.bigquery.analyticshub.v1.IDeleteSubscriptionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.bigquery.analyticshub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.analyticshub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.analyticshub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteSubscription(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteSubscription()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/analytics_hub_service.delete_subscription.js</caption>
+   * region_tag:analyticshub_v1_generated_AnalyticsHubService_DeleteSubscription_async
+   */
+  async checkDeleteSubscriptionProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.bigquery.analyticshub.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteSubscription,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.bigquery.analyticshub.v1.OperationMetadata
+    >;
+  }
+  /**
    * Lists all data exchanges in a given project and location.
    *
    * @param {Object} request
@@ -1736,8 +2435,8 @@ export class AnalyticsHubServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.organization
-   *   Required. The organization resource path of the projects containing DataExchanges.
-   *   e.g. `organizations/myorg/locations/US`.
+   *   Required. The organization resource path of the projects containing
+   *   DataExchanges. e.g. `organizations/myorg/locations/US`.
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response page. Leverage
    *   the page tokens to iterate through the entire collection.
@@ -1836,8 +2535,8 @@ export class AnalyticsHubServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.organization
-   *   Required. The organization resource path of the projects containing DataExchanges.
-   *   e.g. `organizations/myorg/locations/US`.
+   *   Required. The organization resource path of the projects containing
+   *   DataExchanges. e.g. `organizations/myorg/locations/US`.
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response page. Leverage
    *   the page tokens to iterate through the entire collection.
@@ -1884,8 +2583,8 @@ export class AnalyticsHubServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.organization
-   *   Required. The organization resource path of the projects containing DataExchanges.
-   *   e.g. `organizations/myorg/locations/US`.
+   *   Required. The organization resource path of the projects containing
+   *   DataExchanges. e.g. `organizations/myorg/locations/US`.
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response page. Leverage
    *   the page tokens to iterate through the entire collection.
@@ -2120,6 +2819,586 @@ export class AnalyticsHubServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.bigquery.analyticshub.v1.IListing>;
   }
+  /**
+   * Lists all subscriptions in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource path of the subscription.
+   *   e.g. projects/myproject/locations/US
+   * @param {string} request.filter
+   *   The filter expression may be used to filter by Data Exchange or Listing.
+   * @param {number} request.pageSize
+   *   The maximum number of results to return in a single response page.
+   * @param {string} request.pageToken
+   *   Page token, returned by a previous call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.bigquery.analyticshub.v1.Subscription|Subscription}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listSubscriptionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listSubscriptions(
+    request?: protos.google.cloud.bigquery.analyticshub.v1.IListSubscriptionsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.bigquery.analyticshub.v1.ISubscription[],
+      protos.google.cloud.bigquery.analyticshub.v1.IListSubscriptionsRequest | null,
+      protos.google.cloud.bigquery.analyticshub.v1.IListSubscriptionsResponse,
+    ]
+  >;
+  listSubscriptions(
+    request: protos.google.cloud.bigquery.analyticshub.v1.IListSubscriptionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.bigquery.analyticshub.v1.IListSubscriptionsRequest,
+      | protos.google.cloud.bigquery.analyticshub.v1.IListSubscriptionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.bigquery.analyticshub.v1.ISubscription
+    >
+  ): void;
+  listSubscriptions(
+    request: protos.google.cloud.bigquery.analyticshub.v1.IListSubscriptionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.bigquery.analyticshub.v1.IListSubscriptionsRequest,
+      | protos.google.cloud.bigquery.analyticshub.v1.IListSubscriptionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.bigquery.analyticshub.v1.ISubscription
+    >
+  ): void;
+  listSubscriptions(
+    request?: protos.google.cloud.bigquery.analyticshub.v1.IListSubscriptionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.bigquery.analyticshub.v1.IListSubscriptionsRequest,
+          | protos.google.cloud.bigquery.analyticshub.v1.IListSubscriptionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.bigquery.analyticshub.v1.ISubscription
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.bigquery.analyticshub.v1.IListSubscriptionsRequest,
+      | protos.google.cloud.bigquery.analyticshub.v1.IListSubscriptionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.bigquery.analyticshub.v1.ISubscription
+    >
+  ): Promise<
+    [
+      protos.google.cloud.bigquery.analyticshub.v1.ISubscription[],
+      protos.google.cloud.bigquery.analyticshub.v1.IListSubscriptionsRequest | null,
+      protos.google.cloud.bigquery.analyticshub.v1.IListSubscriptionsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listSubscriptions(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource path of the subscription.
+   *   e.g. projects/myproject/locations/US
+   * @param {string} request.filter
+   *   The filter expression may be used to filter by Data Exchange or Listing.
+   * @param {number} request.pageSize
+   *   The maximum number of results to return in a single response page.
+   * @param {string} request.pageToken
+   *   Page token, returned by a previous call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.bigquery.analyticshub.v1.Subscription|Subscription} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listSubscriptionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listSubscriptionsStream(
+    request?: protos.google.cloud.bigquery.analyticshub.v1.IListSubscriptionsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listSubscriptions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listSubscriptions.createStream(
+      this.innerApiCalls.listSubscriptions as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listSubscriptions`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource path of the subscription.
+   *   e.g. projects/myproject/locations/US
+   * @param {string} request.filter
+   *   The filter expression may be used to filter by Data Exchange or Listing.
+   * @param {number} request.pageSize
+   *   The maximum number of results to return in a single response page.
+   * @param {string} request.pageToken
+   *   Page token, returned by a previous call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.bigquery.analyticshub.v1.Subscription|Subscription}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/analytics_hub_service.list_subscriptions.js</caption>
+   * region_tag:analyticshub_v1_generated_AnalyticsHubService_ListSubscriptions_async
+   */
+  listSubscriptionsAsync(
+    request?: protos.google.cloud.bigquery.analyticshub.v1.IListSubscriptionsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.bigquery.analyticshub.v1.ISubscription> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listSubscriptions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listSubscriptions.asyncIterate(
+      this.innerApiCalls['listSubscriptions'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.bigquery.analyticshub.v1.ISubscription>;
+  }
+  /**
+   * Lists all subscriptions on a given Data Exchange or Listing.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   Required. Resource name of the requested target. This resource may be
+   *   either a Listing or a DataExchange. e.g.
+   *   projects/123/locations/US/dataExchanges/456 OR e.g.
+   *   projects/123/locations/US/dataExchanges/456/listings/789
+   * @param {boolean} request.includeDeletedSubscriptions
+   *   If selected, includes deleted subscriptions in the response
+   *   (up to 63 days after deletion).
+   * @param {number} request.pageSize
+   *   The maximum number of results to return in a single response page.
+   * @param {string} request.pageToken
+   *   Page token, returned by a previous call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.bigquery.analyticshub.v1.Subscription|Subscription}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listSharedResourceSubscriptionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listSharedResourceSubscriptions(
+    request?: protos.google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.bigquery.analyticshub.v1.ISubscription[],
+      protos.google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsRequest | null,
+      protos.google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsResponse,
+    ]
+  >;
+  listSharedResourceSubscriptions(
+    request: protos.google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsRequest,
+      | protos.google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.bigquery.analyticshub.v1.ISubscription
+    >
+  ): void;
+  listSharedResourceSubscriptions(
+    request: protos.google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsRequest,
+      | protos.google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.bigquery.analyticshub.v1.ISubscription
+    >
+  ): void;
+  listSharedResourceSubscriptions(
+    request?: protos.google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsRequest,
+          | protos.google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.bigquery.analyticshub.v1.ISubscription
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsRequest,
+      | protos.google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.bigquery.analyticshub.v1.ISubscription
+    >
+  ): Promise<
+    [
+      protos.google.cloud.bigquery.analyticshub.v1.ISubscription[],
+      protos.google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsRequest | null,
+      protos.google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        resource: request.resource ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listSharedResourceSubscriptions(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   Required. Resource name of the requested target. This resource may be
+   *   either a Listing or a DataExchange. e.g.
+   *   projects/123/locations/US/dataExchanges/456 OR e.g.
+   *   projects/123/locations/US/dataExchanges/456/listings/789
+   * @param {boolean} request.includeDeletedSubscriptions
+   *   If selected, includes deleted subscriptions in the response
+   *   (up to 63 days after deletion).
+   * @param {number} request.pageSize
+   *   The maximum number of results to return in a single response page.
+   * @param {string} request.pageToken
+   *   Page token, returned by a previous call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.bigquery.analyticshub.v1.Subscription|Subscription} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listSharedResourceSubscriptionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listSharedResourceSubscriptionsStream(
+    request?: protos.google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        resource: request.resource ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listSharedResourceSubscriptions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listSharedResourceSubscriptions.createStream(
+      this.innerApiCalls.listSharedResourceSubscriptions as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listSharedResourceSubscriptions`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   Required. Resource name of the requested target. This resource may be
+   *   either a Listing or a DataExchange. e.g.
+   *   projects/123/locations/US/dataExchanges/456 OR e.g.
+   *   projects/123/locations/US/dataExchanges/456/listings/789
+   * @param {boolean} request.includeDeletedSubscriptions
+   *   If selected, includes deleted subscriptions in the response
+   *   (up to 63 days after deletion).
+   * @param {number} request.pageSize
+   *   The maximum number of results to return in a single response page.
+   * @param {string} request.pageToken
+   *   Page token, returned by a previous call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.bigquery.analyticshub.v1.Subscription|Subscription}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/analytics_hub_service.list_shared_resource_subscriptions.js</caption>
+   * region_tag:analyticshub_v1_generated_AnalyticsHubService_ListSharedResourceSubscriptions_async
+   */
+  listSharedResourceSubscriptionsAsync(
+    request?: protos.google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.bigquery.analyticshub.v1.ISubscription> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        resource: request.resource ?? '',
+      });
+    const defaultCallSettings =
+      this._defaults['listSharedResourceSubscriptions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listSharedResourceSubscriptions.asyncIterate(
+      this.innerApiCalls['listSharedResourceSubscriptions'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.bigquery.analyticshub.v1.ISubscription>;
+  }
+  /**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   *   for the details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   *   {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<[protos.google.longrunning.Operation]> {
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | iteration protocols}.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+  cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.CancelOperationRequest,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   * for the details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.deleteOperation(request, options, callback);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
@@ -2281,6 +3560,81 @@ export class AnalyticsHubServiceClient {
   }
 
   /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectPath(project: string) {
+    return this.pathTemplates.projectPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from Project resource.
+   *
+   * @param {string} projectName
+   *   A fully-qualified path representing Project resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectName(projectName: string) {
+    return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified subscription resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} subscription
+   * @returns {string} Resource name string.
+   */
+  subscriptionPath(project: string, location: string, subscription: string) {
+    return this.pathTemplates.subscriptionPathTemplate.render({
+      project: project,
+      location: location,
+      subscription: subscription,
+    });
+  }
+
+  /**
+   * Parse the project from Subscription resource.
+   *
+   * @param {string} subscriptionName
+   *   A fully-qualified path representing Subscription resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSubscriptionName(subscriptionName: string) {
+    return this.pathTemplates.subscriptionPathTemplate.match(subscriptionName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Subscription resource.
+   *
+   * @param {string} subscriptionName
+   *   A fully-qualified path representing Subscription resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSubscriptionName(subscriptionName: string) {
+    return this.pathTemplates.subscriptionPathTemplate.match(subscriptionName)
+      .location;
+  }
+
+  /**
+   * Parse the subscription from Subscription resource.
+   *
+   * @param {string} subscriptionName
+   *   A fully-qualified path representing Subscription resource.
+   * @returns {string} A string representing the subscription.
+   */
+  matchSubscriptionFromSubscriptionName(subscriptionName: string) {
+    return this.pathTemplates.subscriptionPathTemplate.match(subscriptionName)
+      .subscription;
+  }
+
+  /**
    * Terminate the gRPC channel and close the client.
    *
    * The client will no longer be usable and all future behavior is undefined.
@@ -2291,6 +3645,7 @@ export class AnalyticsHubServiceClient {
       return this.analyticsHubServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
+        this.operationsClient.close();
       });
     }
     return Promise.resolve();

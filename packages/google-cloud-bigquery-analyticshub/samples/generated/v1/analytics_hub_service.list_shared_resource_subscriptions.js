@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, repositoryId, repository) {
-  // [START artifactregistry_v1_generated_ArtifactRegistry_CreateRepository_async]
+function main(resource) {
+  // [START analyticshub_v1_generated_AnalyticsHubService_ListSharedResourceSubscriptions_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,41 +29,47 @@ function main(parent, repositoryId, repository) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the parent resource where the repository will be
-   *  created.
+   *  Required. Resource name of the requested target. This resource may be
+   *  either a Listing or a DataExchange. e.g.
+   *  projects/123/locations/US/dataExchanges/456 OR e.g.
+   *  projects/123/locations/US/dataExchanges/456/listings/789
    */
-  // const parent = 'abc123'
+  // const resource = 'abc123'
   /**
-   *  The repository id to use for this repository.
+   *  If selected, includes deleted subscriptions in the response
+   *  (up to 63 days after deletion).
    */
-  // const repositoryId = 'abc123'
+  // const includeDeletedSubscriptions = true
   /**
-   *  The repository to be created.
+   *  The maximum number of results to return in a single response page.
    */
-  // const repository = {}
+  // const pageSize = 1234
+  /**
+   *  Page token, returned by a previous call.
+   */
+  // const pageToken = 'abc123'
 
-  // Imports the Artifactregistry library
-  const {ArtifactRegistryClient} = require('@google-cloud/artifact-registry').v1;
+  // Imports the Analyticshub library
+  const {AnalyticsHubServiceClient} = require('@google-cloud/bigquery-analyticshub').v1;
 
   // Instantiates a client
-  const artifactregistryClient = new ArtifactRegistryClient();
+  const analyticshubClient = new AnalyticsHubServiceClient();
 
-  async function callCreateRepository() {
+  async function callListSharedResourceSubscriptions() {
     // Construct request
     const request = {
-      parent,
-      repositoryId,
-      repository,
+      resource,
     };
 
     // Run request
-    const [operation] = await artifactregistryClient.createRepository(request);
-    const [response] = await operation.promise();
-    console.log(response);
+    const iterable = await analyticshubClient.listSharedResourceSubscriptionsAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callCreateRepository();
-  // [END artifactregistry_v1_generated_ArtifactRegistry_CreateRepository_async]
+  callListSharedResourceSubscriptions();
+  // [END analyticshub_v1_generated_AnalyticsHubService_ListSharedResourceSubscriptions_async]
 }
 
 process.on('unhandledRejection', err => {

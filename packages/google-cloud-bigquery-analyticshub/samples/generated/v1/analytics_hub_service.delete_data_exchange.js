@@ -29,8 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The full name of the data exchange resource that you want to delete.
-   *  For example, `projects/myproject/locations/US/dataExchanges/123`.
+   *  Required. The full name of the data exchange resource that you want to
+   *  delete. For example, `projects/myproject/locations/US/dataExchanges/123`.
    */
   // const name = 'abc123'
 
