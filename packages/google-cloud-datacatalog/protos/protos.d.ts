@@ -476,7 +476,8 @@ export namespace google {
                     CLOUD_SPANNER = 6,
                     CLOUD_BIGTABLE = 7,
                     CLOUD_SQL = 8,
-                    LOOKER = 9
+                    LOOKER = 9,
+                    VERTEX_AI = 10
                 }
 
                 /** ManagingSystem enum. */
@@ -3038,11 +3039,17 @@ export namespace google {
                     /** Entry routineSpec */
                     routineSpec?: (google.cloud.datacatalog.v1.IRoutineSpec|null);
 
+                    /** Entry datasetSpec */
+                    datasetSpec?: (google.cloud.datacatalog.v1.IDatasetSpec|null);
+
                     /** Entry filesetSpec */
                     filesetSpec?: (google.cloud.datacatalog.v1.IFilesetSpec|null);
 
                     /** Entry serviceSpec */
                     serviceSpec?: (google.cloud.datacatalog.v1.IServiceSpec|null);
+
+                    /** Entry modelSpec */
+                    modelSpec?: (google.cloud.datacatalog.v1.IModelSpec|null);
 
                     /** Entry displayName */
                     displayName?: (string|null);
@@ -3129,11 +3136,17 @@ export namespace google {
                     /** Entry routineSpec. */
                     public routineSpec?: (google.cloud.datacatalog.v1.IRoutineSpec|null);
 
+                    /** Entry datasetSpec. */
+                    public datasetSpec?: (google.cloud.datacatalog.v1.IDatasetSpec|null);
+
                     /** Entry filesetSpec. */
                     public filesetSpec?: (google.cloud.datacatalog.v1.IFilesetSpec|null);
 
                     /** Entry serviceSpec. */
                     public serviceSpec?: (google.cloud.datacatalog.v1.IServiceSpec|null);
+
+                    /** Entry modelSpec. */
+                    public modelSpec?: (google.cloud.datacatalog.v1.IModelSpec|null);
 
                     /** Entry displayName. */
                     public displayName: string;
@@ -3175,7 +3188,7 @@ export namespace google {
                     public typeSpec?: ("gcsFilesetSpec"|"bigqueryTableSpec"|"bigqueryDateShardedSpec");
 
                     /** Entry spec. */
-                    public spec?: ("databaseTableSpec"|"dataSourceConnectionSpec"|"routineSpec"|"filesetSpec"|"serviceSpec");
+                    public spec?: ("databaseTableSpec"|"dataSourceConnectionSpec"|"routineSpec"|"datasetSpec"|"filesetSpec"|"serviceSpec"|"modelSpec");
 
                     /**
                      * Creates a new Entry instance using the specified properties.
@@ -3950,6 +3963,106 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a DatasetSpec. */
+                interface IDatasetSpec {
+
+                    /** DatasetSpec vertexDatasetSpec */
+                    vertexDatasetSpec?: (google.cloud.datacatalog.v1.IVertexDatasetSpec|null);
+                }
+
+                /** Represents a DatasetSpec. */
+                class DatasetSpec implements IDatasetSpec {
+
+                    /**
+                     * Constructs a new DatasetSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IDatasetSpec);
+
+                    /** DatasetSpec vertexDatasetSpec. */
+                    public vertexDatasetSpec?: (google.cloud.datacatalog.v1.IVertexDatasetSpec|null);
+
+                    /** DatasetSpec systemSpec. */
+                    public systemSpec?: "vertexDatasetSpec";
+
+                    /**
+                     * Creates a new DatasetSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DatasetSpec instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IDatasetSpec): google.cloud.datacatalog.v1.DatasetSpec;
+
+                    /**
+                     * Encodes the specified DatasetSpec message. Does not implicitly {@link google.cloud.datacatalog.v1.DatasetSpec.verify|verify} messages.
+                     * @param message DatasetSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IDatasetSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DatasetSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.DatasetSpec.verify|verify} messages.
+                     * @param message DatasetSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IDatasetSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DatasetSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DatasetSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.DatasetSpec;
+
+                    /**
+                     * Decodes a DatasetSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DatasetSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.DatasetSpec;
+
+                    /**
+                     * Verifies a DatasetSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DatasetSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DatasetSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.DatasetSpec;
+
+                    /**
+                     * Creates a plain object from a DatasetSpec message. Also converts values to other types if specified.
+                     * @param message DatasetSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.DatasetSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DatasetSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DatasetSpec
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a SqlDatabaseSystemSpec. */
                 interface ISqlDatabaseSystemSpec {
 
@@ -4592,6 +4705,465 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ServiceSpec
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VertexModelSourceInfo. */
+                interface IVertexModelSourceInfo {
+
+                    /** VertexModelSourceInfo sourceType */
+                    sourceType?: (google.cloud.datacatalog.v1.VertexModelSourceInfo.ModelSourceType|keyof typeof google.cloud.datacatalog.v1.VertexModelSourceInfo.ModelSourceType|null);
+
+                    /** VertexModelSourceInfo copy */
+                    copy?: (boolean|null);
+                }
+
+                /** Represents a VertexModelSourceInfo. */
+                class VertexModelSourceInfo implements IVertexModelSourceInfo {
+
+                    /**
+                     * Constructs a new VertexModelSourceInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IVertexModelSourceInfo);
+
+                    /** VertexModelSourceInfo sourceType. */
+                    public sourceType: (google.cloud.datacatalog.v1.VertexModelSourceInfo.ModelSourceType|keyof typeof google.cloud.datacatalog.v1.VertexModelSourceInfo.ModelSourceType);
+
+                    /** VertexModelSourceInfo copy. */
+                    public copy: boolean;
+
+                    /**
+                     * Creates a new VertexModelSourceInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VertexModelSourceInfo instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IVertexModelSourceInfo): google.cloud.datacatalog.v1.VertexModelSourceInfo;
+
+                    /**
+                     * Encodes the specified VertexModelSourceInfo message. Does not implicitly {@link google.cloud.datacatalog.v1.VertexModelSourceInfo.verify|verify} messages.
+                     * @param message VertexModelSourceInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IVertexModelSourceInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VertexModelSourceInfo message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.VertexModelSourceInfo.verify|verify} messages.
+                     * @param message VertexModelSourceInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IVertexModelSourceInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VertexModelSourceInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VertexModelSourceInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.VertexModelSourceInfo;
+
+                    /**
+                     * Decodes a VertexModelSourceInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VertexModelSourceInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.VertexModelSourceInfo;
+
+                    /**
+                     * Verifies a VertexModelSourceInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VertexModelSourceInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VertexModelSourceInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.VertexModelSourceInfo;
+
+                    /**
+                     * Creates a plain object from a VertexModelSourceInfo message. Also converts values to other types if specified.
+                     * @param message VertexModelSourceInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.VertexModelSourceInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VertexModelSourceInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VertexModelSourceInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace VertexModelSourceInfo {
+
+                    /** ModelSourceType enum. */
+                    enum ModelSourceType {
+                        MODEL_SOURCE_TYPE_UNSPECIFIED = 0,
+                        AUTOML = 1,
+                        CUSTOM = 2,
+                        BQML = 3,
+                        MODEL_GARDEN = 4
+                    }
+                }
+
+                /** Properties of a VertexModelSpec. */
+                interface IVertexModelSpec {
+
+                    /** VertexModelSpec versionId */
+                    versionId?: (string|null);
+
+                    /** VertexModelSpec versionAliases */
+                    versionAliases?: (string[]|null);
+
+                    /** VertexModelSpec versionDescription */
+                    versionDescription?: (string|null);
+
+                    /** VertexModelSpec vertexModelSourceInfo */
+                    vertexModelSourceInfo?: (google.cloud.datacatalog.v1.IVertexModelSourceInfo|null);
+
+                    /** VertexModelSpec containerImageUri */
+                    containerImageUri?: (string|null);
+                }
+
+                /** Represents a VertexModelSpec. */
+                class VertexModelSpec implements IVertexModelSpec {
+
+                    /**
+                     * Constructs a new VertexModelSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IVertexModelSpec);
+
+                    /** VertexModelSpec versionId. */
+                    public versionId: string;
+
+                    /** VertexModelSpec versionAliases. */
+                    public versionAliases: string[];
+
+                    /** VertexModelSpec versionDescription. */
+                    public versionDescription: string;
+
+                    /** VertexModelSpec vertexModelSourceInfo. */
+                    public vertexModelSourceInfo?: (google.cloud.datacatalog.v1.IVertexModelSourceInfo|null);
+
+                    /** VertexModelSpec containerImageUri. */
+                    public containerImageUri: string;
+
+                    /**
+                     * Creates a new VertexModelSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VertexModelSpec instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IVertexModelSpec): google.cloud.datacatalog.v1.VertexModelSpec;
+
+                    /**
+                     * Encodes the specified VertexModelSpec message. Does not implicitly {@link google.cloud.datacatalog.v1.VertexModelSpec.verify|verify} messages.
+                     * @param message VertexModelSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IVertexModelSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VertexModelSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.VertexModelSpec.verify|verify} messages.
+                     * @param message VertexModelSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IVertexModelSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VertexModelSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VertexModelSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.VertexModelSpec;
+
+                    /**
+                     * Decodes a VertexModelSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VertexModelSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.VertexModelSpec;
+
+                    /**
+                     * Verifies a VertexModelSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VertexModelSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VertexModelSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.VertexModelSpec;
+
+                    /**
+                     * Creates a plain object from a VertexModelSpec message. Also converts values to other types if specified.
+                     * @param message VertexModelSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.VertexModelSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VertexModelSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VertexModelSpec
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VertexDatasetSpec. */
+                interface IVertexDatasetSpec {
+
+                    /** VertexDatasetSpec dataItemCount */
+                    dataItemCount?: (number|Long|string|null);
+
+                    /** VertexDatasetSpec dataType */
+                    dataType?: (google.cloud.datacatalog.v1.VertexDatasetSpec.DataType|keyof typeof google.cloud.datacatalog.v1.VertexDatasetSpec.DataType|null);
+                }
+
+                /** Represents a VertexDatasetSpec. */
+                class VertexDatasetSpec implements IVertexDatasetSpec {
+
+                    /**
+                     * Constructs a new VertexDatasetSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IVertexDatasetSpec);
+
+                    /** VertexDatasetSpec dataItemCount. */
+                    public dataItemCount: (number|Long|string);
+
+                    /** VertexDatasetSpec dataType. */
+                    public dataType: (google.cloud.datacatalog.v1.VertexDatasetSpec.DataType|keyof typeof google.cloud.datacatalog.v1.VertexDatasetSpec.DataType);
+
+                    /**
+                     * Creates a new VertexDatasetSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VertexDatasetSpec instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IVertexDatasetSpec): google.cloud.datacatalog.v1.VertexDatasetSpec;
+
+                    /**
+                     * Encodes the specified VertexDatasetSpec message. Does not implicitly {@link google.cloud.datacatalog.v1.VertexDatasetSpec.verify|verify} messages.
+                     * @param message VertexDatasetSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IVertexDatasetSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VertexDatasetSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.VertexDatasetSpec.verify|verify} messages.
+                     * @param message VertexDatasetSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IVertexDatasetSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VertexDatasetSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VertexDatasetSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.VertexDatasetSpec;
+
+                    /**
+                     * Decodes a VertexDatasetSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VertexDatasetSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.VertexDatasetSpec;
+
+                    /**
+                     * Verifies a VertexDatasetSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VertexDatasetSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VertexDatasetSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.VertexDatasetSpec;
+
+                    /**
+                     * Creates a plain object from a VertexDatasetSpec message. Also converts values to other types if specified.
+                     * @param message VertexDatasetSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.VertexDatasetSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VertexDatasetSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VertexDatasetSpec
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace VertexDatasetSpec {
+
+                    /** DataType enum. */
+                    enum DataType {
+                        DATA_TYPE_UNSPECIFIED = 0,
+                        TABLE = 1,
+                        IMAGE = 2,
+                        TEXT = 3,
+                        VIDEO = 4,
+                        CONVERSATION = 5,
+                        TIME_SERIES = 6,
+                        DOCUMENT = 7,
+                        TEXT_TO_SPEECH = 8,
+                        TRANSLATION = 9,
+                        STORE_VISION = 10,
+                        ENTERPRISE_KNOWLEDGE_GRAPH = 11,
+                        TEXT_PROMPT = 12
+                    }
+                }
+
+                /** Properties of a ModelSpec. */
+                interface IModelSpec {
+
+                    /** ModelSpec vertexModelSpec */
+                    vertexModelSpec?: (google.cloud.datacatalog.v1.IVertexModelSpec|null);
+                }
+
+                /** Represents a ModelSpec. */
+                class ModelSpec implements IModelSpec {
+
+                    /**
+                     * Constructs a new ModelSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IModelSpec);
+
+                    /** ModelSpec vertexModelSpec. */
+                    public vertexModelSpec?: (google.cloud.datacatalog.v1.IVertexModelSpec|null);
+
+                    /** ModelSpec systemSpec. */
+                    public systemSpec?: "vertexModelSpec";
+
+                    /**
+                     * Creates a new ModelSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ModelSpec instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IModelSpec): google.cloud.datacatalog.v1.ModelSpec;
+
+                    /**
+                     * Encodes the specified ModelSpec message. Does not implicitly {@link google.cloud.datacatalog.v1.ModelSpec.verify|verify} messages.
+                     * @param message ModelSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IModelSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ModelSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.ModelSpec.verify|verify} messages.
+                     * @param message ModelSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IModelSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ModelSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ModelSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.ModelSpec;
+
+                    /**
+                     * Decodes a ModelSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ModelSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.ModelSpec;
+
+                    /**
+                     * Verifies a ModelSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ModelSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ModelSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.ModelSpec;
+
+                    /**
+                     * Creates a plain object from a ModelSpec message. Also converts values to other types if specified.
+                     * @param message ModelSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.ModelSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ModelSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ModelSpec
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

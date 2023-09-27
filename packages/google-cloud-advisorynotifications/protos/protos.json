@@ -60,6 +60,44 @@
                               "(google.api.method_signature)": "name"
                             }
                           ]
+                        },
+                        "GetSettings": {
+                          "requestType": "GetSettingsRequest",
+                          "responseType": "Settings",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=organizations/*/locations/*/settings}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=organizations/*/locations/*/settings}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateSettings": {
+                          "requestType": "UpdateSettingsRequest",
+                          "responseType": "Settings",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{settings.name=organizations/*/locations/*/settings}",
+                            "(google.api.http).body": "settings",
+                            "(google.api.method_signature)": "settings"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{settings.name=organizations/*/locations/*/settings}",
+                                "body": "settings"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "settings"
+                            }
+                          ]
                         }
                       }
                     },
@@ -278,6 +316,67 @@
                         "languageCode": {
                           "type": "string",
                           "id": 5
+                        }
+                      }
+                    },
+                    "Settings": {
+                      "options": {
+                        "(google.api.resource).type": "advisorynotifications.googleapis.com/Settings",
+                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/settings"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "notificationSettings": {
+                          "keyType": "string",
+                          "type": "NotificationSettings",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "NotificationSettings": {
+                      "fields": {
+                        "enabled": {
+                          "type": "bool",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "GetSettingsRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "advisorynotifications.googleapis.com/Settings"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateSettingsRequest": {
+                      "fields": {
+                        "settings": {
+                          "type": "Settings",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     }

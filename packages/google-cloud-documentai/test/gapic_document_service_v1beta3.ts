@@ -23,6 +23,8 @@ import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
 import * as documentserviceModule from '../src';
 
+import {PassThrough} from 'stream';
+
 import {
   protobuf,
   LROperation,
@@ -99,6 +101,44 @@ function stubLongRunningCallWithCallback<ResponseType>(
   return callError
     ? sinon.stub().callsArgWith(2, callError)
     : sinon.stub().callsArgWith(2, null, mockOperation);
+}
+
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+    }
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
+    });
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
 }
 
 function stubAsyncIterationCall<ResponseType>(
@@ -1202,6 +1242,341 @@ describe('v1beta3.DocumentServiceClient', () => {
         expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('listDocuments', () => {
+    it('invokes listDocuments without error', async () => {
+      const client = new documentserviceModule.v1beta3.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.documentai.v1beta3.ListDocumentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1beta3.ListDocumentsRequest',
+        ['dataset']
+      );
+      request.dataset = defaultValue1;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.documentai.v1beta3.DocumentMetadata()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.documentai.v1beta3.DocumentMetadata()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.documentai.v1beta3.DocumentMetadata()
+        ),
+      ];
+      client.innerApiCalls.listDocuments = stubSimpleCall(expectedResponse);
+      const [response] = await client.listDocuments(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listDocuments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDocuments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listDocuments without error using callback', async () => {
+      const client = new documentserviceModule.v1beta3.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.documentai.v1beta3.ListDocumentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1beta3.ListDocumentsRequest',
+        ['dataset']
+      );
+      request.dataset = defaultValue1;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.documentai.v1beta3.DocumentMetadata()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.documentai.v1beta3.DocumentMetadata()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.documentai.v1beta3.DocumentMetadata()
+        ),
+      ];
+      client.innerApiCalls.listDocuments =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listDocuments(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.documentai.v1beta3.IDocumentMetadata[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listDocuments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDocuments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listDocuments with error', async () => {
+      const client = new documentserviceModule.v1beta3.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.documentai.v1beta3.ListDocumentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1beta3.ListDocumentsRequest',
+        ['dataset']
+      );
+      request.dataset = defaultValue1;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listDocuments = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listDocuments(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listDocuments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDocuments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listDocumentsStream without error', async () => {
+      const client = new documentserviceModule.v1beta3.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.documentai.v1beta3.ListDocumentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1beta3.ListDocumentsRequest',
+        ['dataset']
+      );
+      request.dataset = defaultValue1;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.documentai.v1beta3.DocumentMetadata()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.documentai.v1beta3.DocumentMetadata()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.documentai.v1beta3.DocumentMetadata()
+        ),
+      ];
+      client.descriptors.page.listDocuments.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listDocumentsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.documentai.v1beta3.DocumentMetadata[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.documentai.v1beta3.DocumentMetadata
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listDocuments.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listDocuments, request)
+      );
+      assert(
+        (client.descriptors.page.listDocuments.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listDocumentsStream with error', async () => {
+      const client = new documentserviceModule.v1beta3.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.documentai.v1beta3.ListDocumentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1beta3.ListDocumentsRequest',
+        ['dataset']
+      );
+      request.dataset = defaultValue1;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listDocuments.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listDocumentsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.documentai.v1beta3.DocumentMetadata[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.documentai.v1beta3.DocumentMetadata
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listDocuments.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listDocuments, request)
+      );
+      assert(
+        (client.descriptors.page.listDocuments.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listDocuments without error', async () => {
+      const client = new documentserviceModule.v1beta3.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.documentai.v1beta3.ListDocumentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1beta3.ListDocumentsRequest',
+        ['dataset']
+      );
+      request.dataset = defaultValue1;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.documentai.v1beta3.DocumentMetadata()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.documentai.v1beta3.DocumentMetadata()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.documentai.v1beta3.DocumentMetadata()
+        ),
+      ];
+      client.descriptors.page.listDocuments.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.documentai.v1beta3.IDocumentMetadata[] =
+        [];
+      const iterable = client.listDocumentsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listDocuments.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listDocuments.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listDocuments with error', async () => {
+      const client = new documentserviceModule.v1beta3.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.documentai.v1beta3.ListDocumentsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1beta3.ListDocumentsRequest',
+        ['dataset']
+      );
+      request.dataset = defaultValue1;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listDocuments.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listDocumentsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.documentai.v1beta3.IDocumentMetadata[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listDocuments.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listDocuments.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
     });
   });
   describe('getLocation', () => {

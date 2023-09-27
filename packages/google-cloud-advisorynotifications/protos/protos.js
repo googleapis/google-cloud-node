@@ -164,6 +164,72 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.advisorynotifications.v1.AdvisoryNotificationsService|getSettings}.
+                         * @memberof google.cloud.advisorynotifications.v1.AdvisoryNotificationsService
+                         * @typedef GetSettingsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.advisorynotifications.v1.Settings} [response] Settings
+                         */
+    
+                        /**
+                         * Calls GetSettings.
+                         * @function getSettings
+                         * @memberof google.cloud.advisorynotifications.v1.AdvisoryNotificationsService
+                         * @instance
+                         * @param {google.cloud.advisorynotifications.v1.IGetSettingsRequest} request GetSettingsRequest message or plain object
+                         * @param {google.cloud.advisorynotifications.v1.AdvisoryNotificationsService.GetSettingsCallback} callback Node-style callback called with the error, if any, and Settings
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AdvisoryNotificationsService.prototype.getSettings = function getSettings(request, callback) {
+                            return this.rpcCall(getSettings, $root.google.cloud.advisorynotifications.v1.GetSettingsRequest, $root.google.cloud.advisorynotifications.v1.Settings, request, callback);
+                        }, "name", { value: "GetSettings" });
+    
+                        /**
+                         * Calls GetSettings.
+                         * @function getSettings
+                         * @memberof google.cloud.advisorynotifications.v1.AdvisoryNotificationsService
+                         * @instance
+                         * @param {google.cloud.advisorynotifications.v1.IGetSettingsRequest} request GetSettingsRequest message or plain object
+                         * @returns {Promise<google.cloud.advisorynotifications.v1.Settings>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.advisorynotifications.v1.AdvisoryNotificationsService|updateSettings}.
+                         * @memberof google.cloud.advisorynotifications.v1.AdvisoryNotificationsService
+                         * @typedef UpdateSettingsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.advisorynotifications.v1.Settings} [response] Settings
+                         */
+    
+                        /**
+                         * Calls UpdateSettings.
+                         * @function updateSettings
+                         * @memberof google.cloud.advisorynotifications.v1.AdvisoryNotificationsService
+                         * @instance
+                         * @param {google.cloud.advisorynotifications.v1.IUpdateSettingsRequest} request UpdateSettingsRequest message or plain object
+                         * @param {google.cloud.advisorynotifications.v1.AdvisoryNotificationsService.UpdateSettingsCallback} callback Node-style callback called with the error, if any, and Settings
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AdvisoryNotificationsService.prototype.updateSettings = function updateSettings(request, callback) {
+                            return this.rpcCall(updateSettings, $root.google.cloud.advisorynotifications.v1.UpdateSettingsRequest, $root.google.cloud.advisorynotifications.v1.Settings, request, callback);
+                        }, "name", { value: "UpdateSettings" });
+    
+                        /**
+                         * Calls UpdateSettings.
+                         * @function updateSettings
+                         * @memberof google.cloud.advisorynotifications.v1.AdvisoryNotificationsService
+                         * @instance
+                         * @param {google.cloud.advisorynotifications.v1.IUpdateSettingsRequest} request UpdateSettingsRequest message or plain object
+                         * @returns {Promise<google.cloud.advisorynotifications.v1.Settings>} Promise
+                         * @variation 2
+                         */
+    
                         return AdvisoryNotificationsService;
                     })();
     
@@ -3139,6 +3205,913 @@
                         };
     
                         return GetNotificationRequest;
+                    })();
+    
+                    v1.Settings = (function() {
+    
+                        /**
+                         * Properties of a Settings.
+                         * @memberof google.cloud.advisorynotifications.v1
+                         * @interface ISettings
+                         * @property {string|null} [name] Settings name
+                         * @property {Object.<string,google.cloud.advisorynotifications.v1.INotificationSettings>|null} [notificationSettings] Settings notificationSettings
+                         * @property {string|null} [etag] Settings etag
+                         */
+    
+                        /**
+                         * Constructs a new Settings.
+                         * @memberof google.cloud.advisorynotifications.v1
+                         * @classdesc Represents a Settings.
+                         * @implements ISettings
+                         * @constructor
+                         * @param {google.cloud.advisorynotifications.v1.ISettings=} [properties] Properties to set
+                         */
+                        function Settings(properties) {
+                            this.notificationSettings = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Settings name.
+                         * @member {string} name
+                         * @memberof google.cloud.advisorynotifications.v1.Settings
+                         * @instance
+                         */
+                        Settings.prototype.name = "";
+    
+                        /**
+                         * Settings notificationSettings.
+                         * @member {Object.<string,google.cloud.advisorynotifications.v1.INotificationSettings>} notificationSettings
+                         * @memberof google.cloud.advisorynotifications.v1.Settings
+                         * @instance
+                         */
+                        Settings.prototype.notificationSettings = $util.emptyObject;
+    
+                        /**
+                         * Settings etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.advisorynotifications.v1.Settings
+                         * @instance
+                         */
+                        Settings.prototype.etag = "";
+    
+                        /**
+                         * Creates a new Settings instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.advisorynotifications.v1.Settings
+                         * @static
+                         * @param {google.cloud.advisorynotifications.v1.ISettings=} [properties] Properties to set
+                         * @returns {google.cloud.advisorynotifications.v1.Settings} Settings instance
+                         */
+                        Settings.create = function create(properties) {
+                            return new Settings(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Settings message. Does not implicitly {@link google.cloud.advisorynotifications.v1.Settings.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.advisorynotifications.v1.Settings
+                         * @static
+                         * @param {google.cloud.advisorynotifications.v1.ISettings} message Settings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Settings.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.notificationSettings != null && Object.hasOwnProperty.call(message, "notificationSettings"))
+                                for (var keys = Object.keys(message.notificationSettings), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.advisorynotifications.v1.NotificationSettings.encode(message.notificationSettings[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.etag);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Settings message, length delimited. Does not implicitly {@link google.cloud.advisorynotifications.v1.Settings.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.advisorynotifications.v1.Settings
+                         * @static
+                         * @param {google.cloud.advisorynotifications.v1.ISettings} message Settings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Settings.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Settings message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.advisorynotifications.v1.Settings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.advisorynotifications.v1.Settings} Settings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Settings.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.advisorynotifications.v1.Settings(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (message.notificationSettings === $util.emptyObject)
+                                            message.notificationSettings = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = null;
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = $root.google.cloud.advisorynotifications.v1.NotificationSettings.decode(reader, reader.uint32());
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.notificationSettings[key] = value;
+                                        break;
+                                    }
+                                case 3: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Settings message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.advisorynotifications.v1.Settings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.advisorynotifications.v1.Settings} Settings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Settings.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Settings message.
+                         * @function verify
+                         * @memberof google.cloud.advisorynotifications.v1.Settings
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Settings.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.notificationSettings != null && message.hasOwnProperty("notificationSettings")) {
+                                if (!$util.isObject(message.notificationSettings))
+                                    return "notificationSettings: object expected";
+                                var key = Object.keys(message.notificationSettings);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.advisorynotifications.v1.NotificationSettings.verify(message.notificationSettings[key[i]]);
+                                    if (error)
+                                        return "notificationSettings." + error;
+                                }
+                            }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Settings message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.advisorynotifications.v1.Settings
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.advisorynotifications.v1.Settings} Settings
+                         */
+                        Settings.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.advisorynotifications.v1.Settings)
+                                return object;
+                            var message = new $root.google.cloud.advisorynotifications.v1.Settings();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.notificationSettings) {
+                                if (typeof object.notificationSettings !== "object")
+                                    throw TypeError(".google.cloud.advisorynotifications.v1.Settings.notificationSettings: object expected");
+                                message.notificationSettings = {};
+                                for (var keys = Object.keys(object.notificationSettings), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.notificationSettings[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.advisorynotifications.v1.Settings.notificationSettings: object expected");
+                                    message.notificationSettings[keys[i]] = $root.google.cloud.advisorynotifications.v1.NotificationSettings.fromObject(object.notificationSettings[keys[i]]);
+                                }
+                            }
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Settings message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.advisorynotifications.v1.Settings
+                         * @static
+                         * @param {google.cloud.advisorynotifications.v1.Settings} message Settings
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Settings.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.notificationSettings = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.etag = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            var keys2;
+                            if (message.notificationSettings && (keys2 = Object.keys(message.notificationSettings)).length) {
+                                object.notificationSettings = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.notificationSettings[keys2[j]] = $root.google.cloud.advisorynotifications.v1.NotificationSettings.toObject(message.notificationSettings[keys2[j]], options);
+                            }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Settings to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.advisorynotifications.v1.Settings
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Settings.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Settings
+                         * @function getTypeUrl
+                         * @memberof google.cloud.advisorynotifications.v1.Settings
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Settings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.advisorynotifications.v1.Settings";
+                        };
+    
+                        return Settings;
+                    })();
+    
+                    v1.NotificationSettings = (function() {
+    
+                        /**
+                         * Properties of a NotificationSettings.
+                         * @memberof google.cloud.advisorynotifications.v1
+                         * @interface INotificationSettings
+                         * @property {boolean|null} [enabled] NotificationSettings enabled
+                         */
+    
+                        /**
+                         * Constructs a new NotificationSettings.
+                         * @memberof google.cloud.advisorynotifications.v1
+                         * @classdesc Represents a NotificationSettings.
+                         * @implements INotificationSettings
+                         * @constructor
+                         * @param {google.cloud.advisorynotifications.v1.INotificationSettings=} [properties] Properties to set
+                         */
+                        function NotificationSettings(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * NotificationSettings enabled.
+                         * @member {boolean} enabled
+                         * @memberof google.cloud.advisorynotifications.v1.NotificationSettings
+                         * @instance
+                         */
+                        NotificationSettings.prototype.enabled = false;
+    
+                        /**
+                         * Creates a new NotificationSettings instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.advisorynotifications.v1.NotificationSettings
+                         * @static
+                         * @param {google.cloud.advisorynotifications.v1.INotificationSettings=} [properties] Properties to set
+                         * @returns {google.cloud.advisorynotifications.v1.NotificationSettings} NotificationSettings instance
+                         */
+                        NotificationSettings.create = function create(properties) {
+                            return new NotificationSettings(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified NotificationSettings message. Does not implicitly {@link google.cloud.advisorynotifications.v1.NotificationSettings.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.advisorynotifications.v1.NotificationSettings
+                         * @static
+                         * @param {google.cloud.advisorynotifications.v1.INotificationSettings} message NotificationSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NotificationSettings.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified NotificationSettings message, length delimited. Does not implicitly {@link google.cloud.advisorynotifications.v1.NotificationSettings.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.advisorynotifications.v1.NotificationSettings
+                         * @static
+                         * @param {google.cloud.advisorynotifications.v1.INotificationSettings} message NotificationSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NotificationSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a NotificationSettings message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.advisorynotifications.v1.NotificationSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.advisorynotifications.v1.NotificationSettings} NotificationSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NotificationSettings.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.advisorynotifications.v1.NotificationSettings();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.enabled = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a NotificationSettings message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.advisorynotifications.v1.NotificationSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.advisorynotifications.v1.NotificationSettings} NotificationSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NotificationSettings.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a NotificationSettings message.
+                         * @function verify
+                         * @memberof google.cloud.advisorynotifications.v1.NotificationSettings
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        NotificationSettings.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                if (typeof message.enabled !== "boolean")
+                                    return "enabled: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a NotificationSettings message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.advisorynotifications.v1.NotificationSettings
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.advisorynotifications.v1.NotificationSettings} NotificationSettings
+                         */
+                        NotificationSettings.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.advisorynotifications.v1.NotificationSettings)
+                                return object;
+                            var message = new $root.google.cloud.advisorynotifications.v1.NotificationSettings();
+                            if (object.enabled != null)
+                                message.enabled = Boolean(object.enabled);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a NotificationSettings message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.advisorynotifications.v1.NotificationSettings
+                         * @static
+                         * @param {google.cloud.advisorynotifications.v1.NotificationSettings} message NotificationSettings
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        NotificationSettings.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.enabled = false;
+                            if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                object.enabled = message.enabled;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this NotificationSettings to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.advisorynotifications.v1.NotificationSettings
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        NotificationSettings.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for NotificationSettings
+                         * @function getTypeUrl
+                         * @memberof google.cloud.advisorynotifications.v1.NotificationSettings
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        NotificationSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.advisorynotifications.v1.NotificationSettings";
+                        };
+    
+                        return NotificationSettings;
+                    })();
+    
+                    v1.GetSettingsRequest = (function() {
+    
+                        /**
+                         * Properties of a GetSettingsRequest.
+                         * @memberof google.cloud.advisorynotifications.v1
+                         * @interface IGetSettingsRequest
+                         * @property {string|null} [name] GetSettingsRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetSettingsRequest.
+                         * @memberof google.cloud.advisorynotifications.v1
+                         * @classdesc Represents a GetSettingsRequest.
+                         * @implements IGetSettingsRequest
+                         * @constructor
+                         * @param {google.cloud.advisorynotifications.v1.IGetSettingsRequest=} [properties] Properties to set
+                         */
+                        function GetSettingsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetSettingsRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.advisorynotifications.v1.GetSettingsRequest
+                         * @instance
+                         */
+                        GetSettingsRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetSettingsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.advisorynotifications.v1.GetSettingsRequest
+                         * @static
+                         * @param {google.cloud.advisorynotifications.v1.IGetSettingsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.advisorynotifications.v1.GetSettingsRequest} GetSettingsRequest instance
+                         */
+                        GetSettingsRequest.create = function create(properties) {
+                            return new GetSettingsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetSettingsRequest message. Does not implicitly {@link google.cloud.advisorynotifications.v1.GetSettingsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.advisorynotifications.v1.GetSettingsRequest
+                         * @static
+                         * @param {google.cloud.advisorynotifications.v1.IGetSettingsRequest} message GetSettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSettingsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetSettingsRequest message, length delimited. Does not implicitly {@link google.cloud.advisorynotifications.v1.GetSettingsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.advisorynotifications.v1.GetSettingsRequest
+                         * @static
+                         * @param {google.cloud.advisorynotifications.v1.IGetSettingsRequest} message GetSettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetSettingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetSettingsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.advisorynotifications.v1.GetSettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.advisorynotifications.v1.GetSettingsRequest} GetSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSettingsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.advisorynotifications.v1.GetSettingsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetSettingsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.advisorynotifications.v1.GetSettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.advisorynotifications.v1.GetSettingsRequest} GetSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetSettingsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetSettingsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.advisorynotifications.v1.GetSettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetSettingsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.advisorynotifications.v1.GetSettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.advisorynotifications.v1.GetSettingsRequest} GetSettingsRequest
+                         */
+                        GetSettingsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.advisorynotifications.v1.GetSettingsRequest)
+                                return object;
+                            var message = new $root.google.cloud.advisorynotifications.v1.GetSettingsRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetSettingsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.advisorynotifications.v1.GetSettingsRequest
+                         * @static
+                         * @param {google.cloud.advisorynotifications.v1.GetSettingsRequest} message GetSettingsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetSettingsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetSettingsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.advisorynotifications.v1.GetSettingsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetSettingsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetSettingsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.advisorynotifications.v1.GetSettingsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetSettingsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.advisorynotifications.v1.GetSettingsRequest";
+                        };
+    
+                        return GetSettingsRequest;
+                    })();
+    
+                    v1.UpdateSettingsRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateSettingsRequest.
+                         * @memberof google.cloud.advisorynotifications.v1
+                         * @interface IUpdateSettingsRequest
+                         * @property {google.cloud.advisorynotifications.v1.ISettings|null} [settings] UpdateSettingsRequest settings
+                         */
+    
+                        /**
+                         * Constructs a new UpdateSettingsRequest.
+                         * @memberof google.cloud.advisorynotifications.v1
+                         * @classdesc Represents an UpdateSettingsRequest.
+                         * @implements IUpdateSettingsRequest
+                         * @constructor
+                         * @param {google.cloud.advisorynotifications.v1.IUpdateSettingsRequest=} [properties] Properties to set
+                         */
+                        function UpdateSettingsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateSettingsRequest settings.
+                         * @member {google.cloud.advisorynotifications.v1.ISettings|null|undefined} settings
+                         * @memberof google.cloud.advisorynotifications.v1.UpdateSettingsRequest
+                         * @instance
+                         */
+                        UpdateSettingsRequest.prototype.settings = null;
+    
+                        /**
+                         * Creates a new UpdateSettingsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.advisorynotifications.v1.UpdateSettingsRequest
+                         * @static
+                         * @param {google.cloud.advisorynotifications.v1.IUpdateSettingsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.advisorynotifications.v1.UpdateSettingsRequest} UpdateSettingsRequest instance
+                         */
+                        UpdateSettingsRequest.create = function create(properties) {
+                            return new UpdateSettingsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateSettingsRequest message. Does not implicitly {@link google.cloud.advisorynotifications.v1.UpdateSettingsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.advisorynotifications.v1.UpdateSettingsRequest
+                         * @static
+                         * @param {google.cloud.advisorynotifications.v1.IUpdateSettingsRequest} message UpdateSettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateSettingsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.settings != null && Object.hasOwnProperty.call(message, "settings"))
+                                $root.google.cloud.advisorynotifications.v1.Settings.encode(message.settings, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateSettingsRequest message, length delimited. Does not implicitly {@link google.cloud.advisorynotifications.v1.UpdateSettingsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.advisorynotifications.v1.UpdateSettingsRequest
+                         * @static
+                         * @param {google.cloud.advisorynotifications.v1.IUpdateSettingsRequest} message UpdateSettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateSettingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateSettingsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.advisorynotifications.v1.UpdateSettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.advisorynotifications.v1.UpdateSettingsRequest} UpdateSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateSettingsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.advisorynotifications.v1.UpdateSettingsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.settings = $root.google.cloud.advisorynotifications.v1.Settings.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateSettingsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.advisorynotifications.v1.UpdateSettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.advisorynotifications.v1.UpdateSettingsRequest} UpdateSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateSettingsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateSettingsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.advisorynotifications.v1.UpdateSettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateSettingsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.settings != null && message.hasOwnProperty("settings")) {
+                                var error = $root.google.cloud.advisorynotifications.v1.Settings.verify(message.settings);
+                                if (error)
+                                    return "settings." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.advisorynotifications.v1.UpdateSettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.advisorynotifications.v1.UpdateSettingsRequest} UpdateSettingsRequest
+                         */
+                        UpdateSettingsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.advisorynotifications.v1.UpdateSettingsRequest)
+                                return object;
+                            var message = new $root.google.cloud.advisorynotifications.v1.UpdateSettingsRequest();
+                            if (object.settings != null) {
+                                if (typeof object.settings !== "object")
+                                    throw TypeError(".google.cloud.advisorynotifications.v1.UpdateSettingsRequest.settings: object expected");
+                                message.settings = $root.google.cloud.advisorynotifications.v1.Settings.fromObject(object.settings);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateSettingsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.advisorynotifications.v1.UpdateSettingsRequest
+                         * @static
+                         * @param {google.cloud.advisorynotifications.v1.UpdateSettingsRequest} message UpdateSettingsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateSettingsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.settings = null;
+                            if (message.settings != null && message.hasOwnProperty("settings"))
+                                object.settings = $root.google.cloud.advisorynotifications.v1.Settings.toObject(message.settings, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateSettingsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.advisorynotifications.v1.UpdateSettingsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateSettingsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateSettingsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.advisorynotifications.v1.UpdateSettingsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateSettingsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.advisorynotifications.v1.UpdateSettingsRequest";
+                        };
+    
+                        return UpdateSettingsRequest;
                     })();
     
                     return v1;

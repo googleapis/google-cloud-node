@@ -32,6 +32,7 @@
     "packages/google-cloud-bigquery-dataexchange": {},
     "packages/google-cloud-bigquery-datapolicies": {},
     "packages/google-cloud-bigquery-datatransfer": {},
+    "packages/google-cloud-bigquery-migration": {},
     "packages/google-cloud-bigquery-reservation": {},
     "packages/google-cloud-billing": {},
     "packages/google-cloud-billing-budgets": {},
