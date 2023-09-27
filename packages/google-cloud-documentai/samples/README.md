@@ -64,6 +64,7 @@
   * [Document_service.get_dataset_schema](#document_service.get_dataset_schema)
   * [Document_service.get_document](#document_service.get_document)
   * [Document_service.import_documents](#document_service.import_documents)
+  * [Document_service.list_documents](#document_service.list_documents)
   * [Document_service.update_dataset](#document_service.update_dataset)
   * [Document_service.update_dataset_schema](#document_service.update_dataset_schema)
   * [Quickstart](#quickstart)
@@ -960,6 +961,23 @@ __Usage:__
 
 
 `node packages/google-cloud-documentai/samples/generated/v1beta3/document_service.import_documents.js`
+
+
+-----
+
+
+
+
+### Document_service.list_documents
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-documentai/samples/generated/v1beta3/document_service.list_documents.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-documentai/samples/generated/v1beta3/document_service.list_documents.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-documentai/samples/generated/v1beta3/document_service.list_documents.js`
 
 
 -----
