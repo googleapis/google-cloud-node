@@ -110,6 +110,86 @@
                     }
                 }
             }
+        },
+        {
+            "regionTag": "advisorynotifications_v1_generated_AdvisoryNotificationsService_GetSettings_async",
+            "title": "AdvisoryNotificationsService getSettings Sample",
+            "origin": "API_DEFINITION",
+            "description": " Get notification settings.",
+            "canonical": true,
+            "file": "advisory_notifications_service.get_settings.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetSettings",
+                "fullName": "google.cloud.advisorynotifications.v1.AdvisoryNotificationsService.GetSettings",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.advisorynotifications.v1.Settings",
+                "client": {
+                    "shortName": "AdvisoryNotificationsServiceClient",
+                    "fullName": "google.cloud.advisorynotifications.v1.AdvisoryNotificationsServiceClient"
+                },
+                "method": {
+                    "shortName": "GetSettings",
+                    "fullName": "google.cloud.advisorynotifications.v1.AdvisoryNotificationsService.GetSettings",
+                    "service": {
+                        "shortName": "AdvisoryNotificationsService",
+                        "fullName": "google.cloud.advisorynotifications.v1.AdvisoryNotificationsService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "advisorynotifications_v1_generated_AdvisoryNotificationsService_UpdateSettings_async",
+            "title": "AdvisoryNotificationsService updateSettings Sample",
+            "origin": "API_DEFINITION",
+            "description": " Update notification settings.",
+            "canonical": true,
+            "file": "advisory_notifications_service.update_settings.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateSettings",
+                "fullName": "google.cloud.advisorynotifications.v1.AdvisoryNotificationsService.UpdateSettings",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "settings",
+                        "type": ".google.cloud.advisorynotifications.v1.Settings"
+                    }
+                ],
+                "resultType": ".google.cloud.advisorynotifications.v1.Settings",
+                "client": {
+                    "shortName": "AdvisoryNotificationsServiceClient",
+                    "fullName": "google.cloud.advisorynotifications.v1.AdvisoryNotificationsServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateSettings",
+                    "fullName": "google.cloud.advisorynotifications.v1.AdvisoryNotificationsService.UpdateSettings",
+                    "service": {
+                        "shortName": "AdvisoryNotificationsService",
+                        "fullName": "google.cloud.advisorynotifications.v1.AdvisoryNotificationsService"
+                    }
+                }
+            }
         }
     ]
 }

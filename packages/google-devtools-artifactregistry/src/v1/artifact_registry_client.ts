@@ -2730,7 +2730,8 @@ export class ArtifactRegistryClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the parent resource where the repository will be created.
+   *   Required. The name of the parent resource where the repository will be
+   *   created.
    * @param {string} request.repositoryId
    *   The repository id to use for this repository.
    * @param {google.devtools.artifactregistry.v1.Repository} request.repository
@@ -4047,7 +4048,8 @@ export class ArtifactRegistryClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the parent resource whose repositories will be listed.
+   *   Required. The name of the parent resource whose repositories will be
+   *   listed.
    * @param {number} request.pageSize
    *   The maximum number of repositories to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
@@ -4144,7 +4146,8 @@ export class ArtifactRegistryClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the parent resource whose repositories will be listed.
+   *   Required. The name of the parent resource whose repositories will be
+   *   listed.
    * @param {number} request.pageSize
    *   The maximum number of repositories to return. Maximum page size is 1,000.
    * @param {string} request.pageToken
@@ -4189,7 +4192,8 @@ export class ArtifactRegistryClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the parent resource whose repositories will be listed.
+   *   Required. The name of the parent resource whose repositories will be
+   *   listed.
    * @param {number} request.pageSize
    *   The maximum number of repositories to return. Maximum page size is 1,000.
    * @param {string} request.pageToken

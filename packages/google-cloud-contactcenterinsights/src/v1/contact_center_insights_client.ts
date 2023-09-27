@@ -2997,6 +2997,9 @@ export class ContactCenterInsightsClient {
    * @param {google.cloud.contactcenterinsights.v1.RedactionConfig} [request.redactionConfig]
    *   Optional. DLP settings for transcript redaction. Optional, will default to
    *   the config specified in Settings.
+   * @param {google.cloud.contactcenterinsights.v1.SpeechConfig} [request.speechConfig]
+   *   Optional. Default Speech-to-Text configuration. Optional, will default to
+   *   the config specified in Settings.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3420,7 +3423,8 @@ export class ContactCenterInsightsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource} request.gcsSource
-   *   A cloud storage bucket source.
+   *   A cloud storage bucket source. Note that any previously ingested objects
+   *   from the source will be skipped to avoid duplication.
    * @param {google.cloud.contactcenterinsights.v1.IngestConversationsRequest.TranscriptObjectConfig} request.transcriptObjectConfig
    *   Configuration for when `source` contains conversation transcripts.
    * @param {string} request.parent
