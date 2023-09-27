@@ -2571,6 +2571,71 @@
                         }
                       }
                     },
+                    "Tag": {
+                      "oneofs": {
+                        "_tagKey": {
+                          "oneof": [
+                            "tagKey"
+                          ]
+                        },
+                        "_tagValue": {
+                          "oneof": [
+                            "tagValue"
+                          ]
+                        },
+                        "_tagValueId": {
+                          "oneof": [
+                            "tagValueId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "tagKey": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "tagValue": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "tagValueId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "EffectiveTagDetails": {
+                      "oneofs": {
+                        "_attachedResource": {
+                          "oneof": [
+                            "attachedResource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "attachedResource": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "effectiveTags": {
+                          "rule": "repeated",
+                          "type": "Tag",
+                          "id": 2
+                        }
+                      }
+                    },
                     "ResourceSearchResult": {
                       "fields": {
                         "name": {
@@ -2666,21 +2731,45 @@
                         "tagKeys": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 23
+                          "id": 23,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "tagValues": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 25
+                          "id": 25,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "tagValueIds": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 26
+                          "id": 26,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "tags": {
+                          "rule": "repeated",
+                          "type": "Tag",
+                          "id": 29
+                        },
+                        "effectiveTags": {
+                          "rule": "repeated",
+                          "type": "EffectiveTagDetails",
+                          "id": 30
                         },
                         "parentAssetType": {
                           "type": "string",
                           "id": 103
+                        },
+                        "sccSecurityMarks": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 32
                         }
                       }
                     },

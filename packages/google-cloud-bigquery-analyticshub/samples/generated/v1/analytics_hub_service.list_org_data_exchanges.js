@@ -29,8 +29,8 @@ function main(organization) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The organization resource path of the projects containing DataExchanges.
-   *  e.g. `organizations/myorg/locations/US`.
+   *  Required. The organization resource path of the projects containing
+   *  DataExchanges. e.g. `organizations/myorg/locations/US`.
    */
   // const organization = 'abc123'
   /**

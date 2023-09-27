@@ -218,6 +218,104 @@ export namespace google {
                         public subscribeListing(request: google.cloud.bigquery.analyticshub.v1.ISubscribeListingRequest): Promise<google.cloud.bigquery.analyticshub.v1.SubscribeListingResponse>;
 
                         /**
+                         * Calls SubscribeDataExchange.
+                         * @param request SubscribeDataExchangeRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public subscribeDataExchange(request: google.cloud.bigquery.analyticshub.v1.ISubscribeDataExchangeRequest, callback: google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubscribeDataExchangeCallback): void;
+
+                        /**
+                         * Calls SubscribeDataExchange.
+                         * @param request SubscribeDataExchangeRequest message or plain object
+                         * @returns Promise
+                         */
+                        public subscribeDataExchange(request: google.cloud.bigquery.analyticshub.v1.ISubscribeDataExchangeRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls RefreshSubscription.
+                         * @param request RefreshSubscriptionRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public refreshSubscription(request: google.cloud.bigquery.analyticshub.v1.IRefreshSubscriptionRequest, callback: google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.RefreshSubscriptionCallback): void;
+
+                        /**
+                         * Calls RefreshSubscription.
+                         * @param request RefreshSubscriptionRequest message or plain object
+                         * @returns Promise
+                         */
+                        public refreshSubscription(request: google.cloud.bigquery.analyticshub.v1.IRefreshSubscriptionRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls GetSubscription.
+                         * @param request GetSubscriptionRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Subscription
+                         */
+                        public getSubscription(request: google.cloud.bigquery.analyticshub.v1.IGetSubscriptionRequest, callback: google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetSubscriptionCallback): void;
+
+                        /**
+                         * Calls GetSubscription.
+                         * @param request GetSubscriptionRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getSubscription(request: google.cloud.bigquery.analyticshub.v1.IGetSubscriptionRequest): Promise<google.cloud.bigquery.analyticshub.v1.Subscription>;
+
+                        /**
+                         * Calls ListSubscriptions.
+                         * @param request ListSubscriptionsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListSubscriptionsResponse
+                         */
+                        public listSubscriptions(request: google.cloud.bigquery.analyticshub.v1.IListSubscriptionsRequest, callback: google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListSubscriptionsCallback): void;
+
+                        /**
+                         * Calls ListSubscriptions.
+                         * @param request ListSubscriptionsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listSubscriptions(request: google.cloud.bigquery.analyticshub.v1.IListSubscriptionsRequest): Promise<google.cloud.bigquery.analyticshub.v1.ListSubscriptionsResponse>;
+
+                        /**
+                         * Calls ListSharedResourceSubscriptions.
+                         * @param request ListSharedResourceSubscriptionsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListSharedResourceSubscriptionsResponse
+                         */
+                        public listSharedResourceSubscriptions(request: google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsRequest, callback: google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListSharedResourceSubscriptionsCallback): void;
+
+                        /**
+                         * Calls ListSharedResourceSubscriptions.
+                         * @param request ListSharedResourceSubscriptionsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listSharedResourceSubscriptions(request: google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsRequest): Promise<google.cloud.bigquery.analyticshub.v1.ListSharedResourceSubscriptionsResponse>;
+
+                        /**
+                         * Calls RevokeSubscription.
+                         * @param request RevokeSubscriptionRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and RevokeSubscriptionResponse
+                         */
+                        public revokeSubscription(request: google.cloud.bigquery.analyticshub.v1.IRevokeSubscriptionRequest, callback: google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.RevokeSubscriptionCallback): void;
+
+                        /**
+                         * Calls RevokeSubscription.
+                         * @param request RevokeSubscriptionRequest message or plain object
+                         * @returns Promise
+                         */
+                        public revokeSubscription(request: google.cloud.bigquery.analyticshub.v1.IRevokeSubscriptionRequest): Promise<google.cloud.bigquery.analyticshub.v1.RevokeSubscriptionResponse>;
+
+                        /**
+                         * Calls DeleteSubscription.
+                         * @param request DeleteSubscriptionRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public deleteSubscription(request: google.cloud.bigquery.analyticshub.v1.IDeleteSubscriptionRequest, callback: google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteSubscriptionCallback): void;
+
+                        /**
+                         * Calls DeleteSubscription.
+                         * @param request DeleteSubscriptionRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteSubscription(request: google.cloud.bigquery.analyticshub.v1.IDeleteSubscriptionRequest): Promise<google.longrunning.Operation>;
+
+                        /**
                          * Calls GetIamPolicy.
                          * @param request GetIamPolicyRequest message or plain object
                          * @param callback Node-style callback called with the error, if any, and Policy
@@ -347,6 +445,55 @@ export namespace google {
                         type SubscribeListingCallback = (error: (Error|null), response?: google.cloud.bigquery.analyticshub.v1.SubscribeListingResponse) => void;
 
                         /**
+                         * Callback as used by {@link google.cloud.bigquery.analyticshub.v1.AnalyticsHubService|subscribeDataExchange}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type SubscribeDataExchangeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.analyticshub.v1.AnalyticsHubService|refreshSubscription}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type RefreshSubscriptionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.analyticshub.v1.AnalyticsHubService|getSubscription}.
+                         * @param error Error, if any
+                         * @param [response] Subscription
+                         */
+                        type GetSubscriptionCallback = (error: (Error|null), response?: google.cloud.bigquery.analyticshub.v1.Subscription) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.analyticshub.v1.AnalyticsHubService|listSubscriptions}.
+                         * @param error Error, if any
+                         * @param [response] ListSubscriptionsResponse
+                         */
+                        type ListSubscriptionsCallback = (error: (Error|null), response?: google.cloud.bigquery.analyticshub.v1.ListSubscriptionsResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.analyticshub.v1.AnalyticsHubService|listSharedResourceSubscriptions}.
+                         * @param error Error, if any
+                         * @param [response] ListSharedResourceSubscriptionsResponse
+                         */
+                        type ListSharedResourceSubscriptionsCallback = (error: (Error|null), response?: google.cloud.bigquery.analyticshub.v1.ListSharedResourceSubscriptionsResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.analyticshub.v1.AnalyticsHubService|revokeSubscription}.
+                         * @param error Error, if any
+                         * @param [response] RevokeSubscriptionResponse
+                         */
+                        type RevokeSubscriptionCallback = (error: (Error|null), response?: google.cloud.bigquery.analyticshub.v1.RevokeSubscriptionResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.analyticshub.v1.AnalyticsHubService|deleteSubscription}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type DeleteSubscriptionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
                          * Callback as used by {@link google.cloud.bigquery.analyticshub.v1.AnalyticsHubService|getIamPolicy}.
                          * @param error Error, if any
                          * @param [response] Policy
@@ -391,6 +538,9 @@ export namespace google {
 
                         /** DataExchange icon */
                         icon?: (Uint8Array|string|null);
+
+                        /** DataExchange sharingEnvironmentConfig */
+                        sharingEnvironmentConfig?: (google.cloud.bigquery.analyticshub.v1.ISharingEnvironmentConfig|null);
                     }
 
                     /** Represents a DataExchange. */
@@ -422,6 +572,9 @@ export namespace google {
 
                         /** DataExchange icon. */
                         public icon: (Uint8Array|string);
+
+                        /** DataExchange sharingEnvironmentConfig. */
+                        public sharingEnvironmentConfig?: (google.cloud.bigquery.analyticshub.v1.ISharingEnvironmentConfig|null);
 
                         /**
                          * Creates a new DataExchange instance using the specified properties.
@@ -499,6 +652,297 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SharingEnvironmentConfig. */
+                    interface ISharingEnvironmentConfig {
+
+                        /** SharingEnvironmentConfig defaultExchangeConfig */
+                        defaultExchangeConfig?: (google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.IDefaultExchangeConfig|null);
+
+                        /** SharingEnvironmentConfig dcrExchangeConfig */
+                        dcrExchangeConfig?: (google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.IDcrExchangeConfig|null);
+                    }
+
+                    /** Represents a SharingEnvironmentConfig. */
+                    class SharingEnvironmentConfig implements ISharingEnvironmentConfig {
+
+                        /**
+                         * Constructs a new SharingEnvironmentConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.analyticshub.v1.ISharingEnvironmentConfig);
+
+                        /** SharingEnvironmentConfig defaultExchangeConfig. */
+                        public defaultExchangeConfig?: (google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.IDefaultExchangeConfig|null);
+
+                        /** SharingEnvironmentConfig dcrExchangeConfig. */
+                        public dcrExchangeConfig?: (google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.IDcrExchangeConfig|null);
+
+                        /** SharingEnvironmentConfig environment. */
+                        public environment?: ("defaultExchangeConfig"|"dcrExchangeConfig");
+
+                        /**
+                         * Creates a new SharingEnvironmentConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SharingEnvironmentConfig instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.analyticshub.v1.ISharingEnvironmentConfig): google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig;
+
+                        /**
+                         * Encodes the specified SharingEnvironmentConfig message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.verify|verify} messages.
+                         * @param message SharingEnvironmentConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.analyticshub.v1.ISharingEnvironmentConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SharingEnvironmentConfig message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.verify|verify} messages.
+                         * @param message SharingEnvironmentConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.ISharingEnvironmentConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SharingEnvironmentConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SharingEnvironmentConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig;
+
+                        /**
+                         * Decodes a SharingEnvironmentConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SharingEnvironmentConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig;
+
+                        /**
+                         * Verifies a SharingEnvironmentConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SharingEnvironmentConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SharingEnvironmentConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig;
+
+                        /**
+                         * Creates a plain object from a SharingEnvironmentConfig message. Also converts values to other types if specified.
+                         * @param message SharingEnvironmentConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SharingEnvironmentConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SharingEnvironmentConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace SharingEnvironmentConfig {
+
+                        /** Properties of a DefaultExchangeConfig. */
+                        interface IDefaultExchangeConfig {
+                        }
+
+                        /** Represents a DefaultExchangeConfig. */
+                        class DefaultExchangeConfig implements IDefaultExchangeConfig {
+
+                            /**
+                             * Constructs a new DefaultExchangeConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.IDefaultExchangeConfig);
+
+                            /**
+                             * Creates a new DefaultExchangeConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DefaultExchangeConfig instance
+                             */
+                            public static create(properties?: google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.IDefaultExchangeConfig): google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.DefaultExchangeConfig;
+
+                            /**
+                             * Encodes the specified DefaultExchangeConfig message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.DefaultExchangeConfig.verify|verify} messages.
+                             * @param message DefaultExchangeConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.IDefaultExchangeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DefaultExchangeConfig message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.DefaultExchangeConfig.verify|verify} messages.
+                             * @param message DefaultExchangeConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.IDefaultExchangeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DefaultExchangeConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DefaultExchangeConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.DefaultExchangeConfig;
+
+                            /**
+                             * Decodes a DefaultExchangeConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DefaultExchangeConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.DefaultExchangeConfig;
+
+                            /**
+                             * Verifies a DefaultExchangeConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DefaultExchangeConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DefaultExchangeConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.DefaultExchangeConfig;
+
+                            /**
+                             * Creates a plain object from a DefaultExchangeConfig message. Also converts values to other types if specified.
+                             * @param message DefaultExchangeConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.DefaultExchangeConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DefaultExchangeConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DefaultExchangeConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a DcrExchangeConfig. */
+                        interface IDcrExchangeConfig {
+                        }
+
+                        /** Represents a DcrExchangeConfig. */
+                        class DcrExchangeConfig implements IDcrExchangeConfig {
+
+                            /**
+                             * Constructs a new DcrExchangeConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.IDcrExchangeConfig);
+
+                            /**
+                             * Creates a new DcrExchangeConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DcrExchangeConfig instance
+                             */
+                            public static create(properties?: google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.IDcrExchangeConfig): google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.DcrExchangeConfig;
+
+                            /**
+                             * Encodes the specified DcrExchangeConfig message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.DcrExchangeConfig.verify|verify} messages.
+                             * @param message DcrExchangeConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.IDcrExchangeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DcrExchangeConfig message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.DcrExchangeConfig.verify|verify} messages.
+                             * @param message DcrExchangeConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.IDcrExchangeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DcrExchangeConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DcrExchangeConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.DcrExchangeConfig;
+
+                            /**
+                             * Decodes a DcrExchangeConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DcrExchangeConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.DcrExchangeConfig;
+
+                            /**
+                             * Verifies a DcrExchangeConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DcrExchangeConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DcrExchangeConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.DcrExchangeConfig;
+
+                            /**
+                             * Creates a plain object from a DcrExchangeConfig message. Also converts values to other types if specified.
+                             * @param message DcrExchangeConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.DcrExchangeConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DcrExchangeConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DcrExchangeConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
 
                     /** Properties of a DataProvider. */
@@ -969,6 +1413,9 @@ export namespace google {
 
                         /** Listing requestAccess */
                         requestAccess?: (string|null);
+
+                        /** Listing restrictedExportConfig */
+                        restrictedExportConfig?: (google.cloud.bigquery.analyticshub.v1.Listing.IRestrictedExportConfig|null);
                     }
 
                     /** Represents a Listing. */
@@ -1015,6 +1462,9 @@ export namespace google {
 
                         /** Listing requestAccess. */
                         public requestAccess: string;
+
+                        /** Listing restrictedExportConfig. */
+                        public restrictedExportConfig?: (google.cloud.bigquery.analyticshub.v1.Listing.IRestrictedExportConfig|null);
 
                         /** Listing source. */
                         public source?: "bigqueryDataset";
@@ -1196,6 +1646,115 @@ export namespace google {
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
+                        /** Properties of a RestrictedExportConfig. */
+                        interface IRestrictedExportConfig {
+
+                            /** RestrictedExportConfig enabled */
+                            enabled?: (boolean|null);
+
+                            /** RestrictedExportConfig restrictDirectTableAccess */
+                            restrictDirectTableAccess?: (boolean|null);
+
+                            /** RestrictedExportConfig restrictQueryResult */
+                            restrictQueryResult?: (boolean|null);
+                        }
+
+                        /** Represents a RestrictedExportConfig. */
+                        class RestrictedExportConfig implements IRestrictedExportConfig {
+
+                            /**
+                             * Constructs a new RestrictedExportConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.bigquery.analyticshub.v1.Listing.IRestrictedExportConfig);
+
+                            /** RestrictedExportConfig enabled. */
+                            public enabled: boolean;
+
+                            /** RestrictedExportConfig restrictDirectTableAccess. */
+                            public restrictDirectTableAccess: boolean;
+
+                            /** RestrictedExportConfig restrictQueryResult. */
+                            public restrictQueryResult: boolean;
+
+                            /**
+                             * Creates a new RestrictedExportConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RestrictedExportConfig instance
+                             */
+                            public static create(properties?: google.cloud.bigquery.analyticshub.v1.Listing.IRestrictedExportConfig): google.cloud.bigquery.analyticshub.v1.Listing.RestrictedExportConfig;
+
+                            /**
+                             * Encodes the specified RestrictedExportConfig message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.Listing.RestrictedExportConfig.verify|verify} messages.
+                             * @param message RestrictedExportConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.bigquery.analyticshub.v1.Listing.IRestrictedExportConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RestrictedExportConfig message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.Listing.RestrictedExportConfig.verify|verify} messages.
+                             * @param message RestrictedExportConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.Listing.IRestrictedExportConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RestrictedExportConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RestrictedExportConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.Listing.RestrictedExportConfig;
+
+                            /**
+                             * Decodes a RestrictedExportConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RestrictedExportConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.Listing.RestrictedExportConfig;
+
+                            /**
+                             * Verifies a RestrictedExportConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RestrictedExportConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RestrictedExportConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.Listing.RestrictedExportConfig;
+
+                            /**
+                             * Creates a plain object from a RestrictedExportConfig message. Also converts values to other types if specified.
+                             * @param message RestrictedExportConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.bigquery.analyticshub.v1.Listing.RestrictedExportConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RestrictedExportConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RestrictedExportConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
                         /** State enum. */
                         enum State {
                             STATE_UNSPECIFIED = 0,
@@ -1224,6 +1783,271 @@ export namespace google {
                             CATEGORY_SCIENCE_AND_RESEARCH = 17,
                             CATEGORY_TRANSPORTATION_AND_LOGISTICS = 18,
                             CATEGORY_TRAVEL_AND_TOURISM = 19
+                        }
+                    }
+
+                    /** Properties of a Subscription. */
+                    interface ISubscription {
+
+                        /** Subscription listing */
+                        listing?: (string|null);
+
+                        /** Subscription dataExchange */
+                        dataExchange?: (string|null);
+
+                        /** Subscription name */
+                        name?: (string|null);
+
+                        /** Subscription creationTime */
+                        creationTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Subscription lastModifyTime */
+                        lastModifyTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Subscription organizationId */
+                        organizationId?: (string|null);
+
+                        /** Subscription organizationDisplayName */
+                        organizationDisplayName?: (string|null);
+
+                        /** Subscription state */
+                        state?: (google.cloud.bigquery.analyticshub.v1.Subscription.State|keyof typeof google.cloud.bigquery.analyticshub.v1.Subscription.State|null);
+
+                        /** Subscription linkedDatasetMap */
+                        linkedDatasetMap?: ({ [k: string]: google.cloud.bigquery.analyticshub.v1.Subscription.ILinkedResource }|null);
+
+                        /** Subscription subscriberContact */
+                        subscriberContact?: (string|null);
+                    }
+
+                    /** Represents a Subscription. */
+                    class Subscription implements ISubscription {
+
+                        /**
+                         * Constructs a new Subscription.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.analyticshub.v1.ISubscription);
+
+                        /** Subscription listing. */
+                        public listing?: (string|null);
+
+                        /** Subscription dataExchange. */
+                        public dataExchange?: (string|null);
+
+                        /** Subscription name. */
+                        public name: string;
+
+                        /** Subscription creationTime. */
+                        public creationTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Subscription lastModifyTime. */
+                        public lastModifyTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Subscription organizationId. */
+                        public organizationId: string;
+
+                        /** Subscription organizationDisplayName. */
+                        public organizationDisplayName: string;
+
+                        /** Subscription state. */
+                        public state: (google.cloud.bigquery.analyticshub.v1.Subscription.State|keyof typeof google.cloud.bigquery.analyticshub.v1.Subscription.State);
+
+                        /** Subscription linkedDatasetMap. */
+                        public linkedDatasetMap: { [k: string]: google.cloud.bigquery.analyticshub.v1.Subscription.ILinkedResource };
+
+                        /** Subscription subscriberContact. */
+                        public subscriberContact: string;
+
+                        /** Subscription resourceName. */
+                        public resourceName?: ("listing"|"dataExchange");
+
+                        /**
+                         * Creates a new Subscription instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Subscription instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.analyticshub.v1.ISubscription): google.cloud.bigquery.analyticshub.v1.Subscription;
+
+                        /**
+                         * Encodes the specified Subscription message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.Subscription.verify|verify} messages.
+                         * @param message Subscription message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.analyticshub.v1.ISubscription, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Subscription message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.Subscription.verify|verify} messages.
+                         * @param message Subscription message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.ISubscription, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Subscription message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Subscription
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.Subscription;
+
+                        /**
+                         * Decodes a Subscription message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Subscription
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.Subscription;
+
+                        /**
+                         * Verifies a Subscription message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Subscription message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Subscription
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.Subscription;
+
+                        /**
+                         * Creates a plain object from a Subscription message. Also converts values to other types if specified.
+                         * @param message Subscription
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.analyticshub.v1.Subscription, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Subscription to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Subscription
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Subscription {
+
+                        /** Properties of a LinkedResource. */
+                        interface ILinkedResource {
+
+                            /** LinkedResource linkedDataset */
+                            linkedDataset?: (string|null);
+                        }
+
+                        /** Represents a LinkedResource. */
+                        class LinkedResource implements ILinkedResource {
+
+                            /**
+                             * Constructs a new LinkedResource.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.bigquery.analyticshub.v1.Subscription.ILinkedResource);
+
+                            /** LinkedResource linkedDataset. */
+                            public linkedDataset?: (string|null);
+
+                            /** LinkedResource reference. */
+                            public reference?: "linkedDataset";
+
+                            /**
+                             * Creates a new LinkedResource instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns LinkedResource instance
+                             */
+                            public static create(properties?: google.cloud.bigquery.analyticshub.v1.Subscription.ILinkedResource): google.cloud.bigquery.analyticshub.v1.Subscription.LinkedResource;
+
+                            /**
+                             * Encodes the specified LinkedResource message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.Subscription.LinkedResource.verify|verify} messages.
+                             * @param message LinkedResource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.bigquery.analyticshub.v1.Subscription.ILinkedResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified LinkedResource message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.Subscription.LinkedResource.verify|verify} messages.
+                             * @param message LinkedResource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.Subscription.ILinkedResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a LinkedResource message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns LinkedResource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.Subscription.LinkedResource;
+
+                            /**
+                             * Decodes a LinkedResource message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns LinkedResource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.Subscription.LinkedResource;
+
+                            /**
+                             * Verifies a LinkedResource message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a LinkedResource message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns LinkedResource
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.Subscription.LinkedResource;
+
+                            /**
+                             * Creates a plain object from a LinkedResource message. Also converts values to other types if specified.
+                             * @param message LinkedResource
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.bigquery.analyticshub.v1.Subscription.LinkedResource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this LinkedResource to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for LinkedResource
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            STATE_ACTIVE = 1,
+                            STATE_STALE = 2,
+                            STATE_INACTIVE = 3
                         }
                     }
 
@@ -2783,6 +3607,9 @@ export namespace google {
 
                     /** Properties of a SubscribeListingResponse. */
                     interface ISubscribeListingResponse {
+
+                        /** SubscribeListingResponse subscription */
+                        subscription?: (google.cloud.bigquery.analyticshub.v1.ISubscription|null);
                     }
 
                     /** Represents a SubscribeListingResponse. */
@@ -2793,6 +3620,9 @@ export namespace google {
                          * @param [properties] Properties to set
                          */
                         constructor(properties?: google.cloud.bigquery.analyticshub.v1.ISubscribeListingResponse);
+
+                        /** SubscribeListingResponse subscription. */
+                        public subscription?: (google.cloud.bigquery.analyticshub.v1.ISubscription|null);
 
                         /**
                          * Creates a new SubscribeListingResponse instance using the specified properties.
@@ -2866,6 +3696,1363 @@ export namespace google {
 
                         /**
                          * Gets the default type url for SubscribeListingResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SubscribeDataExchangeRequest. */
+                    interface ISubscribeDataExchangeRequest {
+
+                        /** SubscribeDataExchangeRequest name */
+                        name?: (string|null);
+
+                        /** SubscribeDataExchangeRequest destination */
+                        destination?: (string|null);
+
+                        /** SubscribeDataExchangeRequest subscription */
+                        subscription?: (string|null);
+
+                        /** SubscribeDataExchangeRequest subscriberContact */
+                        subscriberContact?: (string|null);
+                    }
+
+                    /** Represents a SubscribeDataExchangeRequest. */
+                    class SubscribeDataExchangeRequest implements ISubscribeDataExchangeRequest {
+
+                        /**
+                         * Constructs a new SubscribeDataExchangeRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.analyticshub.v1.ISubscribeDataExchangeRequest);
+
+                        /** SubscribeDataExchangeRequest name. */
+                        public name: string;
+
+                        /** SubscribeDataExchangeRequest destination. */
+                        public destination: string;
+
+                        /** SubscribeDataExchangeRequest subscription. */
+                        public subscription: string;
+
+                        /** SubscribeDataExchangeRequest subscriberContact. */
+                        public subscriberContact: string;
+
+                        /**
+                         * Creates a new SubscribeDataExchangeRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SubscribeDataExchangeRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.analyticshub.v1.ISubscribeDataExchangeRequest): google.cloud.bigquery.analyticshub.v1.SubscribeDataExchangeRequest;
+
+                        /**
+                         * Encodes the specified SubscribeDataExchangeRequest message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.SubscribeDataExchangeRequest.verify|verify} messages.
+                         * @param message SubscribeDataExchangeRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.analyticshub.v1.ISubscribeDataExchangeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SubscribeDataExchangeRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.SubscribeDataExchangeRequest.verify|verify} messages.
+                         * @param message SubscribeDataExchangeRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.ISubscribeDataExchangeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SubscribeDataExchangeRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SubscribeDataExchangeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.SubscribeDataExchangeRequest;
+
+                        /**
+                         * Decodes a SubscribeDataExchangeRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SubscribeDataExchangeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.SubscribeDataExchangeRequest;
+
+                        /**
+                         * Verifies a SubscribeDataExchangeRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SubscribeDataExchangeRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SubscribeDataExchangeRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.SubscribeDataExchangeRequest;
+
+                        /**
+                         * Creates a plain object from a SubscribeDataExchangeRequest message. Also converts values to other types if specified.
+                         * @param message SubscribeDataExchangeRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.analyticshub.v1.SubscribeDataExchangeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SubscribeDataExchangeRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SubscribeDataExchangeRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SubscribeDataExchangeResponse. */
+                    interface ISubscribeDataExchangeResponse {
+
+                        /** SubscribeDataExchangeResponse subscription */
+                        subscription?: (google.cloud.bigquery.analyticshub.v1.ISubscription|null);
+                    }
+
+                    /** Represents a SubscribeDataExchangeResponse. */
+                    class SubscribeDataExchangeResponse implements ISubscribeDataExchangeResponse {
+
+                        /**
+                         * Constructs a new SubscribeDataExchangeResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.analyticshub.v1.ISubscribeDataExchangeResponse);
+
+                        /** SubscribeDataExchangeResponse subscription. */
+                        public subscription?: (google.cloud.bigquery.analyticshub.v1.ISubscription|null);
+
+                        /**
+                         * Creates a new SubscribeDataExchangeResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SubscribeDataExchangeResponse instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.analyticshub.v1.ISubscribeDataExchangeResponse): google.cloud.bigquery.analyticshub.v1.SubscribeDataExchangeResponse;
+
+                        /**
+                         * Encodes the specified SubscribeDataExchangeResponse message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.SubscribeDataExchangeResponse.verify|verify} messages.
+                         * @param message SubscribeDataExchangeResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.analyticshub.v1.ISubscribeDataExchangeResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SubscribeDataExchangeResponse message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.SubscribeDataExchangeResponse.verify|verify} messages.
+                         * @param message SubscribeDataExchangeResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.ISubscribeDataExchangeResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SubscribeDataExchangeResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SubscribeDataExchangeResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.SubscribeDataExchangeResponse;
+
+                        /**
+                         * Decodes a SubscribeDataExchangeResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SubscribeDataExchangeResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.SubscribeDataExchangeResponse;
+
+                        /**
+                         * Verifies a SubscribeDataExchangeResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SubscribeDataExchangeResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SubscribeDataExchangeResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.SubscribeDataExchangeResponse;
+
+                        /**
+                         * Creates a plain object from a SubscribeDataExchangeResponse message. Also converts values to other types if specified.
+                         * @param message SubscribeDataExchangeResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.analyticshub.v1.SubscribeDataExchangeResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SubscribeDataExchangeResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SubscribeDataExchangeResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RefreshSubscriptionRequest. */
+                    interface IRefreshSubscriptionRequest {
+
+                        /** RefreshSubscriptionRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a RefreshSubscriptionRequest. */
+                    class RefreshSubscriptionRequest implements IRefreshSubscriptionRequest {
+
+                        /**
+                         * Constructs a new RefreshSubscriptionRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.analyticshub.v1.IRefreshSubscriptionRequest);
+
+                        /** RefreshSubscriptionRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new RefreshSubscriptionRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RefreshSubscriptionRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.analyticshub.v1.IRefreshSubscriptionRequest): google.cloud.bigquery.analyticshub.v1.RefreshSubscriptionRequest;
+
+                        /**
+                         * Encodes the specified RefreshSubscriptionRequest message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.RefreshSubscriptionRequest.verify|verify} messages.
+                         * @param message RefreshSubscriptionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.analyticshub.v1.IRefreshSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RefreshSubscriptionRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.RefreshSubscriptionRequest.verify|verify} messages.
+                         * @param message RefreshSubscriptionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.IRefreshSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RefreshSubscriptionRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RefreshSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.RefreshSubscriptionRequest;
+
+                        /**
+                         * Decodes a RefreshSubscriptionRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RefreshSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.RefreshSubscriptionRequest;
+
+                        /**
+                         * Verifies a RefreshSubscriptionRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RefreshSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RefreshSubscriptionRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.RefreshSubscriptionRequest;
+
+                        /**
+                         * Creates a plain object from a RefreshSubscriptionRequest message. Also converts values to other types if specified.
+                         * @param message RefreshSubscriptionRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.analyticshub.v1.RefreshSubscriptionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RefreshSubscriptionRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RefreshSubscriptionRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RefreshSubscriptionResponse. */
+                    interface IRefreshSubscriptionResponse {
+
+                        /** RefreshSubscriptionResponse subscription */
+                        subscription?: (google.cloud.bigquery.analyticshub.v1.ISubscription|null);
+                    }
+
+                    /** Represents a RefreshSubscriptionResponse. */
+                    class RefreshSubscriptionResponse implements IRefreshSubscriptionResponse {
+
+                        /**
+                         * Constructs a new RefreshSubscriptionResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.analyticshub.v1.IRefreshSubscriptionResponse);
+
+                        /** RefreshSubscriptionResponse subscription. */
+                        public subscription?: (google.cloud.bigquery.analyticshub.v1.ISubscription|null);
+
+                        /**
+                         * Creates a new RefreshSubscriptionResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RefreshSubscriptionResponse instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.analyticshub.v1.IRefreshSubscriptionResponse): google.cloud.bigquery.analyticshub.v1.RefreshSubscriptionResponse;
+
+                        /**
+                         * Encodes the specified RefreshSubscriptionResponse message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.RefreshSubscriptionResponse.verify|verify} messages.
+                         * @param message RefreshSubscriptionResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.analyticshub.v1.IRefreshSubscriptionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RefreshSubscriptionResponse message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.RefreshSubscriptionResponse.verify|verify} messages.
+                         * @param message RefreshSubscriptionResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.IRefreshSubscriptionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RefreshSubscriptionResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RefreshSubscriptionResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.RefreshSubscriptionResponse;
+
+                        /**
+                         * Decodes a RefreshSubscriptionResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RefreshSubscriptionResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.RefreshSubscriptionResponse;
+
+                        /**
+                         * Verifies a RefreshSubscriptionResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RefreshSubscriptionResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RefreshSubscriptionResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.RefreshSubscriptionResponse;
+
+                        /**
+                         * Creates a plain object from a RefreshSubscriptionResponse message. Also converts values to other types if specified.
+                         * @param message RefreshSubscriptionResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.analyticshub.v1.RefreshSubscriptionResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RefreshSubscriptionResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RefreshSubscriptionResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetSubscriptionRequest. */
+                    interface IGetSubscriptionRequest {
+
+                        /** GetSubscriptionRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetSubscriptionRequest. */
+                    class GetSubscriptionRequest implements IGetSubscriptionRequest {
+
+                        /**
+                         * Constructs a new GetSubscriptionRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.analyticshub.v1.IGetSubscriptionRequest);
+
+                        /** GetSubscriptionRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetSubscriptionRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetSubscriptionRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.analyticshub.v1.IGetSubscriptionRequest): google.cloud.bigquery.analyticshub.v1.GetSubscriptionRequest;
+
+                        /**
+                         * Encodes the specified GetSubscriptionRequest message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.GetSubscriptionRequest.verify|verify} messages.
+                         * @param message GetSubscriptionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.analyticshub.v1.IGetSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetSubscriptionRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.GetSubscriptionRequest.verify|verify} messages.
+                         * @param message GetSubscriptionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.IGetSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetSubscriptionRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.GetSubscriptionRequest;
+
+                        /**
+                         * Decodes a GetSubscriptionRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.GetSubscriptionRequest;
+
+                        /**
+                         * Verifies a GetSubscriptionRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetSubscriptionRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.GetSubscriptionRequest;
+
+                        /**
+                         * Creates a plain object from a GetSubscriptionRequest message. Also converts values to other types if specified.
+                         * @param message GetSubscriptionRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.analyticshub.v1.GetSubscriptionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetSubscriptionRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetSubscriptionRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListSubscriptionsRequest. */
+                    interface IListSubscriptionsRequest {
+
+                        /** ListSubscriptionsRequest parent */
+                        parent?: (string|null);
+
+                        /** ListSubscriptionsRequest filter */
+                        filter?: (string|null);
+
+                        /** ListSubscriptionsRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListSubscriptionsRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a ListSubscriptionsRequest. */
+                    class ListSubscriptionsRequest implements IListSubscriptionsRequest {
+
+                        /**
+                         * Constructs a new ListSubscriptionsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.analyticshub.v1.IListSubscriptionsRequest);
+
+                        /** ListSubscriptionsRequest parent. */
+                        public parent: string;
+
+                        /** ListSubscriptionsRequest filter. */
+                        public filter: string;
+
+                        /** ListSubscriptionsRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListSubscriptionsRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new ListSubscriptionsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListSubscriptionsRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.analyticshub.v1.IListSubscriptionsRequest): google.cloud.bigquery.analyticshub.v1.ListSubscriptionsRequest;
+
+                        /**
+                         * Encodes the specified ListSubscriptionsRequest message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.ListSubscriptionsRequest.verify|verify} messages.
+                         * @param message ListSubscriptionsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.analyticshub.v1.IListSubscriptionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListSubscriptionsRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.ListSubscriptionsRequest.verify|verify} messages.
+                         * @param message ListSubscriptionsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.IListSubscriptionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListSubscriptionsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListSubscriptionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.ListSubscriptionsRequest;
+
+                        /**
+                         * Decodes a ListSubscriptionsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListSubscriptionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.ListSubscriptionsRequest;
+
+                        /**
+                         * Verifies a ListSubscriptionsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListSubscriptionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListSubscriptionsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.ListSubscriptionsRequest;
+
+                        /**
+                         * Creates a plain object from a ListSubscriptionsRequest message. Also converts values to other types if specified.
+                         * @param message ListSubscriptionsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.analyticshub.v1.ListSubscriptionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListSubscriptionsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListSubscriptionsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListSubscriptionsResponse. */
+                    interface IListSubscriptionsResponse {
+
+                        /** ListSubscriptionsResponse subscriptions */
+                        subscriptions?: (google.cloud.bigquery.analyticshub.v1.ISubscription[]|null);
+
+                        /** ListSubscriptionsResponse nextPageToken */
+                        nextPageToken?: (string|null);
+                    }
+
+                    /** Represents a ListSubscriptionsResponse. */
+                    class ListSubscriptionsResponse implements IListSubscriptionsResponse {
+
+                        /**
+                         * Constructs a new ListSubscriptionsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.analyticshub.v1.IListSubscriptionsResponse);
+
+                        /** ListSubscriptionsResponse subscriptions. */
+                        public subscriptions: google.cloud.bigquery.analyticshub.v1.ISubscription[];
+
+                        /** ListSubscriptionsResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /**
+                         * Creates a new ListSubscriptionsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListSubscriptionsResponse instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.analyticshub.v1.IListSubscriptionsResponse): google.cloud.bigquery.analyticshub.v1.ListSubscriptionsResponse;
+
+                        /**
+                         * Encodes the specified ListSubscriptionsResponse message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.ListSubscriptionsResponse.verify|verify} messages.
+                         * @param message ListSubscriptionsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.analyticshub.v1.IListSubscriptionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListSubscriptionsResponse message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.ListSubscriptionsResponse.verify|verify} messages.
+                         * @param message ListSubscriptionsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.IListSubscriptionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListSubscriptionsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListSubscriptionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.ListSubscriptionsResponse;
+
+                        /**
+                         * Decodes a ListSubscriptionsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListSubscriptionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.ListSubscriptionsResponse;
+
+                        /**
+                         * Verifies a ListSubscriptionsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListSubscriptionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListSubscriptionsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.ListSubscriptionsResponse;
+
+                        /**
+                         * Creates a plain object from a ListSubscriptionsResponse message. Also converts values to other types if specified.
+                         * @param message ListSubscriptionsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.analyticshub.v1.ListSubscriptionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListSubscriptionsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListSubscriptionsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListSharedResourceSubscriptionsRequest. */
+                    interface IListSharedResourceSubscriptionsRequest {
+
+                        /** ListSharedResourceSubscriptionsRequest resource */
+                        resource?: (string|null);
+
+                        /** ListSharedResourceSubscriptionsRequest includeDeletedSubscriptions */
+                        includeDeletedSubscriptions?: (boolean|null);
+
+                        /** ListSharedResourceSubscriptionsRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListSharedResourceSubscriptionsRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a ListSharedResourceSubscriptionsRequest. */
+                    class ListSharedResourceSubscriptionsRequest implements IListSharedResourceSubscriptionsRequest {
+
+                        /**
+                         * Constructs a new ListSharedResourceSubscriptionsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsRequest);
+
+                        /** ListSharedResourceSubscriptionsRequest resource. */
+                        public resource: string;
+
+                        /** ListSharedResourceSubscriptionsRequest includeDeletedSubscriptions. */
+                        public includeDeletedSubscriptions: boolean;
+
+                        /** ListSharedResourceSubscriptionsRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListSharedResourceSubscriptionsRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new ListSharedResourceSubscriptionsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListSharedResourceSubscriptionsRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsRequest): google.cloud.bigquery.analyticshub.v1.ListSharedResourceSubscriptionsRequest;
+
+                        /**
+                         * Encodes the specified ListSharedResourceSubscriptionsRequest message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.ListSharedResourceSubscriptionsRequest.verify|verify} messages.
+                         * @param message ListSharedResourceSubscriptionsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListSharedResourceSubscriptionsRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.ListSharedResourceSubscriptionsRequest.verify|verify} messages.
+                         * @param message ListSharedResourceSubscriptionsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListSharedResourceSubscriptionsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListSharedResourceSubscriptionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.ListSharedResourceSubscriptionsRequest;
+
+                        /**
+                         * Decodes a ListSharedResourceSubscriptionsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListSharedResourceSubscriptionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.ListSharedResourceSubscriptionsRequest;
+
+                        /**
+                         * Verifies a ListSharedResourceSubscriptionsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListSharedResourceSubscriptionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListSharedResourceSubscriptionsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.ListSharedResourceSubscriptionsRequest;
+
+                        /**
+                         * Creates a plain object from a ListSharedResourceSubscriptionsRequest message. Also converts values to other types if specified.
+                         * @param message ListSharedResourceSubscriptionsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.analyticshub.v1.ListSharedResourceSubscriptionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListSharedResourceSubscriptionsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListSharedResourceSubscriptionsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListSharedResourceSubscriptionsResponse. */
+                    interface IListSharedResourceSubscriptionsResponse {
+
+                        /** ListSharedResourceSubscriptionsResponse sharedResourceSubscriptions */
+                        sharedResourceSubscriptions?: (google.cloud.bigquery.analyticshub.v1.ISubscription[]|null);
+
+                        /** ListSharedResourceSubscriptionsResponse nextPageToken */
+                        nextPageToken?: (string|null);
+                    }
+
+                    /** Represents a ListSharedResourceSubscriptionsResponse. */
+                    class ListSharedResourceSubscriptionsResponse implements IListSharedResourceSubscriptionsResponse {
+
+                        /**
+                         * Constructs a new ListSharedResourceSubscriptionsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsResponse);
+
+                        /** ListSharedResourceSubscriptionsResponse sharedResourceSubscriptions. */
+                        public sharedResourceSubscriptions: google.cloud.bigquery.analyticshub.v1.ISubscription[];
+
+                        /** ListSharedResourceSubscriptionsResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /**
+                         * Creates a new ListSharedResourceSubscriptionsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListSharedResourceSubscriptionsResponse instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsResponse): google.cloud.bigquery.analyticshub.v1.ListSharedResourceSubscriptionsResponse;
+
+                        /**
+                         * Encodes the specified ListSharedResourceSubscriptionsResponse message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.ListSharedResourceSubscriptionsResponse.verify|verify} messages.
+                         * @param message ListSharedResourceSubscriptionsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListSharedResourceSubscriptionsResponse message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.ListSharedResourceSubscriptionsResponse.verify|verify} messages.
+                         * @param message ListSharedResourceSubscriptionsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.IListSharedResourceSubscriptionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListSharedResourceSubscriptionsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListSharedResourceSubscriptionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.ListSharedResourceSubscriptionsResponse;
+
+                        /**
+                         * Decodes a ListSharedResourceSubscriptionsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListSharedResourceSubscriptionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.ListSharedResourceSubscriptionsResponse;
+
+                        /**
+                         * Verifies a ListSharedResourceSubscriptionsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListSharedResourceSubscriptionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListSharedResourceSubscriptionsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.ListSharedResourceSubscriptionsResponse;
+
+                        /**
+                         * Creates a plain object from a ListSharedResourceSubscriptionsResponse message. Also converts values to other types if specified.
+                         * @param message ListSharedResourceSubscriptionsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.analyticshub.v1.ListSharedResourceSubscriptionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListSharedResourceSubscriptionsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListSharedResourceSubscriptionsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RevokeSubscriptionRequest. */
+                    interface IRevokeSubscriptionRequest {
+
+                        /** RevokeSubscriptionRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a RevokeSubscriptionRequest. */
+                    class RevokeSubscriptionRequest implements IRevokeSubscriptionRequest {
+
+                        /**
+                         * Constructs a new RevokeSubscriptionRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.analyticshub.v1.IRevokeSubscriptionRequest);
+
+                        /** RevokeSubscriptionRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new RevokeSubscriptionRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RevokeSubscriptionRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.analyticshub.v1.IRevokeSubscriptionRequest): google.cloud.bigquery.analyticshub.v1.RevokeSubscriptionRequest;
+
+                        /**
+                         * Encodes the specified RevokeSubscriptionRequest message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.RevokeSubscriptionRequest.verify|verify} messages.
+                         * @param message RevokeSubscriptionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.analyticshub.v1.IRevokeSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RevokeSubscriptionRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.RevokeSubscriptionRequest.verify|verify} messages.
+                         * @param message RevokeSubscriptionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.IRevokeSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RevokeSubscriptionRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RevokeSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.RevokeSubscriptionRequest;
+
+                        /**
+                         * Decodes a RevokeSubscriptionRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RevokeSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.RevokeSubscriptionRequest;
+
+                        /**
+                         * Verifies a RevokeSubscriptionRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RevokeSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RevokeSubscriptionRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.RevokeSubscriptionRequest;
+
+                        /**
+                         * Creates a plain object from a RevokeSubscriptionRequest message. Also converts values to other types if specified.
+                         * @param message RevokeSubscriptionRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.analyticshub.v1.RevokeSubscriptionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RevokeSubscriptionRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RevokeSubscriptionRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RevokeSubscriptionResponse. */
+                    interface IRevokeSubscriptionResponse {
+                    }
+
+                    /** Represents a RevokeSubscriptionResponse. */
+                    class RevokeSubscriptionResponse implements IRevokeSubscriptionResponse {
+
+                        /**
+                         * Constructs a new RevokeSubscriptionResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.analyticshub.v1.IRevokeSubscriptionResponse);
+
+                        /**
+                         * Creates a new RevokeSubscriptionResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RevokeSubscriptionResponse instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.analyticshub.v1.IRevokeSubscriptionResponse): google.cloud.bigquery.analyticshub.v1.RevokeSubscriptionResponse;
+
+                        /**
+                         * Encodes the specified RevokeSubscriptionResponse message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.RevokeSubscriptionResponse.verify|verify} messages.
+                         * @param message RevokeSubscriptionResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.analyticshub.v1.IRevokeSubscriptionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RevokeSubscriptionResponse message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.RevokeSubscriptionResponse.verify|verify} messages.
+                         * @param message RevokeSubscriptionResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.IRevokeSubscriptionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RevokeSubscriptionResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RevokeSubscriptionResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.RevokeSubscriptionResponse;
+
+                        /**
+                         * Decodes a RevokeSubscriptionResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RevokeSubscriptionResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.RevokeSubscriptionResponse;
+
+                        /**
+                         * Verifies a RevokeSubscriptionResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RevokeSubscriptionResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RevokeSubscriptionResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.RevokeSubscriptionResponse;
+
+                        /**
+                         * Creates a plain object from a RevokeSubscriptionResponse message. Also converts values to other types if specified.
+                         * @param message RevokeSubscriptionResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.analyticshub.v1.RevokeSubscriptionResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RevokeSubscriptionResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RevokeSubscriptionResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeleteSubscriptionRequest. */
+                    interface IDeleteSubscriptionRequest {
+
+                        /** DeleteSubscriptionRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a DeleteSubscriptionRequest. */
+                    class DeleteSubscriptionRequest implements IDeleteSubscriptionRequest {
+
+                        /**
+                         * Constructs a new DeleteSubscriptionRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.analyticshub.v1.IDeleteSubscriptionRequest);
+
+                        /** DeleteSubscriptionRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new DeleteSubscriptionRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteSubscriptionRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.analyticshub.v1.IDeleteSubscriptionRequest): google.cloud.bigquery.analyticshub.v1.DeleteSubscriptionRequest;
+
+                        /**
+                         * Encodes the specified DeleteSubscriptionRequest message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.DeleteSubscriptionRequest.verify|verify} messages.
+                         * @param message DeleteSubscriptionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.analyticshub.v1.IDeleteSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteSubscriptionRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.DeleteSubscriptionRequest.verify|verify} messages.
+                         * @param message DeleteSubscriptionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.IDeleteSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteSubscriptionRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.DeleteSubscriptionRequest;
+
+                        /**
+                         * Decodes a DeleteSubscriptionRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteSubscriptionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.DeleteSubscriptionRequest;
+
+                        /**
+                         * Verifies a DeleteSubscriptionRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteSubscriptionRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.DeleteSubscriptionRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteSubscriptionRequest message. Also converts values to other types if specified.
+                         * @param message DeleteSubscriptionRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.analyticshub.v1.DeleteSubscriptionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteSubscriptionRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteSubscriptionRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an OperationMetadata. */
+                    interface IOperationMetadata {
+
+                        /** OperationMetadata createTime */
+                        createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** OperationMetadata endTime */
+                        endTime?: (google.protobuf.ITimestamp|null);
+
+                        /** OperationMetadata target */
+                        target?: (string|null);
+
+                        /** OperationMetadata verb */
+                        verb?: (string|null);
+
+                        /** OperationMetadata statusMessage */
+                        statusMessage?: (string|null);
+
+                        /** OperationMetadata requestedCancellation */
+                        requestedCancellation?: (boolean|null);
+
+                        /** OperationMetadata apiVersion */
+                        apiVersion?: (string|null);
+                    }
+
+                    /** Represents an OperationMetadata. */
+                    class OperationMetadata implements IOperationMetadata {
+
+                        /**
+                         * Constructs a new OperationMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.analyticshub.v1.IOperationMetadata);
+
+                        /** OperationMetadata createTime. */
+                        public createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** OperationMetadata endTime. */
+                        public endTime?: (google.protobuf.ITimestamp|null);
+
+                        /** OperationMetadata target. */
+                        public target: string;
+
+                        /** OperationMetadata verb. */
+                        public verb: string;
+
+                        /** OperationMetadata statusMessage. */
+                        public statusMessage: string;
+
+                        /** OperationMetadata requestedCancellation. */
+                        public requestedCancellation: boolean;
+
+                        /** OperationMetadata apiVersion. */
+                        public apiVersion: string;
+
+                        /**
+                         * Creates a new OperationMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns OperationMetadata instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.analyticshub.v1.IOperationMetadata): google.cloud.bigquery.analyticshub.v1.OperationMetadata;
+
+                        /**
+                         * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.OperationMetadata.verify|verify} messages.
+                         * @param message OperationMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.analyticshub.v1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.OperationMetadata.verify|verify} messages.
+                         * @param message OperationMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an OperationMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns OperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.OperationMetadata;
+
+                        /**
+                         * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns OperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.OperationMetadata;
+
+                        /**
+                         * Verifies an OperationMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns OperationMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.OperationMetadata;
+
+                        /**
+                         * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                         * @param message OperationMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.analyticshub.v1.OperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this OperationMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for OperationMetadata
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -7544,6 +9731,9 @@ export namespace google {
 
             /** MethodOptions .google.api.methodSignature */
             ".google.api.methodSignature"?: (string[]|null);
+
+            /** MethodOptions .google.longrunning.operationInfo */
+            ".google.longrunning.operationInfo"?: (google.longrunning.IOperationInfo|null);
         }
 
         /** Represents a MethodOptions. */
@@ -8543,6 +10733,109 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Properties of an Any. */
+        interface IAny {
+
+            /** Any type_url */
+            type_url?: (string|null);
+
+            /** Any value */
+            value?: (Uint8Array|string|null);
+        }
+
+        /** Represents an Any. */
+        class Any implements IAny {
+
+            /**
+             * Constructs a new Any.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IAny);
+
+            /** Any type_url. */
+            public type_url: string;
+
+            /** Any value. */
+            public value: (Uint8Array|string);
+
+            /**
+             * Creates a new Any instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Any instance
+             */
+            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
+
+            /**
+             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
+
+            /**
+             * Verifies an Any message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Any message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Any
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
+
+            /**
+             * Creates a plain object from an Any message. Also converts values to other types if specified.
+             * @param message Any
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Any to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Any
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of an Empty. */
         interface IEmpty {
         }
@@ -8628,6 +10921,109 @@ export namespace google {
 
             /**
              * Gets the default type url for Empty
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Timestamp. */
+        interface ITimestamp {
+
+            /** Timestamp seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Timestamp nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Timestamp. */
+        class Timestamp implements ITimestamp {
+
+            /**
+             * Constructs a new Timestamp.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.ITimestamp);
+
+            /** Timestamp seconds. */
+            public seconds: (number|Long|string);
+
+            /** Timestamp nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Timestamp instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Timestamp instance
+             */
+            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
+
+            /**
+             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
+
+            /**
+             * Verifies a Timestamp message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Timestamp
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
+
+            /**
+             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+             * @param message Timestamp
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Timestamp to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Timestamp
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -11018,6 +13414,1091 @@ export namespace google {
 
             /**
              * Gets the default type url for Expr
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace longrunning. */
+    namespace longrunning {
+
+        /** Represents an Operations */
+        class Operations extends $protobuf.rpc.Service {
+
+            /**
+             * Constructs a new Operations service.
+             * @param rpcImpl RPC implementation
+             * @param [requestDelimited=false] Whether requests are length-delimited
+             * @param [responseDelimited=false] Whether responses are length-delimited
+             */
+            constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+            /**
+             * Creates new Operations service using the specified rpc implementation.
+             * @param rpcImpl RPC implementation
+             * @param [requestDelimited=false] Whether requests are length-delimited
+             * @param [responseDelimited=false] Whether responses are length-delimited
+             * @returns RPC service. Useful where requests and/or responses are streamed.
+             */
+            public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Operations;
+
+            /**
+             * Calls ListOperations.
+             * @param request ListOperationsRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and ListOperationsResponse
+             */
+            public listOperations(request: google.longrunning.IListOperationsRequest, callback: google.longrunning.Operations.ListOperationsCallback): void;
+
+            /**
+             * Calls ListOperations.
+             * @param request ListOperationsRequest message or plain object
+             * @returns Promise
+             */
+            public listOperations(request: google.longrunning.IListOperationsRequest): Promise<google.longrunning.ListOperationsResponse>;
+
+            /**
+             * Calls GetOperation.
+             * @param request GetOperationRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Operation
+             */
+            public getOperation(request: google.longrunning.IGetOperationRequest, callback: google.longrunning.Operations.GetOperationCallback): void;
+
+            /**
+             * Calls GetOperation.
+             * @param request GetOperationRequest message or plain object
+             * @returns Promise
+             */
+            public getOperation(request: google.longrunning.IGetOperationRequest): Promise<google.longrunning.Operation>;
+
+            /**
+             * Calls DeleteOperation.
+             * @param request DeleteOperationRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Empty
+             */
+            public deleteOperation(request: google.longrunning.IDeleteOperationRequest, callback: google.longrunning.Operations.DeleteOperationCallback): void;
+
+            /**
+             * Calls DeleteOperation.
+             * @param request DeleteOperationRequest message or plain object
+             * @returns Promise
+             */
+            public deleteOperation(request: google.longrunning.IDeleteOperationRequest): Promise<google.protobuf.Empty>;
+
+            /**
+             * Calls CancelOperation.
+             * @param request CancelOperationRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Empty
+             */
+            public cancelOperation(request: google.longrunning.ICancelOperationRequest, callback: google.longrunning.Operations.CancelOperationCallback): void;
+
+            /**
+             * Calls CancelOperation.
+             * @param request CancelOperationRequest message or plain object
+             * @returns Promise
+             */
+            public cancelOperation(request: google.longrunning.ICancelOperationRequest): Promise<google.protobuf.Empty>;
+
+            /**
+             * Calls WaitOperation.
+             * @param request WaitOperationRequest message or plain object
+             * @param callback Node-style callback called with the error, if any, and Operation
+             */
+            public waitOperation(request: google.longrunning.IWaitOperationRequest, callback: google.longrunning.Operations.WaitOperationCallback): void;
+
+            /**
+             * Calls WaitOperation.
+             * @param request WaitOperationRequest message or plain object
+             * @returns Promise
+             */
+            public waitOperation(request: google.longrunning.IWaitOperationRequest): Promise<google.longrunning.Operation>;
+        }
+
+        namespace Operations {
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|listOperations}.
+             * @param error Error, if any
+             * @param [response] ListOperationsResponse
+             */
+            type ListOperationsCallback = (error: (Error|null), response?: google.longrunning.ListOperationsResponse) => void;
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|getOperation}.
+             * @param error Error, if any
+             * @param [response] Operation
+             */
+            type GetOperationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|deleteOperation}.
+             * @param error Error, if any
+             * @param [response] Empty
+             */
+            type DeleteOperationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|cancelOperation}.
+             * @param error Error, if any
+             * @param [response] Empty
+             */
+            type CancelOperationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|waitOperation}.
+             * @param error Error, if any
+             * @param [response] Operation
+             */
+            type WaitOperationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+        }
+
+        /** Properties of an Operation. */
+        interface IOperation {
+
+            /** Operation name */
+            name?: (string|null);
+
+            /** Operation metadata */
+            metadata?: (google.protobuf.IAny|null);
+
+            /** Operation done */
+            done?: (boolean|null);
+
+            /** Operation error */
+            error?: (google.rpc.IStatus|null);
+
+            /** Operation response */
+            response?: (google.protobuf.IAny|null);
+        }
+
+        /** Represents an Operation. */
+        class Operation implements IOperation {
+
+            /**
+             * Constructs a new Operation.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IOperation);
+
+            /** Operation name. */
+            public name: string;
+
+            /** Operation metadata. */
+            public metadata?: (google.protobuf.IAny|null);
+
+            /** Operation done. */
+            public done: boolean;
+
+            /** Operation error. */
+            public error?: (google.rpc.IStatus|null);
+
+            /** Operation response. */
+            public response?: (google.protobuf.IAny|null);
+
+            /** Operation result. */
+            public result?: ("error"|"response");
+
+            /**
+             * Creates a new Operation instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Operation instance
+             */
+            public static create(properties?: google.longrunning.IOperation): google.longrunning.Operation;
+
+            /**
+             * Encodes the specified Operation message. Does not implicitly {@link google.longrunning.Operation.verify|verify} messages.
+             * @param message Operation message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IOperation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Operation message, length delimited. Does not implicitly {@link google.longrunning.Operation.verify|verify} messages.
+             * @param message Operation message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IOperation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Operation message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Operation
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.Operation;
+
+            /**
+             * Decodes an Operation message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Operation
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.Operation;
+
+            /**
+             * Verifies an Operation message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Operation message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Operation
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.Operation;
+
+            /**
+             * Creates a plain object from an Operation message. Also converts values to other types if specified.
+             * @param message Operation
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.Operation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Operation to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Operation
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a GetOperationRequest. */
+        interface IGetOperationRequest {
+
+            /** GetOperationRequest name */
+            name?: (string|null);
+        }
+
+        /** Represents a GetOperationRequest. */
+        class GetOperationRequest implements IGetOperationRequest {
+
+            /**
+             * Constructs a new GetOperationRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IGetOperationRequest);
+
+            /** GetOperationRequest name. */
+            public name: string;
+
+            /**
+             * Creates a new GetOperationRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns GetOperationRequest instance
+             */
+            public static create(properties?: google.longrunning.IGetOperationRequest): google.longrunning.GetOperationRequest;
+
+            /**
+             * Encodes the specified GetOperationRequest message. Does not implicitly {@link google.longrunning.GetOperationRequest.verify|verify} messages.
+             * @param message GetOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IGetOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified GetOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.GetOperationRequest.verify|verify} messages.
+             * @param message GetOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IGetOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a GetOperationRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns GetOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.GetOperationRequest;
+
+            /**
+             * Decodes a GetOperationRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns GetOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.GetOperationRequest;
+
+            /**
+             * Verifies a GetOperationRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a GetOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns GetOperationRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.GetOperationRequest;
+
+            /**
+             * Creates a plain object from a GetOperationRequest message. Also converts values to other types if specified.
+             * @param message GetOperationRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.GetOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this GetOperationRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for GetOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a ListOperationsRequest. */
+        interface IListOperationsRequest {
+
+            /** ListOperationsRequest name */
+            name?: (string|null);
+
+            /** ListOperationsRequest filter */
+            filter?: (string|null);
+
+            /** ListOperationsRequest pageSize */
+            pageSize?: (number|null);
+
+            /** ListOperationsRequest pageToken */
+            pageToken?: (string|null);
+        }
+
+        /** Represents a ListOperationsRequest. */
+        class ListOperationsRequest implements IListOperationsRequest {
+
+            /**
+             * Constructs a new ListOperationsRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IListOperationsRequest);
+
+            /** ListOperationsRequest name. */
+            public name: string;
+
+            /** ListOperationsRequest filter. */
+            public filter: string;
+
+            /** ListOperationsRequest pageSize. */
+            public pageSize: number;
+
+            /** ListOperationsRequest pageToken. */
+            public pageToken: string;
+
+            /**
+             * Creates a new ListOperationsRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ListOperationsRequest instance
+             */
+            public static create(properties?: google.longrunning.IListOperationsRequest): google.longrunning.ListOperationsRequest;
+
+            /**
+             * Encodes the specified ListOperationsRequest message. Does not implicitly {@link google.longrunning.ListOperationsRequest.verify|verify} messages.
+             * @param message ListOperationsRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IListOperationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ListOperationsRequest message, length delimited. Does not implicitly {@link google.longrunning.ListOperationsRequest.verify|verify} messages.
+             * @param message ListOperationsRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IListOperationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ListOperationsRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ListOperationsRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.ListOperationsRequest;
+
+            /**
+             * Decodes a ListOperationsRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ListOperationsRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.ListOperationsRequest;
+
+            /**
+             * Verifies a ListOperationsRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ListOperationsRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ListOperationsRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.ListOperationsRequest;
+
+            /**
+             * Creates a plain object from a ListOperationsRequest message. Also converts values to other types if specified.
+             * @param message ListOperationsRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.ListOperationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ListOperationsRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ListOperationsRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a ListOperationsResponse. */
+        interface IListOperationsResponse {
+
+            /** ListOperationsResponse operations */
+            operations?: (google.longrunning.IOperation[]|null);
+
+            /** ListOperationsResponse nextPageToken */
+            nextPageToken?: (string|null);
+        }
+
+        /** Represents a ListOperationsResponse. */
+        class ListOperationsResponse implements IListOperationsResponse {
+
+            /**
+             * Constructs a new ListOperationsResponse.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IListOperationsResponse);
+
+            /** ListOperationsResponse operations. */
+            public operations: google.longrunning.IOperation[];
+
+            /** ListOperationsResponse nextPageToken. */
+            public nextPageToken: string;
+
+            /**
+             * Creates a new ListOperationsResponse instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ListOperationsResponse instance
+             */
+            public static create(properties?: google.longrunning.IListOperationsResponse): google.longrunning.ListOperationsResponse;
+
+            /**
+             * Encodes the specified ListOperationsResponse message. Does not implicitly {@link google.longrunning.ListOperationsResponse.verify|verify} messages.
+             * @param message ListOperationsResponse message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IListOperationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ListOperationsResponse message, length delimited. Does not implicitly {@link google.longrunning.ListOperationsResponse.verify|verify} messages.
+             * @param message ListOperationsResponse message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IListOperationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ListOperationsResponse message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ListOperationsResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.ListOperationsResponse;
+
+            /**
+             * Decodes a ListOperationsResponse message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ListOperationsResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.ListOperationsResponse;
+
+            /**
+             * Verifies a ListOperationsResponse message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ListOperationsResponse message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ListOperationsResponse
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.ListOperationsResponse;
+
+            /**
+             * Creates a plain object from a ListOperationsResponse message. Also converts values to other types if specified.
+             * @param message ListOperationsResponse
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.ListOperationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ListOperationsResponse to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ListOperationsResponse
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a CancelOperationRequest. */
+        interface ICancelOperationRequest {
+
+            /** CancelOperationRequest name */
+            name?: (string|null);
+        }
+
+        /** Represents a CancelOperationRequest. */
+        class CancelOperationRequest implements ICancelOperationRequest {
+
+            /**
+             * Constructs a new CancelOperationRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.ICancelOperationRequest);
+
+            /** CancelOperationRequest name. */
+            public name: string;
+
+            /**
+             * Creates a new CancelOperationRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns CancelOperationRequest instance
+             */
+            public static create(properties?: google.longrunning.ICancelOperationRequest): google.longrunning.CancelOperationRequest;
+
+            /**
+             * Encodes the specified CancelOperationRequest message. Does not implicitly {@link google.longrunning.CancelOperationRequest.verify|verify} messages.
+             * @param message CancelOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.ICancelOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified CancelOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.CancelOperationRequest.verify|verify} messages.
+             * @param message CancelOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.ICancelOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a CancelOperationRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns CancelOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.CancelOperationRequest;
+
+            /**
+             * Decodes a CancelOperationRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns CancelOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.CancelOperationRequest;
+
+            /**
+             * Verifies a CancelOperationRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a CancelOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns CancelOperationRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.CancelOperationRequest;
+
+            /**
+             * Creates a plain object from a CancelOperationRequest message. Also converts values to other types if specified.
+             * @param message CancelOperationRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.CancelOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this CancelOperationRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for CancelOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a DeleteOperationRequest. */
+        interface IDeleteOperationRequest {
+
+            /** DeleteOperationRequest name */
+            name?: (string|null);
+        }
+
+        /** Represents a DeleteOperationRequest. */
+        class DeleteOperationRequest implements IDeleteOperationRequest {
+
+            /**
+             * Constructs a new DeleteOperationRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IDeleteOperationRequest);
+
+            /** DeleteOperationRequest name. */
+            public name: string;
+
+            /**
+             * Creates a new DeleteOperationRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns DeleteOperationRequest instance
+             */
+            public static create(properties?: google.longrunning.IDeleteOperationRequest): google.longrunning.DeleteOperationRequest;
+
+            /**
+             * Encodes the specified DeleteOperationRequest message. Does not implicitly {@link google.longrunning.DeleteOperationRequest.verify|verify} messages.
+             * @param message DeleteOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IDeleteOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified DeleteOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.DeleteOperationRequest.verify|verify} messages.
+             * @param message DeleteOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IDeleteOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a DeleteOperationRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns DeleteOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.DeleteOperationRequest;
+
+            /**
+             * Decodes a DeleteOperationRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns DeleteOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.DeleteOperationRequest;
+
+            /**
+             * Verifies a DeleteOperationRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a DeleteOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns DeleteOperationRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.DeleteOperationRequest;
+
+            /**
+             * Creates a plain object from a DeleteOperationRequest message. Also converts values to other types if specified.
+             * @param message DeleteOperationRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.DeleteOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this DeleteOperationRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for DeleteOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a WaitOperationRequest. */
+        interface IWaitOperationRequest {
+
+            /** WaitOperationRequest name */
+            name?: (string|null);
+
+            /** WaitOperationRequest timeout */
+            timeout?: (google.protobuf.IDuration|null);
+        }
+
+        /** Represents a WaitOperationRequest. */
+        class WaitOperationRequest implements IWaitOperationRequest {
+
+            /**
+             * Constructs a new WaitOperationRequest.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IWaitOperationRequest);
+
+            /** WaitOperationRequest name. */
+            public name: string;
+
+            /** WaitOperationRequest timeout. */
+            public timeout?: (google.protobuf.IDuration|null);
+
+            /**
+             * Creates a new WaitOperationRequest instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns WaitOperationRequest instance
+             */
+            public static create(properties?: google.longrunning.IWaitOperationRequest): google.longrunning.WaitOperationRequest;
+
+            /**
+             * Encodes the specified WaitOperationRequest message. Does not implicitly {@link google.longrunning.WaitOperationRequest.verify|verify} messages.
+             * @param message WaitOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IWaitOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified WaitOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.WaitOperationRequest.verify|verify} messages.
+             * @param message WaitOperationRequest message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IWaitOperationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a WaitOperationRequest message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns WaitOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.WaitOperationRequest;
+
+            /**
+             * Decodes a WaitOperationRequest message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns WaitOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.WaitOperationRequest;
+
+            /**
+             * Verifies a WaitOperationRequest message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a WaitOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns WaitOperationRequest
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.WaitOperationRequest;
+
+            /**
+             * Creates a plain object from a WaitOperationRequest message. Also converts values to other types if specified.
+             * @param message WaitOperationRequest
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.WaitOperationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this WaitOperationRequest to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for WaitOperationRequest
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an OperationInfo. */
+        interface IOperationInfo {
+
+            /** OperationInfo responseType */
+            responseType?: (string|null);
+
+            /** OperationInfo metadataType */
+            metadataType?: (string|null);
+        }
+
+        /** Represents an OperationInfo. */
+        class OperationInfo implements IOperationInfo {
+
+            /**
+             * Constructs a new OperationInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.longrunning.IOperationInfo);
+
+            /** OperationInfo responseType. */
+            public responseType: string;
+
+            /** OperationInfo metadataType. */
+            public metadataType: string;
+
+            /**
+             * Creates a new OperationInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns OperationInfo instance
+             */
+            public static create(properties?: google.longrunning.IOperationInfo): google.longrunning.OperationInfo;
+
+            /**
+             * Encodes the specified OperationInfo message. Does not implicitly {@link google.longrunning.OperationInfo.verify|verify} messages.
+             * @param message OperationInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.longrunning.IOperationInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified OperationInfo message, length delimited. Does not implicitly {@link google.longrunning.OperationInfo.verify|verify} messages.
+             * @param message OperationInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.longrunning.IOperationInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an OperationInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns OperationInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.longrunning.OperationInfo;
+
+            /**
+             * Decodes an OperationInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns OperationInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.longrunning.OperationInfo;
+
+            /**
+             * Verifies an OperationInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an OperationInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns OperationInfo
+             */
+            public static fromObject(object: { [k: string]: any }): google.longrunning.OperationInfo;
+
+            /**
+             * Creates a plain object from an OperationInfo message. Also converts values to other types if specified.
+             * @param message OperationInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.longrunning.OperationInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this OperationInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for OperationInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace rpc. */
+    namespace rpc {
+
+        /** Properties of a Status. */
+        interface IStatus {
+
+            /** Status code */
+            code?: (number|null);
+
+            /** Status message */
+            message?: (string|null);
+
+            /** Status details */
+            details?: (google.protobuf.IAny[]|null);
+        }
+
+        /** Represents a Status. */
+        class Status implements IStatus {
+
+            /**
+             * Constructs a new Status.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.rpc.IStatus);
+
+            /** Status code. */
+            public code: number;
+
+            /** Status message. */
+            public message: string;
+
+            /** Status details. */
+            public details: google.protobuf.IAny[];
+
+            /**
+             * Creates a new Status instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Status instance
+             */
+            public static create(properties?: google.rpc.IStatus): google.rpc.Status;
+
+            /**
+             * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.rpc.Status;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.rpc.Status;
+
+            /**
+             * Verifies a Status message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Status message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Status
+             */
+            public static fromObject(object: { [k: string]: any }): google.rpc.Status;
+
+            /**
+             * Creates a plain object from a Status message. Also converts values to other types if specified.
+             * @param message Status
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.rpc.Status, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Status to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Status
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

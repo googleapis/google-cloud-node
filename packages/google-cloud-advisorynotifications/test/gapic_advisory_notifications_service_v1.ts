@@ -392,6 +392,294 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
     });
   });
 
+  describe('getSettings', () => {
+    it('invokes getSettings without error', async () => {
+      const client =
+        new advisorynotificationsserviceModule.v1.AdvisoryNotificationsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.advisorynotifications.v1.GetSettingsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.advisorynotifications.v1.GetSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.advisorynotifications.v1.Settings()
+      );
+      client.innerApiCalls.getSettings = stubSimpleCall(expectedResponse);
+      const [response] = await client.getSettings(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSettings without error using callback', async () => {
+      const client =
+        new advisorynotificationsserviceModule.v1.AdvisoryNotificationsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.advisorynotifications.v1.GetSettingsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.advisorynotifications.v1.GetSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.advisorynotifications.v1.Settings()
+      );
+      client.innerApiCalls.getSettings =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getSettings(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.advisorynotifications.v1.ISettings | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSettings with error', async () => {
+      const client =
+        new advisorynotificationsserviceModule.v1.AdvisoryNotificationsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.advisorynotifications.v1.GetSettingsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.advisorynotifications.v1.GetSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getSettings = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getSettings(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSettings with closed client', async () => {
+      const client =
+        new advisorynotificationsserviceModule.v1.AdvisoryNotificationsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.advisorynotifications.v1.GetSettingsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.advisorynotifications.v1.GetSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getSettings(request), expectedError);
+    });
+  });
+
+  describe('updateSettings', () => {
+    it('invokes updateSettings without error', async () => {
+      const client =
+        new advisorynotificationsserviceModule.v1.AdvisoryNotificationsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.advisorynotifications.v1.UpdateSettingsRequest()
+      );
+      request.settings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.advisorynotifications.v1.UpdateSettingsRequest',
+        ['settings', 'name']
+      );
+      request.settings.name = defaultValue1;
+      const expectedHeaderRequestParams = `settings.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.advisorynotifications.v1.Settings()
+      );
+      client.innerApiCalls.updateSettings = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateSettings(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSettings without error using callback', async () => {
+      const client =
+        new advisorynotificationsserviceModule.v1.AdvisoryNotificationsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.advisorynotifications.v1.UpdateSettingsRequest()
+      );
+      request.settings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.advisorynotifications.v1.UpdateSettingsRequest',
+        ['settings', 'name']
+      );
+      request.settings.name = defaultValue1;
+      const expectedHeaderRequestParams = `settings.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.advisorynotifications.v1.Settings()
+      );
+      client.innerApiCalls.updateSettings =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateSettings(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.advisorynotifications.v1.ISettings | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSettings with error', async () => {
+      const client =
+        new advisorynotificationsserviceModule.v1.AdvisoryNotificationsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.advisorynotifications.v1.UpdateSettingsRequest()
+      );
+      request.settings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.advisorynotifications.v1.UpdateSettingsRequest',
+        ['settings', 'name']
+      );
+      request.settings.name = defaultValue1;
+      const expectedHeaderRequestParams = `settings.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateSettings = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateSettings(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSettings with closed client', async () => {
+      const client =
+        new advisorynotificationsserviceModule.v1.AdvisoryNotificationsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.advisorynotifications.v1.UpdateSettingsRequest()
+      );
+      request.settings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.advisorynotifications.v1.UpdateSettingsRequest',
+        ['settings', 'name']
+      );
+      request.settings.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateSettings(request), expectedError);
+    });
+  });
+
   describe('listNotifications', () => {
     it('invokes listNotifications without error', async () => {
       const client =
@@ -906,6 +1194,61 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
         assert.strictEqual(result, 'organizationValue');
         assert(
           (client.pathTemplates.organizationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('settings', () => {
+      const fakePath = '/rendered/path/settings';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        location: 'locationValue',
+      };
+      const client =
+        new advisorynotificationsserviceModule.v1.AdvisoryNotificationsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.settingsPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.settingsPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('settingsPath', () => {
+        const result = client.settingsPath(
+          'organizationValue',
+          'locationValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.settingsPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromSettingsName', () => {
+        const result = client.matchOrganizationFromSettingsName(fakePath);
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (client.pathTemplates.settingsPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromSettingsName', () => {
+        const result = client.matchLocationFromSettingsName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.settingsPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
