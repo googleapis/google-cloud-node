@@ -1280,6 +1280,1170 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1beta1_generated_FeatureOnlineStoreAdminService_CreateFeatureOnlineStore_async",
+            "title": "DatasetService createFeatureOnlineStore Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a new FeatureOnlineStore in a given project and location.",
+            "canonical": true,
+            "file": "feature_online_store_admin_service.create_feature_online_store.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 70,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateFeatureOnlineStore",
+                "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService.CreateFeatureOnlineStore",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "feature_online_store",
+                        "type": ".google.cloud.aiplatform.v1beta1.FeatureOnlineStore"
+                    },
+                    {
+                        "name": "feature_online_store_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "FeatureOnlineStoreAdminServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateFeatureOnlineStore",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService.CreateFeatureOnlineStore",
+                    "service": {
+                        "shortName": "FeatureOnlineStoreAdminService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_FeatureOnlineStoreAdminService_GetFeatureOnlineStore_async",
+            "title": "DatasetService getFeatureOnlineStore Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets details of a single FeatureOnlineStore.",
+            "canonical": true,
+            "file": "feature_online_store_admin_service.get_feature_online_store.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetFeatureOnlineStore",
+                "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService.GetFeatureOnlineStore",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.FeatureOnlineStore",
+                "client": {
+                    "shortName": "FeatureOnlineStoreAdminServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "GetFeatureOnlineStore",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService.GetFeatureOnlineStore",
+                    "service": {
+                        "shortName": "FeatureOnlineStoreAdminService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_FeatureOnlineStoreAdminService_ListFeatureOnlineStores_async",
+            "title": "DatasetService listFeatureOnlineStores Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists FeatureOnlineStores in a given project and location.",
+            "canonical": true,
+            "file": "feature_online_store_admin_service.list_feature_online_stores.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 98,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListFeatureOnlineStores",
+                "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService.ListFeatureOnlineStores",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.ListFeatureOnlineStoresResponse",
+                "client": {
+                    "shortName": "FeatureOnlineStoreAdminServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "ListFeatureOnlineStores",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService.ListFeatureOnlineStores",
+                    "service": {
+                        "shortName": "FeatureOnlineStoreAdminService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_FeatureOnlineStoreAdminService_UpdateFeatureOnlineStore_async",
+            "title": "DatasetService updateFeatureOnlineStore Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates the parameters of a single FeatureOnlineStore.",
+            "canonical": true,
+            "file": "feature_online_store_admin_service.update_feature_online_store.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 70,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateFeatureOnlineStore",
+                "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService.UpdateFeatureOnlineStore",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "feature_online_store",
+                        "type": ".google.cloud.aiplatform.v1beta1.FeatureOnlineStore"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "FeatureOnlineStoreAdminServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateFeatureOnlineStore",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService.UpdateFeatureOnlineStore",
+                    "service": {
+                        "shortName": "FeatureOnlineStoreAdminService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_FeatureOnlineStoreAdminService_DeleteFeatureOnlineStore_async",
+            "title": "DatasetService deleteFeatureOnlineStore Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a single FeatureOnlineStore. The FeatureOnlineStore must not contain any FeatureViews.",
+            "canonical": true,
+            "file": "feature_online_store_admin_service.delete_feature_online_store.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteFeatureOnlineStore",
+                "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService.DeleteFeatureOnlineStore",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "force",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "FeatureOnlineStoreAdminServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteFeatureOnlineStore",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService.DeleteFeatureOnlineStore",
+                    "service": {
+                        "shortName": "FeatureOnlineStoreAdminService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_FeatureOnlineStoreAdminService_CreateFeatureView_async",
+            "title": "DatasetService createFeatureView Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a new FeatureView in a given FeatureOnlineStore.",
+            "canonical": true,
+            "file": "feature_online_store_admin_service.create_feature_view.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 78,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateFeatureView",
+                "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService.CreateFeatureView",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "feature_view",
+                        "type": ".google.cloud.aiplatform.v1beta1.FeatureView"
+                    },
+                    {
+                        "name": "feature_view_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "run_sync_immediately",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "FeatureOnlineStoreAdminServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateFeatureView",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService.CreateFeatureView",
+                    "service": {
+                        "shortName": "FeatureOnlineStoreAdminService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_FeatureOnlineStoreAdminService_GetFeatureView_async",
+            "title": "DatasetService getFeatureView Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets details of a single FeatureView.",
+            "canonical": true,
+            "file": "feature_online_store_admin_service.get_feature_view.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetFeatureView",
+                "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService.GetFeatureView",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.FeatureView",
+                "client": {
+                    "shortName": "FeatureOnlineStoreAdminServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "GetFeatureView",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService.GetFeatureView",
+                    "service": {
+                        "shortName": "FeatureOnlineStoreAdminService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_FeatureOnlineStoreAdminService_ListFeatureViews_async",
+            "title": "DatasetService listFeatureViews Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists FeatureViews in a given FeatureOnlineStore.",
+            "canonical": true,
+            "file": "feature_online_store_admin_service.list_feature_views.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 100,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListFeatureViews",
+                "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService.ListFeatureViews",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.ListFeatureViewsResponse",
+                "client": {
+                    "shortName": "FeatureOnlineStoreAdminServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "ListFeatureViews",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService.ListFeatureViews",
+                    "service": {
+                        "shortName": "FeatureOnlineStoreAdminService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_FeatureOnlineStoreAdminService_UpdateFeatureView_async",
+            "title": "DatasetService updateFeatureView Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates the parameters of a single FeatureView.",
+            "canonical": true,
+            "file": "feature_online_store_admin_service.update_feature_view.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 68,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateFeatureView",
+                "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService.UpdateFeatureView",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "feature_view",
+                        "type": ".google.cloud.aiplatform.v1beta1.FeatureView"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "FeatureOnlineStoreAdminServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateFeatureView",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService.UpdateFeatureView",
+                    "service": {
+                        "shortName": "FeatureOnlineStoreAdminService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_FeatureOnlineStoreAdminService_DeleteFeatureView_async",
+            "title": "DatasetService deleteFeatureView Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a single FeatureView.",
+            "canonical": true,
+            "file": "feature_online_store_admin_service.delete_feature_view.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteFeatureView",
+                "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService.DeleteFeatureView",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "FeatureOnlineStoreAdminServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteFeatureView",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService.DeleteFeatureView",
+                    "service": {
+                        "shortName": "FeatureOnlineStoreAdminService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_FeatureOnlineStoreAdminService_SyncFeatureView_async",
+            "title": "DatasetService syncFeatureView Sample",
+            "origin": "API_DEFINITION",
+            "description": " Triggers on-demand sync for the FeatureView.",
+            "canonical": true,
+            "file": "feature_online_store_admin_service.sync_feature_view.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SyncFeatureView",
+                "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService.SyncFeatureView",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "feature_view",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.SyncFeatureViewResponse",
+                "client": {
+                    "shortName": "FeatureOnlineStoreAdminServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "SyncFeatureView",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService.SyncFeatureView",
+                    "service": {
+                        "shortName": "FeatureOnlineStoreAdminService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_FeatureOnlineStoreAdminService_GetFeatureViewSync_async",
+            "title": "DatasetService getFeatureViewSync Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets details of a single FeatureViewSync.",
+            "canonical": true,
+            "file": "feature_online_store_admin_service.get_feature_view_sync.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetFeatureViewSync",
+                "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService.GetFeatureViewSync",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.FeatureViewSync",
+                "client": {
+                    "shortName": "FeatureOnlineStoreAdminServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "GetFeatureViewSync",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService.GetFeatureViewSync",
+                    "service": {
+                        "shortName": "FeatureOnlineStoreAdminService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_FeatureOnlineStoreAdminService_ListFeatureViewSyncs_async",
+            "title": "DatasetService listFeatureViewSyncs Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists FeatureViewSyncs in a given FeatureView.",
+            "canonical": true,
+            "file": "feature_online_store_admin_service.list_feature_view_syncs.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 90,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListFeatureViewSyncs",
+                "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService.ListFeatureViewSyncs",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.ListFeatureViewSyncsResponse",
+                "client": {
+                    "shortName": "FeatureOnlineStoreAdminServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "ListFeatureViewSyncs",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService.ListFeatureViewSyncs",
+                    "service": {
+                        "shortName": "FeatureOnlineStoreAdminService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_FeatureOnlineStoreService_FetchFeatureValues_async",
+            "title": "DatasetService fetchFeatureValues Sample",
+            "origin": "API_DEFINITION",
+            "description": " Fetch feature values under a FeatureView.",
+            "canonical": true,
+            "file": "feature_online_store_service.fetch_feature_values.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "FetchFeatureValues",
+                "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreService.FetchFeatureValues",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "feature_view",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "format",
+                        "type": ".google.cloud.aiplatform.v1beta1.FetchFeatureValuesRequest.Format"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.FetchFeatureValuesResponse",
+                "client": {
+                    "shortName": "FeatureOnlineStoreServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreServiceClient"
+                },
+                "method": {
+                    "shortName": "FetchFeatureValues",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreService.FetchFeatureValues",
+                    "service": {
+                        "shortName": "FeatureOnlineStoreService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_FeatureOnlineStoreService_SearchNearestEntities_async",
+            "title": "DatasetService searchNearestEntities Sample",
+            "origin": "API_DEFINITION",
+            "description": " Search the nearest entities under a FeatureView. Search only works for indexable feature view; if a feature view isn't indexable, returns Invalid argument response.",
+            "canonical": true,
+            "file": "feature_online_store_service.search_nearest_entities.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 66,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SearchNearestEntities",
+                "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreService.SearchNearestEntities",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "feature_view",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "query",
+                        "type": ".google.cloud.aiplatform.v1beta1.NearestNeighborQuery"
+                    },
+                    {
+                        "name": "return_full_entity",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.SearchNearestEntitiesResponse",
+                "client": {
+                    "shortName": "FeatureOnlineStoreServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreServiceClient"
+                },
+                "method": {
+                    "shortName": "SearchNearestEntities",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreService.SearchNearestEntities",
+                    "service": {
+                        "shortName": "FeatureOnlineStoreService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.FeatureOnlineStoreService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_FeatureRegistryService_CreateFeatureGroup_async",
+            "title": "DatasetService createFeatureGroup Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a new FeatureGroup in a given project and location.",
+            "canonical": true,
+            "file": "feature_registry_service.create_feature_group.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 70,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateFeatureGroup",
+                "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService.CreateFeatureGroup",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "feature_group",
+                        "type": ".google.cloud.aiplatform.v1beta1.FeatureGroup"
+                    },
+                    {
+                        "name": "feature_group_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "FeatureRegistryServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateFeatureGroup",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService.CreateFeatureGroup",
+                    "service": {
+                        "shortName": "FeatureRegistryService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_FeatureRegistryService_GetFeatureGroup_async",
+            "title": "DatasetService getFeatureGroup Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets details of a single FeatureGroup.",
+            "canonical": true,
+            "file": "feature_registry_service.get_feature_group.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetFeatureGroup",
+                "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService.GetFeatureGroup",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.FeatureGroup",
+                "client": {
+                    "shortName": "FeatureRegistryServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryServiceClient"
+                },
+                "method": {
+                    "shortName": "GetFeatureGroup",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService.GetFeatureGroup",
+                    "service": {
+                        "shortName": "FeatureRegistryService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_FeatureRegistryService_ListFeatureGroups_async",
+            "title": "DatasetService listFeatureGroups Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists FeatureGroups in a given project and location.",
+            "canonical": true,
+            "file": "feature_registry_service.list_feature_groups.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 98,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListFeatureGroups",
+                "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService.ListFeatureGroups",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.ListFeatureGroupsResponse",
+                "client": {
+                    "shortName": "FeatureRegistryServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryServiceClient"
+                },
+                "method": {
+                    "shortName": "ListFeatureGroups",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService.ListFeatureGroups",
+                    "service": {
+                        "shortName": "FeatureRegistryService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_FeatureRegistryService_UpdateFeatureGroup_async",
+            "title": "DatasetService updateFeatureGroup Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates the parameters of a single FeatureGroup.",
+            "canonical": true,
+            "file": "feature_registry_service.update_feature_group.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 68,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateFeatureGroup",
+                "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService.UpdateFeatureGroup",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "feature_group",
+                        "type": ".google.cloud.aiplatform.v1beta1.FeatureGroup"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "FeatureRegistryServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateFeatureGroup",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService.UpdateFeatureGroup",
+                    "service": {
+                        "shortName": "FeatureRegistryService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_FeatureRegistryService_DeleteFeatureGroup_async",
+            "title": "DatasetService deleteFeatureGroup Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a single FeatureGroup.",
+            "canonical": true,
+            "file": "feature_registry_service.delete_feature_group.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteFeatureGroup",
+                "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService.DeleteFeatureGroup",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "force",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "FeatureRegistryServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteFeatureGroup",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService.DeleteFeatureGroup",
+                    "service": {
+                        "shortName": "FeatureRegistryService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_FeatureRegistryService_CreateFeature_async",
+            "title": "DatasetService createFeature Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a new Feature in a given FeatureGroup.",
+            "canonical": true,
+            "file": "feature_registry_service.create_feature.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 71,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateFeature",
+                "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService.CreateFeature",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "feature",
+                        "type": ".google.cloud.aiplatform.v1beta1.Feature"
+                    },
+                    {
+                        "name": "feature_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "FeatureRegistryServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateFeature",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService.CreateFeature",
+                    "service": {
+                        "shortName": "FeatureRegistryService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_FeatureRegistryService_GetFeature_async",
+            "title": "DatasetService getFeature Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets details of a single Feature.",
+            "canonical": true,
+            "file": "feature_registry_service.get_feature.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetFeature",
+                "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService.GetFeature",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.Feature",
+                "client": {
+                    "shortName": "FeatureRegistryServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryServiceClient"
+                },
+                "method": {
+                    "shortName": "GetFeature",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService.GetFeature",
+                    "service": {
+                        "shortName": "FeatureRegistryService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_FeatureRegistryService_ListFeatures_async",
+            "title": "DatasetService listFeatures Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists Features in a given FeatureGroup.",
+            "canonical": true,
+            "file": "feature_registry_service.list_features.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 117,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListFeatures",
+                "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService.ListFeatures",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "read_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    },
+                    {
+                        "name": "latest_stats_count",
+                        "type": "TYPE_INT32"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.ListFeaturesResponse",
+                "client": {
+                    "shortName": "FeatureRegistryServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryServiceClient"
+                },
+                "method": {
+                    "shortName": "ListFeatures",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService.ListFeatures",
+                    "service": {
+                        "shortName": "FeatureRegistryService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_FeatureRegistryService_UpdateFeature_async",
+            "title": "DatasetService updateFeature Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates the parameters of a single Feature.",
+            "canonical": true,
+            "file": "feature_registry_service.update_feature.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateFeature",
+                "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService.UpdateFeature",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "feature",
+                        "type": ".google.cloud.aiplatform.v1beta1.Feature"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "FeatureRegistryServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateFeature",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService.UpdateFeature",
+                    "service": {
+                        "shortName": "FeatureRegistryService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_FeatureRegistryService_DeleteFeature_async",
+            "title": "DatasetService deleteFeature Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a single Feature.",
+            "canonical": true,
+            "file": "feature_registry_service.delete_feature.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 57,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteFeature",
+                "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService.DeleteFeature",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "FeatureRegistryServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteFeature",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService.DeleteFeature",
+                    "service": {
+                        "shortName": "FeatureRegistryService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.FeatureRegistryService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1beta1_generated_FeaturestoreOnlineServingService_ReadFeatureValues_async",
             "title": "DatasetService readFeatureValues Sample",
             "origin": "API_DEFINITION",
@@ -1902,7 +3066,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 70,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],
@@ -1994,7 +3158,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 55,
+                    "end": 56,
                     "type": "FULL"
                 }
             ],
@@ -2034,7 +3198,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 116,
+                    "end": 117,
                     "type": "FULL"
                 }
             ],
@@ -2098,7 +3262,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 70,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],
@@ -2142,7 +3306,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 56,
+                    "end": 57,
                     "type": "FULL"
                 }
             ],
