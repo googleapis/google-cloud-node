@@ -187,6 +187,9 @@ export class AdvisoryNotificationsServiceClient {
       organizationPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}'
       ),
+      settingsPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/settings'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -253,6 +256,8 @@ export class AdvisoryNotificationsServiceClient {
     const advisoryNotificationsServiceStubMethods = [
       'listNotifications',
       'getNotification',
+      'getSettings',
+      'updateSettings',
     ];
     for (const methodName of advisoryNotificationsServiceStubMethods) {
       const callPromise = this.advisoryNotificationsServiceStub.then(
@@ -439,6 +444,200 @@ export class AdvisoryNotificationsServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.getNotification(request, options, callback);
+  }
+  /**
+   * Get notification settings.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the settings to retrieve.
+   *   Format:
+   *   organizations/{organization}/locations/{location}/settings.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.advisorynotifications.v1.Settings|Settings}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/advisory_notifications_service.get_settings.js</caption>
+   * region_tag:advisorynotifications_v1_generated_AdvisoryNotificationsService_GetSettings_async
+   */
+  getSettings(
+    request?: protos.google.cloud.advisorynotifications.v1.IGetSettingsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.advisorynotifications.v1.ISettings,
+      (
+        | protos.google.cloud.advisorynotifications.v1.IGetSettingsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getSettings(
+    request: protos.google.cloud.advisorynotifications.v1.IGetSettingsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.advisorynotifications.v1.ISettings,
+      | protos.google.cloud.advisorynotifications.v1.IGetSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getSettings(
+    request: protos.google.cloud.advisorynotifications.v1.IGetSettingsRequest,
+    callback: Callback<
+      protos.google.cloud.advisorynotifications.v1.ISettings,
+      | protos.google.cloud.advisorynotifications.v1.IGetSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getSettings(
+    request?: protos.google.cloud.advisorynotifications.v1.IGetSettingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.advisorynotifications.v1.ISettings,
+          | protos.google.cloud.advisorynotifications.v1.IGetSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.advisorynotifications.v1.ISettings,
+      | protos.google.cloud.advisorynotifications.v1.IGetSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.advisorynotifications.v1.ISettings,
+      (
+        | protos.google.cloud.advisorynotifications.v1.IGetSettingsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getSettings(request, options, callback);
+  }
+  /**
+   * Update notification settings.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.advisorynotifications.v1.Settings} request.settings
+   *   Required. New settings.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.advisorynotifications.v1.Settings|Settings}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/advisory_notifications_service.update_settings.js</caption>
+   * region_tag:advisorynotifications_v1_generated_AdvisoryNotificationsService_UpdateSettings_async
+   */
+  updateSettings(
+    request?: protos.google.cloud.advisorynotifications.v1.IUpdateSettingsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.advisorynotifications.v1.ISettings,
+      (
+        | protos.google.cloud.advisorynotifications.v1.IUpdateSettingsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateSettings(
+    request: protos.google.cloud.advisorynotifications.v1.IUpdateSettingsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.advisorynotifications.v1.ISettings,
+      | protos.google.cloud.advisorynotifications.v1.IUpdateSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSettings(
+    request: protos.google.cloud.advisorynotifications.v1.IUpdateSettingsRequest,
+    callback: Callback<
+      protos.google.cloud.advisorynotifications.v1.ISettings,
+      | protos.google.cloud.advisorynotifications.v1.IUpdateSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateSettings(
+    request?: protos.google.cloud.advisorynotifications.v1.IUpdateSettingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.advisorynotifications.v1.ISettings,
+          | protos.google.cloud.advisorynotifications.v1.IUpdateSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.advisorynotifications.v1.ISettings,
+      | protos.google.cloud.advisorynotifications.v1.IUpdateSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.advisorynotifications.v1.ISettings,
+      (
+        | protos.google.cloud.advisorynotifications.v1.IUpdateSettingsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'settings.name': request.settings!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateSettings(request, options, callback);
   }
 
   /**
@@ -791,6 +990,43 @@ export class AdvisoryNotificationsServiceClient {
   matchOrganizationFromOrganizationName(organizationName: string) {
     return this.pathTemplates.organizationPathTemplate.match(organizationName)
       .organization;
+  }
+
+  /**
+   * Return a fully-qualified settings resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  settingsPath(organization: string, location: string) {
+    return this.pathTemplates.settingsPathTemplate.render({
+      organization: organization,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the organization from Settings resource.
+   *
+   * @param {string} settingsName
+   *   A fully-qualified path representing Settings resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromSettingsName(settingsName: string) {
+    return this.pathTemplates.settingsPathTemplate.match(settingsName)
+      .organization;
+  }
+
+  /**
+   * Parse the location from Settings resource.
+   *
+   * @param {string} settingsName
+   *   A fully-qualified path representing Settings resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSettingsName(settingsName: string) {
+    return this.pathTemplates.settingsPathTemplate.match(settingsName).location;
   }
 
   /**
