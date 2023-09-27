@@ -60,7 +60,9 @@
   * [Flows.validate_flow](#flows.validate_flow)
   * [Intents.create_intent](#intents.create_intent)
   * [Intents.delete_intent](#intents.delete_intent)
+  * [Intents.export_intents](#intents.export_intents)
   * [Intents.get_intent](#intents.get_intent)
+  * [Intents.import_intents](#intents.import_intents)
   * [Intents.list_intents](#intents.list_intents)
   * [Intents.update_intent](#intents.update_intent)
   * [Pages.create_page](#pages.create_page)
@@ -1043,6 +1045,23 @@ __Usage:__
 
 
 
+### Intents.export_intents
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3/intents.export_intents.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3/intents.export_intents.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3/intents.export_intents.js`
+
+
+-----
+
+
+
+
 ### Intents.get_intent
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3/intents.get_intent.js).
@@ -1053,6 +1072,23 @@ __Usage:__
 
 
 `node packages/google-cloud-dialogflow-cx/samples/generated/v3/intents.get_intent.js`
+
+
+-----
+
+
+
+
+### Intents.import_intents
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3/intents.import_intents.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow-cx/samples/generated/v3/intents.import_intents.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow-cx/samples/generated/v3/intents.import_intents.js`
 
 
 -----
