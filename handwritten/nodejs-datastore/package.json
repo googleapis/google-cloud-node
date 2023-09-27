@@ -53,7 +53,7 @@
   "devDependencies": {
     "@google-cloud/storage": "^7.0.1",
     "@types/extend": "^3.0.1",
-    "@types/is": "0.0.22",
+    "@types/is": "0.0.23",
     "@types/js-yaml": "^4.0.0",
     "@types/mocha": "^9.0.0",
     "@types/node": "^20.4.9",
