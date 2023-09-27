@@ -198,6 +198,9 @@ export class AlloyDBAdminClient {
       clusterPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/clusters/{cluster}'
       ),
+      connectionInfoPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/clusters/{cluster}/instances/{instance}/connectionInfo'
+      ),
       instancePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/clusters/{cluster}/instances/{instance}'
       ),
@@ -560,6 +563,8 @@ export class AlloyDBAdminClient {
       'updateBackup',
       'deleteBackup',
       'listSupportedDatabaseFlags',
+      'generateClientCertificate',
+      'getConnectionInfo',
       'listUsers',
       'getUser',
       'createUser',
@@ -903,6 +908,238 @@ export class AlloyDBAdminClient {
       });
     this.initialize();
     return this.innerApiCalls.getBackup(request, options, callback);
+  }
+  /**
+   * Generate a client certificate signed by a Cluster CA.
+   * The sole purpose of this endpoint is to support AlloyDB connectors and the
+   * Auth Proxy client. The endpoint's behavior is subject to change without
+   * notice, so do not rely on its behavior remaining constant. Future changes
+   * will not break AlloyDB connectors or the Auth Proxy client.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent resource. The required format is:
+   *    * projects/{project}/locations/{location}/clusters/{cluster}
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {google.protobuf.Duration} [request.certDuration]
+   *   Optional. An optional hint to the endpoint to generate the client
+   *   certificate with the requested duration. The duration can be from 1 hour to
+   *   24 hours. The endpoint may or may not honor the hint. If the hint is left
+   *   unspecified or is not honored, then the endpoint will pick an appropriate
+   *   default duration.
+   * @param {string} [request.publicKey]
+   *   Optional. The public key from the client.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.alloydb.v1.GenerateClientCertificateResponse|GenerateClientCertificateResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/alloy_d_b_admin.generate_client_certificate.js</caption>
+   * region_tag:alloydb_v1_generated_AlloyDBAdmin_GenerateClientCertificate_async
+   */
+  generateClientCertificate(
+    request?: protos.google.cloud.alloydb.v1.IGenerateClientCertificateRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.alloydb.v1.IGenerateClientCertificateResponse,
+      (
+        | protos.google.cloud.alloydb.v1.IGenerateClientCertificateRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  generateClientCertificate(
+    request: protos.google.cloud.alloydb.v1.IGenerateClientCertificateRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.alloydb.v1.IGenerateClientCertificateResponse,
+      | protos.google.cloud.alloydb.v1.IGenerateClientCertificateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  generateClientCertificate(
+    request: protos.google.cloud.alloydb.v1.IGenerateClientCertificateRequest,
+    callback: Callback<
+      protos.google.cloud.alloydb.v1.IGenerateClientCertificateResponse,
+      | protos.google.cloud.alloydb.v1.IGenerateClientCertificateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  generateClientCertificate(
+    request?: protos.google.cloud.alloydb.v1.IGenerateClientCertificateRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.alloydb.v1.IGenerateClientCertificateResponse,
+          | protos.google.cloud.alloydb.v1.IGenerateClientCertificateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.alloydb.v1.IGenerateClientCertificateResponse,
+      | protos.google.cloud.alloydb.v1.IGenerateClientCertificateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.alloydb.v1.IGenerateClientCertificateResponse,
+      (
+        | protos.google.cloud.alloydb.v1.IGenerateClientCertificateRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.generateClientCertificate(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Get instance metadata used for a connection.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent resource. The required format is:
+   *   projects/{project}/locations/{location}/clusters/{cluster}/instances/{instance}
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.alloydb.v1.ConnectionInfo|ConnectionInfo}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/alloy_d_b_admin.get_connection_info.js</caption>
+   * region_tag:alloydb_v1_generated_AlloyDBAdmin_GetConnectionInfo_async
+   */
+  getConnectionInfo(
+    request?: protos.google.cloud.alloydb.v1.IGetConnectionInfoRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.alloydb.v1.IConnectionInfo,
+      protos.google.cloud.alloydb.v1.IGetConnectionInfoRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getConnectionInfo(
+    request: protos.google.cloud.alloydb.v1.IGetConnectionInfoRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.alloydb.v1.IConnectionInfo,
+      | protos.google.cloud.alloydb.v1.IGetConnectionInfoRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getConnectionInfo(
+    request: protos.google.cloud.alloydb.v1.IGetConnectionInfoRequest,
+    callback: Callback<
+      protos.google.cloud.alloydb.v1.IConnectionInfo,
+      | protos.google.cloud.alloydb.v1.IGetConnectionInfoRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getConnectionInfo(
+    request?: protos.google.cloud.alloydb.v1.IGetConnectionInfoRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.alloydb.v1.IConnectionInfo,
+          | protos.google.cloud.alloydb.v1.IGetConnectionInfoRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.alloydb.v1.IConnectionInfo,
+      | protos.google.cloud.alloydb.v1.IGetConnectionInfoRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.alloydb.v1.IConnectionInfo,
+      protos.google.cloud.alloydb.v1.IGetConnectionInfoRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getConnectionInfo(request, options, callback);
   }
   /**
    * Gets details of a single User.
@@ -5525,6 +5762,81 @@ export class AlloyDBAdminClient {
    */
   matchClusterFromClusterName(clusterName: string) {
     return this.pathTemplates.clusterPathTemplate.match(clusterName).cluster;
+  }
+
+  /**
+   * Return a fully-qualified connectionInfo resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} cluster
+   * @param {string} instance
+   * @returns {string} Resource name string.
+   */
+  connectionInfoPath(
+    project: string,
+    location: string,
+    cluster: string,
+    instance: string
+  ) {
+    return this.pathTemplates.connectionInfoPathTemplate.render({
+      project: project,
+      location: location,
+      cluster: cluster,
+      instance: instance,
+    });
+  }
+
+  /**
+   * Parse the project from ConnectionInfo resource.
+   *
+   * @param {string} connectionInfoName
+   *   A fully-qualified path representing ConnectionInfo resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromConnectionInfoName(connectionInfoName: string) {
+    return this.pathTemplates.connectionInfoPathTemplate.match(
+      connectionInfoName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ConnectionInfo resource.
+   *
+   * @param {string} connectionInfoName
+   *   A fully-qualified path representing ConnectionInfo resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromConnectionInfoName(connectionInfoName: string) {
+    return this.pathTemplates.connectionInfoPathTemplate.match(
+      connectionInfoName
+    ).location;
+  }
+
+  /**
+   * Parse the cluster from ConnectionInfo resource.
+   *
+   * @param {string} connectionInfoName
+   *   A fully-qualified path representing ConnectionInfo resource.
+   * @returns {string} A string representing the cluster.
+   */
+  matchClusterFromConnectionInfoName(connectionInfoName: string) {
+    return this.pathTemplates.connectionInfoPathTemplate.match(
+      connectionInfoName
+    ).cluster;
+  }
+
+  /**
+   * Parse the instance from ConnectionInfo resource.
+   *
+   * @param {string} connectionInfoName
+   *   A fully-qualified path representing ConnectionInfo resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromConnectionInfoName(connectionInfoName: string) {
+    return this.pathTemplates.connectionInfoPathTemplate.match(
+      connectionInfoName
+    ).instance;
   }
 
   /**
