@@ -32,6 +32,7 @@ function main(parent) {
    *  Required. The resource name of the Location to list Features.
    *  Format:
    *  `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`
+   *  `projects/{project}/locations/{location}/featureGroups/{feature_group}`
    */
   // const parent = 'abc123'
   /**
@@ -75,7 +76,7 @@ function main(parent) {
    *  Use "desc" after a field name for descending.
    *  Supported fields:
    *    * `feature_id`
-   *    * `value_type`
+   *    * `value_type` (Not supported for FeatureRegistry Feature)
    *    * `create_time`
    *    * `update_time`
    */
