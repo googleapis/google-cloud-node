@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, repositoryId, repository) {
-  // [START artifactregistry_v1_generated_ArtifactRegistry_CreateRepository_async]
+function main(name) {
+  // [START advisorynotifications_v1_generated_AdvisoryNotificationsService_GetSettings_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,41 +29,31 @@ function main(parent, repositoryId, repository) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the parent resource where the repository will be
-   *  created.
+   *  Required. The resource name of the settings to retrieve.
+   *  Format:
+   *  organizations/{organization}/locations/{location}/settings.
    */
-  // const parent = 'abc123'
-  /**
-   *  The repository id to use for this repository.
-   */
-  // const repositoryId = 'abc123'
-  /**
-   *  The repository to be created.
-   */
-  // const repository = {}
+  // const name = 'abc123'
 
-  // Imports the Artifactregistry library
-  const {ArtifactRegistryClient} = require('@google-cloud/artifact-registry').v1;
+  // Imports the Advisorynotifications library
+  const {AdvisoryNotificationsServiceClient} = require('@google-cloud/advisorynotifications').v1;
 
   // Instantiates a client
-  const artifactregistryClient = new ArtifactRegistryClient();
+  const advisorynotificationsClient = new AdvisoryNotificationsServiceClient();
 
-  async function callCreateRepository() {
+  async function callGetSettings() {
     // Construct request
     const request = {
-      parent,
-      repositoryId,
-      repository,
+      name,
     };
 
     // Run request
-    const [operation] = await artifactregistryClient.createRepository(request);
-    const [response] = await operation.promise();
+    const response = await advisorynotificationsClient.getSettings(request);
     console.log(response);
   }
 
-  callCreateRepository();
-  // [END artifactregistry_v1_generated_ArtifactRegistry_CreateRepository_async]
+  callGetSettings();
+  // [END advisorynotifications_v1_generated_AdvisoryNotificationsService_GetSettings_async]
 }
 
 process.on('unhandledRejection', err => {

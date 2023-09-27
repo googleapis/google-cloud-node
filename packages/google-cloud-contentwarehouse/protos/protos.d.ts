@@ -6004,6 +6004,9 @@ export namespace google {
 
                         /** MatchingDocument qaResult */
                         qaResult?: (google.cloud.contentwarehouse.v1.IQAResult|null);
+
+                        /** MatchingDocument matchedTokenPageIndices */
+                        matchedTokenPageIndices?: ((number|Long|string)[]|null);
                     }
 
                     /** Represents a MatchingDocument. */
@@ -6023,6 +6026,9 @@ export namespace google {
 
                         /** MatchingDocument qaResult. */
                         public qaResult?: (google.cloud.contentwarehouse.v1.IQAResult|null);
+
+                        /** MatchingDocument matchedTokenPageIndices. */
+                        public matchedTokenPageIndices: (number|Long|string)[];
 
                         /**
                          * Creates a new MatchingDocument instance using the specified properties.

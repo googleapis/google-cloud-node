@@ -10615,6 +10615,230 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a Tag. */
+                interface ITag {
+
+                    /** Tag tagKey */
+                    tagKey?: (string|null);
+
+                    /** Tag tagValue */
+                    tagValue?: (string|null);
+
+                    /** Tag tagValueId */
+                    tagValueId?: (string|null);
+                }
+
+                /** Represents a Tag. */
+                class Tag implements ITag {
+
+                    /**
+                     * Constructs a new Tag.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.ITag);
+
+                    /** Tag tagKey. */
+                    public tagKey?: (string|null);
+
+                    /** Tag tagValue. */
+                    public tagValue?: (string|null);
+
+                    /** Tag tagValueId. */
+                    public tagValueId?: (string|null);
+
+                    /** Tag _tagKey. */
+                    public _tagKey?: "tagKey";
+
+                    /** Tag _tagValue. */
+                    public _tagValue?: "tagValue";
+
+                    /** Tag _tagValueId. */
+                    public _tagValueId?: "tagValueId";
+
+                    /**
+                     * Creates a new Tag instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Tag instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.ITag): google.cloud.asset.v1.Tag;
+
+                    /**
+                     * Encodes the specified Tag message. Does not implicitly {@link google.cloud.asset.v1.Tag.verify|verify} messages.
+                     * @param message Tag message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.ITag, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Tag message, length delimited. Does not implicitly {@link google.cloud.asset.v1.Tag.verify|verify} messages.
+                     * @param message Tag message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.ITag, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Tag message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Tag
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.Tag;
+
+                    /**
+                     * Decodes a Tag message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Tag
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.Tag;
+
+                    /**
+                     * Verifies a Tag message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Tag message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Tag
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.Tag;
+
+                    /**
+                     * Creates a plain object from a Tag message. Also converts values to other types if specified.
+                     * @param message Tag
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.Tag, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Tag to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Tag
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EffectiveTagDetails. */
+                interface IEffectiveTagDetails {
+
+                    /** EffectiveTagDetails attachedResource */
+                    attachedResource?: (string|null);
+
+                    /** EffectiveTagDetails effectiveTags */
+                    effectiveTags?: (google.cloud.asset.v1.ITag[]|null);
+                }
+
+                /** Represents an EffectiveTagDetails. */
+                class EffectiveTagDetails implements IEffectiveTagDetails {
+
+                    /**
+                     * Constructs a new EffectiveTagDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.IEffectiveTagDetails);
+
+                    /** EffectiveTagDetails attachedResource. */
+                    public attachedResource?: (string|null);
+
+                    /** EffectiveTagDetails effectiveTags. */
+                    public effectiveTags: google.cloud.asset.v1.ITag[];
+
+                    /** EffectiveTagDetails _attachedResource. */
+                    public _attachedResource?: "attachedResource";
+
+                    /**
+                     * Creates a new EffectiveTagDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EffectiveTagDetails instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.IEffectiveTagDetails): google.cloud.asset.v1.EffectiveTagDetails;
+
+                    /**
+                     * Encodes the specified EffectiveTagDetails message. Does not implicitly {@link google.cloud.asset.v1.EffectiveTagDetails.verify|verify} messages.
+                     * @param message EffectiveTagDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.IEffectiveTagDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EffectiveTagDetails message, length delimited. Does not implicitly {@link google.cloud.asset.v1.EffectiveTagDetails.verify|verify} messages.
+                     * @param message EffectiveTagDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.IEffectiveTagDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EffectiveTagDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EffectiveTagDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.EffectiveTagDetails;
+
+                    /**
+                     * Decodes an EffectiveTagDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EffectiveTagDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.EffectiveTagDetails;
+
+                    /**
+                     * Verifies an EffectiveTagDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EffectiveTagDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EffectiveTagDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.EffectiveTagDetails;
+
+                    /**
+                     * Creates a plain object from an EffectiveTagDetails message. Also converts values to other types if specified.
+                     * @param message EffectiveTagDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.EffectiveTagDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EffectiveTagDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EffectiveTagDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a ResourceSearchResult. */
                 interface IResourceSearchResult {
 
@@ -10687,8 +10911,17 @@ export namespace google {
                     /** ResourceSearchResult tagValueIds */
                     tagValueIds?: (string[]|null);
 
+                    /** ResourceSearchResult tags */
+                    tags?: (google.cloud.asset.v1.ITag[]|null);
+
+                    /** ResourceSearchResult effectiveTags */
+                    effectiveTags?: (google.cloud.asset.v1.IEffectiveTagDetails[]|null);
+
                     /** ResourceSearchResult parentAssetType */
                     parentAssetType?: (string|null);
+
+                    /** ResourceSearchResult sccSecurityMarks */
+                    sccSecurityMarks?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a ResourceSearchResult. */
@@ -10769,8 +11002,17 @@ export namespace google {
                     /** ResourceSearchResult tagValueIds. */
                     public tagValueIds: string[];
 
+                    /** ResourceSearchResult tags. */
+                    public tags: google.cloud.asset.v1.ITag[];
+
+                    /** ResourceSearchResult effectiveTags. */
+                    public effectiveTags: google.cloud.asset.v1.IEffectiveTagDetails[];
+
                     /** ResourceSearchResult parentAssetType. */
                     public parentAssetType: string;
+
+                    /** ResourceSearchResult sccSecurityMarks. */
+                    public sccSecurityMarks: { [k: string]: string };
 
                     /**
                      * Creates a new ResourceSearchResult instance using the specified properties.

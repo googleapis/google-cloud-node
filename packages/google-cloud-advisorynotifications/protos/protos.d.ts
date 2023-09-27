@@ -73,6 +73,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public getNotification(request: google.cloud.advisorynotifications.v1.IGetNotificationRequest): Promise<google.cloud.advisorynotifications.v1.Notification>;
+
+                    /**
+                     * Calls GetSettings.
+                     * @param request GetSettingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Settings
+                     */
+                    public getSettings(request: google.cloud.advisorynotifications.v1.IGetSettingsRequest, callback: google.cloud.advisorynotifications.v1.AdvisoryNotificationsService.GetSettingsCallback): void;
+
+                    /**
+                     * Calls GetSettings.
+                     * @param request GetSettingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getSettings(request: google.cloud.advisorynotifications.v1.IGetSettingsRequest): Promise<google.cloud.advisorynotifications.v1.Settings>;
+
+                    /**
+                     * Calls UpdateSettings.
+                     * @param request UpdateSettingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Settings
+                     */
+                    public updateSettings(request: google.cloud.advisorynotifications.v1.IUpdateSettingsRequest, callback: google.cloud.advisorynotifications.v1.AdvisoryNotificationsService.UpdateSettingsCallback): void;
+
+                    /**
+                     * Calls UpdateSettings.
+                     * @param request UpdateSettingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateSettings(request: google.cloud.advisorynotifications.v1.IUpdateSettingsRequest): Promise<google.cloud.advisorynotifications.v1.Settings>;
                 }
 
                 namespace AdvisoryNotificationsService {
@@ -90,6 +118,20 @@ export namespace google {
                      * @param [response] Notification
                      */
                     type GetNotificationCallback = (error: (Error|null), response?: google.cloud.advisorynotifications.v1.Notification) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.advisorynotifications.v1.AdvisoryNotificationsService|getSettings}.
+                     * @param error Error, if any
+                     * @param [response] Settings
+                     */
+                    type GetSettingsCallback = (error: (Error|null), response?: google.cloud.advisorynotifications.v1.Settings) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.advisorynotifications.v1.AdvisoryNotificationsService|updateSettings}.
+                     * @param error Error, if any
+                     * @param [response] Settings
+                     */
+                    type UpdateSettingsCallback = (error: (Error|null), response?: google.cloud.advisorynotifications.v1.Settings) => void;
                 }
 
                 /** NotificationView enum. */
@@ -1294,6 +1336,406 @@ export namespace google {
 
                     /**
                      * Gets the default type url for GetNotificationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Settings. */
+                interface ISettings {
+
+                    /** Settings name */
+                    name?: (string|null);
+
+                    /** Settings notificationSettings */
+                    notificationSettings?: ({ [k: string]: google.cloud.advisorynotifications.v1.INotificationSettings }|null);
+
+                    /** Settings etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a Settings. */
+                class Settings implements ISettings {
+
+                    /**
+                     * Constructs a new Settings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.advisorynotifications.v1.ISettings);
+
+                    /** Settings name. */
+                    public name: string;
+
+                    /** Settings notificationSettings. */
+                    public notificationSettings: { [k: string]: google.cloud.advisorynotifications.v1.INotificationSettings };
+
+                    /** Settings etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new Settings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Settings instance
+                     */
+                    public static create(properties?: google.cloud.advisorynotifications.v1.ISettings): google.cloud.advisorynotifications.v1.Settings;
+
+                    /**
+                     * Encodes the specified Settings message. Does not implicitly {@link google.cloud.advisorynotifications.v1.Settings.verify|verify} messages.
+                     * @param message Settings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.advisorynotifications.v1.ISettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Settings message, length delimited. Does not implicitly {@link google.cloud.advisorynotifications.v1.Settings.verify|verify} messages.
+                     * @param message Settings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.advisorynotifications.v1.ISettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Settings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Settings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.advisorynotifications.v1.Settings;
+
+                    /**
+                     * Decodes a Settings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Settings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.advisorynotifications.v1.Settings;
+
+                    /**
+                     * Verifies a Settings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Settings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Settings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.advisorynotifications.v1.Settings;
+
+                    /**
+                     * Creates a plain object from a Settings message. Also converts values to other types if specified.
+                     * @param message Settings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.advisorynotifications.v1.Settings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Settings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Settings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a NotificationSettings. */
+                interface INotificationSettings {
+
+                    /** NotificationSettings enabled */
+                    enabled?: (boolean|null);
+                }
+
+                /** Represents a NotificationSettings. */
+                class NotificationSettings implements INotificationSettings {
+
+                    /**
+                     * Constructs a new NotificationSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.advisorynotifications.v1.INotificationSettings);
+
+                    /** NotificationSettings enabled. */
+                    public enabled: boolean;
+
+                    /**
+                     * Creates a new NotificationSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NotificationSettings instance
+                     */
+                    public static create(properties?: google.cloud.advisorynotifications.v1.INotificationSettings): google.cloud.advisorynotifications.v1.NotificationSettings;
+
+                    /**
+                     * Encodes the specified NotificationSettings message. Does not implicitly {@link google.cloud.advisorynotifications.v1.NotificationSettings.verify|verify} messages.
+                     * @param message NotificationSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.advisorynotifications.v1.INotificationSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NotificationSettings message, length delimited. Does not implicitly {@link google.cloud.advisorynotifications.v1.NotificationSettings.verify|verify} messages.
+                     * @param message NotificationSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.advisorynotifications.v1.INotificationSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NotificationSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NotificationSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.advisorynotifications.v1.NotificationSettings;
+
+                    /**
+                     * Decodes a NotificationSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NotificationSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.advisorynotifications.v1.NotificationSettings;
+
+                    /**
+                     * Verifies a NotificationSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NotificationSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NotificationSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.advisorynotifications.v1.NotificationSettings;
+
+                    /**
+                     * Creates a plain object from a NotificationSettings message. Also converts values to other types if specified.
+                     * @param message NotificationSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.advisorynotifications.v1.NotificationSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NotificationSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NotificationSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetSettingsRequest. */
+                interface IGetSettingsRequest {
+
+                    /** GetSettingsRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetSettingsRequest. */
+                class GetSettingsRequest implements IGetSettingsRequest {
+
+                    /**
+                     * Constructs a new GetSettingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.advisorynotifications.v1.IGetSettingsRequest);
+
+                    /** GetSettingsRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetSettingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetSettingsRequest instance
+                     */
+                    public static create(properties?: google.cloud.advisorynotifications.v1.IGetSettingsRequest): google.cloud.advisorynotifications.v1.GetSettingsRequest;
+
+                    /**
+                     * Encodes the specified GetSettingsRequest message. Does not implicitly {@link google.cloud.advisorynotifications.v1.GetSettingsRequest.verify|verify} messages.
+                     * @param message GetSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.advisorynotifications.v1.IGetSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetSettingsRequest message, length delimited. Does not implicitly {@link google.cloud.advisorynotifications.v1.GetSettingsRequest.verify|verify} messages.
+                     * @param message GetSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.advisorynotifications.v1.IGetSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetSettingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.advisorynotifications.v1.GetSettingsRequest;
+
+                    /**
+                     * Decodes a GetSettingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.advisorynotifications.v1.GetSettingsRequest;
+
+                    /**
+                     * Verifies a GetSettingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetSettingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.advisorynotifications.v1.GetSettingsRequest;
+
+                    /**
+                     * Creates a plain object from a GetSettingsRequest message. Also converts values to other types if specified.
+                     * @param message GetSettingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.advisorynotifications.v1.GetSettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetSettingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetSettingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateSettingsRequest. */
+                interface IUpdateSettingsRequest {
+
+                    /** UpdateSettingsRequest settings */
+                    settings?: (google.cloud.advisorynotifications.v1.ISettings|null);
+                }
+
+                /** Represents an UpdateSettingsRequest. */
+                class UpdateSettingsRequest implements IUpdateSettingsRequest {
+
+                    /**
+                     * Constructs a new UpdateSettingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.advisorynotifications.v1.IUpdateSettingsRequest);
+
+                    /** UpdateSettingsRequest settings. */
+                    public settings?: (google.cloud.advisorynotifications.v1.ISettings|null);
+
+                    /**
+                     * Creates a new UpdateSettingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateSettingsRequest instance
+                     */
+                    public static create(properties?: google.cloud.advisorynotifications.v1.IUpdateSettingsRequest): google.cloud.advisorynotifications.v1.UpdateSettingsRequest;
+
+                    /**
+                     * Encodes the specified UpdateSettingsRequest message. Does not implicitly {@link google.cloud.advisorynotifications.v1.UpdateSettingsRequest.verify|verify} messages.
+                     * @param message UpdateSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.advisorynotifications.v1.IUpdateSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateSettingsRequest message, length delimited. Does not implicitly {@link google.cloud.advisorynotifications.v1.UpdateSettingsRequest.verify|verify} messages.
+                     * @param message UpdateSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.advisorynotifications.v1.IUpdateSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateSettingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.advisorynotifications.v1.UpdateSettingsRequest;
+
+                    /**
+                     * Decodes an UpdateSettingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.advisorynotifications.v1.UpdateSettingsRequest;
+
+                    /**
+                     * Verifies an UpdateSettingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateSettingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.advisorynotifications.v1.UpdateSettingsRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateSettingsRequest message. Also converts values to other types if specified.
+                     * @param message UpdateSettingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.advisorynotifications.v1.UpdateSettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateSettingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateSettingsRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

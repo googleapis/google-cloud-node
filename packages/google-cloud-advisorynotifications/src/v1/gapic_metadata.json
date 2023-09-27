@@ -15,6 +15,16 @@
                 "getNotification"
               ]
             },
+            "GetSettings": {
+              "methods": [
+                "getSettings"
+              ]
+            },
+            "UpdateSettings": {
+              "methods": [
+                "updateSettings"
+              ]
+            },
             "ListNotifications": {
               "methods": [
                 "listNotifications",
@@ -30,6 +40,16 @@
             "GetNotification": {
               "methods": [
                 "getNotification"
+              ]
+            },
+            "GetSettings": {
+              "methods": [
+                "getSettings"
+              ]
+            },
+            "UpdateSettings": {
+              "methods": [
+                "updateSettings"
               ]
             },
             "ListNotifications": {
