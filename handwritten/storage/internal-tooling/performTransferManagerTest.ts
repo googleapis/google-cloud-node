@@ -17,7 +17,7 @@
 const yargs = require('yargs');
 // eslint-disable-next-line node/no-unsupported-features/node-builtins
 import {parentPort} from 'worker_threads';
-import {Bucket, TransferManager} from '../src';
+import {Bucket, File, TransferManager} from '../src';
 import {
   cleanupFile,
   generateRandomDirectoryStructure,
@@ -72,14 +72,23 @@ async function main() {
       break;
   }
   parentPort?.postMessage(results);
-  await performTestCleanup();
 }
 
 /**
- * Cleans up after a test is complete by removing all files from the bucket
+ * Cleans up after a test is complete by removing files from the bucket
  */
-async function performTestCleanup() {
-  await bucket.deleteFiles({force: true});
+async function performTestCleanup(fileOrFiles: File[] | File | string[]) {
+  const filesToDelete = Array.isArray(fileOrFiles)
+    ? fileOrFiles
+    : [fileOrFiles];
+  const promises = filesToDelete.map(f => {
+    let fileToDelete = f;
+    if (typeof f === 'string') {
+      fileToDelete = bucket.file(f);
+    }
+    (fileToDelete as File).delete({ignoreNotFound: true});
+  });
+  return Promise.all(promises);
 }
 
 /**
@@ -125,6 +134,8 @@ async function performUploadManyFilesTest(): Promise<TestResult[]> {
     transferOffset: 0,
     bucketName: bucket.name,
   };
+
+  await performTestCleanup(creationInfo.paths);
 
   return [result];
 }
@@ -179,6 +190,8 @@ async function performDownloadManyFilesTest(): Promise<TestResult[]> {
     transferOffset: 0,
     bucketName: bucket.name,
   };
+
+  await performTestCleanup(creationInfo.paths);
 
   return [result];
 }
@@ -256,6 +269,8 @@ async function performChunkUploadDownloadTest(): Promise<TestResult[]> {
     bucketName: bucket.name,
   };
   results.push(result);
+
+  await performTestCleanup(file);
 
   return results;
 }
