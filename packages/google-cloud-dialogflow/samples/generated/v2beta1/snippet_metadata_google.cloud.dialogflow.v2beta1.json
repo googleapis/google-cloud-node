@@ -3558,7 +3558,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 137,
+                    "end": 155,
                     "type": "FULL"
                 }
             ],
@@ -3610,6 +3610,10 @@
                     {
                         "name": "cx_current_page",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "enable_extended_streaming",
+                        "type": "TYPE_BOOL"
                     },
                     {
                         "name": "enable_partial_automated_agent_reply",
