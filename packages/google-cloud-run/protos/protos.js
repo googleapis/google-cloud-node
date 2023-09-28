@@ -29314,7 +29314,6 @@
                          * @property {string|null} [uri] Service uri
                          * @property {Array.<string>|null} [customAudiences] Service customAudiences
                          * @property {boolean|null} [satisfiesPzs] Service satisfiesPzs
-                         * @property {number|Long|null} [trafficTagsCleanupThreshold] Service trafficTagsCleanupThreshold
                          * @property {boolean|null} [reconciling] Service reconciling
                          * @property {string|null} [etag] Service etag
                          */
@@ -29565,14 +29564,6 @@
                         Service.prototype.satisfiesPzs = false;
     
                         /**
-                         * Service trafficTagsCleanupThreshold.
-                         * @member {number|Long} trafficTagsCleanupThreshold
-                         * @memberof google.cloud.run.v2.Service
-                         * @instance
-                         */
-                        Service.prototype.trafficTagsCleanupThreshold = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                        /**
                          * Service reconciling.
                          * @member {boolean} reconciling
                          * @memberof google.cloud.run.v2.Service
@@ -29674,8 +29665,6 @@
                                     writer.uint32(/* id 37, wireType 2 =*/298).string(message.customAudiences[i]);
                             if (message.satisfiesPzs != null && Object.hasOwnProperty.call(message, "satisfiesPzs"))
                                 writer.uint32(/* id 38, wireType 0 =*/304).bool(message.satisfiesPzs);
-                            if (message.trafficTagsCleanupThreshold != null && Object.hasOwnProperty.call(message, "trafficTagsCleanupThreshold"))
-                                writer.uint32(/* id 39, wireType 0 =*/312).int64(message.trafficTagsCleanupThreshold);
                             if (message.reconciling != null && Object.hasOwnProperty.call(message, "reconciling"))
                                 writer.uint32(/* id 98, wireType 0 =*/784).bool(message.reconciling);
                             if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
@@ -29872,10 +29861,6 @@
                                         message.satisfiesPzs = reader.bool();
                                         break;
                                     }
-                                case 39: {
-                                        message.trafficTagsCleanupThreshold = reader.int64();
-                                        break;
-                                    }
                                 case 98: {
                                         message.reconciling = reader.bool();
                                         break;
@@ -30067,9 +30052,6 @@
                             if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
                                 if (typeof message.satisfiesPzs !== "boolean")
                                     return "satisfiesPzs: boolean expected";
-                            if (message.trafficTagsCleanupThreshold != null && message.hasOwnProperty("trafficTagsCleanupThreshold"))
-                                if (!$util.isInteger(message.trafficTagsCleanupThreshold) && !(message.trafficTagsCleanupThreshold && $util.isInteger(message.trafficTagsCleanupThreshold.low) && $util.isInteger(message.trafficTagsCleanupThreshold.high)))
-                                    return "trafficTagsCleanupThreshold: integer|Long expected";
                             if (message.reconciling != null && message.hasOwnProperty("reconciling"))
                                 if (typeof message.reconciling !== "boolean")
                                     return "reconciling: boolean expected";
@@ -30281,15 +30263,6 @@
                             }
                             if (object.satisfiesPzs != null)
                                 message.satisfiesPzs = Boolean(object.satisfiesPzs);
-                            if (object.trafficTagsCleanupThreshold != null)
-                                if ($util.Long)
-                                    (message.trafficTagsCleanupThreshold = $util.Long.fromValue(object.trafficTagsCleanupThreshold)).unsigned = false;
-                                else if (typeof object.trafficTagsCleanupThreshold === "string")
-                                    message.trafficTagsCleanupThreshold = parseInt(object.trafficTagsCleanupThreshold, 10);
-                                else if (typeof object.trafficTagsCleanupThreshold === "number")
-                                    message.trafficTagsCleanupThreshold = object.trafficTagsCleanupThreshold;
-                                else if (typeof object.trafficTagsCleanupThreshold === "object")
-                                    message.trafficTagsCleanupThreshold = new $util.LongBits(object.trafficTagsCleanupThreshold.low >>> 0, object.trafficTagsCleanupThreshold.high >>> 0).toNumber();
                             if (object.reconciling != null)
                                 message.reconciling = Boolean(object.reconciling);
                             if (object.etag != null)
@@ -30351,11 +30324,6 @@
                                 object.latestCreatedRevision = "";
                                 object.uri = "";
                                 object.satisfiesPzs = false;
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.trafficTagsCleanupThreshold = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.trafficTagsCleanupThreshold = options.longs === String ? "0" : 0;
                                 object.reconciling = false;
                                 object.etag = "";
                             }
@@ -30440,11 +30408,6 @@
                             }
                             if (message.satisfiesPzs != null && message.hasOwnProperty("satisfiesPzs"))
                                 object.satisfiesPzs = message.satisfiesPzs;
-                            if (message.trafficTagsCleanupThreshold != null && message.hasOwnProperty("trafficTagsCleanupThreshold"))
-                                if (typeof message.trafficTagsCleanupThreshold === "number")
-                                    object.trafficTagsCleanupThreshold = options.longs === String ? String(message.trafficTagsCleanupThreshold) : message.trafficTagsCleanupThreshold;
-                                else
-                                    object.trafficTagsCleanupThreshold = options.longs === String ? $util.Long.prototype.toString.call(message.trafficTagsCleanupThreshold) : options.longs === Number ? new $util.LongBits(message.trafficTagsCleanupThreshold.low >>> 0, message.trafficTagsCleanupThreshold.high >>> 0).toNumber() : message.trafficTagsCleanupThreshold;
                             if (message.reconciling != null && message.hasOwnProperty("reconciling"))
                                 object.reconciling = message.reconciling;
                             if (message.etag != null && message.hasOwnProperty("etag"))

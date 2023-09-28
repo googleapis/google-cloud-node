@@ -11056,9 +11056,6 @@ export namespace google {
                     /** Service satisfiesPzs */
                     satisfiesPzs?: (boolean|null);
 
-                    /** Service trafficTagsCleanupThreshold */
-                    trafficTagsCleanupThreshold?: (number|Long|string|null);
-
                     /** Service reconciling */
                     reconciling?: (boolean|null);
 
@@ -11158,9 +11155,6 @@ export namespace google {
 
                     /** Service satisfiesPzs. */
                     public satisfiesPzs: boolean;
-
-                    /** Service trafficTagsCleanupThreshold. */
-                    public trafficTagsCleanupThreshold: (number|Long|string);
 
                     /** Service reconciling. */
                     public reconciling: boolean;

@@ -3641,13 +3641,6 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
-                        "trafficTagsCleanupThreshold": {
-                          "type": "int64",
-                          "id": 39,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
                         "reconciling": {
                           "type": "bool",
                           "id": 98,
