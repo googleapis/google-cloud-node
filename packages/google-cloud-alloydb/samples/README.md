@@ -24,8 +24,10 @@
   * [Alloy_d_b_admin.delete_instance](#alloy_d_b_admin.delete_instance)
   * [Alloy_d_b_admin.delete_user](#alloy_d_b_admin.delete_user)
   * [Alloy_d_b_admin.failover_instance](#alloy_d_b_admin.failover_instance)
+  * [Alloy_d_b_admin.generate_client_certificate](#alloy_d_b_admin.generate_client_certificate)
   * [Alloy_d_b_admin.get_backup](#alloy_d_b_admin.get_backup)
   * [Alloy_d_b_admin.get_cluster](#alloy_d_b_admin.get_cluster)
+  * [Alloy_d_b_admin.get_connection_info](#alloy_d_b_admin.get_connection_info)
   * [Alloy_d_b_admin.get_instance](#alloy_d_b_admin.get_instance)
   * [Alloy_d_b_admin.get_user](#alloy_d_b_admin.get_user)
   * [Alloy_d_b_admin.inject_fault](#alloy_d_b_admin.inject_fault)
@@ -324,6 +326,23 @@ __Usage:__
 
 
 
+### Alloy_d_b_admin.generate_client_certificate
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.generate_client_certificate.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.generate_client_certificate.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.generate_client_certificate.js`
+
+
+-----
+
+
+
+
 ### Alloy_d_b_admin.get_backup
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.get_backup.js).
@@ -351,6 +370,23 @@ __Usage:__
 
 
 `node packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.get_cluster.js`
+
+
+-----
+
+
+
+
+### Alloy_d_b_admin.get_connection_info
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.get_connection_info.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.get_connection_info.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-alloydb/samples/generated/v1/alloy_d_b_admin.get_connection_info.js`
 
 
 -----

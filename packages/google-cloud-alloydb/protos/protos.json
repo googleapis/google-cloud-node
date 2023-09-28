@@ -877,6 +877,32 @@
                         }
                       }
                     },
+                    "ConnectionInfo": {
+                      "options": {
+                        "(google.api.resource).type": "alloydb.googleapis.com/ConnectionInfo",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/clusters/{cluster}/instances/{instance}/connectionInfo"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "ipAddress": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "instanceUid": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
                     "Backup": {
                       "options": {
                         "(google.api.resource).type": "alloydb.googleapis.com/Backup",
@@ -1770,6 +1796,44 @@
                             {
                               "(google.api.http)": {
                                 "get": "/v1/{parent=projects/*/locations/*}/supportedDatabaseFlags"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GenerateClientCertificate": {
+                          "requestType": "GenerateClientCertificateRequest",
+                          "responseType": "GenerateClientCertificateResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/clusters/*}:generateClientCertificate",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/clusters/*}:generateClientCertificate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetConnectionInfo": {
+                          "requestType": "GetConnectionInfoRequest",
+                          "responseType": "ConnectionInfo",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/clusters/*/instances/*}/connectionInfo",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/clusters/*/instances/*}/connectionInfo"
                               }
                             },
                             {
@@ -2805,6 +2869,77 @@
                         "nextPageToken": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "GenerateClientCertificateRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "alloydb.googleapis.com/Cluster"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "certDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "publicKey": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GenerateClientCertificateResponse": {
+                      "fields": {
+                        "pemCertificateChain": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "caCert": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GetConnectionInfoRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "alloydb.googleapis.com/Instance"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
