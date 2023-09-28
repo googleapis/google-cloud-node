@@ -20,10 +20,10 @@ import pathlib
 
 
 def patch(library: pathlib.Path):
-    s.replace(library / 'src/*/cloud_tasks_client_config.json',
+    s.replace(library / 'esm/src/*/cloud_tasks_client_config.json',
             '"initial_rpc_timeout_millis": 60000',
             '"initial_rpc_timeout_millis": 20000')
-    s.replace(library / 'src/*/cloud_tasks_client_config.json',
+    s.replace(library / 'esm/src/*/cloud_tasks_client_config.json',
             '"max_rpc_timeout_millis": 60000',
             '"max_rpc_timeout_millis": 20000')
 
