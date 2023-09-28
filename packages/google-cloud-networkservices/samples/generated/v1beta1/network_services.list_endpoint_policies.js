@@ -29,8 +29,8 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The project and location from which the EndpointPolicies should be
-   *  listed, specified in the format `projects/* /locations/global`.
+   *  Required. The project and location from which the EndpointPolicies should
+   *  be listed, specified in the format `projects/* /locations/global`.
    */
   // const parent = 'abc123'
   /**
