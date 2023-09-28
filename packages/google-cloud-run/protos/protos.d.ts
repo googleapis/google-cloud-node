@@ -2719,11 +2719,11 @@ export namespace google {
             /** MethodOptions .google.api.methodSignature */
             ".google.api.methodSignature"?: (string[]|null);
 
-            /** MethodOptions .google.longrunning.operationInfo */
-            ".google.longrunning.operationInfo"?: (google.longrunning.IOperationInfo|null);
-
             /** MethodOptions .google.api.routing */
             ".google.api.routing"?: (google.api.IRoutingRule|null);
+
+            /** MethodOptions .google.longrunning.operationInfo */
+            ".google.longrunning.operationInfo"?: (google.longrunning.IOperationInfo|null);
         }
 
         /** Represents a MethodOptions. */
@@ -4130,7 +4130,8 @@ export namespace google {
                         JOB_STATUS_SERVICE_POLLING_ERROR = 1,
                         NON_ZERO_EXIT_CODE = 2,
                         CANCELLED = 3,
-                        CANCELLING = 4
+                        CANCELLING = 4,
+                        DELETED = 5
                     }
                 }
 
@@ -4195,6 +4196,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteExecution(request: google.cloud.run.v2.IDeleteExecutionRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CancelExecution.
+                     * @param request CancelExecutionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public cancelExecution(request: google.cloud.run.v2.ICancelExecutionRequest, callback: google.cloud.run.v2.Executions.CancelExecutionCallback): void;
+
+                    /**
+                     * Calls CancelExecution.
+                     * @param request CancelExecutionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public cancelExecution(request: google.cloud.run.v2.ICancelExecutionRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace Executions {
@@ -4219,6 +4234,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteExecutionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.run.v2.Executions|cancelExecution}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CancelExecutionCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of a GetExecutionRequest. */
@@ -4639,6 +4661,115 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DeleteExecutionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CancelExecutionRequest. */
+                interface ICancelExecutionRequest {
+
+                    /** CancelExecutionRequest name */
+                    name?: (string|null);
+
+                    /** CancelExecutionRequest validateOnly */
+                    validateOnly?: (boolean|null);
+
+                    /** CancelExecutionRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a CancelExecutionRequest. */
+                class CancelExecutionRequest implements ICancelExecutionRequest {
+
+                    /**
+                     * Constructs a new CancelExecutionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.ICancelExecutionRequest);
+
+                    /** CancelExecutionRequest name. */
+                    public name: string;
+
+                    /** CancelExecutionRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /** CancelExecutionRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new CancelExecutionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CancelExecutionRequest instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.ICancelExecutionRequest): google.cloud.run.v2.CancelExecutionRequest;
+
+                    /**
+                     * Encodes the specified CancelExecutionRequest message. Does not implicitly {@link google.cloud.run.v2.CancelExecutionRequest.verify|verify} messages.
+                     * @param message CancelExecutionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.ICancelExecutionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CancelExecutionRequest message, length delimited. Does not implicitly {@link google.cloud.run.v2.CancelExecutionRequest.verify|verify} messages.
+                     * @param message CancelExecutionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.ICancelExecutionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CancelExecutionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CancelExecutionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.CancelExecutionRequest;
+
+                    /**
+                     * Decodes a CancelExecutionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CancelExecutionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.CancelExecutionRequest;
+
+                    /**
+                     * Verifies a CancelExecutionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CancelExecutionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CancelExecutionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.CancelExecutionRequest;
+
+                    /**
+                     * Creates a plain object from a CancelExecutionRequest message. Also converts values to other types if specified.
+                     * @param message CancelExecutionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.CancelExecutionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CancelExecutionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CancelExecutionRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -5075,6 +5206,9 @@ export namespace google {
 
                     /** Container startupProbe */
                     startupProbe?: (google.cloud.run.v2.IProbe|null);
+
+                    /** Container dependsOn */
+                    dependsOn?: (string[]|null);
                 }
 
                 /** Represents a Container. */
@@ -5118,6 +5252,9 @@ export namespace google {
 
                     /** Container startupProbe. */
                     public startupProbe?: (google.cloud.run.v2.IProbe|null);
+
+                    /** Container dependsOn. */
+                    public dependsOn: string[];
 
                     /**
                      * Creates a new Container instance using the specified properties.
@@ -5835,6 +5972,9 @@ export namespace google {
 
                     /** Volume cloudSqlInstance */
                     cloudSqlInstance?: (google.cloud.run.v2.ICloudSqlInstance|null);
+
+                    /** Volume emptyDir */
+                    emptyDir?: (google.cloud.run.v2.IEmptyDirVolumeSource|null);
                 }
 
                 /** Represents a Volume. */
@@ -5855,8 +5995,11 @@ export namespace google {
                     /** Volume cloudSqlInstance. */
                     public cloudSqlInstance?: (google.cloud.run.v2.ICloudSqlInstance|null);
 
+                    /** Volume emptyDir. */
+                    public emptyDir?: (google.cloud.run.v2.IEmptyDirVolumeSource|null);
+
                     /** Volume volumeType. */
-                    public volumeType?: ("secret"|"cloudSqlInstance");
+                    public volumeType?: ("secret"|"cloudSqlInstance"|"emptyDir");
 
                     /**
                      * Creates a new Volume instance using the specified properties.
@@ -6249,6 +6392,118 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EmptyDirVolumeSource. */
+                interface IEmptyDirVolumeSource {
+
+                    /** EmptyDirVolumeSource medium */
+                    medium?: (google.cloud.run.v2.EmptyDirVolumeSource.Medium|keyof typeof google.cloud.run.v2.EmptyDirVolumeSource.Medium|null);
+
+                    /** EmptyDirVolumeSource sizeLimit */
+                    sizeLimit?: (string|null);
+                }
+
+                /** Represents an EmptyDirVolumeSource. */
+                class EmptyDirVolumeSource implements IEmptyDirVolumeSource {
+
+                    /**
+                     * Constructs a new EmptyDirVolumeSource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.IEmptyDirVolumeSource);
+
+                    /** EmptyDirVolumeSource medium. */
+                    public medium: (google.cloud.run.v2.EmptyDirVolumeSource.Medium|keyof typeof google.cloud.run.v2.EmptyDirVolumeSource.Medium);
+
+                    /** EmptyDirVolumeSource sizeLimit. */
+                    public sizeLimit: string;
+
+                    /**
+                     * Creates a new EmptyDirVolumeSource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EmptyDirVolumeSource instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.IEmptyDirVolumeSource): google.cloud.run.v2.EmptyDirVolumeSource;
+
+                    /**
+                     * Encodes the specified EmptyDirVolumeSource message. Does not implicitly {@link google.cloud.run.v2.EmptyDirVolumeSource.verify|verify} messages.
+                     * @param message EmptyDirVolumeSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.IEmptyDirVolumeSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EmptyDirVolumeSource message, length delimited. Does not implicitly {@link google.cloud.run.v2.EmptyDirVolumeSource.verify|verify} messages.
+                     * @param message EmptyDirVolumeSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.IEmptyDirVolumeSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EmptyDirVolumeSource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EmptyDirVolumeSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.EmptyDirVolumeSource;
+
+                    /**
+                     * Decodes an EmptyDirVolumeSource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EmptyDirVolumeSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.EmptyDirVolumeSource;
+
+                    /**
+                     * Verifies an EmptyDirVolumeSource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EmptyDirVolumeSource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EmptyDirVolumeSource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.EmptyDirVolumeSource;
+
+                    /**
+                     * Creates a plain object from an EmptyDirVolumeSource message. Also converts values to other types if specified.
+                     * @param message EmptyDirVolumeSource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.EmptyDirVolumeSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EmptyDirVolumeSource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EmptyDirVolumeSource
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace EmptyDirVolumeSource {
+
+                    /** Medium enum. */
+                    enum Medium {
+                        MEDIUM_UNSPECIFIED = 0,
+                        MEMORY = 1
+                    }
                 }
 
                 /** Properties of a Probe. */
@@ -6807,6 +7062,9 @@ export namespace google {
 
                     /** VpcAccess egress */
                     egress?: (google.cloud.run.v2.VpcAccess.VpcEgress|keyof typeof google.cloud.run.v2.VpcAccess.VpcEgress|null);
+
+                    /** VpcAccess networkInterfaces */
+                    networkInterfaces?: (google.cloud.run.v2.VpcAccess.INetworkInterface[]|null);
                 }
 
                 /** Represents a VpcAccess. */
@@ -6823,6 +7081,9 @@ export namespace google {
 
                     /** VpcAccess egress. */
                     public egress: (google.cloud.run.v2.VpcAccess.VpcEgress|keyof typeof google.cloud.run.v2.VpcAccess.VpcEgress);
+
+                    /** VpcAccess networkInterfaces. */
+                    public networkInterfaces: google.cloud.run.v2.VpcAccess.INetworkInterface[];
 
                     /**
                      * Creates a new VpcAccess instance using the specified properties.
@@ -6909,6 +7170,115 @@ export namespace google {
                         VPC_EGRESS_UNSPECIFIED = 0,
                         ALL_TRAFFIC = 1,
                         PRIVATE_RANGES_ONLY = 2
+                    }
+
+                    /** Properties of a NetworkInterface. */
+                    interface INetworkInterface {
+
+                        /** NetworkInterface network */
+                        network?: (string|null);
+
+                        /** NetworkInterface subnetwork */
+                        subnetwork?: (string|null);
+
+                        /** NetworkInterface tags */
+                        tags?: (string[]|null);
+                    }
+
+                    /** Represents a NetworkInterface. */
+                    class NetworkInterface implements INetworkInterface {
+
+                        /**
+                         * Constructs a new NetworkInterface.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.run.v2.VpcAccess.INetworkInterface);
+
+                        /** NetworkInterface network. */
+                        public network: string;
+
+                        /** NetworkInterface subnetwork. */
+                        public subnetwork: string;
+
+                        /** NetworkInterface tags. */
+                        public tags: string[];
+
+                        /**
+                         * Creates a new NetworkInterface instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns NetworkInterface instance
+                         */
+                        public static create(properties?: google.cloud.run.v2.VpcAccess.INetworkInterface): google.cloud.run.v2.VpcAccess.NetworkInterface;
+
+                        /**
+                         * Encodes the specified NetworkInterface message. Does not implicitly {@link google.cloud.run.v2.VpcAccess.NetworkInterface.verify|verify} messages.
+                         * @param message NetworkInterface message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.run.v2.VpcAccess.INetworkInterface, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified NetworkInterface message, length delimited. Does not implicitly {@link google.cloud.run.v2.VpcAccess.NetworkInterface.verify|verify} messages.
+                         * @param message NetworkInterface message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.run.v2.VpcAccess.INetworkInterface, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a NetworkInterface message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns NetworkInterface
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.VpcAccess.NetworkInterface;
+
+                        /**
+                         * Decodes a NetworkInterface message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns NetworkInterface
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.VpcAccess.NetworkInterface;
+
+                        /**
+                         * Verifies a NetworkInterface message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a NetworkInterface message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns NetworkInterface
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.VpcAccess.NetworkInterface;
+
+                        /**
+                         * Creates a plain object from a NetworkInterface message. Also converts values to other types if specified.
+                         * @param message NetworkInterface
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.run.v2.VpcAccess.NetworkInterface, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this NetworkInterface to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for NetworkInterface
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -8136,6 +8506,9 @@ export namespace google {
 
                     /** RunJobRequest etag */
                     etag?: (string|null);
+
+                    /** RunJobRequest overrides */
+                    overrides?: (google.cloud.run.v2.RunJobRequest.IOverrides|null);
                 }
 
                 /** Represents a RunJobRequest. */
@@ -8155,6 +8528,9 @@ export namespace google {
 
                     /** RunJobRequest etag. */
                     public etag: string;
+
+                    /** RunJobRequest overrides. */
+                    public overrides?: (google.cloud.run.v2.RunJobRequest.IOverrides|null);
 
                     /**
                      * Creates a new RunJobRequest instance using the specified properties.
@@ -8232,6 +8608,236 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RunJobRequest {
+
+                    /** Properties of an Overrides. */
+                    interface IOverrides {
+
+                        /** Overrides containerOverrides */
+                        containerOverrides?: (google.cloud.run.v2.RunJobRequest.Overrides.IContainerOverride[]|null);
+
+                        /** Overrides taskCount */
+                        taskCount?: (number|null);
+
+                        /** Overrides timeout */
+                        timeout?: (google.protobuf.IDuration|null);
+                    }
+
+                    /** Represents an Overrides. */
+                    class Overrides implements IOverrides {
+
+                        /**
+                         * Constructs a new Overrides.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.run.v2.RunJobRequest.IOverrides);
+
+                        /** Overrides containerOverrides. */
+                        public containerOverrides: google.cloud.run.v2.RunJobRequest.Overrides.IContainerOverride[];
+
+                        /** Overrides taskCount. */
+                        public taskCount: number;
+
+                        /** Overrides timeout. */
+                        public timeout?: (google.protobuf.IDuration|null);
+
+                        /**
+                         * Creates a new Overrides instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Overrides instance
+                         */
+                        public static create(properties?: google.cloud.run.v2.RunJobRequest.IOverrides): google.cloud.run.v2.RunJobRequest.Overrides;
+
+                        /**
+                         * Encodes the specified Overrides message. Does not implicitly {@link google.cloud.run.v2.RunJobRequest.Overrides.verify|verify} messages.
+                         * @param message Overrides message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.run.v2.RunJobRequest.IOverrides, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Overrides message, length delimited. Does not implicitly {@link google.cloud.run.v2.RunJobRequest.Overrides.verify|verify} messages.
+                         * @param message Overrides message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.run.v2.RunJobRequest.IOverrides, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Overrides message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Overrides
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.RunJobRequest.Overrides;
+
+                        /**
+                         * Decodes an Overrides message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Overrides
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.RunJobRequest.Overrides;
+
+                        /**
+                         * Verifies an Overrides message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Overrides message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Overrides
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.RunJobRequest.Overrides;
+
+                        /**
+                         * Creates a plain object from an Overrides message. Also converts values to other types if specified.
+                         * @param message Overrides
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.run.v2.RunJobRequest.Overrides, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Overrides to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Overrides
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Overrides {
+
+                        /** Properties of a ContainerOverride. */
+                        interface IContainerOverride {
+
+                            /** ContainerOverride name */
+                            name?: (string|null);
+
+                            /** ContainerOverride args */
+                            args?: (string[]|null);
+
+                            /** ContainerOverride env */
+                            env?: (google.cloud.run.v2.IEnvVar[]|null);
+
+                            /** ContainerOverride clearArgs */
+                            clearArgs?: (boolean|null);
+                        }
+
+                        /** Represents a ContainerOverride. */
+                        class ContainerOverride implements IContainerOverride {
+
+                            /**
+                             * Constructs a new ContainerOverride.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.run.v2.RunJobRequest.Overrides.IContainerOverride);
+
+                            /** ContainerOverride name. */
+                            public name: string;
+
+                            /** ContainerOverride args. */
+                            public args: string[];
+
+                            /** ContainerOverride env. */
+                            public env: google.cloud.run.v2.IEnvVar[];
+
+                            /** ContainerOverride clearArgs. */
+                            public clearArgs: boolean;
+
+                            /**
+                             * Creates a new ContainerOverride instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ContainerOverride instance
+                             */
+                            public static create(properties?: google.cloud.run.v2.RunJobRequest.Overrides.IContainerOverride): google.cloud.run.v2.RunJobRequest.Overrides.ContainerOverride;
+
+                            /**
+                             * Encodes the specified ContainerOverride message. Does not implicitly {@link google.cloud.run.v2.RunJobRequest.Overrides.ContainerOverride.verify|verify} messages.
+                             * @param message ContainerOverride message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.run.v2.RunJobRequest.Overrides.IContainerOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ContainerOverride message, length delimited. Does not implicitly {@link google.cloud.run.v2.RunJobRequest.Overrides.ContainerOverride.verify|verify} messages.
+                             * @param message ContainerOverride message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.run.v2.RunJobRequest.Overrides.IContainerOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ContainerOverride message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ContainerOverride
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.RunJobRequest.Overrides.ContainerOverride;
+
+                            /**
+                             * Decodes a ContainerOverride message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ContainerOverride
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.RunJobRequest.Overrides.ContainerOverride;
+
+                            /**
+                             * Verifies a ContainerOverride message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ContainerOverride message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ContainerOverride
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.RunJobRequest.Overrides.ContainerOverride;
+
+                            /**
+                             * Creates a plain object from a ContainerOverride message. Also converts values to other types if specified.
+                             * @param message ContainerOverride
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.run.v2.RunJobRequest.Overrides.ContainerOverride, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ContainerOverride to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ContainerOverride
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
                 }
 
                 /** Properties of a Job. */
@@ -11279,6 +11885,9 @@ export namespace google {
                     /** Task createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
 
+                    /** Task scheduledTime */
+                    scheduledTime?: (google.protobuf.ITimestamp|null);
+
                     /** Task startTime */
                     startTime?: (google.protobuf.ITimestamp|null);
 
@@ -11378,6 +11987,9 @@ export namespace google {
 
                     /** Task createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Task scheduledTime. */
+                    public scheduledTime?: (google.protobuf.ITimestamp|null);
 
                     /** Task startTime. */
                     public startTime?: (google.protobuf.ITimestamp|null);

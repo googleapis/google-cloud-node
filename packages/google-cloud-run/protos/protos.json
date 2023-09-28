@@ -1151,7 +1151,8 @@
                             "JOB_STATUS_SERVICE_POLLING_ERROR": 1,
                             "NON_ZERO_EXIT_CODE": 2,
                             "CANCELLED": 3,
-                            "CANCELLING": 4
+                            "CANCELLING": 4,
+                            "DELETED": 5
                           }
                         }
                       }
@@ -1223,6 +1224,34 @@
                               }
                             }
                           ]
+                        },
+                        "CancelExecution": {
+                          "requestType": "CancelExecutionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v2/{name=projects/*/locations/*/jobs/*/executions/*}:cancel",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "Execution",
+                            "(google.longrunning.operation_info).metadata_type": "Execution"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{name=projects/*/locations/*/jobs/*/executions/*}:cancel",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Execution",
+                                "metadata_type": "Execution"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -1276,6 +1305,26 @@
                       }
                     },
                     "DeleteExecutionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "run.googleapis.com/Execution"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "CancelExecutionRequest": {
                       "fields": {
                         "name": {
                           "type": "string",
@@ -1595,6 +1644,11 @@
                         "startupProbe": {
                           "type": "Probe",
                           "id": 11
+                        },
+                        "dependsOn": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 12
                         }
                       }
                     },
@@ -1704,7 +1758,8 @@
                         "volumeType": {
                           "oneof": [
                             "secret",
-                            "cloudSqlInstance"
+                            "cloudSqlInstance",
+                            "emptyDir"
                           ]
                         }
                       },
@@ -1723,6 +1778,10 @@
                         "cloudSqlInstance": {
                           "type": "CloudSqlInstance",
                           "id": 3
+                        },
+                        "emptyDir": {
+                          "type": "EmptyDirVolumeSource",
+                          "id": 4
                         }
                       }
                     },
@@ -1771,6 +1830,26 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 1
+                        }
+                      }
+                    },
+                    "EmptyDirVolumeSource": {
+                      "fields": {
+                        "medium": {
+                          "type": "Medium",
+                          "id": 1
+                        },
+                        "sizeLimit": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Medium": {
+                          "values": {
+                            "MEDIUM_UNSPECIFIED": 0,
+                            "MEMORY": 1
+                          }
                         }
                       }
                     },
@@ -1879,6 +1958,11 @@
                         "egress": {
                           "type": "VpcEgress",
                           "id": 2
+                        },
+                        "networkInterfaces": {
+                          "rule": "repeated",
+                          "type": "NetworkInterface",
+                          "id": 3
                         }
                       },
                       "nested": {
@@ -1887,6 +1971,23 @@
                             "VPC_EGRESS_UNSPECIFIED": 0,
                             "ALL_TRAFFIC": 1,
                             "PRIVATE_RANGES_ONLY": 2
+                          }
+                        },
+                        "NetworkInterface": {
+                          "fields": {
+                            "network": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "subnetwork": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "tags": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3
+                            }
                           }
                         }
                       }
@@ -1985,6 +2086,8 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*/locations/*}/jobs",
                             "(google.api.http).body": "job",
+                            "(google.api.routing).routing_parameters.field": "parent",
+                            "(google.api.routing).routing_parameters.path_template": "projects/*/locations/{location=*}",
                             "(google.api.method_signature)": "parent,job,job_id",
                             "(google.longrunning.operation_info).response_type": "Job",
                             "(google.longrunning.operation_info).metadata_type": "Job"
@@ -1994,6 +2097,14 @@
                               "(google.api.http)": {
                                 "post": "/v2/{parent=projects/*/locations/*}/jobs",
                                 "body": "job"
+                              }
+                            },
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": {
+                                  "field": "parent",
+                                  "path_template": "projects/*/locations/{location=*}"
+                                }
                               }
                             },
                             {
@@ -2012,12 +2123,22 @@
                           "responseType": "Job",
                           "options": {
                             "(google.api.http).get": "/v2/{name=projects/*/locations/*/jobs/*}",
+                            "(google.api.routing).routing_parameters.field": "name",
+                            "(google.api.routing).routing_parameters.path_template": "projects/*/locations/{location=*}/**",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "get": "/v2/{name=projects/*/locations/*/jobs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": {
+                                  "field": "name",
+                                  "path_template": "projects/*/locations/{location=*}/**"
+                                }
                               }
                             },
                             {
@@ -2030,12 +2151,22 @@
                           "responseType": "ListJobsResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=projects/*/locations/*}/jobs",
+                            "(google.api.routing).routing_parameters.field": "parent",
+                            "(google.api.routing).routing_parameters.path_template": "projects/*/locations/{location=*}",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "get": "/v2/{parent=projects/*/locations/*}/jobs"
+                              }
+                            },
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": {
+                                  "field": "parent",
+                                  "path_template": "projects/*/locations/{location=*}"
+                                }
                               }
                             },
                             {
@@ -2049,6 +2180,8 @@
                           "options": {
                             "(google.api.http).patch": "/v2/{job.name=projects/*/locations/*/jobs/*}",
                             "(google.api.http).body": "job",
+                            "(google.api.routing).routing_parameters.field": "job.name",
+                            "(google.api.routing).routing_parameters.path_template": "projects/*/locations/{location=*}/**",
                             "(google.api.method_signature)": "job",
                             "(google.longrunning.operation_info).response_type": "Job",
                             "(google.longrunning.operation_info).metadata_type": "Job"
@@ -2058,6 +2191,14 @@
                               "(google.api.http)": {
                                 "patch": "/v2/{job.name=projects/*/locations/*/jobs/*}",
                                 "body": "job"
+                              }
+                            },
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": {
+                                  "field": "job.name",
+                                  "path_template": "projects/*/locations/{location=*}/**"
+                                }
                               }
                             },
                             {
@@ -2076,6 +2217,8 @@
                           "responseType": "google.longrunning.Operation",
                           "options": {
                             "(google.api.http).delete": "/v2/{name=projects/*/locations/*/jobs/*}",
+                            "(google.api.routing).routing_parameters.field": "name",
+                            "(google.api.routing).routing_parameters.path_template": "projects/*/locations/{location=*}/**",
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "Job",
                             "(google.longrunning.operation_info).metadata_type": "Job"
@@ -2084,6 +2227,14 @@
                             {
                               "(google.api.http)": {
                                 "delete": "/v2/{name=projects/*/locations/*/jobs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": {
+                                  "field": "name",
+                                  "path_template": "projects/*/locations/{location=*}/**"
+                                }
                               }
                             },
                             {
@@ -2103,6 +2254,8 @@
                           "options": {
                             "(google.api.http).post": "/v2/{name=projects/*/locations/*/jobs/*}:run",
                             "(google.api.http).body": "*",
+                            "(google.api.routing).routing_parameters.field": "name",
+                            "(google.api.routing).routing_parameters.path_template": "projects/*/locations/{location=*}/**",
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "Execution",
                             "(google.longrunning.operation_info).metadata_type": "Execution"
@@ -2112,6 +2265,14 @@
                               "(google.api.http)": {
                                 "post": "/v2/{name=projects/*/locations/*/jobs/*}:run",
                                 "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.routing)": {
+                                "routing_parameters": {
+                                  "field": "name",
+                                  "path_template": "projects/*/locations/{location=*}/**"
+                                }
                               }
                             },
                             {
@@ -2308,6 +2469,62 @@
                         "etag": {
                           "type": "string",
                           "id": 3
+                        },
+                        "overrides": {
+                          "type": "Overrides",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "Overrides": {
+                          "fields": {
+                            "containerOverrides": {
+                              "rule": "repeated",
+                              "type": "ContainerOverride",
+                              "id": 1
+                            },
+                            "taskCount": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "timeout": {
+                              "type": "google.protobuf.Duration",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "ContainerOverride": {
+                              "fields": {
+                                "name": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "args": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "env": {
+                                  "rule": "repeated",
+                                  "type": "EnvVar",
+                                  "id": 3
+                                },
+                                "clearArgs": {
+                                  "type": "bool",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -3637,6 +3854,13 @@
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "scheduledTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 34,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
