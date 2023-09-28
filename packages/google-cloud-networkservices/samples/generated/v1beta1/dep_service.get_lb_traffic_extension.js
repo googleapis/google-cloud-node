@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent) {
-  // [START networkservices_v1beta1_generated_NetworkServices_ListEndpointPolicies_async]
+function main(name) {
+  // [START networkservices_v1beta1_generated_DepService_GetLbTrafficExtension_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,43 +29,31 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The project and location from which the EndpointPolicies should
-   *  be listed, specified in the format `projects/* /locations/global`.
+   *  Required. A name of the `LbTrafficExtension` resource to get. Must be in
+   *  the format
+   *  `projects/{project}/locations/{location}/lbTrafficExtensions/{lb_traffic_extension}`.
    */
-  // const parent = 'abc123'
-  /**
-   *  Maximum number of EndpointPolicies to return per call.
-   */
-  // const pageSize = 1234
-  /**
-   *  The value returned by the last `ListEndpointPoliciesResponse`
-   *  Indicates that this is a continuation of a prior
-   *  `ListEndpointPolicies` call, and that the system should return the
-   *  next page of data.
-   */
-  // const pageToken = 'abc123'
+  // const name = 'abc123'
 
   // Imports the Networkservices library
-  const {NetworkServicesClient} = require('@google-cloud/networkservices').v1beta1;
+  const {DepServiceClient} = require('@google-cloud/networkservices').v1beta1;
 
   // Instantiates a client
-  const networkservicesClient = new NetworkServicesClient();
+  const networkservicesClient = new DepServiceClient();
 
-  async function callListEndpointPolicies() {
+  async function callGetLbTrafficExtension() {
     // Construct request
     const request = {
-      parent,
+      name,
     };
 
     // Run request
-    const iterable = await networkservicesClient.listEndpointPoliciesAsync(request);
-    for await (const response of iterable) {
-        console.log(response);
-    }
+    const response = await networkservicesClient.getLbTrafficExtension(request);
+    console.log(response);
   }
 
-  callListEndpointPolicies();
-  // [END networkservices_v1beta1_generated_NetworkServices_ListEndpointPolicies_async]
+  callGetLbTrafficExtension();
+  // [END networkservices_v1beta1_generated_DepService_GetLbTrafficExtension_async]
 }
 
 process.on('unhandledRejection', err => {
