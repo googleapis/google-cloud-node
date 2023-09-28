@@ -33,6 +33,7 @@ function main(feature) {
    *  updated.
    *  Format:
    *  `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}`
+   *  `projects/{project}/locations/{location}/featureGroups/{feature_group}/features/{feature}`
    */
   // const feature = {}
   /**
