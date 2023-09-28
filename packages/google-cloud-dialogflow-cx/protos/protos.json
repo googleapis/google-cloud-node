@@ -8514,12 +8514,32 @@
                               "type": "GcsDestination",
                               "id": 2
                             },
+                            "dtmfSettings": {
+                              "type": "DtmfSettings",
+                              "id": 5
+                            },
                             "loggingSettings": {
                               "type": "LoggingSettings",
                               "id": 6
                             }
                           },
                           "nested": {
+                            "DtmfSettings": {
+                              "fields": {
+                                "enabled": {
+                                  "type": "bool",
+                                  "id": 1
+                                },
+                                "maxDigits": {
+                                  "type": "int32",
+                                  "id": 2
+                                },
+                                "finishDigit": {
+                                  "type": "string",
+                                  "id": 3
+                                }
+                              }
+                            },
                             "LoggingSettings": {
                               "fields": {
                                 "enableStackdriverLogging": {
@@ -9707,6 +9727,10 @@
                               "type": "NluSettings",
                               "id": 11
                             },
+                            "advancedSettings": {
+                              "type": "AdvancedSettings",
+                              "id": 14
+                            },
                             "knowledgeConnectorSettings": {
                               "type": "KnowledgeConnectorSettings",
                               "id": 18,
@@ -10163,6 +10187,10 @@
                               "type": "EventHandler",
                               "id": 10
                             },
+                            "advancedSettings": {
+                              "type": "AdvancedSettings",
+                              "id": 13
+                            },
                             "knowledgeConnectorSettings": {
                               "type": "KnowledgeConnectorSettings",
                               "id": 18,
@@ -10220,6 +10248,10 @@
                                 "redact": {
                                   "type": "bool",
                                   "id": 11
+                                },
+                                "advancedSettings": {
+                                  "type": "AdvancedSettings",
+                                  "id": 12
                                 }
                               },
                               "nested": {
@@ -10546,6 +10578,14 @@
                               "rule": "repeated",
                               "type": "ConditionalCases",
                               "id": 5
+                            },
+                            "advancedSettings": {
+                              "type": "AdvancedSettings",
+                              "id": 7
+                            },
+                            "enableGenerativeFallback": {
+                              "type": "bool",
+                              "id": 12
                             }
                           },
                           "nested": {
@@ -13299,6 +13339,54 @@
                                   "(google.api.method_signature)": "name"
                                 }
                               ]
+                            },
+                            "ImportIntents": {
+                              "requestType": "ImportIntentsRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).post": "/v3beta1/{parent=projects/*/locations/*/agents/*}/intents:import",
+                                "(google.api.http).body": "*",
+                                "(google.longrunning.operation_info).response_type": "ImportIntentsResponse",
+                                "(google.longrunning.operation_info).metadata_type": "ImportIntentsMetadata"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v3beta1/{parent=projects/*/locations/*/agents/*}/intents:import",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "ImportIntentsResponse",
+                                    "metadata_type": "ImportIntentsMetadata"
+                                  }
+                                }
+                              ]
+                            },
+                            "ExportIntents": {
+                              "requestType": "ExportIntentsRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).post": "/v3beta1/{parent=projects/*/locations/*/agents/*}/intents:export",
+                                "(google.api.http).body": "*",
+                                "(google.longrunning.operation_info).response_type": "ExportIntentsResponse",
+                                "(google.longrunning.operation_info).metadata_type": "ExportIntentsMetadata"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v3beta1/{parent=projects/*/locations/*/agents/*}/intents:export",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "ExportIntentsResponse",
+                                    "metadata_type": "ExportIntentsMetadata"
+                                  }
+                                }
+                              ]
                             }
                           }
                         },
@@ -13530,6 +13618,192 @@
                             "INTENT_VIEW_UNSPECIFIED": 0,
                             "INTENT_VIEW_PARTIAL": 1,
                             "INTENT_VIEW_FULL": 2
+                          }
+                        },
+                        "ImportIntentsRequest": {
+                          "oneofs": {
+                            "intents": {
+                              "oneof": [
+                                "intentsUri",
+                                "intentsContent"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Intent"
+                              }
+                            },
+                            "intentsUri": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "intentsContent": {
+                              "type": "InlineSource",
+                              "id": 3
+                            },
+                            "mergeOption": {
+                              "type": "MergeOption",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "MergeOption": {
+                              "valuesOptions": {
+                                "REJECT": {
+                                  "deprecated": true
+                                }
+                              },
+                              "values": {
+                                "MERGE_OPTION_UNSPECIFIED": 0,
+                                "REJECT": 1,
+                                "REPLACE": 2,
+                                "MERGE": 3,
+                                "RENAME": 4,
+                                "REPORT_CONFLICT": 5,
+                                "KEEP": 6
+                              }
+                            }
+                          }
+                        },
+                        "ImportIntentsResponse": {
+                          "fields": {
+                            "intents": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Intent"
+                              }
+                            },
+                            "conflictingResources": {
+                              "type": "ConflictingResources",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "ConflictingResources": {
+                              "fields": {
+                                "intentDisplayNames": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "entityDisplayNames": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "ImportIntentsMetadata": {
+                          "fields": {}
+                        },
+                        "ExportIntentsRequest": {
+                          "oneofs": {
+                            "destination": {
+                              "oneof": [
+                                "intentsUri",
+                                "intentsContentInline"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Intent"
+                              }
+                            },
+                            "intents": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "intentsUri": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "intentsContentInline": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "dataFormat": {
+                              "type": "DataFormat",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "DataFormat": {
+                              "values": {
+                                "DATA_FORMAT_UNSPECIFIED": 0,
+                                "BLOB": 1,
+                                "JSON": 2,
+                                "CSV": 3
+                              }
+                            }
+                          }
+                        },
+                        "ExportIntentsResponse": {
+                          "oneofs": {
+                            "intents": {
+                              "oneof": [
+                                "intentsUri",
+                                "intentsContent"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "intentsUri": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "intentsContent": {
+                              "type": "InlineDestination",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "ExportIntentsMetadata": {
+                          "fields": {}
+                        },
+                        "InlineDestination": {
+                          "fields": {
+                            "content": {
+                              "type": "bytes",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "InlineSource": {
+                          "fields": {
+                            "content": {
+                              "type": "bytes",
+                              "id": 1
+                            }
                           }
                         },
                         "Sessions": {
@@ -14054,6 +14328,10 @@
                             "sentimentAnalysisResult": {
                               "type": "SentimentAnalysisResult",
                               "id": 17
+                            },
+                            "advancedSettings": {
+                              "type": "AdvancedSettings",
+                              "id": 21
                             }
                           }
                         },
