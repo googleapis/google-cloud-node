@@ -2574,6 +2574,9 @@ export namespace google {
 
                     /** SecurityKey webAuthn */
                     webAuthn?: (google.cloud.oslogin.v1beta.IWebAuthn|null);
+
+                    /** SecurityKey deviceNickname */
+                    deviceNickname?: (string|null);
                 }
 
                 /** Represents a SecurityKey. */
@@ -2597,8 +2600,14 @@ export namespace google {
                     /** SecurityKey webAuthn. */
                     public webAuthn?: (google.cloud.oslogin.v1beta.IWebAuthn|null);
 
+                    /** SecurityKey deviceNickname. */
+                    public deviceNickname?: (string|null);
+
                     /** SecurityKey protocolType. */
                     public protocolType?: ("universalTwoFactor"|"webAuthn");
+
+                    /** SecurityKey _deviceNickname. */
+                    public _deviceNickname?: "deviceNickname";
 
                     /**
                      * Creates a new SecurityKey instance using the specified properties.
