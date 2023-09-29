@@ -499,7 +499,7 @@ async.each(
           const path = ['Post', 'post1'];
           const postKey = datastore.key(path);
           await datastore.save({key: postKey, data: post});
-          await sleep(1000);
+          await sleep(10000);
           const savedTime = Date.now();
           await sleep(1000);
           // Save new post2 data, but then verify the timestamp read has post1 data
