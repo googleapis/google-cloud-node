@@ -700,6 +700,16 @@ class Datastore extends DatastoreRequest {
     );
   }
 
+  /**
+   * Gets the database id that all requests will be run against.
+   *
+   * @returns {string} The database id that the current client is set to that
+   *    requests will run against.
+   */
+  getDatabaseId(): string | undefined {
+    return this.options.databaseId;
+  }
+
   getProjectId(): Promise<string> {
     return this.auth.getProjectId();
   }
@@ -1818,6 +1828,7 @@ promisifyAll(Datastore, {
     'double',
     'isDouble',
     'geoPoint',
+    'getDatabaseId',
     'getProjectId',
     'isGeoPoint',
     'index',
@@ -1898,6 +1909,7 @@ export interface DatastoreOptions extends GoogleAuthOptions {
   namespace?: string;
   apiEndpoint?: string;
   sslCreds?: ChannelCredentials;
+  databaseId?: string;
 }
 
 export interface KeyToLegacyUrlSafeCallback {
