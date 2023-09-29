@@ -2035,6 +2035,71 @@ describe('v1.PolicyBasedRoutingServiceClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('group', () => {
+      const fakePath = '/rendered/path/group';
+      const expectedParameters = {
+        project: 'projectValue',
+        hub: 'hubValue',
+        group: 'groupValue',
+      };
+      const client =
+        new policybasedroutingserviceModule.v1.PolicyBasedRoutingServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.groupPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.groupPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('groupPath', () => {
+        const result = client.groupPath(
+          'projectValue',
+          'hubValue',
+          'groupValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.groupPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromGroupName', () => {
+        const result = client.matchProjectFromGroupName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.groupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchHubFromGroupName', () => {
+        const result = client.matchHubFromGroupName(fakePath);
+        assert.strictEqual(result, 'hubValue');
+        assert(
+          (client.pathTemplates.groupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchGroupFromGroupName', () => {
+        const result = client.matchGroupFromGroupName(fakePath);
+        assert.strictEqual(result, 'groupValue');
+        assert(
+          (client.pathTemplates.groupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('hub', () => {
       const fakePath = '/rendered/path/hub';
       const expectedParameters = {
@@ -2079,6 +2144,83 @@ describe('v1.PolicyBasedRoutingServiceClient', () => {
         assert.strictEqual(result, 'hubValue');
         assert(
           (client.pathTemplates.hubPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('hubRoute', () => {
+      const fakePath = '/rendered/path/hubRoute';
+      const expectedParameters = {
+        project: 'projectValue',
+        hub: 'hubValue',
+        route_table: 'routeTableValue',
+        route: 'routeValue',
+      };
+      const client =
+        new policybasedroutingserviceModule.v1.PolicyBasedRoutingServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.hubRoutePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.hubRoutePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('hubRoutePath', () => {
+        const result = client.hubRoutePath(
+          'projectValue',
+          'hubValue',
+          'routeTableValue',
+          'routeValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.hubRoutePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromHubRouteName', () => {
+        const result = client.matchProjectFromHubRouteName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.hubRoutePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchHubFromHubRouteName', () => {
+        const result = client.matchHubFromHubRouteName(fakePath);
+        assert.strictEqual(result, 'hubValue');
+        assert(
+          (client.pathTemplates.hubRoutePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRouteTableFromHubRouteName', () => {
+        const result = client.matchRouteTableFromHubRouteName(fakePath);
+        assert.strictEqual(result, 'routeTableValue');
+        assert(
+          (client.pathTemplates.hubRoutePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRouteFromHubRouteName', () => {
+        const result = client.matchRouteFromHubRouteName(fakePath);
+        assert.strictEqual(result, 'routeValue');
+        assert(
+          (client.pathTemplates.hubRoutePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2236,6 +2378,71 @@ describe('v1.PolicyBasedRoutingServiceClient', () => {
         assert.strictEqual(result, 'policyBasedRouteValue');
         assert(
           (client.pathTemplates.policyBasedRoutePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('routeTable', () => {
+      const fakePath = '/rendered/path/routeTable';
+      const expectedParameters = {
+        project: 'projectValue',
+        hub: 'hubValue',
+        route_table: 'routeTableValue',
+      };
+      const client =
+        new policybasedroutingserviceModule.v1.PolicyBasedRoutingServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.routeTablePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.routeTablePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('routeTablePath', () => {
+        const result = client.routeTablePath(
+          'projectValue',
+          'hubValue',
+          'routeTableValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.routeTablePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromRouteTableName', () => {
+        const result = client.matchProjectFromRouteTableName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.routeTablePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchHubFromRouteTableName', () => {
+        const result = client.matchHubFromRouteTableName(fakePath);
+        assert.strictEqual(result, 'hubValue');
+        assert(
+          (client.pathTemplates.routeTablePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRouteTableFromRouteTableName', () => {
+        const result = client.matchRouteTableFromRouteTableName(fakePath);
+        assert.strictEqual(result, 'routeTableValue');
+        assert(
+          (client.pathTemplates.routeTablePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

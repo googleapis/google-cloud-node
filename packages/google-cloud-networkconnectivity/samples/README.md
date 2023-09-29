@@ -12,14 +12,23 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Hub_service.accept_hub_spoke](#hub_service.accept_hub_spoke)
   * [Hub_service.create_hub](#hub_service.create_hub)
   * [Hub_service.create_spoke](#hub_service.create_spoke)
   * [Hub_service.delete_hub](#hub_service.delete_hub)
   * [Hub_service.delete_spoke](#hub_service.delete_spoke)
+  * [Hub_service.get_group](#hub_service.get_group)
   * [Hub_service.get_hub](#hub_service.get_hub)
+  * [Hub_service.get_route](#hub_service.get_route)
+  * [Hub_service.get_route_table](#hub_service.get_route_table)
   * [Hub_service.get_spoke](#hub_service.get_spoke)
+  * [Hub_service.list_groups](#hub_service.list_groups)
+  * [Hub_service.list_hub_spokes](#hub_service.list_hub_spokes)
   * [Hub_service.list_hubs](#hub_service.list_hubs)
+  * [Hub_service.list_route_tables](#hub_service.list_route_tables)
+  * [Hub_service.list_routes](#hub_service.list_routes)
   * [Hub_service.list_spokes](#hub_service.list_spokes)
+  * [Hub_service.reject_hub_spoke](#hub_service.reject_hub_spoke)
   * [Hub_service.update_hub](#hub_service.update_hub)
   * [Hub_service.update_spoke](#hub_service.update_spoke)
   * [Policy_based_routing_service.create_policy_based_route](#policy_based_routing_service.create_policy_based_route)
@@ -50,6 +59,23 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Hub_service.accept_hub_spoke
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.accept_hub_spoke.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.accept_hub_spoke.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.accept_hub_spoke.js`
+
+
+-----
+
 
 
 
@@ -121,6 +147,23 @@ __Usage:__
 
 
 
+### Hub_service.get_group
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.get_group.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.get_group.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.get_group.js`
+
+
+-----
+
+
+
+
 ### Hub_service.get_hub
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.get_hub.js).
@@ -131,6 +174,40 @@ __Usage:__
 
 
 `node packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.get_hub.js`
+
+
+-----
+
+
+
+
+### Hub_service.get_route
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.get_route.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.get_route.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.get_route.js`
+
+
+-----
+
+
+
+
+### Hub_service.get_route_table
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.get_route_table.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.get_route_table.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.get_route_table.js`
 
 
 -----
@@ -155,6 +232,40 @@ __Usage:__
 
 
 
+### Hub_service.list_groups
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.list_groups.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.list_groups.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.list_groups.js`
+
+
+-----
+
+
+
+
+### Hub_service.list_hub_spokes
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.list_hub_spokes.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.list_hub_spokes.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.list_hub_spokes.js`
+
+
+-----
+
+
+
+
 ### Hub_service.list_hubs
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.list_hubs.js).
@@ -172,6 +283,40 @@ __Usage:__
 
 
 
+### Hub_service.list_route_tables
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.list_route_tables.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.list_route_tables.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.list_route_tables.js`
+
+
+-----
+
+
+
+
+### Hub_service.list_routes
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.list_routes.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.list_routes.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.list_routes.js`
+
+
+-----
+
+
+
+
 ### Hub_service.list_spokes
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.list_spokes.js).
@@ -182,6 +327,23 @@ __Usage:__
 
 
 `node packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.list_spokes.js`
+
+
+-----
+
+
+
+
+### Hub_service.reject_hub_spoke
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.reject_hub_spoke.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.reject_hub_spoke.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-networkconnectivity/samples/generated/v1/hub_service.reject_hub_spoke.js`
 
 
 -----

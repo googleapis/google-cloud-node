@@ -194,8 +194,14 @@ export class PolicyBasedRoutingServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      groupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/global/hubs/{hub}/groups/{group}'
+      ),
       hubPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/global/hubs/{hub}'
+      ),
+      hubRoutePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/global/hubs/{hub}/routeTables/{route_table}/routes/{route}'
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
@@ -205,6 +211,9 @@ export class PolicyBasedRoutingServiceClient {
       ),
       policyBasedRoutePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/global/PolicyBasedRoutes/{policy_based_route}'
+      ),
+      routeTablePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/global/hubs/{hub}/routeTables/{route_table}'
       ),
       spokePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/spokes/{spoke}'
@@ -246,6 +255,9 @@ export class PolicyBasedRoutingServiceClient {
           get: '/v1/{resource=projects/*/locations/global/hubs/*}:getIamPolicy',
           additional_bindings: [
             {
+              get: '/v1/{resource=projects/*/locations/global/hubs/*/groups/*}:getIamPolicy',
+            },
+            {
               get: '/v1/{resource=projects/*/locations/*/spokes/*}:getIamPolicy',
             },
             {
@@ -258,6 +270,10 @@ export class PolicyBasedRoutingServiceClient {
           post: '/v1/{resource=projects/*/locations/global/hubs/*}:setIamPolicy',
           body: '*',
           additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/global/hubs/*/groups/*}:setIamPolicy',
+              body: '*',
+            },
             {
               post: '/v1/{resource=projects/*/locations/*/spokes/*}:setIamPolicy',
               body: '*',
@@ -273,6 +289,10 @@ export class PolicyBasedRoutingServiceClient {
           post: '/v1/{resource=projects/*/locations/global/hubs/*}:testIamPermissions',
           body: '*',
           additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/global/hubs/*/groups/*}:testIamPermissions',
+              body: '*',
+            },
             {
               post: '/v1/{resource=projects/*/locations/*/spokes/*}:testIamPermissions',
               body: '*',
@@ -1483,6 +1503,55 @@ export class PolicyBasedRoutingServiceClient {
   // --------------------
 
   /**
+   * Return a fully-qualified group resource name string.
+   *
+   * @param {string} project
+   * @param {string} hub
+   * @param {string} group
+   * @returns {string} Resource name string.
+   */
+  groupPath(project: string, hub: string, group: string) {
+    return this.pathTemplates.groupPathTemplate.render({
+      project: project,
+      hub: hub,
+      group: group,
+    });
+  }
+
+  /**
+   * Parse the project from Group resource.
+   *
+   * @param {string} groupName
+   *   A fully-qualified path representing Group resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGroupName(groupName: string) {
+    return this.pathTemplates.groupPathTemplate.match(groupName).project;
+  }
+
+  /**
+   * Parse the hub from Group resource.
+   *
+   * @param {string} groupName
+   *   A fully-qualified path representing Group resource.
+   * @returns {string} A string representing the hub.
+   */
+  matchHubFromGroupName(groupName: string) {
+    return this.pathTemplates.groupPathTemplate.match(groupName).hub;
+  }
+
+  /**
+   * Parse the group from Group resource.
+   *
+   * @param {string} groupName
+   *   A fully-qualified path representing Group resource.
+   * @returns {string} A string representing the group.
+   */
+  matchGroupFromGroupName(groupName: string) {
+    return this.pathTemplates.groupPathTemplate.match(groupName).group;
+  }
+
+  /**
    * Return a fully-qualified hub resource name string.
    *
    * @param {string} project
@@ -1516,6 +1585,74 @@ export class PolicyBasedRoutingServiceClient {
    */
   matchHubFromHubName(hubName: string) {
     return this.pathTemplates.hubPathTemplate.match(hubName).hub;
+  }
+
+  /**
+   * Return a fully-qualified hubRoute resource name string.
+   *
+   * @param {string} project
+   * @param {string} hub
+   * @param {string} route_table
+   * @param {string} route
+   * @returns {string} Resource name string.
+   */
+  hubRoutePath(
+    project: string,
+    hub: string,
+    routeTable: string,
+    route: string
+  ) {
+    return this.pathTemplates.hubRoutePathTemplate.render({
+      project: project,
+      hub: hub,
+      route_table: routeTable,
+      route: route,
+    });
+  }
+
+  /**
+   * Parse the project from HubRoute resource.
+   *
+   * @param {string} hubRouteName
+   *   A fully-qualified path representing HubRoute resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromHubRouteName(hubRouteName: string) {
+    return this.pathTemplates.hubRoutePathTemplate.match(hubRouteName).project;
+  }
+
+  /**
+   * Parse the hub from HubRoute resource.
+   *
+   * @param {string} hubRouteName
+   *   A fully-qualified path representing HubRoute resource.
+   * @returns {string} A string representing the hub.
+   */
+  matchHubFromHubRouteName(hubRouteName: string) {
+    return this.pathTemplates.hubRoutePathTemplate.match(hubRouteName).hub;
+  }
+
+  /**
+   * Parse the route_table from HubRoute resource.
+   *
+   * @param {string} hubRouteName
+   *   A fully-qualified path representing HubRoute resource.
+   * @returns {string} A string representing the route_table.
+   */
+  matchRouteTableFromHubRouteName(hubRouteName: string) {
+    return this.pathTemplates.hubRoutePathTemplate.match(hubRouteName)
+      .route_table;
+  }
+
+  /**
+   * Parse the route from HubRoute resource.
+   *
+   * @param {string} hubRouteName
+   *   A fully-qualified path representing HubRoute resource.
+   * @returns {string} A string representing the route.
+   */
+  matchRouteFromHubRouteName(hubRouteName: string) {
+    return this.pathTemplates.hubRoutePathTemplate.match(hubRouteName).route;
   }
 
   /**
@@ -1629,6 +1766,57 @@ export class PolicyBasedRoutingServiceClient {
     return this.pathTemplates.policyBasedRoutePathTemplate.match(
       policyBasedRouteName
     ).policy_based_route;
+  }
+
+  /**
+   * Return a fully-qualified routeTable resource name string.
+   *
+   * @param {string} project
+   * @param {string} hub
+   * @param {string} route_table
+   * @returns {string} Resource name string.
+   */
+  routeTablePath(project: string, hub: string, routeTable: string) {
+    return this.pathTemplates.routeTablePathTemplate.render({
+      project: project,
+      hub: hub,
+      route_table: routeTable,
+    });
+  }
+
+  /**
+   * Parse the project from RouteTable resource.
+   *
+   * @param {string} routeTableName
+   *   A fully-qualified path representing RouteTable resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRouteTableName(routeTableName: string) {
+    return this.pathTemplates.routeTablePathTemplate.match(routeTableName)
+      .project;
+  }
+
+  /**
+   * Parse the hub from RouteTable resource.
+   *
+   * @param {string} routeTableName
+   *   A fully-qualified path representing RouteTable resource.
+   * @returns {string} A string representing the hub.
+   */
+  matchHubFromRouteTableName(routeTableName: string) {
+    return this.pathTemplates.routeTablePathTemplate.match(routeTableName).hub;
+  }
+
+  /**
+   * Parse the route_table from RouteTable resource.
+   *
+   * @param {string} routeTableName
+   *   A fully-qualified path representing RouteTable resource.
+   * @returns {string} A string representing the route_table.
+   */
+  matchRouteTableFromRouteTableName(routeTableName: string) {
+    return this.pathTemplates.routeTablePathTemplate.match(routeTableName)
+      .route_table;
   }
 
   /**
