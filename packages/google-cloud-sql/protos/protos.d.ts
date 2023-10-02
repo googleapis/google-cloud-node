@@ -3391,6 +3391,12 @@ export namespace google {
 
                         /** SqlBakImportOptions bakType */
                         bakType?: (google.cloud.sql.v1.BakType|keyof typeof google.cloud.sql.v1.BakType|null);
+
+                        /** SqlBakImportOptions stopAt */
+                        stopAt?: (google.protobuf.ITimestamp|null);
+
+                        /** SqlBakImportOptions stopAtMark */
+                        stopAtMark?: (string|null);
                     }
 
                     /** Represents a SqlBakImportOptions. */
@@ -3416,6 +3422,12 @@ export namespace google {
 
                         /** SqlBakImportOptions bakType. */
                         public bakType: (google.cloud.sql.v1.BakType|keyof typeof google.cloud.sql.v1.BakType);
+
+                        /** SqlBakImportOptions stopAt. */
+                        public stopAt?: (google.protobuf.ITimestamp|null);
+
+                        /** SqlBakImportOptions stopAtMark. */
+                        public stopAtMark: string;
 
                         /**
                          * Creates a new SqlBakImportOptions instance using the specified properties.
@@ -3612,7 +3624,8 @@ export namespace google {
                 enum BakType {
                     BAK_TYPE_UNSPECIFIED = 0,
                     FULL = 1,
-                    DIFF = 2
+                    DIFF = 2,
+                    TLOG = 3
                 }
 
                 /** Properties of an IpConfiguration. */
@@ -3635,6 +3648,9 @@ export namespace google {
 
                     /** IpConfiguration enablePrivatePathForGoogleCloudServices */
                     enablePrivatePathForGoogleCloudServices?: (google.protobuf.IBoolValue|null);
+
+                    /** IpConfiguration pscConfig */
+                    pscConfig?: (google.cloud.sql.v1.IPscConfig|null);
                 }
 
                 /** Represents an IpConfiguration. */
@@ -3663,6 +3679,12 @@ export namespace google {
 
                     /** IpConfiguration enablePrivatePathForGoogleCloudServices. */
                     public enablePrivatePathForGoogleCloudServices?: (google.protobuf.IBoolValue|null);
+
+                    /** IpConfiguration pscConfig. */
+                    public pscConfig?: (google.cloud.sql.v1.IPscConfig|null);
+
+                    /** IpConfiguration _pscConfig. */
+                    public _pscConfig?: "pscConfig";
 
                     /**
                      * Creates a new IpConfiguration instance using the specified properties.
@@ -3736,6 +3758,112 @@ export namespace google {
 
                     /**
                      * Gets the default type url for IpConfiguration
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PscConfig. */
+                interface IPscConfig {
+
+                    /** PscConfig pscEnabled */
+                    pscEnabled?: (boolean|null);
+
+                    /** PscConfig allowedConsumerProjects */
+                    allowedConsumerProjects?: (string[]|null);
+                }
+
+                /** Represents a PscConfig. */
+                class PscConfig implements IPscConfig {
+
+                    /**
+                     * Constructs a new PscConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1.IPscConfig);
+
+                    /** PscConfig pscEnabled. */
+                    public pscEnabled?: (boolean|null);
+
+                    /** PscConfig allowedConsumerProjects. */
+                    public allowedConsumerProjects: string[];
+
+                    /** PscConfig _pscEnabled. */
+                    public _pscEnabled?: "pscEnabled";
+
+                    /**
+                     * Creates a new PscConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PscConfig instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1.IPscConfig): google.cloud.sql.v1.PscConfig;
+
+                    /**
+                     * Encodes the specified PscConfig message. Does not implicitly {@link google.cloud.sql.v1.PscConfig.verify|verify} messages.
+                     * @param message PscConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1.IPscConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PscConfig message, length delimited. Does not implicitly {@link google.cloud.sql.v1.PscConfig.verify|verify} messages.
+                     * @param message PscConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1.IPscConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PscConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PscConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1.PscConfig;
+
+                    /**
+                     * Decodes a PscConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PscConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1.PscConfig;
+
+                    /**
+                     * Verifies a PscConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PscConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PscConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1.PscConfig;
+
+                    /**
+                     * Creates a plain object from a PscConfig message. Also converts values to other types if specified.
+                     * @param message PscConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1.PscConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PscConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PscConfig
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -6521,6 +6649,9 @@ export namespace google {
                     /** ConnectSettings backendType */
                     backendType?: (google.cloud.sql.v1.SqlBackendType|keyof typeof google.cloud.sql.v1.SqlBackendType|null);
 
+                    /** ConnectSettings pscEnabled */
+                    pscEnabled?: (boolean|null);
+
                     /** ConnectSettings dnsName */
                     dnsName?: (string|null);
                 }
@@ -6551,6 +6682,9 @@ export namespace google {
 
                     /** ConnectSettings backendType. */
                     public backendType: (google.cloud.sql.v1.SqlBackendType|keyof typeof google.cloud.sql.v1.SqlBackendType);
+
+                    /** ConnectSettings pscEnabled. */
+                    public pscEnabled: boolean;
 
                     /** ConnectSettings dnsName. */
                     public dnsName: string;
@@ -8551,6 +8685,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public resetReplicaSize(request: google.cloud.sql.v1.ISqlInstancesResetReplicaSizeRequest): Promise<google.cloud.sql.v1.Operation>;
+
+                    /**
+                     * Calls GetLatestRecoveryTime.
+                     * @param request SqlInstancesGetLatestRecoveryTimeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SqlInstancesGetLatestRecoveryTimeResponse
+                     */
+                    public getLatestRecoveryTime(request: google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeRequest, callback: google.cloud.sql.v1.SqlInstancesService.GetLatestRecoveryTimeCallback): void;
+
+                    /**
+                     * Calls GetLatestRecoveryTime.
+                     * @param request SqlInstancesGetLatestRecoveryTimeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getLatestRecoveryTime(request: google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeRequest): Promise<google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeResponse>;
                 }
 
                 namespace SqlInstancesService {
@@ -8757,6 +8905,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type ResetReplicaSizeCallback = (error: (Error|null), response?: google.cloud.sql.v1.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.sql.v1.SqlInstancesService|getLatestRecoveryTime}.
+                     * @param error Error, if any
+                     * @param [response] SqlInstancesGetLatestRecoveryTimeResponse
+                     */
+                    type GetLatestRecoveryTimeCallback = (error: (Error|null), response?: google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeResponse) => void;
                 }
 
                 /** Properties of a SqlInstancesAddServerCaRequest. */
@@ -13457,6 +13612,212 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a SqlInstancesGetLatestRecoveryTimeRequest. */
+                interface ISqlInstancesGetLatestRecoveryTimeRequest {
+
+                    /** SqlInstancesGetLatestRecoveryTimeRequest instance */
+                    instance?: (string|null);
+
+                    /** SqlInstancesGetLatestRecoveryTimeRequest project */
+                    project?: (string|null);
+                }
+
+                /** Represents a SqlInstancesGetLatestRecoveryTimeRequest. */
+                class SqlInstancesGetLatestRecoveryTimeRequest implements ISqlInstancesGetLatestRecoveryTimeRequest {
+
+                    /**
+                     * Constructs a new SqlInstancesGetLatestRecoveryTimeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeRequest);
+
+                    /** SqlInstancesGetLatestRecoveryTimeRequest instance. */
+                    public instance: string;
+
+                    /** SqlInstancesGetLatestRecoveryTimeRequest project. */
+                    public project: string;
+
+                    /**
+                     * Creates a new SqlInstancesGetLatestRecoveryTimeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SqlInstancesGetLatestRecoveryTimeRequest instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeRequest): google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeRequest;
+
+                    /**
+                     * Encodes the specified SqlInstancesGetLatestRecoveryTimeRequest message. Does not implicitly {@link google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeRequest.verify|verify} messages.
+                     * @param message SqlInstancesGetLatestRecoveryTimeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SqlInstancesGetLatestRecoveryTimeRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeRequest.verify|verify} messages.
+                     * @param message SqlInstancesGetLatestRecoveryTimeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SqlInstancesGetLatestRecoveryTimeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SqlInstancesGetLatestRecoveryTimeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeRequest;
+
+                    /**
+                     * Decodes a SqlInstancesGetLatestRecoveryTimeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SqlInstancesGetLatestRecoveryTimeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeRequest;
+
+                    /**
+                     * Verifies a SqlInstancesGetLatestRecoveryTimeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SqlInstancesGetLatestRecoveryTimeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SqlInstancesGetLatestRecoveryTimeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeRequest;
+
+                    /**
+                     * Creates a plain object from a SqlInstancesGetLatestRecoveryTimeRequest message. Also converts values to other types if specified.
+                     * @param message SqlInstancesGetLatestRecoveryTimeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SqlInstancesGetLatestRecoveryTimeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SqlInstancesGetLatestRecoveryTimeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SqlInstancesGetLatestRecoveryTimeResponse. */
+                interface ISqlInstancesGetLatestRecoveryTimeResponse {
+
+                    /** SqlInstancesGetLatestRecoveryTimeResponse kind */
+                    kind?: (string|null);
+
+                    /** SqlInstancesGetLatestRecoveryTimeResponse latestRecoveryTime */
+                    latestRecoveryTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a SqlInstancesGetLatestRecoveryTimeResponse. */
+                class SqlInstancesGetLatestRecoveryTimeResponse implements ISqlInstancesGetLatestRecoveryTimeResponse {
+
+                    /**
+                     * Constructs a new SqlInstancesGetLatestRecoveryTimeResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeResponse);
+
+                    /** SqlInstancesGetLatestRecoveryTimeResponse kind. */
+                    public kind: string;
+
+                    /** SqlInstancesGetLatestRecoveryTimeResponse latestRecoveryTime. */
+                    public latestRecoveryTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new SqlInstancesGetLatestRecoveryTimeResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SqlInstancesGetLatestRecoveryTimeResponse instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeResponse): google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeResponse;
+
+                    /**
+                     * Encodes the specified SqlInstancesGetLatestRecoveryTimeResponse message. Does not implicitly {@link google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeResponse.verify|verify} messages.
+                     * @param message SqlInstancesGetLatestRecoveryTimeResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SqlInstancesGetLatestRecoveryTimeResponse message, length delimited. Does not implicitly {@link google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeResponse.verify|verify} messages.
+                     * @param message SqlInstancesGetLatestRecoveryTimeResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SqlInstancesGetLatestRecoveryTimeResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SqlInstancesGetLatestRecoveryTimeResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeResponse;
+
+                    /**
+                     * Decodes a SqlInstancesGetLatestRecoveryTimeResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SqlInstancesGetLatestRecoveryTimeResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeResponse;
+
+                    /**
+                     * Verifies a SqlInstancesGetLatestRecoveryTimeResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SqlInstancesGetLatestRecoveryTimeResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SqlInstancesGetLatestRecoveryTimeResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeResponse;
+
+                    /**
+                     * Creates a plain object from a SqlInstancesGetLatestRecoveryTimeResponse message. Also converts values to other types if specified.
+                     * @param message SqlInstancesGetLatestRecoveryTimeResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SqlInstancesGetLatestRecoveryTimeResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SqlInstancesGetLatestRecoveryTimeResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a CloneContext. */
                 interface ICloneContext {
 
@@ -13480,6 +13841,9 @@ export namespace google {
 
                     /** CloneContext databaseNames */
                     databaseNames?: (string[]|null);
+
+                    /** CloneContext preferredZone */
+                    preferredZone?: (string|null);
                 }
 
                 /** Represents a CloneContext. */
@@ -13511,6 +13875,12 @@ export namespace google {
 
                     /** CloneContext databaseNames. */
                     public databaseNames: string[];
+
+                    /** CloneContext preferredZone. */
+                    public preferredZone?: (string|null);
+
+                    /** CloneContext _preferredZone. */
+                    public _preferredZone?: "preferredZone";
 
                     /**
                      * Creates a new CloneContext instance using the specified properties.
@@ -13809,6 +14179,12 @@ export namespace google {
 
                     /** DatabaseInstance maintenanceVersion */
                     maintenanceVersion?: (string|null);
+
+                    /** DatabaseInstance pscServiceAttachmentLink */
+                    pscServiceAttachmentLink?: (string|null);
+
+                    /** DatabaseInstance dnsName */
+                    dnsName?: (string|null);
                 }
 
                 /** Represents a DatabaseInstance. */
@@ -13928,8 +14304,20 @@ export namespace google {
                     /** DatabaseInstance maintenanceVersion. */
                     public maintenanceVersion: string;
 
+                    /** DatabaseInstance pscServiceAttachmentLink. */
+                    public pscServiceAttachmentLink?: (string|null);
+
+                    /** DatabaseInstance dnsName. */
+                    public dnsName?: (string|null);
+
                     /** DatabaseInstance _outOfDiskReport. */
                     public _outOfDiskReport?: "outOfDiskReport";
+
+                    /** DatabaseInstance _pscServiceAttachmentLink. */
+                    public _pscServiceAttachmentLink?: "pscServiceAttachmentLink";
+
+                    /** DatabaseInstance _dnsName. */
+                    public _dnsName?: "dnsName";
 
                     /**
                      * Creates a new DatabaseInstance instance using the specified properties.
@@ -15266,7 +15654,8 @@ export namespace google {
                         RISKY_BACKUP_ADMIN_PRIVILEGE = 30,
                         INSUFFICIENT_GCS_PERMISSIONS = 31,
                         INVALID_FILE_INFO = 32,
-                        UNSUPPORTED_DATABASE_SETTINGS = 33
+                        UNSUPPORTED_DATABASE_SETTINGS = 33,
+                        MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE = 34
                     }
                 }
 
@@ -19339,6 +19728,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public resetReplicaSize(request: google.cloud.sql.v1beta4.ISqlInstancesResetReplicaSizeRequest): Promise<google.cloud.sql.v1beta4.Operation>;
+
+                    /**
+                     * Calls GetLatestRecoveryTime.
+                     * @param request SqlInstancesGetLatestRecoveryTimeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SqlInstancesGetLatestRecoveryTimeResponse
+                     */
+                    public getLatestRecoveryTime(request: google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeRequest, callback: google.cloud.sql.v1beta4.SqlInstancesService.GetLatestRecoveryTimeCallback): void;
+
+                    /**
+                     * Calls GetLatestRecoveryTime.
+                     * @param request SqlInstancesGetLatestRecoveryTimeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getLatestRecoveryTime(request: google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeRequest): Promise<google.cloud.sql.v1beta4.SqlInstancesGetLatestRecoveryTimeResponse>;
                 }
 
                 namespace SqlInstancesService {
@@ -19545,6 +19948,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type ResetReplicaSizeCallback = (error: (Error|null), response?: google.cloud.sql.v1beta4.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.sql.v1beta4.SqlInstancesService|getLatestRecoveryTime}.
+                     * @param error Error, if any
+                     * @param [response] SqlInstancesGetLatestRecoveryTimeResponse
+                     */
+                    type GetLatestRecoveryTimeCallback = (error: (Error|null), response?: google.cloud.sql.v1beta4.SqlInstancesGetLatestRecoveryTimeResponse) => void;
                 }
 
                 /** Represents a SqlOperationsService */
@@ -24954,6 +25364,212 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a SqlInstancesGetLatestRecoveryTimeRequest. */
+                interface ISqlInstancesGetLatestRecoveryTimeRequest {
+
+                    /** SqlInstancesGetLatestRecoveryTimeRequest instance */
+                    instance?: (string|null);
+
+                    /** SqlInstancesGetLatestRecoveryTimeRequest project */
+                    project?: (string|null);
+                }
+
+                /** Represents a SqlInstancesGetLatestRecoveryTimeRequest. */
+                class SqlInstancesGetLatestRecoveryTimeRequest implements ISqlInstancesGetLatestRecoveryTimeRequest {
+
+                    /**
+                     * Constructs a new SqlInstancesGetLatestRecoveryTimeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeRequest);
+
+                    /** SqlInstancesGetLatestRecoveryTimeRequest instance. */
+                    public instance: string;
+
+                    /** SqlInstancesGetLatestRecoveryTimeRequest project. */
+                    public project: string;
+
+                    /**
+                     * Creates a new SqlInstancesGetLatestRecoveryTimeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SqlInstancesGetLatestRecoveryTimeRequest instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeRequest): google.cloud.sql.v1beta4.SqlInstancesGetLatestRecoveryTimeRequest;
+
+                    /**
+                     * Encodes the specified SqlInstancesGetLatestRecoveryTimeRequest message. Does not implicitly {@link google.cloud.sql.v1beta4.SqlInstancesGetLatestRecoveryTimeRequest.verify|verify} messages.
+                     * @param message SqlInstancesGetLatestRecoveryTimeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SqlInstancesGetLatestRecoveryTimeRequest message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.SqlInstancesGetLatestRecoveryTimeRequest.verify|verify} messages.
+                     * @param message SqlInstancesGetLatestRecoveryTimeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SqlInstancesGetLatestRecoveryTimeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SqlInstancesGetLatestRecoveryTimeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1beta4.SqlInstancesGetLatestRecoveryTimeRequest;
+
+                    /**
+                     * Decodes a SqlInstancesGetLatestRecoveryTimeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SqlInstancesGetLatestRecoveryTimeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1beta4.SqlInstancesGetLatestRecoveryTimeRequest;
+
+                    /**
+                     * Verifies a SqlInstancesGetLatestRecoveryTimeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SqlInstancesGetLatestRecoveryTimeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SqlInstancesGetLatestRecoveryTimeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1beta4.SqlInstancesGetLatestRecoveryTimeRequest;
+
+                    /**
+                     * Creates a plain object from a SqlInstancesGetLatestRecoveryTimeRequest message. Also converts values to other types if specified.
+                     * @param message SqlInstancesGetLatestRecoveryTimeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1beta4.SqlInstancesGetLatestRecoveryTimeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SqlInstancesGetLatestRecoveryTimeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SqlInstancesGetLatestRecoveryTimeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SqlInstancesGetLatestRecoveryTimeResponse. */
+                interface ISqlInstancesGetLatestRecoveryTimeResponse {
+
+                    /** SqlInstancesGetLatestRecoveryTimeResponse kind */
+                    kind?: (string|null);
+
+                    /** SqlInstancesGetLatestRecoveryTimeResponse latestRecoveryTime */
+                    latestRecoveryTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a SqlInstancesGetLatestRecoveryTimeResponse. */
+                class SqlInstancesGetLatestRecoveryTimeResponse implements ISqlInstancesGetLatestRecoveryTimeResponse {
+
+                    /**
+                     * Constructs a new SqlInstancesGetLatestRecoveryTimeResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeResponse);
+
+                    /** SqlInstancesGetLatestRecoveryTimeResponse kind. */
+                    public kind: string;
+
+                    /** SqlInstancesGetLatestRecoveryTimeResponse latestRecoveryTime. */
+                    public latestRecoveryTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new SqlInstancesGetLatestRecoveryTimeResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SqlInstancesGetLatestRecoveryTimeResponse instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeResponse): google.cloud.sql.v1beta4.SqlInstancesGetLatestRecoveryTimeResponse;
+
+                    /**
+                     * Encodes the specified SqlInstancesGetLatestRecoveryTimeResponse message. Does not implicitly {@link google.cloud.sql.v1beta4.SqlInstancesGetLatestRecoveryTimeResponse.verify|verify} messages.
+                     * @param message SqlInstancesGetLatestRecoveryTimeResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SqlInstancesGetLatestRecoveryTimeResponse message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.SqlInstancesGetLatestRecoveryTimeResponse.verify|verify} messages.
+                     * @param message SqlInstancesGetLatestRecoveryTimeResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1beta4.ISqlInstancesGetLatestRecoveryTimeResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SqlInstancesGetLatestRecoveryTimeResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SqlInstancesGetLatestRecoveryTimeResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1beta4.SqlInstancesGetLatestRecoveryTimeResponse;
+
+                    /**
+                     * Decodes a SqlInstancesGetLatestRecoveryTimeResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SqlInstancesGetLatestRecoveryTimeResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1beta4.SqlInstancesGetLatestRecoveryTimeResponse;
+
+                    /**
+                     * Verifies a SqlInstancesGetLatestRecoveryTimeResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SqlInstancesGetLatestRecoveryTimeResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SqlInstancesGetLatestRecoveryTimeResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1beta4.SqlInstancesGetLatestRecoveryTimeResponse;
+
+                    /**
+                     * Creates a plain object from a SqlInstancesGetLatestRecoveryTimeResponse message. Also converts values to other types if specified.
+                     * @param message SqlInstancesGetLatestRecoveryTimeResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1beta4.SqlInstancesGetLatestRecoveryTimeResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SqlInstancesGetLatestRecoveryTimeResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SqlInstancesGetLatestRecoveryTimeResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an AclEntry. */
                 interface IAclEntry {
 
@@ -25982,6 +26598,9 @@ export namespace google {
 
                     /** CloneContext databaseNames */
                     databaseNames?: (string[]|null);
+
+                    /** CloneContext preferredZone */
+                    preferredZone?: (string|null);
                 }
 
                 /** Represents a CloneContext. */
@@ -26013,6 +26632,12 @@ export namespace google {
 
                     /** CloneContext databaseNames. */
                     public databaseNames: string[];
+
+                    /** CloneContext preferredZone. */
+                    public preferredZone?: (string|null);
+
+                    /** CloneContext _preferredZone. */
+                    public _preferredZone?: "preferredZone";
 
                     /**
                      * Creates a new CloneContext instance using the specified properties.
@@ -26768,6 +27393,12 @@ export namespace google {
 
                     /** DatabaseInstance maintenanceVersion */
                     maintenanceVersion?: (string|null);
+
+                    /** DatabaseInstance pscServiceAttachmentLink */
+                    pscServiceAttachmentLink?: (string|null);
+
+                    /** DatabaseInstance dnsName */
+                    dnsName?: (string|null);
                 }
 
                 /** Represents a DatabaseInstance. */
@@ -26887,8 +27518,20 @@ export namespace google {
                     /** DatabaseInstance maintenanceVersion. */
                     public maintenanceVersion: string;
 
+                    /** DatabaseInstance pscServiceAttachmentLink. */
+                    public pscServiceAttachmentLink?: (string|null);
+
+                    /** DatabaseInstance dnsName. */
+                    public dnsName?: (string|null);
+
                     /** DatabaseInstance _outOfDiskReport. */
                     public _outOfDiskReport?: "outOfDiskReport";
+
+                    /** DatabaseInstance _pscServiceAttachmentLink. */
+                    public _pscServiceAttachmentLink?: "pscServiceAttachmentLink";
+
+                    /** DatabaseInstance _dnsName. */
+                    public _dnsName?: "dnsName";
 
                     /**
                      * Creates a new DatabaseInstance instance using the specified properties.
@@ -29014,6 +29657,12 @@ export namespace google {
 
                         /** SqlBakImportOptions bakType */
                         bakType?: (google.cloud.sql.v1beta4.BakType|keyof typeof google.cloud.sql.v1beta4.BakType|null);
+
+                        /** SqlBakImportOptions stopAt */
+                        stopAt?: (google.protobuf.ITimestamp|null);
+
+                        /** SqlBakImportOptions stopAtMark */
+                        stopAtMark?: (string|null);
                     }
 
                     /** Represents a SqlBakImportOptions. */
@@ -29039,6 +29688,12 @@ export namespace google {
 
                         /** SqlBakImportOptions bakType. */
                         public bakType: (google.cloud.sql.v1beta4.BakType|keyof typeof google.cloud.sql.v1beta4.BakType);
+
+                        /** SqlBakImportOptions stopAt. */
+                        public stopAt?: (google.protobuf.ITimestamp|null);
+
+                        /** SqlBakImportOptions stopAtMark. */
+                        public stopAtMark: string;
 
                         /**
                          * Creates a new SqlBakImportOptions instance using the specified properties.
@@ -29235,7 +29890,8 @@ export namespace google {
                 enum BakType {
                     BAK_TYPE_UNSPECIFIED = 0,
                     FULL = 1,
-                    DIFF = 2
+                    DIFF = 2,
+                    TLOG = 3
                 }
 
                 /** Properties of an InstancesCloneRequest. */
@@ -30796,7 +31452,8 @@ export namespace google {
                         RISKY_BACKUP_ADMIN_PRIVILEGE = 30,
                         INSUFFICIENT_GCS_PERMISSIONS = 31,
                         INVALID_FILE_INFO = 32,
-                        UNSUPPORTED_DATABASE_SETTINGS = 33
+                        UNSUPPORTED_DATABASE_SETTINGS = 33,
+                        MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE = 34
                     }
                 }
 
@@ -30820,6 +31477,9 @@ export namespace google {
 
                     /** IpConfiguration enablePrivatePathForGoogleCloudServices */
                     enablePrivatePathForGoogleCloudServices?: (google.protobuf.IBoolValue|null);
+
+                    /** IpConfiguration pscConfig */
+                    pscConfig?: (google.cloud.sql.v1beta4.IPscConfig|null);
                 }
 
                 /** Represents an IpConfiguration. */
@@ -30848,6 +31508,12 @@ export namespace google {
 
                     /** IpConfiguration enablePrivatePathForGoogleCloudServices. */
                     public enablePrivatePathForGoogleCloudServices?: (google.protobuf.IBoolValue|null);
+
+                    /** IpConfiguration pscConfig. */
+                    public pscConfig?: (google.cloud.sql.v1beta4.IPscConfig|null);
+
+                    /** IpConfiguration _pscConfig. */
+                    public _pscConfig?: "pscConfig";
 
                     /**
                      * Creates a new IpConfiguration instance using the specified properties.
@@ -30921,6 +31587,112 @@ export namespace google {
 
                     /**
                      * Gets the default type url for IpConfiguration
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PscConfig. */
+                interface IPscConfig {
+
+                    /** PscConfig pscEnabled */
+                    pscEnabled?: (boolean|null);
+
+                    /** PscConfig allowedConsumerProjects */
+                    allowedConsumerProjects?: (string[]|null);
+                }
+
+                /** Represents a PscConfig. */
+                class PscConfig implements IPscConfig {
+
+                    /**
+                     * Constructs a new PscConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.sql.v1beta4.IPscConfig);
+
+                    /** PscConfig pscEnabled. */
+                    public pscEnabled?: (boolean|null);
+
+                    /** PscConfig allowedConsumerProjects. */
+                    public allowedConsumerProjects: string[];
+
+                    /** PscConfig _pscEnabled. */
+                    public _pscEnabled?: "pscEnabled";
+
+                    /**
+                     * Creates a new PscConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PscConfig instance
+                     */
+                    public static create(properties?: google.cloud.sql.v1beta4.IPscConfig): google.cloud.sql.v1beta4.PscConfig;
+
+                    /**
+                     * Encodes the specified PscConfig message. Does not implicitly {@link google.cloud.sql.v1beta4.PscConfig.verify|verify} messages.
+                     * @param message PscConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.sql.v1beta4.IPscConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PscConfig message, length delimited. Does not implicitly {@link google.cloud.sql.v1beta4.PscConfig.verify|verify} messages.
+                     * @param message PscConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.sql.v1beta4.IPscConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PscConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PscConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1beta4.PscConfig;
+
+                    /**
+                     * Decodes a PscConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PscConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1beta4.PscConfig;
+
+                    /**
+                     * Verifies a PscConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PscConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PscConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1beta4.PscConfig;
+
+                    /**
+                     * Creates a plain object from a PscConfig message. Also converts values to other types if specified.
+                     * @param message PscConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.sql.v1beta4.PscConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PscConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PscConfig
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -35076,6 +35848,9 @@ export namespace google {
                     /** ConnectSettings backendType */
                     backendType?: (google.cloud.sql.v1beta4.SqlBackendType|keyof typeof google.cloud.sql.v1beta4.SqlBackendType|null);
 
+                    /** ConnectSettings pscEnabled */
+                    pscEnabled?: (boolean|null);
+
                     /** ConnectSettings dnsName */
                     dnsName?: (string|null);
                 }
@@ -35106,6 +35881,9 @@ export namespace google {
 
                     /** ConnectSettings backendType. */
                     public backendType: (google.cloud.sql.v1beta4.SqlBackendType|keyof typeof google.cloud.sql.v1beta4.SqlBackendType);
+
+                    /** ConnectSettings pscEnabled. */
+                    public pscEnabled: boolean;
 
                     /** ConnectSettings dnsName. */
                     public dnsName: string;

@@ -388,6 +388,11 @@
               "methods": [
                 "resetReplicaSize"
               ]
+            },
+            "GetLatestRecoveryTime": {
+              "methods": [
+                "getLatestRecoveryTime"
+              ]
             }
           }
         },
@@ -537,6 +542,11 @@
             "ResetReplicaSize": {
               "methods": [
                 "resetReplicaSize"
+              ]
+            },
+            "GetLatestRecoveryTime": {
+              "methods": [
+                "getLatestRecoveryTime"
               ]
             }
           }
