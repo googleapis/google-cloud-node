@@ -5897,6 +5897,7 @@
                          * @property {string|null} [privateKey] SecurityKey privateKey
                          * @property {google.cloud.oslogin.v1beta.IUniversalTwoFactor|null} [universalTwoFactor] SecurityKey universalTwoFactor
                          * @property {google.cloud.oslogin.v1beta.IWebAuthn|null} [webAuthn] SecurityKey webAuthn
+                         * @property {string|null} [deviceNickname] SecurityKey deviceNickname
                          */
     
                         /**
@@ -5946,6 +5947,14 @@
                          */
                         SecurityKey.prototype.webAuthn = null;
     
+                        /**
+                         * SecurityKey deviceNickname.
+                         * @member {string|null|undefined} deviceNickname
+                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
+                         * @instance
+                         */
+                        SecurityKey.prototype.deviceNickname = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -5957,6 +5966,17 @@
                          */
                         Object.defineProperty(SecurityKey.prototype, "protocolType", {
                             get: $util.oneOfGetter($oneOfFields = ["universalTwoFactor", "webAuthn"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * SecurityKey _deviceNickname.
+                         * @member {"deviceNickname"|undefined} _deviceNickname
+                         * @memberof google.cloud.oslogin.v1beta.SecurityKey
+                         * @instance
+                         */
+                        Object.defineProperty(SecurityKey.prototype, "_deviceNickname", {
+                            get: $util.oneOfGetter($oneOfFields = ["deviceNickname"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -5992,6 +6012,8 @@
                                 $root.google.cloud.oslogin.v1beta.UniversalTwoFactor.encode(message.universalTwoFactor, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.webAuthn != null && Object.hasOwnProperty.call(message, "webAuthn"))
                                 $root.google.cloud.oslogin.v1beta.WebAuthn.encode(message.webAuthn, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.deviceNickname != null && Object.hasOwnProperty.call(message, "deviceNickname"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.deviceNickname);
                             return writer;
                         };
     
@@ -6040,6 +6062,10 @@
                                     }
                                 case 4: {
                                         message.webAuthn = $root.google.cloud.oslogin.v1beta.WebAuthn.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.deviceNickname = reader.string();
                                         break;
                                     }
                                 default:
@@ -6102,6 +6128,11 @@
                                         return "webAuthn." + error;
                                 }
                             }
+                            if (message.deviceNickname != null && message.hasOwnProperty("deviceNickname")) {
+                                properties._deviceNickname = 1;
+                                if (!$util.isString(message.deviceNickname))
+                                    return "deviceNickname: string expected";
+                            }
                             return null;
                         };
     
@@ -6131,6 +6162,8 @@
                                     throw TypeError(".google.cloud.oslogin.v1beta.SecurityKey.webAuthn: object expected");
                                 message.webAuthn = $root.google.cloud.oslogin.v1beta.WebAuthn.fromObject(object.webAuthn);
                             }
+                            if (object.deviceNickname != null)
+                                message.deviceNickname = String(object.deviceNickname);
                             return message;
                         };
     
@@ -6164,6 +6197,11 @@
                                 object.webAuthn = $root.google.cloud.oslogin.v1beta.WebAuthn.toObject(message.webAuthn, options);
                                 if (options.oneofs)
                                     object.protocolType = "webAuthn";
+                            }
+                            if (message.deviceNickname != null && message.hasOwnProperty("deviceNickname")) {
+                                object.deviceNickname = message.deviceNickname;
+                                if (options.oneofs)
+                                    object._deviceNickname = "deviceNickname";
                             }
                             return object;
                         };
