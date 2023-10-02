@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [8.2.0](https://github.com/googleapis/nodejs-datastore/compare/v8.1.0...v8.2.0) (2023-10-02)
+
+
+### Features
+
+* Support for using multiple databases in datastore ([#1090](https://github.com/googleapis/nodejs-datastore/issues/1090)) ([10ce563](https://github.com/googleapis/nodejs-datastore/commit/10ce563dae7e1164d3ee23a5887265c9de7b106f))
+
+
+### Bug Fixes
+
+* Allow users to set environment variable to connect to emulator running on docker ([#1164](https://github.com/googleapis/nodejs-datastore/issues/1164)) ([a41741b](https://github.com/googleapis/nodejs-datastore/commit/a41741b1412b1854aeecbe50441aa85015c3d399))
+* Check property existence for exclude from indexes with wildcard ([#1114](https://github.com/googleapis/nodejs-datastore/issues/1114)) ([e6b8ef7](https://github.com/googleapis/nodejs-datastore/commit/e6b8ef74ff10107943d0ae194f9a8d540d8557c1))
+* **deps:** Update dependency sinon to v16 ([#1150](https://github.com/googleapis/nodejs-datastore/issues/1150)) ([0d8b715](https://github.com/googleapis/nodejs-datastore/commit/0d8b7153fc156a4b55e965f39161bd5c19bffff6))
+
 ## [8.1.0](https://github.com/googleapis/nodejs-datastore/compare/v8.0.0...v8.1.0) (2023-09-07)
 
 
