@@ -16,17 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {SqlAvailableDatabaseVersionsServiceClient} from './sql_available_database_versions_service_client';
 export {SqlBackupRunsServiceClient} from './sql_backup_runs_service_client';
 export {SqlConnectServiceClient} from './sql_connect_service_client';
 export {SqlDatabasesServiceClient} from './sql_databases_service_client';
-export {SqlEventsServiceClient} from './sql_events_service_client';
 export {SqlFlagsServiceClient} from './sql_flags_service_client';
-export {SqlIamPoliciesServiceClient} from './sql_iam_policies_service_client';
-export {SqlInstanceNamesServiceClient} from './sql_instance_names_service_client';
 export {SqlInstancesServiceClient} from './sql_instances_service_client';
 export {SqlOperationsServiceClient} from './sql_operations_service_client';
-export {SqlRegionsServiceClient} from './sql_regions_service_client';
 export {SqlSslCertsServiceClient} from './sql_ssl_certs_service_client';
 export {SqlTiersServiceClient} from './sql_tiers_service_client';
 export {SqlUsersServiceClient} from './sql_users_service_client';
