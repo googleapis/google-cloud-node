@@ -13,16 +13,21 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Dataset_service.create_dataset](#dataset_service.create_dataset)
+  * [Dataset_service.create_dataset_version](#dataset_service.create_dataset_version)
   * [Dataset_service.delete_dataset](#dataset_service.delete_dataset)
+  * [Dataset_service.delete_dataset_version](#dataset_service.delete_dataset_version)
   * [Dataset_service.delete_saved_query](#dataset_service.delete_saved_query)
   * [Dataset_service.export_data](#dataset_service.export_data)
   * [Dataset_service.get_annotation_spec](#dataset_service.get_annotation_spec)
   * [Dataset_service.get_dataset](#dataset_service.get_dataset)
+  * [Dataset_service.get_dataset_version](#dataset_service.get_dataset_version)
   * [Dataset_service.import_data](#dataset_service.import_data)
   * [Dataset_service.list_annotations](#dataset_service.list_annotations)
   * [Dataset_service.list_data_items](#dataset_service.list_data_items)
+  * [Dataset_service.list_dataset_versions](#dataset_service.list_dataset_versions)
   * [Dataset_service.list_datasets](#dataset_service.list_datasets)
   * [Dataset_service.list_saved_queries](#dataset_service.list_saved_queries)
+  * [Dataset_service.restore_dataset_version](#dataset_service.restore_dataset_version)
   * [Dataset_service.search_data_items](#dataset_service.search_data_items)
   * [Dataset_service.update_dataset](#dataset_service.update_dataset)
   * [Endpoint_service.create_endpoint](#endpoint_service.create_endpoint)
@@ -524,6 +529,23 @@ __Usage:__
 
 
 
+### Dataset_service.create_dataset_version
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.create_dataset_version.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.create_dataset_version.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.create_dataset_version.js`
+
+
+-----
+
+
+
+
 ### Dataset_service.delete_dataset
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.delete_dataset.js).
@@ -534,6 +556,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.delete_dataset.js`
+
+
+-----
+
+
+
+
+### Dataset_service.delete_dataset_version
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.delete_dataset_version.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.delete_dataset_version.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.delete_dataset_version.js`
 
 
 -----
@@ -609,6 +648,23 @@ __Usage:__
 
 
 
+### Dataset_service.get_dataset_version
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.get_dataset_version.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.get_dataset_version.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.get_dataset_version.js`
+
+
+-----
+
+
+
+
 ### Dataset_service.import_data
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.import_data.js).
@@ -660,6 +716,23 @@ __Usage:__
 
 
 
+### Dataset_service.list_dataset_versions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.list_dataset_versions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.list_dataset_versions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.list_dataset_versions.js`
+
+
+-----
+
+
+
+
 ### Dataset_service.list_datasets
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.list_datasets.js).
@@ -687,6 +760,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.list_saved_queries.js`
+
+
+-----
+
+
+
+
+### Dataset_service.restore_dataset_version
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.restore_dataset_version.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.restore_dataset_version.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.restore_dataset_version.js`
 
 
 -----
