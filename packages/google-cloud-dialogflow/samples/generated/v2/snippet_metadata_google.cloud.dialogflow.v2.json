@@ -4114,7 +4114,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 122,
+                    "end": 140,
                     "type": "FULL"
                 }
             ],
@@ -4162,6 +4162,10 @@
                     {
                         "name": "cx_parameters",
                         "type": ".google.protobuf.Struct"
+                    },
+                    {
+                        "name": "enable_extended_streaming",
+                        "type": "TYPE_BOOL"
                     },
                     {
                         "name": "enable_partial_automated_agent_reply",
