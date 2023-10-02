@@ -1457,6 +1457,18 @@
                         }
                       }
                     },
+                    "PersistentDiskSpec": {
+                      "fields": {
+                        "diskType": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "diskSizeGb": {
+                          "type": "int64",
+                          "id": 2
+                        }
+                      }
+                    },
                     "NfsMount": {
                       "fields": {
                         "server": {
@@ -2945,6 +2957,122 @@
                             }
                           ]
                         },
+                        "CreateDatasetVersion": {
+                          "requestType": "CreateDatasetVersionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/datasets/*}/datasetVersions",
+                            "(google.api.http).body": "dataset_version",
+                            "(google.api.method_signature)": "parent,dataset_version",
+                            "(google.longrunning.operation_info).response_type": "DatasetVersion",
+                            "(google.longrunning.operation_info).metadata_type": "CreateDatasetVersionOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/datasets/*}/datasetVersions",
+                                "body": "dataset_version"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,dataset_version"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "DatasetVersion",
+                                "metadata_type": "CreateDatasetVersionOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteDatasetVersion": {
+                          "requestType": "DeleteDatasetVersionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/datasets/*/datasetVersions/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/datasets/*/datasetVersions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "DeleteOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetDatasetVersion": {
+                          "requestType": "GetDatasetVersionRequest",
+                          "responseType": "DatasetVersion",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/datasets/*/datasetVersions/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/datasets/*/datasetVersions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListDatasetVersions": {
+                          "requestType": "ListDatasetVersionsRequest",
+                          "responseType": "ListDatasetVersionsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/datasets/*}/datasetVersions",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/datasets/*}/datasetVersions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "RestoreDatasetVersion": {
+                          "requestType": "RestoreDatasetVersionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/datasets/*/datasetVersions/*}:restore",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "DatasetVersion",
+                            "(google.longrunning.operation_info).metadata_type": "RestoreDatasetVersionOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/datasets/*/datasetVersions/*}:restore"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "DatasetVersion",
+                                "metadata_type": "RestoreDatasetVersionOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "ListDataItems": {
                           "requestType": "ListDataItemsRequest",
                           "responseType": "ListDataItemsResponse",
@@ -3248,11 +3376,130 @@
                         }
                       }
                     },
+                    "CreateDatasetVersionRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Dataset"
+                          }
+                        },
+                        "datasetVersion": {
+                          "type": "DatasetVersion",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "CreateDatasetVersionOperationMetadata": {
                       "fields": {
                         "genericMetadata": {
                           "type": "GenericOperationMetadata",
                           "id": 1
+                        }
+                      }
+                    },
+                    "DeleteDatasetVersionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/DatasetVersion"
+                          }
+                        }
+                      }
+                    },
+                    "GetDatasetVersionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/DatasetVersion"
+                          }
+                        },
+                        "readMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListDatasetVersionsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Dataset"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "readMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListDatasetVersionsResponse": {
+                      "fields": {
+                        "datasetVersions": {
+                          "rule": "repeated",
+                          "type": "DatasetVersion",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "RestoreDatasetVersionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/DatasetVersion"
+                          }
                         }
                       }
                     },
@@ -3550,6 +3797,46 @@
                         "nextPageToken": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "DatasetVersion": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/DatasetVersion",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/datasets/{dataset}/datasetVersions/{dataset_version}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "bigQueryDatasetName": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -10809,6 +11096,14 @@
                         "enableLogging": {
                           "type": "bool",
                           "id": 2
+                        },
+                        "notificationChannels": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.resource_reference).type": "monitoring.googleapis.com/NotificationChannel"
+                          }
                         }
                       },
                       "nested": {
