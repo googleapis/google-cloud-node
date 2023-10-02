@@ -2031,7 +2031,10 @@
                             },
                             "reservation": {
                               "type": "string",
-                              "id": 7
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
