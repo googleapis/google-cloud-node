@@ -1276,6 +1276,102 @@
             }
         },
         {
+            "regionTag": "alloydb_v1_generated_AlloyDBAdmin_GenerateClientCertificate_async",
+            "title": "AlloyDBAdmin generateClientCertificate Sample",
+            "origin": "API_DEFINITION",
+            "description": " Generate a client certificate signed by a Cluster CA. The sole purpose of this endpoint is to support AlloyDB connectors and the Auth Proxy client. The endpoint's behavior is subject to change without notice, so do not rely on its behavior remaining constant. Future changes will not break AlloyDB connectors or the Auth Proxy client.",
+            "canonical": true,
+            "file": "alloy_d_b_admin.generate_client_certificate.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 80,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GenerateClientCertificate",
+                "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.GenerateClientCertificate",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "cert_duration",
+                        "type": ".google.protobuf.Duration"
+                    },
+                    {
+                        "name": "public_key",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.alloydb.v1.GenerateClientCertificateResponse",
+                "client": {
+                    "shortName": "AlloyDBAdminClient",
+                    "fullName": "google.cloud.alloydb.v1.AlloyDBAdminClient"
+                },
+                "method": {
+                    "shortName": "GenerateClientCertificate",
+                    "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.GenerateClientCertificate",
+                    "service": {
+                        "shortName": "AlloyDBAdmin",
+                        "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "alloydb_v1_generated_AlloyDBAdmin_GetConnectionInfo_async",
+            "title": "AlloyDBAdmin getConnectionInfo Sample",
+            "origin": "API_DEFINITION",
+            "description": " Get instance metadata used for a connection.",
+            "canonical": true,
+            "file": "alloy_d_b_admin.get_connection_info.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 68,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetConnectionInfo",
+                "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.GetConnectionInfo",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.alloydb.v1.ConnectionInfo",
+                "client": {
+                    "shortName": "AlloyDBAdminClient",
+                    "fullName": "google.cloud.alloydb.v1.AlloyDBAdminClient"
+                },
+                "method": {
+                    "shortName": "GetConnectionInfo",
+                    "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin.GetConnectionInfo",
+                    "service": {
+                        "shortName": "AlloyDBAdmin",
+                        "fullName": "google.cloud.alloydb.v1.AlloyDBAdmin"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "alloydb_v1_generated_AlloyDBAdmin_ListUsers_async",
             "title": "AlloyDBAdmin listUsers Sample",
             "origin": "API_DEFINITION",

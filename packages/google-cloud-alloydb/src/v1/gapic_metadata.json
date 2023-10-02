@@ -25,6 +25,16 @@
                 "getBackup"
               ]
             },
+            "GenerateClientCertificate": {
+              "methods": [
+                "generateClientCertificate"
+              ]
+            },
+            "GetConnectionInfo": {
+              "methods": [
+                "getConnectionInfo"
+              ]
+            },
             "GetUser": {
               "methods": [
                 "getUser"
@@ -183,6 +193,16 @@
             "GetBackup": {
               "methods": [
                 "getBackup"
+              ]
+            },
+            "GenerateClientCertificate": {
+              "methods": [
+                "generateClientCertificate"
+              ]
+            },
+            "GetConnectionInfo": {
+              "methods": [
+                "getConnectionInfo"
               ]
             },
             "GetUser": {

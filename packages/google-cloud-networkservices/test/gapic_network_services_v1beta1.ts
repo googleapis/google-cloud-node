@@ -1376,5 +1376,150 @@ describe('v1beta1.NetworkServicesClient', () => {
         );
       });
     });
+
+    describe('lbRouteExtension', () => {
+      const fakePath = '/rendered/path/lbRouteExtension';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        lb_route_extension: 'lbRouteExtensionValue',
+      };
+      const client = new networkservicesModule.v1beta1.NetworkServicesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.lbRouteExtensionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.lbRouteExtensionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('lbRouteExtensionPath', () => {
+        const result = client.lbRouteExtensionPath(
+          'projectValue',
+          'locationValue',
+          'lbRouteExtensionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.lbRouteExtensionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromLbRouteExtensionName', () => {
+        const result = client.matchProjectFromLbRouteExtensionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.lbRouteExtensionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromLbRouteExtensionName', () => {
+        const result = client.matchLocationFromLbRouteExtensionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.lbRouteExtensionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLbRouteExtensionFromLbRouteExtensionName', () => {
+        const result =
+          client.matchLbRouteExtensionFromLbRouteExtensionName(fakePath);
+        assert.strictEqual(result, 'lbRouteExtensionValue');
+        assert(
+          (client.pathTemplates.lbRouteExtensionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('lbTrafficExtension', () => {
+      const fakePath = '/rendered/path/lbTrafficExtension';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        lb_traffic_extension: 'lbTrafficExtensionValue',
+      };
+      const client = new networkservicesModule.v1beta1.NetworkServicesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.lbTrafficExtensionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.lbTrafficExtensionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('lbTrafficExtensionPath', () => {
+        const result = client.lbTrafficExtensionPath(
+          'projectValue',
+          'locationValue',
+          'lbTrafficExtensionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.lbTrafficExtensionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromLbTrafficExtensionName', () => {
+        const result = client.matchProjectFromLbTrafficExtensionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.lbTrafficExtensionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromLbTrafficExtensionName', () => {
+        const result = client.matchLocationFromLbTrafficExtensionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.lbTrafficExtensionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLbTrafficExtensionFromLbTrafficExtensionName', () => {
+        const result =
+          client.matchLbTrafficExtensionFromLbTrafficExtensionName(fakePath);
+        assert.strictEqual(result, 'lbTrafficExtensionValue');
+        assert(
+          (
+            client.pathTemplates.lbTrafficExtensionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
   });
 });

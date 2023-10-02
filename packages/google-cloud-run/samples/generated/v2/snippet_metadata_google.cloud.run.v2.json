@@ -152,6 +152,54 @@
             }
         },
         {
+            "regionTag": "run_v2_generated_Executions_CancelExecution_async",
+            "title": "Executions cancelExecution Sample",
+            "origin": "API_DEFINITION",
+            "description": " Cancels an Execution.",
+            "canonical": true,
+            "file": "executions.cancel_execution.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CancelExecution",
+                "fullName": "google.cloud.run.v2.Executions.CancelExecution",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "validate_only",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "etag",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ExecutionsClient",
+                    "fullName": "google.cloud.run.v2.ExecutionsClient"
+                },
+                "method": {
+                    "shortName": "CancelExecution",
+                    "fullName": "google.cloud.run.v2.Executions.CancelExecution",
+                    "service": {
+                        "shortName": "Executions",
+                        "fullName": "google.cloud.run.v2.Executions"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "run_v2_generated_Jobs_CreateJob_async",
             "title": "Executions createJob Sample",
             "origin": "API_DEFINITION",
@@ -402,7 +450,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 66,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],
@@ -422,6 +470,10 @@
                     {
                         "name": "etag",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "overrides",
+                        "type": ".google.cloud.run.v2.RunJobRequest.Overrides"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",

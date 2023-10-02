@@ -20,6 +20,21 @@
                 "getSpoke"
               ]
             },
+            "GetRouteTable": {
+              "methods": [
+                "getRouteTable"
+              ]
+            },
+            "GetRoute": {
+              "methods": [
+                "getRoute"
+              ]
+            },
+            "GetGroup": {
+              "methods": [
+                "getGroup"
+              ]
+            },
             "CreateHub": {
               "methods": [
                 "createHub"
@@ -45,6 +60,16 @@
                 "updateSpoke"
               ]
             },
+            "RejectHubSpoke": {
+              "methods": [
+                "rejectHubSpoke"
+              ]
+            },
+            "AcceptHubSpoke": {
+              "methods": [
+                "acceptHubSpoke"
+              ]
+            },
             "DeleteSpoke": {
               "methods": [
                 "deleteSpoke"
@@ -57,11 +82,39 @@
                 "listHubsAsync"
               ]
             },
+            "ListHubSpokes": {
+              "methods": [
+                "listHubSpokes",
+                "listHubSpokesStream",
+                "listHubSpokesAsync"
+              ]
+            },
             "ListSpokes": {
               "methods": [
                 "listSpokes",
                 "listSpokesStream",
                 "listSpokesAsync"
+              ]
+            },
+            "ListRoutes": {
+              "methods": [
+                "listRoutes",
+                "listRoutesStream",
+                "listRoutesAsync"
+              ]
+            },
+            "ListRouteTables": {
+              "methods": [
+                "listRouteTables",
+                "listRouteTablesStream",
+                "listRouteTablesAsync"
+              ]
+            },
+            "ListGroups": {
+              "methods": [
+                "listGroups",
+                "listGroupsStream",
+                "listGroupsAsync"
               ]
             }
           }
@@ -79,6 +132,21 @@
                 "getSpoke"
               ]
             },
+            "GetRouteTable": {
+              "methods": [
+                "getRouteTable"
+              ]
+            },
+            "GetRoute": {
+              "methods": [
+                "getRoute"
+              ]
+            },
+            "GetGroup": {
+              "methods": [
+                "getGroup"
+              ]
+            },
             "CreateHub": {
               "methods": [
                 "createHub"
@@ -104,6 +172,16 @@
                 "updateSpoke"
               ]
             },
+            "RejectHubSpoke": {
+              "methods": [
+                "rejectHubSpoke"
+              ]
+            },
+            "AcceptHubSpoke": {
+              "methods": [
+                "acceptHubSpoke"
+              ]
+            },
             "DeleteSpoke": {
               "methods": [
                 "deleteSpoke"
@@ -116,11 +194,39 @@
                 "listHubsAsync"
               ]
             },
+            "ListHubSpokes": {
+              "methods": [
+                "listHubSpokes",
+                "listHubSpokesStream",
+                "listHubSpokesAsync"
+              ]
+            },
             "ListSpokes": {
               "methods": [
                 "listSpokes",
                 "listSpokesStream",
                 "listSpokesAsync"
+              ]
+            },
+            "ListRoutes": {
+              "methods": [
+                "listRoutes",
+                "listRoutesStream",
+                "listRoutesAsync"
+              ]
+            },
+            "ListRouteTables": {
+              "methods": [
+                "listRouteTables",
+                "listRouteTablesStream",
+                "listRouteTablesAsync"
+              ]
+            },
+            "ListGroups": {
+              "methods": [
+                "listGroups",
+                "listGroupsStream",
+                "listGroupsAsync"
               ]
             }
           }

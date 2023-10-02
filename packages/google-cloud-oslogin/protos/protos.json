@@ -778,6 +778,11 @@
                             "universalTwoFactor",
                             "webAuthn"
                           ]
+                        },
+                        "_deviceNickname": {
+                          "oneof": [
+                            "deviceNickname"
+                          ]
                         }
                       },
                       "fields": {
@@ -796,6 +801,13 @@
                         "webAuthn": {
                           "type": "WebAuthn",
                           "id": 4
+                        },
+                        "deviceNickname": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },

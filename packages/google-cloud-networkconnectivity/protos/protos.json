@@ -196,6 +196,24 @@
                             }
                           ]
                         },
+                        "ListHubSpokes": {
+                          "requestType": "ListHubSpokesRequest",
+                          "responseType": "ListHubSpokesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/global/hubs/*}:listSpokes",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/global/hubs/*}:listSpokes"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "ListSpokes": {
                           "requestType": "ListSpokesRequest",
                           "responseType": "ListSpokesResponse",
@@ -288,6 +306,62 @@
                             }
                           ]
                         },
+                        "RejectHubSpoke": {
+                          "requestType": "RejectHubSpokeRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/global/hubs/*}:rejectSpoke",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,spoke_uri",
+                            "(google.longrunning.operation_info).response_type": "RejectHubSpokeResponse",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/global/hubs/*}:rejectSpoke",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,spoke_uri"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "RejectHubSpokeResponse",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "AcceptHubSpoke": {
+                          "requestType": "AcceptHubSpokeRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/global/hubs/*}:acceptSpoke",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,spoke_uri",
+                            "(google.longrunning.operation_info).response_type": "AcceptHubSpokeResponse",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/global/hubs/*}:acceptSpoke",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,spoke_uri"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "AcceptHubSpokeResponse",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "DeleteSpoke": {
                           "requestType": "DeleteSpokeRequest",
                           "responseType": "google.longrunning.Operation",
@@ -313,6 +387,114 @@
                               }
                             }
                           ]
+                        },
+                        "GetRouteTable": {
+                          "requestType": "GetRouteTableRequest",
+                          "responseType": "RouteTable",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/global/hubs/*/routeTables/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/global/hubs/*/routeTables/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "GetRoute": {
+                          "requestType": "GetRouteRequest",
+                          "responseType": "Route",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/global/hubs/*/routeTables/*/routes/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/global/hubs/*/routeTables/*/routes/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListRoutes": {
+                          "requestType": "ListRoutesRequest",
+                          "responseType": "ListRoutesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/global/hubs/*/routeTables/*}/routes",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/global/hubs/*/routeTables/*}/routes"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "ListRouteTables": {
+                          "requestType": "ListRouteTablesRequest",
+                          "responseType": "ListRouteTablesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/global/hubs/*}/routeTables",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/global/hubs/*}/routeTables"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetGroup": {
+                          "requestType": "GetGroupRequest",
+                          "responseType": "Group",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/global/hubs/*/groups/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/global/hubs/*/groups/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListGroups": {
+                          "requestType": "ListGroupsRequest",
+                          "responseType": "ListGroupsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/global/hubs/*}/groups",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/global/hubs/*}/groups"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         }
                       }
                     },
@@ -323,13 +505,33 @@
                         "SITE_TO_SITE_SPOKES": 2
                       }
                     },
+                    "RouteType": {
+                      "values": {
+                        "ROUTE_TYPE_UNSPECIFIED": 0,
+                        "VPC_PRIMARY_SUBNET": 1,
+                        "VPC_SECONDARY_SUBNET": 2
+                      }
+                    },
                     "State": {
                       "values": {
                         "STATE_UNSPECIFIED": 0,
                         "CREATING": 1,
                         "ACTIVE": 2,
                         "DELETING": 3,
-                        "UPDATING": 6
+                        "ACCEPTING": 8,
+                        "REJECTING": 9,
+                        "UPDATING": 6,
+                        "INACTIVE": 7,
+                        "OBSOLETE": 10
+                      }
+                    },
+                    "SpokeType": {
+                      "values": {
+                        "SPOKE_TYPE_UNSPECIFIED": 0,
+                        "VPN_TUNNEL": 1,
+                        "INTERCONNECT_ATTACHMENT": 2,
+                        "ROUTER_APPLIANCE": 3,
+                        "VPC_NETWORK": 4
                       }
                     },
                     "Hub": {
@@ -386,6 +588,21 @@
                           "rule": "repeated",
                           "type": "RoutingVPC",
                           "id": 10
+                        },
+                        "routeTables": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "spokeSummary": {
+                          "type": "SpokeSummary",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -451,6 +668,14 @@
                             "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/Hub"
                           }
                         },
+                        "group": {
+                          "type": "string",
+                          "id": 23,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/Group"
+                          }
+                        },
                         "linkedVpnTunnels": {
                           "type": "LinkedVpnTunnels",
                           "id": 17
@@ -463,6 +688,13 @@
                           "type": "LinkedRouterApplianceInstances",
                           "id": 19
                         },
+                        "linkedVpcNetwork": {
+                          "type": "LinkedVpcNetwork",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "uniqueId": {
                           "type": "string",
                           "id": 11,
@@ -473,6 +705,245 @@
                         "state": {
                           "type": "State",
                           "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "reasons": {
+                          "rule": "repeated",
+                          "type": "StateReason",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "spokeType": {
+                          "type": "SpokeType",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "StateReason": {
+                          "fields": {
+                            "code": {
+                              "type": "Code",
+                              "id": 1
+                            },
+                            "message": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "userDetails": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "Code": {
+                              "values": {
+                                "CODE_UNSPECIFIED": 0,
+                                "PENDING_REVIEW": 1,
+                                "REJECTED": 2,
+                                "PAUSED": 3,
+                                "FAILED": 4
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "RouteTable": {
+                      "options": {
+                        "(google.api.resource).type": "networkconnectivity.googleapis.com/RouteTable",
+                        "(google.api.resource).pattern": "projects/{project}/locations/global/hubs/{hub}/routeTables/{route_table}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "Route": {
+                      "options": {
+                        "(google.api.resource).type": "networkconnectivity.googleapis.com/HubRoute",
+                        "(google.api.resource).pattern": "projects/{project}/locations/global/hubs/{hub}/routeTables/{route_table}/routes/{route}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "ipCidrRange": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "type": {
+                          "type": "RouteType",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "nextHopVpcNetwork": {
+                          "type": "NextHopVpcNetwork",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 6
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "spoke": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/Spoke"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "Group": {
+                      "options": {
+                        "(google.api.resource).type": "networkconnectivity.googleapis.com/Group",
+                        "(google.api.resource).pattern": "projects/{project}/locations/global/hubs/{hub}/groups/{group}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "uid": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -614,6 +1085,70 @@
                         }
                       }
                     },
+                    "ListHubSpokesRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/Hub"
+                          }
+                        },
+                        "spokeLocations": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "view": {
+                          "type": "SpokeView",
+                          "id": 7
+                        }
+                      },
+                      "nested": {
+                        "SpokeView": {
+                          "values": {
+                            "SPOKE_VIEW_UNSPECIFIED": 0,
+                            "BASIC": 1,
+                            "DETAILED": 2
+                          }
+                        }
+                      }
+                    },
+                    "ListHubSpokesResponse": {
+                      "fields": {
+                        "spokes": {
+                          "rule": "repeated",
+                          "type": "Spoke",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
                     "ListSpokesRequest": {
                       "fields": {
                         "parent": {
@@ -749,6 +1284,245 @@
                         }
                       }
                     },
+                    "AcceptHubSpokeRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/Hub"
+                          }
+                        },
+                        "spokeUri": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/Spoke"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "AcceptHubSpokeResponse": {
+                      "fields": {
+                        "spoke": {
+                          "type": "Spoke",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "RejectHubSpokeRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/Hub"
+                          }
+                        },
+                        "spokeUri": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/Spoke"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "details": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RejectHubSpokeResponse": {
+                      "fields": {
+                        "spoke": {
+                          "type": "Spoke",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "GetRouteTableRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/RouteTable"
+                          }
+                        }
+                      }
+                    },
+                    "GetRouteRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/HubRoute"
+                          }
+                        }
+                      }
+                    },
+                    "ListRoutesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/RouteTable"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListRoutesResponse": {
+                      "fields": {
+                        "routes": {
+                          "rule": "repeated",
+                          "type": "Route",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListRouteTablesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/Hub"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListRouteTablesResponse": {
+                      "fields": {
+                        "routeTables": {
+                          "rule": "repeated",
+                          "type": "RouteTable",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListGroupsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/Hub"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListGroupsResponse": {
+                      "fields": {
+                        "groups": {
+                          "rule": "repeated",
+                          "type": "Group",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
                     "LinkedVpnTunnels": {
                       "fields": {
                         "uris": {
@@ -818,6 +1592,26 @@
                         }
                       }
                     },
+                    "LinkedVpcNetwork": {
+                      "fields": {
+                        "uri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Network"
+                          }
+                        },
+                        "excludeExportRanges": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "RouterApplianceInstance": {
                       "fields": {
                         "virtualMachine": {
@@ -839,6 +1633,113 @@
                           "rule": "repeated",
                           "type": "LocationFeature",
                           "id": 1
+                        }
+                      }
+                    },
+                    "NextHopVpcNetwork": {
+                      "fields": {
+                        "uri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Network"
+                          }
+                        }
+                      }
+                    },
+                    "SpokeSummary": {
+                      "fields": {
+                        "spokeTypeCounts": {
+                          "rule": "repeated",
+                          "type": "SpokeTypeCount",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "spokeStateCounts": {
+                          "rule": "repeated",
+                          "type": "SpokeStateCount",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "spokeStateReasonCounts": {
+                          "rule": "repeated",
+                          "type": "SpokeStateReasonCount",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SpokeTypeCount": {
+                          "fields": {
+                            "spokeType": {
+                              "type": "SpokeType",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "count": {
+                              "type": "int64",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "SpokeStateCount": {
+                          "fields": {
+                            "state": {
+                              "type": "State",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "count": {
+                              "type": "int64",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "SpokeStateReasonCount": {
+                          "fields": {
+                            "stateReasonCode": {
+                              "type": "Spoke.StateReason.Code",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "count": {
+                              "type": "int64",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "GetGroupRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/Group"
+                          }
                         }
                       }
                     },
