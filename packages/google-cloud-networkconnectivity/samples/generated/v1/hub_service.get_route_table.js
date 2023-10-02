@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START networkconnectivity_v1_generated_HubService_DeleteHub_async]
+  // [START networkconnectivity_v1_generated_HubService_GetRouteTable_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,24 +29,9 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the hub to delete.
+   *  Required. The name of the route table resource.
    */
   // const name = 'abc123'
-  /**
-   *  Optional. A request ID to identify requests. Specify a unique request ID so
-   *  that if you must retry your request, the server knows to ignore the request
-   *  if it has already been completed. The server guarantees that a request
-   *  doesn't result in creation of duplicate commitments for at least 60
-   *  minutes.
-   *  For example, consider a situation where you make an initial request and
-   *  the request times out. If you make the request again with the same request
-   *  ID, the server can check to see whether the original operation
-   *  was received. If it was, the server ignores the second request. This
-   *  behavior prevents clients from mistakenly creating duplicate commitments.
-   *  The request ID must be a valid UUID, with the exception that zero UUID is
-   *  not supported (00000000-0000-0000-0000-000000000000).
-   */
-  // const requestId = 'abc123'
 
   // Imports the Networkconnectivity library
   const {HubServiceClient} = require('@google-cloud/network-connectivity').v1;
@@ -54,20 +39,19 @@ function main(name) {
   // Instantiates a client
   const networkconnectivityClient = new HubServiceClient();
 
-  async function callDeleteHub() {
+  async function callGetRouteTable() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const [operation] = await networkconnectivityClient.deleteHub(request);
-    const [response] = await operation.promise();
+    const response = await networkconnectivityClient.getRouteTable(request);
     console.log(response);
   }
 
-  callDeleteHub();
-  // [END networkconnectivity_v1_generated_HubService_DeleteHub_async]
+  callGetRouteTable();
+  // [END networkconnectivity_v1_generated_HubService_GetRouteTable_async]
 }
 
 process.on('unhandledRejection', err => {

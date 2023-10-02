@@ -33,7 +33,7 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  The maximum number of results per page that should be returned.
+   *  The maximum number of results per page to return.
    */
   // const pageSize = 1234
   /**
@@ -41,7 +41,7 @@ function main(parent) {
    */
   // const pageToken = 'abc123'
   /**
-   *  An expression that filters the results listed in the response.
+   *  An expression that filters the list of results.
    */
   // const filter = 'abc123'
   /**

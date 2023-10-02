@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START networkconnectivity_v1_generated_HubService_DeleteHub_async]
+function main(name, spokeUri) {
+  // [START networkconnectivity_v1_generated_HubService_RejectHubSpoke_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,9 +29,13 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the hub to delete.
+   *  Required. The name of the hub from which to reject the spoke.
    */
   // const name = 'abc123'
+  /**
+   *  Required. The URI of the spoke to reject from the hub.
+   */
+  // const spokeUri = 'abc123'
   /**
    *  Optional. A request ID to identify requests. Specify a unique request ID so
    *  that if you must retry your request, the server knows to ignore the request
@@ -47,6 +51,10 @@ function main(name) {
    *  not supported (00000000-0000-0000-0000-000000000000).
    */
   // const requestId = 'abc123'
+  /**
+   *  Optional. Additional information provided by the hub administrator.
+   */
+  // const details = 'abc123'
 
   // Imports the Networkconnectivity library
   const {HubServiceClient} = require('@google-cloud/network-connectivity').v1;
@@ -54,20 +62,21 @@ function main(name) {
   // Instantiates a client
   const networkconnectivityClient = new HubServiceClient();
 
-  async function callDeleteHub() {
+  async function callRejectHubSpoke() {
     // Construct request
     const request = {
       name,
+      spokeUri,
     };
 
     // Run request
-    const [operation] = await networkconnectivityClient.deleteHub(request);
+    const [operation] = await networkconnectivityClient.rejectHubSpoke(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callDeleteHub();
-  // [END networkconnectivity_v1_generated_HubService_DeleteHub_async]
+  callRejectHubSpoke();
+  // [END networkconnectivity_v1_generated_HubService_RejectHubSpoke_async]
 }
 
 process.on('unhandledRejection', err => {

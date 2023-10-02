@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START networkconnectivity_v1_generated_HubService_DeleteHub_async]
+function main(name, spokeUri) {
+  // [START networkconnectivity_v1_generated_HubService_AcceptHubSpoke_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,9 +29,13 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the hub to delete.
+   *  Required. The name of the hub into which to accept the spoke.
    */
   // const name = 'abc123'
+  /**
+   *  Required. The URI of the spoke to accept into the hub.
+   */
+  // const spokeUri = 'abc123'
   /**
    *  Optional. A request ID to identify requests. Specify a unique request ID so
    *  that if you must retry your request, the server knows to ignore the request
@@ -54,20 +58,21 @@ function main(name) {
   // Instantiates a client
   const networkconnectivityClient = new HubServiceClient();
 
-  async function callDeleteHub() {
+  async function callAcceptHubSpoke() {
     // Construct request
     const request = {
       name,
+      spokeUri,
     };
 
     // Run request
-    const [operation] = await networkconnectivityClient.deleteHub(request);
+    const [operation] = await networkconnectivityClient.acceptHubSpoke(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callDeleteHub();
-  // [END networkconnectivity_v1_generated_HubService_DeleteHub_async]
+  callAcceptHubSpoke();
+  // [END networkconnectivity_v1_generated_HubService_AcceptHubSpoke_async]
 }
 
 process.on('unhandledRejection', err => {

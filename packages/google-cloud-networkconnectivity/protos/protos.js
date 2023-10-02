@@ -616,6 +616,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.networkconnectivity.v1.HubService|listHubSpokes}.
+                         * @memberof google.cloud.networkconnectivity.v1.HubService
+                         * @typedef ListHubSpokesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkconnectivity.v1.ListHubSpokesResponse} [response] ListHubSpokesResponse
+                         */
+    
+                        /**
+                         * Calls ListHubSpokes.
+                         * @function listHubSpokes
+                         * @memberof google.cloud.networkconnectivity.v1.HubService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IListHubSpokesRequest} request ListHubSpokesRequest message or plain object
+                         * @param {google.cloud.networkconnectivity.v1.HubService.ListHubSpokesCallback} callback Node-style callback called with the error, if any, and ListHubSpokesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(HubService.prototype.listHubSpokes = function listHubSpokes(request, callback) {
+                            return this.rpcCall(listHubSpokes, $root.google.cloud.networkconnectivity.v1.ListHubSpokesRequest, $root.google.cloud.networkconnectivity.v1.ListHubSpokesResponse, request, callback);
+                        }, "name", { value: "ListHubSpokes" });
+    
+                        /**
+                         * Calls ListHubSpokes.
+                         * @function listHubSpokes
+                         * @memberof google.cloud.networkconnectivity.v1.HubService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IListHubSpokesRequest} request ListHubSpokesRequest message or plain object
+                         * @returns {Promise<google.cloud.networkconnectivity.v1.ListHubSpokesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.networkconnectivity.v1.HubService|listSpokes}.
                          * @memberof google.cloud.networkconnectivity.v1.HubService
                          * @typedef ListSpokesCallback
@@ -748,6 +781,72 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.networkconnectivity.v1.HubService|rejectHubSpoke}.
+                         * @memberof google.cloud.networkconnectivity.v1.HubService
+                         * @typedef RejectHubSpokeCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls RejectHubSpoke.
+                         * @function rejectHubSpoke
+                         * @memberof google.cloud.networkconnectivity.v1.HubService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IRejectHubSpokeRequest} request RejectHubSpokeRequest message or plain object
+                         * @param {google.cloud.networkconnectivity.v1.HubService.RejectHubSpokeCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(HubService.prototype.rejectHubSpoke = function rejectHubSpoke(request, callback) {
+                            return this.rpcCall(rejectHubSpoke, $root.google.cloud.networkconnectivity.v1.RejectHubSpokeRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "RejectHubSpoke" });
+    
+                        /**
+                         * Calls RejectHubSpoke.
+                         * @function rejectHubSpoke
+                         * @memberof google.cloud.networkconnectivity.v1.HubService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IRejectHubSpokeRequest} request RejectHubSpokeRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkconnectivity.v1.HubService|acceptHubSpoke}.
+                         * @memberof google.cloud.networkconnectivity.v1.HubService
+                         * @typedef AcceptHubSpokeCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls AcceptHubSpoke.
+                         * @function acceptHubSpoke
+                         * @memberof google.cloud.networkconnectivity.v1.HubService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IAcceptHubSpokeRequest} request AcceptHubSpokeRequest message or plain object
+                         * @param {google.cloud.networkconnectivity.v1.HubService.AcceptHubSpokeCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(HubService.prototype.acceptHubSpoke = function acceptHubSpoke(request, callback) {
+                            return this.rpcCall(acceptHubSpoke, $root.google.cloud.networkconnectivity.v1.AcceptHubSpokeRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "AcceptHubSpoke" });
+    
+                        /**
+                         * Calls AcceptHubSpoke.
+                         * @function acceptHubSpoke
+                         * @memberof google.cloud.networkconnectivity.v1.HubService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IAcceptHubSpokeRequest} request AcceptHubSpokeRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.networkconnectivity.v1.HubService|deleteSpoke}.
                          * @memberof google.cloud.networkconnectivity.v1.HubService
                          * @typedef DeleteSpokeCallback
@@ -780,6 +879,204 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.networkconnectivity.v1.HubService|getRouteTable}.
+                         * @memberof google.cloud.networkconnectivity.v1.HubService
+                         * @typedef GetRouteTableCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkconnectivity.v1.RouteTable} [response] RouteTable
+                         */
+    
+                        /**
+                         * Calls GetRouteTable.
+                         * @function getRouteTable
+                         * @memberof google.cloud.networkconnectivity.v1.HubService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IGetRouteTableRequest} request GetRouteTableRequest message or plain object
+                         * @param {google.cloud.networkconnectivity.v1.HubService.GetRouteTableCallback} callback Node-style callback called with the error, if any, and RouteTable
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(HubService.prototype.getRouteTable = function getRouteTable(request, callback) {
+                            return this.rpcCall(getRouteTable, $root.google.cloud.networkconnectivity.v1.GetRouteTableRequest, $root.google.cloud.networkconnectivity.v1.RouteTable, request, callback);
+                        }, "name", { value: "GetRouteTable" });
+    
+                        /**
+                         * Calls GetRouteTable.
+                         * @function getRouteTable
+                         * @memberof google.cloud.networkconnectivity.v1.HubService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IGetRouteTableRequest} request GetRouteTableRequest message or plain object
+                         * @returns {Promise<google.cloud.networkconnectivity.v1.RouteTable>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkconnectivity.v1.HubService|getRoute}.
+                         * @memberof google.cloud.networkconnectivity.v1.HubService
+                         * @typedef GetRouteCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkconnectivity.v1.Route} [response] Route
+                         */
+    
+                        /**
+                         * Calls GetRoute.
+                         * @function getRoute
+                         * @memberof google.cloud.networkconnectivity.v1.HubService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IGetRouteRequest} request GetRouteRequest message or plain object
+                         * @param {google.cloud.networkconnectivity.v1.HubService.GetRouteCallback} callback Node-style callback called with the error, if any, and Route
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(HubService.prototype.getRoute = function getRoute(request, callback) {
+                            return this.rpcCall(getRoute, $root.google.cloud.networkconnectivity.v1.GetRouteRequest, $root.google.cloud.networkconnectivity.v1.Route, request, callback);
+                        }, "name", { value: "GetRoute" });
+    
+                        /**
+                         * Calls GetRoute.
+                         * @function getRoute
+                         * @memberof google.cloud.networkconnectivity.v1.HubService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IGetRouteRequest} request GetRouteRequest message or plain object
+                         * @returns {Promise<google.cloud.networkconnectivity.v1.Route>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkconnectivity.v1.HubService|listRoutes}.
+                         * @memberof google.cloud.networkconnectivity.v1.HubService
+                         * @typedef ListRoutesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkconnectivity.v1.ListRoutesResponse} [response] ListRoutesResponse
+                         */
+    
+                        /**
+                         * Calls ListRoutes.
+                         * @function listRoutes
+                         * @memberof google.cloud.networkconnectivity.v1.HubService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IListRoutesRequest} request ListRoutesRequest message or plain object
+                         * @param {google.cloud.networkconnectivity.v1.HubService.ListRoutesCallback} callback Node-style callback called with the error, if any, and ListRoutesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(HubService.prototype.listRoutes = function listRoutes(request, callback) {
+                            return this.rpcCall(listRoutes, $root.google.cloud.networkconnectivity.v1.ListRoutesRequest, $root.google.cloud.networkconnectivity.v1.ListRoutesResponse, request, callback);
+                        }, "name", { value: "ListRoutes" });
+    
+                        /**
+                         * Calls ListRoutes.
+                         * @function listRoutes
+                         * @memberof google.cloud.networkconnectivity.v1.HubService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IListRoutesRequest} request ListRoutesRequest message or plain object
+                         * @returns {Promise<google.cloud.networkconnectivity.v1.ListRoutesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkconnectivity.v1.HubService|listRouteTables}.
+                         * @memberof google.cloud.networkconnectivity.v1.HubService
+                         * @typedef ListRouteTablesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkconnectivity.v1.ListRouteTablesResponse} [response] ListRouteTablesResponse
+                         */
+    
+                        /**
+                         * Calls ListRouteTables.
+                         * @function listRouteTables
+                         * @memberof google.cloud.networkconnectivity.v1.HubService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IListRouteTablesRequest} request ListRouteTablesRequest message or plain object
+                         * @param {google.cloud.networkconnectivity.v1.HubService.ListRouteTablesCallback} callback Node-style callback called with the error, if any, and ListRouteTablesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(HubService.prototype.listRouteTables = function listRouteTables(request, callback) {
+                            return this.rpcCall(listRouteTables, $root.google.cloud.networkconnectivity.v1.ListRouteTablesRequest, $root.google.cloud.networkconnectivity.v1.ListRouteTablesResponse, request, callback);
+                        }, "name", { value: "ListRouteTables" });
+    
+                        /**
+                         * Calls ListRouteTables.
+                         * @function listRouteTables
+                         * @memberof google.cloud.networkconnectivity.v1.HubService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IListRouteTablesRequest} request ListRouteTablesRequest message or plain object
+                         * @returns {Promise<google.cloud.networkconnectivity.v1.ListRouteTablesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkconnectivity.v1.HubService|getGroup}.
+                         * @memberof google.cloud.networkconnectivity.v1.HubService
+                         * @typedef GetGroupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkconnectivity.v1.Group} [response] Group
+                         */
+    
+                        /**
+                         * Calls GetGroup.
+                         * @function getGroup
+                         * @memberof google.cloud.networkconnectivity.v1.HubService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IGetGroupRequest} request GetGroupRequest message or plain object
+                         * @param {google.cloud.networkconnectivity.v1.HubService.GetGroupCallback} callback Node-style callback called with the error, if any, and Group
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(HubService.prototype.getGroup = function getGroup(request, callback) {
+                            return this.rpcCall(getGroup, $root.google.cloud.networkconnectivity.v1.GetGroupRequest, $root.google.cloud.networkconnectivity.v1.Group, request, callback);
+                        }, "name", { value: "GetGroup" });
+    
+                        /**
+                         * Calls GetGroup.
+                         * @function getGroup
+                         * @memberof google.cloud.networkconnectivity.v1.HubService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IGetGroupRequest} request GetGroupRequest message or plain object
+                         * @returns {Promise<google.cloud.networkconnectivity.v1.Group>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkconnectivity.v1.HubService|listGroups}.
+                         * @memberof google.cloud.networkconnectivity.v1.HubService
+                         * @typedef ListGroupsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkconnectivity.v1.ListGroupsResponse} [response] ListGroupsResponse
+                         */
+    
+                        /**
+                         * Calls ListGroups.
+                         * @function listGroups
+                         * @memberof google.cloud.networkconnectivity.v1.HubService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IListGroupsRequest} request ListGroupsRequest message or plain object
+                         * @param {google.cloud.networkconnectivity.v1.HubService.ListGroupsCallback} callback Node-style callback called with the error, if any, and ListGroupsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(HubService.prototype.listGroups = function listGroups(request, callback) {
+                            return this.rpcCall(listGroups, $root.google.cloud.networkconnectivity.v1.ListGroupsRequest, $root.google.cloud.networkconnectivity.v1.ListGroupsResponse, request, callback);
+                        }, "name", { value: "ListGroups" });
+    
+                        /**
+                         * Calls ListGroups.
+                         * @function listGroups
+                         * @memberof google.cloud.networkconnectivity.v1.HubService
+                         * @instance
+                         * @param {google.cloud.networkconnectivity.v1.IListGroupsRequest} request ListGroupsRequest message or plain object
+                         * @returns {Promise<google.cloud.networkconnectivity.v1.ListGroupsResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return HubService;
                     })();
     
@@ -800,6 +1097,22 @@
                     })();
     
                     /**
+                     * RouteType enum.
+                     * @name google.cloud.networkconnectivity.v1.RouteType
+                     * @enum {number}
+                     * @property {number} ROUTE_TYPE_UNSPECIFIED=0 ROUTE_TYPE_UNSPECIFIED value
+                     * @property {number} VPC_PRIMARY_SUBNET=1 VPC_PRIMARY_SUBNET value
+                     * @property {number} VPC_SECONDARY_SUBNET=2 VPC_SECONDARY_SUBNET value
+                     */
+                    v1.RouteType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "ROUTE_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "VPC_PRIMARY_SUBNET"] = 1;
+                        values[valuesById[2] = "VPC_SECONDARY_SUBNET"] = 2;
+                        return values;
+                    })();
+    
+                    /**
                      * State enum.
                      * @name google.cloud.networkconnectivity.v1.State
                      * @enum {number}
@@ -807,7 +1120,11 @@
                      * @property {number} CREATING=1 CREATING value
                      * @property {number} ACTIVE=2 ACTIVE value
                      * @property {number} DELETING=3 DELETING value
+                     * @property {number} ACCEPTING=8 ACCEPTING value
+                     * @property {number} REJECTING=9 REJECTING value
                      * @property {number} UPDATING=6 UPDATING value
+                     * @property {number} INACTIVE=7 INACTIVE value
+                     * @property {number} OBSOLETE=10 OBSOLETE value
                      */
                     v1.State = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -815,7 +1132,31 @@
                         values[valuesById[1] = "CREATING"] = 1;
                         values[valuesById[2] = "ACTIVE"] = 2;
                         values[valuesById[3] = "DELETING"] = 3;
+                        values[valuesById[8] = "ACCEPTING"] = 8;
+                        values[valuesById[9] = "REJECTING"] = 9;
                         values[valuesById[6] = "UPDATING"] = 6;
+                        values[valuesById[7] = "INACTIVE"] = 7;
+                        values[valuesById[10] = "OBSOLETE"] = 10;
+                        return values;
+                    })();
+    
+                    /**
+                     * SpokeType enum.
+                     * @name google.cloud.networkconnectivity.v1.SpokeType
+                     * @enum {number}
+                     * @property {number} SPOKE_TYPE_UNSPECIFIED=0 SPOKE_TYPE_UNSPECIFIED value
+                     * @property {number} VPN_TUNNEL=1 VPN_TUNNEL value
+                     * @property {number} INTERCONNECT_ATTACHMENT=2 INTERCONNECT_ATTACHMENT value
+                     * @property {number} ROUTER_APPLIANCE=3 ROUTER_APPLIANCE value
+                     * @property {number} VPC_NETWORK=4 VPC_NETWORK value
+                     */
+                    v1.SpokeType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "SPOKE_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "VPN_TUNNEL"] = 1;
+                        values[valuesById[2] = "INTERCONNECT_ATTACHMENT"] = 2;
+                        values[valuesById[3] = "ROUTER_APPLIANCE"] = 3;
+                        values[valuesById[4] = "VPC_NETWORK"] = 4;
                         return values;
                     })();
     
@@ -833,6 +1174,8 @@
                          * @property {string|null} [uniqueId] Hub uniqueId
                          * @property {google.cloud.networkconnectivity.v1.State|null} [state] Hub state
                          * @property {Array.<google.cloud.networkconnectivity.v1.IRoutingVPC>|null} [routingVpcs] Hub routingVpcs
+                         * @property {Array.<string>|null} [routeTables] Hub routeTables
+                         * @property {google.cloud.networkconnectivity.v1.ISpokeSummary|null} [spokeSummary] Hub spokeSummary
                          */
     
                         /**
@@ -846,6 +1189,7 @@
                         function Hub(properties) {
                             this.labels = {};
                             this.routingVpcs = [];
+                            this.routeTables = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -917,6 +1261,22 @@
                         Hub.prototype.routingVpcs = $util.emptyArray;
     
                         /**
+                         * Hub routeTables.
+                         * @member {Array.<string>} routeTables
+                         * @memberof google.cloud.networkconnectivity.v1.Hub
+                         * @instance
+                         */
+                        Hub.prototype.routeTables = $util.emptyArray;
+    
+                        /**
+                         * Hub spokeSummary.
+                         * @member {google.cloud.networkconnectivity.v1.ISpokeSummary|null|undefined} spokeSummary
+                         * @memberof google.cloud.networkconnectivity.v1.Hub
+                         * @instance
+                         */
+                        Hub.prototype.spokeSummary = null;
+    
+                        /**
                          * Creates a new Hub instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkconnectivity.v1.Hub
@@ -958,6 +1318,11 @@
                             if (message.routingVpcs != null && message.routingVpcs.length)
                                 for (var i = 0; i < message.routingVpcs.length; ++i)
                                     $root.google.cloud.networkconnectivity.v1.RoutingVPC.encode(message.routingVpcs[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.routeTables != null && message.routeTables.length)
+                                for (var i = 0; i < message.routeTables.length; ++i)
+                                    writer.uint32(/* id 11, wireType 2 =*/90).string(message.routeTables[i]);
+                            if (message.spokeSummary != null && Object.hasOwnProperty.call(message, "spokeSummary"))
+                                $root.google.cloud.networkconnectivity.v1.SpokeSummary.encode(message.spokeSummary, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             return writer;
                         };
     
@@ -1045,6 +1410,16 @@
                                         message.routingVpcs.push($root.google.cloud.networkconnectivity.v1.RoutingVPC.decode(reader, reader.uint32()));
                                         break;
                                     }
+                                case 11: {
+                                        if (!(message.routeTables && message.routeTables.length))
+                                            message.routeTables = [];
+                                        message.routeTables.push(reader.string());
+                                        break;
+                                    }
+                                case 12: {
+                                        message.spokeSummary = $root.google.cloud.networkconnectivity.v1.SpokeSummary.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -1115,7 +1490,11 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 8:
+                                case 9:
                                 case 6:
+                                case 7:
+                                case 10:
                                     break;
                                 }
                             if (message.routingVpcs != null && message.hasOwnProperty("routingVpcs")) {
@@ -1126,6 +1505,18 @@
                                     if (error)
                                         return "routingVpcs." + error;
                                 }
+                            }
+                            if (message.routeTables != null && message.hasOwnProperty("routeTables")) {
+                                if (!Array.isArray(message.routeTables))
+                                    return "routeTables: array expected";
+                                for (var i = 0; i < message.routeTables.length; ++i)
+                                    if (!$util.isString(message.routeTables[i]))
+                                        return "routeTables: string[] expected";
+                            }
+                            if (message.spokeSummary != null && message.hasOwnProperty("spokeSummary")) {
+                                var error = $root.google.cloud.networkconnectivity.v1.SpokeSummary.verify(message.spokeSummary);
+                                if (error)
+                                    return "spokeSummary." + error;
                             }
                             return null;
                         };
@@ -1188,9 +1579,25 @@
                             case 3:
                                 message.state = 3;
                                 break;
+                            case "ACCEPTING":
+                            case 8:
+                                message.state = 8;
+                                break;
+                            case "REJECTING":
+                            case 9:
+                                message.state = 9;
+                                break;
                             case "UPDATING":
                             case 6:
                                 message.state = 6;
+                                break;
+                            case "INACTIVE":
+                            case 7:
+                                message.state = 7;
+                                break;
+                            case "OBSOLETE":
+                            case 10:
+                                message.state = 10;
                                 break;
                             }
                             if (object.routingVpcs) {
@@ -1202,6 +1609,18 @@
                                         throw TypeError(".google.cloud.networkconnectivity.v1.Hub.routingVpcs: object expected");
                                     message.routingVpcs[i] = $root.google.cloud.networkconnectivity.v1.RoutingVPC.fromObject(object.routingVpcs[i]);
                                 }
+                            }
+                            if (object.routeTables) {
+                                if (!Array.isArray(object.routeTables))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.Hub.routeTables: array expected");
+                                message.routeTables = [];
+                                for (var i = 0; i < object.routeTables.length; ++i)
+                                    message.routeTables[i] = String(object.routeTables[i]);
+                            }
+                            if (object.spokeSummary != null) {
+                                if (typeof object.spokeSummary !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.Hub.spokeSummary: object expected");
+                                message.spokeSummary = $root.google.cloud.networkconnectivity.v1.SpokeSummary.fromObject(object.spokeSummary);
                             }
                             return message;
                         };
@@ -1219,8 +1638,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.routingVpcs = [];
+                                object.routeTables = [];
+                            }
                             if (options.objects || options.defaults)
                                 object.labels = {};
                             if (options.defaults) {
@@ -1230,6 +1651,7 @@
                                 object.description = "";
                                 object.uniqueId = "";
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.spokeSummary = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1254,6 +1676,13 @@
                                 for (var j = 0; j < message.routingVpcs.length; ++j)
                                     object.routingVpcs[j] = $root.google.cloud.networkconnectivity.v1.RoutingVPC.toObject(message.routingVpcs[j], options);
                             }
+                            if (message.routeTables && message.routeTables.length) {
+                                object.routeTables = [];
+                                for (var j = 0; j < message.routeTables.length; ++j)
+                                    object.routeTables[j] = message.routeTables[j];
+                            }
+                            if (message.spokeSummary != null && message.hasOwnProperty("spokeSummary"))
+                                object.spokeSummary = $root.google.cloud.networkconnectivity.v1.SpokeSummary.toObject(message.spokeSummary, options);
                             return object;
                         };
     
@@ -1525,11 +1954,15 @@
                          * @property {Object.<string,string>|null} [labels] Spoke labels
                          * @property {string|null} [description] Spoke description
                          * @property {string|null} [hub] Spoke hub
+                         * @property {string|null} [group] Spoke group
                          * @property {google.cloud.networkconnectivity.v1.ILinkedVpnTunnels|null} [linkedVpnTunnels] Spoke linkedVpnTunnels
                          * @property {google.cloud.networkconnectivity.v1.ILinkedInterconnectAttachments|null} [linkedInterconnectAttachments] Spoke linkedInterconnectAttachments
                          * @property {google.cloud.networkconnectivity.v1.ILinkedRouterApplianceInstances|null} [linkedRouterApplianceInstances] Spoke linkedRouterApplianceInstances
+                         * @property {google.cloud.networkconnectivity.v1.ILinkedVpcNetwork|null} [linkedVpcNetwork] Spoke linkedVpcNetwork
                          * @property {string|null} [uniqueId] Spoke uniqueId
                          * @property {google.cloud.networkconnectivity.v1.State|null} [state] Spoke state
+                         * @property {Array.<google.cloud.networkconnectivity.v1.Spoke.IStateReason>|null} [reasons] Spoke reasons
+                         * @property {google.cloud.networkconnectivity.v1.SpokeType|null} [spokeType] Spoke spokeType
                          */
     
                         /**
@@ -1542,6 +1975,7 @@
                          */
                         function Spoke(properties) {
                             this.labels = {};
+                            this.reasons = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -1597,6 +2031,14 @@
                         Spoke.prototype.hub = "";
     
                         /**
+                         * Spoke group.
+                         * @member {string} group
+                         * @memberof google.cloud.networkconnectivity.v1.Spoke
+                         * @instance
+                         */
+                        Spoke.prototype.group = "";
+    
+                        /**
                          * Spoke linkedVpnTunnels.
                          * @member {google.cloud.networkconnectivity.v1.ILinkedVpnTunnels|null|undefined} linkedVpnTunnels
                          * @memberof google.cloud.networkconnectivity.v1.Spoke
@@ -1621,6 +2063,14 @@
                         Spoke.prototype.linkedRouterApplianceInstances = null;
     
                         /**
+                         * Spoke linkedVpcNetwork.
+                         * @member {google.cloud.networkconnectivity.v1.ILinkedVpcNetwork|null|undefined} linkedVpcNetwork
+                         * @memberof google.cloud.networkconnectivity.v1.Spoke
+                         * @instance
+                         */
+                        Spoke.prototype.linkedVpcNetwork = null;
+    
+                        /**
                          * Spoke uniqueId.
                          * @member {string} uniqueId
                          * @memberof google.cloud.networkconnectivity.v1.Spoke
@@ -1635,6 +2085,22 @@
                          * @instance
                          */
                         Spoke.prototype.state = 0;
+    
+                        /**
+                         * Spoke reasons.
+                         * @member {Array.<google.cloud.networkconnectivity.v1.Spoke.IStateReason>} reasons
+                         * @memberof google.cloud.networkconnectivity.v1.Spoke
+                         * @instance
+                         */
+                        Spoke.prototype.reasons = $util.emptyArray;
+    
+                        /**
+                         * Spoke spokeType.
+                         * @member {google.cloud.networkconnectivity.v1.SpokeType} spokeType
+                         * @memberof google.cloud.networkconnectivity.v1.Spoke
+                         * @instance
+                         */
+                        Spoke.prototype.spokeType = 0;
     
                         /**
                          * Creates a new Spoke instance using the specified properties.
@@ -1683,6 +2149,15 @@
                                 $root.google.cloud.networkconnectivity.v1.LinkedInterconnectAttachments.encode(message.linkedInterconnectAttachments, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
                             if (message.linkedRouterApplianceInstances != null && Object.hasOwnProperty.call(message, "linkedRouterApplianceInstances"))
                                 $root.google.cloud.networkconnectivity.v1.LinkedRouterApplianceInstances.encode(message.linkedRouterApplianceInstances, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
+                            if (message.linkedVpcNetwork != null && Object.hasOwnProperty.call(message, "linkedVpcNetwork"))
+                                $root.google.cloud.networkconnectivity.v1.LinkedVpcNetwork.encode(message.linkedVpcNetwork, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                            if (message.reasons != null && message.reasons.length)
+                                for (var i = 0; i < message.reasons.length; ++i)
+                                    $root.google.cloud.networkconnectivity.v1.Spoke.StateReason.encode(message.reasons[i], writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                            if (message.spokeType != null && Object.hasOwnProperty.call(message, "spokeType"))
+                                writer.uint32(/* id 22, wireType 0 =*/176).int32(message.spokeType);
+                            if (message.group != null && Object.hasOwnProperty.call(message, "group"))
+                                writer.uint32(/* id 23, wireType 2 =*/186).string(message.group);
                             return writer;
                         };
     
@@ -1760,6 +2235,10 @@
                                         message.hub = reader.string();
                                         break;
                                     }
+                                case 23: {
+                                        message.group = reader.string();
+                                        break;
+                                    }
                                 case 17: {
                                         message.linkedVpnTunnels = $root.google.cloud.networkconnectivity.v1.LinkedVpnTunnels.decode(reader, reader.uint32());
                                         break;
@@ -1772,12 +2251,26 @@
                                         message.linkedRouterApplianceInstances = $root.google.cloud.networkconnectivity.v1.LinkedRouterApplianceInstances.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 20: {
+                                        message.linkedVpcNetwork = $root.google.cloud.networkconnectivity.v1.LinkedVpcNetwork.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 11: {
                                         message.uniqueId = reader.string();
                                         break;
                                     }
                                 case 15: {
                                         message.state = reader.int32();
+                                        break;
+                                    }
+                                case 21: {
+                                        if (!(message.reasons && message.reasons.length))
+                                            message.reasons = [];
+                                        message.reasons.push($root.google.cloud.networkconnectivity.v1.Spoke.StateReason.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 22: {
+                                        message.spokeType = reader.int32();
                                         break;
                                     }
                                 default:
@@ -1842,6 +2335,9 @@
                             if (message.hub != null && message.hasOwnProperty("hub"))
                                 if (!$util.isString(message.hub))
                                     return "hub: string expected";
+                            if (message.group != null && message.hasOwnProperty("group"))
+                                if (!$util.isString(message.group))
+                                    return "group: string expected";
                             if (message.linkedVpnTunnels != null && message.hasOwnProperty("linkedVpnTunnels")) {
                                 var error = $root.google.cloud.networkconnectivity.v1.LinkedVpnTunnels.verify(message.linkedVpnTunnels);
                                 if (error)
@@ -1857,6 +2353,11 @@
                                 if (error)
                                     return "linkedRouterApplianceInstances." + error;
                             }
+                            if (message.linkedVpcNetwork != null && message.hasOwnProperty("linkedVpcNetwork")) {
+                                var error = $root.google.cloud.networkconnectivity.v1.LinkedVpcNetwork.verify(message.linkedVpcNetwork);
+                                if (error)
+                                    return "linkedVpcNetwork." + error;
+                            }
                             if (message.uniqueId != null && message.hasOwnProperty("uniqueId"))
                                 if (!$util.isString(message.uniqueId))
                                     return "uniqueId: string expected";
@@ -1868,7 +2369,31 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 8:
+                                case 9:
                                 case 6:
+                                case 7:
+                                case 10:
+                                    break;
+                                }
+                            if (message.reasons != null && message.hasOwnProperty("reasons")) {
+                                if (!Array.isArray(message.reasons))
+                                    return "reasons: array expected";
+                                for (var i = 0; i < message.reasons.length; ++i) {
+                                    var error = $root.google.cloud.networkconnectivity.v1.Spoke.StateReason.verify(message.reasons[i]);
+                                    if (error)
+                                        return "reasons." + error;
+                                }
+                            }
+                            if (message.spokeType != null && message.hasOwnProperty("spokeType"))
+                                switch (message.spokeType) {
+                                default:
+                                    return "spokeType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
                                     break;
                                 }
                             return null;
@@ -1909,6 +2434,8 @@
                                 message.description = String(object.description);
                             if (object.hub != null)
                                 message.hub = String(object.hub);
+                            if (object.group != null)
+                                message.group = String(object.group);
                             if (object.linkedVpnTunnels != null) {
                                 if (typeof object.linkedVpnTunnels !== "object")
                                     throw TypeError(".google.cloud.networkconnectivity.v1.Spoke.linkedVpnTunnels: object expected");
@@ -1923,6 +2450,11 @@
                                 if (typeof object.linkedRouterApplianceInstances !== "object")
                                     throw TypeError(".google.cloud.networkconnectivity.v1.Spoke.linkedRouterApplianceInstances: object expected");
                                 message.linkedRouterApplianceInstances = $root.google.cloud.networkconnectivity.v1.LinkedRouterApplianceInstances.fromObject(object.linkedRouterApplianceInstances);
+                            }
+                            if (object.linkedVpcNetwork != null) {
+                                if (typeof object.linkedVpcNetwork !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.Spoke.linkedVpcNetwork: object expected");
+                                message.linkedVpcNetwork = $root.google.cloud.networkconnectivity.v1.LinkedVpcNetwork.fromObject(object.linkedVpcNetwork);
                             }
                             if (object.uniqueId != null)
                                 message.uniqueId = String(object.uniqueId);
@@ -1949,9 +2481,63 @@
                             case 3:
                                 message.state = 3;
                                 break;
+                            case "ACCEPTING":
+                            case 8:
+                                message.state = 8;
+                                break;
+                            case "REJECTING":
+                            case 9:
+                                message.state = 9;
+                                break;
                             case "UPDATING":
                             case 6:
                                 message.state = 6;
+                                break;
+                            case "INACTIVE":
+                            case 7:
+                                message.state = 7;
+                                break;
+                            case "OBSOLETE":
+                            case 10:
+                                message.state = 10;
+                                break;
+                            }
+                            if (object.reasons) {
+                                if (!Array.isArray(object.reasons))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.Spoke.reasons: array expected");
+                                message.reasons = [];
+                                for (var i = 0; i < object.reasons.length; ++i) {
+                                    if (typeof object.reasons[i] !== "object")
+                                        throw TypeError(".google.cloud.networkconnectivity.v1.Spoke.reasons: object expected");
+                                    message.reasons[i] = $root.google.cloud.networkconnectivity.v1.Spoke.StateReason.fromObject(object.reasons[i]);
+                                }
+                            }
+                            switch (object.spokeType) {
+                            default:
+                                if (typeof object.spokeType === "number") {
+                                    message.spokeType = object.spokeType;
+                                    break;
+                                }
+                                break;
+                            case "SPOKE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.spokeType = 0;
+                                break;
+                            case "VPN_TUNNEL":
+                            case 1:
+                                message.spokeType = 1;
+                                break;
+                            case "INTERCONNECT_ATTACHMENT":
+                            case 2:
+                                message.spokeType = 2;
+                                break;
+                            case "ROUTER_APPLIANCE":
+                            case 3:
+                                message.spokeType = 3;
+                                break;
+                            case "VPC_NETWORK":
+                            case 4:
+                                message.spokeType = 4;
                                 break;
                             }
                             return message;
@@ -1970,6 +2556,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.reasons = [];
                             if (options.objects || options.defaults)
                                 object.labels = {};
                             if (options.defaults) {
@@ -1983,6 +2571,9 @@
                                 object.linkedVpnTunnels = null;
                                 object.linkedInterconnectAttachments = null;
                                 object.linkedRouterApplianceInstances = null;
+                                object.linkedVpcNetwork = null;
+                                object.spokeType = options.enums === String ? "SPOKE_TYPE_UNSPECIFIED" : 0;
+                                object.group = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -2010,6 +2601,17 @@
                                 object.linkedInterconnectAttachments = $root.google.cloud.networkconnectivity.v1.LinkedInterconnectAttachments.toObject(message.linkedInterconnectAttachments, options);
                             if (message.linkedRouterApplianceInstances != null && message.hasOwnProperty("linkedRouterApplianceInstances"))
                                 object.linkedRouterApplianceInstances = $root.google.cloud.networkconnectivity.v1.LinkedRouterApplianceInstances.toObject(message.linkedRouterApplianceInstances, options);
+                            if (message.linkedVpcNetwork != null && message.hasOwnProperty("linkedVpcNetwork"))
+                                object.linkedVpcNetwork = $root.google.cloud.networkconnectivity.v1.LinkedVpcNetwork.toObject(message.linkedVpcNetwork, options);
+                            if (message.reasons && message.reasons.length) {
+                                object.reasons = [];
+                                for (var j = 0; j < message.reasons.length; ++j)
+                                    object.reasons[j] = $root.google.cloud.networkconnectivity.v1.Spoke.StateReason.toObject(message.reasons[j], options);
+                            }
+                            if (message.spokeType != null && message.hasOwnProperty("spokeType"))
+                                object.spokeType = options.enums === String ? $root.google.cloud.networkconnectivity.v1.SpokeType[message.spokeType] === undefined ? message.spokeType : $root.google.cloud.networkconnectivity.v1.SpokeType[message.spokeType] : message.spokeType;
+                            if (message.group != null && message.hasOwnProperty("group"))
+                                object.group = message.group;
                             return object;
                         };
     
@@ -2039,7 +2641,1781 @@
                             return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.Spoke";
                         };
     
+                        Spoke.StateReason = (function() {
+    
+                            /**
+                             * Properties of a StateReason.
+                             * @memberof google.cloud.networkconnectivity.v1.Spoke
+                             * @interface IStateReason
+                             * @property {google.cloud.networkconnectivity.v1.Spoke.StateReason.Code|null} [code] StateReason code
+                             * @property {string|null} [message] StateReason message
+                             * @property {string|null} [userDetails] StateReason userDetails
+                             */
+    
+                            /**
+                             * Constructs a new StateReason.
+                             * @memberof google.cloud.networkconnectivity.v1.Spoke
+                             * @classdesc Represents a StateReason.
+                             * @implements IStateReason
+                             * @constructor
+                             * @param {google.cloud.networkconnectivity.v1.Spoke.IStateReason=} [properties] Properties to set
+                             */
+                            function StateReason(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * StateReason code.
+                             * @member {google.cloud.networkconnectivity.v1.Spoke.StateReason.Code} code
+                             * @memberof google.cloud.networkconnectivity.v1.Spoke.StateReason
+                             * @instance
+                             */
+                            StateReason.prototype.code = 0;
+    
+                            /**
+                             * StateReason message.
+                             * @member {string} message
+                             * @memberof google.cloud.networkconnectivity.v1.Spoke.StateReason
+                             * @instance
+                             */
+                            StateReason.prototype.message = "";
+    
+                            /**
+                             * StateReason userDetails.
+                             * @member {string} userDetails
+                             * @memberof google.cloud.networkconnectivity.v1.Spoke.StateReason
+                             * @instance
+                             */
+                            StateReason.prototype.userDetails = "";
+    
+                            /**
+                             * Creates a new StateReason instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkconnectivity.v1.Spoke.StateReason
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.Spoke.IStateReason=} [properties] Properties to set
+                             * @returns {google.cloud.networkconnectivity.v1.Spoke.StateReason} StateReason instance
+                             */
+                            StateReason.create = function create(properties) {
+                                return new StateReason(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified StateReason message. Does not implicitly {@link google.cloud.networkconnectivity.v1.Spoke.StateReason.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkconnectivity.v1.Spoke.StateReason
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.Spoke.IStateReason} message StateReason message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            StateReason.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
+                                if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
+                                if (message.userDetails != null && Object.hasOwnProperty.call(message, "userDetails"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.userDetails);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified StateReason message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.Spoke.StateReason.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkconnectivity.v1.Spoke.StateReason
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.Spoke.IStateReason} message StateReason message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            StateReason.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a StateReason message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkconnectivity.v1.Spoke.StateReason
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkconnectivity.v1.Spoke.StateReason} StateReason
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            StateReason.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.Spoke.StateReason();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.code = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.message = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.userDetails = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a StateReason message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkconnectivity.v1.Spoke.StateReason
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkconnectivity.v1.Spoke.StateReason} StateReason
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            StateReason.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a StateReason message.
+                             * @function verify
+                             * @memberof google.cloud.networkconnectivity.v1.Spoke.StateReason
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            StateReason.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.code != null && message.hasOwnProperty("code"))
+                                    switch (message.code) {
+                                    default:
+                                        return "code: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                if (message.message != null && message.hasOwnProperty("message"))
+                                    if (!$util.isString(message.message))
+                                        return "message: string expected";
+                                if (message.userDetails != null && message.hasOwnProperty("userDetails"))
+                                    if (!$util.isString(message.userDetails))
+                                        return "userDetails: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a StateReason message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkconnectivity.v1.Spoke.StateReason
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkconnectivity.v1.Spoke.StateReason} StateReason
+                             */
+                            StateReason.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networkconnectivity.v1.Spoke.StateReason)
+                                    return object;
+                                var message = new $root.google.cloud.networkconnectivity.v1.Spoke.StateReason();
+                                switch (object.code) {
+                                default:
+                                    if (typeof object.code === "number") {
+                                        message.code = object.code;
+                                        break;
+                                    }
+                                    break;
+                                case "CODE_UNSPECIFIED":
+                                case 0:
+                                    message.code = 0;
+                                    break;
+                                case "PENDING_REVIEW":
+                                case 1:
+                                    message.code = 1;
+                                    break;
+                                case "REJECTED":
+                                case 2:
+                                    message.code = 2;
+                                    break;
+                                case "PAUSED":
+                                case 3:
+                                    message.code = 3;
+                                    break;
+                                case "FAILED":
+                                case 4:
+                                    message.code = 4;
+                                    break;
+                                }
+                                if (object.message != null)
+                                    message.message = String(object.message);
+                                if (object.userDetails != null)
+                                    message.userDetails = String(object.userDetails);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a StateReason message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkconnectivity.v1.Spoke.StateReason
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.Spoke.StateReason} message StateReason
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            StateReason.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.code = options.enums === String ? "CODE_UNSPECIFIED" : 0;
+                                    object.message = "";
+                                    object.userDetails = "";
+                                }
+                                if (message.code != null && message.hasOwnProperty("code"))
+                                    object.code = options.enums === String ? $root.google.cloud.networkconnectivity.v1.Spoke.StateReason.Code[message.code] === undefined ? message.code : $root.google.cloud.networkconnectivity.v1.Spoke.StateReason.Code[message.code] : message.code;
+                                if (message.message != null && message.hasOwnProperty("message"))
+                                    object.message = message.message;
+                                if (message.userDetails != null && message.hasOwnProperty("userDetails"))
+                                    object.userDetails = message.userDetails;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this StateReason to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkconnectivity.v1.Spoke.StateReason
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            StateReason.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for StateReason
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkconnectivity.v1.Spoke.StateReason
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            StateReason.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.Spoke.StateReason";
+                            };
+    
+                            /**
+                             * Code enum.
+                             * @name google.cloud.networkconnectivity.v1.Spoke.StateReason.Code
+                             * @enum {number}
+                             * @property {number} CODE_UNSPECIFIED=0 CODE_UNSPECIFIED value
+                             * @property {number} PENDING_REVIEW=1 PENDING_REVIEW value
+                             * @property {number} REJECTED=2 REJECTED value
+                             * @property {number} PAUSED=3 PAUSED value
+                             * @property {number} FAILED=4 FAILED value
+                             */
+                            StateReason.Code = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "CODE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "PENDING_REVIEW"] = 1;
+                                values[valuesById[2] = "REJECTED"] = 2;
+                                values[valuesById[3] = "PAUSED"] = 3;
+                                values[valuesById[4] = "FAILED"] = 4;
+                                return values;
+                            })();
+    
+                            return StateReason;
+                        })();
+    
                         return Spoke;
+                    })();
+    
+                    v1.RouteTable = (function() {
+    
+                        /**
+                         * Properties of a RouteTable.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IRouteTable
+                         * @property {string|null} [name] RouteTable name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] RouteTable createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] RouteTable updateTime
+                         * @property {Object.<string,string>|null} [labels] RouteTable labels
+                         * @property {string|null} [description] RouteTable description
+                         * @property {string|null} [uid] RouteTable uid
+                         * @property {google.cloud.networkconnectivity.v1.State|null} [state] RouteTable state
+                         */
+    
+                        /**
+                         * Constructs a new RouteTable.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a RouteTable.
+                         * @implements IRouteTable
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IRouteTable=} [properties] Properties to set
+                         */
+                        function RouteTable(properties) {
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RouteTable name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkconnectivity.v1.RouteTable
+                         * @instance
+                         */
+                        RouteTable.prototype.name = "";
+    
+                        /**
+                         * RouteTable createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.networkconnectivity.v1.RouteTable
+                         * @instance
+                         */
+                        RouteTable.prototype.createTime = null;
+    
+                        /**
+                         * RouteTable updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.networkconnectivity.v1.RouteTable
+                         * @instance
+                         */
+                        RouteTable.prototype.updateTime = null;
+    
+                        /**
+                         * RouteTable labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.networkconnectivity.v1.RouteTable
+                         * @instance
+                         */
+                        RouteTable.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * RouteTable description.
+                         * @member {string} description
+                         * @memberof google.cloud.networkconnectivity.v1.RouteTable
+                         * @instance
+                         */
+                        RouteTable.prototype.description = "";
+    
+                        /**
+                         * RouteTable uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.networkconnectivity.v1.RouteTable
+                         * @instance
+                         */
+                        RouteTable.prototype.uid = "";
+    
+                        /**
+                         * RouteTable state.
+                         * @member {google.cloud.networkconnectivity.v1.State} state
+                         * @memberof google.cloud.networkconnectivity.v1.RouteTable
+                         * @instance
+                         */
+                        RouteTable.prototype.state = 0;
+    
+                        /**
+                         * Creates a new RouteTable instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.RouteTable
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IRouteTable=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.RouteTable} RouteTable instance
+                         */
+                        RouteTable.create = function create(properties) {
+                            return new RouteTable(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RouteTable message. Does not implicitly {@link google.cloud.networkconnectivity.v1.RouteTable.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.RouteTable
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IRouteTable} message RouteTable message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RouteTable.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.description);
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.uid);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.state);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RouteTable message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.RouteTable.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.RouteTable
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IRouteTable} message RouteTable message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RouteTable.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RouteTable message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.RouteTable
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.RouteTable} RouteTable
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RouteTable.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.RouteTable(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 5: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RouteTable message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.RouteTable
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.RouteTable} RouteTable
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RouteTable.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RouteTable message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.RouteTable
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RouteTable.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 8:
+                                case 9:
+                                case 6:
+                                case 7:
+                                case 10:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RouteTable message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.RouteTable
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.RouteTable} RouteTable
+                         */
+                        RouteTable.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.RouteTable)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.RouteTable();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.RouteTable.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.RouteTable.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.RouteTable.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "CREATING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "ACTIVE":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "DELETING":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "ACCEPTING":
+                            case 8:
+                                message.state = 8;
+                                break;
+                            case "REJECTING":
+                            case 9:
+                                message.state = 9;
+                                break;
+                            case "UPDATING":
+                            case 6:
+                                message.state = 6;
+                                break;
+                            case "INACTIVE":
+                            case 7:
+                                message.state = 7;
+                                break;
+                            case "OBSOLETE":
+                            case 10:
+                                message.state = 10;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RouteTable message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.RouteTable
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.RouteTable} message RouteTable
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RouteTable.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.description = "";
+                                object.uid = "";
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.networkconnectivity.v1.State[message.state] === undefined ? message.state : $root.google.cloud.networkconnectivity.v1.State[message.state] : message.state;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RouteTable to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.RouteTable
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RouteTable.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RouteTable
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.RouteTable
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RouteTable.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.RouteTable";
+                        };
+    
+                        return RouteTable;
+                    })();
+    
+                    v1.Route = (function() {
+    
+                        /**
+                         * Properties of a Route.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IRoute
+                         * @property {string|null} [name] Route name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Route createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] Route updateTime
+                         * @property {string|null} [ipCidrRange] Route ipCidrRange
+                         * @property {google.cloud.networkconnectivity.v1.RouteType|null} [type] Route type
+                         * @property {google.cloud.networkconnectivity.v1.INextHopVpcNetwork|null} [nextHopVpcNetwork] Route nextHopVpcNetwork
+                         * @property {Object.<string,string>|null} [labels] Route labels
+                         * @property {string|null} [description] Route description
+                         * @property {string|null} [uid] Route uid
+                         * @property {google.cloud.networkconnectivity.v1.State|null} [state] Route state
+                         * @property {string|null} [spoke] Route spoke
+                         * @property {string|null} [location] Route location
+                         */
+    
+                        /**
+                         * Constructs a new Route.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a Route.
+                         * @implements IRoute
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IRoute=} [properties] Properties to set
+                         */
+                        function Route(properties) {
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Route name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkconnectivity.v1.Route
+                         * @instance
+                         */
+                        Route.prototype.name = "";
+    
+                        /**
+                         * Route createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.networkconnectivity.v1.Route
+                         * @instance
+                         */
+                        Route.prototype.createTime = null;
+    
+                        /**
+                         * Route updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.networkconnectivity.v1.Route
+                         * @instance
+                         */
+                        Route.prototype.updateTime = null;
+    
+                        /**
+                         * Route ipCidrRange.
+                         * @member {string} ipCidrRange
+                         * @memberof google.cloud.networkconnectivity.v1.Route
+                         * @instance
+                         */
+                        Route.prototype.ipCidrRange = "";
+    
+                        /**
+                         * Route type.
+                         * @member {google.cloud.networkconnectivity.v1.RouteType} type
+                         * @memberof google.cloud.networkconnectivity.v1.Route
+                         * @instance
+                         */
+                        Route.prototype.type = 0;
+    
+                        /**
+                         * Route nextHopVpcNetwork.
+                         * @member {google.cloud.networkconnectivity.v1.INextHopVpcNetwork|null|undefined} nextHopVpcNetwork
+                         * @memberof google.cloud.networkconnectivity.v1.Route
+                         * @instance
+                         */
+                        Route.prototype.nextHopVpcNetwork = null;
+    
+                        /**
+                         * Route labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.networkconnectivity.v1.Route
+                         * @instance
+                         */
+                        Route.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * Route description.
+                         * @member {string} description
+                         * @memberof google.cloud.networkconnectivity.v1.Route
+                         * @instance
+                         */
+                        Route.prototype.description = "";
+    
+                        /**
+                         * Route uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.networkconnectivity.v1.Route
+                         * @instance
+                         */
+                        Route.prototype.uid = "";
+    
+                        /**
+                         * Route state.
+                         * @member {google.cloud.networkconnectivity.v1.State} state
+                         * @memberof google.cloud.networkconnectivity.v1.Route
+                         * @instance
+                         */
+                        Route.prototype.state = 0;
+    
+                        /**
+                         * Route spoke.
+                         * @member {string} spoke
+                         * @memberof google.cloud.networkconnectivity.v1.Route
+                         * @instance
+                         */
+                        Route.prototype.spoke = "";
+    
+                        /**
+                         * Route location.
+                         * @member {string} location
+                         * @memberof google.cloud.networkconnectivity.v1.Route
+                         * @instance
+                         */
+                        Route.prototype.location = "";
+    
+                        /**
+                         * Creates a new Route instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.Route
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IRoute=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.Route} Route instance
+                         */
+                        Route.create = function create(properties) {
+                            return new Route(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Route message. Does not implicitly {@link google.cloud.networkconnectivity.v1.Route.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.Route
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IRoute} message Route message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Route.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.ipCidrRange != null && Object.hasOwnProperty.call(message, "ipCidrRange"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.ipCidrRange);
+                            if (message.nextHopVpcNetwork != null && Object.hasOwnProperty.call(message, "nextHopVpcNetwork"))
+                                $root.google.cloud.networkconnectivity.v1.NextHopVpcNetwork.encode(message.nextHopVpcNetwork, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.description);
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.uid);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.state);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.type);
+                            if (message.spoke != null && Object.hasOwnProperty.call(message, "spoke"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.spoke);
+                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                writer.uint32(/* id 12, wireType 2 =*/98).string(message.location);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Route message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.Route.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.Route
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IRoute} message Route message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Route.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Route message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.Route
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.Route} Route
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Route.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.Route(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 3: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 1: {
+                                        message.ipCidrRange = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.type = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextHopVpcNetwork = $root.google.cloud.networkconnectivity.v1.NextHopVpcNetwork.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 7: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.spoke = reader.string();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.location = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Route message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.Route
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.Route} Route
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Route.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Route message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.Route
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Route.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.ipCidrRange != null && message.hasOwnProperty("ipCidrRange"))
+                                if (!$util.isString(message.ipCidrRange))
+                                    return "ipCidrRange: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.nextHopVpcNetwork != null && message.hasOwnProperty("nextHopVpcNetwork")) {
+                                var error = $root.google.cloud.networkconnectivity.v1.NextHopVpcNetwork.verify(message.nextHopVpcNetwork);
+                                if (error)
+                                    return "nextHopVpcNetwork." + error;
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 8:
+                                case 9:
+                                case 6:
+                                case 7:
+                                case 10:
+                                    break;
+                                }
+                            if (message.spoke != null && message.hasOwnProperty("spoke"))
+                                if (!$util.isString(message.spoke))
+                                    return "spoke: string expected";
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                if (!$util.isString(message.location))
+                                    return "location: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Route message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.Route
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.Route} Route
+                         */
+                        Route.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.Route)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.Route();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.Route.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.Route.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.ipCidrRange != null)
+                                message.ipCidrRange = String(object.ipCidrRange);
+                            switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
+                            case "ROUTE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "VPC_PRIMARY_SUBNET":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "VPC_SECONDARY_SUBNET":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            }
+                            if (object.nextHopVpcNetwork != null) {
+                                if (typeof object.nextHopVpcNetwork !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.Route.nextHopVpcNetwork: object expected");
+                                message.nextHopVpcNetwork = $root.google.cloud.networkconnectivity.v1.NextHopVpcNetwork.fromObject(object.nextHopVpcNetwork);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.Route.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "CREATING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "ACTIVE":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "DELETING":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "ACCEPTING":
+                            case 8:
+                                message.state = 8;
+                                break;
+                            case "REJECTING":
+                            case 9:
+                                message.state = 9;
+                                break;
+                            case "UPDATING":
+                            case 6:
+                                message.state = 6;
+                                break;
+                            case "INACTIVE":
+                            case 7:
+                                message.state = 7;
+                                break;
+                            case "OBSOLETE":
+                            case 10:
+                                message.state = 10;
+                                break;
+                            }
+                            if (object.spoke != null)
+                                message.spoke = String(object.spoke);
+                            if (object.location != null)
+                                message.location = String(object.location);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Route message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.Route
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.Route} message Route
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Route.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.ipCidrRange = "";
+                                object.nextHopVpcNetwork = null;
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.description = "";
+                                object.uid = "";
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.type = options.enums === String ? "ROUTE_TYPE_UNSPECIFIED" : 0;
+                                object.spoke = "";
+                                object.location = "";
+                            }
+                            if (message.ipCidrRange != null && message.hasOwnProperty("ipCidrRange"))
+                                object.ipCidrRange = message.ipCidrRange;
+                            if (message.nextHopVpcNetwork != null && message.hasOwnProperty("nextHopVpcNetwork"))
+                                object.nextHopVpcNetwork = $root.google.cloud.networkconnectivity.v1.NextHopVpcNetwork.toObject(message.nextHopVpcNetwork, options);
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.networkconnectivity.v1.State[message.state] === undefined ? message.state : $root.google.cloud.networkconnectivity.v1.State[message.state] : message.state;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.networkconnectivity.v1.RouteType[message.type] === undefined ? message.type : $root.google.cloud.networkconnectivity.v1.RouteType[message.type] : message.type;
+                            if (message.spoke != null && message.hasOwnProperty("spoke"))
+                                object.spoke = message.spoke;
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                object.location = message.location;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Route to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.Route
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Route.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Route
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.Route
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Route.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.Route";
+                        };
+    
+                        return Route;
+                    })();
+    
+                    v1.Group = (function() {
+    
+                        /**
+                         * Properties of a Group.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IGroup
+                         * @property {string|null} [name] Group name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Group createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] Group updateTime
+                         * @property {Object.<string,string>|null} [labels] Group labels
+                         * @property {string|null} [description] Group description
+                         * @property {string|null} [uid] Group uid
+                         * @property {google.cloud.networkconnectivity.v1.State|null} [state] Group state
+                         */
+    
+                        /**
+                         * Constructs a new Group.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a Group.
+                         * @implements IGroup
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IGroup=} [properties] Properties to set
+                         */
+                        function Group(properties) {
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Group name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkconnectivity.v1.Group
+                         * @instance
+                         */
+                        Group.prototype.name = "";
+    
+                        /**
+                         * Group createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.networkconnectivity.v1.Group
+                         * @instance
+                         */
+                        Group.prototype.createTime = null;
+    
+                        /**
+                         * Group updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.networkconnectivity.v1.Group
+                         * @instance
+                         */
+                        Group.prototype.updateTime = null;
+    
+                        /**
+                         * Group labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.networkconnectivity.v1.Group
+                         * @instance
+                         */
+                        Group.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * Group description.
+                         * @member {string} description
+                         * @memberof google.cloud.networkconnectivity.v1.Group
+                         * @instance
+                         */
+                        Group.prototype.description = "";
+    
+                        /**
+                         * Group uid.
+                         * @member {string} uid
+                         * @memberof google.cloud.networkconnectivity.v1.Group
+                         * @instance
+                         */
+                        Group.prototype.uid = "";
+    
+                        /**
+                         * Group state.
+                         * @member {google.cloud.networkconnectivity.v1.State} state
+                         * @memberof google.cloud.networkconnectivity.v1.Group
+                         * @instance
+                         */
+                        Group.prototype.state = 0;
+    
+                        /**
+                         * Creates a new Group instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.Group
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IGroup=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.Group} Group instance
+                         */
+                        Group.create = function create(properties) {
+                            return new Group(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Group message. Does not implicitly {@link google.cloud.networkconnectivity.v1.Group.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.Group
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IGroup} message Group message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Group.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.description);
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.uid);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.state);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Group message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.Group.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.Group
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IGroup} message Group message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Group.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Group message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.Group
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.Group} Group
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Group.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.Group(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 5: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.uid = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Group message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.Group
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.Group} Group
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Group.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Group message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.Group
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Group.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isString(message.uid))
+                                    return "uid: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 8:
+                                case 9:
+                                case 6:
+                                case 7:
+                                case 10:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Group message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.Group
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.Group} Group
+                         */
+                        Group.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.Group)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.Group();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.Group.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.Group.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.Group.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.uid != null)
+                                message.uid = String(object.uid);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "CREATING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "ACTIVE":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "DELETING":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "ACCEPTING":
+                            case 8:
+                                message.state = 8;
+                                break;
+                            case "REJECTING":
+                            case 9:
+                                message.state = 9;
+                                break;
+                            case "UPDATING":
+                            case 6:
+                                message.state = 6;
+                                break;
+                            case "INACTIVE":
+                            case 7:
+                                message.state = 7;
+                                break;
+                            case "OBSOLETE":
+                            case 10:
+                                message.state = 10;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Group message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.Group
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.Group} message Group
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Group.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.description = "";
+                                object.uid = "";
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                object.uid = message.uid;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.networkconnectivity.v1.State[message.state] === undefined ? message.state : $root.google.cloud.networkconnectivity.v1.State[message.state] : message.state;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Group to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.Group
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Group.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Group
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.Group
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Group.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.Group";
+                        };
+    
+                        return Group;
                     })();
     
                     v1.ListHubsRequest = (function() {
@@ -3594,6 +5970,693 @@
                         return DeleteHubRequest;
                     })();
     
+                    v1.ListHubSpokesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListHubSpokesRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IListHubSpokesRequest
+                         * @property {string|null} [name] ListHubSpokesRequest name
+                         * @property {Array.<string>|null} [spokeLocations] ListHubSpokesRequest spokeLocations
+                         * @property {number|null} [pageSize] ListHubSpokesRequest pageSize
+                         * @property {string|null} [pageToken] ListHubSpokesRequest pageToken
+                         * @property {string|null} [filter] ListHubSpokesRequest filter
+                         * @property {string|null} [orderBy] ListHubSpokesRequest orderBy
+                         * @property {google.cloud.networkconnectivity.v1.ListHubSpokesRequest.SpokeView|null} [view] ListHubSpokesRequest view
+                         */
+    
+                        /**
+                         * Constructs a new ListHubSpokesRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a ListHubSpokesRequest.
+                         * @implements IListHubSpokesRequest
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IListHubSpokesRequest=} [properties] Properties to set
+                         */
+                        function ListHubSpokesRequest(properties) {
+                            this.spokeLocations = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListHubSpokesRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkconnectivity.v1.ListHubSpokesRequest
+                         * @instance
+                         */
+                        ListHubSpokesRequest.prototype.name = "";
+    
+                        /**
+                         * ListHubSpokesRequest spokeLocations.
+                         * @member {Array.<string>} spokeLocations
+                         * @memberof google.cloud.networkconnectivity.v1.ListHubSpokesRequest
+                         * @instance
+                         */
+                        ListHubSpokesRequest.prototype.spokeLocations = $util.emptyArray;
+    
+                        /**
+                         * ListHubSpokesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.networkconnectivity.v1.ListHubSpokesRequest
+                         * @instance
+                         */
+                        ListHubSpokesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListHubSpokesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.networkconnectivity.v1.ListHubSpokesRequest
+                         * @instance
+                         */
+                        ListHubSpokesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListHubSpokesRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.networkconnectivity.v1.ListHubSpokesRequest
+                         * @instance
+                         */
+                        ListHubSpokesRequest.prototype.filter = "";
+    
+                        /**
+                         * ListHubSpokesRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.networkconnectivity.v1.ListHubSpokesRequest
+                         * @instance
+                         */
+                        ListHubSpokesRequest.prototype.orderBy = "";
+    
+                        /**
+                         * ListHubSpokesRequest view.
+                         * @member {google.cloud.networkconnectivity.v1.ListHubSpokesRequest.SpokeView} view
+                         * @memberof google.cloud.networkconnectivity.v1.ListHubSpokesRequest
+                         * @instance
+                         */
+                        ListHubSpokesRequest.prototype.view = 0;
+    
+                        /**
+                         * Creates a new ListHubSpokesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.ListHubSpokesRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListHubSpokesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.ListHubSpokesRequest} ListHubSpokesRequest instance
+                         */
+                        ListHubSpokesRequest.create = function create(properties) {
+                            return new ListHubSpokesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListHubSpokesRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListHubSpokesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.ListHubSpokesRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListHubSpokesRequest} message ListHubSpokesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListHubSpokesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.spokeLocations != null && message.spokeLocations.length)
+                                for (var i = 0; i < message.spokeLocations.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.spokeLocations[i]);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.orderBy);
+                            if (message.view != null && Object.hasOwnProperty.call(message, "view"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.view);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListHubSpokesRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListHubSpokesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListHubSpokesRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListHubSpokesRequest} message ListHubSpokesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListHubSpokesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListHubSpokesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.ListHubSpokesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.ListHubSpokesRequest} ListHubSpokesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListHubSpokesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.ListHubSpokesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.spokeLocations && message.spokeLocations.length))
+                                            message.spokeLocations = [];
+                                        message.spokeLocations.push(reader.string());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.view = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListHubSpokesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListHubSpokesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.ListHubSpokesRequest} ListHubSpokesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListHubSpokesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListHubSpokesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.ListHubSpokesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListHubSpokesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.spokeLocations != null && message.hasOwnProperty("spokeLocations")) {
+                                if (!Array.isArray(message.spokeLocations))
+                                    return "spokeLocations: array expected";
+                                for (var i = 0; i < message.spokeLocations.length; ++i)
+                                    if (!$util.isString(message.spokeLocations[i]))
+                                        return "spokeLocations: string[] expected";
+                            }
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            if (message.view != null && message.hasOwnProperty("view"))
+                                switch (message.view) {
+                                default:
+                                    return "view: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListHubSpokesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListHubSpokesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.ListHubSpokesRequest} ListHubSpokesRequest
+                         */
+                        ListHubSpokesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.ListHubSpokesRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.ListHubSpokesRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.spokeLocations) {
+                                if (!Array.isArray(object.spokeLocations))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.ListHubSpokesRequest.spokeLocations: array expected");
+                                message.spokeLocations = [];
+                                for (var i = 0; i < object.spokeLocations.length; ++i)
+                                    message.spokeLocations[i] = String(object.spokeLocations[i]);
+                            }
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            switch (object.view) {
+                            default:
+                                if (typeof object.view === "number") {
+                                    message.view = object.view;
+                                    break;
+                                }
+                                break;
+                            case "SPOKE_VIEW_UNSPECIFIED":
+                            case 0:
+                                message.view = 0;
+                                break;
+                            case "BASIC":
+                            case 1:
+                                message.view = 1;
+                                break;
+                            case "DETAILED":
+                            case 2:
+                                message.view = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListHubSpokesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListHubSpokesRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ListHubSpokesRequest} message ListHubSpokesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListHubSpokesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.spokeLocations = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                                object.view = options.enums === String ? "SPOKE_VIEW_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.spokeLocations && message.spokeLocations.length) {
+                                object.spokeLocations = [];
+                                for (var j = 0; j < message.spokeLocations.length; ++j)
+                                    object.spokeLocations[j] = message.spokeLocations[j];
+                            }
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            if (message.view != null && message.hasOwnProperty("view"))
+                                object.view = options.enums === String ? $root.google.cloud.networkconnectivity.v1.ListHubSpokesRequest.SpokeView[message.view] === undefined ? message.view : $root.google.cloud.networkconnectivity.v1.ListHubSpokesRequest.SpokeView[message.view] : message.view;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListHubSpokesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.ListHubSpokesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListHubSpokesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListHubSpokesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.ListHubSpokesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListHubSpokesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.ListHubSpokesRequest";
+                        };
+    
+                        /**
+                         * SpokeView enum.
+                         * @name google.cloud.networkconnectivity.v1.ListHubSpokesRequest.SpokeView
+                         * @enum {number}
+                         * @property {number} SPOKE_VIEW_UNSPECIFIED=0 SPOKE_VIEW_UNSPECIFIED value
+                         * @property {number} BASIC=1 BASIC value
+                         * @property {number} DETAILED=2 DETAILED value
+                         */
+                        ListHubSpokesRequest.SpokeView = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SPOKE_VIEW_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "BASIC"] = 1;
+                            values[valuesById[2] = "DETAILED"] = 2;
+                            return values;
+                        })();
+    
+                        return ListHubSpokesRequest;
+                    })();
+    
+                    v1.ListHubSpokesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListHubSpokesResponse.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IListHubSpokesResponse
+                         * @property {Array.<google.cloud.networkconnectivity.v1.ISpoke>|null} [spokes] ListHubSpokesResponse spokes
+                         * @property {string|null} [nextPageToken] ListHubSpokesResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListHubSpokesResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListHubSpokesResponse.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a ListHubSpokesResponse.
+                         * @implements IListHubSpokesResponse
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IListHubSpokesResponse=} [properties] Properties to set
+                         */
+                        function ListHubSpokesResponse(properties) {
+                            this.spokes = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListHubSpokesResponse spokes.
+                         * @member {Array.<google.cloud.networkconnectivity.v1.ISpoke>} spokes
+                         * @memberof google.cloud.networkconnectivity.v1.ListHubSpokesResponse
+                         * @instance
+                         */
+                        ListHubSpokesResponse.prototype.spokes = $util.emptyArray;
+    
+                        /**
+                         * ListHubSpokesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.networkconnectivity.v1.ListHubSpokesResponse
+                         * @instance
+                         */
+                        ListHubSpokesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListHubSpokesResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networkconnectivity.v1.ListHubSpokesResponse
+                         * @instance
+                         */
+                        ListHubSpokesResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListHubSpokesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.ListHubSpokesResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListHubSpokesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.ListHubSpokesResponse} ListHubSpokesResponse instance
+                         */
+                        ListHubSpokesResponse.create = function create(properties) {
+                            return new ListHubSpokesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListHubSpokesResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListHubSpokesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.ListHubSpokesResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListHubSpokesResponse} message ListHubSpokesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListHubSpokesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.spokes != null && message.spokes.length)
+                                for (var i = 0; i < message.spokes.length; ++i)
+                                    $root.google.cloud.networkconnectivity.v1.Spoke.encode(message.spokes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListHubSpokesResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListHubSpokesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListHubSpokesResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListHubSpokesResponse} message ListHubSpokesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListHubSpokesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListHubSpokesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.ListHubSpokesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.ListHubSpokesResponse} ListHubSpokesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListHubSpokesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.ListHubSpokesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.spokes && message.spokes.length))
+                                            message.spokes = [];
+                                        message.spokes.push($root.google.cloud.networkconnectivity.v1.Spoke.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListHubSpokesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListHubSpokesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.ListHubSpokesResponse} ListHubSpokesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListHubSpokesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListHubSpokesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.ListHubSpokesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListHubSpokesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.spokes != null && message.hasOwnProperty("spokes")) {
+                                if (!Array.isArray(message.spokes))
+                                    return "spokes: array expected";
+                                for (var i = 0; i < message.spokes.length; ++i) {
+                                    var error = $root.google.cloud.networkconnectivity.v1.Spoke.verify(message.spokes[i]);
+                                    if (error)
+                                        return "spokes." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListHubSpokesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListHubSpokesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.ListHubSpokesResponse} ListHubSpokesResponse
+                         */
+                        ListHubSpokesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.ListHubSpokesResponse)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.ListHubSpokesResponse();
+                            if (object.spokes) {
+                                if (!Array.isArray(object.spokes))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.ListHubSpokesResponse.spokes: array expected");
+                                message.spokes = [];
+                                for (var i = 0; i < object.spokes.length; ++i) {
+                                    if (typeof object.spokes[i] !== "object")
+                                        throw TypeError(".google.cloud.networkconnectivity.v1.ListHubSpokesResponse.spokes: object expected");
+                                    message.spokes[i] = $root.google.cloud.networkconnectivity.v1.Spoke.fromObject(object.spokes[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.ListHubSpokesResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListHubSpokesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListHubSpokesResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ListHubSpokesResponse} message ListHubSpokesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListHubSpokesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.spokes = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.spokes && message.spokes.length) {
+                                object.spokes = [];
+                                for (var j = 0; j < message.spokes.length; ++j)
+                                    object.spokes[j] = $root.google.cloud.networkconnectivity.v1.Spoke.toObject(message.spokes[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListHubSpokesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.ListHubSpokesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListHubSpokesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListHubSpokesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.ListHubSpokesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListHubSpokesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.ListHubSpokesResponse";
+                        };
+    
+                        return ListHubSpokesResponse;
+                    })();
+    
                     v1.ListSpokesRequest = (function() {
     
                         /**
@@ -5146,6 +8209,3103 @@
                         return DeleteSpokeRequest;
                     })();
     
+                    v1.AcceptHubSpokeRequest = (function() {
+    
+                        /**
+                         * Properties of an AcceptHubSpokeRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IAcceptHubSpokeRequest
+                         * @property {string|null} [name] AcceptHubSpokeRequest name
+                         * @property {string|null} [spokeUri] AcceptHubSpokeRequest spokeUri
+                         * @property {string|null} [requestId] AcceptHubSpokeRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new AcceptHubSpokeRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents an AcceptHubSpokeRequest.
+                         * @implements IAcceptHubSpokeRequest
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IAcceptHubSpokeRequest=} [properties] Properties to set
+                         */
+                        function AcceptHubSpokeRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AcceptHubSpokeRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkconnectivity.v1.AcceptHubSpokeRequest
+                         * @instance
+                         */
+                        AcceptHubSpokeRequest.prototype.name = "";
+    
+                        /**
+                         * AcceptHubSpokeRequest spokeUri.
+                         * @member {string} spokeUri
+                         * @memberof google.cloud.networkconnectivity.v1.AcceptHubSpokeRequest
+                         * @instance
+                         */
+                        AcceptHubSpokeRequest.prototype.spokeUri = "";
+    
+                        /**
+                         * AcceptHubSpokeRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networkconnectivity.v1.AcceptHubSpokeRequest
+                         * @instance
+                         */
+                        AcceptHubSpokeRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new AcceptHubSpokeRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.AcceptHubSpokeRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IAcceptHubSpokeRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.AcceptHubSpokeRequest} AcceptHubSpokeRequest instance
+                         */
+                        AcceptHubSpokeRequest.create = function create(properties) {
+                            return new AcceptHubSpokeRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AcceptHubSpokeRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.AcceptHubSpokeRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.AcceptHubSpokeRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IAcceptHubSpokeRequest} message AcceptHubSpokeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AcceptHubSpokeRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.spokeUri != null && Object.hasOwnProperty.call(message, "spokeUri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.spokeUri);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AcceptHubSpokeRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.AcceptHubSpokeRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.AcceptHubSpokeRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IAcceptHubSpokeRequest} message AcceptHubSpokeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AcceptHubSpokeRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AcceptHubSpokeRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.AcceptHubSpokeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.AcceptHubSpokeRequest} AcceptHubSpokeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AcceptHubSpokeRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.AcceptHubSpokeRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.spokeUri = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AcceptHubSpokeRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.AcceptHubSpokeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.AcceptHubSpokeRequest} AcceptHubSpokeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AcceptHubSpokeRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AcceptHubSpokeRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.AcceptHubSpokeRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AcceptHubSpokeRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.spokeUri != null && message.hasOwnProperty("spokeUri"))
+                                if (!$util.isString(message.spokeUri))
+                                    return "spokeUri: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AcceptHubSpokeRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.AcceptHubSpokeRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.AcceptHubSpokeRequest} AcceptHubSpokeRequest
+                         */
+                        AcceptHubSpokeRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.AcceptHubSpokeRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.AcceptHubSpokeRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.spokeUri != null)
+                                message.spokeUri = String(object.spokeUri);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AcceptHubSpokeRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.AcceptHubSpokeRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.AcceptHubSpokeRequest} message AcceptHubSpokeRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AcceptHubSpokeRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.spokeUri = "";
+                                object.requestId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.spokeUri != null && message.hasOwnProperty("spokeUri"))
+                                object.spokeUri = message.spokeUri;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AcceptHubSpokeRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.AcceptHubSpokeRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AcceptHubSpokeRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AcceptHubSpokeRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.AcceptHubSpokeRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AcceptHubSpokeRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.AcceptHubSpokeRequest";
+                        };
+    
+                        return AcceptHubSpokeRequest;
+                    })();
+    
+                    v1.AcceptHubSpokeResponse = (function() {
+    
+                        /**
+                         * Properties of an AcceptHubSpokeResponse.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IAcceptHubSpokeResponse
+                         * @property {google.cloud.networkconnectivity.v1.ISpoke|null} [spoke] AcceptHubSpokeResponse spoke
+                         */
+    
+                        /**
+                         * Constructs a new AcceptHubSpokeResponse.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents an AcceptHubSpokeResponse.
+                         * @implements IAcceptHubSpokeResponse
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IAcceptHubSpokeResponse=} [properties] Properties to set
+                         */
+                        function AcceptHubSpokeResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AcceptHubSpokeResponse spoke.
+                         * @member {google.cloud.networkconnectivity.v1.ISpoke|null|undefined} spoke
+                         * @memberof google.cloud.networkconnectivity.v1.AcceptHubSpokeResponse
+                         * @instance
+                         */
+                        AcceptHubSpokeResponse.prototype.spoke = null;
+    
+                        /**
+                         * Creates a new AcceptHubSpokeResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.AcceptHubSpokeResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IAcceptHubSpokeResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.AcceptHubSpokeResponse} AcceptHubSpokeResponse instance
+                         */
+                        AcceptHubSpokeResponse.create = function create(properties) {
+                            return new AcceptHubSpokeResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AcceptHubSpokeResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1.AcceptHubSpokeResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.AcceptHubSpokeResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IAcceptHubSpokeResponse} message AcceptHubSpokeResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AcceptHubSpokeResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.spoke != null && Object.hasOwnProperty.call(message, "spoke"))
+                                $root.google.cloud.networkconnectivity.v1.Spoke.encode(message.spoke, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AcceptHubSpokeResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.AcceptHubSpokeResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.AcceptHubSpokeResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IAcceptHubSpokeResponse} message AcceptHubSpokeResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AcceptHubSpokeResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AcceptHubSpokeResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.AcceptHubSpokeResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.AcceptHubSpokeResponse} AcceptHubSpokeResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AcceptHubSpokeResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.AcceptHubSpokeResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.spoke = $root.google.cloud.networkconnectivity.v1.Spoke.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AcceptHubSpokeResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.AcceptHubSpokeResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.AcceptHubSpokeResponse} AcceptHubSpokeResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AcceptHubSpokeResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AcceptHubSpokeResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.AcceptHubSpokeResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AcceptHubSpokeResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.spoke != null && message.hasOwnProperty("spoke")) {
+                                var error = $root.google.cloud.networkconnectivity.v1.Spoke.verify(message.spoke);
+                                if (error)
+                                    return "spoke." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AcceptHubSpokeResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.AcceptHubSpokeResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.AcceptHubSpokeResponse} AcceptHubSpokeResponse
+                         */
+                        AcceptHubSpokeResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.AcceptHubSpokeResponse)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.AcceptHubSpokeResponse();
+                            if (object.spoke != null) {
+                                if (typeof object.spoke !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.AcceptHubSpokeResponse.spoke: object expected");
+                                message.spoke = $root.google.cloud.networkconnectivity.v1.Spoke.fromObject(object.spoke);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AcceptHubSpokeResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.AcceptHubSpokeResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.AcceptHubSpokeResponse} message AcceptHubSpokeResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AcceptHubSpokeResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.spoke = null;
+                            if (message.spoke != null && message.hasOwnProperty("spoke"))
+                                object.spoke = $root.google.cloud.networkconnectivity.v1.Spoke.toObject(message.spoke, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AcceptHubSpokeResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.AcceptHubSpokeResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AcceptHubSpokeResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AcceptHubSpokeResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.AcceptHubSpokeResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AcceptHubSpokeResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.AcceptHubSpokeResponse";
+                        };
+    
+                        return AcceptHubSpokeResponse;
+                    })();
+    
+                    v1.RejectHubSpokeRequest = (function() {
+    
+                        /**
+                         * Properties of a RejectHubSpokeRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IRejectHubSpokeRequest
+                         * @property {string|null} [name] RejectHubSpokeRequest name
+                         * @property {string|null} [spokeUri] RejectHubSpokeRequest spokeUri
+                         * @property {string|null} [requestId] RejectHubSpokeRequest requestId
+                         * @property {string|null} [details] RejectHubSpokeRequest details
+                         */
+    
+                        /**
+                         * Constructs a new RejectHubSpokeRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a RejectHubSpokeRequest.
+                         * @implements IRejectHubSpokeRequest
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IRejectHubSpokeRequest=} [properties] Properties to set
+                         */
+                        function RejectHubSpokeRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RejectHubSpokeRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkconnectivity.v1.RejectHubSpokeRequest
+                         * @instance
+                         */
+                        RejectHubSpokeRequest.prototype.name = "";
+    
+                        /**
+                         * RejectHubSpokeRequest spokeUri.
+                         * @member {string} spokeUri
+                         * @memberof google.cloud.networkconnectivity.v1.RejectHubSpokeRequest
+                         * @instance
+                         */
+                        RejectHubSpokeRequest.prototype.spokeUri = "";
+    
+                        /**
+                         * RejectHubSpokeRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.networkconnectivity.v1.RejectHubSpokeRequest
+                         * @instance
+                         */
+                        RejectHubSpokeRequest.prototype.requestId = "";
+    
+                        /**
+                         * RejectHubSpokeRequest details.
+                         * @member {string} details
+                         * @memberof google.cloud.networkconnectivity.v1.RejectHubSpokeRequest
+                         * @instance
+                         */
+                        RejectHubSpokeRequest.prototype.details = "";
+    
+                        /**
+                         * Creates a new RejectHubSpokeRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.RejectHubSpokeRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IRejectHubSpokeRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.RejectHubSpokeRequest} RejectHubSpokeRequest instance
+                         */
+                        RejectHubSpokeRequest.create = function create(properties) {
+                            return new RejectHubSpokeRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RejectHubSpokeRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.RejectHubSpokeRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.RejectHubSpokeRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IRejectHubSpokeRequest} message RejectHubSpokeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RejectHubSpokeRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.spokeUri != null && Object.hasOwnProperty.call(message, "spokeUri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.spokeUri);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            if (message.details != null && Object.hasOwnProperty.call(message, "details"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.details);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RejectHubSpokeRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.RejectHubSpokeRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.RejectHubSpokeRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IRejectHubSpokeRequest} message RejectHubSpokeRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RejectHubSpokeRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RejectHubSpokeRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.RejectHubSpokeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.RejectHubSpokeRequest} RejectHubSpokeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RejectHubSpokeRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.RejectHubSpokeRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.spokeUri = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.details = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RejectHubSpokeRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.RejectHubSpokeRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.RejectHubSpokeRequest} RejectHubSpokeRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RejectHubSpokeRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RejectHubSpokeRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.RejectHubSpokeRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RejectHubSpokeRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.spokeUri != null && message.hasOwnProperty("spokeUri"))
+                                if (!$util.isString(message.spokeUri))
+                                    return "spokeUri: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            if (message.details != null && message.hasOwnProperty("details"))
+                                if (!$util.isString(message.details))
+                                    return "details: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RejectHubSpokeRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.RejectHubSpokeRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.RejectHubSpokeRequest} RejectHubSpokeRequest
+                         */
+                        RejectHubSpokeRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.RejectHubSpokeRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.RejectHubSpokeRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.spokeUri != null)
+                                message.spokeUri = String(object.spokeUri);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            if (object.details != null)
+                                message.details = String(object.details);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RejectHubSpokeRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.RejectHubSpokeRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.RejectHubSpokeRequest} message RejectHubSpokeRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RejectHubSpokeRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.spokeUri = "";
+                                object.requestId = "";
+                                object.details = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.spokeUri != null && message.hasOwnProperty("spokeUri"))
+                                object.spokeUri = message.spokeUri;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            if (message.details != null && message.hasOwnProperty("details"))
+                                object.details = message.details;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RejectHubSpokeRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.RejectHubSpokeRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RejectHubSpokeRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RejectHubSpokeRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.RejectHubSpokeRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RejectHubSpokeRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.RejectHubSpokeRequest";
+                        };
+    
+                        return RejectHubSpokeRequest;
+                    })();
+    
+                    v1.RejectHubSpokeResponse = (function() {
+    
+                        /**
+                         * Properties of a RejectHubSpokeResponse.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IRejectHubSpokeResponse
+                         * @property {google.cloud.networkconnectivity.v1.ISpoke|null} [spoke] RejectHubSpokeResponse spoke
+                         */
+    
+                        /**
+                         * Constructs a new RejectHubSpokeResponse.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a RejectHubSpokeResponse.
+                         * @implements IRejectHubSpokeResponse
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IRejectHubSpokeResponse=} [properties] Properties to set
+                         */
+                        function RejectHubSpokeResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RejectHubSpokeResponse spoke.
+                         * @member {google.cloud.networkconnectivity.v1.ISpoke|null|undefined} spoke
+                         * @memberof google.cloud.networkconnectivity.v1.RejectHubSpokeResponse
+                         * @instance
+                         */
+                        RejectHubSpokeResponse.prototype.spoke = null;
+    
+                        /**
+                         * Creates a new RejectHubSpokeResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.RejectHubSpokeResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IRejectHubSpokeResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.RejectHubSpokeResponse} RejectHubSpokeResponse instance
+                         */
+                        RejectHubSpokeResponse.create = function create(properties) {
+                            return new RejectHubSpokeResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RejectHubSpokeResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1.RejectHubSpokeResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.RejectHubSpokeResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IRejectHubSpokeResponse} message RejectHubSpokeResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RejectHubSpokeResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.spoke != null && Object.hasOwnProperty.call(message, "spoke"))
+                                $root.google.cloud.networkconnectivity.v1.Spoke.encode(message.spoke, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RejectHubSpokeResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.RejectHubSpokeResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.RejectHubSpokeResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IRejectHubSpokeResponse} message RejectHubSpokeResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RejectHubSpokeResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RejectHubSpokeResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.RejectHubSpokeResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.RejectHubSpokeResponse} RejectHubSpokeResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RejectHubSpokeResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.RejectHubSpokeResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.spoke = $root.google.cloud.networkconnectivity.v1.Spoke.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RejectHubSpokeResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.RejectHubSpokeResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.RejectHubSpokeResponse} RejectHubSpokeResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RejectHubSpokeResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RejectHubSpokeResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.RejectHubSpokeResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RejectHubSpokeResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.spoke != null && message.hasOwnProperty("spoke")) {
+                                var error = $root.google.cloud.networkconnectivity.v1.Spoke.verify(message.spoke);
+                                if (error)
+                                    return "spoke." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RejectHubSpokeResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.RejectHubSpokeResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.RejectHubSpokeResponse} RejectHubSpokeResponse
+                         */
+                        RejectHubSpokeResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.RejectHubSpokeResponse)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.RejectHubSpokeResponse();
+                            if (object.spoke != null) {
+                                if (typeof object.spoke !== "object")
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.RejectHubSpokeResponse.spoke: object expected");
+                                message.spoke = $root.google.cloud.networkconnectivity.v1.Spoke.fromObject(object.spoke);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RejectHubSpokeResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.RejectHubSpokeResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.RejectHubSpokeResponse} message RejectHubSpokeResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RejectHubSpokeResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.spoke = null;
+                            if (message.spoke != null && message.hasOwnProperty("spoke"))
+                                object.spoke = $root.google.cloud.networkconnectivity.v1.Spoke.toObject(message.spoke, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RejectHubSpokeResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.RejectHubSpokeResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RejectHubSpokeResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RejectHubSpokeResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.RejectHubSpokeResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RejectHubSpokeResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.RejectHubSpokeResponse";
+                        };
+    
+                        return RejectHubSpokeResponse;
+                    })();
+    
+                    v1.GetRouteTableRequest = (function() {
+    
+                        /**
+                         * Properties of a GetRouteTableRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IGetRouteTableRequest
+                         * @property {string|null} [name] GetRouteTableRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetRouteTableRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a GetRouteTableRequest.
+                         * @implements IGetRouteTableRequest
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IGetRouteTableRequest=} [properties] Properties to set
+                         */
+                        function GetRouteTableRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetRouteTableRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkconnectivity.v1.GetRouteTableRequest
+                         * @instance
+                         */
+                        GetRouteTableRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetRouteTableRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.GetRouteTableRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IGetRouteTableRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.GetRouteTableRequest} GetRouteTableRequest instance
+                         */
+                        GetRouteTableRequest.create = function create(properties) {
+                            return new GetRouteTableRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetRouteTableRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.GetRouteTableRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.GetRouteTableRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IGetRouteTableRequest} message GetRouteTableRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetRouteTableRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetRouteTableRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.GetRouteTableRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.GetRouteTableRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IGetRouteTableRequest} message GetRouteTableRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetRouteTableRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetRouteTableRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.GetRouteTableRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.GetRouteTableRequest} GetRouteTableRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetRouteTableRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.GetRouteTableRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetRouteTableRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.GetRouteTableRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.GetRouteTableRequest} GetRouteTableRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetRouteTableRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetRouteTableRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.GetRouteTableRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetRouteTableRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetRouteTableRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.GetRouteTableRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.GetRouteTableRequest} GetRouteTableRequest
+                         */
+                        GetRouteTableRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.GetRouteTableRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.GetRouteTableRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetRouteTableRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.GetRouteTableRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.GetRouteTableRequest} message GetRouteTableRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetRouteTableRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetRouteTableRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.GetRouteTableRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetRouteTableRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetRouteTableRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.GetRouteTableRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetRouteTableRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.GetRouteTableRequest";
+                        };
+    
+                        return GetRouteTableRequest;
+                    })();
+    
+                    v1.GetRouteRequest = (function() {
+    
+                        /**
+                         * Properties of a GetRouteRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IGetRouteRequest
+                         * @property {string|null} [name] GetRouteRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetRouteRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a GetRouteRequest.
+                         * @implements IGetRouteRequest
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IGetRouteRequest=} [properties] Properties to set
+                         */
+                        function GetRouteRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetRouteRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkconnectivity.v1.GetRouteRequest
+                         * @instance
+                         */
+                        GetRouteRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetRouteRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.GetRouteRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IGetRouteRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.GetRouteRequest} GetRouteRequest instance
+                         */
+                        GetRouteRequest.create = function create(properties) {
+                            return new GetRouteRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetRouteRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.GetRouteRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.GetRouteRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IGetRouteRequest} message GetRouteRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetRouteRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetRouteRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.GetRouteRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.GetRouteRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IGetRouteRequest} message GetRouteRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetRouteRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetRouteRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.GetRouteRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.GetRouteRequest} GetRouteRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetRouteRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.GetRouteRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetRouteRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.GetRouteRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.GetRouteRequest} GetRouteRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetRouteRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetRouteRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.GetRouteRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetRouteRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetRouteRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.GetRouteRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.GetRouteRequest} GetRouteRequest
+                         */
+                        GetRouteRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.GetRouteRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.GetRouteRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetRouteRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.GetRouteRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.GetRouteRequest} message GetRouteRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetRouteRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetRouteRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.GetRouteRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetRouteRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetRouteRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.GetRouteRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetRouteRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.GetRouteRequest";
+                        };
+    
+                        return GetRouteRequest;
+                    })();
+    
+                    v1.ListRoutesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListRoutesRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IListRoutesRequest
+                         * @property {string|null} [parent] ListRoutesRequest parent
+                         * @property {number|null} [pageSize] ListRoutesRequest pageSize
+                         * @property {string|null} [pageToken] ListRoutesRequest pageToken
+                         * @property {string|null} [filter] ListRoutesRequest filter
+                         * @property {string|null} [orderBy] ListRoutesRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListRoutesRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a ListRoutesRequest.
+                         * @implements IListRoutesRequest
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IListRoutesRequest=} [properties] Properties to set
+                         */
+                        function ListRoutesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListRoutesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkconnectivity.v1.ListRoutesRequest
+                         * @instance
+                         */
+                        ListRoutesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListRoutesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.networkconnectivity.v1.ListRoutesRequest
+                         * @instance
+                         */
+                        ListRoutesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListRoutesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.networkconnectivity.v1.ListRoutesRequest
+                         * @instance
+                         */
+                        ListRoutesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListRoutesRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.networkconnectivity.v1.ListRoutesRequest
+                         * @instance
+                         */
+                        ListRoutesRequest.prototype.filter = "";
+    
+                        /**
+                         * ListRoutesRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.networkconnectivity.v1.ListRoutesRequest
+                         * @instance
+                         */
+                        ListRoutesRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListRoutesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.ListRoutesRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListRoutesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.ListRoutesRequest} ListRoutesRequest instance
+                         */
+                        ListRoutesRequest.create = function create(properties) {
+                            return new ListRoutesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListRoutesRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListRoutesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.ListRoutesRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListRoutesRequest} message ListRoutesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRoutesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListRoutesRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListRoutesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListRoutesRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListRoutesRequest} message ListRoutesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRoutesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListRoutesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.ListRoutesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.ListRoutesRequest} ListRoutesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRoutesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.ListRoutesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListRoutesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListRoutesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.ListRoutesRequest} ListRoutesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRoutesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListRoutesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.ListRoutesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListRoutesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListRoutesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListRoutesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.ListRoutesRequest} ListRoutesRequest
+                         */
+                        ListRoutesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.ListRoutesRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.ListRoutesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListRoutesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListRoutesRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ListRoutesRequest} message ListRoutesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListRoutesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListRoutesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.ListRoutesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListRoutesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListRoutesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.ListRoutesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListRoutesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.ListRoutesRequest";
+                        };
+    
+                        return ListRoutesRequest;
+                    })();
+    
+                    v1.ListRoutesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListRoutesResponse.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IListRoutesResponse
+                         * @property {Array.<google.cloud.networkconnectivity.v1.IRoute>|null} [routes] ListRoutesResponse routes
+                         * @property {string|null} [nextPageToken] ListRoutesResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListRoutesResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListRoutesResponse.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a ListRoutesResponse.
+                         * @implements IListRoutesResponse
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IListRoutesResponse=} [properties] Properties to set
+                         */
+                        function ListRoutesResponse(properties) {
+                            this.routes = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListRoutesResponse routes.
+                         * @member {Array.<google.cloud.networkconnectivity.v1.IRoute>} routes
+                         * @memberof google.cloud.networkconnectivity.v1.ListRoutesResponse
+                         * @instance
+                         */
+                        ListRoutesResponse.prototype.routes = $util.emptyArray;
+    
+                        /**
+                         * ListRoutesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.networkconnectivity.v1.ListRoutesResponse
+                         * @instance
+                         */
+                        ListRoutesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListRoutesResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networkconnectivity.v1.ListRoutesResponse
+                         * @instance
+                         */
+                        ListRoutesResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListRoutesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.ListRoutesResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListRoutesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.ListRoutesResponse} ListRoutesResponse instance
+                         */
+                        ListRoutesResponse.create = function create(properties) {
+                            return new ListRoutesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListRoutesResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListRoutesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.ListRoutesResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListRoutesResponse} message ListRoutesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRoutesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.routes != null && message.routes.length)
+                                for (var i = 0; i < message.routes.length; ++i)
+                                    $root.google.cloud.networkconnectivity.v1.Route.encode(message.routes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListRoutesResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListRoutesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListRoutesResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListRoutesResponse} message ListRoutesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRoutesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListRoutesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.ListRoutesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.ListRoutesResponse} ListRoutesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRoutesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.ListRoutesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.routes && message.routes.length))
+                                            message.routes = [];
+                                        message.routes.push($root.google.cloud.networkconnectivity.v1.Route.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListRoutesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListRoutesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.ListRoutesResponse} ListRoutesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRoutesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListRoutesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.ListRoutesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListRoutesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.routes != null && message.hasOwnProperty("routes")) {
+                                if (!Array.isArray(message.routes))
+                                    return "routes: array expected";
+                                for (var i = 0; i < message.routes.length; ++i) {
+                                    var error = $root.google.cloud.networkconnectivity.v1.Route.verify(message.routes[i]);
+                                    if (error)
+                                        return "routes." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListRoutesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListRoutesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.ListRoutesResponse} ListRoutesResponse
+                         */
+                        ListRoutesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.ListRoutesResponse)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.ListRoutesResponse();
+                            if (object.routes) {
+                                if (!Array.isArray(object.routes))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.ListRoutesResponse.routes: array expected");
+                                message.routes = [];
+                                for (var i = 0; i < object.routes.length; ++i) {
+                                    if (typeof object.routes[i] !== "object")
+                                        throw TypeError(".google.cloud.networkconnectivity.v1.ListRoutesResponse.routes: object expected");
+                                    message.routes[i] = $root.google.cloud.networkconnectivity.v1.Route.fromObject(object.routes[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.ListRoutesResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListRoutesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListRoutesResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ListRoutesResponse} message ListRoutesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListRoutesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.routes = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.routes && message.routes.length) {
+                                object.routes = [];
+                                for (var j = 0; j < message.routes.length; ++j)
+                                    object.routes[j] = $root.google.cloud.networkconnectivity.v1.Route.toObject(message.routes[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListRoutesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.ListRoutesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListRoutesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListRoutesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.ListRoutesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListRoutesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.ListRoutesResponse";
+                        };
+    
+                        return ListRoutesResponse;
+                    })();
+    
+                    v1.ListRouteTablesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListRouteTablesRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IListRouteTablesRequest
+                         * @property {string|null} [parent] ListRouteTablesRequest parent
+                         * @property {number|null} [pageSize] ListRouteTablesRequest pageSize
+                         * @property {string|null} [pageToken] ListRouteTablesRequest pageToken
+                         * @property {string|null} [filter] ListRouteTablesRequest filter
+                         * @property {string|null} [orderBy] ListRouteTablesRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListRouteTablesRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a ListRouteTablesRequest.
+                         * @implements IListRouteTablesRequest
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IListRouteTablesRequest=} [properties] Properties to set
+                         */
+                        function ListRouteTablesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListRouteTablesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkconnectivity.v1.ListRouteTablesRequest
+                         * @instance
+                         */
+                        ListRouteTablesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListRouteTablesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.networkconnectivity.v1.ListRouteTablesRequest
+                         * @instance
+                         */
+                        ListRouteTablesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListRouteTablesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.networkconnectivity.v1.ListRouteTablesRequest
+                         * @instance
+                         */
+                        ListRouteTablesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListRouteTablesRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.networkconnectivity.v1.ListRouteTablesRequest
+                         * @instance
+                         */
+                        ListRouteTablesRequest.prototype.filter = "";
+    
+                        /**
+                         * ListRouteTablesRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.networkconnectivity.v1.ListRouteTablesRequest
+                         * @instance
+                         */
+                        ListRouteTablesRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListRouteTablesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.ListRouteTablesRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListRouteTablesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.ListRouteTablesRequest} ListRouteTablesRequest instance
+                         */
+                        ListRouteTablesRequest.create = function create(properties) {
+                            return new ListRouteTablesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListRouteTablesRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListRouteTablesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.ListRouteTablesRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListRouteTablesRequest} message ListRouteTablesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRouteTablesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListRouteTablesRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListRouteTablesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListRouteTablesRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListRouteTablesRequest} message ListRouteTablesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRouteTablesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListRouteTablesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.ListRouteTablesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.ListRouteTablesRequest} ListRouteTablesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRouteTablesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.ListRouteTablesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListRouteTablesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListRouteTablesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.ListRouteTablesRequest} ListRouteTablesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRouteTablesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListRouteTablesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.ListRouteTablesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListRouteTablesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListRouteTablesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListRouteTablesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.ListRouteTablesRequest} ListRouteTablesRequest
+                         */
+                        ListRouteTablesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.ListRouteTablesRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.ListRouteTablesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListRouteTablesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListRouteTablesRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ListRouteTablesRequest} message ListRouteTablesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListRouteTablesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListRouteTablesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.ListRouteTablesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListRouteTablesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListRouteTablesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.ListRouteTablesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListRouteTablesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.ListRouteTablesRequest";
+                        };
+    
+                        return ListRouteTablesRequest;
+                    })();
+    
+                    v1.ListRouteTablesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListRouteTablesResponse.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IListRouteTablesResponse
+                         * @property {Array.<google.cloud.networkconnectivity.v1.IRouteTable>|null} [routeTables] ListRouteTablesResponse routeTables
+                         * @property {string|null} [nextPageToken] ListRouteTablesResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListRouteTablesResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListRouteTablesResponse.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a ListRouteTablesResponse.
+                         * @implements IListRouteTablesResponse
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IListRouteTablesResponse=} [properties] Properties to set
+                         */
+                        function ListRouteTablesResponse(properties) {
+                            this.routeTables = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListRouteTablesResponse routeTables.
+                         * @member {Array.<google.cloud.networkconnectivity.v1.IRouteTable>} routeTables
+                         * @memberof google.cloud.networkconnectivity.v1.ListRouteTablesResponse
+                         * @instance
+                         */
+                        ListRouteTablesResponse.prototype.routeTables = $util.emptyArray;
+    
+                        /**
+                         * ListRouteTablesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.networkconnectivity.v1.ListRouteTablesResponse
+                         * @instance
+                         */
+                        ListRouteTablesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListRouteTablesResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networkconnectivity.v1.ListRouteTablesResponse
+                         * @instance
+                         */
+                        ListRouteTablesResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListRouteTablesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.ListRouteTablesResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListRouteTablesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.ListRouteTablesResponse} ListRouteTablesResponse instance
+                         */
+                        ListRouteTablesResponse.create = function create(properties) {
+                            return new ListRouteTablesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListRouteTablesResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListRouteTablesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.ListRouteTablesResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListRouteTablesResponse} message ListRouteTablesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRouteTablesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.routeTables != null && message.routeTables.length)
+                                for (var i = 0; i < message.routeTables.length; ++i)
+                                    $root.google.cloud.networkconnectivity.v1.RouteTable.encode(message.routeTables[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListRouteTablesResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListRouteTablesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListRouteTablesResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListRouteTablesResponse} message ListRouteTablesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListRouteTablesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListRouteTablesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.ListRouteTablesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.ListRouteTablesResponse} ListRouteTablesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRouteTablesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.ListRouteTablesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.routeTables && message.routeTables.length))
+                                            message.routeTables = [];
+                                        message.routeTables.push($root.google.cloud.networkconnectivity.v1.RouteTable.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListRouteTablesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListRouteTablesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.ListRouteTablesResponse} ListRouteTablesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListRouteTablesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListRouteTablesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.ListRouteTablesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListRouteTablesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.routeTables != null && message.hasOwnProperty("routeTables")) {
+                                if (!Array.isArray(message.routeTables))
+                                    return "routeTables: array expected";
+                                for (var i = 0; i < message.routeTables.length; ++i) {
+                                    var error = $root.google.cloud.networkconnectivity.v1.RouteTable.verify(message.routeTables[i]);
+                                    if (error)
+                                        return "routeTables." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListRouteTablesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListRouteTablesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.ListRouteTablesResponse} ListRouteTablesResponse
+                         */
+                        ListRouteTablesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.ListRouteTablesResponse)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.ListRouteTablesResponse();
+                            if (object.routeTables) {
+                                if (!Array.isArray(object.routeTables))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.ListRouteTablesResponse.routeTables: array expected");
+                                message.routeTables = [];
+                                for (var i = 0; i < object.routeTables.length; ++i) {
+                                    if (typeof object.routeTables[i] !== "object")
+                                        throw TypeError(".google.cloud.networkconnectivity.v1.ListRouteTablesResponse.routeTables: object expected");
+                                    message.routeTables[i] = $root.google.cloud.networkconnectivity.v1.RouteTable.fromObject(object.routeTables[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.ListRouteTablesResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListRouteTablesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListRouteTablesResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ListRouteTablesResponse} message ListRouteTablesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListRouteTablesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.routeTables = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.routeTables && message.routeTables.length) {
+                                object.routeTables = [];
+                                for (var j = 0; j < message.routeTables.length; ++j)
+                                    object.routeTables[j] = $root.google.cloud.networkconnectivity.v1.RouteTable.toObject(message.routeTables[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListRouteTablesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.ListRouteTablesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListRouteTablesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListRouteTablesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.ListRouteTablesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListRouteTablesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.ListRouteTablesResponse";
+                        };
+    
+                        return ListRouteTablesResponse;
+                    })();
+    
+                    v1.ListGroupsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListGroupsRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IListGroupsRequest
+                         * @property {string|null} [parent] ListGroupsRequest parent
+                         * @property {number|null} [pageSize] ListGroupsRequest pageSize
+                         * @property {string|null} [pageToken] ListGroupsRequest pageToken
+                         * @property {string|null} [filter] ListGroupsRequest filter
+                         * @property {string|null} [orderBy] ListGroupsRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListGroupsRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a ListGroupsRequest.
+                         * @implements IListGroupsRequest
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IListGroupsRequest=} [properties] Properties to set
+                         */
+                        function ListGroupsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListGroupsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkconnectivity.v1.ListGroupsRequest
+                         * @instance
+                         */
+                        ListGroupsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListGroupsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.networkconnectivity.v1.ListGroupsRequest
+                         * @instance
+                         */
+                        ListGroupsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListGroupsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.networkconnectivity.v1.ListGroupsRequest
+                         * @instance
+                         */
+                        ListGroupsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListGroupsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.networkconnectivity.v1.ListGroupsRequest
+                         * @instance
+                         */
+                        ListGroupsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListGroupsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.networkconnectivity.v1.ListGroupsRequest
+                         * @instance
+                         */
+                        ListGroupsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListGroupsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.ListGroupsRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListGroupsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.ListGroupsRequest} ListGroupsRequest instance
+                         */
+                        ListGroupsRequest.create = function create(properties) {
+                            return new ListGroupsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListGroupsRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListGroupsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.ListGroupsRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListGroupsRequest} message ListGroupsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListGroupsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListGroupsRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListGroupsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListGroupsRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListGroupsRequest} message ListGroupsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListGroupsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListGroupsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.ListGroupsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.ListGroupsRequest} ListGroupsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListGroupsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.ListGroupsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListGroupsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListGroupsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.ListGroupsRequest} ListGroupsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListGroupsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListGroupsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.ListGroupsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListGroupsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListGroupsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListGroupsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.ListGroupsRequest} ListGroupsRequest
+                         */
+                        ListGroupsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.ListGroupsRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.ListGroupsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListGroupsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListGroupsRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ListGroupsRequest} message ListGroupsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListGroupsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListGroupsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.ListGroupsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListGroupsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListGroupsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.ListGroupsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListGroupsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.ListGroupsRequest";
+                        };
+    
+                        return ListGroupsRequest;
+                    })();
+    
+                    v1.ListGroupsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListGroupsResponse.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IListGroupsResponse
+                         * @property {Array.<google.cloud.networkconnectivity.v1.IGroup>|null} [groups] ListGroupsResponse groups
+                         * @property {string|null} [nextPageToken] ListGroupsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListGroupsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListGroupsResponse.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a ListGroupsResponse.
+                         * @implements IListGroupsResponse
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IListGroupsResponse=} [properties] Properties to set
+                         */
+                        function ListGroupsResponse(properties) {
+                            this.groups = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListGroupsResponse groups.
+                         * @member {Array.<google.cloud.networkconnectivity.v1.IGroup>} groups
+                         * @memberof google.cloud.networkconnectivity.v1.ListGroupsResponse
+                         * @instance
+                         */
+                        ListGroupsResponse.prototype.groups = $util.emptyArray;
+    
+                        /**
+                         * ListGroupsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.networkconnectivity.v1.ListGroupsResponse
+                         * @instance
+                         */
+                        ListGroupsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListGroupsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networkconnectivity.v1.ListGroupsResponse
+                         * @instance
+                         */
+                        ListGroupsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListGroupsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.ListGroupsResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListGroupsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.ListGroupsResponse} ListGroupsResponse instance
+                         */
+                        ListGroupsResponse.create = function create(properties) {
+                            return new ListGroupsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListGroupsResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListGroupsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.ListGroupsResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListGroupsResponse} message ListGroupsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListGroupsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.groups != null && message.groups.length)
+                                for (var i = 0; i < message.groups.length; ++i)
+                                    $root.google.cloud.networkconnectivity.v1.Group.encode(message.groups[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListGroupsResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListGroupsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListGroupsResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IListGroupsResponse} message ListGroupsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListGroupsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListGroupsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.ListGroupsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.ListGroupsResponse} ListGroupsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListGroupsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.ListGroupsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.groups && message.groups.length))
+                                            message.groups = [];
+                                        message.groups.push($root.google.cloud.networkconnectivity.v1.Group.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListGroupsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.ListGroupsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.ListGroupsResponse} ListGroupsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListGroupsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListGroupsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.ListGroupsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListGroupsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.groups != null && message.hasOwnProperty("groups")) {
+                                if (!Array.isArray(message.groups))
+                                    return "groups: array expected";
+                                for (var i = 0; i < message.groups.length; ++i) {
+                                    var error = $root.google.cloud.networkconnectivity.v1.Group.verify(message.groups[i]);
+                                    if (error)
+                                        return "groups." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListGroupsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListGroupsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.ListGroupsResponse} ListGroupsResponse
+                         */
+                        ListGroupsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.ListGroupsResponse)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.ListGroupsResponse();
+                            if (object.groups) {
+                                if (!Array.isArray(object.groups))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.ListGroupsResponse.groups: array expected");
+                                message.groups = [];
+                                for (var i = 0; i < object.groups.length; ++i) {
+                                    if (typeof object.groups[i] !== "object")
+                                        throw TypeError(".google.cloud.networkconnectivity.v1.ListGroupsResponse.groups: object expected");
+                                    message.groups[i] = $root.google.cloud.networkconnectivity.v1.Group.fromObject(object.groups[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.ListGroupsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListGroupsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.ListGroupsResponse
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ListGroupsResponse} message ListGroupsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListGroupsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.groups = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.groups && message.groups.length) {
+                                object.groups = [];
+                                for (var j = 0; j < message.groups.length; ++j)
+                                    object.groups[j] = $root.google.cloud.networkconnectivity.v1.Group.toObject(message.groups[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListGroupsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.ListGroupsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListGroupsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListGroupsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.ListGroupsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListGroupsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.ListGroupsResponse";
+                        };
+    
+                        return ListGroupsResponse;
+                    })();
+    
                     v1.LinkedVpnTunnels = (function() {
     
                         /**
@@ -5952,6 +12112,249 @@
                         return LinkedRouterApplianceInstances;
                     })();
     
+                    v1.LinkedVpcNetwork = (function() {
+    
+                        /**
+                         * Properties of a LinkedVpcNetwork.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface ILinkedVpcNetwork
+                         * @property {string|null} [uri] LinkedVpcNetwork uri
+                         * @property {Array.<string>|null} [excludeExportRanges] LinkedVpcNetwork excludeExportRanges
+                         */
+    
+                        /**
+                         * Constructs a new LinkedVpcNetwork.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a LinkedVpcNetwork.
+                         * @implements ILinkedVpcNetwork
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.ILinkedVpcNetwork=} [properties] Properties to set
+                         */
+                        function LinkedVpcNetwork(properties) {
+                            this.excludeExportRanges = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LinkedVpcNetwork uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.networkconnectivity.v1.LinkedVpcNetwork
+                         * @instance
+                         */
+                        LinkedVpcNetwork.prototype.uri = "";
+    
+                        /**
+                         * LinkedVpcNetwork excludeExportRanges.
+                         * @member {Array.<string>} excludeExportRanges
+                         * @memberof google.cloud.networkconnectivity.v1.LinkedVpcNetwork
+                         * @instance
+                         */
+                        LinkedVpcNetwork.prototype.excludeExportRanges = $util.emptyArray;
+    
+                        /**
+                         * Creates a new LinkedVpcNetwork instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.LinkedVpcNetwork
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ILinkedVpcNetwork=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.LinkedVpcNetwork} LinkedVpcNetwork instance
+                         */
+                        LinkedVpcNetwork.create = function create(properties) {
+                            return new LinkedVpcNetwork(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LinkedVpcNetwork message. Does not implicitly {@link google.cloud.networkconnectivity.v1.LinkedVpcNetwork.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.LinkedVpcNetwork
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ILinkedVpcNetwork} message LinkedVpcNetwork message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LinkedVpcNetwork.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                            if (message.excludeExportRanges != null && message.excludeExportRanges.length)
+                                for (var i = 0; i < message.excludeExportRanges.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.excludeExportRanges[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LinkedVpcNetwork message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.LinkedVpcNetwork.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.LinkedVpcNetwork
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ILinkedVpcNetwork} message LinkedVpcNetwork message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LinkedVpcNetwork.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LinkedVpcNetwork message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.LinkedVpcNetwork
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.LinkedVpcNetwork} LinkedVpcNetwork
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LinkedVpcNetwork.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.LinkedVpcNetwork();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.excludeExportRanges && message.excludeExportRanges.length))
+                                            message.excludeExportRanges = [];
+                                        message.excludeExportRanges.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LinkedVpcNetwork message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.LinkedVpcNetwork
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.LinkedVpcNetwork} LinkedVpcNetwork
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LinkedVpcNetwork.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LinkedVpcNetwork message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.LinkedVpcNetwork
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LinkedVpcNetwork.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            if (message.excludeExportRanges != null && message.hasOwnProperty("excludeExportRanges")) {
+                                if (!Array.isArray(message.excludeExportRanges))
+                                    return "excludeExportRanges: array expected";
+                                for (var i = 0; i < message.excludeExportRanges.length; ++i)
+                                    if (!$util.isString(message.excludeExportRanges[i]))
+                                        return "excludeExportRanges: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LinkedVpcNetwork message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.LinkedVpcNetwork
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.LinkedVpcNetwork} LinkedVpcNetwork
+                         */
+                        LinkedVpcNetwork.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.LinkedVpcNetwork)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.LinkedVpcNetwork();
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            if (object.excludeExportRanges) {
+                                if (!Array.isArray(object.excludeExportRanges))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.LinkedVpcNetwork.excludeExportRanges: array expected");
+                                message.excludeExportRanges = [];
+                                for (var i = 0; i < object.excludeExportRanges.length; ++i)
+                                    message.excludeExportRanges[i] = String(object.excludeExportRanges[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LinkedVpcNetwork message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.LinkedVpcNetwork
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.LinkedVpcNetwork} message LinkedVpcNetwork
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LinkedVpcNetwork.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.excludeExportRanges = [];
+                            if (options.defaults)
+                                object.uri = "";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            if (message.excludeExportRanges && message.excludeExportRanges.length) {
+                                object.excludeExportRanges = [];
+                                for (var j = 0; j < message.excludeExportRanges.length; ++j)
+                                    object.excludeExportRanges[j] = message.excludeExportRanges[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LinkedVpcNetwork to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.LinkedVpcNetwork
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LinkedVpcNetwork.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LinkedVpcNetwork
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.LinkedVpcNetwork
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LinkedVpcNetwork.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.LinkedVpcNetwork";
+                        };
+    
+                        return LinkedVpcNetwork;
+                    })();
+    
                     v1.RouterApplianceInstance = (function() {
     
                         /**
@@ -6428,6 +12831,1570 @@
                         };
     
                         return LocationMetadata;
+                    })();
+    
+                    v1.NextHopVpcNetwork = (function() {
+    
+                        /**
+                         * Properties of a NextHopVpcNetwork.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface INextHopVpcNetwork
+                         * @property {string|null} [uri] NextHopVpcNetwork uri
+                         */
+    
+                        /**
+                         * Constructs a new NextHopVpcNetwork.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a NextHopVpcNetwork.
+                         * @implements INextHopVpcNetwork
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.INextHopVpcNetwork=} [properties] Properties to set
+                         */
+                        function NextHopVpcNetwork(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * NextHopVpcNetwork uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.networkconnectivity.v1.NextHopVpcNetwork
+                         * @instance
+                         */
+                        NextHopVpcNetwork.prototype.uri = "";
+    
+                        /**
+                         * Creates a new NextHopVpcNetwork instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.NextHopVpcNetwork
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.INextHopVpcNetwork=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.NextHopVpcNetwork} NextHopVpcNetwork instance
+                         */
+                        NextHopVpcNetwork.create = function create(properties) {
+                            return new NextHopVpcNetwork(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified NextHopVpcNetwork message. Does not implicitly {@link google.cloud.networkconnectivity.v1.NextHopVpcNetwork.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.NextHopVpcNetwork
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.INextHopVpcNetwork} message NextHopVpcNetwork message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NextHopVpcNetwork.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified NextHopVpcNetwork message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.NextHopVpcNetwork.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.NextHopVpcNetwork
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.INextHopVpcNetwork} message NextHopVpcNetwork message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NextHopVpcNetwork.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a NextHopVpcNetwork message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.NextHopVpcNetwork
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.NextHopVpcNetwork} NextHopVpcNetwork
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NextHopVpcNetwork.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.NextHopVpcNetwork();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.uri = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a NextHopVpcNetwork message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.NextHopVpcNetwork
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.NextHopVpcNetwork} NextHopVpcNetwork
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NextHopVpcNetwork.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a NextHopVpcNetwork message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.NextHopVpcNetwork
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        NextHopVpcNetwork.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a NextHopVpcNetwork message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.NextHopVpcNetwork
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.NextHopVpcNetwork} NextHopVpcNetwork
+                         */
+                        NextHopVpcNetwork.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.NextHopVpcNetwork)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.NextHopVpcNetwork();
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a NextHopVpcNetwork message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.NextHopVpcNetwork
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.NextHopVpcNetwork} message NextHopVpcNetwork
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        NextHopVpcNetwork.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.uri = "";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this NextHopVpcNetwork to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.NextHopVpcNetwork
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        NextHopVpcNetwork.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for NextHopVpcNetwork
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.NextHopVpcNetwork
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        NextHopVpcNetwork.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.NextHopVpcNetwork";
+                        };
+    
+                        return NextHopVpcNetwork;
+                    })();
+    
+                    v1.SpokeSummary = (function() {
+    
+                        /**
+                         * Properties of a SpokeSummary.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface ISpokeSummary
+                         * @property {Array.<google.cloud.networkconnectivity.v1.SpokeSummary.ISpokeTypeCount>|null} [spokeTypeCounts] SpokeSummary spokeTypeCounts
+                         * @property {Array.<google.cloud.networkconnectivity.v1.SpokeSummary.ISpokeStateCount>|null} [spokeStateCounts] SpokeSummary spokeStateCounts
+                         * @property {Array.<google.cloud.networkconnectivity.v1.SpokeSummary.ISpokeStateReasonCount>|null} [spokeStateReasonCounts] SpokeSummary spokeStateReasonCounts
+                         */
+    
+                        /**
+                         * Constructs a new SpokeSummary.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a SpokeSummary.
+                         * @implements ISpokeSummary
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.ISpokeSummary=} [properties] Properties to set
+                         */
+                        function SpokeSummary(properties) {
+                            this.spokeTypeCounts = [];
+                            this.spokeStateCounts = [];
+                            this.spokeStateReasonCounts = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SpokeSummary spokeTypeCounts.
+                         * @member {Array.<google.cloud.networkconnectivity.v1.SpokeSummary.ISpokeTypeCount>} spokeTypeCounts
+                         * @memberof google.cloud.networkconnectivity.v1.SpokeSummary
+                         * @instance
+                         */
+                        SpokeSummary.prototype.spokeTypeCounts = $util.emptyArray;
+    
+                        /**
+                         * SpokeSummary spokeStateCounts.
+                         * @member {Array.<google.cloud.networkconnectivity.v1.SpokeSummary.ISpokeStateCount>} spokeStateCounts
+                         * @memberof google.cloud.networkconnectivity.v1.SpokeSummary
+                         * @instance
+                         */
+                        SpokeSummary.prototype.spokeStateCounts = $util.emptyArray;
+    
+                        /**
+                         * SpokeSummary spokeStateReasonCounts.
+                         * @member {Array.<google.cloud.networkconnectivity.v1.SpokeSummary.ISpokeStateReasonCount>} spokeStateReasonCounts
+                         * @memberof google.cloud.networkconnectivity.v1.SpokeSummary
+                         * @instance
+                         */
+                        SpokeSummary.prototype.spokeStateReasonCounts = $util.emptyArray;
+    
+                        /**
+                         * Creates a new SpokeSummary instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.SpokeSummary
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ISpokeSummary=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.SpokeSummary} SpokeSummary instance
+                         */
+                        SpokeSummary.create = function create(properties) {
+                            return new SpokeSummary(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SpokeSummary message. Does not implicitly {@link google.cloud.networkconnectivity.v1.SpokeSummary.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.SpokeSummary
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ISpokeSummary} message SpokeSummary message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SpokeSummary.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.spokeTypeCounts != null && message.spokeTypeCounts.length)
+                                for (var i = 0; i < message.spokeTypeCounts.length; ++i)
+                                    $root.google.cloud.networkconnectivity.v1.SpokeSummary.SpokeTypeCount.encode(message.spokeTypeCounts[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.spokeStateCounts != null && message.spokeStateCounts.length)
+                                for (var i = 0; i < message.spokeStateCounts.length; ++i)
+                                    $root.google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateCount.encode(message.spokeStateCounts[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.spokeStateReasonCounts != null && message.spokeStateReasonCounts.length)
+                                for (var i = 0; i < message.spokeStateReasonCounts.length; ++i)
+                                    $root.google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateReasonCount.encode(message.spokeStateReasonCounts[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SpokeSummary message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.SpokeSummary.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.SpokeSummary
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.ISpokeSummary} message SpokeSummary message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SpokeSummary.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SpokeSummary message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.SpokeSummary
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.SpokeSummary} SpokeSummary
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SpokeSummary.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.SpokeSummary();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.spokeTypeCounts && message.spokeTypeCounts.length))
+                                            message.spokeTypeCounts = [];
+                                        message.spokeTypeCounts.push($root.google.cloud.networkconnectivity.v1.SpokeSummary.SpokeTypeCount.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.spokeStateCounts && message.spokeStateCounts.length))
+                                            message.spokeStateCounts = [];
+                                        message.spokeStateCounts.push($root.google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateCount.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.spokeStateReasonCounts && message.spokeStateReasonCounts.length))
+                                            message.spokeStateReasonCounts = [];
+                                        message.spokeStateReasonCounts.push($root.google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateReasonCount.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SpokeSummary message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.SpokeSummary
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.SpokeSummary} SpokeSummary
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SpokeSummary.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SpokeSummary message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.SpokeSummary
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SpokeSummary.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.spokeTypeCounts != null && message.hasOwnProperty("spokeTypeCounts")) {
+                                if (!Array.isArray(message.spokeTypeCounts))
+                                    return "spokeTypeCounts: array expected";
+                                for (var i = 0; i < message.spokeTypeCounts.length; ++i) {
+                                    var error = $root.google.cloud.networkconnectivity.v1.SpokeSummary.SpokeTypeCount.verify(message.spokeTypeCounts[i]);
+                                    if (error)
+                                        return "spokeTypeCounts." + error;
+                                }
+                            }
+                            if (message.spokeStateCounts != null && message.hasOwnProperty("spokeStateCounts")) {
+                                if (!Array.isArray(message.spokeStateCounts))
+                                    return "spokeStateCounts: array expected";
+                                for (var i = 0; i < message.spokeStateCounts.length; ++i) {
+                                    var error = $root.google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateCount.verify(message.spokeStateCounts[i]);
+                                    if (error)
+                                        return "spokeStateCounts." + error;
+                                }
+                            }
+                            if (message.spokeStateReasonCounts != null && message.hasOwnProperty("spokeStateReasonCounts")) {
+                                if (!Array.isArray(message.spokeStateReasonCounts))
+                                    return "spokeStateReasonCounts: array expected";
+                                for (var i = 0; i < message.spokeStateReasonCounts.length; ++i) {
+                                    var error = $root.google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateReasonCount.verify(message.spokeStateReasonCounts[i]);
+                                    if (error)
+                                        return "spokeStateReasonCounts." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SpokeSummary message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.SpokeSummary
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.SpokeSummary} SpokeSummary
+                         */
+                        SpokeSummary.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.SpokeSummary)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.SpokeSummary();
+                            if (object.spokeTypeCounts) {
+                                if (!Array.isArray(object.spokeTypeCounts))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.SpokeSummary.spokeTypeCounts: array expected");
+                                message.spokeTypeCounts = [];
+                                for (var i = 0; i < object.spokeTypeCounts.length; ++i) {
+                                    if (typeof object.spokeTypeCounts[i] !== "object")
+                                        throw TypeError(".google.cloud.networkconnectivity.v1.SpokeSummary.spokeTypeCounts: object expected");
+                                    message.spokeTypeCounts[i] = $root.google.cloud.networkconnectivity.v1.SpokeSummary.SpokeTypeCount.fromObject(object.spokeTypeCounts[i]);
+                                }
+                            }
+                            if (object.spokeStateCounts) {
+                                if (!Array.isArray(object.spokeStateCounts))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.SpokeSummary.spokeStateCounts: array expected");
+                                message.spokeStateCounts = [];
+                                for (var i = 0; i < object.spokeStateCounts.length; ++i) {
+                                    if (typeof object.spokeStateCounts[i] !== "object")
+                                        throw TypeError(".google.cloud.networkconnectivity.v1.SpokeSummary.spokeStateCounts: object expected");
+                                    message.spokeStateCounts[i] = $root.google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateCount.fromObject(object.spokeStateCounts[i]);
+                                }
+                            }
+                            if (object.spokeStateReasonCounts) {
+                                if (!Array.isArray(object.spokeStateReasonCounts))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.SpokeSummary.spokeStateReasonCounts: array expected");
+                                message.spokeStateReasonCounts = [];
+                                for (var i = 0; i < object.spokeStateReasonCounts.length; ++i) {
+                                    if (typeof object.spokeStateReasonCounts[i] !== "object")
+                                        throw TypeError(".google.cloud.networkconnectivity.v1.SpokeSummary.spokeStateReasonCounts: object expected");
+                                    message.spokeStateReasonCounts[i] = $root.google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateReasonCount.fromObject(object.spokeStateReasonCounts[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SpokeSummary message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.SpokeSummary
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.SpokeSummary} message SpokeSummary
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SpokeSummary.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.spokeTypeCounts = [];
+                                object.spokeStateCounts = [];
+                                object.spokeStateReasonCounts = [];
+                            }
+                            if (message.spokeTypeCounts && message.spokeTypeCounts.length) {
+                                object.spokeTypeCounts = [];
+                                for (var j = 0; j < message.spokeTypeCounts.length; ++j)
+                                    object.spokeTypeCounts[j] = $root.google.cloud.networkconnectivity.v1.SpokeSummary.SpokeTypeCount.toObject(message.spokeTypeCounts[j], options);
+                            }
+                            if (message.spokeStateCounts && message.spokeStateCounts.length) {
+                                object.spokeStateCounts = [];
+                                for (var j = 0; j < message.spokeStateCounts.length; ++j)
+                                    object.spokeStateCounts[j] = $root.google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateCount.toObject(message.spokeStateCounts[j], options);
+                            }
+                            if (message.spokeStateReasonCounts && message.spokeStateReasonCounts.length) {
+                                object.spokeStateReasonCounts = [];
+                                for (var j = 0; j < message.spokeStateReasonCounts.length; ++j)
+                                    object.spokeStateReasonCounts[j] = $root.google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateReasonCount.toObject(message.spokeStateReasonCounts[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SpokeSummary to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.SpokeSummary
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SpokeSummary.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SpokeSummary
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.SpokeSummary
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SpokeSummary.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.SpokeSummary";
+                        };
+    
+                        SpokeSummary.SpokeTypeCount = (function() {
+    
+                            /**
+                             * Properties of a SpokeTypeCount.
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary
+                             * @interface ISpokeTypeCount
+                             * @property {google.cloud.networkconnectivity.v1.SpokeType|null} [spokeType] SpokeTypeCount spokeType
+                             * @property {number|Long|null} [count] SpokeTypeCount count
+                             */
+    
+                            /**
+                             * Constructs a new SpokeTypeCount.
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary
+                             * @classdesc Represents a SpokeTypeCount.
+                             * @implements ISpokeTypeCount
+                             * @constructor
+                             * @param {google.cloud.networkconnectivity.v1.SpokeSummary.ISpokeTypeCount=} [properties] Properties to set
+                             */
+                            function SpokeTypeCount(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SpokeTypeCount spokeType.
+                             * @member {google.cloud.networkconnectivity.v1.SpokeType} spokeType
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeTypeCount
+                             * @instance
+                             */
+                            SpokeTypeCount.prototype.spokeType = 0;
+    
+                            /**
+                             * SpokeTypeCount count.
+                             * @member {number|Long} count
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeTypeCount
+                             * @instance
+                             */
+                            SpokeTypeCount.prototype.count = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * Creates a new SpokeTypeCount instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeTypeCount
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.SpokeSummary.ISpokeTypeCount=} [properties] Properties to set
+                             * @returns {google.cloud.networkconnectivity.v1.SpokeSummary.SpokeTypeCount} SpokeTypeCount instance
+                             */
+                            SpokeTypeCount.create = function create(properties) {
+                                return new SpokeTypeCount(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SpokeTypeCount message. Does not implicitly {@link google.cloud.networkconnectivity.v1.SpokeSummary.SpokeTypeCount.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeTypeCount
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.SpokeSummary.ISpokeTypeCount} message SpokeTypeCount message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SpokeTypeCount.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.spokeType != null && Object.hasOwnProperty.call(message, "spokeType"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.spokeType);
+                                if (message.count != null && Object.hasOwnProperty.call(message, "count"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int64(message.count);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SpokeTypeCount message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.SpokeSummary.SpokeTypeCount.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeTypeCount
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.SpokeSummary.ISpokeTypeCount} message SpokeTypeCount message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SpokeTypeCount.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SpokeTypeCount message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeTypeCount
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkconnectivity.v1.SpokeSummary.SpokeTypeCount} SpokeTypeCount
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SpokeTypeCount.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.SpokeSummary.SpokeTypeCount();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.spokeType = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.count = reader.int64();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SpokeTypeCount message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeTypeCount
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkconnectivity.v1.SpokeSummary.SpokeTypeCount} SpokeTypeCount
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SpokeTypeCount.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SpokeTypeCount message.
+                             * @function verify
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeTypeCount
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SpokeTypeCount.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.spokeType != null && message.hasOwnProperty("spokeType"))
+                                    switch (message.spokeType) {
+                                    default:
+                                        return "spokeType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                if (message.count != null && message.hasOwnProperty("count"))
+                                    if (!$util.isInteger(message.count) && !(message.count && $util.isInteger(message.count.low) && $util.isInteger(message.count.high)))
+                                        return "count: integer|Long expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SpokeTypeCount message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeTypeCount
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkconnectivity.v1.SpokeSummary.SpokeTypeCount} SpokeTypeCount
+                             */
+                            SpokeTypeCount.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networkconnectivity.v1.SpokeSummary.SpokeTypeCount)
+                                    return object;
+                                var message = new $root.google.cloud.networkconnectivity.v1.SpokeSummary.SpokeTypeCount();
+                                switch (object.spokeType) {
+                                default:
+                                    if (typeof object.spokeType === "number") {
+                                        message.spokeType = object.spokeType;
+                                        break;
+                                    }
+                                    break;
+                                case "SPOKE_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.spokeType = 0;
+                                    break;
+                                case "VPN_TUNNEL":
+                                case 1:
+                                    message.spokeType = 1;
+                                    break;
+                                case "INTERCONNECT_ATTACHMENT":
+                                case 2:
+                                    message.spokeType = 2;
+                                    break;
+                                case "ROUTER_APPLIANCE":
+                                case 3:
+                                    message.spokeType = 3;
+                                    break;
+                                case "VPC_NETWORK":
+                                case 4:
+                                    message.spokeType = 4;
+                                    break;
+                                }
+                                if (object.count != null)
+                                    if ($util.Long)
+                                        (message.count = $util.Long.fromValue(object.count)).unsigned = false;
+                                    else if (typeof object.count === "string")
+                                        message.count = parseInt(object.count, 10);
+                                    else if (typeof object.count === "number")
+                                        message.count = object.count;
+                                    else if (typeof object.count === "object")
+                                        message.count = new $util.LongBits(object.count.low >>> 0, object.count.high >>> 0).toNumber();
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SpokeTypeCount message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeTypeCount
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.SpokeSummary.SpokeTypeCount} message SpokeTypeCount
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SpokeTypeCount.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.spokeType = options.enums === String ? "SPOKE_TYPE_UNSPECIFIED" : 0;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.count = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.count = options.longs === String ? "0" : 0;
+                                }
+                                if (message.spokeType != null && message.hasOwnProperty("spokeType"))
+                                    object.spokeType = options.enums === String ? $root.google.cloud.networkconnectivity.v1.SpokeType[message.spokeType] === undefined ? message.spokeType : $root.google.cloud.networkconnectivity.v1.SpokeType[message.spokeType] : message.spokeType;
+                                if (message.count != null && message.hasOwnProperty("count"))
+                                    if (typeof message.count === "number")
+                                        object.count = options.longs === String ? String(message.count) : message.count;
+                                    else
+                                        object.count = options.longs === String ? $util.Long.prototype.toString.call(message.count) : options.longs === Number ? new $util.LongBits(message.count.low >>> 0, message.count.high >>> 0).toNumber() : message.count;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SpokeTypeCount to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeTypeCount
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SpokeTypeCount.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SpokeTypeCount
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeTypeCount
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SpokeTypeCount.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.SpokeSummary.SpokeTypeCount";
+                            };
+    
+                            return SpokeTypeCount;
+                        })();
+    
+                        SpokeSummary.SpokeStateCount = (function() {
+    
+                            /**
+                             * Properties of a SpokeStateCount.
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary
+                             * @interface ISpokeStateCount
+                             * @property {google.cloud.networkconnectivity.v1.State|null} [state] SpokeStateCount state
+                             * @property {number|Long|null} [count] SpokeStateCount count
+                             */
+    
+                            /**
+                             * Constructs a new SpokeStateCount.
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary
+                             * @classdesc Represents a SpokeStateCount.
+                             * @implements ISpokeStateCount
+                             * @constructor
+                             * @param {google.cloud.networkconnectivity.v1.SpokeSummary.ISpokeStateCount=} [properties] Properties to set
+                             */
+                            function SpokeStateCount(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SpokeStateCount state.
+                             * @member {google.cloud.networkconnectivity.v1.State} state
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateCount
+                             * @instance
+                             */
+                            SpokeStateCount.prototype.state = 0;
+    
+                            /**
+                             * SpokeStateCount count.
+                             * @member {number|Long} count
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateCount
+                             * @instance
+                             */
+                            SpokeStateCount.prototype.count = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * Creates a new SpokeStateCount instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateCount
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.SpokeSummary.ISpokeStateCount=} [properties] Properties to set
+                             * @returns {google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateCount} SpokeStateCount instance
+                             */
+                            SpokeStateCount.create = function create(properties) {
+                                return new SpokeStateCount(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SpokeStateCount message. Does not implicitly {@link google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateCount.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateCount
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.SpokeSummary.ISpokeStateCount} message SpokeStateCount message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SpokeStateCount.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.state);
+                                if (message.count != null && Object.hasOwnProperty.call(message, "count"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int64(message.count);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SpokeStateCount message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateCount.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateCount
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.SpokeSummary.ISpokeStateCount} message SpokeStateCount message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SpokeStateCount.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SpokeStateCount message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateCount
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateCount} SpokeStateCount
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SpokeStateCount.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateCount();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.state = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.count = reader.int64();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SpokeStateCount message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateCount
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateCount} SpokeStateCount
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SpokeStateCount.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SpokeStateCount message.
+                             * @function verify
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateCount
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SpokeStateCount.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    switch (message.state) {
+                                    default:
+                                        return "state: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 8:
+                                    case 9:
+                                    case 6:
+                                    case 7:
+                                    case 10:
+                                        break;
+                                    }
+                                if (message.count != null && message.hasOwnProperty("count"))
+                                    if (!$util.isInteger(message.count) && !(message.count && $util.isInteger(message.count.low) && $util.isInteger(message.count.high)))
+                                        return "count: integer|Long expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SpokeStateCount message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateCount
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateCount} SpokeStateCount
+                             */
+                            SpokeStateCount.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateCount)
+                                    return object;
+                                var message = new $root.google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateCount();
+                                switch (object.state) {
+                                default:
+                                    if (typeof object.state === "number") {
+                                        message.state = object.state;
+                                        break;
+                                    }
+                                    break;
+                                case "STATE_UNSPECIFIED":
+                                case 0:
+                                    message.state = 0;
+                                    break;
+                                case "CREATING":
+                                case 1:
+                                    message.state = 1;
+                                    break;
+                                case "ACTIVE":
+                                case 2:
+                                    message.state = 2;
+                                    break;
+                                case "DELETING":
+                                case 3:
+                                    message.state = 3;
+                                    break;
+                                case "ACCEPTING":
+                                case 8:
+                                    message.state = 8;
+                                    break;
+                                case "REJECTING":
+                                case 9:
+                                    message.state = 9;
+                                    break;
+                                case "UPDATING":
+                                case 6:
+                                    message.state = 6;
+                                    break;
+                                case "INACTIVE":
+                                case 7:
+                                    message.state = 7;
+                                    break;
+                                case "OBSOLETE":
+                                case 10:
+                                    message.state = 10;
+                                    break;
+                                }
+                                if (object.count != null)
+                                    if ($util.Long)
+                                        (message.count = $util.Long.fromValue(object.count)).unsigned = false;
+                                    else if (typeof object.count === "string")
+                                        message.count = parseInt(object.count, 10);
+                                    else if (typeof object.count === "number")
+                                        message.count = object.count;
+                                    else if (typeof object.count === "object")
+                                        message.count = new $util.LongBits(object.count.low >>> 0, object.count.high >>> 0).toNumber();
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SpokeStateCount message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateCount
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateCount} message SpokeStateCount
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SpokeStateCount.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.count = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.count = options.longs === String ? "0" : 0;
+                                }
+                                if (message.state != null && message.hasOwnProperty("state"))
+                                    object.state = options.enums === String ? $root.google.cloud.networkconnectivity.v1.State[message.state] === undefined ? message.state : $root.google.cloud.networkconnectivity.v1.State[message.state] : message.state;
+                                if (message.count != null && message.hasOwnProperty("count"))
+                                    if (typeof message.count === "number")
+                                        object.count = options.longs === String ? String(message.count) : message.count;
+                                    else
+                                        object.count = options.longs === String ? $util.Long.prototype.toString.call(message.count) : options.longs === Number ? new $util.LongBits(message.count.low >>> 0, message.count.high >>> 0).toNumber() : message.count;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SpokeStateCount to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateCount
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SpokeStateCount.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SpokeStateCount
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateCount
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SpokeStateCount.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateCount";
+                            };
+    
+                            return SpokeStateCount;
+                        })();
+    
+                        SpokeSummary.SpokeStateReasonCount = (function() {
+    
+                            /**
+                             * Properties of a SpokeStateReasonCount.
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary
+                             * @interface ISpokeStateReasonCount
+                             * @property {google.cloud.networkconnectivity.v1.Spoke.StateReason.Code|null} [stateReasonCode] SpokeStateReasonCount stateReasonCode
+                             * @property {number|Long|null} [count] SpokeStateReasonCount count
+                             */
+    
+                            /**
+                             * Constructs a new SpokeStateReasonCount.
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary
+                             * @classdesc Represents a SpokeStateReasonCount.
+                             * @implements ISpokeStateReasonCount
+                             * @constructor
+                             * @param {google.cloud.networkconnectivity.v1.SpokeSummary.ISpokeStateReasonCount=} [properties] Properties to set
+                             */
+                            function SpokeStateReasonCount(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SpokeStateReasonCount stateReasonCode.
+                             * @member {google.cloud.networkconnectivity.v1.Spoke.StateReason.Code} stateReasonCode
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateReasonCount
+                             * @instance
+                             */
+                            SpokeStateReasonCount.prototype.stateReasonCode = 0;
+    
+                            /**
+                             * SpokeStateReasonCount count.
+                             * @member {number|Long} count
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateReasonCount
+                             * @instance
+                             */
+                            SpokeStateReasonCount.prototype.count = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * Creates a new SpokeStateReasonCount instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateReasonCount
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.SpokeSummary.ISpokeStateReasonCount=} [properties] Properties to set
+                             * @returns {google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateReasonCount} SpokeStateReasonCount instance
+                             */
+                            SpokeStateReasonCount.create = function create(properties) {
+                                return new SpokeStateReasonCount(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SpokeStateReasonCount message. Does not implicitly {@link google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateReasonCount.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateReasonCount
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.SpokeSummary.ISpokeStateReasonCount} message SpokeStateReasonCount message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SpokeStateReasonCount.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.stateReasonCode != null && Object.hasOwnProperty.call(message, "stateReasonCode"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.stateReasonCode);
+                                if (message.count != null && Object.hasOwnProperty.call(message, "count"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int64(message.count);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SpokeStateReasonCount message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateReasonCount.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateReasonCount
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.SpokeSummary.ISpokeStateReasonCount} message SpokeStateReasonCount message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SpokeStateReasonCount.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SpokeStateReasonCount message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateReasonCount
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateReasonCount} SpokeStateReasonCount
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SpokeStateReasonCount.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateReasonCount();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.stateReasonCode = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.count = reader.int64();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SpokeStateReasonCount message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateReasonCount
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateReasonCount} SpokeStateReasonCount
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SpokeStateReasonCount.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SpokeStateReasonCount message.
+                             * @function verify
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateReasonCount
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SpokeStateReasonCount.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.stateReasonCode != null && message.hasOwnProperty("stateReasonCode"))
+                                    switch (message.stateReasonCode) {
+                                    default:
+                                        return "stateReasonCode: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                if (message.count != null && message.hasOwnProperty("count"))
+                                    if (!$util.isInteger(message.count) && !(message.count && $util.isInteger(message.count.low) && $util.isInteger(message.count.high)))
+                                        return "count: integer|Long expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SpokeStateReasonCount message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateReasonCount
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateReasonCount} SpokeStateReasonCount
+                             */
+                            SpokeStateReasonCount.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateReasonCount)
+                                    return object;
+                                var message = new $root.google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateReasonCount();
+                                switch (object.stateReasonCode) {
+                                default:
+                                    if (typeof object.stateReasonCode === "number") {
+                                        message.stateReasonCode = object.stateReasonCode;
+                                        break;
+                                    }
+                                    break;
+                                case "CODE_UNSPECIFIED":
+                                case 0:
+                                    message.stateReasonCode = 0;
+                                    break;
+                                case "PENDING_REVIEW":
+                                case 1:
+                                    message.stateReasonCode = 1;
+                                    break;
+                                case "REJECTED":
+                                case 2:
+                                    message.stateReasonCode = 2;
+                                    break;
+                                case "PAUSED":
+                                case 3:
+                                    message.stateReasonCode = 3;
+                                    break;
+                                case "FAILED":
+                                case 4:
+                                    message.stateReasonCode = 4;
+                                    break;
+                                }
+                                if (object.count != null)
+                                    if ($util.Long)
+                                        (message.count = $util.Long.fromValue(object.count)).unsigned = false;
+                                    else if (typeof object.count === "string")
+                                        message.count = parseInt(object.count, 10);
+                                    else if (typeof object.count === "number")
+                                        message.count = object.count;
+                                    else if (typeof object.count === "object")
+                                        message.count = new $util.LongBits(object.count.low >>> 0, object.count.high >>> 0).toNumber();
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SpokeStateReasonCount message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateReasonCount
+                             * @static
+                             * @param {google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateReasonCount} message SpokeStateReasonCount
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SpokeStateReasonCount.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.stateReasonCode = options.enums === String ? "CODE_UNSPECIFIED" : 0;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.count = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.count = options.longs === String ? "0" : 0;
+                                }
+                                if (message.stateReasonCode != null && message.hasOwnProperty("stateReasonCode"))
+                                    object.stateReasonCode = options.enums === String ? $root.google.cloud.networkconnectivity.v1.Spoke.StateReason.Code[message.stateReasonCode] === undefined ? message.stateReasonCode : $root.google.cloud.networkconnectivity.v1.Spoke.StateReason.Code[message.stateReasonCode] : message.stateReasonCode;
+                                if (message.count != null && message.hasOwnProperty("count"))
+                                    if (typeof message.count === "number")
+                                        object.count = options.longs === String ? String(message.count) : message.count;
+                                    else
+                                        object.count = options.longs === String ? $util.Long.prototype.toString.call(message.count) : options.longs === Number ? new $util.LongBits(message.count.low >>> 0, message.count.high >>> 0).toNumber() : message.count;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SpokeStateReasonCount to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateReasonCount
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SpokeStateReasonCount.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SpokeStateReasonCount
+                             * @function getTypeUrl
+                             * @memberof google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateReasonCount
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SpokeStateReasonCount.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateReasonCount";
+                            };
+    
+                            return SpokeStateReasonCount;
+                        })();
+    
+                        return SpokeSummary;
+                    })();
+    
+                    v1.GetGroupRequest = (function() {
+    
+                        /**
+                         * Properties of a GetGroupRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IGetGroupRequest
+                         * @property {string|null} [name] GetGroupRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetGroupRequest.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a GetGroupRequest.
+                         * @implements IGetGroupRequest
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IGetGroupRequest=} [properties] Properties to set
+                         */
+                        function GetGroupRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetGroupRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkconnectivity.v1.GetGroupRequest
+                         * @instance
+                         */
+                        GetGroupRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetGroupRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.GetGroupRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IGetGroupRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.GetGroupRequest} GetGroupRequest instance
+                         */
+                        GetGroupRequest.create = function create(properties) {
+                            return new GetGroupRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetGroupRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.GetGroupRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.GetGroupRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IGetGroupRequest} message GetGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetGroupRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetGroupRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.GetGroupRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.GetGroupRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IGetGroupRequest} message GetGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetGroupRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetGroupRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.GetGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.GetGroupRequest} GetGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetGroupRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.GetGroupRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetGroupRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.GetGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.GetGroupRequest} GetGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetGroupRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetGroupRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.GetGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetGroupRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetGroupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.GetGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.GetGroupRequest} GetGroupRequest
+                         */
+                        GetGroupRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.GetGroupRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.GetGroupRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetGroupRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.GetGroupRequest
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.GetGroupRequest} message GetGroupRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetGroupRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetGroupRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.GetGroupRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetGroupRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetGroupRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkconnectivity.v1.GetGroupRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetGroupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkconnectivity.v1.GetGroupRequest";
+                        };
+    
+                        return GetGroupRequest;
                     })();
     
                     v1.PolicyBasedRoutingService = (function() {
