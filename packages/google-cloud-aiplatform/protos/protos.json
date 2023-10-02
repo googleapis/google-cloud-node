@@ -26538,6 +26538,13 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "dedicatedServingEndpoint": {
+                          "type": "DedicatedServingEndpoint",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "embeddingManagement": {
                           "type": "EmbeddingManagement",
                           "id": 11,
@@ -26581,6 +26588,17 @@
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
                                 }
+                              }
+                            }
+                          }
+                        },
+                        "DedicatedServingEndpoint": {
+                          "fields": {
+                            "publicEndpointDomainName": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             }
                           }
