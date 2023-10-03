@@ -57,7 +57,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
     type = type.fields[field]?.resolvedType as protobuf.Type;
   }
   // console.log(type);
-  return type.fields[fields[fields.length - 1]]?.defaultValue;
+  return type?.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
@@ -255,7 +255,7 @@ describe('v2.CloudTasksClient', () => {
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.tasks.v2.GetQueueRequest',
-        ['name']
+        ['queue', 'name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
@@ -503,7 +503,7 @@ describe('v2.CloudTasksClient', () => {
   });
 
   describe('updateQueue', () => {
-    it.only('invokes updateQueue without error', async () => {
+    it('invokes updateQueue without error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',

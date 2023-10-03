@@ -1,1 +1,1 @@
-export {CloudTasksClient} from './cloud_tasks_client.js';
+export { CloudTasksClient } from './cloud_tasks_client.js';
