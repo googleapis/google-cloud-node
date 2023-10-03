@@ -81,6 +81,7 @@
     "jsdoc": "^4.0.2",
     "jsdoc-fresh": "^3.0.0",
     "jsdoc-region-tag": "^3.0.0",
+    "long": "^5.2.3",
     "mocha": "^10.2.0",
     "pack-n-play": "^1.0.0-2",
     "sinon": "^15.2.0",
