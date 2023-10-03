@@ -47,9 +47,16 @@ const root = protobuf.Root.fromJSON(
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
   let type = root.lookupType(typeName) as protobuf.Type;
+  // console.log(type);
+  // console.log(type.fields);
   for (const field of fields.slice(0, -1)) {
+    console.log(field)
+    console.log(type.fields[field])
+    console.log(type.fields[field]?.resolvedType)
+    // console.log(type.fields[field])
     type = type.fields[field]?.resolvedType as protobuf.Type;
   }
+  // console.log(type);
   return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
@@ -251,7 +258,7 @@ describe('v2.CloudTasksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2.Queue()
       );
@@ -282,7 +289,7 @@ describe('v2.CloudTasksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2.Queue()
       );
@@ -312,6 +319,8 @@ describe('v2.CloudTasksClient', () => {
       const actualHeaderRequestParams = (
         client.innerApiCalls.getQueue as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      console.log(actualHeaderRequestParams)
+      console.log(expectedHeaderRequestParams)
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
@@ -329,7 +338,7 @@ describe('v2.CloudTasksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getQueue = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getQueue(request), expectedError);
@@ -378,7 +387,7 @@ describe('v2.CloudTasksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2.Queue()
       );
@@ -409,7 +418,7 @@ describe('v2.CloudTasksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2.Queue()
       );
@@ -456,7 +465,7 @@ describe('v2.CloudTasksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createQueue = stubSimpleCall(
         undefined,
@@ -503,13 +512,13 @@ describe('v2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.UpdateQueueRequest()
       );
-      request.queue ??= {};
+      request.queue = {};
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.tasks.v2.UpdateQueueRequest',
         ['queue', 'name']
       );
       request.queue.name = defaultValue1;
-      const expectedHeaderRequestParams = `queue.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `queue.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2.Queue()
       );
@@ -541,7 +550,7 @@ describe('v2.CloudTasksClient', () => {
         ['queue', 'name']
       );
       request.queue.name = defaultValue1;
-      const expectedHeaderRequestParams = `queue.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `queue.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2.Queue()
       );
@@ -589,7 +598,7 @@ describe('v2.CloudTasksClient', () => {
         ['queue', 'name']
       );
       request.queue.name = defaultValue1;
-      const expectedHeaderRequestParams = `queue.name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `queue.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateQueue = stubSimpleCall(
         undefined,
@@ -642,7 +651,7 @@ describe('v2.CloudTasksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -673,7 +682,7 @@ describe('v2.CloudTasksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -720,7 +729,7 @@ describe('v2.CloudTasksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteQueue = stubSimpleCall(
         undefined,
@@ -772,7 +781,7 @@ describe('v2.CloudTasksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2.Queue()
       );
@@ -803,7 +812,7 @@ describe('v2.CloudTasksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2.Queue()
       );
@@ -850,7 +859,7 @@ describe('v2.CloudTasksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.purgeQueue = stubSimpleCall(
         undefined,
@@ -902,7 +911,7 @@ describe('v2.CloudTasksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2.Queue()
       );
@@ -933,7 +942,7 @@ describe('v2.CloudTasksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2.Queue()
       );
@@ -980,7 +989,7 @@ describe('v2.CloudTasksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.pauseQueue = stubSimpleCall(
         undefined,
@@ -1032,7 +1041,7 @@ describe('v2.CloudTasksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2.Queue()
       );
@@ -1063,7 +1072,7 @@ describe('v2.CloudTasksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2.Queue()
       );
@@ -1110,7 +1119,7 @@ describe('v2.CloudTasksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resumeQueue = stubSimpleCall(
         undefined,
@@ -1162,7 +1171,7 @@ describe('v2.CloudTasksClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1193,7 +1202,7 @@ describe('v2.CloudTasksClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1240,7 +1249,7 @@ describe('v2.CloudTasksClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIamPolicy = stubSimpleCall(
         undefined,
@@ -1292,7 +1301,7 @@ describe('v2.CloudTasksClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1323,7 +1332,7 @@ describe('v2.CloudTasksClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1370,7 +1379,7 @@ describe('v2.CloudTasksClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setIamPolicy = stubSimpleCall(
         undefined,
@@ -1422,7 +1431,7 @@ describe('v2.CloudTasksClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -1454,7 +1463,7 @@ describe('v2.CloudTasksClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -1501,7 +1510,7 @@ describe('v2.CloudTasksClient', () => {
         ['resource']
       );
       request.resource = defaultValue1;
-      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedHeaderRequestParams = `resource=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.testIamPermissions = stubSimpleCall(
         undefined,
@@ -1553,7 +1562,7 @@ describe('v2.CloudTasksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2.Task()
       );
@@ -1584,7 +1593,7 @@ describe('v2.CloudTasksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2.Task()
       );
@@ -1631,7 +1640,7 @@ describe('v2.CloudTasksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTask = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getTask(request), expectedError);
@@ -1680,7 +1689,7 @@ describe('v2.CloudTasksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2.Task()
       );
@@ -1711,7 +1720,7 @@ describe('v2.CloudTasksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2.Task()
       );
@@ -1758,7 +1767,7 @@ describe('v2.CloudTasksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTask = stubSimpleCall(
         undefined,
@@ -1810,7 +1819,7 @@ describe('v2.CloudTasksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1841,7 +1850,7 @@ describe('v2.CloudTasksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1888,7 +1897,7 @@ describe('v2.CloudTasksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTask = stubSimpleCall(
         undefined,
@@ -1940,7 +1949,7 @@ describe('v2.CloudTasksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2.Task()
       );
@@ -1971,7 +1980,7 @@ describe('v2.CloudTasksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2.Task()
       );
@@ -2018,7 +2027,7 @@ describe('v2.CloudTasksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.runTask = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.runTask(request), expectedError);
@@ -2067,7 +2076,7 @@ describe('v2.CloudTasksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.tasks.v2.Queue()),
         generateSampleMessage(new protos.google.cloud.tasks.v2.Queue()),
@@ -2100,7 +2109,7 @@ describe('v2.CloudTasksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.tasks.v2.Queue()),
         generateSampleMessage(new protos.google.cloud.tasks.v2.Queue()),
@@ -2149,7 +2158,7 @@ describe('v2.CloudTasksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listQueues = stubSimpleCall(
         undefined,
@@ -2180,7 +2189,7 @@ describe('v2.CloudTasksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.tasks.v2.Queue()),
         generateSampleMessage(new protos.google.cloud.tasks.v2.Queue()),
@@ -2231,7 +2240,7 @@ describe('v2.CloudTasksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listQueues.createStream = stubPageStreamingCall(
         undefined,
@@ -2279,7 +2288,7 @@ describe('v2.CloudTasksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.tasks.v2.Queue()),
         generateSampleMessage(new protos.google.cloud.tasks.v2.Queue()),
@@ -2322,7 +2331,7 @@ describe('v2.CloudTasksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listQueues.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -2366,7 +2375,7 @@ describe('v2.CloudTasksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.tasks.v2.Task()),
         generateSampleMessage(new protos.google.cloud.tasks.v2.Task()),
@@ -2399,7 +2408,7 @@ describe('v2.CloudTasksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.tasks.v2.Task()),
         generateSampleMessage(new protos.google.cloud.tasks.v2.Task()),
@@ -2448,7 +2457,7 @@ describe('v2.CloudTasksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTasks = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listTasks(request), expectedError);
@@ -2476,7 +2485,7 @@ describe('v2.CloudTasksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.tasks.v2.Task()),
         generateSampleMessage(new protos.google.cloud.tasks.v2.Task()),
@@ -2527,7 +2536,7 @@ describe('v2.CloudTasksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTasks.createStream = stubPageStreamingCall(
         undefined,
@@ -2575,7 +2584,7 @@ describe('v2.CloudTasksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.tasks.v2.Task()),
         generateSampleMessage(new protos.google.cloud.tasks.v2.Task()),
@@ -2617,7 +2626,7 @@ describe('v2.CloudTasksClient', () => {
         ['parent']
       );
       request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTasks.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -2645,7 +2654,7 @@ describe('v2.CloudTasksClient', () => {
     });
   });
   describe('getLocation', () => {
-    it.only('invokes getLocation without error', async () => {
+    it('invokes getLocation without error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
@@ -2654,7 +2663,6 @@ describe('v2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
-      console.log(request);
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
       const expectedOptions = {
@@ -2669,13 +2677,12 @@ describe('v2.CloudTasksClient', () => {
       );
       client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
       const response = await client.getLocation(request, expectedOptions);
-      // assert.deepStrictEqual(response, [expectedResponse]);
-      // console.log(client.locationsClient.getLocation);
-      // assert(
-      //   (client.locationsClient.getLocation as SinonStub)
-      //     .getCall(0)
-      //     .calledWith(request, expectedOptions, undefined)
-      // );
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.locationsClient.getLocation as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions)
+      );
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({

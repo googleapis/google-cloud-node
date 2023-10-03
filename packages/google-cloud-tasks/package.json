@@ -57,7 +57,7 @@
     "system-test": "c8 mocha build/cjs/system-test",
     "test:cjs": "c8 mocha build/cjs/test",
     "test:esm": "c8 mocha build/esm/test",
-    "test": "npm run test:cjs && npm run test:esm",
+    "test": "npm run test:esm && npm run test:cjs",
     "compile:esm": "tsc -p ./tsconfig.esm.json",
     "babel": "babel esm --out-dir build/cjs --extensions \".ts\" --out-file-extension .cjs --copy-files",
     "compile:cjs": "tsc -p ./tsconfig.json && npm run babel",
