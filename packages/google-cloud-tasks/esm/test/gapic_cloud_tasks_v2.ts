@@ -50,9 +50,9 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
   // console.log(type);
   // console.log(type.fields);
   for (const field of fields.slice(0, -1)) {
-    console.log(field)
-    console.log(type.fields[field])
-    console.log(type.fields[field]?.resolvedType)
+    console.log(field);
+    console.log(type.fields[field]);
+    console.log(type.fields[field]?.resolvedType);
     // console.log(type.fields[field])
     type = type.fields[field]?.resolvedType as protobuf.Type;
   }
@@ -289,7 +289,7 @@ describe('v2.CloudTasksClient', () => {
         ['name']
       );
       request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2.Queue()
       );
@@ -319,8 +319,8 @@ describe('v2.CloudTasksClient', () => {
       const actualHeaderRequestParams = (
         client.innerApiCalls.getQueue as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      console.log(actualHeaderRequestParams)
-      console.log(expectedHeaderRequestParams)
+      console.log(actualHeaderRequestParams);
+      console.log(expectedHeaderRequestParams);
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
@@ -503,7 +503,7 @@ describe('v2.CloudTasksClient', () => {
   });
 
   describe('updateQueue', () => {
-    it('invokes updateQueue without error', async () => {
+    it.only('invokes updateQueue without error', async () => {
       const client = new cloudtasksModule.v2.CloudTasksClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
