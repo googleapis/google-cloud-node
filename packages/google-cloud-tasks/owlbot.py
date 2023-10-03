@@ -29,6 +29,30 @@ def patch(library: pathlib.Path):
 
 
 node.owlbot_main(relative_dir="packages/google-cloud-tasks",
-    staging_excludes=["README.md", "package.json"],
+    staging_excludes=["README.md", "package.json", 'esm/src/index.ts'],
     patch_staging=patch
 )
+
+# Add beta version GrafeasClient to export
+s.replace('packages/google-cloud-tasks/esm/src/index.ts',
+        r"""
+import * as v2 from './v2/index.js';
+const CloudTasksClient = v2.CloudTasksClient;
+type CloudTasksClient = v2.CloudTasksClient;
+export {v2, CloudTasksClient};
+export default {v2, CloudTasksClient};
+// @ts-ignore
+import type * as protos from '../../protos/protos.js';
+export {protos};
+""",
+"import * as v2 from './v2';"+
+"import * as v2beta2 from './v2beta2';"+
+"import * as v2beta3 from './v2beta3';"+
+
+"const CloudTasksClient = v2.CloudTasksClient;"+
+"type CloudTasksClient = v2.CloudTasksClient;"+
+
+"export {v2, v2beta2, v2beta3, CloudTasksClient};"+
+"export default {v2, v2beta2, v2beta3, CloudTasksClient};"+
+"import * as protos from '../../protos/protos.js';"+
+"export {protos};")
