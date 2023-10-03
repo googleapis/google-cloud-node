@@ -17,7 +17,7 @@ import {readFileSync} from 'fs';
 import * as path from 'path';
 import {after, before, describe, it} from 'mocha';
 import * as yaml from 'js-yaml';
-import {Datastore, DatastoreOptions, Index} from '../src';
+import {Datastore, DatastoreOptions, Index, Transaction} from '../src';
 import {google} from '../protos/protos';
 import {Storage} from '@google-cloud/storage';
 import {AggregateField} from '../src/aggregate';
@@ -1857,6 +1857,16 @@ async.each(
         });
 
         describe('aggregate query within a transaction', async () => {
+          it('should run a query and return the results', async () => {
+            // Add a test here to verify what the data is at this time.
+            // This will be a valuable reference for tests in this describe block.
+            const query = datastore.createQuery('Company');
+            const [results] = await datastore.runQuery(query);
+            assert.deepStrictEqual(
+              results.map(result => result.rating),
+              [100, 100]
+            );
+          });
           it('should aggregate query within a count transaction', async () => {
             const transaction = datastore.transaction();
             await transaction.run();
@@ -1912,6 +1922,40 @@ async.each(
               );
             }
             assert.deepStrictEqual(result, [{'average rating': 100}]);
+            await transaction.commit();
+          });
+          it('readOnly transaction should see consistent snapshot of database', async () => {
+            async function getResults(transaction: Transaction) {
+              const query = transaction.createQuery('Company');
+              const aggregateQuery = transaction
+                .createAggregationQuery(query)
+                .count('total');
+              let result;
+              try {
+                [result] = await aggregateQuery.run();
+              } catch (e) {
+                await transaction.rollback();
+                assert.fail(
+                  'The aggregation query run should have been successful'
+                );
+              }
+              return result;
+            }
+            const key = datastore.key(['Company', 'Google']);
+            const transaction = datastore.transaction({readOnly: true});
+            await transaction.run();
+            const results = await getResults(transaction);
+            assert.deepStrictEqual(results, [{total: 2}]);
+            await datastore.save([
+              {
+                key,
+                data: {
+                  rating: 100,
+                },
+              },
+            ]);
+            const resultsAgain = await getResults(transaction);
+            assert.deepStrictEqual(resultsAgain, [{total: 2}]);
             await transaction.commit();
           });
         });

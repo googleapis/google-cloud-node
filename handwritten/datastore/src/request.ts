@@ -1000,7 +1000,12 @@ class DatastoreRequest {
       reqOpts.transaction = this.id;
     }
 
-    if (isTransaction && (method === 'lookup' || method === 'runQuery')) {
+    if (
+      isTransaction &&
+      (method === 'lookup' ||
+        method === 'runQuery' ||
+        method === 'runAggregationQuery')
+    ) {
       if (reqOpts.readOptions && reqOpts.readOptions.readConsistency) {
         throw new Error(
           'Read consistency cannot be specified in a transaction.'
