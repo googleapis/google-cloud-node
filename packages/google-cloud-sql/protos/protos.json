@@ -754,6 +754,20 @@
                             "bakType": {
                               "type": "BakType",
                               "id": 6
+                            },
+                            "stopAt": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "stopAtMark": {
+                              "type": "string",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -781,10 +795,18 @@
                       "values": {
                         "BAK_TYPE_UNSPECIFIED": 0,
                         "FULL": 1,
-                        "DIFF": 2
+                        "DIFF": 2,
+                        "TLOG": 3
                       }
                     },
                     "IpConfiguration": {
+                      "oneofs": {
+                        "_pscConfig": {
+                          "oneof": [
+                            "pscConfig"
+                          ]
+                        }
+                      },
                       "fields": {
                         "ipv4Enabled": {
                           "type": "google.protobuf.BoolValue",
@@ -810,6 +832,36 @@
                         "enablePrivatePathForGoogleCloudServices": {
                           "type": "google.protobuf.BoolValue",
                           "id": 7
+                        },
+                        "pscConfig": {
+                          "type": "PscConfig",
+                          "id": 9,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "PscConfig": {
+                      "oneofs": {
+                        "_pscEnabled": {
+                          "oneof": [
+                            "pscEnabled"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "pscEnabled": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "allowedConsumerProjects": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -1663,6 +1715,10 @@
                           "type": "SqlBackendType",
                           "id": 32
                         },
+                        "pscEnabled": {
+                          "type": "bool",
+                          "id": 33
+                        },
                         "dnsName": {
                           "type": "string",
                           "id": 34
@@ -2472,6 +2528,20 @@
                               }
                             }
                           ]
+                        },
+                        "GetLatestRecoveryTime": {
+                          "requestType": "SqlInstancesGetLatestRecoveryTimeRequest",
+                          "responseType": "SqlInstancesGetLatestRecoveryTimeResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/projects/{project}/instances/{instance}/getLatestRecoveryTime"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/projects/{project}/instances/{instance}/getLatestRecoveryTime"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -3167,7 +3237,38 @@
                         }
                       }
                     },
+                    "SqlInstancesGetLatestRecoveryTimeRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SqlInstancesGetLatestRecoveryTimeResponse": {
+                      "fields": {
+                        "kind": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "latestRecoveryTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        }
+                      }
+                    },
                     "CloneContext": {
+                      "oneofs": {
+                        "_preferredZone": {
+                          "oneof": [
+                            "preferredZone"
+                          ]
+                        }
+                      },
                       "fields": {
                         "kind": {
                           "type": "string",
@@ -3197,6 +3298,14 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 9
+                        },
+                        "preferredZone": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -3221,6 +3330,16 @@
                         "_outOfDiskReport": {
                           "oneof": [
                             "outOfDiskReport"
+                          ]
+                        },
+                        "_pscServiceAttachmentLink": {
+                          "oneof": [
+                            "pscServiceAttachmentLink"
+                          ]
+                        },
+                        "_dnsName": {
+                          "oneof": [
+                            "dnsName"
                           ]
                         }
                       },
@@ -3393,6 +3512,22 @@
                         "maintenanceVersion": {
                           "type": "string",
                           "id": 42
+                        },
+                        "pscServiceAttachmentLink": {
+                          "type": "string",
+                          "id": 48,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "dnsName": {
+                          "type": "string",
+                          "id": 49,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
@@ -3663,7 +3798,8 @@
                             "RISKY_BACKUP_ADMIN_PRIVILEGE": 30,
                             "INSUFFICIENT_GCS_PERMISSIONS": 31,
                             "INVALID_FILE_INFO": 32,
-                            "UNSUPPORTED_DATABASE_SETTINGS": 33
+                            "UNSUPPORTED_DATABASE_SETTINGS": 33,
+                            "MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE": 34
                           }
                         }
                       }
@@ -5068,6 +5204,20 @@
                               }
                             }
                           ]
+                        },
+                        "GetLatestRecoveryTime": {
+                          "requestType": "SqlInstancesGetLatestRecoveryTimeRequest",
+                          "responseType": "SqlInstancesGetLatestRecoveryTimeResponse",
+                          "options": {
+                            "(google.api.http).get": "/sql/v1beta4/projects/{project}/instances/{instance}/getLatestRecoveryTime"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/sql/v1beta4/projects/{project}/instances/{instance}/getLatestRecoveryTime"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -5990,6 +6140,30 @@
                         }
                       }
                     },
+                    "SqlInstancesGetLatestRecoveryTimeRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SqlInstancesGetLatestRecoveryTimeResponse": {
+                      "fields": {
+                        "kind": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "latestRecoveryTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        }
+                      }
+                    },
                     "AclEntry": {
                       "fields": {
                         "value": {
@@ -6216,6 +6390,13 @@
                       }
                     },
                     "CloneContext": {
+                      "oneofs": {
+                        "_preferredZone": {
+                          "oneof": [
+                            "preferredZone"
+                          ]
+                        }
+                      },
                       "fields": {
                         "kind": {
                           "type": "string",
@@ -6245,6 +6426,14 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 9
+                        },
+                        "preferredZone": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -6352,6 +6541,16 @@
                         "_outOfDiskReport": {
                           "oneof": [
                             "outOfDiskReport"
+                          ]
+                        },
+                        "_pscServiceAttachmentLink": {
+                          "oneof": [
+                            "pscServiceAttachmentLink"
+                          ]
+                        },
+                        "_dnsName": {
+                          "oneof": [
+                            "dnsName"
                           ]
                         }
                       },
@@ -6524,6 +6723,22 @@
                         "maintenanceVersion": {
                           "type": "string",
                           "id": 42
+                        },
+                        "pscServiceAttachmentLink": {
+                          "type": "string",
+                          "id": 48,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "dnsName": {
+                          "type": "string",
+                          "id": 49,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
@@ -6986,6 +7201,20 @@
                             "bakType": {
                               "type": "BakType",
                               "id": 6
+                            },
+                            "stopAt": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "stopAtMark": {
+                              "type": "string",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -7013,7 +7242,8 @@
                       "values": {
                         "BAK_TYPE_UNSPECIFIED": 0,
                         "FULL": 1,
-                        "DIFF": 2
+                        "DIFF": 2,
+                        "TLOG": 3
                       }
                     },
                     "InstancesCloneRequest": {
@@ -7221,12 +7451,20 @@
                             "RISKY_BACKUP_ADMIN_PRIVILEGE": 30,
                             "INSUFFICIENT_GCS_PERMISSIONS": 31,
                             "INVALID_FILE_INFO": 32,
-                            "UNSUPPORTED_DATABASE_SETTINGS": 33
+                            "UNSUPPORTED_DATABASE_SETTINGS": 33,
+                            "MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE": 34
                           }
                         }
                       }
                     },
                     "IpConfiguration": {
+                      "oneofs": {
+                        "_pscConfig": {
+                          "oneof": [
+                            "pscConfig"
+                          ]
+                        }
+                      },
                       "fields": {
                         "ipv4Enabled": {
                           "type": "google.protobuf.BoolValue",
@@ -7252,6 +7490,36 @@
                         "enablePrivatePathForGoogleCloudServices": {
                           "type": "google.protobuf.BoolValue",
                           "id": 7
+                        },
+                        "pscConfig": {
+                          "type": "PscConfig",
+                          "id": 9,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "PscConfig": {
+                      "oneofs": {
+                        "_pscEnabled": {
+                          "oneof": [
+                            "pscEnabled"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "pscEnabled": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "allowedConsumerProjects": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -8364,6 +8632,10 @@
                         "backendType": {
                           "type": "SqlBackendType",
                           "id": 32
+                        },
+                        "pscEnabled": {
+                          "type": "bool",
+                          "id": 33
                         },
                         "dnsName": {
                           "type": "string",

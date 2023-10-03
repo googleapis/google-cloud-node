@@ -90,8 +90,7 @@ export class SqlInstancesServiceClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
-   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
    * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
@@ -99,7 +98,7 @@ export class SqlInstancesServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new SqlInstancesServiceClient({fallback: 'rest'}, gax);
+   *     const client = new SqlInstancesServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -169,7 +168,7 @@ export class SqlInstancesServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest') {
+    } else {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -257,6 +256,7 @@ export class SqlInstancesServiceClient {
       'performDiskShrink',
       'getDiskShrinkConfig',
       'resetReplicaSize',
+      'getLatestRecoveryTime',
     ];
     for (const methodName of sqlInstancesServiceStubMethods) {
       const callPromise = this.sqlInstancesServiceStub.then(
@@ -3100,6 +3100,105 @@ export class SqlInstancesServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.resetReplicaSize(request, options, callback);
+  }
+  /**
+   * Get Latest Recovery Time for a given instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.instance
+   *   Cloud SQL instance ID. This does not include the project ID.
+   * @param {string} request.project
+   *   Project ID of the project that contains the instance.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeResponse|SqlInstancesGetLatestRecoveryTimeResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/sql_instances_service.get_latest_recovery_time.js</caption>
+   * region_tag:sqladmin_v1_generated_SqlInstancesService_GetLatestRecoveryTime_async
+   */
+  getLatestRecoveryTime(
+    request?: protos.google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeResponse,
+      (
+        | protos.google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getLatestRecoveryTime(
+    request: protos.google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeResponse,
+      | protos.google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getLatestRecoveryTime(
+    request: protos.google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeRequest,
+    callback: Callback<
+      protos.google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeResponse,
+      | protos.google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getLatestRecoveryTime(
+    request?: protos.google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeResponse,
+          | protos.google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeResponse,
+      | protos.google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeResponse,
+      (
+        | protos.google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        instance: request.instance ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getLatestRecoveryTime(request, options, callback);
   }
 
   /**
