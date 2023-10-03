@@ -11695,6 +11695,14 @@ export namespace google {
                     }
                 }
 
+                /** ExternalSyncParallelLevel enum. */
+                enum ExternalSyncParallelLevel {
+                    EXTERNAL_SYNC_PARALLEL_LEVEL_UNSPECIFIED = 0,
+                    MIN = 1,
+                    OPTIMAL = 2,
+                    MAX = 3
+                }
+
                 /** Properties of a SqlInstancesGetDiskShrinkConfigRequest. */
                 interface ISqlInstancesGetDiskShrinkConfigRequest {
 
@@ -11957,7 +11965,7 @@ export namespace google {
                     mysqlSyncConfig?: (google.cloud.sql.v1.IMySqlSyncConfig|null);
 
                     /** SqlInstancesStartExternalSyncRequest syncParallelLevel */
-                    syncParallelLevel?: (google.cloud.sql.v1.SqlInstancesStartExternalSyncRequest.ExternalSyncParallelLevel|keyof typeof google.cloud.sql.v1.SqlInstancesStartExternalSyncRequest.ExternalSyncParallelLevel|null);
+                    syncParallelLevel?: (google.cloud.sql.v1.ExternalSyncParallelLevel|keyof typeof google.cloud.sql.v1.ExternalSyncParallelLevel|null);
                 }
 
                 /** Represents a SqlInstancesStartExternalSyncRequest. */
@@ -11985,7 +11993,7 @@ export namespace google {
                     public mysqlSyncConfig?: (google.cloud.sql.v1.IMySqlSyncConfig|null);
 
                     /** SqlInstancesStartExternalSyncRequest syncParallelLevel. */
-                    public syncParallelLevel: (google.cloud.sql.v1.SqlInstancesStartExternalSyncRequest.ExternalSyncParallelLevel|keyof typeof google.cloud.sql.v1.SqlInstancesStartExternalSyncRequest.ExternalSyncParallelLevel);
+                    public syncParallelLevel: (google.cloud.sql.v1.ExternalSyncParallelLevel|keyof typeof google.cloud.sql.v1.ExternalSyncParallelLevel);
 
                     /** SqlInstancesStartExternalSyncRequest syncConfig. */
                     public syncConfig?: "mysqlSyncConfig";
@@ -12066,17 +12074,6 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace SqlInstancesStartExternalSyncRequest {
-
-                    /** ExternalSyncParallelLevel enum. */
-                    enum ExternalSyncParallelLevel {
-                        EXTERNAL_SYNC_PARALLEL_LEVEL_UNSPECIFIED = 0,
-                        MIN = 1,
-                        OPTIMAL = 2,
-                        MAX = 3
-                    }
                 }
 
                 /** Properties of a SqlInstancesResetReplicaSizeRequest. */

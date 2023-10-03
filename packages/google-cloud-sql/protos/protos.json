@@ -2950,6 +2950,14 @@
                         }
                       }
                     },
+                    "ExternalSyncParallelLevel": {
+                      "values": {
+                        "EXTERNAL_SYNC_PARALLEL_LEVEL_UNSPECIFIED": 0,
+                        "MIN": 1,
+                        "OPTIMAL": 2,
+                        "MAX": 3
+                      }
+                    },
                     "SqlInstancesGetDiskShrinkConfigRequest": {
                       "fields": {
                         "instance": {
@@ -3046,16 +3054,6 @@
                           "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "ExternalSyncParallelLevel": {
-                          "values": {
-                            "EXTERNAL_SYNC_PARALLEL_LEVEL_UNSPECIFIED": 0,
-                            "MIN": 1,
-                            "OPTIMAL": 2,
-                            "MAX": 3
                           }
                         }
                       }
