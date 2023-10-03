@@ -20,6 +20,11 @@
                 "updateDataset"
               ]
             },
+            "GetDatasetVersion": {
+              "methods": [
+                "getDatasetVersion"
+              ]
+            },
             "GetAnnotationSpec": {
               "methods": [
                 "getAnnotationSpec"
@@ -45,6 +50,21 @@
                 "exportData"
               ]
             },
+            "CreateDatasetVersion": {
+              "methods": [
+                "createDatasetVersion"
+              ]
+            },
+            "DeleteDatasetVersion": {
+              "methods": [
+                "deleteDatasetVersion"
+              ]
+            },
+            "RestoreDatasetVersion": {
+              "methods": [
+                "restoreDatasetVersion"
+              ]
+            },
             "DeleteSavedQuery": {
               "methods": [
                 "deleteSavedQuery"
@@ -55,6 +75,13 @@
                 "listDatasets",
                 "listDatasetsStream",
                 "listDatasetsAsync"
+              ]
+            },
+            "ListDatasetVersions": {
+              "methods": [
+                "listDatasetVersions",
+                "listDatasetVersionsStream",
+                "listDatasetVersionsAsync"
               ]
             },
             "ListDataItems": {
@@ -100,6 +127,11 @@
                 "updateDataset"
               ]
             },
+            "GetDatasetVersion": {
+              "methods": [
+                "getDatasetVersion"
+              ]
+            },
             "GetAnnotationSpec": {
               "methods": [
                 "getAnnotationSpec"
@@ -125,6 +157,21 @@
                 "exportData"
               ]
             },
+            "CreateDatasetVersion": {
+              "methods": [
+                "createDatasetVersion"
+              ]
+            },
+            "DeleteDatasetVersion": {
+              "methods": [
+                "deleteDatasetVersion"
+              ]
+            },
+            "RestoreDatasetVersion": {
+              "methods": [
+                "restoreDatasetVersion"
+              ]
+            },
             "DeleteSavedQuery": {
               "methods": [
                 "deleteSavedQuery"
@@ -135,6 +182,13 @@
                 "listDatasets",
                 "listDatasetsStream",
                 "listDatasetsAsync"
+              ]
+            },
+            "ListDatasetVersions": {
+              "methods": [
+                "listDatasetVersions",
+                "listDatasetVersionsStream",
+                "listDatasetVersionsAsync"
               ]
             },
             "ListDataItems": {
@@ -1947,6 +2001,13 @@
               "methods": [
                 "getPublisherModel"
               ]
+            },
+            "ListPublisherModels": {
+              "methods": [
+                "listPublisherModels",
+                "listPublisherModelsStream",
+                "listPublisherModelsAsync"
+              ]
             }
           }
         },
@@ -1956,6 +2017,13 @@
             "GetPublisherModel": {
               "methods": [
                 "getPublisherModel"
+              ]
+            },
+            "ListPublisherModels": {
+              "methods": [
+                "listPublisherModels",
+                "listPublisherModelsStream",
+                "listPublisherModelsAsync"
               ]
             }
           }
