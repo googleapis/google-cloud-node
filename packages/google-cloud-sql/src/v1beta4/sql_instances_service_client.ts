@@ -2830,7 +2830,7 @@ export class SqlInstancesServiceClient {
    *   Whether to skip the verification step (VESS).
    * @param {google.cloud.sql.v1beta4.MySqlSyncConfig} request.mysqlSyncConfig
    *   MySQL-specific settings for start external sync.
-   * @param {google.cloud.sql.v1beta4.SqlInstancesStartExternalSyncRequest.ExternalSyncParallelLevel} [request.syncParallelLevel]
+   * @param {google.cloud.sql.v1beta4.ExternalSyncParallelLevel} [request.syncParallelLevel]
    *   Optional. Parallel level for initial data sync. Currently only applicable
    *   for MySQL.
    * @param {object} [options]
