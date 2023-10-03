@@ -34,7 +34,6 @@
   * [Sql_instances_service.failover](#sql_instances_service.failover)
   * [Sql_instances_service.get](#sql_instances_service.get)
   * [Sql_instances_service.get_disk_shrink_config](#sql_instances_service.get_disk_shrink_config)
-  * [Sql_instances_service.get_latest_recovery_time](#sql_instances_service.get_latest_recovery_time)
   * [Sql_instances_service.import](#sql_instances_service.import)
   * [Sql_instances_service.insert](#sql_instances_service.insert)
   * [Sql_instances_service.list](#sql_instances_service.list)
@@ -90,7 +89,6 @@
   * [Sql_instances_service.failover](#sql_instances_service.failover)
   * [Sql_instances_service.get](#sql_instances_service.get)
   * [Sql_instances_service.get_disk_shrink_config](#sql_instances_service.get_disk_shrink_config)
-  * [Sql_instances_service.get_latest_recovery_time](#sql_instances_service.get_latest_recovery_time)
   * [Sql_instances_service.import](#sql_instances_service.import)
   * [Sql_instances_service.insert](#sql_instances_service.insert)
   * [Sql_instances_service.list](#sql_instances_service.list)
@@ -143,7 +141,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Sql_backup_runs_service.delete
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_backup_runs_service.delete.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_backup_runs_service.delete.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_backup_runs_service.delete.js,samples/README.md)
 
@@ -160,7 +158,7 @@ __Usage:__
 
 ### Sql_backup_runs_service.get
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_backup_runs_service.get.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_backup_runs_service.get.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_backup_runs_service.get.js,samples/README.md)
 
@@ -177,7 +175,7 @@ __Usage:__
 
 ### Sql_backup_runs_service.insert
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_backup_runs_service.insert.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_backup_runs_service.insert.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_backup_runs_service.insert.js,samples/README.md)
 
@@ -194,7 +192,7 @@ __Usage:__
 
 ### Sql_backup_runs_service.list
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_backup_runs_service.list.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_backup_runs_service.list.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_backup_runs_service.list.js,samples/README.md)
 
@@ -211,7 +209,7 @@ __Usage:__
 
 ### Sql_connect_service.generate_ephemeral_cert
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_connect_service.generate_ephemeral_cert.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_connect_service.generate_ephemeral_cert.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_connect_service.generate_ephemeral_cert.js,samples/README.md)
 
@@ -228,7 +226,7 @@ __Usage:__
 
 ### Sql_connect_service.get_connect_settings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_connect_service.get_connect_settings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_connect_service.get_connect_settings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_connect_service.get_connect_settings.js,samples/README.md)
 
@@ -245,7 +243,7 @@ __Usage:__
 
 ### Sql_databases_service.delete
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_databases_service.delete.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_databases_service.delete.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_databases_service.delete.js,samples/README.md)
 
@@ -262,7 +260,7 @@ __Usage:__
 
 ### Sql_databases_service.get
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_databases_service.get.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_databases_service.get.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_databases_service.get.js,samples/README.md)
 
@@ -279,7 +277,7 @@ __Usage:__
 
 ### Sql_databases_service.insert
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_databases_service.insert.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_databases_service.insert.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_databases_service.insert.js,samples/README.md)
 
@@ -296,7 +294,7 @@ __Usage:__
 
 ### Sql_databases_service.list
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_databases_service.list.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_databases_service.list.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_databases_service.list.js,samples/README.md)
 
@@ -313,7 +311,7 @@ __Usage:__
 
 ### Sql_databases_service.patch
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_databases_service.patch.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_databases_service.patch.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_databases_service.patch.js,samples/README.md)
 
@@ -330,7 +328,7 @@ __Usage:__
 
 ### Sql_databases_service.update
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_databases_service.update.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_databases_service.update.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_databases_service.update.js,samples/README.md)
 
@@ -347,7 +345,7 @@ __Usage:__
 
 ### Sql_flags_service.list
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_flags_service.list.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_flags_service.list.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_flags_service.list.js,samples/README.md)
 
@@ -364,7 +362,7 @@ __Usage:__
 
 ### Sql_instances_service.add_server_ca
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.add_server_ca.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.add_server_ca.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.add_server_ca.js,samples/README.md)
 
@@ -381,7 +379,7 @@ __Usage:__
 
 ### Sql_instances_service.clone
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.clone.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.clone.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.clone.js,samples/README.md)
 
@@ -398,7 +396,7 @@ __Usage:__
 
 ### Sql_instances_service.create_ephemeral
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.create_ephemeral.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.create_ephemeral.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.create_ephemeral.js,samples/README.md)
 
@@ -415,7 +413,7 @@ __Usage:__
 
 ### Sql_instances_service.delete
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.delete.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.delete.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.delete.js,samples/README.md)
 
@@ -432,7 +430,7 @@ __Usage:__
 
 ### Sql_instances_service.demote_master
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.demote_master.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.demote_master.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.demote_master.js,samples/README.md)
 
@@ -449,7 +447,7 @@ __Usage:__
 
 ### Sql_instances_service.export
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.export.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.export.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.export.js,samples/README.md)
 
@@ -466,7 +464,7 @@ __Usage:__
 
 ### Sql_instances_service.failover
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.failover.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.failover.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.failover.js,samples/README.md)
 
@@ -483,7 +481,7 @@ __Usage:__
 
 ### Sql_instances_service.get
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.get.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.get.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.get.js,samples/README.md)
 
@@ -500,7 +498,7 @@ __Usage:__
 
 ### Sql_instances_service.get_disk_shrink_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.get_disk_shrink_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.get_disk_shrink_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.get_disk_shrink_config.js,samples/README.md)
 
@@ -515,26 +513,9 @@ __Usage:__
 
 
 
-### Sql_instances_service.get_latest_recovery_time
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.get_latest_recovery_time.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.get_latest_recovery_time.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-sql/samples/generated/v1/sql_instances_service.get_latest_recovery_time.js`
-
-
------
-
-
-
-
 ### Sql_instances_service.import
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.import.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.import.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.import.js,samples/README.md)
 
@@ -551,7 +532,7 @@ __Usage:__
 
 ### Sql_instances_service.insert
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.insert.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.insert.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.insert.js,samples/README.md)
 
@@ -568,7 +549,7 @@ __Usage:__
 
 ### Sql_instances_service.list
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.list.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.list.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.list.js,samples/README.md)
 
@@ -585,7 +566,7 @@ __Usage:__
 
 ### Sql_instances_service.list_server_cas
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.list_server_cas.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.list_server_cas.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.list_server_cas.js,samples/README.md)
 
@@ -602,7 +583,7 @@ __Usage:__
 
 ### Sql_instances_service.patch
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.patch.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.patch.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.patch.js,samples/README.md)
 
@@ -619,7 +600,7 @@ __Usage:__
 
 ### Sql_instances_service.perform_disk_shrink
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.perform_disk_shrink.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.perform_disk_shrink.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.perform_disk_shrink.js,samples/README.md)
 
@@ -636,7 +617,7 @@ __Usage:__
 
 ### Sql_instances_service.promote_replica
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.promote_replica.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.promote_replica.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.promote_replica.js,samples/README.md)
 
@@ -653,7 +634,7 @@ __Usage:__
 
 ### Sql_instances_service.reencrypt
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.reencrypt.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.reencrypt.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.reencrypt.js,samples/README.md)
 
@@ -670,7 +651,7 @@ __Usage:__
 
 ### Sql_instances_service.reschedule_maintenance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.reschedule_maintenance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.reschedule_maintenance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.reschedule_maintenance.js,samples/README.md)
 
@@ -687,7 +668,7 @@ __Usage:__
 
 ### Sql_instances_service.reset_replica_size
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.reset_replica_size.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.reset_replica_size.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.reset_replica_size.js,samples/README.md)
 
@@ -704,7 +685,7 @@ __Usage:__
 
 ### Sql_instances_service.reset_ssl_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.reset_ssl_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.reset_ssl_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.reset_ssl_config.js,samples/README.md)
 
@@ -721,7 +702,7 @@ __Usage:__
 
 ### Sql_instances_service.restart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.restart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.restart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.restart.js,samples/README.md)
 
@@ -738,7 +719,7 @@ __Usage:__
 
 ### Sql_instances_service.restore_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.restore_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.restore_backup.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.restore_backup.js,samples/README.md)
 
@@ -755,7 +736,7 @@ __Usage:__
 
 ### Sql_instances_service.rotate_server_ca
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.rotate_server_ca.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.rotate_server_ca.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.rotate_server_ca.js,samples/README.md)
 
@@ -772,7 +753,7 @@ __Usage:__
 
 ### Sql_instances_service.start_external_sync
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.start_external_sync.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.start_external_sync.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.start_external_sync.js,samples/README.md)
 
@@ -789,7 +770,7 @@ __Usage:__
 
 ### Sql_instances_service.start_replica
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.start_replica.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.start_replica.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.start_replica.js,samples/README.md)
 
@@ -806,7 +787,7 @@ __Usage:__
 
 ### Sql_instances_service.stop_replica
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.stop_replica.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.stop_replica.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.stop_replica.js,samples/README.md)
 
@@ -823,7 +804,7 @@ __Usage:__
 
 ### Sql_instances_service.truncate_log
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.truncate_log.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.truncate_log.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.truncate_log.js,samples/README.md)
 
@@ -840,7 +821,7 @@ __Usage:__
 
 ### Sql_instances_service.update
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.update.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.update.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.update.js,samples/README.md)
 
@@ -857,7 +838,7 @@ __Usage:__
 
 ### Sql_instances_service.verify_external_sync_settings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.verify_external_sync_settings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_instances_service.verify_external_sync_settings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_instances_service.verify_external_sync_settings.js,samples/README.md)
 
@@ -874,7 +855,7 @@ __Usage:__
 
 ### Sql_operations_service.cancel
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_operations_service.cancel.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_operations_service.cancel.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_operations_service.cancel.js,samples/README.md)
 
@@ -891,7 +872,7 @@ __Usage:__
 
 ### Sql_operations_service.get
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_operations_service.get.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_operations_service.get.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_operations_service.get.js,samples/README.md)
 
@@ -908,7 +889,7 @@ __Usage:__
 
 ### Sql_operations_service.list
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_operations_service.list.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_operations_service.list.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_operations_service.list.js,samples/README.md)
 
@@ -925,7 +906,7 @@ __Usage:__
 
 ### Sql_ssl_certs_service.delete
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_ssl_certs_service.delete.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_ssl_certs_service.delete.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_ssl_certs_service.delete.js,samples/README.md)
 
@@ -942,7 +923,7 @@ __Usage:__
 
 ### Sql_ssl_certs_service.get
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_ssl_certs_service.get.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_ssl_certs_service.get.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_ssl_certs_service.get.js,samples/README.md)
 
@@ -959,7 +940,7 @@ __Usage:__
 
 ### Sql_ssl_certs_service.insert
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_ssl_certs_service.insert.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_ssl_certs_service.insert.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_ssl_certs_service.insert.js,samples/README.md)
 
@@ -976,7 +957,7 @@ __Usage:__
 
 ### Sql_ssl_certs_service.list
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_ssl_certs_service.list.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_ssl_certs_service.list.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_ssl_certs_service.list.js,samples/README.md)
 
@@ -993,7 +974,7 @@ __Usage:__
 
 ### Sql_tiers_service.list
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_tiers_service.list.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_tiers_service.list.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_tiers_service.list.js,samples/README.md)
 
@@ -1010,7 +991,7 @@ __Usage:__
 
 ### Sql_users_service.delete
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_users_service.delete.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_users_service.delete.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_users_service.delete.js,samples/README.md)
 
@@ -1027,7 +1008,7 @@ __Usage:__
 
 ### Sql_users_service.get
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_users_service.get.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_users_service.get.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_users_service.get.js,samples/README.md)
 
@@ -1044,7 +1025,7 @@ __Usage:__
 
 ### Sql_users_service.insert
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_users_service.insert.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_users_service.insert.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_users_service.insert.js,samples/README.md)
 
@@ -1061,7 +1042,7 @@ __Usage:__
 
 ### Sql_users_service.list
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_users_service.list.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_users_service.list.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_users_service.list.js,samples/README.md)
 
@@ -1078,7 +1059,7 @@ __Usage:__
 
 ### Sql_users_service.update
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1/sql_users_service.update.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1/sql_users_service.update.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1/sql_users_service.update.js,samples/README.md)
 
@@ -1095,7 +1076,7 @@ __Usage:__
 
 ### Sql_backup_runs_service.delete
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_backup_runs_service.delete.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_backup_runs_service.delete.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_backup_runs_service.delete.js,samples/README.md)
 
@@ -1112,7 +1093,7 @@ __Usage:__
 
 ### Sql_backup_runs_service.get
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_backup_runs_service.get.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_backup_runs_service.get.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_backup_runs_service.get.js,samples/README.md)
 
@@ -1129,7 +1110,7 @@ __Usage:__
 
 ### Sql_backup_runs_service.insert
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_backup_runs_service.insert.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_backup_runs_service.insert.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_backup_runs_service.insert.js,samples/README.md)
 
@@ -1146,7 +1127,7 @@ __Usage:__
 
 ### Sql_backup_runs_service.list
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_backup_runs_service.list.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_backup_runs_service.list.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_backup_runs_service.list.js,samples/README.md)
 
@@ -1163,7 +1144,7 @@ __Usage:__
 
 ### Sql_connect_service.generate_ephemeral_cert
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_connect_service.generate_ephemeral_cert.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_connect_service.generate_ephemeral_cert.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_connect_service.generate_ephemeral_cert.js,samples/README.md)
 
@@ -1180,7 +1161,7 @@ __Usage:__
 
 ### Sql_connect_service.get_connect_settings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_connect_service.get_connect_settings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_connect_service.get_connect_settings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_connect_service.get_connect_settings.js,samples/README.md)
 
@@ -1197,7 +1178,7 @@ __Usage:__
 
 ### Sql_databases_service.delete
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_databases_service.delete.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_databases_service.delete.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_databases_service.delete.js,samples/README.md)
 
@@ -1214,7 +1195,7 @@ __Usage:__
 
 ### Sql_databases_service.get
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_databases_service.get.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_databases_service.get.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_databases_service.get.js,samples/README.md)
 
@@ -1231,7 +1212,7 @@ __Usage:__
 
 ### Sql_databases_service.insert
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_databases_service.insert.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_databases_service.insert.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_databases_service.insert.js,samples/README.md)
 
@@ -1248,7 +1229,7 @@ __Usage:__
 
 ### Sql_databases_service.list
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_databases_service.list.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_databases_service.list.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_databases_service.list.js,samples/README.md)
 
@@ -1265,7 +1246,7 @@ __Usage:__
 
 ### Sql_databases_service.patch
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_databases_service.patch.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_databases_service.patch.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_databases_service.patch.js,samples/README.md)
 
@@ -1282,7 +1263,7 @@ __Usage:__
 
 ### Sql_databases_service.update
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_databases_service.update.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_databases_service.update.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_databases_service.update.js,samples/README.md)
 
@@ -1299,7 +1280,7 @@ __Usage:__
 
 ### Sql_flags_service.list
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_flags_service.list.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_flags_service.list.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_flags_service.list.js,samples/README.md)
 
@@ -1316,7 +1297,7 @@ __Usage:__
 
 ### Sql_instances_service.add_server_ca
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.add_server_ca.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.add_server_ca.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.add_server_ca.js,samples/README.md)
 
@@ -1333,7 +1314,7 @@ __Usage:__
 
 ### Sql_instances_service.clone
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.clone.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.clone.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.clone.js,samples/README.md)
 
@@ -1350,7 +1331,7 @@ __Usage:__
 
 ### Sql_instances_service.create_ephemeral
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.create_ephemeral.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.create_ephemeral.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.create_ephemeral.js,samples/README.md)
 
@@ -1367,7 +1348,7 @@ __Usage:__
 
 ### Sql_instances_service.delete
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.delete.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.delete.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.delete.js,samples/README.md)
 
@@ -1384,7 +1365,7 @@ __Usage:__
 
 ### Sql_instances_service.demote_master
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.demote_master.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.demote_master.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.demote_master.js,samples/README.md)
 
@@ -1401,7 +1382,7 @@ __Usage:__
 
 ### Sql_instances_service.export
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.export.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.export.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.export.js,samples/README.md)
 
@@ -1418,7 +1399,7 @@ __Usage:__
 
 ### Sql_instances_service.failover
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.failover.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.failover.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.failover.js,samples/README.md)
 
@@ -1435,7 +1416,7 @@ __Usage:__
 
 ### Sql_instances_service.get
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.get.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.get.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.get.js,samples/README.md)
 
@@ -1452,7 +1433,7 @@ __Usage:__
 
 ### Sql_instances_service.get_disk_shrink_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.get_disk_shrink_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.get_disk_shrink_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.get_disk_shrink_config.js,samples/README.md)
 
@@ -1467,26 +1448,9 @@ __Usage:__
 
 
 
-### Sql_instances_service.get_latest_recovery_time
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.get_latest_recovery_time.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.get_latest_recovery_time.js,samples/README.md)
-
-__Usage:__
-
-
-`node packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.get_latest_recovery_time.js`
-
-
------
-
-
-
-
 ### Sql_instances_service.import
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.import.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.import.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.import.js,samples/README.md)
 
@@ -1503,7 +1467,7 @@ __Usage:__
 
 ### Sql_instances_service.insert
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.insert.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.insert.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.insert.js,samples/README.md)
 
@@ -1520,7 +1484,7 @@ __Usage:__
 
 ### Sql_instances_service.list
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.list.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.list.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.list.js,samples/README.md)
 
@@ -1537,7 +1501,7 @@ __Usage:__
 
 ### Sql_instances_service.list_server_cas
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.list_server_cas.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.list_server_cas.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.list_server_cas.js,samples/README.md)
 
@@ -1554,7 +1518,7 @@ __Usage:__
 
 ### Sql_instances_service.patch
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.patch.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.patch.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.patch.js,samples/README.md)
 
@@ -1571,7 +1535,7 @@ __Usage:__
 
 ### Sql_instances_service.perform_disk_shrink
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.perform_disk_shrink.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.perform_disk_shrink.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.perform_disk_shrink.js,samples/README.md)
 
@@ -1588,7 +1552,7 @@ __Usage:__
 
 ### Sql_instances_service.promote_replica
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.promote_replica.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.promote_replica.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.promote_replica.js,samples/README.md)
 
@@ -1605,7 +1569,7 @@ __Usage:__
 
 ### Sql_instances_service.reencrypt
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.reencrypt.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.reencrypt.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.reencrypt.js,samples/README.md)
 
@@ -1622,7 +1586,7 @@ __Usage:__
 
 ### Sql_instances_service.reschedule_maintenance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.reschedule_maintenance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.reschedule_maintenance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.reschedule_maintenance.js,samples/README.md)
 
@@ -1639,7 +1603,7 @@ __Usage:__
 
 ### Sql_instances_service.reset_replica_size
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.reset_replica_size.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.reset_replica_size.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.reset_replica_size.js,samples/README.md)
 
@@ -1656,7 +1620,7 @@ __Usage:__
 
 ### Sql_instances_service.reset_ssl_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.reset_ssl_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.reset_ssl_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.reset_ssl_config.js,samples/README.md)
 
@@ -1673,7 +1637,7 @@ __Usage:__
 
 ### Sql_instances_service.restart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.restart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.restart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.restart.js,samples/README.md)
 
@@ -1690,7 +1654,7 @@ __Usage:__
 
 ### Sql_instances_service.restore_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.restore_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.restore_backup.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.restore_backup.js,samples/README.md)
 
@@ -1707,7 +1671,7 @@ __Usage:__
 
 ### Sql_instances_service.rotate_server_ca
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.rotate_server_ca.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.rotate_server_ca.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.rotate_server_ca.js,samples/README.md)
 
@@ -1724,7 +1688,7 @@ __Usage:__
 
 ### Sql_instances_service.start_external_sync
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.start_external_sync.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.start_external_sync.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.start_external_sync.js,samples/README.md)
 
@@ -1741,7 +1705,7 @@ __Usage:__
 
 ### Sql_instances_service.start_replica
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.start_replica.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.start_replica.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.start_replica.js,samples/README.md)
 
@@ -1758,7 +1722,7 @@ __Usage:__
 
 ### Sql_instances_service.stop_replica
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.stop_replica.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.stop_replica.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.stop_replica.js,samples/README.md)
 
@@ -1775,7 +1739,7 @@ __Usage:__
 
 ### Sql_instances_service.truncate_log
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.truncate_log.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.truncate_log.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.truncate_log.js,samples/README.md)
 
@@ -1792,7 +1756,7 @@ __Usage:__
 
 ### Sql_instances_service.update
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.update.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.update.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.update.js,samples/README.md)
 
@@ -1809,7 +1773,7 @@ __Usage:__
 
 ### Sql_instances_service.verify_external_sync_settings
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.verify_external_sync_settings.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.verify_external_sync_settings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_instances_service.verify_external_sync_settings.js,samples/README.md)
 
@@ -1826,7 +1790,7 @@ __Usage:__
 
 ### Sql_operations_service.cancel
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_operations_service.cancel.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_operations_service.cancel.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_operations_service.cancel.js,samples/README.md)
 
@@ -1843,7 +1807,7 @@ __Usage:__
 
 ### Sql_operations_service.get
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_operations_service.get.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_operations_service.get.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_operations_service.get.js,samples/README.md)
 
@@ -1860,7 +1824,7 @@ __Usage:__
 
 ### Sql_operations_service.list
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_operations_service.list.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_operations_service.list.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_operations_service.list.js,samples/README.md)
 
@@ -1877,7 +1841,7 @@ __Usage:__
 
 ### Sql_ssl_certs_service.delete
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_ssl_certs_service.delete.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_ssl_certs_service.delete.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_ssl_certs_service.delete.js,samples/README.md)
 
@@ -1894,7 +1858,7 @@ __Usage:__
 
 ### Sql_ssl_certs_service.get
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_ssl_certs_service.get.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_ssl_certs_service.get.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_ssl_certs_service.get.js,samples/README.md)
 
@@ -1911,7 +1875,7 @@ __Usage:__
 
 ### Sql_ssl_certs_service.insert
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_ssl_certs_service.insert.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_ssl_certs_service.insert.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_ssl_certs_service.insert.js,samples/README.md)
 
@@ -1928,7 +1892,7 @@ __Usage:__
 
 ### Sql_ssl_certs_service.list
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_ssl_certs_service.list.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_ssl_certs_service.list.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_ssl_certs_service.list.js,samples/README.md)
 
@@ -1945,7 +1909,7 @@ __Usage:__
 
 ### Sql_tiers_service.list
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_tiers_service.list.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_tiers_service.list.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_tiers_service.list.js,samples/README.md)
 
@@ -1962,7 +1926,7 @@ __Usage:__
 
 ### Sql_users_service.delete
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_users_service.delete.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_users_service.delete.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_users_service.delete.js,samples/README.md)
 
@@ -1979,7 +1943,7 @@ __Usage:__
 
 ### Sql_users_service.get
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_users_service.get.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_users_service.get.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_users_service.get.js,samples/README.md)
 
@@ -1996,7 +1960,7 @@ __Usage:__
 
 ### Sql_users_service.insert
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_users_service.insert.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_users_service.insert.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_users_service.insert.js,samples/README.md)
 
@@ -2013,7 +1977,7 @@ __Usage:__
 
 ### Sql_users_service.list
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_users_service.list.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_users_service.list.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_users_service.list.js,samples/README.md)
 
@@ -2030,7 +1994,7 @@ __Usage:__
 
 ### Sql_users_service.update
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/generated/v1beta4/sql_users_service.update.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/generated/v1beta4/sql_users_service.update.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/generated/v1beta4/sql_users_service.update.js,samples/README.md)
 
@@ -2047,7 +2011,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-sql/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-sql/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-sql/samples/quickstart.js,samples/README.md)
 
