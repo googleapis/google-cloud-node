@@ -19173,6 +19173,7 @@
                          * @property {number|null} [transactionRisk] FraudPreventionAssessment transactionRisk
                          * @property {google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.IStolenInstrumentVerdict|null} [stolenInstrumentVerdict] FraudPreventionAssessment stolenInstrumentVerdict
                          * @property {google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.ICardTestingVerdict|null} [cardTestingVerdict] FraudPreventionAssessment cardTestingVerdict
+                         * @property {google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.IBehavioralTrustVerdict|null} [behavioralTrustVerdict] FraudPreventionAssessment behavioralTrustVerdict
                          */
     
                         /**
@@ -19215,6 +19216,14 @@
                         FraudPreventionAssessment.prototype.cardTestingVerdict = null;
     
                         /**
+                         * FraudPreventionAssessment behavioralTrustVerdict.
+                         * @member {google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.IBehavioralTrustVerdict|null|undefined} behavioralTrustVerdict
+                         * @memberof google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment
+                         * @instance
+                         */
+                        FraudPreventionAssessment.prototype.behavioralTrustVerdict = null;
+    
+                        /**
                          * Creates a new FraudPreventionAssessment instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment
@@ -19244,6 +19253,8 @@
                                 $root.google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.StolenInstrumentVerdict.encode(message.stolenInstrumentVerdict, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.cardTestingVerdict != null && Object.hasOwnProperty.call(message, "cardTestingVerdict"))
                                 $root.google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.CardTestingVerdict.encode(message.cardTestingVerdict, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.behavioralTrustVerdict != null && Object.hasOwnProperty.call(message, "behavioralTrustVerdict"))
+                                $root.google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict.encode(message.behavioralTrustVerdict, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -19288,6 +19299,10 @@
                                     }
                                 case 3: {
                                         message.cardTestingVerdict = $root.google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.CardTestingVerdict.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.behavioralTrustVerdict = $root.google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -19338,6 +19353,11 @@
                                 if (error)
                                     return "cardTestingVerdict." + error;
                             }
+                            if (message.behavioralTrustVerdict != null && message.hasOwnProperty("behavioralTrustVerdict")) {
+                                var error = $root.google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict.verify(message.behavioralTrustVerdict);
+                                if (error)
+                                    return "behavioralTrustVerdict." + error;
+                            }
                             return null;
                         };
     
@@ -19365,6 +19385,11 @@
                                     throw TypeError(".google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.cardTestingVerdict: object expected");
                                 message.cardTestingVerdict = $root.google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.CardTestingVerdict.fromObject(object.cardTestingVerdict);
                             }
+                            if (object.behavioralTrustVerdict != null) {
+                                if (typeof object.behavioralTrustVerdict !== "object")
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.behavioralTrustVerdict: object expected");
+                                message.behavioralTrustVerdict = $root.google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict.fromObject(object.behavioralTrustVerdict);
+                            }
                             return message;
                         };
     
@@ -19385,6 +19410,7 @@
                                 object.transactionRisk = 0;
                                 object.stolenInstrumentVerdict = null;
                                 object.cardTestingVerdict = null;
+                                object.behavioralTrustVerdict = null;
                             }
                             if (message.transactionRisk != null && message.hasOwnProperty("transactionRisk"))
                                 object.transactionRisk = options.json && !isFinite(message.transactionRisk) ? String(message.transactionRisk) : message.transactionRisk;
@@ -19392,6 +19418,8 @@
                                 object.stolenInstrumentVerdict = $root.google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.StolenInstrumentVerdict.toObject(message.stolenInstrumentVerdict, options);
                             if (message.cardTestingVerdict != null && message.hasOwnProperty("cardTestingVerdict"))
                                 object.cardTestingVerdict = $root.google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.CardTestingVerdict.toObject(message.cardTestingVerdict, options);
+                            if (message.behavioralTrustVerdict != null && message.hasOwnProperty("behavioralTrustVerdict"))
+                                object.behavioralTrustVerdict = $root.google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict.toObject(message.behavioralTrustVerdict, options);
                             return object;
                         };
     
@@ -19825,6 +19853,209 @@
                             };
     
                             return CardTestingVerdict;
+                        })();
+    
+                        FraudPreventionAssessment.BehavioralTrustVerdict = (function() {
+    
+                            /**
+                             * Properties of a BehavioralTrustVerdict.
+                             * @memberof google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment
+                             * @interface IBehavioralTrustVerdict
+                             * @property {number|null} [trust] BehavioralTrustVerdict trust
+                             */
+    
+                            /**
+                             * Constructs a new BehavioralTrustVerdict.
+                             * @memberof google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment
+                             * @classdesc Represents a BehavioralTrustVerdict.
+                             * @implements IBehavioralTrustVerdict
+                             * @constructor
+                             * @param {google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.IBehavioralTrustVerdict=} [properties] Properties to set
+                             */
+                            function BehavioralTrustVerdict(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * BehavioralTrustVerdict trust.
+                             * @member {number} trust
+                             * @memberof google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @instance
+                             */
+                            BehavioralTrustVerdict.prototype.trust = 0;
+    
+                            /**
+                             * Creates a new BehavioralTrustVerdict instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.IBehavioralTrustVerdict=} [properties] Properties to set
+                             * @returns {google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict} BehavioralTrustVerdict instance
+                             */
+                            BehavioralTrustVerdict.create = function create(properties) {
+                                return new BehavioralTrustVerdict(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified BehavioralTrustVerdict message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.IBehavioralTrustVerdict} message BehavioralTrustVerdict message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BehavioralTrustVerdict.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.trust != null && Object.hasOwnProperty.call(message, "trust"))
+                                    writer.uint32(/* id 1, wireType 5 =*/13).float(message.trust);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified BehavioralTrustVerdict message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.IBehavioralTrustVerdict} message BehavioralTrustVerdict message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BehavioralTrustVerdict.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a BehavioralTrustVerdict message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict} BehavioralTrustVerdict
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BehavioralTrustVerdict.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.trust = reader.float();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a BehavioralTrustVerdict message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict} BehavioralTrustVerdict
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BehavioralTrustVerdict.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a BehavioralTrustVerdict message.
+                             * @function verify
+                             * @memberof google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            BehavioralTrustVerdict.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.trust != null && message.hasOwnProperty("trust"))
+                                    if (typeof message.trust !== "number")
+                                        return "trust: number expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a BehavioralTrustVerdict message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict} BehavioralTrustVerdict
+                             */
+                            BehavioralTrustVerdict.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict)
+                                    return object;
+                                var message = new $root.google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict();
+                                if (object.trust != null)
+                                    message.trust = Number(object.trust);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a BehavioralTrustVerdict message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @static
+                             * @param {google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict} message BehavioralTrustVerdict
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            BehavioralTrustVerdict.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.trust = 0;
+                                if (message.trust != null && message.hasOwnProperty("trust"))
+                                    object.trust = options.json && !isFinite(message.trust) ? String(message.trust) : message.trust;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this BehavioralTrustVerdict to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            BehavioralTrustVerdict.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for BehavioralTrustVerdict
+                             * @function getTypeUrl
+                             * @memberof google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            BehavioralTrustVerdict.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict";
+                            };
+    
+                            return BehavioralTrustVerdict;
                         })();
     
                         return FraudPreventionAssessment;

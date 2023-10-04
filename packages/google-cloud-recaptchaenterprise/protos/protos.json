@@ -2085,6 +2085,10 @@
                         "cardTestingVerdict": {
                           "type": "CardTestingVerdict",
                           "id": 3
+                        },
+                        "behavioralTrustVerdict": {
+                          "type": "BehavioralTrustVerdict",
+                          "id": 4
                         }
                       },
                       "nested": {
@@ -2099,6 +2103,14 @@
                         "CardTestingVerdict": {
                           "fields": {
                             "risk": {
+                              "type": "float",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "BehavioralTrustVerdict": {
+                          "fields": {
+                            "trust": {
                               "type": "float",
                               "id": 1
                             }

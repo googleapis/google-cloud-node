@@ -7550,6 +7550,9 @@ export namespace google {
 
                     /** FraudPreventionAssessment cardTestingVerdict */
                     cardTestingVerdict?: (google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.ICardTestingVerdict|null);
+
+                    /** FraudPreventionAssessment behavioralTrustVerdict */
+                    behavioralTrustVerdict?: (google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.IBehavioralTrustVerdict|null);
                 }
 
                 /** Represents a FraudPreventionAssessment. */
@@ -7569,6 +7572,9 @@ export namespace google {
 
                     /** FraudPreventionAssessment cardTestingVerdict. */
                     public cardTestingVerdict?: (google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.ICardTestingVerdict|null);
+
+                    /** FraudPreventionAssessment behavioralTrustVerdict. */
+                    public behavioralTrustVerdict?: (google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.IBehavioralTrustVerdict|null);
 
                     /**
                      * Creates a new FraudPreventionAssessment instance using the specified properties.
@@ -7838,6 +7844,103 @@ export namespace google {
 
                         /**
                          * Gets the default type url for CardTestingVerdict
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a BehavioralTrustVerdict. */
+                    interface IBehavioralTrustVerdict {
+
+                        /** BehavioralTrustVerdict trust */
+                        trust?: (number|null);
+                    }
+
+                    /** Represents a BehavioralTrustVerdict. */
+                    class BehavioralTrustVerdict implements IBehavioralTrustVerdict {
+
+                        /**
+                         * Constructs a new BehavioralTrustVerdict.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.IBehavioralTrustVerdict);
+
+                        /** BehavioralTrustVerdict trust. */
+                        public trust: number;
+
+                        /**
+                         * Creates a new BehavioralTrustVerdict instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BehavioralTrustVerdict instance
+                         */
+                        public static create(properties?: google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.IBehavioralTrustVerdict): google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict;
+
+                        /**
+                         * Encodes the specified BehavioralTrustVerdict message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict.verify|verify} messages.
+                         * @param message BehavioralTrustVerdict message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.IBehavioralTrustVerdict, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BehavioralTrustVerdict message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict.verify|verify} messages.
+                         * @param message BehavioralTrustVerdict message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.IBehavioralTrustVerdict, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BehavioralTrustVerdict message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BehavioralTrustVerdict
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict;
+
+                        /**
+                         * Decodes a BehavioralTrustVerdict message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BehavioralTrustVerdict
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict;
+
+                        /**
+                         * Verifies a BehavioralTrustVerdict message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BehavioralTrustVerdict message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BehavioralTrustVerdict
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict;
+
+                        /**
+                         * Creates a plain object from a BehavioralTrustVerdict message. Also converts values to other types if specified.
+                         * @param message BehavioralTrustVerdict
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.recaptchaenterprise.v1beta1.FraudPreventionAssessment.BehavioralTrustVerdict, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BehavioralTrustVerdict to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BehavioralTrustVerdict
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
