@@ -47,16 +47,9 @@ const root = protobuf.Root.fromJSON(
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
   let type = root.lookupType(typeName) as protobuf.Type;
-  // console.log(type);
-  // console.log(type.fields);
   for (const field of fields.slice(0, -1)) {
-    console.log(field);
-    console.log(type.fields[field]);
-    console.log(type.fields[field]?.resolvedType);
-    // console.log(type.fields[field])
     type = type.fields[field]?.resolvedType as protobuf.Type;
   }
-  // console.log(type);
   return type?.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
@@ -255,7 +248,7 @@ describe('v2.CloudTasksClient', () => {
       );
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.tasks.v2.GetQueueRequest',
-        ['queue', 'name']
+        ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
@@ -319,8 +312,6 @@ describe('v2.CloudTasksClient', () => {
       const actualHeaderRequestParams = (
         client.innerApiCalls.getQueue as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      console.log(actualHeaderRequestParams);
-      console.log(expectedHeaderRequestParams);
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
