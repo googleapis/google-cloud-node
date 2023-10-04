@@ -2675,7 +2675,9 @@ describe('v2beta2.CloudTasksClient', () => {
         ['taskId']
       );
       request.taskId = defaultValue2;
-      const expectedHeaderRequestParams = `queue=${defaultValue1 ?? ''}&task_id=${defaultValue2 ?? ''}`;
+      const expectedHeaderRequestParams = `queue=${
+        defaultValue1 ?? ''
+      }&task_id=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.BufferTaskResponse()
       );
@@ -2711,7 +2713,9 @@ describe('v2beta2.CloudTasksClient', () => {
         ['taskId']
       );
       request.taskId = defaultValue2;
-      const expectedHeaderRequestParams = `queue=${defaultValue1 ?? ''}&task_id=${defaultValue2 ?? ''}`;
+      const expectedHeaderRequestParams = `queue=${
+        defaultValue1 ?? ''
+      }&task_id=${defaultValue2 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.BufferTaskResponse()
       );
@@ -2763,7 +2767,9 @@ describe('v2beta2.CloudTasksClient', () => {
         ['taskId']
       );
       request.taskId = defaultValue2;
-      const expectedHeaderRequestParams = `queue=${defaultValue1 ?? ''}&task_id=${defaultValue2 ?? ''}`;
+      const expectedHeaderRequestParams = `queue=${
+        defaultValue1 ?? ''
+      }&task_id=${defaultValue2 ?? ''}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.bufferTask = stubSimpleCall(
         undefined,
