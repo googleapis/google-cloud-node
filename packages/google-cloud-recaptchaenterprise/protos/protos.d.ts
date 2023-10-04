@@ -187,6 +187,76 @@ export namespace google {
                     public getMetrics(request: google.cloud.recaptchaenterprise.v1.IGetMetricsRequest): Promise<google.cloud.recaptchaenterprise.v1.Metrics>;
 
                     /**
+                     * Calls CreateFirewallPolicy.
+                     * @param request CreateFirewallPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FirewallPolicy
+                     */
+                    public createFirewallPolicy(request: google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest, callback: google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.CreateFirewallPolicyCallback): void;
+
+                    /**
+                     * Calls CreateFirewallPolicy.
+                     * @param request CreateFirewallPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createFirewallPolicy(request: google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest): Promise<google.cloud.recaptchaenterprise.v1.FirewallPolicy>;
+
+                    /**
+                     * Calls ListFirewallPolicies.
+                     * @param request ListFirewallPoliciesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListFirewallPoliciesResponse
+                     */
+                    public listFirewallPolicies(request: google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest, callback: google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.ListFirewallPoliciesCallback): void;
+
+                    /**
+                     * Calls ListFirewallPolicies.
+                     * @param request ListFirewallPoliciesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listFirewallPolicies(request: google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest): Promise<google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse>;
+
+                    /**
+                     * Calls GetFirewallPolicy.
+                     * @param request GetFirewallPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FirewallPolicy
+                     */
+                    public getFirewallPolicy(request: google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest, callback: google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.GetFirewallPolicyCallback): void;
+
+                    /**
+                     * Calls GetFirewallPolicy.
+                     * @param request GetFirewallPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getFirewallPolicy(request: google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest): Promise<google.cloud.recaptchaenterprise.v1.FirewallPolicy>;
+
+                    /**
+                     * Calls UpdateFirewallPolicy.
+                     * @param request UpdateFirewallPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FirewallPolicy
+                     */
+                    public updateFirewallPolicy(request: google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest, callback: google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.UpdateFirewallPolicyCallback): void;
+
+                    /**
+                     * Calls UpdateFirewallPolicy.
+                     * @param request UpdateFirewallPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateFirewallPolicy(request: google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest): Promise<google.cloud.recaptchaenterprise.v1.FirewallPolicy>;
+
+                    /**
+                     * Calls DeleteFirewallPolicy.
+                     * @param request DeleteFirewallPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteFirewallPolicy(request: google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest, callback: google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.DeleteFirewallPolicyCallback): void;
+
+                    /**
+                     * Calls DeleteFirewallPolicy.
+                     * @param request DeleteFirewallPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteFirewallPolicy(request: google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest): Promise<google.protobuf.Empty>;
+
+                    /**
                      * Calls ListRelatedAccountGroups.
                      * @param request ListRelatedAccountGroupsRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListRelatedAccountGroupsResponse
@@ -300,6 +370,41 @@ export namespace google {
                      * @param [response] Metrics
                      */
                     type GetMetricsCallback = (error: (Error|null), response?: google.cloud.recaptchaenterprise.v1.Metrics) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService|createFirewallPolicy}.
+                     * @param error Error, if any
+                     * @param [response] FirewallPolicy
+                     */
+                    type CreateFirewallPolicyCallback = (error: (Error|null), response?: google.cloud.recaptchaenterprise.v1.FirewallPolicy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService|listFirewallPolicies}.
+                     * @param error Error, if any
+                     * @param [response] ListFirewallPoliciesResponse
+                     */
+                    type ListFirewallPoliciesCallback = (error: (Error|null), response?: google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService|getFirewallPolicy}.
+                     * @param error Error, if any
+                     * @param [response] FirewallPolicy
+                     */
+                    type GetFirewallPolicyCallback = (error: (Error|null), response?: google.cloud.recaptchaenterprise.v1.FirewallPolicy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService|updateFirewallPolicy}.
+                     * @param error Error, if any
+                     * @param [response] FirewallPolicy
+                     */
+                    type UpdateFirewallPolicyCallback = (error: (Error|null), response?: google.cloud.recaptchaenterprise.v1.FirewallPolicy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService|deleteFirewallPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteFirewallPolicyCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService|listRelatedAccountGroups}.
@@ -1199,8 +1304,14 @@ export namespace google {
                     /** Assessment privatePasswordLeakVerification */
                     privatePasswordLeakVerification?: (google.cloud.recaptchaenterprise.v1.IPrivatePasswordLeakVerification|null);
 
+                    /** Assessment firewallPolicyAssessment */
+                    firewallPolicyAssessment?: (google.cloud.recaptchaenterprise.v1.IFirewallPolicyAssessment|null);
+
                     /** Assessment fraudPreventionAssessment */
                     fraudPreventionAssessment?: (google.cloud.recaptchaenterprise.v1.IFraudPreventionAssessment|null);
+
+                    /** Assessment fraudSignals */
+                    fraudSignals?: (google.cloud.recaptchaenterprise.v1.IFraudSignals|null);
                 }
 
                 /** Represents an Assessment. */
@@ -1233,8 +1344,14 @@ export namespace google {
                     /** Assessment privatePasswordLeakVerification. */
                     public privatePasswordLeakVerification?: (google.cloud.recaptchaenterprise.v1.IPrivatePasswordLeakVerification|null);
 
+                    /** Assessment firewallPolicyAssessment. */
+                    public firewallPolicyAssessment?: (google.cloud.recaptchaenterprise.v1.IFirewallPolicyAssessment|null);
+
                     /** Assessment fraudPreventionAssessment. */
                     public fraudPreventionAssessment?: (google.cloud.recaptchaenterprise.v1.IFraudPreventionAssessment|null);
+
+                    /** Assessment fraudSignals. */
+                    public fraudSignals?: (google.cloud.recaptchaenterprise.v1.IFraudSignals|null);
 
                     /**
                      * Creates a new Assessment instance using the specified properties.
@@ -1335,6 +1452,24 @@ export namespace google {
                     /** Event hashedAccountId */
                     hashedAccountId?: (Uint8Array|string|null);
 
+                    /** Event express */
+                    express?: (boolean|null);
+
+                    /** Event requestedUri */
+                    requestedUri?: (string|null);
+
+                    /** Event wafTokenAssessment */
+                    wafTokenAssessment?: (boolean|null);
+
+                    /** Event ja3 */
+                    ja3?: (string|null);
+
+                    /** Event headers */
+                    headers?: (string[]|null);
+
+                    /** Event firewallPolicyEvaluation */
+                    firewallPolicyEvaluation?: (boolean|null);
+
                     /** Event transactionData */
                     transactionData?: (google.cloud.recaptchaenterprise.v1.ITransactionData|null);
                 }
@@ -1365,6 +1500,24 @@ export namespace google {
 
                     /** Event hashedAccountId. */
                     public hashedAccountId: (Uint8Array|string);
+
+                    /** Event express. */
+                    public express: boolean;
+
+                    /** Event requestedUri. */
+                    public requestedUri: string;
+
+                    /** Event wafTokenAssessment. */
+                    public wafTokenAssessment: boolean;
+
+                    /** Event ja3. */
+                    public ja3: string;
+
+                    /** Event headers. */
+                    public headers: string[];
+
+                    /** Event firewallPolicyEvaluation. */
+                    public firewallPolicyEvaluation: boolean;
 
                     /** Event transactionData. */
                     public transactionData?: (google.cloud.recaptchaenterprise.v1.ITransactionData|null);
@@ -2114,6 +2267,9 @@ export namespace google {
 
                     /** RiskAnalysis reasons */
                     reasons?: (google.cloud.recaptchaenterprise.v1.RiskAnalysis.ClassificationReason[]|null);
+
+                    /** RiskAnalysis extendedVerdictReasons */
+                    extendedVerdictReasons?: (string[]|null);
                 }
 
                 /** Represents a RiskAnalysis. */
@@ -2130,6 +2286,9 @@ export namespace google {
 
                     /** RiskAnalysis reasons. */
                     public reasons: google.cloud.recaptchaenterprise.v1.RiskAnalysis.ClassificationReason[];
+
+                    /** RiskAnalysis extendedVerdictReasons. */
+                    public extendedVerdictReasons: string[];
 
                     /**
                      * Creates a new RiskAnalysis instance using the specified properties.
@@ -2382,6 +2541,9 @@ export namespace google {
 
                     /** FraudPreventionAssessment cardTestingVerdict */
                     cardTestingVerdict?: (google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.ICardTestingVerdict|null);
+
+                    /** FraudPreventionAssessment behavioralTrustVerdict */
+                    behavioralTrustVerdict?: (google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.IBehavioralTrustVerdict|null);
                 }
 
                 /** Represents a FraudPreventionAssessment. */
@@ -2401,6 +2563,9 @@ export namespace google {
 
                     /** FraudPreventionAssessment cardTestingVerdict. */
                     public cardTestingVerdict?: (google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.ICardTestingVerdict|null);
+
+                    /** FraudPreventionAssessment behavioralTrustVerdict. */
+                    public behavioralTrustVerdict?: (google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.IBehavioralTrustVerdict|null);
 
                     /**
                      * Creates a new FraudPreventionAssessment instance using the specified properties.
@@ -2674,6 +2839,420 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a BehavioralTrustVerdict. */
+                    interface IBehavioralTrustVerdict {
+
+                        /** BehavioralTrustVerdict trust */
+                        trust?: (number|null);
+                    }
+
+                    /** Represents a BehavioralTrustVerdict. */
+                    class BehavioralTrustVerdict implements IBehavioralTrustVerdict {
+
+                        /**
+                         * Constructs a new BehavioralTrustVerdict.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.IBehavioralTrustVerdict);
+
+                        /** BehavioralTrustVerdict trust. */
+                        public trust: number;
+
+                        /**
+                         * Creates a new BehavioralTrustVerdict instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BehavioralTrustVerdict instance
+                         */
+                        public static create(properties?: google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.IBehavioralTrustVerdict): google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict;
+
+                        /**
+                         * Encodes the specified BehavioralTrustVerdict message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict.verify|verify} messages.
+                         * @param message BehavioralTrustVerdict message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.IBehavioralTrustVerdict, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BehavioralTrustVerdict message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict.verify|verify} messages.
+                         * @param message BehavioralTrustVerdict message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.IBehavioralTrustVerdict, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BehavioralTrustVerdict message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BehavioralTrustVerdict
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict;
+
+                        /**
+                         * Decodes a BehavioralTrustVerdict message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BehavioralTrustVerdict
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict;
+
+                        /**
+                         * Verifies a BehavioralTrustVerdict message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BehavioralTrustVerdict message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BehavioralTrustVerdict
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict;
+
+                        /**
+                         * Creates a plain object from a BehavioralTrustVerdict message. Also converts values to other types if specified.
+                         * @param message BehavioralTrustVerdict
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BehavioralTrustVerdict to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BehavioralTrustVerdict
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a FraudSignals. */
+                interface IFraudSignals {
+
+                    /** FraudSignals userSignals */
+                    userSignals?: (google.cloud.recaptchaenterprise.v1.FraudSignals.IUserSignals|null);
+
+                    /** FraudSignals cardSignals */
+                    cardSignals?: (google.cloud.recaptchaenterprise.v1.FraudSignals.ICardSignals|null);
+                }
+
+                /** Represents a FraudSignals. */
+                class FraudSignals implements IFraudSignals {
+
+                    /**
+                     * Constructs a new FraudSignals.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IFraudSignals);
+
+                    /** FraudSignals userSignals. */
+                    public userSignals?: (google.cloud.recaptchaenterprise.v1.FraudSignals.IUserSignals|null);
+
+                    /** FraudSignals cardSignals. */
+                    public cardSignals?: (google.cloud.recaptchaenterprise.v1.FraudSignals.ICardSignals|null);
+
+                    /**
+                     * Creates a new FraudSignals instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FraudSignals instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IFraudSignals): google.cloud.recaptchaenterprise.v1.FraudSignals;
+
+                    /**
+                     * Encodes the specified FraudSignals message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FraudSignals.verify|verify} messages.
+                     * @param message FraudSignals message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IFraudSignals, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FraudSignals message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FraudSignals.verify|verify} messages.
+                     * @param message FraudSignals message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IFraudSignals, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FraudSignals message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FraudSignals
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.FraudSignals;
+
+                    /**
+                     * Decodes a FraudSignals message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FraudSignals
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.FraudSignals;
+
+                    /**
+                     * Verifies a FraudSignals message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FraudSignals message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FraudSignals
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.FraudSignals;
+
+                    /**
+                     * Creates a plain object from a FraudSignals message. Also converts values to other types if specified.
+                     * @param message FraudSignals
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.FraudSignals, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FraudSignals to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FraudSignals
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace FraudSignals {
+
+                    /** Properties of a UserSignals. */
+                    interface IUserSignals {
+
+                        /** UserSignals activeDaysLowerBound */
+                        activeDaysLowerBound?: (number|null);
+
+                        /** UserSignals syntheticRisk */
+                        syntheticRisk?: (number|null);
+                    }
+
+                    /** Represents a UserSignals. */
+                    class UserSignals implements IUserSignals {
+
+                        /**
+                         * Constructs a new UserSignals.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.recaptchaenterprise.v1.FraudSignals.IUserSignals);
+
+                        /** UserSignals activeDaysLowerBound. */
+                        public activeDaysLowerBound: number;
+
+                        /** UserSignals syntheticRisk. */
+                        public syntheticRisk: number;
+
+                        /**
+                         * Creates a new UserSignals instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UserSignals instance
+                         */
+                        public static create(properties?: google.cloud.recaptchaenterprise.v1.FraudSignals.IUserSignals): google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals;
+
+                        /**
+                         * Encodes the specified UserSignals message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals.verify|verify} messages.
+                         * @param message UserSignals message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.recaptchaenterprise.v1.FraudSignals.IUserSignals, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UserSignals message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals.verify|verify} messages.
+                         * @param message UserSignals message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.FraudSignals.IUserSignals, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a UserSignals message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UserSignals
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals;
+
+                        /**
+                         * Decodes a UserSignals message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UserSignals
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals;
+
+                        /**
+                         * Verifies a UserSignals message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a UserSignals message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UserSignals
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals;
+
+                        /**
+                         * Creates a plain object from a UserSignals message. Also converts values to other types if specified.
+                         * @param message UserSignals
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UserSignals to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UserSignals
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CardSignals. */
+                    interface ICardSignals {
+
+                        /** CardSignals cardLabels */
+                        cardLabels?: (google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals.CardLabel[]|null);
+                    }
+
+                    /** Represents a CardSignals. */
+                    class CardSignals implements ICardSignals {
+
+                        /**
+                         * Constructs a new CardSignals.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.recaptchaenterprise.v1.FraudSignals.ICardSignals);
+
+                        /** CardSignals cardLabels. */
+                        public cardLabels: google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals.CardLabel[];
+
+                        /**
+                         * Creates a new CardSignals instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CardSignals instance
+                         */
+                        public static create(properties?: google.cloud.recaptchaenterprise.v1.FraudSignals.ICardSignals): google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals;
+
+                        /**
+                         * Encodes the specified CardSignals message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals.verify|verify} messages.
+                         * @param message CardSignals message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.recaptchaenterprise.v1.FraudSignals.ICardSignals, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CardSignals message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals.verify|verify} messages.
+                         * @param message CardSignals message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.FraudSignals.ICardSignals, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CardSignals message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CardSignals
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals;
+
+                        /**
+                         * Decodes a CardSignals message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CardSignals
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals;
+
+                        /**
+                         * Verifies a CardSignals message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CardSignals message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CardSignals
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals;
+
+                        /**
+                         * Creates a plain object from a CardSignals message. Also converts values to other types if specified.
+                         * @param message CardSignals
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CardSignals to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CardSignals
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace CardSignals {
+
+                        /** CardLabel enum. */
+                        enum CardLabel {
+                            CARD_LABEL_UNSPECIFIED = 0,
+                            PREPAID = 1,
+                            VIRTUAL = 2,
+                            UNEXPECTED_LOCATION = 3
+                        }
                     }
                 }
 
@@ -3489,6 +4068,618 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DeleteKeyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateFirewallPolicyRequest. */
+                interface ICreateFirewallPolicyRequest {
+
+                    /** CreateFirewallPolicyRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateFirewallPolicyRequest firewallPolicy */
+                    firewallPolicy?: (google.cloud.recaptchaenterprise.v1.IFirewallPolicy|null);
+                }
+
+                /** Represents a CreateFirewallPolicyRequest. */
+                class CreateFirewallPolicyRequest implements ICreateFirewallPolicyRequest {
+
+                    /**
+                     * Constructs a new CreateFirewallPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest);
+
+                    /** CreateFirewallPolicyRequest parent. */
+                    public parent: string;
+
+                    /** CreateFirewallPolicyRequest firewallPolicy. */
+                    public firewallPolicy?: (google.cloud.recaptchaenterprise.v1.IFirewallPolicy|null);
+
+                    /**
+                     * Creates a new CreateFirewallPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateFirewallPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest): google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest;
+
+                    /**
+                     * Encodes the specified CreateFirewallPolicyRequest message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest.verify|verify} messages.
+                     * @param message CreateFirewallPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateFirewallPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest.verify|verify} messages.
+                     * @param message CreateFirewallPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateFirewallPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateFirewallPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest;
+
+                    /**
+                     * Decodes a CreateFirewallPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateFirewallPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest;
+
+                    /**
+                     * Verifies a CreateFirewallPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateFirewallPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateFirewallPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a CreateFirewallPolicyRequest message. Also converts values to other types if specified.
+                     * @param message CreateFirewallPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.CreateFirewallPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateFirewallPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateFirewallPolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListFirewallPoliciesRequest. */
+                interface IListFirewallPoliciesRequest {
+
+                    /** ListFirewallPoliciesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListFirewallPoliciesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListFirewallPoliciesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListFirewallPoliciesRequest. */
+                class ListFirewallPoliciesRequest implements IListFirewallPoliciesRequest {
+
+                    /**
+                     * Constructs a new ListFirewallPoliciesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest);
+
+                    /** ListFirewallPoliciesRequest parent. */
+                    public parent: string;
+
+                    /** ListFirewallPoliciesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListFirewallPoliciesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListFirewallPoliciesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListFirewallPoliciesRequest instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest): google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest;
+
+                    /**
+                     * Encodes the specified ListFirewallPoliciesRequest message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest.verify|verify} messages.
+                     * @param message ListFirewallPoliciesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListFirewallPoliciesRequest message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest.verify|verify} messages.
+                     * @param message ListFirewallPoliciesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListFirewallPoliciesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListFirewallPoliciesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest;
+
+                    /**
+                     * Decodes a ListFirewallPoliciesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListFirewallPoliciesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest;
+
+                    /**
+                     * Verifies a ListFirewallPoliciesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListFirewallPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListFirewallPoliciesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest;
+
+                    /**
+                     * Creates a plain object from a ListFirewallPoliciesRequest message. Also converts values to other types if specified.
+                     * @param message ListFirewallPoliciesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListFirewallPoliciesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFirewallPoliciesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListFirewallPoliciesResponse. */
+                interface IListFirewallPoliciesResponse {
+
+                    /** ListFirewallPoliciesResponse firewallPolicies */
+                    firewallPolicies?: (google.cloud.recaptchaenterprise.v1.IFirewallPolicy[]|null);
+
+                    /** ListFirewallPoliciesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListFirewallPoliciesResponse. */
+                class ListFirewallPoliciesResponse implements IListFirewallPoliciesResponse {
+
+                    /**
+                     * Constructs a new ListFirewallPoliciesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse);
+
+                    /** ListFirewallPoliciesResponse firewallPolicies. */
+                    public firewallPolicies: google.cloud.recaptchaenterprise.v1.IFirewallPolicy[];
+
+                    /** ListFirewallPoliciesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListFirewallPoliciesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListFirewallPoliciesResponse instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse): google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse;
+
+                    /**
+                     * Encodes the specified ListFirewallPoliciesResponse message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse.verify|verify} messages.
+                     * @param message ListFirewallPoliciesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListFirewallPoliciesResponse message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse.verify|verify} messages.
+                     * @param message ListFirewallPoliciesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListFirewallPoliciesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListFirewallPoliciesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse;
+
+                    /**
+                     * Decodes a ListFirewallPoliciesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListFirewallPoliciesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse;
+
+                    /**
+                     * Verifies a ListFirewallPoliciesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListFirewallPoliciesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListFirewallPoliciesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse;
+
+                    /**
+                     * Creates a plain object from a ListFirewallPoliciesResponse message. Also converts values to other types if specified.
+                     * @param message ListFirewallPoliciesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.ListFirewallPoliciesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListFirewallPoliciesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFirewallPoliciesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetFirewallPolicyRequest. */
+                interface IGetFirewallPolicyRequest {
+
+                    /** GetFirewallPolicyRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetFirewallPolicyRequest. */
+                class GetFirewallPolicyRequest implements IGetFirewallPolicyRequest {
+
+                    /**
+                     * Constructs a new GetFirewallPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest);
+
+                    /** GetFirewallPolicyRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetFirewallPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetFirewallPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest): google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest;
+
+                    /**
+                     * Encodes the specified GetFirewallPolicyRequest message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest.verify|verify} messages.
+                     * @param message GetFirewallPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetFirewallPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest.verify|verify} messages.
+                     * @param message GetFirewallPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetFirewallPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetFirewallPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest;
+
+                    /**
+                     * Decodes a GetFirewallPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetFirewallPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest;
+
+                    /**
+                     * Verifies a GetFirewallPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetFirewallPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetFirewallPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a GetFirewallPolicyRequest message. Also converts values to other types if specified.
+                     * @param message GetFirewallPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.GetFirewallPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetFirewallPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetFirewallPolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateFirewallPolicyRequest. */
+                interface IUpdateFirewallPolicyRequest {
+
+                    /** UpdateFirewallPolicyRequest firewallPolicy */
+                    firewallPolicy?: (google.cloud.recaptchaenterprise.v1.IFirewallPolicy|null);
+
+                    /** UpdateFirewallPolicyRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateFirewallPolicyRequest. */
+                class UpdateFirewallPolicyRequest implements IUpdateFirewallPolicyRequest {
+
+                    /**
+                     * Constructs a new UpdateFirewallPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest);
+
+                    /** UpdateFirewallPolicyRequest firewallPolicy. */
+                    public firewallPolicy?: (google.cloud.recaptchaenterprise.v1.IFirewallPolicy|null);
+
+                    /** UpdateFirewallPolicyRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateFirewallPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateFirewallPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest): google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest;
+
+                    /**
+                     * Encodes the specified UpdateFirewallPolicyRequest message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest.verify|verify} messages.
+                     * @param message UpdateFirewallPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateFirewallPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest.verify|verify} messages.
+                     * @param message UpdateFirewallPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateFirewallPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateFirewallPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest;
+
+                    /**
+                     * Decodes an UpdateFirewallPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateFirewallPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest;
+
+                    /**
+                     * Verifies an UpdateFirewallPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateFirewallPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateFirewallPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateFirewallPolicyRequest message. Also converts values to other types if specified.
+                     * @param message UpdateFirewallPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.UpdateFirewallPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateFirewallPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateFirewallPolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteFirewallPolicyRequest. */
+                interface IDeleteFirewallPolicyRequest {
+
+                    /** DeleteFirewallPolicyRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteFirewallPolicyRequest. */
+                class DeleteFirewallPolicyRequest implements IDeleteFirewallPolicyRequest {
+
+                    /**
+                     * Constructs a new DeleteFirewallPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest);
+
+                    /** DeleteFirewallPolicyRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteFirewallPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteFirewallPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest): google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest;
+
+                    /**
+                     * Encodes the specified DeleteFirewallPolicyRequest message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest.verify|verify} messages.
+                     * @param message DeleteFirewallPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteFirewallPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest.verify|verify} messages.
+                     * @param message DeleteFirewallPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteFirewallPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteFirewallPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest;
+
+                    /**
+                     * Decodes a DeleteFirewallPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteFirewallPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest;
+
+                    /**
+                     * Verifies a DeleteFirewallPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteFirewallPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteFirewallPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteFirewallPolicyRequest message. Also converts values to other types if specified.
+                     * @param message DeleteFirewallPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.DeleteFirewallPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteFirewallPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteFirewallPolicyRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -4316,6 +5507,9 @@ export namespace google {
 
                     /** AndroidKeySettings allowedPackageNames */
                     allowedPackageNames?: (string[]|null);
+
+                    /** AndroidKeySettings supportNonGoogleAppStoreDistribution */
+                    supportNonGoogleAppStoreDistribution?: (boolean|null);
                 }
 
                 /** Represents an AndroidKeySettings. */
@@ -4332,6 +5526,9 @@ export namespace google {
 
                     /** AndroidKeySettings allowedPackageNames. */
                     public allowedPackageNames: string[];
+
+                    /** AndroidKeySettings supportNonGoogleAppStoreDistribution. */
+                    public supportNonGoogleAppStoreDistribution: boolean;
 
                     /**
                      * Creates a new AndroidKeySettings instance using the specified properties.
@@ -4419,6 +5616,9 @@ export namespace google {
 
                     /** IOSKeySettings allowedBundleIds */
                     allowedBundleIds?: (string[]|null);
+
+                    /** IOSKeySettings appleDeveloperId */
+                    appleDeveloperId?: (google.cloud.recaptchaenterprise.v1.IAppleDeveloperId|null);
                 }
 
                 /** Represents a IOSKeySettings. */
@@ -4435,6 +5635,9 @@ export namespace google {
 
                     /** IOSKeySettings allowedBundleIds. */
                     public allowedBundleIds: string[];
+
+                    /** IOSKeySettings appleDeveloperId. */
+                    public appleDeveloperId?: (google.cloud.recaptchaenterprise.v1.IAppleDeveloperId|null);
 
                     /**
                      * Creates a new IOSKeySettings instance using the specified properties.
@@ -4508,6 +5711,115 @@ export namespace google {
 
                     /**
                      * Gets the default type url for IOSKeySettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AppleDeveloperId. */
+                interface IAppleDeveloperId {
+
+                    /** AppleDeveloperId privateKey */
+                    privateKey?: (string|null);
+
+                    /** AppleDeveloperId keyId */
+                    keyId?: (string|null);
+
+                    /** AppleDeveloperId teamId */
+                    teamId?: (string|null);
+                }
+
+                /** Represents an AppleDeveloperId. */
+                class AppleDeveloperId implements IAppleDeveloperId {
+
+                    /**
+                     * Constructs a new AppleDeveloperId.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IAppleDeveloperId);
+
+                    /** AppleDeveloperId privateKey. */
+                    public privateKey: string;
+
+                    /** AppleDeveloperId keyId. */
+                    public keyId: string;
+
+                    /** AppleDeveloperId teamId. */
+                    public teamId: string;
+
+                    /**
+                     * Creates a new AppleDeveloperId instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AppleDeveloperId instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IAppleDeveloperId): google.cloud.recaptchaenterprise.v1.AppleDeveloperId;
+
+                    /**
+                     * Encodes the specified AppleDeveloperId message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.AppleDeveloperId.verify|verify} messages.
+                     * @param message AppleDeveloperId message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IAppleDeveloperId, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AppleDeveloperId message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.AppleDeveloperId.verify|verify} messages.
+                     * @param message AppleDeveloperId message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IAppleDeveloperId, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AppleDeveloperId message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AppleDeveloperId
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.AppleDeveloperId;
+
+                    /**
+                     * Decodes an AppleDeveloperId message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AppleDeveloperId
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.AppleDeveloperId;
+
+                    /**
+                     * Verifies an AppleDeveloperId message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AppleDeveloperId message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AppleDeveloperId
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.AppleDeveloperId;
+
+                    /**
+                     * Creates a plain object from an AppleDeveloperId message. Also converts values to other types if specified.
+                     * @param message AppleDeveloperId
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.AppleDeveloperId, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AppleDeveloperId to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AppleDeveloperId
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -4823,6 +6135,830 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ChallengeMetrics
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FirewallPolicyAssessment. */
+                interface IFirewallPolicyAssessment {
+
+                    /** FirewallPolicyAssessment error */
+                    error?: (google.rpc.IStatus|null);
+
+                    /** FirewallPolicyAssessment firewallPolicy */
+                    firewallPolicy?: (google.cloud.recaptchaenterprise.v1.IFirewallPolicy|null);
+                }
+
+                /** Represents a FirewallPolicyAssessment. */
+                class FirewallPolicyAssessment implements IFirewallPolicyAssessment {
+
+                    /**
+                     * Constructs a new FirewallPolicyAssessment.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IFirewallPolicyAssessment);
+
+                    /** FirewallPolicyAssessment error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /** FirewallPolicyAssessment firewallPolicy. */
+                    public firewallPolicy?: (google.cloud.recaptchaenterprise.v1.IFirewallPolicy|null);
+
+                    /**
+                     * Creates a new FirewallPolicyAssessment instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FirewallPolicyAssessment instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IFirewallPolicyAssessment): google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment;
+
+                    /**
+                     * Encodes the specified FirewallPolicyAssessment message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment.verify|verify} messages.
+                     * @param message FirewallPolicyAssessment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IFirewallPolicyAssessment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FirewallPolicyAssessment message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment.verify|verify} messages.
+                     * @param message FirewallPolicyAssessment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IFirewallPolicyAssessment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FirewallPolicyAssessment message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FirewallPolicyAssessment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment;
+
+                    /**
+                     * Decodes a FirewallPolicyAssessment message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FirewallPolicyAssessment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment;
+
+                    /**
+                     * Verifies a FirewallPolicyAssessment message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FirewallPolicyAssessment message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FirewallPolicyAssessment
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment;
+
+                    /**
+                     * Creates a plain object from a FirewallPolicyAssessment message. Also converts values to other types if specified.
+                     * @param message FirewallPolicyAssessment
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.FirewallPolicyAssessment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FirewallPolicyAssessment to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FirewallPolicyAssessment
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FirewallAction. */
+                interface IFirewallAction {
+
+                    /** FirewallAction allow */
+                    allow?: (google.cloud.recaptchaenterprise.v1.FirewallAction.IAllowAction|null);
+
+                    /** FirewallAction block */
+                    block?: (google.cloud.recaptchaenterprise.v1.FirewallAction.IBlockAction|null);
+
+                    /** FirewallAction redirect */
+                    redirect?: (google.cloud.recaptchaenterprise.v1.FirewallAction.IRedirectAction|null);
+
+                    /** FirewallAction substitute */
+                    substitute?: (google.cloud.recaptchaenterprise.v1.FirewallAction.ISubstituteAction|null);
+
+                    /** FirewallAction setHeader */
+                    setHeader?: (google.cloud.recaptchaenterprise.v1.FirewallAction.ISetHeaderAction|null);
+                }
+
+                /** Represents a FirewallAction. */
+                class FirewallAction implements IFirewallAction {
+
+                    /**
+                     * Constructs a new FirewallAction.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IFirewallAction);
+
+                    /** FirewallAction allow. */
+                    public allow?: (google.cloud.recaptchaenterprise.v1.FirewallAction.IAllowAction|null);
+
+                    /** FirewallAction block. */
+                    public block?: (google.cloud.recaptchaenterprise.v1.FirewallAction.IBlockAction|null);
+
+                    /** FirewallAction redirect. */
+                    public redirect?: (google.cloud.recaptchaenterprise.v1.FirewallAction.IRedirectAction|null);
+
+                    /** FirewallAction substitute. */
+                    public substitute?: (google.cloud.recaptchaenterprise.v1.FirewallAction.ISubstituteAction|null);
+
+                    /** FirewallAction setHeader. */
+                    public setHeader?: (google.cloud.recaptchaenterprise.v1.FirewallAction.ISetHeaderAction|null);
+
+                    /** FirewallAction firewallActionOneof. */
+                    public firewallActionOneof?: ("allow"|"block"|"redirect"|"substitute"|"setHeader");
+
+                    /**
+                     * Creates a new FirewallAction instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FirewallAction instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IFirewallAction): google.cloud.recaptchaenterprise.v1.FirewallAction;
+
+                    /**
+                     * Encodes the specified FirewallAction message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallAction.verify|verify} messages.
+                     * @param message FirewallAction message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IFirewallAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FirewallAction message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallAction.verify|verify} messages.
+                     * @param message FirewallAction message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IFirewallAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FirewallAction message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FirewallAction
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.FirewallAction;
+
+                    /**
+                     * Decodes a FirewallAction message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FirewallAction
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.FirewallAction;
+
+                    /**
+                     * Verifies a FirewallAction message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FirewallAction message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FirewallAction
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.FirewallAction;
+
+                    /**
+                     * Creates a plain object from a FirewallAction message. Also converts values to other types if specified.
+                     * @param message FirewallAction
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.FirewallAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FirewallAction to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FirewallAction
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace FirewallAction {
+
+                    /** Properties of an AllowAction. */
+                    interface IAllowAction {
+                    }
+
+                    /** Represents an AllowAction. */
+                    class AllowAction implements IAllowAction {
+
+                        /**
+                         * Constructs a new AllowAction.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.recaptchaenterprise.v1.FirewallAction.IAllowAction);
+
+                        /**
+                         * Creates a new AllowAction instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AllowAction instance
+                         */
+                        public static create(properties?: google.cloud.recaptchaenterprise.v1.FirewallAction.IAllowAction): google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction;
+
+                        /**
+                         * Encodes the specified AllowAction message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction.verify|verify} messages.
+                         * @param message AllowAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.recaptchaenterprise.v1.FirewallAction.IAllowAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AllowAction message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction.verify|verify} messages.
+                         * @param message AllowAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.FirewallAction.IAllowAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AllowAction message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AllowAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction;
+
+                        /**
+                         * Decodes an AllowAction message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AllowAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction;
+
+                        /**
+                         * Verifies an AllowAction message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AllowAction message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AllowAction
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction;
+
+                        /**
+                         * Creates a plain object from an AllowAction message. Also converts values to other types if specified.
+                         * @param message AllowAction
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.recaptchaenterprise.v1.FirewallAction.AllowAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AllowAction to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AllowAction
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a BlockAction. */
+                    interface IBlockAction {
+                    }
+
+                    /** Represents a BlockAction. */
+                    class BlockAction implements IBlockAction {
+
+                        /**
+                         * Constructs a new BlockAction.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.recaptchaenterprise.v1.FirewallAction.IBlockAction);
+
+                        /**
+                         * Creates a new BlockAction instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BlockAction instance
+                         */
+                        public static create(properties?: google.cloud.recaptchaenterprise.v1.FirewallAction.IBlockAction): google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction;
+
+                        /**
+                         * Encodes the specified BlockAction message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction.verify|verify} messages.
+                         * @param message BlockAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.recaptchaenterprise.v1.FirewallAction.IBlockAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BlockAction message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction.verify|verify} messages.
+                         * @param message BlockAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.FirewallAction.IBlockAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BlockAction message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BlockAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction;
+
+                        /**
+                         * Decodes a BlockAction message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BlockAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction;
+
+                        /**
+                         * Verifies a BlockAction message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BlockAction message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BlockAction
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction;
+
+                        /**
+                         * Creates a plain object from a BlockAction message. Also converts values to other types if specified.
+                         * @param message BlockAction
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.recaptchaenterprise.v1.FirewallAction.BlockAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BlockAction to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BlockAction
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RedirectAction. */
+                    interface IRedirectAction {
+                    }
+
+                    /** Represents a RedirectAction. */
+                    class RedirectAction implements IRedirectAction {
+
+                        /**
+                         * Constructs a new RedirectAction.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.recaptchaenterprise.v1.FirewallAction.IRedirectAction);
+
+                        /**
+                         * Creates a new RedirectAction instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RedirectAction instance
+                         */
+                        public static create(properties?: google.cloud.recaptchaenterprise.v1.FirewallAction.IRedirectAction): google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction;
+
+                        /**
+                         * Encodes the specified RedirectAction message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction.verify|verify} messages.
+                         * @param message RedirectAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.recaptchaenterprise.v1.FirewallAction.IRedirectAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RedirectAction message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction.verify|verify} messages.
+                         * @param message RedirectAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.FirewallAction.IRedirectAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RedirectAction message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RedirectAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction;
+
+                        /**
+                         * Decodes a RedirectAction message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RedirectAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction;
+
+                        /**
+                         * Verifies a RedirectAction message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RedirectAction message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RedirectAction
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction;
+
+                        /**
+                         * Creates a plain object from a RedirectAction message. Also converts values to other types if specified.
+                         * @param message RedirectAction
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.recaptchaenterprise.v1.FirewallAction.RedirectAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RedirectAction to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RedirectAction
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SubstituteAction. */
+                    interface ISubstituteAction {
+
+                        /** SubstituteAction path */
+                        path?: (string|null);
+                    }
+
+                    /** Represents a SubstituteAction. */
+                    class SubstituteAction implements ISubstituteAction {
+
+                        /**
+                         * Constructs a new SubstituteAction.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.recaptchaenterprise.v1.FirewallAction.ISubstituteAction);
+
+                        /** SubstituteAction path. */
+                        public path: string;
+
+                        /**
+                         * Creates a new SubstituteAction instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SubstituteAction instance
+                         */
+                        public static create(properties?: google.cloud.recaptchaenterprise.v1.FirewallAction.ISubstituteAction): google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction;
+
+                        /**
+                         * Encodes the specified SubstituteAction message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction.verify|verify} messages.
+                         * @param message SubstituteAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.recaptchaenterprise.v1.FirewallAction.ISubstituteAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SubstituteAction message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction.verify|verify} messages.
+                         * @param message SubstituteAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.FirewallAction.ISubstituteAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SubstituteAction message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SubstituteAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction;
+
+                        /**
+                         * Decodes a SubstituteAction message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SubstituteAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction;
+
+                        /**
+                         * Verifies a SubstituteAction message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SubstituteAction message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SubstituteAction
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction;
+
+                        /**
+                         * Creates a plain object from a SubstituteAction message. Also converts values to other types if specified.
+                         * @param message SubstituteAction
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.recaptchaenterprise.v1.FirewallAction.SubstituteAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SubstituteAction to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SubstituteAction
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SetHeaderAction. */
+                    interface ISetHeaderAction {
+
+                        /** SetHeaderAction key */
+                        key?: (string|null);
+
+                        /** SetHeaderAction value */
+                        value?: (string|null);
+                    }
+
+                    /** Represents a SetHeaderAction. */
+                    class SetHeaderAction implements ISetHeaderAction {
+
+                        /**
+                         * Constructs a new SetHeaderAction.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.recaptchaenterprise.v1.FirewallAction.ISetHeaderAction);
+
+                        /** SetHeaderAction key. */
+                        public key: string;
+
+                        /** SetHeaderAction value. */
+                        public value: string;
+
+                        /**
+                         * Creates a new SetHeaderAction instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SetHeaderAction instance
+                         */
+                        public static create(properties?: google.cloud.recaptchaenterprise.v1.FirewallAction.ISetHeaderAction): google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction;
+
+                        /**
+                         * Encodes the specified SetHeaderAction message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction.verify|verify} messages.
+                         * @param message SetHeaderAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.recaptchaenterprise.v1.FirewallAction.ISetHeaderAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SetHeaderAction message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction.verify|verify} messages.
+                         * @param message SetHeaderAction message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.FirewallAction.ISetHeaderAction, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SetHeaderAction message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SetHeaderAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction;
+
+                        /**
+                         * Decodes a SetHeaderAction message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SetHeaderAction
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction;
+
+                        /**
+                         * Verifies a SetHeaderAction message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SetHeaderAction message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SetHeaderAction
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction;
+
+                        /**
+                         * Creates a plain object from a SetHeaderAction message. Also converts values to other types if specified.
+                         * @param message SetHeaderAction
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.recaptchaenterprise.v1.FirewallAction.SetHeaderAction, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SetHeaderAction to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SetHeaderAction
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a FirewallPolicy. */
+                interface IFirewallPolicy {
+
+                    /** FirewallPolicy name */
+                    name?: (string|null);
+
+                    /** FirewallPolicy description */
+                    description?: (string|null);
+
+                    /** FirewallPolicy path */
+                    path?: (string|null);
+
+                    /** FirewallPolicy condition */
+                    condition?: (string|null);
+
+                    /** FirewallPolicy actions */
+                    actions?: (google.cloud.recaptchaenterprise.v1.IFirewallAction[]|null);
+                }
+
+                /** Represents a FirewallPolicy. */
+                class FirewallPolicy implements IFirewallPolicy {
+
+                    /**
+                     * Constructs a new FirewallPolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IFirewallPolicy);
+
+                    /** FirewallPolicy name. */
+                    public name: string;
+
+                    /** FirewallPolicy description. */
+                    public description: string;
+
+                    /** FirewallPolicy path. */
+                    public path: string;
+
+                    /** FirewallPolicy condition. */
+                    public condition: string;
+
+                    /** FirewallPolicy actions. */
+                    public actions: google.cloud.recaptchaenterprise.v1.IFirewallAction[];
+
+                    /**
+                     * Creates a new FirewallPolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FirewallPolicy instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IFirewallPolicy): google.cloud.recaptchaenterprise.v1.FirewallPolicy;
+
+                    /**
+                     * Encodes the specified FirewallPolicy message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallPolicy.verify|verify} messages.
+                     * @param message FirewallPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IFirewallPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FirewallPolicy message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.FirewallPolicy.verify|verify} messages.
+                     * @param message FirewallPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IFirewallPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FirewallPolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FirewallPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.FirewallPolicy;
+
+                    /**
+                     * Decodes a FirewallPolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FirewallPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.FirewallPolicy;
+
+                    /**
+                     * Verifies a FirewallPolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FirewallPolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FirewallPolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.FirewallPolicy;
+
+                    /**
+                     * Creates a plain object from a FirewallPolicy message. Also converts values to other types if specified.
+                     * @param message FirewallPolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.FirewallPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FirewallPolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FirewallPolicy
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -5781,13 +7917,15 @@ export namespace google {
                         WAF_FEATURE_UNSPECIFIED = 0,
                         CHALLENGE_PAGE = 1,
                         SESSION_TOKEN = 2,
-                        ACTION_TOKEN = 3
+                        ACTION_TOKEN = 3,
+                        EXPRESS = 5
                     }
 
                     /** WafService enum. */
                     enum WafService {
                         WAF_SERVICE_UNSPECIFIED = 0,
-                        CA = 1
+                        CA = 1,
+                        FASTLY = 3
                     }
                 }
             }
@@ -13915,6 +16053,222 @@ export namespace google {
 
             /**
              * Gets the default type url for Timestamp
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an Any. */
+        interface IAny {
+
+            /** Any type_url */
+            type_url?: (string|null);
+
+            /** Any value */
+            value?: (Uint8Array|string|null);
+        }
+
+        /** Represents an Any. */
+        class Any implements IAny {
+
+            /**
+             * Constructs a new Any.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IAny);
+
+            /** Any type_url. */
+            public type_url: string;
+
+            /** Any value. */
+            public value: (Uint8Array|string);
+
+            /**
+             * Creates a new Any instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Any instance
+             */
+            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
+
+            /**
+             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
+
+            /**
+             * Verifies an Any message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Any message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Any
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
+
+            /**
+             * Creates a plain object from an Any message. Also converts values to other types if specified.
+             * @param message Any
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Any to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Any
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace rpc. */
+    namespace rpc {
+
+        /** Properties of a Status. */
+        interface IStatus {
+
+            /** Status code */
+            code?: (number|null);
+
+            /** Status message */
+            message?: (string|null);
+
+            /** Status details */
+            details?: (google.protobuf.IAny[]|null);
+        }
+
+        /** Represents a Status. */
+        class Status implements IStatus {
+
+            /**
+             * Constructs a new Status.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.rpc.IStatus);
+
+            /** Status code. */
+            public code: number;
+
+            /** Status message. */
+            public message: string;
+
+            /** Status details. */
+            public details: google.protobuf.IAny[];
+
+            /**
+             * Creates a new Status instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Status instance
+             */
+            public static create(properties?: google.rpc.IStatus): google.rpc.Status;
+
+            /**
+             * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.rpc.Status;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.rpc.Status;
+
+            /**
+             * Verifies a Status message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Status message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Status
+             */
+            public static fromObject(object: { [k: string]: any }): google.rpc.Status;
+
+            /**
+             * Creates a plain object from a Status message. Also converts values to other types if specified.
+             * @param message Status
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.rpc.Status, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Status to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Status
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
