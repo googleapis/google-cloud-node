@@ -512,7 +512,7 @@ describe('v2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.UpdateQueueRequest()
       );
-      request.queue = {};
+      request.queue ??== {};
       const defaultValue1 = getTypeDefaultValue(
         '.google.cloud.tasks.v2.UpdateQueueRequest',
         ['queue', 'name']
