@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [8.2.1](https://github.com/googleapis/nodejs-datastore/compare/v8.2.0...v8.2.1) (2023-10-03)
+
+
+### Bug Fixes
+
+* Make aggregation query requests run properly inside a transaction ([#1166](https://github.com/googleapis/nodejs-datastore/issues/1166)) ([263804b](https://github.com/googleapis/nodejs-datastore/commit/263804b768322de39bf87b4c5265c303a2bda173))
+
 ## [8.2.0](https://github.com/googleapis/nodejs-datastore/compare/v8.1.0...v8.2.0) (2023-10-02)
 
 
