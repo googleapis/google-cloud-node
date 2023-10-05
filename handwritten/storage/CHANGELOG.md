@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [7.2.0](https://github.com/googleapis/nodejs-storage/compare/v7.1.0...v7.2.0) (2023-10-05)
+
+
+### Features
+
+* Add headers option to MPU ([#2303](https://github.com/googleapis/nodejs-storage/issues/2303)) ([7f58f30](https://github.com/googleapis/nodejs-storage/commit/7f58f30588735d129fda0503e1daec5f605f8447))
+* Transfer Manager Metrics ([#2305](https://github.com/googleapis/nodejs-storage/issues/2305)) ([9be3b6a](https://github.com/googleapis/nodejs-storage/commit/9be3b6a97d9c4685d3c01a6d44e618087be54ea1))
+
+
+### Bug Fixes
+
+* Make sure destination uses posix separator instead of win ([#2304](https://github.com/googleapis/nodejs-storage/issues/2304)) ([1d4ea74](https://github.com/googleapis/nodejs-storage/commit/1d4ea74a3cc441dfccc47893f0318234f213921b))
+
 ## [7.1.0](https://github.com/googleapis/nodejs-storage/compare/v7.0.1...v7.1.0) (2023-09-07)
 
 
