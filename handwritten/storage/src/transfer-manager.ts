@@ -474,10 +474,12 @@ export class TransferManager {
         [GCCL_GCS_CMD_KEY]: GCCL_GCS_CMD_FEATURE.UPLOAD_MANY,
       };
 
-      passThroughOptionsCopy.destination = filePath;
+      passThroughOptionsCopy.destination = filePath
+        .split(path.sep)
+        .join(path.posix.sep);
       if (options.prefix) {
-        passThroughOptionsCopy.destination = path.join(
-          options.prefix,
+        passThroughOptionsCopy.destination = path.posix.join(
+          ...options.prefix.split(path.sep),
           passThroughOptionsCopy.destination
         );
       }
