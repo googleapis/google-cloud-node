@@ -29,4 +29,4 @@ s.replace(
     ".circleci/config.yml",
     "command: npm run system-test",
     "command: mkdir $HOME/.config && npm run system-test")
-node.fix_hermetic()
+node.fix()
