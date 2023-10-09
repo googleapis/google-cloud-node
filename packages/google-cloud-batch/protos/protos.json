@@ -708,6 +708,13 @@
                               "rule": "repeated",
                               "type": "AttachedDisk",
                               "id": 6
+                            },
+                            "reservation": {
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -2031,7 +2038,10 @@
                             },
                             "reservation": {
                               "type": "string",
-                              "id": 7
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },

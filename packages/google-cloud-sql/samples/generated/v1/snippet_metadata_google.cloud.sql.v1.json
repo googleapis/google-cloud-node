@@ -2020,6 +2020,50 @@
             }
         },
         {
+            "regionTag": "sqladmin_v1_generated_SqlInstancesService_GetLatestRecoveryTime_async",
+            "title": "SqlAvailableDatabaseVersionsService getLatestRecoveryTime Sample",
+            "origin": "API_DEFINITION",
+            "description": " Get Latest Recovery Time for a given instance.",
+            "canonical": true,
+            "file": "sql_instances_service.get_latest_recovery_time.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetLatestRecoveryTime",
+                "fullName": "google.cloud.sql.v1.SqlInstancesService.GetLatestRecoveryTime",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "instance",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeResponse",
+                "client": {
+                    "shortName": "SqlInstancesServiceClient",
+                    "fullName": "google.cloud.sql.v1.SqlInstancesServiceClient"
+                },
+                "method": {
+                    "shortName": "GetLatestRecoveryTime",
+                    "fullName": "google.cloud.sql.v1.SqlInstancesService.GetLatestRecoveryTime",
+                    "service": {
+                        "shortName": "SqlInstancesService",
+                        "fullName": "google.cloud.sql.v1.SqlInstancesService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "sqladmin_v1_generated_SqlOperationsService_Get_async",
             "title": "SqlAvailableDatabaseVersionsService get Sample",
             "origin": "API_DEFINITION",

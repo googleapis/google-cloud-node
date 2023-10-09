@@ -4704,6 +4704,171 @@ describe('v1.SqlInstancesServiceClient', () => {
       await assert.rejects(client.resetReplicaSize(request), expectedError);
     });
   });
+
+  describe('getLatestRecoveryTime', () => {
+    it('invokes getLatestRecoveryTime without error', async () => {
+      const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeRequest',
+        ['instance']
+      );
+      request.instance = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeResponse()
+      );
+      client.innerApiCalls.getLatestRecoveryTime =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getLatestRecoveryTime(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getLatestRecoveryTime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getLatestRecoveryTime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getLatestRecoveryTime without error using callback', async () => {
+      const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeRequest',
+        ['instance']
+      );
+      request.instance = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeResponse()
+      );
+      client.innerApiCalls.getLatestRecoveryTime =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getLatestRecoveryTime(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.sql.v1.ISqlInstancesGetLatestRecoveryTimeResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getLatestRecoveryTime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getLatestRecoveryTime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getLatestRecoveryTime with error', async () => {
+      const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeRequest',
+        ['instance']
+      );
+      request.instance = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&instance=${defaultValue2}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getLatestRecoveryTime = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getLatestRecoveryTime(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.getLatestRecoveryTime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getLatestRecoveryTime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getLatestRecoveryTime with closed client', async () => {
+      const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeRequest',
+        ['instance']
+      );
+      request.instance = defaultValue2;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getLatestRecoveryTime(request),
+        expectedError
+      );
+    });
+  });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new sqlinstancesserviceModule.v1.SqlInstancesServiceClient(

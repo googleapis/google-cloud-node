@@ -14,6 +14,7 @@
 """This script is used to synthesize generated parts of this library."""
 
 import os
+import re
 import synthtool as s
 import synthtool.gcp as gcp
 import synthtool.languages.node_mono_repo as node
@@ -23,19 +24,21 @@ from pathlib import Path
 
 def patch(library: Path):
   # remove empty v1 services
-  for service in ['sql_available_database_versions_service', 'sql_events_service', 'sql_iam_policies_service', 'sql_instance_names_service', 'sql_regions_service']:
-    for suffix in ['_client_config.json', '_client.ts', '_proto_list.json']:
-      os.unlink(library / f'src/v1/{service}{suffix}')
-    os.unlink(library / f'test/gapic_{service}_v1.ts')
+  if re.search("/v1$", str(library)):
+    for service in ['sql_available_database_versions_service', 'sql_events_service', 'sql_iam_policies_service', 'sql_instance_names_service', 'sql_regions_service']:
+      for suffix in ['_client_config.json', '_client.ts', '_proto_list.json']:
+        os.unlink(library / f'src/v1/{service}{suffix}')
+      os.unlink(library / f'test/gapic_{service}_v1.ts')
+    # fix request.id which is Long but used in the path templates
+    s.replace(library / f'src/v1/sql_backup_runs_service_client.ts', r'id: request\.id', 'id: request.id?.toString()')
 
   # remove empty v1beta4 services
-  for service in ['sql_iam_policies_service_client']:
-    for suffix in ['_client_config.json', '_client.ts', '_proto_list.json']:
-      os.unlink(library / f'src/v1beta4/{service}{suffix}')
-    os.unlink(library / f'test/gapic_{service}_v1beta4.ts')
-
-  # fix request.id which is Long but used in the path templates
-  s.replace(library / f'src/v1/sql_backup_runs_service_client.ts', r'id: request\.id', 'id: request.id?.toString()')
-  s.replace(library / f'src/v1beta4/sql_backup_runs_service_client.ts', r'id: request\.id', 'id: request.id?.toString()')
+  if re.search("/v1beta4$", str(library)):
+    for service in ['sql_iam_policies_service']:
+      for suffix in ['_client_config.json', '_client.ts', '_proto_list.json']:
+        os.unlink(library / f'src/v1beta4/{service}{suffix}')
+      os.unlink(library / f'test/gapic_{service}_v1beta4.ts')
+    # fix request.id which is Long but used in the path templates
+    s.replace(library / f'src/v1beta4/sql_backup_runs_service_client.ts', r'id: request\.id', 'id: request.id?.toString()')
 
 node.owlbot_main(relative_dir="packages/google-cloud-sql", templates_excludes=["src/index.ts", "src/v1/index.ts", "src/v1beta4/index.ts", "system-test/fixtures/sample/src/index.js", "system-test/fixtures/sample/src/index.ts"], patch_staging=patch)
