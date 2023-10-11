@@ -357,9 +357,8 @@ async.each(
             const query = defaultDatastore
               .createQuery('Post')
               .hasAncestor(postKey);
-            const [defaultDatastoreResults] = await defaultDatastore.runQuery(
-              query
-            );
+            const [defaultDatastoreResults] =
+              await defaultDatastore.runQuery(query);
             assert.strictEqual(defaultDatastoreResults.length, 1);
             const [entity] = await defaultDatastore.get(postKey);
             assert.strictEqual(entity.author, 'Silvano');
@@ -368,9 +367,8 @@ async.each(
               namespace,
               databaseId: SECOND_DATABASE_ID,
             });
-            const [secondDatastoreResults] = await otherDatastore.runQuery(
-              query
-            );
+            const [secondDatastoreResults] =
+              await otherDatastore.runQuery(query);
             assert.strictEqual(secondDatastoreResults.length, 0);
             const [otherEntity] = await otherDatastore.get(postKey);
             assert(typeof otherEntity === 'undefined');
@@ -383,13 +381,11 @@ async.each(
             const query = defaultDatastore
               .createQuery('Post')
               .hasAncestor(postKey);
-            const [defaultDatastoreResults] = await defaultDatastore.runQuery(
-              query
-            );
+            const [defaultDatastoreResults] =
+              await defaultDatastore.runQuery(query);
             assert.strictEqual(defaultDatastoreResults.length, 0);
-            const [originalSecondaryResults] = await defaultDatastore.runQuery(
-              query
-            );
+            const [originalSecondaryResults] =
+              await defaultDatastore.runQuery(query);
             assert.strictEqual(originalSecondaryResults.length, 0);
             const [entity] = await defaultDatastore.get(postKey);
             assert(typeof entity === 'undefined');
@@ -399,9 +395,8 @@ async.each(
               databaseId: SECOND_DATABASE_ID,
             });
             await otherDatastore.save({key: postKey, data: post});
-            const [secondDatastoreResults] = await otherDatastore.runQuery(
-              query
-            );
+            const [secondDatastoreResults] =
+              await otherDatastore.runQuery(query);
             assert.strictEqual(secondDatastoreResults.length, 1);
             const [originalResults] = await defaultDatastore.runQuery(query);
             assert.strictEqual(originalResults.length, 0);
@@ -452,9 +447,8 @@ async.each(
             const query = defaultDatastore
               .createQuery('Post')
               .hasAncestor(defaultPostKey);
-            const [defaultDatastoreResults] = await defaultDatastore.runQuery(
-              query
-            );
+            const [defaultDatastoreResults] =
+              await defaultDatastore.runQuery(query);
             assert.strictEqual(defaultDatastoreResults.length, 1);
             assert.strictEqual(
               defaultDatastoreResults[0].author,
