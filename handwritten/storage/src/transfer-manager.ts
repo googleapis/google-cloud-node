@@ -651,42 +651,30 @@ export class TransferManager {
       let chunkEnd = start + chunkSize - 1;
       chunkEnd = chunkEnd > size ? size : chunkEnd;
       promises.push(
-        limit(() =>
-          file
-            .download({
-              start: chunkStart,
-              end: chunkEnd,
-              [GCCL_GCS_CMD_KEY]: GCCL_GCS_CMD_FEATURE.DOWNLOAD_SHARDED,
-            })
-            .then(resp => {
-              return fileToWrite.write(resp[0], 0, resp[0].length, chunkStart);
-            })
-        )
+        limit(async () => {
+          const resp = await file.download({
+            start: chunkStart,
+            end: chunkEnd,
+            [GCCL_GCS_CMD_KEY]: GCCL_GCS_CMD_FEATURE.DOWNLOAD_SHARDED,
+          });
+          return fileToWrite.write(resp[0], 0, resp[0].length, chunkStart);
+        })
       );
 
       start += chunkSize;
     }
 
-    return new Promise((resolve, reject) => {
-      let results: DownloadResponse;
-      Promise.all(promises)
-        .then(data => {
-          results = data.map(result => result.buffer) as DownloadResponse;
-          if (options.validation === 'crc32c') {
-            return CRC32C.fromFile(filePath);
-          }
-          return;
-        })
-        .then(() => {
-          resolve(results);
-        })
-        .catch(e => {
-          reject(e);
-        })
-        .finally(() => {
-          fileToWrite.close();
-        });
-    });
+    let results: DownloadResponse;
+    try {
+      const data = await Promise.all(promises);
+      results = data.map(result => result.buffer) as DownloadResponse;
+      if (options.validation === 'crc32c') {
+        await CRC32C.fromFile(filePath);
+      }
+      return results;
+    } finally {
+      fileToWrite.close();
+    }
   }
 
   /**
