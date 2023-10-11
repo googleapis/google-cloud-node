@@ -80,6 +80,16 @@ describe('transfer manager', () => {
     );
   });
 
+  it('should upload a file utilizing chunked upload', async () => {
+    const output = execSync(
+      `node uploadFileInChunksWithTransferManager.js ${bucketName} ${firstFilePath} ${chunkSize}`
+    );
+    assert.match(
+      output,
+      new RegExp(`${firstFilePath} uploaded to ${bucketName}.`)
+    );
+  });
+
   it('should upload a directory', async () => {
     const output = execSync(
       `node uploadDirectoryWithTransferManager.js ${bucketName} ${resourcesPath}`

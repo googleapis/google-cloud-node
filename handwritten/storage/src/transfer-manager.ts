@@ -33,39 +33,39 @@ const packageJson = require('../../package.json');
 
 /**
  * Default number of concurrently executing promises to use when calling uploadManyFiles.
- * @experimental
+ *
  */
-const DEFAULT_PARALLEL_UPLOAD_LIMIT = 2;
+const DEFAULT_PARALLEL_UPLOAD_LIMIT = 5;
 /**
  * Default number of concurrently executing promises to use when calling downloadManyFiles.
- * @experimental
+ *
  */
-const DEFAULT_PARALLEL_DOWNLOAD_LIMIT = 2;
+const DEFAULT_PARALLEL_DOWNLOAD_LIMIT = 5;
 /**
  * Default number of concurrently executing promises to use when calling downloadFileInChunks.
- * @experimental
+ *
  */
-const DEFAULT_PARALLEL_CHUNKED_DOWNLOAD_LIMIT = 2;
+const DEFAULT_PARALLEL_CHUNKED_DOWNLOAD_LIMIT = 5;
 /**
  * The minimum size threshold in bytes at which to apply a chunked download strategy when calling downloadFileInChunks.
- * @experimental
+ *
  */
 const DOWNLOAD_IN_CHUNKS_FILE_SIZE_THRESHOLD = 32 * 1024 * 1024;
 /**
  * The chunk size in bytes to use when calling downloadFileInChunks.
- * @experimental
+ *
  */
-const DOWNLOAD_IN_CHUNKS_DEFAULT_CHUNK_SIZE = 10 * 1024 * 1024;
+const DOWNLOAD_IN_CHUNKS_DEFAULT_CHUNK_SIZE = 32 * 1024 * 1024;
 /**
  * The chunk size in bytes to use when calling uploadFileInChunks.
- * @experimental
+ *
  */
 const UPLOAD_IN_CHUNKS_DEFAULT_CHUNK_SIZE = 32 * 1024 * 1024;
 /**
  * Default number of concurrently executing promises to use when calling uploadFileInChunks.
- * @experimental
+ *
  */
-const DEFAULT_PARALLEL_CHUNKED_UPLOAD_LIMIT = 2;
+const DEFAULT_PARALLEL_CHUNKED_UPLOAD_LIMIT = 5;
 
 const EMPTY_REGEX = '(?:)';
 
@@ -165,7 +165,7 @@ export class MultiPartUploadError extends Error {
  * Class representing an implementation of MPU in the XML API. This class is not meant for public usage.
  *
  * @private
- * @experimental
+ *
  */
 class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
   public partsMap;
@@ -383,7 +383,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
  * @hideconstructor
  *
  * @param {Bucket} bucket A {@link Bucket} instance
- * @experimental
+ *
  */
 export class TransferManager {
   bucket: Bucket;
@@ -400,7 +400,7 @@ export class TransferManager {
    * @property {string} [prefix] A prefix to append to all of the uploaded files.
    * @property {object} [passthroughOptions] {@link UploadOptions} Options to be passed through
    * to each individual upload operation.
-   * @experimental
+   *
    */
   /**
    * Upload multiple files in parallel to the bucket. This is a convenience method
@@ -429,7 +429,7 @@ export class TransferManager {
    * const response = await transferManager.uploadManyFiles('/local/directory');
    * // Your bucket will now contain all files contained in '/local/directory' maintaining the subdirectory structure.
    * ```
-   * @experimental
+   *
    */
   async uploadManyFiles(
     filePathsOrDirectory: string[] | string,
@@ -502,7 +502,7 @@ export class TransferManager {
    * @property {string} [stripPrefix] A prefix to remove from all of the downloaded files.
    * @property {object} [passthroughOptions] {@link DownloadOptions} Options to be passed through
    * to each individual download operation.
-   * @experimental
+   *
    */
   /**
    * Download multiple files in parallel to the local filesystem. This is a convenience method
@@ -534,7 +534,7 @@ export class TransferManager {
    * const response = await transferManager.downloadManyFiles('test-folder');
    * // All files with GCS prefix of 'test-folder' have been downloaded.
    * ```
-   * @experimental
+   *
    */
   async downloadManyFiles(
     filesOrFolder: File[] | string[] | string,
@@ -594,7 +594,7 @@ export class TransferManager {
    * to use when downloading the file.
    * @property {number} [chunkSizeBytes] The size in bytes of each chunk to be downloaded.
    * @property {string | boolean} [validation] Whether or not to perform a CRC32C validation check when download is complete.
-   * @experimental
+   *
    */
   /**
    * Download a large file in chunks utilizing parallel download operations. This is a convenience method
@@ -618,7 +618,7 @@ export class TransferManager {
    * // Your local directory now contains:
    * // - "large-file.txt" (with the contents from my-bucket.large-file.txt)
    * ```
-   * @experimental
+   *
    */
   async downloadFileInChunks(
     fileOrName: File | string,
@@ -645,7 +645,7 @@ export class TransferManager {
 
     let start = 0;
     const filePath = options.destination || path.basename(file.name);
-    const fileToWrite = await fsp.open(filePath, 'w+');
+    const fileToWrite = await fsp.open(filePath, 'w');
     while (start < size) {
       const chunkStart = start;
       let chunkEnd = start + chunkSize - 1;
@@ -704,7 +704,7 @@ export class TransferManager {
    * See {@link https://cloud.google.com/storage/docs/xml-api/post-object-multipart#request_headers| Request Headers: Initiate a Multipart Upload}
    * @property {boolean} [autoAbortFailure] boolean to indicate if an in progress upload session will be automatically aborted upon failure. If not set,
    * failures will be automatically aborted.
-   * @experimental
+   *
    */
   /**
    * Upload a large file in chunks utilizing parallel upload opertions. If the upload fails, an uploadId and
@@ -731,7 +731,7 @@ export class TransferManager {
    * // - "large-file.txt"
    * ```
    *
-   * @experimental
+   *
    */
   async uploadFileInChunks(
     filePath: string,

@@ -1,5 +1,5 @@
 /**
- * Copyright 2022 Google LLC
+ * Copyright 2023 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,20 +16,27 @@
  */
 
 // sample-metadata:
-//   title: Upload Directory With Transfer Manager
-//   description: Uploads a directory in parallel utilizing transfer manager.
-//   usage: node uploadFolderWithTransferManager.js <BUCKET_NAME> <DIRECTORY_NAME>
+//   title: Upload a File in Chunks With Transfer Manager
+//   description: Uploads a single file in in chunks in parallel utilizing transfer manager.
+//   usage: node uploadFileInChunksWithTransferManager.js <BUCKET_NAME> <FILE_NAME> <CHUNK_SIZE>
 
-function main(bucketName = 'my-bucket', directoryName = 'my-directory') {
-  // [START storage_transfer_manager_upload_directory]
+function main(
+  bucketName = 'my-bucket',
+  filePath = './local/path/to/file.txt',
+  chunkSize = 32 * 1024 * 1024
+) {
+  // [START storage_transfer_manager_upload_chunks_concurrently]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
   // The ID of your GCS bucket
   // const bucketName = 'your-unique-bucket-name';
 
-  // The local directory to upload
-  // const directoryName = 'your-directory';
+  // The path of file to upload
+  // const fileName = 'path/to/your/file';
+
+  // The size of each chunk to be uploaded
+  // const chunkSize = 32 * 1024 * 1024;
 
   // Imports the Google Cloud client library
   const {Storage, TransferManager} = require('@google-cloud/storage');
@@ -40,15 +47,17 @@ function main(bucketName = 'my-bucket', directoryName = 'my-directory') {
   // Creates a transfer manager client
   const transferManager = new TransferManager(storage.bucket(bucketName));
 
-  async function uploadDirectoryWithTransferManager() {
-    // Uploads the directory
-    await transferManager.uploadManyFiles(directoryName);
+  async function uploadFileInChunksWithTransferManager() {
+    // Uploads the files
+    await transferManager.uploadFileInChunks(filePath, {
+      chunkSizeBytes: chunkSize,
+    });
 
-    console.log(`${directoryName} uploaded to ${bucketName}.`);
+    console.log(`${filePath} uploaded to ${bucketName}.`);
   }
 
-  uploadDirectoryWithTransferManager().catch(console.error);
-  // [END storage_transfer_manager_upload_directory]
+  uploadFileInChunksWithTransferManager().catch(console.error);
+  // [END storage_transfer_manager_upload_chunks_concurrently]
 }
 
 process.on('unhandledRejection', err => {
