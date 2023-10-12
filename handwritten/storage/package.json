@@ -64,7 +64,7 @@
     "mime": "^3.0.0",
     "mime-types": "^2.0.8",
     "p-limit": "^3.0.1",
-    "retry-request": "^6.0.0",
+    "retry-request": "^7.0.0",
     "teeny-request": "^9.0.0",
     "uuid": "^8.0.0"
   },
