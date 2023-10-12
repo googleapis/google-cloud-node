@@ -59,7 +59,7 @@
     "long": "^5.2.3",
     "mocha": "^10.0.0",
     "null-loader": "^4.0.1",
-    "pack-n-play": "^1.0.0-2",
+    "pack-n-play": "^2.0.0",
     "sinon": "^15.0.0",
     "ts-loader": "^9.1.2",
     "typescript": "^5.1.6",
