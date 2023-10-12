@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [7.3.0](https://github.com/googleapis/nodejs-storage/compare/v7.2.0...v7.3.0) (2023-10-11)
+
+
+### Features
+
+* Add transfer manager MPU sample, adjust defaults, prepare for GA ([#2318](https://github.com/googleapis/nodejs-storage/issues/2318)) ([a7d09c1](https://github.com/googleapis/nodejs-storage/commit/a7d09c16aa7f732db089c55d2692ce5fd88c52f3))
+
+
+### Bug Fixes
+
+* Simplify the code for downloadInChunks ([#2323](https://github.com/googleapis/nodejs-storage/issues/2323)) ([6519929](https://github.com/googleapis/nodejs-storage/commit/6519929153e0006b61d205860de93c9e64b99d81))
+
 ## [7.2.0](https://github.com/googleapis/nodejs-storage/compare/v7.1.0...v7.2.0) (2023-10-05)
 
 
