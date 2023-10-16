@@ -14182,6 +14182,9 @@ export namespace google {
 
                     /** DatabaseInstance dnsName */
                     dnsName?: (string|null);
+
+                    /** DatabaseInstance primaryDnsName */
+                    primaryDnsName?: (string|null);
                 }
 
                 /** Represents a DatabaseInstance. */
@@ -14307,6 +14310,9 @@ export namespace google {
                     /** DatabaseInstance dnsName. */
                     public dnsName?: (string|null);
 
+                    /** DatabaseInstance primaryDnsName. */
+                    public primaryDnsName?: (string|null);
+
                     /** DatabaseInstance _outOfDiskReport. */
                     public _outOfDiskReport?: "outOfDiskReport";
 
@@ -14315,6 +14321,9 @@ export namespace google {
 
                     /** DatabaseInstance _dnsName. */
                     public _dnsName?: "dnsName";
+
+                    /** DatabaseInstance _primaryDnsName. */
+                    public _primaryDnsName?: "primaryDnsName";
 
                     /**
                      * Creates a new DatabaseInstance instance using the specified properties.
