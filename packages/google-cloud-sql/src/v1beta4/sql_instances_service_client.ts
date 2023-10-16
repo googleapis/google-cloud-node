@@ -742,7 +742,7 @@ export class SqlInstancesServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.instance
-   *   Cloud SQL instance ID. This does not include the project ID.
+   *   The Cloud SQL instance ID. This doesn't include the project ID.
    * @param {string} request.project
    *   Project ID of the project that contains the instance to be exported.
    * @param {google.cloud.sql.v1beta4.InstancesExportRequest} request.body

@@ -6548,6 +6548,11 @@
                           "oneof": [
                             "dnsName"
                           ]
+                        },
+                        "_primaryDnsName": {
+                          "oneof": [
+                            "primaryDnsName"
+                          ]
                         }
                       },
                       "fields": {
@@ -6731,6 +6736,14 @@
                         "dnsName": {
                           "type": "string",
                           "id": 49,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "primaryDnsName": {
+                          "type": "string",
+                          "id": 51,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
