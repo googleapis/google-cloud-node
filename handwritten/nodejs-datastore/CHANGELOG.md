@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [8.2.2](https://github.com/googleapis/nodejs-datastore/compare/v8.2.1...v8.2.2) (2023-10-17)
+
+
+### Bug Fixes
+
+* **deps:** Update google-gax ([#1173](https://github.com/googleapis/nodejs-datastore/issues/1173)) ([8237b15](https://github.com/googleapis/nodejs-datastore/commit/8237b152aa906cac55117cdeaf7a8bda85e94ac7))
+
 ## [8.2.1](https://github.com/googleapis/nodejs-datastore/compare/v8.2.0...v8.2.1) (2023-10-03)
 
 
