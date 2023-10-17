@@ -8250,6 +8250,279 @@
                         return ShipmentTypeRequirement;
                     })();
     
+                    v1.RouteModifiers = (function() {
+    
+                        /**
+                         * Properties of a RouteModifiers.
+                         * @memberof google.cloud.optimization.v1
+                         * @interface IRouteModifiers
+                         * @property {boolean|null} [avoidTolls] RouteModifiers avoidTolls
+                         * @property {boolean|null} [avoidHighways] RouteModifiers avoidHighways
+                         * @property {boolean|null} [avoidFerries] RouteModifiers avoidFerries
+                         * @property {boolean|null} [avoidIndoor] RouteModifiers avoidIndoor
+                         */
+    
+                        /**
+                         * Constructs a new RouteModifiers.
+                         * @memberof google.cloud.optimization.v1
+                         * @classdesc Represents a RouteModifiers.
+                         * @implements IRouteModifiers
+                         * @constructor
+                         * @param {google.cloud.optimization.v1.IRouteModifiers=} [properties] Properties to set
+                         */
+                        function RouteModifiers(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RouteModifiers avoidTolls.
+                         * @member {boolean} avoidTolls
+                         * @memberof google.cloud.optimization.v1.RouteModifiers
+                         * @instance
+                         */
+                        RouteModifiers.prototype.avoidTolls = false;
+    
+                        /**
+                         * RouteModifiers avoidHighways.
+                         * @member {boolean} avoidHighways
+                         * @memberof google.cloud.optimization.v1.RouteModifiers
+                         * @instance
+                         */
+                        RouteModifiers.prototype.avoidHighways = false;
+    
+                        /**
+                         * RouteModifiers avoidFerries.
+                         * @member {boolean} avoidFerries
+                         * @memberof google.cloud.optimization.v1.RouteModifiers
+                         * @instance
+                         */
+                        RouteModifiers.prototype.avoidFerries = false;
+    
+                        /**
+                         * RouteModifiers avoidIndoor.
+                         * @member {boolean} avoidIndoor
+                         * @memberof google.cloud.optimization.v1.RouteModifiers
+                         * @instance
+                         */
+                        RouteModifiers.prototype.avoidIndoor = false;
+    
+                        /**
+                         * Creates a new RouteModifiers instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.optimization.v1.RouteModifiers
+                         * @static
+                         * @param {google.cloud.optimization.v1.IRouteModifiers=} [properties] Properties to set
+                         * @returns {google.cloud.optimization.v1.RouteModifiers} RouteModifiers instance
+                         */
+                        RouteModifiers.create = function create(properties) {
+                            return new RouteModifiers(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RouteModifiers message. Does not implicitly {@link google.cloud.optimization.v1.RouteModifiers.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.optimization.v1.RouteModifiers
+                         * @static
+                         * @param {google.cloud.optimization.v1.IRouteModifiers} message RouteModifiers message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RouteModifiers.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.avoidTolls != null && Object.hasOwnProperty.call(message, "avoidTolls"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.avoidTolls);
+                            if (message.avoidHighways != null && Object.hasOwnProperty.call(message, "avoidHighways"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.avoidHighways);
+                            if (message.avoidFerries != null && Object.hasOwnProperty.call(message, "avoidFerries"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.avoidFerries);
+                            if (message.avoidIndoor != null && Object.hasOwnProperty.call(message, "avoidIndoor"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.avoidIndoor);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RouteModifiers message, length delimited. Does not implicitly {@link google.cloud.optimization.v1.RouteModifiers.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.optimization.v1.RouteModifiers
+                         * @static
+                         * @param {google.cloud.optimization.v1.IRouteModifiers} message RouteModifiers message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RouteModifiers.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RouteModifiers message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.optimization.v1.RouteModifiers
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.optimization.v1.RouteModifiers} RouteModifiers
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RouteModifiers.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.optimization.v1.RouteModifiers();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        message.avoidTolls = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.avoidHighways = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.avoidFerries = reader.bool();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.avoidIndoor = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RouteModifiers message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.optimization.v1.RouteModifiers
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.optimization.v1.RouteModifiers} RouteModifiers
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RouteModifiers.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RouteModifiers message.
+                         * @function verify
+                         * @memberof google.cloud.optimization.v1.RouteModifiers
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RouteModifiers.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.avoidTolls != null && message.hasOwnProperty("avoidTolls"))
+                                if (typeof message.avoidTolls !== "boolean")
+                                    return "avoidTolls: boolean expected";
+                            if (message.avoidHighways != null && message.hasOwnProperty("avoidHighways"))
+                                if (typeof message.avoidHighways !== "boolean")
+                                    return "avoidHighways: boolean expected";
+                            if (message.avoidFerries != null && message.hasOwnProperty("avoidFerries"))
+                                if (typeof message.avoidFerries !== "boolean")
+                                    return "avoidFerries: boolean expected";
+                            if (message.avoidIndoor != null && message.hasOwnProperty("avoidIndoor"))
+                                if (typeof message.avoidIndoor !== "boolean")
+                                    return "avoidIndoor: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RouteModifiers message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.optimization.v1.RouteModifiers
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.optimization.v1.RouteModifiers} RouteModifiers
+                         */
+                        RouteModifiers.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.optimization.v1.RouteModifiers)
+                                return object;
+                            var message = new $root.google.cloud.optimization.v1.RouteModifiers();
+                            if (object.avoidTolls != null)
+                                message.avoidTolls = Boolean(object.avoidTolls);
+                            if (object.avoidHighways != null)
+                                message.avoidHighways = Boolean(object.avoidHighways);
+                            if (object.avoidFerries != null)
+                                message.avoidFerries = Boolean(object.avoidFerries);
+                            if (object.avoidIndoor != null)
+                                message.avoidIndoor = Boolean(object.avoidIndoor);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RouteModifiers message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.optimization.v1.RouteModifiers
+                         * @static
+                         * @param {google.cloud.optimization.v1.RouteModifiers} message RouteModifiers
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RouteModifiers.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.avoidTolls = false;
+                                object.avoidHighways = false;
+                                object.avoidFerries = false;
+                                object.avoidIndoor = false;
+                            }
+                            if (message.avoidTolls != null && message.hasOwnProperty("avoidTolls"))
+                                object.avoidTolls = message.avoidTolls;
+                            if (message.avoidHighways != null && message.hasOwnProperty("avoidHighways"))
+                                object.avoidHighways = message.avoidHighways;
+                            if (message.avoidFerries != null && message.hasOwnProperty("avoidFerries"))
+                                object.avoidFerries = message.avoidFerries;
+                            if (message.avoidIndoor != null && message.hasOwnProperty("avoidIndoor"))
+                                object.avoidIndoor = message.avoidIndoor;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RouteModifiers to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.optimization.v1.RouteModifiers
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RouteModifiers.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RouteModifiers
+                         * @function getTypeUrl
+                         * @memberof google.cloud.optimization.v1.RouteModifiers
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RouteModifiers.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.optimization.v1.RouteModifiers";
+                        };
+    
+                        return RouteModifiers;
+                    })();
+    
                     v1.Vehicle = (function() {
     
                         /**
@@ -8257,6 +8530,7 @@
                          * @memberof google.cloud.optimization.v1
                          * @interface IVehicle
                          * @property {google.cloud.optimization.v1.Vehicle.TravelMode|null} [travelMode] Vehicle travelMode
+                         * @property {google.cloud.optimization.v1.IRouteModifiers|null} [routeModifiers] Vehicle routeModifiers
                          * @property {google.type.ILatLng|null} [startLocation] Vehicle startLocation
                          * @property {google.cloud.optimization.v1.IWaypoint|null} [startWaypoint] Vehicle startWaypoint
                          * @property {google.type.ILatLng|null} [endLocation] Vehicle endLocation
@@ -8318,6 +8592,14 @@
                          * @instance
                          */
                         Vehicle.prototype.travelMode = 0;
+    
+                        /**
+                         * Vehicle routeModifiers.
+                         * @member {google.cloud.optimization.v1.IRouteModifiers|null|undefined} routeModifiers
+                         * @memberof google.cloud.optimization.v1.Vehicle
+                         * @instance
+                         */
+                        Vehicle.prototype.routeModifiers = null;
     
                         /**
                          * Vehicle startLocation.
@@ -8575,6 +8857,8 @@
                                 writer = $Writer.create();
                             if (message.travelMode != null && Object.hasOwnProperty.call(message, "travelMode"))
                                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.travelMode);
+                            if (message.routeModifiers != null && Object.hasOwnProperty.call(message, "routeModifiers"))
+                                $root.google.cloud.optimization.v1.RouteModifiers.encode(message.routeModifiers, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.startLocation != null && Object.hasOwnProperty.call(message, "startLocation"))
                                 $root.google.type.LatLng.encode(message.startLocation, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.startWaypoint != null && Object.hasOwnProperty.call(message, "startWaypoint"))
@@ -8682,6 +8966,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.travelMode = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.routeModifiers = $root.google.cloud.optimization.v1.RouteModifiers.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 3: {
@@ -8896,6 +9184,11 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.routeModifiers != null && message.hasOwnProperty("routeModifiers")) {
+                                var error = $root.google.cloud.optimization.v1.RouteModifiers.verify(message.routeModifiers);
+                                if (error)
+                                    return "routeModifiers." + error;
+                            }
                             if (message.startLocation != null && message.hasOwnProperty("startLocation")) {
                                 var error = $root.google.type.LatLng.verify(message.startLocation);
                                 if (error)
@@ -9091,6 +9384,11 @@
                             case 2:
                                 message.travelMode = 2;
                                 break;
+                            }
+                            if (object.routeModifiers != null) {
+                                if (typeof object.routeModifiers !== "object")
+                                    throw TypeError(".google.cloud.optimization.v1.Vehicle.routeModifiers: object expected");
+                                message.routeModifiers = $root.google.cloud.optimization.v1.RouteModifiers.fromObject(object.routeModifiers);
                             }
                             if (object.startLocation != null) {
                                 if (typeof object.startLocation !== "object")
@@ -9291,6 +9589,7 @@
                             }
                             if (options.defaults) {
                                 object.travelMode = options.enums === String ? "TRAVEL_MODE_UNSPECIFIED" : 0;
+                                object.routeModifiers = null;
                                 object.startLocation = null;
                                 object.startWaypoint = null;
                                 object.endLocation = null;
@@ -9310,6 +9609,8 @@
                             }
                             if (message.travelMode != null && message.hasOwnProperty("travelMode"))
                                 object.travelMode = options.enums === String ? $root.google.cloud.optimization.v1.Vehicle.TravelMode[message.travelMode] === undefined ? message.travelMode : $root.google.cloud.optimization.v1.Vehicle.TravelMode[message.travelMode] : message.travelMode;
+                            if (message.routeModifiers != null && message.hasOwnProperty("routeModifiers"))
+                                object.routeModifiers = $root.google.cloud.optimization.v1.RouteModifiers.toObject(message.routeModifiers, options);
                             if (message.startLocation != null && message.hasOwnProperty("startLocation"))
                                 object.startLocation = $root.google.type.LatLng.toObject(message.startLocation, options);
                             if (message.startWaypoint != null && message.hasOwnProperty("startWaypoint"))
