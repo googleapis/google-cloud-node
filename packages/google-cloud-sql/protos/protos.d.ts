@@ -15661,7 +15661,8 @@ export namespace google {
                         INSUFFICIENT_GCS_PERMISSIONS = 31,
                         INVALID_FILE_INFO = 32,
                         UNSUPPORTED_DATABASE_SETTINGS = 33,
-                        MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE = 34
+                        MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE = 34,
+                        LOCAL_INFILE_OFF = 35
                     }
                 }
 
@@ -31465,7 +31466,8 @@ export namespace google {
                         INSUFFICIENT_GCS_PERMISSIONS = 31,
                         INVALID_FILE_INFO = 32,
                         UNSUPPORTED_DATABASE_SETTINGS = 33,
-                        MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE = 34
+                        MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE = 34,
+                        LOCAL_INFILE_OFF = 35
                     }
                 }
 
