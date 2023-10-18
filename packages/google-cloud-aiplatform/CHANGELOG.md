@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.2.0...aiplatform-v3.3.0) (2023-10-18)
+
+
+### Features
+
+* Add dedicated_serving_endpoint ([#4722](https://github.com/googleapis/google-cloud-node/issues/4722)) ([b01c920](https://github.com/googleapis/google-cloud-node/commit/b01c920a996dfc8a3f21d0433f756985edf46b34))
+* Add feature.proto ([#4713](https://github.com/googleapis/google-cloud-node/issues/4713)) ([0490f66](https://github.com/googleapis/google-cloud-node/commit/0490f6644994992176c4d960ea1d29402cfae305))
+
 ## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.1.0...aiplatform-v3.2.0) (2023-09-11)
 
 

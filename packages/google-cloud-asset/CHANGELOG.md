@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/asset-v5.0.2...asset-v5.1.0) (2023-10-18)
+
+
+### Features
+
+* [asset] add support for directly attached and effective tags ([#4694](https://github.com/googleapis/google-cloud-node/issues/4694)) ([5865cc3](https://github.com/googleapis/google-cloud-node/commit/5865cc3232a99aa9146828d52928815bc082f1e5))
+
 ## [5.0.2](https://github.com/googleapis/google-cloud-node/compare/asset-v5.0.1...asset-v5.0.2) (2023-09-06)
 
 

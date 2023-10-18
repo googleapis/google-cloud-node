@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.1.0...dataplex-v3.2.0) (2023-10-18)
+
+
+### Features
+
+* [dataplex] DataQualityDimension is now part of the DataQualityDimensionResult message ([#4734](https://github.com/googleapis/google-cloud-node/issues/4734)) ([86e26db](https://github.com/googleapis/google-cloud-node/commit/86e26db233c5aedc7e1b7b33b21aec341d45b77f))
+
 ## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v3.0.1...dataplex-v3.1.0) (2023-09-20)
 
 

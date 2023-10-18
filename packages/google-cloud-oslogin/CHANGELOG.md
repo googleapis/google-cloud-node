@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/os-login-v5.1.0...os-login-v5.2.0) (2023-10-18)
+
+
+### Features
+
+* [oslogin] added SecurityKey.device_nickname ([#4723](https://github.com/googleapis/google-cloud-node/issues/4723)) ([d6149f2](https://github.com/googleapis/google-cloud-node/commit/d6149f203f15d9f76b89dbbd6c0a46c0fdbad160))
+
 ## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/os-login-v5.0.0...os-login-v5.1.0) (2023-09-06)
 
 
