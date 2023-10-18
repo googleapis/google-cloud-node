@@ -21,7 +21,7 @@ const assert = require('assert');
 // specified by the GOOGLE_APPLICATION_CREDENTIALS environment variable and use
 // the project specified by the GCLOUD_PROJECT environment variable. See
 // https://googlecloudplatform.github.io/gcloud-node/#/docs/google-cloud/latest/guides/authentication
-const {Datastore} = require('@google-cloud/datastore');
+const {Datastore, PropertyFilter, and} = require('@google-cloud/datastore');
 
 function makeStub() {
   return sinon.stub().returns(Promise.resolve([]));
@@ -434,7 +434,7 @@ class Index extends TestHelper {
     // [START datastore_unindexed_property_query]
     const query = datastore
       .createQuery('Task')
-      .filter('description', '=', 'A task description.');
+      .filter(new PropertyFilter('description', '=', 'A task description.'));
     // [END datastore_unindexed_property_query]
 
     return this.datastore.runQuery(query);
@@ -487,8 +487,12 @@ class Metadata extends TestHelper {
       const query = datastore
         .createQuery('__namespace__')
         .select('__key__')
-        .filter('__key__', '>=', startKey)
-        .filter('__key__', '<', endKey);
+        .filter(
+          and([
+            new PropertyFilter('__key__', '>=', startKey),
+            new PropertyFilter('__key__', '<', endKey),
+          ])
+        );
 
       const [entities] = await datastore.runQuery(query);
       const namespaces = entities.map(entity => entity[datastore.KEY].name);
@@ -608,8 +612,12 @@ class Query extends TestHelper {
     // [START datastore_basic_query]
     const query = datastore
       .createQuery('Task')
-      .filter('done', '=', false)
-      .filter('priority', '>=', 4)
+      .filter(
+        and([
+          new PropertyFilter('done', '=', false),
+          new PropertyFilter('priority', '>=', 4),
+        ])
+      )
       .order('priority', {
         descending: true,
       });
@@ -658,7 +666,9 @@ class Query extends TestHelper {
     const datastore = this.datastore;
 
     // [START datastore_property_filter]
-    const query = datastore.createQuery('Task').filter('done', '=', false);
+    const query = datastore
+      .createQuery('Task')
+      .filter(new PropertyFilter('done', '=', false));
     // [END datastore_property_filter]
 
     return this.datastore.runQuery(query);
@@ -670,8 +680,12 @@ class Query extends TestHelper {
     // [START datastore_composite_filter]
     const query = datastore
       .createQuery('Task')
-      .filter('done', '=', false)
-      .filter('priority', '=', 4);
+      .filter(
+        and([
+          new PropertyFilter('done', '=', false),
+          new PropertyFilter('priority', '=', 4),
+        ])
+      );
     // [END datastore_composite_filter]
 
     return this.datastore.runQuery(query);
@@ -683,7 +697,9 @@ class Query extends TestHelper {
     // [START datastore_key_filter]
     const query = datastore
       .createQuery('Task')
-      .filter('__key__', '>', datastore.key(['Task', 'someTask']));
+      .filter(
+        new PropertyFilter('__key__', '>', datastore.key(['Task', 'someTask']))
+      );
     // [END datastore_key_filter]
 
     return this.datastore.runQuery(query);
@@ -733,7 +749,7 @@ class Query extends TestHelper {
     // [START datastore_kindless_query]
     const query = datastore
       .createQuery()
-      .filter('__key__', '>', lastSeenKey)
+      .filter(new PropertyFilter('__key__', '>', lastSeenKey))
       .limit(1);
     // [END datastore_kindless_query]
 
@@ -794,8 +810,12 @@ class Query extends TestHelper {
     // [START datastore_array_value_inequality_range]
     const query = datastore
       .createQuery('Task')
-      .filter('tag', '>', 'learn')
-      .filter('tag', '<', 'math');
+      .filter(
+        and([
+          new PropertyFilter('tag', '>', 'learn'),
+          new PropertyFilter('tag', '<', 'math'),
+        ])
+      );
     // [END datastore_array_value_inequality_range]
 
     return this.datastore.runQuery(query);
@@ -807,8 +827,12 @@ class Query extends TestHelper {
     // [START datastore_array_value_equality]
     const query = datastore
       .createQuery('Task')
-      .filter('tag', '=', 'fun')
-      .filter('tag', '=', 'programming');
+      .filter(
+        and([
+          new PropertyFilter('tag', '=', 'fun'),
+          new PropertyFilter('tag', '=', 'programming'),
+        ])
+      );
     // [END datastore_array_value_equality]
 
     return this.datastore.runQuery(query);
@@ -820,8 +844,12 @@ class Query extends TestHelper {
     // [START datastore_inequality_range]
     const query = datastore
       .createQuery('Task')
-      .filter('created', '>', new Date('1990-01-01T00:00:00z'))
-      .filter('created', '<', new Date('2000-12-31T23:59:59z'));
+      .filter(
+        and([
+          new PropertyFilter('created', '>', new Date('1990-01-01T00:00:00z')),
+          new PropertyFilter('created', '<', new Date('2000-12-31T23:59:59z')),
+        ])
+      );
     // [END datastore_inequality_range]
 
     return this.datastore.runQuery(query);
@@ -833,8 +861,12 @@ class Query extends TestHelper {
     // [START datastore_inequality_invalid]
     const query = datastore
       .createQuery('Task')
-      .filter('priority', '>', 3)
-      .filter('created', '>', new Date('1990-01-01T00:00:00z'));
+      .filter(
+        and([
+          new PropertyFilter('priority', '>', 3),
+          new PropertyFilter('created', '>', new Date('1990-01-01T00:00:00z')),
+        ])
+      );
     // [END datastore_inequality_invalid]
 
     return this.datastore.runQuery(query);
@@ -846,10 +878,14 @@ class Query extends TestHelper {
     // [START datastore_equal_and_inequality_range]
     const query = datastore
       .createQuery('Task')
-      .filter('priority', '=', 4)
-      .filter('done', '=', false)
-      .filter('created', '>', new Date('1990-01-01T00:00:00z'))
-      .filter('created', '<', new Date('2000-12-31T23:59:59z'));
+      .filter(
+        and([
+          new PropertyFilter('priority', '=', 4),
+          new PropertyFilter('done', '=', false),
+          new PropertyFilter('created', '>', new Date('1990-01-01T00:00:00z')),
+          new PropertyFilter('created', '<', new Date('2000-12-31T23:59:59z')),
+        ])
+      );
     // [END datastore_equal_and_inequality_range]
 
     return this.datastore.runQuery(query);
@@ -861,7 +897,7 @@ class Query extends TestHelper {
     // [START datastore_inequality_sort]
     const query = datastore
       .createQuery('Task')
-      .filter('priority', '>', 3)
+      .filter(new PropertyFilter('priority', '>', 3))
       .order('priority')
       .order('created');
     // [END datastore_inequality_sort]
@@ -875,7 +911,7 @@ class Query extends TestHelper {
     // [START datastore_inequality_sort_invalid_not_same]
     const query = datastore
       .createQuery('Task')
-      .filter('priority', '>', 3)
+      .filter(new PropertyFilter('priority', '>', 3))
       .order('created');
     // [END datastore_inequality_sort_invalid_not_same]
 
@@ -888,7 +924,7 @@ class Query extends TestHelper {
     // [START datastore_inequality_sort_invalid_not_first]
     const query = datastore
       .createQuery('Task')
-      .filter('priority', '>', 3)
+      .filter(new PropertyFilter('priority', '>', 3))
       .order('created')
       .order('priority');
     // [END datastore_inequality_sort_invalid_not_first]
