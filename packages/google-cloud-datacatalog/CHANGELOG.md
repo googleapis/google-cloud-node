@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v4.0.1...datacatalog-v4.1.0) (2023-10-18)
+
+
+### Features
+
+* [datacatalog] Enable vertex AI ingestion on Dataplex ([#4702](https://github.com/googleapis/google-cloud-node/issues/4702)) ([1efa18e](https://github.com/googleapis/google-cloud-node/commit/1efa18eb361892462784d508c7a8d2c490e4020f))
+
 ## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v4.0.0...datacatalog-v4.0.1) (2023-09-06)
 
 

@@ -5,6 +5,378 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "81cca6072dab3c753db27fab7dbf08d13196e087",
+          "message": "[artifactregistry] make repositories required in ListRepositoriesRequest",
+          "issues": [
+            "4709"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "dcd9022f16c63c9e0f0eec10615f64b76184a9b6",
+          "message": "[artifactregistry] make repository and repository_id in CreateRepository required",
+          "issues": [
+            "4693"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/artifact-registry",
+      "id": "c29d5060-43db-4eb3-96fc-1ba0e5751862",
+      "createTime": "2023-10-18T09:49:03.040Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e63c0606dab89366c35352f521b5e4e2cee6ffe8",
+          "message": "[run] Removes accidentally exposed field service.traffic_tags_cleanup_threshold in Cloud Run Service",
+          "issues": [
+            "4697"
+          ]
+        }
+      ],
+      "version": "1.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/run",
+      "id": "1ec7cd5e-2779-4b5a-9709-3a7275460abb",
+      "createTime": "2023-10-18T09:49:03.032Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d6149f203f15d9f76b89dbbd6c0a46c0fdbad160",
+          "message": "[oslogin] added SecurityKey.device_nickname",
+          "issues": [
+            "4723"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-login",
+      "id": "2b46192f-2bdb-4852-9f4c-5aba8a7b2705",
+      "createTime": "2023-10-18T09:49:03.022Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "58506dbc77a118a1d9fb78511822b7fa6bb4c57d",
+          "message": "[optimization] added the route modifiers",
+          "issues": [
+            "4737"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/optimization",
+      "id": "102ebe00-0b94-4c39-b8c1-5a3c3b52c512",
+      "createTime": "2023-10-18T09:49:02.962Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "884021190e490434fa232458350b9a9d2f3a6e96",
+          "message": "[networkservices] publish DEP proto",
+          "issues": [
+            "4721"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/networkservices",
+      "id": "7f972a85-e948-4f92-bef9-f36c69ddd38c",
+      "createTime": "2023-10-18T09:49:02.949Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4e65f0a9c2b49bb04b552ac9a04a93112d2c50bf",
+          "message": "[networkconnectivity] add Network Connectivity Center APIs related to VPC spokes",
+          "issues": [
+            "4725"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-connectivity",
+      "id": "b7a1eeb0-c858-4e5e-992b-8368109350e3",
+      "createTime": "2023-10-18T09:49:02.941Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b3aa512c92c9da6866c9ae22bf607b858ea8f5cf",
+          "message": "[metastore] added EndpointLocation (v1, v1beta, v1alpha)",
+          "issues": [
+            "4712"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc-metastore",
+      "id": "ebe5da9b-bd08-4d81-960e-407c9bf552bb",
+      "createTime": "2023-10-18T09:49:02.835Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d02e04450fbbe047238f2d0d8b20355ec9855832",
+          "message": "[documentai] Added SummaryOptions to ProcessOptions for the Summarizer processor",
+          "issues": [
+            "4696"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "effcc26ef80ba3d7fd982d1d3860c147a9046f15",
+          "message": "[documentai] added field Processor.processor_version_aliases",
+          "issues": [
+            "4689"
+          ]
+        }
+      ],
+      "version": "8.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "07727e36-b497-4ecd-8ad0-ef1ecf08b72a",
+      "createTime": "2023-10-18T09:49:02.737Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "969c8b400612e9036de647e36b2c76398a3d4db6",
+          "message": "[discoveryengine] add v1alpha public library for discoveryengine",
+          "issues": [
+            "4735"
+          ]
+        }
+      ],
+      "version": "1.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "c3428744-61b3-469e-9f78-3a1cb5e16390",
+      "createTime": "2023-10-18T09:49:02.706Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b94abd9db50cd9291727f961ca7acf1089047727",
+          "message": "[dialogflow-cx] add support for AdvancedSettings",
+          "issues": [
+            "4718"
+          ]
+        }
+      ],
+      "version": "4.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "47e0fdca-0aef-4cc1-86b3-8c26184b0259",
+      "createTime": "2023-10-18T09:49:02.694Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5ef2787c291122993b94687d4c486f29b6fffff9",
+          "message": "[dialogflow] Add the enable_extended_streaming flag",
+          "issues": [
+            "4724"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "e071fe3158fe5ded093091a19d41c6a42041bb7b",
+          "message": "[dialogflow] Add the enable_extended_streaming flag",
+          "issues": [
+            "4719"
+          ]
+        }
+      ],
+      "version": "6.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "c713d75a-48b9-4988-a7a0-362c77ecbeab",
+      "createTime": "2023-10-18T09:49:02.686Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "86e26db233c5aedc7e1b7b33b21aec341d45b77f",
+          "message": "[dataplex] DataQualityDimension is now part of the DataQualityDimensionResult message",
+          "issues": [
+            "4734"
+          ]
+        }
+      ],
+      "version": "3.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "d4bd3a69-6a5a-4777-a5b1-b3d31815a7f6",
+      "createTime": "2023-10-18T09:49:02.678Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1efa18eb361892462784d508c7a8d2c490e4020f",
+          "message": "[datacatalog] Enable vertex AI ingestion on Dataplex",
+          "issues": [
+            "4702"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datacatalog",
+      "id": "95cf4a15-9c84-430d-9be8-0db8c3ab9cca",
+      "createTime": "2023-10-18T09:49:02.671Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8ea16a1535e4162dac7b9bd621c731330712f899",
+          "message": "[contentwarehouse] add matched_token_page_indices field in DocumentWarehouse API",
+          "issues": [
+            "4700"
+          ]
+        }
+      ],
+      "version": "1.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contentwarehouse",
+      "id": "346ec76d-bb07-4979-bfce-2378f55f31c8",
+      "createTime": "2023-10-18T09:49:02.663Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "44b33333493ac4a458e84c1d3231f5571e63fd33",
+          "message": "[contactcenterinsights] add optional SpeechConfig to UploadConversationRequest",
+          "issues": [
+            "4695"
+          ]
+        }
+      ],
+      "version": "3.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contact-center-insights",
+      "id": "354eb9bc-3bd3-4fb0-8494-00db7eafb681",
+      "createTime": "2023-10-18T09:49:02.656Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3689da386f79a5cedff8aadc4aa0bf352d068ce2",
+          "message": "[bigquery-analyticshub] add Subscription resource and RPCs",
+          "issues": [
+            "4699"
+          ]
+        }
+      ],
+      "version": "1.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-analyticshub",
+      "id": "f5ccd606-58a3-4a39-be4e-398237208686",
+      "createTime": "2023-10-18T09:49:02.648Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "58e44c936c28732023cae4e9af539f37587c9a64",
+          "message": "[batch] add InstancePolicy.reservation field for restricting jobs to a specific reservation",
+          "issues": [
+            "4727"
+          ]
+        }
+      ],
+      "version": "1.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "d43b6a86-c3d7-47d1-b0d0-c4e65b74cbe4",
+      "createTime": "2023-10-18T09:49:02.640Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5865cc3232a99aa9146828d52928815bc082f1e5",
+          "message": "[asset] add support for directly attached and effective tags",
+          "issues": [
+            "4694"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/asset",
+      "id": "676e7091-d76e-4204-8f6d-0a05b857714d",
+      "createTime": "2023-10-18T09:49:02.629Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "68d3b870717e0cc37afde596acfaefc5737a5857",
+          "message": "[alloydb] Add support to generate client certificate and get connection info for auth proxy in AlloyDB v1",
+          "issues": [
+            "4717"
+          ]
+        }
+      ],
+      "version": "1.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "3d42484a-21d9-44c0-b0b3-65a01a3b0c49",
+      "createTime": "2023-10-18T09:49:02.617Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b01c920a996dfc8a3f21d0433f756985edf46b34",
+          "message": "Add dedicated_serving_endpoint",
+          "issues": [
+            "4722"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "0490f6644994992176c4d960ea1d29402cfae305",
+          "message": "Add feature.proto",
+          "issues": [
+            "4713"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "c956f4e4-da53-42a6-8216-d1ed37655705",
+      "createTime": "2023-10-18T09:49:02.610Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "f8dcd673bbc0c28e2b2d08acd1bca1183781951b",
           "message": "[tpu] added new WAITING_FOR_RESOURCES state for QueuedResourceState",
           "issues": [
@@ -19312,5 +19684,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2023-09-20T00:11:06.049Z"
+  "updateTime": "2023-10-18T09:49:03.040Z"
 }

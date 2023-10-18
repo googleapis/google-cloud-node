@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/optimization-v3.1.0...optimization-v3.2.0) (2023-10-18)
+
+
+### Features
+
+* [optimization] added the route modifiers ([#4737](https://github.com/googleapis/google-cloud-node/issues/4737)) ([58506db](https://github.com/googleapis/google-cloud-node/commit/58506dbc77a118a1d9fb78511822b7fa6bb4c57d))
+
 ## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/optimization-v3.0.1...optimization-v3.1.0) (2023-09-08)
 
 

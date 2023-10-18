@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v3.0.1...contact-center-insights-v3.1.0) (2023-10-18)
+
+
+### Features
+
+* [contactcenterinsights] add optional SpeechConfig to UploadConversationRequest ([#4695](https://github.com/googleapis/google-cloud-node/issues/4695)) ([44b3333](https://github.com/googleapis/google-cloud-node/commit/44b33333493ac4a458e84c1d3231f5571e63fd33))
+
 ## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v3.0.0...contact-center-insights-v3.0.1) (2023-09-06)
 
 

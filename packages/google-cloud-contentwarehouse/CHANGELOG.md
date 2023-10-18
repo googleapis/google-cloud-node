@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v1.2.0...contentwarehouse-v1.3.0) (2023-10-18)
+
+
+### Features
+
+* [contentwarehouse] add matched_token_page_indices field in DocumentWarehouse API ([#4700](https://github.com/googleapis/google-cloud-node/issues/4700)) ([8ea16a1](https://github.com/googleapis/google-cloud-node/commit/8ea16a1535e4162dac7b9bd621c731330712f899))
+
 ## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v1.1.0...contentwarehouse-v1.2.0) (2023-09-19)
 
 

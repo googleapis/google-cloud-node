@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.1.0...dialogflow-v6.2.0) (2023-10-18)
+
+
+### Features
+
+* [dialogflow] Add the enable_extended_streaming flag ([#4719](https://github.com/googleapis/google-cloud-node/issues/4719)) ([e071fe3](https://github.com/googleapis/google-cloud-node/commit/e071fe3158fe5ded093091a19d41c6a42041bb7b))
+* [dialogflow] Add the enable_extended_streaming flag ([#4724](https://github.com/googleapis/google-cloud-node/issues/4724)) ([5ef2787](https://github.com/googleapis/google-cloud-node/commit/5ef2787c291122993b94687d4c486f29b6fffff9))
+
 ## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.0.0...dialogflow-v6.1.0) (2023-09-06)
 
 
