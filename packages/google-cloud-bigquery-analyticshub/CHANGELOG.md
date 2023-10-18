@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-analyticshub-v1.0.1...bigquery-analyticshub-v1.1.0) (2023-10-18)
+
+
+### Features
+
+* [bigquery-analyticshub] add Subscription resource and RPCs ([#4699](https://github.com/googleapis/google-cloud-node/issues/4699)) ([3689da3](https://github.com/googleapis/google-cloud-node/commit/3689da386f79a5cedff8aadc4aa0bf352d068ce2))
+
 ## [1.0.1](https://github.com/googleapis/google-cloud-node/compare/bigquery-analyticshub-v1.0.0...bigquery-analyticshub-v1.0.1) (2023-09-06)
 
 

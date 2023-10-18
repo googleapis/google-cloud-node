@@ -2269,9 +2269,24 @@
                     },
                     "DataQualityDimensionResult": {
                       "fields": {
+                        "dimension": {
+                          "type": "DataQualityDimension",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "passed": {
                           "type": "bool",
                           "id": 3
+                        }
+                      }
+                    },
+                    "DataQualityDimension": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     },

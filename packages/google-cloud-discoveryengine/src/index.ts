@@ -17,6 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1 from './v1';
+import * as v1alpha from './v1alpha';
 import * as v1beta from './v1beta';
 
 const CompletionServiceClient = v1.CompletionServiceClient;
@@ -34,6 +35,7 @@ type UserEventServiceClient = v1.UserEventServiceClient;
 
 export {
   v1,
+  v1alpha,
   v1beta,
   CompletionServiceClient,
   ConversationalSearchServiceClient,
@@ -44,6 +46,7 @@ export {
 };
 export default {
   v1,
+  v1alpha,
   v1beta,
   CompletionServiceClient,
   ConversationalSearchServiceClient,
