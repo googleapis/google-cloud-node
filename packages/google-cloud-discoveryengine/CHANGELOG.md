@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.1.0...discoveryengine-v1.2.0) (2023-10-18)
+
+
+### Features
+
+* [discoveryengine] add v1alpha public library for discoveryengine ([#4735](https://github.com/googleapis/google-cloud-node/issues/4735)) ([969c8b4](https://github.com/googleapis/google-cloud-node/commit/969c8b400612e9036de647e36b2c76398a3d4db6))
+
 ## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.0.0...discoveryengine-v1.1.0) (2023-09-06)
 
 

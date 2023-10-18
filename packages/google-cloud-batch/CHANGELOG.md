@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.2.0...batch-v1.3.0) (2023-10-18)
+
+
+### Features
+
+* [batch] add InstancePolicy.reservation field for restricting jobs to a specific reservation ([#4727](https://github.com/googleapis/google-cloud-node/issues/4727)) ([58e44c9](https://github.com/googleapis/google-cloud-node/commit/58e44c936c28732023cae4e9af539f37587c9a64))
+
 ## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.1.0...batch-v1.2.0) (2023-09-06)
 
 
