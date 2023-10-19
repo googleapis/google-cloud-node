@@ -10,7 +10,7 @@
                   "options": {
                     "go_package": "cloud.google.com/go/analytics/admin/apiv1alpha/adminpb;adminpb",
                     "java_multiple_files": true,
-                    "java_outer_classname": "ResourcesProto",
+                    "java_outer_classname": "SubpropertyEventFilterProto",
                     "java_package": "com.google.analytics.admin.v1alpha"
                   },
                   "nested": {
@@ -544,230 +544,6 @@
                             },
                             {
                               "(google.api.method_signature)": "property,update_mask"
-                            }
-                          ]
-                        },
-                        "GetUserLink": {
-                          "requestType": "GetUserLinkRequest",
-                          "responseType": "UserLink",
-                          "options": {
-                            "(google.api.http).get": "/v1alpha/{name=accounts/*/userLinks/*}",
-                            "(google.api.http).additional_bindings.get": "/v1alpha/{name=properties/*/userLinks/*}",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1alpha/{name=accounts/*/userLinks/*}",
-                                "additional_bindings": {
-                                  "get": "/v1alpha/{name=properties/*/userLinks/*}"
-                                }
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
-                        "BatchGetUserLinks": {
-                          "requestType": "BatchGetUserLinksRequest",
-                          "responseType": "BatchGetUserLinksResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1alpha/{parent=accounts/*}/userLinks:batchGet",
-                            "(google.api.http).additional_bindings.get": "/v1alpha/{parent=properties/*}/userLinks:batchGet"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1alpha/{parent=accounts/*}/userLinks:batchGet",
-                                "additional_bindings": {
-                                  "get": "/v1alpha/{parent=properties/*}/userLinks:batchGet"
-                                }
-                              }
-                            }
-                          ]
-                        },
-                        "ListUserLinks": {
-                          "requestType": "ListUserLinksRequest",
-                          "responseType": "ListUserLinksResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1alpha/{parent=accounts/*}/userLinks",
-                            "(google.api.http).additional_bindings.get": "/v1alpha/{parent=properties/*}/userLinks",
-                            "(google.api.method_signature)": "parent"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1alpha/{parent=accounts/*}/userLinks",
-                                "additional_bindings": {
-                                  "get": "/v1alpha/{parent=properties/*}/userLinks"
-                                }
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent"
-                            }
-                          ]
-                        },
-                        "AuditUserLinks": {
-                          "requestType": "AuditUserLinksRequest",
-                          "responseType": "AuditUserLinksResponse",
-                          "options": {
-                            "(google.api.http).post": "/v1alpha/{parent=accounts/*}/userLinks:audit",
-                            "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v1alpha/{parent=properties/*}/userLinks:audit",
-                            "(google.api.http).additional_bindings.body": "*"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1alpha/{parent=accounts/*}/userLinks:audit",
-                                "body": "*",
-                                "additional_bindings": {
-                                  "post": "/v1alpha/{parent=properties/*}/userLinks:audit",
-                                  "body": "*"
-                                }
-                              }
-                            }
-                          ]
-                        },
-                        "CreateUserLink": {
-                          "requestType": "CreateUserLinkRequest",
-                          "responseType": "UserLink",
-                          "options": {
-                            "(google.api.http).post": "/v1alpha/{parent=accounts/*}/userLinks",
-                            "(google.api.http).body": "user_link",
-                            "(google.api.http).additional_bindings.post": "/v1alpha/{parent=properties/*}/userLinks",
-                            "(google.api.http).additional_bindings.body": "user_link",
-                            "(google.api.method_signature)": "parent,user_link"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1alpha/{parent=accounts/*}/userLinks",
-                                "body": "user_link",
-                                "additional_bindings": {
-                                  "post": "/v1alpha/{parent=properties/*}/userLinks",
-                                  "body": "user_link"
-                                }
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent,user_link"
-                            }
-                          ]
-                        },
-                        "BatchCreateUserLinks": {
-                          "requestType": "BatchCreateUserLinksRequest",
-                          "responseType": "BatchCreateUserLinksResponse",
-                          "options": {
-                            "(google.api.http).post": "/v1alpha/{parent=accounts/*}/userLinks:batchCreate",
-                            "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v1alpha/{parent=properties/*}/userLinks:batchCreate",
-                            "(google.api.http).additional_bindings.body": "*"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1alpha/{parent=accounts/*}/userLinks:batchCreate",
-                                "body": "*",
-                                "additional_bindings": {
-                                  "post": "/v1alpha/{parent=properties/*}/userLinks:batchCreate",
-                                  "body": "*"
-                                }
-                              }
-                            }
-                          ]
-                        },
-                        "UpdateUserLink": {
-                          "requestType": "UpdateUserLinkRequest",
-                          "responseType": "UserLink",
-                          "options": {
-                            "(google.api.http).patch": "/v1alpha/{user_link.name=accounts/*/userLinks/*}",
-                            "(google.api.http).body": "user_link",
-                            "(google.api.http).additional_bindings.patch": "/v1alpha/{user_link.name=properties/*/userLinks/*}",
-                            "(google.api.http).additional_bindings.body": "user_link",
-                            "(google.api.method_signature)": "user_link"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "patch": "/v1alpha/{user_link.name=accounts/*/userLinks/*}",
-                                "body": "user_link",
-                                "additional_bindings": {
-                                  "patch": "/v1alpha/{user_link.name=properties/*/userLinks/*}",
-                                  "body": "user_link"
-                                }
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "user_link"
-                            }
-                          ]
-                        },
-                        "BatchUpdateUserLinks": {
-                          "requestType": "BatchUpdateUserLinksRequest",
-                          "responseType": "BatchUpdateUserLinksResponse",
-                          "options": {
-                            "(google.api.http).post": "/v1alpha/{parent=accounts/*}/userLinks:batchUpdate",
-                            "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v1alpha/{parent=properties/*}/userLinks:batchUpdate",
-                            "(google.api.http).additional_bindings.body": "*"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1alpha/{parent=accounts/*}/userLinks:batchUpdate",
-                                "body": "*",
-                                "additional_bindings": {
-                                  "post": "/v1alpha/{parent=properties/*}/userLinks:batchUpdate",
-                                  "body": "*"
-                                }
-                              }
-                            }
-                          ]
-                        },
-                        "DeleteUserLink": {
-                          "requestType": "DeleteUserLinkRequest",
-                          "responseType": "google.protobuf.Empty",
-                          "options": {
-                            "(google.api.http).delete": "/v1alpha/{name=accounts/*/userLinks/*}",
-                            "(google.api.http).additional_bindings.delete": "/v1alpha/{name=properties/*/userLinks/*}",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "delete": "/v1alpha/{name=accounts/*/userLinks/*}",
-                                "additional_bindings": {
-                                  "delete": "/v1alpha/{name=properties/*/userLinks/*}"
-                                }
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
-                        "BatchDeleteUserLinks": {
-                          "requestType": "BatchDeleteUserLinksRequest",
-                          "responseType": "google.protobuf.Empty",
-                          "options": {
-                            "(google.api.http).post": "/v1alpha/{parent=accounts/*}/userLinks:batchDelete",
-                            "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v1alpha/{parent=properties/*}/userLinks:batchDelete",
-                            "(google.api.http).additional_bindings.body": "*"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1alpha/{parent=accounts/*}/userLinks:batchDelete",
-                                "body": "*",
-                                "additional_bindings": {
-                                  "post": "/v1alpha/{parent=properties/*}/userLinks:batchDelete",
-                                  "body": "*"
-                                }
-                              }
                             }
                           ]
                         },
@@ -2786,6 +2562,188 @@
                               "(google.api.method_signature)": "name"
                             }
                           ]
+                        },
+                        "UpdateDataRedactionSettings": {
+                          "requestType": "UpdateDataRedactionSettingsRequest",
+                          "responseType": "DataRedactionSettings",
+                          "options": {
+                            "(google.api.http).patch": "/v1alpha/{data_redaction_settings.name=properties/*/dataStreams/*/dataRedactionSettings}",
+                            "(google.api.http).body": "data_redaction_settings",
+                            "(google.api.method_signature)": "data_redaction_settings,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{data_redaction_settings.name=properties/*/dataStreams/*/dataRedactionSettings}",
+                                "body": "data_redaction_settings"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "data_redaction_settings,update_mask"
+                            }
+                          ]
+                        },
+                        "GetDataRedactionSettings": {
+                          "requestType": "GetDataRedactionSettingsRequest",
+                          "responseType": "DataRedactionSettings",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/dataStreams/*/dataRedactionSettings}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/dataStreams/*/dataRedactionSettings}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateRollupProperty": {
+                          "requestType": "CreateRollupPropertyRequest",
+                          "responseType": "CreateRollupPropertyResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/properties:createRollupProperty",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/properties:createRollupProperty",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "GetRollupPropertySourceLink": {
+                          "requestType": "GetRollupPropertySourceLinkRequest",
+                          "responseType": "RollupPropertySourceLink",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/rollupPropertySourceLinks/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/rollupPropertySourceLinks/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListRollupPropertySourceLinks": {
+                          "requestType": "ListRollupPropertySourceLinksRequest",
+                          "responseType": "ListRollupPropertySourceLinksResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{parent=properties/*}/rollupPropertySourceLinks",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=properties/*}/rollupPropertySourceLinks"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateRollupPropertySourceLink": {
+                          "requestType": "CreateRollupPropertySourceLinkRequest",
+                          "responseType": "RollupPropertySourceLink",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=properties/*}/rollupPropertySourceLinks",
+                            "(google.api.http).body": "rollup_property_source_link",
+                            "(google.api.method_signature)": "parent,rollup_property_source_link"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=properties/*}/rollupPropertySourceLinks",
+                                "body": "rollup_property_source_link"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,rollup_property_source_link"
+                            }
+                          ]
+                        },
+                        "DeleteRollupPropertySourceLink": {
+                          "requestType": "DeleteRollupPropertySourceLinkRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1alpha/{name=properties/*/rollupPropertySourceLinks/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=properties/*/rollupPropertySourceLinks/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateSubproperty": {
+                          "requestType": "CreateSubpropertyRequest",
+                          "responseType": "CreateSubpropertyResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/properties:createSubproperty",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/properties:createSubproperty",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteSubpropertyEventFilter": {
+                          "requestType": "DeleteSubpropertyEventFilterRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1alpha/{name=properties/*/subpropertyEventFilters/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=properties/*/subpropertyEventFilters/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateSubpropertyEventFilter": {
+                          "requestType": "CreateSubpropertyEventFilterRequest",
+                          "responseType": "SubpropertyEventFilter",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=properties/*}/subpropertyEventFilters",
+                            "(google.api.http).body": "subproperty_event_filter",
+                            "(google.api.method_signature)": "parent,subproperty_event_filter"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=properties/*}/subpropertyEventFilters",
+                                "body": "subproperty_event_filter"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,subproperty_event_filter"
+                            }
+                          ]
                         }
                       }
                     },
@@ -2838,6 +2796,20 @@
                         "returnEntityQuota": {
                           "type": "bool",
                           "id": 11
+                        },
+                        "includeAllUsers": {
+                          "type": "bool",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "expandGroups": {
+                          "type": "bool",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -3044,248 +3016,6 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/Property"
-                          }
-                        }
-                      }
-                    },
-                    "GetUserLinkRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/UserLink"
-                          }
-                        }
-                      }
-                    },
-                    "BatchGetUserLinksRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/UserLink"
-                          }
-                        },
-                        "names": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/UserLink"
-                          }
-                        }
-                      }
-                    },
-                    "BatchGetUserLinksResponse": {
-                      "fields": {
-                        "userLinks": {
-                          "rule": "repeated",
-                          "type": "UserLink",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "ListUserLinksRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/UserLink"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ListUserLinksResponse": {
-                      "fields": {
-                        "userLinks": {
-                          "rule": "repeated",
-                          "type": "UserLink",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "AuditUserLinksRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/UserLink"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "AuditUserLinksResponse": {
-                      "fields": {
-                        "userLinks": {
-                          "rule": "repeated",
-                          "type": "AuditUserLink",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "CreateUserLinkRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/UserLink"
-                          }
-                        },
-                        "notifyNewUser": {
-                          "type": "bool",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "userLink": {
-                          "type": "UserLink",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "BatchCreateUserLinksRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/UserLink"
-                          }
-                        },
-                        "notifyNewUsers": {
-                          "type": "bool",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "requests": {
-                          "rule": "repeated",
-                          "type": "CreateUserLinkRequest",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "BatchCreateUserLinksResponse": {
-                      "fields": {
-                        "userLinks": {
-                          "rule": "repeated",
-                          "type": "UserLink",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "UpdateUserLinkRequest": {
-                      "fields": {
-                        "userLink": {
-                          "type": "UserLink",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "BatchUpdateUserLinksRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/UserLink"
-                          }
-                        },
-                        "requests": {
-                          "rule": "repeated",
-                          "type": "UpdateUserLinkRequest",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "BatchUpdateUserLinksResponse": {
-                      "fields": {
-                        "userLinks": {
-                          "rule": "repeated",
-                          "type": "UserLink",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "DeleteUserLinkRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/UserLink"
-                          }
-                        }
-                      }
-                    },
-                    "BatchDeleteUserLinksRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/UserLink"
-                          }
-                        },
-                        "requests": {
-                          "rule": "repeated",
-                          "type": "DeleteUserLinkRequest",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -5113,6 +4843,36 @@
                         }
                       }
                     },
+                    "GetDataRedactionSettingsRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/DataRedactionSettings"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateDataRedactionSettingsRequest": {
+                      "fields": {
+                        "dataRedactionSettings": {
+                          "type": "DataRedactionSettings",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "CreateConnectedSiteTagRequest": {
                       "fields": {
                         "property": {
@@ -5350,6 +5110,258 @@
                         "nextPageToken": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "CreateRollupPropertyRequest": {
+                      "fields": {
+                        "rollupProperty": {
+                          "type": "Property",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "sourceProperties": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CreateRollupPropertyResponse": {
+                      "fields": {
+                        "rollupProperty": {
+                          "type": "Property",
+                          "id": 1
+                        },
+                        "rollupPropertySourceLinks": {
+                          "rule": "repeated",
+                          "type": "RollupPropertySourceLink",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetRollupPropertySourceLinkRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/RollupPropertySourceLink"
+                          }
+                        }
+                      }
+                    },
+                    "ListRollupPropertySourceLinksRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/RollupPropertySourceLink"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListRollupPropertySourceLinksResponse": {
+                      "fields": {
+                        "rollupPropertySourceLinks": {
+                          "rule": "repeated",
+                          "type": "RollupPropertySourceLink",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CreateRollupPropertySourceLinkRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/RollupPropertySourceLink"
+                          }
+                        },
+                        "rollupPropertySourceLink": {
+                          "type": "RollupPropertySourceLink",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteRollupPropertySourceLinkRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/RollupPropertySourceLink"
+                          }
+                        }
+                      }
+                    },
+                    "CreateSubpropertyRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/Property"
+                          }
+                        },
+                        "subproperty": {
+                          "type": "Property",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "subpropertyEventFilter": {
+                          "type": "SubpropertyEventFilter",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CreateSubpropertyResponse": {
+                      "fields": {
+                        "subproperty": {
+                          "type": "Property",
+                          "id": 1
+                        },
+                        "subpropertyEventFilter": {
+                          "type": "SubpropertyEventFilter",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CreateSubpropertyEventFilterRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/SubpropertyEventFilter"
+                          }
+                        },
+                        "subpropertyEventFilter": {
+                          "type": "SubpropertyEventFilter",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetSubpropertyEventFilterRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/SubpropertyEventFilter"
+                          }
+                        }
+                      }
+                    },
+                    "ListSubpropertyEventFiltersRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/SubpropertyEventFilter"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListSubpropertyEventFiltersResponse": {
+                      "fields": {
+                        "subpropertyEventFilters": {
+                          "rule": "repeated",
+                          "type": "SubpropertyEventFilter",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateSubpropertyEventFilterRequest": {
+                      "fields": {
+                        "subpropertyEventFilter": {
+                          "type": "SubpropertyEventFilter",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteSubpropertyEventFilterRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/SubpropertyEventFilter"
+                          }
                         }
                       }
                     },
@@ -6340,6 +6352,7 @@
                         "EXPANDED_DATA_SET": 21,
                         "CHANNEL_GROUP": 22,
                         "ENHANCED_MEASUREMENT_SETTINGS": 24,
+                        "DATA_REDACTION_SETTINGS": 25,
                         "SKADNETWORK_CONVERSION_VALUE_SCHEMA": 26,
                         "ADSENSE_LINK": 27,
                         "AUDIENCE": 28,
@@ -6661,55 +6674,6 @@
                             "ANDROID_APP_DATA_STREAM": 2,
                             "IOS_APP_DATA_STREAM": 3
                           }
-                        }
-                      }
-                    },
-                    "UserLink": {
-                      "options": {
-                        "(google.api.resource).type": "analyticsadmin.googleapis.com/UserLink",
-                        "(google.api.resource).pattern": "properties/{property}/userLinks/{user_link}"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "emailAddress": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "directRoles": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "AuditUserLink": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "emailAddress": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "directRoles": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 3
-                        },
-                        "effectiveRoles": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 4
                         }
                       }
                     },
@@ -7151,6 +7115,7 @@
                                 "channelGroup",
                                 "bigqueryLink",
                                 "enhancedMeasurementSettings",
+                                "dataRedactionSettings",
                                 "skadnetworkConversionValueSchema",
                                 "adsenseLink",
                                 "audience",
@@ -7234,6 +7199,10 @@
                             "enhancedMeasurementSettings": {
                               "type": "EnhancedMeasurementSettings",
                               "id": 24
+                            },
+                            "dataRedactionSettings": {
+                              "type": "DataRedactionSettings",
+                              "id": 25
                             },
                             "skadnetworkConversionValueSchema": {
                               "type": "SKAdNetworkConversionValueSchema",
@@ -7952,6 +7921,34 @@
                         }
                       }
                     },
+                    "DataRedactionSettings": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsadmin.googleapis.com/DataRedactionSettings",
+                        "(google.api.resource).pattern": "properties/{property}/dataStreams/{data_stream}/dataRedactionSettings"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "emailRedactionEnabled": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "queryParameterRedactionEnabled": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "queryParameterKeys": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
                     "AdSenseLink": {
                       "options": {
                         "(google.api.resource).type": "analyticsadmin.googleapis.com/AdSenseLink",
@@ -7970,6 +7967,201 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      }
+                    },
+                    "RollupPropertySourceLink": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsadmin.googleapis.com/RollupPropertySourceLink",
+                        "(google.api.resource).pattern": "properties/{property}/rollupPropertySourceLinks/{rollup_property_source_link}",
+                        "(google.api.resource).plural": "rollupPropertySourceLinks",
+                        "(google.api.resource).singular": "rollupPropertySourceLink"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "sourceProperty": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      }
+                    },
+                    "SubpropertyEventFilterCondition": {
+                      "oneofs": {
+                        "oneFilter": {
+                          "oneof": [
+                            "nullFilter",
+                            "stringFilter"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "nullFilter": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "stringFilter": {
+                          "type": "StringFilter",
+                          "id": 3
+                        },
+                        "fieldName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "StringFilter": {
+                          "fields": {
+                            "matchType": {
+                              "type": "MatchType",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "value": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "caseSensitive": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "MatchType": {
+                              "values": {
+                                "MATCH_TYPE_UNSPECIFIED": 0,
+                                "EXACT": 1,
+                                "BEGINS_WITH": 2,
+                                "ENDS_WITH": 3,
+                                "CONTAINS": 4,
+                                "FULL_REGEXP": 5,
+                                "PARTIAL_REGEXP": 6
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "SubpropertyEventFilterExpression": {
+                      "oneofs": {
+                        "expr": {
+                          "oneof": [
+                            "orGroup",
+                            "notExpression",
+                            "filterCondition"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "orGroup": {
+                          "type": "SubpropertyEventFilterExpressionList",
+                          "id": 1
+                        },
+                        "notExpression": {
+                          "type": "SubpropertyEventFilterExpression",
+                          "id": 2
+                        },
+                        "filterCondition": {
+                          "type": "SubpropertyEventFilterCondition",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "SubpropertyEventFilterExpressionList": {
+                      "fields": {
+                        "filterExpressions": {
+                          "rule": "repeated",
+                          "type": "SubpropertyEventFilterExpression",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "UNORDERED_LIST"
+                          }
+                        }
+                      }
+                    },
+                    "SubpropertyEventFilterClause": {
+                      "fields": {
+                        "filterClauseType": {
+                          "type": "FilterClauseType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "filterExpression": {
+                          "type": "SubpropertyEventFilterExpression",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "FilterClauseType": {
+                          "values": {
+                            "FILTER_CLAUSE_TYPE_UNSPECIFIED": 0,
+                            "INCLUDE": 1,
+                            "EXCLUDE": 2
+                          }
+                        }
+                      }
+                    },
+                    "SubpropertyEventFilter": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsadmin.googleapis.com/SubpropertyEventFilter",
+                        "(google.api.resource).pattern": "properties/{property}/subpropertyEventFilters/{sub_property_event_filter}",
+                        "(google.api.resource).plural": "subpropertyEventFilters",
+                        "(google.api.resource).singular": "subpropertyEventFilter"
+                      },
+                      "oneofs": {
+                        "_applyToProperty": {
+                          "oneof": [
+                            "applyToProperty"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "applyToProperty": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE",
+                            "proto3_optional": true
+                          }
+                        },
+                        "filterClauses": {
+                          "rule": "repeated",
+                          "type": "SubpropertyEventFilterClause",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "UNORDERED_LIST"
                           }
                         }
                       }

@@ -111,6 +111,21 @@ function main() {
    *  requests, this field must be false.
    */
   // const returnEntityQuota = true
+  /**
+   *  Optional. Determines whether to include users who have never made an API
+   *  call in the response. If true, all users with access to the specified
+   *  property or account are included in the response, regardless of whether
+   *  they have made an API call or not. If false, only the users who have made
+   *  an API call will be included.
+   */
+  // const includeAllUsers = true
+  /**
+   *  Optional. Decides whether to return the users within user groups. This
+   *  field works only when include_all_users is set to true. If true, it will
+   *  return all users with access to the specified property or account.
+   *  If false, only the users with direct access will be returned.
+   */
+  // const expandGroups = true
 
   // Imports the Admin library
   const {AnalyticsAdminServiceClient} = require('@google-analytics/admin').v1alpha;
