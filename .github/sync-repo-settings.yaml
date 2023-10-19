@@ -29,7 +29,6 @@ branchProtectionRules:
   # List of required status check contexts that must pass for commits to be accepted to matching branches.
   requiredStatusCheckContexts:
     - "cla/google"
-    - "lint (14)"
     - "system-presubmit-node14 (long-door-651)"
     - "samples-presubmit-node14-with-credentials (long-door-651)"
     - "samples-presubmit-node14 (long-door-651)"

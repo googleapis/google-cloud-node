@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/artifact-registry-v3.0.1...artifact-registry-v3.1.0) (2023-10-18)
+
+
+### Features
+
+* [artifactregistry] make repositories required in ListRepositoriesRequest ([#4709](https://github.com/googleapis/google-cloud-node/issues/4709)) ([81cca60](https://github.com/googleapis/google-cloud-node/commit/81cca6072dab3c753db27fab7dbf08d13196e087))
+
+
+### Bug Fixes
+
+* [artifactregistry] make repository and repository_id in CreateRepository required ([#4693](https://github.com/googleapis/google-cloud-node/issues/4693)) ([dcd9022](https://github.com/googleapis/google-cloud-node/commit/dcd9022f16c63c9e0f0eec10615f64b76184a9b6))
+
 ## [3.0.1](https://github.com/googleapis/google-cloud-node/compare/artifact-registry-v3.0.0...artifact-registry-v3.0.1) (2023-09-06)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/googleapis/google-cloud-node/compare/run-v1.0.1...run-v1.0.2) (2023-10-18)
+
+
+### Bug Fixes
+
+* [run] Removes accidentally exposed field service.traffic_tags_cleanup_threshold in Cloud Run Service ([#4697](https://github.com/googleapis/google-cloud-node/issues/4697)) ([e63c060](https://github.com/googleapis/google-cloud-node/commit/e63c0606dab89366c35352f521b5e4e2cee6ffe8))
+
 ## [1.0.1](https://github.com/googleapis/google-cloud-node/compare/run-v1.0.0...run-v1.0.1) (2023-09-06)
 
 

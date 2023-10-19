@@ -8423,6 +8423,9 @@ export namespace google {
                 /** Properties of a DataQualityDimensionResult. */
                 interface IDataQualityDimensionResult {
 
+                    /** DataQualityDimensionResult dimension */
+                    dimension?: (google.cloud.dataplex.v1.IDataQualityDimension|null);
+
                     /** DataQualityDimensionResult passed */
                     passed?: (boolean|null);
                 }
@@ -8435,6 +8438,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.dataplex.v1.IDataQualityDimensionResult);
+
+                    /** DataQualityDimensionResult dimension. */
+                    public dimension?: (google.cloud.dataplex.v1.IDataQualityDimension|null);
 
                     /** DataQualityDimensionResult passed. */
                     public passed: boolean;
@@ -8511,6 +8517,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DataQualityDimensionResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DataQualityDimension. */
+                interface IDataQualityDimension {
+
+                    /** DataQualityDimension name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DataQualityDimension. */
+                class DataQualityDimension implements IDataQualityDimension {
+
+                    /**
+                     * Constructs a new DataQualityDimension.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IDataQualityDimension);
+
+                    /** DataQualityDimension name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DataQualityDimension instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataQualityDimension instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IDataQualityDimension): google.cloud.dataplex.v1.DataQualityDimension;
+
+                    /**
+                     * Encodes the specified DataQualityDimension message. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityDimension.verify|verify} messages.
+                     * @param message DataQualityDimension message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IDataQualityDimension, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataQualityDimension message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityDimension.verify|verify} messages.
+                     * @param message DataQualityDimension message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IDataQualityDimension, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataQualityDimension message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataQualityDimension
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DataQualityDimension;
+
+                    /**
+                     * Decodes a DataQualityDimension message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataQualityDimension
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DataQualityDimension;
+
+                    /**
+                     * Verifies a DataQualityDimension message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataQualityDimension message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataQualityDimension
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DataQualityDimension;
+
+                    /**
+                     * Creates a plain object from a DataQualityDimension message. Also converts values to other types if specified.
+                     * @param message DataQualityDimension
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.DataQualityDimension, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataQualityDimension to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataQualityDimension
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
