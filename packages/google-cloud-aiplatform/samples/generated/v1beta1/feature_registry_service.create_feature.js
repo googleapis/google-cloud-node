@@ -29,10 +29,6 @@ function main(parent, feature, featureId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The resource name of the EntityType or FeatureGroup to create a Feature.
-   *  Format:
-   *  `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`
-   *  `projects/{project}/locations/{location}/featureGroups/{feature_group}`
    */
   // const parent = 'abc123'
   /**

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v1.2.0...alloydb-v1.3.0) (2023-10-18)
+
+
+### Features
+
+* [alloydb] Add support to generate client certificate and get connection info for auth proxy in AlloyDB v1 ([#4717](https://github.com/googleapis/google-cloud-node/issues/4717)) ([68d3b87](https://github.com/googleapis/google-cloud-node/commit/68d3b870717e0cc37afde596acfaefc5737a5857))
+
 ## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v1.1.0...alloydb-v1.2.0) (2023-09-19)
 
 
