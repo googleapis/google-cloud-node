@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. The name of the key to be deleted, in the format
-   *  "projects/{project}/keys/{key}".
+   *  `projects/{project}/keys/{key}`.
    */
   // const name = 'abc123'
 

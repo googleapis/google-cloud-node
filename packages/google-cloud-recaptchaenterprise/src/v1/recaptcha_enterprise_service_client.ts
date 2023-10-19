@@ -181,6 +181,9 @@ export class RecaptchaEnterpriseServiceClient {
       assessmentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/assessments/{assessment}'
       ),
+      firewallPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/firewallpolicies/{firewallpolicy}'
+      ),
       keyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/keys/{key}'
       ),
@@ -207,6 +210,11 @@ export class RecaptchaEnterpriseServiceClient {
         'pageToken',
         'nextPageToken',
         'keys'
+      ),
+      listFirewallPolicies: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'firewallPolicies'
       ),
       listRelatedAccountGroups: new this._gaxModule.PageDescriptor(
         'pageToken',
@@ -286,6 +294,11 @@ export class RecaptchaEnterpriseServiceClient {
       'deleteKey',
       'migrateKey',
       'getMetrics',
+      'createFirewallPolicy',
+      'listFirewallPolicies',
+      'getFirewallPolicy',
+      'updateFirewallPolicy',
+      'deleteFirewallPolicy',
       'listRelatedAccountGroups',
       'listRelatedAccountGroupMemberships',
       'searchRelatedAccountGroupMemberships',
@@ -379,7 +392,7 @@ export class RecaptchaEnterpriseServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the project in which the assessment will be created,
-   *   in the format "projects/{project}".
+   *   in the format `projects/{project}`.
    * @param {google.cloud.recaptchaenterprise.v1.Assessment} request.assessment
    *   Required. The assessment details.
    * @param {object} [options]
@@ -479,7 +492,7 @@ export class RecaptchaEnterpriseServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the Assessment, in the format
-   *   "projects/{project}/assessments/{assessment}".
+   *   `projects/{project}/assessments/{assessment}`.
    * @param {google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Annotation} [request.annotation]
    *   Optional. The annotation that will be assigned to the Event. This field can
    *   be left empty to provide reasons that apply to an event without concluding
@@ -592,7 +605,7 @@ export class RecaptchaEnterpriseServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the project in which the key will be created, in the
-   *   format "projects/{project}".
+   *   format `projects/{project}`.
    * @param {google.cloud.recaptchaenterprise.v1.Key} request.key
    *   Required. Information to create a reCAPTCHA Enterprise key.
    * @param {object} [options]
@@ -687,7 +700,7 @@ export class RecaptchaEnterpriseServiceClient {
    *   The request object that will be sent.
    * @param {string} request.key
    *   Required. The public key name linked to the requested secret key in the
-   *   format "projects/{project}/keys/{key}".
+   *   format `projects/{project}/keys/{key}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -788,7 +801,7 @@ export class RecaptchaEnterpriseServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the requested key, in the format
-   *   "projects/{project}/keys/{key}".
+   *   `projects/{project}/keys/{key}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -972,7 +985,7 @@ export class RecaptchaEnterpriseServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the key to be deleted, in the format
-   *   "projects/{project}/keys/{key}".
+   *   `projects/{project}/keys/{key}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1060,7 +1073,7 @@ export class RecaptchaEnterpriseServiceClient {
    * Migrates an existing key from reCAPTCHA to reCAPTCHA Enterprise.
    * Once a key is migrated, it can be used from either product. SiteVerify
    * requests are billed as CreateAssessment calls. You must be
-   * authenticated as one of the current owners of the reCAPTCHA Site Key, and
+   * authenticated as one of the current owners of the reCAPTCHA Key, and
    * your user must have the reCAPTCHA Enterprise Admin IAM role in the
    * destination project.
    *
@@ -1068,7 +1081,7 @@ export class RecaptchaEnterpriseServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the key to be migrated, in the format
-   *   "projects/{project}/keys/{key}".
+   *   `projects/{project}/keys/{key}`.
    * @param {boolean} [request.skipBillingCheck]
    *   Optional. If true, skips the billing check.
    *   A reCAPTCHA Enterprise key or migrated key behaves differently than a
@@ -1169,7 +1182,7 @@ export class RecaptchaEnterpriseServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the requested metrics, in the format
-   *   "projects/{project}/keys/{key}/metrics".
+   *   `projects/{project}/keys/{key}/metrics`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1253,6 +1266,400 @@ export class RecaptchaEnterpriseServiceClient {
     this.initialize();
     return this.innerApiCalls.getMetrics(request, options, callback);
   }
+  /**
+   * Creates a new FirewallPolicy, specifying conditions at which reCAPTCHA
+   * Enterprise actions can be executed.
+   * A project may have a maximum of 1000 policies.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the project this policy will apply to, in the format
+   *   `projects/{project}`.
+   * @param {google.cloud.recaptchaenterprise.v1.FirewallPolicy} request.firewallPolicy
+   *   Required. Information to create the policy.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.FirewallPolicy|FirewallPolicy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.create_firewall_policy.js</caption>
+   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_CreateFirewallPolicy_async
+   */
+  createFirewallPolicy(
+    request?: protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+      (
+        | protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createFirewallPolicy(
+    request: protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+      | protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createFirewallPolicy(
+    request: protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+      | protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createFirewallPolicy(
+    request?: protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+          | protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+      | protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+      (
+        | protos.google.cloud.recaptchaenterprise.v1.ICreateFirewallPolicyRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createFirewallPolicy(request, options, callback);
+  }
+  /**
+   * Returns the specified firewall policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the requested policy, in the format
+   *   `projects/{project}/firewallpolicies/{firewallpolicy}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.FirewallPolicy|FirewallPolicy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.get_firewall_policy.js</caption>
+   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_GetFirewallPolicy_async
+   */
+  getFirewallPolicy(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+      (
+        | protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getFirewallPolicy(
+    request: protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+      | protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getFirewallPolicy(
+    request: protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+      | protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getFirewallPolicy(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+          | protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+      | protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+      (
+        | protos.google.cloud.recaptchaenterprise.v1.IGetFirewallPolicyRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getFirewallPolicy(request, options, callback);
+  }
+  /**
+   * Updates the specified firewall policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.recaptchaenterprise.v1.FirewallPolicy} request.firewallPolicy
+   *   Required. The policy to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The mask to control which fields of the policy get updated. If
+   *   the mask is not present, all fields will be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.FirewallPolicy|FirewallPolicy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.update_firewall_policy.js</caption>
+   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_UpdateFirewallPolicy_async
+   */
+  updateFirewallPolicy(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+      (
+        | protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateFirewallPolicy(
+    request: protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+      | protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateFirewallPolicy(
+    request: protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+      | protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateFirewallPolicy(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+          | protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+      | protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy,
+      (
+        | protos.google.cloud.recaptchaenterprise.v1.IUpdateFirewallPolicyRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'firewall_policy.name': request.firewallPolicy!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateFirewallPolicy(request, options, callback);
+  }
+  /**
+   * Deletes the specified firewall policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the policy to be deleted, in the format
+   *   `projects/{project}/firewallpolicies/{firewallpolicy}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.delete_firewall_policy.js</caption>
+   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_DeleteFirewallPolicy_async
+   */
+  deleteFirewallPolicy(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  deleteFirewallPolicy(
+    request: protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteFirewallPolicy(
+    request: protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteFirewallPolicy(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.recaptchaenterprise.v1.IDeleteFirewallPolicyRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteFirewallPolicy(request, options, callback);
+  }
 
   /**
    * Returns the list of all keys that belong to a project.
@@ -1261,7 +1668,7 @@ export class RecaptchaEnterpriseServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the project that contains the keys that will be
-   *   listed, in the format "projects/{project}".
+   *   listed, in the format `projects/{project}`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of keys to return. Default is 10. Max limit is
    *   1000.
@@ -1361,7 +1768,7 @@ export class RecaptchaEnterpriseServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the project that contains the keys that will be
-   *   listed, in the format "projects/{project}".
+   *   listed, in the format `projects/{project}`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of keys to return. Default is 10. Max limit is
    *   1000.
@@ -1409,7 +1816,7 @@ export class RecaptchaEnterpriseServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the project that contains the keys that will be
-   *   listed, in the format "projects/{project}".
+   *   listed, in the format `projects/{project}`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of keys to return. Default is 10. Max limit is
    *   1000.
@@ -1450,13 +1857,208 @@ export class RecaptchaEnterpriseServiceClient {
     ) as AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IKey>;
   }
   /**
+   * Returns the list of all firewall policies that belong to a project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the project to list the policies for, in the format
+   *   `projects/{project}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of policies to return. Default is 10. Max
+   *   limit is 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous.
+   *   ListFirewallPoliciesRequest, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.recaptchaenterprise.v1.FirewallPolicy|FirewallPolicy}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listFirewallPoliciesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listFirewallPolicies(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy[],
+      protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest | null,
+      protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse,
+    ]
+  >;
+  listFirewallPolicies(
+    request: protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
+      | protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse
+      | null
+      | undefined,
+      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy
+    >
+  ): void;
+  listFirewallPolicies(
+    request: protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
+      | protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse
+      | null
+      | undefined,
+      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy
+    >
+  ): void;
+  listFirewallPolicies(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
+          | protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse
+          | null
+          | undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
+      | protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse
+      | null
+      | undefined,
+      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy
+    >
+  ): Promise<
+    [
+      protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy[],
+      protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest | null,
+      protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listFirewallPolicies(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the project to list the policies for, in the format
+   *   `projects/{project}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of policies to return. Default is 10. Max
+   *   limit is 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous.
+   *   ListFirewallPoliciesRequest, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.recaptchaenterprise.v1.FirewallPolicy|FirewallPolicy} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listFirewallPoliciesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listFirewallPoliciesStream(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listFirewallPolicies'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listFirewallPolicies.createStream(
+      this.innerApiCalls.listFirewallPolicies as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listFirewallPolicies`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the project to list the policies for, in the format
+   *   `projects/{project}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of policies to return. Default is 10. Max
+   *   limit is 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous.
+   *   ListFirewallPoliciesRequest, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.recaptchaenterprise.v1.FirewallPolicy|FirewallPolicy}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.list_firewall_policies.js</caption>
+   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListFirewallPolicies_async
+   */
+  listFirewallPoliciesAsync(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IListFirewallPoliciesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listFirewallPolicies'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listFirewallPolicies.asyncIterate(
+      this.innerApiCalls['listFirewallPolicies'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IFirewallPolicy>;
+  }
+  /**
    * List groups of related accounts.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the project to list related account groups from, in
-   *   the format "projects/{project}".
+   *   the format `projects/{project}`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of groups to return. The service might return
    *   fewer than this value. If unspecified, at most 50 groups are returned. The
@@ -1565,7 +2167,7 @@ export class RecaptchaEnterpriseServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the project to list related account groups from, in
-   *   the format "projects/{project}".
+   *   the format `projects/{project}`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of groups to return. The service might return
    *   fewer than this value. If unspecified, at most 50 groups are returned. The
@@ -1618,7 +2220,7 @@ export class RecaptchaEnterpriseServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the project to list related account groups from, in
-   *   the format "projects/{project}".
+   *   the format `projects/{project}`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of groups to return. The service might return
    *   fewer than this value. If unspecified, at most 50 groups are returned. The
@@ -1887,10 +2489,10 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {string} request.project
    *   Required. The name of the project to search related account group
    *   memberships from. Specify the project name in the following format:
-   *   "projects/{project}".
+   *   `projects/{project}`.
    * @param {Buffer} [request.hashedAccountId]
-   *   Optional. The unique stable hashed user identifier we should search
-   *   connections to. The identifier should correspond to a `hashed_account_id`
+   *   Optional. The unique stable hashed user identifier used to search
+   *   connections. The identifier should correspond to a `hashed_account_id`
    *   provided in a previous `CreateAssessment` or `AnnotateAssessment` call.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of groups to return. The service might return
@@ -2002,10 +2604,10 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {string} request.project
    *   Required. The name of the project to search related account group
    *   memberships from. Specify the project name in the following format:
-   *   "projects/{project}".
+   *   `projects/{project}`.
    * @param {Buffer} [request.hashedAccountId]
-   *   Optional. The unique stable hashed user identifier we should search
-   *   connections to. The identifier should correspond to a `hashed_account_id`
+   *   Optional. The unique stable hashed user identifier used to search
+   *   connections. The identifier should correspond to a `hashed_account_id`
    *   provided in a previous `CreateAssessment` or `AnnotateAssessment` call.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of groups to return. The service might return
@@ -2062,10 +2664,10 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {string} request.project
    *   Required. The name of the project to search related account group
    *   memberships from. Specify the project name in the following format:
-   *   "projects/{project}".
+   *   `projects/{project}`.
    * @param {Buffer} [request.hashedAccountId]
-   *   Optional. The unique stable hashed user identifier we should search
-   *   connections to. The identifier should correspond to a `hashed_account_id`
+   *   Optional. The unique stable hashed user identifier used to search
+   *   connections. The identifier should correspond to a `hashed_account_id`
    *   provided in a previous `CreateAssessment` or `AnnotateAssessment` call.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of groups to return. The service might return
@@ -2153,6 +2755,46 @@ export class RecaptchaEnterpriseServiceClient {
   matchAssessmentFromAssessmentName(assessmentName: string) {
     return this.pathTemplates.assessmentPathTemplate.match(assessmentName)
       .assessment;
+  }
+
+  /**
+   * Return a fully-qualified firewallPolicy resource name string.
+   *
+   * @param {string} project
+   * @param {string} firewallpolicy
+   * @returns {string} Resource name string.
+   */
+  firewallPolicyPath(project: string, firewallpolicy: string) {
+    return this.pathTemplates.firewallPolicyPathTemplate.render({
+      project: project,
+      firewallpolicy: firewallpolicy,
+    });
+  }
+
+  /**
+   * Parse the project from FirewallPolicy resource.
+   *
+   * @param {string} firewallPolicyName
+   *   A fully-qualified path representing FirewallPolicy resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromFirewallPolicyName(firewallPolicyName: string) {
+    return this.pathTemplates.firewallPolicyPathTemplate.match(
+      firewallPolicyName
+    ).project;
+  }
+
+  /**
+   * Parse the firewallpolicy from FirewallPolicy resource.
+   *
+   * @param {string} firewallPolicyName
+   *   A fully-qualified path representing FirewallPolicy resource.
+   * @returns {string} A string representing the firewallpolicy.
+   */
+  matchFirewallpolicyFromFirewallPolicyName(firewallPolicyName: string) {
+    return this.pathTemplates.firewallPolicyPathTemplate.match(
+      firewallPolicyName
+    ).firewallpolicy;
   }
 
   /**
