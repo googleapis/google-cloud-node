@@ -216,6 +216,9 @@ export class DatasetServiceClient {
       datasetPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}'
       ),
+      datasetVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/datasets/{dataset}/datasetVersions/{dataset_version}'
+      ),
       entityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}'
       ),
@@ -319,6 +322,11 @@ export class DatasetServiceClient {
         'nextPageToken',
         'datasets'
       ),
+      listDatasetVersions: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'datasetVersions'
+      ),
       listDataItems: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -370,6 +378,9 @@ export class DatasetServiceClient {
               post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
             },
             {
+              post: '/v1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
             },
             {
@@ -393,6 +404,10 @@ export class DatasetServiceClient {
           additional_bindings: [
             {
               post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',
               body: '*',
             },
             {
@@ -423,6 +438,9 @@ export class DatasetServiceClient {
           additional_bindings: [
             {
               post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
@@ -1408,6 +1426,24 @@ export class DatasetServiceClient {
     const exportDataMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1.ExportDataOperationMetadata'
     ) as gax.protobuf.Type;
+    const createDatasetVersionResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.DatasetVersion'
+    ) as gax.protobuf.Type;
+    const createDatasetVersionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.CreateDatasetVersionOperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteDatasetVersionResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteDatasetVersionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.DeleteOperationMetadata'
+    ) as gax.protobuf.Type;
+    const restoreDatasetVersionResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.DatasetVersion'
+    ) as gax.protobuf.Type;
+    const restoreDatasetVersionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.RestoreDatasetVersionOperationMetadata'
+    ) as gax.protobuf.Type;
     const deleteSavedQueryResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
@@ -1435,6 +1471,23 @@ export class DatasetServiceClient {
         this.operationsClient,
         exportDataResponse.decode.bind(exportDataResponse),
         exportDataMetadata.decode.bind(exportDataMetadata)
+      ),
+      createDatasetVersion: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createDatasetVersionResponse.decode.bind(createDatasetVersionResponse),
+        createDatasetVersionMetadata.decode.bind(createDatasetVersionMetadata)
+      ),
+      deleteDatasetVersion: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteDatasetVersionResponse.decode.bind(deleteDatasetVersionResponse),
+        deleteDatasetVersionMetadata.decode.bind(deleteDatasetVersionMetadata)
+      ),
+      restoreDatasetVersion: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        restoreDatasetVersionResponse.decode.bind(
+          restoreDatasetVersionResponse
+        ),
+        restoreDatasetVersionMetadata.decode.bind(restoreDatasetVersionMetadata)
       ),
       deleteSavedQuery: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -1500,6 +1553,11 @@ export class DatasetServiceClient {
       'deleteDataset',
       'importData',
       'exportData',
+      'createDatasetVersion',
+      'deleteDatasetVersion',
+      'getDatasetVersion',
+      'listDatasetVersions',
+      'restoreDatasetVersion',
       'listDataItems',
       'searchDataItems',
       'listSavedQueries',
@@ -1775,6 +1833,100 @@ export class DatasetServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.updateDataset(request, options, callback);
+  }
+  /**
+   * Gets a Dataset version.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the Dataset version to delete.
+   *   Format:
+   *   `projects/{project}/locations/{location}/datasets/{dataset}/datasetVersions/{dataset_version}`
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.DatasetVersion|DatasetVersion}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataset_service.get_dataset_version.js</caption>
+   * region_tag:aiplatform_v1_generated_DatasetService_GetDatasetVersion_async
+   */
+  getDatasetVersion(
+    request?: protos.google.cloud.aiplatform.v1.IGetDatasetVersionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IDatasetVersion,
+      protos.google.cloud.aiplatform.v1.IGetDatasetVersionRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getDatasetVersion(
+    request: protos.google.cloud.aiplatform.v1.IGetDatasetVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IDatasetVersion,
+      | protos.google.cloud.aiplatform.v1.IGetDatasetVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getDatasetVersion(
+    request: protos.google.cloud.aiplatform.v1.IGetDatasetVersionRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IDatasetVersion,
+      | protos.google.cloud.aiplatform.v1.IGetDatasetVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getDatasetVersion(
+    request?: protos.google.cloud.aiplatform.v1.IGetDatasetVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IDatasetVersion,
+          | protos.google.cloud.aiplatform.v1.IGetDatasetVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.IDatasetVersion,
+      | protos.google.cloud.aiplatform.v1.IGetDatasetVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IDatasetVersion,
+      protos.google.cloud.aiplatform.v1.IGetDatasetVersionRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getDatasetVersion(request, options, callback);
   }
   /**
    * Gets an AnnotationSpec.
@@ -2430,6 +2582,424 @@ export class DatasetServiceClient {
     >;
   }
   /**
+   * Create a version from a Dataset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the Dataset resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/datasets/{dataset}`
+   * @param {google.cloud.aiplatform.v1.DatasetVersion} request.datasetVersion
+   *   Required. The version to be created. The same CMEK policies with the
+   *   original Dataset will be applied the dataset version. So here we don't need
+   *   to specify the EncryptionSpecType here.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataset_service.create_dataset_version.js</caption>
+   * region_tag:aiplatform_v1_generated_DatasetService_CreateDatasetVersion_async
+   */
+  createDatasetVersion(
+    request?: protos.google.cloud.aiplatform.v1.ICreateDatasetVersionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IDatasetVersion,
+        protos.google.cloud.aiplatform.v1.ICreateDatasetVersionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createDatasetVersion(
+    request: protos.google.cloud.aiplatform.v1.ICreateDatasetVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IDatasetVersion,
+        protos.google.cloud.aiplatform.v1.ICreateDatasetVersionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createDatasetVersion(
+    request: protos.google.cloud.aiplatform.v1.ICreateDatasetVersionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IDatasetVersion,
+        protos.google.cloud.aiplatform.v1.ICreateDatasetVersionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createDatasetVersion(
+    request?: protos.google.cloud.aiplatform.v1.ICreateDatasetVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IDatasetVersion,
+            protos.google.cloud.aiplatform.v1.ICreateDatasetVersionOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IDatasetVersion,
+        protos.google.cloud.aiplatform.v1.ICreateDatasetVersionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IDatasetVersion,
+        protos.google.cloud.aiplatform.v1.ICreateDatasetVersionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createDatasetVersion(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `createDatasetVersion()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataset_service.create_dataset_version.js</caption>
+   * region_tag:aiplatform_v1_generated_DatasetService_CreateDatasetVersion_async
+   */
+  async checkCreateDatasetVersionProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1.DatasetVersion,
+      protos.google.cloud.aiplatform.v1.CreateDatasetVersionOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createDatasetVersion,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1.DatasetVersion,
+      protos.google.cloud.aiplatform.v1.CreateDatasetVersionOperationMetadata
+    >;
+  }
+  /**
+   * Deletes a Dataset version.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the Dataset version to delete.
+   *   Format:
+   *   `projects/{project}/locations/{location}/datasets/{dataset}/datasetVersions/{dataset_version}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataset_service.delete_dataset_version.js</caption>
+   * region_tag:aiplatform_v1_generated_DatasetService_DeleteDatasetVersion_async
+   */
+  deleteDatasetVersion(
+    request?: protos.google.cloud.aiplatform.v1.IDeleteDatasetVersionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteDatasetVersion(
+    request: protos.google.cloud.aiplatform.v1.IDeleteDatasetVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteDatasetVersion(
+    request: protos.google.cloud.aiplatform.v1.IDeleteDatasetVersionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteDatasetVersion(
+    request?: protos.google.cloud.aiplatform.v1.IDeleteDatasetVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteDatasetVersion(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteDatasetVersion()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataset_service.delete_dataset_version.js</caption>
+   * region_tag:aiplatform_v1_generated_DatasetService_DeleteDatasetVersion_async
+   */
+  async checkDeleteDatasetVersionProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteDatasetVersion,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
+    >;
+  }
+  /**
+   * Restores a dataset version.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the DatasetVersion resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/datasets/{dataset}/datasetVersions/{dataset_version}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataset_service.restore_dataset_version.js</caption>
+   * region_tag:aiplatform_v1_generated_DatasetService_RestoreDatasetVersion_async
+   */
+  restoreDatasetVersion(
+    request?: protos.google.cloud.aiplatform.v1.IRestoreDatasetVersionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IDatasetVersion,
+        protos.google.cloud.aiplatform.v1.IRestoreDatasetVersionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  restoreDatasetVersion(
+    request: protos.google.cloud.aiplatform.v1.IRestoreDatasetVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IDatasetVersion,
+        protos.google.cloud.aiplatform.v1.IRestoreDatasetVersionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  restoreDatasetVersion(
+    request: protos.google.cloud.aiplatform.v1.IRestoreDatasetVersionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IDatasetVersion,
+        protos.google.cloud.aiplatform.v1.IRestoreDatasetVersionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  restoreDatasetVersion(
+    request?: protos.google.cloud.aiplatform.v1.IRestoreDatasetVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IDatasetVersion,
+            protos.google.cloud.aiplatform.v1.IRestoreDatasetVersionOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IDatasetVersion,
+        protos.google.cloud.aiplatform.v1.IRestoreDatasetVersionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IDatasetVersion,
+        protos.google.cloud.aiplatform.v1.IRestoreDatasetVersionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.restoreDatasetVersion(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `restoreDatasetVersion()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataset_service.restore_dataset_version.js</caption>
+   * region_tag:aiplatform_v1_generated_DatasetService_RestoreDatasetVersion_async
+   */
+  async checkRestoreDatasetVersionProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1.DatasetVersion,
+      protos.google.cloud.aiplatform.v1.RestoreDatasetVersionOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.restoreDatasetVersion,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1.DatasetVersion,
+      protos.google.cloud.aiplatform.v1.RestoreDatasetVersionOperationMetadata
+    >;
+  }
+  /**
    * Deletes a SavedQuery.
    *
    * @param {Object} request
@@ -2830,6 +3400,219 @@ export class DatasetServiceClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IDataset>;
+  }
+  /**
+   * Lists DatasetVersions in a Dataset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Dataset to list DatasetVersions from.
+   *   Format:
+   *   `projects/{project}/locations/{location}/datasets/{dataset}`
+   * @param {string} [request.filter]
+   *   Optional. The standard list filter.
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
+   * @param {google.protobuf.FieldMask} [request.readMask]
+   *   Optional. Mask specifying which fields to read.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields to order by, sorted in ascending
+   *   order. Use "desc" after a field name for descending.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.aiplatform.v1.DatasetVersion|DatasetVersion}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listDatasetVersionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listDatasetVersions(
+    request?: protos.google.cloud.aiplatform.v1.IListDatasetVersionsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IDatasetVersion[],
+      protos.google.cloud.aiplatform.v1.IListDatasetVersionsRequest | null,
+      protos.google.cloud.aiplatform.v1.IListDatasetVersionsResponse,
+    ]
+  >;
+  listDatasetVersions(
+    request: protos.google.cloud.aiplatform.v1.IListDatasetVersionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListDatasetVersionsRequest,
+      | protos.google.cloud.aiplatform.v1.IListDatasetVersionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IDatasetVersion
+    >
+  ): void;
+  listDatasetVersions(
+    request: protos.google.cloud.aiplatform.v1.IListDatasetVersionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListDatasetVersionsRequest,
+      | protos.google.cloud.aiplatform.v1.IListDatasetVersionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IDatasetVersion
+    >
+  ): void;
+  listDatasetVersions(
+    request?: protos.google.cloud.aiplatform.v1.IListDatasetVersionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListDatasetVersionsRequest,
+          | protos.google.cloud.aiplatform.v1.IListDatasetVersionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IDatasetVersion
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListDatasetVersionsRequest,
+      | protos.google.cloud.aiplatform.v1.IListDatasetVersionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IDatasetVersion
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IDatasetVersion[],
+      protos.google.cloud.aiplatform.v1.IListDatasetVersionsRequest | null,
+      protos.google.cloud.aiplatform.v1.IListDatasetVersionsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listDatasetVersions(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Dataset to list DatasetVersions from.
+   *   Format:
+   *   `projects/{project}/locations/{location}/datasets/{dataset}`
+   * @param {string} [request.filter]
+   *   Optional. The standard list filter.
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
+   * @param {google.protobuf.FieldMask} [request.readMask]
+   *   Optional. Mask specifying which fields to read.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields to order by, sorted in ascending
+   *   order. Use "desc" after a field name for descending.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.aiplatform.v1.DatasetVersion|DatasetVersion} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listDatasetVersionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listDatasetVersionsStream(
+    request?: protos.google.cloud.aiplatform.v1.IListDatasetVersionsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listDatasetVersions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listDatasetVersions.createStream(
+      this.innerApiCalls.listDatasetVersions as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listDatasetVersions`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Dataset to list DatasetVersions from.
+   *   Format:
+   *   `projects/{project}/locations/{location}/datasets/{dataset}`
+   * @param {string} [request.filter]
+   *   Optional. The standard list filter.
+   * @param {number} [request.pageSize]
+   *   Optional. The standard list page size.
+   * @param {string} [request.pageToken]
+   *   Optional. The standard list page token.
+   * @param {google.protobuf.FieldMask} [request.readMask]
+   *   Optional. Mask specifying which fields to read.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields to order by, sorted in ascending
+   *   order. Use "desc" after a field name for descending.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.aiplatform.v1.DatasetVersion|DatasetVersion}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataset_service.list_dataset_versions.js</caption>
+   * region_tag:aiplatform_v1_generated_DatasetService_ListDatasetVersions_async
+   */
+  listDatasetVersionsAsync(
+    request?: protos.google.cloud.aiplatform.v1.IListDatasetVersionsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1.IDatasetVersion> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listDatasetVersions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listDatasetVersions.asyncIterate(
+      this.innerApiCalls['listDatasetVersions'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IDatasetVersion>;
   }
   /**
    * Lists DataItems in a Dataset.
@@ -4806,6 +5589,81 @@ export class DatasetServiceClient {
    */
   matchDatasetFromDatasetName(datasetName: string) {
     return this.pathTemplates.datasetPathTemplate.match(datasetName).dataset;
+  }
+
+  /**
+   * Return a fully-qualified datasetVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} dataset
+   * @param {string} dataset_version
+   * @returns {string} Resource name string.
+   */
+  datasetVersionPath(
+    project: string,
+    location: string,
+    dataset: string,
+    datasetVersion: string
+  ) {
+    return this.pathTemplates.datasetVersionPathTemplate.render({
+      project: project,
+      location: location,
+      dataset: dataset,
+      dataset_version: datasetVersion,
+    });
+  }
+
+  /**
+   * Parse the project from DatasetVersion resource.
+   *
+   * @param {string} datasetVersionName
+   *   A fully-qualified path representing DatasetVersion resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDatasetVersionName(datasetVersionName: string) {
+    return this.pathTemplates.datasetVersionPathTemplate.match(
+      datasetVersionName
+    ).project;
+  }
+
+  /**
+   * Parse the location from DatasetVersion resource.
+   *
+   * @param {string} datasetVersionName
+   *   A fully-qualified path representing DatasetVersion resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDatasetVersionName(datasetVersionName: string) {
+    return this.pathTemplates.datasetVersionPathTemplate.match(
+      datasetVersionName
+    ).location;
+  }
+
+  /**
+   * Parse the dataset from DatasetVersion resource.
+   *
+   * @param {string} datasetVersionName
+   *   A fully-qualified path representing DatasetVersion resource.
+   * @returns {string} A string representing the dataset.
+   */
+  matchDatasetFromDatasetVersionName(datasetVersionName: string) {
+    return this.pathTemplates.datasetVersionPathTemplate.match(
+      datasetVersionName
+    ).dataset;
+  }
+
+  /**
+   * Parse the dataset_version from DatasetVersion resource.
+   *
+   * @param {string} datasetVersionName
+   *   A fully-qualified path representing DatasetVersion resource.
+   * @returns {string} A string representing the dataset_version.
+   */
+  matchDatasetVersionFromDatasetVersionName(datasetVersionName: string) {
+    return this.pathTemplates.datasetVersionPathTemplate.match(
+      datasetVersionName
+    ).dataset_version;
   }
 
   /**

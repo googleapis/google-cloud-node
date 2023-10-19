@@ -218,6 +218,9 @@ export class PipelineServiceClient {
       datasetPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}'
       ),
+      datasetVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/datasets/{dataset}/datasetVersions/{dataset_version}'
+      ),
       entityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}'
       ),
@@ -357,6 +360,9 @@ export class PipelineServiceClient {
               post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',
             },
             {
+              post: '/v1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:getIamPolicy',
+            },
+            {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',
             },
             {
@@ -380,6 +386,10 @@ export class PipelineServiceClient {
           additional_bindings: [
             {
               post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:setIamPolicy',
               body: '*',
             },
             {
@@ -410,6 +420,9 @@ export class PipelineServiceClient {
           additional_bindings: [
             {
               post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/notebookRuntimeTemplates/*}:testIamPermissions',
             },
             {
               post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',
@@ -1874,7 +1887,7 @@ export class PipelineServiceClient {
    *   generated.
    *
    *   This value should be less than 128 characters, and valid characters
-   *   are /{@link protos.0-9|a-z}-/.
+   *   are `/{@link protos.0-9|a-z}-/`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4044,6 +4057,81 @@ export class PipelineServiceClient {
    */
   matchDatasetFromDatasetName(datasetName: string) {
     return this.pathTemplates.datasetPathTemplate.match(datasetName).dataset;
+  }
+
+  /**
+   * Return a fully-qualified datasetVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} dataset
+   * @param {string} dataset_version
+   * @returns {string} Resource name string.
+   */
+  datasetVersionPath(
+    project: string,
+    location: string,
+    dataset: string,
+    datasetVersion: string
+  ) {
+    return this.pathTemplates.datasetVersionPathTemplate.render({
+      project: project,
+      location: location,
+      dataset: dataset,
+      dataset_version: datasetVersion,
+    });
+  }
+
+  /**
+   * Parse the project from DatasetVersion resource.
+   *
+   * @param {string} datasetVersionName
+   *   A fully-qualified path representing DatasetVersion resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDatasetVersionName(datasetVersionName: string) {
+    return this.pathTemplates.datasetVersionPathTemplate.match(
+      datasetVersionName
+    ).project;
+  }
+
+  /**
+   * Parse the location from DatasetVersion resource.
+   *
+   * @param {string} datasetVersionName
+   *   A fully-qualified path representing DatasetVersion resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDatasetVersionName(datasetVersionName: string) {
+    return this.pathTemplates.datasetVersionPathTemplate.match(
+      datasetVersionName
+    ).location;
+  }
+
+  /**
+   * Parse the dataset from DatasetVersion resource.
+   *
+   * @param {string} datasetVersionName
+   *   A fully-qualified path representing DatasetVersion resource.
+   * @returns {string} A string representing the dataset.
+   */
+  matchDatasetFromDatasetVersionName(datasetVersionName: string) {
+    return this.pathTemplates.datasetVersionPathTemplate.match(
+      datasetVersionName
+    ).dataset;
+  }
+
+  /**
+   * Parse the dataset_version from DatasetVersion resource.
+   *
+   * @param {string} datasetVersionName
+   *   A fully-qualified path representing DatasetVersion resource.
+   * @returns {string} A string representing the dataset_version.
+   */
+  matchDatasetVersionFromDatasetVersionName(datasetVersionName: string) {
+    return this.pathTemplates.datasetVersionPathTemplate.match(
+      datasetVersionName
+    ).dataset_version;
   }
 
   /**
